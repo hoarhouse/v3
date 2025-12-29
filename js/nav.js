@@ -37,6 +37,11 @@ function generateNav() {
                             </a>
                         </li>
                     `).join('')}
+                    <li class="nav-item nav-item-donate">
+                        <a href="get-involved.html" class="nav-donate-btn">
+                            Donate
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -162,6 +167,25 @@ const navStyles = `
 .nav-link.active {
     color: var(--secondary);
     font-weight: 500;
+}
+
+/* Donate Button in Navigation */
+.nav-donate-btn {
+    background: #e53e3e;
+    color: #ffffff !important;
+    padding: 0.5rem 1.5rem;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    display: inline-block;
+    margin-left: 1rem;
+}
+
+.nav-donate-btn:hover {
+    background: #c53030;
+    text-decoration: none;
+    transform: translateY(-1px);
 }
 
 /* Hamburger Menu Button - Hidden on Desktop */
@@ -332,6 +356,26 @@ const navStyles = `
         background-color: var(--light-background);
         color: var(--secondary);
         font-weight: 500;
+    }
+    
+    /* Donate button in mobile menu */
+    .nav-item-donate {
+        margin-top: 1rem;
+        padding-top: 1rem;
+        border-top: 1px solid var(--border-light);
+    }
+    
+    .nav-donate-btn {
+        background: #e53e3e;
+        color: #ffffff !important;
+        text-align: center;
+        margin-left: 0;
+        width: calc(100% - 3rem);
+        margin: 0 1.5rem;
+    }
+    
+    .nav-donate-btn:hover {
+        background: #c53030;
     }
 }
 
