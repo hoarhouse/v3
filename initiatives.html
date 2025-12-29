@@ -48,6 +48,16 @@
             text-align: center;
         }
         
+        /* Section Title - Standard across all pages */
+        .section-title {
+            text-align: center;
+            font-size: clamp(2rem, 4vw, 3rem);
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+            font-weight: 600;
+            letter-spacing: -0.03em;
+        }
+        
         /* Initiative Sections */
         .initiative-section {
             padding: 5rem 0;
@@ -85,11 +95,11 @@
         }
         
         .initiative-title {
-            font-size: clamp(2rem, 4vw, 2.5rem);
+            font-size: clamp(2rem, 4vw, 3rem);
             margin-bottom: 0.5rem;
             color: var(--primary);
             font-weight: 600;
-            letter-spacing: -0.02em;
+            letter-spacing: -0.03em;
         }
         
         .initiative-tagline {
@@ -150,9 +160,8 @@
             padding: 5rem 0;
         }
         
-        .cta-section h2 {
+        .cta-section .section-title {
             color: var(--background);
-            margin-bottom: 1rem;
         }
         
         .cta-text {
