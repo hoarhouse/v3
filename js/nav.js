@@ -63,6 +63,7 @@ function initNav() {
             navToggle.addEventListener('click', () => {
                 navMenu.classList.add('nav-menu--active');
                 navOverlay.classList.add('nav-overlay--active');
+                body.classList.add('menu-open'); // Add class to body
                 body.style.overflow = 'hidden'; // Prevent scrolling when menu is open
             });
         }
@@ -71,6 +72,7 @@ function initNav() {
         const closeMenu = () => {
             navMenu.classList.remove('nav-menu--active');
             navOverlay.classList.remove('nav-overlay--active');
+            body.classList.remove('menu-open'); // Remove class from body
             body.style.overflow = ''; // Restore scrolling
         };
         
