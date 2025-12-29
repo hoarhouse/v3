@@ -106,7 +106,7 @@ const navStyles = `
     background-color: rgba(255, 255, 255, 0.98);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    padding: 1rem 0;
+    padding: 0.75rem 0;
     position: sticky;
     top: 0;
     z-index: 1000;
@@ -116,32 +116,36 @@ const navStyles = `
 .nav-container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 2rem;
+    padding: 0 1.5rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
     position: relative;
+    flex-wrap: nowrap;
 }
 
 .nav-brand a {
     color: var(--primary);
-    font-size: 1.25rem;
+    font-size: 1.125rem;
     font-weight: 600;
     text-decoration: none;
     letter-spacing: -0.02em;
+    flex-shrink: 0;
 }
 
 /* Desktop Navigation */
 .nav-menu {
-    display: block;
+    display: flex;
+    align-items: center;
 }
 
 .nav-list {
     list-style: none;
     display: flex;
-    gap: 1rem;
+    gap: 0.75rem;
     margin: 0;
     padding: 0;
+    align-items: center;
 }
 
 .nav-item {
