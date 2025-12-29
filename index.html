@@ -279,60 +279,106 @@
         .stakeholder-5 { top: 60%; left: 15%; }  /* 8 o'clock */
         .stakeholder-6 { top: 25%; left: 15%; }  /* 10 o'clock */
         
-        /* Mobile Responsive - Vertical Layout */
+        /* Mobile Responsive - Scaled Hub and Spoke */
         @media (max-width: 767px) {
             .bridging-diagram {
-                height: auto;
-                max-width: 100%;
+                max-width: 320px;
+                height: 320px;
+                margin-left: auto;
+                margin-right: auto;
+                transform: scale(0.9);
             }
             
+            /* Scale down center hub */
             .dcf-center {
-                position: relative;
-                top: auto;
-                left: auto;
-                transform: none;
-                margin: 0 auto 3rem;
+                width: 90px;
+                height: 90px;
+                border-width: 2px;
             }
             
-            .connection-lines {
-                display: none;
+            .dcf-center svg {
+                width: 32px;
+                height: 32px;
+                margin-bottom: 0.25rem;
             }
             
-            .stakeholder-node {
-                position: relative;
-                top: auto;
-                left: auto;
-                transform: none;
-                display: flex;
-                align-items: center;
-                margin-bottom: 1.5rem;
-                padding: 0 1rem;
-            }
-            
-            .stakeholder-icon-wrapper {
-                margin: 0 1rem 0 0;
-                flex-shrink: 0;
-            }
-            
-            .stakeholder-label {
-                text-align: left;
+            .dcf-center-label {
                 font-size: 1rem;
             }
             
-            /* Add connecting line on mobile */
-            .stakeholder-node::before {
-                content: "";
-                position: absolute;
-                left: 50%;
-                top: -1.5rem;
-                width: 1px;
-                height: 1.5rem;
-                background: var(--accent);
-                opacity: 0.3;
+            /* Scale down connection lines */
+            .connection-lines {
+                /* Keep visible on mobile */
             }
             
-            .stakeholder-node:first-child::before {
-                display: none;
+            /* Scale down stakeholder nodes */
+            .stakeholder-node {
+                width: 70px;
+            }
+            
+            .stakeholder-icon-wrapper {
+                width: 44px;
+                height: 44px;
+                margin-bottom: 0.25rem;
+            }
+            
+            .stakeholder-node svg {
+                width: 20px;
+                height: 20px;
+            }
+            
+            .stakeholder-label {
+                font-size: 0.65rem;
+                line-height: 1.1;
+            }
+            
+            /* Adjust positions for smaller diagram */
+            .stakeholder-1 { top: 8%; left: 50%; }   /* 12 o'clock */
+            .stakeholder-2 { top: 22%; left: 82%; }  /* 2 o'clock */
+            .stakeholder-3 { top: 58%; left: 82%; }  /* 4 o'clock */
+            .stakeholder-4 { top: 92%; left: 50%; }  /* 6 o'clock */
+            .stakeholder-5 { top: 58%; left: 18%; }  /* 8 o'clock */
+            .stakeholder-6 { top: 22%; left: 18%; }  /* 10 o'clock */
+        }
+        
+        /* Extra small screens */
+        @media (max-width: 375px) {
+            .bridging-diagram {
+                max-width: 280px;
+                height: 280px;
+                transform: scale(0.85);
+            }
+            
+            .dcf-center {
+                width: 80px;
+                height: 80px;
+            }
+            
+            .dcf-center svg {
+                width: 28px;
+                height: 28px;
+            }
+            
+            .dcf-center-label {
+                font-size: 0.9rem;
+            }
+            
+            .stakeholder-node {
+                width: 60px;
+            }
+            
+            .stakeholder-icon-wrapper {
+                width: 40px;
+                height: 40px;
+            }
+            
+            .stakeholder-node svg {
+                width: 18px;
+                height: 18px;
+            }
+            
+            .stakeholder-label {
+                font-size: 0.6rem;
             }
         }
         
