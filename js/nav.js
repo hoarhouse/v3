@@ -38,9 +38,7 @@ function generateNav() {
                         </li>
                     `).join('')}
                     <li class="nav-item nav-item-donate">
-                        <a href="get-involved.html" class="nav-donate-btn">
-                            Donate
-                        </a>
+                        <a href="get-involved.html" class="nav-donate-btn">Donate</a>
                     </li>
                 </ul>
             </div>
@@ -165,11 +163,12 @@ const navStyles = `
     padding: 6px 12px;
     border-radius: 6px;
     transition: all 0.3s ease;
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
     font-size: 0.875rem;
     font-weight: 500;
     white-space: nowrap;
-    line-height: 1.2;
+    line-height: 1;
     vertical-align: middle;
 }
 
@@ -193,10 +192,13 @@ const navStyles = `
     font-weight: 600;
     font-size: 0.875rem;
     transition: all 0.3s ease;
-    display: inline-block;
-    margin-left: 0.5rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 0 0 0.5rem;
     white-space: nowrap;
-    line-height: 1.2;
+    line-height: 1;
+    height: auto;
     vertical-align: middle;
 }
 
