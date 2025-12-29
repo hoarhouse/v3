@@ -155,12 +155,13 @@ const navStyles = `
 .nav-link {
     color: var(--primary);
     text-decoration: none;
-    padding: 0.5rem 1rem;
+    padding: 0.5rem 0.75rem;
     border-radius: 6px;
     transition: all 0.3s ease;
     display: block;
-    font-size: 0.95rem;
-    font-weight: 400;
+    font-size: 0.875rem;
+    font-weight: 500;
+    white-space: nowrap;
 }
 
 .nav-link:hover {
@@ -177,13 +178,15 @@ const navStyles = `
 .nav-donate-btn {
     background: #e53e3e;
     color: #ffffff !important;
-    padding: 0.5rem 1.5rem;
+    padding: 0.5rem 1rem;
     border-radius: 6px;
     text-decoration: none;
     font-weight: 500;
+    font-size: 0.875rem;
     transition: all 0.3s ease;
     display: inline-block;
-    margin-left: 1rem;
+    margin-left: 0.5rem;
+    white-space: nowrap;
 }
 
 .nav-donate-btn:hover {
