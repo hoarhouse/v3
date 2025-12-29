@@ -207,7 +207,14 @@ const navStyles = `
     /* Show hamburger button */
     .nav-toggle {
         display: flex;
-        z-index: 1002;
+        z-index: 998;
+        transition: opacity 0.3s ease;
+    }
+    
+    /* Hide hamburger when menu is open */
+    body.menu-open .nav-toggle {
+        opacity: 0;
+        pointer-events: none;
     }
     
     /* Overlay for background dimming */
@@ -249,26 +256,35 @@ const navStyles = `
         right: 0;
     }
     
-    /* Close button for mobile */
+    /* Close button for mobile - properly positioned */
     .nav-close {
         display: flex;
-        position: absolute;
-        top: 1rem;
-        right: 1rem;
-        background: none;
-        border: none;
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: rgba(255, 255, 255, 0.1);
+        border: 2px solid var(--white);
+        border-radius: 50%;
         cursor: pointer;
-        padding: 8px;
-        min-width: 44px;
-        min-height: 44px;
+        padding: 0;
+        width: 48px;
+        height: 48px;
         align-items: center;
         justify-content: center;
+        z-index: 1002;
+        transition: background 0.3s ease, transform 0.2s ease;
+    }
+    
+    .nav-close:hover,
+    .nav-close:focus {
+        background: rgba(255, 255, 255, 0.2);
+        transform: scale(1.1);
     }
     
     .close-line {
         position: absolute;
-        width: 24px;
-        height: 3px;
+        width: 20px;
+        height: 2px;
         background-color: var(--white);
     }
     
