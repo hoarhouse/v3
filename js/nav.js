@@ -5,6 +5,7 @@ const menuItems = [
     { text: 'Home', href: 'index.html', page: 'index' },
     { text: 'About', href: 'about.html', page: 'about' },
     { text: 'Initiatives', href: 'initiatives.html', page: 'initiatives' },
+    { text: 'Budapest Appeal', href: 'budapest-appeal.html', page: 'budapest-appeal' },
     { text: 'Get Involved', href: 'get-involved.html', page: 'get-involved' },
     { text: 'Contact', href: 'contact.html', page: 'contact' }
 ];

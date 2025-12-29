@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Budapest Appeal - DCF Hungary</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        /* Page-specific styles */
+        
+        /* Hero Section */
+        .hero {
+            background: var(--light-background);
+            padding: 6rem 0;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            margin-bottom: 1rem;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            color: var(--primary);
+        }
+        
+        .hero-subtitle {
+            font-size: clamp(1.25rem, 3vw, 1.75rem);
+            color: var(--accent);
+            max-width: 700px;
+            margin: 0 auto;
+            font-weight: 400;
+            line-height: 1.4;
+        }
+        
+        /* Section Base Styles */
+        section {
+            padding: 5rem 0;
+        }
+        
+        section:nth-child(odd) {
+            background: var(--background);
+        }
+        
+        section:nth-child(even) {
+            background: var(--light-background);
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: clamp(2rem, 4vw, 3rem);
+            margin-bottom: 2rem;
+            color: var(--primary);
+            font-weight: 600;
+            letter-spacing: -0.03em;
+        }
+        
+        /* Appeal Section */
+        .appeal-text {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--primary);
+            font-weight: 300;
+        }
+        
+        .appeal-text p {
+            margin-bottom: 1.5rem;
+        }
+        
+        /* Why It Matters Cards */
+        .matters-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 3rem auto 0;
+        }
+        
+        .matter-card {
+            background: var(--background);
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow-subtle);
+            transition: all 0.3s ease;
+        }
+        
+        .matter-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-hover);
+        }
+        
+        .matter-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .matter-description {
+            font-size: 0.95rem;
+            color: var(--accent);
+            line-height: 1.6;
+        }
+        
+        /* Join Section */
+        .join-intro {
+            text-align: center;
+            font-size: 1.15rem;
+            color: var(--primary);
+            margin-bottom: 3rem;
+            font-weight: 300;
+        }
+        
+        .join-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .join-item {
+            position: relative;
+            padding-left: 2rem;
+            font-size: 1.05rem;
+            color: var(--primary);
+            font-weight: 300;
+            line-height: 1.6;
+        }
+        
+        .join-item:before {
+            content: "•";
+            position: absolute;
+            left: 0.5rem;
+            color: var(--secondary);
+            font-weight: 400;
+        }
+        
+        /* Principles Section */
+        .principles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 3rem auto 0;
+        }
+        
+        .principle-card {
+            background: var(--background);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow-subtle);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        
+        .principle-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-hover);
+        }
+        
+        .principle-icon {
+            width: 48px;
+            height: 48px;
+            margin: 0 auto 1.5rem;
+            color: var(--secondary);
+        }
+        
+        .principle-title {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 0.75rem;
+        }
+        
+        .principle-description {
+            font-size: 0.9rem;
+            color: var(--accent);
+            line-height: 1.5;
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            background: var(--primary);
+            color: var(--background);
+            text-align: center;
+            padding: 5rem 0;
+        }
+        
+        .cta-section .section-title {
+            color: var(--background);
+            margin-bottom: 1.5rem;
+        }
+        
+        .cta-text {
+            font-size: 1.25rem;
+            max-width: 700px;
+            margin: 0 auto 2.5rem;
+            font-weight: 300;
+            line-height: 1.6;
+            color: var(--background);
+            opacity: 0.95;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn-cta {
+            padding: 1rem 2.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-sign {
+            background: #e53e3e;
+            color: #ffffff;
+        }
+        
+        .btn-sign:hover {
+            background: #c53030;
+            transform: translateY(-2px);
+        }
+        
+        .btn-learn {
+            border: 2px solid var(--background);
+            color: var(--background);
+            background: transparent;
+        }
+        
+        .btn-learn:hover {
+            background: var(--background);
+            color: var(--primary);
+        }
+        
+        /* Supporters Section */
+        .supporters-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .supporters-text {
+            font-size: 1.1rem;
+            color: var(--primary);
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+        
+        .supporters-placeholder {
+            font-style: italic;
+            color: var(--accent);
+            font-size: 1rem;
+        }
+        
+        /* Mobile Responsive */
+        @media (max-width: 767px) {
+            .hero {
+                padding: 3rem 1rem;
+            }
+            
+            section {
+                padding: 3rem 1rem;
+            }
+            
+            .matters-grid,
+            .principles-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .join-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .cta-section {
+                padding: 3rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav id="main-nav"></nav>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>The Budapest Appeal</h1>
+            <p class="hero-subtitle">A Call for Digital Ceasefire and Cyber Peace</p>
+        </div>
+    </section>
+    
+    <!-- About the Appeal Section -->
+    <section>
+        <div class="container">
+            <h2 class="section-title">About the Appeal</h2>
+            <div class="appeal-text">
+                <p>The Budapest Appeal for a Cyber Ceasefire and Digital Peace was conceived following the public announcement made by President Trump in October 2025 regarding the possibility of a high-level Russia–United States summit in Hungary.</p>
+                
+                <p>In that context, Budapest — where Domus Communis Foundation maintains an active presence — emerged as a natural symbolic reference point, reflecting DCF's mission to foster dialogue and encounter across the Global North, South, East, and West.</p>
+                
+                <p>The initiative was designed to be among the first of its kind to frame digital de-escalation and peace-building explicitly within a Sovereign AI and data sovereignty model, affirming that technological restraint, human dignity, and national agency must advance together.</p>
+                
+                <p>While the anticipated summit did not ultimately take place, the substance and urgency of the Appeal remain fully valid. The Budapest Appeal continues as an open initiative, welcoming the support and engagement of all those committed to peace, human dignity, and the common good.</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Why It Matters Section -->
+    <section>
+        <div class="container">
+            <h2 class="section-title">Why Digital Peace Matters Now</h2>
+            
+            <div class="matters-grid">
+                <div class="matter-card">
+                    <h3 class="matter-title">Cyber Warfare Escalation</h3>
+                    <p class="matter-description">Digital conflicts threaten global stability, critical infrastructure, and civilian safety with increasing frequency and sophistication.</p>
+                </div>
+                
+                <div class="matter-card">
+                    <h3 class="matter-title">Autonomous Weapons</h3>
+                    <p class="matter-description">AI-powered weapons systems operate beyond human control, raising unprecedented ethical and security concerns.</p>
+                </div>
+                
+                <div class="matter-card">
+                    <h3 class="matter-title">Disinformation</h3>
+                    <p class="matter-description">Cyber disinformation campaigns undermine democracy, social cohesion, and trust in institutions worldwide.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Join the Appeal Section -->
+    <section>
+        <div class="container">
+            <h2 class="section-title">Join the Appeal</h2>
+            <p class="join-intro">The Budapest Appeal welcomes the support and engagement of:</p>
+            
+            <div class="join-grid">
+                <div class="join-item">Major AI and technology actors</div>
+                <div class="join-item">Global civil society leaders</div>
+                <div class="join-item">Academic institutions and researchers</div>
+                <div class="join-item">Nobel Laureates</div>
+                <div class="join-item">Faith leaders and religious institutions</div>
+                <div class="join-item">Governmental bodies and policymakers</div>
+                <div class="join-item">Organizations committed to peace and the common good</div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Core Principles Section -->
+    <section>
+        <div class="container">
+            <h2 class="section-title">Core Principles</h2>
+            
+            <div class="principles-grid">
+                <div class="principle-card">
+                    <div class="principle-icon">
+                        <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <!-- Shield with down arrow for de-escalation -->
+                            <path d="M24 4 L8 12 L8 24 C8 32, 16 40, 24 44 C32 40, 40 32, 40 24 L40 12 Z"/>
+                            <path d="M24 16 L24 28 M20 24 L24 28 L28 24"/>
+                        </svg>
+                    </div>
+                    <h3 class="principle-title">Digital De-escalation</h3>
+                    <p class="principle-description">Immediate steps to reduce cyber hostilities between nations</p>
+                </div>
+                
+                <div class="principle-card">
+                    <div class="principle-icon">
+                        <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <!-- Crown with circuit for sovereign AI -->
+                            <path d="M8 28 L12 18 L18 22 L24 14 L30 22 L36 18 L40 28 L40 36 L8 36 Z"/>
+                            <circle cx="24" cy="32" r="2"/>
+                        </svg>
+                    </div>
+                    <h3 class="principle-title">Sovereign AI</h3>
+                    <p class="principle-description">AI systems that respect national agency and human dignity</p>
+                </div>
+                
+                <div class="principle-card">
+                    <div class="principle-icon">
+                        <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <!-- Database with lock for data sovereignty -->
+                            <ellipse cx="24" cy="12" rx="12" ry="4"/>
+                            <path d="M12 12 L12 36 Q12 40, 24 40 Q36 40, 36 36 L36 12"/>
+                            <path d="M12 24 Q12 28, 24 28 Q36 28, 36 24"/>
+                            <circle cx="24" cy="32" r="4"/>
+                            <path d="M24 30 L24 34"/>
+                        </svg>
+                    </div>
+                    <h3 class="principle-title">Data Sovereignty</h3>
+                    <p class="principle-description">Peoples' right to control their own data and digital infrastructure</p>
+                </div>
+                
+                <div class="principle-card">
+                    <div class="principle-icon">
+                        <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <!-- Hand with stop sign for restraint -->
+                            <path d="M16 20 L16 40 L32 40 L32 20"/>
+                            <path d="M16 20 L16 12 M20 20 L20 10 M24 20 L24 8 M28 20 L28 10 M32 20 L32 14"/>
+                            <line x1="12" y1="24" x2="36" y2="24"/>
+                        </svg>
+                    </div>
+                    <h3 class="principle-title">Technological Restraint</h3>
+                    <p class="principle-description">Ethical limits on autonomous weapons and surveillance systems</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Call to Action Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2 class="section-title">Support the Budapest Appeal</h2>
+            <p class="cta-text">
+                Add your voice to the call for digital peace. Organizations and individuals committed to cyber ceasefire and ethical technology are invited to join.
+            </p>
+            <div class="cta-buttons">
+                <a href="contact.html" class="btn-cta btn-sign">Sign the Appeal</a>
+                <a href="initiatives.html" class="btn-cta btn-learn">Learn More</a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Supporters Section -->
+    <section>
+        <div class="container">
+            <h2 class="section-title">Supporters</h2>
+            <div class="supporters-content">
+                <p class="supporters-text">The Budapest Appeal is supported by a growing coalition of organizations and individuals.</p>
+                <p class="supporters-placeholder">Founding supporters to be announced.</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">Domus Communis Foundation</div>
+            <div class="footer-links">
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="initiatives.html">Initiatives</a>
+                <a href="budapest-appeal.html">Budapest Appeal</a>
+                <a href="get-involved.html">Get Involved</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 Domus Communis Foundation Hungary. All rights reserved.</p>
+                <p>Inspired by Catholic Social Teaching. Serving people of all faiths.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script src="js/nav.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
