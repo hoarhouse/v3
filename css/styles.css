@@ -6,28 +6,38 @@
 }
 
 html {
-    font-size: 16px;
+    font-size: 16px; /* Prevents iOS zoom on input focus */
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    -webkit-text-size-adjust: 100%; /* Prevent font scaling in landscape */
 }
 
 body {
     min-height: 100vh;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    overflow-x: hidden; /* Prevent horizontal scroll */
 }
 
 img, picture, video, canvas, svg {
     display: block;
     max-width: 100%;
+    height: auto; /* Maintain aspect ratio */
 }
 
 input, button, textarea, select {
     font: inherit;
+    font-size: 16px; /* Prevent zoom on iOS */
+}
+
+/* Ensure all touch targets are at least 44px */
+button, a, input, select, textarea {
+    min-height: 44px;
 }
 
 p, h1, h2, h3, h4, h5, h6 {
     overflow-wrap: break-word;
+    hyphens: auto;
 }
 
 /* CSS Variables */
