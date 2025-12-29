@@ -19,19 +19,26 @@ function generateNav() {
                 <a href="index.html">DCF Hungary</a>
             </div>
             <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
-                <span></span>
-                <span></span>
-                <span></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
             </button>
-            <ul class="nav-menu" id="navMenu">
-                ${menuItems.map(item => `
-                    <li class="nav-item">
-                        <a href="${item.href}" class="nav-link ${currentPage === item.page ? 'active' : ''}">
-                            ${item.text}
-                        </a>
-                    </li>
-                `).join('')}
-            </ul>
+            <div class="nav-overlay" id="navOverlay"></div>
+            <div class="nav-menu" id="navMenu">
+                <button class="nav-close" id="navClose" aria-label="Close navigation">
+                    <span class="close-line"></span>
+                    <span class="close-line"></span>
+                </button>
+                <ul class="nav-list">
+                    ${menuItems.map(item => `
+                        <li class="nav-item">
+                            <a href="${item.href}" class="nav-link ${currentPage === item.page ? 'active' : ''}">
+                                ${item.text}
+                            </a>
+                        </li>
+                    `).join('')}
+                </ul>
+            </div>
         </div>
     `;
     
@@ -44,24 +51,43 @@ function initNav() {
     if (navElement) {
         navElement.innerHTML = generateNav();
         
-        // Add mobile menu toggle functionality
+        // Get elements
         const navToggle = document.getElementById('navToggle');
+        const navClose = document.getElementById('navClose');
         const navMenu = document.getElementById('navMenu');
+        const navOverlay = document.getElementById('navOverlay');
+        const body = document.body;
         
-        if (navToggle && navMenu) {
+        // Open menu
+        if (navToggle) {
             navToggle.addEventListener('click', () => {
-                navMenu.classList.toggle('nav-menu--active');
-                navToggle.classList.toggle('nav-toggle--active');
-            });
-            
-            // Close menu when clicking on a link (mobile)
-            document.querySelectorAll('.nav-link').forEach(link => {
-                link.addEventListener('click', () => {
-                    navMenu.classList.remove('nav-menu--active');
-                    navToggle.classList.remove('nav-toggle--active');
-                });
+                navMenu.classList.add('nav-menu--active');
+                navOverlay.classList.add('nav-overlay--active');
+                body.style.overflow = 'hidden'; // Prevent scrolling when menu is open
             });
         }
+        
+        // Close menu function
+        const closeMenu = () => {
+            navMenu.classList.remove('nav-menu--active');
+            navOverlay.classList.remove('nav-overlay--active');
+            body.style.overflow = ''; // Restore scrolling
+        };
+        
+        // Close button
+        if (navClose) {
+            navClose.addEventListener('click', closeMenu);
+        }
+        
+        // Overlay click
+        if (navOverlay) {
+            navOverlay.addEventListener('click', closeMenu);
+        }
+        
+        // Close menu when clicking on a link (mobile)
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', closeMenu);
+        });
     }
 }
 
