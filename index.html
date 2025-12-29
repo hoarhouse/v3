@@ -500,15 +500,6 @@
                 grid-template-columns: 1fr;
             }
             
-            .bridging-visual {
-                grid-template-columns: 1fr;
-            }
-            
-            .bridge-node.central {
-                grid-column: 1;
-                order: -1;
-            }
-            
             .flagship-card {
                 padding: 3rem 2rem;
             }
@@ -554,72 +545,97 @@
             <h2 class="section-title">Bridging Worlds for the Common Good</h2>
             <p style="text-align: center; max-width: 800px; margin: 0 auto 2rem; color: var(--accent); font-weight: 300; font-size: 1.1rem; line-height: 1.6;">DCF serves as a unique bridge connecting major AI and technology actors, global civil society leaders, academic institutions, Nobel Laureates, faith leaders, and governmental bodies. Our role is to help shape a future where AI interprets and serves the principle of 'Be Human' and advances the common good.</p>
             
-            <div class="bridging-visual">
-                <div class="bridge-node">
-                    <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-                        <!-- Classical building with pillars -->
-                        <path d="M6 40h36M10 40V20M18 40V20M30 40V20M38 40V20" stroke="currentColor" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M24 8l-18 12h36L24 8z" stroke="currentColor" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M24 12v4" stroke="currentColor" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                    <div class="bridge-node-label">Institutions</div>
-                </div>
-                <div class="bridge-node">
-                    <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-                        <!-- Book -->
-                        <path d="M10 8h28c2 0 4 2 4 4v24c0 2-2 4-4 4H10c-2 0-4-2-4-4V12c0-2 2-4 4-4z" stroke="currentColor" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M12 16h24M12 24h24M12 32h16" stroke="currentColor" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                    <div class="bridge-node-label">Academia</div>
-                </div>
-                <div class="bridge-node">
-                    <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-                        <!-- Laurel wreath -->
-                        <path d="M24 38c0 0-10-2-14-10s-2-14 2-16c4-2 8 2 10 6M24 38c0 0 10-2 14-10s2-14-2-16c-4-2-8 2-10 6" stroke="currentColor" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M18 20c-1-2-3-4-5-4M18 24c-1-2-3-3-5-3M18 28c-1-2-3-2-5-2M30 20c1-2 3-4 5-4M30 24c1-2 3-3 5-3M30 28c1-2 3-2 5-2" stroke="currentColor" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                    <div class="bridge-node-label">Nobel Laureates</div>
-                </div>
-                <div class="bridge-node">
-                    <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-                        <!-- Simple church/cross -->
-                        <path d="M24 4v8M20 8h8" stroke="currentColor" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M24 12v8l-10 6v14h8v-8h4v8h8V26l-10-6z" stroke="currentColor" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                    <div class="bridge-node-label">Faith Leaders</div>
-                </div>
-                <div class="bridge-node central">
+            <div class="bridging-diagram">
+                <!-- Connection Lines SVG -->
+                <svg class="connection-lines" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Lines from center to each stakeholder -->
+                    <line x1="300" y1="300" x2="300" y2="60" class="connection-line"/>   <!-- To 12 o'clock -->
+                    <line x1="300" y1="300" x2="510" y2="150" class="connection-line"/>  <!-- To 2 o'clock -->
+                    <line x1="300" y1="300" x2="510" y2="360" class="connection-line"/>  <!-- To 4 o'clock -->
+                    <line x1="300" y1="300" x2="300" y2="540" class="connection-line"/>  <!-- To 6 o'clock -->
+                    <line x1="300" y1="300" x2="90" y2="360" class="connection-line"/>   <!-- To 8 o'clock -->
+                    <line x1="300" y1="300" x2="90" y2="150" class="connection-line"/>   <!-- To 10 o'clock -->
+                </svg>
+                
+                <!-- DCF Center Hub -->
+                <div class="dcf-center">
                     <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
                         <!-- Compass rose/guiding star -->
                         <path d="M24 4l4 8 8 4-8 4-4 8-4-8-8-4 8-4 4-8z" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         <circle cx="24" cy="24" r="4" stroke="currentColor" fill="none" stroke-width="1.5"/>
-                        <path d="M24 2v8M24 38v8M2 24h8M38 24h8" stroke="currentColor" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
-                    <div class="bridge-node-label">DCF</div>
+                    <div class="dcf-center-label">DCF</div>
                 </div>
-                <div class="bridge-node">
-                    <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-                        <!-- Circuit nodes -->
-                        <circle cx="12" cy="12" r="4" stroke="currentColor" fill="none" stroke-width="1.5"/>
-                        <circle cx="36" cy="12" r="4" stroke="currentColor" fill="none" stroke-width="1.5"/>
-                        <circle cx="12" cy="36" r="4" stroke="currentColor" fill="none" stroke-width="1.5"/>
-                        <circle cx="36" cy="36" r="4" stroke="currentColor" fill="none" stroke-width="1.5"/>
-                        <circle cx="24" cy="24" r="4" stroke="currentColor" fill="none" stroke-width="1.5"/>
-                        <path d="M16 12h16M12 16v16M36 16v16M20 24H12M28 24h8M24 20V12M24 28v8" stroke="currentColor" fill="none" stroke-width="1.5" stroke-linecap="round"/>
-                    </svg>
-                    <div class="bridge-node-label">AI & Tech Actors</div>
+                
+                <!-- Stakeholder Nodes -->
+                <div class="stakeholder-node stakeholder-1">
+                    <div class="stakeholder-icon-wrapper">
+                        <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Circuit nodes -->
+                            <circle cx="12" cy="12" r="4" stroke="currentColor" fill="none" stroke-width="1.5"/>
+                            <circle cx="36" cy="12" r="4" stroke="currentColor" fill="none" stroke-width="1.5"/>
+                            <circle cx="24" cy="36" r="4" stroke="currentColor" fill="none" stroke-width="1.5"/>
+                            <path d="M16 12h16M24 32V16" stroke="currentColor" fill="none" stroke-width="1.5"/>
+                        </svg>
+                    </div>
+                    <div class="stakeholder-label">AI & Technology<br>Actors</div>
                 </div>
-                <div class="bridge-node">
-                    <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-                        <!-- Group of three people -->
-                        <circle cx="24" cy="10" r="4" stroke="currentColor" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M16 26c0-3 3-6 8-6s8 3 8 6v10H16V26z" stroke="currentColor" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                        <circle cx="12" cy="14" r="3" stroke="currentColor" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M6 28c0-2 2-4 6-4" stroke="currentColor" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                        <circle cx="36" cy="14" r="3" stroke="currentColor" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M42 28c0-2-2-4-6-4" stroke="currentColor" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                    <div class="bridge-node-label">Civil Society</div>
+                
+                <div class="stakeholder-node stakeholder-2">
+                    <div class="stakeholder-icon-wrapper">
+                        <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Book -->
+                            <path d="M10 8h28c2 0 4 2 4 4v24c0 2-2 4-4 4H10c-2 0-4-2-4-4V12c0-2 2-4 4-4z" stroke="currentColor" fill="none" stroke-width="1.5"/>
+                            <path d="M12 16h24M12 24h24M12 32h16" stroke="currentColor" fill="none" stroke-width="1.5"/>
+                        </svg>
+                    </div>
+                    <div class="stakeholder-label">Academia</div>
+                </div>
+                
+                <div class="stakeholder-node stakeholder-3">
+                    <div class="stakeholder-icon-wrapper">
+                        <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Laurel wreath -->
+                            <path d="M24 38c0 0-10-2-14-10s-2-14 2-16c4-2 8 2 10 6M24 38c0 0 10-2 14-10s2-14-2-16c-4-2-8 2-10 6" stroke="currentColor" fill="none" stroke-width="1.5"/>
+                            <path d="M18 24c-1-2-3-3-5-3M30 24c1-2 3-3 5-3" stroke="currentColor" fill="none" stroke-width="1.5"/>
+                        </svg>
+                    </div>
+                    <div class="stakeholder-label">Nobel<br>Laureates</div>
+                </div>
+                
+                <div class="stakeholder-node stakeholder-4">
+                    <div class="stakeholder-icon-wrapper">
+                        <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Church/cross -->
+                            <path d="M24 8v8M20 12h8" stroke="currentColor" fill="none" stroke-width="1.5"/>
+                            <path d="M24 16v8l-10 6v10h8v-6h4v6h8V30l-10-6z" stroke="currentColor" fill="none" stroke-width="1.5"/>
+                        </svg>
+                    </div>
+                    <div class="stakeholder-label">Faith<br>Leaders</div>
+                </div>
+                
+                <div class="stakeholder-node stakeholder-5">
+                    <div class="stakeholder-icon-wrapper">
+                        <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Group of people -->
+                            <circle cx="24" cy="12" r="4" stroke="currentColor" fill="none" stroke-width="1.5"/>
+                            <path d="M16 28c0-3 3-6 8-6s8 3 8 6v8H16v-8z" stroke="currentColor" fill="none" stroke-width="1.5"/>
+                            <circle cx="12" cy="16" r="3" stroke="currentColor" fill="none" stroke-width="1.5"/>
+                            <circle cx="36" cy="16" r="3" stroke="currentColor" fill="none" stroke-width="1.5"/>
+                        </svg>
+                    </div>
+                    <div class="stakeholder-label">Civil<br>Society</div>
+                </div>
+                
+                <div class="stakeholder-node stakeholder-6">
+                    <div class="stakeholder-icon-wrapper">
+                        <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Building with pillars -->
+                            <path d="M8 40h32M12 40V20M20 40V20M28 40V20M36 40V20" stroke="currentColor" fill="none" stroke-width="1.5"/>
+                            <path d="M24 10l-16 10h32L24 10z" stroke="currentColor" fill="none" stroke-width="1.5"/>
+                        </svg>
+                    </div>
+                    <div class="stakeholder-label">Institutions &<br>Governments</div>
                 </div>
             </div>
         </div>
