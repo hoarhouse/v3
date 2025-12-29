@@ -259,7 +259,7 @@ const navStyles = `
     /* Close button for mobile - properly positioned */
     .nav-close {
         display: flex;
-        position: fixed;
+        position: absolute;
         top: 20px;
         right: 20px;
         background: rgba(255, 255, 255, 0.1);
