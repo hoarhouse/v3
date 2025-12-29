@@ -5,13 +5,533 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DCF Hungary - Get Involved</title>
     <link rel="stylesheet" href="css/styles.css">
+    <style>
+        /* Page-specific styles */
+        
+        /* Hero Section */
+        .hero {
+            background: var(--light-background);
+            padding: 5rem 0;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            margin-bottom: 1rem;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            color: var(--primary);
+        }
+        
+        .hero-subtitle {
+            font-size: clamp(1.25rem, 3vw, 1.75rem);
+            color: var(--accent);
+            max-width: 700px;
+            margin: 0 auto;
+            font-weight: 400;
+            line-height: 1.4;
+        }
+        
+        /* Section Base Styles */
+        section {
+            padding: 5rem 0;
+        }
+        
+        section:nth-child(odd) {
+            background: var(--background);
+        }
+        
+        section:nth-child(even) {
+            background: var(--light-background);
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: clamp(2rem, 4vw, 3rem);
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+            font-weight: 600;
+            letter-spacing: -0.03em;
+        }
+        
+        .section-text {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            font-size: 1.15rem;
+            line-height: 1.8;
+            color: var(--primary);
+            font-weight: 300;
+        }
+        
+        /* Donate Section */
+        .donate-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            max-width: 800px;
+            margin: 0 auto 3rem;
+        }
+        
+        .donate-card {
+            background: var(--background);
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow-subtle);
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        
+        .donate-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--secondary);
+        }
+        
+        .donate-amount {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .donate-level {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .donate-description {
+            font-size: 0.95rem;
+            color: var(--accent);
+            line-height: 1.6;
+        }
+        
+        .donate-button-container {
+            text-align: center;
+            margin: 3rem 0 2rem;
+        }
+        
+        .btn-donate-large {
+            background: #e53e3e !important;
+            color: #ffffff !important;
+            padding: 1.25rem 3rem;
+            font-size: 1.25rem;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-donate-large:hover {
+            background: #c53030 !important;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(229, 62, 62, 0.3);
+        }
+        
+        .donate-note {
+            text-align: center;
+            font-style: italic;
+            color: var(--accent);
+            font-size: 0.9rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* Partner Section */
+        .partner-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto 3rem;
+        }
+        
+        .partner-card {
+            background: var(--background);
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow-subtle);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .partner-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-hover);
+        }
+        
+        .partner-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 1.5rem;
+            color: var(--secondary);
+        }
+        
+        .partner-type {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .partner-description {
+            font-size: 0.95rem;
+            color: var(--accent);
+            line-height: 1.6;
+        }
+        
+        /* Network Section */
+        .network-signup {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .signup-form {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .email-input {
+            flex: 1;
+            padding: 1rem 1.5rem;
+            border: 1px solid var(--border-light);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+        
+        .email-input:focus {
+            outline: none;
+            border-color: var(--secondary);
+        }
+        
+        .btn-subscribe {
+            background: var(--secondary);
+            color: var(--background);
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-subscribe:hover {
+            opacity: 0.85;
+            transform: translateY(-1px);
+        }
+        
+        /* Volunteer Section */
+        .expertise-list {
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+        
+        .expertise-list ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .expertise-list li {
+            position: relative;
+            padding-left: 2rem;
+            margin-bottom: 1rem;
+            font-size: 1.05rem;
+            line-height: 1.6;
+            color: var(--primary);
+            font-weight: 300;
+        }
+        
+        .expertise-list li:before {
+            content: "•";
+            position: absolute;
+            left: 0.5rem;
+            color: var(--secondary);
+            font-weight: 400;
+        }
+        
+        /* CTA Buttons */
+        .cta-button-container {
+            text-align: center;
+            margin-top: 2rem;
+        }
+        
+        .btn-cta {
+            background: var(--secondary);
+            color: var(--background);
+            padding: 1rem 2.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-cta:hover {
+            opacity: 0.85;
+            transform: translateY(-2px);
+        }
+        
+        /* Questions Section */
+        .questions-section {
+            background: var(--primary);
+            color: var(--background);
+            text-align: center;
+            padding: 5rem 0;
+        }
+        
+        .questions-section .section-title {
+            color: var(--background);
+        }
+        
+        .questions-text {
+            font-size: 1.25rem;
+            max-width: 600px;
+            margin: 0 auto 2.5rem;
+            font-weight: 300;
+            line-height: 1.6;
+            color: var(--background);
+            opacity: 0.95;
+        }
+        
+        .btn-cta-white {
+            background: var(--background);
+            color: var(--primary);
+            padding: 1rem 2.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-cta-white:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+        
+        /* Mobile Responsive */
+        @media (max-width: 767px) {
+            .hero {
+                padding: 3rem 1rem;
+            }
+            
+            section {
+                padding: 3rem 1rem;
+            }
+            
+            .donate-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .partner-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .signup-form {
+                flex-direction: column;
+            }
+            
+            .email-input,
+            .btn-subscribe {
+                width: 100%;
+            }
+            
+            .questions-section {
+                padding: 3rem 1rem;
+            }
+        }
+    </style>
 </head>
 <body>
     <nav id="main-nav"></nav>
     
-    <main class="container">
-        <h1>Get Involved - Coming Soon</h1>
-    </main>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Get Involved</h1>
+            <p class="hero-subtitle">Join us in shaping the future of ethical AI and technology</p>
+        </div>
+    </section>
+    
+    <!-- Donate Section -->
+    <section>
+        <div class="container">
+            <h2 class="section-title">Support Our Mission</h2>
+            <p class="section-text">
+                Your donation directly funds our initiatives advancing ethical AI, digital peace, and technology that serves human dignity.
+            </p>
+            
+            <div class="donate-grid">
+                <div class="donate-card">
+                    <div class="donate-amount">$50</div>
+                    <div class="donate-level">Supporter</div>
+                    <div class="donate-description">Help fund educational resources and research materials</div>
+                </div>
+                
+                <div class="donate-card">
+                    <div class="donate-amount">$250</div>
+                    <div class="donate-level">Advocate</div>
+                    <div class="donate-description">Support a workshop or training session</div>
+                </div>
+                
+                <div class="donate-card">
+                    <div class="donate-amount">$1,000</div>
+                    <div class="donate-level">Partner</div>
+                    <div class="donate-description">Fund a policy brief or research initiative</div>
+                </div>
+                
+                <div class="donate-card">
+                    <div class="donate-amount">$5,000+</div>
+                    <div class="donate-level">Benefactor</div>
+                    <div class="donate-description">Sponsor a major program or initiative</div>
+                </div>
+            </div>
+            
+            <div class="donate-button-container">
+                <a href="#" class="btn-donate-large">Donate Now</a>
+            </div>
+            
+            <p class="donate-note">
+                DCF Hungary is a registered nonprofit. All donations are tax-deductible to the extent permitted by law.
+            </p>
+        </div>
+    </section>
+    
+    <!-- Partner Section -->
+    <section>
+        <div class="container">
+            <h2 class="section-title">Partner With Us</h2>
+            <p class="section-text">
+                We collaborate with organizations, institutions, and companies committed to ethical technology development.
+            </p>
+            
+            <div class="partner-grid">
+                <div class="partner-card">
+                    <div class="partner-icon">
+                        <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <!-- Academic institution icon -->
+                            <path d="M4 18 L24 6 L44 18 L44 22 L24 34 L4 22 Z"/>
+                            <path d="M12 23 L12 38 C12 40, 18 42, 24 42 C30 42, 36 40, 36 38 L36 23"/>
+                            <line x1="24" y1="34" x2="24" y2="42"/>
+                        </svg>
+                    </div>
+                    <div class="partner-type">Institutional Partners</div>
+                    <div class="partner-description">Universities, research institutions, and academic organizations advancing AI ethics</div>
+                </div>
+                
+                <div class="partner-card">
+                    <div class="partner-icon">
+                        <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <!-- Corporate building icon -->
+                            <rect x="8" y="12" width="32" height="28" rx="2"/>
+                            <rect x="14" y="18" width="6" height="6"/>
+                            <rect x="28" y="18" width="6" height="6"/>
+                            <rect x="14" y="28" width="6" height="6"/>
+                            <rect x="28" y="28" width="6" height="6"/>
+                            <rect x="20" y="34" width="8" height="6"/>
+                        </svg>
+                    </div>
+                    <div class="partner-type">Corporate Partners</div>
+                    <div class="partner-description">Technology companies committed to responsible AI development</div>
+                </div>
+                
+                <div class="partner-card">
+                    <div class="partner-icon">
+                        <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <!-- Hands holding heart icon -->
+                            <path d="M24 38 L12 26 C6 20, 6 12, 12 12 C16 12, 20 14, 24 18 C28 14, 32 12, 36 12 C42 12, 42 20, 36 26 Z"/>
+                            <path d="M8 30 L8 42 L16 42 L16 34"/>
+                            <path d="M40 30 L40 42 L32 42 L32 34"/>
+                        </svg>
+                    </div>
+                    <div class="partner-type">Faith & Civil Society</div>
+                    <div class="partner-description">Religious organizations and NGOs working for the common good</div>
+                </div>
+            </div>
+            
+            <div class="cta-button-container">
+                <a href="contact.html" class="btn-cta">Become a Partner</a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Join Our Network Section -->
+    <section>
+        <div class="container">
+            <h2 class="section-title">Join Our Network</h2>
+            <p class="section-text">
+                Connect with a global community of technologists, researchers, faith leaders, and advocates working together for ethical AI.
+            </p>
+            
+            <div class="network-signup">
+                <p class="section-text">Subscribe to our newsletter for updates on our initiatives and opportunities to engage.</p>
+                <form class="signup-form" onsubmit="return false;">
+                    <input type="email" class="email-input" placeholder="Enter your email" required>
+                    <button type="submit" class="btn-subscribe">Subscribe</button>
+                </form>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Volunteer/Advise Section -->
+    <section>
+        <div class="container">
+            <h2 class="section-title">Share Your Expertise</h2>
+            <p class="section-text">
+                DCF welcomes experts in AI, technology, ethics, policy, and faith to contribute their knowledge and skills.
+            </p>
+            
+            <div class="expertise-list">
+                <ul>
+                    <li>Serve as an advisor or consultant</li>
+                    <li>Contribute research or policy analysis</li>
+                    <li>Speak at events or workshops</li>
+                    <li>Mentor emerging developers</li>
+                </ul>
+            </div>
+            
+            <div class="cta-button-container">
+                <a href="contact.html" class="btn-cta">Contact Us</a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Questions Section -->
+    <section class="questions-section">
+        <div class="container">
+            <h2 class="section-title">Questions?</h2>
+            <p class="questions-text">
+                We'd love to hear from you. Reach out to learn more about how you can support our mission.
+            </p>
+            <a href="contact.html" class="btn-cta-white">Contact Us</a>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">Domus Communis Foundation</div>
+            <div class="footer-links">
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="initiatives.html">Initiatives</a>
+                <a href="get-involved.html">Get Involved</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 Domus Communis Foundation Hungary. All rights reserved.</p>
+                <p>Inspired by Catholic Social Teaching. Serving people of all faiths.</p>
+            </div>
+        </div>
+    </footer>
     
     <script src="js/nav.js"></script>
     <script src="js/main.js"></script>
