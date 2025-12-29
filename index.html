@@ -151,73 +151,175 @@
             font-size: 1.25rem;
         }
         
-        /* Bridging Role */
+        /* Bridging Role - Hub and Spoke Diagram */
         .bridging-section {
             background: var(--light-background);
             padding: 6rem 0;
         }
         
-        .bridging-visual {
+        .bridging-diagram {
             margin-top: 4rem;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-            gap: 2rem;
-            max-width: 1000px;
+            position: relative;
+            max-width: 600px;
+            height: 600px;
             margin-left: auto;
             margin-right: auto;
         }
         
-        .bridge-node {
-            text-align: center;
-            padding: 2rem 1rem;
+        /* Center Hub - DCF */
+        .dcf-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 140px;
+            height: 140px;
             background: var(--background);
-            border-radius: 12px;
-            transition: all 0.3s ease;
-            box-shadow: none;
+            border: 3px solid var(--gold);
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            box-shadow: 0 4px 20px rgba(184, 134, 11, 0.2);
         }
         
-        .bridge-node:hover {
-            transform: translateY(-4px);
+        .dcf-center svg {
+            width: 48px;
+            height: 48px;
+            stroke: var(--gold);
+            fill: none;
+            margin-bottom: 0.5rem;
+        }
+        
+        .dcf-center-label {
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: var(--primary);
+            letter-spacing: -0.02em;
+        }
+        
+        /* Connecting Lines */
+        .connection-lines {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+        
+        .connection-line {
+            stroke: var(--accent);
+            stroke-width: 1;
+            stroke-dasharray: 4, 4;
+            fill: none;
+            opacity: 0.3;
+        }
+        
+        /* Stakeholder Nodes */
+        .stakeholder-node {
+            position: absolute;
+            width: 100px;
+            text-align: center;
+            transform: translate(-50%, -50%);
+        }
+        
+        .stakeholder-icon-wrapper {
+            width: 64px;
+            height: 64px;
+            background: var(--background);
+            border: 1px solid var(--border-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 0.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .stakeholder-node:hover .stakeholder-icon-wrapper {
+            transform: scale(1.1);
             box-shadow: var(--shadow-hover);
         }
         
-        .bridge-node svg {
-            width: 32px;
-            height: 32px;
-            margin-bottom: 1rem;
+        .stakeholder-node svg {
+            width: 28px;
+            height: 28px;
             stroke: var(--accent);
             fill: none;
         }
         
-        .bridge-node-label {
-            font-weight: 500;
+        .stakeholder-label {
+            font-size: 0.85rem;
             color: var(--primary);
-            font-size: 0.95rem;
+            font-weight: 500;
+            line-height: 1.2;
         }
         
-        .bridge-node.central {
-            background: var(--secondary);
-            color: var(--background);
-            grid-column: span 2;
-        }
+        /* Position stakeholders in circle */
+        .stakeholder-1 { top: 10%; left: 50%; }  /* 12 o'clock */
+        .stakeholder-2 { top: 25%; left: 85%; }  /* 2 o'clock */
+        .stakeholder-3 { top: 60%; left: 85%; }  /* 4 o'clock */
+        .stakeholder-4 { top: 90%; left: 50%; }  /* 6 o'clock */
+        .stakeholder-5 { top: 60%; left: 15%; }  /* 8 o'clock */
+        .stakeholder-6 { top: 25%; left: 15%; }  /* 10 o'clock */
         
-        .bridge-node.central svg {
-            stroke: var(--background);
-        }
-        
-        .bridge-node.central .bridge-node-label {
-            color: var(--background);
-            font-size: 1.1rem;
-        }
-        
-        @media (min-width: 768px) {
-            .bridging-visual {
-                grid-template-columns: repeat(3, 1fr);
+        /* Mobile Responsive - Vertical Layout */
+        @media (max-width: 767px) {
+            .bridging-diagram {
+                height: auto;
+                max-width: 100%;
             }
             
-            .bridge-node.central {
-                grid-column: 2;
-                grid-row: 2;
+            .dcf-center {
+                position: relative;
+                top: auto;
+                left: auto;
+                transform: none;
+                margin: 0 auto 3rem;
+            }
+            
+            .connection-lines {
+                display: none;
+            }
+            
+            .stakeholder-node {
+                position: relative;
+                top: auto;
+                left: auto;
+                transform: none;
+                display: flex;
+                align-items: center;
+                margin-bottom: 1.5rem;
+                padding: 0 1rem;
+            }
+            
+            .stakeholder-icon-wrapper {
+                margin: 0 1rem 0 0;
+                flex-shrink: 0;
+            }
+            
+            .stakeholder-label {
+                text-align: left;
+                font-size: 1rem;
+            }
+            
+            /* Add connecting line on mobile */
+            .stakeholder-node::before {
+                content: "";
+                position: absolute;
+                left: 50%;
+                top: -1.5rem;
+                width: 1px;
+                height: 1.5rem;
+                background: var(--accent);
+                opacity: 0.3;
+            }
+            
+            .stakeholder-node:first-child::before {
+                display: none;
             }
         }
         
