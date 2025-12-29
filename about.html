@@ -5,13 +5,500 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DCF Hungary - About</title>
     <link rel="stylesheet" href="css/styles.css">
+    <style>
+        /* Page-specific styles */
+        
+        /* Hero Section */
+        .hero {
+            background: var(--light-background);
+            padding: 5rem 0;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            margin-bottom: 1rem;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            color: var(--primary);
+        }
+        
+        .hero-subtitle {
+            font-size: clamp(1.25rem, 3vw, 1.75rem);
+            color: var(--accent);
+            max-width: 700px;
+            margin: 0 auto;
+            font-weight: 400;
+            line-height: 1.4;
+        }
+        
+        /* Section Styles */
+        section {
+            padding: 5rem 0;
+        }
+        
+        section:nth-child(odd) {
+            background: var(--background);
+        }
+        
+        section:nth-child(even) {
+            background: var(--light-background);
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: clamp(2rem, 4vw, 3rem);
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+            font-weight: 600;
+            letter-spacing: -0.03em;
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.25rem;
+            margin-bottom: 3rem;
+            color: var(--accent);
+            font-weight: 300;
+        }
+        
+        .section-content {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--primary);
+            font-weight: 300;
+        }
+        
+        .section-content p {
+            margin-bottom: 1.5rem;
+        }
+        
+        /* Principles Cards */
+        .principles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .principle-card {
+            background: var(--background);
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow-subtle);
+            transition: all 0.3s ease;
+        }
+        
+        .principle-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-hover);
+        }
+        
+        .principle-name {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .principle-description {
+            font-size: 0.95rem;
+            color: var(--accent);
+            line-height: 1.6;
+        }
+        
+        .interfaith-note {
+            text-align: center;
+            font-style: italic;
+            color: var(--accent);
+            margin-top: 2rem;
+            font-size: 1rem;
+        }
+        
+        /* Location Cards */
+        .locations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .location-card {
+            background: var(--background);
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: var(--shadow-subtle);
+            transition: all 0.3s ease;
+        }
+        
+        .location-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-hover);
+        }
+        
+        .location-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .location-city {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .location-role {
+            font-size: 0.9rem;
+            color: var(--accent);
+            line-height: 1.4;
+        }
+        
+        .budapest-note {
+            max-width: 700px;
+            margin: 3rem auto 0;
+            padding: 2rem;
+            background: var(--background);
+            border-left: 4px solid var(--gold);
+            border-radius: 8px;
+        }
+        
+        .budapest-note h4 {
+            color: var(--gold);
+            margin-bottom: 1rem;
+        }
+        
+        /* Leadership Cards */
+        .leadership-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .leader-card {
+            background: var(--background);
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: var(--shadow-subtle);
+            transition: all 0.3s ease;
+        }
+        
+        .leader-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-hover);
+        }
+        
+        .leader-avatar {
+            width: 80px;
+            height: 80px;
+            background: var(--light-background);
+            border: 2px solid var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+        
+        .leader-name {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 0.25rem;
+        }
+        
+        .leader-title {
+            font-size: 0.9rem;
+            color: var(--gold);
+            margin-bottom: 0.75rem;
+        }
+        
+        .leader-bio {
+            font-size: 0.85rem;
+            color: var(--accent);
+            line-height: 1.4;
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            background: var(--primary);
+            color: var(--background);
+            text-align: center;
+            padding: 5rem 0;
+        }
+        
+        .cta-section .section-title {
+            color: var(--background);
+        }
+        
+        .cta-text {
+            font-size: 1.25rem;
+            max-width: 600px;
+            margin: 0 auto 2.5rem;
+            font-weight: 300;
+            line-height: 1.6;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn-cta {
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+        
+        .btn-cta-primary {
+            background: var(--background);
+            color: var(--primary);
+        }
+        
+        .btn-cta-primary:hover {
+            transform: translateY(-2px);
+            opacity: 0.9;
+        }
+        
+        .btn-cta-outline {
+            border: 2px solid var(--background);
+            color: var(--background);
+            background: transparent;
+        }
+        
+        .btn-cta-outline:hover {
+            background: var(--background);
+            color: var(--primary);
+        }
+        
+        /* Mobile Responsive */
+        @media (max-width: 767px) {
+            .hero {
+                padding: 3rem 1rem;
+            }
+            
+            section {
+                padding: 3rem 1rem;
+            }
+            
+            .principles-grid,
+            .locations-grid,
+            .leadership-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .budapest-note {
+                margin: 2rem 0 0;
+                padding: 1.5rem;
+            }
+        }
+    </style>
 </head>
 <body>
     <nav id="main-nav"></nav>
     
-    <main class="container">
-        <h1>About - Coming Soon</h1>
-    </main>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>About DCF</h1>
+            <p class="hero-subtitle">Building ethical technology for the common good of humankind</p>
+        </div>
+    </section>
+    
+    <!-- Mission & Vision Section -->
+    <section>
+        <div class="container">
+            <h2 class="section-title">Our Mission</h2>
+            <div class="section-content">
+                <p>Domus Communis Foundation is a global constellation dedicated to ensuring artificial intelligence and cyber technology serves humanity rather than the reverse. We build a 'cyber commons' — a globally networked collaborative space where ethical technology development operates through shared resources, collective governance, and mutual benefit.</p>
+                <p>Guided by Catholic Social Teaching principles while serving people of all faiths, we bridge major AI and technology actors, global civil society leaders, academia, Nobel Laureates, faith leaders, and institutions to shape a future where AI serves humanity, peace, and human dignity.</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Catholic Social Teaching Section -->
+    <section>
+        <div class="container">
+            <h2 class="section-title">Our Guiding Principles</h2>
+            <p class="section-subtitle">Inspired by Catholic Social Teaching</p>
+            
+            <div class="principles-grid">
+                <div class="principle-card">
+                    <h3 class="principle-name">Human Dignity</h3>
+                    <p class="principle-description">Every person possesses inherent worth; technology must serve and protect this dignity</p>
+                </div>
+                
+                <div class="principle-card">
+                    <h3 class="principle-name">Common Good</h3>
+                    <p class="principle-description">Technology should benefit all of society, not just the privileged few</p>
+                </div>
+                
+                <div class="principle-card">
+                    <h3 class="principle-name">Subsidiarity</h3>
+                    <p class="principle-description">Decisions should be made at the most local level possible</p>
+                </div>
+                
+                <div class="principle-card">
+                    <h3 class="principle-name">Solidarity</h3>
+                    <p class="principle-description">Technology must foster interconnection and mutual support</p>
+                </div>
+                
+                <div class="principle-card">
+                    <h3 class="principle-name">Preferential Option for the Poor</h3>
+                    <p class="principle-description">Technology should bridge gaps, not widen them</p>
+                </div>
+                
+                <div class="principle-card">
+                    <h3 class="principle-name">Care for Creation</h3>
+                    <p class="principle-description">Sustainable innovation preserving the earth for future generations</p>
+                </div>
+            </div>
+            
+            <p class="interfaith-note">While inspired by Catholic principles, DCF welcomes and serves people of all faiths and backgrounds.</p>
+        </div>
+    </section>
+    
+    <!-- Interfaith Section -->
+    <section>
+        <div class="container">
+            <h2 class="section-title">An Interfaith Commitment</h2>
+            <div class="section-content">
+                <p>In 2026, we honor the 800th anniversary of Saint Francis of Assisi's historic dialogue with Sultan Malik al-Kamil — a model of interfaith encounter that guides our work bridging faith traditions in service of ethical technology and human dignity.</p>
+                <p>We also support the Rome Call for AI Ethics, led by the Pontifical Academy for Life, promoting Transparency, Inclusion, Responsibility, Impartiality, Reliability, and Security in AI development.</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Global Constellation Section -->
+    <section>
+        <div class="container">
+            <h2 class="section-title">The Global Constellation</h2>
+            <div class="section-content">
+                <p>DCF is designed as a constellation structure connecting the Global North, South, East, and West with nonprofit foundation entities located across the globe.</p>
+            </div>
+            
+            <div class="locations-grid">
+                <div class="location-card">
+                    <div class="location-icon">🇺🇸</div>
+                    <h3 class="location-city">Washington D.C., USA</h3>
+                    <p class="location-role">Global North leadership and policy influence</p>
+                </div>
+                
+                <div class="location-card">
+                    <div class="location-icon">🇭🇺</div>
+                    <h3 class="location-city">Budapest, Hungary</h3>
+                    <p class="location-role">Technical hub, European connections, R&D</p>
+                </div>
+                
+                <div class="location-card">
+                    <div class="location-icon">🇬🇭</div>
+                    <h3 class="location-city">Accra, Ghana</h3>
+                    <p class="location-role">Global South bridge, African engagement</p>
+                </div>
+            </div>
+            
+            <div class="budapest-note">
+                <h4>Why Budapest?</h4>
+                <p>Budapest serves as a natural center point connecting global regions, leveraging Hungary's rich scientific legacy — including computing pioneer John von Neumann — and its position bridging Eastern and Western Europe.</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Leadership Section -->
+    <section>
+        <div class="container">
+            <h2 class="section-title">Our Leadership</h2>
+            
+            <div class="leadership-grid">
+                <div class="leader-card">
+                    <div class="leader-avatar">AK</div>
+                    <h3 class="leader-name">Dr. Antal Kuthy</h3>
+                    <p class="leader-title">Co-founder & Technical Lead</p>
+                    <p class="leader-bio">CEO of E-Group Kft., AI and cybersecurity expert</p>
+                </div>
+                
+                <div class="leader-card">
+                    <div class="leader-avatar">ZV</div>
+                    <h3 class="leader-name">Zsadány Véscey</h3>
+                    <p class="leader-title">Co-founder & Strategic Advisor</p>
+                    <p class="leader-bio">ALEAS Group, organizational development</p>
+                </div>
+                
+                <div class="leader-card">
+                    <div class="leader-avatar">ZP</div>
+                    <h3 class="leader-name">Zoltán Pap</h3>
+                    <p class="leader-title">Co-founder & Operations</p>
+                    <p class="leader-bio">Sustainable organizational structures</p>
+                </div>
+                
+                <div class="leader-card">
+                    <div class="leader-avatar">AP</div>
+                    <h3 class="leader-name">Dr. Alessio Pecorario</h3>
+                    <p class="leader-title">Founder & Diplomatic Lead</p>
+                    <p class="leader-bio">15+ years Vatican/international security experience</p>
+                </div>
+                
+                <div class="leader-card">
+                    <div class="leader-avatar">GS</div>
+                    <h3 class="leader-name">Giuseppe Saviano</h3>
+                    <p class="leader-title">Partner</p>
+                    <p class="leader-bio">International relations and collaboration</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Call to Action Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2 class="section-title">Join Our Mission</h2>
+            <p class="cta-text">Partner with us to ensure AI and technology serve humanity.</p>
+            <div class="cta-buttons">
+                <a href="get-involved.html" class="btn-cta btn-cta-primary">Get Involved</a>
+                <a href="contact.html" class="btn-cta btn-cta-outline">Contact Us</a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">Domus Communis Foundation</div>
+            <div class="footer-links">
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="initiatives.html">Initiatives</a>
+                <a href="get-involved.html">Get Involved</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 Domus Communis Foundation Hungary. All rights reserved.</p>
+                <p>Inspired by Catholic Social Teaching. Serving people of all faiths.</p>
+            </div>
+        </div>
+    </footer>
     
     <script src="js/nav.js"></script>
     <script src="js/main.js"></script>
