@@ -5,15 +5,590 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DCF Hungary - Contact</title>
     <link rel="stylesheet" href="css/styles.css">
+    <style>
+        /* Page-specific styles */
+        
+        /* Hero Section */
+        .hero {
+            background: var(--light-background);
+            padding: 5rem 0;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            margin-bottom: 1rem;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            color: var(--primary);
+        }
+        
+        .hero-subtitle {
+            font-size: clamp(1.25rem, 3vw, 1.75rem);
+            color: var(--accent);
+            max-width: 700px;
+            margin: 0 auto;
+            font-weight: 400;
+            line-height: 1.4;
+        }
+        
+        /* Section Base Styles */
+        section {
+            padding: 5rem 0;
+        }
+        
+        section:nth-child(odd) {
+            background: var(--background);
+        }
+        
+        section:nth-child(even) {
+            background: var(--light-background);
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: clamp(2rem, 4vw, 3rem);
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+            font-weight: 600;
+            letter-spacing: -0.03em;
+        }
+        
+        .section-text {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 3rem;
+            font-size: 1.15rem;
+            line-height: 1.8;
+            color: var(--primary);
+            font-weight: 300;
+        }
+        
+        /* Contact Form Section */
+        .contact-form-container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        
+        .form-label {
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--primary);
+        }
+        
+        .form-input,
+        .form-select,
+        .form-textarea {
+            padding: 0.875rem 1rem;
+            border: 1px solid #d1d1d6;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: all 0.3s ease;
+            background: var(--background);
+        }
+        
+        .form-input:focus,
+        .form-select:focus,
+        .form-textarea:focus {
+            outline: none;
+            border-color: var(--secondary);
+            box-shadow: 0 0 0 3px rgba(0, 113, 227, 0.1);
+        }
+        
+        .form-textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .form-submit {
+            background: var(--secondary);
+            color: var(--background);
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.05rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+        
+        .form-submit:hover {
+            opacity: 0.85;
+            transform: translateY(-2px);
+        }
+        
+        .form-note {
+            text-align: center;
+            color: var(--accent);
+            font-size: 0.9rem;
+            margin-top: 1.5rem;
+            font-style: italic;
+        }
+        
+        /* Contact Info Section */
+        .contact-info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .contact-card {
+            background: var(--background);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow-subtle);
+        }
+        
+        .contact-label {
+            font-size: 0.9rem;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .contact-value {
+            font-size: 1.05rem;
+            color: var(--primary);
+            font-weight: 400;
+        }
+        
+        .contact-value a {
+            color: var(--secondary);
+            text-decoration: none;
+        }
+        
+        .contact-value a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Connect Section */
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            margin-bottom: 3rem;
+        }
+        
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--light-background);
+            color: var(--primary);
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .social-link:hover {
+            background: var(--secondary);
+            color: var(--background);
+            transform: translateY(-2px);
+        }
+        
+        .newsletter-signup {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .signup-form {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .email-input {
+            flex: 1;
+            padding: 0.875rem 1rem;
+            border: 1px solid #d1d1d6;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+        
+        .email-input:focus {
+            outline: none;
+            border-color: var(--secondary);
+        }
+        
+        .btn-subscribe {
+            background: var(--secondary);
+            color: var(--background);
+            padding: 0.875rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+        
+        .btn-subscribe:hover {
+            opacity: 0.85;
+            transform: translateY(-1px);
+        }
+        
+        /* FAQ Section */
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .faq-item {
+            background: var(--background);
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+            box-shadow: var(--shadow-subtle);
+            transition: box-shadow 0.3s ease;
+        }
+        
+        .faq-item:hover {
+            box-shadow: var(--shadow-hover);
+        }
+        
+        .faq-question {
+            padding: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: var(--primary);
+            transition: background 0.3s ease;
+            user-select: none;
+        }
+        
+        .faq-question:hover {
+            background: var(--light-background);
+        }
+        
+        .faq-icon {
+            width: 24px;
+            height: 24px;
+            transition: transform 0.3s ease;
+            flex-shrink: 0;
+            margin-left: 1rem;
+        }
+        
+        .faq-item.active .faq-icon {
+            transform: rotate(180deg);
+        }
+        
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+        }
+        
+        .faq-answer-content {
+            padding: 0 1.5rem 1.5rem;
+            color: var(--accent);
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+        
+        /* Mobile Responsive */
+        @media (max-width: 767px) {
+            .hero {
+                padding: 3rem 1rem;
+            }
+            
+            section {
+                padding: 3rem 1rem;
+            }
+            
+            .contact-info-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .social-links {
+                gap: 1rem;
+            }
+            
+            .signup-form {
+                flex-direction: column;
+            }
+            
+            .email-input,
+            .btn-subscribe {
+                width: 100%;
+            }
+            
+            .faq-question {
+                font-size: 1rem;
+                padding: 1.25rem;
+            }
+        }
+    </style>
 </head>
 <body>
     <nav id="main-nav"></nav>
     
-    <main class="container">
-        <h1>Contact - Coming Soon</h1>
-    </main>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Contact Us</h1>
+            <p class="hero-subtitle">We'd love to hear from you</p>
+        </div>
+    </section>
+    
+    <!-- Contact Form Section -->
+    <section>
+        <div class="container">
+            <h2 class="section-title">Send Us a Message</h2>
+            
+            <div class="contact-form-container">
+                <form class="contact-form" onsubmit="return false;">
+                    <div class="form-group">
+                        <label class="form-label" for="name">Name *</label>
+                        <input type="text" id="name" class="form-input" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="email">Email *</label>
+                        <input type="email" id="email" class="form-input" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="organization">Organization</label>
+                        <input type="text" id="organization" class="form-input">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="subject">Subject *</label>
+                        <select id="subject" class="form-select" required>
+                            <option value="">Select a subject</option>
+                            <option value="general">General Inquiry</option>
+                            <option value="partnership">Partnership</option>
+                            <option value="donation">Donation</option>
+                            <option value="media">Media</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="message">Message *</label>
+                        <textarea id="message" class="form-textarea" required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="form-submit">Send Message</button>
+                </form>
+                
+                <p class="form-note">We typically respond within 2-3 business days.</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Contact Information Section -->
+    <section>
+        <div class="container">
+            <h2 class="section-title">Other Ways to Reach Us</h2>
+            
+            <div class="contact-info-grid">
+                <div class="contact-card">
+                    <div class="contact-label">General Inquiries</div>
+                    <div class="contact-value">
+                        <a href="mailto:info@dcfhungary.org">info@dcfhungary.org</a>
+                    </div>
+                </div>
+                
+                <div class="contact-card">
+                    <div class="contact-label">Location</div>
+                    <div class="contact-value">Budapest, Hungary</div>
+                </div>
+                
+                <div class="contact-card">
+                    <div class="contact-label">Partnership Inquiries</div>
+                    <div class="contact-value">
+                        <a href="mailto:partners@dcfhungary.org">partners@dcfhungary.org</a>
+                    </div>
+                </div>
+                
+                <div class="contact-card">
+                    <div class="contact-label">Media Inquiries</div>
+                    <div class="contact-value">
+                        <a href="mailto:media@dcfhungary.org">media@dcfhungary.org</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Connect Section -->
+    <section>
+        <div class="container">
+            <h2 class="section-title">Follow Our Work</h2>
+            <p class="section-text">
+                Stay connected with DCF's latest initiatives and announcements.
+            </p>
+            
+            <div class="social-links">
+                <a href="#" class="social-link" aria-label="LinkedIn">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                    </svg>
+                </a>
+                
+                <a href="#" class="social-link" aria-label="Twitter/X">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                    </svg>
+                </a>
+            </div>
+            
+            <div class="newsletter-signup">
+                <p class="section-text">Subscribe to our newsletter</p>
+                <form class="signup-form" onsubmit="return false;">
+                    <input type="email" class="email-input" placeholder="Enter your email" required>
+                    <button type="submit" class="btn-subscribe">Subscribe</button>
+                </form>
+            </div>
+        </div>
+    </section>
+    
+    <!-- FAQ Section -->
+    <section>
+        <div class="container">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        What is DCF Hungary?
+                        <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            DCF Hungary is part of a global nonprofit constellation dedicated to ensuring AI and cyber technology serves humanity. We bridge technologists, academics, faith leaders, and institutions to advance ethical technology development.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Do I need to be Catholic to get involved?
+                        <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            No. While our work is inspired by Catholic Social Teaching, we welcome and serve people of all faiths and backgrounds. Our focus is on shared human values and ethical technology.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        How can my organization partner with DCF?
+                        <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            We collaborate with universities, tech companies, NGOs, and faith organizations. Contact us at partners@dcfhungary.org to discuss partnership opportunities.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        How are donations used?
+                        <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            Donations directly fund our eight initiatives: Peace, Technology, Academia, Education, Mentorship, Research, Regulatory, and Theology/Philosophy programs advancing ethical AI.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Where is DCF located?
+                        <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            DCF operates as a global constellation with presence in Washington D.C. (USA), Budapest (Hungary), and Accra (Ghana).
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">Domus Communis Foundation</div>
+            <div class="footer-links">
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="initiatives.html">Initiatives</a>
+                <a href="get-involved.html">Get Involved</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 Domus Communis Foundation Hungary. All rights reserved.</p>
+                <p>Inspired by Catholic Social Teaching. Serving people of all faiths.</p>
+            </div>
+        </div>
+    </footer>
     
     <script src="js/nav.js"></script>
     <script src="js/main.js"></script>
+    <script>
+        // FAQ Accordion functionality
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const faqItem = question.parentElement;
+                
+                // Close other FAQs
+                document.querySelectorAll('.faq-item').forEach(item => {
+                    if (item !== faqItem) {
+                        item.classList.remove('active');
+                    }
+                });
+                
+                // Toggle current FAQ
+                faqItem.classList.toggle('active');
+            });
+        });
+    </script>
 </body>
 </html>
