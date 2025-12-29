@@ -94,6 +94,7 @@ function initNav() {
 // Add navigation styles
 const navStyles = `
 <style>
+/* Navigation Base Styles */
 #main-nav {
     background-color: var(--primary);
     padding: 1rem 0;
@@ -110,6 +111,7 @@ const navStyles = `
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: relative;
 }
 
 .nav-brand a {
@@ -119,20 +121,30 @@ const navStyles = `
     text-decoration: none;
 }
 
+/* Desktop Navigation */
 .nav-menu {
+    display: block;
+}
+
+.nav-list {
     list-style: none;
     display: flex;
-    gap: 2rem;
+    gap: 1rem;
     margin: 0;
     padding: 0;
+}
+
+.nav-item {
+    margin: 0;
 }
 
 .nav-link {
     color: var(--white);
     text-decoration: none;
-    padding: 0.5rem 1rem;
+    padding: 0.75rem 1.25rem;
     border-radius: 4px;
     transition: background-color 0.3s ease;
+    display: block;
 }
 
 .nav-link:hover {
@@ -145,60 +157,161 @@ const navStyles = `
     font-weight: 600;
 }
 
+/* Hamburger Menu Button - Hidden on Desktop */
 .nav-toggle {
     display: none;
     flex-direction: column;
+    justify-content: center;
     gap: 4px;
     background: none;
     border: none;
     cursor: pointer;
-    padding: 4px;
+    padding: 8px;
+    min-width: 44px;
+    min-height: 44px;
 }
 
-.nav-toggle span {
-    width: 25px;
+.hamburger-line {
+    width: 24px;
     height: 3px;
     background-color: var(--white);
     transition: all 0.3s ease;
+    display: block;
 }
 
-.nav-toggle--active span:nth-child(1) {
-    transform: rotate(45deg) translate(5px, 5px);
+/* Close Button - Always Hidden on Desktop */
+.nav-close {
+    display: none;
 }
 
-.nav-toggle--active span:nth-child(2) {
-    opacity: 0;
+/* Overlay - Hidden on Desktop */
+.nav-overlay {
+    display: none;
 }
 
-.nav-toggle--active span:nth-child(3) {
-    transform: rotate(-45deg) translate(7px, -6px);
-}
-
-@media (max-width: 768px) {
-    .nav-toggle {
-        display: flex;
+/* Tablet Styles */
+@media (max-width: 1023px) and (min-width: 768px) {
+    .nav-list {
+        gap: 0.5rem;
     }
     
+    .nav-link {
+        padding: 0.75rem 1rem;
+    }
+}
+
+/* Mobile Styles */
+@media (max-width: 767px) {
+    /* Show hamburger button */
+    .nav-toggle {
+        display: flex;
+        z-index: 1002;
+    }
+    
+    /* Overlay for background dimming */
+    .nav-overlay {
+        display: block;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.5);
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+        z-index: 999;
+    }
+    
+    .nav-overlay--active {
+        opacity: 1;
+        visibility: visible;
+    }
+    
+    /* Mobile Menu Container */
     .nav-menu {
         position: fixed;
-        left: -100%;
-        top: 70px;
-        flex-direction: column;
+        top: 0;
+        right: -100%;
+        width: 280px;
+        max-width: 85%;
+        height: 100vh;
         background-color: var(--primary);
-        width: 100%;
-        text-align: center;
-        transition: left 0.3s ease;
-        padding: 2rem 0;
-        box-shadow: 0 10px 27px rgba(0,0,0,0.05);
+        transition: right 0.3s ease;
+        z-index: 1001;
+        overflow-y: auto;
+        box-shadow: -2px 0 10px rgba(0,0,0,0.2);
     }
     
     .nav-menu--active {
-        left: 0;
+        right: 0;
+    }
+    
+    /* Close button for mobile */
+    .nav-close {
+        display: flex;
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 8px;
+        min-width: 44px;
+        min-height: 44px;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .close-line {
+        position: absolute;
+        width: 24px;
+        height: 3px;
+        background-color: var(--white);
+    }
+    
+    .close-line:first-child {
+        transform: rotate(45deg);
+    }
+    
+    .close-line:last-child {
+        transform: rotate(-45deg);
+    }
+    
+    /* Mobile Menu List */
+    .nav-list {
+        flex-direction: column;
+        gap: 0;
+        padding: 4rem 1rem 2rem;
     }
     
     .nav-item {
-        margin: 0.5rem 0;
+        margin: 0.25rem 0;
     }
+    
+    .nav-link {
+        padding: 1rem;
+        min-height: 48px;
+        display: flex;
+        align-items: center;
+        font-size: 1.1rem;
+        border-radius: 4px;
+    }
+    
+    .nav-link:hover,
+    .nav-link:focus {
+        background-color: rgba(255,255,255,0.1);
+    }
+    
+    .nav-link.active {
+        background-color: rgba(255,255,255,0.2);
+        font-weight: 600;
+    }
+}
+
+/* Ensure no horizontal scroll */
+body {
+    overflow-x: hidden;
 }
 </style>
 `;
