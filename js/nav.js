@@ -142,7 +142,7 @@ const navStyles = `
 .nav-list {
     list-style: none;
     display: flex;
-    gap: 0.75rem;
+    gap: 0.5rem;
     margin: 0;
     padding: 0;
     align-items: center;
@@ -152,16 +152,25 @@ const navStyles = `
     margin: 0;
 }
 
+/* Reset donate item spacing on desktop */
+.nav-item-donate {
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+
 .nav-link {
     color: var(--primary);
     text-decoration: none;
-    padding: 0.5rem 0.75rem;
+    padding: 6px 12px;
     border-radius: 6px;
     transition: all 0.3s ease;
-    display: block;
+    display: inline-block;
     font-size: 0.875rem;
     font-weight: 500;
     white-space: nowrap;
+    line-height: 1.2;
+    vertical-align: middle;
 }
 
 .nav-link:hover {
@@ -178,21 +187,23 @@ const navStyles = `
 .nav-donate-btn {
     background: #e53e3e;
     color: #ffffff !important;
-    padding: 0.5rem 1rem;
+    padding: 6px 16px;
     border-radius: 6px;
     text-decoration: none;
-    font-weight: 500;
+    font-weight: 600;
     font-size: 0.875rem;
     transition: all 0.3s ease;
     display: inline-block;
     margin-left: 0.5rem;
     white-space: nowrap;
+    line-height: 1.2;
+    vertical-align: middle;
 }
 
 .nav-donate-btn:hover {
     background: #c53030;
     text-decoration: none;
-    transform: translateY(-1px);
+    opacity: 1;
 }
 
 /* Hamburger Menu Button - Hidden on Desktop */
@@ -230,17 +241,18 @@ const navStyles = `
 /* Tablet Styles - Tighter spacing for medium screens */
 @media (max-width: 1200px) and (min-width: 901px) {
     .nav-list {
-        gap: 0.5rem;
+        gap: 0.4rem;
     }
     
     .nav-link {
-        padding: 0.4rem 0.6rem;
+        padding: 5px 10px;
         font-size: 0.825rem;
     }
     
     .nav-donate-btn {
-        padding: 0.4rem 0.8rem;
+        padding: 5px 14px;
         font-size: 0.825rem;
+        margin-left: 0.4rem;
     }
 }
 
