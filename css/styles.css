@@ -80,27 +80,33 @@ h1, h2, h3, h4, h5, h6 {
     margin-bottom: 1.5rem;
     letter-spacing: -0.02em;
     color: var(--primary);
+    /* Ensure no hyphenation on headings */
+    hyphens: none !important;
+    -webkit-hyphens: none !important;
+    -ms-hyphens: none !important;
+    word-break: keep-all !important;
+    overflow-wrap: normal !important;
 }
 
-/* Responsive Typography with proper scaling */
+/* Responsive Typography with proper scaling - reduced mobile sizes */
 h1 {
-    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-size: clamp(2rem, 6vw, 4rem);
     font-weight: 700;
     margin-bottom: 2rem;
 }
 
 h2 {
-    font-size: clamp(2rem, 4vw, 3rem);
+    font-size: clamp(1.75rem, 4vw, 3rem);
     font-weight: 600;
 }
 
 h3 {
-    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-size: clamp(1.35rem, 3vw, 2rem);
     font-weight: 600;
 }
 
 h4 {
-    font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+    font-size: clamp(1.15rem, 2.5vw, 1.5rem);
     font-weight: 600;
 }
 
@@ -321,8 +327,30 @@ footer .btn-donate:hover {
     background: #c53030 !important;
 }
 
-/* Mobile footer adjustments */
+/* Mobile adjustments */
 @media (max-width: 767px) {
+    /* Ensure no hyphenation on mobile */
+    h1, h2, h3, h4, h5, h6 {
+        hyphens: none !important;
+        -webkit-hyphens: none !important;
+        -ms-hyphens: none !important;
+        word-break: keep-all !important;
+        overflow-wrap: normal !important;
+    }
+    
+    /* Slightly smaller font sizes on mobile to prevent overflow */
+    h1 {
+        font-size: 1.85rem;
+    }
+    
+    h2 {
+        font-size: 1.6rem;
+    }
+    
+    h3 {
+        font-size: 1.3rem;
+    }
+    
     footer {
         padding: 3rem 0 2rem;
     }
