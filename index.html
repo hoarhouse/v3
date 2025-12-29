@@ -5,13 +5,518 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DCF Hungary - Home</title>
     <link rel="stylesheet" href="css/styles.css">
+    <style>
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, #2d5a8e 100%);
+            color: var(--white);
+            padding: 4rem 0;
+            text-align: center;
+            min-height: 70vh;
+            display: flex;
+            align-items: center;
+        }
+        
+        .hero h1 {
+            font-size: clamp(2rem, 6vw, 3.5rem);
+            margin-bottom: 1.5rem;
+            font-weight: 800;
+        }
+        
+        .hero-subheadline {
+            font-size: clamp(1.25rem, 3vw, 1.75rem);
+            margin-bottom: 1.5rem;
+            color: var(--accent);
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .hero-text {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            margin-bottom: 2.5rem;
+            opacity: 0.95;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.7;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn-primary {
+            background: var(--secondary);
+            color: var(--white);
+            padding: 1rem 2rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: inline-block;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            text-decoration: none;
+        }
+        
+        .btn-outline {
+            border: 2px solid var(--white);
+            color: var(--white);
+            padding: calc(1rem - 2px) calc(2rem - 2px);
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background 0.2s, color 0.2s;
+            display: inline-block;
+        }
+        
+        .btn-outline:hover {
+            background: var(--white);
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        /* Section Styles */
+        section {
+            padding: 4rem 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: clamp(2rem, 4vw, 2.75rem);
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.25rem;
+            margin-bottom: 3rem;
+            color: var(--text);
+            opacity: 0.85;
+        }
+        
+        /* Strategic Objectives */
+        .objectives-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .objective-card {
+            background: var(--light-gray);
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+        }
+        
+        .objective-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+        }
+        
+        .objective-number {
+            background: var(--primary);
+            color: var(--white);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+        
+        /* Bridging Role */
+        .bridging-section {
+            background: var(--light-gray);
+        }
+        
+        .bridging-visual {
+            margin-top: 3rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1.5rem;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .bridge-node {
+            text-align: center;
+            padding: 1.5rem 1rem;
+            background: var(--white);
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            position: relative;
+        }
+        
+        .bridge-node-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .bridge-node-label {
+            font-weight: 600;
+            color: var(--primary);
+        }
+        
+        .bridge-node.central {
+            background: var(--primary);
+            color: var(--white);
+            grid-column: span 2;
+        }
+        
+        @media (min-width: 768px) {
+            .bridging-visual {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .bridge-node.central {
+                grid-column: 2;
+                grid-row: 2;
+            }
+        }
+        
+        /* Flagship Initiative */
+        .flagship-section {
+            padding: 5rem 0;
+        }
+        
+        .flagship-card {
+            background: linear-gradient(135deg, var(--primary) 0%, #2d5a8e 100%);
+            color: var(--white);
+            padding: 3rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        }
+        
+        .flagship-title {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent);
+        }
+        
+        .flagship-description {
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+        
+        /* Initiatives Grid */
+        .initiatives-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+        
+        .initiative-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+            text-align: center;
+            text-decoration: none;
+            color: var(--text);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .initiative-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            text-decoration: none;
+        }
+        
+        .initiative-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .initiative-name {
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .initiative-tagline {
+            font-size: 0.9rem;
+            color: var(--text);
+            opacity: 0.8;
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            background: var(--accent);
+            text-align: center;
+            padding: 5rem 0;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--primary);
+            color: var(--white);
+            padding: 3rem 0 2rem;
+            margin-top: 0;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        .footer-brand {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-links a {
+            color: var(--white);
+            text-decoration: none;
+            opacity: 0.9;
+        }
+        
+        .footer-links a:hover {
+            opacity: 1;
+            text-decoration: underline;
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.2);
+            margin-top: 2rem;
+            padding-top: 2rem;
+            text-align: center;
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+        
+        /* Mobile Responsive */
+        @media (max-width: 767px) {
+            .hero {
+                padding: 3rem 1rem;
+                min-height: auto;
+            }
+            
+            .objectives-grid,
+            .initiatives-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .bridging-visual {
+                grid-template-columns: 1fr;
+            }
+            
+            .bridge-node.central {
+                grid-column: 1;
+                order: -1;
+            }
+            
+            .flagship-card {
+                padding: 2rem 1.5rem;
+            }
+        }
+    </style>
 </head>
 <body>
     <nav id="main-nav"></nav>
     
-    <main class="container">
-        <h1>Home - Coming Soon</h1>
-    </main>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Domus Communis Foundation</h1>
+            <p class="hero-subheadline">The leading global Catholic-inspired constellation advancing ethical AI and cyber technology for the common good of humankind.</p>
+            <p class="hero-text">We bridge major AI and technology actors, global civil society leaders, academia, Nobel Laureates, faith leaders, and institutions to shape a future where AI serves humanity, peace, and human dignity.</p>
+            <div class="hero-buttons">
+                <a href="get-involved.html" class="btn-primary">Support Our Mission</a>
+                <a href="initiatives.html" class="btn-outline">Explore Our Work</a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Strategic Objectives Section -->
+    <section>
+        <div class="container">
+            <h2 class="section-title">Our Strategic Objectives</h2>
+            <div class="objectives-grid">
+                <div class="objective-card">
+                    <div class="objective-number">1</div>
+                    <p>Contributing to the creation of a global center on AI for the common good, including development of common-good-oriented algorithms.</p>
+                </div>
+                <div class="objective-card">
+                    <div class="objective-number">2</div>
+                    <p>Supporting the establishment of a European research center on artificial intelligence and digital sovereignty.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Bridging Role Section -->
+    <section class="bridging-section">
+        <div class="container">
+            <h2 class="section-title">Bridging Worlds for the Common Good</h2>
+            <p style="text-align: center; max-width: 800px; margin: 0 auto 2rem;">DCF serves as a unique bridge connecting major AI and technology actors, global civil society leaders, academic institutions, Nobel Laureates, faith leaders, and governmental bodies. Our role is to help shape a future where AI interprets and serves the principle of 'Be Human' and advances the common good.</p>
+            
+            <div class="bridging-visual">
+                <div class="bridge-node">
+                    <div class="bridge-node-icon">🏛️</div>
+                    <div class="bridge-node-label">Institutions</div>
+                </div>
+                <div class="bridge-node">
+                    <div class="bridge-node-icon">🎓</div>
+                    <div class="bridge-node-label">Academia</div>
+                </div>
+                <div class="bridge-node">
+                    <div class="bridge-node-icon">🏆</div>
+                    <div class="bridge-node-label">Nobel Laureates</div>
+                </div>
+                <div class="bridge-node">
+                    <div class="bridge-node-icon">✝️</div>
+                    <div class="bridge-node-label">Faith Leaders</div>
+                </div>
+                <div class="bridge-node central">
+                    <div class="bridge-node-icon">🌐</div>
+                    <div class="bridge-node-label">DCF</div>
+                </div>
+                <div class="bridge-node">
+                    <div class="bridge-node-icon">🤖</div>
+                    <div class="bridge-node-label">AI & Tech Actors</div>
+                </div>
+                <div class="bridge-node">
+                    <div class="bridge-node-icon">🌍</div>
+                    <div class="bridge-node-label">Civil Society</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Flagship Initiative Section -->
+    <section class="flagship-section">
+        <div class="container">
+            <h2 class="section-title">Flagship Initiatives</h2>
+            <div class="flagship-card">
+                <h3 class="flagship-title">THE BUDAPEST APPEAL</h3>
+                <h4 style="color: var(--accent); margin-bottom: 1.5rem;">The Budapest Appeal for Digital Ceasefire</h4>
+                <p class="flagship-description">The Budapest Appeal for a Cyber Ceasefire and Digital Peace was conceived following discussions regarding a potential high-level summit in Hungary. Budapest — where Domus Communis Foundation maintains an active presence — emerged as a natural symbolic reference point, reflecting DCF's mission to foster dialogue across the Global North, South, East, and West. The initiative frames digital de-escalation and peace-building within a Sovereign AI and data sovereignty model, affirming that technological restraint, human dignity, and national agency must advance together. The Budapest Appeal continues as an open initiative, welcoming support from major AI actors, global civil society leaders, academia, Nobel Laureates, faith leaders, and institutions committed to peace and the common good.</p>
+                <a href="initiatives.html" class="btn-outline">Join the Budapest Appeal</a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 8 Initiatives Preview Section -->
+    <section>
+        <div class="container">
+            <h2 class="section-title">Our Initiatives</h2>
+            <p class="section-subtitle">Eight strategic programs advancing ethical technology for humanity</p>
+            
+            <div class="initiatives-grid">
+                <a href="initiatives.html" class="initiative-card">
+                    <div class="initiative-icon">☮️</div>
+                    <div class="initiative-name">Peace</div>
+                    <div class="initiative-tagline">Digital Peace Process for Global Stability</div>
+                </a>
+                
+                <a href="initiatives.html" class="initiative-card">
+                    <div class="initiative-icon">💻</div>
+                    <div class="initiative-name">Technology</div>
+                    <div class="initiative-tagline">Solutions for Ethical Digital Sovereignty</div>
+                </a>
+                
+                <a href="initiatives.html" class="initiative-card">
+                    <div class="initiative-icon">🎓</div>
+                    <div class="initiative-name">Academia</div>
+                    <div class="initiative-tagline">Connecting Global Academic Excellence</div>
+                </a>
+                
+                <a href="initiatives.html" class="initiative-card">
+                    <div class="initiative-icon">📚</div>
+                    <div class="initiative-name">Education</div>
+                    <div class="initiative-tagline">Programs for Cyber Safety and Ethical AI</div>
+                </a>
+                
+                <a href="initiatives.html" class="initiative-card">
+                    <div class="initiative-icon">🤝</div>
+                    <div class="initiative-name">Mentorship</div>
+                    <div class="initiative-tagline">Guiding the Next Generation of Ethical Developers</div>
+                </a>
+                
+                <a href="initiatives.html" class="initiative-card">
+                    <div class="initiative-icon">🔬</div>
+                    <div class="initiative-name">Research</div>
+                    <div class="initiative-tagline">Accelerating Human-Centric AI Innovation</div>
+                </a>
+                
+                <a href="initiatives.html" class="initiative-card">
+                    <div class="initiative-icon">⚖️</div>
+                    <div class="initiative-name">Regulatory</div>
+                    <div class="initiative-tagline">Building Effective Standards and Regulations</div>
+                </a>
+                
+                <a href="initiatives.html" class="initiative-card">
+                    <div class="initiative-icon">🕊️</div>
+                    <div class="initiative-name">Theology/Philosophy</div>
+                    <div class="initiative-tagline">Interfaith Commons for Value-Based Technology</div>
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Call to Action Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2 class="section-title">Join the Movement</h2>
+            <p style="font-size: 1.25rem; max-width: 600px; margin: 0 auto;">Support DCF's mission to ensure AI and technology serve humanity, peace, and the common good.</p>
+            <div class="cta-buttons">
+                <a href="get-involved.html" class="btn-primary">Donate Now</a>
+                <a href="contact.html" class="btn-primary">Partner With Us</a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">Domus Communis Foundation</div>
+            <div class="footer-links">
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="initiatives.html">Initiatives</a>
+                <a href="get-involved.html">Get Involved</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 Domus Communis Foundation Hungary. All rights reserved.</p>
+                <p>Inspired by Catholic Social Teaching. Serving people of all faiths.</p>
+            </div>
+        </div>
+    </footer>
     
     <script src="js/nav.js"></script>
     <script src="js/main.js"></script>
