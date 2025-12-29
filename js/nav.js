@@ -16,7 +16,7 @@ function generateNav() {
     const navHTML = `
         <div class="nav-container">
             <div class="nav-brand">
-                <a href="index.html">DCF Hungary</a>
+                <a href="index.html">DCF</a>
             </div>
             <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
                 <span class="hamburger-line"></span>
