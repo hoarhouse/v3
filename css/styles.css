@@ -230,3 +230,19 @@ button:hover,
     background-color: var(--secondary);
     color: var(--background);
 }
+
+/* Donate Button Styles - Bright Red */
+.btn-donate,
+[href*="donate" i].btn-primary,
+[href*="get-involved"].btn-primary:contains("Donate") {
+    background-color: var(--donate-red) !important;
+    color: var(--background) !important;
+    border: none;
+}
+
+.btn-donate:hover,
+[href*="donate" i].btn-primary:hover {
+    background-color: var(--donate-red-hover) !important;
+    opacity: 1;
+    transform: translateY(-2px);
+}
