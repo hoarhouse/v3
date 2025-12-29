@@ -96,20 +96,22 @@ function initNav() {
 // Add navigation styles
 const navStyles = `
 <style>
-/* Navigation Base Styles */
+/* Navigation Base Styles - Apple Clean */
 #main-nav {
-    background-color: var(--primary);
+    background-color: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     padding: 1rem 0;
     position: sticky;
     top: 0;
     z-index: 1000;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
 }
 
 .nav-container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 1rem;
+    padding: 0 2rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -117,10 +119,11 @@ const navStyles = `
 }
 
 .nav-brand a {
-    color: var(--white);
-    font-size: 1.5rem;
-    font-weight: bold;
+    color: var(--primary);
+    font-size: 1.25rem;
+    font-weight: 600;
     text-decoration: none;
+    letter-spacing: -0.02em;
 }
 
 /* Desktop Navigation */
@@ -141,22 +144,24 @@ const navStyles = `
 }
 
 .nav-link {
-    color: var(--white);
+    color: var(--primary);
     text-decoration: none;
-    padding: 0.75rem 1.25rem;
-    border-radius: 4px;
-    transition: background-color 0.3s ease;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    transition: all 0.3s ease;
     display: block;
+    font-size: 0.95rem;
+    font-weight: 400;
 }
 
 .nav-link:hover {
-    background-color: rgba(255,255,255,0.1);
+    color: var(--secondary);
     text-decoration: none;
 }
 
 .nav-link.active {
-    background-color: rgba(255,255,255,0.2);
-    font-weight: 600;
+    color: var(--secondary);
+    font-weight: 500;
 }
 
 /* Hamburger Menu Button - Hidden on Desktop */
@@ -174,9 +179,9 @@ const navStyles = `
 }
 
 .hamburger-line {
-    width: 24px;
-    height: 3px;
-    background-color: var(--white);
+    width: 20px;
+    height: 1.5px;
+    background-color: var(--primary);
     transition: all 0.3s ease;
     display: block;
 }
@@ -245,11 +250,11 @@ const navStyles = `
         width: 280px;
         max-width: 85%;
         height: 100vh;
-        background-color: var(--primary);
+        background-color: var(--background);
         transition: right 0.3s ease;
         z-index: 1001;
         overflow-y: auto;
-        box-shadow: -2px 0 10px rgba(0,0,0,0.2);
+        box-shadow: -2px 0 20px rgba(0,0,0,0.1);
     }
     
     .nav-menu--active {
@@ -262,30 +267,30 @@ const navStyles = `
         position: absolute;
         top: 20px;
         right: 20px;
-        background: rgba(255, 255, 255, 0.1);
-        border: 2px solid var(--white);
+        background: var(--light-background);
+        border: none;
         border-radius: 50%;
         cursor: pointer;
         padding: 0;
-        width: 48px;
-        height: 48px;
+        width: 44px;
+        height: 44px;
         align-items: center;
         justify-content: center;
         z-index: 1002;
-        transition: background 0.3s ease, transform 0.2s ease;
+        transition: all 0.3s ease;
     }
     
     .nav-close:hover,
     .nav-close:focus {
-        background: rgba(255, 255, 255, 0.2);
-        transform: scale(1.1);
+        background: var(--accent);
+        transform: scale(1.05);
     }
     
     .close-line {
         position: absolute;
-        width: 20px;
-        height: 2px;
-        background-color: var(--white);
+        width: 18px;
+        height: 1.5px;
+        background-color: var(--primary);
     }
     
     .close-line:first-child {
@@ -308,22 +313,25 @@ const navStyles = `
     }
     
     .nav-link {
-        padding: 1rem;
+        padding: 1rem 1.5rem;
         min-height: 48px;
         display: flex;
         align-items: center;
-        font-size: 1.1rem;
-        border-radius: 4px;
+        font-size: 1rem;
+        border-radius: 8px;
+        color: var(--primary);
     }
     
     .nav-link:hover,
     .nav-link:focus {
-        background-color: rgba(255,255,255,0.1);
+        background-color: var(--light-background);
+        color: var(--secondary);
     }
     
     .nav-link.active {
-        background-color: rgba(255,255,255,0.2);
-        font-weight: 600;
+        background-color: var(--light-background);
+        color: var(--secondary);
+        font-weight: 500;
     }
 }
 
