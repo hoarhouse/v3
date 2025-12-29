@@ -54,6 +54,8 @@ p, h1, h2, h3, h4, h5, h6 {
 body {
     color: var(--text);
     background-color: var(--white);
+    font-size: 16px; /* Base font size for mobile */
+    line-height: 1.6;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -62,8 +64,9 @@ h1, h2, h3, h4, h5, h6 {
     margin-bottom: 1rem;
 }
 
+/* Responsive Typography with proper scaling */
 h1 {
-    font-size: clamp(2rem, 5vw, 3rem);
+    font-size: clamp(1.75rem, 5vw, 3rem);
 }
 
 h2 {
@@ -74,13 +77,22 @@ h3 {
     font-size: clamp(1.25rem, 3vw, 1.875rem);
 }
 
+h4 {
+    font-size: clamp(1.125rem, 2.5vw, 1.5rem);
+}
+
 p {
     margin-bottom: 1rem;
+    font-size: 1rem;
+    line-height: 1.6;
 }
 
 a {
     color: var(--primary);
     text-decoration: none;
+    display: inline-block;
+    padding: 0.25rem 0.5rem;
+    margin: -0.25rem -0.5rem;
 }
 
 a:hover {
@@ -92,17 +104,99 @@ a:hover {
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 1rem;
+    padding: 1rem;
 }
 
+/* Main content spacing for mobile */
+main {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+/* Tablet Breakpoint: 768px to 1023px */
 @media (min-width: 768px) {
+    body {
+        font-size: 17px;
+    }
+    
     .container {
         padding: 0 2rem;
     }
+    
+    main {
+        padding-top: 3rem;
+        padding-bottom: 3rem;
+    }
 }
 
+/* Desktop Breakpoint: 1024px and up */
 @media (min-width: 1024px) {
+    body {
+        font-size: 18px;
+    }
+    
     .container {
         padding: 0 3rem;
     }
+    
+    main {
+        padding-top: 4rem;
+        padding-bottom: 4rem;
+    }
+}
+
+/* Utility Classes for Mobile Optimization */
+.text-center {
+    text-align: center;
+}
+
+.hidden-mobile {
+    display: none;
+}
+
+.visible-mobile {
+    display: block;
+}
+
+@media (min-width: 768px) {
+    .hidden-mobile {
+        display: block;
+    }
+    
+    .visible-mobile {
+        display: none;
+    }
+}
+
+/* Ensure forms are mobile-friendly */
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="password"],
+textarea,
+select {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 16px; /* Prevent zoom */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Buttons with proper touch targets */
+button,
+.btn {
+    min-height: 48px;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    border: none;
+    background-color: var(--primary);
+    color: var(--white);
+    transition: background-color 0.3s ease;
+}
+
+button:hover,
+.btn:hover {
+    background-color: var(--secondary);
 }
