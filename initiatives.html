@@ -5,13 +5,555 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DCF Hungary - Initiatives</title>
     <link rel="stylesheet" href="css/styles.css">
+    <style>
+        /* Page-specific styles */
+        
+        /* Hero Section */
+        .hero {
+            background: var(--light-background);
+            padding: 5rem 0;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            margin-bottom: 1rem;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            color: var(--primary);
+        }
+        
+        .hero-subtitle {
+            font-size: clamp(1.25rem, 3vw, 1.75rem);
+            color: var(--accent);
+            max-width: 700px;
+            margin: 0 auto;
+            font-weight: 400;
+            line-height: 1.4;
+        }
+        
+        /* Intro Section */
+        .intro-section {
+            padding: 4rem 0;
+            background: var(--background);
+        }
+        
+        .intro-text {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.15rem;
+            line-height: 1.8;
+            color: var(--primary);
+            font-weight: 300;
+            text-align: center;
+        }
+        
+        /* Initiative Sections */
+        .initiative-section {
+            padding: 5rem 0;
+        }
+        
+        .initiative-section:nth-of-type(even) {
+            background: var(--background);
+        }
+        
+        .initiative-section:nth-of-type(odd) {
+            background: var(--light-background);
+        }
+        
+        .initiative-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .initiative-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .initiative-icon {
+            flex-shrink: 0;
+            width: 60px;
+            height: 60px;
+            color: var(--secondary);
+        }
+        
+        .initiative-title-group {
+            flex-grow: 1;
+        }
+        
+        .initiative-title {
+            font-size: clamp(2rem, 4vw, 2.5rem);
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+            font-weight: 600;
+            letter-spacing: -0.02em;
+        }
+        
+        .initiative-tagline {
+            font-style: italic;
+            color: var(--accent);
+            font-size: 1.1rem;
+            font-weight: 300;
+        }
+        
+        .initiative-description {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: var(--primary);
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+        
+        .initiative-programs {
+            margin-top: 2rem;
+        }
+        
+        .programs-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .programs-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .programs-list li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.75rem;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: var(--primary);
+            font-weight: 300;
+        }
+        
+        .programs-list li:before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: var(--secondary);
+            font-weight: 400;
+        }
+        
+        /* Call to Action Section */
+        .cta-section {
+            background: var(--primary);
+            color: var(--background);
+            text-align: center;
+            padding: 5rem 0;
+        }
+        
+        .cta-section h2 {
+            color: var(--background);
+            margin-bottom: 1rem;
+        }
+        
+        .cta-text {
+            font-size: 1.25rem;
+            max-width: 600px;
+            margin: 0 auto 2.5rem;
+            font-weight: 300;
+            line-height: 1.6;
+            color: var(--background);
+            opacity: 0.95;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn-cta {
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+        
+        .btn-donate {
+            background: #e53e3e !important;
+            color: #ffffff !important;
+        }
+        
+        .btn-donate:hover {
+            background: #c53030 !important;
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            border: 2px solid var(--background);
+            color: var(--background);
+            background: transparent;
+        }
+        
+        .btn-secondary:hover {
+            background: var(--background);
+            color: var(--primary);
+        }
+        
+        /* Mobile Responsive */
+        @media (max-width: 767px) {
+            .hero {
+                padding: 3rem 1rem;
+            }
+            
+            .initiative-section {
+                padding: 3rem 1rem;
+            }
+            
+            .initiative-header {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .initiative-icon {
+                width: 48px;
+                height: 48px;
+            }
+            
+            .cta-section {
+                padding: 3rem 1rem;
+            }
+        }
+    </style>
 </head>
 <body>
     <nav id="main-nav"></nav>
     
-    <main class="container">
-        <h1>Initiatives - Coming Soon</h1>
-    </main>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Our Initiatives</h1>
+            <p class="hero-subtitle">Eight strategic programs advancing ethical technology for humanity</p>
+        </div>
+    </section>
+    
+    <!-- Intro Section -->
+    <section class="intro-section">
+        <div class="container">
+            <p class="intro-text">
+                DCF advances its mission through eight interconnected initiatives, each addressing critical aspects of ethical technology development. Together, they form a comprehensive approach to ensuring AI and cyber technology serve the common good.
+            </p>
+        </div>
+    </section>
+    
+    <!-- 1. PEACE Initiative -->
+    <section class="initiative-section">
+        <div class="container">
+            <div class="initiative-content">
+                <div class="initiative-header">
+                    <div class="initiative-icon">
+                        <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M24 8 C12 8, 12 20, 12 20 L24 32 L36 20 C36 20, 36 8, 24 8Z"/>
+                            <path d="M24 32 L24 40"/>
+                            <path d="M18 36 L24 32 L30 36"/>
+                            <circle cx="24" cy="18" r="2"/>
+                        </svg>
+                    </div>
+                    <div class="initiative-title-group">
+                        <h2 class="initiative-title">PEACE</h2>
+                        <p class="initiative-tagline">Digital Peace Process for Global Stability</p>
+                    </div>
+                </div>
+                <p class="initiative-description">
+                    Programs for a Digital Peace Process to end cyber hostilities, cyber disinformation, and autonomous AI weapon systems in conjunction with peace efforts to stop military hostilities for sustainable integral peace.
+                </p>
+                <div class="initiative-programs">
+                    <h3 class="programs-title">Key Programs:</h3>
+                    <ul class="programs-list">
+                        <li>Digital Peace Initiative bringing together government leaders, technologists, faith leaders, and academia</li>
+                        <li>Planning and advocacy for Cyber Ceasefire</li>
+                        <li>Ending autonomous AI weaponry and cyber disinformation</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 2. TECHNOLOGY Initiative -->
+    <section class="initiative-section">
+        <div class="container">
+            <div class="initiative-content">
+                <div class="initiative-header">
+                    <div class="initiative-icon">
+                        <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <circle cx="24" cy="24" r="16"/>
+                            <circle cx="24" cy="12" r="3"/>
+                            <circle cx="36" cy="24" r="3"/>
+                            <circle cx="24" cy="36" r="3"/>
+                            <circle cx="12" cy="24" r="3"/>
+                            <path d="M24 15 L24 21 M24 27 L24 33 M15 24 L21 24 M27 24 L33 24"/>
+                        </svg>
+                    </div>
+                    <div class="initiative-title-group">
+                        <h2 class="initiative-title">TECHNOLOGY</h2>
+                        <p class="initiative-tagline">Solutions for Ethical Digital Sovereignty</p>
+                    </div>
+                </div>
+                <p class="initiative-description">
+                    Solutions for ethical digital sovereignty and sovereign AI for the common good of humankind and for serving vulnerable populations worldwide to eliminate the digital divide.
+                </p>
+                <div class="initiative-programs">
+                    <h3 class="programs-title">Key Programs:</h3>
+                    <ul class="programs-list">
+                        <li>Enabling and providing data sovereign platforms</li>
+                        <li>Sovereign AI and agentic AI with values controlled by users</li>
+                        <li>Goal: fully enabled pod available and within reach of everyone</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 3. ACADEMIA Initiative -->
+    <section class="initiative-section">
+        <div class="container">
+            <div class="initiative-content">
+                <div class="initiative-header">
+                    <div class="initiative-icon">
+                        <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M8 12 L24 8 L40 12 L40 20 L24 24 L8 20 Z"/>
+                            <path d="M12 14 L12 32 C12 34, 18 36, 24 36 C30 36, 36 34, 36 32 L36 14"/>
+                            <line x1="24" y1="24" x2="24" y2="36"/>
+                        </svg>
+                    </div>
+                    <div class="initiative-title-group">
+                        <h2 class="initiative-title">ACADEMIA</h2>
+                        <p class="initiative-tagline">Connecting Global Academic Excellence</p>
+                    </div>
+                </div>
+                <p class="initiative-description">
+                    Bringing together academicians and academia from around the world for research and aggregating library resources on ethics and technology for advancement of cyber and AI to benefit humankind.
+                </p>
+                <div class="initiative-programs">
+                    <h3 class="programs-title">Key Programs:</h3>
+                    <ul class="programs-list">
+                        <li>Developing an academic commons for academicians and academic institutions</li>
+                        <li>Sharing information and collaboration for ethical, value-based, human-centered cyber and AI technologies</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 4. EDUCATION Initiative -->
+    <section class="initiative-section">
+        <div class="container">
+            <div class="initiative-content">
+                <div class="initiative-header">
+                    <div class="initiative-icon">
+                        <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M24 8 C20 8, 16 12, 16 16 L16 28 C16 30, 18 32, 20 32 L28 32 C30 32, 32 30, 32 28 L32 16 C32 12, 28 8, 24 8Z"/>
+                            <ellipse cx="24" cy="38" rx="8" ry="3"/>
+                            <line x1="24" y1="32" x2="24" y2="35"/>
+                            <circle cx="24" cy="18" r="4" fill="currentColor" opacity="0.3"/>
+                        </svg>
+                    </div>
+                    <div class="initiative-title-group">
+                        <h2 class="initiative-title">EDUCATION</h2>
+                        <p class="initiative-tagline">Programs for Cyber Safety and Ethical AI</p>
+                    </div>
+                </div>
+                <p class="initiative-description">
+                    Programs in cybersecurity, cyber safety, and human-centered AI curricula for secular, faith-based, and Catholic schools; students; teachers; parents; and caregivers.
+                </p>
+                <div class="initiative-programs">
+                    <h3 class="programs-title">Key Programs:</h3>
+                    <ul class="programs-list">
+                        <li>Interactive experiential learning platform and simulations</li>
+                        <li>Cyber safety, cyberbullying, and leadership training</li>
+                        <li>Certification programs for ethical AI technologies</li>
+                        <li>Curriculum for Catholic and faith-based schools</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 5. MENTORSHIP Initiative -->
+    <section class="initiative-section">
+        <div class="container">
+            <div class="initiative-content">
+                <div class="initiative-header">
+                    <div class="initiative-icon">
+                        <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <circle cx="18" cy="16" r="5"/>
+                            <path d="M8 36 C8 30, 13 28, 18 28 C20 28, 21.5 28.5, 22.5 29"/>
+                            <circle cx="32" cy="20" r="5"/>
+                            <path d="M24 40 C24 34, 28 32, 32 32 C36 32, 40 34, 40 40"/>
+                            <path d="M22 20 L28 24" stroke-dasharray="2 2"/>
+                        </svg>
+                    </div>
+                    <div class="initiative-title-group">
+                        <h2 class="initiative-title">MENTORSHIP</h2>
+                        <p class="initiative-tagline">Guiding the Next Generation of Ethical Developers</p>
+                    </div>
+                </div>
+                <p class="initiative-description">
+                    Mentorship and technology programs to guide young and emerging developers and programmers with ethical, value-based, human-centered principles throughout their innovation journey.
+                </p>
+                <div class="initiative-programs">
+                    <h3 class="programs-title">Key Programs:</h3>
+                    <ul class="programs-list">
+                        <li>Providing a global mentoring network</li>
+                        <li>Live training and e-learning platforms</li>
+                        <li>Connecting young developers with capital and opportunities</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 6. RESEARCH Initiative -->
+    <section class="initiative-section">
+        <div class="container">
+            <div class="initiative-content">
+                <div class="initiative-header">
+                    <div class="initiative-icon">
+                        <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <circle cx="24" cy="24" r="12"/>
+                            <line x1="24" y1="12" x2="24" y2="8"/>
+                            <line x1="24" y1="36" x2="24" y2="40"/>
+                            <line x1="12" y1="24" x2="8" y2="24"/>
+                            <line x1="36" y1="24" x2="40" y2="24"/>
+                            <line x1="16.5" y1="16.5" x2="14" y2="14"/>
+                            <line x1="31.5" y1="31.5" x2="34" y2="34"/>
+                            <line x1="31.5" y1="16.5" x2="34" y2="14"/>
+                            <line x1="16.5" y1="31.5" x2="14" y2="34"/>
+                            <circle cx="24" cy="24" r="3" fill="currentColor"/>
+                            <line x1="24" y1="24" x2="30" y2="18" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <div class="initiative-title-group">
+                        <h2 class="initiative-title">RESEARCH</h2>
+                        <p class="initiative-tagline">Accelerating Human-Centric AI Innovation</p>
+                    </div>
+                </div>
+                <p class="initiative-description">
+                    Supporting and aggregating pioneering scientific research to guide and accelerate human-centric, ethical, safe cyber and AI technologies to benefit humanity.
+                </p>
+                <div class="initiative-programs">
+                    <h3 class="programs-title">Key Programs:</h3>
+                    <ul class="programs-list">
+                        <li>Developing research commons for global collaboration</li>
+                        <li>Connecting researchers with commercial applications</li>
+                        <li>Sharing research and resources through the technology community</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 7. REGULATORY Initiative -->
+    <section class="initiative-section">
+        <div class="container">
+            <div class="initiative-content">
+                <div class="initiative-header">
+                    <div class="initiative-icon">
+                        <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M8 40 L40 40"/>
+                            <line x1="24" y1="12" x2="24" y2="36"/>
+                            <path d="M12 20 Q12 14, 18 14 L30 14 Q36 14, 36 20 Q36 24, 32 26 L28 28 Q24 30, 24 34"/>
+                            <circle cx="16" cy="20" r="2"/>
+                            <circle cx="32" cy="20" r="2"/>
+                            <line x1="14" y1="36" x2="34" y2="36"/>
+                        </svg>
+                    </div>
+                    <div class="initiative-title-group">
+                        <h2 class="initiative-title">REGULATORY</h2>
+                        <p class="initiative-tagline">Building Effective Standards and Regulations</p>
+                    </div>
+                </div>
+                <p class="initiative-description">
+                    Provide connectivity to all communities with the regulatory agencies to develop effective regulations and standards.
+                </p>
+                <div class="initiative-programs">
+                    <h3 class="programs-title">Key Programs:</h3>
+                    <ul class="programs-list">
+                        <li>Creating a regulatory commons for global connection</li>
+                        <li>Best practice sharing between regulators</li>
+                        <li>Connecting regulators with technologists, researchers, faith leaders, and academics</li>
+                        <li>Identifying standards for regulatory guidance and human protection</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 8. THEOLOGY/PHILOSOPHY Initiative -->
+    <section class="initiative-section">
+        <div class="container">
+            <div class="initiative-content">
+                <div class="initiative-header">
+                    <div class="initiative-icon">
+                        <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M12 28 Q12 16, 24 16 Q36 16, 36 28 L36 36 Q36 38, 34 38 L14 38 Q12 38, 12 36 Z"/>
+                            <path d="M18 24 L18 32 M30 24 L30 32"/>
+                            <line x1="8" y1="38" x2="40" y2="38"/>
+                            <circle cx="24" cy="12" r="2"/>
+                            <line x1="24" y1="14" x2="24" y2="16"/>
+                        </svg>
+                    </div>
+                    <div class="initiative-title-group">
+                        <h2 class="initiative-title">THEOLOGY/PHILOSOPHY</h2>
+                        <p class="initiative-tagline">Interfaith Commons for Value-Based Technology</p>
+                    </div>
+                </div>
+                <p class="initiative-description">
+                    Provide an interfaith commons and sharing of values for the continued development and advancement of ethical, value-based, human-centered cyber and AI technologies bringing faith and science to work closely together.
+                </p>
+                <div class="initiative-programs">
+                    <h3 class="programs-title">Key Programs:</h3>
+                    <ul class="programs-list">
+                        <li>Creating the interfaith commons</li>
+                        <li>Providing value-based integration into developing cyber and AI technologies</li>
+                        <li>Maintaining cultural and societal values worldwide</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Call to Action Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>Get Involved</h2>
+            <p class="cta-text">Support our initiatives and help shape the future of ethical technology.</p>
+            <div class="cta-buttons">
+                <a href="get-involved.html" class="btn-cta btn-donate">Donate</a>
+                <a href="get-involved.html" class="btn-cta btn-secondary">Partner With Us</a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">Domus Communis Foundation</div>
+            <div class="footer-links">
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="initiatives.html">Initiatives</a>
+                <a href="get-involved.html">Get Involved</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 Domus Communis Foundation Hungary. All rights reserved.</p>
+                <p>Inspired by Catholic Social Teaching. Serving people of all faiths.</p>
+            </div>
+        </div>
+    </footer>
     
     <script src="js/nav.js"></script>
     <script src="js/main.js"></script>
