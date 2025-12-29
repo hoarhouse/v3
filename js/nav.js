@@ -227,19 +227,25 @@ const navStyles = `
     display: none;
 }
 
-/* Tablet Styles */
-@media (max-width: 1023px) and (min-width: 768px) {
+/* Tablet Styles - Tighter spacing for medium screens */
+@media (max-width: 1200px) and (min-width: 901px) {
     .nav-list {
         gap: 0.5rem;
     }
     
     .nav-link {
-        padding: 0.75rem 1rem;
+        padding: 0.4rem 0.6rem;
+        font-size: 0.825rem;
+    }
+    
+    .nav-donate-btn {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.825rem;
     }
 }
 
-/* Mobile Styles */
-@media (max-width: 767px) {
+/* Mobile Styles - Earlier breakpoint at 900px */
+@media (max-width: 900px) {
     /* Show hamburger button */
     .nav-toggle {
         display: flex;
