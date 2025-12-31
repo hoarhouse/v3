@@ -7,7 +7,8 @@ const menuItems = [
     { text: 'Initiatives', href: 'initiatives.html', page: 'initiatives' },
     { text: 'Budapest Appeal', href: 'budapest-appeal.html', page: 'budapest-appeal' },
     { text: 'Get Involved', href: 'get-involved.html', page: 'get-involved' },
-    { text: 'Contact', href: 'contact.html', page: 'contact' }
+    { text: 'Contact', href: 'contact.html', page: 'contact' },
+    { text: 'Privacy Policy', href: 'privacy.html', page: 'privacy' }
 ];
 
 // Generate navigation HTML
@@ -505,10 +506,14 @@ const footerStyles = `
     color: #86868b;
     font-size: 0.9rem;
     max-width: 800px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 .footer-nonprofit p {
     line-height: 1.6;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 .footer-bottom {
@@ -542,6 +547,8 @@ const footerStyles = `
     .footer-links {
         gap: 1rem;
         font-size: 0.9rem;
+        flex-direction: column;
+        align-items: flex-start;
     }
     
     .footer-nonprofit {
