@@ -414,10 +414,154 @@ body {
 </style>
 `;
 
+// Footer generation function
+function generateFooter() {
+    const footerHTML = `
+        <div class="footer-content">
+            <div class="footer-main">
+                <div class="footer-brand">Domus Communis Foundation</div>
+                <div class="footer-links">
+                    <a href="index.html">Home</a>
+                    <a href="about.html">About</a>
+                    <a href="initiatives.html">Initiatives</a>
+                    <a href="get-involved.html">Get Involved</a>
+                    <a href="contact.html">Contact</a>
+                    <a href="budapest-appeal.html">Budapest Appeal</a>
+                    <a href="privacy.html">Privacy Policy</a>
+                </div>
+                <div class="footer-nonprofit">
+                    <p>Domus Communis Foundation is a registered 501(c)(3) non-profit organization. Your donations are tax-deductible within the fullest extent allowed by law. EIN: 99-1778616.</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 Domus Communis Foundation. All rights reserved.</p>
+                <p>Inspired by Catholic Social Teaching. Serving people of all faiths and values.</p>
+            </div>
+        </div>
+    `;
+    
+    return footerHTML;
+}
+
+// Inject footer into page
+function initFooter() {
+    const footerElement = document.getElementById('main-footer');
+    if (footerElement) {
+        footerElement.innerHTML = generateFooter();
+    }
+}
+
+// Add footer styles
+const footerStyles = `
+<style>
+/* Footer Styles - Dark Theme */
+#main-footer {
+    background: #1d1d1f;
+    color: #ffffff;
+    padding: 4rem 0 0;
+    margin-top: 0;
+    border-top: none;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.footer-main {
+    padding-bottom: 3rem;
+}
+
+.footer-brand {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
+    letter-spacing: -0.02em;
+    color: #ffffff;
+}
+
+.footer-links {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+}
+
+.footer-links a {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 400;
+    transition: all 0.3s ease;
+    opacity: 0.9;
+}
+
+.footer-links a:hover {
+    opacity: 0.7;
+}
+
+.footer-nonprofit {
+    margin-top: 2rem;
+    color: #86868b;
+    font-size: 0.9rem;
+    max-width: 800px;
+}
+
+.footer-nonprofit p {
+    line-height: 1.6;
+}
+
+.footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding: 2rem 0 3rem;
+    text-align: center;
+    color: #86868b;
+    font-size: 0.9rem;
+    font-weight: 300;
+}
+
+.footer-bottom p {
+    margin-bottom: 0.5rem;
+    color: #86868b;
+}
+
+/* Mobile Responsive */
+@media (max-width: 767px) {
+    #main-footer {
+        padding: 3rem 0 0;
+    }
+    
+    .footer-content {
+        padding: 0 1rem;
+    }
+    
+    .footer-main {
+        padding-bottom: 2rem;
+    }
+    
+    .footer-links {
+        gap: 1rem;
+        font-size: 0.9rem;
+    }
+    
+    .footer-nonprofit {
+        font-size: 0.85rem;
+    }
+    
+    .footer-bottom {
+        padding: 1.5rem 0 2rem;
+        font-size: 0.85rem;
+    }
+}
+</style>
+`;
+
 // Initialize on DOM load
 document.addEventListener('DOMContentLoaded', () => {
     // Add styles to head
     document.head.insertAdjacentHTML('beforeend', navStyles);
-    // Initialize navigation
+    document.head.insertAdjacentHTML('beforeend', footerStyles);
+    // Initialize navigation and footer
     initNav();
+    initFooter();
 });
