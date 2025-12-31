@@ -476,6 +476,48 @@
             line-height: 1.4;
         }
         
+        /* Key Concepts Section */
+        .key-concepts-section {
+            background: #f5f5f7;
+            padding: 5rem 0;
+        }
+        
+        .key-concepts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 3rem auto 0;
+        }
+        
+        .concept-card {
+            background: #ffffff;
+            padding: 2.5rem;
+            border-radius: 8px;
+            box-shadow: var(--shadow-subtle);
+            transition: all 0.3s ease;
+        }
+        
+        .concept-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-hover);
+        }
+        
+        .concept-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
+        
+        .concept-definition {
+            font-size: 1.05rem;
+            line-height: 1.7;
+            color: var(--accent);
+            font-weight: 300;
+        }
+        
         /* CTA Section */
         .cta-section {
             background: var(--light-background);
@@ -568,7 +610,8 @@
             }
             
             .objectives-grid,
-            .initiatives-grid {
+            .initiatives-grid,
+            .key-concepts-grid {
                 grid-template-columns: 1fr;
             }
             
@@ -606,6 +649,31 @@
                 <div class="objective-card">
                     <div class="objective-number">2</div>
                     <p>Supporting the establishment of digital sovereignty, sovereign AI, and value-based AI programming research centers across the Global North, South, East, and West.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Key Concepts Section -->
+    <section class="key-concepts-section">
+        <div class="container">
+            <h2 class="section-title">Key Concepts</h2>
+            <p class="section-subtitle">Understanding Our Mission</p>
+            
+            <div class="key-concepts-grid">
+                <div class="concept-card">
+                    <h3 class="concept-title">Data Sovereignty</h3>
+                    <p class="concept-definition">Empowers individuals and entities with full rights over their data including access, control, sharing, and monetization. Data ownership and value generation is held by the original data creators.</p>
+                </div>
+                
+                <div class="concept-card">
+                    <h3 class="concept-title">Sovereign AI</h3>
+                    <p class="concept-definition">AI programming architected to replicate the human user digitally, ensuring it aligns closely with the values of each individual and enterprise user and making decisions that reflect and follow the commands and controls set by its human user(s), ensuring that autonomy remains with the person rather than a third party AI agent.</p>
+                </div>
+                
+                <div class="concept-card">
+                    <h3 class="concept-title">Value-Based AI Programming</h3>
+                    <p class="concept-definition">AI programming designed to incorporate human values as a core part of artificial intelligence.</p>
                 </div>
             </div>
         </div>
