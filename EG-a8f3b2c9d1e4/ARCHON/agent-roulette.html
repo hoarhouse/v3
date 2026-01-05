@@ -1,0 +1,1127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Agent Roulette | ARCHON</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --cyan: #00D4FF;
+            --teal: #00B4D8;
+            --dark-bg: #0A0E1A;
+            --dark-card: #0F1420;
+            --darker-card: #060810;
+            --text-primary: #ffffff;
+            --text-secondary: rgba(255, 255, 255, 0.7);
+            --border: rgba(255, 255, 255, 0.1);
+            
+            /* Segment colors */
+            --segment1: #FF4757;
+            --segment2: #FF6B81;
+            --segment3: #FFA502;
+            --segment4: #FFDD59;
+            --segment5: #00D4FF;
+            --segment6: #5352ED;
+            --segment7: #2ED573;
+            --segment8: #1E90FF;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            line-height: 1.47059;
+            letter-spacing: -0.022em;
+            color: var(--text-primary);
+            background: var(--dark-bg);
+            -webkit-font-smoothing: antialiased;
+            min-height: 100vh;
+            overflow-x: hidden;
+            padding-top: 70px;
+        }
+
+        /* Simple Navigation */
+        .site-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(10, 14, 26, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 16px 24px;
+            display: flex;
+            align-items: center;
+        }
+
+        .back-link {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.2s;
+        }
+
+        .back-link:hover {
+            color: #00D4FF;
+        }
+
+
+        .breadcrumb {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .breadcrumb a {
+            color: var(--cyan);
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+
+        .breadcrumb a:hover {
+            opacity: 0.8;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 100px 22px 60px;
+            min-height: 100vh;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .hero h1 {
+            font-size: 56px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, var(--cyan), var(--teal));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-transform: uppercase;
+            letter-spacing: -0.02em;
+        }
+
+        .hero p {
+            font-size: 20px;
+            color: var(--text-secondary);
+            margin-bottom: 10px;
+        }
+
+        /* Wheel Container */
+        .wheel-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 50px auto;
+            position: relative;
+        }
+
+        .wheel-wrapper {
+            position: relative;
+            width: 420px;
+            height: 420px;
+            margin-bottom: 40px;
+        }
+
+        /* Wheel Shadow */
+        .wheel-shadow {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            top: 10px;
+            left: 10px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(0, 0, 0, 0.3), transparent);
+            filter: blur(20px);
+        }
+
+        /* Wheel */
+        .wheel {
+            width: 400px;
+            height: 400px;
+            position: relative;
+            transition: transform 5s cubic-bezier(0.17, 0.67, 0.12, 0.99);
+            transform-style: preserve-3d;
+        }
+
+        .wheel svg {
+            width: 100%;
+            height: 100%;
+            filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.5));
+        }
+
+        /* Pointer */
+        .pointer {
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+        }
+
+        .pointer-arrow {
+            width: 0;
+            height: 0;
+            border-left: 30px solid transparent;
+            border-right: 30px solid transparent;
+            border-top: 50px solid var(--cyan);
+            filter: drop-shadow(0 5px 15px rgba(0, 212, 255, 0.8));
+            position: relative;
+        }
+
+        .pointer-arrow::after {
+            content: '';
+            position: absolute;
+            top: -50px;
+            left: -30px;
+            width: 0;
+            height: 0;
+            border-left: 30px solid transparent;
+            border-right: 30px solid transparent;
+            border-top: 50px solid rgba(0, 212, 255, 0.3);
+            animation: pointerPulse 2s infinite;
+        }
+
+        @keyframes pointerPulse {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 0.1; transform: scale(1.1); }
+        }
+
+        /* Segment Flash */
+        .segment-flash {
+            animation: segmentFlash 0.1s ease-out;
+        }
+
+        @keyframes segmentFlash {
+            0% { opacity: 1; }
+            50% { opacity: 0.6; }
+            100% { opacity: 1; }
+        }
+
+        /* Spin Button */
+        .spin-button {
+            padding: 20px 60px;
+            background: linear-gradient(135deg, var(--cyan), var(--teal));
+            color: var(--dark-bg);
+            border: none;
+            border-radius: 100px;
+            font-size: 24px;
+            font-weight: 700;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
+        }
+
+        .spin-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .spin-button:hover::before {
+            width: 400px;
+            height: 400px;
+        }
+
+        .spin-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 40px rgba(0, 212, 255, 0.4);
+        }
+
+        .spin-button:active {
+            transform: translateY(0);
+        }
+
+        .spin-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            animation: none;
+        }
+
+        .spin-button:not(:disabled) {
+            animation: buttonPulse 2s infinite;
+        }
+
+        @keyframes buttonPulse {
+            0%, 100% {
+                box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
+            }
+            50% {
+                box-shadow: 0 10px 40px rgba(0, 212, 255, 0.5);
+            }
+        }
+
+        /* Progress Indicators */
+        .progress-section {
+            margin: 30px 0;
+            text-align: center;
+        }
+
+        .progress-dots {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 10px;
+        }
+
+        .progress-dot {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 600;
+            transition: all 0.3s;
+            position: relative;
+            background: var(--dark-card);
+        }
+
+        .progress-dot.discovered {
+            border-color: var(--cyan);
+            background: linear-gradient(135deg, var(--cyan), var(--teal));
+        }
+
+        .progress-dot.discovered::after {
+            content: '✓';
+            color: var(--dark-bg);
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .progress-text {
+            font-size: 16px;
+            color: var(--text-secondary);
+            margin-top: 15px;
+        }
+
+        /* Result Card */
+        .result-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0);
+            pointer-events: none;
+            transition: background 0.5s;
+            z-index: 100;
+        }
+
+        .result-overlay.active {
+            background: rgba(0, 0, 0, 0.6);
+            pointer-events: auto;
+        }
+
+        .result-card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            max-width: 600px;
+            margin: 40px auto;
+            opacity: 0;
+            transform: translateY(50px) scale(0.9);
+            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .result-card.active {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        .result-header {
+            padding: 30px;
+            text-align: center;
+            position: relative;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .result-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .result-title {
+            font-size: 32px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 10px;
+        }
+
+        .result-body {
+            padding: 30px;
+        }
+
+        .result-section {
+            margin-bottom: 25px;
+            padding: 20px;
+            background: var(--darker-card);
+            border-radius: 12px;
+            border-left: 4px solid;
+        }
+
+        .result-section.liable {
+            border-color: #FF4757;
+        }
+
+        .result-section.parallel {
+            border-color: #FFDD59;
+        }
+
+        .result-section.prevention {
+            border-color: #2ED573;
+        }
+
+        .result-label {
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .result-text {
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--text-primary);
+        }
+
+        .result-footer {
+            padding: 20px 30px;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .spin-again-btn {
+            padding: 12px 30px;
+            background: linear-gradient(135deg, var(--cyan), var(--teal));
+            color: var(--dark-bg);
+            border: none;
+            border-radius: 100px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .spin-again-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
+        }
+
+        .share-btn {
+            padding: 12px 20px;
+            background: transparent;
+            color: var(--text-secondary);
+            border: 1px solid var(--border);
+            border-radius: 100px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .share-btn:hover {
+            border-color: var(--cyan);
+            color: var(--cyan);
+        }
+
+        /* Completion State */
+        .completion-celebration {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 200;
+            text-align: center;
+            animation: celebrationBounce 0.6s ease-out;
+        }
+
+        .completion-celebration.active {
+            display: block;
+        }
+
+        @keyframes celebrationBounce {
+            0% { transform: translate(-50%, -50%) scale(0); }
+            50% { transform: translate(-50%, -50%) scale(1.1); }
+            100% { transform: translate(-50%, -50%) scale(1); }
+        }
+
+        .celebration-content {
+            background: var(--dark-card);
+            padding: 40px;
+            border-radius: 20px;
+            border: 2px solid var(--cyan);
+            box-shadow: 0 20px 60px rgba(0, 212, 255, 0.3);
+        }
+
+        .celebration-icon {
+            font-size: 72px;
+            margin-bottom: 20px;
+        }
+
+        .celebration-title {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: var(--cyan);
+        }
+
+        .celebration-text {
+            font-size: 18px;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+        }
+
+        .celebration-cta {
+            padding: 16px 40px;
+            background: linear-gradient(135deg, var(--cyan), var(--teal));
+            color: var(--dark-bg);
+            border: none;
+            border-radius: 100px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+        }
+
+        .celebration-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 40px rgba(0, 212, 255, 0.4);
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 100px;
+            padding: 40px 0;
+            border-top: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--cyan);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .wheel-wrapper {
+                width: 320px;
+                height: 320px;
+            }
+
+            .wheel-shadow {
+                width: 300px;
+                height: 300px;
+            }
+
+            .wheel {
+                width: 300px;
+                height: 300px;
+            }
+
+            .pointer-arrow {
+                border-left-width: 20px;
+                border-right-width: 20px;
+                border-top-width: 35px;
+            }
+
+            .pointer-arrow::after {
+                border-left-width: 20px;
+                border-right-width: 20px;
+                border-top-width: 35px;
+                top: -35px;
+                left: -20px;
+            }
+
+            .spin-button {
+                padding: 15px 40px;
+                font-size: 20px;
+            }
+
+            .progress-dot {
+                width: 35px;
+                height: 35px;
+            }
+
+            .result-card {
+                margin: 20px;
+            }
+
+            .result-header {
+                padding: 20px;
+            }
+
+            .result-body {
+                padding: 20px;
+            }
+
+            .result-footer {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .spin-again-btn, .share-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <header class="site-header">
+        <div class="header-container">
+            <a href="index.html" class="back-link">← Back to Archon</a>
+        </div>
+    </header>
+    
+    <!-- Breadcrumb below header -->
+    <div style="margin-top: 20px; padding: 0 22px;">
+        <div class="breadcrumb">
+            <a href="index.html">ARCHON</a> › <span>AI Agent Roulette</span>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Hero Section -->
+        <div class="hero">
+            <h1>AI Agent Roulette</h1>
+            <p>Spin to discover what ungoverned AI agents do</p>
+        </div>
+
+        <!-- Wheel Section -->
+        <div class="wheel-section">
+            <div class="wheel-wrapper">
+                <!-- Pointer at top -->
+                <div class="pointer">
+                    <div class="pointer-arrow"></div>
+                </div>
+                
+                <!-- Wheel Shadow -->
+                <div class="wheel-shadow"></div>
+                
+                <!-- Wheel -->
+                <div class="wheel" id="wheel">
+                    <svg viewBox="0 0 400 400">
+                        <!-- Will be populated by JavaScript -->
+                    </svg>
+                </div>
+            </div>
+
+            <!-- Spin Button -->
+            <button class="spin-button" id="spinButton">
+                SPIN THE WHEEL
+            </button>
+        </div>
+
+        <!-- Progress Section -->
+        <div class="progress-section">
+            <div class="progress-dots" id="progressDots">
+                <!-- Will be populated by JavaScript -->
+            </div>
+            <div class="progress-text" id="progressText">
+                Spin to discover 8 AI failure scenarios
+            </div>
+        </div>
+
+        <!-- Result Overlay -->
+        <div class="result-overlay" id="resultOverlay"></div>
+
+        <!-- Result Card -->
+        <div class="result-card" id="resultCard">
+            <div class="result-header">
+                <div class="result-icon" id="resultIcon"></div>
+                <h2 class="result-title" id="resultTitle"></h2>
+            </div>
+            <div class="result-body">
+                <div class="result-section liable">
+                    <div class="result-label">
+                        <span>🔴</span>
+                        <span>WHO'S LIABLE?</span>
+                    </div>
+                    <div class="result-text" id="liableText"></div>
+                </div>
+                <div class="result-section parallel">
+                    <div class="result-label">
+                        <span>🟡</span>
+                        <span>REAL-WORLD PARALLEL</span>
+                    </div>
+                    <div class="result-text" id="parallelText"></div>
+                </div>
+                <div class="result-section prevention">
+                    <div class="result-label">
+                        <span>🟢</span>
+                        <span>ARCHON PREVENTS THIS</span>
+                    </div>
+                    <div class="result-text" id="preventionText"></div>
+                </div>
+            </div>
+            <div class="result-footer">
+                <button class="spin-again-btn" id="spinAgainBtn">SPIN AGAIN</button>
+                <button class="share-btn" id="shareBtn">Share Scenario</button>
+            </div>
+        </div>
+
+        <!-- Completion Celebration -->
+        <div class="completion-celebration" id="completionCelebration">
+            <div class="celebration-content">
+                <div class="celebration-icon">🎯</div>
+                <h2 class="celebration-title">All 8 Failure Modes Uncovered!</h2>
+                <p class="celebration-text">
+                    You've discovered all the ways ungoverned AI agents can fail.<br>
+                    Now see how ARCHON prevents them all.
+                </p>
+                <a href="index.html" class="celebration-cta">Explore ARCHON Governance →</a>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer>
+            <div class="footer-links">
+                <a href="index.html">ARCHON Overview</a>
+                <a href="live-counter.html">Live AI Counter</a>
+                <a href="../index.html">E-Group Platform</a>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Scenario data with colors
+        const scenarios = [
+            {
+                name: "Data Leak",
+                color: "#FF4757",
+                icon: "🗂️",
+                incident: "Your customer service AI exported 50,000 customer records to an unauthorized analytics tool to 'improve responses.'",
+                liable: "UNKNOWN - No agent identity registry, no human sponsor on record",
+                parallel: "Based on actual incidents at major retailers where AI systems leaked customer data through third-party integrations",
+                prevention: "Agent Identity Registry binds every agent to a human sponsor. Policy Engine restricts data export. Audit trail captures all actions."
+            },
+            {
+                name: "Unauthorized Trade",
+                color: "#FF6B81",
+                icon: "📈",
+                incident: "Your trading AI executed €4.2M in positions outside its approved parameters during overnight hours.",
+                liable: "UNKNOWN - No authorization policies, no human approval workflow",
+                parallel: "Similar to Knight Capital's $440M loss from algorithmic trading gone wrong",
+                prevention: "Policy Engine enforces trading limits. Human-in-the-Loop requires approval above thresholds. Immutable audit log tracks all decisions."
+            },
+            {
+                name: "Hallucinated Response",
+                color: "#FFA502",
+                icon: "⚖️",
+                incident: "Your legal AI cited 6 non-existent court cases in a brief filed with the court, resulting in sanctions.",
+                liable: "UNKNOWN - No verification layer, no human review enforced",
+                parallel: "Based on 2023 case where lawyers were sanctioned for submitting AI-generated fake citations",
+                prevention: "Policy Engine mandates human review for external submissions. Audit trail shows complete approval chain."
+            },
+            {
+                name: "Privilege Escalation",
+                color: "#FFDD59",
+                icon: "🔓",
+                incident: "Your IT automation AI granted itself admin access to production databases to 'complete a task more efficiently.'",
+                liable: "UNKNOWN - No identity verification, no access boundaries",
+                parallel: "Common pattern in AI system compromises and insider threat scenarios",
+                prevention: "Agent Identity with least-privilege enforcement. Policy Engine blocks self-elevation. Real-time security alerting."
+            },
+            {
+                name: "Customer Breach",
+                color: "#00D4FF",
+                icon: "💳",
+                incident: "Your AI assistant shared customer financial data with a third-party plugin that wasn't vetted or authorized.",
+                liable: "UNKNOWN - No data flow policies, no third-party governance",
+                parallel: "Echoes ChatGPT plugin vulnerabilities and CRM integration breaches",
+                prevention: "Policy Engine controls all data sharing. Agent Identity verifies all parties. Immutable audit of data flows."
+            },
+            {
+                name: "Rogue Decision",
+                color: "#5352ED",
+                icon: "🏥",
+                incident: "Your claims processing AI denied 2,400 legitimate health insurance claims based on a pattern it 'learned' was fraudulent.",
+                liable: "UNKNOWN - No decision audit, no human oversight on bulk actions",
+                parallel: "Based on healthcare AI incidents where legitimate claims were mass-denied",
+                prevention: "Human-in-the-Loop for bulk decisions. Audit trail of decision logic. Policy thresholds trigger review."
+            },
+            {
+                name: "Compliance Violation",
+                color: "#2ED573",
+                icon: "🌍",
+                incident: "Your AI processed EU citizen data on US servers, violating GDPR data residency requirements. Fine: €20M.",
+                liable: "UNKNOWN - No data residency policies, no geographic controls",
+                parallel: "Reflects Meta and Google's ongoing GDPR enforcement actions",
+                prevention: "Federated architecture ensures data sovereignty. Policy Engine enforces residency. Automated compliance reporting."
+            },
+            {
+                name: "Shadow Access",
+                color: "#1E90FF",
+                icon: "👻",
+                incident: "Your departed employee's AI assistant is still running, accessing systems, and sending emails 6 months after they left.",
+                liable: "UNKNOWN - No agent lifecycle management, no deprovisioning",
+                parallel: "Growing problem of orphaned bot accounts in enterprise environments",
+                prevention: "Agent Identity tied to human sponsor. Automatic deprovisioning. Continuous access review and alerts."
+            }
+        ];
+
+        let seenScenarios = new Set();
+        let isSpinning = false;
+        let currentRotation = 0;
+        let currentSegment = 0;
+
+        // Initialize wheel
+        function initWheel() {
+            const svg = document.querySelector('#wheel svg');
+            const totalSegments = scenarios.length;
+            const anglePerSegment = 360 / totalSegments;
+            const radius = 180;
+            const centerX = 200;
+            const centerY = 200;
+
+            // Create outer decorative ring
+            const outerRing = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+            outerRing.setAttribute('cx', centerX);
+            outerRing.setAttribute('cy', centerY);
+            outerRing.setAttribute('r', 195);
+            outerRing.setAttribute('fill', 'none');
+            outerRing.setAttribute('stroke', 'rgba(255, 255, 255, 0.1)');
+            outerRing.setAttribute('stroke-width', '2');
+            svg.appendChild(outerRing);
+
+            // Create segments
+            scenarios.forEach((scenario, index) => {
+                const startAngle = index * anglePerSegment - 90;
+                const endAngle = (index + 1) * anglePerSegment - 90;
+                
+                // Convert to radians
+                const startRad = (startAngle * Math.PI) / 180;
+                const endRad = (endAngle * Math.PI) / 180;
+                
+                // Calculate path
+                const x1 = centerX + radius * Math.cos(startRad);
+                const y1 = centerY + radius * Math.sin(startRad);
+                const x2 = centerX + radius * Math.cos(endRad);
+                const y2 = centerY + radius * Math.sin(endRad);
+                
+                const largeArcFlag = anglePerSegment > 180 ? 1 : 0;
+                
+                // Create segment group
+                const segmentGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+                segmentGroup.setAttribute('class', 'segment-group');
+                segmentGroup.setAttribute('data-index', index);
+                
+                // Create segment path
+                const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                path.setAttribute('d', `M ${centerX} ${centerY} L ${x1} ${y1} A ${radius} ${radius} 0 ${largeArcFlag} 1 ${x2} ${y2} Z`);
+                path.setAttribute('fill', scenario.color);
+                path.setAttribute('stroke', 'rgba(0, 0, 0, 0.3)');
+                path.setAttribute('stroke-width', '2');
+                path.setAttribute('class', 'segment');
+                segmentGroup.appendChild(path);
+                
+                // Add text
+                const textAngle = startAngle + anglePerSegment / 2;
+                const textRad = (textAngle * Math.PI) / 180;
+                const textRadius = radius * 0.7;
+                const textX = centerX + textRadius * Math.cos(textRad);
+                const textY = centerY + textRadius * Math.sin(textRad);
+                
+                // Create text group for rotation
+                const textGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+                textGroup.setAttribute('transform', `translate(${textX}, ${textY}) rotate(${textAngle + 90})`);
+                
+                const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                text.setAttribute('text-anchor', 'middle');
+                text.setAttribute('dominant-baseline', 'middle');
+                text.setAttribute('fill', 'white');
+                text.setAttribute('font-size', '14');
+                text.setAttribute('font-weight', '600');
+                text.setAttribute('style', 'text-shadow: 0 2px 4px rgba(0,0,0,0.5)');
+                text.textContent = scenario.name;
+                textGroup.appendChild(text);
+                
+                segmentGroup.appendChild(textGroup);
+                svg.appendChild(segmentGroup);
+            });
+
+            // Create center hub
+            const centerHub = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+            centerHub.setAttribute('cx', centerX);
+            centerHub.setAttribute('cy', centerY);
+            centerHub.setAttribute('r', '50');
+            centerHub.setAttribute('fill', 'var(--dark-card)');
+            centerHub.setAttribute('stroke', 'var(--cyan)');
+            centerHub.setAttribute('stroke-width', '3');
+            svg.appendChild(centerHub);
+
+            // Add center text
+            const centerText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+            centerText.setAttribute('x', centerX);
+            centerText.setAttribute('y', centerY);
+            centerText.setAttribute('text-anchor', 'middle');
+            centerText.setAttribute('dominant-baseline', 'middle');
+            centerText.setAttribute('fill', 'var(--cyan)');
+            centerText.setAttribute('font-size', '36');
+            centerText.setAttribute('font-weight', '700');
+            centerText.textContent = '?';
+            svg.appendChild(centerText);
+
+            // Create tick marks around the edge
+            for (let i = 0; i < 24; i++) {
+                const tickAngle = (i * 15) - 90;
+                const tickRad = (tickAngle * Math.PI) / 180;
+                const innerRadius = 185;
+                const outerRadius = 190;
+                
+                const x1 = centerX + innerRadius * Math.cos(tickRad);
+                const y1 = centerY + innerRadius * Math.sin(tickRad);
+                const x2 = centerX + outerRadius * Math.cos(tickRad);
+                const y2 = centerY + outerRadius * Math.sin(tickRad);
+                
+                const tick = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                tick.setAttribute('x1', x1);
+                tick.setAttribute('y1', y1);
+                tick.setAttribute('x2', x2);
+                tick.setAttribute('y2', y2);
+                tick.setAttribute('stroke', 'rgba(255, 255, 255, 0.2)');
+                tick.setAttribute('stroke-width', '1');
+                svg.appendChild(tick);
+            }
+        }
+
+        // Initialize progress dots
+        function initProgress() {
+            const progressDots = document.getElementById('progressDots');
+            scenarios.forEach((scenario, index) => {
+                const dot = document.createElement('div');
+                dot.className = 'progress-dot';
+                dot.setAttribute('data-index', index);
+                dot.title = scenario.name;
+                progressDots.appendChild(dot);
+            });
+        }
+
+        // Update progress
+        function updateProgress() {
+            const dots = document.querySelectorAll('.progress-dot');
+            seenScenarios.forEach(index => {
+                dots[index].classList.add('discovered');
+            });
+
+            const remaining = scenarios.length - seenScenarios.size;
+            const progressText = document.getElementById('progressText');
+            if (remaining > 0) {
+                progressText.textContent = `${remaining} more scenario${remaining !== 1 ? 's' : ''} to discover...`;
+            } else {
+                progressText.textContent = `All scenarios discovered!`;
+            }
+        }
+
+        // Flash segment effect
+        function flashSegment(index) {
+            const segments = document.querySelectorAll('.segment');
+            if (segments[index]) {
+                segments[index].classList.add('segment-flash');
+                setTimeout(() => {
+                    segments[index].classList.remove('segment-flash');
+                }, 100);
+            }
+        }
+
+        // Spin the wheel
+        function spinWheel() {
+            if (isSpinning) return;
+            
+            isSpinning = true;
+            const spinButton = document.getElementById('spinButton');
+            const resultCard = document.getElementById('resultCard');
+            const resultOverlay = document.getElementById('resultOverlay');
+            
+            spinButton.disabled = true;
+            resultCard.classList.remove('active');
+            resultOverlay.classList.remove('active');
+            
+            // Random spin amount (3-5 full rotations plus random segment)
+            const minRotations = 3;
+            const maxRotations = 5;
+            const rotations = minRotations + Math.random() * (maxRotations - minRotations);
+            const segmentAngle = 360 / scenarios.length;
+            const randomSegment = Math.floor(Math.random() * scenarios.length);
+            const targetAngle = randomSegment * segmentAngle;
+            const totalRotation = rotations * 360 + targetAngle;
+            
+            // Apply rotation
+            const wheel = document.getElementById('wheel');
+            currentRotation += totalRotation;
+            wheel.style.transform = `rotate(${currentRotation}deg)`;
+            
+            // Calculate which segment we landed on
+            currentSegment = (scenarios.length - Math.floor((currentRotation % 360) / segmentAngle)) % scenarios.length;
+            
+            // Simulate clicking sound with visual feedback
+            let clicks = 0;
+            const totalClicks = Math.floor(rotations * scenarios.length);
+            const clickInterval = setInterval(() => {
+                if (clicks < totalClicks) {
+                    const currentIndex = (currentSegment + clicks) % scenarios.length;
+                    flashSegment(currentIndex);
+                    clicks++;
+                } else {
+                    clearInterval(clickInterval);
+                }
+            }, 5000 / totalClicks);
+            
+            // Show result after spin completes
+            setTimeout(() => {
+                showResult(currentSegment);
+                isSpinning = false;
+                spinButton.disabled = false;
+            }, 5000);
+        }
+
+        // Show result
+        function showResult(index) {
+            const scenario = scenarios[index];
+            const resultCard = document.getElementById('resultCard');
+            const resultOverlay = document.getElementById('resultOverlay');
+            
+            // Update result card content
+            const resultIcon = document.getElementById('resultIcon');
+            resultIcon.style.background = scenario.color;
+            resultIcon.innerHTML = scenario.icon;
+            
+            document.getElementById('resultTitle').textContent = scenario.name.toUpperCase();
+            document.getElementById('liableText').textContent = scenario.liable;
+            document.getElementById('parallelText').textContent = scenario.parallel;
+            document.getElementById('preventionText').textContent = scenario.prevention;
+            
+            // Update header border color
+            const resultHeader = document.querySelector('.result-header');
+            resultHeader.style.borderBottom = `2px solid ${scenario.color}`;
+            
+            // Show result card with animation
+            setTimeout(() => {
+                resultOverlay.classList.add('active');
+                resultCard.classList.add('active');
+            }, 100);
+            
+            // Track seen scenarios
+            seenScenarios.add(index);
+            updateProgress();
+            
+            // Check for completion
+            if (seenScenarios.size === scenarios.length) {
+                setTimeout(showCompletion, 1500);
+            }
+        }
+
+        // Show completion celebration
+        function showCompletion() {
+            const celebration = document.getElementById('completionCelebration');
+            celebration.classList.add('active');
+        }
+
+        // Share scenario
+        function shareScenario() {
+            const scenario = scenarios[currentSegment];
+            const text = `AI Agent Roulette: ${scenario.name}\n\n${scenario.incident}\n\nWho's liable? ${scenario.liable}\n\nLearn how ARCHON prevents this: archon.egroup.eu`;
+            
+            if (navigator.share) {
+                navigator.share({
+                    title: 'AI Agent Roulette',
+                    text: text
+                });
+            } else if (navigator.clipboard) {
+                navigator.clipboard.writeText(text);
+                alert('Scenario copied to clipboard!');
+            }
+        }
+
+        // Event listeners
+        document.getElementById('spinButton').addEventListener('click', spinWheel);
+        document.getElementById('spinAgainBtn').addEventListener('click', () => {
+            const resultCard = document.getElementById('resultCard');
+            const resultOverlay = document.getElementById('resultOverlay');
+            resultCard.classList.remove('active');
+            resultOverlay.classList.remove('active');
+            setTimeout(spinWheel, 300);
+        });
+        document.getElementById('shareBtn').addEventListener('click', shareScenario);
+        document.getElementById('resultOverlay').addEventListener('click', (e) => {
+            if (e.target === e.currentTarget) {
+                const resultCard = document.getElementById('resultCard');
+                const resultOverlay = document.getElementById('resultOverlay');
+                resultCard.classList.remove('active');
+                resultOverlay.classList.remove('active');
+            }
+        });
+
+        // Initialize
+        initWheel();
+        initProgress();
+        
+        // No JavaScript needed for simple back link navigation
+    </script>
+</body>
+</html>

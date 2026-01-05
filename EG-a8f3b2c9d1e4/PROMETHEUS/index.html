@@ -1,0 +1,2754 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PROMETHEUS - Federated Carbon Intelligence for Supply Chains</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --cyan: #00D4FF;
+            --teal: #00B4D8;
+            --dark-bg: #0A0E1A;
+            --dark-card: #0F1420;
+            --blue: #00D4FF;
+            --blue-dark: #00B4D8;
+            --green: #10a37f;
+            --red: #dc2626;
+            --text-primary: #1d1d1f;
+            --text-secondary: #86868b;
+            --bg-gray: #f5f5f7;
+            --border: #d2d2d7;
+            --warning: #ff9500;
+            --success: #34c759;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            line-height: 1.47059;
+            letter-spacing: -0.022em;
+            color: var(--text-primary);
+            background: white;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Navigation with Hamburger Menu */
+        .site-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(10, 14, 26, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 16px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: 600;
+            color: #00D4FF;
+            text-decoration: none;
+        }
+
+        /* Products Dropdown */
+        .products-dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-toggle {
+            background: none;
+            border: 1px solid rgba(255,255,255,0.2);
+            color: rgba(255,255,255,0.8);
+            padding: 10px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+
+        .dropdown-toggle:hover {
+            border-color: #00D4FF;
+            color: #00D4FF;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            margin-top: 8px;
+            background: rgba(15, 20, 32, 0.98);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 8px 0;
+            min-width: 200px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+        }
+
+        .dropdown-menu.open {
+            display: block;
+            animation: dropdownFadeIn 0.3s ease;
+        }
+
+        .dropdown-menu a {
+            display: block;
+            padding: 12px 20px;
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+
+        .dropdown-menu a:hover {
+            background: rgba(0,212,255,0.1);
+            color: #00D4FF;
+        }
+
+        .dropdown-menu a.active {
+            color: #00D4FF;
+            background: rgba(0,212,255,0.05);
+        }
+
+        @keyframes dropdownFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+
+
+        /* Hero Section */
+        .hero {
+            padding-top: 70px;
+            text-align: center;
+            background: linear-gradient(135deg, var(--dark-bg) 0%, var(--dark-card) 100%);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 20% 50%, rgba(0, 212, 255, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 50%, rgba(0, 180, 216, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            padding: 100px 22px 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 72px;
+            line-height: 1.07143;
+            font-weight: 600;
+            letter-spacing: -0.005em;
+            margin-bottom: 20px;
+        }
+
+        .hero .subtitle {
+            font-size: 28px;
+            line-height: 1.14286;
+            font-weight: 400;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 15px;
+        }
+
+        .hero .tagline {
+            font-size: 21px;
+            font-style: italic;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 30px;
+        }
+
+        .impact-statement {
+            font-size: 24px;
+            font-weight: 500;
+            color: var(--cyan);
+            margin-bottom: 40px;
+        }
+
+        .quick-stats {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            margin: 40px 0 60px;
+            flex-wrap: wrap;
+        }
+
+        .stat-block {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 42px;
+            font-weight: 600;
+            background: linear-gradient(135deg, var(--cyan), var(--teal));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        /* How It Works Section */
+        .how-it-works-section {
+            padding: 100px 22px;
+            background: white;
+        }
+
+        .section-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 48px;
+            line-height: 1.08349;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .process-steps {
+            display: flex;
+            justify-content: space-between;
+            gap: 30px;
+            margin-bottom: 60px;
+            flex-wrap: wrap;
+        }
+
+        .step-card {
+            flex: 1;
+            min-width: 200px;
+            text-align: center;
+            padding: 30px 20px;
+            background: var(--bg-gray);
+            border-radius: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .step-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--cyan), var(--teal));
+            color: white;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .step-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--text-primary);
+        }
+
+        .step-description {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        /* Flow Diagram */
+        .flow-diagram {
+            background: white;
+            border: 2px solid var(--border);
+            border-radius: 20px;
+            padding: 40px;
+            margin: 60px 0;
+        }
+
+        .flow-svg {
+            width: 100%;
+            max-width: 900px;
+            height: auto;
+            margin: 0 auto;
+            display: block;
+        }
+
+        /* Key Benefits */
+        .key-benefits {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .benefit-card {
+            padding: 30px;
+            background: linear-gradient(135deg, var(--dark-bg) 0%, var(--dark-card) 100%);
+            border-radius: 20px;
+            color: white;
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(0, 212, 255, 0.4);
+        }
+
+        .benefit-icon {
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+
+        .benefit-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--cyan);
+        }
+
+        .benefit-text {
+            font-size: 16px;
+            line-height: 1.5;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* Problem Section */
+        .problem-section {
+            padding: 100px 22px;
+            background: var(--bg-gray);
+        }
+
+        .problem-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .problem-card {
+            background: linear-gradient(135deg, var(--dark-bg) 0%, var(--dark-card) 100%);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            padding: 40px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .problem-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(0, 212, 255, 0.4);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+        }
+
+        .problem-card h3 {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .problem-card p {
+            font-size: 17px;
+            line-height: 1.47059;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Cost Table */
+        .cost-table {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            margin: 40px 0;
+        }
+
+        .cost-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .cost-table th {
+            background: var(--red);
+            color: white;
+            padding: 20px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .cost-table td {
+            padding: 20px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .cost-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .cost-table .metric {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .cost-table .impact {
+            color: var(--red);
+            font-weight: 600;
+        }
+
+        .highlight-stat {
+            background: linear-gradient(135deg, var(--cyan), var(--teal));
+            color: white;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            margin: 60px 0;
+        }
+
+        .highlight-stat .value {
+            font-size: 56px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .highlight-stat .context {
+            font-size: 21px;
+            opacity: 0.95;
+        }
+
+        /* Solution Section */
+        .solution-section {
+            padding: 100px 22px;
+            background: white;
+        }
+
+        .subsection-title {
+            font-size: 32px;
+            font-weight: 600;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .comparison-table {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            margin: 40px 0;
+        }
+
+        .comparison-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .comparison-table th {
+            background: linear-gradient(135deg, var(--cyan), var(--teal));
+            color: white;
+            padding: 20px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .comparison-table td {
+            padding: 20px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .comparison-table tr:hover {
+            background: var(--bg-gray);
+        }
+
+        .comparison-table .platform-name {
+            font-weight: 600;
+        }
+
+        .comparison-table .prometheus-row {
+            background: rgba(0, 212, 255, 0.05);
+        }
+
+        .comparison-table .prometheus-row td {
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        /* Technology Section */
+        .technology-section {
+            padding: 100px 22px;
+            background: var(--bg-gray);
+        }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .tech-card {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        .tech-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+        }
+
+        .tech-card h4 {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--text-primary);
+        }
+
+        .tech-card p {
+            font-size: 16px;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        /* Regulatory Section */
+        .regulatory-section {
+            padding: 100px 22px;
+            background: white;
+        }
+
+        .regulatory-banner {
+            background: linear-gradient(135deg, var(--red), #B91C1C);
+            color: white;
+            padding: 40px;
+            border-radius: 20px;
+            margin: 40px 0;
+        }
+
+        .regulatory-timeline {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 30px;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        .timeline-item {
+            text-align: center;
+        }
+
+        .timeline-year {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .timeline-event {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .timeline-detail {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .regulatory-message {
+            text-align: center;
+            font-size: 24px;
+            font-weight: 600;
+            margin-top: 30px;
+        }
+
+        /* Assessment Tools Section */
+        .assessment-section {
+            padding: 100px 22px;
+            background: var(--bg-gray);
+        }
+
+        .assessment-subtitle {
+            font-size: 21px;
+            color: var(--text-secondary);
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .assessment-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .assessment-card {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 20px;
+            text-decoration: none;
+            color: var(--text-primary);
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            display: block;
+        }
+
+        .assessment-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--cyan);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+        }
+
+        .assessment-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .assessment-title {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--text-primary);
+        }
+
+        .assessment-description {
+            font-size: 16px;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        .assessment-cta {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .cta-link {
+            display: inline-block;
+            padding: 16px 32px;
+            background: linear-gradient(135deg, var(--cyan), var(--teal));
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 17px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .cta-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
+        }
+
+        /* Footer */
+        .footer {
+            background: linear-gradient(135deg, var(--dark-bg) 0%, var(--dark-card) 100%);
+            padding: 60px 22px;
+            color: white;
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--cyan);
+        }
+
+        .footer-text {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 14px;
+            margin-top: 20px;
+        }
+        
+        /* Technology Stack Section */
+        .tech-stack-section {
+            padding: 100px 22px;
+            background: var(--bg-gray);
+        }
+        
+        .tech-stack-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 60px;
+            margin-top: 60px;
+        }
+        
+        .tech-stack-category {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            border: 1px solid var(--border);
+        }
+        
+        .stack-category-title {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 30px;
+            color: var(--text-primary);
+        }
+        
+        .tech-component {
+            display: flex;
+            gap: 20px;
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        .tech-component:last-child {
+            border-bottom: none;
+        }
+        
+        .component-icon {
+            font-size: 28px;
+            flex-shrink: 0;
+        }
+        
+        .component-details h4 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+        }
+        
+        .component-details p {
+            font-size: 15px;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+        
+        @media (max-width: 768px) {
+            .tech-stack-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .tech-stack-category {
+                padding: 30px 20px;
+            }
+        }
+
+        /* Market Opportunity Section */
+        .market-section {
+            padding: 100px 22px;
+            background: linear-gradient(135deg, var(--dark-bg) 0%, var(--dark-card) 100%);
+        }
+
+        .market-section .section-title {
+            color: #ffffff;
+        }
+
+        .market-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .market-stat-card {
+            background: rgba(0, 212, 255, 0.1);
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .market-stat-card.primary {
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.2), rgba(0, 180, 216, 0.2));
+            border-color: var(--cyan);
+        }
+
+        .market-stat-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--cyan);
+        }
+
+        .market-stat-card .stat-value {
+            font-size: 42px;
+            font-weight: 600;
+            color: var(--cyan);
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .market-stat-card .stat-label {
+            font-size: 18px;
+            color: white;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .market-stat-card .stat-source {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.6);
+            display: block;
+        }
+
+        .market-context h3 {
+            font-size: 32px;
+            color: white;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .driver-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .driver-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 30px;
+        }
+
+        .driver-card h4 {
+            font-size: 20px;
+            color: var(--cyan);
+            margin-bottom: 15px;
+        }
+
+        .driver-card p {
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+        }
+
+        .market-gap {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 20px;
+            padding: 40px;
+            margin-top: 60px;
+        }
+
+        .market-gap h3 {
+            font-size: 28px;
+            color: white;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .crisis-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .crisis-stat {
+            text-align: center;
+        }
+
+        .crisis-value {
+            font-size: 48px;
+            font-weight: 600;
+            color: var(--red);
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .crisis-label {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .crisis-insight {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.6;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Customer Segments Section */
+        .customers-section {
+            padding: 100px 22px;
+            background: white;
+        }
+
+        .customer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .customer-card {
+            background: var(--bg-gray);
+            border-radius: 20px;
+            padding: 35px;
+            transition: all 0.3s ease;
+        }
+
+        .customer-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+        }
+
+        .customer-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .customer-card h3 {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--text-primary);
+        }
+
+        .customer-card p {
+            font-size: 16px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .customer-meta {
+            display: flex;
+            justify-content: space-between;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+        }
+
+        .customer-meta span {
+            font-size: 14px;
+            color: var(--cyan);
+            font-weight: 500;
+        }
+
+        /* Pricing Section */
+        .pricing-section {
+            padding: 100px 22px;
+            background: linear-gradient(135deg, var(--dark-bg) 0%, var(--dark-card) 100%);
+        }
+
+        .pricing-section .section-title {
+            color: #ffffff;
+        }
+
+        .pricing-subtitle {
+            text-align: center;
+            font-size: 21px;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 60px;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .pricing-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 40px 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .pricing-card.featured {
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(0, 180, 216, 0.1));
+            border-color: var(--cyan);
+            transform: scale(1.05);
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--cyan);
+        }
+
+        .pricing-card.featured:hover {
+            transform: scale(1.05) translateY(-4px);
+        }
+
+        .pricing-tier {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--cyan);
+            margin-bottom: 20px;
+        }
+
+        .pricing-price {
+            font-size: 48px;
+            font-weight: 600;
+            color: white;
+            margin-bottom: 10px;
+        }
+
+        .pricing-price span {
+            font-size: 18px;
+            font-weight: 400;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .pricing-description {
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 30px;
+        }
+
+        .pricing-features {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            text-align: left;
+        }
+
+        .pricing-features li {
+            padding: 10px 0;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .pricing-features li:last-child {
+            border-bottom: none;
+        }
+
+        .pricing-context {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 30px;
+            margin-top: 60px;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .pricing-context h4 {
+            font-size: 20px;
+            color: var(--cyan);
+            margin-bottom: 15px;
+        }
+
+        .pricing-context p {
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+        }
+
+        /* Competitive Comparison Section */
+        .competitive-section {
+            padding: 100px 22px;
+            background: white;
+        }
+
+        .comparison-table {
+            overflow-x: auto;
+            margin-top: 40px;
+        }
+
+        .comparison-table table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .comparison-table th {
+            background: var(--bg-gray);
+            padding: 20px;
+            text-align: left;
+            font-size: 16px;
+            font-weight: 600;
+            border-bottom: 2px solid var(--border);
+        }
+
+        .comparison-table th.highlight {
+            background: linear-gradient(135deg, var(--cyan), var(--teal));
+            color: white;
+        }
+
+        .comparison-table td {
+            padding: 20px;
+            font-size: 15px;
+            border-bottom: 1px solid var(--border);
+            color: var(--text-secondary);
+        }
+
+        .comparison-table td.highlight {
+            background: rgba(0, 212, 255, 0.05);
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        .comparison-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .competitive-insight {
+            background: var(--bg-gray);
+            border-radius: 16px;
+            padding: 40px;
+            margin-top: 60px;
+        }
+
+        .competitive-insight h3 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: var(--text-primary);
+        }
+
+        .competitive-insight p {
+            font-size: 18px;
+            line-height: 1.6;
+            color: var(--text-secondary);
+        }
+
+        /* ROI Section */
+        .roi-section {
+            padding: 100px 22px;
+            background: linear-gradient(135deg, var(--dark-bg) 0%, var(--dark-card) 100%);
+        }
+
+        .roi-section .section-title {
+            color: #ffffff;
+        }
+
+        .roi-calculator {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .roi-scenario {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 40px;
+        }
+
+        .roi-scenario h3 {
+            font-size: 28px;
+            color: white;
+            margin-bottom: 10px;
+        }
+
+        .roi-context {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 40px;
+        }
+
+        .roi-breakdown {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+            padding: 30px;
+        }
+
+        .roi-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .roi-item:last-child {
+            border-bottom: none;
+        }
+
+        .roi-item.total {
+            border-top: 2px solid var(--cyan);
+            margin-top: 20px;
+            padding-top: 20px;
+        }
+
+        .roi-label {
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .roi-value {
+            font-size: 20px;
+            font-weight: 600;
+            color: white;
+        }
+
+        .roi-value.negative {
+            color: var(--red);
+        }
+
+        .roi-value.positive {
+            color: var(--green);
+        }
+
+        .roi-value.highlight {
+            color: var(--cyan);
+            font-size: 32px;
+        }
+
+        .roi-risks {
+            margin-top: 60px;
+        }
+
+        .roi-risks h3 {
+            font-size: 28px;
+            color: white;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .risk-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .risk-card {
+            background: rgba(220, 38, 38, 0.1);
+            border: 1px solid rgba(220, 38, 38, 0.3);
+            border-radius: 16px;
+            padding: 30px;
+        }
+
+        .risk-card h4 {
+            font-size: 20px;
+            color: var(--red);
+            margin-bottom: 15px;
+        }
+
+        .risk-card p {
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+        }
+
+        .hero-explanation {
+            max-width: 900px;
+            margin: 40px auto 0;
+            text-align: left;
+        }
+        
+        .hero-explanation p {
+            font-size: 18px;
+            line-height: 1.8;
+            color: rgba(255,255,255,0.85);
+            margin-bottom: 24px;
+        }
+        
+        .hero-explanation p:last-child {
+            margin-bottom: 0;
+        }
+        
+        .hero-explanation strong {
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .nav-content {
+                max-width: 100%;
+                padding: 0 15px;
+            }
+            
+            .nav-links {
+                gap: 15px;
+            }
+            
+            .nav-links a {
+                font-size: 12px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 48px;
+            }
+            
+            .hero .subtitle {
+                font-size: 21px;
+            }
+            
+            .problem-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .process-steps {
+                flex-direction: column;
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation with Hamburger Menu -->
+    <header class="site-header">
+        <div class="header-container">
+            <a href="../index.html" class="logo">E-Group</a>
+            <div class="products-dropdown">
+                <button class="dropdown-toggle" onclick="toggleDropdown()">Products ▼</button>
+                <nav class="dropdown-menu">
+                    <a href="../HealthCompanion/index.html">Health Companion</a>
+                    <a href="../ResearchPay/index.html">ResearchPay</a>
+                    <a href="../LabVault/index.html">LabVault</a>
+                    <a href="../Argus/index.html">Argus</a>
+                    <a href="../ALETHEIA/index.html">Aletheia</a>
+                    <a href="index.html" class="active">Prometheus</a>
+                    <a href="../NEMESIS/index.html">Nemesis</a>
+                    <a href="../HYPERION/index.html">Hyperion</a>
+                    <a href="../ARCHON/index.html">Archon</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>PROMETHEUS</h1>
+            <p class="subtitle">Federated Carbon Intelligence for Supply Chains</p>
+            <p class="tagline">"Accurate Scope 3 Data Without Suppliers Sharing Secrets"</p>
+            <p class="impact-statement">€500M+ TAM with CSRD compliance driving 50,000+ companies to act</p>
+            
+            <div class="quick-stats">
+                <div class="stat-block">
+                    <span class="stat-number">75-84%</span>
+                    <span class="stat-label">Hidden Emissions</span>
+                </div>
+                <div class="stat-block">
+                    <span class="stat-number">50,000+</span>
+                    <span class="stat-label">Companies Affected</span>
+                </div>
+                <div class="stat-block">
+                    <span class="stat-number">200%+</span>
+                    <span class="stat-label">Current Error Rate</span>
+                </div>
+                <div class="stat-block">
+                    <span class="stat-number">€75K</span>
+                    <span class="stat-label">Non-Compliance Fine</span>
+                </div>
+            </div>
+            
+            <div class="hero-explanation">
+                <p>
+                    <strong>PROMETHEUS is a federated carbon intelligence platform that solves the impossible problem of Scope 3 emissions reporting.</strong> We enable companies to report accurate supply chain carbon data without requiring suppliers to expose confidential cost structures, production volumes, or competitive information.
+                </p>
+                <p>
+                    Here's the uncomfortable truth: 80% of most companies' carbon footprint sits in Scope 3—their supply chain. But current Scope 3 reporting is 40-60% inaccurate because it relies on industry averages and supplier surveys. Why? Because suppliers won't share real production data. It would expose their margins, costs, and competitive secrets. <strong>So everyone guesses, auditors raise eyebrows, and CSRD compliance becomes a fiction.</strong>
+                </p>
+                <p>
+                    <strong>PROMETHEUS changes this with federated carbon calculation.</strong> Our models run inside supplier systems, computing emissions from actual production data, then return only the carbon numbers—never the underlying business data. Suppliers get privacy protection. Buyers get verified numbers. Auditors get data they can trust. And Europe gets real progress on climate accountability.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    
+
+    <!-- How PROMETHEUS Works Section -->
+    <section class="how-it-works-section" id="how-it-works">
+        <div class="section-content">
+            <h2 class="section-title">How PROMETHEUS Works</h2>
+            
+            <div class="process-steps">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <h3 class="step-title">Connect ERP</h3>
+                    <p class="step-description">Supplier installs lightweight connector to production systems</p>
+                </div>
+                
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <h3 class="step-title">Local Analysis</h3>
+                    <p class="step-description">AI calculates emissions using actual energy and material data</p>
+                </div>
+                
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <h3 class="step-title">Model Update</h3>
+                    <p class="step-description">Only model parameters sent - production data never leaves</p>
+                </div>
+                
+                <div class="step-card">
+                    <div class="step-number">4</div>
+                    <h3 class="step-title">Network Learning</h3>
+                    <p class="step-description">Federated aggregation improves accuracy for everyone</p>
+                </div>
+                
+                <div class="step-card">
+                    <div class="step-number">5</div>
+                    <h3 class="step-title">Deliver Data</h3>
+                    <p class="step-description">You receive audit-ready product carbon footprints</p>
+                </div>
+            </div>
+
+            <!-- Flow Diagram -->
+            <div class="flow-diagram">
+                <svg class="flow-svg" viewBox="0 0 900 500" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Brand Company -->
+                    <rect x="20" y="200" width="140" height="80" rx="10" fill="#f5f5f7" stroke="#d2d2d7" stroke-width="2"/>
+                    <text x="90" y="235" text-anchor="middle" font-size="14" font-weight="600" fill="#1d1d1f">Brand Company</text>
+                    <text x="90" y="255" text-anchor="middle" font-size="12" fill="#86868b">Needs Scope 3</text>
+                    
+                    <!-- Supplier Nodes -->
+                    <!-- Germany -->
+                    <g transform="translate(300, 80)">
+                        <rect width="120" height="80" rx="10" fill="#0F1420" stroke="#00D4FF" stroke-width="2"/>
+                        <text x="60" y="30" text-anchor="middle" font-size="14" font-weight="600" fill="white">Supplier DE</text>
+                        <g transform="translate(52, 44)">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#86868b" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                            </svg>
+                        </g>
+                        <text x="68" y="50" text-anchor="left" font-size="11" fill="#86868b">Data stays here</text>
+                        <circle cx="60" cy="65" r="3" fill="#10a37f"/>
+                    </g>
+                    
+                    <!-- France -->
+                    <g transform="translate(300, 210)">
+                        <rect width="120" height="80" rx="10" fill="#0F1420" stroke="#00D4FF" stroke-width="2"/>
+                        <text x="60" y="30" text-anchor="middle" font-size="14" font-weight="600" fill="white">Supplier FR</text>
+                        <g transform="translate(52, 44)">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#86868b" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                            </svg>
+                        </g>
+                        <text x="68" y="50" text-anchor="left" font-size="11" fill="#86868b">Data stays here</text>
+                        <circle cx="60" cy="65" r="3" fill="#10a37f"/>
+                    </g>
+                    
+                    <!-- Poland -->
+                    <g transform="translate(300, 340)">
+                        <rect width="120" height="80" rx="10" fill="#0F1420" stroke="#00D4FF" stroke-width="2"/>
+                        <text x="60" y="30" text-anchor="middle" font-size="14" font-weight="600" fill="white">Supplier PL</text>
+                        <g transform="translate(52, 44)">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#86868b" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                            </svg>
+                        </g>
+                        <text x="68" y="50" text-anchor="left" font-size="11" fill="#86868b">Data stays here</text>
+                        <circle cx="60" cy="65" r="3" fill="#10a37f"/>
+                    </g>
+                    
+                    <!-- PROMETHEUS Coordinator -->
+                    <g transform="translate(550, 200)">
+                        <circle cx="60" cy="40" r="50" fill="url(#gradient)" stroke="#00D4FF" stroke-width="3"/>
+                        <text x="60" y="40" text-anchor="middle" font-size="14" font-weight="600" fill="white">PROMETHEUS</text>
+                        <text x="60" y="56" text-anchor="middle" font-size="11" fill="white">Coordinator</text>
+                        <text x="60" y="100" text-anchor="middle" font-size="11" fill="#86868b">No raw data</text>
+                    </g>
+                    
+                    <!-- Result -->
+                    <rect x="740" y="200" width="140" height="80" rx="10" fill="#10a37f" opacity="0.1" stroke="#10a37f" stroke-width="2"/>
+                    <text x="810" y="235" text-anchor="middle" font-size="14" font-weight="600" fill="#10a37f">Accurate PCFs</text>
+                    <text x="810" y="255" text-anchor="middle" font-size="12" fill="#86868b">Audit-ready</text>
+                    
+                    <!-- Arrows -->
+                    <!-- Request arrows -->
+                    <path d="M 160 240 L 300 150" stroke="#86868b" stroke-width="1" stroke-dasharray="5,5" fill="none" marker-end="url(#arrowgray)"/>
+                    <path d="M 160 240 L 300 250" stroke="#86868b" stroke-width="1" stroke-dasharray="5,5" fill="none" marker-end="url(#arrowgray)"/>
+                    <path d="M 160 240 L 300 380" stroke="#86868b" stroke-width="1" stroke-dasharray="5,5" fill="none" marker-end="url(#arrowgray)"/>
+                    
+                    <!-- Model updates -->
+                    <path d="M 420 120 L 550 220" stroke="#00D4FF" stroke-width="2" fill="none" marker-end="url(#arrowcyan)"/>
+                    <path d="M 420 250 L 550 240" stroke="#00D4FF" stroke-width="2" fill="none" marker-end="url(#arrowcyan)"/>
+                    <path d="M 420 380 L 550 260" stroke="#00D4FF" stroke-width="2" fill="none" marker-end="url(#arrowcyan)"/>
+                    
+                    <!-- Results -->
+                    <path d="M 660 240 L 740 240" stroke="#10a37f" stroke-width="2" fill="none" marker-end="url(#arrowgreen)"/>
+                    
+                    <!-- Timeline -->
+                    <text x="450" y="460" text-anchor="middle" font-size="12" fill="#86868b">Supplier A updates model → Hours later → All participants get better emission factors</text>
+                    
+                    <!-- Define gradients and markers -->
+                    <defs>
+                        <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#00D4FF;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#00B4D8;stop-opacity:1" />
+                        </linearGradient>
+                        
+                        <marker id="arrowcyan" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+                            <path d="M0,0 L0,6 L9,3 z" fill="#00D4FF"/>
+                        </marker>
+                        
+                        <marker id="arrowgray" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+                            <path d="M0,0 L0,6 L9,3 z" fill="#86868b"/>
+                        </marker>
+                        
+                        <marker id="arrowgreen" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+                            <path d="M0,0 L0,6 L9,3 z" fill="#10a37f"/>
+                        </marker>
+                    </defs>
+                </svg>
+            </div>
+
+            <!-- Key Benefits -->
+            <div class="key-benefits">
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#00D4FF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                        </svg>
+                    </div>
+                    <h3 class="benefit-title">Complete Data Sovereignty</h3>
+                    <p class="benefit-text">Suppliers keep production secrets private. You get accurate emissions.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#00D4FF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+                        </svg>
+                    </div>
+                    <h3 class="benefit-title">Primary Data at Scale</h3>
+                    <p class="benefit-text">Get real emission factors from hundreds of suppliers, not industry averages</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#00D4FF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                            <circle cx="12" cy="11" r="3"/>
+                            <circle cx="12" cy="11" r="1" fill="#00D4FF"/>
+                        </svg>
+                    </div>
+                    <h3 class="benefit-title">Audit-Ready Compliance</h3>
+                    <p class="benefit-text">CSRD-compliant data with full traceability to source</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technology Stack Section -->
+    <section class="tech-stack-section" id="tech-stack">
+        <div class="section-content">
+            <h2 class="section-title">Technology Stack</h2>
+            <p class="section-subtitle">Enterprise-ready components for carbon intelligence</p>
+            
+            <div class="tech-stack-grid">
+                <div class="tech-stack-category">
+                    <h3 class="stack-category-title">E-Group Components</h3>
+                    <div class="tech-component">
+                        <div class="component-icon">🧠</div>
+                        <div class="component-details">
+                            <h4>FedX</h4>
+                            <p>Federated learning for distributed carbon model training</p>
+                        </div>
+                    </div>
+                    <div class="tech-component">
+                        <div class="component-icon">🔐</div>
+                        <div class="component-details">
+                            <h4>MyD Wallet</h4>
+                            <p>eIDAS 2.0 compliant identity for Scope 3 verification</p>
+                        </div>
+                    </div>
+                    <div class="tech-component">
+                        <div class="component-icon">📊</div>
+                        <div class="component-details">
+                            <h4>InnoHealth DataLake</h4>
+                            <p>GDPR-compliant emission data with automated retention</p>
+                        </div>
+                    </div>
+                    <div class="tech-component">
+                        <div class="component-icon">🔗</div>
+                        <div class="component-details">
+                            <h4>IOX Platform</h4>
+                            <p>Secure supply chain data exchange and API gateway</p>
+                        </div>
+                    </div>
+                    <div class="tech-component">
+                        <div class="component-icon">💬</div>
+                        <div class="component-details">
+                            <h4>COIOS Interface</h4>
+                            <p>Natural language queries for carbon analytics</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tech-stack-category">
+                    <h3 class="stack-category-title">Konvergence Components</h3>
+                    <div class="tech-component">
+                        <div class="component-icon">🏛️</div>
+                        <div class="component-details">
+                            <h4>Archimedes</h4>
+                            <p>Zero-trust backend for emission calculations</p>
+                        </div>
+                    </div>
+                    <div class="tech-component">
+                        <div class="component-icon">⛓️</div>
+                        <div class="component-details">
+                            <h4>Fortigraph</h4>
+                            <p>Immutable audit trail for CSRD reporting</p>
+                        </div>
+                    </div>
+                    <div class="tech-component">
+                        <div class="component-icon">❄️</div>
+                        <div class="component-details">
+                            <h4>Cold Shield</h4>
+                            <p>Quantum-resistant archival for compliance records</p>
+                        </div>
+                    </div>
+                    <div class="tech-component">
+                        <div class="component-icon">🔒</div>
+                        <div class="component-details">
+                            <h4>Chain Vault</h4>
+                            <p>Encrypted storage for carbon certificates</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Market Opportunity Section -->
+    <section class="market-section" id="market">
+        <div class="section-content">
+            <h2 class="section-title">Market Opportunity</h2>
+            
+            <div class="market-stats">
+                <div class="market-stat-card primary">
+                    <span class="stat-value">$11.9-18.5B</span>
+                    <span class="stat-label">Carbon Accounting Market</span>
+                    <span class="stat-source">2024, growing 24-38% CAGR</span>
+                </div>
+                <div class="market-stat-card">
+                    <span class="stat-value">€332M</span>
+                    <span class="stat-label">European ESG Software</span>
+                    <span class="stat-source">EU leads with 35% global share</span>
+                </div>
+                <div class="market-stat-card">
+                    <span class="stat-value">50,000</span>
+                    <span class="stat-label">Companies Under CSRD</span>
+                    <span class="stat-source">Scope 3 reporting required</span>
+                </div>
+                <div class="market-stat-card">
+                    <span class="stat-value">70-80%</span>
+                    <span class="stat-label">Emissions Are Scope 3</span>
+                    <span class="stat-source">Hidden in supply chains</span>
+                </div>
+            </div>
+            
+            <div class="market-context">
+                <h3>Why Now?</h3>
+                <div class="driver-cards">
+                    <div class="driver-card">
+                        <h4>CSRD Mandates Scope 3</h4>
+                        <p>50,000 EU companies must report Scope 3 emissions starting 2024-2025. For the first time, supply chain carbon is legally required — not optional.</p>
+                    </div>
+                    <div class="driver-card">
+                        <h4>CBAM Hits January 2026</h4>
+                        <p>Carbon Border Adjustment Mechanism requires product-level carbon data for imports. Inaccurate data = incorrect tariffs = financial and legal exposure.</p>
+                    </div>
+                    <div class="driver-card">
+                        <h4>California Leads US</h4>
+                        <p>California mandating Scope 1, 2, and 3 reporting by 2026-2027. Other states will follow. US multinationals need solutions now.</p>
+                    </div>
+                    <div class="driver-card">
+                        <h4>11.4x Multiplier</h4>
+                        <p>Supply chain emissions average 11.4x higher than direct operations. Companies can't hit net zero targets without Scope 3 visibility.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="market-gap">
+                <h3>The Data Quality Crisis</h3>
+                <div class="crisis-stats">
+                    <div class="crisis-stat">
+                        <span class="crisis-value">60%</span>
+                        <span class="crisis-label">of companies don't track supply chain emissions at all</span>
+                    </div>
+                    <div class="crisis-stat">
+                        <span class="crisis-value">±200%</span>
+                        <span class="crisis-label">typical error range for spend-based estimates</span>
+                    </div>
+                    <div class="crisis-stat">
+                        <span class="crisis-value">20-30%</span>
+                        <span class="crisis-label">supplier survey response rates</span>
+                    </div>
+                </div>
+                <p class="crisis-insight">Current approaches can't solve this. Suppliers won't share production data. Industry averages are fiction. The only path to accurate Scope 3 is federated primary data collection — where suppliers keep secrets private while sharing emission factors.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Customer Segments Section -->
+    <section class="customers-section" id="customers">
+        <div class="section-content">
+            <h2 class="section-title">Target Customers</h2>
+            
+            <div class="customer-grid">
+                <div class="customer-card">
+                    <div class="customer-icon">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#00D4FF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M2 20h20"/>
+                            <path d="M5 20V8l5 4V8l5 4V4h4v16"/>
+                            <path d="M3 20v-4h4v4"/>
+                        </svg>
+                    </div>
+                    <h3>Manufacturing Enterprises</h3>
+                    <p>Automotive, electronics, industrial goods. Complex multi-tier supply chains where 80%+ of emissions are Scope 3. Under immediate CSRD pressure.</p>
+                    <div class="customer-meta">
+                        <span>5,000+ large EU manufacturers</span>
+                        <span>€50K-200K deal size</span>
+                    </div>
+                </div>
+                
+                <div class="customer-card">
+                    <div class="customer-icon">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#00D4FF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="9" cy="21" r="1"/>
+                            <circle cx="20" cy="21" r="1"/>
+                            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+                        </svg>
+                    </div>
+                    <h3>Consumer Goods & Retail</h3>
+                    <p>Brands with extensive supplier networks. Need product carbon footprints for CBAM, consumer labeling, and investor pressure.</p>
+                    <div class="customer-meta">
+                        <span>2,000+ major EU retailers/brands</span>
+                        <span>€40K-150K deal size</span>
+                    </div>
+                </div>
+                
+                <div class="customer-card">
+                    <div class="customer-icon">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#00D4FF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M10.5 20.5L3.5 13.5a4.95 4.95 0 1 1 7-7l7 7a4.95 4.95 0 1 1-7 7z"/>
+                            <path d="M8.5 8.5l7 7"/>
+                        </svg>
+                    </div>
+                    <h3>Pharmaceutical & Chemicals</h3>
+                    <p>Heavily regulated industries with complex upstream emissions. API manufacturing and chemical inputs are Scope 3 blind spots.</p>
+                    <div class="customer-meta">
+                        <span>500+ major EU pharma/chemical</span>
+                        <span>€75K-250K deal size</span>
+                    </div>
+                </div>
+                
+                <div class="customer-card">
+                    <div class="customer-icon">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#00D4FF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M3 11h18"/>
+                            <path d="M5 11V6a7 7 0 0 1 14 0v5"/>
+                            <path d="M3 15h18"/>
+                            <path d="M5 15v2a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-2"/>
+                            <path d="M7 11v4"/>
+                            <path d="M17 11v4"/>
+                        </svg>
+                    </div>
+                    <h3>Food & Beverage</h3>
+                    <p>Agricultural supply chains with massive Scope 3 exposure. Farm-level emissions nearly impossible to track with current methods.</p>
+                    <div class="customer-meta">
+                        <span>3,000+ EU F&B companies</span>
+                        <span>€30K-120K deal size</span>
+                    </div>
+                </div>
+                
+                <div class="customer-card">
+                    <div class="customer-icon">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#00D4FF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 22l4-4-2-2 1-9h-6l1 9-2 2 4 4z"/>
+                            <path d="M9 2h6l-1 5h-4l-1-5z"/>
+                        </svg>
+                    </div>
+                    <h3>Fashion & Apparel</h3>
+                    <p>Long, opaque supply chains spanning Asia. Tier 2/3 suppliers (fabric, dyeing) represent 70% of emissions with minimal data coverage.</p>
+                    <div class="customer-meta">
+                        <span>1,500+ EU fashion companies</span>
+                        <span>€35K-100K deal size</span>
+                    </div>
+                </div>
+                
+                <div class="customer-card">
+                    <div class="customer-icon">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#00D4FF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+                            <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+                        </svg>
+                    </div>
+                    <h3>Supply Chain Platforms</h3>
+                    <p>Procurement and supply chain software providers who need carbon capabilities. Integration partners, not direct competitors.</p>
+                    <div class="customer-meta">
+                        <span>OEM/white-label opportunities</span>
+                        <span>Revenue share model</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section class="problem-section" id="problem">
+        <div class="section-content">
+            <h2 class="section-title">Scope 3 Reporting Is Fundamentally Broken</h2>
+            
+            <div class="problem-grid">
+                <div class="problem-card">
+                    <h3>The Visibility Gap</h3>
+                    <p>75-84% of your carbon footprint comes from your supply chain. But suppliers won't share production data because it reveals competitive secrets - process efficiency, energy sources, material costs.</p>
+                </div>
+                
+                <div class="problem-card">
+                    <h3>Spend-Based Estimates Are Fiction</h3>
+                    <p>Current methods use industry averages that can be off by 200-300%. A supplier using 100% renewable energy looks identical to one burning coal. Auditors increasingly reject these estimates.</p>
+                </div>
+                
+                <div class="problem-card">
+                    <h3>Manual Surveys Don't Scale</h3>
+                    <p>Supplier questionnaires achieve 20-30% response rates with unreliable, self-reported data. A typical enterprise has 5,000+ tier-1 suppliers. The math doesn't work.</p>
+                </div>
+                
+                <div class="problem-card">
+                    <h3>Regulatory Deadline Is Here</h3>
+                    <p>CSRD requires 50,000+ EU companies to report Scope 3 emissions starting 2025. Non-compliance means fines up to €75,000 and potential criminal liability for executives.</p>
+                </div>
+            </div>
+
+            <div class="cost-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Metric</th>
+                            <th>Impact</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="metric">Companies affected by CSRD</td>
+                            <td class="impact">50,000+</td>
+                        </tr>
+                        <tr>
+                            <td class="metric">Scope 3 as % of total emissions</td>
+                            <td class="impact">75-84%</td>
+                        </tr>
+                        <tr>
+                            <td class="metric">Typical spend-based error range</td>
+                            <td class="impact">±200-300%</td>
+                        </tr>
+                        <tr>
+                            <td class="metric">Supplier survey response rate</td>
+                            <td class="impact">20-30%</td>
+                        </tr>
+                        <tr>
+                            <td class="metric">Time to manually collect data</td>
+                            <td class="impact">6-18 months</td>
+                        </tr>
+                        <tr>
+                            <td class="metric">Non-compliance fine (France)</td>
+                            <td class="impact">€75,000</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="highlight-stat">
+                <div class="value">75-84%</div>
+                <div class="context">of your carbon footprint is invisible - and current methods can't fix it</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solution Section -->
+    <section class="solution-section" id="solution">
+        <div class="section-content">
+            <h2 class="section-title">PROMETHEUS: Federated Carbon Intelligence</h2>
+            
+            <p style="font-size: 21px; text-align: center; margin-bottom: 60px; color: var(--text-secondary);">
+                PROMETHEUS solves this through federated AI - enabling accurate product carbon footprints across your entire supply chain while suppliers keep their production data completely private.
+            </p>
+
+            <h3 class="subsection-title">PROMETHEUS vs. Existing Solutions</h3>
+            
+            <div class="comparison-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Approach</th>
+                            <th>Data Location</th>
+                            <th>Accuracy</th>
+                            <th>Supplier Adoption</th>
+                            <th>CSRD Ready</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="platform-name">Spend-based estimates</td>
+                            <td>N/A</td>
+                            <td>±200%</td>
+                            <td>N/A</td>
+                            <td>No</td>
+                        </tr>
+                        <tr>
+                            <td class="platform-name">Supplier surveys</td>
+                            <td>Centralized</td>
+                            <td>±50-100%</td>
+                            <td>20-30%</td>
+                            <td>Partial</td>
+                        </tr>
+                        <tr>
+                            <td class="platform-name">Carbon platforms (Carbmee, etc.)</td>
+                            <td>Centralized</td>
+                            <td>±30-50%</td>
+                            <td>Variable</td>
+                            <td>Partial</td>
+                        </tr>
+                        <tr class="prometheus-row">
+                            <td class="platform-name">PROMETHEUS</td>
+                            <td>Supplier premises</td>
+                            <td>±10-15%</td>
+                            <td>High</td>
+                            <td>Yes</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3 class="subsection-title">What Makes PROMETHEUS Different</h3>
+            
+            <div class="problem-grid">
+                <div class="problem-card">
+                    <h3>Zero Data Centralization</h3>
+                    <p>Production data never leaves supplier systems. No competitive intelligence exposure.</p>
+                </div>
+                
+                <div class="problem-card">
+                    <h3>Actual vs. Average</h3>
+                    <p>Real emission factors from actual production - not industry averages that hide good and bad performers.</p>
+                </div>
+                
+                <div class="problem-card">
+                    <h3>Network Effects</h3>
+                    <p>Every supplier that joins improves accuracy for everyone. First mover captures the network.</p>
+                </div>
+                
+                <div class="problem-card">
+                    <h3>Audit Trail</h3>
+                    <p>Every emission factor traceable to verified source. Auditors can validate without accessing raw data.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technology Section -->
+    <section class="technology-section" id="technology">
+        <div class="section-content">
+            <h2 class="section-title">E-Group Products Powering PROMETHEUS</h2>
+            
+            <div class="tech-grid">
+                <div class="tech-card">
+                    <h4>FedX - Federated Learning Engine</h4>
+                    <p>Trains emission models across distributed supplier nodes without centralizing data</p>
+                </div>
+                
+                <div class="tech-card">
+                    <h4>MyD Wallet - Identity & Verification</h4>
+                    <p>eIDAS 2.0 certified identity for all supply chain participants</p>
+                </div>
+                
+                <div class="tech-card">
+                    <h4>InnoHealth DataLake - Data Governance</h4>
+                    <p>Policy enforcement and audit trails for emission data access</p>
+                </div>
+                
+                <div class="tech-card">
+                    <h4>IOX - Secure Communication</h4>
+                    <p>Encrypted peer-to-peer communication between PROMETHEUS nodes</p>
+                </div>
+                
+                <div class="tech-card">
+                    <h4>reData.me - Data Sovereignty Controls</h4>
+                    <p>Supplier-controlled permissions for what emission data can be derived</p>
+                </div>
+                
+                <div class="tech-card">
+                    <h4>PROMETHEUS Agent - Edge Deployment</h4>
+                    <p>Lightweight connector to supplier ERP/production systems</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Regulatory Timing Section -->
+    <section class="regulatory-section">
+        <div class="section-content">
+            <h2 class="section-title">Perfect Regulatory Timing</h2>
+            
+            <div class="regulatory-banner">
+                <div class="regulatory-timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-year">2025</div>
+                        <div class="timeline-event">CSRD</div>
+                        <div class="timeline-detail">Large companies must report</div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-year">2026</div>
+                        <div class="timeline-event">CBAM</div>
+                        <div class="timeline-detail">Carbon border tax requires product data</div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-year">2027</div>
+                        <div class="timeline-event">CSRD Wave 2</div>
+                        <div class="timeline-detail">Mid-size companies must report</div>
+                    </div>
+                </div>
+                
+                <div class="regulatory-message">
+                    50,000+ EU companies need Scope 3 solutions NOW
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing-section" id="pricing">
+        <div class="section-content">
+            <h2 class="section-title">Pricing</h2>
+            <p class="pricing-subtitle">Positioned below premium platforms ($37K-264K) while delivering superior data quality</p>
+            
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <div class="pricing-tier">Starter</div>
+                    <div class="pricing-price">€15K<span>/year</span></div>
+                    <div class="pricing-description">For mid-market companies beginning CSRD compliance</div>
+                    <ul class="pricing-features">
+                        <li>Up to 100 suppliers</li>
+                        <li>5 Scope 3 categories</li>
+                        <li>Spend-based baseline + primary data upgrade path</li>
+                        <li>Basic supplier onboarding</li>
+                        <li>Annual CSRD report template</li>
+                        <li>Email support</li>
+                    </ul>
+                </div>
+                
+                <div class="pricing-card">
+                    <div class="pricing-tier">Professional</div>
+                    <div class="pricing-price">€45K<span>/year</span></div>
+                    <div class="pricing-description">For companies with complex supply chains</div>
+                    <ul class="pricing-features">
+                        <li>Up to 500 suppliers</li>
+                        <li>All 15 Scope 3 categories</li>
+                        <li>Federated primary data collection</li>
+                        <li>Supplier engagement portal</li>
+                        <li>Product carbon footprints</li>
+                        <li>Quarterly reporting</li>
+                        <li>Priority support</li>
+                    </ul>
+                </div>
+                
+                <div class="pricing-card featured">
+                    <div class="pricing-tier">Enterprise</div>
+                    <div class="pricing-price">€120K<span>/year</span></div>
+                    <div class="pricing-description">For large enterprises with global supply chains</div>
+                    <ul class="pricing-features">
+                        <li>Unlimited suppliers</li>
+                        <li>Multi-tier supply chain mapping</li>
+                        <li>Full federated network access</li>
+                        <li>CBAM product-level calculations</li>
+                        <li>Audit-ready documentation</li>
+                        <li>Custom integrations (ERP, procurement)</li>
+                        <li>Real-time monitoring dashboard</li>
+                        <li>Dedicated success manager</li>
+                    </ul>
+                </div>
+                
+                <div class="pricing-card">
+                    <div class="pricing-tier">Strategic</div>
+                    <div class="pricing-price">€250K+<span>/year</span></div>
+                    <div class="pricing-description">For global enterprises and industry consortiums</div>
+                    <ul class="pricing-features">
+                        <li>Everything in Enterprise</li>
+                        <li>Industry consortium orchestration</li>
+                        <li>Custom algorithm development</li>
+                        <li>On-premise deployment option</li>
+                        <li>White-label capabilities</li>
+                        <li>Executive reporting</li>
+                        <li>24/7 support</li>
+                        <li>Quarterly business reviews</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="pricing-context">
+                <h4>Pricing Rationale</h4>
+                <p>Watershed charges $37K-264K annually. Salesforce Net Zero Cloud runs $48K-210K. PROMETHEUS delivers superior Scope 3 accuracy through federated primary data at competitive pricing. The difference: we solve the supplier data-sharing problem that others can't.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Competitive Comparison Section -->
+    <section class="competitive-section" id="competitive">
+        <div class="section-content">
+            <h2 class="section-title">Competitive Landscape</h2>
+            
+            <div class="comparison-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Capability</th>
+                            <th>Persefoni</th>
+                            <th>Watershed</th>
+                            <th>Salesforce Net Zero</th>
+                            <th class="highlight">PROMETHEUS</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Scope 3 Data Source</td>
+                            <td>Spend-based + surveys</td>
+                            <td>Spend-based + surveys</td>
+                            <td>Spend-based + manual</td>
+                            <td class="highlight">Federated primary data</td>
+                        </tr>
+                        <tr>
+                            <td>Supplier Data Privacy</td>
+                            <td>❌ Must share data</td>
+                            <td>❌ Must share data</td>
+                            <td>❌ Must share data</td>
+                            <td class="highlight"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00D4FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; vertical-align: middle; margin-right: 4px;"><polyline points="20 6 9 17 4 12"/></svg> Data stays local</td>
+                        </tr>
+                        <tr>
+                            <td>Accuracy (Scope 3)</td>
+                            <td><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ff9500" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; vertical-align: middle; margin-right: 4px;"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> ±50-100%</td>
+                            <td><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ff9500" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; vertical-align: middle; margin-right: 4px;"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> ±50-100%</td>
+                            <td><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ff9500" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; vertical-align: middle; margin-right: 4px;"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> ±100-200%</td>
+                            <td class="highlight"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00D4FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; vertical-align: middle; margin-right: 4px;"><polyline points="20 6 9 17 4 12"/></svg> ±10-20%</td>
+                        </tr>
+                        <tr>
+                            <td>Supplier Adoption</td>
+                            <td><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ff9500" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; vertical-align: middle; margin-right: 4px;"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> Low (data sharing required)</td>
+                            <td><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ff9500" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; vertical-align: middle; margin-right: 4px;"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> Low (data sharing required)</td>
+                            <td><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ff9500" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; vertical-align: middle; margin-right: 4px;"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> Low (manual burden)</td>
+                            <td class="highlight"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00D4FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; vertical-align: middle; margin-right: 4px;"><polyline points="20 6 9 17 4 12"/></svg> High (privacy preserved)</td>
+                        </tr>
+                        <tr>
+                            <td>Network Effects</td>
+                            <td>❌ None</td>
+                            <td>❌ None</td>
+                            <td>❌ None</td>
+                            <td class="highlight"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00D4FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; vertical-align: middle; margin-right: 4px;"><polyline points="20 6 9 17 4 12"/></svg> Shared learning</td>
+                        </tr>
+                        <tr>
+                            <td>CBAM Product-Level</td>
+                            <td><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ff9500" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; vertical-align: middle; margin-right: 4px;"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> Limited</td>
+                            <td><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ff9500" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; vertical-align: middle; margin-right: 4px;"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> Limited</td>
+                            <td>❌ No</td>
+                            <td class="highlight"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00D4FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; vertical-align: middle; margin-right: 4px;"><polyline points="20 6 9 17 4 12"/></svg> Full support</td>
+                        </tr>
+                        <tr>
+                            <td>Annual Pricing</td>
+                            <td>Free - Enterprise</td>
+                            <td>$37K-264K</td>
+                            <td>$48K-210K</td>
+                            <td class="highlight">€15K-250K</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="competitive-insight">
+                <h3>The Fundamental Difference</h3>
+                <p>Every competitor relies on suppliers voluntarily sharing production data — which they won't do because it reveals competitive secrets. Response rates hover at 20-30%. PROMETHEUS solves this with federated learning: AI calculates emissions locally at each supplier, sharing only the emission factors, never the underlying production data. This is why we achieve 80%+ supplier participation and ±10-20% accuracy while others remain stuck at ±100% with spend-based estimates.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Add-Ons & Premium Services Section -->
+    <section class="addons-section">
+        <div class="section-content">
+            <h2 class="section-title">Add-Ons & Premium Services</h2>
+            <p class="section-subtitle">Enhance PROMETHEUS with specialized features and enterprise capabilities</p>
+            
+            <!-- Tier 1: Core Add-Ons -->
+            <div class="addon-tier">
+                <h3 class="tier-title">Tier 1: Core Add-Ons</h3>
+                <div class="addon-grid">
+                    <div class="addon-card">
+                        <div class="addon-number">1</div>
+                        <h4 class="addon-title">Carbon Analytics Dashboard</h4>
+                        <p class="addon-desc">Real-time Scope 3 visibility with drill-down by supplier, category, product line, and geography. Trend analysis, year-over-year comparisons, and reduction tracking.</p>
+                        <div class="addon-target">
+                            <span class="target-icon">📊</span>
+                            <span>For sustainability teams and C-suite reporting</span>
+                        </div>
+                    </div>
+                    
+                    <div class="addon-card">
+                        <div class="addon-number">2</div>
+                        <h4 class="addon-title">Expedited Onboarding SLA</h4>
+                        <p class="addon-desc">Standard 4-6 weeks supplier onboarding, Premium 2-week fast-track, Enterprise 1-week priority with dedicated support.</p>
+                        <div class="addon-pricing">Per-supplier premium or subscription tier</div>
+                        <div class="addon-target">
+                            <span class="target-icon">⚡</span>
+                            <span>For time-sensitive supplier integrations</span>
+                        </div>
+                    </div>
+                    
+                    <div class="addon-card">
+                        <div class="addon-number">3</div>
+                        <h4 class="addon-title">Carbon Monitoring & Alerts</h4>
+                        <p class="addon-desc">Continuous monitoring of supplier emission changes, regulatory updates, and CBAM threshold breaches. Automated alerts when suppliers exceed baselines or new regulations affect your supply chain.</p>
+                        <div class="addon-target">
+                            <span class="target-icon">🔔</span>
+                            <span>For supply chain and compliance teams</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Tier 2: Enterprise Features -->
+            <div class="addon-tier">
+                <h3 class="tier-title">Tier 2: Enterprise Features</h3>
+                <div class="addon-grid">
+                    <div class="addon-card">
+                        <div class="addon-number">4</div>
+                        <h4 class="addon-title">Bulk Supplier Onboarding API</h4>
+                        <p class="addon-desc">Automated connector deployment, bulk ERP integration, mass enrollment workflows. Integration with procurement platforms (SAP Ariba, Coupa, Jaggaer).</p>
+                        <div class="addon-pricing">€75K-300K annually</div>
+                        <div class="addon-target">
+                            <span class="target-icon">🏢</span>
+                            <span>For enterprises with 1,000+ suppliers</span>
+                        </div>
+                    </div>
+                    
+                    <div class="addon-card">
+                        <div class="addon-number">5</div>
+                        <h4 class="addon-title">White-Label Carbon Platform</h4>
+                        <p class="addon-desc">Branded version for industry associations, trade groups, or large OEMs to deploy across their supplier networks. Members report through association-branded portal.</p>
+                        <div class="addon-target">
+                            <span class="target-icon">🏭</span>
+                            <span>For automotive OEMs, retail consortiums, industry bodies</span>
+                        </div>
+                    </div>
+                    
+                    <div class="addon-card">
+                        <div class="addon-number">6</div>
+                        <h4 class="addon-title">CBAM Compliance Package</h4>
+                        <p class="addon-desc">Product-level carbon footprint calculations for EU border adjustment. Pre-formatted CBAM declarations, tariff optimization recommendations, customs documentation.</p>
+                        <div class="addon-target">
+                            <span class="target-icon">🌍</span>
+                            <span>For importers and companies with non-EU supply chains</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Tier 3: Strategic Products -->
+            <div class="addon-tier">
+                <h3 class="tier-title">Tier 3: Strategic Products</h3>
+                <div class="addon-grid">
+                    <div class="addon-card">
+                        <div class="addon-number">7</div>
+                        <h4 class="addon-title">Decarbonization Pathway Marketplace</h4>
+                        <p class="addon-desc">When high-emission suppliers are identified, connect them to verified renewable energy providers, efficiency consultants, and carbon offset programs. Revenue share with solution providers (10-15% referral fee). Creates ecosystem lock-in.</p>
+                        <div class="addon-target">
+                            <span class="target-icon">🌱</span>
+                            <span>For suppliers needing decarbonization solutions</span>
+                        </div>
+                    </div>
+                    
+                    <div class="addon-card">
+                        <div class="addon-number">8</div>
+                        <h4 class="addon-title">Regulatory Intelligence Feed</h4>
+                        <p class="addon-desc">Real-time updates on carbon regulations across jurisdictions (CSRD, CBAM, SEC Climate, California SB 253). API feed for GRC system integration. Quarterly impact assessments by industry.</p>
+                        <div class="addon-target">
+                            <span class="target-icon">📋</span>
+                            <span>For legal, compliance, and policy teams</span>
+                        </div>
+                    </div>
+                    
+                    <div class="addon-card">
+                        <div class="addon-number">9</div>
+                        <h4 class="addon-title">Carbon Risk Insurance</h4>
+                        <p class="addon-desc">Partner with insurers to offer coverage against CBAM tariff miscalculations, CSRD audit failures, and greenwashing litigation exposure. Commission-based revenue. De-risks transition to accurate carbon reporting.</p>
+                        <div class="addon-target">
+                            <span class="target-icon">🛡️</span>
+                            <span>For companies transitioning to carbon compliance</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <style>
+        /* Add-Ons & Premium Services Section */
+        .addons-section {
+            padding: 100px 24px;
+            background: linear-gradient(135deg, #0A0E1A 0%, #0F1420 50%, #051910 100%);
+            border-top: 1px solid rgba(16, 185, 129, 0.1);
+        }
+        
+        .addons-section .section-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .addons-section .section-title {
+            text-align: center;
+            font-size: 42px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 16px;
+        }
+        
+        .addons-section .section-subtitle {
+            text-align: center;
+            font-size: 20px;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 80px;
+        }
+        
+        .addon-tier {
+            margin-bottom: 80px;
+        }
+        
+        .addon-tier:last-child {
+            margin-bottom: 0;
+        }
+        
+        .tier-title {
+            font-size: 28px;
+            font-weight: 600;
+            background: linear-gradient(90deg, #00D4FF, #10B981);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 40px;
+            padding-left: 20px;
+            border-left: 4px solid #10B981;
+        }
+        
+        .addon-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 30px;
+        }
+        
+        .addon-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            border-radius: 16px;
+            padding: 32px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .addon-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(16, 185, 129, 0.4);
+            box-shadow: 0 20px 40px rgba(16, 185, 129, 0.1);
+            background: rgba(255, 255, 255, 0.04);
+        }
+        
+        .addon-number {
+            position: absolute;
+            top: -15px;
+            left: 24px;
+            width: 30px;
+            height: 30px;
+            background: linear-gradient(135deg, #10B981, #00D4FF);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 14px;
+            color: #0A0E1A;
+        }
+        
+        .addon-title {
+            font-size: 22px;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 16px;
+            margin-top: 8px;
+        }
+        
+        .addon-desc {
+            font-size: 15px;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 20px;
+        }
+        
+        .addon-pricing {
+            background: rgba(16, 185, 129, 0.1);
+            border-left: 3px solid #10B981;
+            padding: 12px 16px;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #10B981;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        
+        .addon-target {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        .target-icon {
+            font-size: 20px;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .addon-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .addons-section .section-title {
+                font-size: 32px;
+            }
+            
+            .tier-title {
+                font-size: 24px;
+            }
+            
+            .addon-title {
+                font-size: 20px;
+            }
+        }
+    </style>
+
+
+    <!-- ROI Section -->
+    <section class="roi-section" id="roi">
+        <div class="section-content">
+            <h2 class="section-title">Return on Investment</h2>
+            
+            <div class="roi-calculator">
+                <div class="roi-scenario">
+                    <h3>Manufacturing Enterprise</h3>
+                    <p class="roi-context">€500M revenue, 2,000 suppliers, CSRD-obligated</p>
+                    
+                    <div class="roi-breakdown">
+                        <div class="roi-item">
+                            <span class="roi-label">PROMETHEUS Annual Cost</span>
+                            <span class="roi-value negative">-€120,000</span>
+                        </div>
+                        <div class="roi-item">
+                            <span class="roi-label">Current carbon consulting spend</span>
+                            <span class="roi-value positive">+€180,000 saved</span>
+                        </div>
+                        <div class="roi-item">
+                            <span class="roi-label">CBAM tariff optimization (accurate data)</span>
+                            <span class="roi-value positive">+€400,000 avoided</span>
+                        </div>
+                        <div class="roi-item">
+                            <span class="roi-label">Audit preparation time saved</span>
+                            <span class="roi-value positive">+€75,000 value</span>
+                        </div>
+                        <div class="roi-item">
+                            <span class="roi-label">Greenwashing litigation risk reduction</span>
+                            <span class="roi-value positive">Unquantified but significant</span>
+                        </div>
+                        <div class="roi-item total">
+                            <span class="roi-label">Net Annual Benefit</span>
+                            <span class="roi-value positive">+€535,000</span>
+                        </div>
+                        <div class="roi-item">
+                            <span class="roi-label">ROI</span>
+                            <span class="roi-value highlight">4.5x</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="roi-risks">
+                <h3>Cost of Inaction</h3>
+                <div class="risk-cards">
+                    <div class="risk-card">
+                        <h4>CSRD Non-Compliance</h4>
+                        <p>Fines up to €10M or 5% of annual turnover. Director personal liability in some jurisdictions.</p>
+                    </div>
+                    <div class="risk-card">
+                        <h4>CBAM Miscalculation</h4>
+                        <p>Incorrect emissions data = wrong carbon tariffs. Underpayment triggers penalties. Overpayment wastes money.</p>
+                    </div>
+                    <div class="risk-card">
+                        <h4>Greenwashing Claims</h4>
+                        <p>Companies reporting estimates as fact face litigation. €180M+ in greenwashing fines issued in 2023 alone.</p>
+                    </div>
+                    <div class="risk-card">
+                        <h4>Investor & Customer Pressure</h4>
+                        <p>73% of investors now verify Scope 3 claims. B2B customers requiring supplier carbon data. No data = lost business.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Assessment Tools Section -->
+    <section class="assessment-section">
+        <div class="section-content">
+            <h2 class="section-title">See Why Your Scope 3 Is Fiction</h2>
+            <p class="assessment-subtitle">These aren't questionnaires. They're working demonstrations of the global carbon data gap - and why federated intelligence is the only solution.</p>
+            
+            <div class="assessment-grid">
+                <a href="carbon-truth-calculator.html" class="assessment-card">
+                    <div class="assessment-icon">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#00D4FF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 3v18"/>
+                            <path d="M8 12h8"/>
+                            <path d="M8 6l8 6-8 6V6z"/>
+                        </svg>
+                    </div>
+                    <h3 class="assessment-title">Product Carbon Truth Calculator</h3>
+                    <p class="assessment-description">Enter any product. See the massive gap between industry-average estimates and what primary supplier data actually reveals. Expose the fiction in current carbon reporting.</p>
+                </a>
+                
+                <a href="blind-spot-scanner.html" class="assessment-card">
+                    <div class="assessment-icon">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#00D4FF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"/>
+                            <circle cx="12" cy="12" r="3"/>
+                        </svg>
+                    </div>
+                    <h3 class="assessment-title">Supply Chain Blind Spot Scanner</h3>
+                    <p class="assessment-description">Select your industry. Get an interactive Sankey diagram showing all 15 Scope 3 categories color-coded by data quality. See exactly where your carbon reporting is built on guesswork.</p>
+                </a>
+                
+                <a href="carbon-intelligence-map.html" class="assessment-card">
+                    <div class="assessment-icon">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#00D4FF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M2 12h20"/>
+                            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                            <path d="M16 4c0 2-2 4-4 6s-2 6 0 8" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <h3 class="assessment-title">Sector Carbon Intelligence Map</h3>
+                    <p class="assessment-description">Explore the global map of emission hotspots vs. data deserts. See why 73% of your supply chain emissions come from regions with less than 15% data coverage.</p>
+                </a>
+            </div>
+            
+            <div class="assessment-cta">
+                <a href="carbon-truth-calculator.html" class="cta-link">Start with Carbon Truth Calculator →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Tools Section -->
+    <section class="interactive-tools">
+        <div class="interactive-tools-container">
+            <h2>Interactive Tools</h2>
+            <p class="section-subtitle">Proof-of-concept applications and lead generation tools built on PROMETHEUS</p>
+            <div class="tools-grid triple">
+                <div class="tool-card">
+                    <h3>Carbon Truth Calculator</h3>
+                    <p>Compare industry-average emissions data with actual supplier measurements. Expose the massive gaps in current carbon reporting systems.</p>
+                    <a href="carbon-truth-calculator.html" class="btn">Calculate Truth Gap →</a>
+                </div>
+                <div class="tool-card">
+                    <h3>Blind Spot Scanner</h3>
+                    <p>Visualize your Scope 3 emissions with an interactive Sankey diagram. See exactly where your carbon reporting is based on estimates versus real data.</p>
+                    <a href="blind-spot-scanner.html" class="btn">Scan Blind Spots →</a>
+                </div>
+                <div class="tool-card">
+                    <h3>Carbon Intelligence Map</h3>
+                    <p>Explore a live map of supply chain carbon data sharing. Watch as European companies build the world's first federated emissions intelligence network.</p>
+                    <a href="carbon-intelligence-map.html" class="btn">View Map →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <style>
+        /* Interactive Tools Section */
+        .interactive-tools {
+            padding: 80px 24px;
+            background: #0F1420;
+        }
+
+        .interactive-tools-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .interactive-tools h2 {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 16px;
+            color: #ffffff;
+        }
+
+        .interactive-tools .section-subtitle {
+            text-align: center;
+            color: rgba(255,255,255,0.7);
+            font-size: 18px;
+            margin-bottom: 48px;
+        }
+
+        .tools-grid {
+            display: grid;
+            gap: 24px;
+            justify-content: center;
+        }
+
+        .tools-grid.triple {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        @media (max-width: 900px) {
+            .tools-grid.triple {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .tools-grid.triple {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .tool-card {
+            background: #0F1420;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 16px;
+            padding: 32px;
+            transition: all 0.3s ease;
+        }
+
+        .tool-card:hover {
+            border-color: rgba(0, 212, 255, 0.3);
+            transform: translateY(-4px);
+            box-shadow: 0 10px 40px rgba(0, 212, 255, 0.1);
+        }
+
+        .tool-card h3 {
+            font-size: 22px;
+            color: #ffffff;
+            margin-bottom: 12px;
+        }
+
+        .tool-card p {
+            color: rgba(255,255,255,0.7);
+            font-size: 15px;
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+
+        .tool-card .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background: rgba(0, 212, 255, 0.1);
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            border-radius: 50px;
+            color: #00D4FF;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .tool-card .btn:hover {
+            background: rgba(0, 212, 255, 0.2);
+            border-color: #00D4FF;
+        }
+    </style>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="../index.html">← Back to E-Group Platform</a>
+            <a href="../Argus/index.html">Argus</a>
+            <a href="../ALETHEIA/index.html">ALETHEIA</a>
+            <a href="../HealthCompanion/index.html">Health Companion</a>
+        </div>
+        <p class="footer-text">Part of E-Group European Sovereign Data Infrastructure</p>
+        <p class="footer-text">© 2024 E-Group Innovation</p>
+    </footer>
+    <script>
+        // Hamburger Menu Toggle
+        // Products Dropdown Toggle
+        function toggleDropdown() {
+            const menu = document.querySelector('.dropdown-menu');
+            menu.classList.toggle('open');
+        }
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(e) {
+            const dropdown = document.querySelector('.products-dropdown');
+            const menu = document.querySelector('.dropdown-menu');
+            if (menu && !e.target.closest('.products-dropdown')) {
+                menu.classList.remove('open');
+            }
+        });
+
+        // Close dropdown on Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                const menu = document.querySelector('.dropdown-menu');
+                if (menu) menu.classList.remove('open');
+            }
+        });
+    </script>
+</body>
+</html>

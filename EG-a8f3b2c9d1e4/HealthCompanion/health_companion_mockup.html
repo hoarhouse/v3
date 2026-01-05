@@ -1,0 +1,1607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Companion - Interactive Demo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* Calming, professional color palette */
+            --primary-blue: #4A90E2;
+            --success-green: #7FB685;
+            --background: #FAFBFC;
+            --card-white: #FFFFFF;
+            --text-primary: #2C3E50;
+            --text-secondary: #8E8E93;
+            --accent-purple: #A29BFE;
+            --border-light: #E5E5EA;
+            --shadow-soft: 0 2px 12px rgba(0, 0, 0, 0.06);
+            --shadow-medium: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --shadow-large: 0 8px 32px rgba(0, 0, 0, 0.12);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            background: var(--background);
+            color: var(--text-primary);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            padding-top: 80px;
+        }
+
+        /* Sticky Header Navigation */
+        .header-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-light);
+            z-index: 1000;
+            padding: 16px 0;
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, var(--primary-blue), #6BA3E5);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .logo-icon::before {
+            content: '❤️';
+            font-size: 18px;
+        }
+
+        .logo-text {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--text-primary);
+            letter-spacing: -0.3px;
+        }
+
+        .back-button {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            background: var(--card-white);
+            border: 1px solid var(--border-light);
+            border-radius: 10px;
+            text-decoration: none;
+            color: var(--text-primary);
+            font-size: 15px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        .back-button:hover {
+            background: var(--background);
+            transform: translateX(-4px);
+        }
+
+        /* Main Content */
+        .main-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px;
+        }
+
+        .intro-section {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .page-title {
+            font-size: 48px;
+            font-weight: 700;
+            letter-spacing: -1px;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, var(--primary-blue), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .page-subtitle {
+            font-size: 24px;
+            color: var(--text-secondary);
+            font-weight: 400;
+            margin-bottom: 20px;
+        }
+
+        .intro-text {
+            font-size: 18px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Screen Grid Layout */
+        .screens-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+            margin-bottom: 80px;
+        }
+
+        .screen-card {
+            background: var(--card-white);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: var(--shadow-soft);
+            transition: all 0.3s ease;
+        }
+
+        .screen-card:hover {
+            box-shadow: var(--shadow-large);
+            transform: translateY(-4px);
+        }
+
+        .screen-title {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+        }
+
+        .screen-description {
+            font-size: 15px;
+            color: var(--text-secondary);
+            line-height: 1.5;
+            margin-bottom: 24px;
+        }
+
+        /* Phone Mockup */
+        .phone-mockup {
+            width: 100%;
+            max-width: 320px;
+            height: 640px;
+            margin: 0 auto;
+            background: #1C1C1E;
+            border-radius: 40px;
+            padding: 12px;
+            position: relative;
+            box-shadow: var(--shadow-medium);
+        }
+
+        .phone-screen {
+            width: 100%;
+            height: 100%;
+            background: var(--background);
+            border-radius: 32px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Screen Content Styles */
+        .status-bar {
+            height: 44px;
+            background: var(--card-white);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .screen-content {
+            padding: 20px;
+            height: calc(100% - 44px);
+            overflow-y: auto;
+        }
+
+        .screen-content::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .screen-content::-webkit-scrollbar-thumb {
+            background: var(--border-light);
+            border-radius: 2px;
+        }
+
+        /* Screen 1: Daily Check-in */
+        .checkin-header {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        .greeting {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+
+        .checkin-date {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .mood-selector {
+            background: var(--card-white);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .mood-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: var(--text-primary);
+        }
+
+        .mood-options {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        .mood-option {
+            flex: 1;
+            text-align: center;
+            padding: 12px;
+            border-radius: 12px;
+            border: 2px solid transparent;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        .mood-option:hover {
+            border-color: var(--primary-blue);
+            background: rgba(74, 144, 226, 0.05);
+        }
+
+        .mood-option.selected {
+            border-color: var(--primary-blue);
+            background: rgba(74, 144, 226, 0.1);
+        }
+
+        .mood-emoji {
+            font-size: 32px;
+            margin-bottom: 4px;
+        }
+
+        .mood-label {
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        .quick-log {
+            background: var(--card-white);
+            border-radius: 16px;
+            padding: 20px;
+        }
+
+        .quick-log-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--text-primary);
+        }
+
+        .quick-log-buttons {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        .log-button {
+            padding: 12px;
+            background: var(--background);
+            border: 1px solid var(--border-light);
+            border-radius: 10px;
+            font-size: 14px;
+            color: var(--text-primary);
+            transition: all 0.2s;
+        }
+
+        .log-button:hover {
+            background: var(--primary-blue);
+            color: white;
+            border-color: var(--primary-blue);
+        }
+
+        /* Screen 2: Symptom Tracking */
+        .chat-interface {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding-bottom: 20px;
+        }
+
+        .message {
+            margin-bottom: 16px;
+            display: flex;
+            gap: 12px;
+        }
+
+        .message.ai {
+            justify-content: flex-start;
+        }
+
+        .message.user {
+            justify-content: flex-end;
+        }
+
+        .message-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-blue), #6BA3E5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+
+        .message-bubble {
+            max-width: 70%;
+            padding: 12px 16px;
+            border-radius: 16px;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .message.ai .message-bubble {
+            background: var(--card-white);
+            color: var(--text-primary);
+        }
+
+        .message.user .message-bubble {
+            background: var(--primary-blue);
+            color: white;
+        }
+
+        .symptom-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        .symptom-tag {
+            padding: 8px 14px;
+            background: var(--background);
+            border: 1px solid var(--border-light);
+            border-radius: 20px;
+            font-size: 13px;
+            color: var(--text-primary);
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        .symptom-tag:hover {
+            background: var(--primary-blue);
+            color: white;
+            border-color: var(--primary-blue);
+        }
+
+        .chat-input-area {
+            padding: 16px;
+            background: var(--card-white);
+            border-top: 1px solid var(--border-light);
+        }
+
+        .chat-input {
+            width: 100%;
+            padding: 12px 16px;
+            background: var(--background);
+            border: 1px solid var(--border-light);
+            border-radius: 24px;
+            font-size: 14px;
+            color: var(--text-primary);
+            outline: none;
+        }
+
+        .chat-input:focus {
+            border-color: var(--primary-blue);
+        }
+
+        /* Screen 3: Medication Manager */
+        .med-header {
+            margin-bottom: 24px;
+        }
+
+        .med-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+
+        .med-subtitle {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .adherence-card {
+            background: linear-gradient(135deg, var(--success-green), #6FA575);
+            color: white;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .adherence-label {
+            font-size: 14px;
+            opacity: 0.9;
+            margin-bottom: 8px;
+        }
+
+        .adherence-score {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .adherence-streak {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .med-list {
+            background: var(--card-white);
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        .med-item {
+            padding: 16px;
+            border-bottom: 1px solid var(--border-light);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .med-item:last-child {
+            border-bottom: none;
+        }
+
+        .med-info {
+            flex: 1;
+        }
+
+        .med-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+
+        .med-details {
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        .med-time {
+            background: var(--background);
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--primary-blue);
+        }
+
+        .med-time.taken {
+            background: rgba(127, 182, 133, 0.1);
+            color: var(--success-green);
+        }
+
+        /* Screen 4: Health Insights */
+        .insights-header {
+            margin-bottom: 24px;
+        }
+
+        .insights-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+
+        .insights-date {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .insight-card {
+            background: var(--card-white);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 16px;
+        }
+
+        .insight-type {
+            display: inline-block;
+            padding: 4px 10px;
+            background: rgba(74, 144, 226, 0.1);
+            color: var(--primary-blue);
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .insight-type.positive {
+            background: rgba(127, 182, 133, 0.1);
+            color: var(--success-green);
+        }
+
+        .insight-type.attention {
+            background: rgba(255, 159, 67, 0.1);
+            color: #FF9F43;
+        }
+
+        .insight-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+
+        .insight-description {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.5;
+            margin-bottom: 12px;
+        }
+
+        .insight-chart {
+            height: 120px;
+            background: linear-gradient(to right, var(--background), rgba(74, 144, 226, 0.05));
+            border-radius: 12px;
+            display: flex;
+            align-items: flex-end;
+            padding: 12px;
+            gap: 4px;
+        }
+
+        .chart-bar {
+            flex: 1;
+            background: var(--primary-blue);
+            border-radius: 4px 4px 0 0;
+            opacity: 0.6;
+            transition: all 0.2s;
+        }
+
+        .chart-bar:hover {
+            opacity: 1;
+        }
+
+        /* Screen 5: Doctor Visit Prep */
+        .visit-header {
+            background: linear-gradient(135deg, var(--primary-blue), #6BA3E5);
+            color: white;
+            padding: 20px;
+            border-radius: 16px;
+            margin-bottom: 20px;
+        }
+
+        .visit-doctor {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .visit-time {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .prep-section {
+            background: var(--card-white);
+            border-radius: 16px;
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+
+        .prep-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+        }
+
+        .prep-item {
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border-light);
+            font-size: 14px;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .prep-item:last-child {
+            border-bottom: none;
+        }
+
+        .prep-checkbox {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--border-light);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+
+        .prep-checkbox.checked {
+            background: var(--success-green);
+            border-color: var(--success-green);
+        }
+
+        .prep-checkbox.checked::after {
+            content: '✓';
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .export-button {
+            width: 100%;
+            padding: 14px;
+            background: var(--primary-blue);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .export-button:hover {
+            background: #3A7BC8;
+            transform: translateY(-1px);
+        }
+
+        /* Screen 6: Emergency Info */
+        .emergency-alert {
+            background: linear-gradient(135deg, #FF6B6B, #FF8787);
+            color: white;
+            padding: 16px;
+            border-radius: 16px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .emergency-icon {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        .emergency-text {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .info-section {
+            background: var(--card-white);
+            border-radius: 16px;
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+
+        .info-label {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-bottom: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .info-value {
+            font-size: 16px;
+            color: var(--text-primary);
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .info-value:last-child {
+            margin-bottom: 0;
+        }
+
+        .emergency-contacts {
+            background: var(--card-white);
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        .contact-item {
+            padding: 14px 16px;
+            border-bottom: 1px solid var(--border-light);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .contact-item:last-child {
+            border-bottom: none;
+        }
+
+        .contact-info {
+            flex: 1;
+        }
+
+        .contact-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .contact-relation {
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        .contact-action {
+            width: 32px;
+            height: 32px;
+            background: var(--primary-blue);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .contact-action:hover {
+            transform: scale(1.1);
+        }
+
+        /* Screen 7: Privacy Control */
+        .privacy-header {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        .privacy-icon {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, var(--primary-blue), #6BA3E5);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 16px;
+            font-size: 32px;
+        }
+
+        .privacy-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+
+        .privacy-subtitle {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .permission-card {
+            background: var(--card-white);
+            border-radius: 16px;
+            padding: 16px;
+            margin-bottom: 12px;
+        }
+
+        .permission-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .permission-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .permission-toggle {
+            width: 48px;
+            height: 28px;
+            background: var(--border-light);
+            border-radius: 14px;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .permission-toggle.active {
+            background: var(--success-green);
+        }
+
+        .permission-toggle::after {
+            content: '';
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            background: white;
+            border-radius: 50%;
+            top: 2px;
+            left: 2px;
+            transition: all 0.3s;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .permission-toggle.active::after {
+            left: 22px;
+        }
+
+        .permission-description {
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+
+        .data-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .stat-card {
+            background: var(--background);
+            border-radius: 12px;
+            padding: 14px;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-blue);
+            margin-bottom: 4px;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        /* Screen 8: Research Participation */
+        .research-header {
+            background: linear-gradient(135deg, var(--accent-purple), #8B82D1);
+            color: white;
+            padding: 20px;
+            border-radius: 16px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .research-icon {
+            font-size: 32px;
+            margin-bottom: 12px;
+        }
+
+        .research-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .research-subtitle {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .earnings-overview {
+            background: var(--card-white);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .earnings-label {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+
+        .earnings-amount {
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--success-green);
+            margin-bottom: 8px;
+        }
+
+        .earnings-period {
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        .study-card {
+            background: var(--card-white);
+            border-radius: 16px;
+            padding: 16px;
+            margin-bottom: 12px;
+            border: 2px solid var(--border-light);
+            transition: all 0.2s;
+        }
+
+        .study-card:hover {
+            border-color: var(--primary-blue);
+            transform: translateY(-2px);
+        }
+
+        .study-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            background: rgba(162, 155, 254, 0.1);
+            color: var(--accent-purple);
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .study-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+
+        .study-details {
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.4;
+            margin-bottom: 12px;
+        }
+
+        .study-compensation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 12px;
+            border-top: 1px solid var(--border-light);
+        }
+
+        .compensation-amount {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--success-green);
+        }
+
+        .join-button {
+            padding: 8px 16px;
+            background: var(--primary-blue);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .join-button:hover {
+            background: #3A7BC8;
+            transform: scale(1.05);
+        }
+
+        /* Navigation Footer */
+        .footer-nav {
+            background: var(--card-white);
+            border-top: 1px solid var(--border-light);
+            padding: 60px 0;
+            margin-top: 80px;
+        }
+
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 40px;
+            text-align: center;
+        }
+
+        .footer-title {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 16px;
+        }
+
+        .footer-text {
+            font-size: 18px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 32px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 16px 32px;
+            background: linear-gradient(135deg, var(--primary-blue), #6BA3E5);
+            color: white;
+            text-decoration: none;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 16px rgba(74, 144, 226, 0.2);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(74, 144, 226, 0.3);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .screens-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                padding: 0 20px;
+            }
+
+            .main-container {
+                padding: 20px;
+            }
+
+            .page-title {
+                font-size: 36px;
+            }
+
+            .page-subtitle {
+                font-size: 20px;
+            }
+
+            .phone-mockup {
+                max-width: 280px;
+                height: 560px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Sticky Header Navigation -->
+    <header class="header-nav">
+        <div class="header-content">
+            <div class="logo-section">
+                <div class="logo-icon"></div>
+                <span class="logo-text">Health Companion</span>
+            </div>
+            <a href="./index.html" class="back-button">
+                ← Back to Overview
+            </a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-container">
+        <!-- Introduction Section -->
+        <section class="intro-section">
+            <h1 class="page-title">Health Companion - Interactive Demo</h1>
+            <h2 class="page-subtitle">Experience the interface - 8 key features</h2>
+            <p class="intro-text">
+                Explore how Health Companion works through these interactive mockups. 
+                Each screen shows real features you'll use daily to manage your health journey with confidence and ease.
+            </p>
+        </section>
+
+        <!-- Screens Grid -->
+        <div class="screens-grid">
+            <!-- Screen 1: Daily Check-in -->
+            <div class="screen-card">
+                <h3 class="screen-title">Daily Check-in</h3>
+                <p class="screen-description">
+                    Start your day with a quick mood and wellness check. Track how you're feeling and log symptoms in seconds.
+                </p>
+                <div class="phone-mockup">
+                    <div class="phone-screen">
+                        <div class="status-bar">
+                            <span>9:41 AM</span>
+                            <span>100%</span>
+                        </div>
+                        <div class="screen-content">
+                            <div class="checkin-header">
+                                <div class="greeting">Good Morning, Sarah</div>
+                                <div class="checkin-date">Thursday, November 14</div>
+                            </div>
+                            <div class="mood-selector">
+                                <div class="mood-title">How are you feeling today?</div>
+                                <div class="mood-options">
+                                    <div class="mood-option">
+                                        <div class="mood-emoji">😊</div>
+                                        <div class="mood-label">Great</div>
+                                    </div>
+                                    <div class="mood-option selected">
+                                        <div class="mood-emoji">🙂</div>
+                                        <div class="mood-label">Good</div>
+                                    </div>
+                                    <div class="mood-option">
+                                        <div class="mood-emoji">😐</div>
+                                        <div class="mood-label">Okay</div>
+                                    </div>
+                                    <div class="mood-option">
+                                        <div class="mood-emoji">😔</div>
+                                        <div class="mood-label">Not Great</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="quick-log">
+                                <div class="quick-log-title">Quick Log</div>
+                                <div class="quick-log-buttons">
+                                    <button class="log-button">💊 Medications</button>
+                                    <button class="log-button">🩺 Symptoms</button>
+                                    <button class="log-button">💤 Sleep</button>
+                                    <button class="log-button">🏃 Exercise</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Screen 2: Symptom Tracking -->
+            <div class="screen-card">
+                <h3 class="screen-title">Symptom Tracking</h3>
+                <p class="screen-description">
+                    Have a conversation with your AI assistant to log symptoms naturally. No complex forms or medical jargon.
+                </p>
+                <div class="phone-mockup">
+                    <div class="phone-screen">
+                        <div class="status-bar">
+                            <span>9:41 AM</span>
+                            <span>100%</span>
+                        </div>
+                        <div class="screen-content">
+                            <div class="chat-interface">
+                                <div class="chat-messages">
+                                    <div class="message ai">
+                                        <div class="message-avatar">HC</div>
+                                        <div class="message-bubble">
+                                            Hi Sarah! I noticed you wanted to log symptoms. What are you experiencing today?
+                                        </div>
+                                    </div>
+                                    <div class="message user">
+                                        <div class="message-bubble">
+                                            I've had a headache since this morning
+                                        </div>
+                                    </div>
+                                    <div class="message ai">
+                                        <div class="message-avatar">HC</div>
+                                        <div>
+                                            <div class="message-bubble">
+                                                I'm sorry you're dealing with a headache. Can you tell me more about it? How would you rate the pain?
+                                            </div>
+                                            <div class="symptom-options">
+                                                <span class="symptom-tag">Mild (1-3)</span>
+                                                <span class="symptom-tag">Moderate (4-6)</span>
+                                                <span class="symptom-tag">Severe (7-10)</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="chat-input-area">
+                                    <input type="text" class="chat-input" placeholder="Type your message...">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Screen 3: Medication Manager -->
+            <div class="screen-card">
+                <h3 class="screen-title">Medication Manager</h3>
+                <p class="screen-description">
+                    Never miss a dose with smart reminders. Track adherence, view interactions, and manage refills effortlessly.
+                </p>
+                <div class="phone-mockup">
+                    <div class="phone-screen">
+                        <div class="status-bar">
+                            <span>9:41 AM</span>
+                            <span>100%</span>
+                        </div>
+                        <div class="screen-content">
+                            <div class="med-header">
+                                <div class="med-title">Your Medications</div>
+                                <div class="med-subtitle">Thursday, November 14</div>
+                            </div>
+                            <div class="adherence-card">
+                                <div class="adherence-label">This Week's Adherence</div>
+                                <div class="adherence-score">94%</div>
+                                <div class="adherence-streak">🔥 15 day streak!</div>
+                            </div>
+                            <div class="med-list">
+                                <div class="med-item">
+                                    <div class="med-info">
+                                        <div class="med-name">Metformin</div>
+                                        <div class="med-details">500mg • 2x daily with meals</div>
+                                    </div>
+                                    <div class="med-time taken">✓ 8:00 AM</div>
+                                </div>
+                                <div class="med-item">
+                                    <div class="med-info">
+                                        <div class="med-name">Lisinopril</div>
+                                        <div class="med-details">10mg • Once daily</div>
+                                    </div>
+                                    <div class="med-time taken">✓ 8:00 AM</div>
+                                </div>
+                                <div class="med-item">
+                                    <div class="med-info">
+                                        <div class="med-name">Metformin</div>
+                                        <div class="med-details">500mg • Evening dose</div>
+                                    </div>
+                                    <div class="med-time">6:00 PM</div>
+                                </div>
+                                <div class="med-item">
+                                    <div class="med-info">
+                                        <div class="med-name">Vitamin D3</div>
+                                        <div class="med-details">2000 IU • Once daily</div>
+                                    </div>
+                                    <div class="med-time">With dinner</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Screen 4: Health Insights -->
+            <div class="screen-card">
+                <h3 class="screen-title">Health Insights</h3>
+                <p class="screen-description">
+                    AI-powered insights turn your health data into actionable advice. See patterns and get personalized recommendations.
+                </p>
+                <div class="phone-mockup">
+                    <div class="phone-screen">
+                        <div class="status-bar">
+                            <span>9:41 AM</span>
+                            <span>100%</span>
+                        </div>
+                        <div class="screen-content">
+                            <div class="insights-header">
+                                <div class="insights-title">Your Health Insights</div>
+                                <div class="insights-date">Weekly Summary</div>
+                            </div>
+                            <div class="insight-card">
+                                <span class="insight-type positive">Positive Trend</span>
+                                <div class="insight-title">Blood Pressure Improving</div>
+                                <div class="insight-description">
+                                    Your average BP this week (128/82) is 5% lower than last month. Keep up your exercise routine!
+                                </div>
+                                <div class="insight-chart">
+                                    <div class="chart-bar" style="height: 60%"></div>
+                                    <div class="chart-bar" style="height: 65%"></div>
+                                    <div class="chart-bar" style="height: 70%"></div>
+                                    <div class="chart-bar" style="height: 55%"></div>
+                                    <div class="chart-bar" style="height: 80%"></div>
+                                    <div class="chart-bar" style="height: 75%"></div>
+                                    <div class="chart-bar" style="height: 85%"></div>
+                                </div>
+                            </div>
+                            <div class="insight-card">
+                                <span class="insight-type attention">Attention Needed</span>
+                                <div class="insight-title">Sleep Pattern Change</div>
+                                <div class="insight-description">
+                                    You're averaging 5.5 hours of sleep, down from 7 hours. This might be affecting your morning glucose levels.
+                                </div>
+                            </div>
+                            <div class="insight-card">
+                                <span class="insight-type">AI Recommendation</span>
+                                <div class="insight-title">Medication Timing</div>
+                                <div class="insight-description">
+                                    Taking your evening Metformin 30 minutes earlier might reduce nighttime discomfort based on your symptom logs.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Screen 5: Doctor Visit Prep -->
+            <div class="screen-card">
+                <h3 class="screen-title">Doctor Visit Prep</h3>
+                <p class="screen-description">
+                    Prepare for appointments with auto-generated summaries. Share your health data with one tap.
+                </p>
+                <div class="phone-mockup">
+                    <div class="phone-screen">
+                        <div class="status-bar">
+                            <span>9:41 AM</span>
+                            <span>100%</span>
+                        </div>
+                        <div class="screen-content">
+                            <div class="visit-header">
+                                <div class="visit-doctor">Dr. Emily Chen</div>
+                                <div class="visit-time">Tomorrow at 2:30 PM</div>
+                            </div>
+                            <div class="prep-section">
+                                <div class="prep-title">Visit Summary Ready</div>
+                                <div class="prep-item">
+                                    <div class="prep-checkbox checked"></div>
+                                    <span>30-day health trends compiled</span>
+                                </div>
+                                <div class="prep-item">
+                                    <div class="prep-checkbox checked"></div>
+                                    <span>Medication adherence report</span>
+                                </div>
+                                <div class="prep-item">
+                                    <div class="prep-checkbox checked"></div>
+                                    <span>Symptom timeline created</span>
+                                </div>
+                                <div class="prep-item">
+                                    <div class="prep-checkbox"></div>
+                                    <span>Questions to ask doctor</span>
+                                </div>
+                            </div>
+                            <div class="prep-section">
+                                <div class="prep-title">AI Suggestions</div>
+                                <div class="prep-item">
+                                    • Ask about adjusting Metformin dose
+                                </div>
+                                <div class="prep-item">
+                                    • Discuss sleep improvement strategies
+                                </div>
+                                <div class="prep-item">
+                                    • Review blood pressure medication
+                                </div>
+                            </div>
+                            <button class="export-button">
+                                Share Summary with Doctor
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Screen 6: Emergency Information -->
+            <div class="screen-card">
+                <h3 class="screen-title">Emergency Information</h3>
+                <p class="screen-description">
+                    Critical health information instantly available. One tap access for emergency responders and loved ones.
+                </p>
+                <div class="phone-mockup">
+                    <div class="phone-screen">
+                        <div class="status-bar">
+                            <span>9:41 AM</span>
+                            <span>100%</span>
+                        </div>
+                        <div class="screen-content">
+                            <div class="emergency-alert">
+                                <div class="emergency-icon">🚨</div>
+                                <div class="emergency-text">Emergency Medical Information</div>
+                            </div>
+                            <div class="info-section">
+                                <div class="info-label">Medical Conditions</div>
+                                <div class="info-value">Type 2 Diabetes</div>
+                                <div class="info-value">Hypertension</div>
+                            </div>
+                            <div class="info-section">
+                                <div class="info-label">Current Medications</div>
+                                <div class="info-value">Metformin 500mg 2x daily</div>
+                                <div class="info-value">Lisinopril 10mg daily</div>
+                            </div>
+                            <div class="info-section">
+                                <div class="info-label">Allergies</div>
+                                <div class="info-value">Penicillin - Severe</div>
+                                <div class="info-value">Shellfish - Moderate</div>
+                            </div>
+                            <div class="info-section">
+                                <div class="info-label">Blood Type</div>
+                                <div class="info-value">O Positive</div>
+                            </div>
+                            <div class="emergency-contacts">
+                                <div class="contact-item">
+                                    <div class="contact-info">
+                                        <div class="contact-name">John Doe</div>
+                                        <div class="contact-relation">Spouse</div>
+                                    </div>
+                                    <div class="contact-action">📞</div>
+                                </div>
+                                <div class="contact-item">
+                                    <div class="contact-info">
+                                        <div class="contact-name">Dr. Emily Chen</div>
+                                        <div class="contact-relation">Primary Care</div>
+                                    </div>
+                                    <div class="contact-action">📞</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Screen 7: Privacy Control -->
+            <div class="screen-card">
+                <h3 class="screen-title">Privacy Control Center</h3>
+                <p class="screen-description">
+                    You're in control. Manage exactly what data is shared, with whom, and earn from research participation.
+                </p>
+                <div class="phone-mockup">
+                    <div class="phone-screen">
+                        <div class="status-bar">
+                            <span>9:41 AM</span>
+                            <span>100%</span>
+                        </div>
+                        <div class="screen-content">
+                            <div class="privacy-header">
+                                <div class="privacy-icon">🔒</div>
+                                <div class="privacy-title">Your Data, Your Control</div>
+                                <div class="privacy-subtitle">Manage privacy settings</div>
+                            </div>
+                            <div class="permission-card">
+                                <div class="permission-header">
+                                    <span class="permission-name">Healthcare Provider</span>
+                                    <div class="permission-toggle active"></div>
+                                </div>
+                                <div class="permission-description">
+                                    Share medical history and current health data with your care team
+                                </div>
+                            </div>
+                            <div class="permission-card">
+                                <div class="permission-header">
+                                    <span class="permission-name">Research Studies</span>
+                                    <div class="permission-toggle active"></div>
+                                </div>
+                                <div class="permission-description">
+                                    Contribute anonymized data to medical research and earn compensation
+                                </div>
+                            </div>
+                            <div class="permission-card">
+                                <div class="permission-header">
+                                    <span class="permission-name">Insurance Company</span>
+                                    <div class="permission-toggle"></div>
+                                </div>
+                                <div class="permission-description">
+                                    Allow read-only access to specific health records
+                                </div>
+                            </div>
+                            <div class="data-stats">
+                                <div class="stat-card">
+                                    <div class="stat-value">3</div>
+                                    <div class="stat-label">Active Shares</div>
+                                </div>
+                                <div class="stat-card">
+                                    <div class="stat-value">€127</div>
+                                    <div class="stat-label">Earned This Month</div>
+                                </div>
+                                <div class="stat-card">
+                                    <div class="stat-value">100%</div>
+                                    <div class="stat-label">Data Encrypted</div>
+                                </div>
+                                <div class="stat-card">
+                                    <div class="stat-value">GDPR</div>
+                                    <div class="stat-label">Compliant</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Screen 8: Research Participation -->
+            <div class="screen-card">
+                <h3 class="screen-title">Research Participation</h3>
+                <p class="screen-description">
+                    Join studies that matter to you. Contribute to medical breakthroughs and get compensated fairly for your data.
+                </p>
+                <div class="phone-mockup">
+                    <div class="phone-screen">
+                        <div class="status-bar">
+                            <span>9:41 AM</span>
+                            <span>100%</span>
+                        </div>
+                        <div class="screen-content">
+                            <div class="research-header">
+                                <div class="research-icon">🔬</div>
+                                <div class="research-title">Research Opportunities</div>
+                                <div class="research-subtitle">Make a difference, get rewarded</div>
+                            </div>
+                            <div class="earnings-overview">
+                                <div class="earnings-label">Total Earnings</div>
+                                <div class="earnings-amount">€892.50</div>
+                                <div class="earnings-period">Since January 2024</div>
+                            </div>
+                            <div class="study-card">
+                                <span class="study-badge">MATCHED</span>
+                                <div class="study-title">Diabetes Management Study</div>
+                                <div class="study-details">
+                                    University Medical Center is researching new approaches to Type 2 diabetes. Your profile matches their criteria.
+                                </div>
+                                <div class="study-compensation">
+                                    <span class="compensation-amount">€50/month</span>
+                                    <button class="join-button">Learn More</button>
+                                </div>
+                            </div>
+                            <div class="study-card">
+                                <span class="study-badge">ACTIVE</span>
+                                <div class="study-title">Sleep & Metabolism Research</div>
+                                <div class="study-details">
+                                    Contributing sleep and glucose data. Study ends March 2025.
+                                </div>
+                                <div class="study-compensation">
+                                    <span class="compensation-amount">€35/month</span>
+                                    <button class="join-button">View Details</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation Footer -->
+        <footer class="footer-nav">
+            <div class="footer-content">
+                <h2 class="footer-title">Ready to learn more about Health Companion?</h2>
+                <p class="footer-text">
+                    Discover how Health Companion transforms healthcare management through AI-powered insights, 
+                    seamless data control, and meaningful research participation.
+                </p>
+                <a href="./index.html" class="cta-button">View Full Product Overview</a>
+                
+                <div style="margin-top: 40px; padding-top: 40px; border-top: 1px solid rgba(255, 255, 255, 0.2);">
+                    <p style="font-size: 18px; margin-bottom: 20px; color: rgba(255, 255, 255, 0.9);">
+                        Also explore our companion platforms:
+                    </p>
+                    <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
+                        <a href="../ResearchPay/index.html" style="display: inline-block; padding: 15px 30px; background: #10a37f; color: white; text-decoration: none; border-radius: 50px; font-weight: 600; font-size: 16px; transition: all 0.3s;" 
+                           onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 10px 30px rgba(16, 163, 127, 0.3)'" 
+                           onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+                            ResearchPay →
+                        </a>
+                        <a href="../LabVault/index.html" style="display: inline-block; padding: 15px 30px; background: #9B59B6; color: white; text-decoration: none; border-radius: 50px; font-weight: 600; font-size: 16px; transition: all 0.3s;" 
+                           onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 10px 30px rgba(155, 89, 182, 0.3)'" 
+                           onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+                            LabVault →
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </main>
+</body>
+</html>

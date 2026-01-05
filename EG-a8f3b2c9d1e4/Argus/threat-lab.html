@@ -1,0 +1,1848 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Argus Threat Lab - Elite Security Research Platform</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --blue: #1a73e8;
+            --blue-dark: #1557b0;
+            --cyan: #00D4FF;
+            --cyan-dark: #00a3cc;
+            --green: #10a37f;
+            --red: #dc2626;
+            --orange: #ff9500;
+            --yellow: #fbbf24;
+            --purple: #8b5cf6;
+            --gold: #fbbf24;
+            --silver: #cbd5e1;
+            --bronze: #dc8b5e;
+            --text-primary: #1d1d1f;
+            --text-secondary: #86868b;
+            --bg-gray: #f5f5f7;
+            --border: #d2d2d7;
+            --dark-bg: #1a1f2e;
+            --dark-card: #232937;
+            --dark-border: #2a3548;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            line-height: 1.47059;
+            letter-spacing: -0.022em;
+            color: var(--text-primary);
+            background: white;
+            -webkit-font-smoothing: antialiased;
+            padding-top: 70px;
+        }
+
+        /* Navigation with Hamburger Menu */
+        .site-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(10, 14, 26, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 16px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .back-link {
+            font-size: 16px;
+            color: #00D4FF;
+            text-decoration: none;
+            transition: opacity 0.2s;
+        }
+
+        .back-link:hover {
+            opacity: 0.8;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding-top: 52px;
+            text-align: center;
+            background: linear-gradient(135deg, #f5f5f7 0%, #ffffff 50%, #f5f5f7 100%);
+        }
+
+        .hero-content {
+            padding: 100px 22px 80px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: var(--purple);
+            color: white;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-size: 72px;
+            line-height: 1.07143;
+            font-weight: 600;
+            letter-spacing: -0.005em;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--purple), var(--cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero .subtitle {
+            font-size: 28px;
+            line-height: 1.14286;
+            font-weight: 400;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 80px;
+            margin: 60px 0;
+            flex-wrap: wrap;
+        }
+
+        .stat-block {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 48px;
+            font-weight: 600;
+            color: var(--purple);
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        /* Section Base Styles */
+        .section {
+            padding: 100px 22px;
+        }
+
+        .section-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 48px;
+            line-height: 1.08349;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-subtitle {
+            font-size: 21px;
+            line-height: 1.47059;
+            color: var(--text-secondary);
+            text-align: center;
+            max-width: 800px;
+            margin: -40px auto 60px;
+        }
+
+        /* What Is Threat Lab Section */
+        .what-is-section {
+            background: white;
+        }
+
+        .what-is-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .what-is-content h2 {
+            font-size: 48px;
+            font-weight: 600;
+            margin-bottom: 30px;
+            color: var(--text-primary);
+        }
+
+        .what-is-summary {
+            font-size: 24px;
+            line-height: 1.4;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+        }
+
+        .what-is-points {
+            list-style: none;
+        }
+
+        .what-is-points li {
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border);
+            font-size: 18px;
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .what-is-points li:last-child {
+            border-bottom: none;
+        }
+
+        .point-icon {
+            width: 24px;
+            height: 24px;
+            background: linear-gradient(135deg, var(--purple), var(--cyan));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 14px;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        /* Flow Diagram */
+        .flow-diagram {
+            background: var(--bg-gray);
+            border-radius: 20px;
+            padding: 40px;
+            position: relative;
+        }
+
+        .flow-step {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: relative;
+        }
+
+        .flow-step:last-child {
+            margin-bottom: 0;
+        }
+
+        .flow-step::after {
+            content: "↓";
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--purple);
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .flow-step:last-child::after {
+            display: none;
+        }
+
+        .flow-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--purple), var(--cyan));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+
+        .flow-text {
+            flex: 1;
+        }
+
+        .flow-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+
+        .flow-desc {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        /* How It Works Section */
+        .how-section {
+            background: var(--bg-gray);
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 30px;
+        }
+
+        .step-card {
+            text-align: center;
+        }
+
+        .step-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--purple), var(--cyan));
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 36px;
+            color: white;
+        }
+
+        .step-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 10px;
+        }
+
+        .step-desc {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        /* Platform Screenshots Section */
+        .screenshots-section {
+            background: linear-gradient(135deg, var(--dark-bg) 0%, #2a3548 50%, var(--dark-bg) 100%);
+            padding: 120px 22px;
+        }
+
+        .screenshots-section .section-title {
+            color: white;
+        }
+
+        .screenshots-section .section-subtitle {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .screenshots-grid {
+            display: grid;
+            gap: 80px;
+        }
+
+        .screenshot-container {
+            position: relative;
+        }
+
+        .device-frame {
+            margin: 0 auto;
+            position: relative;
+            filter: drop-shadow(0 20px 60px rgba(0, 0, 0, 0.3));
+        }
+
+        .device-frame.laptop {
+            max-width: 1000px;
+            background: #1a1a1a;
+            border-radius: 12px;
+            padding: 10px;
+        }
+
+        .device-frame.tablet {
+            max-width: 600px;
+            background: #2a2a2a;
+            border-radius: 16px;
+            padding: 20px;
+        }
+
+        .device-frame.phone {
+            max-width: 320px;
+            background: #1a1a1a;
+            border-radius: 30px;
+            padding: 10px;
+        }
+
+        .screen {
+            background: var(--dark-bg);
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .device-frame.laptop .screen {
+            aspect-ratio: 16/10;
+        }
+
+        .device-frame.tablet .screen {
+            aspect-ratio: 4/3;
+        }
+
+        .device-frame.phone .screen {
+            aspect-ratio: 9/19;
+            border-radius: 20px;
+        }
+
+        /* Laptop Analysis Dashboard Mockup */
+        .analysis-mockup {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .analysis-nav {
+            background: var(--dark-card);
+            padding: 15px 20px;
+            border-bottom: 1px solid var(--dark-border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .analysis-logo {
+            color: var(--purple);
+            font-weight: 600;
+            font-size: 18px;
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .search-bar {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 6px;
+            padding: 6px 12px;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 13px;
+            width: 200px;
+        }
+
+        .nav-icon {
+            width: 24px;
+            height: 24px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--cyan);
+            font-size: 12px;
+        }
+
+        .user-avatar {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, var(--purple), var(--cyan));
+            border-radius: 50%;
+        }
+
+        .analysis-main {
+            flex: 1;
+            display: flex;
+        }
+
+        .threat-sidebar {
+            width: 260px;
+            background: var(--dark-card);
+            border-right: 1px solid var(--dark-border);
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .threat-list-title {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 15px;
+        }
+
+        .threat-item {
+            padding: 12px;
+            margin-bottom: 10px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .threat-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .threat-item.active {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(0, 212, 255, 0.15));
+            border: 1px solid var(--purple);
+        }
+
+        .threat-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .threat-id {
+            color: white;
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .new-badge {
+            background: var(--cyan);
+            color: var(--dark-bg);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .threat-meta {
+            display: flex;
+            gap: 10px;
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .severity-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            margin-top: 4px;
+        }
+
+        .severity-dot.critical {
+            background: var(--red);
+        }
+
+        .severity-dot.high {
+            background: var(--orange);
+        }
+
+        .severity-dot.medium {
+            background: var(--yellow);
+        }
+
+        .threat-detail {
+            flex: 1;
+            padding: 30px;
+        }
+
+        .detail-header {
+            margin-bottom: 30px;
+        }
+
+        .detail-title {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 10px;
+        }
+
+        .detail-title h2 {
+            font-size: 28px;
+            color: white;
+        }
+
+        .severity-badge {
+            background: var(--red);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .detail-info {
+            display: flex;
+            gap: 30px;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 14px;
+        }
+
+        .detail-tabs {
+            display: flex;
+            gap: 20px;
+            border-bottom: 1px solid var(--dark-border);
+            margin-bottom: 30px;
+        }
+
+        .tab {
+            padding: 12px 0;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 14px;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .tab.active {
+            color: var(--cyan);
+            border-bottom-color: var(--cyan);
+        }
+
+        .detail-content {
+            background: var(--dark-card);
+            border-radius: 12px;
+            padding: 30px;
+            height: 250px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 48px;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .action-btn {
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 1px solid transparent;
+        }
+
+        .action-btn.primary {
+            background: linear-gradient(135deg, var(--cyan), var(--blue));
+            color: white;
+        }
+
+        .action-btn.secondary {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .activity-sidebar {
+            width: 280px;
+            background: var(--dark-card);
+            border-left: 1px solid var(--dark-border);
+            padding: 20px;
+        }
+
+        .activity-title {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 20px;
+        }
+
+        .activity-item {
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 13px;
+        }
+
+        .activity-user {
+            color: var(--cyan);
+            margin-bottom: 4px;
+        }
+
+        .activity-action {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .activity-time {
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 11px;
+            margin-top: 4px;
+        }
+
+        /* Tablet Leaderboard Mockup */
+        .leaderboard-mockup {
+            height: 100%;
+            padding: 30px;
+            background: var(--dark-bg);
+        }
+
+        .leaderboard-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .leaderboard-title {
+            font-size: 24px;
+            color: white;
+            margin-bottom: 15px;
+        }
+
+        .filter-tabs {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .filter-tab {
+            padding: 8px 16px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 6px;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 13px;
+            cursor: pointer;
+        }
+
+        .filter-tab.active {
+            background: linear-gradient(135deg, var(--purple), var(--cyan));
+            border-color: transparent;
+            color: white;
+        }
+
+        .top-three {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .podium-card {
+            background: var(--dark-card);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        .podium-card.gold {
+            border: 2px solid var(--gold);
+            padding-bottom: 40px;
+        }
+
+        .podium-card.silver {
+            border: 2px solid var(--silver);
+            padding-bottom: 30px;
+        }
+
+        .podium-card.bronze {
+            border: 2px solid var(--bronze);
+            padding-bottom: 20px;
+        }
+
+        .rank-badge {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .rank-badge.gold {
+            background: var(--gold);
+        }
+
+        .rank-badge.silver {
+            background: var(--silver);
+        }
+
+        .rank-badge.bronze {
+            background: var(--bronze);
+        }
+
+        .researcher-avatar {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--purple), var(--cyan));
+            border-radius: 50%;
+            margin: 20px auto 10px;
+        }
+
+        .researcher-handle {
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .researcher-points {
+            color: var(--cyan);
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .researcher-achievement {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 12px;
+        }
+
+        .rank-table {
+            background: var(--dark-card);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .rank-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .rank-table th {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 12px;
+            text-align: left;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .rank-table td {
+            padding: 12px;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 14px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .rank-table tr.highlight {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(0, 212, 255, 0.1));
+        }
+
+        .your-rank-bar {
+            background: linear-gradient(135deg, var(--purple), var(--cyan));
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            text-align: center;
+            color: white;
+        }
+
+        /* Phone Mobile Mockup */
+        .mobile-mockup {
+            height: 100%;
+            padding: 20px;
+            background: var(--dark-bg);
+        }
+
+        .push-notification {
+            background: linear-gradient(135deg, var(--orange), var(--red));
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 10px 30px rgba(255, 107, 0, 0.3);
+        }
+
+        .notification-emoji {
+            font-size: 24px;
+        }
+
+        .notification-text {
+            flex: 1;
+            color: white;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .mobile-threat-card {
+            background: var(--dark-card);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .mobile-threat-header {
+            margin-bottom: 15px;
+        }
+
+        .mobile-threat-title {
+            color: white;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .mobile-threat-meta {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .mobile-meta-item {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .mobile-meta-item.critical {
+            color: var(--red);
+            font-weight: 600;
+        }
+
+        .mobile-threat-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+        }
+
+        .mobile-info-item {
+            text-align: center;
+        }
+
+        .mobile-info-value {
+            color: var(--cyan);
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .mobile-info-label {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 11px;
+            text-transform: uppercase;
+            margin-top: 4px;
+        }
+
+        .mobile-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .mobile-btn {
+            flex: 1;
+            padding: 12px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .mobile-btn.primary {
+            background: linear-gradient(135deg, var(--cyan), var(--blue));
+            color: white;
+        }
+
+        .mobile-btn.secondary {
+            background: rgba(255, 255, 255, 0.05);
+            color: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .mobile-stats {
+            background: var(--dark-card);
+            border-radius: 16px;
+            padding: 20px;
+        }
+
+        .mobile-stats-title {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 15px;
+        }
+
+        .mobile-stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        .mobile-stat {
+            text-align: center;
+        }
+
+        .mobile-stat-value {
+            color: var(--purple);
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .mobile-stat-trend {
+            color: var(--green);
+            font-size: 12px;
+        }
+
+        .mobile-stat-label {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 11px;
+            text-transform: uppercase;
+            margin-top: 4px;
+        }
+
+        /* Fame Factor Section */
+        .fame-section {
+            background: white;
+        }
+
+        .fame-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+        }
+
+        .fame-card {
+            text-align: center;
+        }
+
+        .fame-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--purple), var(--cyan));
+            border-radius: 20px;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+        }
+
+        .fame-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 15px;
+        }
+
+        .fame-desc {
+            font-size: 16px;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        /* Impact Section */
+        .impact-section {
+            background: var(--bg-gray);
+        }
+
+        .impact-visual {
+            text-align: center;
+            margin: 60px 0;
+        }
+
+        .impact-number {
+            font-size: 96px;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--purple), var(--cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+        }
+
+        .impact-label {
+            font-size: 28px;
+            color: var(--text-primary);
+            margin-bottom: 40px;
+        }
+
+        .impact-stats {
+            display: flex;
+            justify-content: center;
+            gap: 80px;
+            flex-wrap: wrap;
+        }
+
+        .impact-stat {
+            text-align: center;
+        }
+
+        .impact-stat-value {
+            font-size: 48px;
+            font-weight: 600;
+            color: var(--purple);
+            margin-bottom: 10px;
+        }
+
+        .impact-stat-label {
+            font-size: 16px;
+            color: var(--text-secondary);
+        }
+
+        /* Who Should Join Section */
+        .join-section {
+            background: white;
+        }
+
+        .join-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+        }
+
+        .join-card {
+            text-align: center;
+            padding: 30px 20px;
+            background: var(--bg-gray);
+            border-radius: 16px;
+            transition: all 0.3s;
+        }
+
+        .join-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(139, 92, 246, 0.1);
+        }
+
+        .join-icon {
+            width: 60px;
+            height: 60px;
+            background: white;
+            border-radius: 50%;
+            margin: 0 auto 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+        }
+
+        .join-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 120px 22px;
+            background: linear-gradient(135deg, var(--purple), var(--cyan));
+            color: white;
+            text-align: center;
+        }
+
+        .cta-content h2 {
+            font-size: 56px;
+            font-weight: 600;
+            margin-bottom: 30px;
+        }
+
+        .cta-content p {
+            font-size: 24px;
+            margin-bottom: 50px;
+            opacity: 0.95;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 18px 40px;
+            border-radius: 100px;
+            font-size: 17px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+
+        .btn-white {
+            background: white;
+            color: var(--purple);
+        }
+
+        .btn-white:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-outline:hover {
+            background: white;
+            color: var(--purple);
+        }
+
+        /* Cross Links Section */
+        .cross-links {
+            text-align: center;
+            padding: 80px 22px;
+            background: white;
+        }
+
+        .cross-links-title {
+            font-size: 18px;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+        }
+
+        .cross-links-list {
+            display: flex;
+            gap: 40px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cross-links-list a {
+            color: var(--blue);
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .cross-links-list a:hover {
+            color: var(--purple);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 48px;
+            }
+            
+            .hero .subtitle {
+                font-size: 21px;
+            }
+            
+            .what-is-container,
+            .fame-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .steps-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .join-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: rgba(255, 255, 255, 0.98);
+                flex-direction: column;
+                padding: 20px;
+                gap: 16px;
+                border-bottom: 1px solid var(--border);
+                animation: slideDown 0.3s ease;
+            }
+
+            .nav-links.open {
+                display: flex;
+            }
+
+            @keyframes slideDown {
+                from {
+                    opacity: 0;
+                    transform: translateY(-20px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <header class="site-header">
+        <div class="header-container">
+            <a href="index.html" class="back-link">← Back to Argus</a>
+        </div>
+    </header>
+    
+    <!-- Breadcrumb below header -->
+    <div style="margin-top: 20px; padding: 0 22px;">
+        <div style="font-size: 14px; color: var(--text-secondary);">
+            <a href="../Argus/index.html" style="color: var(--text-secondary); text-decoration: none;">Argus</a> 
+            <span style="color: var(--text-secondary);"> > </span>
+            <a href="../Argus/community.html" style="color: var(--text-secondary); text-decoration: none;">Community</a>
+            <span style="color: var(--text-secondary);"> > </span>
+            <span style="color: var(--text-primary);">Threat Lab</span>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <span class="hero-badge">FOR ELITE SECURITY RESEARCHERS</span>
+            <h1>Argus Threat Lab</h1>
+            <p class="subtitle">Where Europe's top security talent competes to protect millions</p>
+            
+            <div class="hero-stats">
+                <div class="stat-block">
+                    <span class="stat-number">12K+</span>
+                    <span class="stat-label">Threats Named</span>
+                </div>
+                <div class="stat-block">
+                    <span class="stat-number">847</span>
+                    <span class="stat-label">Active Researchers</span>
+                </div>
+                <div class="stat-block">
+                    <span class="stat-number">2.4M</span>
+                    <span class="stat-label">Orgs Protected</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- What Is Threat Lab Section -->
+    <section class="section what-is-section">
+        <div class="section-content">
+            <div class="what-is-container">
+                <div class="what-is-content">
+                    <h2>What Is Threat Lab?</h2>
+                    <p class="what-is-summary">
+                        A gamified threat research platform where security professionals compete to analyze, name, and neutralize emerging cyber threats.
+                    </p>
+                    <ul class="what-is-points">
+                        <li>
+                            <span class="point-icon">✓</span>
+                            <span>Analyze anonymized attack patterns from across Europe's Sentinel network</span>
+                        </li>
+                        <li>
+                            <span class="point-icon">✓</span>
+                            <span>Be the first to name new threats - your discovery, your legacy</span>
+                        </li>
+                        <li>
+                            <span class="point-icon">✓</span>
+                            <span>Write detection rules that deploy instantly to protect thousands</span>
+                        </li>
+                        <li>
+                            <span class="point-icon">✓</span>
+                            <span>Earn recognition: leaderboard ranking, conference invites, career opportunities</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="flow-diagram">
+                    <div class="flow-step">
+                        <div class="flow-icon">🌐</div>
+                        <div class="flow-text">
+                            <div class="flow-title">Sentinel Network Detects</div>
+                            <div class="flow-desc">New threat identified by Sentinel agents</div>
+                        </div>
+                    </div>
+                    <div class="flow-step">
+                        <div class="flow-icon">📊</div>
+                        <div class="flow-text">
+                            <div class="flow-title">Pattern Posted</div>
+                            <div class="flow-desc">Anonymized data appears as "Unknown Threat"</div>
+                        </div>
+                    </div>
+                    <div class="flow-step">
+                        <div class="flow-icon">🔬</div>
+                        <div class="flow-text">
+                            <div class="flow-title">Researchers Compete</div>
+                            <div class="flow-desc">Race to analyze and name the threat</div>
+                        </div>
+                    </div>
+                    <div class="flow-step">
+                        <div class="flow-icon">🚀</div>
+                        <div class="flow-text">
+                            <div class="flow-title">Rules Deploy</div>
+                            <div class="flow-desc">Best detection rules sent to all Sentinels</div>
+                        </div>
+                    </div>
+                    <div class="flow-step">
+                        <div class="flow-icon">🏆</div>
+                        <div class="flow-text">
+                            <div class="flow-title">Your Name Lives On</div>
+                            <div class="flow-desc">"Discovered by @yourhandle" forever</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="section how-section">
+        <div class="section-content">
+            <h2 class="section-title">Your Path to Recognition</h2>
+            <p class="section-subtitle">From discovery to deployment in five steps</p>
+            
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-icon">🔍</div>
+                    <div class="step-title">Discover</div>
+                    <div class="step-desc">Monitor the threat feed for new unknown patterns</div>
+                </div>
+                <div class="step-card">
+                    <div class="step-icon">🧬</div>
+                    <div class="step-title">Analyze</div>
+                    <div class="step-desc">Study behavior, identify TTPs, understand the attack</div>
+                </div>
+                <div class="step-card">
+                    <div class="step-icon">🏷️</div>
+                    <div class="step-title">Name</div>
+                    <div class="step-desc">Propose a name that the community will vote on</div>
+                </div>
+                <div class="step-card">
+                    <div class="step-icon">⚡</div>
+                    <div class="step-title">Deploy</div>
+                    <div class="step-desc">Your rules protect thousands within hours</div>
+                </div>
+                <div class="step-card">
+                    <div class="step-icon">🌟</div>
+                    <div class="step-title">Fame</div>
+                    <div class="step-desc">Climb the leaderboard, earn recognition</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Platform Screenshots -->
+    <section class="section screenshots-section">
+        <div class="section-content">
+            <h2 class="section-title">The Platform Elite Researchers Choose</h2>
+            <p class="section-subtitle">Professional tools that make threat hunting competitive</p>
+            
+            <div class="screenshots-grid">
+                <!-- Laptop Analysis Dashboard Screenshot -->
+                <div class="screenshot-container">
+                    <div class="device-frame laptop">
+                        <div class="screen">
+                            <div class="analysis-mockup">
+                                <div class="analysis-nav">
+                                    <div class="analysis-logo">🔬 Threat Lab</div>
+                                    <div class="nav-actions">
+                                        <input class="search-bar" placeholder="Search threats..." />
+                                        <div class="nav-icon">🔔</div>
+                                        <div class="user-avatar"></div>
+                                    </div>
+                                </div>
+                                <div class="analysis-main">
+                                    <div class="threat-sidebar">
+                                        <div class="threat-list-title">Active Threats</div>
+                                        <div class="threat-item active">
+                                            <div class="threat-header">
+                                                <span class="threat-id">Unknown Threat #4,721</span>
+                                                <span class="new-badge">NEW</span>
+                                            </div>
+                                            <div class="threat-meta">
+                                                <span class="severity-dot critical"></span>
+                                                <span>Critical</span>
+                                                <span>Healthcare</span>
+                                            </div>
+                                        </div>
+                                        <div class="threat-item">
+                                            <div class="threat-header">
+                                                <span class="threat-id">Unknown Threat #4,720</span>
+                                                <span class="new-badge">NEW</span>
+                                            </div>
+                                            <div class="threat-meta">
+                                                <span class="severity-dot high"></span>
+                                                <span>High</span>
+                                                <span>Financial</span>
+                                            </div>
+                                        </div>
+                                        <div class="threat-item">
+                                            <div class="threat-header">
+                                                <span class="threat-id">Unknown Threat #4,719</span>
+                                            </div>
+                                            <div class="threat-meta">
+                                                <span class="severity-dot medium"></span>
+                                                <span>Medium</span>
+                                                <span>Manufacturing</span>
+                                            </div>
+                                        </div>
+                                        <div class="threat-item">
+                                            <div class="threat-header">
+                                                <span class="threat-id">Unknown Threat #4,718</span>
+                                            </div>
+                                            <div class="threat-meta">
+                                                <span class="severity-dot high"></span>
+                                                <span>High</span>
+                                                <span>Energy</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="threat-detail">
+                                        <div class="detail-header">
+                                            <div class="detail-title">
+                                                <h2>Unknown Threat #4,721</h2>
+                                                <span class="severity-badge">CRITICAL</span>
+                                            </div>
+                                            <div class="detail-info">
+                                                <span>First detected: 2 hours ago</span>
+                                                <span>Sector: Healthcare</span>
+                                                <span>7 researchers analyzing</span>
+                                            </div>
+                                        </div>
+                                        <div class="detail-tabs">
+                                            <div class="tab active">Overview</div>
+                                            <div class="tab">Timeline</div>
+                                            <div class="tab">IOCs</div>
+                                            <div class="tab">Similar Threats</div>
+                                        </div>
+                                        <div class="detail-content">
+                                            📈
+                                        </div>
+                                        <div class="action-buttons">
+                                            <button class="action-btn primary">Name This Threat</button>
+                                            <button class="action-btn secondary">Add Attribution</button>
+                                            <button class="action-btn secondary">Write Detection Rule</button>
+                                        </div>
+                                    </div>
+                                    <div class="activity-sidebar">
+                                        <div class="activity-title">Live Activity</div>
+                                        <div class="activity-item">
+                                            <div class="activity-user">@martinez</div>
+                                            <div class="activity-action">added attribution</div>
+                                            <div class="activity-time">2 min ago</div>
+                                        </div>
+                                        <div class="activity-item">
+                                            <div class="activity-user">@blackhat_anna</div>
+                                            <div class="activity-action">submitted rule</div>
+                                            <div class="activity-time">5 min ago</div>
+                                        </div>
+                                        <div class="activity-item">
+                                            <div class="activity-user">@sentinel_zero</div>
+                                            <div class="activity-action">proposed name</div>
+                                            <div class="activity-time">8 min ago</div>
+                                        </div>
+                                        <div class="activity-item">
+                                            <div class="activity-user">@cyberwarrior</div>
+                                            <div class="activity-action">started analysis</div>
+                                            <div class="activity-time">12 min ago</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tablet Leaderboard Screenshot -->
+                <div class="screenshot-container">
+                    <div class="device-frame tablet">
+                        <div class="screen">
+                            <div class="leaderboard-mockup">
+                                <div class="leaderboard-header">
+                                    <h2 class="leaderboard-title">Top Researchers - November 2025</h2>
+                                    <div class="filter-tabs">
+                                        <div class="filter-tab">All Time</div>
+                                        <div class="filter-tab active">This Month</div>
+                                        <div class="filter-tab">This Week</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="top-three">
+                                    <div class="podium-card silver">
+                                        <div class="rank-badge silver">#2</div>
+                                        <div class="researcher-avatar"></div>
+                                        <div class="researcher-handle">@blackhat_anna</div>
+                                        <div class="researcher-points">11,200 pts</div>
+                                        <div class="researcher-achievement">112 rules written</div>
+                                    </div>
+                                    <div class="podium-card gold">
+                                        <div class="rank-badge gold">#1</div>
+                                        <div class="researcher-avatar"></div>
+                                        <div class="researcher-handle">@martinez</div>
+                                        <div class="researcher-points">12,450 pts</div>
+                                        <div class="researcher-achievement">47 threats named</div>
+                                    </div>
+                                    <div class="podium-card bronze">
+                                        <div class="rank-badge bronze">#3</div>
+                                        <div class="researcher-avatar"></div>
+                                        <div class="researcher-handle">@sentinel_zero</div>
+                                        <div class="researcher-points">9,800 pts</div>
+                                        <div class="researcher-achievement">38 attributions</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="rank-table">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>Rank</th>
+                                                <th>Researcher</th>
+                                                <th>Threats</th>
+                                                <th>Rules</th>
+                                                <th>Points</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>#4</td>
+                                                <td>@cyberwarrior</td>
+                                                <td>29</td>
+                                                <td>67</td>
+                                                <td>8,420</td>
+                                            </tr>
+                                            <tr>
+                                                <td>#5</td>
+                                                <td>@0day_hunter</td>
+                                                <td>31</td>
+                                                <td>52</td>
+                                                <td>7,890</td>
+                                            </tr>
+                                            <tr>
+                                                <td>#6</td>
+                                                <td>@threatminer</td>
+                                                <td>24</td>
+                                                <td>71</td>
+                                                <td>7,230</td>
+                                            </tr>
+                                            <tr class="highlight">
+                                                <td>#47</td>
+                                                <td>@you</td>
+                                                <td>3</td>
+                                                <td>8</td>
+                                                <td>450</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                
+                                <div class="your-rank-bar">
+                                    Your Rank: #47 ↑3 this week • You need 230 points for next level
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Phone Mobile Screenshot -->
+                <div class="screenshot-container">
+                    <div class="device-frame phone">
+                        <div class="screen">
+                            <div class="mobile-mockup">
+                                <div class="push-notification">
+                                    <span class="notification-emoji">🔥</span>
+                                    <span class="notification-text">New critical threat - Be first to name it!</span>
+                                </div>
+                                
+                                <div class="mobile-threat-card">
+                                    <div class="mobile-threat-header">
+                                        <div class="mobile-threat-title">Unknown Threat #4,721</div>
+                                        <div class="mobile-threat-meta">
+                                            <span class="mobile-meta-item critical">Critical</span>
+                                            <span class="mobile-meta-item">EU Financial Services</span>
+                                            <span class="mobile-meta-item">12 minutes ago</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="mobile-threat-info">
+                                        <div class="mobile-info-item">
+                                            <div class="mobile-info-value">4</div>
+                                            <div class="mobile-info-label">Analyzing</div>
+                                        </div>
+                                        <div class="mobile-info-item">
+                                            <div class="mobile-info-value">0</div>
+                                            <div class="mobile-info-label">Rules</div>
+                                        </div>
+                                        <div class="mobile-info-item">
+                                            <div class="mobile-info-value">Unnamed</div>
+                                            <div class="mobile-info-label">Status</div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="mobile-actions">
+                                        <button class="mobile-btn primary">Analyze Now</button>
+                                        <button class="mobile-btn secondary">Save</button>
+                                    </div>
+                                </div>
+                                
+                                <div class="mobile-stats">
+                                    <div class="mobile-stats-title">Your Quick Stats</div>
+                                    <div class="mobile-stats-grid">
+                                        <div class="mobile-stat">
+                                            <div class="mobile-stat-value">#47</div>
+                                            <div class="mobile-stat-trend">↑3</div>
+                                            <div class="mobile-stat-label">Rank</div>
+                                        </div>
+                                        <div class="mobile-stat">
+                                            <div class="mobile-stat-value">340</div>
+                                            <div class="mobile-stat-label">Pts/Week</div>
+                                        </div>
+                                        <div class="mobile-stat">
+                                            <div class="mobile-stat-value">2</div>
+                                            <div class="mobile-stat-label">Active</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Fame Factor Section -->
+    <section class="section fame-section">
+        <div class="section-content">
+            <h2 class="section-title">The Recognition You Deserve</h2>
+            <p class="section-subtitle">Your expertise, publicly acknowledged</p>
+            
+            <div class="fame-grid">
+                <div class="fame-card">
+                    <div class="fame-icon">🏆</div>
+                    <div class="fame-title">Named Discoveries</div>
+                    <div class="fame-desc">Threats you name carry your handle forever. "The Martinez Variant" - discovered by @martinez, protecting thousands.</div>
+                </div>
+                <div class="fame-card">
+                    <div class="fame-icon">📊</div>
+                    <div class="fame-title">Leaderboard Glory</div>
+                    <div class="fame-desc">Real-time rankings visible to the entire security community. Climb the ranks, earn respect.</div>
+                </div>
+                <div class="fame-card">
+                    <div class="fame-icon">🎤</div>
+                    <div class="fame-title">Conference Invites</div>
+                    <div class="fame-desc">Top researchers get invited to speak at major security conferences. Share your discoveries.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Impact Section -->
+    <section class="section impact-section">
+        <div class="section-content">
+            <h2 class="section-title">Your Rules Protect Millions</h2>
+            
+            <div class="impact-visual">
+                <div class="impact-number">2.4M+</div>
+                <div class="impact-label">Organizations Protected by Your Work</div>
+                
+                <div class="impact-stats">
+                    <div class="impact-stat">
+                        <div class="impact-stat-value">12,847</div>
+                        <div class="impact-stat-label">Threats Named</div>
+                    </div>
+                    <div class="impact-stat">
+                        <div class="impact-stat-value">89,421</div>
+                        <div class="impact-stat-label">Detection Rules</div>
+                    </div>
+                    <div class="impact-stat">
+                        <div class="impact-stat-value">&lt; 2hrs</div>
+                        <div class="impact-stat-label">Time to Deploy</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Who Should Join Section -->
+    <section class="section join-section">
+        <div class="section-content">
+            <h2 class="section-title">Is Threat Lab For You?</h2>
+            <p class="section-subtitle">Join if you're ready to compete at the highest level</p>
+            
+            <div class="join-grid">
+                <div class="join-card">
+                    <div class="join-icon">🔍</div>
+                    <div class="join-title">Threat Intelligence Analysts</div>
+                </div>
+                <div class="join-card">
+                    <div class="join-icon">🛡️</div>
+                    <div class="join-title">SOC Analysts</div>
+                </div>
+                <div class="join-card">
+                    <div class="join-icon">🎓</div>
+                    <div class="join-title">Security Students</div>
+                </div>
+                <div class="join-card">
+                    <div class="join-icon">🏁</div>
+                    <div class="join-title">CTF Champions</div>
+                </div>
+                <div class="join-card">
+                    <div class="join-icon">🦠</div>
+                    <div class="join-title">Malware Researchers</div>
+                </div>
+                <div class="join-card">
+                    <div class="join-icon">🎯</div>
+                    <div class="join-title">Penetration Testers</div>
+                </div>
+                <div class="join-card">
+                    <div class="join-icon">💰</div>
+                    <div class="join-title">Bug Bounty Hunters</div>
+                </div>
+                <div class="join-card">
+                    <div class="join-icon">⚡</div>
+                    <div class="join-title">Incident Responders</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="cta-content">
+            <h2>Join the Elite</h2>
+            <p>Be among the researchers protecting Europe. Your analysis. Your name. Your legacy.</p>
+            
+            <div class="cta-buttons">
+                <a href="../Argus/community.html#waitlist" class="btn btn-white">Apply for Threat Lab</a>
+                <a href="../Argus/sentinel.html" class="btn btn-outline">Learn About Sentinel</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cross Links -->
+    <section class="cross-links">
+        <p class="cross-links-title">Explore More:</p>
+        <div class="cross-links-list">
+            <a href="../Argus/sentinel.html">Sentinel</a>
+            <a href="../Argus/immunity-index.html">Immunity Index</a>
+            <a href="../Argus/community.html">Community Defense</a>
+            <a href="../Argus/index.html">Argus Platform</a>
+        </div>
+    </section>
+
+    <script>
+        // Mobile Menu Toggle
+        // No JavaScript needed for simple back link navigation
+    </script>
+</body>
+</html>

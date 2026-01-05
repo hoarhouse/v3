@@ -1,0 +1,1223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Group - European Sovereign Data Platform</title>
+    <style>
+        :root {
+            --dark-bg: #0A0E1A;
+            --dark-card: #0F1420;
+            --cyan: #00D4FF;
+            --cyan-dark: #00B4D8;
+            --text-primary: #ffffff;
+            --text-secondary: rgba(255, 255, 255, 0.7);
+            --border: rgba(255, 255, 255, 0.1);
+            --green: #10a37f;
+            --blue: #1a73e8;
+            --purple: #9B59B6;
+            --orange: #F39C12;
+            --red: #dc2626;
+            --yellow: #fbbf24;
+            --spacing-xs: 8px;
+            --spacing-sm: 16px;
+            --spacing-md: 24px;
+            --spacing-lg: 48px;
+            --spacing-xl: 64px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', Roboto, sans-serif;
+            color: var(--text-primary);
+            background: var(--dark-bg);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            padding-top: 70px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-md);
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(10, 14, 26, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--cyan), var(--cyan-dark));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.5px;
+            z-index: 1001;
+        }
+
+        .products-dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-button {
+            background: none;
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .dropdown-button:hover {
+            border-color: var(--cyan);
+            color: var(--cyan);
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            background: rgba(10, 14, 26, 0.98);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 16px;
+            z-index: 1001;
+            min-width: 200px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .dropdown-content.show {
+            display: block;
+            animation: dropdownFadeIn 0.3s ease;
+        }
+
+        @keyframes dropdownFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .dropdown-content a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            padding: 8px 0;
+            display: block;
+            font-size: 15px;
+            transition: color 0.2s;
+            border-bottom: 1px solid transparent;
+        }
+
+        .dropdown-content a:hover {
+            color: var(--cyan);
+        }
+
+        .dropdown-content a.active {
+            color: var(--cyan);
+            font-weight: 600;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 140px 0 80px;
+            text-align: center;
+            background: linear-gradient(135deg, var(--dark-bg) 0%, var(--dark-card) 100%);
+        }
+
+        .hero h1 {
+            font-size: clamp(42px, 5vw, 64px);
+            font-weight: 700;
+            letter-spacing: -1.5px;
+            margin-bottom: var(--spacing-md);
+            background: linear-gradient(135deg, var(--cyan), var(--cyan-dark));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero .subheadline {
+            font-size: clamp(18px, 2.5vw, 24px);
+            color: var(--text-secondary);
+            margin-bottom: var(--spacing-lg);
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero .description {
+            font-size: 17px;
+            color: var(--text-secondary);
+            max-width: 800px;
+            margin: 0 auto var(--spacing-xl);
+            line-height: 1.8;
+        }
+
+        /* Hero Buttons - Redesigned */
+        .hero-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+            margin-top: 32px;
+        }
+        
+        .hero-buttons a {
+            display: inline-flex;
+            align-items: center;
+            padding: 12px 20px;
+            background: rgba(0, 212, 255, 0.1);
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            border-radius: 50px;
+            color: #00D4FF;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(4px);
+        }
+        
+        .hero-buttons a:hover {
+            background: rgba(0, 212, 255, 0.2);
+            border-color: #00D4FF;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(0, 212, 255, 0.3);
+        }
+        
+        .hero-buttons a:active {
+            transform: translateY(0);
+        }
+        
+        @media (max-width: 768px) {
+            .hero-buttons a {
+                padding: 10px 16px;
+                font-size: 13px;
+            }
+        }
+        
+        /* Legacy Product Buttons */
+        .product-buttons {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: var(--spacing-xl);
+            padding: 0 var(--spacing-md);
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border-radius: 100px;
+            font-size: 15px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+            display: inline-block;
+            cursor: pointer;
+            border: 1px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn-blue {
+            background: var(--blue);
+            color: white;
+        }
+
+        .btn-blue:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(26, 115, 232, 0.4);
+        }
+
+        .btn-green {
+            background: var(--green);
+            color: white;
+        }
+
+        .btn-green:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(16, 163, 127, 0.4);
+        }
+
+        .btn-purple {
+            background: var(--purple);
+            color: white;
+        }
+
+        .btn-purple:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(155, 89, 182, 0.4);
+        }
+
+        .btn-orange {
+            background: var(--orange);
+            color: white;
+        }
+
+        .btn-orange:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(243, 156, 18, 0.4);
+        }
+
+        .btn-cyan {
+            background: linear-gradient(135deg, var(--cyan), var(--cyan-dark));
+            color: var(--dark-bg);
+            font-weight: 700;
+        }
+
+        .btn-cyan:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 212, 255, 0.4);
+        }
+
+        .btn-teal {
+            background: var(--cyan-dark);
+            color: white;
+        }
+
+        .btn-teal:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 180, 216, 0.4);
+        }
+
+        .btn-red {
+            background: var(--red);
+            color: white;
+        }
+
+        .btn-red:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(220, 38, 38, 0.4);
+        }
+
+        .btn-yellow {
+            background: var(--yellow);
+            color: var(--dark-bg);
+        }
+
+        .btn-yellow:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(251, 191, 36, 0.4);
+        }
+
+        /* Section Styles */
+        .section {
+            padding: var(--spacing-xl) 0;
+            position: relative;
+        }
+
+        .section-dark {
+            background: var(--dark-bg);
+        }
+
+        .section-light {
+            background: var(--dark-card);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .section-title {
+            font-size: clamp(32px, 4vw, 48px);
+            font-weight: 700;
+            margin-bottom: var(--spacing-sm);
+            letter-spacing: -1px;
+            background: linear-gradient(135deg, var(--cyan), var(--cyan-dark));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .section-subtitle {
+            font-size: 18px;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Products Grid */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .product-card {
+            background: var(--dark-card);
+            border: 1px solid var(--border);
+            padding: var(--spacing-lg);
+            border-radius: 20px;
+            transition: all 0.3s;
+            display: flex;
+            flex-direction: column;
+            min-height: 280px;
+        }
+
+        .product-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--cyan);
+            box-shadow: 0 20px 40px rgba(0, 212, 255, 0.1);
+        }
+
+        .product-icon {
+            width: 48px;
+            height: 48px;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .product-icon svg {
+            width: 100%;
+            height: 100%;
+            stroke: var(--cyan);
+            fill: none;
+            stroke-width: 2;
+        }
+
+        .product-title {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+        }
+
+        .product-subtitle {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: var(--spacing-sm);
+            color: var(--cyan);
+        }
+
+        .product-description {
+            color: var(--text-secondary);
+            font-size: 15px;
+            line-height: 1.6;
+            flex-grow: 1;
+        }
+
+        .product-link {
+            margin-top: var(--spacing-md);
+            color: var(--cyan);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: gap 0.3s;
+        }
+
+        .product-link:hover {
+            gap: 12px;
+        }
+
+        /* Why Data Sovereignty Section */
+        .sovereignty-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-lg);
+            margin-top: var(--spacing-lg);
+        }
+
+        .sovereignty-item {
+            text-align: center;
+        }
+
+        .sovereignty-icon {
+            width: 40px;
+            height: 40px;
+            margin: 0 auto var(--spacing-sm);
+        }
+
+        .sovereignty-icon svg {
+            width: 100%;
+            height: 100%;
+            stroke: var(--cyan);
+            fill: none;
+            stroke-width: 2;
+        }
+
+        .sovereignty-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: var(--spacing-sm);
+            color: var(--cyan);
+        }
+
+        .sovereignty-text {
+            color: var(--text-secondary);
+            font-size: 15px;
+        }
+
+        /* Technology Stack */
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-lg);
+        }
+
+        .tech-item {
+            background: var(--dark-card);
+            border: 1px solid var(--border);
+            padding: var(--spacing-md);
+            border-radius: 12px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .tech-item:hover {
+            border-color: var(--cyan);
+            transform: translateY(-2px);
+        }
+
+        .tech-name {
+            font-weight: 600;
+            color: var(--cyan);
+            margin-bottom: 8px;
+        }
+
+        .tech-desc {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        /* Market Opportunity */
+        .market-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--spacing-lg);
+            margin: var(--spacing-xl) 0;
+        }
+
+        .market-stat {
+            text-align: center;
+            padding: var(--spacing-md);
+            background: var(--dark-card);
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            transition: all 0.3s;
+        }
+
+        .market-stat:hover {
+            border-color: var(--cyan);
+            transform: scale(1.05);
+        }
+
+        .market-number {
+            font-size: clamp(36px, 4vw, 48px);
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--cyan), var(--cyan-dark));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 8px;
+        }
+
+        .market-label {
+            color: var(--text-secondary);
+            font-size: 16px;
+        }
+
+        /* How It Works */
+        .how-it-works {
+            background: var(--dark-card);
+            border-radius: 20px;
+            padding: var(--spacing-xl);
+            margin-top: var(--spacing-lg);
+        }
+
+        .workflow-step {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .workflow-number {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--cyan), var(--cyan-dark));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: var(--dark-bg);
+            flex-shrink: 0;
+        }
+
+        .workflow-content h3 {
+            margin-bottom: 8px;
+            color: var(--text-primary);
+        }
+
+        .workflow-content p {
+            color: var(--text-secondary);
+            font-size: 15px;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark-card);
+            border-top: 1px solid var(--border);
+            padding: var(--spacing-xl) 0 var(--spacing-lg);
+            margin-top: var(--spacing-xl);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--spacing-lg);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .footer-section h3 {
+            margin-bottom: var(--spacing-sm);
+            color: var(--cyan);
+            font-size: 18px;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--cyan);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: var(--spacing-lg);
+            border-top: 1px solid var(--border);
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 var(--spacing-sm);
+            }
+
+            .product-buttons {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 8px;
+            }
+
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+
+            .products-grid,
+            .sovereignty-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .market-stats {
+                gap: var(--spacing-md);
+            }
+
+            .workflow-step {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .workflow-number {
+                margin: 0 auto;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.6s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-content">
+            <div class="logo">E-Group</div>
+            <div class="products-dropdown">
+                <button class="dropdown-button" onclick="toggleDropdown()">
+                    Products
+                    <span>▼</span>
+                </button>
+                <div class="dropdown-content" id="productsDropdown">
+                    <a href="HealthCompanion/index.html">Health Companion</a>
+                    <a href="ResearchPay/index.html">ResearchPay</a>
+                    <a href="LabVault/index.html">LabVault</a>
+                    <a href="Argus/index.html">Argus</a>
+                    <a href="ALETHEIA/index.html">Aletheia</a>
+                    <a href="PROMETHEUS/index.html">Prometheus</a>
+                    <a href="NEMESIS/index.html">Nemesis</a>
+                    <a href="HYPERION/index.html">Hyperion</a>
+                    <a href="ARCHON/index.html">Archon</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1 class="fade-in-up">Nine Products. Seven Markets.<br>One Infrastructure.</h1>
+            <p class="subheadline fade-in-up">The platform that returns data sovereignty to Europe.</p>
+            <p class="description fade-in-up">
+                E-Group delivers a complete ecosystem of data products built on a single, unified infrastructure. 
+                From healthcare AI and secure payments to environmental monitoring and sovereign AI governance — 
+                every solution is designed with European values at its core: privacy, security, and citizen control.
+            </p>
+
+            <!-- Hero Buttons -->
+            <div class="hero-buttons fade-in-up">
+                <a href="HealthCompanion/index.html">Health Companion</a>
+                <a href="ResearchPay/index.html">ResearchPay</a>
+                <a href="LabVault/index.html">LabVault</a>
+                <a href="Argus/index.html">Argus</a>
+                <a href="ALETHEIA/index.html">Aletheia</a>
+                <a href="PROMETHEUS/index.html">Prometheus</a>
+                <a href="NEMESIS/index.html">Nemesis</a>
+                <a href="HYPERION/index.html">Hyperion</a>
+                <a href="ARCHON/index.html">Archon</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products" class="section section-dark">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Our Product Portfolio</h2>
+                <p class="section-subtitle">Nine specialized solutions addressing critical European market needs</p>
+            </div>
+
+            <div class="products-grid">
+                <!-- Health Companion -->
+                <div class="product-card">
+                    <div class="product-icon">
+                        <svg viewBox="0 0 48 48">
+                            <path d="M24 8 L24 40 M8 24 L40 24" stroke-linecap="round"/>
+                            <rect x="16" y="16" width="16" height="16" rx="2" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <h3 class="product-title">Health Companion</h3>
+                    <p class="product-subtitle">Your Personal Health Assistant</p>
+                    <p class="product-description">
+                        A mobile app that stores all your health information in one place and helps you understand it. Chat with an AI assistant about your symptoms, medications, and health questions. You control who sees your data—share with doctors when YOU decide, not when they ask.
+                    </p>
+                    <a href="HealthCompanion/index.html" class="product-link">Learn more →</a>
+                </div>
+
+                <!-- ResearchPay -->
+                <div class="product-card">
+                    <div class="product-icon">
+                        <svg viewBox="0 0 48 48">
+                            <circle cx="24" cy="24" r="16" stroke-linejoin="round"/>
+                            <path d="M24 16 L24 32 M20 20 L28 20" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <h3 class="product-title">ResearchPay</h3>
+                    <p class="product-subtitle">Get Paid When Researchers Use Your Health Data</p>
+                    <p class="product-description">
+                        Pharmaceutical companies and universities need health data for research. ResearchPay lets you contribute your anonymized health data to studies and get paid €150-300 per year for it. Researchers see patterns and statistics—never your actual identity or records.
+                    </p>
+                    <a href="ResearchPay/index.html" class="product-link">Learn more →</a>
+                </div>
+
+                <!-- LabVault -->
+                <div class="product-card">
+                    <div class="product-icon">
+                        <svg viewBox="0 0 48 48">
+                            <path d="M16 8 L16 28 L24 40 L32 28 L32 8 M12 8 L36 8" stroke-linecap="round" stroke-linejoin="round"/>
+                            <circle cx="24" cy="32" r="3"/>
+                        </svg>
+                    </div>
+                    <h3 class="product-title">LabVault</h3>
+                    <p class="product-subtitle">All Your Lab Results in One Place</p>
+                    <p class="product-description">
+                        Blood tests from your doctor, results from specialists, screenings from the hospital—LabVault collects them all into one unified view. See trends over time, get plain-English explanations of what your numbers mean, and share specific results with any healthcare provider.
+                    </p>
+                    <a href="LabVault/index.html" class="product-link">Learn more →</a>
+                </div>
+
+                <!-- Argus -->
+                <div class="product-card">
+                    <div class="product-icon">
+                        <svg viewBox="0 0 48 48">
+                            <path d="M24 8 L8 20 L8 36 L24 44 L40 36 L40 20 Z" stroke-linejoin="round"/>
+                            <path d="M24 24 L24 44 M24 24 L8 36 M24 24 L40 36" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <h3 class="product-title">Argus</h3>
+                    <p class="product-subtitle">Cybersecurity That Learns From Everyone's Attacks</p>
+                    <p class="product-description">
+                        When one company gets attacked, Argus helps ALL companies learn from it—without anyone sharing their sensitive data. Our AI learns attack patterns across hundreds of organizations so your security team can stop threats before they hit you.
+                    </p>
+                    <a href="Argus/index.html" class="product-link">Learn more →</a>
+                </div>
+
+                <!-- ALETHEIA -->
+                <div class="product-card">
+                    <div class="product-icon">
+                        <svg viewBox="0 0 48 48">
+                            <rect x="12" y="20" width="24" height="20" rx="2" stroke-linejoin="round"/>
+                            <path d="M16 16 L16 20 M32 16 L32 20 M20 8 L28 8 L32 12 L16 12 Z" stroke-linecap="round"/>
+                            <circle cx="24" cy="30" r="3"/>
+                        </svg>
+                    </div>
+                    <h3 class="product-title">ALETHEIA</h3>
+                    <p class="product-subtitle">Verify Professional Credentials Across Borders</p>
+                    <p class="product-description">
+                        Is that doctor licensed? Is that engineer's degree real? ALETHEIA checks professional credentials across EU countries in minutes instead of months. Licensing bodies keep their data private while employers get instant verification.
+                    </p>
+                    <a href="ALETHEIA/index.html" class="product-link">Learn more →</a>
+                </div>
+
+                <!-- PROMETHEUS -->
+                <div class="product-card">
+                    <div class="product-icon">
+                        <svg viewBox="0 0 48 48">
+                            <circle cx="24" cy="24" r="16" stroke-linejoin="round"/>
+                            <path d="M24 8 Q40 16 40 24 Q40 32 24 40 Q8 32 8 24 Q8 16 24 8" stroke-linecap="round"/>
+                            <circle cx="24" cy="24" r="4"/>
+                        </svg>
+                    </div>
+                    <h3 class="product-title">PROMETHEUS</h3>
+                    <p class="product-subtitle">Accurate Carbon Emissions Data From Your Supply Chain</p>
+                    <p class="product-description">
+                        Companies must report their suppliers' carbon emissions, but suppliers won't share production data (it reveals trade secrets). PROMETHEUS calculates emissions inside supplier systems and returns only the carbon numbers—accurate data without exposing anyone's secrets.
+                    </p>
+                    <a href="PROMETHEUS/index.html" class="product-link">Learn more →</a>
+                </div>
+
+                <!-- NEMESIS -->
+                <div class="product-card">
+                    <div class="product-icon">
+                        <svg viewBox="0 0 48 48">
+                            <path d="M8 24 L40 24 M24 12 L12 24 L24 36 M24 12 L36 24 L24 36" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <h3 class="product-title">NEMESIS</h3>
+                    <p class="product-subtitle">Detect Procurement Fraud Across Europe</p>
+                    <p class="product-description">
+                        €2 trillion in EU public contracts. Billions lost to fraud. NEMESIS spots suspicious patterns—bid rigging, shell companies, corrupt networks—across 27 countries without any nation sharing sensitive procurement data with another.
+                    </p>
+                    <a href="NEMESIS/index.html" class="product-link">Learn more →</a>
+                </div>
+
+                <!-- HYPERION -->
+                <div class="product-card">
+                    <div class="product-icon">
+                        <svg viewBox="0 0 48 48">
+                            <circle cx="24" cy="24" r="8" stroke-linejoin="round"/>
+                            <path d="M24 8 L24 16 M24 32 L24 40 M8 24 L16 24 M32 24 L40 24" stroke-linecap="round"/>
+                            <path d="M14 14 L20 20 M28 28 L34 34 M34 14 L28 20 M20 28 L14 34" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <h3 class="product-title">HYPERION</h3>
+                    <p class="product-subtitle">Identity Management for Light-Based Computers</p>
+                    <p class="product-description">
+                        Photonic computers use light instead of electricity—they're faster and more efficient. HYPERION verifies which photonic computing nodes are legitimate, who owns them, and what they're allowed to do. Like a passport system for next-generation AI hardware.
+                    </p>
+                    <a href="HYPERION/index.html" class="product-link">Learn more →</a>
+                </div>
+
+                <!-- ARCHON -->
+                <div class="product-card">
+                    <div class="product-icon">
+                        <svg viewBox="0 0 48 48">
+                            <rect x="12" y="16" width="24" height="20" rx="2" stroke-linejoin="round"/>
+                            <circle cx="20" cy="26" r="2"/>
+                            <circle cx="28" cy="26" r="2"/>
+                            <path d="M18 12 L18 16 M30 12 L30 16 M20 32 L28 32" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <h3 class="product-title">ARCHON</h3>
+                    <p class="product-subtitle">Identity Management for AI Agents</p>
+                    <p class="product-description">
+                        Companies are deploying AI agents that act autonomously—accessing data, making decisions, executing transactions. ARCHON gives each AI agent a verified identity, controls what it can do, and links it to a responsible human. Like HR for your AI workforce.
+                    </p>
+                    <a href="ARCHON/index.html" class="product-link">Learn more →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Data Sovereignty Matters -->
+    <section class="section section-light">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Why Data Sovereignty Matters</h2>
+                <p class="section-subtitle">European data should serve European citizens, not foreign corporations</p>
+            </div>
+
+            <div class="sovereignty-grid">
+                <div class="sovereignty-item">
+                    <div class="sovereignty-icon">
+                        <svg viewBox="0 0 40 40">
+                            <rect x="12" y="16" width="16" height="12" rx="2" stroke-linejoin="round"/>
+                            <path d="M16 16 L16 12 Q16 8 20 8 Q24 8 24 12 L24 16" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <h3 class="sovereignty-title">Privacy</h3>
+                    <p class="sovereignty-text">
+                        Your medical records, financial data, and personal information stay within EU borders, 
+                        protected by the world's strongest privacy laws.
+                    </p>
+                </div>
+
+                <div class="sovereignty-item">
+                    <div class="sovereignty-icon">
+                        <svg viewBox="0 0 40 40">
+                            <circle cx="20" cy="20" r="12" stroke-linejoin="round"/>
+                            <circle cx="20" cy="20" r="4"/>
+                            <path d="M20 8 L20 12 M20 28 L20 32 M8 20 L12 20 M28 20 L32 20" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <h3 class="sovereignty-title">Control</h3>
+                    <p class="sovereignty-text">
+                        European institutions decide how European data is used. No backdoors, no foreign surveillance, 
+                        no corporate exploitation.
+                    </p>
+                </div>
+
+                <div class="sovereignty-item">
+                    <div class="sovereignty-icon">
+                        <svg viewBox="0 0 40 40">
+                            <path d="M20 8 L12 16 L16 20 L20 16 L24 20 L28 16 Z" stroke-linejoin="round"/>
+                            <path d="M20 16 L20 32 M16 20 L16 28 M24 20 L24 28" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <h3 class="sovereignty-title">Value</h3>
+                    <p class="sovereignty-text">
+                        The €3 trillion value of European data stays in Europe, funding European innovation 
+                        and creating European jobs.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technology Stack -->
+    <section id="technology" class="section section-dark">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Built on Proven Technology</h2>
+                <p class="section-subtitle">30 years of trust from European governments and institutions</p>
+            </div>
+
+            <div class="tech-grid">
+                <div class="tech-item">
+                    <div class="tech-name">MyD Wallet</div>
+                    <div class="tech-desc">eIDAS 2.0 certified digital identity</div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-name">FedX</div>
+                    <div class="tech-desc">Federated data exchange protocol</div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-name">InnoHealth DataLake</div>
+                    <div class="tech-desc">GDPR-compliant health data infrastructure</div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-name">Archimedes</div>
+                    <div class="tech-desc">Zero-trust security framework</div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-name">Nexus Chain</div>
+                    <div class="tech-desc">EU sovereign blockchain</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Market Opportunity -->
+    <section id="opportunity" class="section section-light">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">The European Opportunity</h2>
+                <p class="section-subtitle">Nine products. Seven markets. €127 billion total addressable market.</p>
+            </div>
+
+            <div class="market-stats">
+                <div class="market-stat">
+                    <div class="market-number">€18B</div>
+                    <div class="market-label">Healthcare AI</div>
+                </div>
+                <div class="market-stat">
+                    <div class="market-number">€12B</div>
+                    <div class="market-label">Research Infrastructure</div>
+                </div>
+                <div class="market-stat">
+                    <div class="market-number">€24B</div>
+                    <div class="market-label">Smart Infrastructure</div>
+                </div>
+                <div class="market-stat">
+                    <div class="market-number">€15B</div>
+                    <div class="market-label">Digital Identity</div>
+                </div>
+                <div class="market-stat">
+                    <div class="market-number">€22B</div>
+                    <div class="market-label">Environmental Tech</div>
+                </div>
+                <div class="market-stat">
+                    <div class="market-number">€19B</div>
+                    <div class="market-label">LegalTech</div>
+                </div>
+                <div class="market-stat">
+                    <div class="market-number">€8B</div>
+                    <div class="market-label">Quantum Computing</div>
+                </div>
+                <div class="market-stat">
+                    <div class="market-number">€9B</div>
+                    <div class="market-label">AI Governance</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section id="how-it-works" class="section section-dark">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">How Our Platform Works Together</h2>
+                <p class="section-subtitle">One infrastructure, infinite possibilities</p>
+            </div>
+
+            <div class="how-it-works">
+                <div class="workflow-step">
+                    <div class="workflow-number">1</div>
+                    <div class="workflow-content">
+                        <h3>Unified Identity Layer</h3>
+                        <p>MyD Wallet provides single sign-on across all products with eIDAS 2.0 certified credentials</p>
+                    </div>
+                </div>
+
+                <div class="workflow-step">
+                    <div class="workflow-number">2</div>
+                    <div class="workflow-content">
+                        <h3>Federated Data Exchange</h3>
+                        <p>FedX enables secure data sharing between products while maintaining sovereignty</p>
+                    </div>
+                </div>
+
+                <div class="workflow-step">
+                    <div class="workflow-number">3</div>
+                    <div class="workflow-content">
+                        <h3>Cross-Product Intelligence</h3>
+                        <p>AI insights from one product enhance others — Health data informs research, infrastructure monitoring prevents failures</p>
+                    </div>
+                </div>
+
+                <div class="workflow-step">
+                    <div class="workflow-number">4</div>
+                    <div class="workflow-content">
+                        <h3>Unified Compliance</h3>
+                        <p>Single compliance framework ensures GDPR, EU AI Act, and Green Deal adherence across all products</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="section section-light">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Ready to Reclaim Europe's Digital Future?</h2>
+                <p class="section-subtitle">Join the data sovereignty revolution</p>
+            </div>
+
+            <div style="text-align: center; margin-top: 48px;">
+                <a href="#contact" class="btn btn-cyan" style="font-size: 18px; padding: 16px 40px;">
+                    Get Started Today
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Products</h3>
+                    <ul class="footer-links">
+                        <li><a href="HealthCompanion/index.html">Health Companion</a></li>
+                        <li><a href="ResearchPay/index.html">ResearchPay</a></li>
+                        <li><a href="LabVault/index.html">LabVault</a></li>
+                        <li><a href="Argus/index.html">Argus</a></li>
+                        <li><a href="ALETHEIA/index.html">ALETHEIA</a></li>
+                        <li><a href="PROMETHEUS/index.html">PROMETHEUS</a></li>
+                        <li><a href="NEMESIS/index.html">NEMESIS</a></li>
+                        <li><a href="HYPERION/index.html">HYPERION</a></li>
+                        <li><a href="ARCHON/index.html">ARCHON</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Technology</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">MyD Wallet</a></li>
+                        <li><a href="#">FedX Protocol</a></li>
+                        <li><a href="#">InnoHealth DataLake</a></li>
+                        <li><a href="#">Archimedes Security</a></li>
+                        <li><a href="#">Nexus Chain</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Company</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">About E-Group</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Press</a></li>
+                        <li><a href="#">Partners</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Resources</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Documentation</a></li>
+                        <li><a href="#">White Papers</a></li>
+                        <li><a href="#">Case Studies</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Support</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2025 E-Group. Building Europe's sovereign data infrastructure.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Products Dropdown Toggle
+        function toggleDropdown() {
+            const dropdown = document.getElementById('productsDropdown');
+            dropdown.classList.toggle('show');
+        }
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(event) {
+            const dropdown = document.querySelector('.products-dropdown');
+            const dropdownContent = document.getElementById('productsDropdown');
+            
+            if (!dropdown.contains(event.target) && dropdownContent.classList.contains('show')) {
+                dropdownContent.classList.remove('show');
+            }
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const navHeight = document.querySelector('.nav').offsetHeight;
+                    const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - navHeight;
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Add scroll effect to nav
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('.nav');
+            if (window.scrollY > 100) {
+                nav.style.background = 'rgba(10, 14, 26, 0.98)';
+            } else {
+                nav.style.background = 'rgba(10, 14, 26, 0.95)';
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,2498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ARCHON - Sovereign Identity for Autonomous AI | E-Group</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --cyan: #00D4FF;
+            --teal: #00B4D8;
+            --dark-bg: #0A0E1A;
+            --dark-card: #0F1420;
+            --blue: #00D4FF;
+            --blue-dark: #00B4D8;
+            --green: #10a37f;
+            --red: #dc2626;
+            --orange: #ff9500;
+            --yellow: #fbbf24;
+            --purple: #8b5cf6;
+            --text-primary: #ffffff;
+            --text-secondary: rgba(255, 255, 255, 0.7);
+            --bg-gray: #1a1f2e;
+            --border: rgba(255, 255, 255, 0.1);
+            --warning: #ff9500;
+            --success: #34c759;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            line-height: 1.47059;
+            letter-spacing: -0.022em;
+            color: var(--text-primary);
+            background: var(--dark-bg);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Smooth Scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Navigation with Hamburger Menu */
+        .site-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(10, 14, 26, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 16px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: 600;
+            color: #00D4FF;
+            text-decoration: none;
+        }
+
+        /* Products Dropdown */
+        .products-dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-toggle {
+            background: none;
+            border: 1px solid rgba(255,255,255,0.2);
+            color: rgba(255,255,255,0.8);
+            padding: 10px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+
+        .dropdown-toggle:hover {
+            border-color: #00D4FF;
+            color: #00D4FF;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            margin-top: 8px;
+            background: rgba(15, 20, 32, 0.98);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 8px 0;
+            min-width: 200px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+        }
+
+        .dropdown-menu.open {
+            display: block;
+            animation: dropdownFadeIn 0.3s ease;
+        }
+
+        .dropdown-menu a {
+            display: block;
+            padding: 12px 20px;
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+
+        .dropdown-menu a:hover {
+            background: rgba(0,212,255,0.1);
+            color: #00D4FF;
+        }
+
+        .dropdown-menu a.active {
+            color: #00D4FF;
+            background: rgba(0,212,255,0.05);
+        }
+
+        @keyframes dropdownFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+
+
+        /* Hero Section */
+        .hero {
+            padding-top: 70px;
+            text-align: center;
+            background: linear-gradient(135deg, var(--dark-bg) 0%, var(--dark-card) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 20% 50%, rgba(0, 212, 255, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 50%, rgba(0, 180, 216, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            padding: 100px 22px 80px;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            padding: 8px 16px;
+            background: rgba(0, 212, 255, 0.2);
+            border: 1px solid var(--cyan);
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            margin-bottom: 30px;
+            color: var(--cyan);
+        }
+
+        .hero h1 {
+            font-size: 80px;
+            line-height: 1.05;
+            font-weight: 600;
+            letter-spacing: -0.015em;
+            margin-bottom: 30px;
+            background: linear-gradient(135deg, var(--cyan), var(--teal));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-tagline {
+            font-size: 32px;
+            font-weight: 500;
+            margin-bottom: 30px;
+            color: var(--text-primary);
+        }
+
+        .hero-description {
+            font-size: 21px;
+            line-height: 1.47;
+            color: var(--text-secondary);
+            max-width: 900px;
+            margin: 0 auto 30px;
+        }
+
+        .hero-explanation {
+            max-width: 1000px;
+            margin: 0 auto 50px;
+            text-align: left;
+        }
+
+        .hero-explanation p {
+            font-size: 18px;
+            line-height: 1.6;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        .hero-explanation p:last-child {
+            margin-bottom: 0;
+        }
+
+        .hero-explanation strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .hero-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 40px;
+            background: linear-gradient(135deg, var(--cyan), var(--teal));
+            color: white;
+            text-decoration: none;
+            border-radius: 100px;
+            font-size: 17px;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .hero-cta:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
+        }
+
+        .hero-features {
+            text-align: left;
+            list-style: none;
+            padding: 0;
+            margin: 20px 0 30px;
+        }
+
+        .hero-features li {
+            font-size: 17px;
+            line-height: 1.7;
+            color: var(--text-secondary);
+            margin-bottom: 15px;
+            padding-left: 30px;
+            position: relative;
+        }
+
+        .hero-features li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--cyan);
+            font-weight: 600;
+        }
+
+        .hero-features li strong {
+            color: var(--text-primary);
+        }
+
+        .hero-regulatory {
+            max-width: 1000px;
+            margin: 40px auto 0;
+            padding-top: 40px;
+            border-top: 1px solid rgba(0, 212, 255, 0.2);
+        }
+
+        .hero-regulatory p {
+            font-size: 18px;
+            line-height: 1.6;
+            color: var(--text-secondary);
+        }
+
+        .hero-regulatory strong {
+            color: var(--cyan);
+        }
+
+        /* Section Styles */
+        .section {
+            padding: 100px 22px;
+        }
+
+        .section-dark {
+            background: var(--dark-bg);
+        }
+
+        /* Feature Cards Grid */
+        .features-grid {
+            display: grid !important;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
+            max-width: 1200px;
+            margin: 50px auto 0;
+            padding: 0 20px;
+        }
+
+        .feature-card {
+            background: var(--dark-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 35px;
+            transition: all 0.3s;
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            max-width: 100%;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--cyan);
+            box-shadow: 0 15px 30px rgba(0, 212, 255, 0.1);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--cyan), var(--teal));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        .feature-title {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--text-primary);
+        }
+
+        .feature-description {
+            font-size: 15px;
+            line-height: 1.6;
+            color: var(--text-secondary);
+            flex-grow: 1;
+        }
+
+        .feature-list {
+            margin-top: 20px;
+            list-style: none;
+            padding: 0;
+        }
+
+        .feature-list li {
+            font-size: 14px;
+            color: var(--text-secondary);
+            padding: 8px 0;
+            border-top: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+        }
+
+        .feature-list li:before {
+            content: '';
+            color: var(--cyan);
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .section-darker {
+            background: linear-gradient(135deg, var(--dark-card) 0%, var(--dark-bg) 100%);
+        }
+
+        .section-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title {
+            font-size: 48px;
+            font-weight: 600;
+            line-height: 1.1;
+            margin-bottom: 20px;
+        }
+
+        .section-subtitle {
+            font-size: 21px;
+            color: var(--text-secondary);
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.5;
+        }
+
+        /* Problem Section */
+        .problem-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+            max-width: 1200px;
+            margin: 50px auto 0;
+        }
+
+        .problem-card {
+            background: var(--dark-card);
+            border: 1px solid var(--border);
+            padding: 40px;
+            border-radius: 20px;
+            transition: all 0.3s;
+            width: auto;
+            max-width: none;
+        }
+
+        .problem-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(0, 212, 255, 0.3);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .problem-icon {
+            background: rgba(0, 212, 255, 0.1);
+            border-radius: 12px;
+            padding: 12px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .problem-title {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--cyan);
+        }
+
+        .problem-description {
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--text-secondary);
+        }
+
+        .stat-highlight {
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--cyan);
+            margin-bottom: 10px;
+        }
+
+        /* How It Works Section */
+        .architecture-diagram {
+            background: var(--dark-card);
+            border-radius: 20px;
+            padding: 40px;
+            margin-top: 50px;
+            overflow-x: auto;
+        }
+
+        .diagram-svg {
+            width: 100%;
+            max-width: 1100px;
+            height: auto;
+            margin: 0 auto;
+            display: block;
+        }
+
+        /* Technology Stack */
+        .tech-stack {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 50px;
+        }
+
+        .tech-column {
+            background: var(--dark-card);
+            border-radius: 20px;
+            padding: 40px;
+            border: 1px solid var(--border);
+        }
+
+        .tech-column-header {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid var(--cyan);
+        }
+
+        .tech-item {
+            margin-bottom: 25px;
+        }
+
+        .tech-item-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--cyan);
+            margin-bottom: 8px;
+        }
+
+        .tech-item-description {
+            font-size: 15px;
+            line-height: 1.5;
+            color: var(--text-secondary);
+        }
+
+        /* Timeline */
+        .timeline {
+            margin-top: 50px;
+            padding: 40px;
+            background: var(--dark-card);
+            border-radius: 20px;
+        }
+
+        .timeline-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+            position: relative;
+            padding-left: 40px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 12px;
+            height: 12px;
+            background: var(--cyan);
+            border-radius: 50%;
+        }
+
+        .timeline-date {
+            min-width: 120px;
+            font-weight: 600;
+            color: var(--cyan);
+            margin-right: 30px;
+        }
+
+        .timeline-content {
+            flex: 1;
+        }
+
+        .timeline-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .timeline-description {
+            font-size: 15px;
+            color: var(--text-secondary);
+        }
+
+        /* Comparison Table */
+        .comparison-table {
+            overflow-x: auto;
+            margin-top: 50px;
+        }
+
+        .comparison-table table {
+            width: 100%;
+            background: var(--dark-card);
+            border-radius: 20px;
+            overflow: hidden;
+            border-collapse: separate;
+            border-spacing: 0;
+        }
+
+        .comparison-table th {
+            padding: 20px;
+            background: rgba(0, 212, 255, 0.1);
+            font-weight: 600;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .comparison-table td {
+            padding: 20px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .comparison-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .comparison-table .product-name {
+            font-weight: 600;
+            color: var(--cyan);
+        }
+
+        .check {
+            color: var(--green);
+            font-size: 20px;
+        }
+
+        .cross {
+            color: var(--red);
+            font-size: 20px;
+        }
+
+        .partial {
+            color: var(--yellow);
+            font-size: 20px;
+        }
+
+        /* Target Markets */
+        .markets-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .market-card {
+            background: var(--dark-card);
+            border: 1px solid var(--border);
+            padding: 35px;
+            border-radius: 20px;
+            transition: all 0.3s;
+        }
+
+        .market-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--cyan);
+            box-shadow: 0 15px 30px rgba(0, 212, 255, 0.1);
+        }
+
+        .market-icon {
+            background: rgba(0, 212, 255, 0.1);
+            border-radius: 12px;
+            padding: 12px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .market-title {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .market-description {
+            font-size: 15px;
+            color: var(--text-secondary);
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        .market-deal-size {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--cyan);
+        }
+
+        /* Pricing */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .pricing-card {
+            background: var(--dark-card);
+            border: 1px solid var(--border);
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .pricing-card.featured {
+            border: 2px solid var(--cyan);
+            transform: scale(1.05);
+        }
+
+        .pricing-card.featured::before {
+            content: 'RECOMMENDED';
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--cyan);
+            color: var(--dark-bg);
+            padding: 4px 20px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+        }
+
+        .pricing-tier {
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-secondary);
+            margin-bottom: 15px;
+        }
+
+        .pricing-name {
+            font-size: 32px;
+            font-weight: 600;
+            margin-bottom: 25px;
+        }
+
+        .pricing-cost {
+            margin-bottom: 20px;
+        }
+
+        .pricing-implementation {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--cyan);
+        }
+
+        .pricing-annual {
+            font-size: 16px;
+            color: var(--text-secondary);
+            margin-top: 10px;
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin: 30px 0;
+            text-align: left;
+        }
+
+        .pricing-features li {
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border);
+            color: var(--text-secondary);
+        }
+
+        .pricing-features li:last-child {
+            border-bottom: none;
+        }
+
+        .pricing-cta {
+            width: 100%;
+            padding: 14px 32px;
+            background: transparent;
+            color: var(--cyan);
+            border: 1px solid var(--cyan);
+            border-radius: 100px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .pricing-card.featured .pricing-cta {
+            background: linear-gradient(135deg, var(--cyan), var(--teal));
+            color: white;
+            border: none;
+        }
+
+        .pricing-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 212, 255, 0.3);
+        }
+
+        /* Interactive Tools Section */
+        .tools-preview-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .tool-preview-card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            padding: 50px;
+            border: 2px solid rgba(0, 212, 255, 0.2);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .tool-preview-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--cyan), var(--teal));
+        }
+
+        .tool-preview-content {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .tool-preview-left {
+            z-index: 1;
+        }
+
+        .tool-preview-title {
+            font-size: 32px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--cyan);
+        }
+
+        .tool-preview-subtitle {
+            font-size: 20px;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+        }
+
+        .tool-preview-description {
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+        }
+
+        .tool-preview-button {
+            display: inline-block;
+            padding: 14px 32px;
+            background: linear-gradient(135deg, var(--cyan), var(--teal));
+            color: white;
+            text-decoration: none;
+            border-radius: 100px;
+            font-size: 16px;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .tool-preview-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
+        }
+
+        .tool-preview-right {
+            position: relative;
+        }
+
+        .mini-counter-container {
+            background: rgba(10, 14, 26, 0.8);
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            border-radius: 16px;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mini-counter-container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(0, 212, 255, 0.05) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        .mini-counter-label {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-secondary);
+            margin-bottom: 15px;
+        }
+
+        .mini-counter {
+            font-size: 42px;
+            font-weight: 700;
+            color: var(--cyan);
+            font-variant-numeric: tabular-nums;
+            text-shadow: 0 0 30px rgba(0, 212, 255, 0.5);
+            position: relative;
+            z-index: 1;
+            transition: all 0.3s ease;
+        }
+
+        .mini-counter-sublabel {
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-top: 10px;
+            opacity: 0.7;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Test Button Preview */
+        .test-button-container {
+            background: rgba(10, 14, 26, 0.8);
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            border-radius: 16px;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mini-test-button {
+            padding: 25px 60px;
+            font-size: 24px;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--cyan), var(--teal));
+            color: var(--dark-bg);
+            border: none;
+            border-radius: 100px;
+            cursor: not-allowed;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            box-shadow: 0 0 40px rgba(0, 212, 255, 0.3);
+            opacity: 0.8;
+            animation: pulse 3s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow: 0 0 40px rgba(0, 212, 255, 0.3);
+            }
+            50% {
+                transform: scale(1.02);
+                box-shadow: 0 0 60px rgba(0, 212, 255, 0.4);
+            }
+        }
+
+        .test-button-sublabel {
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-top: 15px;
+            opacity: 0.7;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 120px 22px;
+            background: linear-gradient(135deg, var(--dark-card) 0%, var(--dark-bg) 100%);
+            text-align: center;
+        }
+
+        .cta-title {
+            font-size: 48px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .cta-subtitle {
+            font-size: 24px;
+            margin-bottom: 50px;
+            color: var(--text-secondary);
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-primary {
+            background: linear-gradient(135deg, var(--cyan), var(--teal));
+            color: white;
+            padding: 16px 32px;
+            border-radius: 100px;
+            text-decoration: none;
+            font-size: 17px;
+            font-weight: 500;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+
+        .cta-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
+        }
+
+        .cta-secondary {
+            background: transparent;
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 16px 32px;
+            border-radius: 100px;
+            text-decoration: none;
+            font-size: 17px;
+            font-weight: 500;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+
+        .cta-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* Footer */
+        footer {
+            padding: 60px 22px 40px;
+            background: var(--dark-card);
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h4 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--cyan);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--cyan);
+        }
+
+        .footer-bottom {
+            padding-top: 30px;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .footer-copyright {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .hero h1 {
+                font-size: 64px;
+            }
+
+            .tech-stack {
+                grid-template-columns: 1fr;
+            }
+
+            .markets-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            }
+
+            .tool-preview-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .features-grid {
+                grid-template-columns: 1fr;
+                padding: 0 10px;
+            }
+
+            .feature-card {
+                padding: 25px;
+            }
+
+
+            .hero h1 {
+                font-size: 48px;
+            }
+
+            .hero-explanation {
+                padding: 0 20px;
+            }
+
+            .hero-explanation p {
+                font-size: 16px;
+            }
+
+            .hero-features li {
+                font-size: 15px;
+                padding-left: 25px;
+            }
+
+            .hero-regulatory p {
+                font-size: 16px;
+            }
+
+            .hero-tagline {
+                font-size: 24px;
+            }
+
+            .hero-description {
+                font-size: 18px;
+            }
+
+            .section-title {
+                font-size: 36px;
+            }
+
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .pricing-card.featured {
+                transform: none;
+            }
+
+            .comparison-table {
+                font-size: 14px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .cta-primary, .cta-secondary {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .tool-preview-card {
+                padding: 30px 20px;
+            }
+
+            .mini-counter {
+                font-size: 32px;
+            }
+
+            .tool-preview-title {
+                font-size: 24px;
+            }
+
+            .tool-preview-subtitle {
+                font-size: 18px;
+            }
+
+            .mini-test-button {
+                font-size: 18px;
+                padding: 20px 40px;
+            }
+
+            .test-button-container {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation with Hamburger Menu -->
+    <header class="site-header">
+        <div class="header-container">
+            <a href="../index.html" class="logo">E-Group</a>
+            <div class="products-dropdown">
+                <button class="dropdown-toggle" onclick="toggleDropdown()">Products ▼</button>
+                <nav class="dropdown-menu">
+                    <a href="../HealthCompanion/index.html">Health Companion</a>
+                    <a href="../ResearchPay/index.html">ResearchPay</a>
+                    <a href="../LabVault/index.html">LabVault</a>
+                    <a href="../Argus/index.html">Argus</a>
+                    <a href="../ALETHEIA/index.html">Aletheia</a>
+                    <a href="../PROMETHEUS/index.html">Prometheus</a>
+                    <a href="../NEMESIS/index.html">Nemesis</a>
+                    <a href="../HYPERION/index.html">Hyperion</a>
+                    <a href="index.html" class="active">Archon</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">EU's First eIDAS 2.0 Certified AI Agent Identity</div>
+            <h1>ARCHON</h1>
+            <p class="hero-tagline">Identity & Access Management for AI Agents</p>
+            <div class="hero-explanation">
+                <p>
+                    <strong>ARCHON is an identity management system for AI agents</strong>—the autonomous software programs that companies are deploying to automate tasks, make decisions, and access sensitive data.
+                </p>
+                <p>
+                    Just like employees need ID badges and access permissions, AI agents need verified identities and controlled access. ARCHON provides this by:
+                </p>
+                <ul class="hero-features">
+                    <li><strong>Issuing digital credentials</strong> to each AI agent so you know exactly which agents are operating in your systems</li>
+                    <li><strong>Controlling what each agent can do</strong> with real-time permission enforcement</li>
+                    <li><strong>Linking every agent to a responsible human</strong> so there's always accountability</li>
+                    <li><strong>Logging every action</strong> for compliance and audit purposes</li>
+                </ul>
+                <p>
+                    Think of ARCHON as <strong>'HR for your AI workforce'</strong>—onboarding agents with verified identities, defining what they're allowed to do, and maintaining records of everything they do.
+                </p>
+            </div>
+            <div class="hero-regulatory">
+                <p>
+                    <strong>Built on E-Group's eIDAS 2.0 certified MyD Wallet</strong>, ARCHON is the EU's first sovereign identity infrastructure for AI agents. While US solutions like Strivacity and Okta bolt governance onto cloud-centric platforms, ARCHON is built from the ground up for European data sovereignty. Federated architecture means your agents don't phone home to American servers. GDPR, EU AI Act, DORA, and NIS2 compliance is native, not an afterthought.
+                </p>
+            </div>
+            <a href="#contact" class="hero-cta">Request Enterprise Demo →</a>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section id="problem" class="section section-dark">
+        <div class="section-content">
+            <div class="section-header">
+                <h2 class="section-title">The AI Identity Crisis</h2>
+                <p class="section-subtitle">
+                    AI agents are becoming autonomous actors — executing transactions, accessing data, making decisions. 
+                    But we're trying to secure machine-speed interactions with human-centric identity models.
+                </p>
+            </div>
+
+            <div class="problem-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; max-width: 1200px; margin: 50px auto 0; padding: 0 20px;">
+                <div class="problem-card">
+                    <span class="problem-icon">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#00D4FF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/>
+                            <path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/>
+                            <path d="M1 1l22 22"/>
+                            <circle cx="12" cy="12" r="3"/>
+                        </svg>
+                    </span>
+                    <div class="stat-highlight">83%</div>
+                    <h3 class="problem-title">Blind Automation</h3>
+                    <p class="problem-description">
+                        of organizations use AI, but only 13% have visibility into how these systems handle sensitive data. 
+                        Agents operate in the shadows without proper identity or accountability.
+                    </p>
+                </div>
+
+                <div class="problem-card">
+                    <span class="problem-icon">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#00D4FF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                            <path d="M9 9l6 6"/>
+                            <path d="M15 9l-6 6"/>
+                        </svg>
+                    </span>
+                    <div class="stat-highlight">76%</div>
+                    <h3 class="problem-title">Security Nightmare</h3>
+                    <p class="problem-description">
+                        of security professionals say autonomous AI agents are "the hardest systems to secure." 
+                        Traditional IAM breaks down when interactions happen at machine speed.
+                    </p>
+                </div>
+
+                <div class="problem-card">
+                    <span class="problem-icon">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#00D4FF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M2 12h20"/>
+                            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                        </svg>
+                    </span>
+                    <h3 class="problem-title">Sovereignty at Risk</h3>
+                    <p class="problem-description">
+                        US solutions (Strivacity, authID, Okta) don't address EU sovereignty or GDPR requirements. 
+                        Your AI agents shouldn't phone home to US clouds for permission to operate.
+                    </p>
+                </div>
+
+                <div class="problem-card">
+                    <span class="problem-icon">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#00D4FF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+                        </svg>
+                    </span>
+                    <h3 class="problem-title">Machine Speed Mismatch</h3>
+                    <p class="problem-description">
+                        Non-human identity interactions will soon outnumber human ones. Current systems can't handle 
+                        the volume, velocity, or verification needs of autonomous AI operations.
+                    </p>
+                </div>
+
+                <div class="problem-card">
+                    <span class="problem-icon">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#00D4FF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/>
+                            <rect x="8" y="2" width="8" height="4" rx="1" ry="1"/>
+                            <path d="M9.5 11a2.5 2.5 0 1 1 5 0c0 1-1 1.5-2 2v1"/>
+                            <path d="M12 17h.01"/>
+                        </svg>
+                    </span>
+                    <h3 class="problem-title">Regulatory Void</h3>
+                    <p class="problem-description">
+                        No standardized way to verify agent identity, enforce authorization, or maintain accountability. 
+                        EU AI Act compliance becomes impossible without proper agent governance.
+                    </p>
+                </div>
+
+                <div class="problem-card">
+                    <span class="problem-icon">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#00D4FF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+                            <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+                            <path d="M18 6l-6 6"/>
+                        </svg>
+                    </span>
+                    <h3 class="problem-title">Trust Deficit</h3>
+                    <p class="problem-description">
+                        When an AI agent makes a €10M trading decision or accesses patient records, who's accountable? 
+                        Without verifiable identity chains, trust in AI systems collapses.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="section section-darker">
+        <div class="section-content">
+            <div class="section-header">
+                <h2 class="section-title">How ARCHON Works</h2>
+                <p class="section-subtitle">
+                    Complete identity lifecycle management for AI agents — from credential issuance to audit trails
+                </p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#00D4FF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="5" width="20" height="14" rx="2"/>
+                            <circle cx="8" cy="12" r="2"/>
+                            <path d="M14 10h4"/>
+                            <path d="M14 14h4"/>
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">Agent Identity Registry</h3>
+                    <p class="feature-description">
+                        Issue verifiable credentials to AI agents with cryptographic proof of identity. 
+                        Every agent is bound to a human sponsor who maintains ultimate accountability.
+                    </p>
+                    <ul class="feature-list">
+                        <li>eIDAS 2.0 certified credentials</li>
+                        <li>Human-to-agent binding</li>
+                        <li>Revocation capabilities</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#00D4FF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">Policy Engine</h3>
+                    <p class="feature-description">
+                        Define granular permissions and enforce them in real-time. Context-aware 
+                        authorization decisions at machine speed without sacrificing security.
+                    </p>
+                    <ul class="feature-list">
+                        <li>Real-time enforcement</li>
+                        <li>Context-aware decisions</li>
+                        <li>Dynamic policy updates</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#00D4FF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M2 12h20"/>
+                            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">Federated Governance</h3>
+                    <p class="feature-description">
+                        Distributed architecture with no central point of failure. Your agent 
+                        governance stays within EU borders, ensuring complete data sovereignty.
+                    </p>
+                    <ul class="feature-list">
+                        <li>No central failure point</li>
+                        <li>EU data sovereignty</li>
+                        <li>Cross-organization federation</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#00D4FF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M18 20V10"/>
+                            <path d="M12 20V4"/>
+                            <path d="M6 20v-6"/>
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">Audit & Compliance</h3>
+                    <p class="feature-description">
+                        Immutable audit logs track every agent action. Built-in compliance 
+                        reporting for EU AI Act, GDPR, DORA, and NIS2 requirements.
+                    </p>
+                    <ul class="feature-list">
+                        <li>Immutable audit trails</li>
+                        <li>Compliance dashboards</li>
+                        <li>Automated reporting</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#00D4FF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                            <circle cx="12" cy="7" r="4"/>
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">Human-in-the-Loop</h3>
+                    <p class="feature-description">
+                        Emergency intervention capabilities ensure humans maintain control. 
+                        Approval workflows for high-risk operations and override mechanisms.
+                    </p>
+                    <ul class="feature-list">
+                        <li>Emergency intervention</li>
+                        <li>Approval workflows</li>
+                        <li>Override capabilities</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="architecture-diagram" style="margin-top: 80px;">
+                <svg class="diagram-svg" viewBox="0 0 1200 650" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Background -->
+                    <rect width="1200" height="650" fill="transparent"/>
+                    
+                    <!-- Title -->
+                    <text x="600" y="30" text-anchor="middle" font-size="22" fill="#00D4FF" font-weight="600">ARCHON Architecture</text>
+                    <text x="600" y="55" text-anchor="middle" font-size="14" fill="rgba(255, 255, 255, 0.6)">Combining E-Group Identity & Compliance with Konvergence Zero-Trust Infrastructure</text>
+                    
+                    <!-- Vertical Separator Line -->
+                    <line x1="600" y1="80" x2="600" y2="480" stroke="rgba(255, 255, 255, 0.1)" stroke-width="2" stroke-dasharray="5,5"/>
+                    
+                    <!-- E-Group Stack Label -->
+                    <text x="300" y="90" text-anchor="middle" font-size="18" fill="#00D4FF" font-weight="600">E-Group Stack</text>
+                    
+                    <!-- Konvergence Stack Label -->
+                    <text x="900" y="90" text-anchor="middle" font-size="18" fill="#A855F7" font-weight="600">Konvergence Stack</text>
+                    
+                    <!-- E-GROUP COMPONENTS (LEFT SIDE) -->
+                    
+                    <!-- MyD Wallet → Agent Identity Registry -->
+                    <g transform="translate(50, 120)">
+                        <defs>
+                            <linearGradient id="cyanGradient1" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#00D4FF;stop-opacity:0.2" />
+                                <stop offset="100%" style="stop-color:#00B4D8;stop-opacity:0.1" />
+                            </linearGradient>
+                        </defs>
+                        <rect x="0" y="0" width="240" height="100" rx="12" fill="url(#cyanGradient1)" stroke="#00D4FF" stroke-width="2"/>
+                        <text x="120" y="25" text-anchor="middle" font-size="14" fill="#00D4FF" font-weight="700">MyD Wallet</text>
+                        <text x="120" y="45" text-anchor="middle" font-size="12" fill="rgba(255, 255, 255, 0.9)" font-weight="600">→ Agent Identity Registry</text>
+                        <text x="120" y="65" text-anchor="middle" font-size="11" fill="rgba(255, 255, 255, 0.6)">Issue verifiable credentials</text>
+                        <text x="120" y="82" text-anchor="middle" font-size="11" fill="rgba(255, 255, 255, 0.6)">Bind to human sponsors</text>
+                    </g>
+                    
+                    <!-- FedX → Policy Engine -->
+                    <g transform="translate(310, 120)">
+                        <defs>
+                            <linearGradient id="cyanGradient2" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#00D4FF;stop-opacity:0.2" />
+                                <stop offset="100%" style="stop-color:#00B4D8;stop-opacity:0.1" />
+                            </linearGradient>
+                        </defs>
+                        <rect x="0" y="0" width="240" height="100" rx="12" fill="url(#cyanGradient2)" stroke="#00D4FF" stroke-width="2"/>
+                        <text x="120" y="25" text-anchor="middle" font-size="14" fill="#00D4FF" font-weight="700">FedX</text>
+                        <text x="120" y="45" text-anchor="middle" font-size="12" fill="rgba(255, 255, 255, 0.9)" font-weight="600">→ Policy Engine</text>
+                        <text x="120" y="65" text-anchor="middle" font-size="11" fill="rgba(255, 255, 255, 0.6)">Define permissions</text>
+                        <text x="120" y="82" text-anchor="middle" font-size="11" fill="rgba(255, 255, 255, 0.6)">Real-time enforcement</text>
+                    </g>
+                    
+                    <!-- InnoHealth DataLake → Audit & Compliance -->
+                    <g transform="translate(180, 240)">
+                        <defs>
+                            <linearGradient id="cyanGradient3" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#00D4FF;stop-opacity:0.2" />
+                                <stop offset="100%" style="stop-color:#00B4D8;stop-opacity:0.1" />
+                            </linearGradient>
+                        </defs>
+                        <rect x="0" y="0" width="240" height="100" rx="12" fill="url(#cyanGradient3)" stroke="#00D4FF" stroke-width="2"/>
+                        <text x="120" y="25" text-anchor="middle" font-size="14" fill="#00D4FF" font-weight="700">InnoHealth DataLake</text>
+                        <text x="120" y="45" text-anchor="middle" font-size="12" fill="rgba(255, 255, 255, 0.9)" font-weight="600">→ Audit & Compliance</text>
+                        <text x="120" y="65" text-anchor="middle" font-size="11" fill="rgba(255, 255, 255, 0.6)">Immutable logs</text>
+                        <text x="120" y="82" text-anchor="middle" font-size="11" fill="rgba(255, 255, 255, 0.6)">EU AI Act reporting</text>
+                    </g>
+                    
+                    <!-- KONVERGENCE COMPONENTS (RIGHT SIDE) -->
+                    
+                    <!-- Archimedes → Zero-Trust Infrastructure -->
+                    <g transform="translate(650, 120)">
+                        <defs>
+                            <linearGradient id="purpleGradient1" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#A855F7;stop-opacity:0.2" />
+                                <stop offset="100%" style="stop-color:#9333EA;stop-opacity:0.1" />
+                            </linearGradient>
+                        </defs>
+                        <rect x="0" y="0" width="240" height="100" rx="12" fill="url(#purpleGradient1)" stroke="#A855F7" stroke-width="2"/>
+                        <text x="120" y="25" text-anchor="middle" font-size="14" fill="#A855F7" font-weight="700">Archimedes</text>
+                        <text x="120" y="45" text-anchor="middle" font-size="12" fill="rgba(255, 255, 255, 0.9)" font-weight="600">→ Zero-Trust Infrastructure</text>
+                        <text x="120" y="65" text-anchor="middle" font-size="11" fill="rgba(255, 255, 255, 0.6)">DID/VC support</text>
+                        <text x="120" y="82" text-anchor="middle" font-size="11" fill="rgba(255, 255, 255, 0.6)">Cryptographic authentication</text>
+                    </g>
+                    
+                    <!-- Fortigraph → Credential Resilience -->
+                    <g transform="translate(910, 120)">
+                        <defs>
+                            <linearGradient id="purpleGradient2" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#A855F7;stop-opacity:0.2" />
+                                <stop offset="100%" style="stop-color:#9333EA;stop-opacity:0.1" />
+                            </linearGradient>
+                        </defs>
+                        <rect x="0" y="0" width="240" height="100" rx="12" fill="url(#purpleGradient2)" stroke="#A855F7" stroke-width="2"/>
+                        <text x="120" y="25" text-anchor="middle" font-size="14" fill="#A855F7" font-weight="700">Fortigraph</text>
+                        <text x="120" y="45" text-anchor="middle" font-size="12" fill="rgba(255, 255, 255, 0.9)" font-weight="600">→ Credential Resilience</text>
+                        <text x="120" y="65" text-anchor="middle" font-size="11" fill="rgba(255, 255, 255, 0.6)">Backup/recovery</text>
+                        <text x="120" y="82" text-anchor="middle" font-size="11" fill="rgba(255, 255, 255, 0.6)">Hot Shield protection</text>
+                    </g>
+                    
+                    <!-- CENTRAL COMPONENTS -->
+                    
+                    <!-- AI Agent (Center) -->
+                    <g transform="translate(500, 300)">
+                        <defs>
+                            <radialGradient id="agentGradient">
+                                <stop offset="0%" style="stop-color:#9D4EDD;stop-opacity:0.3" />
+                                <stop offset="100%" style="stop-color:#9D4EDD;stop-opacity:0.05" />
+                            </radialGradient>
+                            <filter id="agentGlow">
+                                <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                                <feMerge>
+                                    <feMergeNode in="coloredBlur"/>
+                                    <feMergeNode in="SourceGraphic"/>
+                                </feMerge>
+                            </filter>
+                        </defs>
+                        <circle cx="100" cy="60" r="55" fill="url(#agentGradient)" stroke="#9D4EDD" stroke-width="2" filter="url(#agentGlow)"/>
+                        <text x="100" y="65" text-anchor="middle" font-size="18" fill="#9D4EDD" font-weight="600">AI Agent</text>
+                    </g>
+                    
+                    <!-- Human Sponsor (Left-Center) -->
+                    <g transform="translate(80, 380)">
+                        <rect x="0" y="0" width="180" height="80" rx="12" fill="rgba(0, 212, 255, 0.05)" stroke="#00D4FF" stroke-width="1" stroke-dasharray="5,5"/>
+                        <text x="90" y="30" text-anchor="middle" font-size="14" fill="#00D4FF" font-weight="600">Human Sponsor</text>
+                        <text x="90" y="50" text-anchor="middle" font-size="11" fill="rgba(255, 255, 255, 0.6)">Ultimate accountability</text>
+                    </g>
+                    
+                    <!-- Protected Resources (Right-Center) -->
+                    <g transform="translate(940, 380)">
+                        <rect x="0" y="0" width="180" height="80" rx="12" fill="rgba(168, 85, 247, 0.05)" stroke="#A855F7" stroke-width="1" stroke-dasharray="5,5"/>
+                        <text x="90" y="30" text-anchor="middle" font-size="14" fill="#A855F7" font-weight="600">Protected Resources</text>
+                        <text x="90" y="50" text-anchor="middle" font-size="11" fill="rgba(255, 255, 255, 0.6)">Data & systems</text>
+                    </g>
+                    
+                    <!-- FLOW ARROWS -->
+                    
+                    <!-- Human Sponsor → MyD Wallet (Register Identity) -->
+                    <path d="M 170 380 Q 170 300 170 220" stroke="#00D4FF" stroke-width="2" fill="none" marker-end="url(#arrowCyan)" opacity="0.8"/>
+                    <text x="145" y="300" font-size="10" fill="#00D4FF" opacity="0.7">Register</text>
+                    
+                    <!-- MyD Wallet → AI Agent (Issue Credentials) -->
+                    <path d="M 290 170 Q 400 170 500 330" stroke="#00D4FF" stroke-width="2" fill="none" marker-end="url(#arrowCyan)" opacity="0.8"/>
+                    <text x="380" y="230" font-size="10" fill="#00D4FF" opacity="0.7">Issue DID</text>
+                    
+                    <!-- FedX → AI Agent (Policies) -->
+                    <path d="M 430 220 Q 480 270 550 330" stroke="#00D4FF" stroke-width="2" fill="none" marker-end="url(#arrowCyan)" opacity="0.8"/>
+                    <text x="460" y="280" font-size="10" fill="#00D4FF" opacity="0.7">Policies</text>
+                    
+                    <!-- AI Agent → Archimedes (Authenticate) -->
+                    <path d="M 650 330 Q 750 250 770 220" stroke="#A855F7" stroke-width="2" fill="none" marker-end="url(#arrowPurple)" opacity="0.8"/>
+                    <text x="720" y="260" font-size="10" fill="#A855F7" opacity="0.7">Auth</text>
+                    
+                    <!-- Archimedes → Protected Resources (Zero-Trust Access) -->
+                    <path d="M 890 170 Q 970 270 1030 380" stroke="#A855F7" stroke-width="2" fill="none" marker-end="url(#arrowPurple)" opacity="0.8"/>
+                    <text x="950" y="280" font-size="10" fill="#A855F7" opacity="0.7">Access</text>
+                    
+                    <!-- Fortigraph → AI Agent (Backup Credentials) -->
+                    <path d="M 1030 220 Q 850 300 700 350" stroke="#A855F7" stroke-width="1" fill="none" marker-end="url(#arrowPurple)" opacity="0.5" stroke-dasharray="3,3"/>
+                    <text x="850" y="290" font-size="10" fill="#A855F7" opacity="0.7">Backup</text>
+                    
+                    <!-- All Actions → InnoHealth DataLake (Audit Logs) -->
+                    <path d="M 430 220 Q 350 260 300 290" stroke="#00D4FF" stroke-width="1" fill="none" marker-end="url(#arrowCyan)" opacity="0.5" stroke-dasharray="3,3"/>
+                    <path d="M 600 360 Q 450 360 420 340" stroke="#9D4EDD" stroke-width="1" fill="none" marker-end="url(#arrowPurple)" opacity="0.5" stroke-dasharray="3,3"/>
+                    <path d="M 770 220 Q 500 300 420 290" stroke="#A855F7" stroke-width="1" fill="none" marker-end="url(#arrowPurple)" opacity="0.5" stroke-dasharray="3,3"/>
+                    <text x="350" y="340" font-size="10" fill="rgba(255,255,255,0.5)" opacity="0.7">Audit</text>
+                    
+                    <!-- Human-in-the-Loop → AI Agent (Override) -->
+                    <path d="M 400 520 Q 500 420 550 380" stroke="#ff9500" stroke-width="2" fill="none" marker-end="url(#arrowOrange)" opacity="0.7" stroke-dasharray="5,3"/>
+                    <text x="450" y="450" font-size="10" fill="#ff9500" opacity="0.7">Override</text>
+                    
+                    <!-- Arrow markers -->
+                    <defs>
+                        <marker id="arrowCyan" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+                            <polygon points="0 0, 10 5, 0 10" fill="#00D4FF" opacity="0.8"/>
+                        </marker>
+                        <marker id="arrowPurple" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+                            <polygon points="0 0, 10 5, 0 10" fill="#A855F7" opacity="0.8"/>
+                        </marker>
+                        <marker id="arrowOrange" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+                            <polygon points="0 0, 10 5, 0 10" fill="#ff9500" opacity="0.8"/>
+                        </marker>
+                    </defs>
+                    
+                    <!-- Human-in-the-Loop Controls (Bottom) -->
+                    <g transform="translate(400, 500)">
+                        <rect x="0" y="0" width="400" height="70" rx="12" fill="rgba(255, 149, 0, 0.1)" stroke="#ff9500" stroke-width="2"/>
+                        <text x="200" y="30" text-anchor="middle" font-size="16" fill="#ff9500" font-weight="600">Human-in-the-Loop Controls</text>
+                        <text x="200" y="50" text-anchor="middle" font-size="12" fill="rgba(255, 255, 255, 0.7)">Emergency intervention • Approval workflows • Override capabilities</text>
+                    </g>
+                    
+                    <!-- Legend -->
+                    <g transform="translate(50, 550)">
+                        <rect x="0" y="0" width="15" height="15" fill="rgba(0, 212, 255, 0.3)"/>
+                        <text x="20" y="12" font-size="11" fill="rgba(255, 255, 255, 0.6)">E-Group Technology</text>
+                        
+                        <rect x="150" y="0" width="15" height="15" fill="rgba(168, 85, 247, 0.3)"/>
+                        <text x="170" y="12" font-size="11" fill="rgba(255, 255, 255, 0.6)">Konvergence Technology</text>
+                    </g>
+                </svg>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technology Stack Section -->
+    <section id="technology" class="section section-dark">
+        <div class="section-content">
+            <div class="section-header">
+                <h2 class="section-title">Technology Stack</h2>
+                <p class="section-subtitle">
+                    Built on proven E-Group and Konvergence infrastructure with 30 years of EU government trust
+                </p>
+            </div>
+
+            <div class="tech-stack">
+                <div class="tech-column">
+                    <h3 class="tech-column-header">E-Group Components</h3>
+                    
+                    <div class="tech-item">
+                        <div class="tech-item-title">MyD Wallet</div>
+                        <div class="tech-item-description">
+                            eIDAS 2.0 certified digital identity wallet extended for AI agent credentials. 
+                            Issues and manages verifiable credentials for both human sponsors and their AI agents.
+                        </div>
+                    </div>
+                    
+                    <div class="tech-item">
+                        <div class="tech-item-title">FedX</div>
+                        <div class="tech-item-description">
+                            Federated policy enforcement engine for real-time authorization decisions. 
+                            Ensures agents operate within defined boundaries across distributed systems.
+                        </div>
+                    </div>
+                    
+                    <div class="tech-item">
+                        <div class="tech-item-title">InnoHealth DataLake</div>
+                        <div class="tech-item-description">
+                            Immutable audit logging and compliance reporting infrastructure. 
+                            Tracks every agent action for EU AI Act compliance and forensic analysis.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tech-column">
+                    <h3 class="tech-column-header">Konvergence Components</h3>
+                    
+                    <div class="tech-item">
+                        <div class="tech-item-title">Archimedes</div>
+                        <div class="tech-item-description">
+                            Zero-trust infrastructure with DID/VC (Decentralized Identifier/Verifiable Credential) 
+                            support for cryptographic agent authentication and authorization.
+                        </div>
+                    </div>
+                    
+                    <div class="tech-item">
+                        <div class="tech-item-title">Fortigraph</div>
+                        <div class="tech-item-description">
+                            Credential backup and recovery system ensuring agent identities persist across 
+                            infrastructure changes. Includes Hot Shield for active protection.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why This Matters Now Section -->
+    <section class="section section-darker">
+        <div class="section-content">
+            <div class="section-header">
+                <h2 class="section-title">Why This Matters Now</h2>
+                <p class="section-subtitle">
+                    Four major EU regulations are converging to mandate verifiable AI agent identity
+                </p>
+            </div>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date">October 2024</div>
+                    <div class="timeline-content">
+                        <div class="timeline-title">NIS2 Directive</div>
+                        <div class="timeline-description">
+                            Critical infrastructure must secure all systems including AI. 
+                            Agent identity becomes mandatory for compliance.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">January 2025</div>
+                    <div class="timeline-content">
+                        <div class="timeline-title">DORA</div>
+                        <div class="timeline-description">
+                            Financial sector ICT risk management requires oversight of all digital actors, 
+                            including autonomous AI systems.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">2025-2026</div>
+                    <div class="timeline-content">
+                        <div class="timeline-title">EU AI Act</div>
+                        <div class="timeline-description">
+                            High-risk AI systems require full traceability and human accountability. 
+                            Impossible without proper agent identity infrastructure.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">2026</div>
+                    <div class="timeline-content">
+                        <div class="timeline-title">eIDAS 2.0</div>
+                        <div class="timeline-description">
+                            EU Digital Identity Wallets become mandatory. ARCHON extends this framework 
+                            to cover machine and agent identities.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Competitive Positioning Section -->
+    <section class="section section-dark">
+        <div class="section-content">
+            <div class="section-header">
+                <h2 class="section-title">Competitive Positioning</h2>
+                <p class="section-subtitle">
+                    The only solution built for EU sovereignty and regulatory requirements from day one
+                </p>
+            </div>
+
+            <div class="comparison-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Capability</th>
+                            <th class="product-name">ARCHON</th>
+                            <th>Strivacity</th>
+                            <th>authID</th>
+                            <th>Okta</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>EU Data Sovereignty</td>
+                            <td><span class="check"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00D4FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> Full sovereignty</td>
+                            <td><span class="cross">✗</span> US cloud</td>
+                            <td><span class="cross">✗</span> US cloud</td>
+                            <td><span class="partial">~</span> Regional options</td>
+                        </tr>
+                        <tr>
+                            <td>eIDAS 2.0 Certified</td>
+                            <td><span class="check"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00D4FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> Full certification</td>
+                            <td><span class="cross">✗</span> No certification</td>
+                            <td><span class="cross">✗</span> No certification</td>
+                            <td><span class="cross">✗</span> No certification</td>
+                        </tr>
+                        <tr>
+                            <td>Federated Architecture</td>
+                            <td><span class="check"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00D4FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> No central point</td>
+                            <td><span class="cross">✗</span> Centralized</td>
+                            <td><span class="cross">✗</span> Centralized</td>
+                            <td><span class="cross">✗</span> Centralized</td>
+                        </tr>
+                        <tr>
+                            <td>GDPR Native</td>
+                            <td><span class="check"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00D4FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> Built-in compliance</td>
+                            <td><span class="partial">~</span> Add-on features</td>
+                            <td><span class="partial">~</span> Basic support</td>
+                            <td><span class="partial">~</span> Configuration needed</td>
+                        </tr>
+                        <tr>
+                            <td>EU AI Act Aligned</td>
+                            <td><span class="check"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00D4FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> Full alignment</td>
+                            <td><span class="cross">✗</span> Not addressed</td>
+                            <td><span class="cross">✗</span> Not addressed</td>
+                            <td><span class="partial">~</span> Partial features</td>
+                        </tr>
+                        <tr>
+                            <td>Government Credibility</td>
+                            <td><span class="check"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00D4FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> 30 years EU trust</td>
+                            <td><span class="cross">✗</span> US focused</td>
+                            <td><span class="cross">✗</span> Limited presence</td>
+                            <td><span class="partial">~</span> Enterprise focus</td>
+                        </tr>
+                        <tr>
+                            <td>AI Agent Focus</td>
+                            <td><span class="check"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00D4FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> Purpose-built</td>
+                            <td><span class="cross">✗</span> Human-centric</td>
+                            <td><span class="partial">~</span> Basic bot support</td>
+                            <td><span class="partial">~</span> API management</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Target Markets Section -->
+    <section id="markets" class="section section-darker">
+        <div class="section-content">
+            <div class="section-header">
+                <h2 class="section-title">Target Markets</h2>
+                <p class="section-subtitle">
+                    High-value sectors where AI agent governance is becoming mandatory
+                </p>
+            </div>
+
+            <div class="markets-grid">
+                <div class="market-card">
+                    <span class="market-icon">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#00D4FF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M3 21h18"/>
+                            <path d="M5 21V7l7-4 7 4v14"/>
+                            <path d="M9 21v-6h6v6"/>
+                            <path d="M10 10h4"/>
+                        </svg>
+                    </span>
+                    <h3 class="market-title">Financial Services</h3>
+                    <p class="market-description">
+                        DORA compliance for AI trading systems, robo-advisors, and automated decision-making. 
+                        Banks need verifiable agent identity for regulatory reporting.
+                    </p>
+                    <div class="market-deal-size">€300K - €1M deals</div>
+                </div>
+
+                <div class="market-card">
+                    <span class="market-icon">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#00D4FF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+                        </svg>
+                    </span>
+                    <h3 class="market-title">Critical Infrastructure</h3>
+                    <p class="market-description">
+                        NIS2 compliance for energy grids, transport systems, and utilities using AI for operations. 
+                        Agent identity is mandatory for security audits.
+                    </p>
+                    <div class="market-deal-size">€200K - €800K deals</div>
+                </div>
+
+                <div class="market-card">
+                    <span class="market-icon">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#00D4FF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="4" y="2" width="16" height="20" rx="2" ry="2"/>
+                            <path d="M9 22v-4h6v4"/>
+                            <path d="M8 6h.01"/>
+                            <path d="M16 6h.01"/>
+                            <path d="M12 6h.01"/>
+                            <path d="M8 10h.01"/>
+                            <path d="M16 10h.01"/>
+                            <path d="M12 10h.01"/>
+                            <path d="M8 14h.01"/>
+                            <path d="M16 14h.01"/>
+                            <path d="M12 14h.01"/>
+                        </svg>
+                    </span>
+                    <h3 class="market-title">Enterprise AI</h3>
+                    <p class="market-description">
+                        Large organizations deploying autonomous AI for customer service, operations, and analytics. 
+                        Need governance before regulators force it.
+                    </p>
+                    <div class="market-deal-size">€100K - €500K deals</div>
+                </div>
+
+                <div class="market-card">
+                    <span class="market-icon">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#00D4FF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M17 18a2 2 0 0 0 4 0V8a2 2 0 0 0-4 0v10"/>
+                            <path d="M7 18a2 2 0 0 1-4 0V8a2 2 0 0 1 4 0v10"/>
+                            <path d="M7 8l5-5 5 5"/>
+                            <path d="M17 8l-5 5-5-5"/>
+                        </svg>
+                    </span>
+                    <h3 class="market-title">AI Platform Vendors</h3>
+                    <p class="market-description">
+                        Partnership opportunities with AI platform providers who need built-in governance. 
+                        White-label ARCHON for their EU customers.
+                    </p>
+                    <div class="market-deal-size">Strategic partnerships</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="section section-dark">
+        <div class="section-content">
+            <div class="section-header">
+                <h2 class="section-title">Investment Tiers</h2>
+                <p class="section-subtitle">
+                    Scalable pricing aligned with your AI governance maturity and regulatory requirements
+                </p>
+            </div>
+
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <div class="pricing-tier">For Growing Organizations</div>
+                    <div class="pricing-name">Foundation</div>
+                    <div class="pricing-cost">
+                        <div class="pricing-implementation">€150,000</div>
+                        <div class="pricing-annual">Implementation</div>
+                        <div class="pricing-annual">+ €75,000/year maintenance</div>
+                    </div>
+                    <ul class="pricing-features">
+                        <li>Up to 100 AI agents</li>
+                        <li>Core identity & authentication</li>
+                        <li>Basic policy engine</li>
+                        <li>Standard audit logging</li>
+                        <li>EU AI Act reporting templates</li>
+                        <li>Email support</li>
+                    </ul>
+                    <button class="pricing-cta" onclick="window.location.href='#contact'">Contact Sales</button>
+                </div>
+
+                <div class="pricing-card featured">
+                    <div class="pricing-tier">For Regulated Industries</div>
+                    <div class="pricing-name">Enterprise</div>
+                    <div class="pricing-cost">
+                        <div class="pricing-implementation">€400,000</div>
+                        <div class="pricing-annual">Implementation</div>
+                        <div class="pricing-annual">+ €200,000/year maintenance</div>
+                    </div>
+                    <ul class="pricing-features">
+                        <li>Up to 1,000 AI agents</li>
+                        <li>Advanced policy orchestration</li>
+                        <li>Federated governance</li>
+                        <li>Real-time compliance monitoring</li>
+                        <li>DORA/NIS2 compliance modules</li>
+                        <li>24/7 priority support</li>
+                        <li>Quarterly reviews</li>
+                    </ul>
+                    <button class="pricing-cta" onclick="window.location.href='#contact'">Contact Sales</button>
+                </div>
+
+                <div class="pricing-card">
+                    <div class="pricing-tier">For Governments & Critical Infrastructure</div>
+                    <div class="pricing-name">Sovereign</div>
+                    <div class="pricing-cost">
+                        <div class="pricing-implementation">€800,000+</div>
+                        <div class="pricing-annual">Custom implementation</div>
+                        <div class="pricing-annual">+ €400,000+/year</div>
+                    </div>
+                    <ul class="pricing-features">
+                        <li>Unlimited AI agents</li>
+                        <li>Full sovereignty deployment</li>
+                        <li>Custom policy frameworks</li>
+                        <li>Dedicated infrastructure</li>
+                        <li>White-glove onboarding</li>
+                        <li>On-site team</li>
+                        <li>SLA guarantees</li>
+                    </ul>
+                    <button class="pricing-cta" onclick="window.location.href='#contact'">Contact Sales</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Add-Ons & Premium Services Section -->
+    <section class="addons-section">
+        <div class="section-content">
+            <h2 class="section-title">Add-Ons & Premium Services</h2>
+            <p class="section-subtitle">Enhance ARCHON with specialized features and enterprise capabilities</p>
+            
+            <!-- Tier 1: Core Add-Ons -->
+            <div class="addon-tier">
+                <h3 class="tier-title">Tier 1: Core Add-Ons</h3>
+                <div class="addon-grid">
+                    <div class="addon-card">
+                        <div class="addon-number">1</div>
+                        <h4 class="addon-title">Agent Identity Analytics Dashboard</h4>
+                        <p class="addon-desc">Real-time visualization of all AI agents across your enterprise. Authentication patterns, permission usage, and anomaly detection. Agent inventory with ownership chains, expiry dates, and status. Executive reporting for compliance audits and risk committees.</p>
+                        <div class="addon-pricing">€8K-25K/year</div>
+                        <div class="addon-target">
+                            <span class="target-icon">📊</span>
+                            <span>For CISOs, identity teams, compliance officers</span>
+                        </div>
+                    </div>
+                    
+                    <div class="addon-card">
+                        <div class="addon-number">2</div>
+                        <h4 class="addon-title">Priority Authentication SLA</h4>
+                        <p class="addon-desc">Standard 200ms agent credential verification, Premium 50ms low-latency for real-time agent workflows, Enterprise sub-10ms with dedicated infrastructure and 99.99% uptime. Guaranteed response times for mission-critical agent operations.</p>
+                        <div class="addon-pricing">€15K-50K/year</div>
+                        <div class="addon-target">
+                            <span class="target-icon">⚡</span>
+                            <span>For financial services, high-frequency trading, real-time decision systems</span>
+                        </div>
+                    </div>
+                    
+                    <div class="addon-card">
+                        <div class="addon-number">3</div>
+                        <h4 class="addon-title">Agent Lifecycle Management</h4>
+                        <p class="addon-desc">Automated provisioning, rotation, and deprovisioning of agent credentials. Expiration alerts with proactive credential renewal. Orphaned agent detection and remediation workflows. Just-in-Time (JIT) access with automatic credential expiry.</p>
+                        <div class="addon-pricing">€10K-30K/year</div>
+                        <div class="addon-target">
+                            <span class="target-icon">🔄</span>
+                            <span>For enterprises with 100+ AI agents, DevOps teams</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Tier 2: Enterprise Features -->
+            <div class="addon-tier">
+                <h3 class="tier-title">Tier 2: Enterprise Features</h3>
+                <div class="addon-grid">
+                    <div class="addon-card">
+                        <div class="addon-number">4</div>
+                        <h4 class="addon-title">Multi-Agent Orchestration Module</h4>
+                        <p class="addon-desc">Manage trust relationships between collaborating AI agents. Cross-agent delegation policies and permission inheritance. Agent-to-agent authentication for multi-agent systems (MAS). Workflow orchestration with full audit trails.</p>
+                        <div class="addon-pricing">€50K-150K/year</div>
+                        <div class="addon-target">
+                            <span class="target-icon">🤝</span>
+                            <span>For enterprises deploying complex multi-agent workflows, AI platform teams</span>
+                        </div>
+                    </div>
+                    
+                    <div class="addon-card">
+                        <div class="addon-number">5</div>
+                        <h4 class="addon-title">Shadow Agent Discovery & Remediation</h4>
+                        <p class="addon-desc">Continuous scanning for unauthorized/unmanaged AI agents. Integration with cloud platforms (AWS, Azure, GCP) and SaaS tools. Risk scoring for discovered agents based on permissions and data access. Automated remediation workflows (quarantine, credential revocation).</p>
+                        <div class="addon-pricing">€30K-80K/year</div>
+                        <div class="addon-target">
+                            <span class="target-icon">🔍</span>
+                            <span>For security operations teams, governance teams</span>
+                        </div>
+                    </div>
+                    
+                    <div class="addon-card">
+                        <div class="addon-number">6</div>
+                        <h4 class="addon-title">Model Context Protocol (MCP) Gateway</h4>
+                        <p class="addon-desc">Secure authentication layer for MCP-enabled AI agents. Policy enforcement for agent-to-tool connections. Centralized logging of all MCP interactions. Integration with popular AI frameworks (LangChain, AutoGPT, CrewAI).</p>
+                        <div class="addon-pricing">€25K-75K/year</div>
+                        <div class="addon-target">
+                            <span class="target-icon">🔌</span>
+                            <span>For AI development teams, platform engineering</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Tier 3: Strategic Products -->
+            <div class="addon-tier">
+                <h3 class="tier-title">Tier 3: Strategic Products</h3>
+                <div class="addon-grid">
+                    <div class="addon-card">
+                        <div class="addon-number">7</div>
+                        <h4 class="addon-title">EU AI Act Compliance Module</h4>
+                        <p class="addon-desc">Pre-built compliance templates for high-risk AI system requirements. Automated traceability documentation for agent decisions. Human oversight binding - link every agent action to accountable human identity. Audit-ready reporting packages for EU AI Act conformity assessments.</p>
+                        <div class="addon-pricing">€20K-60K/year</div>
+                        <div class="addon-target">
+                            <span class="target-icon">📋</span>
+                            <span>For any organization deploying AI in EU (mandatory by Aug 2025)</span>
+                        </div>
+                    </div>
+                    
+                    <div class="addon-card">
+                        <div class="addon-number">8</div>
+                        <h4 class="addon-title">Agent Threat Intelligence Feed</h4>
+                        <p class="addon-desc">Real-time alerts on emerging agent-specific attack vectors. Prompt injection, privilege escalation, and credential theft patterns. Adversarial AI threat briefings and countermeasures. API feed for integration into SOC/SIEM platforms (Splunk, Sentinel, CrowdStrike).</p>
+                        <div class="addon-pricing">€15K-40K/year subscription</div>
+                        <div class="addon-target">
+                            <span class="target-icon">🛡️</span>
+                            <span>For security operations centers, threat intelligence teams</span>
+                        </div>
+                    </div>
+                    
+                    <div class="addon-card">
+                        <div class="addon-number">9</div>
+                        <h4 class="addon-title">Zero Trust Agent Framework Extension</h4>
+                        <p class="addon-desc">Continuous authentication for long-running agent sessions. Dynamic permission adjustment based on real-time risk signals. Behavioral baseline monitoring with automatic access revocation on anomaly. Integration with existing Zero Trust architecture (Zscaler, Cloudflare, Palo Alto).</p>
+                        <div class="addon-pricing">€40K-120K/year</div>
+                        <div class="addon-target">
+                            <span class="target-icon">🔐</span>
+                            <span>For enterprises with mature Zero Trust programs, security architects</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <style>
+        /* Add-Ons & Premium Services Section */
+        .addons-section {
+            padding: 100px 24px;
+            background: linear-gradient(135deg, #0A0E1A 0%, #0F1420 100%);
+            border-top: 1px solid rgba(0, 212, 255, 0.1);
+        }
+        
+        .addons-section .section-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .addons-section .section-title {
+            text-align: center;
+            font-size: 42px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 16px;
+        }
+        
+        .addons-section .section-subtitle {
+            text-align: center;
+            font-size: 20px;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 80px;
+        }
+        
+        .addon-tier {
+            margin-bottom: 80px;
+        }
+        
+        .addon-tier:last-child {
+            margin-bottom: 0;
+        }
+        
+        .tier-title {
+            font-size: 28px;
+            font-weight: 600;
+            color: #00D4FF;
+            margin-bottom: 40px;
+            padding-left: 20px;
+            border-left: 4px solid #00D4FF;
+        }
+        
+        .addon-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 30px;
+        }
+        
+        .addon-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            border-radius: 16px;
+            padding: 32px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .addon-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(0, 212, 255, 0.4);
+            box-shadow: 0 20px 40px rgba(0, 212, 255, 0.1);
+            background: rgba(255, 255, 255, 0.04);
+        }
+        
+        .addon-number {
+            position: absolute;
+            top: -15px;
+            left: 24px;
+            width: 30px;
+            height: 30px;
+            background: linear-gradient(135deg, #00D4FF, #00B4D8);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 14px;
+            color: #0A0E1A;
+        }
+        
+        .addon-title {
+            font-size: 22px;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 16px;
+            margin-top: 8px;
+        }
+        
+        .addon-desc {
+            font-size: 15px;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 20px;
+        }
+        
+        .addon-pricing {
+            background: rgba(0, 212, 255, 0.1);
+            border-left: 3px solid #00D4FF;
+            padding: 12px 16px;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #00D4FF;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        
+        .addon-target {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        .target-icon {
+            font-size: 20px;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .addon-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .addons-section .section-title {
+                font-size: 32px;
+            }
+            
+            .tier-title {
+                font-size: 24px;
+            }
+            
+            .addon-title {
+                font-size: 20px;
+            }
+        }
+    </style>
+    <!-- Interactive Tools Section -->
+    <section class="section section-dark">
+        <div class="section-content">
+            <div class="section-header">
+                <h2 class="section-title">Interactive Tools</h2>
+                <p class="section-subtitle">
+                    Proof-of-concept applications and lead generation tools built on ARCHON
+                </p>
+            </div>
+
+            <div class="tools-preview-grid">
+                <!-- Live AI Agent Counter Card -->
+                <div class="tool-preview-card">
+                    <div class="tool-preview-content">
+                        <div class="tool-preview-left">
+                            <h3 class="tool-preview-title">Live AI Agent Counter</h3>
+                            <p class="tool-preview-subtitle">Watch AI agents multiply in real-time</p>
+                            <p class="tool-preview-description">
+                                A hypnotic visualization showing the exponential growth of autonomous AI agents globally. 
+                                See how many operate without governance, make critical decisions without oversight, 
+                                and lack verifiable identity credentials.
+                            </p>
+                            <a href="live-counter.html" class="tool-preview-button">View Full Counter →</a>
+                        </div>
+                        <div class="tool-preview-right">
+                            <div class="mini-counter-container">
+                                <div class="mini-counter-label">AI Agents Operating Now</div>
+                                <div class="mini-counter" id="miniCounter">847,000,000</div>
+                                <div class="mini-counter-sublabel">Growing exponentially</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AI Agent Roulette Card -->
+                <div class="tool-preview-card">
+                    <div class="tool-preview-content">
+                        <div class="tool-preview-left">
+                            <h3 class="tool-preview-title">AI Agent Roulette</h3>
+                            <p class="tool-preview-subtitle">What will your ungoverned AI agent do today?</p>
+                            <p class="tool-preview-description">
+                                Spin the wheel to discover real failure scenarios - data leaks, rogue decisions, 
+                                compliance violations. See who's liable (spoiler: no one knows).
+                            </p>
+                            <a href="agent-roulette.html" class="tool-preview-button">Spin the Wheel →</a>
+                        </div>
+                        <div class="tool-preview-right">
+                            <div class="test-button-container">
+                                <button class="mini-test-button" disabled>Find Out</button>
+                                <div class="test-button-sublabel">Click to see the impact</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="contact" class="cta-section">
+        <div class="section-content">
+            <h2 class="cta-title">Ready to Govern Your AI Agents?</h2>
+            <p class="cta-subtitle">
+                Get ahead of regulations. Build trust in autonomous AI. Maintain EU sovereignty.
+            </p>
+            <div class="cta-buttons">
+                <a href="mailto:archon@e-group.com" class="cta-primary">Request Enterprise Demo</a>
+                <a href="live-counter.html" class="cta-secondary">View Live AI Counter</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h4>ARCHON</h4>
+                    <ul class="footer-links">
+                        <li><a href="#problem">The Problem</a></li>
+                        <li><a href="#how-it-works">How It Works</a></li>
+                        <li><a href="#technology">Technology Stack</a></li>
+                        <li><a href="#pricing">Pricing</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Resources</h4>
+                    <ul class="footer-links">
+                        <li><a href="live-counter.html">Live AI Counter</a></li>
+                        <li><a href="#">Documentation</a></li>
+                        <li><a href="#">EU AI Act Guide</a></li>
+                        <li><a href="#">eIDAS 2.0 Overview</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>E-Group Products</h4>
+                    <ul class="footer-links">
+                        <li><a href="../Argus/index.html">ARGUS</a></li>
+                        <li><a href="../NEMESIS/index.html">NEMESIS</a></li>
+                        <li><a href="../PROMETHEUS/index.html">PROMETHEUS</a></li>
+                        <li><a href="../ALETHEIA/index.html">ALETHEIA</a></li>
+                        <li><a href="../HYPERION/index.html">HYPERION</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Company</h4>
+                    <ul class="footer-links">
+                        <li><a href="../index.html">About E-Group</a></li>
+                        <li><a href="#">30 Years of Trust</a></li>
+                        <li><a href="#">Government References</a></li>
+                        <li><a href="mailto:archon@e-group.com">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-copyright">
+                    © 2024 E-Group | Building Europe's Digital Sovereignty Since 1994
+                </div>
+                <div class="footer-copyright">
+                    ARCHON - Sovereign Identity for Autonomous AI
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mini counter animation for the preview
+        (function() {
+            let miniCount = 847000000;
+            const miniGrowthRate = 230; // ~2300 per second
+            
+            function formatNumber(num) {
+                return Math.floor(num).toLocaleString('en-US');
+            }
+            
+            function updateMiniCounter() {
+                // Add some randomization for organic feel
+                const randomFactor = 0.8 + Math.random() * 0.4;
+                miniCount += miniGrowthRate * randomFactor;
+                
+                const miniCounterElement = document.getElementById('miniCounter');
+                if (miniCounterElement) {
+                    miniCounterElement.textContent = formatNumber(miniCount);
+                    
+                    // Add subtle pulse effect on update
+                    miniCounterElement.style.transform = 'scale(1.02)';
+                    setTimeout(() => {
+                        miniCounterElement.style.transform = 'scale(1)';
+                    }, 200);
+                }
+            }
+            
+            // Update every 100ms for smooth animation
+            setInterval(updateMiniCounter, 100);
+            
+            // Initial update
+            updateMiniCounter();
+        })();
+    </script>
+    <script>
+        // Hamburger Menu Toggle
+        // Products Dropdown Toggle
+        function toggleDropdown() {
+            const menu = document.querySelector('.dropdown-menu');
+            menu.classList.toggle('open');
+        }
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(e) {
+            const dropdown = document.querySelector('.products-dropdown');
+            const menu = document.querySelector('.dropdown-menu');
+            if (menu && !e.target.closest('.products-dropdown')) {
+                menu.classList.remove('open');
+            }
+        });
+
+        // Close dropdown on Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                const menu = document.querySelector('.dropdown-menu');
+                if (menu) menu.classList.remove('open');
+            }
+        });
+    </script>
+</body>
+</html>
