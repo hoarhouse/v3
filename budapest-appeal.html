@@ -268,6 +268,106 @@
             font-size: 1rem;
         }
         
+        /* Download Button Section */
+        .download-section {
+            text-align: center;
+            padding: 2rem 0;
+            background: var(--light-background);
+        }
+        
+        .btn-download {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            background: transparent;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-download:hover {
+            background: var(--primary);
+            color: var(--background);
+            transform: translateY(-2px);
+        }
+        
+        /* Full Appeal Section */
+        .full-appeal-section {
+            padding: 5rem 0;
+            background: var(--background);
+        }
+        
+        .appeal-header {
+            max-width: 900px;
+            margin: 0 auto 3rem;
+            text-align: center;
+        }
+        
+        .appeal-subtitle {
+            font-size: 1.5rem;
+            color: var(--accent);
+            font-weight: 400;
+            font-style: italic;
+            margin-top: 1rem;
+            line-height: 1.4;
+        }
+        
+        .appeal-introduction {
+            max-width: 900px;
+            margin: 0 auto 4rem;
+            font-size: 1.15rem;
+            line-height: 1.9;
+            color: var(--primary);
+            font-style: italic;
+        }
+        
+        .appeal-section {
+            max-width: 900px;
+            margin: 0 auto 3rem;
+        }
+        
+        .appeal-section-title {
+            font-size: 1.75rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+        
+        .appeal-section-content {
+            font-size: 1.1rem;
+            line-height: 1.9;
+            color: var(--primary);
+            font-weight: 300;
+        }
+        
+        .appeal-section-content p {
+            margin-bottom: 1.5rem;
+        }
+        
+        .appeal-conclusion {
+            max-width: 900px;
+            margin: 4rem auto 0;
+            padding-top: 3rem;
+            border-top: 1px solid var(--border-light);
+        }
+        
+        .appeal-conclusion p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .appeal-signature {
+            margin-top: 2rem;
+            font-style: italic;
+            color: var(--accent);
+        }
+        
         /* Mobile Responsive */
         @media (max-width: 767px) {
             .hero {
@@ -290,6 +390,31 @@
             .cta-section {
                 padding: 3rem 1rem;
             }
+            
+            .full-appeal-section {
+                padding: 3rem 1rem;
+            }
+            
+            .appeal-subtitle {
+                font-size: 1.25rem;
+            }
+            
+            .appeal-introduction {
+                font-size: 1.05rem;
+            }
+            
+            .appeal-section-title {
+                font-size: 1.5rem;
+            }
+            
+            .appeal-section-content {
+                font-size: 1rem;
+            }
+            
+            .btn-download {
+                padding: 0.875rem 1.5rem;
+                font-size: 0.95rem;
+            }
         }
     </style>
 </head>
@@ -301,6 +426,20 @@
         <div class="container">
             <h1>The Budapest Appeal</h1>
             <p class="hero-subtitle">A Call for Digital Ceasefire and Cyber Peace</p>
+        </div>
+    </section>
+    
+    <!-- Download Button -->
+    <section class="download-section">
+        <div class="container">
+            <a href="documents/DCF_Budapest_Appeal.pdf" class="btn-download" download>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                    <polyline points="7 10 12 15 17 10"></polyline>
+                    <line x1="12" y1="15" x2="12" y2="3"></line>
+                </svg>
+                Download the Full Appeal (PDF)
+            </a>
         </div>
     </section>
     
@@ -419,6 +558,96 @@
                     <h3 class="principle-title">Technological Restraint</h3>
                     <p class="principle-description">Value-based limits on autonomous weapons and surveillance systems</p>
                 </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- The Full Appeal Section -->
+    <section class="full-appeal-section">
+        <div class="container">
+            <div class="appeal-header">
+                <h2 class="section-title">The Full Appeal</h2>
+                <p class="appeal-subtitle">Open Letter to President Donald J. Trump, President Vladimir V. Putin, President Volodymyr O. Zelensky and other participating Heads of State and Government</p>
+            </div>
+            
+            <div class="appeal-introduction">
+                <p>We, Nobel Laureates, business and academic leaders, spiritual voices and global citizens, appeal to you at this historic moment when the eyes of humanity turn to Budapest in the hope that a meeting may become a threshold for peace.</p>
+                
+                <p>For nearly a decade, the world has watched with anguish the tragic conflict between Russia and Ukraine—two nations bound by geography, culture, and history—unfold into forms of warfare unprecedented in scope and consequence. It is the first conflict in human history to take place simultaneously in large-scale in both the physical and digital dimensions, where the front line no longer just ends at a border, and every hospital, data center, utility center, and home can become a silent target.</p>
+                
+                <p>This confrontation has revealed a profound truth: cyberspace is no longer neutral terrain. It has become an extension of the battlefield. Networks have been infiltrated, satellites disrupted, financial systems attacked, and disinformation weaponised at a scale that corrodes truth itself. Energy grids have been switched off from afar, emergency services delayed, medical records erased, and entire populations forced into darkness—both literal and informational.</p>
+                
+                <p>The growing use of autonomous and AI-driven systems has deepened this transformation. Algorithms now determine targets, machines act without conscience, and data replaces human judgment as the trigger of destruction. What began as a regional conflict has become a warning for all humankind: the fusion of artificial intelligence, cyber warfare, and traditional arms risks creating a domain of combat beyond moral or human control.</p>
+            </div>
+            
+            <div class="appeal-section">
+                <h3 class="appeal-section-title">Section I: A Call for a Cyber Ceasefire and Digital Peace Process</h3>
+                <div class="appeal-section-content">
+                    <p>History offers rare moments when leadership can prevent an era of irreversible devastation. Budapest can be such a moment.</p>
+                    
+                    <p>We call upon you to include, alongside your negotiations for an end to military hostilities, a commitment to end digital hostilities as well. We propose that a meeting mark the beginning of a Digital Peace Process between Russia and Ukraine—an initiative to restore trust, protect civilians, and safeguard the integrity of the global digital commons on which all nations depend.</p>
+                    
+                    <p>As a first humanitarian step, we urge the proclamation of a Cyber Ceasefire—a six-month suspension of all offensive cyber operations that may foreseeably harm civilians or critical infrastructure. This act of restraint will not alter borders, but it will save lives, prevent hospital and power failures, and halt the contagion of disinformation and digital chaos. Such a gesture would demonstrate that compassion and rationality can still prevail over technological escalation, reaffirming that even in war, there remains a shared human duty to protect life.</p>
+                </div>
+            </div>
+            
+            <div class="appeal-section">
+                <h3 class="appeal-section-title">Section II: A Framework for Digital Peace</h3>
+                <div class="appeal-section-content">
+                    <p>To give substance to this ceasefire, we propose the creation of a Budapest Hotline—a neutral, real-time coordination mechanism managed under the auspices of the United Nations, linking the Computer Emergency Response Teams (CERTs) of the countries involved, along with neutral experts and international observers. The Budapest Hotline would be a channel of peace in a network of war, enabling rapid deconfliction of cyber incidents, transparency regarding emerging threats, and immediate technical collaboration to prevent digital escalation.</p>
+                    
+                    <p>Beyond immediate ceasefire mechanisms, this appeal calls for the launch of a Digital Peace Process—a multilateral dialogue to establish norms ensuring the protection of civilians in cyberspace and reaffirming that international humanitarian law fully applies in the digital domain.</p>
+                </div>
+            </div>
+            
+            <div class="appeal-section">
+                <h3 class="appeal-section-title">Section III: AI Treaty for Integral Human Development</h3>
+                <div class="appeal-section-content">
+                    <p>Peace is not only the absence of war—it is the presence of justice, fairness, and opportunity. The digital age has opened unprecedented possibilities for dialogue and innovation, yet it has also produced new forms of dependency and exclusion. Today, a handful of global corporations control most of the world's data, algorithms, and digital infrastructures, concentrating power in ways that shape economies, knowledge, and even human attention.</p>
+                    
+                    <p>DCF, a global constellation of nonprofits dedicated to advancing human-centric, ethical, safe, and sovereign AI; sovereign data technology; and cyber technologies for peace and the common good, believes that integral peace must be inseparable from integral human development. To achieve complete and sustainable peace, we must also secure digital and economic sovereignty—ensuring that technology serves people, not the reverse.</p>
+                    
+                    <p>Sovereign AI, data sovereignty and decentralised infrastructures represent a moral and economic alternative to monopolies over intelligence and innovation. They also enable local communities, small enterprises, and nations to regain agency over their data, creativity, and development models, ensuring a fairer digital economy for all. This approach is not anti-market; it is pro-human. It seeks an economy rooted in dignity rather than dominance—where technological wealth becomes a shared instrument for human flourishing, not a source of inequality.</p>
+                    
+                    <p>DCF wishes to support the development of an AI treaty integrating digital and AI sovereign solutions with synergies of the industrial and technological capacities of countries for those impacted by the war and for broader international digital development.</p>
+                </div>
+            </div>
+            
+            <div class="appeal-section">
+                <h3 class="appeal-section-title">Section IV: A Vision for the Future</h3>
+                <div class="appeal-section-content">
+                    <p>This appeal transcends the present conflict. The next war may not begin with missiles, but with lines of digital code disabling hospitals, nuclear plants, or communication networks. The challenge before us is to ensure that technology—and especially artificial intelligence—becomes a guardian of peace, not a multiplier of destruction.</p>
+                    
+                    <p>The world must now commit to ethical self-regulation of technology: a framework of transparency, accountability, and sovereign design that allows nations to retain agency and dignity while sharing responsibility for the digital commons. Budapest, a city of bridges, can once again symbolise what unites humanity. Let it be remembered as the place where leaders chose dialogue over escalation, conscience over automation, and wisdom over code.</p>
+                </div>
+            </div>
+            
+            <div class="appeal-conclusion">
+                <h3 class="appeal-section-title">Section V: Conclusion</h3>
+                <p>Your Excellencies,</p>
+                
+                <p>The future remains in human hands. Let a summit be remembered not only as a political event, but as the moment when humanity chose to reclaim control over its own intelligence—both natural and artificial.</p>
+                
+                <p>Let Budapest be the city where the age of digital war begins to end, and the age of Digital Peace, Sovereign AI, Data Sovereignty, and Digital Integral Security begin.</p>
+                
+                <p>With profound respect and hope,</p>
+                
+                <div class="appeal-signature">
+                    <p>The undersigned<br>
+                    Nobel Laureates, Spiritual voices, Scholars, Technologists, and Citizens of the World</p>
+                </div>
+            </div>
+            
+            <!-- Second Download Button -->
+            <div style="text-align: center; margin-top: 3rem;">
+                <a href="documents/DCF_Budapest_Appeal.pdf" class="btn-download" download>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                        <polyline points="7 10 12 15 17 10"></polyline>
+                        <line x1="12" y1="15" x2="12" y2="3"></line>
+                    </svg>
+                    Download the Full Appeal (PDF)
+                </a>
             </div>
         </div>
     </section>
