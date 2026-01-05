@@ -1,0 +1,1421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Argus Immunity Index - Europe's Real-Time Cyber Defense Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --blue: #1a73e8;
+            --blue-dark: #1557b0;
+            --green: #10a37f;
+            --red: #dc2626;
+            --yellow: #ff9500;
+            --text-primary: #1d1d1f;
+            --text-secondary: #86868b;
+            --bg-gray: #f5f5f7;
+            --border: #d2d2d7;
+            --warning: #ff9500;
+            --success: #34c759;
+            --cyan: #00D4FF;
+            --teal: #00B4D8;
+            --dark-bg: #0A0E1A;
+            --dark-card: #0F1823;
+            --dark-border: #1a2332;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            line-height: 1.47059;
+            letter-spacing: -0.022em;
+            color: var(--text-primary);
+            background: white;
+            -webkit-font-smoothing: antialiased;
+            padding-top: 70px;
+        }
+
+        /* Navigation with Hamburger Menu */
+        .site-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(10, 14, 26, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 16px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .back-link {
+            font-size: 16px;
+            color: #00D4FF;
+            text-decoration: none;
+            transition: opacity 0.2s;
+        }
+
+        .back-link:hover {
+            opacity: 0.8;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 22px 0;
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .breadcrumb a {
+            color: var(--text-secondary);
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            color: var(--text-primary);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--dark-bg) 0%, #0F1420 100%);
+            color: white;
+            padding: 120px 22px 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 50%, rgba(0, 212, 255, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 50%, rgba(0, 180, 216, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            padding: 8px 16px;
+            background: rgba(0, 212, 255, 0.2);
+            border: 1px solid var(--cyan);
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 20px;
+            color: var(--cyan);
+        }
+
+        .live-dot {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background: #34c759;
+            border-radius: 50%;
+            margin-right: 6px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
+        .hero h1 {
+            font-size: 56px;
+            line-height: 1.1;
+            font-weight: 600;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #ffffff 0%, var(--cyan) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: 21px;
+            line-height: 1.5;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 40px;
+            font-weight: 400;
+        }
+
+        .hero-cta {
+            display: inline-flex;
+            gap: 16px;
+        }
+
+        .cta-button {
+            padding: 14px 32px;
+            border-radius: 8px;
+            font-size: 17px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+
+        .cta-primary {
+            background: linear-gradient(135deg, var(--cyan), var(--teal));
+            color: white;
+        }
+
+        .cta-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
+        }
+
+        .cta-secondary {
+            background: transparent;
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .cta-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* What Is Section */
+        .what-is-section {
+            padding: 100px 22px;
+            background: white;
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto 60px;
+        }
+
+        .section-title {
+            font-size: 48px;
+            font-weight: 600;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            color: var(--text-primary);
+        }
+
+        .section-subtitle {
+            font-size: 21px;
+            line-height: 1.5;
+            color: var(--text-secondary);
+        }
+
+        /* Immunity Concept Visual */
+        .immunity-visual {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: var(--bg-gray);
+            border-radius: 20px;
+            padding: 60px;
+        }
+
+        .visual-title {
+            text-align: center;
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 40px;
+            color: var(--text-primary);
+        }
+
+        .progress-demo {
+            background: white;
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+        }
+
+        .progress-bar-container {
+            position: relative;
+            height: 80px;
+            background: #f0f0f0;
+            border-radius: 40px;
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+
+        .progress-bar {
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            border-radius: 40px;
+            transition: all 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 30px;
+            font-size: 24px;
+            font-weight: 600;
+            color: white;
+        }
+
+        .progress-red {
+            width: 15%;
+            background: linear-gradient(135deg, #dc2626, #ef4444);
+        }
+
+        .progress-yellow {
+            width: 23%;
+            background: linear-gradient(135deg, #ff9500, #fbbf24);
+        }
+
+        .progress-green {
+            width: 35%;
+            background: linear-gradient(135deg, #10a37f, #34c759);
+        }
+
+        .progress-markers {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .marker {
+            text-align: center;
+            flex: 1;
+        }
+
+        .marker-value {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .marker-label {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .marker-status {
+            font-size: 12px;
+            font-weight: 600;
+            margin-top: 5px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .status-vulnerable { color: var(--red); }
+        .status-building { color: var(--yellow); }
+        .status-immune { color: var(--green); }
+
+        /* How It Works Flow */
+        .flow-container {
+            max-width: 1200px;
+            margin: 60px auto 0;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+        }
+
+        .flow-step {
+            text-align: center;
+            position: relative;
+        }
+
+        .flow-step::after {
+            content: '→';
+            position: absolute;
+            right: -25px;
+            top: 30px;
+            font-size: 24px;
+            color: var(--cyan);
+            font-weight: 300;
+        }
+
+        .flow-step:last-child::after {
+            display: none;
+        }
+
+        .flow-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--cyan), var(--teal));
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 36px;
+        }
+
+        .flow-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+        }
+
+        .flow-description {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+
+        /* Dashboard Screenshots Section */
+        .screenshots-section {
+            padding: 100px 22px;
+            background: var(--bg-gray);
+        }
+
+        .screenshots-grid {
+            max-width: 1400px;
+            margin: 60px auto 0;
+            display: grid;
+            gap: 60px;
+        }
+
+        /* Device Frames */
+        .device-frame {
+            position: relative;
+            filter: drop-shadow(0 30px 60px rgba(0,0,0,0.2));
+        }
+
+        .laptop-frame {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .laptop-screen {
+            background: var(--dark-bg);
+            border-radius: 12px;
+            border: 12px solid #1a1a1a;
+            position: relative;
+            aspect-ratio: 16/10;
+            overflow: hidden;
+        }
+
+        .laptop-base {
+            height: 20px;
+            background: linear-gradient(to bottom, #1a1a1a 0%, #0d0d0d 100%);
+            border-radius: 0 0 8px 8px;
+            position: relative;
+            margin-top: -2px;
+        }
+
+        .laptop-notch {
+            width: 100px;
+            height: 8px;
+            background: #0d0d0d;
+            margin: 0 auto;
+            border-radius: 0 0 4px 4px;
+        }
+
+        .tablet-frame {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #1a1a1a;
+            border-radius: 24px;
+            padding: 20px;
+        }
+
+        .tablet-screen {
+            background: var(--dark-bg);
+            border-radius: 16px;
+            aspect-ratio: 4/3;
+            overflow: hidden;
+        }
+
+        .phone-frame {
+            max-width: 380px;
+            margin: 0 auto;
+            background: #1a1a1a;
+            border-radius: 36px;
+            padding: 12px;
+        }
+
+        .phone-notch {
+            width: 140px;
+            height: 28px;
+            background: #1a1a1a;
+            margin: 0 auto -14px;
+            border-radius: 0 0 14px 14px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .phone-screen {
+            background: var(--dark-bg);
+            border-radius: 30px;
+            aspect-ratio: 9/19;
+            overflow: hidden;
+        }
+
+        /* Dashboard Content */
+        .dashboard-header {
+            background: var(--dark-card);
+            padding: 16px 24px;
+            border-bottom: 1px solid var(--dark-border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .dashboard-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-text {
+            font-size: 18px;
+            font-weight: 600;
+            color: white;
+        }
+
+        .dashboard-status {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            font-size: 14px;
+            color: rgba(255,255,255,0.7);
+        }
+
+        .status-live {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            background: rgba(52, 199, 89, 0.2);
+            border-radius: 20px;
+            color: #34c759;
+            font-weight: 500;
+        }
+
+        .dashboard-content {
+            padding: 24px;
+            height: calc(100% - 65px);
+        }
+
+        /* Map Visual */
+        .map-container {
+            background: var(--dark-card);
+            border-radius: 12px;
+            padding: 20px;
+            height: 100%;
+            position: relative;
+        }
+
+        .europe-map {
+            position: relative;
+            height: 100%;
+            background: radial-gradient(ellipse at center, rgba(0, 212, 255, 0.05) 0%, transparent 70%);
+        }
+
+        .country {
+            position: absolute;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .country:hover {
+            transform: scale(1.1);
+            z-index: 10;
+        }
+
+        .country-green {
+            background: rgba(52, 199, 89, 0.3);
+            border: 1px solid #34c759;
+            box-shadow: 0 0 20px rgba(52, 199, 89, 0.3);
+        }
+
+        .country-yellow {
+            background: rgba(255, 149, 0, 0.3);
+            border: 1px solid #ff9500;
+        }
+
+        .country-red {
+            background: rgba(220, 38, 38, 0.3);
+            border: 1px solid #dc2626;
+        }
+
+        /* Sector Progress */
+        .sector-panel {
+            background: var(--dark-card);
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        .panel-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .sector-item {
+            margin-bottom: 20px;
+        }
+
+        .sector-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .sector-name {
+            font-size: 14px;
+            color: rgba(255,255,255,0.9);
+            font-weight: 500;
+        }
+
+        .sector-percent {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .sector-bar {
+            height: 8px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 4px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .sector-fill {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 0.5s ease;
+        }
+
+        .fill-green {
+            background: linear-gradient(90deg, #34c759, #10a37f);
+        }
+
+        .fill-yellow {
+            background: linear-gradient(90deg, #ff9500, #fbbf24);
+        }
+
+        .fill-red {
+            background: linear-gradient(90deg, #dc2626, #ef4444);
+        }
+
+        .sector-status {
+            font-size: 11px;
+            margin-top: 4px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .immune-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 2px 8px;
+            background: rgba(52, 199, 89, 0.2);
+            border-radius: 10px;
+            color: #34c759;
+        }
+
+        /* Mobile Dashboard */
+        .mobile-header {
+            background: var(--dark-card);
+            padding: 40px 20px 20px;
+            border-bottom: 1px solid var(--dark-border);
+        }
+
+        .mobile-logo {
+            font-size: 20px;
+            font-weight: 600;
+            color: white;
+            margin-bottom: 8px;
+        }
+
+        .mobile-live {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 10px;
+            background: rgba(52, 199, 89, 0.2);
+            border-radius: 12px;
+            color: #34c759;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .mobile-content {
+            padding: 20px;
+        }
+
+        .hero-stat {
+            text-align: center;
+            padding: 30px 20px;
+            background: var(--dark-card);
+            border-radius: 16px;
+            margin-bottom: 20px;
+        }
+
+        .stat-number {
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--cyan);
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: rgba(255,255,255,0.7);
+        }
+
+        .sector-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .mobile-sector-card {
+            background: var(--dark-card);
+            border-radius: 12px;
+            padding: 16px;
+            border: 1px solid var(--dark-border);
+        }
+
+        .mobile-alert {
+            background: linear-gradient(135deg, rgba(52, 199, 89, 0.2), rgba(52, 199, 89, 0.1));
+            border: 1px solid #34c759;
+            border-radius: 12px;
+            padding: 12px;
+            margin-top: 20px;
+            font-size: 14px;
+            color: #34c759;
+            text-align: center;
+        }
+
+        /* Features Section */
+        .features-section {
+            padding: 100px 22px;
+            background: white;
+        }
+
+        .features-grid {
+            max-width: 1200px;
+            margin: 60px auto 0;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+        }
+
+        .feature-card {
+            text-align: center;
+            padding: 30px 20px;
+            background: var(--bg-gray);
+            border-radius: 20px;
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 20px;
+            background: linear-gradient(135deg, var(--cyan), var(--teal));
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+        }
+
+        .feature-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--text-primary);
+        }
+
+        .feature-description {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+
+        /* Why Transparency Section */
+        .transparency-section {
+            padding: 100px 22px;
+            background: var(--bg-gray);
+        }
+
+        .transparency-grid {
+            max-width: 1000px;
+            margin: 60px auto 0;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+        }
+
+        .transparency-item {
+            display: flex;
+            gap: 20px;
+            align-items: start;
+        }
+
+        .transparency-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--cyan), var(--teal));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+
+        .transparency-content {
+            flex: 1;
+        }
+
+        .transparency-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+        }
+
+        .transparency-text {
+            font-size: 15px;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 100px 22px;
+            background: linear-gradient(135deg, var(--dark-bg) 0%, #0F1420 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .cta-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .cta-title {
+            font-size: 48px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .cta-subtitle {
+            font-size: 21px;
+            margin-bottom: 40px;
+            color: rgba(255,255,255,0.9);
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .hero-subtitle {
+                font-size: 18px;
+            }
+
+            .section-title {
+                font-size: 32px;
+            }
+
+            .flow-container {
+                grid-template-columns: 1fr;
+            }
+
+            .flow-step::after {
+                display: none;
+            }
+
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .transparency-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .cta-button {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+
+        /* Live ticker animation */
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .ticker {
+            background: var(--dark-card);
+            border-top: 1px solid var(--dark-border);
+            padding: 12px 0;
+            overflow: hidden;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+        }
+
+        .ticker-content {
+            display: flex;
+            animation: scroll 30s linear infinite;
+            white-space: nowrap;
+        }
+
+        .ticker-item {
+            padding: 0 30px;
+            color: rgba(255,255,255,0.7);
+            font-size: 13px;
+        }
+
+        .ticker-highlight {
+            color: var(--cyan);
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <header class="site-header">
+        <div class="header-container">
+            <a href="index.html" class="back-link">← Back to Argus</a>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb" style="padding-top: 72px;">
+        <a href="../Argus/index.html">Argus</a> > <a href="../Argus/community.html">Community</a> > Immunity Index
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">
+                <span class="live-dot"></span>
+                LIVE DASHBOARD
+            </div>
+            <h1>Europe's Cyber Defense<br>In Real Time</h1>
+            <p class="hero-subtitle">
+                Watch collective immunity spread across sectors and nations.<br>
+                When your industry hits 30%, everyone becomes protected.
+            </p>
+            <div class="hero-cta">
+                <a href="#waitlist" class="cta-button cta-primary">Check Your Sector</a>
+                <a href="#screenshots" class="cta-button cta-secondary">See Dashboard</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- What Is Immunity Index Section -->
+    <section class="what-is-section">
+        <div class="section-header">
+            <h2 class="section-title">What Is the Immunity Index?</h2>
+            <p class="section-subtitle">
+                A public dashboard showing which European sectors have achieved<br>
+                herd immunity against cyber attacks through collective defense.
+            </p>
+        </div>
+
+        <div class="immunity-visual">
+            <h3 class="visual-title">The 30% Herd Immunity Threshold</h3>
+            
+            <div class="progress-demo">
+                <div class="progress-bar-container">
+                    <div class="progress-bar progress-green" style="width: 35%;">
+                        35%
+                    </div>
+                </div>
+                
+                <div class="progress-markers">
+                    <div class="marker">
+                        <div class="marker-value" style="color: var(--red);">0-14%</div>
+                        <div class="marker-label">Vulnerable</div>
+                        <div class="marker-status status-vulnerable">Exposed</div>
+                    </div>
+                    <div class="marker">
+                        <div class="marker-value" style="color: var(--yellow);">15-29%</div>
+                        <div class="marker-label">Building Defense</div>
+                        <div class="marker-status status-building">Growing</div>
+                    </div>
+                    <div class="marker">
+                        <div class="marker-value" style="color: var(--green);">30%+</div>
+                        <div class="marker-label">Herd Immunity</div>
+                        <div class="marker-status status-immune">✓ Protected</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flow-container">
+                <div class="flow-step">
+                    <div class="flow-icon">🏢</div>
+                    <div class="flow-title">Organizations Join</div>
+                    <div class="flow-description">Each new member increases sector protection</div>
+                </div>
+                <div class="flow-step">
+                    <div class="flow-icon">📈</div>
+                    <div class="flow-title">Progress Builds</div>
+                    <div class="flow-description">Real-time tracking shows percentage rising</div>
+                </div>
+                <div class="flow-step">
+                    <div class="flow-icon">🎯</div>
+                    <div class="flow-title">30% Threshold</div>
+                    <div class="flow-description">Critical mass for effective defense</div>
+                </div>
+                <div class="flow-step">
+                    <div class="flow-icon">🛡️</div>
+                    <div class="flow-title">Sector Protected</div>
+                    <div class="flow-description">All organizations benefit from immunity</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dashboard Screenshots Section -->
+    <section class="screenshots-section" id="screenshots">
+        <div class="section-header">
+            <h2 class="section-title">The Live Dashboard</h2>
+            <p class="section-subtitle">
+                Mission control for Europe's collective cyber defense
+            </p>
+        </div>
+
+        <div class="screenshots-grid">
+            <!-- Laptop Screenshot -->
+            <div class="device-frame laptop-frame">
+                <div class="laptop-screen">
+                    <div class="dashboard-header">
+                        <div class="dashboard-logo">
+                            <div class="logo-text">Argus Immunity Index</div>
+                        </div>
+                        <div class="dashboard-status">
+                            <span>Last updated: 2 min ago</span>
+                            <div class="status-live">
+                                <span class="live-dot"></span>
+                                LIVE
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="dashboard-content" style="display: grid; grid-template-columns: 1fr 380px; gap: 24px;">
+                        <!-- Map -->
+                        <div class="map-container">
+                            <div class="europe-map">
+                                <div class="country country-green" style="top: 30%; left: 45%;">Germany</div>
+                                <div class="country country-green" style="top: 35%; left: 35%;">Netherlands</div>
+                                <div class="country country-yellow" style="top: 45%; left: 30%;">France</div>
+                                <div class="country country-yellow" style="top: 25%; left: 55%;">Poland</div>
+                                <div class="country country-red" style="top: 55%; left: 25%;">Spain</div>
+                                <div class="country country-red" style="top: 60%; left: 45%;">Italy</div>
+                                <div class="country country-yellow" style="top: 20%; left: 40%;">Denmark</div>
+                                <div class="country country-green" style="top: 15%; left: 50%;">Sweden</div>
+                            </div>
+                        </div>
+                        
+                        <!-- Sectors Panel -->
+                        <div class="sector-panel">
+                            <div class="panel-title">Sector Immunity Progress</div>
+                            
+                            <div class="sector-item">
+                                <div class="sector-header">
+                                    <span class="sector-name">Financial Services</span>
+                                    <span class="sector-percent" style="color: #34c759;">31%</span>
+                                </div>
+                                <div class="sector-bar">
+                                    <div class="sector-fill fill-green" style="width: 31%;"></div>
+                                </div>
+                                <div class="sector-status">
+                                    <span class="immune-badge">✓ IMMUNE</span>
+                                </div>
+                            </div>
+                            
+                            <div class="sector-item">
+                                <div class="sector-header">
+                                    <span class="sector-name">Healthcare</span>
+                                    <span class="sector-percent" style="color: #ff9500;">23%</span>
+                                </div>
+                                <div class="sector-bar">
+                                    <div class="sector-fill fill-yellow" style="width: 23%;"></div>
+                                </div>
+                                <div class="sector-status" style="color: #ff9500;">7% to immunity</div>
+                            </div>
+                            
+                            <div class="sector-item">
+                                <div class="sector-header">
+                                    <span class="sector-name">Manufacturing</span>
+                                    <span class="sector-percent" style="color: #ff9500;">18%</span>
+                                </div>
+                                <div class="sector-bar">
+                                    <div class="sector-fill fill-yellow" style="width: 18%;"></div>
+                                </div>
+                                <div class="sector-status" style="color: #ff9500;">12% to immunity</div>
+                            </div>
+                            
+                            <div class="sector-item">
+                                <div class="sector-header">
+                                    <span class="sector-name">Energy</span>
+                                    <span class="sector-percent" style="color: #dc2626;">12%</span>
+                                </div>
+                                <div class="sector-bar">
+                                    <div class="sector-fill fill-red" style="width: 12%;"></div>
+                                </div>
+                                <div class="sector-status" style="color: #dc2626;">Vulnerable</div>
+                            </div>
+                            
+                            <div class="sector-item">
+                                <div class="sector-header">
+                                    <span class="sector-name">Retail</span>
+                                    <span class="sector-percent" style="color: #dc2626;">8%</span>
+                                </div>
+                                <div class="sector-bar">
+                                    <div class="sector-fill fill-red" style="width: 8%;"></div>
+                                </div>
+                                <div class="sector-status" style="color: #dc2626;">Vulnerable</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Live Ticker -->
+                    <div class="ticker">
+                        <div class="ticker-content">
+                            <span class="ticker-item">
+                                <span class="ticker-highlight">🛡️ Threat 'BlackCat-7' neutralized</span> across 847 organizations
+                            </span>
+                            <span class="ticker-item">
+                                <span class="ticker-highlight">🎉 German manufacturing</span> reached 30% immunity threshold
+                            </span>
+                            <span class="ticker-item">
+                                <span class="ticker-highlight">⚠️ New threat detected</span> in healthcare sector
+                            </span>
+                            <span class="ticker-item">
+                                <span class="ticker-highlight">📈 Financial services</span> immunity growing: 31% → 32%
+                            </span>
+                            <span class="ticker-item">
+                                <span class="ticker-highlight">🛡️ Threat 'BlackCat-7' neutralized</span> across 847 organizations
+                            </span>
+                            <span class="ticker-item">
+                                <span class="ticker-highlight">🎉 German manufacturing</span> reached 30% immunity threshold
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="laptop-base">
+                    <div class="laptop-notch"></div>
+                </div>
+            </div>
+
+            <!-- Tablet Screenshot -->
+            <div class="device-frame tablet-frame">
+                <div class="tablet-screen">
+                    <div class="dashboard-header">
+                        <div class="dashboard-logo">
+                            <div class="logo-text">Healthcare Sector Deep Dive</div>
+                        </div>
+                        <div class="dashboard-status">
+                            <span style="padding: 4px 12px; background: rgba(255, 149, 0, 0.2); border-radius: 20px; color: #ff9500; font-weight: 500;">
+                                Building Immunity
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <div class="dashboard-content">
+                        <!-- Progress Visual -->
+                        <div style="background: var(--dark-card); border-radius: 16px; padding: 30px; margin-bottom: 24px;">
+                            <h3 style="color: white; font-size: 24px; margin-bottom: 20px;">23% → 30% for Herd Immunity</h3>
+                            <div style="position: relative; height: 60px; background: rgba(255,255,255,0.1); border-radius: 30px; overflow: hidden;">
+                                <div style="width: 23%; height: 100%; background: linear-gradient(90deg, #ff9500, #fbbf24); display: flex; align-items: center; justify-content: flex-end; padding-right: 20px;">
+                                    <span style="color: white; font-size: 20px; font-weight: 600;">23%</span>
+                                </div>
+                                <div style="position: absolute; left: 30%; top: 0; bottom: 0; width: 2px; background: #34c759;"></div>
+                                <div style="position: absolute; left: 30%; top: -25px; font-size: 12px; color: #34c759; font-weight: 600;">30%</div>
+                            </div>
+                            <p style="color: rgba(255,255,255,0.7); margin-top: 16px; font-size: 14px;">7% more organizations needed for sector-wide protection</p>
+                        </div>
+                        
+                        <!-- Country Breakdown -->
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                            <div style="background: var(--dark-card); border-radius: 12px; padding: 20px;">
+                                <h4 style="color: white; font-size: 16px; margin-bottom: 16px;">Country Participation</h4>
+                                <div style="display: flex; flex-direction: column; gap: 12px;">
+                                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--dark-border);">
+                                        <span style="color: rgba(255,255,255,0.9); font-size: 14px;">Germany</span>
+                                        <span style="color: #34c759; font-weight: 600;">34% ✓</span>
+                                    </div>
+                                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--dark-border);">
+                                        <span style="color: rgba(255,255,255,0.9); font-size: 14px;">Netherlands</span>
+                                        <span style="color: #ff9500; font-weight: 600;">29%</span>
+                                    </div>
+                                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--dark-border);">
+                                        <span style="color: rgba(255,255,255,0.9); font-size: 14px;">France</span>
+                                        <span style="color: #ff9500; font-weight: 600;">21%</span>
+                                    </div>
+                                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--dark-border);">
+                                        <span style="color: rgba(255,255,255,0.9); font-size: 14px;">Spain</span>
+                                        <span style="color: #dc2626; font-weight: 600;">15%</span>
+                                    </div>
+                                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 0;">
+                                        <span style="color: rgba(255,255,255,0.9); font-size: 14px;">Italy</span>
+                                        <span style="color: #dc2626; font-weight: 600;">12%</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div style="background: var(--dark-card); border-radius: 12px; padding: 20px;">
+                                <h4 style="color: white; font-size: 16px; margin-bottom: 16px;">Recent Threats</h4>
+                                <div style="background: rgba(220, 38, 38, 0.1); border: 1px solid rgba(220, 38, 38, 0.3); border-radius: 8px; padding: 12px; margin-bottom: 8px;">
+                                    <div style="color: #dc2626; font-weight: 600; font-size: 14px;">3 Active Threats</div>
+                                    <div style="color: rgba(255,255,255,0.6); font-size: 12px; margin-top: 4px;">Affecting healthcare this week</div>
+                                </div>
+                                <div style="background: rgba(52, 199, 89, 0.1); border: 1px solid rgba(52, 199, 89, 0.3); border-radius: 8px; padding: 12px;">
+                                    <div style="color: #34c759; font-weight: 600; font-size: 14px;">12 Threats Blocked</div>
+                                    <div style="color: rgba(255,255,255,0.6); font-size: 12px; margin-top: 4px;">By immune organizations</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- CTA -->
+                        <div style="margin-top: 24px; text-align: center;">
+                            <button style="background: linear-gradient(135deg, var(--cyan), var(--teal)); color: white; border: none; padding: 14px 32px; border-radius: 8px; font-size: 16px; font-weight: 500; cursor: pointer;">
+                                Protect Your Healthcare Organization
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Phone Screenshot -->
+            <div class="device-frame phone-frame">
+                <div class="phone-notch"></div>
+                <div class="phone-screen">
+                    <div class="mobile-header">
+                        <div class="mobile-logo">Immunity Index</div>
+                        <div class="mobile-live">
+                            <span class="live-dot"></span>
+                            LIVE
+                        </div>
+                    </div>
+                    
+                    <div class="mobile-content">
+                        <div class="hero-stat">
+                            <div class="stat-number">2,847</div>
+                            <div class="stat-label">Organizations Protected</div>
+                        </div>
+                        
+                        <div class="sector-cards">
+                            <div class="mobile-sector-card" style="border-color: #34c759;">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                                    <span style="color: white; font-weight: 600;">Financial Services</span>
+                                    <span style="color: #34c759; font-weight: 600;">31%</span>
+                                </div>
+                                <div style="height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; overflow: hidden;">
+                                    <div style="width: 31%; height: 100%; background: linear-gradient(90deg, #34c759, #10a37f);"></div>
+                                </div>
+                                <div style="margin-top: 8px; display: flex; align-items: center; gap: 6px;">
+                                    <span style="color: #34c759; font-size: 12px; font-weight: 600;">✓ IMMUNE</span>
+                                </div>
+                            </div>
+                            
+                            <div class="mobile-sector-card" style="border-color: #ff9500;">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                                    <span style="color: white; font-weight: 600;">Healthcare</span>
+                                    <span style="color: #ff9500; font-weight: 600;">23%</span>
+                                </div>
+                                <div style="height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; overflow: hidden;">
+                                    <div style="width: 23%; height: 100%; background: linear-gradient(90deg, #ff9500, #fbbf24);"></div>
+                                </div>
+                                <div style="margin-top: 8px;">
+                                    <span style="color: #ff9500; font-size: 12px;">7% to immunity</span>
+                                </div>
+                            </div>
+                            
+                            <div class="mobile-sector-card">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                                    <span style="color: white; font-weight: 600;">Manufacturing</span>
+                                    <span style="color: #ff9500; font-weight: 600;">18%</span>
+                                </div>
+                                <div style="height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; overflow: hidden;">
+                                    <div style="width: 18%; height: 100%; background: linear-gradient(90deg, #ff9500, #fbbf24);"></div>
+                                </div>
+                                <div style="margin-top: 8px;">
+                                    <span style="color: #ff9500; font-size: 12px;">Building immunity</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mobile-alert">
+                            🎉 German manufacturing just reached herd immunity!
+                        </div>
+                        
+                        <button style="width: 100%; margin-top: 20px; background: linear-gradient(135deg, var(--cyan), var(--teal)); color: white; border: none; padding: 16px; border-radius: 12px; font-size: 16px; font-weight: 500;">
+                            Check Your Sector
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section">
+        <div class="section-header">
+            <h2 class="section-title">What You'll See</h2>
+            <p class="section-subtitle">
+                Real-time intelligence about Europe's cyber defense posture
+            </p>
+        </div>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🗺️</div>
+                <h3 class="feature-title">The Map</h3>
+                <p class="feature-description">
+                    Color-coded view of immunity levels across European nations
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">📊</div>
+                <h3 class="feature-title">Progress Bars</h3>
+                <p class="feature-description">
+                    Live tracking of each sector's journey to 30% immunity
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h3 class="feature-title">Threat Feed</h3>
+                <p class="feature-description">
+                    Real-time alerts as attacks are detected and neutralized
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🏆</div>
+                <h3 class="feature-title">Leaderboards</h3>
+                <p class="feature-description">
+                    Rankings of sectors and nations by protection levels
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Transparency Matters Section -->
+    <section class="transparency-section">
+        <div class="section-header">
+            <h2 class="section-title">Why Transparency Matters</h2>
+            <p class="section-subtitle">
+                Public visibility creates powerful incentives for cyber defense
+            </p>
+        </div>
+
+        <div class="transparency-grid">
+            <div class="transparency-item">
+                <div class="transparency-icon">👁️</div>
+                <div class="transparency-content">
+                    <h3 class="transparency-title">Public Accountability</h3>
+                    <p class="transparency-text">
+                        Boards and regulators can see which sectors are protected vs. exposed
+                    </p>
+                </div>
+            </div>
+
+            <div class="transparency-item">
+                <div class="transparency-icon">🏃</div>
+                <div class="transparency-content">
+                    <h3 class="transparency-title">Competitive Pressure</h3>
+                    <p class="transparency-text">
+                        No sector wants to be last - visibility drives rapid adoption
+                    </p>
+                </div>
+            </div>
+
+            <div class="transparency-item">
+                <div class="transparency-icon">📰</div>
+                <div class="transparency-content">
+                    <h3 class="transparency-title">Media Attention</h3>
+                    <p class="transparency-text">
+                        Red sectors make headlines, green sectors attract investment
+                    </p>
+                </div>
+            </div>
+
+            <div class="transparency-item">
+                <div class="transparency-icon">🤝</div>
+                <div class="transparency-content">
+                    <h3 class="transparency-title">Peer Influence</h3>
+                    <p class="transparency-text">
+                        Organizations join when they see competitors are protected
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section" id="waitlist">
+        <div class="cta-content">
+            <h2 class="cta-title">See Where Your Sector Stands</h2>
+            <p class="cta-subtitle">
+                Your competitors might already be protected. Don't be the last to know.
+            </p>
+            <div class="cta-buttons">
+                <a href="#" class="cta-button cta-primary">Join the Waitlist</a>
+                <a href="../Argus/community.html" class="cta-button cta-secondary">Learn About Community Defense</a>
+            </div>
+        </div>
+    </section>
+    <script>
+        // Mobile Menu Toggle
+        // No JavaScript needed for simple back link navigation
+    </script>
+</body>
+</html>

@@ -1,0 +1,2176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HYPERION - Sovereign Identity for Photonic AI Infrastructure</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --cyan: #00D4FF;
+            --teal: #00B4D8;
+            --dark-bg: #0A0E1A;
+            --dark-card: #0F1420;
+            --blue: #00D4FF;
+            --blue-dark: #00B4D8;
+            --green: #10a37f;
+            --red: #dc2626;
+            --orange: #ff9500;
+            --yellow: #fbbf24;
+            --purple: #8b5cf6;
+            --text-primary: #ffffff;
+            --text-secondary: rgba(255, 255, 255, 0.7);
+            --text-dark: #1d1d1f;
+            --bg-gray: #1a1f2e;
+            --border: rgba(255, 255, 255, 0.1);
+            --warning: #ff9500;
+            --success: #34c759;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            line-height: 1.47059;
+            letter-spacing: -0.022em;
+            color: var(--text-primary);
+            background: var(--dark-bg);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Navigation with Hamburger Menu */
+        .site-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(10, 14, 26, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 16px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: 600;
+            color: #00D4FF;
+            text-decoration: none;
+        }
+
+        /* Products Dropdown */
+        .products-dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-toggle {
+            background: none;
+            border: 1px solid rgba(255,255,255,0.2);
+            color: rgba(255,255,255,0.8);
+            padding: 10px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+
+        .dropdown-toggle:hover {
+            border-color: #00D4FF;
+            color: #00D4FF;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            margin-top: 8px;
+            background: rgba(15, 20, 32, 0.98);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 8px 0;
+            min-width: 200px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+        }
+
+        .dropdown-menu.open {
+            display: block;
+            animation: dropdownFadeIn 0.3s ease;
+        }
+
+        .dropdown-menu a {
+            display: block;
+            padding: 12px 20px;
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+
+        .dropdown-menu a:hover {
+            background: rgba(0,212,255,0.1);
+            color: #00D4FF;
+        }
+
+        .dropdown-menu a.active {
+            color: #00D4FF;
+            background: rgba(0,212,255,0.05);
+        }
+
+        @keyframes dropdownFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+
+
+        /* Hero Section - Crystal Clear Value Proposition */
+        .hero {
+            padding: 120px 24px 80px;
+            text-align: center;
+            background: linear-gradient(180deg, rgba(0, 212, 255, 0.05) 0%, transparent 100%);
+        }
+        
+        .hero-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .hero-badge {
+            display: inline-block;
+            padding: 8px 16px;
+            background: rgba(0, 212, 255, 0.1);
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            border-radius: 50px;
+            color: #00D4FF;
+            font-size: 14px;
+            margin-bottom: 24px;
+        }
+        
+        .hero h1 {
+            font-size: 64px;
+            color: #ffffff;
+            margin-bottom: 16px;
+            font-weight: 700;
+        }
+        
+        .hero-tagline {
+            font-size: 28px;
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 40px;
+        }
+        
+        .hero-explanation {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: left;
+        }
+        
+        .hero-explanation p {
+            font-size: 18px;
+            line-height: 1.8;
+            color: rgba(255,255,255,0.85);
+            margin-bottom: 24px;
+        }
+        
+        .hero-explanation p strong {
+            color: #ffffff;
+        }
+
+        .hero-content {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .OLD-hero-badge {
+            display: inline-block;
+            padding: 8px 16px;
+            background: rgba(0, 212, 255, 0.1);
+            border: 1px solid var(--cyan);
+            border-radius: 100px;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--cyan);
+            margin-bottom: 30px;
+        }
+
+        .hero h1 {
+            font-size: 72px;
+            line-height: 1.05;
+            font-weight: 700;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--cyan), var(--teal));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subheadline {
+            font-size: 28px;
+            font-weight: 400;
+            color: var(--text-primary);
+            margin-bottom: 30px;
+        }
+
+        .hero-explanation {
+            font-size: 20px;
+            line-height: 1.5;
+            color: var(--text-secondary);
+            max-width: 900px;
+            margin: 0 auto 50px;
+            padding: 25px;
+            background: rgba(0, 212, 255, 0.05);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            border-radius: 12px;
+        }
+
+        .hero-explanation strong {
+            color: var(--cyan);
+        }
+
+        .quick-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            max-width: 900px;
+            margin: 50px auto 0;
+        }
+
+        .photonic-explainer, .problem-section, .solution-section {
+            margin: 30px 0;
+            padding: 25px;
+            background: rgba(0, 212, 255, 0.02);
+            border: 1px solid rgba(0, 212, 255, 0.1);
+            border-radius: 12px;
+        }
+
+        .photonic-explainer h3, .problem-section h3, .solution-section h3 {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--cyan);
+            margin-bottom: 15px;
+        }
+
+        .hero-questions {
+            list-style: none;
+            padding: 0;
+            margin: 15px 0;
+        }
+
+        .hero-questions li {
+            font-size: 17px;
+            line-height: 1.7;
+            color: var(--text-secondary);
+            margin-bottom: 10px;
+            padding-left: 30px;
+            position: relative;
+        }
+
+        .hero-questions li::before {
+            content: '?';
+            position: absolute;
+            left: 0;
+            color: var(--cyan);
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+        .hero-features {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0;
+        }
+
+        .hero-features li {
+            font-size: 17px;
+            line-height: 1.7;
+            color: var(--text-secondary);
+            margin-bottom: 15px;
+            padding-left: 30px;
+            position: relative;
+        }
+
+        .hero-features li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--cyan);
+            font-weight: 600;
+        }
+
+        .hero-features li strong {
+            color: var(--text-primary);
+        }
+
+        .hero-analogy {
+            font-size: 18px;
+            line-height: 1.6;
+            color: var(--text-secondary);
+            margin-top: 20px;
+            padding: 20px;
+            background: rgba(0, 212, 255, 0.05);
+            border-left: 3px solid var(--cyan);
+            border-radius: 8px;
+        }
+
+        .hero-analogy strong {
+            color: var(--cyan);
+        }
+
+        .hero-regulatory {
+            max-width: 900px;
+            margin: 40px auto 0;
+            padding-top: 40px;
+            border-top: 1px solid rgba(0, 212, 255, 0.2);
+        }
+
+        .hero-regulatory p {
+            font-size: 18px;
+            line-height: 1.6;
+            color: var(--text-secondary);
+        }
+
+        .hero-regulatory strong {
+            color: var(--cyan);
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 30px 20px;
+            transition: all 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--cyan);
+            background: rgba(0, 212, 255, 0.05);
+        }
+
+        .stat-value {
+            font-size: 42px;
+            font-weight: 700;
+            color: var(--cyan);
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+
+        /* Architecture Section */
+        .architecture {
+            padding: 80px 24px;
+            background: rgba(0, 212, 255, 0.02);
+        }
+        
+        .architecture-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .architecture h2 {
+            text-align: center;
+            font-size: 36px;
+            color: #ffffff;
+            margin-bottom: 16px;
+        }
+        
+        .architecture .section-subtitle {
+            text-align: center;
+            color: rgba(255,255,255,0.7);
+            font-size: 18px;
+            margin-bottom: 48px;
+        }
+        
+        .architecture-diagram {
+            background: #0A0E1A;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 16px;
+            padding: 40px;
+            margin-bottom: 24px;
+        }
+        
+        .architecture-key {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            flex-wrap: wrap;
+        }
+        
+        .key-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: rgba(255,255,255,0.7);
+            font-size: 14px;
+        }
+        
+        .key-color {
+            width: 16px;
+            height: 16px;
+            border-radius: 4px;
+        }
+        
+        /* Technology Stack Section */
+        .tech-stack {
+            padding: 80px 24px;
+            background: #0A0E1A;
+        }
+        
+        .tech-stack-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .tech-stack h2 {
+            text-align: center;
+            font-size: 36px;
+            color: #ffffff;
+            margin-bottom: 16px;
+        }
+        
+        .tech-stack .section-subtitle {
+            text-align: center;
+            color: rgba(255,255,255,0.7);
+            font-size: 18px;
+            margin-bottom: 48px;
+        }
+        
+        .tech-columns {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+        }
+        
+        @media (max-width: 768px) {
+            .tech-columns {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .tech-column h3 {
+            font-size: 24px;
+            color: #00D4FF;
+            margin-bottom: 24px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid rgba(0, 212, 255, 0.3);
+        }
+        
+        .tech-item {
+            background: #0F1420;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 16px;
+        }
+        
+        .tech-item h4 {
+            font-size: 18px;
+            color: #ffffff;
+            margin-bottom: 8px;
+        }
+        
+        .tech-item p {
+            font-size: 14px;
+            color: rgba(255,255,255,0.7);
+            line-height: 1.6;
+        }
+        
+        /* Problem Section */
+        .problem-section {
+            padding: 100px 22px;
+            background: var(--dark-card);
+        }
+
+        .section-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-badge {
+            display: inline-block;
+            padding: 6px 12px;
+            background: rgba(220, 38, 38, 0.1);
+            border: 1px solid var(--red);
+            border-radius: 100px;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--red);
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            font-size: 56px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--text-primary);
+        }
+
+        .section-subtitle {
+            font-size: 20px;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.5;
+        }
+
+        .problem-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .problem-card {
+            background: rgba(220, 38, 38, 0.05);
+            border: 1px solid rgba(220, 38, 38, 0.3);
+            border-radius: 16px;
+            padding: 30px;
+            transition: all 0.3s;
+        }
+
+        .problem-card:hover {
+            transform: translateY(-5px);
+            background: rgba(220, 38, 38, 0.08);
+        }
+
+        .problem-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .problem-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 15px;
+        }
+
+        .problem-description {
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--text-secondary);
+        }
+
+        .bottom-line {
+            text-align: center;
+            padding: 30px;
+            background: rgba(220, 38, 38, 0.1);
+            border: 2px solid var(--red);
+            border-radius: 16px;
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        /* How It Works Section */
+        .how-it-works {
+            padding: 100px 22px;
+            background: var(--dark-bg);
+        }
+
+        .diagram-container {
+            background: rgba(0, 212, 255, 0.02);
+            border: 1px solid rgba(0, 212, 255, 0.1);
+            border-radius: 16px;
+            padding: 60px 20px;
+            margin-bottom: 60px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .diagram-svg {
+            width: 100%;
+            height: auto;
+            max-width: 100%;
+        }
+
+        /* Flow Steps - Cleaner */
+        .flow-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-top: 80px;
+            padding: 0 40px;
+        }
+
+        .flow-step {
+            text-align: center;
+        }
+
+        .flow-step-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(0, 212, 255, 0.1);
+            color: var(--cyan);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            border-radius: 50%;
+            font-size: 18px;
+            font-weight: 500;
+            margin-bottom: 15px;
+        }
+
+        .flow-step-title {
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+
+        .flow-step-desc {
+            font-size: 13px;
+            line-height: 1.4;
+            color: #8b949e;
+        }
+        
+        .flow-step-desc strong {
+            color: var(--cyan);
+            font-weight: 500;
+        }
+
+        /* Timeline Section */
+        .timeline-section {
+            padding: 100px 22px;
+            background: var(--dark-card);
+        }
+
+        .timeline-container {
+            background: var(--dark-bg);
+            border: 2px solid var(--cyan);
+            border-radius: 20px;
+            padding: 40px;
+            position: relative;
+        }
+
+        .timeline {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .timeline-item {
+            text-align: center;
+        }
+
+        .timeline-year {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--cyan);
+            margin-bottom: 15px;
+        }
+
+        .timeline-event {
+            background: rgba(0, 212, 255, 0.1);
+            border: 1px solid var(--cyan);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 15px;
+        }
+
+        .timeline-event-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 5px;
+        }
+
+        .timeline-event-date {
+            font-size: 14px;
+            color: var(--cyan);
+            margin-bottom: 10px;
+        }
+
+        .timeline-event-desc {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+
+        /* Competitive Section */
+        .competitive-section {
+            padding: 100px 22px;
+            background: var(--dark-bg);
+        }
+
+        .competitive-table {
+            background: var(--dark-card);
+            border-radius: 20px;
+            overflow: hidden;
+            margin-bottom: 40px;
+        }
+
+        .competitive-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .competitive-table th {
+            background: var(--cyan);
+            color: var(--dark-bg);
+            padding: 20px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        .competitive-table td {
+            padding: 20px;
+            border-bottom: 1px solid var(--border);
+            font-size: 15px;
+        }
+
+        .competitive-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .category-name {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .category-gap {
+            color: var(--text-secondary);
+        }
+
+        .unique-value {
+            background: linear-gradient(135deg, var(--cyan), var(--teal));
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .unique-value h3 {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--dark-bg);
+            margin-bottom: 30px;
+        }
+
+        .unique-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            text-align: left;
+        }
+
+        .unique-feature {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .unique-feature-check {
+            color: var(--dark-bg);
+            font-size: 24px;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .unique-feature-text {
+            color: var(--dark-bg);
+            font-size: 16px;
+            line-height: 1.4;
+            font-weight: 500;
+        }
+
+        /* Interactive Tools Section */
+        .tools-section {
+            padding: 100px 22px;
+            background: linear-gradient(135deg, var(--dark-bg) 0%, var(--dark-card) 100%);
+            position: relative;
+        }
+        
+        .tools-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 20% 50%, rgba(0, 212, 255, 0.05) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 50%, rgba(0, 180, 216, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+        }
+        
+        .tools-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .tools-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .tools-title {
+            font-size: 48px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--text-primary);
+        }
+        
+        .tools-subtitle {
+            font-size: 21px;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+        }
+        
+        .tool-card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            padding: 50px;
+            border: 2px solid rgba(0, 212, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .tool-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--cyan);
+            box-shadow: 0 20px 40px rgba(0, 212, 255, 0.2);
+        }
+        
+        .tool-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--cyan), var(--purple));
+        }
+        
+        .tool-icon {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 25px;
+            color: var(--cyan);
+        }
+        
+        .tool-title {
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--text-primary);
+        }
+        
+        .tool-description {
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+        }
+        
+        .tool-button {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--cyan), var(--purple));
+            color: white;
+            padding: 14px 32px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .tool-button:hover {
+            transform: translateX(5px);
+            box-shadow: 0 8px 20px rgba(0, 212, 255, 0.3);
+        }
+        
+        @media (max-width: 768px) {
+            .tools-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .tool-card {
+                padding: 35px 25px;
+            }
+            
+            .tools-title {
+                font-size: 36px;
+            }
+            
+            .tool-title {
+                font-size: 24px;
+            }
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 100px 22px;
+            background: linear-gradient(135deg, var(--dark-card), var(--dark-bg));
+            text-align: center;
+        }
+
+        .cta-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .cta-title {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--cyan), var(--teal));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .cta-subtitle {
+            font-size: 20px;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-button {
+            padding: 16px 32px;
+            border-radius: 100px;
+            font-size: 17px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+
+        .cta-primary {
+            background: linear-gradient(135deg, var(--cyan), var(--teal));
+            color: var(--dark-bg);
+        }
+
+        .cta-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
+        }
+
+        .cta-secondary {
+            background: transparent;
+            color: var(--text-primary);
+            border: 2px solid var(--cyan);
+        }
+
+        .cta-secondary:hover {
+            background: rgba(0, 212, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        footer {
+            padding: 60px 22px;
+            background: var(--dark-bg);
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--cyan);
+        }
+
+        .footer-brand {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 48px;
+            }
+
+            .hero-subheadline {
+                font-size: 22px;
+            }
+
+            .quick-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .photonic-explainer, .problem-section, .solution-section {
+                padding: 20px;
+            }
+
+            .hero-questions li, .hero-features li {
+                font-size: 15px;
+                padding-left: 25px;
+            }
+
+            .hero-analogy {
+                font-size: 16px;
+            }
+
+            .hero-regulatory p {
+                font-size: 16px;
+            }
+
+            .problem-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .timeline {
+                grid-template-columns: 1fr;
+            }
+
+            .flow-steps {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                gap: 30px;
+            }
+        }
+
+        /* Animations */
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.7;
+            }
+        }
+
+        @keyframes flow {
+            0% {
+                stroke-dashoffset: 100;
+            }
+            100% {
+                stroke-dashoffset: 0;
+            }
+        }
+
+        .animate-pulse {
+            animation: pulse 2s infinite;
+        }
+
+        .animate-flow {
+            stroke-dasharray: 100;
+            animation: flow 3s linear infinite;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation with Hamburger Menu -->
+    <header class="site-header">
+        <div class="header-container">
+            <a href="../index.html" class="logo">E-Group</a>
+            <div class="products-dropdown">
+                <button class="dropdown-toggle" onclick="toggleDropdown()">Products ▼</button>
+                <nav class="dropdown-menu">
+                    <a href="../HealthCompanion/index.html">Health Companion</a>
+                    <a href="../ResearchPay/index.html">ResearchPay</a>
+                    <a href="../LabVault/index.html">LabVault</a>
+                    <a href="../Argus/index.html">Argus</a>
+                    <a href="../ALETHEIA/index.html">Aletheia</a>
+                    <a href="../PROMETHEUS/index.html">Prometheus</a>
+                    <a href="../NEMESIS/index.html">Nemesis</a>
+                    <a href="index.html" class="active">Hyperion</a>
+                    <a href="../ARCHON/index.html">Archon</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section - Crystal Clear Value Proposition -->
+    <section class="hero">
+        <div class="hero-container">
+            <span class="hero-badge">Next-Generation Photonic AI Infrastructure</span>
+            <h1>HYPERION</h1>
+            <p class="hero-tagline">Identity & Security for Next-Generation Light-Based Computing</p>
+            
+            <div class="hero-explanation">
+                <p><strong>HYPERION provides identity verification and security controls for photonic computers</strong>—a new type of processor that uses light instead of electricity to perform calculations.</p>
+                
+                <div class="photonic-explainer">
+                    <h3>What is photonic computing?</h3>
+                    <p>Traditional computers use electrical signals. Photonic computers use light particles (photons), making them dramatically faster and more energy-efficient. Companies like Lightmatter, Q.ANT, and Lumai are bringing these systems to market now, with major applications in AI, defense, and scientific research.</p>
+                </div>
+
+                <div class="problem-section">
+                    <h3>The problem HYPERION solves:</h3>
+                    <p>When organizations connect photonic processors into networks for AI training or sensitive computations, they need to answer critical questions:</p>
+                    <ul class="hero-questions">
+                        <li>Which computing nodes are legitimate and authorized?</li>
+                        <li>Who owns each node, and where is it physically located?</li>
+                        <li>What data is each node allowed to access?</li>
+                        <li>Who is accountable if something goes wrong?</li>
+                    </ul>
+                </div>
+
+                <div class="solution-section">
+                    <h3>What HYPERION does:</h3>
+                    <ul class="hero-features">
+                        <li><strong>Verifies each photonic node's identity</strong> with EU-certified digital credentials</li>
+                        <li><strong>Controls what each node can access</strong> with real-time permission enforcement</li>
+                        <li><strong>Tracks every operation</strong> with immutable audit logs for regulatory compliance</li>
+                        <li><strong>Ensures EU data sovereignty</strong> so your compute infrastructure doesn't depend on US cloud services</li>
+                    </ul>
+                    <p class="hero-analogy">Think of HYPERION as the <strong>'passport and security clearance system'</strong> for photonic computing nodes—verifying who they are, what they're allowed to do, and keeping records of everything.</p>
+                </div>
+
+                <div class="hero-regulatory">
+                    <p><strong>Built on E-Group's eIDAS 2.0 certified MyD Wallet</strong>, HYPERION is the first sovereign identity infrastructure designed specifically for photonic AI systems. As Europe invests billions in photonic computing through IPCEI initiatives, HYPERION ensures sovereignty isn't sacrificed for speed.</p>
+                </div>
+            </div>
+
+            <div class="quick-stats">
+                <div class="stat-card">
+                    <div class="stat-value">FIRST</div>
+                    <div class="stat-label">eIDAS 2.0 certified wallet for machine identity</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">ZERO</div>
+                    <div class="stat-label">Competitors in photonic identity space</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">2026</div>
+                    <div class="stat-label">Regulatory deadline for mandatory EU digital identity</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How HYPERION Works Section -->
+    <section class="how-it-works" id="how-it-works">
+        <div class="section-content">
+            <div class="section-header">
+                <h2 class="section-title">How HYPERION Works</h2>
+                <p class="section-subtitle">
+                    Sovereign identity that travels with your photonic infrastructure
+                </p>
+            </div>
+
+            <div class="diagram-container" style="background: transparent; border: none; padding: 60px 20px;">
+                <svg viewBox="0 0 1200 750" class="diagram-svg">
+                    <defs>
+                        <!-- Simplified gradients -->
+                        <linearGradient id="softGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" style="stop-color:#00D4FF;stop-opacity:0.1" />
+                            <stop offset="100%" style="stop-color:#00D4FF;stop-opacity:0.05" />
+                        </linearGradient>
+
+                        <!-- Arrow markers -->
+                        <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+                            <path d="M0,0 L8,4 L0,8 L5,4 z" fill="#00D4FF" opacity="0.6" />
+                        </marker>
+                    </defs>
+
+                    <!-- Clean background -->
+                    <rect width="1200" height="750" fill="#0A0E1A" />
+
+                    <!-- Photonic Nodes - Simplified -->
+                    <g transform="translate(200, 60)">
+                        <rect x="0" y="0" width="160" height="80" rx="8" fill="#0F1420" stroke="rgba(0, 212, 255, 0.2)" stroke-width="1" />
+                        <text x="80" y="35" text-anchor="middle" font-size="13" font-weight="500" fill="#ffffff">Node A</text>
+                        <text x="80" y="55" text-anchor="middle" font-size="11" fill="#8b949e">Frankfurt</text>
+                    </g>
+
+                    <g transform="translate(520, 60)">
+                        <rect x="0" y="0" width="160" height="80" rx="8" fill="#0F1420" stroke="rgba(0, 212, 255, 0.2)" stroke-width="1" />
+                        <text x="80" y="35" text-anchor="middle" font-size="13" font-weight="500" fill="#ffffff">Node B</text>
+                        <text x="80" y="55" text-anchor="middle" font-size="11" fill="#8b949e">Paris</text>
+                    </g>
+
+                    <g transform="translate(840, 60)">
+                        <rect x="0" y="0" width="160" height="80" rx="8" fill="#0F1420" stroke="rgba(0, 212, 255, 0.2)" stroke-width="1" />
+                        <text x="80" y="35" text-anchor="middle" font-size="13" font-weight="500" fill="#ffffff">Node C</text>
+                        <text x="80" y="55" text-anchor="middle" font-size="11" fill="#8b949e">Amsterdam</text>
+                    </g>
+
+                    <!-- Simple arrows -->
+                    <g stroke="rgba(0, 212, 255, 0.3)" stroke-width="1" fill="none">
+                        <path d="M280,140 L280,200" marker-end="url(#arrow)" />
+                        <path d="M600,140 L600,200" marker-end="url(#arrow)" />
+                        <path d="M920,140 L920,200" marker-end="url(#arrow)" />
+                    </g>
+
+                    <!-- HYPERION Layer - Clean and minimal -->
+                    <g transform="translate(100, 220)">
+                        <!-- Subtle background -->
+                        <rect x="0" y="0" width="1000" height="280" rx="12" fill="rgba(0, 212, 255, 0.03)" stroke="rgba(0, 212, 255, 0.15)" stroke-width="1" />
+                        
+                        <!-- Title -->
+                        <text x="500" y="40" text-anchor="middle" font-size="18" font-weight="600" fill="#00D4FF">HYPERION LAYER</text>
+                        
+                        <!-- E-Group Row - Simplified -->
+                        <g transform="translate(60, 80)">
+                            <text x="0" y="0" font-size="11" fill="#8b949e">E-GROUP</text>
+                            
+                            <!-- MyD -->
+                            <g transform="translate(0, 20)">
+                                <rect x="0" y="0" width="260" height="60" rx="8" fill="rgba(0, 212, 255, 0.05)" stroke="none" />
+                                <text x="130" y="25" text-anchor="middle" font-size="12" font-weight="500" fill="#ffffff">MyD Wallet</text>
+                                <text x="130" y="42" text-anchor="middle" font-size="10" fill="#8b949e">eIDAS 2.0 Identity</text>
+                            </g>
+
+                            <!-- FedX -->
+                            <g transform="translate(290, 20)">
+                                <rect x="0" y="0" width="260" height="60" rx="8" fill="rgba(0, 212, 255, 0.05)" stroke="none" />
+                                <text x="130" y="25" text-anchor="middle" font-size="12" font-weight="500" fill="#ffffff">FedX</text>
+                                <text x="130" y="42" text-anchor="middle" font-size="10" fill="#8b949e">Federated Registry</text>
+                            </g>
+
+                            <!-- DataLake -->
+                            <g transform="translate(580, 20)">
+                                <rect x="0" y="0" width="260" height="60" rx="8" fill="rgba(0, 212, 255, 0.05)" stroke="none" />
+                                <text x="130" y="25" text-anchor="middle" font-size="12" font-weight="500" fill="#ffffff">DataLake</text>
+                                <text x="130" y="42" text-anchor="middle" font-size="10" fill="#8b949e">Audit Logs</text>
+                            </g>
+                        </g>
+
+                        <!-- Konvergence Row - Simplified -->
+                        <g transform="translate(60, 180)">
+                            <text x="0" y="0" font-size="11" fill="#8b949e">KONVERGENCE</text>
+                            
+                            <!-- Archimedes -->
+                            <g transform="translate(145, 20)">
+                                <rect x="0" y="0" width="260" height="60" rx="8" fill="rgba(157, 78, 221, 0.05)" stroke="none" />
+                                <text x="130" y="25" text-anchor="middle" font-size="12" font-weight="500" fill="#ffffff">Archimedes</text>
+                                <text x="130" y="42" text-anchor="middle" font-size="10" fill="#8b949e">Zero-Trust Backend</text>
+                            </g>
+
+                            <!-- Fortigraph -->
+                            <g transform="translate(435, 20)">
+                                <rect x="0" y="0" width="260" height="60" rx="8" fill="rgba(157, 78, 221, 0.05)" stroke="none" />
+                                <text x="130" y="25" text-anchor="middle" font-size="12" font-weight="500" fill="#ffffff">Fortigraph</text>
+                                <text x="130" y="42" text-anchor="middle" font-size="10" fill="#8b949e">Credential Backup</text>
+                            </g>
+                        </g>
+                    </g>
+
+                    <!-- Output arrows - simplified -->
+                    <g stroke="rgba(0, 212, 255, 0.3)" stroke-width="1" fill="none">
+                        <path d="M280,500 L280,560" marker-end="url(#arrow)" />
+                        <path d="M600,500 L600,560" marker-end="url(#arrow)" />
+                        <path d="M920,500 L920,560" marker-end="url(#arrow)" />
+                    </g>
+
+                    <!-- Verified Nodes - Minimal -->
+                    <g transform="translate(200, 580)">
+                        <rect x="0" y="0" width="160" height="80" rx="8" fill="rgba(16, 163, 127, 0.05)" stroke="rgba(16, 163, 127, 0.2)" stroke-width="1" />
+                        <g transform="translate(68, 27)">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#10a37f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"/>
+                            </svg>
+                        </g>
+                        <text x="88" y="35" text-anchor="left" font-size="13" font-weight="500" fill="#10a37f">Verified</text>
+                        <text x="80" y="55" text-anchor="middle" font-size="11" fill="#8b949e">Node A</text>
+                    </g>
+
+                    <g transform="translate(520, 580)">
+                        <rect x="0" y="0" width="160" height="80" rx="8" fill="rgba(16, 163, 127, 0.05)" stroke="rgba(16, 163, 127, 0.2)" stroke-width="1" />
+                        <g transform="translate(68, 27)">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#10a37f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"/>
+                            </svg>
+                        </g>
+                        <text x="88" y="35" text-anchor="left" font-size="13" font-weight="500" fill="#10a37f">Verified</text>
+                        <text x="80" y="55" text-anchor="middle" font-size="11" fill="#8b949e">Node B</text>
+                    </g>
+
+                    <g transform="translate(840, 580)">
+                        <rect x="0" y="0" width="160" height="80" rx="8" fill="rgba(16, 163, 127, 0.05)" stroke="rgba(16, 163, 127, 0.2)" stroke-width="1" />
+                        <g transform="translate(68, 27)">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#10a37f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"/>
+                            </svg>
+                        </g>
+                        <text x="88" y="35" text-anchor="left" font-size="13" font-weight="500" fill="#10a37f">Verified</text>
+                        <text x="80" y="55" text-anchor="middle" font-size="11" fill="#8b949e">Node C</text>
+                    </g>
+
+                    <!-- Federation Result - Clean -->
+                    <g transform="translate(400, 690)">
+                        <rect x="0" y="0" width="400" height="40" rx="8" fill="rgba(0, 212, 255, 0.1)" stroke="none" />
+                        <text x="200" y="25" text-anchor="middle" font-size="13" font-weight="500" fill="#00D4FF">Federated AI Training Enabled</text>
+                    </g>
+                </svg>
+            </div>
+
+            <div class="flow-steps">
+                <div class="flow-step">
+                    <div class="flow-step-number">①</div>
+                    <h4 class="flow-step-title">IDENTITY REQUEST</h4>
+                    <p class="flow-step-desc">
+                        Photonic compute node requests verified identity before joining 
+                        any federated network. Request handled by <strong>Archimedes</strong> zero-trust 
+                        architecture.
+                    </p>
+                </div>
+
+                <div class="flow-step">
+                    <div class="flow-step-number">②</div>
+                    <h4 class="flow-step-title">CREDENTIAL ISSUANCE</h4>
+                    <p class="flow-step-desc">
+                        <strong>MyD Wallet</strong> verifies node ownership, hardware attestation, 
+                        geographic jurisdiction, and security clearance — then issues 
+                        eIDAS 2.0 compliant verifiable credentials.
+                    </p>
+                </div>
+
+                <div class="flow-step">
+                    <div class="flow-step-number">③</div>
+                    <h4 class="flow-step-title">CREDENTIAL BACKUP</h4>
+                    <p class="flow-step-desc">
+                        <strong>Fortigraph</strong> immediately backs up credentials: Hot Shield for 
+                        instant recovery, Cold Shield for long-term archive, Chain Vault 
+                        for immutable Filecoin storage.
+                    </p>
+                </div>
+
+                <div class="flow-step">
+                    <div class="flow-step-number">④</div>
+                    <h4 class="flow-step-title">REGISTRY UPDATE</h4>
+                    <p class="flow-step-desc">
+                        <strong>FedX</strong> registers the verified node in the federated trust network, 
+                        enabling authenticated participation in multi-party compute.
+                    </p>
+                </div>
+
+                <div class="flow-step">
+                    <div class="flow-step-number">⑤</div>
+                    <h4 class="flow-step-title">CONTINUOUS AUDIT</h4>
+                    <p class="flow-step-desc">
+                        <strong>DataLake</strong> logs all identity events, creating complete audit trails 
+                        for NIS2, EU AI Act, and eIDAS 2.0 compliance.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technology Stack Section -->
+    <section class="tech-stack" id="tech-stack">
+        <div class="tech-stack-container">
+            <h2>Technology Stack</h2>
+            <p class="section-subtitle">Powered by proven E-Group and Konvergence infrastructure</p>
+
+            <div class="tech-columns">
+                <div class="tech-column">
+                    <h3>E-Group Components</h3>
+                    <div class="tech-item">
+                        <h4>MyD Wallet</h4>
+                        <p>eIDAS 2.0 compliant identity credentials for photonic processing nodes and AI systems</p>
+                    </div>
+                    <div class="tech-item">
+                        <h4>FedX</h4>
+                        <p>Federated authorization engine that validates permissions at photonic speed without centralized bottlenecks</p>
+                    </div>
+                    <div class="tech-item">
+                        <h4>InnoHealth DataLake</h4>
+                        <p>Policy enforcement and real-time audit logging for all photonic AI operations</p>
+                    </div>
+                    <div class="tech-item">
+                        <h4>IOX Platform</h4>
+                        <p>Secure communication layer connecting distributed photonic nodes across EU infrastructure</p>
+                    </div>
+                    <div class="tech-item">
+                        <h4>COIOS Interface</h4>
+                        <p>Natural language governance interface for managing photonic AI policies and permissions</p>
+                    </div>
+                </div>
+                
+                <div class="tech-column">
+                    <h3>Konvergence Components</h3>
+                    <div class="tech-item">
+                        <h4>Archimedes</h4>
+                        <p>Zero-trust backend providing decentralized identity management for photonic AI networks</p>
+                    </div>
+                    <div class="tech-item">
+                        <h4>Fortigraph</h4>
+                        <p>Immutable audit trail capturing all photonic AI decisions for regulatory compliance and accountability</p>
+                    </div>
+                    <div class="tech-item">
+                        <h4>Cold Shield</h4>
+                        <p>Long-term archival of AI decision logs and model provenance for NIS2 and EU AI Act compliance</p>
+                    </div>
+                    <div class="tech-item">
+                        <h4>Chain Vault</h4>
+                        <p>Encrypted credential storage for photonic node identities with quantum-resistant security</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- How Stack Works Together -->
+            <div style="background: var(--dark-card); border-radius: 20px; padding: 40px; margin-bottom: 60px;">
+                <h3 style="font-size: 28px; font-weight: 700; color: var(--text-primary); margin-bottom: 30px; text-align: center;">How the Stack Works Together</h3>
+                
+                <table style="width: 100%; border-collapse: collapse;">
+                    <thead>
+                        <tr style="border-bottom: 2px solid var(--border);">
+                            <th style="padding: 15px; text-align: left; font-size: 14px; color: var(--cyan); font-weight: 600; width: 10%;">#</th>
+                            <th style="padding: 15px; text-align: left; font-size: 14px; color: var(--cyan); font-weight: 600; width: 30%;">COMPONENT</th>
+                            <th style="padding: 15px; text-align: left; font-size: 14px; color: var(--cyan); font-weight: 600; width: 60%;">ROLE IN HYPERION</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="border-bottom: 1px solid var(--border);">
+                            <td style="padding: 15px; font-size: 14px; color: var(--text-secondary);">1</td>
+                            <td style="padding: 15px; font-size: 14px; color: var(--text-primary); font-weight: 600;">
+                                MyD Wallet<br>
+                                <span style="color: var(--cyan); font-size: 12px; font-weight: 400;">(E-Group)</span>
+                            </td>
+                            <td style="padding: 15px; font-size: 14px; color: var(--text-secondary);">
+                                Issues eIDAS 2.0 compliant verifiable credentials to each photonic compute node
+                            </td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--border);">
+                            <td style="padding: 15px; font-size: 14px; color: var(--text-secondary);">2</td>
+                            <td style="padding: 15px; font-size: 14px; color: var(--text-primary); font-weight: 600;">
+                                Archimedes<br>
+                                <span style="color: #9D4EDD; font-size: 12px; font-weight: 400;">(Konvergence)</span>
+                            </td>
+                            <td style="padding: 15px; font-size: 14px; color: var(--text-secondary);">
+                                Provides the zero-trust backend architecture and DID/VC infrastructure for cryptographic node authentication and policy enforcement
+                            </td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--border);">
+                            <td style="padding: 15px; font-size: 14px; color: var(--text-secondary);">3</td>
+                            <td style="padding: 15px; font-size: 14px; color: var(--text-primary); font-weight: 600;">
+                                FedX<br>
+                                <span style="color: var(--cyan); font-size: 12px; font-weight: 400;">(E-Group)</span>
+                            </td>
+                            <td style="padding: 15px; font-size: 14px; color: var(--text-secondary);">
+                                Maintains the federated registry of verified nodes and manages trust relationships across organizations
+                            </td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--border);">
+                            <td style="padding: 15px; font-size: 14px; color: var(--text-secondary);">4</td>
+                            <td style="padding: 15px; font-size: 14px; color: var(--text-primary); font-weight: 600;">
+                                Fortigraph<br>
+                                <span style="color: #9D4EDD; font-size: 12px; font-weight: 400;">(Konvergence)</span>
+                            </td>
+                            <td style="padding: 15px; font-size: 14px; color: var(--text-secondary);">
+                                Backs up identity credentials with ransomware-resistant storage: Hot Shield for live access, Cold Shield for archives, Chain Vault for immutable Filecoin storage
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 15px; font-size: 14px; color: var(--text-secondary);">5</td>
+                            <td style="padding: 15px; font-size: 14px; color: var(--text-primary); font-weight: 600;">
+                                DataLake<br>
+                                <span style="color: var(--cyan); font-size: 12px; font-weight: 400;">(E-Group)</span>
+                            </td>
+                            <td style="padding: 15px; font-size: 14px; color: var(--text-secondary);">
+                                Logs all identity events, authentications, and access patterns for compliance audit trails required by NIS2, EU AI Act, eIDAS 2.0
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why This Matters Now Section -->
+    <section class="timeline-section" id="timeline">
+        <div class="section-content">
+            <div class="section-header">
+                <h2 class="section-title">Why This Matters Now</h2>
+                <p class="section-subtitle">
+                    The regulatory timeline is converging. Act now or lose market access.
+                </p>
+            </div>
+
+            <div class="timeline-container">
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-year">2024</div>
+                        <div class="timeline-event">
+                            <div class="timeline-event-title">NIS2</div>
+                            <div class="timeline-event-date">Now in Effect</div>
+                            <div class="timeline-event-desc">
+                                Identity & access controls mandated
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-year">2025</div>
+                        <div class="timeline-event">
+                            <div class="timeline-event-title">EU AI Act</div>
+                            <div class="timeline-event-date">Aug 2025</div>
+                            <div class="timeline-event-desc">
+                                Traceability required for high-risk AI systems
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-year">2026</div>
+                        <div class="timeline-event">
+                            <div class="timeline-event-title">eIDAS 2.0</div>
+                            <div class="timeline-event-date">Wallet Mandatory</div>
+                            <div class="timeline-event-desc">
+                                EU-compliant identity required for all
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-year">2027</div>
+                        <div class="timeline-event">
+                            <div class="timeline-event-title">Defense</div>
+                            <div class="timeline-event-date">Deployments Scale</div>
+                            <div class="timeline-event-desc">
+                                Classified photonic AI requires sovereign identity
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="text-align: center; font-size: 20px; color: var(--text-primary); font-weight: 600; margin-top: 30px;">
+                    These regulations are converging. By 2026, you cannot deploy AI 
+                    infrastructure in the EU without verified, traceable identity.
+                    <br><br>
+                    <span style="color: var(--cyan);">HYPERION is the only solution ready today.</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Competitive Positioning Section -->
+    <section class="competitive-section" id="competitive">
+        <div class="section-content">
+            <div class="section-header">
+                <h2 class="section-title">The Competitive Landscape</h2>
+                <p class="section-subtitle">
+                    Why existing solutions can't solve this problem
+                </p>
+            </div>
+
+            <div class="competitive-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th width="30%">CATEGORY</th>
+                            <th width="70%">WHY THEY CAN'T DO THIS</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="category-name">Photonic Hardware Vendors</td>
+                            <td class="category-gap">Lightmatter, Q.ANT, Lumai build chips — not governance software</td>
+                        </tr>
+                        <tr>
+                            <td class="category-name">AI Governance Platforms</td>
+                            <td class="category-gap">Holistic AI, Credo AI focus on model governance — no hardware identity</td>
+                        </tr>
+                        <tr>
+                            <td class="category-name">Enterprise Identity Providers</td>
+                            <td class="category-gap">Okta, Microsoft Entra do user identity — not machine/hardware attestation</td>
+                        </tr>
+                        <tr>
+                            <td class="category-name">Sovereign Cloud Vendors</td>
+                            <td class="category-gap">SAP, Oracle do cloud infrastructure — not compute node identity</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="unique-value">
+                <h3>HYPERION IS THE ONLY SOLUTION COMBINING:</h3>
+                
+                <div style="margin-bottom: 30px;">
+                    <h4 style="font-size: 18px; font-weight: 700; color: var(--dark-bg); margin-bottom: 15px;">FROM E-GROUP:</h4>
+                    <div class="unique-features">
+                        <div class="unique-feature">
+                            <span class="unique-feature-check">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#00D4FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="20 6 9 17 4 12"/>
+                                </svg>
+                            </span>
+                            <span class="unique-feature-text">eIDAS 2.0 certified identity (MyD Wallet — first in market)</span>
+                        </div>
+                        <div class="unique-feature">
+                            <span class="unique-feature-check">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#00D4FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="20 6 9 17 4 12"/>
+                                </svg>
+                            </span>
+                            <span class="unique-feature-text">Federated trust framework (FedX)</span>
+                        </div>
+                        <div class="unique-feature">
+                            <span class="unique-feature-check">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#00D4FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="20 6 9 17 4 12"/>
+                                </svg>
+                            </span>
+                            <span class="unique-feature-text">Compliance audit logging (DataLake)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-bottom: 30px;">
+                    <h4 style="font-size: 18px; font-weight: 700; color: var(--dark-bg); margin-bottom: 15px;">FROM KONVERGENCE:</h4>
+                    <div class="unique-features">
+                        <div class="unique-feature">
+                            <span class="unique-feature-check">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#00D4FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="20 6 9 17 4 12"/>
+                                </svg>
+                            </span>
+                            <span class="unique-feature-text">Zero-trust backend architecture (Archimedes)</span>
+                        </div>
+                        <div class="unique-feature">
+                            <span class="unique-feature-check">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#00D4FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="20 6 9 17 4 12"/>
+                                </svg>
+                            </span>
+                            <span class="unique-feature-text">Air-gapped deployment capability (Archimedes)</span>
+                        </div>
+                        <div class="unique-feature">
+                            <span class="unique-feature-check">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#00D4FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="20 6 9 17 4 12"/>
+                                </svg>
+                            </span>
+                            <span class="unique-feature-text">Ransomware-resistant credential backup (Fortigraph)</span>
+                        </div>
+                        <div class="unique-feature">
+                            <span class="unique-feature-check">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#00D4FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="20 6 9 17 4 12"/>
+                                </svg>
+                            </span>
+                            <span class="unique-feature-text">Immutable storage on Filecoin (Chain Vault)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="padding-top: 30px; border-top: 2px solid rgba(10, 14, 26, 0.3); text-align: center;">
+                    <h4 style="font-size: 20px; font-weight: 700; color: var(--dark-bg);">
+                        TOGETHER: The only sovereign identity layer for photonic AI infrastructure
+                    </h4>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="how-it-works" id="pricing">
+        <div class="section-content">
+            <div class="section-header">
+                <h2 class="section-title">Simple, Scalable Pricing</h2>
+                <p class="section-subtitle">
+                    Per-node licensing that scales with your photonic infrastructure
+                </p>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 60px;">
+                <div style="background: var(--dark-card); border: 2px solid var(--cyan); border-radius: 20px; padding: 40px; text-align: center;">
+                    <h3 style="font-size: 24px; color: var(--cyan); margin-bottom: 20px;">ENTERPRISE</h3>
+                    <div style="font-size: 48px; font-weight: 700; color: var(--text-primary); margin-bottom: 10px;">€10K</div>
+                    <div style="font-size: 16px; color: var(--text-secondary); margin-bottom: 30px;">per node / year</div>
+                    <ul style="list-style: none; padding: 0; text-align: left;">
+                        <li style="padding: 10px 0; color: var(--text-secondary);">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00D4FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; vertical-align: middle; margin-right: 8px;">
+                                <polyline points="20 6 9 17 4 12"/>
+                            </svg> Full HYPERION platform</li>
+                        <li style="padding: 10px 0; color: var(--text-secondary);">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00D4FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; vertical-align: middle; margin-right: 8px;">
+                                <polyline points="20 6 9 17 4 12"/>
+                            </svg> eIDAS 2.0 compliance</li>
+                        <li style="padding: 10px 0; color: var(--text-secondary);">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00D4FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; vertical-align: middle; margin-right: 8px;">
+                                <polyline points="20 6 9 17 4 12"/>
+                            </svg> Federation support</li>
+                        <li style="padding: 10px 0; color: var(--text-secondary);">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00D4FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; vertical-align: middle; margin-right: 8px;">
+                                <polyline points="20 6 9 17 4 12"/>
+                            </svg> Standard support</li>
+                    </ul>
+                </div>
+
+                <div style="background: linear-gradient(135deg, var(--cyan), var(--teal)); border-radius: 20px; padding: 40px; text-align: center; position: relative;">
+                    <div style="position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background: var(--dark-bg); color: var(--cyan); padding: 5px 20px; border-radius: 100px; font-size: 12px; font-weight: 600; letter-spacing: 0.1em;">RECOMMENDED</div>
+                    <h3 style="font-size: 24px; color: var(--dark-bg); margin-bottom: 20px;">GOVERNMENT</h3>
+                    <div style="font-size: 48px; font-weight: 700; color: var(--dark-bg); margin-bottom: 10px;">€25K</div>
+                    <div style="font-size: 16px; color: var(--dark-bg); margin-bottom: 30px;">per node / year</div>
+                    <ul style="list-style: none; padding: 0; text-align: left;">
+                        <li style="padding: 10px 0; color: var(--dark-bg);">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00D4FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; vertical-align: middle; margin-right: 8px;">
+                                <polyline points="20 6 9 17 4 12"/>
+                            </svg> Air-gapped deployment</li>
+                        <li style="padding: 10px 0; color: var(--dark-bg);">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00D4FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; vertical-align: middle; margin-right: 8px;">
+                                <polyline points="20 6 9 17 4 12"/>
+                            </svg> Classified clearance support</li>
+                        <li style="padding: 10px 0; color: var(--dark-bg);">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00D4FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; vertical-align: middle; margin-right: 8px;">
+                                <polyline points="20 6 9 17 4 12"/>
+                            </svg> On-premise installation</li>
+                        <li style="padding: 10px 0; color: var(--dark-bg);">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00D4FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; vertical-align: middle; margin-right: 8px;">
+                                <polyline points="20 6 9 17 4 12"/>
+                            </svg> 24/7 priority support</li>
+                    </ul>
+                </div>
+
+                <div style="background: var(--dark-card); border: 2px solid var(--cyan); border-radius: 20px; padding: 40px; text-align: center;">
+                    <h3 style="font-size: 24px; color: var(--cyan); margin-bottom: 20px;">CUSTOM</h3>
+                    <div style="font-size: 48px; font-weight: 700; color: var(--text-primary); margin-bottom: 10px;">Contact</div>
+                    <div style="font-size: 16px; color: var(--text-secondary); margin-bottom: 30px;">for volume pricing</div>
+                    <ul style="list-style: none; padding: 0; text-align: left;">
+                        <li style="padding: 10px 0; color: var(--text-secondary);">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00D4FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; vertical-align: middle; margin-right: 8px;">
+                                <polyline points="20 6 9 17 4 12"/>
+                            </svg> 100+ nodes</li>
+                        <li style="padding: 10px 0; color: var(--text-secondary);">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00D4FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; vertical-align: middle; margin-right: 8px;">
+                                <polyline points="20 6 9 17 4 12"/>
+                            </svg> Custom integrations</li>
+                        <li style="padding: 10px 0; color: var(--text-secondary);">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00D4FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; vertical-align: middle; margin-right: 8px;">
+                                <polyline points="20 6 9 17 4 12"/>
+                            </svg> Dedicated success team</li>
+                        <li style="padding: 10px 0; color: var(--text-secondary);">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00D4FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; vertical-align: middle; margin-right: 8px;">
+                                <polyline points="20 6 9 17 4 12"/>
+                            </svg> Co-development options</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Add-Ons & Premium Services Section -->
+    <section class="addons-section">
+        <div class="section-content">
+            <h2 class="section-title">Add-Ons & Premium Services</h2>
+            <p class="section-subtitle">Enhance HYPERION with specialized features and enterprise capabilities</p>
+            
+            <!-- Tier 1: Core Add-Ons -->
+            <div class="addon-tier">
+                <h3 class="tier-title">Tier 1: Core Add-Ons</h3>
+                <div class="addon-grid">
+                    <div class="addon-card">
+                        <div class="addon-number">1</div>
+                        <h4 class="addon-title">Node Identity Analytics Dashboard</h4>
+                        <p class="addon-desc">Real-time visualization of all photonic nodes across your infrastructure. Authentication patterns, authorization requests, and anomaly detection. Geographic distribution maps showing node locations and trust relationships. Executive reporting for compliance audits and board presentations.</p>
+                        <div class="addon-pricing">€3K-8K/node/year</div>
+                        <div class="addon-target">
+                            <span class="target-icon">📊</span>
+                            <span>For infrastructure teams, CISOs, compliance officers</span>
+                        </div>
+                    </div>
+                    
+                    <div class="addon-card">
+                        <div class="addon-number">2</div>
+                        <h4 class="addon-title">Priority Identity SLA</h4>
+                        <p class="addon-desc">Standard 500ms credential verification, Premium 50ms low-latency for time-critical workloads, Enterprise sub-10ms photonic-speed verification with dedicated infrastructure. Guaranteed uptime SLAs (99.9% → 99.99% → 99.999%).</p>
+                        <div class="addon-pricing">€5K-15K/node/year</div>
+                        <div class="addon-target">
+                            <span class="target-icon">⚡</span>
+                            <span>For defense contractors, high-frequency compute, real-time AI systems</span>
+                        </div>
+                    </div>
+                    
+                    <div class="addon-card">
+                        <div class="addon-number">3</div>
+                        <h4 class="addon-title">Credential Lifecycle Management</h4>
+                        <p class="addon-desc">Automated credential rotation and renewal. Expiration alerts and proactive re-issuance. Revocation management with instant propagation across federated network. Certificate inventory and health monitoring.</p>
+                        <div class="addon-pricing">€2K-5K/node/year</div>
+                        <div class="addon-target">
+                            <span class="target-icon">🔄</span>
+                            <span>For large-scale deployments (50+ nodes), managed service providers</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Tier 2: Enterprise Features -->
+            <div class="addon-tier">
+                <h3 class="tier-title">Tier 2: Enterprise Features</h3>
+                <div class="addon-grid">
+                    <div class="addon-card">
+                        <div class="addon-number">4</div>
+                        <h4 class="addon-title">Multi-Tenant Federation Module</h4>
+                        <p class="addon-desc">Enable multiple organizations to share photonic compute while maintaining sovereign identity boundaries. Cross-organizational trust policies and data compartmentalization. Consortium management for joint research or defense projects. Per-tenant billing, audit trails, and access controls.</p>
+                        <div class="addon-pricing">€50K-150K/year base + per-tenant fees</div>
+                        <div class="addon-target">
+                            <span class="target-icon">🏢</span>
+                            <span>For research consortiums, defense alliances, IPCEI project participants</span>
+                        </div>
+                    </div>
+                    
+                    <div class="addon-card">
+                        <div class="addon-number">5</div>
+                        <h4 class="addon-title">Hardware Attestation Suite</h4>
+                        <p class="addon-desc">Deep integration with photonic chip manufacturers (Lightmatter, Q.ANT, Lumai). Cryptographic proof of hardware authenticity and tampering detection. Supply chain verification for photonic components. Firmware integrity monitoring and secure boot attestation.</p>
+                        <div class="addon-pricing">€20K-75K/year</div>
+                        <div class="addon-target">
+                            <span class="target-icon">🔐</span>
+                            <span>For defense/government deployments, critical infrastructure operators</span>
+                        </div>
+                    </div>
+                    
+                    <div class="addon-card">
+                        <div class="addon-number">6</div>
+                        <h4 class="addon-title">Quantum-Resistant Upgrade Package</h4>
+                        <p class="addon-desc">Post-quantum cryptography for credential issuance and verification. Future-proof identity infrastructure against quantum computing threats. Migration path from current cryptographic standards to PQC. Hybrid classical/quantum-resistant credential chains.</p>
+                        <div class="addon-pricing">€30K-100K/year</div>
+                        <div class="addon-target">
+                            <span class="target-icon">🛡️</span>
+                            <span>For defense agencies, long-term infrastructure investments, security-conscious enterprises</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Tier 3: Strategic Products -->
+            <div class="addon-tier">
+                <h3 class="tier-title">Tier 3: Strategic Products</h3>
+                <div class="addon-grid">
+                    <div class="addon-card">
+                        <div class="addon-number">7</div>
+                        <h4 class="addon-title">EU AI Act Compliance Module</h4>
+                        <p class="addon-desc">Pre-built compliance templates for high-risk AI system requirements. Automated traceability documentation for AI decisions. Model provenance tracking tied to photonic node identity. Audit-ready reporting packages for EU AI Act conformity assessments.</p>
+                        <div class="addon-pricing">€15K-50K/year</div>
+                        <div class="addon-target">
+                            <span class="target-icon">📋</span>
+                            <span>For any organization deploying AI in EU (mandatory by Aug 2025)</span>
+                        </div>
+                    </div>
+                    
+                    <div class="addon-card">
+                        <div class="addon-number">8</div>
+                        <h4 class="addon-title">Defense & Classified Clearance Extension</h4>
+                        <p class="addon-desc">NATO-compatible security classifications. National security clearance verification integration. Air-gapped deployment with HSM (Hardware Security Module) support. Secure enclave operation for classified workloads. Personnel clearance binding to node access permissions.</p>
+                        <div class="addon-pricing">€100K-500K/year</div>
+                        <div class="addon-target">
+                            <span class="target-icon">🎖️</span>
+                            <span>For defense ministries, NATO contractors, national security agencies</span>
+                        </div>
+                    </div>
+                    
+                    <div class="addon-card">
+                        <div class="addon-number">9</div>
+                        <h4 class="addon-title">Photonic Network Intelligence Feed</h4>
+                        <p class="addon-desc">Threat intelligence specific to photonic computing infrastructure. Early warning on vulnerabilities in photonic chips and firmware. Regulatory change alerts (NIS2, EU AI Act, eIDAS 2.0 updates). Quarterly briefings on photonic AI security landscape. API feed for integration into SOC/SIEM platforms.</p>
+                        <div class="addon-pricing">€10K-30K/year subscription</div>
+                        <div class="addon-target">
+                            <span class="target-icon">🔍</span>
+                            <span>For security operations teams, compliance teams, CISOs</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <style>
+        /* Add-Ons & Premium Services Section */
+        .addons-section {
+            padding: 100px 24px;
+            background: linear-gradient(135deg, #0A0E1A 0%, #0F1420 100%);
+            border-top: 1px solid rgba(0, 212, 255, 0.1);
+        }
+        
+        .addons-section .section-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .addons-section .section-title {
+            text-align: center;
+            font-size: 42px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 16px;
+        }
+        
+        .addons-section .section-subtitle {
+            text-align: center;
+            font-size: 20px;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 80px;
+        }
+        
+        .addon-tier {
+            margin-bottom: 80px;
+        }
+        
+        .addon-tier:last-child {
+            margin-bottom: 0;
+        }
+        
+        .tier-title {
+            font-size: 28px;
+            font-weight: 600;
+            color: #00D4FF;
+            margin-bottom: 40px;
+            padding-left: 20px;
+            border-left: 4px solid #00D4FF;
+        }
+        
+        .addon-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 30px;
+        }
+        
+        .addon-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            border-radius: 16px;
+            padding: 32px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .addon-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(0, 212, 255, 0.4);
+            box-shadow: 0 20px 40px rgba(0, 212, 255, 0.1);
+            background: rgba(255, 255, 255, 0.04);
+        }
+        
+        .addon-number {
+            position: absolute;
+            top: -15px;
+            left: 24px;
+            width: 30px;
+            height: 30px;
+            background: linear-gradient(135deg, #00D4FF, #00B4D8);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 14px;
+            color: #0A0E1A;
+        }
+        
+        .addon-title {
+            font-size: 22px;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 16px;
+            margin-top: 8px;
+        }
+        
+        .addon-desc {
+            font-size: 15px;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 20px;
+        }
+        
+        .addon-pricing {
+            background: rgba(0, 212, 255, 0.1);
+            border-left: 3px solid #00D4FF;
+            padding: 12px 16px;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #00D4FF;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        
+        .addon-target {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        .target-icon {
+            font-size: 20px;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .addon-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .addons-section .section-title {
+                font-size: 32px;
+            }
+            
+            .tier-title {
+                font-size: 24px;
+            }
+            
+            .addon-title {
+                font-size: 20px;
+            }
+        }
+    </style>
+
+    <!-- Interactive Tools Section -->
+    <section class="tools-section">
+        <div class="tools-content">
+            <div class="tools-header">
+                <h2 class="tools-title">Interactive Tools</h2>
+                <p class="tools-subtitle">
+                    Proof-of-concept applications and lead generation tools built on HYPERION
+                </p>
+            </div>
+            <div class="tools-grid">
+                <!-- NIS2 Compliance Checker Card -->
+                <div class="tool-card">
+                    <svg class="tool-icon" viewBox="0 0 60 60" fill="none">
+                        <path d="M30 10L40 15V25C40 32.5 35 38.5 30 40C25 38.5 20 32.5 20 25V15L30 10Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M25 28L28 31L35 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <h3 class="tool-title">NIS2 Compliance Checker</h3>
+                    <p class="tool-description">
+                        Assess your organization's readiness for NIS2 directive requirements. Identify gaps and get actionable recommendations.
+                    </p>
+                    <a href="nis2-checker.html" class="tool-button">Check NIS2 Compliance →</a>
+                </div>
+                
+                <!-- eIDAS 2.0 Readiness Assessment Card -->
+                <div class="tool-card">
+                    <svg class="tool-icon" viewBox="0 0 60 60" fill="none">
+                        <rect x="15" y="20" width="30" height="25" rx="3" stroke="currentColor" stroke-width="2"/>
+                        <path d="M25 30H35M25 35H30" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        <circle cx="30" cy="15" r="5" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                    <h3 class="tool-title">eIDAS 2.0 Readiness Assessment</h3>
+                    <p class="tool-description">
+                        Evaluate your digital identity infrastructure against eIDAS 2.0 requirements. See where you stand before the 2026 mandate.
+                    </p>
+                    <a href="eidas-readiness.html" class="tool-button">Check eIDAS Readiness →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="cta-content">
+            <h2 class="cta-title">Ready to Secure Your Photonic Infrastructure?</h2>
+            <p class="cta-subtitle">
+                The first deployments will set the standard. Be the pioneer, not the follower.
+            </p>
+            <div class="cta-buttons">
+                <a href="nis2-checker.html" class="cta-button cta-primary">Try NIS2 Compliance Checker</a>
+                <a href="mailto:hyperion@e-group.com" class="cta-button cta-secondary">Request Demo</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <ul class="footer-links">
+                <li><a href="../index.html">E-Group Home</a></li>
+                <li><a href="../Argus/index.html">ARGUS</a></li>
+                <li><a href="../NEMESIS/index.html">NEMESIS</a></li>
+                <li><a href="../PROMETHEUS/index.html">PROMETHEUS</a></li>
+                <li><a href="../ALETHEIA/index.html">ALETHEIA</a></li>
+                <li><a href="nis2-checker.html">NIS2 Checker</a></li>
+            </ul>
+            <div class="footer-brand">
+                © 2024 E-Group | Securing Tomorrow's AI Infrastructure
+            </div>
+        </div>
+    </footer>
+    <script>
+        // Hamburger Menu Toggle
+        // Products Dropdown Toggle
+        function toggleDropdown() {
+            const menu = document.querySelector('.dropdown-menu');
+            menu.classList.toggle('open');
+        }
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(e) {
+            const dropdown = document.querySelector('.products-dropdown');
+            const menu = document.querySelector('.dropdown-menu');
+            if (menu && !e.target.closest('.products-dropdown')) {
+                menu.classList.remove('open');
+            }
+        });
+
+        // Close dropdown on Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                const menu = document.querySelector('.dropdown-menu');
+                if (menu) menu.classList.remove('open');
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Argus Sentinel - Free Agent for Collective Cyber Defense</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --blue: #1a73e8;
+            --blue-dark: #1557b0;
+            --cyan: #00D4FF;
+            --cyan-dark: #00a3cc;
+            --green: #10a37f;
+            --red: #dc2626;
+            --orange: #ff9500;
+            --yellow: #fbbf24;
+            --text-primary: #1d1d1f;
+            --text-secondary: #86868b;
+            --bg-gray: #f5f5f7;
+            --border: #d2d2d7;
+            --dark-bg: #1a1f2e;
+            --dark-card: #232937;
+            --dark-border: #2a3548;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            line-height: 1.47059;
+            letter-spacing: -0.022em;
+            color: var(--text-primary);
+            background: white;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Navigation with Hamburger Menu */
+        .site-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(10, 14, 26, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 16px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .back-link {
+            font-size: 16px;
+            color: #00D4FF;
+            text-decoration: none;
+            transition: opacity 0.2s;
+        }
+
+        .back-link:hover {
+            opacity: 0.8;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding-top: 70px;
+            text-align: center;
+            background: linear-gradient(135deg, #f5f5f7 0%, #ffffff 50%, #f5f5f7 100%);
+        }
+
+        .hero-content {
+            padding: 100px 22px 80px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: var(--green);
+            color: white;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-size: 72px;
+            line-height: 1.07143;
+            font-weight: 600;
+            letter-spacing: -0.005em;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--text-primary), var(--blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero .subtitle {
+            font-size: 28px;
+            line-height: 1.14286;
+            font-weight: 400;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 80px;
+            margin: 60px 0;
+            flex-wrap: wrap;
+        }
+
+        .stat-block {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 48px;
+            font-weight: 600;
+            color: var(--cyan);
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        /* Section Base Styles */
+        .section {
+            padding: 100px 22px;
+        }
+
+        .section-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 48px;
+            line-height: 1.08349;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-subtitle {
+            font-size: 21px;
+            line-height: 1.47059;
+            color: var(--text-secondary);
+            text-align: center;
+            max-width: 800px;
+            margin: -40px auto 60px;
+        }
+
+        /* What Is Sentinel Section */
+        .what-is-section {
+            background: white;
+        }
+
+        .what-is-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .what-is-content h2 {
+            font-size: 48px;
+            font-weight: 600;
+            margin-bottom: 30px;
+            color: var(--text-primary);
+        }
+
+        .what-is-summary {
+            font-size: 24px;
+            line-height: 1.4;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+        }
+
+        .what-is-points {
+            list-style: none;
+        }
+
+        .what-is-points li {
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border);
+            font-size: 18px;
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .what-is-points li:last-child {
+            border-bottom: none;
+        }
+
+        .point-icon {
+            width: 24px;
+            height: 24px;
+            background: linear-gradient(135deg, var(--cyan), var(--blue));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 14px;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        /* Flow Diagram */
+        .flow-diagram {
+            background: var(--bg-gray);
+            border-radius: 20px;
+            padding: 40px;
+            position: relative;
+        }
+
+        .flow-step {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: relative;
+        }
+
+        .flow-step:last-child {
+            margin-bottom: 0;
+        }
+
+        .flow-step::after {
+            content: "↓";
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--cyan);
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .flow-step:last-child::after {
+            display: none;
+        }
+
+        .flow-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--cyan), var(--blue));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+
+        .flow-text {
+            flex: 1;
+        }
+
+        .flow-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+
+        .flow-desc {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        /* Platform Screenshots Section */
+        .screenshots-section {
+            background: linear-gradient(135deg, var(--dark-bg) 0%, #2a3548 50%, var(--dark-bg) 100%);
+            padding: 120px 22px;
+        }
+
+        .screenshots-section .section-title {
+            color: white;
+        }
+
+        .screenshots-section .section-subtitle {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .screenshots-grid {
+            display: grid;
+            gap: 80px;
+        }
+
+        .screenshot-container {
+            position: relative;
+        }
+
+        .device-frame {
+            margin: 0 auto;
+            position: relative;
+            filter: drop-shadow(0 20px 60px rgba(0, 0, 0, 0.3));
+        }
+
+        .device-frame.laptop {
+            max-width: 1000px;
+            background: #1a1a1a;
+            border-radius: 12px;
+            padding: 10px;
+        }
+
+        .device-frame.tablet {
+            max-width: 600px;
+            background: #2a2a2a;
+            border-radius: 16px;
+            padding: 20px;
+        }
+
+        .device-frame.phone {
+            max-width: 320px;
+            background: #1a1a1a;
+            border-radius: 30px;
+            padding: 10px;
+        }
+
+        .screen {
+            background: var(--dark-bg);
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .device-frame.laptop .screen {
+            aspect-ratio: 16/10;
+        }
+
+        .device-frame.tablet .screen {
+            aspect-ratio: 4/3;
+        }
+
+        .device-frame.phone .screen {
+            aspect-ratio: 9/19;
+            border-radius: 20px;
+        }
+
+        /* Laptop Dashboard Mockup */
+        .dashboard-mockup {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .dashboard-nav {
+            background: var(--dark-card);
+            padding: 15px 20px;
+            border-bottom: 1px solid var(--dark-border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .dashboard-logo {
+            color: var(--cyan);
+            font-weight: 600;
+            font-size: 18px;
+        }
+
+        .dashboard-user {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 14px;
+        }
+
+        .dashboard-main {
+            flex: 1;
+            display: flex;
+            padding: 30px;
+            gap: 30px;
+        }
+
+        .dashboard-content {
+            flex: 1;
+        }
+
+        .status-card {
+            background: var(--dark-card);
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .status-card::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(16, 163, 127, 0.1), transparent);
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+
+        .status-text {
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--green);
+            margin-bottom: 10px;
+            position: relative;
+        }
+
+        .status-subtitle {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 14px;
+        }
+
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: var(--dark-card);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 28px;
+            font-weight: 600;
+            color: var(--cyan);
+            margin-bottom: 5px;
+        }
+
+        .stat-label-small {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.5);
+            text-transform: uppercase;
+        }
+
+        .activity-graph {
+            background: var(--dark-card);
+            border-radius: 12px;
+            padding: 20px;
+            height: 200px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .graph-title {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        .graph-line {
+            position: absolute;
+            bottom: 40px;
+            left: 20px;
+            right: 20px;
+            height: 100px;
+            border-left: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .graph-line svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .dashboard-sidebar {
+            width: 300px;
+        }
+
+        .alerts-panel {
+            background: var(--dark-card);
+            border-radius: 12px;
+            padding: 20px;
+            height: 100%;
+        }
+
+        .alerts-title {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 14px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .alert-item {
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            margin-bottom: 12px;
+            border-left: 3px solid transparent;
+        }
+
+        .alert-item.critical {
+            border-left-color: var(--red);
+        }
+
+        .alert-item.warning {
+            border-left-color: var(--orange);
+        }
+
+        .alert-item.info {
+            border-left-color: var(--cyan);
+        }
+
+        .alert-time {
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.4);
+            margin-bottom: 5px;
+        }
+
+        .alert-text {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* Tablet Detection View Mockup */
+        .detection-mockup {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .detection-header {
+            background: var(--dark-card);
+            padding: 20px;
+            border-bottom: 1px solid var(--dark-border);
+        }
+
+        .detection-title {
+            color: white;
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .filter-bar {
+            display: flex;
+            gap: 10px;
+        }
+
+        .filter-button {
+            padding: 8px 16px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 6px;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 13px;
+        }
+
+        .filter-button.active {
+            background: linear-gradient(135deg, var(--cyan), var(--blue));
+            border-color: transparent;
+            color: white;
+        }
+
+        .detection-table {
+            flex: 1;
+            overflow: auto;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .table th {
+            background: var(--dark-card);
+            padding: 15px;
+            text-align: left;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 1px solid var(--dark-border);
+            position: sticky;
+            top: 0;
+        }
+
+        .table td {
+            padding: 15px;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 14px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .table tr:hover {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .severity-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .severity-critical {
+            background: var(--red);
+            color: white;
+        }
+
+        .severity-high {
+            background: var(--orange);
+            color: white;
+        }
+
+        .severity-medium {
+            background: var(--yellow);
+            color: var(--dark-bg);
+        }
+
+        .severity-low {
+            background: var(--green);
+            color: white;
+        }
+
+        .confidence-value {
+            color: var(--cyan);
+            font-weight: 600;
+        }
+
+        /* Phone Alert Mockup */
+        .phone-mockup {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+        }
+
+        .phone-notification {
+            background: linear-gradient(135deg, rgba(220, 38, 38, 0.9), rgba(239, 68, 68, 0.9));
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(220, 38, 38, 0.3);
+        }
+
+        .notification-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .notification-icon {
+            width: 40px;
+            height: 40px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+
+        .notification-title {
+            color: white;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .notification-body {
+            color: rgba(255, 255, 255, 0.95);
+            font-size: 14px;
+            line-height: 1.5;
+            margin-bottom: 8px;
+        }
+
+        .notification-time {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 12px;
+            margin-bottom: 20px;
+        }
+
+        .notification-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .notification-button {
+            flex: 1;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            text-align: center;
+        }
+
+        .notification-button.primary {
+            background: white;
+            color: var(--red);
+        }
+
+        .notification-button.secondary {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            backdrop-filter: blur(10px);
+        }
+
+        .phone-stats {
+            background: var(--dark-card);
+            border-radius: 16px;
+            padding: 20px;
+        }
+
+        .phone-stats-title {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 15px;
+        }
+
+        .phone-stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .phone-stat {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            padding: 12px;
+            text-align: center;
+        }
+
+        .phone-stat-value {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--cyan);
+            margin-bottom: 4px;
+        }
+
+        .phone-stat-label {
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.5);
+            text-transform: uppercase;
+        }
+
+        /* Trust Section */
+        .trust-section {
+            background: var(--bg-gray);
+        }
+
+        .trust-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .trust-column {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+        }
+
+        .trust-column h3 {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .trust-column.shares h3 {
+            color: var(--green);
+        }
+
+        .trust-column.never h3 {
+            color: var(--red);
+        }
+
+        .trust-list {
+            list-style: none;
+        }
+
+        .trust-list li {
+            padding: 15px 0;
+            border-bottom: 1px solid var(--border);
+            font-size: 16px;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .trust-list li:last-child {
+            border-bottom: none;
+        }
+
+        .trust-icon {
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        /* Specifications Section */
+        .specs-section {
+            background: white;
+        }
+
+        .specs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .spec-group h4 {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--cyan);
+        }
+
+        .spec-list {
+            list-style: none;
+        }
+
+        .spec-list li {
+            padding: 10px 0;
+            font-size: 14px;
+            color: var(--text-secondary);
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .spec-label {
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        /* Pricing Comparison */
+        .pricing-section {
+            background: var(--bg-gray);
+        }
+
+        .pricing-table {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .pricing-header {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            background: linear-gradient(135deg, var(--dark-bg), var(--dark-card));
+        }
+
+        .pricing-header > div {
+            padding: 30px;
+            color: white;
+            text-align: center;
+        }
+
+        .pricing-header > div:first-child {
+            text-align: left;
+        }
+
+        .product-name {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .product-price {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
+        .pricing-body {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+        }
+
+        .pricing-row {
+            display: contents;
+        }
+
+        .pricing-row > div {
+            padding: 20px 30px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .pricing-row > div:first-child {
+            justify-content: flex-start;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .pricing-row:last-child > div {
+            border-bottom: none;
+        }
+
+        .check {
+            color: var(--green);
+            font-size: 20px;
+        }
+
+        .cross {
+            color: var(--red);
+            font-size: 20px;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 120px 22px;
+            background: linear-gradient(135deg, var(--cyan), var(--blue));
+            color: white;
+            text-align: center;
+        }
+
+        .cta-content h2 {
+            font-size: 56px;
+            font-weight: 600;
+            margin-bottom: 30px;
+        }
+
+        .cta-content p {
+            font-size: 24px;
+            margin-bottom: 50px;
+            opacity: 0.95;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 18px 40px;
+            border-radius: 100px;
+            font-size: 17px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+
+        .btn-white {
+            background: white;
+            color: var(--blue);
+        }
+
+        .btn-white:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-outline:hover {
+            background: white;
+            color: var(--blue);
+        }
+
+        /* Cross Links Section */
+        .cross-links {
+            text-align: center;
+            padding: 80px 22px;
+            background: white;
+        }
+
+        .cross-links-title {
+            font-size: 18px;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+        }
+
+        .cross-links-list {
+            display: flex;
+            gap: 40px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cross-links-list a {
+            color: var(--blue);
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .cross-links-list a:hover {
+            color: var(--cyan);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 48px;
+            }
+            
+            .hero .subtitle {
+                font-size: 21px;
+            }
+            
+            .what-is-container,
+            .trust-grid,
+            .pricing-header,
+            .pricing-body {
+                grid-template-columns: 1fr;
+            }
+
+            .dashboard-main {
+                flex-direction: column;
+            }
+
+            .dashboard-sidebar {
+                width: 100%;
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <!-- Navigation with Hamburger Menu -->
+    <header class="site-header">
+        <div class="header-container">
+            <a href="index.html" class="back-link">← Back to Argus</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <span class="hero-badge">FREE FOREVER • NO CREDIT CARD</span>
+            <h1>Argus Sentinel</h1>
+            <p class="subtitle">The free agent that makes Europe's cyber defense collective</p>
+            
+            <div class="hero-stats">
+                <div class="stat-block">
+                    <span class="stat-number">~50MB</span>
+                    <span class="stat-label">Agent Size</span>
+                </div>
+                <div class="stat-block">
+                    <span class="stat-number">&lt;1%</span>
+                    <span class="stat-label">CPU Usage</span>
+                </div>
+                <div class="stat-block">
+                    <span class="stat-number">24/7</span>
+                    <span class="stat-label">Protection</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- What Is Sentinel Section -->
+    <section class="section what-is-section">
+        <div class="section-content">
+            <div class="what-is-container">
+                <div class="what-is-content">
+                    <h2>What Is Sentinel?</h2>
+                    <p class="what-is-summary">
+                        A lightweight monitoring agent that protects your organization while strengthening Europe's collective cyber defense.
+                    </p>
+                    <ul class="what-is-points">
+                        <li>
+                            <span class="point-icon">✓</span>
+                            <span>Monitors your network for threats using federated AI - no data leaves your infrastructure</span>
+                        </li>
+                        <li>
+                            <span class="point-icon">✓</span>
+                            <span>Shares only anonymized threat fingerprints with the network - never your logs or data</span>
+                        </li>
+                        <li>
+                            <span class="point-icon">✓</span>
+                            <span>Receives real-time protection from threats detected anywhere in the network</span>
+                        </li>
+                        <li>
+                            <span class="point-icon">✓</span>
+                            <span>Free forever for basic protection - upgrade to Argus Platform for enterprise features</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="flow-diagram">
+                    <div class="flow-step">
+                        <div class="flow-icon">🏢</div>
+                        <div class="flow-text">
+                            <div class="flow-title">Your Network</div>
+                            <div class="flow-desc">Sentinel monitors locally, learning your baseline</div>
+                        </div>
+                    </div>
+                    <div class="flow-step">
+                        <div class="flow-icon">🔍</div>
+                        <div class="flow-text">
+                            <div class="flow-title">Threat Detection</div>
+                            <div class="flow-desc">AI identifies anomalies without sending data out</div>
+                        </div>
+                    </div>
+                    <div class="flow-step">
+                        <div class="flow-icon">🔐</div>
+                        <div class="flow-text">
+                            <div class="flow-title">Anonymous Fingerprint</div>
+                            <div class="flow-desc">Only the threat pattern shared - no identifying data</div>
+                        </div>
+                    </div>
+                    <div class="flow-step">
+                        <div class="flow-icon">🌐</div>
+                        <div class="flow-text">
+                            <div class="flow-title">Network Intelligence</div>
+                            <div class="flow-desc">Pattern analyzed, detection rules created</div>
+                        </div>
+                    </div>
+                    <div class="flow-step">
+                        <div class="flow-icon">🛡️</div>
+                        <div class="flow-text">
+                            <div class="flow-title">Collective Protection</div>
+                            <div class="flow-desc">All participants protected from identified threat</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Platform Screenshots -->
+    <section class="section screenshots-section">
+        <div class="section-content">
+            <h2 class="section-title">See Sentinel in Action</h2>
+            <p class="section-subtitle">Professional-grade monitoring that's actually free</p>
+            
+            <div class="screenshots-grid">
+                <!-- Laptop Dashboard Screenshot -->
+                <div class="screenshot-container">
+                    <div class="device-frame laptop">
+                        <div class="screen">
+                            <div class="dashboard-mockup">
+                                <div class="dashboard-nav">
+                                    <div class="dashboard-logo">🛡️ Sentinel</div>
+                                    <div class="dashboard-user">
+                                        <span>admin@company.eu</span>
+                                        <span style="width: 32px; height: 32px; background: var(--dark-border); border-radius: 50%;"></span>
+                                    </div>
+                                </div>
+                                <div class="dashboard-main">
+                                    <div class="dashboard-content">
+                                        <div class="status-card">
+                                            <div class="status-text">PROTECTED</div>
+                                            <div class="status-subtitle">All systems operational</div>
+                                        </div>
+                                        <div class="stats-row">
+                                            <div class="stat-card">
+                                                <div class="stat-value">247</div>
+                                                <div class="stat-label-small">Threats Blocked</div>
+                                            </div>
+                                            <div class="stat-card">
+                                                <div class="stat-value">89</div>
+                                                <div class="stat-label-small">Patterns Shared</div>
+                                            </div>
+                                            <div class="stat-card">
+                                                <div class="stat-value">1,204</div>
+                                                <div class="stat-label-small">Rules Active</div>
+                                            </div>
+                                        </div>
+                                        <div class="activity-graph">
+                                            <div class="graph-title">Network Activity</div>
+                                            <div class="graph-line">
+                                                <svg viewBox="0 0 400 100" preserveAspectRatio="none">
+                                                    <path d="M0,80 L50,70 L100,75 L150,40 L200,45 L250,30 L300,35 L350,25 L400,20" 
+                                                          stroke="#00D4FF" 
+                                                          stroke-width="2" 
+                                                          fill="none"
+                                                          opacity="0.8"/>
+                                                    <path d="M0,80 L50,70 L100,75 L150,40 L200,45 L250,30 L300,35 L350,25 L400,20 L400,100 L0,100" 
+                                                          fill="url(#gradient)"
+                                                          opacity="0.2"/>
+                                                    <defs>
+                                                        <linearGradient id="gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                                                            <stop offset="0%" style="stop-color:#00D4FF;stop-opacity:1" />
+                                                            <stop offset="100%" style="stop-color:#00D4FF;stop-opacity:0" />
+                                                        </linearGradient>
+                                                    </defs>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="dashboard-sidebar">
+                                        <div class="alerts-panel">
+                                            <div class="alerts-title">Recent Alerts</div>
+                                            <div class="alert-item critical">
+                                                <div class="alert-time">2 min ago</div>
+                                                <div class="alert-text">Lateral movement pattern blocked</div>
+                                            </div>
+                                            <div class="alert-item warning">
+                                                <div class="alert-time">15 min ago</div>
+                                                <div class="alert-text">Suspicious PowerShell activity</div>
+                                            </div>
+                                            <div class="alert-item info">
+                                                <div class="alert-time">1 hour ago</div>
+                                                <div class="alert-text">New threat rules deployed</div>
+                                            </div>
+                                            <div class="alert-item info">
+                                                <div class="alert-time">3 hours ago</div>
+                                                <div class="alert-text">Pattern shared with network</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tablet Detection View Screenshot -->
+                <div class="screenshot-container">
+                    <div class="device-frame tablet">
+                        <div class="screen">
+                            <div class="detection-mockup">
+                                <div class="detection-header">
+                                    <div class="detection-title">Threat Detection Log</div>
+                                    <div class="filter-bar">
+                                        <div class="filter-button active">All</div>
+                                        <div class="filter-button">Critical</div>
+                                        <div class="filter-button">Today</div>
+                                    </div>
+                                </div>
+                                <div class="detection-table">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>Time</th>
+                                                <th>Threat Type</th>
+                                                <th>Severity</th>
+                                                <th>Confidence</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>14:32:15</td>
+                                                <td>Lateral Movement</td>
+                                                <td><span class="severity-badge severity-critical">Critical</span></td>
+                                                <td><span class="confidence-value">94%</span></td>
+                                                <td>Blocked</td>
+                                            </tr>
+                                            <tr>
+                                                <td>14:28:41</td>
+                                                <td>Data Exfiltration</td>
+                                                <td><span class="severity-badge severity-high">High</span></td>
+                                                <td><span class="confidence-value">87%</span></td>
+                                                <td>Blocked</td>
+                                            </tr>
+                                            <tr>
+                                                <td>13:55:02</td>
+                                                <td>Privilege Escalation</td>
+                                                <td><span class="severity-badge severity-high">High</span></td>
+                                                <td><span class="confidence-value">91%</span></td>
+                                                <td>Blocked</td>
+                                            </tr>
+                                            <tr>
+                                                <td>12:41:33</td>
+                                                <td>Suspicious Process</td>
+                                                <td><span class="severity-badge severity-medium">Medium</span></td>
+                                                <td><span class="confidence-value">76%</span></td>
+                                                <td>Monitored</td>
+                                            </tr>
+                                            <tr>
+                                                <td>11:22:18</td>
+                                                <td>Network Scan</td>
+                                                <td><span class="severity-badge severity-low">Low</span></td>
+                                                <td><span class="confidence-value">65%</span></td>
+                                                <td>Logged</td>
+                                            </tr>
+                                            <tr>
+                                                <td>10:15:44</td>
+                                                <td>Anomalous Login</td>
+                                                <td><span class="severity-badge severity-medium">Medium</span></td>
+                                                <td><span class="confidence-value">82%</span></td>
+                                                <td>Alert Sent</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Phone Alert Screenshot -->
+                <div class="screenshot-container">
+                    <div class="device-frame phone">
+                        <div class="screen">
+                            <div class="phone-mockup">
+                                <div class="phone-notification">
+                                    <div class="notification-header">
+                                        <div class="notification-icon">⚠️</div>
+                                        <div class="notification-title">Threat Detected</div>
+                                    </div>
+                                    <div class="notification-body">
+                                        Lateral Movement Pattern detected with 94% confidence. Automatic blocking engaged.
+                                    </div>
+                                    <div class="notification-time">2 minutes ago</div>
+                                    <div class="notification-actions">
+                                        <div class="notification-button primary">View Details</div>
+                                        <div class="notification-button secondary">Dismiss</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="phone-stats">
+                                    <div class="phone-stats-title">Quick Stats</div>
+                                    <div class="phone-stats-grid">
+                                        <div class="phone-stat">
+                                            <div class="phone-stat-value">3</div>
+                                            <div class="phone-stat-label">Threats Today</div>
+                                        </div>
+                                        <div class="phone-stat">
+                                            <div class="phone-stat-value">✓</div>
+                                            <div class="phone-stat-label">Protected</div>
+                                        </div>
+                                        <div class="phone-stat">
+                                            <div class="phone-stat-value">247</div>
+                                            <div class="phone-stat-label">Total Blocked</div>
+                                        </div>
+                                        <div class="phone-stat">
+                                            <div class="phone-stat-value">1.2k</div>
+                                            <div class="phone-stat-label">Rules Active</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trust & Privacy Section -->
+    <section class="section trust-section">
+        <div class="section-content">
+            <h2 class="section-title">Your Data Stays Yours</h2>
+            <p class="section-subtitle">Complete transparency about what we share and what we don't</p>
+            
+            <div class="trust-grid">
+                <div class="trust-column shares">
+                    <h3><span class="trust-icon">✓</span> What Sentinel Shares</h3>
+                    <ul class="trust-list">
+                        <li>
+                            <span class="trust-icon">•</span>
+                            <span>Anonymized threat fingerprints (mathematical signatures)</span>
+                        </li>
+                        <li>
+                            <span class="trust-icon">•</span>
+                            <span>Attack pattern behaviors (not content)</span>
+                        </li>
+                        <li>
+                            <span class="trust-icon">•</span>
+                            <span>File hashes of known malware</span>
+                        </li>
+                        <li>
+                            <span class="trust-icon">•</span>
+                            <span>Timing patterns of attacks</span>
+                        </li>
+                        <li>
+                            <span class="trust-icon">•</span>
+                            <span>Threat severity indicators</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="trust-column never">
+                    <h3><span class="trust-icon">✗</span> What Sentinel NEVER Shares</h3>
+                    <ul class="trust-list">
+                        <li>
+                            <span class="trust-icon">•</span>
+                            <span>Raw network logs or traffic data</span>
+                        </li>
+                        <li>
+                            <span class="trust-icon">•</span>
+                            <span>Employee or customer information</span>
+                        </li>
+                        <li>
+                            <span class="trust-icon">•</span>
+                            <span>Internal IP addresses or network topology</span>
+                        </li>
+                        <li>
+                            <span class="trust-icon">•</span>
+                            <span>Company name or identifying information</span>
+                        </li>
+                        <li>
+                            <span class="trust-icon">•</span>
+                            <span>Any actual file contents or communications</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technical Specifications -->
+    <section class="section specs-section">
+        <div class="section-content">
+            <h2 class="section-title">Technical Specifications</h2>
+            <p class="section-subtitle">Enterprise-grade technology that runs anywhere</p>
+            
+            <div class="specs-grid">
+                <div class="spec-group">
+                    <h4>System Requirements</h4>
+                    <ul class="spec-list">
+                        <li>
+                            <span class="spec-label">Agent Size</span>
+                            <span>~50MB</span>
+                        </li>
+                        <li>
+                            <span class="spec-label">Memory</span>
+                            <span>< 200MB RAM</span>
+                        </li>
+                        <li>
+                            <span class="spec-label">CPU Usage</span>
+                            <span>< 1% average</span>
+                        </li>
+                        <li>
+                            <span class="spec-label">Disk Space</span>
+                            <span>500MB for logs</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="spec-group">
+                    <h4>Platform Support</h4>
+                    <ul class="spec-list">
+                        <li>
+                            <span class="spec-label">Windows</span>
+                            <span>Server 2016+</span>
+                        </li>
+                        <li>
+                            <span class="spec-label">Linux</span>
+                            <span>All major distros</span>
+                        </li>
+                        <li>
+                            <span class="spec-label">macOS</span>
+                            <span>10.15+</span>
+                        </li>
+                        <li>
+                            <span class="spec-label">Containers</span>
+                            <span>Docker, K8s</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="spec-group">
+                    <h4>Security & Compliance</h4>
+                    <ul class="spec-list">
+                        <li>
+                            <span class="spec-label">Encryption</span>
+                            <span>AES-256</span>
+                        </li>
+                        <li>
+                            <span class="spec-label">GDPR</span>
+                            <span>Fully compliant</span>
+                        </li>
+                        <li>
+                            <span class="spec-label">NIS2</span>
+                            <span>Ready</span>
+                        </li>
+                        <li>
+                            <span class="spec-label">Updates</span>
+                            <span>Auto-update</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="spec-group">
+                    <h4>Network & Integration</h4>
+                    <ul class="spec-list">
+                        <li>
+                            <span class="spec-label">Bandwidth</span>
+                            <span>< 1MB/hour</span>
+                        </li>
+                        <li>
+                            <span class="spec-label">Protocol</span>
+                            <span>HTTPS only</span>
+                        </li>
+                        <li>
+                            <span class="spec-label">Proxy</span>
+                            <span>Supported</span>
+                        </li>
+                        <li>
+                            <span class="spec-label">API</span>
+                            <span>REST/GraphQL</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Comparison -->
+    <section class="section pricing-section">
+        <div class="section-content">
+            <h2 class="section-title">Choose Your Protection Level</h2>
+            <p class="section-subtitle">Start free, upgrade when you need enterprise features</p>
+            
+            <div class="pricing-table">
+                <div class="pricing-header">
+                    <div></div>
+                    <div>
+                        <div class="product-name">Sentinel</div>
+                        <div class="product-price">Free Forever</div>
+                    </div>
+                    <div>
+                        <div class="product-name">Argus Platform</div>
+                        <div class="product-price">€2,500/month</div>
+                    </div>
+                </div>
+                <div class="pricing-body">
+                    <div class="pricing-row">
+                        <div>Threat Detection</div>
+                        <div><span class="check">✓</span></div>
+                        <div><span class="check">✓</span></div>
+                    </div>
+                    <div class="pricing-row">
+                        <div>Community Intelligence</div>
+                        <div><span class="check">✓</span></div>
+                        <div><span class="check">✓</span></div>
+                    </div>
+                    <div class="pricing-row">
+                        <div>Alert Timing</div>
+                        <div>24hr delay</div>
+                        <div>Real-time</div>
+                    </div>
+                    <div class="pricing-row">
+                        <div>Auto-Remediation</div>
+                        <div><span class="cross">✗</span></div>
+                        <div><span class="check">✓</span></div>
+                    </div>
+                    <div class="pricing-row">
+                        <div>Advanced AI Models</div>
+                        <div><span class="cross">✗</span></div>
+                        <div><span class="check">✓</span></div>
+                    </div>
+                    <div class="pricing-row">
+                        <div>Compliance Reports</div>
+                        <div><span class="cross">✗</span></div>
+                        <div><span class="check">✓</span></div>
+                    </div>
+                    <div class="pricing-row">
+                        <div>API Access</div>
+                        <div>Read-only</div>
+                        <div>Full</div>
+                    </div>
+                    <div class="pricing-row">
+                        <div>Support</div>
+                        <div>Community</div>
+                        <div>24/7 Dedicated</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="cta-content">
+            <h2>Join Europe's Cyber Immune System</h2>
+            <p>Deploy Sentinel in minutes. Protect your organization while strengthening the entire network.</p>
+            
+            <div class="cta-buttons">
+                <a href="community.html#waitlist" class="btn btn-white">Download Sentinel Free</a>
+                <a href="index.html" class="btn btn-outline">Explore Argus Platform</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cross Links -->
+    <section class="cross-links">
+        <p class="cross-links-title">Explore More:</p>
+        <div class="cross-links-list">
+            <a href="immunity-index.html">Immunity Index</a>
+            <a href="threat-lab.html">Threat Lab</a>
+            <a href="community.html">Community Defense</a>
+            <a href="index.html">Argus Platform</a>
+        </div>
+    </section>
+
+    <script>
+        // Hamburger Menu Toggle
+        // No JavaScript needed for simple back link navigation
+
+    </script>
+</body>
+</html>
