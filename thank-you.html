@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DCF Hungary - Thank You</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        /* Page-specific styles */
+        
+        /* Hero Section */
+        .hero {
+            background: var(--light-background);
+            padding: 5rem 0;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            margin-bottom: 1rem;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            color: var(--primary);
+        }
+        
+        .hero-subtitle {
+            font-size: clamp(1.25rem, 3vw, 1.75rem);
+            color: var(--accent);
+            max-width: 700px;
+            margin: 0 auto;
+            font-weight: 400;
+            line-height: 1.4;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+        
+        /* Checkmark Icon */
+        .checkmark-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 2rem;
+            color: #34c759;
+        }
+        
+        /* Section Base Styles */
+        section {
+            padding: 5rem 0;
+        }
+        
+        section:nth-child(odd) {
+            background: var(--background);
+        }
+        
+        section:nth-child(even) {
+            background: var(--light-background);
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: clamp(2rem, 4vw, 3rem);
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+            font-weight: 600;
+            letter-spacing: -0.03em;
+        }
+        
+        .section-text {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            font-size: 1.15rem;
+            line-height: 1.8;
+            color: var(--primary);
+            font-weight: 300;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+        
+        /* Confirmation Box */
+        .confirmation-box {
+            background: var(--light-background);
+            padding: 2.5rem;
+            border-radius: 8px;
+            box-shadow: var(--shadow-subtle);
+            max-width: 700px;
+            margin: 0 auto 3rem;
+            text-align: center;
+            border: 1px solid var(--border-light);
+        }
+        
+        .confirmation-box p {
+            font-size: 1.05rem;
+            line-height: 1.6;
+            color: var(--primary);
+            margin: 0;
+        }
+        
+        .confirmation-box a {
+            color: var(--secondary);
+            text-decoration: underline;
+        }
+        
+        .confirmation-box a:hover {
+            opacity: 0.85;
+        }
+        
+        /* CTA Button */
+        .cta-button-container {
+            text-align: center;
+            margin-top: 2rem;
+        }
+        
+        .btn-cta {
+            background: var(--secondary);
+            color: var(--background);
+            padding: 1rem 2.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-cta:hover {
+            opacity: 0.85;
+            transform: translateY(-2px);
+        }
+        
+        /* Mobile Responsive */
+        @media (max-width: 767px) {
+            .hero {
+                padding: 3rem 1rem;
+            }
+            
+            section {
+                padding: 3rem 1rem;
+            }
+            
+            .confirmation-box {
+                padding: 2rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav id="main-nav"></nav>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <!-- Checkmark Icon -->
+            <div class="checkmark-icon">
+                <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="3">
+                    <circle cx="24" cy="24" r="20" stroke="currentColor" fill="none"/>
+                    <path d="M14 24 L20 30 L34 16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <h1>Thank You</h1>
+            <p class="hero-subtitle">Your generosity makes our mission possible</p>
+        </div>
+    </section>
+    
+    <!-- Main Content Section -->
+    <section>
+        <div class="container">
+            <h2 class="section-title">Donation Received</h2>
+            <p class="section-text">
+                We are deeply grateful for your support of the Domus Communis Foundation. Your contribution directly advances our work in digital peace, data sovereignty, and ethical AI development. Together, we are building technology that serves human dignity and the common good.
+            </p>
+            
+            <div class="confirmation-box">
+                <p>
+                    You will receive an email confirming your donation shortly. If you have any questions, please contact us at <a href="mailto:admin@dcffoundation.org">admin@dcffoundation.org</a>
+                </p>
+            </div>
+            
+            <div class="cta-button-container">
+                <a href="index.html" class="btn-cta">Return to Home</a>
+            </div>
+        </div>
+    </section>
+    
+    <footer id="main-footer"></footer>
+    
+    <script src="js/nav.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
