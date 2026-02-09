@@ -2,7 +2,7 @@
 
 // Define menu structure in one place
 const menuItems = [
-    { text: 'Blog', href: 'blog.html', page: 'blog' },
+    { text: 'Blog', href: '/v3/blog.html', page: 'blog' },
     { text: 'Home', href: 'index.html', page: 'index' },
     { text: 'About', href: 'about.html', page: 'about' },
     { text: 'Initiatives', href: 'initiatives.html', page: 'initiatives' },
@@ -423,7 +423,7 @@ function generateFooter() {
             <div class="footer-main">
                 <div class="footer-brand">Domus Communis Foundation</div>
                 <div class="footer-links">
-                    <a href="blog.html">Blog</a>
+                    <a href="/v3/blog.html">Blog</a>
                     <a href="index.html">Home</a>
                     <a href="about.html">About</a>
                     <a href="initiatives.html">Initiatives</a>
