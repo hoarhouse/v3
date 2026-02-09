@@ -3,13 +3,13 @@
 // Define menu structure in one place
 const menuItems = [
     { text: 'Blog', href: '/v3/blog.html', page: 'blog' },
-    { text: 'Home', href: 'index.html', page: 'index' },
-    { text: 'About', href: 'about.html', page: 'about' },
-    { text: 'Initiatives', href: 'initiatives.html', page: 'initiatives' },
-    { text: 'Budapest Appeal', href: 'budapest-appeal.html', page: 'budapest-appeal' },
-    { text: 'Get Involved', href: 'get-involved.html', page: 'get-involved' },
-    { text: 'Contact', href: 'contact.html', page: 'contact' },
-    { text: 'Privacy Policy', href: 'privacy.html', page: 'privacy' }
+    { text: 'Home', href: '/v3/index.html', page: 'index' },
+    { text: 'About', href: '/v3/about.html', page: 'about' },
+    { text: 'Initiatives', href: '/v3/initiatives.html', page: 'initiatives' },
+    { text: 'Budapest Appeal', href: '/v3/budapest-appeal.html', page: 'budapest-appeal' },
+    { text: 'Get Involved', href: '/v3/get-involved.html', page: 'get-involved' },
+    { text: 'Contact', href: '/v3/contact.html', page: 'contact' },
+    { text: 'Privacy Policy', href: '/v3/privacy.html', page: 'privacy' }
 ];
 
 // Generate navigation HTML
@@ -19,7 +19,7 @@ function generateNav() {
     const navHTML = `
         <div class="nav-container">
             <div class="nav-brand">
-                <a href="index.html">DCF</a>
+                <a href="/v3/index.html">DCF</a>
             </div>
             <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
                 <span class="hamburger-line"></span>
@@ -41,7 +41,7 @@ function generateNav() {
                         </li>
                     `).join('')}
                     <li class="nav-item nav-item-donate">
-                        <a href="get-involved.html" class="nav-donate-btn">Donate</a>
+                        <a href="/v3/get-involved.html" class="nav-donate-btn">Donate</a>
                     </li>
                 </ul>
             </div>
@@ -424,13 +424,13 @@ function generateFooter() {
                 <div class="footer-brand">Domus Communis Foundation</div>
                 <div class="footer-links">
                     <a href="/v3/blog.html">Blog</a>
-                    <a href="index.html">Home</a>
-                    <a href="about.html">About</a>
-                    <a href="initiatives.html">Initiatives</a>
-                    <a href="get-involved.html">Get Involved</a>
-                    <a href="contact.html">Contact</a>
-                    <a href="budapest-appeal.html">Budapest Appeal</a>
-                    <a href="privacy.html">Privacy Policy</a>
+                    <a href="/v3/index.html">Home</a>
+                    <a href="/v3/about.html">About</a>
+                    <a href="/v3/initiatives.html">Initiatives</a>
+                    <a href="/v3/get-involved.html">Get Involved</a>
+                    <a href="/v3/contact.html">Contact</a>
+                    <a href="/v3/budapest-appeal.html">Budapest Appeal</a>
+                    <a href="/v3/privacy.html">Privacy Policy</a>
                 </div>
                 <div class="footer-nonprofit">
                     <p>Domus Communis Foundation is a registered 501(c)(3) non-profit organization. Your donations are tax-deductible within the fullest extent allowed by law. EIN: 99-1778616.</p>
