@@ -652,7 +652,7 @@
 
         <!-- Back Link -->
         <div class="faq-section">
-            <a href="https://hoarhouse.github.io/dcfh/faqs/index.html" class="back-link">← Back to All FAQs</a>
+            <a href="https://hoarhouse.github.io/v3/faqs/index.html" class="back-link">← Back to All FAQs</a>
         </div>
     </main>
 
@@ -685,7 +685,7 @@
                     ? normalizedPath.split('/faqs/')[1] 
                     : normalizedPath.split('/').pop();
                 
-                const expectedUrl = `/dcfh/faqs/${pagePath}`;
+                const expectedUrl = `/v3/faqs/${pagePath}`;
                 
                 // Get view count for this FAQ page
                 const { data, error } = await window.dcfSupabase
