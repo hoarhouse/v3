@@ -1,0 +1,3018 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO Meta Tags -->
+    <title>Fighting Poverty to Build Peace - 42nd World Day of Peace 2009 | DCF Hungary</title>
+    <meta name="description" content="Pope Benedict XVI's 2009 World Day of Peace message on fighting poverty to build peace, addressing global solidarity, economic justice, and the relationship between poverty and conflict.">
+    <meta name="keywords" content="World Day of Peace 2009, Benedict XVI, Fighting Poverty, Building Peace, Vatican Peace Message, Catholic Social Teaching, Economic Justice">
+    <meta name="author" content="Pope Benedict XVI"
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://hoarhouse.github.io/v3/vatican-resources/htmldocs/world-day-of-peace-2009-fighting-poverty-to-build-peace.html">
+    <meta property="og:title" content="Fighting Poverty to Build Peace - 42nd World Day of Peace 2009">
+    <meta property="og:description" content="Pope Benedict XVI's 2009 World Day of Peace message on fighting poverty to build peace, addressing global solidarity and economic justice.">
+    <meta property="og:site_name" content="DCF Hungary">
+    <meta property="og:image" content="https://hoarhouse.github.io/v3/images/dcf-vatican-resources-og.jpg">
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Fighting Poverty to Build Peace - 42nd World Day of Peace 2009">
+    <meta name="twitter:description" content="Pope Benedict XVI's 2009 World Day of Peace message on fighting poverty to build peace, addressing global solidarity and economic justice.">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://hoarhouse.github.io/v3/vatican-resources/htmldocs/world-day-of-peace-2009-fighting-poverty-to-build-peace.html">
+    
+    <!-- Schema.org JSON-LD -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "DigitalDocument",
+        "name": "Fighting Poverty to Build Peace - 42nd World Day of Peace 2009",
+        "description": "Pope Benedict XVI's 2009 World Day of Peace message on fighting poverty to build peace, addressing global solidarity and economic justice.",
+        "url": "https://hoarhouse.github.io/v3/vatican-resources/htmldocs/world-day-of-peace-2009-fighting-poverty-to-build-peace.html",
+        "author": {
+            "@type": "Person",
+            "name": "Pope Benedict XVI"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "DCF Hungary",
+            "url": "https://hoarhouse.github.io/v3/"
+        },
+        "about": "document",
+        "keywords": "World Day of Peace 2009, Benedict XVI, Fighting Poverty, Building Peace, Vatican Peace Message, Catholic Social Teaching, Economic Justice",
+                        "datePublished": "2009-01-01",
+        "inLanguage": "en"
+    }
+    </script>
+    
+    <!-- Breadcrumb Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://hoarhouse.github.io/v3/"
+            },
+            {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Library",
+                "item": "https://hoarhouse.github.io/v3/library.html"
+            },
+            {
+                "@type": "ListItem",
+                "position": 3,
+                "name": "Vatican Resources",
+                "item": "https://hoarhouse.github.io/v3/vatican-resources/index.html"
+            },
+            {
+                "@type": "ListItem",
+                "position": 4,
+                "name": "Fighting Poverty to Build Peace",
+                "item": "https://hoarhouse.github.io/v3/vatican-resources/htmldocs/world-day-of-peace-2009-fighting-poverty-to-build-peace.html"
+            }
+        ]
+    }
+    </script>
+    
+    <!-- Supabase -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8f9fa;
+        }
+
+        .header {
+            background: white;
+            border-bottom: 1px solid #e5e5e5;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-weight: 600;
+            color: #333;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 24px;
+            height: 24px;
+            background: #333;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .nav-menu a:hover {
+            color: #333;
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        /* Consistent button styling */
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: #000;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #333;
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #666;
+            border: 2px solid #e5e5e5;
+        }
+
+        .btn-secondary:hover {
+            color: #333;
+            border-color: #333;
+        }
+
+        .login-btn {
+            color: #333;
+            text-decoration: none;
+            font-size: 0.9rem;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+
+        .login-btn:hover {
+            background: #f8f9fa;
+        }
+
+        .join-btn {
+            background: #000;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+
+        .join-btn:hover {
+            background: #333;
+            transform: translateY(-1px);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            padding: 4rem 0;
+            background: #f8f9fa;
+        }
+
+        .hero-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+            background: linear-gradient(135deg, #000 0%, #333 100%);
+            color: white;
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .hero-title {
+            font-size: 3rem;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+            color: white;
+            line-height: 1.1;
+        }
+
+        .hero-subtitle {
+            font-size: 1.1rem;
+            font-weight: 300;
+            color: rgba(255, 255, 255, 0.7);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .main-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .page-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        .page-subtitle {
+            font-size: 1.1rem;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .main-content {
+            background: white;
+            border-radius: 12px;
+            padding: 2.5rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        .form-description {
+            color: #666;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .form-input,
+        .form-select,
+        .form-textarea {
+            padding: 0.75rem;
+            border: 2px solid #e5e5e5;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-input:focus,
+        .form-select:focus,
+        .form-textarea:focus {
+            outline: none;
+            border-color: #000;
+        }
+
+        .form-textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .form-checkbox {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+
+        .form-checkbox input[type="checkbox"] {
+            margin-top: 0.25rem;
+        }
+
+        .form-checkbox label {
+            font-size: 0.9rem;
+            color: #666;
+            line-height: 1.4;
+        }
+
+        .submit-btn {
+            background: #000;
+            color: white;
+            padding: 14px 2rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .submit-btn:hover {
+            background: #333;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Character counter styles */
+        .char-counter {
+            text-align: left;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            font-weight: normal;
+            color: #6b7280;
+        }
+
+        .char-counter.valid {
+            color: #6b7280; /* Neutral gray when valid */
+        }
+
+        .char-counter.warning {
+            color: #ffa726; /* Soft orange when at limit */
+        }
+
+        .char-counter.invalid {
+            color: #ef9a9a; /* Soft red when below minimum */
+        }
+
+        /* Validation message styles */
+        .validation-message {
+            font-size: 0.85rem;
+            margin-top: 0.25rem;
+            color: #ef9a9a; /* Soft red for errors */
+            font-weight: normal;
+        }
+
+        /* Field error styles */
+        .field-error {
+            font-size: 0.85rem;
+            margin-top: 0.25rem;
+            color: #ef9a9a; /* Soft red */
+        }
+
+        /* Remove aggressive input error styling */
+        .form-input.error,
+        .form-textarea.error,
+        .form-select.error {
+            border-color: #ef9a9a; /* Soft red instead of bright red */
+        }
+
+        .form-input:focus.error,
+        .form-textarea:focus.error,
+        .form-select:focus.error {
+            border-color: #ef9a9a; /* Keep soft red on focus */
+        }
+
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .sidebar-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .contact-icon {
+            width: 40px;
+            height: 40px;
+            background: #f8f9fa;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+            border: 2px solid #e5e5e5;
+        }
+
+        .contact-details {
+            flex: 1;
+        }
+
+        .contact-label {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 0.25rem;
+        }
+
+        .contact-value {
+            color: #666;
+            line-height: 1.5;
+        }
+
+        .contact-value a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .contact-value a:hover {
+            text-decoration: underline;
+        }
+
+        .team-member {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+
+        .team-member:last-child {
+            margin-bottom: 0;
+        }
+
+        .team-avatar {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #000, #333);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+
+        .team-info {
+            flex: 1;
+        }
+
+        .team-name {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 0.25rem;
+        }
+
+        .team-role {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .team-email {
+            color: #007bff;
+            font-size: 0.8rem;
+            text-decoration: none;
+        }
+
+        .team-email:hover {
+            text-decoration: underline;
+        }
+
+        .success-message {
+            background: #d4edda;
+            color: #155724;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            border: 1px solid #c3e6cb;
+            display: none;
+        }
+
+        @media (max-width: 1024px) {
+            .content-wrapper {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .sidebar {
+                order: -1;
+            }
+        }
+
+        /* Sacred Minimalist Icon Centering Fixes */
+        .contact-icon {
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+        }
+
+        .dcf-icon {
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            width: 100% !important;
+            height: 100% !important;
+        }
+
+        .dcf-icon svg {
+            display: block !important;
+            max-width: 100% !important;
+            max-height: 100% !important;
+            width: 24px !important;
+            height: 24px !important;
+        }
+
+        @media (max-width: 768px) {
+            .main-container {
+                padding: 0 1rem;
+            }
+
+            .nav-menu {
+                display: none;
+            }
+
+            .hero-container {
+                padding: 2rem 1.5rem;
+                margin: 0 1rem;
+            }
+
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+
+            .page-title {
+                font-size: 2rem;
+            }
+
+            .main-content,
+            .sidebar-card {
+                padding: 1.5rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-item {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .team-member {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    
+
+        .user-menu {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        /* Language Dropdown */
+        .language-switcher {
+            position: relative;
+            display: inline-block;
+        }
+
+        .lang-dropdown-btn {
+            background: white;
+            border: 2px solid #e5e5e5;
+            border-radius: 8px;
+            padding: 0.4rem 1rem 0.4rem 0.8rem;
+            font-size: 0.9rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #333;
+            transition: all 0.2s ease;
+            min-width: 70px;
+            font-weight: 500;
+            position: relative;
+        }
+
+        .lang-dropdown-btn:hover {
+            background: #f8f9fa;
+            border-color: #999;
+        }
+
+        /* Arrow icon */
+        
+
+        .lang-dropdown-btn.active::after {
+            transform: translateY(-50%) rotate(180deg);
+        }
+
+        .lang-dropdown-menu {
+            position: absolute;
+            top: calc(100% + 4px);
+            right: 0;
+            background: white;
+            border: 1px solid #e5e5e5;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            width: 100%;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.2s ease;
+            z-index: 1000;
+        }
+
+        .lang-dropdown-menu.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .lang-dropdown-item {
+            padding: 0.6rem 1rem;
+            cursor: pointer;
+            transition: background 0.2s ease;
+            color: #333;
+            font-size: 0.9rem;
+            border: none;
+            background: none;
+            width: 100%;
+            text-align: left;
+            display: block;
+        }
+
+        .lang-dropdown-item:hover {
+            background: #f8f9fa;
+        }
+
+        .lang-dropdown-item:first-child {
+            border-radius: 8px 8px 0 0;
+        }
+
+        .lang-dropdown-item:last-child {
+            border-radius: 0 0 8px 8px;
+        }
+
+        .lang-dropdown-item.active {
+            background: #f0f0f0;
+            font-weight: 600;
+        }
+
+        /* Notification CSS handled by dcf-unified-auth.js */
+
+        .notification-badge {
+            position: absolute;
+            top: -2px;
+            right: -2px;
+            background: #ef9a9a;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: 600;
+            border: 2px solid white;
+            min-width: 20px;
+        }
+
+        
+
+        .user-dropdown {
+            position: relative;
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: calc(100% + 8px);
+            right: 0;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+            border: 1px solid #e5e5e5;
+            min-width: 280px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .dropdown-menu.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.5rem;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+                .user-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f0f0f0;
+            color: #666;
+            font-weight: 600;
+            font-size: 0.75rem;
+            transition: all 0.2s ease;
+            box-sizing: border-box;
+            overflow: hidden;
+            /* Content controlled by master-consolidated.js */
+        }
+
+        .user-avatar:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .dropdown-avatar {
+            width: 48px;
+            height: 48px;
+            min-width: 48px;
+            min-height: 48px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #000, #333);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 1rem;
+            flex-shrink: 0;
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+
+        .dropdown-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .dropdown-name {
+            font-weight: 600;
+            color: #333;
+            font-size: 1rem;
+            margin-bottom: 0.25rem;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .dropdown-email {
+            color: #666;
+            font-size: 0.85rem;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .dropdown-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1.5rem;
+            color: #333;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            border: none;
+            background: none;
+            width: 100%;
+            text-align: left;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .dropdown-item:hover {
+            background: #f8f9fa;
+            color: #000;
+        }
+
+        .dropdown-icon {
+            font-size: 1rem;
+            width: 20px;
+            text-align: center;
+            flex-shrink: 0;
+        }
+
+        .dropdown-divider {
+            height: 1px;
+            background: #f0f0f0;
+            margin: 0.5rem 0;
+        }
+
+        .logout-btn {
+            color: #ef9a9a !important;
+            font-weight: 500;
+        }
+
+        .logout-btn:hover {
+            background: #fee !important;
+            color: #ef9a9a !important;
+        }
+
+        .dropdown-divider {
+            height: 1px;
+            background: #f0f0f0;
+            margin: 0.5rem 0;
+        }
+
+        .dropdown-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1.5rem;
+            color: #333;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            border: none;
+            background: none;
+            width: 100%;
+            text-align: left;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .dropdown-item:hover {
+            background: #f8f9fa;
+            color: #000;
+        }
+
+        .logout-btn {
+            color: #ef9a9a !important;
+            font-weight: 500;
+        }
+
+        .logout-btn:hover {
+            background: #fee !important;
+            color: #ef9a9a !important;
+        }
+
+        .dropdown-icon {
+            font-size: 1rem;
+            width: 20px;
+            text-align: center;
+            flex-shrink: 0;
+        }
+
+        /* Mobile Menu Styles */
+        @media (max-width: 768px) {
+            /* Show mobile menu toggle button */
+            .mobile-menu-toggle {
+                display: block !important;
+            }
+            
+            /* Hide nav menu by default on mobile */
+            .nav-menu {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: white;
+                flex-direction: column;
+                padding: 1rem 0;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+                border-top: 1px solid #e5e5e5;
+                z-index: 999;
+            }
+            
+            /* Show nav menu when active */
+            .nav-menu.mobile-active {
+                display: flex;
+                animation: slideDown 0.3s ease;
+            }
+            
+            /* Mobile menu items styling */
+            .nav-menu li {
+                width: 100%;
+                margin: 0;
+                border-bottom: 1px solid #f0f0f0;
+            }
+            
+            .nav-menu li:last-child {
+                border-bottom: none;
+            }
+            
+            .nav-menu a {
+                display: block;
+                padding: 1rem 2rem;
+                width: 100%;
+                text-align: left;
+            }
+            
+            /* Mobile dropdown adjustments */
+            .nav-dropdown {
+                position: relative !important;
+            }
+            
+            .nav-dropdown .nav-submenu {
+                position: static !important;
+                display: none;
+                width: 100%;
+                box-shadow: none !important;
+                border: none !important;
+                background: #f8f9fa !important;
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+            
+            .nav-dropdown:hover .nav-submenu {
+                display: none; /* Disable hover on mobile */
+            }
+            
+            /* Enable click to toggle dropdown on mobile */
+            .nav-dropdown.mobile-open .nav-submenu {
+                display: block;
+            }
+            
+            .nav-submenu a {
+                padding-left: 3rem !important;
+                background: #f8f9fa;
+            }
+            
+            /* Slide down animation */
+            @keyframes slideDown {
+                from {
+                    opacity: 0;
+                    transform: translateY(-10px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+            
+            /* Adjust nav container for mobile */
+            .nav-container {
+                flex-wrap: wrap;
+                position: relative;
+            }
+            
+            /* Ensure logo stays on left */
+            .logo {
+                flex: 0 0 auto;
+            }
+            
+            /* User menu adjustments */
+            .user-menu {
+                flex: 0 0 auto;
+            }
+        }
+        
+        /* Desktop styles - ensure mobile toggle is hidden */
+        @media (min-width: 769px) {
+            .mobile-menu-toggle {
+                display: none !important;
+            }
+            
+            .nav-menu {
+                display: flex !important;
+            }
+        }
+    
+
+/* Resource-specific styles */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8f9fa;
+        }
+
+        .header {
+            background: white;
+            border-bottom: 1px solid #e5e5e5;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-weight: 600;
+            color: #333;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 24px;
+            height: 24px;
+            background: #333;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .nav-menu a:hover {
+            color: #333;
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        /* Consistent button styling */
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: #000;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #333;
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #666;
+            border: 2px solid #e5e5e5;
+        }
+
+        .btn-secondary:hover {
+            color: #333;
+            border-color: #333;
+        }
+
+        .login-btn {
+            color: #333;
+            text-decoration: none;
+            font-size: 0.9rem;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+
+        .login-btn:hover {
+            background: #f8f9fa;
+        }
+
+        .join-btn {
+            background: #000;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+
+        .join-btn:hover {
+            background: #333;
+            transform: translateY(-1px);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            padding: 4rem 0;
+            background: #f8f9fa;
+        }
+
+        .hero-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+            background: linear-gradient(135deg, #000 0%, #333 100%);
+            color: white;
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .hero-title {
+            font-size: 3rem;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+            color: white;
+            line-height: 1.1;
+        }
+
+        .hero-subtitle {
+            font-size: 1.1rem;
+            font-weight: 300;
+            color: rgba(255, 255, 255, 0.7);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .main-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .page-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        .page-subtitle {
+            font-size: 1.1rem;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .main-content {
+            background: white;
+            border-radius: 12px;
+            padding: 2.5rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        .form-description {
+            color: #666;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .form-input,
+        .form-select,
+        .form-textarea {
+            padding: 0.75rem;
+            border: 2px solid #e5e5e5;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-input:focus,
+        .form-select:focus,
+        .form-textarea:focus {
+            outline: none;
+            border-color: #000;
+        }
+
+        .form-textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .form-checkbox {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+
+        .form-checkbox input[type="checkbox"] {
+            margin-top: 0.25rem;
+        }
+
+        .form-checkbox label {
+            font-size: 0.9rem;
+            color: #666;
+            line-height: 1.4;
+        }
+
+        .submit-btn {
+            background: #000;
+            color: white;
+            padding: 14px 2rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .submit-btn:hover {
+            background: #333;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Character counter styles */
+        .char-counter {
+            text-align: left;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            font-weight: normal;
+            color: #6b7280;
+        }
+
+        .char-counter.valid {
+            color: #6b7280; /* Neutral gray when valid */
+        }
+
+        .char-counter.warning {
+            color: #ffa726; /* Soft orange when at limit */
+        }
+
+        .char-counter.invalid {
+            color: #ef9a9a; /* Soft red when below minimum */
+        }
+
+        /* Validation message styles */
+        .validation-message {
+            font-size: 0.85rem;
+            margin-top: 0.25rem;
+            color: #ef9a9a; /* Soft red for errors */
+            font-weight: normal;
+        }
+
+        /* Field error styles */
+        .field-error {
+            font-size: 0.85rem;
+            margin-top: 0.25rem;
+            color: #ef9a9a; /* Soft red */
+        }
+
+        /* Remove aggressive input error styling */
+        .form-input.error,
+        .form-textarea.error,
+        .form-select.error {
+            border-color: #ef9a9a; /* Soft red instead of bright red */
+        }
+
+        .form-input:focus.error,
+        .form-textarea:focus.error,
+        .form-select:focus.error {
+            border-color: #ef9a9a; /* Keep soft red on focus */
+        }
+
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .sidebar-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .contact-icon {
+            width: 40px;
+            height: 40px;
+            background: #f8f9fa;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+            border: 2px solid #e5e5e5;
+        }
+
+        .contact-details {
+            flex: 1;
+        }
+
+        .contact-label {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 0.25rem;
+        }
+
+        .contact-value {
+            color: #666;
+            line-height: 1.5;
+        }
+
+        .contact-value a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .contact-value a:hover {
+            text-decoration: underline;
+        }
+
+        .team-member {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+
+        .team-member:last-child {
+            margin-bottom: 0;
+        }
+
+        .team-avatar {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #000, #333);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+
+        .team-info {
+            flex: 1;
+        }
+
+        .team-name {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 0.25rem;
+        }
+
+        .team-role {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .team-email {
+            color: #007bff;
+            font-size: 0.8rem;
+            text-decoration: none;
+        }
+
+        .team-email:hover {
+            text-decoration: underline;
+        }
+
+        .success-message {
+            background: #d4edda;
+            color: #155724;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            border: 1px solid #c3e6cb;
+            display: none;
+        }
+
+        @media (max-width: 1024px) {
+            .content-wrapper {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .sidebar {
+                order: -1;
+            }
+        }
+
+        /* Sacred Minimalist Icon Centering Fixes */
+        .contact-icon {
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+        }
+
+        .dcf-icon {
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            width: 100% !important;
+            height: 100% !important;
+        }
+
+        .dcf-icon svg {
+            display: block !important;
+            max-width: 100% !important;
+            max-height: 100% !important;
+            width: 24px !important;
+            height: 24px !important;
+        }
+
+        @media (max-width: 768px) {
+            .main-container {
+                padding: 0 1rem;
+            }
+
+            .nav-menu {
+                display: none;
+            }
+
+            .hero-container {
+                padding: 2rem 1.5rem;
+                margin: 0 1rem;
+            }
+
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+
+            .page-title {
+                font-size: 2rem;
+            }
+
+            .main-content,
+            .sidebar-card {
+                padding: 1.5rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-item {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .team-member {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    
+
+        .user-menu {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        /* Language Dropdown */
+        .language-switcher {
+            position: relative;
+            display: inline-block;
+        }
+
+        .lang-dropdown-btn {
+            background: white;
+            border: 2px solid #e5e5e5;
+            border-radius: 8px;
+            padding: 0.4rem 1rem 0.4rem 0.8rem;
+            font-size: 0.9rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #333;
+            transition: all 0.2s ease;
+            min-width: 70px;
+            font-weight: 500;
+            position: relative;
+        }
+
+        .lang-dropdown-btn:hover {
+            background: #f8f9fa;
+            border-color: #999;
+        }
+
+        /* Arrow icon */
+        
+
+        .lang-dropdown-btn.active::after {
+            transform: translateY(-50%) rotate(180deg);
+        }
+
+        .lang-dropdown-menu {
+            position: absolute;
+            top: calc(100% + 4px);
+            right: 0;
+            background: white;
+            border: 1px solid #e5e5e5;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            width: 100%;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.2s ease;
+            z-index: 1000;
+        }
+
+        .lang-dropdown-menu.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .lang-dropdown-item {
+            padding: 0.6rem 1rem;
+            cursor: pointer;
+            transition: background 0.2s ease;
+            color: #333;
+            font-size: 0.9rem;
+            border: none;
+            background: none;
+            width: 100%;
+            text-align: left;
+            display: block;
+        }
+
+        .lang-dropdown-item:hover {
+            background: #f8f9fa;
+        }
+
+        .lang-dropdown-item:first-child {
+            border-radius: 8px 8px 0 0;
+        }
+
+        .lang-dropdown-item:last-child {
+            border-radius: 0 0 8px 8px;
+        }
+
+        .lang-dropdown-item.active {
+            background: #f0f0f0;
+            font-weight: 600;
+        }
+
+        /* Notification CSS handled by dcf-unified-auth.js */
+
+        .notification-badge {
+            position: absolute;
+            top: -2px;
+            right: -2px;
+            background: #ef9a9a;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: 600;
+            border: 2px solid white;
+            min-width: 20px;
+        }
+
+        
+
+        .user-dropdown {
+            position: relative;
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: calc(100% + 8px);
+            right: 0;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+            border: 1px solid #e5e5e5;
+            min-width: 280px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .dropdown-menu.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.5rem;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+                .user-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f0f0f0;
+            color: #666;
+            font-weight: 600;
+            font-size: 0.75rem;
+            transition: all 0.2s ease;
+            box-sizing: border-box;
+            overflow: hidden;
+            /* Content controlled by master-consolidated.js */
+        }
+
+        .user-avatar:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .dropdown-avatar {
+            width: 48px;
+            height: 48px;
+            min-width: 48px;
+            min-height: 48px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #000, #333);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 1rem;
+            flex-shrink: 0;
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+
+        .dropdown-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .dropdown-name {
+            font-weight: 600;
+            color: #333;
+            font-size: 1rem;
+            margin-bottom: 0.25rem;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .dropdown-email {
+            color: #666;
+            font-size: 0.85rem;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .dropdown-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1.5rem;
+            color: #333;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            border: none;
+            background: none;
+            width: 100%;
+            text-align: left;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .dropdown-item:hover {
+            background: #f8f9fa;
+            color: #000;
+        }
+
+        .dropdown-icon {
+            font-size: 1rem;
+            width: 20px;
+            text-align: center;
+            flex-shrink: 0;
+        }
+
+        .dropdown-divider {
+            height: 1px;
+            background: #f0f0f0;
+            margin: 0.5rem 0;
+        }
+
+        .logout-btn {
+            color: #ef9a9a !important;
+            font-weight: 500;
+        }
+
+        .logout-btn:hover {
+            background: #fee !important;
+            color: #ef9a9a !important;
+        }
+
+        .dropdown-divider {
+            height: 1px;
+            background: #f0f0f0;
+            margin: 0.5rem 0;
+        }
+
+        .dropdown-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1.5rem;
+            color: #333;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            border: none;
+            background: none;
+            width: 100%;
+            text-align: left;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .dropdown-item:hover {
+            background: #f8f9fa;
+            color: #000;
+        }
+
+        .logout-btn {
+            color: #ef9a9a !important;
+            font-weight: 500;
+        }
+
+        .logout-btn:hover {
+            background: #fee !important;
+            color: #ef9a9a !important;
+        }
+
+        .dropdown-icon {
+            font-size: 1rem;
+            width: 20px;
+            text-align: center;
+            flex-shrink: 0;
+        }
+
+        /* Mobile Menu Styles */
+        @media (max-width: 768px) {
+            /* Show mobile menu toggle button */
+            .mobile-menu-toggle {
+                display: block !important;
+            }
+            
+            /* Hide nav menu by default on mobile */
+            .nav-menu {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: white;
+                flex-direction: column;
+                padding: 1rem 0;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+                border-top: 1px solid #e5e5e5;
+                z-index: 999;
+            }
+            
+            /* Show nav menu when active */
+            .nav-menu.mobile-active {
+                display: flex;
+                animation: slideDown 0.3s ease;
+            }
+            
+            /* Mobile menu items styling */
+            .nav-menu li {
+                width: 100%;
+                margin: 0;
+                border-bottom: 1px solid #f0f0f0;
+            }
+            
+            .nav-menu li:last-child {
+                border-bottom: none;
+            }
+            
+            .nav-menu a {
+                display: block;
+                padding: 1rem 2rem;
+                width: 100%;
+                text-align: left;
+            }
+            
+            /* Mobile dropdown adjustments */
+            .nav-dropdown {
+                position: relative !important;
+            }
+            
+            .nav-dropdown .nav-submenu {
+                position: static !important;
+                display: none;
+                width: 100%;
+                box-shadow: none !important;
+                border: none !important;
+                background: #f8f9fa !important;
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+            
+            .nav-dropdown:hover .nav-submenu {
+                display: none; /* Disable hover on mobile */
+            }
+            
+            /* Enable click to toggle dropdown on mobile */
+            .nav-dropdown.mobile-open .nav-submenu {
+                display: block;
+            }
+            
+            .nav-submenu a {
+                padding-left: 3rem !important;
+                background: #f8f9fa;
+            }
+            
+            /* Slide down animation */
+            @keyframes slideDown {
+                from {
+                    opacity: 0;
+                    transform: translateY(-10px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+            
+            /* Adjust nav container for mobile */
+            .nav-container {
+                flex-wrap: wrap;
+                position: relative;
+            }
+            
+            /* Ensure logo stays on left */
+            .logo {
+                flex: 0 0 auto;
+            }
+            
+            /* User menu adjustments */
+            .user-menu {
+                flex: 0 0 auto;
+            }
+        }
+        
+        /* Desktop styles - ensure mobile toggle is hidden */
+        @media (min-width: 769px) {
+            .mobile-menu-toggle {
+                display: none !important;
+            }
+            
+            .nav-menu {
+                display: flex !important;
+            }
+        }
+    
+        .breadcrumb {
+            max-width: 1400px;
+            margin: 1rem auto;
+            padding: 0 2rem;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .breadcrumb a {
+            color: #666;
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            color: #000;
+        }
+
+        .main-container {
+            max-width: 1400px;
+            margin: 0 auto 2rem;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            gap: 2rem;
+        }
+
+        .content-area {
+            min-width: 0;
+        }
+
+        .resource-hero {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .resource-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .resource-meta {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+            margin-bottom: 1.5rem;
+        }
+
+        .meta-badge {
+            background: #f0f0f0;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: #555;
+        }
+
+        .resource-description {
+            color: #666;
+            font-size: 1.15rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .pdf-viewer {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .pdf-viewer h2 {
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        iframe {
+            width: 100%;
+            height: 800px;
+            border: none;
+            border-radius: 8px;
+            background: #f5f5f5;
+        }
+
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .card-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .author-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #000, #333);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .author-details {
+            flex: 1;
+        }
+
+        .author-name {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 0.25rem;
+        }
+
+        .author-role {
+            font-size: 0.85rem;
+            color: #666;
+        }
+
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+        [style*="font-size: 1.5rem"] {
+            text-align: center;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .stat-number {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .share-buttons {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.75rem;
+        }
+
+        .share-btn {
+            padding: 0.75rem;
+            border-radius: 8px;
+            border: 2px solid #e5e5e5;
+            background: white;
+            color: #333;
+            text-decoration: none;
+            text-align: center;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .share-btn:hover {
+            border-color: #333;
+            background: #f8f9fa;
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tag {
+            padding: 0.5rem 1rem;
+            background: #f0f0f0;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: #555;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .tag:hover {
+            background: #e0e0e0;
+            color: #000;
+        }
+
+        .related-resources {
+            margin-top: 3rem;
+            background: white;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .related-resources h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .related-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .related-card {
+            border: 1px solid #e5e5e5;
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s;
+        }
+
+        .related-card:hover {
+            border-color: #333;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .related-card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.75rem;
+            color: #333;
+        }
+
+        .related-card p {
+            color: #666;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .copy-success {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: #000;
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            display: none;
+            z-index: 1000;
+        }
+
+        @media (max-width: 1024px) {
+            .main-container {
+                grid-template-columns: 1fr;
+            }
+            .sidebar {
+                order: -1;
+            }
+        }
+
+        /* HTMLDocs Format Specific Styles */
+        .htmldoc-container {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .htmldoc-header {
+            padding: 3rem 0 2rem 0;
+            border-bottom: 3px solid #dc3545;
+            margin-bottom: 2rem;
+        }
+
+        .htmldoc-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #000;
+            margin-bottom: 0.5rem;
+            line-height: 1.2;
+        }
+
+        .htmldoc-subtitle {
+            font-size: 1.3rem;
+            color: #666;
+            margin-bottom: 1rem;
+            font-weight: 400;
+        }
+
+        .htmldoc-meta {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            color: #666;
+            font-size: 0.95rem;
+            padding: 1rem 0;
+        }
+
+        .htmldoc-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .htmldoc-intro {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 8px;
+            border-left: 4px solid #dc3545;
+            margin-bottom: 3rem;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .htmldoc-toc {
+            background: white;
+            border: 2px solid #e5e5e5;
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .htmldoc-toc h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #000;
+        }
+
+        .htmldoc-toc ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .htmldoc-toc li {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .htmldoc-toc li:last-child {
+            border-bottom: none;
+        }
+
+        .htmldoc-toc a {
+            color: #333;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .htmldoc-toc a:hover {
+            color: #dc3545;
+        }
+
+        .htmldoc-section {
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid #e5e5e5;
+        }
+
+        .htmldoc-section:last-child {
+            border-bottom: none;
+        }
+
+        .htmldoc-section h2 {
+            font-size: 2rem;
+            color: #000;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+
+        .htmldoc-section h3 {
+            font-size: 1.5rem;
+            color: #333;
+            margin: 2rem 0 1rem 0;
+            font-weight: 600;
+        }
+
+        .htmldoc-section h4 {
+            font-size: 1.2rem;
+            color: #444;
+            margin: 1.5rem 0 1rem 0;
+            font-weight: 600;
+        }
+
+        .htmldoc-paragraph {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: #333;
+            margin-bottom: 1.5rem;
+        }
+
+        .htmldoc-blockquote {
+            background: #f8f9fa;
+            border-left: 4px solid #dc3545;
+            padding: 1.5rem 2rem;
+            margin: 2rem 0;
+            font-style: italic;
+            font-size: 1.1rem;
+            color: #444;
+        }
+
+        .htmldoc-list {
+            margin: 1.5rem 0;
+            padding-left: 2rem;
+        }
+
+        .htmldoc-list li {
+            margin-bottom: 0.75rem;
+            line-height: 1.7;
+            color: #333;
+        }
+
+        .htmldoc-highlight {
+            background: #fff3cd;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid #ffc107;
+            margin: 2rem 0;
+        }
+
+        .htmldoc-key-teaching {
+            background: #e8f5e8;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid #28a745;
+            margin: 2rem 0;
+        }
+
+        .htmldoc-warning {
+            background: #fee;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid #dc3545;
+            margin: 2rem 0;
+        }
+
+        .paragraph-number {
+            color: #999;
+            font-weight: 600;
+            margin-right: 0.5rem;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: #dc3545;
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3);
+            transition: all 0.3s ease;
+            display: none;
+        }
+
+        .back-to-top:hover {
+            background: #c82333;
+            transform: translateY(-2px);
+        }
+
+        .back-to-top.visible {
+            display: block;
+        }
+
+    </style>
+    <link rel="stylesheet" href="/v3/css/styles.css">
+</head>
+<body>
+    <nav id="main-nav"></nav>
+    
+    
+    <!-- Header dynamically populated by dcf-ui.js -->
+    <div id="dcf-header"></div>
+
+    <div class="breadcrumb">
+        <a href="/v3/index.html">Home</a> / 
+        <a href="/v3/library.html">Library</a> / 
+        <a href="/v3/vatican-resources/index.html">Vatican Resources</a> / 
+        <span>Fighting Poverty to Build Peace</span>
+    </div>
+
+    <main class="main-container">
+        <div style="display: flex; gap: 2rem; max-width: 1400px; margin: 0 auto; padding: 2rem;">
+        <div class="htmldoc-container" style="flex: 1; max-width: 900px;">
+            <div class="htmldoc-header">
+                <h1 class="htmldoc-title">Fighting Poverty to Build Peace</h1>
+                <h2 class="htmldoc-subtitle">42nd World Day of Peace Message</h2>
+                <div class="htmldoc-meta">
+                    <div class="htmldoc-meta-item">
+                        <span>🏛️</span>
+                        <span>Pope Benedict XVI</span>
+                    </div>
+                    <div class="htmldoc-meta-item">
+                        <span>📅</span>
+                        <span>January 1, 2009</span>
+                    </div>
+                    <div class="htmldoc-meta-item">
+                        <span>📄</span>
+                        <span>15 Paragraphs</span>
+                    </div>
+                    <div class="htmldoc-meta-item">
+                        <span>⏱️</span>
+                        <span>12 min read</span>
+                    </div>
+                </div>
+            </div>
+
+            
+            <!-- Table of Contents -->
+            <div class="htmldoc-toc">
+                <h2>Table of Contents</h2>
+                <ul>
+                    <li><a href="#introduction">Introduction</a></li>
+                    <li><a href="#globalization">Poverty and Globalization</a></li>
+                    <li><a href="#demographics">Demographic Changes and Poverty</a></li>
+                    <li><a href="#diseases">Pandemic Diseases</a></li>
+                    <li><a href="#child-poverty">Child Poverty</a></li>
+                    <li><a href="#disarmament">Disarmament and Development</a></li>
+                    <li><a href="#food-crisis">The Global Food Crisis</a></li>
+                    <li><a href="#conclusion">Conclusion</a></li>
+                </ul>
+            </div>
+
+            <!-- SECTION: INTRODUCTION -->
+            <div class="htmldoc-section" id="introduction">
+                <h2>Introduction</h2>
+                
+                <p class="htmldoc-paragraph"><span class="paragraph-number">1.</span> Once again, as the new year begins, I want to extend good wishes for peace to people everywhere. With this Message I would like to propose a reflection on the theme: <strong>Fighting Poverty to Build Peace</strong>. Back in 1993, my venerable Predecessor Pope John Paul II, in his Message for the World Day of Peace that year, drew attention to the negative repercussions for peace when entire populations live in poverty. Poverty is often a contributory factor or a compounding element in conflicts, including armed ones. In turn, these conflicts fuel further tragic situations of poverty. "Our world shows increasing evidence of another grave threat to peace: many individuals and indeed whole peoples are living today in conditions of extreme poverty. The gap between rich and poor has become more marked, even in the most economically developed nations. This is a problem which the conscience of humanity cannot ignore, since the conditions in which a great number of people are living are an insult to their innate dignity and as a result are a threat to the authentic and harmonious progress of the world community".</p>
+
+                <p class="htmldoc-paragraph"><span class="paragraph-number">2.</span> In this context, fighting poverty requires attentive consideration of the complex phenomenon of globalization. This is important from a methodological standpoint, because it suggests drawing upon the fruits of economic and sociological research into the many different aspects of poverty. Yet the reference to globalization should also alert us to the spiritual and moral implications of the question, urging us, in our dealings with the poor, to set out from the clear recognition that we all share in a single divine plan: we are called to form one family in which all – individuals, peoples and nations – model their behaviour according to the principles of fraternity and responsibility.</p>
+            </div>
+
+            <!-- SECTION: GLOBALIZATION -->
+            <div class="htmldoc-section" id="globalization">
+                <h2>Poverty and Globalization</h2>
+                
+                <p class="htmldoc-paragraph"><span class="paragraph-number">3.</span> This perspective requires an understanding of poverty that is wide-ranging and well articulated. If it were a question of material poverty alone, then the social sciences, which enable us to measure phenomena on the basis of mainly quantitative data, would be sufficient to illustrate its principal characteristics. Yet we know that other, non-material forms of poverty exist which are not the direct and automatic consequence of material deprivation. For example, in advanced wealthy societies, there is evidence of marginalization, as well as affective, moral and spiritual poverty, seen in people whose interior lives are disoriented and who experience various forms of malaise despite their economic prosperity.</p>
+
+                <div class="htmldoc-key-teaching">
+                    <strong>Key Insight:</strong> Poverty is not merely material deprivation. It encompasses marginalization and spiritual poverty even in wealthy societies, requiring a comprehensive approach to human development.
+                </div>
+
+                <p class="htmldoc-paragraph"><span class="paragraph-number">4.</span> "Poverty" is often produced by a rejection of God's love, by man's basic and tragic tendency to close in on himself, thinking himself to be self-sufficient or merely an insignificant and ephemeral fact, a "stranger" in a random universe. Man is impoverished whenever he is cut off from God or from his fellow human beings. The total rejection of God, "the deliberate closing of one's heart to an encounter with love", is the source of man's impoverishment, not only spiritual but material as well.</p>
+            </div>
+
+            <!-- SECTION: DEMOGRAPHICS -->
+            <div class="htmldoc-section" id="demographics">
+                <h2>Demographic Changes and Poverty</h2>
+                
+                <p class="htmldoc-paragraph"><span class="paragraph-number">5.</span> One of the most obvious aspects of development today is the importance of the life cycle. The increase in life expectancy in advanced economies is significant evidence of human progress, but it brings with it problems linked to the management of an ageing population. At the opposite end of the spectrum, a worrying aspect of another kind of poverty is found in nations where the population continues to grow at a high rate. These demographic changes, especially where they represent rapid growth, make it more difficult to achieve a sufficiently high degree of economic development. In the poorest countries, where malnutrition, endemic diseases and social tensions persist, demographic increases accentuate the dramatic character of the situation.</p>
+
+                <p class="htmldoc-paragraph"><span class="paragraph-number">6.</span> Another area of concern arises from the increase – both in developed and developing countries – of unemployment, which in many cases results from the economic distortions produced by various forms of governmental protectionism or of economic nationalism. It cannot be overlooked that unemployment often has the effect of wearing down the dignity of those who are without work and of placing them and their families in a condition of humiliating dependence.</p>
+            </div>
+
+            <!-- SECTION: DISEASES -->
+            <div class="htmldoc-section" id="diseases">
+                <h2>Pandemic Diseases</h2>
+                
+                <p class="htmldoc-paragraph"><span class="paragraph-number">7.</span> A third area of concern – which poses a real threat to the achievement of peace – arises from the persistence, and often the spread, of various pandemic diseases such as malaria, tuberculosis and AIDS, which – to the extent that they strike the productive sectors of the population – aggravate the general state of poverty and create broad situations of hardship. The attempts made to arrest these diseases in the international order have not always met with success. In the first place, there is the problem of the shortage of economic resources in the countries affected, which often lack the medicines and the structures necessary for treating the sick.</p>
+
+                <div class="htmldoc-warning">
+                    <strong>Critical Challenge:</strong> Pandemic diseases not only threaten health but also undermine economic development and social stability, particularly in the poorest regions.
+                </div>
+            </div>
+
+            <!-- SECTION: CHILD POVERTY -->
+            <div class="htmldoc-section" id="child-poverty">
+                <h2>Child Poverty</h2>
+                
+                <p class="htmldoc-paragraph"><span class="paragraph-number">8.</span> One of the most distressing forms of poverty is that which affects children. Almost half of those living in absolute poverty today are children. To take the side of children when considering poverty means giving priority to those objectives which concern them most directly – such as caring for mothers, commitment to education, access to vaccines, medical care and drinking water, safeguarding the environment, and above all, commitment to defence of the family and the stability of relations within it. When the family is weakened, it is inevitably children who suffer. Where the dignity and rights of women are not adequately protected, it is again the children who are affected most.</p>
+
+                <p class="htmldoc-paragraph"><span class="paragraph-number">9.</span> A fifth area related to the fight against material poverty concerns the current food crisis, which jeopardizes the satisfaction of basic needs. This crisis is characterized not so much by the insufficiency of food, as by difficulty of access to it and by different forms of speculation: in other words, by a lack of a set of economic and social institutions capable of ensuring regular access to water and food for nutritional needs, and also capable of addressing those needs associated with primary emergencies.</p>
+            </div>
+
+            <!-- SECTION: DISARMAMENT -->
+            <div class="htmldoc-section" id="disarmament">
+                <h2>Disarmament and Development</h2>
+                
+                <p class="htmldoc-paragraph"><span class="paragraph-number">10.</span> Another source of material poverty is the current imbalance in expenditure between sectors. Investments in arms production and the purchase of weapons – including the arms trade – absorb resources which could be used for people's development, particularly for the poorest and neediest, who are also the most defenceless. This is an established fact: the enormous resources devoted to military expenditure and to developing or acquiring ever more sophisticated weapons prevent adequate resources from being devoted to dealing with pressing problems, both at the national and international level.</p>
+
+                <p class="htmldoc-paragraph"><span class="paragraph-number">11.</span> Moreover, this state of affairs aggravates rather than resolves a number of serious conflicts which continue to scar our world. It is here that we must ask ourselves whether the levels of peace which we have achieved are not perhaps the result of a balance established not by authentic justice, but by a sort of fear which in certain cases is reciprocal. The arms race generates insecurity, and insecurity increases the risk of violence. Violence needs no other pretext to erupt than the existence of arms and armaments.</p>
+
+                <div class="htmldoc-highlight">
+                    <h4>Arms and Poverty</h4>
+                    <p>"An excessive increase in military expenditure risks accelerating the arms race, producing pockets of underdevelopment and desperation, so that it can paradoxically become a cause of instability, tension and conflict."</p>
+                </div>
+            </div>
+
+            <!-- SECTION: FOOD CRISIS -->
+            <div class="htmldoc-section" id="food-crisis">
+                <h2>The Global Food Crisis</h2>
+                
+                <p class="htmldoc-paragraph"><span class="paragraph-number">12.</span> In this context, I would like to recall what Benedict XV, one of my venerable Predecessors, said at the beginning of the First World War: "We implore those who hold in their hands the destinies of nations to listen to Our voice. If their rights have been violated, they can certainly defend them. But let them do so while respecting the rights of others; let them not forget that, if they have rights, they also have duties." The same can be said today with regard to the current food crisis, which places in jeopardy the fulfilment of basic needs. This crisis is characterized not so much by the insufficiency of food, as by difficulty of access to it and by different forms of speculation.</p>
+
+                <p class="htmldoc-paragraph"><span class="paragraph-number">13.</span> The fight against poverty requires cooperation both on the economic level and on the legal level, as well as at the level of national and international institutions, so as to identify and implement solutions on a coordinate basis, respecting the principle of subsidiarity. It is also necessary to create efficient mechanisms capable of ensuring a fair distribution of the goods of the earth, both primary goods and those deriving from more advanced forms of enterprise, and at the same time fostering a responsible awareness of the need for a different life-style in the wealthier nations.</p>
+            </div>
+
+            <!-- SECTION: CONCLUSION -->
+            <div class="htmldoc-section" id="conclusion">
+                <h2>Conclusion</h2>
+                
+                <p class="htmldoc-paragraph"><span class="paragraph-number">14.</span> In my Encyclical Letter Spe Salvi, I pointed to the need for a self-critical investigation of modernity in dialogue with Christianity and its conception of hope. In that same spirit, in Populorum Progressio Paul VI pointed clearly to the goal of rescuing peoples, first and foremost, from hunger, deprivation, endemic diseases and illiteracy. From the economic point of view, this meant their active participation, on equal terms, in the international economic process; from the social point of view, it meant their evolution into educated societies marked by solidarity; from the political point of view, it meant the consolidation of democratic regimes capable of ensuring freedom and peace.</p>
+
+                <p class="htmldoc-paragraph"><span class="paragraph-number">15.</span> More than forty years after Populorum Progressio, its basic theme, namely progress, remains an open question, made all the more acute and urgent by the current economic and financial crisis. If some regions of the planet that once suffered from poverty have experienced remarkable changes in terms of economic growth and participation in global production, others are still living in a situation of deprivation comparable to that which existed at the time of Paul VI, and in some cases one can even speak of deterioration. It is significant that some of the causes of this situation were noted in Populorum Progressio, such as the persistence of protectionism and agricultural policies in developed countries which prevent access to international markets on the part of produce coming from poorer countries.</p>
+
+                <div class="htmldoc-key-teaching">
+                    <strong>Final Appeal:</strong> Fighting poverty is not simply a technical or economic issue; it is above all a moral imperative for all of humanity. To fight poverty is to build peace.
+                </div>
+
+                <p style="text-align: right; margin-top: 3rem; font-style: italic;">
+                    From the Vatican, 8 December 2008<br>
+                    <strong>BENEDICTUS PP. XVI</strong>
+                </p>
+            </div>            <div class="back-link-section" style="padding: 2rem 0; border-top: 2px solid #e5e5e5; margin-top: 3rem;">
+                <a href="/v3/vatican-resources/index.html" class="btn btn-primary">← Back to Vatican Resources</a>
+            </div>
+        </div>
+
+                </div>
+        
+        <!-- RIGHT SIDEBAR -->
+        <aside style="width: 320px; flex-shrink: 0;">
+            <div style="background: white; border-radius: 12px; padding: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.1); margin-bottom: 1.5rem;">
+                <h3 style="font-size: 1.2rem; margin-bottom: 1rem;">👤 Author</h3>
+                <div style="display: flex; align-items: center; gap: 1rem;">
+                    <div style="width: 48px; height: 48px; background: linear-gradient(135deg, #dc3545, #c82333); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: 600; font-size: 1.1rem;">VD</div>
+                    <div>
+                        <div style="font-weight: 600; color: #333;">Vatican Documents</div>
+                        <div style="color: #666; font-size: 0.9rem;">Vatican / DCF Hungary</div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="background: white; border-radius: 12px; padding: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.1); margin-bottom: 1.5rem;">
+                <h3 style="font-size: 1.2rem; margin-bottom: 1rem;">📊 Statistics</h3>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <div style="text-align: center;">
+                        <div class="stat-number" data-stat="views" style="font-size: 1.5rem; font-weight: 700; color: #333;">LOADING</div>
+                        <div style="font-size: 0.8rem; color: #666;">Views</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div class="stat-number" data-stat="downloads" style="font-size: 1.5rem; font-weight: 700; color: #333;">LOADING</div>
+                        <div style="font-size: 0.8rem; color: #666;">Downloads</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div class="stat-number" data-stat="bookmarks" style="font-size: 1.5rem; font-weight: 700; color: #333;">LOADING</div>
+                        <div style="font-size: 0.8rem; color: #666;">Bookmarks</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div id="stat-rating" style="font-size: 1.5rem; font-weight: 700; color: #333;">0.0★</div>
+                        <div style="font-size: 0.8rem; color: #666;">Rating</div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="background: white; border-radius: 12px; padding: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.1); margin-bottom: 1.5rem;">
+                <h3 style="font-size: 1.2rem; margin-bottom: 1rem;">🔗 Share</h3>
+                <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+                    <a href="https://twitter.com/intent/tweet?url=https://hoarhouse.github.io/v3/vatican-resources/antiqua-et-nova-2025.html&text=Antiqua%20et%20Nova" target="_blank" style="padding: 0.75rem; background: #f8f9fa; border-radius: 8px; text-decoration: none; color: #333; font-weight: 500;">𝕏 Twitter</a>
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://hoarhouse.github.io/v3/vatican-resources/antiqua-et-nova-2025.html" target="_blank" style="padding: 0.75rem; background: #f8f9fa; border-radius: 8px; text-decoration: none; color: #333; font-weight: 500;">📘 Facebook</a>
+                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://hoarhouse.github.io/v3/vatican-resources/antiqua-et-nova-2025.html" target="_blank" style="padding: 0.75rem; background: #f8f9fa; border-radius: 8px; text-decoration: none; color: #333; font-weight: 500;">💼 LinkedIn</a>
+                    <button onclick="navigator.clipboard.writeText(window.location.href); alert('Link copied!');" style="padding: 0.75rem; background: #f8f9fa; border-radius: 8px; border: none; color: #333; font-weight: 500; cursor: pointer; width: 100%; font-family: inherit; font-size: inherit;">📋 Copy Link</button>
+                </div>
+            </div>
+
+            <div style="background: white; border-radius: 12px; padding: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                <h3 style="font-size: 1.2rem; margin-bottom: 1rem;">🏷️ Tags</h3>
+                <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                    <span style="padding: 0.4rem 0.8rem; background: #f8f9fa; border-radius: 20px; font-size: 0.85rem; color: #666;">Antiqua et Nova</span>
+                    <span style="padding: 0.4rem 0.8rem; background: #f8f9fa; border-radius: 20px; font-size: 0.85rem; color: #666;">Vatican</span>
+                    <span style="padding: 0.4rem 0.8rem; background: #f8f9fa; border-radius: 20px; font-size: 0.85rem; color: #666;">AI Ethics</span>
+                    <span style="padding: 0.4rem 0.8rem; background: #f8f9fa; border-radius: 20px; font-size: 0.85rem; color: #666;">Pope Francis</span>
+                    <span style="padding: 0.4rem 0.8rem; background: #f8f9fa; border-radius: 20px; font-size: 0.85rem; color: #666;">Human Dignity</span>
+                    <span style="padding: 0.4rem 0.8rem; background: #f8f9fa; border-radius: 20px; font-size: 0.85rem; color: #666;">AI Warfare</span>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    
+    <a href="#" class="back-to-top" id="backToTop">↑ Top</a>
+    </main>
+
+    
+
+    <script>
+        // Resource tracking with proper timing
+        async function trackResourceView() {
+            const resourceId = 'ddd30fd0-b1c4-46eb-a10d-f812bba15827';
+            
+            let attempts = 0;
+            while (!window.dcfSupabase && attempts < 50) {
+                await new Promise(resolve => setTimeout(resolve, 100));
+                attempts++;
+            }
+            
+            if (!window.dcfSupabase) return;
+            
+            try {
+                const { error } = await window.dcfSupabase.rpc('increment_resource_view', {
+                    resource_id: resourceId
+                });
+                
+                if (error) {
+                    console.error('❌ Error tracking view:', error);
+                } else {
+                    console.log('✅ Resource view tracked');
+                }
+            } catch (err) {
+                console.warn('View tracking error:', err);
+            }
+        }
+        
+        async function loadLiveStats() {
+            let attempts = 0;
+            while (!window.dcfSupabase && attempts < 50) {
+                await new Promise(resolve => setTimeout(resolve, 100));
+                attempts++;
+            }
+            
+            if (!window.dcfSupabase) return;
+            
+            try {
+                const { data, error } = await window.dcfSupabase.from('resources')
+                    .select('view_count, download_count, bookmark_count, rating_average')
+                    .eq('id', 'ddd30fd0-b1c4-46eb-a10d-f812bba15827')
+                    .single();
+                
+                if (error) throw error;
+                
+                const statNumbers = document.querySelectorAll('[style*="font-size: 1.5rem"]');
+                if (statNumbers[0]) statNumbers[0].textContent = data.view_count || 0;
+                if (statNumbers[1]) statNumbers[1].textContent = data.download_count || 0;
+                if (statNumbers[2]) statNumbers[2].textContent = data.bookmark_count || 0;
+                if (statNumbers[3]) statNumbers[3].textContent = (data.rating_average || 0).toFixed(1) + '★';
+                
+                console.log('✅ Live stats loaded:', data);
+            } catch (err) {
+                console.warn('Failed to load stats:', err);
+            }
+        }
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(() => {
+                trackResourceView();
+                loadLiveStats();
+            }, 1000);
+        });
+    </script>
+
+    <script>
+        // Resource tracking with proper timing
+        async function trackResourceView() {
+            const resourceId = 'ddd30fd0-b1c4-46eb-a10d-f812bba15827';
+            
+            let attempts = 0;
+            while (!window.dcfSupabase && attempts < 50) {
+                await new Promise(resolve => setTimeout(resolve, 100));
+                attempts++;
+            }
+            
+            if (!window.dcfSupabase) {
+                console.error('❌ Supabase client not available');
+                return;
+            }
+            
+            try {
+                const { error } = await window.dcfSupabase.rpc('increment_resource_view', {
+                    resource_id: resourceId
+                });
+                
+                if (error) {
+                    console.error('❌ Error tracking view:', error);
+                } else {
+                    console.log('✅ Resource view tracked');
+                }
+            } catch (err) {
+                console.warn('View tracking error:', err);
+            }
+        }
+        
+        async function loadLiveStats() {
+            let attempts = 0;
+            while (!window.dcfSupabase && attempts < 50) {
+                await new Promise(resolve => setTimeout(resolve, 100));
+                attempts++;
+            }
+            
+            if (!window.dcfSupabase) {
+                console.warn('Supabase not available for stats');
+                return;
+            }
+            
+            try {
+                const { data, error } = await window.dcfSupabase.from('resources')
+                    .select('view_count, download_count, bookmark_count, rating_average')
+                    .eq('id', 'ddd30fd0-b1c4-46eb-a10d-f812bba15827')
+                    .single();
+                
+                if (error) throw error;
+                
+                document.querySelectorAll('[data-stat="views"]').forEach(el => el.textContent = data.view_count || 0); document.querySelectorAll('[data-stat="downloads"]').forEach(el => el.textContent = data.download_count || 0); document.querySelectorAll('[data-stat="bookmarks"]').forEach(el => el.textContent = data.bookmark_count || 0); document.querySelectorAll('#stat-rating').forEach(el => el.textContent = (data.rating_average || 0).toFixed(1) + '★');
+                if (statItems[0]) statItems[0].querySelector('.stat-number').textContent = data.view_count || 0;
+                if (statItems[1]) statItems[1].querySelector('.stat-number').textContent = data.download_count || 0;
+                if (statItems[2]) statItems[2].querySelector('.stat-number').textContent = data.bookmark_count || 0;
+                if (statItems[3]) statItems[3].querySelector('.stat-number').textContent = (data.rating_average || 0).toFixed(1) + '★';
+                
+                console.log('✅ Live stats loaded:', data);
+            } catch (err) {
+                console.warn('Failed to load stats:', err);
+            }
+        }
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            trackResourceView();
+            setTimeout(loadLiveStats, 1000);
+        });
+    </script>
+
+    
+
+    
+
+    <script src="../../js/dcf-core.js"></script>
+    <script src="../../js/dcf-ui.js"></script>
+    <script src="../../js/dcf-auth.js"></script>
+    <script src="../../js/dcf-analytics.js"></script>
+    <script src="../../js/dcf-init.js"></script>
+
+    <script>
+        // Resource tracking with proper timing
+        async function trackResourceView() {
+            const resourceId = 'ddd30fd0-b1c4-46eb-a10d-f812bba15827';
+            
+            let attempts = 0;
+            while (!window.dcfSupabase && attempts < 50) {
+                await new Promise(resolve => setTimeout(resolve, 100));
+                attempts++;
+            }
+            
+            if (!window.dcfSupabase) {
+                console.error('❌ Supabase client not available');
+                return;
+            }
+            
+            try {
+                const { error } = await window.dcfSupabase.rpc('increment_resource_view', {
+                    resource_id: resourceId
+                });
+                
+                if (error) {
+                    console.error('❌ Error tracking view:', error);
+                } else {
+                    console.log('✅ Resource view tracked');
+                }
+            } catch (err) {
+                console.warn('View tracking error:', err);
+            }
+        }
+        
+        async function loadLiveStats() {
+            let attempts = 0;
+            while (!window.dcfSupabase && attempts < 50) {
+                await new Promise(resolve => setTimeout(resolve, 100));
+                attempts++;
+            }
+            
+            if (!window.dcfSupabase) {
+                console.warn('Supabase not available for stats');
+                return;
+            }
+            
+            try {
+                const { data, error } = await window.dcfSupabase.from('resources')
+                    .select('view_count, download_count, bookmark_count, rating_average')
+                    .eq('id', 'ddd30fd0-b1c4-46eb-a10d-f812bba15827')
+                    .single();
+                
+                if (error) throw error;
+                
+                document.querySelectorAll('[data-stat="views"]').forEach(el => el.textContent = data.view_count || 0); document.querySelectorAll('[data-stat="downloads"]').forEach(el => el.textContent = data.download_count || 0); document.querySelectorAll('[data-stat="bookmarks"]').forEach(el => el.textContent = data.bookmark_count || 0); document.querySelectorAll('#stat-rating').forEach(el => el.textContent = (data.rating_average || 0).toFixed(1) + '★');
+                if (statItems[0]) statItems[0].querySelector('.stat-number').textContent = data.view_count || 0;
+                if (statItems[1]) statItems[1].querySelector('.stat-number').textContent = data.download_count || 0;
+                if (statItems[2]) statItems[2].querySelector('.stat-number').textContent = data.bookmark_count || 0;
+                if (statItems[3]) statItems[3].querySelector('.stat-number').textContent = (data.rating_average || 0).toFixed(1) + '★';
+                
+                console.log('✅ Live stats loaded:', data);
+            } catch (err) {
+                console.warn('Failed to load stats:', err);
+            }
+        }
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            trackResourceView();
+            setTimeout(loadLiveStats, 1000);
+        });
+    </script>
+
+    <footer id="main-footer"></footer>
+    
+    <script src="/v3/js/nav.js"></script>
+    <script src="/v3/js/main.js"></script>
+</body>
+</html>
