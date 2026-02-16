@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code to Conscience - DCF Hungary Blog</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/v3/css/styles.css">
+    <style>
+:root {
+    --ctc-black: #0a0a0a;
+    --ctc-dark: #141414;
+    --ctc-darker: #1a1a1a;
+    --ctc-electric: #00d4aa;
+    --ctc-electric-dim: rgba(0, 212, 170, 0.1);
+    --ctc-electric-glow: rgba(0, 212, 170, 0.4);
+    --ctc-white: #ffffff;
+    --ctc-gray-100: #f5f5f5;
+    --ctc-gray-300: #d4d4d4;
+    --ctc-gray-500: #737373;
+    --ctc-gray-700: #404040;
+    --font-display: 'Instrument Serif', Georgia, serif;
+    --font-mono: 'Space Mono', 'Courier New', monospace;
+    --font-body: 'Inter', -apple-system, sans-serif;
+}
+
+body {
+    background: var(--ctc-black);
+    color: var(--ctc-white);
+}
+
+.publication-header {
+    background: linear-gradient(180deg, var(--ctc-black) 0%, var(--ctc-dark) 100%);
+    border-bottom: 1px solid rgba(0, 212, 170, 0.2);
+    padding: 80px 40px 60px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.publication-header::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at center, var(--ctc-electric-dim) 0%, transparent 50%);
+    animation: pulse 4s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 0.6; }
+}
+
+.publication-title {
+    font-family: var(--font-mono);
+    font-size: clamp(42px, 6vw, 72px);
+    font-weight: 700;
+    letter-spacing: -2px;
+    margin: 0 0 16px 0;
+    position: relative;
+    display: inline-block;
+}
+
+.publication-title span {
+    background: linear-gradient(135deg, var(--ctc-electric) 0%, #00ffcc 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.publication-subtitle {
+    font-family: var(--font-body);
+    font-size: 18px;
+    font-weight: 300;
+    color: var(--ctc-gray-300);
+    max-width: 600px;
+    margin: 0 auto 32px;
+    line-height: 1.6;
+    position: relative;
+}
+
+.publication-meta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--ctc-electric);
+    position: relative;
+}
+
+.publication-meta .meta-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.publication-meta .meta-item::before {
+    content: '>';
+    font-weight: 700;
+}
+
+.publication-nav {
+    margin-top: 48px;
+    padding-top: 32px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.publication-nav a {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--ctc-gray-500);
+    text-decoration: none;
+    padding: 8px 16px;
+    border: 1px solid transparent;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    margin: 0 8px;
+}
+
+.publication-nav a:hover {
+    color: var(--ctc-electric);
+    border-color: var(--ctc-electric);
+    box-shadow: 0 0 20px var(--ctc-electric-glow);
+}
+
+.articles-section {
+    padding: 60px 40px 80px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.articles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 32px;
+    margin-top: 48px;
+}
+
+.article-card {
+    background: var(--ctc-dark);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    border-radius: 0;
+}
+
+.article-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--ctc-electric), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
+}
+
+.article-card:hover::before {
+    transform: translateX(100%);
+}
+
+.article-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--ctc-electric-glow);
+    box-shadow: 0 10px 40px rgba(0, 212, 170, 0.2);
+}
+
+.card-image {
+    height: 200px;
+    background: var(--ctc-darker);
+    position: relative;
+    overflow: hidden;
+}
+
+.card-image .code-pattern {
+    width: 100%;
+    height: 100%;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--ctc-electric);
+    opacity: 0.3;
+    padding: 20px;
+    line-height: 1.4;
+    white-space: pre-wrap;
+    word-break: break-all;
+}
+
+.card-category {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--ctc-black);
+    background: var(--ctc-electric);
+    padding: 4px 12px;
+    font-weight: 700;
+}
+
+.card-content {
+    padding: 24px;
+}
+
+.card-title {
+    font-family: var(--font-display);
+    font-size: 24px;
+    line-height: 1.3;
+    margin: 0 0 12px 0;
+    font-weight: 400;
+}
+
+.card-title a {
+    color: var(--ctc-white);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.card-title a:hover {
+    color: var(--ctc-electric);
+}
+
+.card-excerpt {
+    font-family: var(--font-body);
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--ctc-gray-300);
+    margin: 0 0 16px 0;
+}
+
+.card-meta {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--ctc-gray-500);
+    padding-top: 16px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.card-author::before {
+    content: '/';
+    margin-right: 4px;
+    color: var(--ctc-electric);
+}
+
+.card-date::before {
+    content: '@';
+    margin-right: 4px;
+    color: var(--ctc-electric);
+}
+
+@media (max-width: 768px) {
+    .publication-header {
+        padding: 60px 20px 40px;
+    }
+    
+    .articles-section {
+        padding: 40px 20px;
+    }
+    
+    .articles-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+}
+    </style>
+</head>
+<body>
+    <nav id="main-nav"></nav>
+    
+    <section class="publication-header">
+        <h1 class="publication-title"><span>Code to Conscience</span></h1>
+        <p class="publication-subtitle">
+            Exploring the intersection of technology, ethics, and human dignity in our digital age
+        </p>
+        <div class="publication-meta">
+            <span class="meta-item">7 Articles</span>
+            <span class="meta-item">Tech Ethics</span>
+        </div>
+        <div class="publication-nav">
+            <a href="/v3/insights.html">All Publications</a>
+            <a href="/v3/blog/dignitas/index.html">Dignitas</a>
+            <a href="/v3/blog/wisdom-brief/index.html">The Wisdom Brief</a>
+        </div>
+    </section>
+
+    <section class="articles-section">
+        <div class="articles-grid">
+            <article class="article-card">
+                <div class="card-image">
+                    <div class="code-pattern">function conscience(technology) {
+  if (!ethics.validate(technology)) {
+    return humanity.intervene();
+  }
+  return progress.continue({
+    values: preserved,
+    dignity: maintained
+  });
+}</div>
+                </div>
+                <div class="card-category">AI Ethics</div>
+                <div class="card-content">
+                    <h3 class="card-title">
+                        <a href="ai-and-authentic-leadership-keeping-the-human-at-the-helm.html">
+                            AI and Authentic Leadership: Keeping the Human at the Helm
+                        </a>
+                    </h3>
+                    <p class="card-excerpt">Examining how leaders can maintain authenticity and human judgment in an AI-augmented world.</p>
+                    <div class="card-meta">
+                        <span class="card-author">Christopher Hoar</span>
+                        <span class="card-date">November 15, 2024</span>
+                    </div>
+                </div>
+            </article>
+
+            <article class="article-card">
+                <div class="card-image">
+                    <div class="code-pattern">class DigitalEthics {
+  constructor() {
+    this.core = 'human_dignity';
+    this.framework = 'virtue_ethics';
+  }
+  
+  evaluate(action) {
+    return this.preserves_humanity(action) 
+      && this.promotes_flourishing(action);
+  }
+}</div>
+                </div>
+                <div class="card-category">Digital Ethics</div>
+                <div class="card-content">
+                    <h3 class="card-title">
+                        <a href="bridging-silicon-and-soul-technology-at-the-service-of-human-dignity.html">
+                            Bridging Silicon and Soul: Technology at the Service of Human Dignity
+                        </a>
+                    </h3>
+                    <p class="card-excerpt">Exploring pathways to ensure technology enhances rather than diminishes our humanity.</p>
+                    <div class="card-meta">
+                        <span class="card-author">Christopher Hoar</span>
+                        <span class="card-date">November 8, 2024</span>
+                    </div>
+                </div>
+            </article>
+
+            <article class="article-card">
+                <div class="card-image">
+                    <div class="code-pattern">// Digital footprint analysis
+const identity = {
+  online: fragmented(),
+  offline: authentic(),
+  challenge: reconcile(online, offline)
+};
+
+return identity.integrate({
+  preserve: 'authenticity',
+  enhance: 'connection'
+});</div>
+                </div>
+                <div class="card-category">Digital Identity</div>
+                <div class="card-content">
+                    <h3 class="card-title">
+                        <a href="digital-footprints-ethical-trails-navigating-identity-in-the-online-age.html">
+                            Digital Footprints, Ethical Trails: Navigating Identity in the Online Age
+                        </a>
+                    </h3>
+                    <p class="card-excerpt">Understanding how our digital presence shapes our identity and ethical responsibilities.</p>
+                    <div class="card-meta">
+                        <span class="card-author">Christopher Hoar</span>
+                        <span class="card-date">November 1, 2024</span>
+                    </div>
+                </div>
+            </article>
+
+            <article class="article-card">
+                <div class="card-image">
+                    <div class="code-pattern">interface HumanAgency {
+  freedom: boolean;
+  responsibility: boolean;
+  creativity: boolean;
+  
+  preserve(): void {
+    while (ai.advances()) {
+      human.remains_sovereign();
+    }
+  }
+}</div>
+                </div>
+                <div class="card-category">Human Agency</div>
+                <div class="card-content">
+                    <h3 class="card-title">
+                        <a href="from-automation-to-augmentation-preserving-human-agency-in-ai-systems.html">
+                            From Automation to Augmentation: Preserving Human Agency in AI Systems
+                        </a>
+                    </h3>
+                    <p class="card-excerpt">Shifting the paradigm from replacing humans to empowering them through thoughtful AI design.</p>
+                    <div class="card-meta">
+                        <span class="card-author">Christopher Hoar</span>
+                        <span class="card-date">October 25, 2024</span>
+                    </div>
+                </div>
+            </article>
+
+            <article class="article-card">
+                <div class="card-image">
+                    <div class="code-pattern">async function buildTrust() {
+  const transparency = await open_source();
+  const accountability = await clear_governance();
+  const ethics = await human_centered();
+  
+  return community.flourish({
+    transparency,
+    accountability,
+    ethics
+  });
+}</div>
+                </div>
+                <div class="card-category">Digital Commons</div>
+                <div class="card-content">
+                    <h3 class="card-title">
+                        <a href="open-source-open-hearts-building-technology-for-the-common-good.html">
+                            Open Source, Open Hearts: Building Technology for the Common Good
+                        </a>
+                    </h3>
+                    <p class="card-excerpt">How collaborative development models can create more ethical and inclusive technologies.</p>
+                    <div class="card-meta">
+                        <span class="card-author">Christopher Hoar</span>
+                        <span class="card-date">October 18, 2024</span>
+                    </div>
+                </div>
+            </article>
+
+            <article class="article-card">
+                <div class="card-image">
+                    <div class="code-pattern">const algorithm = {
+  inputs: ['data', 'context', 'values'],
+  process: function() {
+    return this.inputs.reduce((result, input) => {
+      if (input === 'values') {
+        return prioritize(result, 'ethics');
+      }
+      return optimize(result, input);
+    });
+  }
+};</div>
+                </div>
+                <div class="card-category">Algorithmic Justice</div>
+                <div class="card-content">
+                    <h3 class="card-title">
+                        <a href="the-algorithm-and-the-altar-finding-sacred-space-in-digital-life.html">
+                            The Algorithm and the Altar: Finding Sacred Space in Digital Life
+                        </a>
+                    </h3>
+                    <p class="card-excerpt">Reclaiming moments of transcendence and meaning in our algorithm-driven world.</p>
+                    <div class="card-meta">
+                        <span class="card-author">Christopher Hoar</span>
+                        <span class="card-date">October 11, 2024</span>
+                    </div>
+                </div>
+            </article>
+
+            <article class="article-card">
+                <div class="card-image">
+                    <div class="code-pattern">// Vatican AI Ethics Framework
+const principles = [
+  'transparency',
+  'inclusion', 
+  'accountability',
+  'impartiality',
+  'reliability',
+  'security_and_privacy'
+];
+
+implement(principles, {
+  context: 'organizational',
+  approach: 'human_centered'
+});</div>
+                </div>
+                <div class="card-category">Implementation</div>
+                <div class="card-content">
+                    <h3 class="card-title">
+                        <a href="the-vaticans-vision-for-ai-translating-ethics-into-action.html">
+                            The Vatican's Vision for AI: Translating Ethics into Action
+                        </a>
+                    </h3>
+                    <p class="card-excerpt">Practical steps for implementing Rome's Call for AI Ethics in organizations worldwide.</p>
+                    <div class="card-meta">
+                        <span class="card-author">Christopher Hoar</span>
+                        <span class="card-date">October 4, 2024</span>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+    
+    <footer id="main-footer"></footer>
+    
+    <script src="/v3/js/nav.js"></script>
+    <script src="/v3/js/main.js"></script>
+</body>
+</html>
