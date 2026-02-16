@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dignitas - DCF Hungary</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Base CSS -->
+    <link rel="stylesheet" href="/v3/css/styles.css">
+    
+    <style>
+        /* Dignitas Custom Properties */
+        :root {
+            --dignitas-deep: #1a1a2e;
+            --dignitas-gold: #c9a84c;
+            --dignitas-gold-light: #e8d5a0;
+            --dignitas-warm: #f7f3eb;
+            --dignitas-cream: #faf8f4;
+            --dignitas-text: #2c2c3a;
+            --dignitas-text-light: #6b6b7b;
+            --dignitas-rule: #d4cfc4;
+            --dignitas-accent: #8b2332;
+        }
+        
+        /* Override body background for Dignitas */
+        body {
+            background: var(--dignitas-cream);
+            font-family: 'Source Sans 3', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+        
+        /* Masthead Section */
+        .dignitas-masthead {
+            background: var(--dignitas-warm);
+            border-bottom: 1px solid var(--dignitas-rule);
+            padding: 3rem 2rem 3rem;
+            text-align: center;
+        }
+        
+        .gold-bar-top {
+            width: 60px;
+            height: 3px;
+            background: var(--dignitas-gold);
+            margin: 0 auto 2rem;
+        }
+        
+        .publication-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--dignitas-text-light);
+            margin-bottom: 2rem;
+            font-family: 'Source Sans 3', sans-serif;
+            font-weight: 400;
+        }
+        
+        .dignitas-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(48px, 6vw, 72px);
+            font-weight: 400;
+            color: var(--dignitas-deep);
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+        }
+        
+        .gold-rule {
+            width: 40px;
+            height: 1px;
+            background: var(--dignitas-gold);
+            margin: 0 auto 1.5rem;
+        }
+        
+        .dignitas-tagline {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 18px;
+            max-width: 540px;
+            margin: 0 auto 2rem;
+            line-height: 1.5;
+            color: var(--dignitas-text);
+        }
+        
+        .dignitas-meta {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--dignitas-text-light);
+            font-family: 'Source Sans 3', sans-serif;
+            font-weight: 300;
+        }
+        
+        /* Category Navigation */
+        .category-nav {
+            background: white;
+            border-bottom: 1px solid var(--dignitas-rule);
+            padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .category-nav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            padding: 0 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .category-link {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--dignitas-text-light);
+            text-decoration: none;
+            padding: 1.5rem 0;
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s ease;
+            font-family: 'Source Sans 3', sans-serif;
+            font-weight: 400;
+        }
+        
+        .category-link:hover {
+            color: var(--dignitas-text);
+        }
+        
+        .category-link.active {
+            color: var(--dignitas-text);
+            border-bottom-color: var(--dignitas-gold);
+        }
+        
+        /* Featured Article Section */
+        .featured-section {
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+        }
+        
+        .section-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--dignitas-gold);
+            margin-bottom: 2rem;
+            font-family: 'Source Sans 3', sans-serif;
+            font-weight: 600;
+        }
+        
+        .featured-article {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        
+        .featured-image {
+            aspect-ratio: 16/10;
+            background: linear-gradient(135deg, var(--dignitas-deep) 0%, var(--dignitas-text) 100%);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--dignitas-gold-light);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 24px;
+            opacity: 0.3;
+        }
+        
+        .featured-content {
+            padding: 3rem;
+        }
+        
+        .category-tag {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--dignitas-accent);
+            margin-bottom: 1rem;
+            font-family: 'Source Sans 3', sans-serif;
+            font-weight: 600;
+        }
+        
+        .featured-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 38px;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+        }
+        
+        .featured-title a {
+            color: var(--dignitas-deep);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .featured-title a:hover {
+            color: var(--dignitas-gold);
+        }
+        
+        .featured-excerpt {
+            font-family: 'Source Sans 3', sans-serif;
+            font-size: 16px;
+            line-height: 1.7;
+            color: var(--dignitas-text);
+            margin-bottom: 2rem;
+        }
+        
+        .author-byline {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .author-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--dignitas-gold);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Source Sans 3', sans-serif;
+            font-weight: 600;
+            font-size: 18px;
+        }
+        
+        .author-info {
+            font-family: 'Source Sans 3', sans-serif;
+        }
+        
+        .author-name {
+            font-weight: 600;
+            color: var(--dignitas-text);
+            display: block;
+            margin-bottom: 0.25rem;
+        }
+        
+        .author-role {
+            font-size: 13px;
+            color: var(--dignitas-text-light);
+        }
+        
+        /* Articles Grid Section */
+        .articles-section {
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+        }
+        
+        .articles-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .coming-soon {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 4rem 2rem;
+            background: white;
+            border-radius: 8px;
+            border: 1px dashed var(--dignitas-rule);
+        }
+        
+        .coming-soon p {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 20px;
+            color: var(--dignitas-text-light);
+        }
+        
+        /* Newsletter Section */
+        .newsletter-section {
+            background: var(--dignitas-deep);
+            padding: 4rem 2rem;
+            text-align: center;
+            margin-top: 4rem;
+        }
+        
+        .newsletter-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--dignitas-gold);
+            margin-bottom: 1rem;
+            font-family: 'Source Sans 3', sans-serif;
+            font-weight: 600;
+        }
+        
+        .newsletter-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 32px;
+            color: white;
+            margin-bottom: 1rem;
+        }
+        
+        .newsletter-description {
+            color: rgba(255,255,255,0.6);
+            font-family: 'Source Sans 3', sans-serif;
+            font-size: 16px;
+            max-width: 540px;
+            margin: 0 auto 2rem;
+            line-height: 1.6;
+        }
+        
+        .newsletter-form {
+            max-width: 480px;
+            margin: 0 auto;
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .newsletter-input {
+            flex: 1;
+            padding: 1rem 1.5rem;
+            border: 1px solid rgba(255,255,255,0.2);
+            background: rgba(255,255,255,0.05);
+            border-radius: 4px;
+            color: white;
+            font-family: 'Source Sans 3', sans-serif;
+            font-size: 15px;
+        }
+        
+        .newsletter-input::placeholder {
+            color: rgba(255,255,255,0.4);
+        }
+        
+        .newsletter-button {
+            padding: 1rem 2rem;
+            background: var(--dignitas-gold);
+            color: var(--dignitas-deep);
+            border: none;
+            border-radius: 4px;
+            font-family: 'Source Sans 3', sans-serif;
+            font-weight: 600;
+            font-size: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .newsletter-button:hover {
+            background: var(--dignitas-gold-light);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 900px) {
+            .featured-article {
+                grid-template-columns: 1fr;
+            }
+            
+            .featured-content {
+                padding: 2rem;
+            }
+            
+            .featured-title {
+                font-size: 32px;
+            }
+            
+            .articles-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .dignitas-masthead {
+                padding: 2rem 1rem;
+            }
+            
+            .category-nav-inner {
+                gap: 1.5rem;
+                padding: 0 1rem;
+            }
+            
+            .category-link {
+                font-size: 11px;
+                padding: 1rem 0;
+            }
+            
+            .featured-section {
+                margin: 2rem auto;
+                padding: 0 1rem;
+            }
+            
+            .featured-title {
+                font-size: 28px;
+            }
+            
+            .articles-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .newsletter-form {
+                flex-direction: column;
+            }
+            
+            .newsletter-button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Main Navigation -->
+    <nav id="main-nav"></nav>
+    
+    <!-- Dignitas Masthead -->
+    <div class="dignitas-masthead">
+        <div class="gold-bar-top"></div>
+        <div class="publication-label">A Publication of the Domus Communis Foundation</div>
+        <h1 class="dignitas-title">Dignitas</h1>
+        <div class="gold-rule"></div>
+        <p class="dignitas-tagline">
+            Exploring the ethics of artificial intelligence, digital sovereignty, and technology in service of human dignity
+        </p>
+        <div class="dignitas-meta">DCF Hungary · Budapest · Washington, D.C. · Accra</div>
+    </div>
+    
+    <!-- Category Navigation -->
+    <nav class="category-nav">
+        <div class="category-nav-inner">
+            <a href="#" class="category-link active">All</a>
+            <a href="#" class="category-link">AI Ethics</a>
+            <a href="#" class="category-link">Digital Sovereignty</a>
+            <a href="#" class="category-link">Faith & Technology</a>
+            <a href="#" class="category-link">Policy & Governance</a>
+            <a href="#" class="category-link">CyberPeace</a>
+        </div>
+    </nav>
+    
+    <!-- Featured Article Section -->
+    <section class="featured-section">
+        <div class="section-label">Featured</div>
+        <article class="featured-article">
+            <div class="featured-image">
+                [Featured Image]
+            </div>
+            <div class="featured-content">
+                <div class="category-tag">AI Ethics</div>
+                <h2 class="featured-title">
+                    <a href="/v3/blog/dignitas/ai-consciousness-values.html">
+                        Will AI Achieve Consciousness: Defining Consciousness and the Need for Value-Based AI Programming
+                    </a>
+                </h2>
+                <p class="featured-excerpt">
+                    As artificial intelligence systems become increasingly sophisticated, the question of machine consciousness moves from science fiction to serious philosophical and ethical inquiry. This exploration examines the fundamental nature of consciousness, the challenges in defining it, and why value-based programming is essential regardless of whether AI achieves true awareness.
+                </p>
+                <div class="author-byline">
+                    <div class="author-avatar">ZP</div>
+                    <div class="author-info">
+                        <span class="author-name">Zoltán Pap</span>
+                        <span class="author-role">DCF Board Member · January 1, 2026</span>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </section>
+    
+    <!-- Articles Grid Section -->
+    <section class="articles-section">
+        <div class="section-label">Latest Articles</div>
+        <div class="articles-grid">
+            <!-- Future articles will be added here -->
+            <div class="coming-soon">
+                <p>More articles coming soon</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Newsletter Section -->
+    <section class="newsletter-section">
+        <div class="newsletter-label">Stay Informed</div>
+        <h2 class="newsletter-title">Subscribe to Dignitas</h2>
+        <p class="newsletter-description">
+            Receive thoughtful analysis and insights on the intersection of technology, ethics, and human dignity delivered directly to your inbox.
+        </p>
+        <form class="newsletter-form" onsubmit="return false;">
+            <input type="email" class="newsletter-input" placeholder="Enter your email address" required>
+            <button type="submit" class="newsletter-button">Subscribe</button>
+        </form>
+    </section>
+    
+    <!-- Footer -->
+    <footer id="main-footer"></footer>
+    
+    <!-- Scripts -->
+    <script src="/v3/js/nav.js"></script>
+    <script src="/v3/js/main.js"></script>
+</body>
+</html>
