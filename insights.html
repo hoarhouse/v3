@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insights - DCF Hungary</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Base CSS -->
+    <link rel="stylesheet" href="/v3/css/styles.css">
+    
+    <style>
+        /* Dignitas Color Variables (reused for consistency) */
+        :root {
+            --dignitas-deep: #1a1a2e;
+            --dignitas-gold: #c9a84c;
+            --dignitas-gold-light: #e8d5a0;
+            --dignitas-warm: #f7f3eb;
+            --dignitas-cream: #faf8f4;
+            --dignitas-text: #2c2c3a;
+            --dignitas-text-light: #6b6b7b;
+            --dignitas-rule: #d4cfc4;
+            --dignitas-accent: #8b2332;
+            --cyberpeace-green: #2a6b4a;
+        }
+        
+        /* Hero Section */
+        .insights-hero {
+            background: var(--dignitas-warm);
+            padding: 5rem 2rem;
+            text-align: center;
+        }
+        
+        .hero-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--dignitas-gold);
+            margin-bottom: 1.5rem;
+            font-family: 'Source Sans 3', sans-serif;
+            font-weight: 600;
+        }
+        
+        .hero-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 42px;
+            font-weight: 400;
+            color: var(--dignitas-deep);
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+        
+        .hero-subtitle {
+            font-family: 'Source Sans 3', sans-serif;
+            font-size: 15px;
+            color: var(--dignitas-text-light);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        
+        /* Blog Cards Section */
+        .blogs-section {
+            padding: 4rem 2rem;
+            background: var(--dignitas-cream);
+        }
+        
+        .blogs-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+        }
+        
+        .blog-card {
+            background: white;
+            border: 1px solid var(--dignitas-rule);
+            border-radius: 4px;
+            padding: 36px 28px;
+            text-align: center;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+        
+        .blog-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            border-radius: 4px 4px 0 0;
+        }
+        
+        .blog-card.dignitas::before {
+            background: var(--dignitas-gold);
+        }
+        
+        .blog-card.wisdom-brief::before {
+            background: var(--dignitas-accent);
+        }
+        
+        .blog-card.cyberpeace::before {
+            background: var(--cyberpeace-green);
+        }
+        
+        .blog-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+        }
+        
+        .blog-card.coming-soon {
+            opacity: 0.7;
+            cursor: default;
+        }
+        
+        .blog-card.coming-soon:hover {
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .blog-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 28px;
+            font-weight: 400;
+            color: var(--dignitas-deep);
+            margin-bottom: 0.5rem;
+        }
+        
+        .blog-tagline {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 16px;
+            color: var(--dignitas-text-light);
+            margin-bottom: 1.5rem;
+            line-height: 1.4;
+        }
+        
+        .blog-description {
+            font-family: 'Source Sans 3', sans-serif;
+            font-size: 14px;
+            color: var(--dignitas-text);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+        
+        .blog-post-count {
+            font-family: 'Source Sans 3', sans-serif;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--dignitas-text-light);
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--dignitas-rule);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 900px) {
+            .blogs-grid {
+                grid-template-columns: 1fr;
+                max-width: 400px;
+            }
+            
+            .hero-title {
+                font-size: 36px;
+            }
+            
+            .insights-hero {
+                padding: 3rem 1.5rem;
+            }
+            
+            .blogs-section {
+                padding: 3rem 1.5rem;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .hero-title {
+                font-size: 32px;
+            }
+            
+            .hero-subtitle {
+                font-size: 14px;
+            }
+            
+            .blog-card {
+                padding: 28px 20px;
+            }
+            
+            .blog-title {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Main Navigation -->
+    <nav id="main-nav"></nav>
+    
+    <!-- Hero Section -->
+    <section class="insights-hero">
+        <div class="hero-label">DCF Publications</div>
+        <h1 class="hero-title">Insights</h1>
+        <p class="hero-subtitle">
+            Research, analysis, and perspectives from the Domus Communis Foundation
+        </p>
+    </section>
+    
+    <!-- Blog Cards Section -->
+    <section class="blogs-section">
+        <div class="blogs-grid">
+            <!-- Dignitas Card -->
+            <a href="/v3/blog/dignitas/index.html" class="blog-card dignitas">
+                <h2 class="blog-title">Dignitas</h2>
+                <p class="blog-tagline">Ethics of AI & human dignity</p>
+                <p class="blog-description">
+                    In-depth analysis on artificial intelligence, digital sovereignty, and technology's impact on the human person.
+                </p>
+                <div class="blog-post-count">1 Article</div>
+            </a>
+            
+            <!-- The Wisdom Brief Card -->
+            <a href="/v3/blog/wisdom-brief/index.html" class="blog-card wisdom-brief">
+                <h2 class="blog-title">The Wisdom Brief</h2>
+                <p class="blog-tagline">Ancient wisdom for the digital age</p>
+                <p class="blog-description">
+                    Vatican teaching and Catholic social thought applied to today's most pressing technology challenges.
+                </p>
+                <div class="blog-post-count">5 Articles</div>
+            </a>
+            
+            <!-- CyberPeace Card -->
+            <div class="blog-card cyberpeace coming-soon">
+                <h2 class="blog-title">CyberPeace</h2>
+                <p class="blog-tagline">Dispatches from the digital frontier</p>
+                <p class="blog-description">
+                    Coverage and commentary from DCF's CyberPeace Summit and ongoing digital peace initiatives.
+                </p>
+                <div class="blog-post-count">Coming Soon</div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer id="main-footer"></footer>
+    
+    <!-- Scripts -->
+    <script src="/v3/js/nav.js"></script>
+    <script src="/v3/js/main.js"></script>
+</body>
+</html>
