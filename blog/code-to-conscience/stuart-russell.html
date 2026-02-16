@@ -3,336 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stuart Russell - DCF Hungary Blog</title>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>Stuart Russell — Code to Conscience</title>
     <link rel="stylesheet" href="/v3/css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-:root {
-    --ctc-black: #0a0a0a;
-    --ctc-dark: #141414;
-    --ctc-darker: #1a1a1a;
-    --ctc-electric: #00d4aa;
-    --ctc-electric-dim: rgba(0, 212, 170, 0.1);
-    --ctc-electric-glow: rgba(0, 212, 170, 0.4);
-    --ctc-white: #ffffff;
-    --ctc-gray-100: #f5f5f5;
-    --ctc-gray-300: #d4d4d4;
-    --ctc-gray-500: #737373;
-    --ctc-gray-700: #404040;
-    --font-display: 'Instrument Serif', Georgia, serif;
-    --font-mono: 'Space Mono', 'Courier New', monospace;
-    --font-body: 'Inter', -apple-system, sans-serif;
-}
-
-body {
-    background: var(--ctc-black);
-    color: var(--ctc-white);
-    font-family: var(--font-body);
-    line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
-}
-
-.article-hero {
-    background: linear-gradient(180deg, var(--ctc-dark) 0%, var(--ctc-darker) 100%);
-    color: var(--ctc-white);
-    padding: 60px 40px 48px;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-    border-bottom: 1px solid rgba(0, 212, 170, 0.2);
-}
-
-.article-hero::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-image:
-        linear-gradient(rgba(0,212,170,0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0,212,170,0.03) 1px, transparent 1px);
-    background-size: 48px 48px;
-    pointer-events: none;
-}
-
-.article-hero::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, var(--ctc-electric), transparent);
-    animation: scan 3s ease-in-out infinite;
-}
-
-@keyframes scan {
-    0%, 100% { transform: translateX(-100%); }
-    50% { transform: translateX(100%); }
-}
-
-.article-hero .back-link {
-    display: inline-block;
-    font-family: var(--font-mono);
-    font-size: 11px;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    color: var(--ctc-electric);
-    text-decoration: none;
-    margin-bottom: 24px;
-    position: relative;
-    z-index: 1;
-    transition: all 0.3s ease;
-}
-
-.article-hero .back-link:hover {
-    color: var(--ctc-white);
-    text-shadow: 0 0 10px var(--ctc-electric-glow);
-}
-
-.article-hero .article-category-tag {
-    display: inline-block;
-    font-family: var(--font-mono);
-    font-size: 10px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--ctc-black);
-    background: var(--ctc-electric);
-    padding: 6px 16px;
-    margin-bottom: 20px;
-    position: relative;
-    z-index: 1;
-    font-weight: 700;
-}
-
-.article-hero h1 {
-    font-family: var(--font-display);
-    font-size: clamp(32px, 5vw, 48px);
-    font-weight: 400;
-    font-style: italic;
-    color: var(--ctc-white);
-    line-height: 1.2;
-    max-width: 900px;
-    margin: 0 auto 24px;
-    position: relative;
-    z-index: 1;
-}
-
-.article-hero .article-meta {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 16px;
-    margin-top: 24px;
-    position: relative;
-    z-index: 1;
-}
-
-.article-hero .meta-avatar {
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    background: var(--ctc-darker);
-    border: 2px solid var(--ctc-electric);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--ctc-electric);
-    font-family: var(--font-mono);
-    font-size: 12px;
-    font-weight: 700;
-}
-
-.article-hero .meta-info {
-    text-align: left;
-    font-family: var(--font-body);
-    font-size: 14px;
-    line-height: 1.4;
-}
-
-.article-hero .meta-name {
-    font-weight: 600;
-    color: var(--ctc-white);
-}
-
-.article-hero .meta-detail {
-    color: var(--ctc-gray-300);
-    font-size: 13px;
-}
-
-.article-body {
-    max-width: 720px;
-    margin: 0 auto;
-    padding: 60px 40px 80px;
-    font-family: var(--font-body);
-    font-size: 17px;
-    font-weight: 400;
-    line-height: 1.8;
-    color: var(--ctc-gray-300);
-}
-
-.article-body h2 {
-    font-family: var(--font-display);
-    font-size: 32px;
-    font-weight: 400;
-    font-style: italic;
-    color: var(--ctc-white);
-    margin: 48px 0 20px;
-    line-height: 1.3;
-}
-
-.article-body h3 {
-    font-family: var(--font-display);
-    font-size: 24px;
-    font-weight: 400;
-    font-style: italic;
-    color: var(--ctc-white);
-    margin: 36px 0 16px;
-}
-
-.article-body p {
-    margin-bottom: 24px;
-}
-
-.article-body strong {
-    color: var(--ctc-white);
-    font-weight: 600;
-}
-
-.article-body em {
-    font-style: italic;
-}
-
-.article-body blockquote {
-    border-left: 3px solid var(--ctc-electric);
-    margin: 32px 0;
-    padding: 20px 28px;
-    background: var(--ctc-darker);
-    font-family: var(--font-display);
-    font-size: 18px;
-    font-style: italic;
-    color: var(--ctc-gray-100);
-    line-height: 1.7;
-    position: relative;
-}
-
-.article-body blockquote::before {
-    content: '"';
-    position: absolute;
-    top: -10px;
-    left: 20px;
-    font-size: 48px;
-    color: var(--ctc-electric);
-    opacity: 0.3;
-    font-family: var(--font-display);
-}
-
-.article-body ul, .article-body ol {
-    margin-bottom: 24px;
-    padding-left: 28px;
-}
-
-.article-body li {
-    margin-bottom: 12px;
-    line-height: 1.7;
-}
-
-.article-body a {
-    color: var(--ctc-electric);
-    text-decoration: underline;
-    text-decoration-color: rgba(0, 212, 170, 0.3);
-    text-underline-offset: 3px;
-    transition: all 0.3s ease;
-}
-
-.article-body a:hover {
-    text-decoration-color: var(--ctc-electric);
-    text-shadow: 0 0 8px var(--ctc-electric-glow);
-}
-
-.article-body code {
-    font-family: var(--font-mono);
-    font-size: 14px;
-    background: var(--ctc-darker);
-    color: var(--ctc-electric);
-    padding: 2px 6px;
-    border-radius: 3px;
-}
-
-.article-body pre {
-    background: var(--ctc-darker);
-    border: 1px solid var(--ctc-gray-700);
-    border-radius: 4px;
-    padding: 16px 20px;
-    margin: 24px 0;
-    overflow-x: auto;
-}
-
-.article-body pre code {
-    background: none;
-    padding: 0;
-    font-size: 14px;
-    line-height: 1.6;
-}
-
-.article-footer-nav {
-    max-width: 720px;
-    margin: 0 auto;
-    padding: 0 40px 80px;
-    border-top: 1px solid rgba(0, 212, 170, 0.2);
-    padding-top: 40px;
-    text-align: center;
-}
-
-.article-footer-nav a {
-    display: inline-block;
-    font-family: var(--font-mono);
-    font-size: 12px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--ctc-electric);
-    text-decoration: none;
-    font-weight: 700;
-    transition: all 0.3s ease;
-}
-
-.article-footer-nav a:hover {
-    color: var(--ctc-white);
-    text-shadow: 0 0 10px var(--ctc-electric-glow);
-}
-
-@media (max-width: 768px) {
-    .article-hero {
-        padding: 48px 24px 40px;
-    }
-    
-    .article-body {
-        padding: 48px 24px 64px;
-        font-size: 16px;
-    }
-    
-    .article-footer-nav {
-        padding: 0 24px 64px;
-    }
-}
-
-@media (max-width: 480px) {
-    .article-hero h1 {
-        font-size: 28px;
-    }
-    
-    .article-body h2 {
-        font-size: 26px;
-    }
-    
-    .article-body h3 {
-        font-size: 20px;
-    }
-}
-</style>
-    
+        :root {
+            --c2c-black: #0a0a0a;
+            --c2c-dark: #141418;
+            --c2c-charcoal: #1e1e24;
+            --c2c-electric: #00d4aa;
+            --c2c-white: #f0f0f0;
+            --c2c-gray: #8a8a96;
+            --c2c-gray-light: #b0b0bc;
+            --c2c-rule: #2a2a32;
+            --c2c-surface: #18181e;
+            --font-mono: 'Space Mono', 'Courier New', monospace;
+            --font-serif: 'Instrument Serif', Georgia, serif;
+            --font-sans: 'Inter', -apple-system, sans-serif;
+        }
+        body { background: var(--c2c-black); color: var(--c2c-white); font-family: var(--font-sans); line-height: 1.6; -webkit-font-smoothing: antialiased; margin: 0; padding: 0; }
+        .article-hero { background: var(--c2c-dark); color: #fff; padding: 48px 40px 44px; text-align: center; position: relative; overflow: hidden; }
+        .article-hero::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(0,212,170,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0,212,170,0.03) 1px, transparent 1px); background-size: 48px 48px; pointer-events: none; }
+        .article-hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, var(--c2c-electric), transparent); }
+        .article-hero .back-link { display: inline-block; font-family: var(--font-mono); font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--c2c-electric); text-decoration: none; margin-bottom: 20px; position: relative; z-index: 1; }
+        .article-hero .back-link:hover { color: #fff; }
+        .article-hero .article-category-tag { display: inline-block; font-family: var(--font-mono); font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--c2c-electric); border: 1px solid rgba(0,212,170,0.3); padding: 4px 12px; border-radius: 2px; margin-bottom: 16px; position: relative; z-index: 1; }
+        .article-hero h1 { font-family: var(--font-serif); font-size: clamp(28px, 4vw, 42px); font-weight: 400; font-style: italic; color: #fff; line-height: 1.25; max-width: 800px; margin: 0 auto 16px; position: relative; z-index: 1; }
+        .article-hero .article-meta { display: flex; align-items: center; justify-content: center; gap: 12px; margin-top: 20px; position: relative; z-index: 1; }
+        .article-hero .meta-avatar { width: 44px; height: 44px; border-radius: 50%; background: var(--c2c-charcoal); border: 1px solid var(--c2c-rule); display: flex; align-items: center; justify-content: center; color: var(--c2c-electric); font-family: var(--font-mono); font-size: 11px; font-weight: 700; }
+        .article-hero .meta-info { text-align: left; font-family: var(--font-sans); font-size: 13px; line-height: 1.4; }
+        .article-hero .meta-name { font-weight: 600; color: #fff; }
+        .article-hero .meta-detail { color: var(--c2c-gray); }
+        .article-body { max-width: 720px; margin: 0 auto; padding: 48px 40px 64px; font-family: var(--font-sans); font-size: 17px; font-weight: 300; line-height: 1.85; color: var(--c2c-gray-light); }
+        .article-body h2 { font-family: var(--font-serif); font-size: 28px; font-weight: 400; font-style: italic; color: var(--c2c-white); margin: 40px 0 16px; line-height: 1.3; }
+        .article-body h3 { font-family: var(--font-serif); font-size: 22px; font-weight: 400; font-style: italic; color: var(--c2c-white); margin: 32px 0 12px; }
+        .article-body h4 { font-family: var(--font-sans); font-size: 18px; font-weight: 600; color: var(--c2c-white); margin: 28px 0 10px; }
+        .article-body p { margin-bottom: 20px; }
+        .article-body strong, .article-body b { color: var(--c2c-white); font-weight: 600; }
+        .article-body em, .article-body i { font-style: italic; }
+        .article-body blockquote { border-left: 2px solid var(--c2c-electric); margin: 32px 0; padding: 16px 24px; background: var(--c2c-surface); font-family: var(--font-serif); font-size: 19px; font-style: italic; color: var(--c2c-gray-light); line-height: 1.6; }
+        .article-body ul, .article-body ol { margin-bottom: 20px; padding-left: 24px; }
+        .article-body li { margin-bottom: 8px; }
+        .article-body a { color: var(--c2c-electric); text-decoration: underline; text-decoration-color: rgba(0,212,170,0.3); text-underline-offset: 3px; }
+        .article-body a:hover { text-decoration-color: var(--c2c-electric); }
+        .article-body img { max-width: 100%; height: auto; border-radius: 4px; margin: 24px 0; }
+        .article-footer-nav { max-width: 720px; margin: 0 auto; padding: 0 40px 64px; border-top: 1px solid var(--c2c-rule); padding-top: 32px; text-align: center; }
+        .article-footer-nav a { display: inline-block; font-family: var(--font-mono); font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--c2c-electric); text-decoration: none; font-weight: 700; }
+        .article-footer-nav a:hover { color: #fff; }
+        @media (max-width: 600px) { .article-hero { padding: 36px 20px 32px; } .article-body { padding: 32px 20px 48px; } .article-footer-nav { padding: 0 20px 48px; } }
+    </style>
 </head>
 <body>
-    <nav id="main-nav"></nav>
-    
+    <div id="site-nav"></div>
+
     <div class="article-hero">
         <a href="/v3/blog/code-to-conscience/index.html" class="back-link">← Back to Code to Conscience</a>
         <div class="article-category-tag">Profile</div>
@@ -347,71 +70,22 @@ body {
     </div>
 
     <div class="article-body">
-        <p class="post-excerpt">UC Berkeley’s Stuart Russell, co-author of the world’s leading AI textbook, champions human-aligned AI and campaigns to ban autonomous weapons before machines gain power over life.</p>
-                    </div>
-                </article>
-
-                <div class="post-content">
-                    <div class="post-body">
-                        <p>Stuart Russell is a professor of computer science at the University of California, Berkeley, and one of the world’s most respected experts on artificial intelligence. He is best known as the co-author (with Peter Norvig) of <em>Artificial Intelligence: A Modern Approach</em>, the leading AI textbook used by universities worldwide for decades. His research spans machine learning, probabilistic reasoning, and knowledge representation, but in recent years he has become most prominent as a global voice on the ethical and societal implications of AI.</p><p><br></p><p>Russell has repeatedly warned of the dangers of unconstrained AI development, particularly in the realm of autonomous weapons. He has worked with the United Nations and advocacy groups to push for an international ban on lethal autonomous weapons systems, arguing that machines should never be given the power to decide matters of life and death. His advocacy emphasizes not only the technical risks but also the moral responsibility of governments and corporations to act before it is too late.</p><p><br></p><p>In 2019, Russell published <em>Human Compatible: Artificial Intelligence and the Problem of Control</em>. The book outlines the “control problem”: how to ensure that increasingly powerful AI systems remain aligned with human values and objectives. Russell argues for a new paradigm of AI design, one in which systems are explicitly built to remain uncertain about human preferences and constantly learn from human feedback. This approach, he believes, offers a safer and more flexible path than attempting to predefine fixed objectives.</p><p><br></p><p>As both a technical leader and public intellectual, Russell bridges the gap between cutting-edge research and policymaking. He has testified before legislative bodies, contributed to international treaties, and inspired a generation of students. His combination of technical mastery and ethical leadership makes him one of the most influential voices shaping AI’s future.</p>
-                    </div>
-                </div>
-
-                <div class="post-footer">
-                    <div class="post-stats">
-                        <span id="viewCount">-- views</span>
-                    </div>
-                    <a href="../../blog/category.html?blog=code-to-conscience" class="back-to-blog">← Back to Code to Conscience</a>
-                </div>
-            </main>
-
-
-            <!-- Social Share Sidebar -->
-            <div class="share-sidebar" id="shareSidebar">
-                <a href="#" class="share-btn share-twitter" title="Share on Twitter">
-                    <svg viewBox="0 0 24 24">
-                        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-                    </svg>
-                </a>
-                <a href="#" class="share-btn share-facebook" title="Share on Facebook">
-                    <svg viewBox="0 0 24 24">
-                        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-                    </svg>
-                </a>
-                <a href="#" class="share-btn share-linkedin" title="Share on LinkedIn">
-                    <svg viewBox="0 0 24 24">
-                        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                    </svg>
-                </a>
-                <a href="#" class="share-btn share-reddit" title="Share on Reddit">
-                    <svg viewBox="0 0 24 24">
-                        <path d="M12 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0zm5.01 4.744c.688 0 1.25.561 1.25 1.249a1.25 1.25 0 0 1-2.498.056l-2.597-.547-.8 3.747c1.824.07 3.48.632 4.674 1.488.308-.309.73-.491 1.207-.491.968 0 1.754.786 1.754 1.754 0 .716-.435 1.333-1.01 1.614a3.111 3.111 0 0 1 .042.52c0 2.694-3.13 4.87-7.004 4.87-3.874 0-7.004-2.176-7.004-4.87 0-.183.015-.366.043-.534A1.748 1.748 0 0 1 4.028 12c0-.968.786-1.754 1.754-1.754.463 0 .898.196 1.207.49 1.207-.883 2.878-1.43 4.744-1.487l.885-4.182a.342.342 0 0 1 .14-.197.35.35 0 0 1 .238-.042l2.906.617a1.214 1.214 0 0 1 1.108-.701zM9.25 12C8.561 12 8 12.562 8 13.25c0 .687.561 1.248 1.25 1.248.687 0 1.248-.561 1.248-1.249 0-.688-.561-1.249-1.249-1.249zm5.5 0c-.687 0-1.248.561-1.248 1.25 0 .687.561 1.248 1.249 1.248.688 0 1.249-.561 1.249-1.249 0-.687-.562-1.249-1.25-1.249zm-5.466 3.99a.327.327 0 0 0-.231.094.33.33 0 0 0 0 .463c.842.842 2.484.913 2.961.913.477 0 2.105-.056 2.961-.913a.361.361 0 0 0 .029-.463.33.33 0 0 0-.464 0c-.547.533-1.684.73-2.512.73-.828 0-1.979-.196-2.512-.73a.326.326 0 0 0-.232-.095z"/>
-                    </svg>
-                </a>
-                <a href="#" class="share-btn share-whatsapp" title="Share on WhatsApp">
-                    <svg viewBox="0 0 24 24">
-                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
-                    </svg>
-                </a>
-                <a href="#" class="share-btn share-email" title="Share via Email">
-                    <svg viewBox="0 0 24 24">
-                        <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
-                    </svg>
-                </a>
-                <a href="#" class="share-btn share-copy" title="Copy Link">
-                    <svg viewBox="0 0 24 24">
-                        <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/>
-                    </svg>
-                </a>
-            </div>
+        <p class="post-excerpt">UC Berkeley's Stuart Russell, co-author of the world's leading AI textbook, champions human-aligned AI and campaigns to ban autonomous weapons before machines gain power over life.</p>
+        
+        <p>Stuart Russell is a professor of computer science at the University of California, Berkeley, and one of the world's most respected experts on artificial intelligence. He is best known as the co-author (with Peter Norvig) of <em>Artificial Intelligence: A Modern Approach</em>, the leading AI textbook used by universities worldwide for decades. His research spans machine learning, probabilistic reasoning, and knowledge representation, but in recent years he has become most prominent as a global voice on the ethical and societal implications of AI.</p>
+        
+        <p>Russell has repeatedly warned of the dangers of unconstrained AI development, particularly in the realm of autonomous weapons. He has worked with the United Nations and advocacy groups to push for an international ban on lethal autonomous weapons systems, arguing that machines should never be given the power to decide matters of life and death. His advocacy emphasizes not only the technical risks but also the moral responsibility of governments and corporations to act before it is too late.</p>
+        
+        <p>In 2019, Russell published <em>Human Compatible: Artificial Intelligence and the Problem of Control</em>. The book outlines the "control problem": how to ensure that increasingly powerful AI systems remain aligned with human values and objectives. Russell argues for a new paradigm of AI design, one in which systems are explicitly built to remain uncertain about human preferences and constantly learn from human feedback. This approach, he believes, offers a safer and more flexible path than attempting to predefine fixed objectives.</p>
+        
+        <p>As both a technical leader and public intellectual, Russell bridges the gap between cutting-edge research and policymaking. He has testified before legislative bodies, contributed to international treaties, and inspired a generation of students. His combination of technical mastery and ethical leadership makes him one of the most influential voices shaping AI's future.</p>
     </div>
 
     <div class="article-footer-nav">
         <a href="/v3/blog/code-to-conscience/index.html">← Back to Code to Conscience</a>
     </div>
-    
-    <footer id="main-footer"></footer>
-    
+
+    <div id="site-footer"></div>
     <script src="/v3/js/nav.js"></script>
     <script src="/v3/js/main.js"></script>
 </body>
