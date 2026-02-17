@@ -3,539 +3,269 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DCF Hungary - Library</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <title>Library — DCF Hungary</title>
+    <link rel="stylesheet" href="/v3/css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
     <style>
-        /* Page-specific styles */
-        
-        /* Hero Section */
-        .hero {
-            background: var(--light-background);
-            padding: 5rem 0;
-            text-align: center;
-        }
-        
-        .hero h1 {
-            font-size: clamp(2.5rem, 6vw, 4rem);
-            margin-bottom: 1rem;
-            font-weight: 700;
-            letter-spacing: -0.03em;
-            color: var(--primary);
-        }
-        
-        .hero-subtitle {
-            font-size: clamp(1.25rem, 3vw, 1.75rem);
-            color: var(--accent);
-            max-width: 700px;
-            margin: 0 auto;
-            font-weight: 400;
-            line-height: 1.4;
-            word-wrap: break-word;
-            overflow-wrap: break-word;
-        }
-        
-        /* Section Base Styles */
-        section {
-            padding: 5rem 0;
-        }
-        
-        section:nth-child(odd) {
-            background: var(--background);
-        }
-        
-        section:nth-child(even) {
-            background: var(--light-background);
-        }
-        
-        .section-title {
-            text-align: center;
-            font-size: clamp(2rem, 4vw, 3rem);
-            margin-bottom: 1.5rem;
-            color: var(--primary);
-            font-weight: 600;
-            letter-spacing: -0.03em;
-        }
-        
-        .section-text {
-            text-align: center;
-            max-width: 800px;
-            margin: 0 auto 3rem;
-            font-size: 1.15rem;
-            line-height: 1.8;
-            color: var(--primary);
-            font-weight: 300;
-            word-wrap: break-word;
-            overflow-wrap: break-word;
-        }
-        
-        /* Presentations Grid */
-        .presentations-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
-        /* Presentation Card */
-        .presentation-card {
-            background: var(--background);
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: var(--shadow-subtle);
-            transition: all 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            padding: 2.5rem;
-        }
-        
-        .presentation-card:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-hover);
-        }
-        
-        .presentation-icon {
-            width: 60px;
-            height: 60px;
-            margin-bottom: 1.5rem;
-            color: var(--secondary);
-        }
-        
-        .presentation-title {
-            font-size: 1.35rem;
-            font-weight: 600;
-            color: var(--primary);
-            margin-bottom: 1rem;
-            line-height: 1.3;
-            letter-spacing: -0.02em;
-            flex: 1;
-        }
-        
-        .presentation-author {
-            font-size: 0.95rem;
-            color: var(--accent);
-            margin-bottom: 1.5rem;
-            font-weight: 500;
-        }
-        
-        .presentation-actions {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-        }
-        
-        .btn-download, .btn-view {
-            flex: 1;
-            min-width: 100px;
-            padding: 0.75rem 1.25rem;
-            border-radius: 6px;
-            text-decoration: none;
-            font-weight: 500;
-            text-align: center;
-            transition: all 0.3s ease;
-            font-size: 0.95rem;
-        }
-        
-        .btn-download {
-            background: var(--secondary);
-            color: var(--background);
-        }
-        
-        .btn-download:hover {
-            opacity: 0.85;
-            transform: translateY(-1px);
-        }
-        
-        .btn-view {
-            background: transparent;
-            color: var(--secondary);
-            border: 2px solid var(--secondary);
-        }
-        
-        .btn-view:hover {
-            background: var(--secondary);
-            color: var(--background);
-        }
-        
-        /* Placeholder Section */
-        .placeholder-section {
-            background: var(--light-background);
-            padding: 3rem;
-            border-radius: 8px;
-            text-align: center;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-        
-        .placeholder-text {
-            font-size: 1.25rem;
-            color: var(--accent);
-            font-weight: 300;
-            font-style: italic;
-        }
-        
-        /* Mobile Responsive */
-        @media (max-width: 767px) {
-            .hero {
-                padding: 3rem 1rem;
-            }
-            
-            section {
-                padding: 3rem 1rem;
-            }
-            
-            .presentations-grid {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
-            }
-            
-            .presentation-card {
-                padding: 2rem;
-            }
-            
-            .presentation-title {
-                font-size: 1.15rem;
-            }
-            
-            .presentation-actions {
-                flex-direction: column;
-            }
-            
-            .btn-download, .btn-view {
-                width: 100%;
-            }
-        }
+    :root {
+        --bg: #ffffff;
+        --text: #1a1a1a;
+        --text-secondary: #555;
+        --text-muted: #999;
+        --rule: #e5e5e5;
+        --surface: #f7f7f8;
+        --surface-hover: #f0f0f2;
+        --accent-gold: #c9a84c;
+        --accent-navy: #0f1a2e;
+        --accent-burgundy: #8b2332;
+        --font: 'Inter', -apple-system, sans-serif;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: var(--font); color: var(--text); background: var(--bg); line-height: 1.5; -webkit-font-smoothing: antialiased; }
+    
+    .lib-header { max-width: 1200px; margin: 0 auto; padding: 48px 40px 0; }
+    .lib-header h1 { font-size: 56px; font-weight: 800; letter-spacing: -2px; color: var(--text); line-height: 1; margin-bottom: 12px; }
+    .lib-header p { font-size: 20px; font-weight: 300; color: var(--text-secondary); max-width: 650px; line-height: 1.5; }
+    .lib-divider { max-width: 1200px; margin: 32px auto 0; padding: 0 40px; }
+    .lib-divider hr { border: none; height: 1px; background: var(--rule); }
+    
+    .lib-section { max-width: 1200px; margin: 0 auto; padding: 40px 40px 16px; }
+    .lib-section-header { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 24px; padding-bottom: 12px; border-bottom: 1px solid var(--rule); }
+    .lib-section-header h2 { font-size: 24px; font-weight: 800; letter-spacing: -0.5px; color: var(--text); }
+    .lib-section-header .count { font-size: 12px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
+    
+    .lib-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 24px; }
+    
+    .lib-card { background: var(--surface); border: 1px solid var(--rule); border-radius: 8px; padding: 24px; text-decoration: none; color: inherit; transition: all 0.2s; display: flex; flex-direction: column; }
+    .lib-card:hover { background: var(--surface-hover); border-color: #ccc; transform: translateY(-1px); box-shadow: 0 4px 16px rgba(0,0,0,0.05); }
+    
+    .lib-card-icon { width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 16px; margin-bottom: 14px; flex-shrink: 0; }
+    .lib-card-title { font-size: 15px; font-weight: 700; line-height: 1.3; margin-bottom: 6px; color: var(--text); }
+    .lib-card-desc { font-size: 13px; font-weight: 400; line-height: 1.5; color: var(--text-muted); flex: 1; }
+    .lib-card-meta { font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--rule); }
+    
+    .icon-presentation { background: rgba(201,168,76,0.12); color: var(--accent-gold); }
+    .icon-vatican { background: rgba(15,26,46,0.08); color: var(--accent-navy); }
+    .icon-faq { background: rgba(139,35,50,0.08); color: var(--accent-burgundy); }
+    .icon-soon { background: rgba(0,0,0,0.04); color: var(--text-muted); }
+    
+    .lib-view-all { display: inline-flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 600; color: var(--text-secondary); text-decoration: none; padding: 10px 0; margin-bottom: 32px; }
+    .lib-view-all:hover { color: var(--text); }
+    .lib-view-all .arrow { transition: transform 0.2s; }
+    .lib-view-all:hover .arrow { transform: translateX(4px); }
+    
+    .lib-card--soon { background: var(--surface); border: 1px dashed var(--rule); opacity: 0.6; }
+    .lib-card--soon:hover { transform: none; box-shadow: none; cursor: default; }
+    
+    @media (max-width: 900px) {
+        .lib-grid { grid-template-columns: repeat(2, 1fr); }
+        .lib-header h1 { font-size: 40px; }
+    }
+    @media (max-width: 600px) {
+        .lib-grid { grid-template-columns: 1fr; }
+        .lib-header, .lib-section, .lib-divider { padding-left: 20px; padding-right: 20px; }
+        .lib-header h1 { font-size: 32px; letter-spacing: -1px; }
+        .lib-header p { font-size: 16px; }
+    }
     </style>
 </head>
 <body>
     <nav id="main-nav"></nav>
-    
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="container">
-            <h1>Library</h1>
-            <p class="hero-subtitle">Resources from the Domus Communis Foundation on ethical AI, data sovereignty, and technology for human dignity</p>
+
+    <header class="lib-header">
+        <h1>Library</h1>
+        <p>Presentations, Vatican documents, FAQs, and research on ethical AI, data sovereignty, and technology for human dignity.</p>
+    </header>
+    <div class="lib-divider"><hr></div>
+
+    <!-- PRESENTATIONS -->
+    <section class="lib-section">
+        <div class="lib-section-header">
+            <h2>Presentations</h2>
+            <span class="count">3 Resources</span>
+        </div>
+        <div class="lib-grid">
+            <a href="https://docs.google.com/viewer?url=https://hoarhouse.github.io/v3/library/sovereign-data-ai-catholic-social-teaching.pptx&embedded=false" class="lib-card" target="_blank">
+                <div class="lib-card-icon icon-presentation">📊</div>
+                <div class="lib-card-title">Sovereign Data, Sovereign AI & Catholic Social Teachings</div>
+                <div class="lib-card-desc">Value-based AI programming and its relationship to Catholic social teaching principles.</div>
+                <div class="lib-card-meta">By Zoltan Pap · PPTX</div>
+            </a>
+            <a href="https://docs.google.com/viewer?url=https://hoarhouse.github.io/v3/library/valuing-sovereign-data.pptx&embedded=false" class="lib-card" target="_blank">
+                <div class="lib-card-icon icon-presentation">📊</div>
+                <div class="lib-card-title">Valuing Sovereign Data: Methods and Insights</div>
+                <div class="lib-card-desc">Frameworks for understanding and quantifying the value of sovereign data ownership.</div>
+                <div class="lib-card-meta">By Zoltan Pap · PPTX</div>
+            </a>
+            <a href="https://docs.google.com/viewer?url=https://hoarhouse.github.io/v3/library/value-based-ai-catholic-teaching.pptx&embedded=false" class="lib-card" target="_blank">
+                <div class="lib-card-icon icon-presentation">📊</div>
+                <div class="lib-card-title">Value-Based AI Programming & Catholic Teaching</div>
+                <div class="lib-card-desc">How Catholic social teaching connects to ethical AI development practices.</div>
+                <div class="lib-card-meta">By Zoltan Pap · PPTX</div>
+            </a>
         </div>
     </section>
-    
-    <!-- Presentations Section -->
-    <section>
-        <div class="container">
-            <h2 class="section-title">Presentations</h2>
-            <p class="section-text">
-                Explore our comprehensive presentations on the intersection of technology, ethics, and human values.
-            </p>
-            
-            <div class="presentations-grid">
-                <!-- Presentation 1 -->
-                <div class="presentation-card">
-                    <svg class="presentation-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
-                        <rect x="8" y="10" width="32" height="24" rx="2"/>
-                        <path d="M8 16 L40 16"/>
-                        <circle cx="14" cy="13" r="1"/>
-                        <circle cx="18" cy="13" r="1"/>
-                        <circle cx="22" cy="13" r="1"/>
-                        <path d="M14 22 L34 22"/>
-                        <path d="M14 26 L34 26"/>
-                        <path d="M14 30 L26 30"/>
-                        <path d="M20 34 L20 38"/>
-                        <path d="M28 34 L28 38"/>
-                        <path d="M16 38 L32 38"/>
-                    </svg>
-                    <h3 class="presentation-title">Sovereign Data, Sovereign AI, Value-Based AI Programming and the Relationship to Catholic Social Teachings</h3>
-                    <p class="presentation-author">By Zoltan Pap</p>
-                    <div class="presentation-actions">
-                        <a href="https://docs.google.com/viewer?url=https://hoarhouse.github.io/v3/library/sovereign-data-ai-catholic-social-teaching.pptx&embedded=false" class="btn-view" target="_blank">View Online</a>
-                        <a href="/v3/library/sovereign-data-ai-catholic-social-teaching.pptx" class="btn-download" download>Download</a>
-                    </div>
-                </div>
-                
-                <!-- Presentation 2 -->
-                <div class="presentation-card">
-                    <svg class="presentation-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
-                        <rect x="8" y="10" width="32" height="24" rx="2"/>
-                        <path d="M8 16 L40 16"/>
-                        <circle cx="14" cy="13" r="1"/>
-                        <circle cx="18" cy="13" r="1"/>
-                        <circle cx="22" cy="13" r="1"/>
-                        <path d="M14 22 L34 22"/>
-                        <path d="M14 26 L34 26"/>
-                        <path d="M14 30 L26 30"/>
-                        <path d="M20 34 L20 38"/>
-                        <path d="M28 34 L28 38"/>
-                        <path d="M16 38 L32 38"/>
-                    </svg>
-                    <h3 class="presentation-title">Valuing Sovereign Data: Methods and Insights</h3>
-                    <p class="presentation-author">By Zoltan Pap</p>
-                    <div class="presentation-actions">
-                        <a href="https://docs.google.com/viewer?url=https://hoarhouse.github.io/v3/library/valuing-sovereign-data.pptx&embedded=false" class="btn-view" target="_blank">View Online</a>
-                        <a href="/v3/library/valuing-sovereign-data.pptx" class="btn-download" download>Download</a>
-                    </div>
-                </div>
-                
-                <!-- Presentation 3 -->
-                <div class="presentation-card">
-                    <svg class="presentation-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
-                        <rect x="8" y="10" width="32" height="24" rx="2"/>
-                        <path d="M8 16 L40 16"/>
-                        <circle cx="14" cy="13" r="1"/>
-                        <circle cx="18" cy="13" r="1"/>
-                        <circle cx="22" cy="13" r="1"/>
-                        <path d="M14 22 L34 22"/>
-                        <path d="M14 26 L34 26"/>
-                        <path d="M14 30 L26 30"/>
-                        <path d="M20 34 L20 38"/>
-                        <path d="M28 34 L28 38"/>
-                        <path d="M16 38 L32 38"/>
-                    </svg>
-                    <h3 class="presentation-title">Value-Based AI Programming Connection to Catholic Social Teaching</h3>
-                    <p class="presentation-author">By Zoltan Pap</p>
-                    <div class="presentation-actions">
-                        <a href="https://docs.google.com/viewer?url=https://hoarhouse.github.io/v3/library/value-based-ai-catholic-teaching.pptx&embedded=false" class="btn-view" target="_blank">View Online</a>
-                        <a href="/v3/library/value-based-ai-catholic-teaching.pptx" class="btn-download" download>Download</a>
-                    </div>
-                </div>
-            </div>
+
+    <!-- VATICAN RESOURCES — 9 cards -->
+    <section class="lib-section">
+        <div class="lib-section-header">
+            <h2>Vatican Resources</h2>
+            <span class="count">22 Documents</span>
         </div>
+        <div class="lib-grid">
+            <a href="/v3/vatican-resources/htmldocs/antiqua-et-nova-2025.html" class="lib-card">
+                <div class="lib-card-icon icon-vatican">✝</div>
+                <div class="lib-card-title">Antiqua et Nova 2025</div>
+                <div class="lib-card-desc">Comprehensive Vatican document on AI and human intelligence.</div>
+                <div class="lib-card-meta">Vatican · 2025</div>
+            </a>
+            <a href="/v3/vatican-resources/htmldocs/pope-francis-rome-call-ai-ethics-january-2023.html" class="lib-card">
+                <div class="lib-card-icon icon-vatican">✝</div>
+                <div class="lib-card-title">Rome Call for AI Ethics</div>
+                <div class="lib-card-desc">Pope Francis addresses AI ethics and algor-ethics principles.</div>
+                <div class="lib-card-meta">Pope Francis · 2023</div>
+            </a>
+            <a href="/v3/vatican-resources/htmldocs/pope-leo-xiv-ai-ethics-conference-june-2025.html" class="lib-card">
+                <div class="lib-card-icon icon-vatican">✝</div>
+                <div class="lib-card-title">Pope Leo XIV: AI Ethics Conference</div>
+                <div class="lib-card-desc">Pope Leo XIV on AI ethics and human dignity at the Vatican.</div>
+                <div class="lib-card-meta">Pope Leo XIV · June 2025</div>
+            </a>
+            <a href="/v3/vatican-resources/htmldocs/pope-leo-xiv-un-ai-summit-july-2025.html" class="lib-card">
+                <div class="lib-card-icon icon-vatican">✝</div>
+                <div class="lib-card-title">Pope Leo XIV: UN AI Summit</div>
+                <div class="lib-card-desc">Papal address to the United Nations summit on artificial intelligence.</div>
+                <div class="lib-card-meta">Pope Leo XIV · July 2025</div>
+            </a>
+            <a href="/v3/vatican-resources/htmldocs/pope-leo-xiv-tech-executives-vatican-june-2025.html" class="lib-card">
+                <div class="lib-card-icon icon-vatican">✝</div>
+                <div class="lib-card-title">Pope Leo XIV: Tech Executives at Vatican</div>
+                <div class="lib-card-desc">The Pope's address to technology executives visiting the Vatican.</div>
+                <div class="lib-card-meta">Pope Leo XIV · June 2025</div>
+            </a>
+            <a href="/v3/vatican-resources/htmldocs/pope-francis-paris-ai-summit-february-2025.html" class="lib-card">
+                <div class="lib-card-icon icon-vatican">✝</div>
+                <div class="lib-card-title">Paris AI Summit 2025</div>
+                <div class="lib-card-desc">Pope Francis addresses global AI governance at the Paris summit.</div>
+                <div class="lib-card-meta">Pope Francis · February 2025</div>
+            </a>
+            <a href="/v3/vatican-resources/htmldocs/pope-francis-world-communications-day-2024.html" class="lib-card">
+                <div class="lib-card-icon icon-vatican">✝</div>
+                <div class="lib-card-title">World Communications Day 2024</div>
+                <div class="lib-card-desc">Pope Francis on AI and the wisdom of the heart.</div>
+                <div class="lib-card-meta">Pope Francis · 2024</div>
+            </a>
+            <a href="/v3/vatican-resources/htmldocs/pope-francis-centesimus-annus-ai-june-2024.html" class="lib-card">
+                <div class="lib-card-icon icon-vatican">✝</div>
+                <div class="lib-card-title">Centesimus Annus & AI</div>
+                <div class="lib-card-desc">Pope Francis connects Catholic economic teaching with artificial intelligence.</div>
+                <div class="lib-card-meta">Pope Francis · June 2024</div>
+            </a>
+            <a href="/v3/vatican-resources/htmldocs/towards-full-presence-social-media-2023.html" class="lib-card">
+                <div class="lib-card-icon icon-vatican">✝</div>
+                <div class="lib-card-title">Towards Full Presence 2023</div>
+                <div class="lib-card-desc">Vatican guidance on social media engagement and digital presence.</div>
+                <div class="lib-card-meta">Vatican · 2023</div>
+            </a>
+        </div>
+        <a href="/v3/vatican-resources/index.html" class="lib-view-all">View all 22 Vatican Resources <span class="arrow">→</span></a>
     </section>
-    
-    <!-- Vatican Resources Section -->
-    <section>
-        <div class="container">
-            <h2 class="section-title">Vatican Resources</h2>
-            <p class="section-text">
-                Official Vatican documents on AI, technology, and human dignity
-            </p>
-            
-            <div class="presentations-grid">
-                <!-- Row 1 -->
-                <div class="presentation-card">
-                    <svg class="presentation-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
-                        <path d="M24 4 L24 44"/>
-                        <path d="M12 12 L36 12"/>
-                        <path d="M8 24 L40 24"/>
-                        <path d="M12 36 L36 36"/>
-                        <circle cx="24" cy="24" r="20"/>
-                    </svg>
-                    <h3 class="presentation-title">Rome Call for AI Ethics</h3>
-                    <p class="presentation-author">Pope Francis addresses AI ethics and algor-ethics</p>
-                    <div class="presentation-actions">
-                        <a href="/v3/vatican-resources/htmldocs/pope-francis-rome-call-ai-ethics-january-2023.html" class="btn-download">View Document</a>
-                    </div>
-                </div>
-                
-                <div class="presentation-card">
-                    <svg class="presentation-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
-                        <rect x="8" y="8" width="32" height="32" rx="2"/>
-                        <path d="M16 20 L32 20"/>
-                        <path d="M16 24 L32 24"/>
-                        <path d="M16 28 L32 28"/>
-                        <path d="M16 32 L24 32"/>
-                    </svg>
-                    <h3 class="presentation-title">Antiqua et Nova 2025</h3>
-                    <p class="presentation-author">Comprehensive Vatican document on AI and human intelligence</p>
-                    <div class="presentation-actions">
-                        <a href="/v3/vatican-resources/htmldocs/antiqua-et-nova-2025.html" class="btn-download">View Document</a>
-                    </div>
-                </div>
-                
-                <div class="presentation-card">
-                    <svg class="presentation-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
-                        <circle cx="24" cy="16" r="8"/>
-                        <path d="M8 40 C8 32, 16 28, 24 28 C32 28, 40 32, 40 40"/>
-                        <path d="M24 20 L24 24"/>
-                        <path d="M20 16 L28 16"/>
-                    </svg>
-                    <h3 class="presentation-title">AI Ethics Conference 2025</h3>
-                    <p class="presentation-author">Pope Leo XIV on AI ethics and human dignity</p>
-                    <div class="presentation-actions">
-                        <a href="/v3/vatican-resources/htmldocs/pope-leo-xiv-ai-ethics-conference-june-2025.html" class="btn-download">View Document</a>
-                    </div>
-                </div>
-                
-                <div class="presentation-card">
-                    <svg class="presentation-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
-                        <circle cx="24" cy="24" r="20"/>
-                        <path d="M24 8 L24 24 L32 32"/>
-                        <circle cx="24" cy="24" r="3"/>
-                    </svg>
-                    <h3 class="presentation-title">World Communications Day 2024</h3>
-                    <p class="presentation-author">Pope Francis on AI and the wisdom of the heart</p>
-                    <div class="presentation-actions">
-                        <a href="/v3/vatican-resources/htmldocs/pope-francis-world-communications-day-2024.html" class="btn-download">View Document</a>
-                    </div>
-                </div>
-                
-                <!-- Row 2 -->
-                <div class="presentation-card">
-                    <svg class="presentation-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
-                        <path d="M24 4 L12 20 L36 20 Z"/>
-                        <rect x="12" y="20" width="24" height="24" rx="2"/>
-                        <circle cx="24" cy="32" r="4"/>
-                    </svg>
-                    <h3 class="presentation-title">Paris AI Summit 2025</h3>
-                    <p class="presentation-author">Pope Francis addresses global AI governance</p>
-                    <div class="presentation-actions">
-                        <a href="/v3/vatican-resources/htmldocs/pope-francis-paris-ai-summit-february-2025.html" class="btn-download">View Document</a>
-                    </div>
-                </div>
-                
-                <div class="presentation-card">
-                    <svg class="presentation-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
-                        <path d="M24 4 L24 44"/>
-                        <path d="M12 12 L36 12"/>
-                        <path d="M16 24 L32 24"/>
-                        <path d="M12 36 L36 36"/>
-                        <path d="M8 24 L16 20 L16 28 Z"/>
-                        <path d="M40 24 L32 20 L32 28 Z"/>
-                    </svg>
-                    <h3 class="presentation-title">Church and Internet 2002</h3>
-                    <p class="presentation-author">Vatican guidance on digital evangelization</p>
-                    <div class="presentation-actions">
-                        <a href="/v3/vatican-resources/htmldocs/church-and-internet-2002.html" class="btn-download">View Document</a>
-                    </div>
-                </div>
-                
-                <div class="presentation-card">
-                    <svg class="presentation-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
-                        <rect x="8" y="8" width="32" height="32" rx="2"/>
-                        <path d="M16 16 L32 16"/>
-                        <path d="M16 24 L32 24"/>
-                        <path d="M16 32 L32 32"/>
-                        <circle cx="12" cy="16" r="1"/>
-                        <circle cx="12" cy="24" r="1"/>
-                        <circle cx="12" cy="32" r="1"/>
-                    </svg>
-                    <h3 class="presentation-title">Ethics in Internet 2002</h3>
-                    <p class="presentation-author">Vatican principles for digital ethics</p>
-                    <div class="presentation-actions">
-                        <a href="/v3/vatican-resources/htmldocs/ethics-in-internet-2002.html" class="btn-download">View Document</a>
-                    </div>
-                </div>
-                
-                <div class="presentation-card">
-                    <svg class="presentation-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
-                        <circle cx="24" cy="24" r="20"/>
-                        <path d="M16 24 C16 16, 32 16, 32 24 C32 32, 16 32, 16 24"/>
-                        <circle cx="20" cy="20" r="2"/>
-                        <circle cx="28" cy="20" r="2"/>
-                        <circle cx="24" cy="28" r="2"/>
-                    </svg>
-                    <h3 class="presentation-title">Towards Full Presence 2023</h3>
-                    <p class="presentation-author">Vatican guidance on social media engagement</p>
-                    <div class="presentation-actions">
-                        <a href="/v3/vatican-resources/htmldocs/towards-full-presence-social-media-2023.html" class="btn-download">View Document</a>
-                    </div>
-                </div>
+
+    <!-- FAQS — 9 cards -->
+    <section class="lib-section">
+        <div class="lib-section-header">
+            <h2>FAQs</h2>
+            <span class="count">22 Topics</span>
+        </div>
+        <div class="lib-grid">
+            <a href="/v3/faqs/catholic-ai-ethics-faq.html" class="lib-card">
+                <div class="lib-card-icon icon-faq">?</div>
+                <div class="lib-card-title">Catholic AI Ethics</div>
+                <div class="lib-card-desc">Comprehensive guide to Catholic perspectives on artificial intelligence.</div>
+                <div class="lib-card-meta">General · FAQ</div>
+            </a>
+            <a href="/v3/faqs/vatican-rome-call-ai-ethics-faq.html" class="lib-card">
+                <div class="lib-card-icon icon-faq">?</div>
+                <div class="lib-card-title">Vatican Rome Call for AI Ethics</div>
+                <div class="lib-card-desc">Understanding the Vatican's historic initiative for ethical AI development.</div>
+                <div class="lib-card-meta">Vatican · FAQ</div>
+            </a>
+            <a href="/v3/faqs/ai-consciousness-souls-faq.html" class="lib-card">
+                <div class="lib-card-icon icon-faq">?</div>
+                <div class="lib-card-title">AI Consciousness & Souls</div>
+                <div class="lib-card-desc">The intersection of AI consciousness and spiritual questions.</div>
+                <div class="lib-card-meta">Philosophy · FAQ</div>
+            </a>
+            <a href="/v3/faqs/ai-privacy-surveillance-faq.html" class="lib-card">
+                <div class="lib-card-icon icon-faq">?</div>
+                <div class="lib-card-title">AI Privacy & Surveillance</div>
+                <div class="lib-card-desc">Privacy concerns and surveillance implications in the age of AI.</div>
+                <div class="lib-card-meta">Ethics · FAQ</div>
+            </a>
+            <a href="/v3/faqs/ai-bias-fairness-faq.html" class="lib-card">
+                <div class="lib-card-icon icon-faq">?</div>
+                <div class="lib-card-title">AI Bias & Fairness</div>
+                <div class="lib-card-desc">Understanding and addressing algorithmic bias and fairness in AI systems.</div>
+                <div class="lib-card-meta">Ethics · FAQ</div>
+            </a>
+            <a href="/v3/faqs/ai-healthcare-faq.html" class="lib-card">
+                <div class="lib-card-icon icon-faq">?</div>
+                <div class="lib-card-title">AI in Healthcare</div>
+                <div class="lib-card-desc">Ethical considerations for artificial intelligence in medical and health applications.</div>
+                <div class="lib-card-meta">Healthcare · FAQ</div>
+            </a>
+            <a href="/v3/faqs/ai-warfare-weapons-faq.html" class="lib-card">
+                <div class="lib-card-icon icon-faq">?</div>
+                <div class="lib-card-title">AI Warfare & Weapons</div>
+                <div class="lib-card-desc">The moral implications of autonomous weapons and AI in military applications.</div>
+                <div class="lib-card-meta">Peace · FAQ</div>
+            </a>
+            <a href="/v3/faqs/ai-jobs-workplace-faq.html" class="lib-card">
+                <div class="lib-card-icon icon-faq">?</div>
+                <div class="lib-card-title">AI Jobs & Workplace</div>
+                <div class="lib-card-desc">How AI is transforming work, employment, and human labor dignity.</div>
+                <div class="lib-card-meta">Labor · FAQ</div>
+            </a>
+            <a href="/v3/faqs/deepfakes-misinformation-faq.html" class="lib-card">
+                <div class="lib-card-icon icon-faq">?</div>
+                <div class="lib-card-title">Deepfakes & Misinformation</div>
+                <div class="lib-card-desc">Understanding the ethical challenges of synthetic media and digital deception.</div>
+                <div class="lib-card-meta">Ethics · FAQ</div>
+            </a>
+        </div>
+        <a href="/v3/faqs/index.html" class="lib-view-all">View all 22 FAQs <span class="arrow">→</span></a>
+    </section>
+
+    <!-- MORE RESOURCES — Coming Soon -->
+    <section class="lib-section" style="padding-bottom: 64px;">
+        <div class="lib-section-header">
+            <h2>More Resources</h2>
+        </div>
+        <div class="lib-grid">
+            <div class="lib-card lib-card--soon">
+                <div class="lib-card-icon icon-soon">📄</div>
+                <div class="lib-card-title">Research Papers</div>
+                <div class="lib-card-desc">Academic research and white papers on AI ethics, digital sovereignty, and technology governance.</div>
+                <div class="lib-card-meta">Coming Soon</div>
             </div>
-            
-            <!-- View All Vatican Resources Button -->
-            <div style="text-align: center; margin-top: 3rem;">
-                <a href="/v3/vatican-resources/index.html" class="btn-download" style="display: inline-block; padding: 1rem 2rem; font-size: 1.1rem;">
-                    View All Vatican Resources →
-                </a>
+            <div class="lib-card lib-card--soon">
+                <div class="lib-card-icon icon-soon">🔗</div>
+                <div class="lib-card-title">External Resources</div>
+                <div class="lib-card-desc">Curated links to partner organizations, academic institutions, and policy centers.</div>
+                <div class="lib-card-meta">Coming Soon</div>
+            </div>
+            <div class="lib-card lib-card--soon">
+                <div class="lib-card-icon icon-soon">🎥</div>
+                <div class="lib-card-title">Video & Media</div>
+                <div class="lib-card-desc">Talks, interviews, and conference recordings on AI ethics and human dignity.</div>
+                <div class="lib-card-meta">Coming Soon</div>
             </div>
         </div>
     </section>
-    
-    <!-- Research Papers Section -->
-    <section>
-        <div class="container">
-            <h2 class="section-title">Research Papers</h2>
-            <div class="placeholder-section">
-                <p class="placeholder-text">Coming soon</p>
-            </div>
-        </div>
-    </section>
-    
-    <!-- External Resources Section -->
-    <section>
-        <div class="container">
-            <h2 class="section-title">External Resources</h2>
-            <div class="placeholder-section">
-                <p class="placeholder-text">Coming soon</p>
-            </div>
-        </div>
-    </section>
-    
-    <!-- FAQs Section -->
-    <section>
-        <div class="container">
-            <h2 class="section-title">FAQs</h2>
-            <p class="section-text">
-                Frequently asked questions on AI ethics, Catholic teaching, and technology
-            </p>
-            
-            <div class="presentations-grid">
-                <!-- FAQ 1 -->
-                <div class="presentation-card">
-                    <svg class="presentation-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
-                        <circle cx="24" cy="24" r="20"/>
-                        <circle cx="24" cy="35" r="2" fill="currentColor"/>
-                        <path d="M24 28 L24 26 C24 22, 28 22, 28 18 C28 15, 26 13, 24 13 C22 13, 20 15, 20 18"/>
-                    </svg>
-                    <h3 class="presentation-title">Catholic AI Ethics</h3>
-                    <p class="presentation-author">Comprehensive guide to Catholic perspectives on artificial intelligence</p>
-                    <div class="presentation-actions">
-                        <a href="/v3/faqs/catholic-ai-ethics-faq.html" class="btn-download">View FAQ</a>
-                    </div>
-                </div>
-                
-                <!-- FAQ 2 -->
-                <div class="presentation-card">
-                    <svg class="presentation-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
-                        <circle cx="24" cy="24" r="20"/>
-                        <circle cx="24" cy="35" r="2" fill="currentColor"/>
-                        <path d="M24 28 L24 26 C24 22, 28 22, 28 18 C28 15, 26 13, 24 13 C22 13, 20 15, 20 18"/>
-                    </svg>
-                    <h3 class="presentation-title">Vatican Rome Call for AI Ethics</h3>
-                    <p class="presentation-author">Understanding the Vatican's historic initiative for ethical AI development</p>
-                    <div class="presentation-actions">
-                        <a href="/v3/faqs/vatican-rome-call-ai-ethics-faq.html" class="btn-download">View FAQ</a>
-                    </div>
-                </div>
-                
-                <!-- FAQ 3 -->
-                <div class="presentation-card">
-                    <svg class="presentation-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
-                        <circle cx="24" cy="24" r="20"/>
-                        <circle cx="24" cy="35" r="2" fill="currentColor"/>
-                        <path d="M24 28 L24 26 C24 22, 28 22, 28 18 C28 15, 26 13, 24 13 C22 13, 20 15, 20 18"/>
-                    </svg>
-                    <h3 class="presentation-title">AI Consciousness & Souls</h3>
-                    <p class="presentation-author">Exploring the intersection of AI consciousness and spiritual questions</p>
-                    <div class="presentation-actions">
-                        <a href="/v3/faqs/ai-consciousness-souls-faq.html" class="btn-download">View FAQ</a>
-                    </div>
-                </div>
-                
-                <!-- FAQ 4 -->
-                <div class="presentation-card">
-                    <svg class="presentation-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
-                        <circle cx="24" cy="24" r="20"/>
-                        <circle cx="24" cy="35" r="2" fill="currentColor"/>
-                        <path d="M24 28 L24 26 C24 22, 28 22, 28 18 C28 15, 26 13, 24 13 C22 13, 20 15, 20 18"/>
-                    </svg>
-                    <h3 class="presentation-title">AI Privacy & Surveillance</h3>
-                    <p class="presentation-author">Privacy concerns and surveillance implications in the age of AI</p>
-                    <div class="presentation-actions">
-                        <a href="/v3/faqs/ai-privacy-surveillance-faq.html" class="btn-download">View FAQ</a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- View All FAQs Button -->
-            <div style="text-align: center; margin-top: 3rem;">
-                <a href="/v3/faqs/index.html" class="btn-download" style="display: inline-block; padding: 1rem 2rem; font-size: 1.1rem;">
-                    View All FAQs →
-                </a>
-            </div>
-        </div>
-    </section>
-    
+
     <footer id="main-footer"></footer>
-    
-    <script src="js/nav.js"></script>
-    <script src="js/main.js"></script>
+    <script src="/v3/js/nav.js"></script>
+    <script src="/v3/js/main.js"></script>
 </body>
 </html>
