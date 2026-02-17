@@ -3,706 +3,732 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dignitas - DCF Hungary</title>
-    
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Base CSS -->
+    <title>Dignitas — DCF Hungary</title>
     <link rel="stylesheet" href="/v3/css/styles.css">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
     <style>
-        /* Dignitas Custom Properties */
         :root {
-            --dignitas-deep: #1a1a2e;
-            --dignitas-gold: #c9a84c;
-            --dignitas-gold-light: #e8d5a0;
-            --dignitas-warm: #f7f3eb;
-            --dignitas-cream: #faf8f4;
-            --dignitas-text: #2c2c3a;
-            --dignitas-text-light: #6b6b7b;
-            --dignitas-rule: #d4cfc4;
-            --dignitas-accent: #8b2332;
+            --d-gold: #c9a84c;
+            --d-gold-dark: #a88a3a;
+            --d-deep: #1a1a2e;
+            --d-cream: #faf8f4;
+            --d-warm: #f7f3eb;
+            --d-text: #2c2c2c;
+            --d-text-light: #5a5a5a;
+            --d-text-muted: #8a8a8a;
+            --d-rule: #e2ddd4;
+            --d-rule-light: #eee9e0;
+            --d-white: #ffffff;
+            --font-display: 'Cormorant Garamond', Georgia, serif;
+            --font-body: 'Source Sans 3', -apple-system, sans-serif;
         }
         
-        /* Override body background for Dignitas */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
         body {
-            background: var(--dignitas-cream);
-            font-family: 'Source Sans 3', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--d-white);
+            color: var(--d-text);
+            font-family: var(--font-body);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
         }
         
-        /* Masthead Section */
-        .dignitas-masthead {
-            background: var(--dignitas-warm);
-            border-bottom: 1px solid var(--dignitas-rule);
-            padding: 3rem 2rem 3rem;
-            text-align: center;
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: color 0.2s ease;
         }
         
-        .gold-bar-top {
-            width: 60px;
-            height: 3px;
-            background: var(--dignitas-gold);
-            margin: 0 auto 2rem;
+        /* Masthead */
+        .masthead {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 28px 40px 0;
         }
         
-        .publication-label {
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            color: var(--dignitas-text-light);
-            margin-bottom: 2rem;
-            font-family: 'Source Sans 3', sans-serif;
-            font-weight: 400;
+        .masthead-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            padding-bottom: 16px;
+            border-bottom: 3px solid var(--d-gold);
         }
         
-        .dignitas-title {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(48px, 6vw, 72px);
-            font-weight: 400;
-            color: var(--dignitas-deep);
-            margin-bottom: 1.5rem;
-            line-height: 1.1;
+        .masthead-left {
+            display: flex;
+            align-items: baseline;
+            gap: 16px;
         }
         
-        .gold-rule {
-            width: 40px;
-            height: 1px;
-            background: var(--dignitas-gold);
-            margin: 0 auto 1.5rem;
+        .masthead-title {
+            font-family: var(--font-display);
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--d-deep);
         }
         
-        .dignitas-tagline {
-            font-family: 'Cormorant Garamond', serif;
-            font-style: italic;
-            font-size: 18px;
-            max-width: 540px;
-            margin: 0 auto 2rem;
-            line-height: 1.5;
-            color: var(--dignitas-text);
+        .masthead-tagline {
+            font-family: var(--font-body);
+            font-size: 13px;
+            color: var(--d-text-muted);
+            padding-left: 16px;
+            border-left: 1px solid var(--d-rule);
         }
         
-        .dignitas-meta {
+        .masthead-right {
+            font-family: var(--font-body);
             font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 1.5px;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--dignitas-text-light);
-            font-family: 'Source Sans 3', sans-serif;
-            font-weight: 300;
+            color: var(--d-gold-dark);
         }
         
         /* Category Navigation */
         .category-nav {
-            background: white;
-            border-bottom: 1px solid var(--dignitas-rule);
-            padding: 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-        
-        .category-nav-inner {
             max-width: 1200px;
             margin: 0 auto;
+            padding: 0 40px;
+            border-bottom: 1px solid var(--d-rule);
             display: flex;
-            justify-content: center;
-            gap: 3rem;
-            padding: 0 2rem;
-            flex-wrap: wrap;
+            gap: 0;
         }
         
-        .category-link {
-            font-size: 12px;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            color: var(--dignitas-text-light);
-            text-decoration: none;
-            padding: 1.5rem 0;
-            border-bottom: 2px solid transparent;
-            transition: all 0.3s ease;
-            font-family: 'Source Sans 3', sans-serif;
-            font-weight: 400;
-        }
-        
-        .category-link:hover {
-            color: var(--dignitas-text);
-        }
-        
-        .category-link.active {
-            color: var(--dignitas-text);
-            border-bottom-color: var(--dignitas-gold);
-        }
-        
-        /* Featured Article Section */
-        .featured-section {
-            max-width: 1200px;
-            margin: 4rem auto;
-            padding: 0 2rem;
-        }
-        
-        .section-label {
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: var(--dignitas-gold);
-            margin-bottom: 2rem;
-            font-family: 'Source Sans 3', sans-serif;
+        .category-nav a {
+            font-family: var(--font-body);
+            font-size: 13px;
             font-weight: 600;
+            padding: 12px 18px;
+            color: var(--d-text-light);
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s ease;
         }
         
-        .featured-article {
+        .category-nav a:hover,
+        .category-nav a.active {
+            color: var(--d-gold-dark);
+            border-bottom-color: var(--d-gold);
+        }
+        
+        /* Featured Article */
+        .featured {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 32px 40px 0;
+        }
+        
+        .featured-inner {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: center;
-            background: white;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            grid-template-columns: 1.2fr 1fr;
+            gap: 32px;
+            padding-bottom: 32px;
+            border-bottom: 1px solid var(--d-rule);
         }
         
         .featured-image {
-            aspect-ratio: 16/10;
-            background: linear-gradient(135deg, var(--dignitas-deep) 0%, var(--dignitas-text) 100%);
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--dignitas-gold-light);
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 24px;
-            opacity: 0.3;
+            aspect-ratio: 3/2;
+            border-radius: 3px;
+            background: linear-gradient(135deg, #f7f3eb, #e8dfd0, #ddd5c4);
         }
         
         .featured-content {
-            padding: 3rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
         
-        .category-tag {
+        .featured-category {
+            font-family: var(--font-body);
             font-size: 11px;
-            text-transform: uppercase;
+            font-weight: 700;
             letter-spacing: 1.5px;
-            color: var(--dignitas-accent);
-            margin-bottom: 1rem;
-            font-family: 'Source Sans 3', sans-serif;
-            font-weight: 600;
+            text-transform: uppercase;
+            color: var(--d-gold-dark);
+            margin-bottom: 12px;
         }
         
         .featured-title {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 38px;
+            font-family: var(--font-display);
+            font-size: clamp(28px, 3vw, 38px);
+            font-weight: 700;
             line-height: 1.2;
-            margin-bottom: 1.5rem;
+            color: var(--d-deep);
+            margin-bottom: 16px;
         }
         
-        .featured-title a {
-            color: var(--dignitas-deep);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-        
-        .featured-title a:hover {
-            color: var(--dignitas-gold);
+        .featured-title:hover {
+            color: var(--d-gold-dark);
         }
         
         .featured-excerpt {
-            font-family: 'Source Sans 3', sans-serif;
             font-size: 16px;
-            line-height: 1.7;
-            color: var(--dignitas-text);
-            margin-bottom: 2rem;
+            font-weight: 300;
+            line-height: 1.65;
+            color: var(--d-text-light);
+            margin-bottom: 12px;
         }
         
-        .author-byline {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-        
-        .author-avatar {
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            background: var(--dignitas-gold);
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: 'Source Sans 3', sans-serif;
-            font-weight: 600;
-            font-size: 18px;
-        }
-        
-        .author-info {
-            font-family: 'Source Sans 3', sans-serif;
-        }
-        
-        .author-name {
-            font-weight: 600;
-            color: var(--dignitas-text);
-            display: block;
-            margin-bottom: 0.25rem;
-        }
-        
-        .author-role {
+        .featured-byline {
             font-size: 13px;
-            color: var(--dignitas-text-light);
+            color: var(--d-text-muted);
         }
         
-        /* Articles Grid Section */
-        .articles-section {
-            max-width: 1200px;
-            margin: 4rem auto;
-            padding: 0 2rem;
-        }
-        
-        .articles-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 36px;
-            margin-top: 2rem;
-        }
-        
-        .article-card {
-            border-bottom: 1px solid var(--dignitas-rule);
-            padding-bottom: 32px;
-            transition: transform 0.2s;
-        }
-        
-        .article-card:hover {
-            transform: translateY(-2px);
-        }
-        
-        .card-image {
-            aspect-ratio: 16/10;
-            border-radius: 3px;
-            margin-bottom: 20px;
-            overflow: hidden;
-        }
-        
-        .card-image img, .card-image div {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.4s;
-        }
-        
-        .article-card:hover .card-image img,
-        .article-card:hover .card-image div {
-            transform: scale(1.03);
-        }
-        
-        .card-category {
-            font-size: 10px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: var(--dignitas-accent);
+        .featured-byline strong {
             font-weight: 600;
+            color: var(--d-text);
+        }
+        
+        /* Latest Section */
+        .latest {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 32px 40px 48px;
+        }
+        
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--d-rule);
+            margin-bottom: 24px;
+        }
+        
+        .section-title {
+            font-family: var(--font-display);
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--d-deep);
+        }
+        
+        .section-count {
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--d-text-muted);
+        }
+        
+        .latest-content {
+            display: grid;
+            grid-template-columns: 1fr 380px;
+            gap: 40px;
+        }
+        
+        /* Main Feed */
+        .main-feed {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .feed-item {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 20px;
+            padding: 20px 0;
+            border-bottom: 1px solid var(--d-rule-light);
+        }
+        
+        .feed-image {
+            aspect-ratio: 3/2;
+            border-radius: 3px;
+        }
+        
+        .feed-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .feed-category {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--d-gold-dark);
             margin-bottom: 8px;
         }
         
-        .card-title {
+        .feed-title {
             font-family: var(--font-display);
-            font-size: 22px;
-            font-weight: 600;
+            font-size: 20px;
+            font-weight: 700;
             line-height: 1.3;
-            margin-bottom: 10px;
+            color: var(--d-deep);
+            margin-bottom: 8px;
         }
         
-        .card-title a {
-            color: var(--dignitas-deep);
-            text-decoration: none;
+        .feed-title:hover {
+            color: var(--d-gold-dark);
         }
         
-        .card-title a:hover {
-            color: var(--dignitas-accent);
-        }
-        
-        .card-excerpt {
+        .feed-excerpt {
             font-size: 14px;
-            line-height: 1.6;
-            color: var(--dignitas-text-light);
-            margin-bottom: 16px;
+            font-weight: 300;
+            line-height: 1.5;
+            color: var(--d-text-light);
+            margin-bottom: 8px;
             display: -webkit-box;
-            -webkit-line-clamp: 3;
+            -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
             overflow: hidden;
         }
         
-        .card-byline {
-            display: flex;
-            align-items: center;
-            gap: 10px;
+        .feed-byline {
             font-size: 12px;
+            color: var(--d-text-muted);
         }
         
-        .card-avatar {
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
-            background: var(--dignitas-deep);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--dignitas-gold-light);
+        /* Sidebar */
+        .sidebar {
+            border-left: 1px solid var(--d-rule);
+            padding-left: 40px;
+        }
+        
+        .sidebar-header {
             font-family: var(--font-display);
-            font-size: 11px;
-            font-weight: 600;
-            flex-shrink: 0;
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--d-deep);
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--d-gold);
+            margin-bottom: 20px;
         }
         
-        .card-byline .byline-name {
-            font-weight: 600;
-            color: var(--dignitas-deep);
-            font-size: 12px;
+        .sidebar-item {
+            padding: 14px 0;
+            border-bottom: 1px solid var(--d-rule-light);
         }
         
-        .card-byline .byline-date {
-            color: var(--dignitas-text-light);
-            font-size: 12px;
-        }
-        
-        .coming-soon {
-            grid-column: 1 / -1;
-            text-align: center;
-            padding: 4rem 2rem;
-            background: white;
-            border-radius: 8px;
-            border: 1px dashed var(--dignitas-rule);
-        }
-        
-        .coming-soon p {
-            font-family: 'Cormorant Garamond', serif;
-            font-style: italic;
-            font-size: 20px;
-            color: var(--dignitas-text-light);
-        }
-        
-        /* Newsletter Section */
-        .newsletter-section {
-            background: var(--dignitas-deep);
-            padding: 4rem 2rem;
-            text-align: center;
-            margin-top: 4rem;
-        }
-        
-        .newsletter-label {
-            font-size: 11px;
+        .sidebar-category {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 1px;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            color: var(--dignitas-gold);
-            margin-bottom: 1rem;
-            font-family: 'Source Sans 3', sans-serif;
-            font-weight: 600;
+            color: var(--d-gold-dark);
+            margin-bottom: 6px;
         }
         
-        .newsletter-title {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 32px;
-            color: white;
-            margin-bottom: 1rem;
-        }
-        
-        .newsletter-description {
-            color: rgba(255,255,255,0.6);
-            font-family: 'Source Sans 3', sans-serif;
+        .sidebar-title {
+            font-family: var(--font-display);
             font-size: 16px;
-            max-width: 540px;
-            margin: 0 auto 2rem;
-            line-height: 1.6;
-        }
-        
-        .newsletter-form {
-            max-width: 480px;
-            margin: 0 auto;
-            display: flex;
-            gap: 1rem;
-        }
-        
-        .newsletter-input {
-            flex: 1;
-            padding: 1rem 1.5rem;
-            border: 1px solid rgba(255,255,255,0.2);
-            background: rgba(255,255,255,0.05);
-            border-radius: 4px;
-            color: white;
-            font-family: 'Source Sans 3', sans-serif;
-            font-size: 15px;
-        }
-        
-        .newsletter-input::placeholder {
-            color: rgba(255,255,255,0.4);
-        }
-        
-        .newsletter-button {
-            padding: 1rem 2rem;
-            background: var(--dignitas-gold);
-            color: var(--dignitas-deep);
-            border: none;
-            border-radius: 4px;
-            font-family: 'Source Sans 3', sans-serif;
             font-weight: 600;
-            font-size: 15px;
+            line-height: 1.3;
+            color: var(--d-deep);
+            margin-bottom: 6px;
+        }
+        
+        .sidebar-title:hover {
+            color: var(--d-gold-dark);
+        }
+        
+        .sidebar-byline {
+            font-size: 11px;
+            color: var(--d-text-muted);
+        }
+        
+        /* Newsletter Box */
+        .newsletter-box {
+            margin-top: 28px;
+            background: var(--d-cream);
+            border-radius: 3px;
+            border: 1px solid var(--d-rule);
+            padding: 24px;
+        }
+        
+        .newsletter-box-title {
+            font-family: var(--font-display);
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--d-deep);
+            margin-bottom: 8px;
+        }
+        
+        .newsletter-box-desc {
+            font-size: 13px;
+            color: var(--d-text-light);
+            margin-bottom: 16px;
+        }
+        
+        .newsletter-box input {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid var(--d-rule);
+            border-radius: 3px;
+            font-size: 13px;
+            margin-bottom: 12px;
+        }
+        
+        .newsletter-box button {
+            width: 100%;
+            padding: 10px 12px;
+            background: var(--d-gold);
+            color: var(--d-deep);
+            font-size: 12px;
+            font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 1px;
+            border: none;
+            border-radius: 3px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: background 0.2s ease;
         }
         
-        .newsletter-button:hover {
-            background: var(--dignitas-gold-light);
+        .newsletter-box button:hover {
+            background: var(--d-gold-dark);
         }
         
-        /* Responsive Design */
-        @media (max-width: 900px) {
-            .featured-article {
+        /* Newsletter Bar */
+        .newsletter-bar {
+            background: var(--d-deep);
+            padding: 40px;
+        }
+        
+        .newsletter-bar-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .newsletter-bar-left {
+            flex: 1;
+        }
+        
+        .newsletter-bar-title {
+            font-family: var(--font-display);
+            font-size: 24px;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 4px;
+        }
+        
+        .newsletter-bar-desc {
+            font-size: 14px;
+            font-weight: 300;
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        .newsletter-bar-form {
+            display: flex;
+            gap: 12px;
+        }
+        
+        .newsletter-bar input {
+            width: 260px;
+            padding: 10px 14px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 3px;
+            color: white;
+            font-size: 13px;
+        }
+        
+        .newsletter-bar input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+        
+        .newsletter-bar button {
+            padding: 10px 20px;
+            background: var(--d-gold);
+            color: var(--d-deep);
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+        
+        .newsletter-bar button:hover {
+            background: var(--d-gold-dark);
+        }
+        
+        /* Responsive */
+        @media (max-width: 1000px) {
+            .latest-content {
                 grid-template-columns: 1fr;
             }
             
-            .featured-content {
-                padding: 2rem;
-            }
-            
-            .featured-title {
-                font-size: 32px;
-            }
-            
-            .articles-grid {
-                grid-template-columns: repeat(2, 1fr);
+            .sidebar {
+                border-left: none;
+                border-top: 1px solid var(--d-rule);
+                padding-left: 0;
+                padding-top: 32px;
+                margin-top: 32px;
             }
         }
         
-        @media (max-width: 600px) {
-            .dignitas-masthead {
-                padding: 2rem 1rem;
+        @media (max-width: 768px) {
+            .masthead {
+                padding: 20px 20px 0;
             }
             
-            .category-nav-inner {
-                gap: 1.5rem;
-                padding: 0 1rem;
+            .masthead-inner {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
             }
             
-            .category-link {
-                font-size: 11px;
-                padding: 1rem 0;
+            .masthead-left {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
             }
             
-            .featured-section {
-                margin: 2rem auto;
-                padding: 0 1rem;
+            .masthead-tagline {
+                border-left: none;
+                padding-left: 0;
             }
             
-            .featured-title {
+            .category-nav {
+                padding: 0 20px;
+                overflow-x: auto;
+            }
+            
+            .featured {
+                padding: 24px 20px 0;
+            }
+            
+            .featured-inner {
+                grid-template-columns: 1fr;
+            }
+            
+            .latest {
+                padding: 24px 20px 40px;
+            }
+            
+            .feed-item {
+                grid-template-columns: 140px 1fr;
+            }
+            
+            .newsletter-bar {
+                padding: 32px 20px;
+            }
+            
+            .newsletter-bar-inner {
+                flex-direction: column;
+                gap: 24px;
+            }
+            
+            .newsletter-bar-form {
+                width: 100%;
+            }
+            
+            .newsletter-bar input {
+                flex: 1;
+            }
+        }
+        
+        @media (max-width: 500px) {
+            .masthead-title {
                 font-size: 28px;
             }
             
-            .articles-grid {
-                grid-template-columns: 1fr;
+            .category-nav a {
+                padding: 12px;
+                font-size: 12px;
             }
             
-            .newsletter-form {
+            .feed-item {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+            
+            .feed-image {
+                display: none;
+            }
+            
+            .newsletter-bar-form {
                 flex-direction: column;
             }
             
-            .newsletter-button {
+            .newsletter-bar input {
                 width: 100%;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Main Navigation -->
-    <nav id="main-nav"></nav>
+    <div id="site-nav"></div>
     
-    <!-- Dignitas Masthead -->
-    <div class="dignitas-masthead">
-        <div class="gold-bar-top"></div>
-        <div class="publication-label">A Publication of the Domus Communis Foundation</div>
-        <h1 class="dignitas-title">Dignitas</h1>
-        <div class="gold-rule"></div>
-        <p class="dignitas-tagline">
-            Exploring the ethics of artificial intelligence, digital sovereignty, and technology in service of human dignity
-        </p>
-        <div class="dignitas-meta">DCF Hungary · Budapest · Washington, D.C. · Accra</div>
+    <!-- Masthead -->
+    <div class="masthead">
+        <div class="masthead-inner">
+            <div class="masthead-left">
+                <h1 class="masthead-title">Dignitas</h1>
+                <div class="masthead-tagline">The ethics of AI & human dignity</div>
+            </div>
+            <div class="masthead-right">A DCF Publication</div>
+        </div>
     </div>
     
     <!-- Category Navigation -->
     <nav class="category-nav">
-        <div class="category-nav-inner">
-            <a href="#" class="category-link active">All</a>
-            <a href="#" class="category-link">AI Ethics</a>
-            <a href="#" class="category-link">Digital Sovereignty</a>
-            <a href="#" class="category-link">Faith & Technology</a>
-            <a href="#" class="category-link">Policy & Governance</a>
-            <a href="#" class="category-link">CyberPeace</a>
-        </div>
+        <a href="#" class="active">All</a>
+        <a href="#">AI Ethics</a>
+        <a href="#">Digital Sovereignty</a>
+        <a href="#">Faith & Technology</a>
+        <a href="#">Policy & Governance</a>
+        <a href="#">CyberPeace</a>
     </nav>
     
-    <!-- Featured Article Section -->
-    <section class="featured-section">
-        <div class="section-label">Featured</div>
-        <article class="featured-article">
-            <div class="featured-image">
-                [Featured Image]
-            </div>
+    <!-- Featured Article -->
+    <section class="featured">
+        <div class="featured-inner">
+            <div class="featured-image"></div>
             <div class="featured-content">
-                <div class="category-tag">AI Ethics</div>
-                <h2 class="featured-title">
-                    <a href="/v3/blog/dignitas/ai-consciousness-values.html">
-                        Will AI Achieve Consciousness: Defining Consciousness and the Need for Value-Based AI Programming
-                    </a>
-                </h2>
-                <p class="featured-excerpt">
-                    As artificial intelligence systems become increasingly sophisticated, the question of machine consciousness moves from science fiction to serious philosophical and ethical inquiry. This exploration examines the fundamental nature of consciousness, the challenges in defining it, and why value-based programming is essential regardless of whether AI achieves true awareness.
-                </p>
-                <div class="author-byline">
-                    <div class="author-avatar">ZP</div>
-                    <div class="author-info">
-                        <span class="author-name">Zoltán Pap</span>
-                        <span class="author-role">DCF Board Member · January 1, 2026</span>
-                    </div>
-                </div>
+                <div class="featured-category">AI Ethics</div>
+                <a href="/v3/blog/dignitas/ai-consciousness-values.html">
+                    <h2 class="featured-title">Will AI Achieve Consciousness? Navigating the Intersection of Technology and Human Values</h2>
+                </a>
+                <p class="featured-excerpt">As artificial intelligence systems grow in complexity, the question of machine consciousness challenges our deepest assumptions about what it means to be human.</p>
+                <div class="featured-byline"><strong>Zoltán Pap</strong>, DCF Board Member · 2025</div>
             </div>
-        </article>
-    </section>
-    
-    <!-- Articles Grid Section -->
-    <section class="articles-section">
-        <div class="section-label">Latest Articles</div>
-        <div class="articles-grid">
-            <article class="article-card">
-                <div class="card-image">
-                    <div style="width:100%;height:100%;background:linear-gradient(135deg, #2a3a2e, #1a4a3e);"></div>
-                </div>
-                <div class="card-category">Faith &amp; Technology</div>
-                <h3 class="card-title"><a href="/v3/blog/dignitas/catholic-social-teaching-ai.html">Value-Based AI Programming: History, Implementation, and Relation to Catholic Social Teaching</a></h3>
-                <p class="card-excerpt">Tracing the development of value-based AI programming and its deep connections to Catholic Social Teaching's centuries-old framework for human dignity and the common good.</p>
-                <div class="card-byline">
-                    <div class="card-avatar">ZP</div>
-                    <div>
-                        <span class="byline-name">Zoltán Pap</span>
-                        <span class="byline-date">&middot; 2025</span>
-                    </div>
-                </div>
-            </article>
-
-            <article class="article-card">
-                <div class="card-image">
-                    <div style="width:100%;height:100%;background:linear-gradient(135deg, #1a2a3e, #2a4a6e);"></div>
-                </div>
-                <div class="card-category">Digital Sovereignty</div>
-                <h3 class="card-title"><a href="/v3/blog/dignitas/data-based-income.html">Freedom &amp; Sovereignty through Data Based Income</a></h3>
-                <p class="card-excerpt">How reclaiming ownership of personal data can create new economic models that restore individual sovereignty in the digital age.</p>
-                <div class="card-byline">
-                    <div class="card-avatar">ZP</div>
-                    <div>
-                        <span class="byline-name">Zoltán Pap</span>
-                        <span class="byline-date">&middot; December 31, 2025</span>
-                    </div>
-                </div>
-            </article>
-
-            <article class="article-card">
-                <div class="card-image">
-                    <div style="width:100%;height:100%;background:linear-gradient(135deg, #1a2e2a, #0f3e3a);"></div>
-                </div>
-                <div class="card-category">CyberPeace</div>
-                <h3 class="card-title"><a href="/v3/blog/dignitas/beyond-firewalls-toward-an-integral-cybersecurity-order.html">Beyond Firewalls: Toward an Integral Cybersecurity Order</a></h3>
-                <p class="card-excerpt">The year is 2026. A coordinated cyberattack strikes the Holy See. Within minutes, the communication systems of a major Dicastery collapse.</p>
-                <div class="card-byline">
-                    <div class="card-avatar">DCF</div>
-                    <div>
-                        <span class="byline-name">Domus Communis Foundation</span>
-                        <span class="byline-date">&middot; September 25, 2025</span>
-                    </div>
-                </div>
-            </article>
-
-            <article class="article-card">
-                <div class="card-image">
-                    <div style="width:100%;height:100%;background:linear-gradient(135deg, #2a1a2e, #3e1a4e);"></div>
-                </div>
-                <div class="card-category">Ethics Frameworks</div>
-                <h3 class="card-title"><a href="/v3/blog/dignitas/implementing-vatican-ai-ethics-in-your-organization-a-practical-checklist.html">Implementing Vatican AI Ethics in Your Organization: A Practical Checklist</a></h3>
-                <p class="card-excerpt">From hiring algorithms to healthcare diagnostics, AI now mediates how we work, learn, and live. Here's how to implement Vatican AI ethics principles in practice.</p>
-                <div class="card-byline">
-                    <div class="card-avatar">DCF</div>
-                    <div>
-                        <span class="byline-name">Domus Communis Foundation</span>
-                        <span class="byline-date">&middot; October 12, 2025</span>
-                    </div>
-                </div>
-            </article>
-
-            <article class="article-card">
-                <div class="card-image">
-                    <div style="width:100%;height:100%;background:linear-gradient(135deg, #1a1a3e, #2e1a3e);"></div>
-                </div>
-                <div class="card-category">AI Ethics</div>
-                <h3 class="card-title"><a href="/v3/blog/dignitas/the-future-of-ai-and-humanity-game-changing-or-game-over.html">The Future of AI and Humanity: Game Changing or Game Over?</a></h3>
-                <p class="card-excerpt">Human intelligence remains inseparable from us biologically and spiritually. Our intelligence is not a product but resides in our hands and decisions, shaping societies regardless of systems.</p>
-                <div class="card-byline">
-                    <div class="card-avatar">AK</div>
-                    <div>
-                        <span class="byline-name">Dr. Antal Kuthy &amp; Zoltán Pap</span>
-                        <span class="byline-date">&middot; October 6, 2025</span>
-                    </div>
-                </div>
-            </article>
-
-            <article class="article-card">
-                <div class="card-image">
-                    <div style="width:100%;height:100%;background:linear-gradient(135deg, #2e2a1a, #3e3a1a);"></div>
-                </div>
-                <div class="card-category">Faith &amp; Technology</div>
-                <h3 class="card-title"><a href="/v3/blog/dignitas/coexistence-fraternity-in-the-age-of-ai.html">Coexistence: Fraternity in the Age of AI</a></h3>
-                <p class="card-excerpt">The choices we make today about AI will fundamentally shape the world we leave to future generations. AI is already causing significant harm: widening inequalities and concentrating power.</p>
-                <div class="card-byline">
-                    <div class="card-avatar">DCF</div>
-                    <div>
-                        <span class="byline-name">Domus Communis Foundation</span>
-                        <span class="byline-date">&middot; October 7, 2025</span>
-                    </div>
-                </div>
-            </article>
-
-            <article class="article-card">
-                <div class="card-image">
-                    <div style="width:100%;height:100%;background:linear-gradient(135deg, #1a2a1e, #1a3e2e);"></div>
-                </div>
-                <div class="card-category">DCF Mission</div>
-                <h3 class="card-title"><a href="/v3/blog/dignitas/the-mission-of-the-domus-communis-foundation.html">The Mission of the Domus Communis Foundation</a></h3>
-                <p class="card-excerpt">A global constellation of non-profits dedicated to the research, development, and promotion of human-centric, ethical, safe, and secure cyber and AI technologies for the benefit of humankind.</p>
-                <div class="card-byline">
-                    <div class="card-avatar">ZP</div>
-                    <div>
-                        <span class="byline-name">Zoltán Pap</span>
-                        <span class="byline-date">&middot; October 7, 2025</span>
-                    </div>
-                </div>
-            </article>
         </div>
     </section>
     
-    <!-- Newsletter Section -->
-    <section class="newsletter-section">
-        <div class="newsletter-label">Stay Informed</div>
-        <h2 class="newsletter-title">Subscribe to Dignitas</h2>
-        <p class="newsletter-description">
-            Receive thoughtful analysis and insights on the intersection of technology, ethics, and human dignity delivered directly to your inbox.
-        </p>
-        <form class="newsletter-form" onsubmit="return false;">
-            <input type="email" class="newsletter-input" placeholder="Enter your email address" required>
-            <button type="submit" class="newsletter-button">Subscribe</button>
-        </form>
+    <!-- Latest Section -->
+    <section class="latest">
+        <div class="section-header">
+            <h2 class="section-title">Latest</h2>
+            <div class="section-count">8 Articles</div>
+        </div>
+        
+        <div class="latest-content">
+            <!-- Main Feed -->
+            <div class="main-feed">
+                <!-- Feed Item 1 -->
+                <article class="feed-item">
+                    <div class="feed-image" style="background: linear-gradient(135deg, #f0ead6, #ddd5c4);"></div>
+                    <div class="feed-content">
+                        <div class="feed-category">Faith & Technology</div>
+                        <a href="/v3/blog/dignitas/catholic-social-teaching-ai.html">
+                            <h3 class="feed-title">Value-Based AI Programming: A Framework for Ethical Development</h3>
+                        </a>
+                        <p class="feed-excerpt">Moving beyond algorithmic bias to build AI systems grounded in human values and Catholic social teaching.</p>
+                        <div class="feed-byline">Zoltán Pap · 2025</div>
+                    </div>
+                </article>
+                
+                <!-- Feed Item 2 -->
+                <article class="feed-item">
+                    <div class="feed-image" style="background: linear-gradient(135deg, #e8e0d0, #d5cdbf);"></div>
+                    <div class="feed-content">
+                        <div class="feed-category">Digital Sovereignty</div>
+                        <a href="/v3/blog/dignitas/data-based-income.html">
+                            <h3 class="feed-title">Freedom & Sovereignty Through Data-Based Income</h3>
+                        </a>
+                        <p class="feed-excerpt">How reclaiming ownership of personal data can create new economic models that empower individuals and communities.</p>
+                        <div class="feed-byline">Zoltán Pap · December 2025</div>
+                    </div>
+                </article>
+                
+                <!-- Feed Item 3 -->
+                <article class="feed-item">
+                    <div class="feed-image" style="background: linear-gradient(135deg, #d6e0e8, #c4cbd5);"></div>
+                    <div class="feed-content">
+                        <div class="feed-category">CyberPeace</div>
+                        <a href="/v3/blog/dignitas/beyond-firewalls-toward-an-integral-cybersecurity-order.html">
+                            <h3 class="feed-title">Beyond Firewalls: Toward an Integral Cybersecurity Order</h3>
+                        </a>
+                        <p class="feed-excerpt">A coordinated cyberattack strikes the Holy See. What comes next redefines how we think about digital security.</p>
+                        <div class="feed-byline">DCF · September 2025</div>
+                    </div>
+                </article>
+                
+                <!-- Feed Item 4 -->
+                <article class="feed-item">
+                    <div class="feed-image" style="background: linear-gradient(135deg, #e0d6e8, #cdc4d5);"></div>
+                    <div class="feed-content">
+                        <div class="feed-category">Ethics Frameworks</div>
+                        <a href="/v3/blog/dignitas/implementing-vatican-ai-ethics-in-your-organization-a-practical-checklist.html">
+                            <h3 class="feed-title">Implementing Vatican AI Ethics in Your Organization: A Practical Checklist</h3>
+                        </a>
+                        <p class="feed-excerpt">From hiring algorithms to healthcare diagnostics — a step-by-step guide to applying Vatican AI principles.</p>
+                        <div class="feed-byline">DCF · October 2025</div>
+                    </div>
+                </article>
+                
+                <!-- Feed Item 5 -->
+                <article class="feed-item">
+                    <div class="feed-image" style="background: linear-gradient(135deg, #d6e8da, #c4d5c8);"></div>
+                    <div class="feed-content">
+                        <div class="feed-category">AI Ethics</div>
+                        <a href="/v3/blog/dignitas/the-future-of-ai-and-humanity-game-changing-or-game-over.html">
+                            <h3 class="feed-title">The Future of AI and Humanity: Game Changing or Game Over?</h3>
+                        </a>
+                        <p class="feed-excerpt">Human intelligence remains inseparable from us biologically and spiritually. Our intelligence is not a product.</p>
+                        <div class="feed-byline">Dr. Antal Kuthy & Zoltán Pap · October 2025</div>
+                    </div>
+                </article>
+            </div>
+            
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <h3 class="sidebar-header">Most Read</h3>
+                
+                <!-- Sidebar Item 1 -->
+                <article class="sidebar-item">
+                    <div class="sidebar-category">Faith & Technology</div>
+                    <a href="/v3/blog/dignitas/coexistence-fraternity-in-the-age-of-ai.html">
+                        <h4 class="sidebar-title">Coexistence: Fraternity in the Age of AI</h4>
+                    </a>
+                    <div class="sidebar-byline">DCF · October 2025</div>
+                </article>
+                
+                <!-- Sidebar Item 2 -->
+                <article class="sidebar-item">
+                    <div class="sidebar-category">DCF Mission</div>
+                    <a href="/v3/blog/dignitas/the-mission-of-the-domus-communis-foundation.html">
+                        <h4 class="sidebar-title">The Mission of the Domus Communis Foundation</h4>
+                    </a>
+                    <div class="sidebar-byline">Zoltán Pap · October 2025</div>
+                </article>
+                
+                <!-- Sidebar Item 3 -->
+                <article class="sidebar-item">
+                    <div class="sidebar-category">AI Ethics</div>
+                    <a href="/v3/blog/dignitas/ai-consciousness-values.html">
+                        <h4 class="sidebar-title">Will AI Achieve Consciousness?</h4>
+                    </a>
+                    <div class="sidebar-byline">Zoltán Pap · 2025</div>
+                </article>
+                
+                <!-- Newsletter Box -->
+                <div class="newsletter-box">
+                    <h3 class="newsletter-box-title">Subscribe to Dignitas</h3>
+                    <p class="newsletter-box-desc">Policy analysis and ethical frameworks for the AI age.</p>
+                    <input type="email" placeholder="Your email address">
+                    <button>Subscribe</button>
+                </div>
+            </aside>
+        </div>
     </section>
     
-    <!-- Footer -->
-    <footer id="main-footer"></footer>
+    <!-- Newsletter Bar -->
+    <section class="newsletter-bar">
+        <div class="newsletter-bar-inner">
+            <div class="newsletter-bar-left">
+                <h2 class="newsletter-bar-title">Dignitas Newsletter</h2>
+                <p class="newsletter-bar-desc">Policy analysis and ethical frameworks for the AI age. Published by DCF Hungary.</p>
+            </div>
+            <form class="newsletter-bar-form">
+                <input type="email" placeholder="Your email address">
+                <button>Subscribe</button>
+            </form>
+        </div>
+    </section>
     
-    <!-- Scripts -->
+    <div id="site-footer"></div>
+    
     <script src="/v3/js/nav.js"></script>
     <script src="/v3/js/main.js"></script>
 </body>
