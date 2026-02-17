@@ -19,9 +19,21 @@
     --ctc-gray-300: #d4d4d4;
     --ctc-gray-500: #737373;
     --ctc-gray-700: #404040;
+    --c2c-black: #0a0a0a;
+    --c2c-dark: #141418;
+    --c2c-charcoal: #1e1e24;
+    --c2c-electric: #00d4aa;
+    --c2c-white: #f0f0f0;
+    --c2c-gray: #8a8a96;
+    --c2c-gray-light: #b0b0bc;
+    --c2c-rule: #2a2a32;
+    --c2c-surface: #18181e;
     --font-display: 'Instrument Serif', Georgia, serif;
+    --font-serif: 'Instrument Serif', Georgia, serif;
     --font-mono: 'Space Mono', 'Courier New', monospace;
     --font-body: 'Inter', -apple-system, sans-serif;
+    --font-sans: 'Inter', -apple-system, sans-serif;
+    --font-ui: 'Inter', -apple-system, sans-serif;
 }
 
 body {
@@ -29,107 +41,79 @@ body {
     color: var(--ctc-white);
 }
 
-.publication-header {
-    background: linear-gradient(180deg, var(--ctc-black) 0%, var(--ctc-dark) 100%);
-    border-bottom: 1px solid rgba(0, 212, 170, 0.2);
-    padding: 80px 40px 60px;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
+.c2c-masthead {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 28px 40px 0;
 }
-
-.publication-header::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle at center, var(--ctc-electric-dim) 0%, transparent 50%);
-    animation: pulse 4s ease-in-out infinite;
-}
-
-@keyframes pulse {
-    0%, 100% { opacity: 0.3; }
-    50% { opacity: 0.6; }
-}
-
-.publication-title {
-    font-family: var(--font-mono);
-    font-size: clamp(42px, 6vw, 72px);
-    font-weight: 700;
-    letter-spacing: -2px;
-    margin: 0 0 16px 0;
-    position: relative;
-    display: inline-block;
-}
-
-.publication-title span {
-    background: linear-gradient(135deg, var(--ctc-electric) 0%, #00ffcc 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-
-.publication-subtitle {
-    font-family: var(--font-body);
-    font-size: 18px;
-    font-weight: 300;
-    color: var(--ctc-gray-300);
-    max-width: 600px;
-    margin: 0 auto 32px;
-    line-height: 1.6;
-    position: relative;
-}
-
-.publication-meta {
+.c2c-masthead-row {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 24px;
-    font-family: var(--font-mono);
-    font-size: 12px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    color: var(--ctc-electric);
-    position: relative;
+    align-items: baseline;
+    justify-content: space-between;
+    padding-bottom: 16px;
+    border-bottom: 2px solid var(--c2c-electric);
 }
-
-.publication-meta .meta-item {
+.c2c-masthead-left {
     display: flex;
-    align-items: center;
-    gap: 8px;
+    align-items: baseline;
+    gap: 16px;
 }
-
-.publication-meta .meta-item::before {
-    content: '>';
-    font-weight: 700;
+.c2c-masthead-title {
+    font-family: var(--font-serif);
+    font-size: 48px;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--c2c-white);
+    line-height: 1;
+    margin: 0;
 }
-
-.publication-nav {
-    margin-top: 48px;
-    padding-top: 32px;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
+.c2c-masthead-tag {
+    font-family: var(--font-ui, var(--font-sans));
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--c2c-gray);
+    padding-left: 16px;
+    border-left: 1px solid var(--c2c-rule);
 }
-
-.publication-nav a {
-    display: inline-block;
+.c2c-masthead-sub {
     font-family: var(--font-mono);
     font-size: 11px;
+    font-weight: 700;
     letter-spacing: 2px;
     text-transform: uppercase;
-    color: var(--ctc-gray-500);
-    text-decoration: none;
-    padding: 8px 16px;
-    border: 1px solid transparent;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    margin: 0 8px;
+    color: var(--c2c-electric);
 }
 
-.publication-nav a:hover {
-    color: var(--ctc-electric);
-    border-color: var(--ctc-electric);
-    box-shadow: 0 0 20px var(--ctc-electric-glow);
+/* Category Navigation */
+.publication-nav {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+    border-bottom: 1px solid var(--c2c-rule);
+    display: flex;
+    gap: 0;
+}
+.publication-nav a {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--c2c-gray);
+    text-decoration: none;
+    padding: 12px 18px;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s ease;
+    margin: 0;
+}
+.publication-nav a:hover,
+.publication-nav a.active {
+    color: var(--c2c-electric);
+    border-bottom-color: var(--c2c-electric);
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    box-shadow: none;
 }
 
 .articles-section {
@@ -264,8 +248,29 @@ body {
 }
 
 @media (max-width: 768px) {
-    .publication-header {
-        padding: 60px 20px 40px;
+    .c2c-masthead { 
+        padding: 28px 20px 0;
+    }
+    .c2c-masthead-row { 
+        flex-direction: column; 
+        align-items: flex-start;
+        gap: 12px; 
+    }
+    .c2c-masthead-left {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+    .c2c-masthead-tag { 
+        border-left: none; 
+        padding-left: 0; 
+    }
+    .c2c-masthead-title { 
+        font-size: 36px; 
+    }
+    .publication-nav {
+        padding: 0 20px;
+        overflow-x: auto;
     }
     
     .articles-section {
@@ -277,26 +282,38 @@ body {
         gap: 24px;
     }
 }
+
+@media (max-width: 500px) {
+    .c2c-masthead-title { 
+        font-size: 28px; 
+    }
+    .publication-nav a {
+        padding: 12px;
+        font-size: 10px;
+    }
+}
     </style>
 </head>
 <body>
     <nav id="main-nav"></nav>
     
-    <section class="publication-header">
-        <h1 class="publication-title"><span>Code to Conscience</span></h1>
-        <p class="publication-subtitle">
-            Exploring the intersection of technology, ethics, and human dignity in our digital age
-        </p>
-        <div class="publication-meta">
-            <span class="meta-item">7 Articles</span>
-            <span class="meta-item">Tech Ethics</span>
+    <header class="c2c-masthead">
+        <div class="c2c-masthead-row">
+            <div class="c2c-masthead-left">
+                <h1 class="c2c-masthead-title">Code to Conscience</h1>
+                <span class="c2c-masthead-tag">Profiles from the frontlines of AI ethics</span>
+            </div>
+            <span class="c2c-masthead-sub">// A DCF Publication</span>
         </div>
-        <div class="publication-nav">
-            <a href="/v3/insights.html">All Publications</a>
-            <a href="/v3/blog/dignitas/index.html">Dignitas</a>
-            <a href="/v3/blog/wisdom-brief/index.html">The Wisdom Brief</a>
-        </div>
-    </section>
+    </header>
+
+    <nav class="publication-nav">
+        <a href="#" class="active">All</a>
+        <a href="#">AI Pioneers</a>
+        <a href="#">Ethics Leaders</a>
+        <a href="#">Tech Policy</a>
+        <a href="#">Digital Rights</a>
+    </nav>
 
     <section class="articles-section">
         <div class="articles-grid">
