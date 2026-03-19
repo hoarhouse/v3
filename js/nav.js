@@ -2,15 +2,22 @@
 
 // Define menu structure in one place
 const menuItems = [
-    { text: 'Insights', href: '/v3/insights.html', page: 'insights' },
-    { text: 'Library', href: '/v3/library.html', page: 'library' },
-    { text: 'Home', href: '/v3/index.html', page: 'index' },
-    { text: 'About', href: '/v3/about.html', page: 'about' },
-    { text: 'Initiatives', href: '/v3/initiatives.html', page: 'initiatives' },
-    { text: 'Budapest Appeal', href: '/v3/budapest-appeal.html', page: 'budapest-appeal' },
-    { text: 'Get Involved', href: '/v3/get-involved.html', page: 'get-involved' },
-    { text: 'Contact', href: '/v3/contact.html', page: 'contact' },
-    { text: 'Privacy Policy', href: '/v3/privacy.html', page: 'privacy' }
+  { text: 'About', href: '/v3/about.html', page: 'about' },
+  { text: 'Initiatives', href: '/v3/initiatives.html', page: 'initiatives' },
+  {
+    text: 'Events',
+    href: '/v3/events/index.html',
+    page: 'events',
+    dropdown: [
+      { text: 'April 26 — Education, Youth & Technology', href: '/v3/events/april-26-education-youth-technology.html' },
+      { text: 'May 24 — AI, Human Dignity & Communities', href: '/v3/events/may-24-ai-human-dignity-communities.html' }
+    ]
+  },
+  { text: 'Insights', href: '/v3/insights.html', page: 'insights' },
+  { text: 'Library', href: '/v3/library.html', page: 'library' },
+  { text: 'Budapest Appeal', href: '/v3/budapest-appeal.html', page: 'budapest-appeal' },
+  { text: 'Get Involved', href: '/v3/get-involved.html', page: 'get-involved' },
+  { text: 'Contact', href: '/v3/contact.html', page: 'contact' }
 ];
 
 // Generate navigation HTML
@@ -34,13 +41,31 @@ function generateNav() {
                     <span class="close-line"></span>
                 </button>
                 <ul class="nav-list">
-                    ${menuItems.map(item => `
-                        <li class="nav-item">
-                            <a href="${item.href}" class="nav-link ${currentPage === item.page ? 'active' : ''}">
-                                ${item.text}
-                            </a>
-                        </li>
-                    `).join('')}
+                    ${menuItems.map(item => {
+  if (item.dropdown) {
+    return `
+      <li class="nav-item nav-item--dropdown">
+        <a href="${item.href}" class="nav-link nav-link--dropdown ${currentPage === item.page ? 'active' : ''}">
+          ${item.text} <span class="nav-dropdown-arrow">▾</span>
+        </a>
+        <ul class="nav-dropdown">
+          ${item.dropdown.map(sub => `
+            <li class="nav-dropdown-item">
+              <a href="${sub.href}" class="nav-dropdown-link">${sub.text}</a>
+            </li>
+          `).join('')}
+        </ul>
+      </li>
+    `;
+  }
+  return `
+    <li class="nav-item">
+      <a href="${item.href}" class="nav-link ${currentPage === item.page ? 'active' : ''}">
+        ${item.text}
+      </a>
+    </li>
+  `;
+}).join('')}
                     <li class="nav-item nav-item-donate">
                         <a href="/v3/get-involved.html" class="nav-donate-btn">Donate</a>
                     </li>
@@ -184,6 +209,83 @@ const navStyles = `
 .nav-link.active {
     color: var(--secondary);
     font-weight: 500;
+}
+
+
+
+/* Dropdown Menu */
+.nav-item--dropdown {
+  position: relative;
+}
+.nav-link--dropdown {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.nav-dropdown-arrow {
+  font-size: 0.75rem;
+  transition: transform 0.2s ease;
+}
+.nav-item--dropdown:hover .nav-dropdown-arrow {
+  transform: rotate(180deg);
+}
+.nav-dropdown {
+  display: none;
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  background: #ffffff;
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: 10px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+  padding: 0.5rem;
+  min-width: 280px;
+  list-style: none;
+  z-index: 999;
+}
+.nav-item--dropdown:hover .nav-dropdown {
+  display: block;
+}
+.nav-dropdown-item {
+  margin: 0;
+}
+.nav-dropdown-link {
+  display: block;
+  padding: 0.6rem 1rem;
+  color: var(--primary);
+  text-decoration: none;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+.nav-dropdown-link:hover {
+  background: var(--light-background);
+  color: var(--secondary);
+}
+
+/* Mobile dropdown — show as flat list */
+@media (max-width: 900px) {
+  .nav-dropdown {
+    display: block;
+    position: static;
+    box-shadow: none;
+    border: none;
+    border-left: 2px solid var(--secondary);
+    border-radius: 0;
+    padding: 0.25rem 0 0.25rem 1rem;
+    margin: 0.25rem 0 0.25rem 1.5rem;
+    background: transparent;
+    min-width: unset;
+  }
+  .nav-dropdown-link {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.9rem;
+  }
+  .nav-dropdown-arrow {
+    display: none;
+  }
 }
 
 /* Donate Button in Navigation */
