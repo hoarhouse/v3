@@ -89,38 +89,78 @@
     .speaker-card.expanded .speaker-bio { display: block; }
     .speaker-expand-icon { margin-left: auto; color: #0071e3; font-size: 1.1rem; flex-shrink: 0; transition: transform 0.2s ease; }
     .speaker-card.expanded .speaker-expand-icon { transform: rotate(45deg); }
-    /* Countdown timer */
+    /* Countdown Timer - Urgent Style */
+    .countdown-wrapper {
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+    .countdown-label-text {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #0071e3;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+    }
     .countdown-strip {
-      background: rgba(255,255,255,0.07);
-      border: 1px solid rgba(255,255,255,0.12);
-      border-radius: 10px;
       display: inline-flex;
-      gap: 0;
-      margin-bottom: 1.75rem;
-      overflow: hidden;
+      gap: 0.5rem;
     }
     .countdown-unit {
-      padding: 0.6rem 1.1rem;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(0,113,227,0.5);
+      border-radius: 10px;
+      padding: 0.75rem 1.25rem;
       text-align: center;
-      border-right: 1px solid rgba(255,255,255,0.12);
+      min-width: 80px;
+      position: relative;
     }
-    .countdown-unit:last-child { border-right: none; }
     .countdown-number {
       display: block;
-      font-size: 1.5rem;
-      font-weight: 700;
+      font-size: 2.5rem;
+      font-weight: 800;
       color: #ffffff;
       line-height: 1;
-      margin-bottom: 0.2rem;
+      margin-bottom: 0.3rem;
+      font-variant-numeric: tabular-nums;
+      letter-spacing: -0.02em;
     }
     .countdown-label {
       display: block;
       font-size: 0.65rem;
       text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: rgba(255,255,255,0.55);
+      letter-spacing: 0.1em;
+      color: rgba(255,255,255,0.5);
+      font-weight: 600;
     }
-    .countdown-past { font-size: 0.9rem; color: rgba(255,255,255,0.7); padding: 0.6rem 1.25rem; }
+    .countdown-sep {
+      display: flex;
+      align-items: center;
+      padding-bottom: 1.2rem;
+      color: rgba(255,255,255,0.3);
+      font-size: 1.5rem;
+      font-weight: 300;
+    }
+    .countdown-past {
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.7);
+      padding: 0.75rem 1.5rem;
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 8px;
+      display: inline-block;
+    }
+    /* Pulse effect when under 7 days */
+    @keyframes urgentPulse {
+      0%, 100% { border-color: rgba(0,113,227,0.5); }
+      50% { border-color: rgba(0,113,227,1); box-shadow: 0 0 12px rgba(0,113,227,0.4); }
+    }
+    .countdown-unit.urgent {
+      animation: urgentPulse 2s ease-in-out infinite;
+    }
+    @media (max-width: 600px) {
+      .countdown-unit { min-width: 60px; padding: 0.6rem 0.75rem; }
+      .countdown-number { font-size: 2rem; }
+    }
     .event-info-item a { display: inline; vertical-align: baseline; }
   </style>
 </head>
@@ -146,10 +186,24 @@
         4:00 PM – 6:00 PM
       </div>
     </div>
-    <div class="countdown-strip" id="countdown">
-      <div class="countdown-unit"><span class="countdown-number" id="cd-days">--</span><span class="countdown-label">Days</span></div>
-      <div class="countdown-unit"><span class="countdown-number" id="cd-hours">--</span><span class="countdown-label">Hours</span></div>
-      <div class="countdown-unit"><span class="countdown-number" id="cd-mins">--</span><span class="countdown-label">Minutes</span></div>
+    <div class="countdown-wrapper">
+      <div class="countdown-label-text">Event begins in</div>
+      <div class="countdown-strip" id="countdown">
+        <div class="countdown-unit" id="cd-days-unit">
+          <span class="countdown-number" id="cd-days">--</span>
+          <span class="countdown-label">Days</span>
+        </div>
+        <div class="countdown-sep">:</div>
+        <div class="countdown-unit">
+          <span class="countdown-number" id="cd-hours">--</span>
+          <span class="countdown-label">Hours</span>
+        </div>
+        <div class="countdown-sep">:</div>
+        <div class="countdown-unit">
+          <span class="countdown-number" id="cd-mins">--</span>
+          <span class="countdown-label">Minutes</span>
+        </div>
+      </div>
     </div>
     <div class="hero-ctas">
       <a href="#register" class="btn-primary">Register to Attend</a>
@@ -347,6 +401,8 @@
         const hours = Math.floor((diff % 86400000) / 3600000);
         const mins = Math.floor((diff % 3600000) / 60000);
         document.getElementById('cd-days').textContent = String(days).padStart(2, '0');
+        if (days < 7) { document.getElementById('cd-days-unit').classList.add('urgent'); }
+        else { document.getElementById('cd-days-unit').classList.remove('urgent'); }
         document.getElementById('cd-hours').textContent = String(hours).padStart(2, '0');
         document.getElementById('cd-mins').textContent = String(mins).padStart(2, '0');
       }
