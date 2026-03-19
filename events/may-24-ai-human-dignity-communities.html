@@ -1,465 +1,195 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI, Human Dignity & Cooperation among Communities | DCF Events</title>
-    <link rel="stylesheet" href="/v3/css/styles.css">
-    <style>
-        /* Hero Section */
-        .hero {
-            background: #0a0f1e;
-            color: white;
-            padding: 5rem 0 4rem;
-        }
-        
-        .breadcrumb {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: rgba(255, 255, 255, 0.7);
-            text-decoration: none;
-            font-size: 0.9rem;
-            margin-bottom: 2rem;
-            transition: color 0.3s ease;
-        }
-        
-        .breadcrumb:hover {
-            color: white;
-        }
-        
-        .date-pill {
-            display: inline-block;
-            background: rgba(255, 255, 255, 0.15);
-            color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 24px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            margin-bottom: 1.5rem;
-        }
-        
-        .hero h1 {
-            font-size: clamp(2rem, 5vw, 3.5rem);
-            margin-bottom: 1rem;
-            font-weight: 700;
-            letter-spacing: -0.03em;
-        }
-        
-        .hero-subtitle {
-            font-size: clamp(1.1rem, 3vw, 1.4rem);
-            line-height: 1.6;
-            max-width: 800px;
-            opacity: 0.9;
-            margin-bottom: 1.5rem;
-        }
-        
-        .location-time {
-            font-size: 1rem;
-            opacity: 0.85;
-            margin-bottom: 2rem;
-            line-height: 1.6;
-        }
-        
-        .cta-buttons {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-        }
-        
-        .btn-primary {
-            background: #0071e3;
-            color: white;
-            padding: 0.875rem 2rem;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 500;
-            border: 2px solid #0071e3;
-            transition: all 0.3s ease;
-            display: inline-block;
-        }
-        
-        .btn-primary:hover {
-            background: #0051a2;
-            border-color: #0051a2;
-        }
-        
-        .btn-outline {
-            background: transparent;
-            color: white;
-            padding: 0.875rem 2rem;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 500;
-            border: 2px solid white;
-            transition: all 0.3s ease;
-            display: inline-block;
-        }
-        
-        .btn-outline:hover {
-            background: rgba(255, 255, 255, 0.1);
-        }
-        
-        /* Content Sections */
-        section {
-            padding: 4rem 0;
-        }
-        
-        section:nth-child(even) {
-            background: #f5f5f7;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-        
-        .content-narrow {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        h2 {
-            font-size: 2rem;
-            color: #1d1d1f;
-            margin-bottom: 1.5rem;
-            font-weight: 600;
-        }
-        
-        p {
-            color: #424245;
-            line-height: 1.8;
-            font-size: 1.05rem;
-        }
-        
-        /* Welcome Remarks */
-        .remarks-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-        
-        .remark-item {
-            background: white;
-            padding: 2rem;
-            border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-        }
-        
-        .remark-label {
-            font-weight: 600;
-            color: #6e6e73;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            margin-bottom: 0.5rem;
-        }
-        
-        .remark-name {
-            font-size: 1.2rem;
-            color: #1d1d1f;
-            font-weight: 600;
-            line-height: 1.4;
-        }
-        
-        /* Speakers Grid */
-        .speakers-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-        
-        .speaker-card {
-            text-align: center;
-        }
-        
-        .speaker-avatar {
-            width: 80px;
-            height: 80px;
-            background: #f5f5f7;
-            color: #0071e3;
-            border-radius: 50%;
-            margin: 0 auto 1rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            font-weight: 600;
-        }
-        
-        .speaker-name {
-            font-weight: 600;
-            color: #1d1d1f;
-            font-size: 1.1rem;
-            margin-bottom: 0.25rem;
-        }
-        
-        .speaker-title {
-            color: #6e6e73;
-            font-size: 0.95rem;
-            line-height: 1.4;
-        }
-        
-        .moderator-section {
-            margin-top: 3rem;
-            padding-top: 2rem;
-            border-top: 1px solid #e5e5e7;
-        }
-        
-        .moderator-label {
-            font-weight: 600;
-            color: #6e6e73;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            margin-bottom: 1rem;
-            text-align: center;
-        }
-        
-        /* Topics Grid */
-        .topics-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
-            margin-top: 2rem;
-        }
-        
-        .topic-card {
-            background: white;
-            padding: 2rem;
-            border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-            display: flex;
-            align-items: flex-start;
-            gap: 1rem;
-        }
-        
-        .topic-icon {
-            width: 24px;
-            height: 24px;
-            background: #0071e3;
-            border-radius: 50%;
-            flex-shrink: 0;
-            margin-top: 2px;
-        }
-        
-        .topic-text {
-            flex: 1;
-            color: #424245;
-            line-height: 1.6;
-        }
-        
-        /* Register Section */
-        #register {
-            background: white;
-        }
-        
-        #register p {
-            margin-bottom: 2rem;
-        }
-        
-        iframe {
-            width: 100%;
-            border-radius: 12px;
-            border: 1px solid #e5e5e7;
-        }
-        
-        /* About DCF Section */
-        .about-dcf {
-            background: #f5f5f7;
-        }
-        
-        .about-dcf p {
-            margin-bottom: 2rem;
-        }
-        
-        .btn-learn-more {
-            background: #0071e3;
-            color: white;
-            padding: 0.875rem 2rem;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 500;
-            transition: background 0.3s ease;
-            display: inline-block;
-        }
-        
-        .btn-learn-more:hover {
-            background: #0051a2;
-        }
-        
-        /* Mobile Responsive */
-        @media (max-width: 768px) {
-            .hero {
-                padding: 3rem 0 2.5rem;
-            }
-            
-            section {
-                padding: 3rem 0;
-            }
-            
-            .container {
-                padding: 0 1rem;
-            }
-            
-            .cta-buttons {
-                flex-direction: column;
-                width: 100%;
-            }
-            
-            .btn-primary,
-            .btn-outline {
-                width: 100%;
-                text-align: center;
-            }
-            
-            .speakers-grid,
-            .topics-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI, Human Dignity & Cooperation among Communities | DCF Events</title>
+  <link rel="stylesheet" href="/v3/css/styles.css">
+  <style>
+    .event-hero {
+      background-color: #0a0f1e;
+      color: #ffffff;
+      padding: 4rem 2rem 3rem;
+      text-align: center;
+    }
+    .event-hero .breadcrumb { color: rgba(255,255,255,0.7); font-size: 0.875rem; margin-bottom: 1.5rem; }
+    .event-hero .breadcrumb a { color: rgba(255,255,255,0.7); text-decoration: none; }
+    .event-hero .breadcrumb a:hover { color: #ffffff; }
+    .event-hero .date-badge {
+      display: inline-block;
+      background: #0071e3;
+      color: #ffffff;
+      padding: 0.4rem 1.2rem;
+      border-radius: 20px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+    }
+    .event-hero h1 { font-size: clamp(1.75rem, 4vw, 2.75rem); font-weight: 700; margin-bottom: 1rem; max-width: 800px; margin-left: auto; margin-right: auto; }
+    .event-hero .subtitle { font-size: 1.125rem; color: rgba(255,255,255,0.8); max-width: 650px; margin: 0 auto 1.5rem; line-height: 1.6; }
+    .event-hero .location-time { font-size: 0.95rem; color: rgba(255,255,255,0.75); margin-bottom: 2rem; }
+    .hero-ctas { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .btn-primary { background: #0071e3; color: #ffffff; padding: 0.75rem 1.75rem; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 0.95rem; }
+    .btn-outline { background: transparent; color: #ffffff; border: 2px solid rgba(255,255,255,0.6); padding: 0.75rem 1.75rem; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 0.95rem; }
+    .event-section { padding: 4rem 2rem; }
+    .event-section.alt { background: #f5f5f7; }
+    .event-section .inner { max-width: 800px; margin: 0 auto; }
+    .event-section .wide { max-width: 1100px; margin: 0 auto; }
+    .event-section h2 { font-size: 1.75rem; font-weight: 700; margin-bottom: 1.5rem; color: #1d1d1f; }
+    .event-section p { color: #3d3d3f; line-height: 1.8; margin-bottom: 1rem; }
+    .welcome-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 1.5rem; }
+    .welcome-card { background: #ffffff; border-radius: 12px; padding: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+    .welcome-card .label { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; color: #0071e3; font-weight: 600; margin-bottom: 0.5rem; }
+    .welcome-card .name { font-weight: 700; font-size: 1rem; color: #1d1d1f; margin-bottom: 0.25rem; }
+    .welcome-card .role { font-size: 0.875rem; color: #86868b; }
+    .speakers-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.5rem; margin-top: 1.5rem; }
+    .speaker-card { background: #ffffff; border-radius: 12px; padding: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.08); display: flex; gap: 1rem; align-items: flex-start; }
+    .speaker-avatar { width: 48px; height: 48px; border-radius: 50%; background: #f5f5f7; color: #0071e3; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1rem; flex-shrink: 0; }
+    .speaker-info .name { font-weight: 700; font-size: 0.95rem; color: #1d1d1f; margin-bottom: 0.25rem; }
+    .speaker-info .title { font-size: 0.825rem; color: #86868b; line-height: 1.5; }
+    .moderator-row { margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid rgba(0,0,0,0.1); }
+    .moderator-row .label { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; color: #0071e3; font-weight: 600; margin-bottom: 0.75rem; }
+    .topics-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1.5rem; }
+    .topic-card { background: #ffffff; border-radius: 10px; padding: 1.25rem 1.5rem; box-shadow: 0 2px 6px rgba(0,0,0,0.06); display: flex; align-items: center; gap: 0.75rem; }
+    .topic-icon { font-size: 1.25rem; flex-shrink: 0; }
+    .topic-card p { margin: 0; font-size: 0.9rem; color: #1d1d1f; font-weight: 500; line-height: 1.5; }
+    .register-section { padding: 4rem 2rem; text-align: center; }
+    .register-section h2 { font-size: 1.75rem; font-weight: 700; margin-bottom: 1rem; }
+    .register-section p { color: #3d3d3f; margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto; }
+    .register-form { max-width: 700px; margin: 0 auto; }
+    .about-dcf-section { background: #f5f5f7; padding: 3rem 2rem; text-align: center; }
+    .about-dcf-section h2 { font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem; }
+    .about-dcf-section p { max-width: 700px; margin: 0 auto 1.5rem; color: #3d3d3f; line-height: 1.8; }
+    .btn-secondary { background: #0071e3; color: #ffffff; padding: 0.75rem 1.75rem; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 0.95rem; display: inline-block; }
+    @media (max-width: 768px) {
+      .welcome-grid { grid-template-columns: 1fr; }
+      .topics-grid { grid-template-columns: 1fr; }
+      .speakers-grid { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
 <body>
-    <nav id="main-nav"></nav>
-    
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="container">
-            <a href="/v3/events/index.html" class="breadcrumb">
-                ← Back to Events
-            </a>
-            <div class="date-pill">May 24, 2026</div>
-            <h1>Artificial Intelligence, Human Dignity & Cooperation among Communities</h1>
-            <p class="hero-subtitle">
-                A dialogue on guiding technological development and building relationships among communities
-            </p>
-            <p class="location-time">
-                📍 Parish of Santa Maria delle Grazie — Casal Boccone, Rome | 4:00 PM – 6:00 PM
-            </p>
-            <div class="cta-buttons">
-                <a href="#register" class="btn-primary">Register to Attend</a>
-                <a href="#" class="btn-outline">Share This Event</a>
-            </div>
+  <nav id="main-nav"></nav>
+
+  <!-- HERO -->
+  <section class="event-hero">
+    <div class="breadcrumb"><a href="/v3/events/index.html">← Back to Events</a></div>
+    <div class="date-badge">May 24, 2026</div>
+    <h1>Artificial Intelligence, Human Dignity &amp; Cooperation among Communities</h1>
+    <p class="subtitle">A dialogue on guiding technological development and building relationships among communities</p>
+    <p class="location-time">📍 Parish of Santa Maria delle Grazie — Casal Boccone, Rome &nbsp;|&nbsp; 4:00 PM – 6:00 PM</p>
+    <div class="hero-ctas">
+      <a href="#register" class="btn-primary">Register to Attend</a>
+      <a href="#" class="btn-outline">Share This Event</a>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="event-section">
+    <div class="inner">
+      <h2>About This Event</h2>
+      <p>The second meeting focuses on guiding technological development and building relationships among communities. Current transformations call for renewed efforts to ensure that technology serves the human person, the freedom of communities, and the construction of peace.</p>
+      <p>The Domus Communis Foundation will present its model of technological development and its international network as a platform for collaboration among communities, institutions, and academia.</p>
+    </div>
+  </section>
+
+  <!-- WELCOME REMARKS -->
+  <section class="event-section alt">
+    <div class="wide">
+      <h2>Welcome Remarks</h2>
+      <div class="welcome-grid">
+        <div class="welcome-card">
+          <div class="label">Video Message</div>
+          <div class="name">GHR Foundation</div>
+          <div class="role"></div>
         </div>
-    </section>
-    
-    <!-- About This Event -->
-    <section>
-        <div class="container content-narrow">
-            <h2>About This Event</h2>
-            <p>
-                The second meeting focuses on guiding technological development and building relationships among communities. Current transformations call for renewed efforts to ensure that technology serves the human person, the freedom of communities, and the construction of peace. The Domus Communis Foundation will present its model of technological development and its international network as a platform for collaboration among communities, institutions, and academia.
-            </p>
+        <div class="welcome-card">
+          <div class="label">Introduction</div>
+          <div class="name">Alessio Pecorario</div>
+          <div class="role">Founder and CEO, Domus Communis Foundation</div>
         </div>
-    </section>
-    
-    <!-- Welcome Remarks -->
-    <section>
-        <div class="container">
-            <h2>Welcome Remarks</h2>
-            <div class="remarks-grid">
-                <div class="remark-item">
-                    <div class="remark-label">Video message from:</div>
-                    <div class="remark-name">GHR Foundation</div>
-                </div>
-                <div class="remark-item">
-                    <div class="remark-label">Introduction by:</div>
-                    <div class="remark-name">Alessio Pecorario, Founder and CEO, Domus Communis Foundation</div>
-                </div>
-            </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SPEAKERS -->
+  <section class="event-section">
+    <div class="wide">
+      <h2>Speakers</h2>
+      <div class="speakers-grid">
+        <div class="speaker-card">
+          <div class="speaker-avatar">CT</div>
+          <div class="speaker-info">
+            <div class="name">Cardinal Silvano Maria Tomasi</div>
+            <div class="title">Former Permanent Observer to the United Nations</div>
+          </div>
         </div>
-    </section>
-    
-    <!-- Speakers -->
-    <section>
-        <div class="container">
-            <h2>Speakers</h2>
-            <div class="speakers-grid">
-                <div class="speaker-card">
-                    <div class="speaker-avatar">ST</div>
-                    <div class="speaker-name">Cardinal Silvano Maria Tomasi</div>
-                    <div class="speaker-title">Former Permanent Observer to the United Nations</div>
-                </div>
-                <div class="speaker-card">
-                    <div class="speaker-avatar">MA</div>
-                    <div class="speaker-name">Maria Amparo Alonso Escobar</div>
-                    <div class="speaker-title">Founder and CEO, EAiD (Ethical AI for Human Development)</div>
-                </div>
-                <div class="speaker-card">
-                    <div class="speaker-avatar">ZP</div>
-                    <div class="speaker-name">Zoltan Papp</div>
-                    <div class="speaker-title">Co-founder, Domus Communis Foundation</div>
-                </div>
-                <div class="speaker-card">
-                    <div class="speaker-avatar">AK</div>
-                    <div class="speaker-name">Antal Kuthy</div>
-                    <div class="speaker-title">Technology entrepreneur and co-founder of the Foundation</div>
-                </div>
-            </div>
-            
-            <div class="moderator-section">
-                <div class="moderator-label">Moderator</div>
-                <div class="speaker-card">
-                    <div class="speaker-avatar">EC</div>
-                    <div class="speaker-name">Enzo Cursio</div>
-                    <div class="speaker-title">Ambassador, Fratelli Tutti Foundation</div>
-                </div>
-            </div>
+        <div class="speaker-card">
+          <div class="speaker-avatar">MA</div>
+          <div class="speaker-info">
+            <div class="name">Maria Amparo Alonso Escobar</div>
+            <div class="title">Founder and CEO, EAiD (Ethical AI for Human Development)</div>
+          </div>
         </div>
-    </section>
-    
-    <!-- Topics of Discussion -->
-    <section>
-        <div class="container">
-            <h2>Topics of Discussion</h2>
-            <div class="topics-grid">
-                <div class="topic-card">
-                    <div class="topic-icon"></div>
-                    <div class="topic-text">Artificial intelligence and human dignity</div>
-                </div>
-                <div class="topic-card">
-                    <div class="topic-icon"></div>
-                    <div class="topic-text">Digital sovereignty and the freedom of communities</div>
-                </div>
-                <div class="topic-card">
-                    <div class="topic-icon"></div>
-                    <div class="topic-text">Technology, faith, and integral human development</div>
-                </div>
-                <div class="topic-card">
-                    <div class="topic-icon"></div>
-                    <div class="topic-text">The role of local communities in shaping a more human digital future</div>
-                </div>
-            </div>
+        <div class="speaker-card">
+          <div class="speaker-avatar">ZP</div>
+          <div class="speaker-info">
+            <div class="name">Zoltan Papp</div>
+            <div class="title">Co-founder, Domus Communis Foundation</div>
+          </div>
         </div>
-    </section>
-    
-    <!-- Register -->
-    <section id="register">
-        <div class="container content-narrow">
-            <h2>Register to Attend</h2>
-            <p>Space is limited. Reserve your place at this dialogue on faith, technology, and the future of education.</p>
-            <iframe src="REGISTRATION_FORM_URL" width="100%" height="600" frameborder="0" marginheight="0" marginwidth="0">Loading form...</iframe>
-            <!-- Replace REGISTRATION_FORM_URL with actual Google Form embed URL -->
+        <div class="speaker-card">
+          <div class="speaker-avatar">AK</div>
+          <div class="speaker-info">
+            <div class="name">Antal Kuthy</div>
+            <div class="title">Technology entrepreneur and co-founder of the Foundation</div>
+          </div>
         </div>
-    </section>
-    
-    <!-- About DCF -->
-    <section class="about-dcf">
-        <div class="container content-narrow">
-            <h2>About the Domus Communis Foundation</h2>
-            <p>
-                The Domus Communis Foundation is an international constellation of nonprofits dedicated to the research, development, and promotion of human-centric, ethical, safe, and secure cyber and AI technologies for the benefit of humankind, the preservation of peace, and the advancement of the common good.
-            </p>
-            <a href="/v3/about.html" class="btn-learn-more">Learn More About DCF</a>
+      </div>
+      <div class="moderator-row">
+        <div class="label">Moderator</div>
+        <div class="speaker-card" style="max-width:360px;">
+          <div class="speaker-avatar">EC</div>
+          <div class="speaker-info">
+            <div class="name">Enzo Cursio</div>
+            <div class="title">Ambassador, Fratelli Tutti Foundation</div>
+          </div>
         </div>
-    </section>
-    
-    <footer id="main-footer"></footer>
-    
-    <script src="/v3/js/nav.js"></script>
+      </div>
+    </div>
+  </section>
+
+  <!-- TOPICS -->
+  <section class="event-section alt">
+    <div class="wide">
+      <h2>Topics of Discussion</h2>
+      <div class="topics-grid">
+        <div class="topic-card"><span class="topic-icon">🤖</span><p>Artificial intelligence and human dignity</p></div>
+        <div class="topic-card"><span class="topic-icon">🔐</span><p>Digital sovereignty and the freedom of communities</p></div>
+        <div class="topic-card"><span class="topic-icon">✝️</span><p>Technology, faith, and integral human development</p></div>
+        <div class="topic-card"><span class="topic-icon">🏘️</span><p>The role of local communities in shaping a more human digital future</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REGISTER -->
+  <section class="register-section" id="register">
+    <h2>Register to Attend</h2>
+    <p>Space is limited. Reserve your place at this dialogue on faith, technology, and the future of education.</p>
+    <div class="register-form">
+      <!-- Replace REGISTRATION_FORM_URL with actual Google Form embed URL -->
+      <iframe src="REGISTRATION_FORM_URL" width="100%" height="600" frameborder="0" marginheight="0" marginwidth="0">Loading form...</iframe>
+    </div>
+  </section>
+
+  <!-- ABOUT DCF -->
+  <section class="about-dcf-section">
+    <h2>About the Domus Communis Foundation</h2>
+    <p>The Domus Communis Foundation is an international constellation of nonprofits dedicated to the research, development, and promotion of human-centric, ethical, safe, and secure cyber and AI technologies for the benefit of humankind, the preservation of peace, and the advancement of the common good.</p>
+    <a href="/v3/about.html" class="btn-secondary">Learn More About DCF</a>
+  </section>
+
+  <footer id="main-footer"></footer>
+  <script src="/v3/js/nav.js"></script>
 </body>
 </html>
