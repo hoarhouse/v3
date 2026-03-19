@@ -15,19 +15,12 @@
     .event-hero .breadcrumb { color: rgba(255,255,255,0.7); font-size: 0.875rem; margin-bottom: 1.5rem; }
     .event-hero .breadcrumb a { color: rgba(255,255,255,0.7); text-decoration: none; }
     .event-hero .breadcrumb a:hover { color: #ffffff; }
-    .event-hero .date-badge {
-      display: inline-block;
-      background: #0071e3;
-      color: #ffffff;
-      padding: 0.4rem 1.2rem;
-      border-radius: 20px;
-      font-size: 0.875rem;
-      font-weight: 600;
-      margin-bottom: 1.5rem;
-    }
     .event-hero h1 { font-size: clamp(1.75rem, 4vw, 2.75rem); font-weight: 700; color: #ffffff !important; margin-bottom: 1rem; max-width: 800px; margin-left: auto; margin-right: auto; }
     .event-hero .subtitle { font-size: 1.125rem; color: rgba(255,255,255,0.8); max-width: 650px; margin: 0 auto 1.5rem; line-height: 1.6; }
-    .event-hero .location-time { font-size: 0.95rem; color: rgba(255,255,255,0.75); margin-bottom: 2rem; }
+    .event-info-strip { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; margin-bottom: 2rem; margin-top: 0.5rem; }
+    .event-info-item { display: flex; align-items: center; gap: 0.5rem; color: rgba(255,255,255,0.9); font-size: 0.975rem; font-weight: 500; }
+    .event-info-item svg { width: 18px; height: 18px; flex-shrink: 0; opacity: 0.85; }
+    @media (max-width: 600px) { .event-info-strip { flex-direction: column; align-items: center; gap: 0.75rem; } }
     .hero-ctas { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
     .btn-primary { background: #0071e3; color: #ffffff; padding: 0.75rem 1.75rem; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 0.95rem; }
     .btn-outline { background: transparent; color: #ffffff; border: 2px solid rgba(255,255,255,0.6); padding: 0.75rem 1.75rem; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 0.95rem; }
@@ -74,10 +67,22 @@
   <!-- HERO -->
   <section class="event-hero">
     <div class="breadcrumb"><a href="/v3/events/index.html">← Back to Events</a></div>
-    <div class="date-badge">May 24, 2026</div>
     <h1>Artificial Intelligence, Human Dignity &amp; Cooperation among Communities</h1>
     <p class="subtitle">A dialogue on guiding technological development and building relationships among communities</p>
-    <p class="location-time">📍 Parish of Santa Maria delle Grazie — Casal Boccone, Rome &nbsp;|&nbsp; 4:00 PM – 6:00 PM</p>
+    <div class="event-info-strip">
+      <div class="event-info-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        May 24, 2026
+      </div>
+      <div class="event-info-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg>
+        Parish of Santa Maria delle Grazie, Rome
+      </div>
+      <div class="event-info-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        4:00 PM – 6:00 PM
+      </div>
+    </div>
     <div class="hero-ctas">
       <a href="#register" class="btn-primary">Register to Attend</a>
       <a href="#" class="btn-outline">Share This Event</a>
