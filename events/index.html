@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DCF Hungary - Events</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <style>
+        /* Page-specific styles */
+        
+        /* Hero Section */
+        .hero {
+            background: var(--light-background);
+            padding: 5rem 0 3rem;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            margin-bottom: 1rem;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            color: var(--primary);
+        }
+        
+        .hero-subtitle {
+            font-size: clamp(1.25rem, 3vw, 1.75rem);
+            color: var(--accent);
+            max-width: 700px;
+            margin: 0 auto;
+            font-weight: 400;
+            line-height: 1.4;
+        }
+        
+        /* Events Grid */
+        .events-section {
+            padding: 4rem 0 5rem;
+        }
+        
+        .events-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .event-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        .event-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.15);
+        }
+        
+        .event-date {
+            background: var(--primary);
+            color: white;
+            padding: 1rem 1.5rem;
+            font-size: 1.25rem;
+            font-weight: 600;
+            text-align: center;
+        }
+        
+        .event-content {
+            padding: 1.5rem;
+        }
+        
+        .event-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 0.75rem;
+            line-height: 1.3;
+        }
+        
+        .event-description {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+        
+        .event-details {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+        
+        .event-detail {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .event-detail-icon {
+            width: 16px;
+            height: 16px;
+            fill: var(--accent);
+        }
+        
+        .event-cta {
+            color: var(--accent);
+            font-weight: 600;
+            margin-top: 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .event-cta-arrow {
+            transition: transform 0.3s ease;
+        }
+        
+        .event-card:hover .event-cta-arrow {
+            transform: translateX(3px);
+        }
+        
+        /* Upcoming Badge */
+        .upcoming-badge {
+            background: var(--accent);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+        
+        /* Past Events Section */
+        .past-events {
+            background: var(--light-background);
+            padding: 4rem 0;
+        }
+        
+        .past-events-title {
+            text-align: center;
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 2rem;
+        }
+        
+        .past-event-card {
+            opacity: 0.7;
+        }
+        
+        .past-event-card .event-date {
+            background: var(--text-muted);
+        }
+    </style>
+</head>
+<body>
+    <div id="nav-placeholder"></div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>DCF Events</h1>
+            <p class="hero-subtitle">Join us for engaging discussions on AI ethics, human dignity, and the future of technology in society</p>
+        </div>
+    </section>
+
+    <!-- Upcoming Events -->
+    <section class="events-section">
+        <div class="container">
+            <div class="upcoming-badge">Upcoming Events</div>
+            
+            <div class="events-grid">
+                <!-- April 26 Event -->
+                <a href="april-26-education-youth-technology.html" class="event-card">
+                    <div class="event-date">April 26, 2025</div>
+                    <div class="event-content">
+                        <h3 class="event-title">Education, Youth & Technology</h3>
+                        <p class="event-description">
+                            Exploring the intersection of AI in education, digital literacy for young people, and the role of technology in shaping future generations.
+                        </p>
+                        <div class="event-details">
+                            <div class="event-detail">
+                                <svg class="event-detail-icon" viewBox="0 0 16 16">
+                                    <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/>
+                                    <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"/>
+                                </svg>
+                                <span>10:00 AM - 4:00 PM CET</span>
+                            </div>
+                            <div class="event-detail">
+                                <svg class="event-detail-icon" viewBox="0 0 16 16">
+                                    <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
+                                </svg>
+                                <span>Budapest, Hungary</span>
+                            </div>
+                        </div>
+                        <div class="event-cta">
+                            Learn More 
+                            <svg class="event-cta-arrow" width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+                            </svg>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- May 24 Event -->
+                <a href="may-24-ai-human-dignity-communities.html" class="event-card">
+                    <div class="event-date">May 24, 2025</div>
+                    <div class="event-content">
+                        <h3 class="event-title">AI, Human Dignity & Communities</h3>
+                        <p class="event-description">
+                            A deep dive into how artificial intelligence impacts human dignity, community relationships, and the preservation of human values in the digital age.
+                        </p>
+                        <div class="event-details">
+                            <div class="event-detail">
+                                <svg class="event-detail-icon" viewBox="0 0 16 16">
+                                    <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/>
+                                    <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"/>
+                                </svg>
+                                <span>9:30 AM - 5:00 PM CET</span>
+                            </div>
+                            <div class="event-detail">
+                                <svg class="event-detail-icon" viewBox="0 0 16 16">
+                                    <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
+                                </svg>
+                                <span>Budapest, Hungary</span>
+                            </div>
+                        </div>
+                        <div class="event-cta">
+                            Learn More 
+                            <svg class="event-cta-arrow" width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+                            </svg>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Placeholder -->
+    <div id="footer-placeholder"></div>
+
+    <script src="../js/nav.js"></script>
+    <script src="../js/main.js"></script>
+</body>
+</html>

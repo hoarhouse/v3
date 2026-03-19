@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DCF Hungary - Education, Youth & Technology Event</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <style>
+        /* Page-specific styles */
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            color: white;
+            padding: 5rem 0 4rem;
+            text-align: center;
+        }
+        
+        .event-badge {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 1rem;
+            backdrop-filter: blur(10px);
+        }
+        
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+        }
+        
+        .hero-meta {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+        
+        .hero-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn-register {
+            background: white;
+            color: var(--primary);
+            padding: 0.75rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .btn-register:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+            padding: 0.75rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background 0.3s ease;
+        }
+        
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Content Sections */
+        .content-section {
+            padding: 4rem 0;
+        }
+        
+        .content-section:nth-child(even) {
+            background: var(--light-background);
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .section-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* Event Details Grid */
+        .details-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+        
+        .detail-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .detail-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--accent);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+        
+        .detail-icon svg {
+            width: 24px;
+            height: 24px;
+            fill: white;
+        }
+        
+        .detail-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .detail-text {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+        
+        /* Agenda Section */
+        .agenda-timeline {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .agenda-item {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--border-light);
+        }
+        
+        .agenda-item:last-child {
+            border-bottom: none;
+        }
+        
+        .agenda-time {
+            flex-shrink: 0;
+            width: 120px;
+            font-weight: 600;
+            color: var(--accent);
+        }
+        
+        .agenda-content {
+            flex-grow: 1;
+        }
+        
+        .agenda-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .agenda-description {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+        
+        .agenda-speaker {
+            margin-top: 0.5rem;
+            font-style: italic;
+            color: var(--text-muted);
+        }
+        
+        /* Speakers Grid */
+        .speakers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .speaker-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            text-align: center;
+            padding: 2rem;
+        }
+        
+        .speaker-avatar {
+            width: 120px;
+            height: 120px;
+            background: var(--accent);
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+            font-weight: 600;
+        }
+        
+        .speaker-name {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 0.25rem;
+        }
+        
+        .speaker-title {
+            color: var(--accent);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+        
+        .speaker-bio {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            background: var(--primary);
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+        }
+        
+        .cta-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .cta-text {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+    </style>
+</head>
+<body>
+    <div id="nav-placeholder"></div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="event-badge">DCF Hungary Event</div>
+            <h1>Education, Youth & Technology</h1>
+            <div class="hero-meta">April 26, 2025 • Budapest, Hungary</div>
+            <div class="hero-actions">
+                <a href="#register" class="btn-register">Register Now</a>
+                <a href="#agenda" class="btn-outline">View Agenda</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Event Details -->
+    <section class="content-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Event Overview</h2>
+                <p class="section-subtitle">Join us for a transformative discussion on the role of technology in shaping education and empowering youth</p>
+            </div>
+            
+            <div class="details-grid">
+                <div class="detail-card">
+                    <div class="detail-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/>
+                        </svg>
+                    </div>
+                    <h3 class="detail-title">Date & Time</h3>
+                    <p class="detail-text">April 26, 2025<br>10:00 AM - 4:00 PM CET</p>
+                </div>
+                
+                <div class="detail-card">
+                    <div class="detail-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                        </svg>
+                    </div>
+                    <h3 class="detail-title">Location</h3>
+                    <p class="detail-text">Central European University<br>Budapest, Hungary</p>
+                </div>
+                
+                <div class="detail-card">
+                    <div class="detail-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>
+                        </svg>
+                    </div>
+                    <h3 class="detail-title">Audience</h3>
+                    <p class="detail-text">Educators, Policy Makers, Tech Leaders, Students</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Agenda -->
+    <section class="content-section" id="agenda">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Event Agenda</h2>
+                <p class="section-subtitle">A full day of insights, discussions, and networking</p>
+            </div>
+            
+            <div class="agenda-timeline">
+                <div class="agenda-item">
+                    <div class="agenda-time">10:00 - 10:30</div>
+                    <div class="agenda-content">
+                        <h3 class="agenda-title">Registration & Welcome Coffee</h3>
+                        <p class="agenda-description">Check-in, networking, and light refreshments</p>
+                    </div>
+                </div>
+                
+                <div class="agenda-item">
+                    <div class="agenda-time">10:30 - 11:15</div>
+                    <div class="agenda-content">
+                        <h3 class="agenda-title">Opening Keynote: The Digital Native Generation</h3>
+                        <p class="agenda-description">Understanding how technology shapes young minds and the responsibility of educators in the AI age</p>
+                        <p class="agenda-speaker">Speaker: Dr. Maria Kovacs, Educational Psychologist</p>
+                    </div>
+                </div>
+                
+                <div class="agenda-item">
+                    <div class="agenda-time">11:15 - 12:00</div>
+                    <div class="agenda-content">
+                        <h3 class="agenda-title">Panel Discussion: AI in the Classroom</h3>
+                        <p class="agenda-description">Exploring practical applications, challenges, and ethical considerations of AI-powered educational tools</p>
+                    </div>
+                </div>
+                
+                <div class="agenda-item">
+                    <div class="agenda-time">12:00 - 13:00</div>
+                    <div class="agenda-content">
+                        <h3 class="agenda-title">Networking Lunch</h3>
+                        <p class="agenda-description">Enjoy a catered lunch while connecting with fellow attendees</p>
+                    </div>
+                </div>
+                
+                <div class="agenda-item">
+                    <div class="agenda-time">13:00 - 14:00</div>
+                    <div class="agenda-content">
+                        <h3 class="agenda-title">Workshop: Digital Literacy for the 21st Century</h3>
+                        <p class="agenda-description">Interactive session on teaching critical thinking and ethical reasoning in the digital age</p>
+                    </div>
+                </div>
+                
+                <div class="agenda-item">
+                    <div class="agenda-time">14:00 - 15:00</div>
+                    <div class="agenda-content">
+                        <h3 class="agenda-title">Case Studies: Success Stories from European Schools</h3>
+                        <p class="agenda-description">Real-world examples of technology integration that preserves human values</p>
+                    </div>
+                </div>
+                
+                <div class="agenda-item">
+                    <div class="agenda-time">15:00 - 15:45</div>
+                    <div class="agenda-content">
+                        <h3 class="agenda-title">Closing Remarks & Action Plan</h3>
+                        <p class="agenda-description">Synthesis of key insights and collaborative planning for implementation</p>
+                    </div>
+                </div>
+                
+                <div class="agenda-item">
+                    <div class="agenda-time">15:45 - 16:00</div>
+                    <div class="agenda-content">
+                        <h3 class="agenda-title">Farewell Reception</h3>
+                        <p class="agenda-description">Final networking opportunity and closing refreshments</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Speakers -->
+    <section class="content-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Featured Speakers</h2>
+                <p class="section-subtitle">Learn from leading experts in education, technology, and youth development</p>
+            </div>
+            
+            <div class="speakers-grid">
+                <div class="speaker-card">
+                    <div class="speaker-avatar">MK</div>
+                    <h3 class="speaker-name">Dr. Maria Kovacs</h3>
+                    <p class="speaker-title">Educational Psychologist</p>
+                    <p class="speaker-bio">Leading researcher in digital learning and youth cognitive development with 15+ years of experience</p>
+                </div>
+                
+                <div class="speaker-card">
+                    <div class="speaker-avatar">JN</div>
+                    <h3 class="speaker-name">János Nagy</h3>
+                    <p class="speaker-title">Tech Ethics Advocate</p>
+                    <p class="speaker-bio">Former Google engineer turned advocate for ethical AI in education and public policy</p>
+                </div>
+                
+                <div class="speaker-card">
+                    <div class="speaker-avatar">AS</div>
+                    <h3 class="speaker-name">Anna Szabó</h3>
+                    <p class="speaker-title">Ministry of Education</p>
+                    <p class="speaker-bio">Senior policy advisor on digital transformation in Hungarian educational institutions</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section" id="register">
+        <div class="container">
+            <h2 class="cta-title">Reserve Your Spot</h2>
+            <p class="cta-text">Limited seats available. Join us for this important conversation.</p>
+            <div class="cta-buttons">
+                <a href="#" class="btn-register">Register Now</a>
+                <a href="../contact.html" class="btn-outline">Contact Us</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Placeholder -->
+    <div id="footer-placeholder"></div>
+
+    <script src="../js/nav.js"></script>
+    <script src="../js/main.js"></script>
+</body>
+</html>
