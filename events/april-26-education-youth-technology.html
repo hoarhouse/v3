@@ -76,7 +76,7 @@
       </div>
       <div class="event-info-item">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg>
-        Parish of Santa Maria delle Grazie, Rome
+        <a href="https://maps.google.com/?q=Parish+Santa+Maria+delle+Grazie+Via+Casal+Boccone+Rome+Italy" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:3px;opacity:0.9;">Parish of Santa Maria delle Grazie, Rome</a>
       </div>
       <div class="event-info-item">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
@@ -86,6 +86,10 @@
     <div class="hero-ctas">
       <a href="#register" class="btn-primary">Register to Attend</a>
       <a href="#" class="btn-outline">Share This Event</a>
+      <a href="#" class="btn-outline" id="addToCalBtn" onclick="downloadCalendar(); return false;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px;display:inline-block;vertical-align:middle;margin-right:6px;"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        Add to Calendar
+      </a>
     </div>
   </section>
 
@@ -210,5 +214,34 @@
 
   <footer id="main-footer"></footer>
   <script src="/v3/js/nav.js"></script>
+<script>
+function downloadCalendar() {
+  const icsContent = [
+    'BEGIN:VCALENDAR',
+    'VERSION:2.0',
+    'PRODID:-//Domus Communis Foundation//DCF Events//EN',
+    'BEGIN:VEVENT',
+    'UID:april26-2026-dcf-events@dcffoundation.org',
+    'DTSTAMP:20260101T000000Z',
+    'DTSTART:20260426T140000Z',
+    'DTEND:20260426T160000Z',
+    'SUMMARY:Education\, Youth & Technological Responsibility — DCF Event',
+    'DESCRIPTION:A dialogue on digital transformation\, formation\, and the educational mission of faith communities. Hosted by the Domus Communis Foundation at the Parish of Santa Maria delle Grazie\, Rome.',
+    'LOCATION:Parish of Santa Maria delle Grazie\, Via Casal Boccone\, Rome\, Italy',
+    'URL:https://dcffoundation.org/v3/events/april-26-education-youth-technology.html',
+    'END:VEVENT',
+    'END:VCALENDAR'
+  ].join('\r\n');
+  const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'dcf-event-april-26-2026.ics';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+</script>
 </body>
 </html>
