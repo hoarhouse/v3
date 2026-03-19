@@ -59,6 +59,36 @@
       .topics-grid { grid-template-columns: 1fr; }
       .speakers-grid { grid-template-columns: 1fr; }
     }
+    /* Sticky Register Bar */
+    .sticky-bar {
+      position: fixed;
+      bottom: -80px;
+      left: 0;
+      right: 0;
+      background: #0a0f1e;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding: 0.875rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 900;
+      transition: bottom 0.35s ease;
+      box-shadow: 0 -4px 20px rgba(0,0,0,0.2);
+    }
+    .sticky-bar.visible { bottom: 0; }
+    .sticky-bar-info { color: rgba(255,255,255,0.85); font-size: 0.9rem; }
+    .sticky-bar-info strong { color: #ffffff; font-weight: 600; margin-right: 0.5rem; }
+    .sticky-bar a { background: #0071e3; color: #ffffff; padding: 0.6rem 1.5rem; border-radius: 7px; text-decoration: none; font-weight: 600; font-size: 0.875rem; white-space: nowrap; }
+    @media (max-width: 600px) {
+      .sticky-bar { padding: 0.75rem 1rem; }
+      .sticky-bar-info { font-size: 0.8rem; }
+    }
+    /* Speaker bio expand */
+    .speaker-card { cursor: pointer; }
+    .speaker-bio { display: none; margin-top: 0.75rem; padding-top: 0.75rem; border-top: 1px solid rgba(0,0,0,0.08); font-size: 0.825rem; color: #555; line-height: 1.6; grid-column: 1 / -1; }
+    .speaker-card.expanded .speaker-bio { display: block; }
+    .speaker-expand-icon { margin-left: auto; color: #0071e3; font-size: 1.1rem; flex-shrink: 0; transition: transform 0.2s ease; }
+    .speaker-card.expanded .speaker-expand-icon { transform: rotate(45deg); }
   </style>
 </head>
 <body>
@@ -126,58 +156,72 @@
     <div class="wide">
       <h2>Speakers</h2>
       <div class="speakers-grid">
-        <div class="speaker-card">
-          <div class="speaker-avatar">AF</div>
-          <div class="speaker-info">
-            <div class="name">H.E. Cardinal Ángel Fernández Artime, S.D.B.</div>
-            <div class="title">Pro-Prefect of the Dicastery for Institutes of Consecrated Life and Societies of Apostolic Life</div>
-          </div>
-        </div>
-        <div class="speaker-card">
-          <div class="speaker-avatar">FB</div>
-          <div class="speaker-info">
-            <div class="name">Cardinal Fabio Baggio, C.S.</div>
-            <div class="title">Director General of Borgo Laudato Sì</div>
-          </div>
-        </div>
-        <div class="speaker-card">
-          <div class="speaker-avatar">AS</div>
-          <div class="speaker-info">
-            <div class="name">Sr. Alessandra Smerilli, F.M.A.</div>
-            <div class="title">Secretary of the Dicastery for Promoting Integral Human Development</div>
-          </div>
-        </div>
-        <div class="speaker-card">
-          <div class="speaker-avatar">RP</div>
-          <div class="speaker-info">
-            <div class="name">Mons. Renzo Pegoraro</div>
-            <div class="title">President of the Pontifical Academy for Life</div>
-          </div>
-        </div>
-        <div class="speaker-card">
-          <div class="speaker-avatar">PS</div>
-          <div class="speaker-info">
-            <div class="name">Representative</div>
-            <div class="title">Pontifical Salesian University</div>
-          </div>
-        </div>
-        <div class="speaker-card">
-          <div class="speaker-avatar">AE</div>
-          <div class="speaker-info">
-            <div class="name">Antonino Errigo</div>
-            <div class="title">Secretary General of Borgo Laudato Sì</div>
-          </div>
-        </div>
+        <div class="speaker-card" onclick="this.classList.toggle('expanded')">
+      <div class="speaker-avatar">AF</div>
+      <div class="speaker-info">
+        <div class="name">H.E. Cardinal Ángel Fernández Artime, S.D.B.</div>
+        <div class="title">Pro-Prefect of the Dicastery for Institutes of Consecrated Life and Societies of Apostolic Life</div>
+        <div class="speaker-bio">Cardinal Fernández Artime served as the tenth Rector Major of the Salesians of Don Bosco from 2014 to 2024, leading the congregation's global educational and missionary work before being appointed to the Roman Curia by Pope Francis.</div>
+      </div>
+      <span class="speaker-expand-icon">+</span>
+    </div>
+        <div class="speaker-card" onclick="this.classList.toggle('expanded')">
+      <div class="speaker-avatar">FB</div>
+      <div class="speaker-info">
+        <div class="name">Cardinal Fabio Baggio, C.S.</div>
+        <div class="title">Director General of Borgo Laudato Sì</div>
+        <div class="speaker-bio">Cardinal Baggio is a Scalabrinian missionary with extensive experience in migration and human development, previously serving as Under-Secretary of the Dicastery for Promoting Integral Human Development.</div>
+      </div>
+      <span class="speaker-expand-icon">+</span>
+    </div>
+        <div class="speaker-card" onclick="this.classList.toggle('expanded')">
+      <div class="speaker-avatar">AS</div>
+      <div class="speaker-info">
+        <div class="name">Sr. Alessandra Smerilli, F.M.A.</div>
+        <div class="title">Secretary of the Dicastery for Promoting Integral Human Development</div>
+        <div class="speaker-bio">Sr. Smerilli is an economist and Daughter of Mary Help of Christians, known for her work on Catholic Social Teaching, integral human development, and the ethics of economic systems in the digital age.</div>
+      </div>
+      <span class="speaker-expand-icon">+</span>
+    </div>
+        <div class="speaker-card" onclick="this.classList.toggle('expanded')">
+      <div class="speaker-avatar">RP</div>
+      <div class="speaker-info">
+        <div class="name">Mons. Renzo Pegoraro</div>
+        <div class="title">President of the Pontifical Academy for Life</div>
+        <div class="speaker-bio">Mons. Pegoraro is a moral theologian and bioethicist who leads the Pontifical Academy for Life's engagement with artificial intelligence ethics, biotechnology, and the Church's dialogue with science and technology.</div>
+      </div>
+      <span class="speaker-expand-icon">+</span>
+    </div>
+        <div class="speaker-card" onclick="this.classList.toggle('expanded')">
+      <div class="speaker-avatar">PS</div>
+      <div class="speaker-info">
+        <div class="name">Representative</div>
+        <div class="title">Pontifical Salesian University</div>
+        <div class="speaker-bio">The Pontifical Salesian University (UPS) in Rome is a leading Catholic institution dedicated to education, communication, and youth ministry, continuing the mission of Don Bosco in the digital age.</div>
+      </div>
+      <span class="speaker-expand-icon">+</span>
+    </div>
+        <div class="speaker-card" onclick="this.classList.toggle('expanded')">
+      <div class="speaker-avatar">AE</div>
+      <div class="speaker-info">
+        <div class="name">Antonino Errigo</div>
+        <div class="title">Secretary General of Borgo Laudato Sì</div>
+        <div class="speaker-bio">Antonino Errigo leads operations at Borgo Laudato Sì, an ecological village and formation center near the Vatican dedicated to integral ecology, sustainable living, and the implementation of Laudato Sì.</div>
+      </div>
+      <span class="speaker-expand-icon">+</span>
+    </div>
       </div>
       <div class="moderator-row">
         <div class="label">Moderator</div>
-        <div class="speaker-card" style="max-width:360px;">
-          <div class="speaker-avatar">AP</div>
-          <div class="speaker-info">
-            <div class="name">Alessio Pecorario</div>
-            <div class="title">Founder and CEO, Domus Communis Foundation</div>
-          </div>
-        </div>
+        <div class="speaker-card" style="max-width:360px;" onclick="this.classList.toggle('expanded')">
+      <div class="speaker-avatar">AP</div>
+      <div class="speaker-info">
+        <div class="name">Alessio Pecorario</div>
+        <div class="title">Founder and CEO, Domus Communis Foundation</div>
+        <div class="speaker-bio">Alessio Pecorario is the founder and CEO of the Domus Communis Foundation, with extensive experience at the Holy See in technology governance, integral cybersecurity, and AI ethics.</div>
+      </div>
+      <span class="speaker-expand-icon">+</span>
+    </div>
       </div>
     </div>
   </section>
@@ -214,7 +258,24 @@
 
   <footer id="main-footer"></footer>
   <script src="/v3/js/nav.js"></script>
+    <div class="sticky-bar" id="stickyBar">
+      <div class="sticky-bar-info">
+        <strong>April 26, 2026</strong> Education, Youth &amp; Technological Responsibility &nbsp;·&nbsp; 4:00 PM – 6:00 PM, Rome
+      </div>
+      <a href="#register">Register to Attend</a>
+    </div>
 <script>
+    // Sticky bar — show after scrolling past hero
+    const stickyBar = document.getElementById('stickyBar');
+    const hero = document.querySelector('.event-hero');
+    window.addEventListener('scroll', () => {
+      if (hero && window.scrollY > hero.offsetHeight) {
+        stickyBar.classList.add('visible');
+      } else {
+        stickyBar.classList.remove('visible');
+      }
+    });
+    
 function downloadCalendar() {
   const icsContent = [
     'BEGIN:VCALENDAR',

@@ -59,6 +59,36 @@
       .topics-grid { grid-template-columns: 1fr; }
       .speakers-grid { grid-template-columns: 1fr; }
     }
+    /* Sticky Register Bar */
+    .sticky-bar {
+      position: fixed;
+      bottom: -80px;
+      left: 0;
+      right: 0;
+      background: #0a0f1e;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding: 0.875rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 900;
+      transition: bottom 0.35s ease;
+      box-shadow: 0 -4px 20px rgba(0,0,0,0.2);
+    }
+    .sticky-bar.visible { bottom: 0; }
+    .sticky-bar-info { color: rgba(255,255,255,0.85); font-size: 0.9rem; }
+    .sticky-bar-info strong { color: #ffffff; font-weight: 600; margin-right: 0.5rem; }
+    .sticky-bar a { background: #0071e3; color: #ffffff; padding: 0.6rem 1.5rem; border-radius: 7px; text-decoration: none; font-weight: 600; font-size: 0.875rem; white-space: nowrap; }
+    @media (max-width: 600px) {
+      .sticky-bar { padding: 0.75rem 1rem; }
+      .sticky-bar-info { font-size: 0.8rem; }
+    }
+    /* Speaker bio expand */
+    .speaker-card { cursor: pointer; }
+    .speaker-bio { display: none; margin-top: 0.75rem; padding-top: 0.75rem; border-top: 1px solid rgba(0,0,0,0.08); font-size: 0.825rem; color: #555; line-height: 1.6; grid-column: 1 / -1; }
+    .speaker-card.expanded .speaker-bio { display: block; }
+    .speaker-expand-icon { margin-left: auto; color: #0071e3; font-size: 1.1rem; flex-shrink: 0; transition: transform 0.2s ease; }
+    .speaker-card.expanded .speaker-expand-icon { transform: rotate(45deg); }
   </style>
 </head>
 <body>
@@ -126,44 +156,54 @@
     <div class="wide">
       <h2>Speakers</h2>
       <div class="speakers-grid">
-        <div class="speaker-card">
-          <div class="speaker-avatar">CT</div>
-          <div class="speaker-info">
-            <div class="name">Cardinal Silvano Maria Tomasi</div>
-            <div class="title">Former Permanent Observer to the United Nations</div>
-          </div>
-        </div>
-        <div class="speaker-card">
+        <div class="speaker-card" onclick="this.classList.toggle('expanded')">
+      <div class="speaker-avatar">CT</div>
+      <div class="speaker-info">
+        <div class="name">Cardinal Silvano Maria Tomasi</div>
+        <div class="title">Former Permanent Observer to the United Nations</div>
+        <div class="speaker-bio">Cardinal Tomasi served for over a decade as the Holy See's Permanent Observer to the United Nations in Geneva, becoming one of the most respected voices in multilateral diplomacy on disarmament, human rights, and technology governance.</div>
+      </div>
+      <span class="speaker-expand-icon">+</span>
+    </div>
+        <div class="speaker-card" onclick="this.classList.toggle('expanded')">
           <div class="speaker-avatar">MA</div>
           <div class="speaker-info">
             <div class="name">Maria Amparo Alonso Escobar</div>
             <div class="title">Founder and CEO, EAiD (Ethical AI for Human Development)</div>
+            <div class="speaker-bio">Maria Amparo Alonso Escobar is the founder and CEO of EAiD (Ethical AI for Human Development), working at the intersection of artificial intelligence, human rights, and sustainable development.</div>
           </div>
+          <span class="speaker-expand-icon">+</span>
         </div>
-        <div class="speaker-card">
-          <div class="speaker-avatar">ZP</div>
-          <div class="speaker-info">
-            <div class="name">Zoltan Papp</div>
-            <div class="title">Co-founder, Domus Communis Foundation</div>
-          </div>
-        </div>
-        <div class="speaker-card">
-          <div class="speaker-avatar">AK</div>
-          <div class="speaker-info">
-            <div class="name">Antal Kuthy</div>
-            <div class="title">Technology entrepreneur and co-founder of the Foundation</div>
-          </div>
-        </div>
+        <div class="speaker-card" onclick="this.classList.toggle('expanded')">
+      <div class="speaker-avatar">ZP</div>
+      <div class="speaker-info">
+        <div class="name">Zoltan Papp</div>
+        <div class="title">Co-founder, Domus Communis Foundation</div>
+        <div class="speaker-bio">Zoltan Papp is a technology entrepreneur and co-founder of the Domus Communis Foundation, with deep expertise in sovereign AI, data sovereignty, and the intersection of technology and human values.</div>
+      </div>
+      <span class="speaker-expand-icon">+</span>
+    </div>
+        <div class="speaker-card" onclick="this.classList.toggle('expanded')">
+      <div class="speaker-avatar">AK</div>
+      <div class="speaker-info">
+        <div class="name">Antal Kuthy</div>
+        <div class="title">Technology entrepreneur and co-founder of the Foundation</div>
+        <div class="speaker-bio">Antal Kuthy is a technology entrepreneur and co-founder of the Domus Communis Foundation, a leading voice in the global movement for sovereign AI and human-centric digital infrastructure.</div>
+      </div>
+      <span class="speaker-expand-icon">+</span>
+    </div>
       </div>
       <div class="moderator-row">
         <div class="label">Moderator</div>
-        <div class="speaker-card" style="max-width:360px;">
-          <div class="speaker-avatar">EC</div>
-          <div class="speaker-info">
-            <div class="name">Enzo Cursio</div>
-            <div class="title">Ambassador, Fratelli Tutti Foundation</div>
-          </div>
-        </div>
+        <div class="speaker-card" style="max-width:360px;" onclick="this.classList.toggle('expanded')">
+      <div class="speaker-avatar">EC</div>
+      <div class="speaker-info">
+        <div class="name">Enzo Cursio</div>
+        <div class="title">Ambassador, Fratelli Tutti Foundation</div>
+        <div class="speaker-bio">Enzo Cursio serves as Ambassador of the Fratelli Tutti Foundation, working to advance the principles of human fraternity, solidarity, and dialogue across cultures and faiths.</div>
+      </div>
+      <span class="speaker-expand-icon">+</span>
+    </div>
       </div>
     </div>
   </section>
@@ -200,7 +240,24 @@
 
   <footer id="main-footer"></footer>
   <script src="/v3/js/nav.js"></script>
+    <div class="sticky-bar" id="stickyBar">
+      <div class="sticky-bar-info">
+        <strong>May 24, 2026</strong> AI, Human Dignity &amp; Cooperation among Communities &nbsp;·&nbsp; 4:00 PM – 6:00 PM, Rome
+      </div>
+      <a href="#register">Register to Attend</a>
+    </div>
 <script>
+    // Sticky bar — show after scrolling past hero
+    const stickyBar = document.getElementById('stickyBar');
+    const hero = document.querySelector('.event-hero');
+    window.addEventListener('scroll', () => {
+      if (hero && window.scrollY > hero.offsetHeight) {
+        stickyBar.classList.add('visible');
+      } else {
+        stickyBar.classList.remove('visible');
+      }
+    });
+    
 function downloadCalendar() {
   const icsContent = [
     'BEGIN:VCALENDAR',
