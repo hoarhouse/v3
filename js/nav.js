@@ -232,7 +232,8 @@ const navStyles = `
 .nav-dropdown {
   display: none;
   position: absolute;
-  top: calc(100% + 8px);
+  top: 100%;
+  padding-top: 8px;
   left: 0;
   background: #ffffff;
   border: 1px solid rgba(0,0,0,0.08);
