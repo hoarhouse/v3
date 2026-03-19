@@ -44,7 +44,8 @@
     .moderator-row .label { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; color: #0071e3; font-weight: 600; margin-bottom: 0.75rem; }
     .topics-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1.5rem; }
     .topic-card { background: #ffffff; border-radius: 10px; padding: 1.25rem 1.5rem; box-shadow: 0 2px 6px rgba(0,0,0,0.06); display: flex; align-items: center; gap: 0.75rem; }
-    .topic-icon { font-size: 1.25rem; flex-shrink: 0; }
+    .topic-icon { width: 24px; height: 24px; flex-shrink: 0; color: #0071e3; }
+    .topic-icon svg { width: 24px; height: 24px; display: block; }
     .topic-card p { margin: 0; font-size: 0.9rem; color: #1d1d1f; font-weight: 500; line-height: 1.5; }
     .register-section { padding: 4rem 2rem; text-align: center; }
     .register-section h2 { font-size: 1.75rem; font-weight: 700; margin-bottom: 1rem; }
@@ -493,10 +494,10 @@
     <div class="wide">
       <h2>Topics of Discussion</h2>
       <div class="topics-grid">
-        <div class="topic-card"><span class="topic-icon">🎓</span><p>Education of young people in the age of artificial intelligence</p></div>
-        <div class="topic-card"><span class="topic-icon">💻</span><p>Digital responsibility and human formation</p></div>
-        <div class="topic-card"><span class="topic-icon">🌿</span><p>Integral ecology and technological innovation</p></div>
-        <div class="topic-card"><span class="topic-icon">⛪</span><p>The role of Christian communities in accompanying change</p></div>
+        <div class="topic-card"><span class="topic-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5-10-5z"/><path d="M6 12v5c0 2 2 3 6 3s6-1 6-3v-5"/></svg></span><p>Education of young people in the age of artificial intelligence</p></div>
+        <div class="topic-card"><span class="topic-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></span><p>Digital responsibility and human formation</p></div>
+        <div class="topic-card"><span class="topic-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 4 13c0-4 3-8 7-10 4 2 7 6 7 10a7 7 0 0 1-7 7z"/><path d="M11 20c0-4-2-8-7-10"/></svg></span><p>Integral ecology and technological innovation</p></div>
+        <div class="topic-card"><span class="topic-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v4M10 5h4"/><path d="M12 7v4l-4 3v7h8v-7l-4-3z"/><path d="M9 21v-4h6v4"/></svg></span><p>The role of Christian communities in accompanying change</p></div>
       </div>
     </div>
   </section>
