@@ -1629,57 +1629,71 @@ select.fi { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w
     }
   };
 
+  function scrollToSection(sectionId){
+    /* Scroll within the mini preview container or the full modal */
+    var containers = ['mini-site-preview','site-preview-content'];
+    containers.forEach(function(cid){
+      var container = document.getElementById(cid);
+      if(!container) return;
+      var target = container.querySelector('#ws-' + sectionId);
+      if(!target) return;
+      container.scrollTo({top: target.offsetTop - 48, behavior:'smooth'});
+    });
+  }
+
   function getSiteHTML(t, full) {
     var p = templates[t];
-    var pad = full ? '48px 28px' : '28px 20px';
-    var padSm = full ? '24px 28px' : '16px 20px';
-    var h1size = full ? '36px' : '22px';
-    var subsize = full ? '15px' : '12px';
-    var bodypad = full ? '36px 28px' : '18px 16px';
-    var cardpad = full ? '20px' : '14px';
-    var sectiongap = full ? '20px' : '12px';
+    var pad      = full ? '48px 28px' : '28px 20px';
+    var h1size   = full ? '36px' : '22px';
+    var subsize  = full ? '15px' : '12px';
+    var bodypad  = full ? '36px 28px' : '18px 16px';
+    var cardpad  = full ? '20px' : '14px';
+    var gap      = full ? '20px' : '12px';
 
     return '<div style="font-family:Outfit,system-ui,sans-serif;line-height:1.5;">'
 
-      /* NAV */
-      + '<div style="background:' + p.navBg + ';border-bottom:2px solid ' + p.navBorder + ';padding:11px 20px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:10;">'
+      /* ── NAV ── */
+      + '<div id="ws-top" style="background:' + p.navBg + ';border-bottom:2px solid ' + p.navBorder + ';padding:11px 20px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:10;">'
         + '<div style="font-size:' + (full?'15px':'13px') + ';font-weight:800;color:#fff;letter-spacing:-0.02em;white-space:nowrap;">St. Mary\'s <span style="color:#d85020;">Parish</span></div>'
-        + '<div style="display:flex;align-items:center;gap:' + (full?'14px':'8px') + ';">'
-          + (full ? '<a href="#" style="font-size:13px;font-weight:600;color:rgba(255,255,255,0.5);text-decoration:none;">About</a><a href="#" style="font-size:13px;font-weight:600;color:rgba(255,255,255,0.5);text-decoration:none;">Mass times</a><a href="#" style="font-size:13px;font-weight:600;color:rgba(255,255,255,0.5);text-decoration:none;">Contact</a>' : '')
-          + '<div style="font-size:' + (full?'12px':'11px') + ';font-weight:700;background:#d85020;color:#fff;padding:' + (full?'8px 16px':'6px 11px') + ';border-radius:6px;white-space:nowrap;">Donate</div>'
+        + '<div style="display:flex;align-items:center;gap:' + (full?'16px':'8px') + ';">'
+          + '<a onclick="scrollToSection(\'about\')" style="font-size:' + (full?'13px':'11px') + ';font-weight:600;color:rgba(255,255,255,0.55);text-decoration:none;cursor:pointer;white-space:nowrap;">About</a>'
+          + '<a onclick="scrollToSection(\'mass\')" style="font-size:' + (full?'13px':'11px') + ';font-weight:600;color:rgba(255,255,255,0.55);text-decoration:none;cursor:pointer;white-space:nowrap;">Mass times</a>'
+          + '<a onclick="scrollToSection(\'contact\')" style="font-size:' + (full?'13px':'11px') + ';font-weight:600;color:rgba(255,255,255,0.55);text-decoration:none;cursor:pointer;white-space:nowrap;">Contact</a>'
+          + '<div onclick="scrollToSection(\'donate\')" style="font-size:' + (full?'12px':'11px') + ';font-weight:700;background:#d85020;color:#fff;padding:' + (full?'8px 16px':'6px 11px') + ';border-radius:6px;white-space:nowrap;cursor:pointer;">Donate</div>'
         + '</div>'
       + '</div>'
 
-      /* HERO */
-      + '<div style="position:relative;overflow:hidden;">'
+      /* ── HERO ── */
+      + '<div id="ws-hero" style="position:relative;overflow:hidden;">'
       + '<div style="background:' + (heroPhotoUrl ? 'url(\'' + heroPhotoUrl + '\') center/cover no-repeat' : p.heroBg) + ';padding:' + pad + ';position:relative;">'
       + (heroPhotoUrl ? '<div style="position:absolute;inset:0;background:rgba(0,0,0,0.55);"></div>' : '')
         + '<div style="position:relative;z-index:1;">'
-          + '<div style="font-size:10px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:' + (heroPhotoUrl?'rgba(255,255,255,0.75)':p.accentColor) + ';margin-bottom:10px;">✓ DCF Verified · New York</div>'
+          + '<div style="font-size:10px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:' + (heroPhotoUrl?'rgba(255,255,255,0.75)':p.accentColor) + ';margin-bottom:10px;">&#10003; DCF Verified &middot; New York</div>'
           + '<div style="font-size:' + h1size + ';font-weight:800;color:#fff;letter-spacing:-0.03em;line-height:1.1;margin-bottom:8px;">' + siteData.heroTitle + '</div>'
           + '<div style="font-size:' + subsize + ';color:rgba(255,255,255,0.65);line-height:1.65;margin-bottom:' + (full?'24px':'14px') + ';max-width:460px;">' + siteData.heroTagline + '</div>'
           + '<div style="display:flex;gap:8px;flex-wrap:wrap;">'
-            + '<div style="font-size:' + (full?'13px':'12px') + ';font-weight:700;background:' + p.btnBg + ';color:' + p.btnColor + ';padding:' + (full?'10px 18px':'8px 13px') + ';border-radius:6px;cursor:pointer;white-space:nowrap;">Join us Sunday →</div>'
-            + '<div style="font-size:' + (full?'13px':'12px') + ';font-weight:700;background:rgba(255,255,255,0.12);color:rgba(255,255,255,0.8);padding:' + (full?'10px 18px':'8px 13px') + ';border-radius:6px;cursor:pointer;white-space:nowrap;">Mass times</div>'
+            + '<div onclick="scrollToSection(\'mass\')" style="font-size:' + (full?'13px':'12px') + ';font-weight:700;background:' + p.btnBg + ';color:' + p.btnColor + ';padding:' + (full?'10px 18px':'8px 13px') + ';border-radius:6px;cursor:pointer;white-space:nowrap;">Join us Sunday &#8594;</div>'
+            + '<div onclick="scrollToSection(\'about\')" style="font-size:' + (full?'13px':'12px') + ';font-weight:700;background:rgba(255,255,255,0.12);color:rgba(255,255,255,0.8);padding:' + (full?'10px 18px':'8px 13px') + ';border-radius:6px;cursor:pointer;white-space:nowrap;">About us</div>'
           + '</div>'
         + '</div>'
       + '</div>'
       + '</div>'
 
-      /* STATS BAR */
-      + '<div style="background:' + p.accentColor + ';padding:10px 20px;display:flex;gap:' + (full?'24px':'14px') + ';flex-wrap:wrap;">'
-        + '<div style="font-size:' + (full?'12px':'10px') + ';font-weight:700;color:' + (t==='midnight'?'#000':'#fff') + ';white-space:nowrap;">🕊 Founded 1887</div>'
-        + '<div style="font-size:' + (full?'12px':'10px') + ';font-weight:700;color:' + (t==='midnight'?'#000':'#fff') + ';white-space:nowrap;">👥 1,200+ Families</div>'
-        + (full ? '<div style="font-size:12px;font-weight:700;color:' + (t==='midnight'?'#000':'#fff') + ';white-space:nowrap;">🌍 40+ Countries</div><div style="font-size:12px;font-weight:700;color:' + (t==='midnight'?'#000':'#fff') + ';white-space:nowrap;">✓ Communio verified</div>' : '')
+      /* ── STATS BAR ── */
+      + '<div style="background:' + p.accentColor + ';padding:10px 20px;display:flex;gap:' + (full?'24px':'12px') + ';flex-wrap:wrap;">'
+        + '<div style="font-size:' + (full?'12px':'10px') + ';font-weight:700;color:' + (t==='midnight'?'#000':'#fff') + ';white-space:nowrap;">&#128330; Founded 1887</div>'
+        + '<div style="font-size:' + (full?'12px':'10px') + ';font-weight:700;color:' + (t==='midnight'?'#000':'#fff') + ';white-space:nowrap;">&#128101; 1,200+ Families</div>'
+        + (full ? '<div style="font-size:12px;font-weight:700;color:' + (t==='midnight'?'#000':'#fff') + ';white-space:nowrap;">&#127757; 40+ Countries</div><div style="font-size:12px;font-weight:700;color:' + (t==='midnight'?'#000':'#fff') + ';white-space:nowrap;">&#10003; Communio verified</div>' : '')
       + '</div>'
 
-      /* BODY */
-      + '<div style="background:' + p.bodyBg + ';padding:' + bodypad + ';display:flex;flex-direction:column;gap:' + sectiongap + ';">'
+      /* ── BODY ── */
+      + '<div style="background:' + p.bodyBg + ';padding:' + bodypad + ';display:flex;flex-direction:column;gap:' + gap + ';">'
 
-        /* Mass times + Events — single col on mini, 2 col on full */
+        /* Mass times + Events */
+        + '<div id="ws-mass">'
         + (full
-          ? '<div style="display:grid;grid-template-columns:1fr 1fr;gap:' + sectiongap + ';">'
-          : '<div style="display:flex;flex-direction:column;gap:' + sectiongap + ';">')
+            ? '<div style="display:grid;grid-template-columns:1fr 1fr;gap:' + gap + ';">'
+            : '<div style="display:flex;flex-direction:column;gap:' + gap + ';">')
           + '<div style="background:' + p.cardBg + ';border:1px solid ' + p.cardBorder + ';border-radius:10px;padding:' + cardpad + ';">'
             + '<div style="font-size:9px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:' + p.labelColor + ';margin-bottom:8px;">Mass times</div>'
             + '<div style="font-size:' + (full?'13px':'12px') + ';font-weight:600;color:' + p.headingColor + ';margin-bottom:6px;">Weekend</div>'
@@ -1689,20 +1703,16 @@ select.fi { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w
           + '<div style="background:' + p.cardBg + ';border:1px solid ' + p.cardBorder + ';border-radius:10px;padding:' + cardpad + ';">'
             + '<div style="font-size:9px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:' + p.labelColor + ';margin-bottom:8px;">Upcoming events</div>'
             + '<div style="display:flex;flex-direction:column;gap:8px;">'
-              + '<div style="display:flex;gap:9px;align-items:center;">'
-                + '<div style="background:' + p.accentColor + ';color:' + (t==='midnight'?'#000':'#fff') + ';border-radius:6px;padding:5px 7px;text-align:center;flex-shrink:0;min-width:34px;"><div style="font-size:8px;font-weight:700;text-transform:uppercase;">Apr</div><div style="font-size:' + (full?'16px':'13px') + ';font-weight:800;line-height:1;">19</div></div>'
-                + '<div><div style="font-size:' + (full?'13px':'12px') + ';font-weight:700;color:' + p.headingColor + ';">Easter Vigil</div><div style="font-size:11px;color:' + p.textColor + ';">8:00pm · Main Church</div></div>'
-              + '</div>'
-              + '<div style="display:flex;gap:9px;align-items:center;">'
-                + '<div style="background:' + p.cardBorder + ';border-radius:6px;padding:5px 7px;text-align:center;flex-shrink:0;min-width:34px;"><div style="font-size:8px;font-weight:700;text-transform:uppercase;color:' + p.textColor + ';">Apr</div><div style="font-size:' + (full?'16px':'13px') + ';font-weight:800;line-height:1;color:' + p.headingColor + ';">22</div></div>'
-                + '<div><div style="font-size:' + (full?'13px':'12px') + ';font-weight:700;color:' + p.headingColor + ';">Youth Group</div><div style="font-size:11px;color:' + p.textColor + ';">6:30pm · Parish Hall</div></div>'
-              + '</div>'
+              + '<div style="display:flex;gap:9px;align-items:center;"><div style="background:' + p.accentColor + ';color:' + (t==='midnight'?'#000':'#fff') + ';border-radius:6px;padding:5px 7px;text-align:center;flex-shrink:0;min-width:34px;"><div style="font-size:8px;font-weight:700;text-transform:uppercase;">Apr</div><div style="font-size:' + (full?'16px':'13px') + ';font-weight:800;line-height:1;">19</div></div><div><div style="font-size:' + (full?'13px':'12px') + ';font-weight:700;color:' + p.headingColor + ';">Easter Vigil</div><div style="font-size:11px;color:' + p.textColor + ';">8:00pm &middot; Main Church</div></div></div>'
+              + '<div style="display:flex;gap:9px;align-items:center;"><div style="background:' + p.cardBorder + ';border-radius:6px;padding:5px 7px;text-align:center;flex-shrink:0;min-width:34px;"><div style="font-size:8px;font-weight:700;text-transform:uppercase;color:' + p.textColor + ';">Apr</div><div style="font-size:' + (full?'16px':'13px') + ';font-weight:800;line-height:1;color:' + p.headingColor + ';">22</div></div><div><div style="font-size:' + (full?'13px':'12px') + ';font-weight:700;color:' + p.headingColor + ';">Youth Group</div><div style="font-size:11px;color:' + p.textColor + ';">6:30pm &middot; Parish Hall</div></div></div>'
+              + '<div style="display:flex;gap:9px;align-items:center;"><div style="background:' + p.cardBorder + ';border-radius:6px;padding:5px 7px;text-align:center;flex-shrink:0;min-width:34px;"><div style="font-size:8px;font-weight:700;text-transform:uppercase;color:' + p.textColor + ';">May</div><div style="font-size:' + (full?'16px':'13px') + ';font-weight:800;line-height:1;color:' + p.headingColor + ';">4</div></div><div><div style="font-size:' + (full?'13px':'12px') + ';font-weight:700;color:' + p.headingColor + ';">First Communion</div><div style="font-size:11px;color:' + p.textColor + ';">10:00am &middot; Main Church</div></div></div>'
             + '</div>'
           + '</div>'
         + '</div>'
+        + '</div>'
 
         /* About */
-        + '<div style="background:' + p.cardBg + ';border:1px solid ' + p.cardBorder + ';border-radius:10px;padding:' + cardpad + ';">'
+        + '<div id="ws-about" style="background:' + p.cardBg + ';border:1px solid ' + p.cardBorder + ';border-radius:10px;padding:' + cardpad + ';">'
           + '<div style="font-size:9px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:' + p.labelColor + ';margin-bottom:8px;">About our parish</div>'
           + '<div style="font-size:' + (full?'13px':'12px') + ';color:' + p.textColor + ';line-height:1.7;">' + siteData.aboutText + '</div>'
           + '<div style="display:flex;flex-wrap:wrap;gap:5px;margin-top:10px;">'
@@ -1713,375 +1723,47 @@ select.fi { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w
         + '</div>'
 
         /* Donate */
-        + '<div style="background:' + p.navBg + ';border-radius:10px;padding:' + cardpad + ';">'
+        + '<div id="ws-donate" style="background:' + p.navBg + ';border-radius:10px;padding:' + cardpad + ';">'
           + '<div style="font-size:' + (full?'16px':'14px') + ';font-weight:800;color:#fff;margin-bottom:5px;">' + siteData.donateTitle + '</div>'
           + '<div style="font-size:' + (full?'13px':'12px') + ';color:rgba(255,255,255,0.5);line-height:1.55;margin-bottom:12px;">' + siteData.donateDesc + '</div>'
-          + '<div style="font-size:' + (full?'14px':'13px') + ';font-weight:700;background:' + p.donBtnBg + ';color:' + p.donBtnColor + ';padding:' + (full?'12px 22px':'10px 16px') + ';border-radius:6px;cursor:pointer;display:inline-block;">Donate online →</div>'
+          + '<div style="display:flex;gap:7px;flex-wrap:wrap;margin-bottom:12px;">'
+            + '<div style="font-size:12px;font-weight:700;color:rgba(255,255,255,0.55);background:rgba(255,255,255,0.07);border:1.5px solid rgba(255,255,255,0.1);border-radius:6px;padding:6px 12px;cursor:pointer;">$10</div>'
+            + '<div style="font-size:12px;font-weight:700;color:#fff;background:#d85020;border:1.5px solid #d85020;border-radius:6px;padding:6px 12px;cursor:pointer;">$25</div>'
+            + '<div style="font-size:12px;font-weight:700;color:rgba(255,255,255,0.55);background:rgba(255,255,255,0.07);border:1.5px solid rgba(255,255,255,0.1);border-radius:6px;padding:6px 12px;cursor:pointer;">$50</div>'
+            + '<div style="font-size:12px;font-weight:700;color:rgba(255,255,255,0.55);background:rgba(255,255,255,0.07);border:1.5px solid rgba(255,255,255,0.1);border-radius:6px;padding:6px 12px;cursor:pointer;">$100</div>'
+          + '</div>'
+          + '<div style="font-size:' + (full?'14px':'13px') + ';font-weight:700;background:#d85020;color:#fff;padding:' + (full?'12px 22px':'10px 16px') + ';border-radius:6px;cursor:pointer;display:inline-block;">Donate online &#8594;</div>'
+          + '<div style="font-size:10px;color:rgba(255,255,255,0.2);margin-top:8px;">96.1% reaches the parish &middot; 1% supports Communio</div>'
+        + '</div>'
+
+        /* Contact */
+        + '<div id="ws-contact" style="background:' + p.cardBg + ';border:1px solid ' + p.cardBorder + ';border-radius:10px;padding:' + cardpad + ';">'
+          + '<div style="font-size:9px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:' + p.labelColor + ';margin-bottom:10px;">Contact us</div>'
+          + '<div style="display:flex;flex-direction:column;gap:8px;">'
+            + '<div style="display:flex;align-items:center;gap:9px;font-size:' + (full?'13px':'12px') + ';color:' + p.textColor + ';"><div style="width:28px;height:28px;border-radius:6px;background:' + p.cardBorder + ';display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:13px;">&#9993;</div>' + siteData.contactEmail + '</div>'
+            + '<div style="display:flex;align-items:center;gap:9px;font-size:' + (full?'13px':'12px') + ';color:' + p.textColor + ';"><div style="width:28px;height:28px;border-radius:6px;background:' + p.cardBorder + ';display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:13px;">&#128222;</div>' + siteData.contactPhone + '</div>'
+            + '<div style="display:flex;align-items:center;gap:9px;font-size:' + (full?'13px':'12px') + ';color:' + p.textColor + ';"><div style="width:28px;height:28px;border-radius:6px;background:' + p.cardBorder + ';display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:13px;">&#128205;</div>' + siteData.contactAddress + '</div>'
+          + '</div>'
         + '</div>'
 
       + '</div>'
 
-      /* FOOTER */
-      + '<div style="background:' + p.footerBg + ';border-top:1px solid rgba(255,255,255,0.07);padding:16px 20px;">'
-        + '<div style="font-size:' + (full?'12px':'11px') + ';color:' + p.footerText + ';margin-bottom:4px;">' + siteData.heroTitle + ' · ' + siteData.contactAddress + '</div>'
-        + '<div style="font-size:10px;color:rgba(255,255,255,0.25);">Part of the <span style="color:rgba(255,255,255,0.45);">Communio</span> network · EIN 99-1778616</div>'
+      /* ── FOOTER ── */
+      + '<div id="ws-footer" style="background:' + p.footerBg + ';border-top:1px solid rgba(255,255,255,0.07);padding:16px 20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;">'
+        + '<div>'
+          + '<div style="font-size:' + (full?'13px':'11px') + ';color:' + p.footerText + ';font-weight:600;margin-bottom:2px;">' + siteData.heroTitle + '</div>'
+          + '<div style="font-size:10px;color:rgba(255,255,255,0.25);">' + siteData.contactAddress + '</div>'
+        + '</div>'
+        + '<div style="display:flex;gap:12px;flex-wrap:wrap;">'
+          + '<a onclick="scrollToSection(\'about\')" style="font-size:11px;color:rgba(255,255,255,0.3);text-decoration:none;cursor:pointer;">About</a>'
+          + '<a onclick="scrollToSection(\'mass\')"  style="font-size:11px;color:rgba(255,255,255,0.3);text-decoration:none;cursor:pointer;">Mass times</a>'
+          + '<a onclick="scrollToSection(\'contact\')" style="font-size:11px;color:rgba(255,255,255,0.3);text-decoration:none;cursor:pointer;">Contact</a>'
+        + '</div>'
       + '</div>'
 
     + '</div>';
   }
 
-    function selectTemplate(name){
-    currentTemplate = name;
-    /* Update card borders */
-    document.querySelectorAll('.site-tmpl').forEach(function(el){
-      el.style.border = '2px solid var(--border-l)';
-      var lbl = el.querySelector('div:last-child div:last-child');
-      if(lbl){ lbl.textContent = 'Click to select'; lbl.style.color = '#888'; lbl.style.background = 'transparent'; }
-    });
-    var sel = document.getElementById('tmpl-' + name);
-    if(sel){
-      sel.style.border = '2px solid #d85020';
-      var lbl2 = sel.querySelector('div:last-child div:last-child');
-      if(lbl2){ lbl2.textContent = 'Selected ✓'; lbl2.style.color = '#d85020'; lbl2.style.background = 'rgba(216,80,32,0.1)'; }
-    }
-    /* Update mini preview */
-    var mini = document.getElementById('mini-site-preview');
-    if(mini){ mini.innerHTML = getSiteHTML(name, false); }
-    /* Also refresh full preview if open */
-    var modal = document.getElementById('site-preview-modal');
-    if(modal && modal.style.display === 'flex'){
-      var fc = document.getElementById('site-preview-content');
-      if(fc){ fc.innerHTML = getSiteHTML(name, true); }
-    }
-  }
-
-  function openPreview(){
-    var modal = document.getElementById('site-preview-modal');
-    var content = document.getElementById('site-preview-content');
-    if(modal && content){
-      content.innerHTML = getSiteHTML(currentTemplate, true);
-      modal.style.display = 'flex';
-      document.body.style.overflow = 'hidden';
-    }
-  }
-
-  function closePreview(){
-    var modal = document.getElementById('site-preview-modal');
-    if(modal){ modal.style.display = 'none'; document.body.style.overflow = ''; }
-  }
-
-  function publishSite(){
-    var btn = document.getElementById('publish-btn');
-    if(!btn) return;
-    btn.textContent = 'Publishing...';
-    btn.disabled = true;
-    /* PHP: POST to /website/publish.php with parish_id, template_name */
-    /* PHP: generates static site files at $parish->slug.communio.org */
-    setTimeout(function(){
-      btn.innerHTML = 'Published ✓';
-      btn.style.background = 'var(--sage)';
-      setTimeout(function(){
-        btn.innerHTML = 'Publish changes <svg viewBox="0 0 16 16" fill="none" width="13" height="13"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-        btn.style.background = '#d85020';
-        btn.disabled = false;
-      }, 2500);
-    }, 1800);
-  }
-
-  /* ── PHOTO UPLOAD ───────────────────────────────── */
-  var stockPhotos = {
-    church1: 'https://images.unsplash.com/photo-1548625149-fc4a29cf7092?auto=format&fit=crop&w=1200&q=80',
-    church2: 'https://images.unsplash.com/photo-1438032005730-c779502df39b?auto=format&fit=crop&w=1200&q=80',
-    community: 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1200&q=80',
-    candles: 'https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?auto=format&fit=crop&w=1200&q=80',
-    altar: 'https://images.unsplash.com/photo-1545378851-f1e3f3a2e4b6?auto=format&fit=crop&w=1200&q=80',
-    stained: 'https://images.unsplash.com/photo-1509565840034-3c385bbe6451?auto=format&fit=crop&w=1200&q=80'
-  };
-
-  function handleHeroUpload(event){
-    var file = event.target.files[0];
-    if(!file) return;
-    if(file.size > 5 * 1024 * 1024){
-      alert('Photo must be under 5MB');
-      return;
-    }
-    var reader = new FileReader();
-    reader.onload = function(e){
-      heroPhotoUrl = e.target.result;
-      updateHeroPreview(heroPhotoUrl);
-    };
-    reader.readAsDataURL(file);
-  }
-
-  function setStockPhoto(key){
-    heroPhotoUrl = stockPhotos[key];
-    updateHeroPreview(heroPhotoUrl);
-    /* Update border on stock grid */
-    var grid = document.querySelectorAll('#hero-photo-preview').length;
-    document.querySelectorAll('[onclick^="setStockPhoto"]').forEach(function(el){
-      el.style.borderColor = 'transparent';
-    });
-    event.currentTarget.style.borderColor = '#d85020';
-  }
-
-  function updateHeroPreview(url){
-    /* Update the thumbnail */
-    var preview = document.getElementById('hero-photo-preview');
-    if(preview){ preview.style.backgroundImage = 'url(\'' + url + '\')'; }
-    /* Refresh the mini site preview */
-    var mini = document.getElementById('mini-site-preview');
-    if(mini){ mini.innerHTML = getSiteHTML(currentTemplate, false); }
-    /* If full preview modal is open, refresh it too */
-    var modal = document.getElementById('site-preview-modal');
-    if(modal && modal.style.display === 'flex'){
-      var content = document.getElementById('site-preview-content');
-      if(content){ content.innerHTML = getSiteHTML(currentTemplate, true); }
-    }
-  }
-
-  /* ── WEBSITE EDITOR JS ─────────────────────────── */
-  var currentTemplate = 'warm';
-  var heroPhotoUrl = 'https://images.unsplash.com/photo-1548625149-fc4a29cf7092?auto=format&fit=crop&w=1200&q=80';
-
-  var siteData = {
-    heroTitle:    "St. Mary\'s Parish",
-    heroTagline:  "Serving the Lower East Side since 1887",
-    aboutText:    "St. Mary\'s Parish has been a cornerstone of the Lower East Side since 1887. We serve 1,200+ families from 40+ countries — committed to social justice, compassionate outreach, and the Gospel in a changing world.",
-    massSat:      "5:00pm Vigil",
-    massSun:      "8:00am, 10:00am, 12:00pm, 6:00pm (Spanish)",
-    massWeekday:  "7:00am & 12:10pm (Mon–Fri)",
-    donateTitle:  "Support St. Mary\'s Parish",
-    donateDesc:   "Your gift sustains our community programmes. Funds go direct to the parish via Stripe.",
-    contactEmail: "info@stmarysnyc.org",
-    contactPhone: "+1 (212) 555-0182",
-    contactAddress:"15 Mott Street, New York, NY 10013"
-  };
-
-  var currentEditSection = null;
-
-  var sectionDefs = {
-    hero: {
-      title: 'Hero & intro',
-      fields: [
-        {id:'heroTitle',   label:'Parish name', type:'input'},
-        {id:'heroTagline', label:'Tagline',      type:'input'},
-        {id:'__photo__',   label:'Hero photo',   type:'photo'}
-      ]
-    },
-    about: {
-      title: 'About us',
-      fields: [{id:'aboutText', label:'About paragraph', type:'textarea'}]
-    },
-    mass: {
-      title: 'Mass times & events',
-      fields: [
-        {id:'massSat',     label:'Saturday',  type:'input'},
-        {id:'massSun',     label:'Sunday',    type:'input'},
-        {id:'massWeekday', label:'Weekday',   type:'input'}
-      ]
-    },
-    donate: {
-      title: 'Donations section',
-      fields: [
-        {id:'donateTitle', label:'Heading',     type:'input'},
-        {id:'donateDesc',  label:'Description', type:'textarea'}
-      ]
-    },
-    contact: {
-      title: 'Contact details',
-      fields: [
-        {id:'contactEmail',   label:'Email',   type:'input'},
-        {id:'contactPhone',   label:'Phone',   type:'input'},
-        {id:'contactAddress', label:'Address', type:'input'}
-      ]
-    }
-  };
-
-  var stockPhotos = {
-    church1:   'https://images.unsplash.com/photo-1548625149-fc4a29cf7092?auto=format&fit=crop&w=1200&q=80',
-    church2:   'https://images.unsplash.com/photo-1438032005730-c779502df39b?auto=format&fit=crop&w=1200&q=80',
-    community: 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1200&q=80',
-    candles:   'https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?auto=format&fit=crop&w=1200&q=80',
-    altar:     'https://images.unsplash.com/photo-1545378851-f1e3f3a2e4b6?auto=format&fit=crop&w=1200&q=80',
-    stained:   'https://images.unsplash.com/photo-1509565840034-3c385bbe6451?auto=format&fit=crop&w=1200&q=80'
-  };
-
-  function editSection(name){
-    currentEditSection = name;
-    var def = sectionDefs[name];
-
-    /* Highlight section nav item */
-    document.querySelectorAll('.we-section-item').forEach(function(el){ el.classList.remove('active'); });
-    var navItem = document.getElementById('wsec-' + name);
-    if(navItem) navItem.classList.add('active');
-
-    /* Set editor title */
-    document.getElementById('we-editor-title').textContent = 'Editing: ' + def.title;
-
-    /* Build form fields */
-    var body = document.getElementById('we-editor-body');
-    body.innerHTML = '';
-
-    def.fields.forEach(function(f){
-      if(f.type === 'photo'){
-        /* Photo upload widget */
-        var wrap = document.createElement('div');
-        wrap.style.cssText = 'display:flex;flex-direction:column;gap:8px;';
-
-        /* Current photo thumbnail */
-        var thumb = document.createElement('div');
-        thumb.id = 'hero-photo-thumb';
-        thumb.style.cssText = 'width:100%;height:100px;border-radius:8px;background:url(\'' + heroPhotoUrl + '\') center/cover;border:1px solid var(--border-l);position:relative;';
-        var thumbOverlay = document.createElement('div');
-        thumbOverlay.style.cssText = 'position:absolute;inset:0;background:rgba(0,0,0,0.3);border-radius:8px;display:flex;align-items:center;justify-content:center;';
-        thumbOverlay.innerHTML = '<span style="font-size:9px;font-weight:700;color:#fff;letter-spacing:.06em;text-transform:uppercase;">Current hero photo</span>';
-        thumb.appendChild(thumbOverlay);
-        wrap.appendChild(thumb);
-
-        /* Upload button */
-        var uploadLbl = document.createElement('label');
-        uploadLbl.style.cssText = 'display:flex;align-items:center;justify-content:center;gap:6px;width:100%;padding:9px;border:1.5px dashed var(--border);border-radius:8px;cursor:pointer;font-size:12px;font-weight:700;color:var(--mid);background:var(--cream);transition:all .18s;';
-        uploadLbl.innerHTML = '<svg viewBox="0 0 16 16" fill="none" width="13" height="13"><path d="M8 2v8M5 5l3-3 3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M2 11v1a2 2 0 002 2h8a2 2 0 002-2v-1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg> Upload photo';
-        var fileInput = document.createElement('input');
-        fileInput.type = 'file';
-        fileInput.accept = 'image/*';
-        fileInput.style.display = 'none';
-        fileInput.addEventListener('change', handleHeroUpload);
-        uploadLbl.appendChild(fileInput);
-        uploadLbl.addEventListener('mouseover', function(){ this.style.borderColor='#d85020'; this.style.color='#d85020'; });
-        uploadLbl.addEventListener('mouseout',  function(){ this.style.borderColor='var(--border)'; this.style.color='var(--mid)'; });
-        wrap.appendChild(uploadLbl);
-
-        /* Stock photos grid */
-        var stockLbl = document.createElement('div');
-        stockLbl.style.cssText = 'font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--light);margin-top:4px;';
-        stockLbl.textContent = 'Or choose a stock photo';
-        wrap.appendChild(stockLbl);
-
-        var grid = document.createElement('div');
-        grid.style.cssText = 'display:grid;grid-template-columns:repeat(3,1fr);gap:5px;';
-        var stockList = ['church1','church2','community','candles','altar','stained'];
-        var stockLabels = ['Church interior','Church exterior','Community','Candles','Altar','Stained glass'];
-        stockList.forEach(function(key, idx){
-          var tile = document.createElement('div');
-          tile.id = 'stock-' + key;
-          tile.title = stockLabels[idx];
-          tile.style.cssText = 'height:44px;border-radius:5px;background:url(\'' + stockPhotos[key] + '\') center/cover;cursor:pointer;border:2px solid ' + (heroPhotoUrl === stockPhotos[key] ? '#d85020' : 'transparent') + ';transition:all .18s;';
-          tile.addEventListener('click', function(){ setStockPhoto(key); });
-          tile.addEventListener('mouseover', function(){ this.style.borderColor='#d85020'; });
-          tile.addEventListener('mouseout',  function(){ if(heroPhotoUrl !== stockPhotos[key]) this.style.borderColor='transparent'; });
-          grid.appendChild(tile);
-        });
-        wrap.appendChild(grid);
-
-        var hint = document.createElement('div');
-        hint.style.cssText = 'font-size:10px;color:var(--light);text-align:center;';
-        hint.textContent = 'JPG or PNG · max 5MB · min 1200px wide recommended';
-        wrap.appendChild(hint);
-
-        body.appendChild(wrap);
-
-      } else {
-        /* Regular text field */
-        var wrap = document.createElement('div');
-        wrap.style.cssText = 'display:flex;flex-direction:column;gap:4px;';
-        var lbl = document.createElement('label');
-        lbl.style.cssText = 'font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--light);';
-        lbl.textContent = f.label;
-        var inp;
-        if(f.type === 'textarea'){
-          inp = document.createElement('textarea');
-          inp.style.cssText = 'font-family:var(--f-sans);font-size:13px;color:var(--ink);background:var(--cream);border:1.5px solid var(--border-l);border-radius:8px;padding:9px 11px;outline:none;resize:vertical;min-height:80px;line-height:1.6;width:100%;';
-        } else {
-          inp = document.createElement('input');
-          inp.type = 'text';
-          inp.style.cssText = 'font-family:var(--f-sans);font-size:13px;color:var(--ink);background:var(--cream);border:1.5px solid var(--border-l);border-radius:8px;padding:9px 11px;outline:none;width:100%;';
-        }
-        inp.id = 'ed-' + f.id;
-        inp.value = siteData[f.id] || '';
-        inp.addEventListener('focus', function(){ this.style.borderColor='#d85020'; this.style.background='#fff'; });
-        inp.addEventListener('blur',  function(){ this.style.borderColor='var(--border-l)'; this.style.background='var(--cream)'; });
-        wrap.appendChild(lbl);
-        wrap.appendChild(inp);
-        body.appendChild(wrap);
-      }
-    });
-
-    /* Switch right col to editor state */
-    document.getElementById('we-preview-state').style.display = 'none';
-    document.getElementById('we-editor-state').style.display  = 'block';
-  }
-
-  function showPreview(){
-    /* Save any pending edits first */
-    _saveEditorValues();
-    /* Switch right col back to preview */
-    document.getElementById('we-editor-state').style.display  = 'none';
-    document.getElementById('we-preview-state').style.display = 'block';
-    /* Refresh preview */
-    refreshMiniPreview();
-    /* Clear active section highlight */
-    document.querySelectorAll('.we-section-item').forEach(function(el){ el.classList.remove('active'); });
-    currentEditSection = null;
-  }
-
-  function _saveEditorValues(){
-    if(!currentEditSection) return;
-    var def = sectionDefs[currentEditSection];
-    def.fields.forEach(function(f){
-      if(f.type === 'photo') return;
-      var inp = document.getElementById('ed-' + f.id);
-      if(inp) siteData[f.id] = inp.value;
-    });
-  }
-
-  function applyEdits(){
-    _saveEditorValues();
-    refreshMiniPreview();
-    /* Flash button */
-    var btn = document.getElementById('we-apply-btn');
-    if(btn){
-      var orig = btn.innerHTML;
-      btn.textContent = 'Applied ✓';
-      btn.style.background = 'var(--sage)';
-      setTimeout(function(){ btn.innerHTML = orig; btn.style.background = '#d85020'; }, 1500);
-    }
-  }
-
-  function refreshMiniPreview(){
-    var mini = document.getElementById('mini-site-preview');
-    if(mini) mini.innerHTML = getSiteHTML(currentTemplate, false);
-  }
-
-  function handleHeroUpload(event){
-    var file = event.target.files[0];
-    if(!file) return;
-    if(file.size > 5 * 1024 * 1024){ alert('Photo must be under 5MB'); return; }
-    var reader = new FileReader();
-    reader.onload = function(e){
-      heroPhotoUrl = e.target.result;
-      _updatePhotoUI();
-    };
-    reader.readAsDataURL(file);
-  }
-
-  function setStockPhoto(key){
-    heroPhotoUrl = stockPhotos[key];
-    _updatePhotoUI();
-    /* Update tile borders */
-    Object.keys(stockPhotos).forEach(function(k){
-      var tile = document.getElementById('stock-' + k);
-      if(tile) tile.style.borderColor = (k === key) ? '#d85020' : 'transparent';
-    });
-  }
-
-  function _updatePhotoUI(){
-    /* Update thumbnail in editor */
-    var thumb = document.getElementById('hero-photo-thumb');
-    if(thumb) thumb.style.backgroundImage = 'url(\'' + heroPhotoUrl + '\')';
-    /* Refresh mini preview */
-    refreshMiniPreview();
-  }
 
   function selectTemplate(name){
     currentTemplate = name;
