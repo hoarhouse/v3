@@ -1035,174 +1035,119 @@ select.fi { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w
 
       <!-- Full-screen preview modal -->
       <div id="site-preview-modal" style="display:none;position:fixed;inset:0;z-index:500;background:rgba(0,0,0,0.85);align-items:center;justify-content:center;padding:20px;">
-        <div style="background:#fff;border-radius:12px;overflow:hidden;width:100%;max-width:900px;max-height:90dvh;display:flex;flex-direction:column;box-shadow:0 24px 80px rgba(0,0,0,0.5);">
+        <div style="background:#fff;border-radius:12px;overflow:hidden;width:100%;max-width:900px;max-height:90dvh;display:flex;flex-direction:column;box-shadow:0 24px 80px rgba(0,0,0,0.4);">
           <div style="background:#000;padding:10px 16px;display:flex;align-items:center;gap:10px;flex-shrink:0;border-bottom:2px solid #e8c040;">
             <div style="display:flex;gap:5px;"><div style="width:9px;height:9px;border-radius:50%;background:#ff5f57;"></div><div style="width:9px;height:9px;border-radius:50%;background:#febc2e;"></div><div style="width:9px;height:9px;border-radius:50%;background:#28c840;"></div></div>
             <div style="flex:1;background:rgba(255,255,255,0.1);border-radius:6px;padding:5px 12px;font-size:12px;color:rgba(255,255,255,0.6);text-align:center;">stmarysnyc.communio.org</div>
-            <button onclick="closePreview()" style="font-family:var(--f-sans);font-size:12px;font-weight:700;color:rgba(255,255,255,0.6);background:rgba(255,255,255,0.1);border:none;border-radius:6px;padding:6px 12px;cursor:pointer;">✕ Close</button>
+            <button onclick="closePreview()" style="font-family:var(--f-sans);font-size:12px;font-weight:700;color:rgba(255,255,255,0.6);background:rgba(255,255,255,0.1);border:none;border-radius:6px;padding:6px 12px;cursor:pointer;">&#x2715; Close</button>
           </div>
           <div style="overflow-y:auto;flex:1;" id="site-preview-content"></div>
         </div>
       </div>
 
+      <!-- Page header -->
       <div style="margin-bottom:18px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;">
         <div>
           <div style="font-size:clamp(18px,4vw,24px);font-weight:800;color:var(--ink);letter-spacing:-0.025em;margin-bottom:3px;">Parish Website</div>
-          <div style="display:flex;align-items:center;gap:8px;"><div class="we-live"><div class="we-live-dot"></div>Live</div><span style="font-size:12px;color:var(--light);">stmarysnyc.communio.org · 142 visitors this month</span></div>
+          <div style="display:flex;align-items:center;gap:8px;"><div class="we-live"><div class="we-live-dot"></div>Live</div><span style="font-size:12px;color:var(--light);">stmarysnyc.communio.org &middot; 142 visitors this month</span></div>
         </div>
         <div style="display:flex;gap:8px;flex-wrap:wrap;">
-          <button class="btn-outline btn-sm" onclick="openPreview()">Preview full site ↗</button>
+          <button class="btn-outline btn-sm" onclick="openPreview()">Preview full site &#x2197;</button>
           <button class="btn-primary btn-sm" id="publish-btn" onclick="publishSite()">Publish changes <svg viewBox="0 0 16 16" fill="none" width="13" height="13"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
         </div>
       </div>
 
       <!-- Template selector -->
       <div class="card" style="padding:0;margin-bottom:14px;">
-        <div style="padding:14px 18px;border-bottom:1px solid var(--border-l);display:flex;align-items:center;justify-content:space-between;">
-          <div style="font-size:14px;font-weight:800;color:var(--ink);">Choose a template</div>
-          <span style="font-size:11px;color:var(--light);">Click to preview · changes apply on publish</span>
+        <div style="padding:13px 18px;border-bottom:1px solid var(--border-l);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;">
+          <div style="font-size:13px;font-weight:800;color:var(--ink);">Template</div>
+          <span style="font-size:11px;color:var(--light);">Click to select &middot; updates preview instantly</span>
         </div>
-        <div style="padding:16px 18px;display:grid;grid-template-columns:repeat(3,1fr);gap:12px;" id="template-grid">
-
-          <!-- Template A: Warm & Classic -->
-          <div class="site-tmpl active" id="tmpl-warm" onclick="selectTemplate('warm')" style="border:2px solid #d85020;border-radius:12px;overflow:hidden;cursor:pointer;transition:all .2s;">
-            <div style="background:#f5f2e8;padding:0;">
-              <div style="background:#000;padding:8px 10px;display:flex;align-items:center;justify-content:space-between;">
-                <div style="font-size:9px;font-weight:800;color:#fff;">St. Mary's <span style="color:#d85020;">Parish</span></div>
-                <div style="font-size:8px;font-weight:700;background:#d85020;color:#fff;padding:2px 6px;border-radius:3px;">Donate</div>
-              </div>
-              <div style="background:#d85020;padding:14px 10px;">
-                <div style="font-size:11px;font-weight:800;color:#fff;margin-bottom:3px;">St. Mary's Parish</div>
-                <div style="font-size:8px;color:rgba(255,255,255,0.7);margin-bottom:8px;">Serving New York since 1887</div>
-                <div style="display:flex;gap:4px;"><div style="font-size:8px;font-weight:700;background:#fff;color:#d85020;padding:3px 7px;border-radius:3px;">Join us Sunday</div><div style="font-size:8px;font-weight:700;background:rgba(255,255,255,0.2);color:#fff;padding:3px 7px;border-radius:3px;">Learn more</div></div>
-              </div>
-              <div style="padding:10px;display:grid;grid-template-columns:1fr 1fr;gap:6px;">
-                <div style="background:#fff;border:1px solid #e8c040;border-radius:5px;padding:8px;"><div style="font-size:8px;font-weight:700;color:#000;margin-bottom:4px;">Mass Times</div><div style="font-size:7px;color:#5a4a20;">Sun 8am, 10am, 12pm<br/>Sat 5pm Vigil</div></div>
-                <div style="background:#fff;border:1px solid #e8c040;border-radius:5px;padding:8px;"><div style="font-size:8px;font-weight:700;color:#000;margin-bottom:4px;">Upcoming</div><div style="font-size:7px;color:#5a4a20;">Easter Vigil Apr 19<br/>Youth Group Apr 22</div></div>
-              </div>
-            </div>
-            <div style="padding:8px 10px;background:#fff;border-top:2px solid #d85020;display:flex;align-items:center;justify-content:space-between;">
-              <div style="font-size:9px;font-weight:800;color:#000;">Warm &amp; Classic</div>
-              <div style="font-size:8px;font-weight:700;color:#d85020;background:rgba(216,80,32,0.1);padding:2px 6px;border-radius:3px;">Selected ✓</div>
-            </div>
+        <div style="padding:14px 18px;display:grid;grid-template-columns:repeat(3,1fr);gap:10px;" id="template-grid">
+          <div class="site-tmpl" id="tmpl-warm" onclick="selectTemplate('warm')" style="border:2px solid #d85020;border-radius:8px;overflow:hidden;cursor:pointer;transition:all .2s;">
+            <div style="background:#d85020;padding:8px 10px;display:flex;align-items:center;justify-content:space-between;"><div style="font-size:9px;font-weight:800;color:#fff;">Commun<span style="opacity:.7;">io</span></div><div style="font-size:7px;font-weight:700;background:rgba(255,255,255,0.25);color:#fff;padding:2px 5px;border-radius:3px;">Donate</div></div>
+            <div style="background:#f5f2e8;padding:8px 10px;"><div style="font-size:9px;font-weight:800;color:#000;margin-bottom:2px;">St. Mary&#39;s</div><div style="font-size:7px;color:#5a4a20;margin-bottom:5px;">Est. 1887 &middot; New York</div><div style="height:3px;background:#d85020;border-radius:2px;width:55%;margin-bottom:3px;"></div><div style="height:3px;background:#e8c040;border-radius:2px;width:38%;"></div></div>
+            <div style="padding:5px 10px;background:#fff;border-top:1px solid #e8c040;font-size:8px;font-weight:800;color:#000;">Warm &amp; Classic <span style="color:#d85020;">&bull; Selected</span></div>
           </div>
-
-          <!-- Template B: Sage & Natural -->
-          <div class="site-tmpl" id="tmpl-sage" onclick="selectTemplate('sage')" style="border:2px solid var(--border-l);border-radius:12px;overflow:hidden;cursor:pointer;transition:all .2s;">
-            <div style="background:#f0faf0;padding:0;">
-              <div style="background:#0a2a0a;padding:8px 10px;display:flex;align-items:center;justify-content:space-between;">
-                <div style="font-size:9px;font-weight:800;color:#fff;">St. Mary's <span style="color:#5aaa5a;">Parish</span></div>
-                <div style="font-size:8px;font-weight:700;background:#d85020;color:#fff;padding:2px 6px;border-radius:3px;">Donate</div>
-              </div>
-              <div style="background:#0a2a0a;padding:14px 10px;">
-                <div style="font-size:11px;font-weight:800;color:#fff;margin-bottom:3px;">St. Mary's Parish</div>
-                <div style="font-size:8px;color:rgba(255,255,255,0.6);margin-bottom:8px;">Serving New York since 1887</div>
-                <div style="display:flex;gap:4px;"><div style="font-size:8px;font-weight:700;background:#d85020;color:#fff;padding:3px 7px;border-radius:3px;">Join us Sunday</div><div style="font-size:8px;font-weight:700;background:rgba(255,255,255,0.15);color:#fff;padding:3px 7px;border-radius:3px;">Learn more</div></div>
-              </div>
-              <div style="padding:10px;display:grid;grid-template-columns:1fr 1fr;gap:6px;">
-                <div style="background:#fff;border:1px solid #b8d4b8;border-radius:5px;padding:8px;"><div style="font-size:8px;font-weight:700;color:#0a2a0a;margin-bottom:4px;">Mass Times</div><div style="font-size:7px;color:#2a6a2a;">Sun 8am, 10am, 12pm<br/>Sat 5pm Vigil</div></div>
-                <div style="background:#fff;border:1px solid #b8d4b8;border-radius:5px;padding:8px;"><div style="font-size:8px;font-weight:700;color:#0a2a0a;margin-bottom:4px;">Upcoming</div><div style="font-size:7px;color:#2a6a2a;">Easter Vigil Apr 19<br/>Youth Group Apr 22</div></div>
-              </div>
-            </div>
-            <div style="padding:8px 10px;background:#fff;border-top:1px solid #b8d4b8;display:flex;align-items:center;justify-content:space-between;">
-              <div style="font-size:9px;font-weight:800;color:#0a2a0a;">Sage &amp; Natural</div>
-              <div style="font-size:8px;color:#888;">Click to select</div>
-            </div>
+          <div class="site-tmpl" id="tmpl-sage" onclick="selectTemplate('sage')" style="border:2px solid var(--border-l);border-radius:8px;overflow:hidden;cursor:pointer;transition:all .2s;">
+            <div style="background:#0a2a0a;padding:8px 10px;display:flex;align-items:center;justify-content:space-between;"><div style="font-size:9px;font-weight:800;color:#fff;">Commun<span style="opacity:.7;">io</span></div><div style="font-size:7px;font-weight:700;background:#d85020;color:#fff;padding:2px 5px;border-radius:3px;">Donate</div></div>
+            <div style="background:#f0faf0;padding:8px 10px;"><div style="font-size:9px;font-weight:800;color:#0a2a0a;margin-bottom:2px;">St. Mary&#39;s</div><div style="font-size:7px;color:#2a5a2a;margin-bottom:5px;">Est. 1887 &middot; New York</div><div style="height:3px;background:#0a2a0a;border-radius:2px;width:55%;margin-bottom:3px;"></div><div style="height:3px;background:#d85020;border-radius:2px;width:38%;"></div></div>
+            <div style="padding:5px 10px;background:#fff;border-top:1px solid #b8d4b8;font-size:8px;font-weight:800;color:#0a2a0a;">Sage &amp; Natural</div>
           </div>
-
-          <!-- Template C: Midnight & Bold -->
-          <div class="site-tmpl" id="tmpl-midnight" onclick="selectTemplate('midnight')" style="border:2px solid var(--border-l);border-radius:12px;overflow:hidden;cursor:pointer;transition:all .2s;">
-            <div style="background:#111;padding:0;">
-              <div style="background:#000;padding:8px 10px;border-bottom:1px solid #e8c040;display:flex;align-items:center;justify-content:space-between;">
-                <div style="font-size:9px;font-weight:800;color:#fff;">St. Mary's <span style="color:#d85020;">Parish</span></div>
-                <div style="font-size:8px;font-weight:700;background:#d85020;color:#fff;padding:2px 6px;border-radius:3px;">Donate</div>
-              </div>
-              <div style="background:#000;padding:14px 10px;">
-                <div style="font-size:8px;font-weight:700;color:#e8c040;letter-spacing:.06em;text-transform:uppercase;margin-bottom:5px;">Est. 1887 · New York</div>
-                <div style="font-size:12px;font-weight:800;color:#fff;margin-bottom:3px;">St. Mary's Parish</div>
-                <div style="font-size:8px;color:rgba(255,255,255,0.5);margin-bottom:8px;">Serving the Lower East Side</div>
-                <div style="display:flex;gap:4px;"><div style="font-size:8px;font-weight:700;background:#d85020;color:#fff;padding:3px 7px;border-radius:3px;">Join us Sunday</div><div style="font-size:8px;font-weight:700;background:rgba(232,192,64,0.15);color:#e8c040;padding:3px 7px;border-radius:3px;">Learn more</div></div>
-              </div>
-              <div style="padding:10px;display:grid;grid-template-columns:1fr 1fr;gap:6px;">
-                <div style="background:#111;border:1px solid rgba(232,192,64,0.3);border-radius:5px;padding:8px;"><div style="font-size:8px;font-weight:700;color:#e8c040;margin-bottom:4px;">Mass Times</div><div style="font-size:7px;color:rgba(255,255,255,0.5);">Sun 8am, 10am, 12pm<br/>Sat 5pm Vigil</div></div>
-                <div style="background:#111;border:1px solid rgba(232,192,64,0.3);border-radius:5px;padding:8px;"><div style="font-size:8px;font-weight:700;color:#e8c040;margin-bottom:4px;">Upcoming</div><div style="font-size:7px;color:rgba(255,255,255,0.5);">Easter Vigil Apr 19<br/>Youth Group Apr 22</div></div>
-              </div>
-            </div>
-            <div style="padding:8px 10px;background:#111;border-top:1px solid rgba(232,192,64,0.2);display:flex;align-items:center;justify-content:space-between;">
-              <div style="font-size:9px;font-weight:800;color:#e8c040;">Midnight &amp; Bold</div>
-              <div style="font-size:8px;color:#666;">Click to select</div>
-            </div>
+          <div class="site-tmpl" id="tmpl-midnight" onclick="selectTemplate('midnight')" style="border:2px solid var(--border-l);border-radius:8px;overflow:hidden;cursor:pointer;transition:all .2s;">
+            <div style="background:#000;padding:8px 10px;border-bottom:1px solid #e8c040;display:flex;align-items:center;justify-content:space-between;"><div style="font-size:9px;font-weight:800;color:#fff;">Commun<span style="color:#d85020;">io</span></div><div style="font-size:7px;font-weight:700;background:#d85020;color:#fff;padding:2px 5px;border-radius:3px;">Donate</div></div>
+            <div style="background:#111;padding:8px 10px;"><div style="font-size:9px;font-weight:800;color:#e8c040;margin-bottom:2px;">St. Mary&#39;s</div><div style="font-size:7px;color:rgba(255,255,255,0.4);margin-bottom:5px;">Est. 1887 &middot; New York</div><div style="height:3px;background:#d85020;border-radius:2px;width:55%;margin-bottom:3px;"></div><div style="height:3px;background:#e8c040;border-radius:2px;width:38%;"></div></div>
+            <div style="padding:5px 10px;background:#111;border-top:1px solid rgba(232,192,64,0.2);font-size:8px;font-weight:800;color:#e8c040;">Midnight &amp; Bold</div>
           </div>
-
         </div>
       </div>
 
-      <!-- Two column: sections editor + live preview -->
-      <div class="we-layout">
+      <!-- Main editor layout: left = sections nav, right = context (editor OR preview) -->
+      <div style="display:grid;grid-template-columns:200px 1fr;gap:14px;align-items:start;" id="we-main-layout">
+
+        <!-- LEFT: sections nav -->
         <div>
           <div class="we-panel">
             <div class="we-panel-head">Page sections</div>
-            <!-- PHP: foreach ($website_sections as $section) -->
-            <div class="we-section-item active" onclick="editSection('hero')" id="wsec-hero" style="cursor:pointer;"><div class="we-ico"><svg viewBox="0 0 14 14" fill="none" width="12" height="12"><rect x="1" y="1" width="12" height="12" rx="2" stroke="var(--terra)" stroke-width="1.2"/><path d="M4 5h6M4 7.5h4" stroke="var(--terra)" stroke-width="1.2" stroke-linecap="round"/></svg></div><div class="we-section-lbl">Hero &amp; intro</div><div class="we-section-status">✓</div></div>
-            <div class="we-section-item" onclick="editSection('about')" id="wsec-about" style="cursor:pointer;"><div class="we-ico"><svg viewBox="0 0 14 14" fill="none" width="12" height="12"><circle cx="7" cy="5" r="2.5" stroke="var(--mid)" stroke-width="1.2"/><path d="M2 13c0-2.76 2.24-5 5-5s5 2.24 5 5" stroke="var(--mid)" stroke-width="1.2" stroke-linecap="round"/></svg></div><div class="we-section-lbl">About us</div><div class="we-section-status">✓</div></div>
-            <div class="we-section-item" onclick="editSection('mass')" id="wsec-mass" style="cursor:pointer;"><div class="we-ico"><svg viewBox="0 0 14 14" fill="none" width="12" height="12"><rect x="1" y="3" width="12" height="9" rx="1.5" stroke="var(--mid)" stroke-width="1.2"/><path d="M1 6h12" stroke="var(--mid)" stroke-width="1.2"/></svg></div><div class="we-section-lbl">Mass times &amp; events</div><div class="we-section-status">✓</div></div>
-            <div class="we-section-item" onclick="editSection('donate')" id="wsec-donate" style="cursor:pointer;"><div class="we-ico"><svg viewBox="0 0 14 14" fill="none" width="12" height="12"><rect x="1" y="4" width="12" height="8" rx="1.5" stroke="var(--mid)" stroke-width="1.2"/><path d="M1 7h12" stroke="var(--mid)" stroke-width="1.2"/></svg></div><div class="we-section-lbl">Donations</div><div class="we-section-status" style="color:var(--amber);">Edit</div></div>
-            <div class="we-section-item" onclick="editSection('contact')" id="wsec-contact" style="cursor:pointer;"><div class="we-ico"><svg viewBox="0 0 14 14" fill="none" width="12" height="12"><path d="M7 1C4.8 1 3 2.8 3 5c0 3 4 7.5 4 7.5S11 8 11 5c0-2.2-1.8-4-4-4z" stroke="var(--mid)" stroke-width="1.2"/></svg></div><div class="we-section-lbl">Contact &amp; map</div><div class="we-section-status">✓</div></div>
-          </div>
-
-        <!-- Section editor — shown when a section is clicked -->
-        <div id="we-section-editor" style="display:none;margin-top:12px;background:#fff;border:1px solid var(--border-l);border-radius:var(--r-xl);overflow:hidden;">
-          <div style="padding:12px 16px;background:var(--cream);border-bottom:1px solid var(--border-l);display:flex;align-items:center;justify-content:space-between;">
-            <div style="font-size:12px;font-weight:800;color:var(--ink);" id="we-editor-title">Edit section</div>
-            <button onclick="closeEditor()" style="font-family:var(--f-sans);font-size:11px;font-weight:600;color:var(--light);background:none;border:none;cursor:pointer;">✕ Close</button>
-          </div>
-          <div id="we-editor-body" style="padding:14px 16px;display:flex;flex-direction:column;gap:10px;"></div>
-          <div style="padding:0 16px 14px;display:flex;justify-content:flex-end;gap:7px;">
-            <button onclick="closeEditor()" style="font-family:var(--f-sans);font-size:12px;font-weight:600;color:var(--mid);background:transparent;border:1.5px solid var(--border-l);border-radius:8px;padding:7px 14px;cursor:pointer;">Cancel</button>
-            <button onclick="applyEdits()" style="font-family:var(--f-sans);font-size:12px;font-weight:700;color:#fff;background:#d85020;border:none;border-radius:8px;padding:7px 14px;cursor:pointer;">Apply &amp; preview</button>
+            <div class="we-section-item active" id="wsec-hero"    onclick="editSection('hero')"    style="cursor:pointer;"><div class="we-ico"><svg viewBox="0 0 14 14" fill="none" width="12" height="12"><rect x="1" y="1" width="12" height="12" rx="2" stroke="var(--terra)" stroke-width="1.2"/><path d="M4 5h6M4 7.5h4" stroke="var(--terra)" stroke-width="1.2" stroke-linecap="round"/></svg></div><div class="we-section-lbl">Hero &amp; intro</div><div class="we-section-status" id="wss-hero">&#x270F;</div></div>
+            <div class="we-section-item"        id="wsec-about"   onclick="editSection('about')"   style="cursor:pointer;"><div class="we-ico"><svg viewBox="0 0 14 14" fill="none" width="12" height="12"><circle cx="7" cy="5" r="2.5" stroke="var(--mid)" stroke-width="1.2"/><path d="M2 13c0-2.76 2.24-5 5-5s5 2.24 5 5" stroke="var(--mid)" stroke-width="1.2" stroke-linecap="round"/></svg></div><div class="we-section-lbl">About us</div><div class="we-section-status" id="wss-about">&#x270F;</div></div>
+            <div class="we-section-item"        id="wsec-mass"    onclick="editSection('mass')"    style="cursor:pointer;"><div class="we-ico"><svg viewBox="0 0 14 14" fill="none" width="12" height="12"><rect x="1" y="3" width="12" height="9" rx="1.5" stroke="var(--mid)" stroke-width="1.2"/><path d="M1 6h12" stroke="var(--mid)" stroke-width="1.2"/></svg></div><div class="we-section-lbl">Mass times</div><div class="we-section-status" id="wss-mass">&#x270F;</div></div>
+            <div class="we-section-item"        id="wsec-donate"  onclick="editSection('donate')"  style="cursor:pointer;"><div class="we-ico"><svg viewBox="0 0 14 14" fill="none" width="12" height="12"><rect x="1" y="4" width="12" height="8" rx="1.5" stroke="var(--mid)" stroke-width="1.2"/><path d="M1 7h12" stroke="var(--mid)" stroke-width="1.2"/></svg></div><div class="we-section-lbl">Donations</div><div class="we-section-status" id="wss-donate">&#x270F;</div></div>
+            <div class="we-section-item"        id="wsec-contact" onclick="editSection('contact')" style="cursor:pointer;"><div class="we-ico"><svg viewBox="0 0 14 14" fill="none" width="12" height="12"><path d="M7 1C4.8 1 3 2.8 3 5c0 3 4 7.5 4 7.5S11 8 11 5c0-2.2-1.8-4-4-4z" stroke="var(--mid)" stroke-width="1.2"/></svg></div><div class="we-section-lbl">Contact</div><div class="we-section-status" id="wss-contact">&#x270F;</div></div>
           </div>
         </div>
-        </div>
 
-        <!-- Photo upload -->
-        <div class="we-panel" style="margin-top:12px;">
-          <div class="we-panel-head">Hero photo</div>
-          <div style="padding:14px 16px;">
-            <div id="hero-photo-preview" style="width:100%;height:90px;border-radius:8px;background:url('https://images.unsplash.com/photo-1548625149-fc4a29cf7092?auto=format&fit=crop&w=600&q=80') center/cover no-repeat;position:relative;margin-bottom:10px;border:1px solid var(--border-l);">
-              <div style="position:absolute;inset:0;background:rgba(0,0,0,0.35);border-radius:8px;display:flex;align-items:center;justify-content:center;">
-                <span style="font-size:10px;font-weight:700;color:#fff;letter-spacing:.05em;">CURRENT HERO PHOTO</span>
+        <!-- RIGHT: context panel — shows EDITOR or PREVIEW depending on state -->
+        <div id="we-right-col">
+
+          <!-- PREVIEW STATE (default) -->
+          <div id="we-preview-state">
+            <div class="we-preview">
+              <div class="we-bar">
+                <div class="we-dots"><div class="we-dot"></div><div class="we-dot"></div><div class="we-dot"></div></div>
+                <div class="we-url">stmarysnyc.communio.org</div>
+                <div class="we-live"><div class="we-live-dot"></div>Live</div>
               </div>
+              <div id="mini-site-preview" style="overflow-y:auto;max-height:520px;"></div>
             </div>
-            <label id="photo-upload-label" style="display:flex;align-items:center;justify-content:center;gap:7px;width:100%;padding:9px;border:1.5px dashed var(--border);border-radius:8px;cursor:pointer;font-size:12px;font-weight:700;color:var(--mid);transition:all .2s;background:var(--cream);" onmouseover="this.style.borderColor='#d85020';this.style.color='#d85020';" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--mid)';">
-              <svg viewBox="0 0 16 16" fill="none" width="14" height="14"><path d="M8 2v8M5 5l3-3 3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M2 11v1a2 2 0 002 2h8a2 2 0 002-2v-1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-              Upload new photo
-              <input type="file" accept="image/*" style="display:none;" onchange="handleHeroUpload(event)">
-            </label>
-            <div style="font-size:10px;color:var(--light);margin-top:7px;text-align:center;">JPG or PNG · max 5MB · min 1200px wide recommended</div>
-            <div style="margin-top:10px;">
-              <div style="font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--light);margin-bottom:7px;">Or choose a stock photo</div>
-              <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:5px;">
-                <div onclick="setStockPhoto('church1')" style="height:44px;border-radius:5px;background:url('https://images.unsplash.com/photo-1548625149-fc4a29cf7092?auto=format&fit=crop&w=200&q=70') center/cover;cursor:pointer;border:2px solid #d85020;transition:all .2s;" title="Church interior"></div>
-                <div onclick="setStockPhoto('church2')" style="height:44px;border-radius:5px;background:url('https://images.unsplash.com/photo-1438032005730-c779502df39b?auto=format&fit=crop&w=200&q=70') center/cover;cursor:pointer;border:2px solid transparent;transition:all .2s;" title="Church exterior" onmouseover="this.style.borderColor='#d85020'" onmouseout="this.style.borderColor='transparent'"></div>
-                <div onclick="setStockPhoto('community')" style="height:44px;border-radius:5px;background:url('https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=200&q=70') center/cover;cursor:pointer;border:2px solid transparent;transition:all .2s;" title="Community" onmouseover="this.style.borderColor='#d85020'" onmouseout="this.style.borderColor='transparent'"></div>
-                <div onclick="setStockPhoto('candles')" style="height:44px;border-radius:5px;background:url('https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?auto=format&fit=crop&w=200&q=70') center/cover;cursor:pointer;border:2px solid transparent;transition:all .2s;" title="Candles" onmouseover="this.style.borderColor='#d85020'" onmouseout="this.style.borderColor='transparent'"></div>
-                <div onclick="setStockPhoto('altar')" style="height:44px;border-radius:5px;background:url('https://images.unsplash.com/photo-1545378851-f1e3f3a2e4b6?auto=format&fit=crop&w=200&q=70') center/cover;cursor:pointer;border:2px solid transparent;transition:all .2s;" title="Altar" onmouseover="this.style.borderColor='#d85020'" onmouseout="this.style.borderColor='transparent'"></div>
-                <div onclick="setStockPhoto('stained')" style="height:44px;border-radius:5px;background:url('https://images.unsplash.com/photo-1509565840034-3c385bbe6451?auto=format&fit=crop&w=200&q=70') center/cover;cursor:pointer;border:2px solid transparent;transition:all .2s;" title="Stained glass" onmouseover="this.style.borderColor='#d85020'" onmouseout="this.style.borderColor='transparent'"></div>
+            <div style="margin-top:10px;font-size:12px;color:var(--light);text-align:center;">Click any section on the left to edit it</div>
+          </div>
+
+          <!-- EDITOR STATE (shown when a section is selected) -->
+          <div id="we-editor-state" style="display:none;">
+            <div style="background:#fff;border:1px solid var(--border-l);border-radius:var(--r-xl);overflow:hidden;">
+              <!-- Editor header -->
+              <div style="padding:13px 18px;background:var(--cream);border-bottom:1px solid var(--border-l);display:flex;align-items:center;justify-content:space-between;">
+                <div style="display:flex;align-items:center;gap:10px;">
+                  <button onclick="showPreview()" style="font-family:var(--f-sans);font-size:11px;font-weight:700;color:var(--mid);background:none;border:1.5px solid var(--border-l);border-radius:6px;padding:5px 11px;cursor:pointer;display:flex;align-items:center;gap:5px;"><svg viewBox="0 0 14 14" fill="none" width="11" height="11"><path d="M1 7s2.5-5 6-5 6 5 6 5-2.5 5-6 5-6-5-6-5z" stroke="currentColor" stroke-width="1.3"/><circle cx="7" cy="7" r="2" stroke="currentColor" stroke-width="1.3"/></svg> Preview</button>
+                  <div style="font-size:13px;font-weight:800;color:var(--ink);" id="we-editor-title">Edit section</div>
+                </div>
+                <button onclick="applyEdits()" style="font-family:var(--f-sans);font-size:12px;font-weight:700;color:#fff;background:#d85020;border:none;border-radius:6px;padding:7px 16px;cursor:pointer;" id="we-apply-btn">Apply &#x2713;</button>
               </div>
+              <!-- Editor fields -->
+              <div id="we-editor-body" style="padding:16px 18px;display:flex;flex-direction:column;gap:12px;"></div>
             </div>
           </div>
-        </div>
 
-        <!-- Live mini preview -->
-        <div class="we-preview">
-          <div class="we-bar">
-            <div class="we-dots"><div class="we-dot"></div><div class="we-dot"></div><div class="we-dot"></div></div>
-            <div class="we-url">stmarysnyc.communio.org</div>
-            <div class="we-live"><div class="we-live-dot"></div>Live</div>
-          </div>
-          <div id="mini-site-preview" style="overflow-y:auto;max-height:480px;"></div>
-        </div>
-      </div>
+        </div><!-- #we-right-col -->
+
+      </div><!-- #we-main-layout -->
+
+      <!-- Mobile: accordion editors (visible below 700px only) -->
+      <style>
+        @media(max-width:700px){
+          #we-main-layout { grid-template-columns: 1fr !important; }
+          #we-right-col { display: none !important; }
+          .we-mob-accordion { display: block !important; }
+          .we-section-item { border-bottom: 1px solid var(--border-l); }
+        }
+        @media(min-width:701px){
+          .we-mob-accordion { display: none !important; }
+        }
+        .we-mob-acc-body { display: none; padding: 14px 16px; background: var(--cream); border-top: 1px solid var(--border-l); }
+        .we-mob-acc-body.open { display: block; }
+        .we-section-item:hover .we-section-status { color: #d85020; }
+      </style>
 
     </div>
 
@@ -1894,140 +1839,292 @@ select.fi { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w
     }
   }
 
-  /* ── SECTION EDITOR ─────────────────────────────── */
+  /* ── WEBSITE EDITOR JS ─────────────────────────── */
+  var currentTemplate = 'warm';
+  var heroPhotoUrl = 'https://images.unsplash.com/photo-1548625149-fc4a29cf7092?auto=format&fit=crop&w=1200&q=80';
+
   var siteData = {
-    heroTitle: "St. Mary\'s Parish",
-    heroTagline: "Serving the Lower East Side since 1887",
-    aboutText: "St. Mary\'s Parish has been a cornerstone of the Lower East Side since 1887. We serve 1,200+ families from 40+ countries — committed to social justice, compassionate outreach, and the Gospel in a changing world.",
-    massSat: "5:00pm Vigil",
-    massSun: "8:00am, 10:00am, 12:00pm, 6:00pm (Spanish)",
-    massWeekday: "7:00am & 12:10pm (Mon–Fri)",
-    donateTitle: "Support St. Mary\'s Parish",
-    donateDesc: "Your gift sustains our community programmes and the upkeep of our historic church. Funds go direct to the parish via Stripe.",
+    heroTitle:    "St. Mary\'s Parish",
+    heroTagline:  "Serving the Lower East Side since 1887",
+    aboutText:    "St. Mary\'s Parish has been a cornerstone of the Lower East Side since 1887. We serve 1,200+ families from 40+ countries — committed to social justice, compassionate outreach, and the Gospel in a changing world.",
+    massSat:      "5:00pm Vigil",
+    massSun:      "8:00am, 10:00am, 12:00pm, 6:00pm (Spanish)",
+    massWeekday:  "7:00am & 12:10pm (Mon–Fri)",
+    donateTitle:  "Support St. Mary\'s Parish",
+    donateDesc:   "Your gift sustains our community programmes. Funds go direct to the parish via Stripe.",
     contactEmail: "info@stmarysnyc.org",
     contactPhone: "+1 (212) 555-0182",
-    contactAddress: "15 Mott Street, New York, NY 10013"
+    contactAddress:"15 Mott Street, New York, NY 10013"
   };
 
   var currentEditSection = null;
 
-  var sectionEditors = {
+  var sectionDefs = {
     hero: {
-      title: 'Edit hero section',
+      title: 'Hero & intro',
       fields: [
-        {id:'heroTitle', label:'Parish name', type:'input'},
-        {id:'heroTagline', label:'Tagline', type:'input'}
+        {id:'heroTitle',   label:'Parish name', type:'input'},
+        {id:'heroTagline', label:'Tagline',      type:'input'},
+        {id:'__photo__',   label:'Hero photo',   type:'photo'}
       ]
     },
     about: {
-      title: 'Edit about section',
-      fields: [
-        {id:'aboutText', label:'About your parish', type:'textarea'}
-      ]
+      title: 'About us',
+      fields: [{id:'aboutText', label:'About paragraph', type:'textarea'}]
     },
     mass: {
-      title: 'Edit mass times',
+      title: 'Mass times & events',
       fields: [
-        {id:'massSat', label:'Saturday', type:'input'},
-        {id:'massSun', label:'Sunday', type:'input'},
-        {id:'massWeekday', label:'Weekday', type:'input'}
+        {id:'massSat',     label:'Saturday',  type:'input'},
+        {id:'massSun',     label:'Sunday',    type:'input'},
+        {id:'massWeekday', label:'Weekday',   type:'input'}
       ]
     },
     donate: {
-      title: 'Edit donations section',
+      title: 'Donations section',
       fields: [
-        {id:'donateTitle', label:'Section heading', type:'input'},
-        {id:'donateDesc', label:'Description', type:'textarea'}
+        {id:'donateTitle', label:'Heading',     type:'input'},
+        {id:'donateDesc',  label:'Description', type:'textarea'}
       ]
     },
     contact: {
-      title: 'Edit contact details',
+      title: 'Contact details',
       fields: [
-        {id:'contactEmail', label:'Email address', type:'input'},
-        {id:'contactPhone', label:'Phone number', type:'input'},
+        {id:'contactEmail',   label:'Email',   type:'input'},
+        {id:'contactPhone',   label:'Phone',   type:'input'},
         {id:'contactAddress', label:'Address', type:'input'}
       ]
     }
   };
 
+  var stockPhotos = {
+    church1:   'https://images.unsplash.com/photo-1548625149-fc4a29cf7092?auto=format&fit=crop&w=1200&q=80',
+    church2:   'https://images.unsplash.com/photo-1438032005730-c779502df39b?auto=format&fit=crop&w=1200&q=80',
+    community: 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1200&q=80',
+    candles:   'https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?auto=format&fit=crop&w=1200&q=80',
+    altar:     'https://images.unsplash.com/photo-1545378851-f1e3f3a2e4b6?auto=format&fit=crop&w=1200&q=80',
+    stained:   'https://images.unsplash.com/photo-1509565840034-3c385bbe6451?auto=format&fit=crop&w=1200&q=80'
+  };
+
   function editSection(name){
     currentEditSection = name;
-    /* Highlight active section item */
-    document.querySelectorAll('.we-section-item').forEach(function(el){
-      el.classList.remove('active');
-    });
-    var el = document.getElementById('wsec-' + name);
-    if(el){ el.classList.add('active'); }
+    var def = sectionDefs[name];
 
-    var editor = sectionEditors[name];
-    document.getElementById('we-editor-title').textContent = editor.title;
+    /* Highlight section nav item */
+    document.querySelectorAll('.we-section-item').forEach(function(el){ el.classList.remove('active'); });
+    var navItem = document.getElementById('wsec-' + name);
+    if(navItem) navItem.classList.add('active');
+
+    /* Set editor title */
+    document.getElementById('we-editor-title').textContent = 'Editing: ' + def.title;
 
     /* Build form fields */
     var body = document.getElementById('we-editor-body');
     body.innerHTML = '';
-    editor.fields.forEach(function(f){
-      var wrap = document.createElement('div');
-      wrap.style.cssText = 'display:flex;flex-direction:column;gap:4px;';
-      var lbl = document.createElement('label');
-      lbl.style.cssText = 'font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--light);';
-      lbl.textContent = f.label;
-      var inp;
-      if(f.type === 'textarea'){
-        inp = document.createElement('textarea');
-        inp.style.cssText = 'font-family:var(--f-sans);font-size:13px;color:var(--ink);background:var(--cream);border:1.5px solid var(--border-l);border-radius:8px;padding:9px 11px;outline:none;resize:vertical;min-height:80px;line-height:1.55;';
+
+    def.fields.forEach(function(f){
+      if(f.type === 'photo'){
+        /* Photo upload widget */
+        var wrap = document.createElement('div');
+        wrap.style.cssText = 'display:flex;flex-direction:column;gap:8px;';
+
+        /* Current photo thumbnail */
+        var thumb = document.createElement('div');
+        thumb.id = 'hero-photo-thumb';
+        thumb.style.cssText = 'width:100%;height:100px;border-radius:8px;background:url(\'' + heroPhotoUrl + '\') center/cover;border:1px solid var(--border-l);position:relative;';
+        var thumbOverlay = document.createElement('div');
+        thumbOverlay.style.cssText = 'position:absolute;inset:0;background:rgba(0,0,0,0.3);border-radius:8px;display:flex;align-items:center;justify-content:center;';
+        thumbOverlay.innerHTML = '<span style="font-size:9px;font-weight:700;color:#fff;letter-spacing:.06em;text-transform:uppercase;">Current hero photo</span>';
+        thumb.appendChild(thumbOverlay);
+        wrap.appendChild(thumb);
+
+        /* Upload button */
+        var uploadLbl = document.createElement('label');
+        uploadLbl.style.cssText = 'display:flex;align-items:center;justify-content:center;gap:6px;width:100%;padding:9px;border:1.5px dashed var(--border);border-radius:8px;cursor:pointer;font-size:12px;font-weight:700;color:var(--mid);background:var(--cream);transition:all .18s;';
+        uploadLbl.innerHTML = '<svg viewBox="0 0 16 16" fill="none" width="13" height="13"><path d="M8 2v8M5 5l3-3 3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M2 11v1a2 2 0 002 2h8a2 2 0 002-2v-1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg> Upload photo';
+        var fileInput = document.createElement('input');
+        fileInput.type = 'file';
+        fileInput.accept = 'image/*';
+        fileInput.style.display = 'none';
+        fileInput.addEventListener('change', handleHeroUpload);
+        uploadLbl.appendChild(fileInput);
+        uploadLbl.addEventListener('mouseover', function(){ this.style.borderColor='#d85020'; this.style.color='#d85020'; });
+        uploadLbl.addEventListener('mouseout',  function(){ this.style.borderColor='var(--border)'; this.style.color='var(--mid)'; });
+        wrap.appendChild(uploadLbl);
+
+        /* Stock photos grid */
+        var stockLbl = document.createElement('div');
+        stockLbl.style.cssText = 'font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--light);margin-top:4px;';
+        stockLbl.textContent = 'Or choose a stock photo';
+        wrap.appendChild(stockLbl);
+
+        var grid = document.createElement('div');
+        grid.style.cssText = 'display:grid;grid-template-columns:repeat(3,1fr);gap:5px;';
+        var stockList = ['church1','church2','community','candles','altar','stained'];
+        var stockLabels = ['Church interior','Church exterior','Community','Candles','Altar','Stained glass'];
+        stockList.forEach(function(key, idx){
+          var tile = document.createElement('div');
+          tile.id = 'stock-' + key;
+          tile.title = stockLabels[idx];
+          tile.style.cssText = 'height:44px;border-radius:5px;background:url(\'' + stockPhotos[key] + '\') center/cover;cursor:pointer;border:2px solid ' + (heroPhotoUrl === stockPhotos[key] ? '#d85020' : 'transparent') + ';transition:all .18s;';
+          tile.addEventListener('click', function(){ setStockPhoto(key); });
+          tile.addEventListener('mouseover', function(){ this.style.borderColor='#d85020'; });
+          tile.addEventListener('mouseout',  function(){ if(heroPhotoUrl !== stockPhotos[key]) this.style.borderColor='transparent'; });
+          grid.appendChild(tile);
+        });
+        wrap.appendChild(grid);
+
+        var hint = document.createElement('div');
+        hint.style.cssText = 'font-size:10px;color:var(--light);text-align:center;';
+        hint.textContent = 'JPG or PNG · max 5MB · min 1200px wide recommended';
+        wrap.appendChild(hint);
+
+        body.appendChild(wrap);
+
       } else {
-        inp = document.createElement('input');
-        inp.type = 'text';
-        inp.style.cssText = 'font-family:var(--f-sans);font-size:13px;color:var(--ink);background:var(--cream);border:1.5px solid var(--border-l);border-radius:8px;padding:9px 11px;outline:none;';
+        /* Regular text field */
+        var wrap = document.createElement('div');
+        wrap.style.cssText = 'display:flex;flex-direction:column;gap:4px;';
+        var lbl = document.createElement('label');
+        lbl.style.cssText = 'font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--light);';
+        lbl.textContent = f.label;
+        var inp;
+        if(f.type === 'textarea'){
+          inp = document.createElement('textarea');
+          inp.style.cssText = 'font-family:var(--f-sans);font-size:13px;color:var(--ink);background:var(--cream);border:1.5px solid var(--border-l);border-radius:8px;padding:9px 11px;outline:none;resize:vertical;min-height:80px;line-height:1.6;width:100%;';
+        } else {
+          inp = document.createElement('input');
+          inp.type = 'text';
+          inp.style.cssText = 'font-family:var(--f-sans);font-size:13px;color:var(--ink);background:var(--cream);border:1.5px solid var(--border-l);border-radius:8px;padding:9px 11px;outline:none;width:100%;';
+        }
+        inp.id = 'ed-' + f.id;
+        inp.value = siteData[f.id] || '';
+        inp.addEventListener('focus', function(){ this.style.borderColor='#d85020'; this.style.background='#fff'; });
+        inp.addEventListener('blur',  function(){ this.style.borderColor='var(--border-l)'; this.style.background='var(--cream)'; });
+        wrap.appendChild(lbl);
+        wrap.appendChild(inp);
+        body.appendChild(wrap);
       }
-      inp.id = 'ed-' + f.id;
-      inp.value = siteData[f.id] || '';
-      inp.addEventListener('focus', function(){ this.style.borderColor='#d85020'; this.style.background='#fff'; });
-      inp.addEventListener('blur', function(){ this.style.borderColor='var(--border-l)'; this.style.background='var(--cream)'; });
-      wrap.appendChild(lbl);
-      wrap.appendChild(inp);
-      body.appendChild(wrap);
     });
 
-    /* Show editor */
-    var editorEl = document.getElementById('we-section-editor');
-    editorEl.style.display = 'block';
-    editorEl.scrollIntoView({behavior:'smooth', block:'nearest'});
+    /* Switch right col to editor state */
+    document.getElementById('we-preview-state').style.display = 'none';
+    document.getElementById('we-editor-state').style.display  = 'block';
   }
 
-  function closeEditor(){
-    document.getElementById('we-section-editor').style.display = 'none';
+  function showPreview(){
+    /* Save any pending edits first */
+    _saveEditorValues();
+    /* Switch right col back to preview */
+    document.getElementById('we-editor-state').style.display  = 'none';
+    document.getElementById('we-preview-state').style.display = 'block';
+    /* Refresh preview */
+    refreshMiniPreview();
+    /* Clear active section highlight */
+    document.querySelectorAll('.we-section-item').forEach(function(el){ el.classList.remove('active'); });
     currentEditSection = null;
-    document.querySelectorAll('.we-section-item').forEach(function(el,i){
-      el.classList.remove('active');
+  }
+
+  function _saveEditorValues(){
+    if(!currentEditSection) return;
+    var def = sectionDefs[currentEditSection];
+    def.fields.forEach(function(f){
+      if(f.type === 'photo') return;
+      var inp = document.getElementById('ed-' + f.id);
+      if(inp) siteData[f.id] = inp.value;
     });
-    document.getElementById('wsec-hero').classList.add('active');
   }
 
   function applyEdits(){
-    if(!currentEditSection) return;
-    var editor = sectionEditors[currentEditSection];
-    /* Save values back to siteData */
-    editor.fields.forEach(function(f){
-      var inp = document.getElementById('ed-' + f.id);
-      if(inp){ siteData[f.id] = inp.value; }
-    });
-    /* Refresh mini preview */
-    var mini = document.getElementById('mini-site-preview');
-    if(mini){ mini.innerHTML = getSiteHTML(currentTemplate, false); }
-    /* Flash the apply button green */
-    var btn = document.querySelector('[onclick="applyEdits()"]');
+    _saveEditorValues();
+    refreshMiniPreview();
+    /* Flash button */
+    var btn = document.getElementById('we-apply-btn');
     if(btn){
+      var orig = btn.innerHTML;
       btn.textContent = 'Applied ✓';
       btn.style.background = 'var(--sage)';
-      setTimeout(function(){
-        btn.innerHTML = 'Apply &amp; preview';
-        btn.style.background = '#d85020';
-      }, 1500);
+      setTimeout(function(){ btn.innerHTML = orig; btn.style.background = '#d85020'; }, 1500);
     }
   }
 
-  /* Init mini preview on website section load — handled in navTo() directly */
+  function refreshMiniPreview(){
+    var mini = document.getElementById('mini-site-preview');
+    if(mini) mini.innerHTML = getSiteHTML(currentTemplate, false);
+  }
+
+  function handleHeroUpload(event){
+    var file = event.target.files[0];
+    if(!file) return;
+    if(file.size > 5 * 1024 * 1024){ alert('Photo must be under 5MB'); return; }
+    var reader = new FileReader();
+    reader.onload = function(e){
+      heroPhotoUrl = e.target.result;
+      _updatePhotoUI();
+    };
+    reader.readAsDataURL(file);
+  }
+
+  function setStockPhoto(key){
+    heroPhotoUrl = stockPhotos[key];
+    _updatePhotoUI();
+    /* Update tile borders */
+    Object.keys(stockPhotos).forEach(function(k){
+      var tile = document.getElementById('stock-' + k);
+      if(tile) tile.style.borderColor = (k === key) ? '#d85020' : 'transparent';
+    });
+  }
+
+  function _updatePhotoUI(){
+    /* Update thumbnail in editor */
+    var thumb = document.getElementById('hero-photo-thumb');
+    if(thumb) thumb.style.backgroundImage = 'url(\'' + heroPhotoUrl + '\')';
+    /* Refresh mini preview */
+    refreshMiniPreview();
+  }
+
+  function selectTemplate(name){
+    currentTemplate = name;
+    /* Update card borders */
+    document.querySelectorAll('.site-tmpl').forEach(function(el){ el.style.borderColor = 'var(--border-l)'; });
+    var sel = document.getElementById('tmpl-' + name);
+    if(sel) sel.style.borderColor = '#d85020';
+    /* Refresh preview */
+    refreshMiniPreview();
+  }
+
+  function openPreview(){
+    var modal   = document.getElementById('site-preview-modal');
+    var content = document.getElementById('site-preview-content');
+    if(modal && content){
+      content.innerHTML = getSiteHTML(currentTemplate, true);
+      modal.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }
+  }
+
+  function closePreview(){
+    var modal = document.getElementById('site-preview-modal');
+    if(modal){ modal.style.display = 'none'; document.body.style.overflow = ''; }
+  }
+
+  function publishSite(){
+    var btn = document.getElementById('publish-btn');
+    if(!btn) return;
+    btn.textContent = 'Publishing...';
+    btn.disabled = true;
+    setTimeout(function(){
+      btn.innerHTML = 'Published ✓';
+      btn.style.background = 'var(--sage)';
+      setTimeout(function(){
+        btn.innerHTML = 'Publish changes <svg viewBox="0 0 16 16" fill="none" width="13" height="13"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+        btn.style.background = '#d85020';
+        btn.disabled = false;
+      }, 2500);
+    }, 1800);
+  }
+
+  /* Init mini preview on website section load — handled in navTo() directly */  /* Init mini preview on website section load — handled in navTo() directly */
     document.addEventListener('DOMContentLoaded', function(){
     /* Hide all views */
     document.querySelectorAll('.view, .app-view').forEach(function(v){
