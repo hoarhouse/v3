@@ -10,18 +10,18 @@
 <style>
 /* ── VARIABLES ─────────────────────────────────────────── */
 :root {
-  --cream:#faf7f2; --cream-dk:#f2ece2; --ww:#faf7f2; --white:#fff;
+  --cream:#ffffff; --cream-dk:#f5ede0; --ww:#ffffff; --white:#fff;
   --terra:#c85c3a; --terra-l:#e8856a; --terra-p:#fceee9;
   --sage:#4a7c59;  --sage-l:#6a9e78;  --sage-p:#eaf3ec;
-  --amber:#e0a23a; --amber-p:#fdf3e0;
-  --ink:#1e1a14; --ink-s:#3a3228;
+  --amber:#d4922a; --amber-p:#fdf3e0;
+  --ink:#16120c; --ink-s:#2e2518;
   --mid:#6b5c48; --light:#9c8b78;
-  --border:#ede4d6; --border-l:#f5ede4;
+  --border:#e8d9c4; --border-l:#f0e4d0;
   --f-sans:'Outfit',system-ui,sans-serif;
   --f-serif:'Lora',Georgia,serif;
   --r-md:8px; --r-lg:12px; --r-xl:16px; --r-pill:8px;
-  --sh-sm:0 2px 10px rgba(30,26,20,0.07);
-  --sh-md:0 8px 28px rgba(30,26,20,0.10);
+  --sh-sm:0 2px 10px rgba(22,18,12,0.07);
+  --sh-md:0 8px 28px rgba(22,18,12,0.10);
   --ease:0.2s ease;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
@@ -193,9 +193,9 @@ select.fi{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.o
 .tmpl:hover{border-color:var(--terra);transform:translateY(-2px);}
 .tmpl.sel{border-color:var(--terra);}
 .tp{height:62px;position:relative;}
-.tp-a{background:linear-gradient(145deg,#faf7f2,#f2ece2);}
+.tp-a{background:linear-gradient(145deg,#ffffff,#f5ede0);}
 .tp-b{background:linear-gradient(145deg,#eaf3ec,#4a7c59);}
-.tp-c{background:linear-gradient(145deg,#1e1a14,#3a3228);}
+.tp-c{background:linear-gradient(145deg,#16120c,#2e2518);}
 .tp-lines{position:absolute;inset:8px;display:flex;flex-direction:column;gap:4px;}
 .tpl{height:5px;border-radius:3px;opacity:.45;}
 .tpl.h{width:55%;height:7px;opacity:.7;}
@@ -1043,7 +1043,7 @@ select.fi{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.o
 
           <!-- PHP: foreach ($direct_conversations as $conv) { echo msg-item HTML } -->
           <div class="msg-item active" onclick="showThread('accra')">
-            <div class="msg-av" style="background:#e0a23a;">HS</div>
+            <div class="msg-av" style="background:#d4922a;">HS</div>
             <div class="msg-info">
               <div class="msg-name">Holy Spirit Parish, Accra</div>
               <div class="msg-preview">We'd love to discuss a joint youth programme...</div>
@@ -1124,7 +1124,7 @@ select.fi{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.o
         <div class="msg-thread" id="msg-thread">
           <!-- PHP: SELECT * FROM messages WHERE conversation_id=$conv_id ORDER BY created_at ASC -->
           <div class="mt-head">
-            <div class="mt-av" style="background:#e0a23a;">HS</div>
+            <div class="mt-av" style="background:#d4922a;">HS</div>
             <div>
               <div class="mt-name">Holy Spirit Parish, Accra</div>
               <!-- PHP: echo $parish->city . ", " . $parish->country -->
@@ -1200,7 +1200,7 @@ select.fi{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.o
       <div class="network-grid" style="margin-bottom:28px;">
         <div class="parish-card">
           <div class="pc-top">
-            <div class="pc-av2" style="background:#e0a23a;">HS</div>
+            <div class="pc-av2" style="background:#d4922a;">HS</div>
             <div><div class="pc-info-name">Holy Spirit Parish</div><div class="pc-info-loc">🇬🇭 Accra, Ghana</div></div>
           </div>
           <div class="pc-tags"><span class="pc-focus">Youth ministry</span><span class="pc-focus">Education</span></div>
