@@ -541,6 +541,10 @@ select.fi { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w
 /* Sidebar overlay on mobile */
 .sb-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 99; }
 .sb-overlay.on { display: block; }
+.notif-toggle { width:40px;height:22px;border-radius:100px;background:var(--border-l);cursor:pointer;position:relative;transition:background .2s;flex-shrink:0; }
+.notif-toggle::after { content:'';position:absolute;top:2px;left:2px;width:18px;height:18px;border-radius:50%;background:#fff;transition:left .2s;box-shadow:0 1px 3px rgba(0,0,0,0.2); }
+.notif-toggle.on { background:#d85020; }
+.notif-toggle.on::after { left:20px; }
 </style>
 </head>
 <body>
@@ -1233,44 +1237,283 @@ select.fi { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w
     <div class="section-panel" id="panel-settings">
       <div style="font-size:clamp(18px,4vw,24px);font-weight:800;color:var(--ink);letter-spacing:-0.025em;margin-bottom:18px;">Settings</div>
       <div class="settings-layout">
+
+        <!-- LEFT NAV -->
         <div class="settings-nav">
-          <!-- PHP: highlight active settings section -->
-          <div class="sn-item active"><svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="6" r="2.5" stroke="currentColor" stroke-width="1.3"/><path d="M2 14c0-3.31 2.69-6 6-6s6 2.69 6 6" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg><span class="sn-lbl">Parish profile</span></div>
-          <div class="sn-item"><svg viewBox="0 0 16 16" fill="none"><rect x="1" y="4" width="14" height="9" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M1 7.5h14" stroke="currentColor" stroke-width="1.3"/></svg><span class="sn-lbl">Donations</span></div>
-          <div class="sn-item"><svg viewBox="0 0 16 16" fill="none"><path d="M8 1v3M8 12v3M1 8h3M12 8h3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><circle cx="8" cy="8" r="2.5" stroke="currentColor" stroke-width="1.3"/></svg><span class="sn-lbl">Notifications</span></div>
-          <div class="sn-item"><svg viewBox="0 0 16 16" fill="none"><rect x="1" y="2" width="14" height="11" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M1 5.5h14" stroke="currentColor" stroke-width="1.3"/></svg><span class="sn-lbl">Website</span></div>
-          <div class="sn-item"><svg viewBox="0 0 16 16" fill="none"><path d="M8 1.5a6.5 6.5 0 100 13 6.5 6.5 0 000-13z" stroke="currentColor" stroke-width="1.3"/><path d="M2 8h12M8 2a10 10 0 000 12M8 2a10 10 0 010 12" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg><span class="sn-lbl">Privacy</span></div>
-          <div class="sn-item"><svg viewBox="0 0 16 16" fill="none"><rect x="2" y="3" width="12" height="10" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M5 3V2M11 3V2M2 7h12" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg><span class="sn-lbl">Account</span></div>
+          <div class="sn-item active" id="stab-profile"       onclick="switchSettingsTab('profile')"><svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="6" r="2.5" stroke="currentColor" stroke-width="1.3"/><path d="M2 14c0-3.31 2.69-6 6-6s6 2.69 6 6" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg><span class="sn-lbl">Parish profile</span></div>
+          <div class="sn-item"        id="stab-donations"     onclick="switchSettingsTab('donations')"><svg viewBox="0 0 16 16" fill="none"><rect x="1" y="4" width="14" height="9" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M1 7.5h14" stroke="currentColor" stroke-width="1.3"/></svg><span class="sn-lbl">Donations</span></div>
+          <div class="sn-item"        id="stab-notifications" onclick="switchSettingsTab('notifications')"><svg viewBox="0 0 16 16" fill="none"><path d="M8 1v3M8 12v3M1 8h3M12 8h3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><circle cx="8" cy="8" r="2.5" stroke="currentColor" stroke-width="1.3"/></svg><span class="sn-lbl">Notifications</span></div>
+          <div class="sn-item"        id="stab-website"       onclick="switchSettingsTab('website')"><svg viewBox="0 0 16 16" fill="none"><rect x="1" y="2" width="14" height="11" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M1 5.5h14" stroke="currentColor" stroke-width="1.3"/></svg><span class="sn-lbl">Website</span></div>
+          <div class="sn-item"        id="stab-privacy"       onclick="switchSettingsTab('privacy')"><svg viewBox="0 0 16 16" fill="none"><path d="M8 1.5a6.5 6.5 0 100 13 6.5 6.5 0 000-13z" stroke="currentColor" stroke-width="1.3"/><path d="M2 8h12M8 2a10 10 0 000 12M8 2a10 10 0 010 12" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg><span class="sn-lbl">Privacy</span></div>
+          <div class="sn-item"        id="stab-account"       onclick="switchSettingsTab('account')"><svg viewBox="0 0 16 16" fill="none"><rect x="2" y="3" width="12" height="10" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M5 3V2M11 3V2M2 7h12" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg><span class="sn-lbl">Account</span></div>
         </div>
-        <!-- PHP: form action="update-parish-settings.php" method="POST" -->
+
+        <!-- RIGHT CONTENT -->
         <div class="settings-content">
-          <div class="settings-title">Parish profile</div>
-          <div class="settings-sub">This information appears on your public Communio profile</div>
-          <div style="display:flex;flex-direction:column;gap:13px;">
-            <!-- PHP: name="parish_name" value=$parish->name -->
-            <div class="field"><div class="fl">Parish name</div><input class="fi" type="text" value="St. Mary's Parish"></div>
-            <div class="field-row">
-              <div class="field"><div class="fl">City</div><input class="fi" type="text" value="New York"></div>
-              <div class="field"><div class="fl">Country</div><select class="fi"><option>United States</option><option>Hungary</option><option>Ghana</option></select></div>
-            </div>
-            <div class="field"><div class="fl">Description</div><textarea class="fi" style="min-height:78px;">St. Mary's Parish has been serving the Lower East Side community since 1887. We are a vibrant, multicultural congregation of over 1,200 families, committed to social justice, youth ministry, and ethical technology advocacy.</textarea></div>
-            <div class="field-row">
-              <div class="field"><div class="fl">Contact person</div><input class="fi" type="text" value="Fr. James O'Brien"></div>
-              <div class="field"><div class="fl">Role</div><select class="fi"><option>Pastor / Parish Priest</option><option>Administrator</option></select></div>
-            </div>
-            <div class="field-row">
-              <div class="field"><div class="fl">Public email</div><input class="fi" type="email" value="info@stmarysnyc.org"></div>
-              <div class="field"><div class="fl">Phone</div><input class="fi" type="tel" value="+1 (212) 555-0182"></div>
-            </div>
-            <div style="display:flex;justify-content:flex-end;gap:8px;padding-top:4px;">
-              <button class="btn-outline btn-sm">Cancel</button>
-              <!-- PHP: form submit → update-parish.php → redirect with flash message -->
-              <button class="btn-primary btn-sm">Save changes <svg viewBox="0 0 16 16" fill="none" width="13" height="13"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+
+          <!-- PARISH PROFILE -->
+          <div id="sc-profile">
+            <div class="settings-title">Parish profile</div>
+            <div class="settings-sub">This information appears on your public Communio profile</div>
+            <div style="display:flex;flex-direction:column;gap:13px;">
+              <div class="field"><div class="fl">Parish name</div><input class="fi" type="text" value="St. Mary's Parish"></div>
+              <div class="field-row">
+                <div class="field"><div class="fl">City</div><input class="fi" type="text" value="New York"></div>
+                <div class="field"><div class="fl">Country</div><select class="fi"><option>United States</option><option>Hungary</option><option>Ghana</option></select></div>
+              </div>
+              <div class="field"><div class="fl">Description</div><textarea class="fi" style="min-height:78px;">St. Mary's Parish has been serving the Lower East Side community since 1887. We are a vibrant, multicultural congregation of over 1,200 families, committed to social justice, youth ministry, and ethical technology advocacy.</textarea></div>
+              <div class="field-row">
+                <div class="field"><div class="fl">Contact person</div><input class="fi" type="text" value="Fr. James O'Brien"></div>
+                <div class="field"><div class="fl">Role</div><select class="fi"><option>Pastor / Parish Priest</option><option>Administrator</option></select></div>
+              </div>
+              <div class="field-row">
+                <div class="field"><div class="fl">Public email</div><input class="fi" type="email" value="info@stmarysnyc.org"></div>
+                <div class="field"><div class="fl">Phone</div><input class="fi" type="tel" value="+1 (212) 555-0182"></div>
+              </div>
+              <div class="field"><div class="fl">Address</div><input class="fi" type="text" value="15 Mott Street, New York, NY 10013"></div>
+              <div class="field">
+                <div class="fl" style="margin-bottom:8px;">Focus areas</div>
+                <div class="fpills">
+                  <span class="fpill">Peace &amp; reconciliation</span>
+                  <span class="fpill">Ethical technology</span>
+                  <span class="fpill">Social justice</span>
+                  <span class="fpill">Youth ministry</span>
+                  <span class="fpill add">+ Add</span>
+                </div>
+              </div>
+              <div style="display:flex;justify-content:flex-end;gap:8px;padding-top:4px;">
+                <button class="btn-outline btn-sm">Cancel</button>
+                <button class="btn-primary btn-sm" onclick="saveSettingsFlash(this)">Save changes <svg viewBox="0 0 16 16" fill="none" width="13" height="13"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
+
+          <!-- DONATIONS -->
+          <div id="sc-donations" style="display:none;">
+            <div class="settings-title">Donations</div>
+            <div class="settings-sub">Manage how your parish receives online donations</div>
+            <div style="display:flex;flex-direction:column;gap:16px;">
+              <!-- Stripe status -->
+              <div style="background:var(--sage-p);border:1.5px solid var(--sage-l);border-radius:var(--r-lg);padding:14px 16px;display:flex;align-items:center;gap:12px;">
+                <div style="width:8px;height:8px;border-radius:50%;background:var(--sage);flex-shrink:0;"></div>
+                <div style="flex:1;"><div style="font-size:13px;font-weight:700;color:var(--sage);">Stripe connected &amp; active</div><div style="font-size:12px;color:var(--mid);margin-top:1px;">acct_1PaXb2&bull;&bull;&bull;&bull;&bull;7qWz &middot; Payouts enabled</div></div>
+                <button class="btn-outline btn-sm" style="font-size:11px;">Manage in Stripe &#x2197;</button>
+              </div>
+              <div class="field">
+                <div class="fl">Donation page title</div>
+                <input class="fi" type="text" value="Support St. Mary's Parish">
+              </div>
+              <div class="field">
+                <div class="fl">Donation description</div>
+                <textarea class="fi" style="min-height:72px;">Your gift sustains our community programmes and the upkeep of our historic church. Funds go direct to the parish via Stripe.</textarea>
+              </div>
+              <div class="field">
+                <div class="fl" style="margin-bottom:8px;">Suggested amounts</div>
+                <div style="display:flex;gap:8px;flex-wrap:wrap;">
+                  <input class="fi" type="number" value="10"  style="width:70px;text-align:center;">
+                  <input class="fi" type="number" value="25"  style="width:70px;text-align:center;">
+                  <input class="fi" type="number" value="50"  style="width:70px;text-align:center;">
+                  <input class="fi" type="number" value="100" style="width:70px;text-align:center;">
+                </div>
+              </div>
+              <div class="field">
+                <div class="fl" style="margin-bottom:8px;">Accept recurring donations</div>
+                <div style="display:flex;align-items:center;gap:10px;">
+                  <div id="toggle-recurring" onclick="toggleSwitch(this)" style="width:40px;height:22px;border-radius:100px;background:#d85020;cursor:pointer;position:relative;transition:background .2s;flex-shrink:0;">
+                    <div style="position:absolute;top:2px;left:20px;width:18px;height:18px;border-radius:50%;background:#fff;transition:left .2s;"></div>
+                  </div>
+                  <span style="font-size:13px;color:var(--mid);">Allow donors to set up monthly giving</span>
+                </div>
+              </div>
+              <div style="background:var(--amber-p);border:1px solid var(--border-l);border-radius:var(--r-lg);padding:13px 16px;">
+                <div style="font-size:12px;font-weight:700;color:#7a5a00;margin-bottom:3px;">Fee reminder</div>
+                <div style="font-size:12px;color:var(--mid);line-height:1.6;">Communio charges 1% only when donations exceed $500/month. Stripe charges 2.9%. 96.1% of every donation reaches your parish.</div>
+              </div>
+              <div style="display:flex;justify-content:flex-end;gap:8px;">
+                <button class="btn-outline btn-sm">Cancel</button>
+                <button class="btn-primary btn-sm" onclick="saveSettingsFlash(this)">Save changes <svg viewBox="0 0 16 16" fill="none" width="13" height="13"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+              </div>
+            </div>
+          </div>
+
+          <!-- NOTIFICATIONS -->
+          <div id="sc-notifications" style="display:none;">
+            <div class="settings-title">Notifications</div>
+            <div class="settings-sub">Choose what emails and alerts you receive</div>
+            <div style="display:flex;flex-direction:column;gap:0;">
+              <div style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--light);padding:12px 0 6px;">Donations</div>
+              <div style="display:flex;flex-direction:column;gap:0;border:1px solid var(--border-l);border-radius:var(--r-lg);overflow:hidden;">
+                <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 16px;border-bottom:1px solid var(--border-l);">
+                  <div><div style="font-size:13px;font-weight:600;color:var(--ink);">New donation received</div><div style="font-size:11px;color:var(--light);">Email when a donor gives to your parish</div></div>
+                  <div class="notif-toggle on" onclick="toggleSwitch(this)"></div>
+                </div>
+                <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 16px;border-bottom:1px solid var(--border-l);">
+                  <div><div style="font-size:13px;font-weight:600;color:var(--ink);">Monthly donation summary</div><div style="font-size:11px;color:var(--light);">Monthly digest of all giving activity</div></div>
+                  <div class="notif-toggle on" onclick="toggleSwitch(this)"></div>
+                </div>
+                <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 16px;">
+                  <div><div style="font-size:13px;font-weight:600;color:var(--ink);">Payout confirmed</div><div style="font-size:11px;color:var(--light);">When Stripe sends funds to your bank account</div></div>
+                  <div class="notif-toggle on" onclick="toggleSwitch(this)"></div>
+                </div>
+              </div>
+              <div style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--light);padding:16px 0 6px;">Network &amp; messages</div>
+              <div style="display:flex;flex-direction:column;gap:0;border:1px solid var(--border-l);border-radius:var(--r-lg);overflow:hidden;">
+                <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 16px;border-bottom:1px solid var(--border-l);">
+                  <div><div style="font-size:13px;font-weight:600;color:var(--ink);">New message</div><div style="font-size:11px;color:var(--light);">Email when a parish sends you a direct message</div></div>
+                  <div class="notif-toggle on" onclick="toggleSwitch(this)"></div>
+                </div>
+                <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 16px;border-bottom:1px solid var(--border-l);">
+                  <div><div style="font-size:13px;font-weight:600;color:var(--ink);">Connection request</div><div style="font-size:11px;color:var(--light);">Email when a parish wants to connect</div></div>
+                  <div class="notif-toggle on" onclick="toggleSwitch(this)"></div>
+                </div>
+                <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 16px;">
+                  <div><div style="font-size:13px;font-weight:600;color:var(--ink);">Project channel activity</div><div style="font-size:11px;color:var(--light);">Digest of new posts in your project channels</div></div>
+                  <div class="notif-toggle" onclick="toggleSwitch(this)"></div>
+                </div>
+              </div>
+              <div style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--light);padding:16px 0 6px;">Communio platform</div>
+              <div style="display:flex;flex-direction:column;gap:0;border:1px solid var(--border-l);border-radius:var(--r-lg);overflow:hidden;">
+                <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 16px;border-bottom:1px solid var(--border-l);">
+                  <div><div style="font-size:13px;font-weight:600;color:var(--ink);">New projects to join</div><div style="font-size:11px;color:var(--light);">Weekly digest of campaigns matching your focus areas</div></div>
+                  <div class="notif-toggle on" onclick="toggleSwitch(this)"></div>
+                </div>
+                <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 16px;">
+                  <div><div style="font-size:13px;font-weight:600;color:var(--ink);">DCF announcements</div><div style="font-size:11px;color:var(--light);">Important updates from the Domus Communis Foundation</div></div>
+                  <div class="notif-toggle on" onclick="toggleSwitch(this)"></div>
+                </div>
+              </div>
+              <div style="display:flex;justify-content:flex-end;gap:8px;margin-top:16px;">
+                <button class="btn-primary btn-sm" onclick="saveSettingsFlash(this)">Save preferences <svg viewBox="0 0 16 16" fill="none" width="13" height="13"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+              </div>
+            </div>
+          </div>
+
+          <!-- WEBSITE -->
+          <div id="sc-website" style="display:none;">
+            <div class="settings-title">Website settings</div>
+            <div class="settings-sub">Control your parish website URL and visibility</div>
+            <div style="display:flex;flex-direction:column;gap:14px;">
+              <div class="field">
+                <div class="fl">Your website URL</div>
+                <div style="display:flex;align-items:center;gap:8px;background:var(--cream);border:1.5px solid var(--border-l);border-radius:var(--r-md);padding:10px 12px;">
+                  <span style="font-size:13px;color:var(--light);white-space:nowrap;">communio.org/</span>
+                  <input style="font-family:var(--f-sans);font-size:13px;color:var(--ink);background:transparent;border:none;outline:none;flex:1;" type="text" value="stmarysnyc">
+                </div>
+                <div style="font-size:11px;color:var(--light);">stmarysnyc.communio.org &middot; live now</div>
+              </div>
+              <div class="field">
+                <div class="fl" style="margin-bottom:8px;">Website visibility</div>
+                <div style="display:flex;flex-direction:column;gap:8px;">
+                  <label style="display:flex;align-items:center;gap:10px;cursor:pointer;">
+                    <input type="radio" name="visibility" checked style="accent-color:#d85020;">
+                    <div><div style="font-size:13px;font-weight:600;color:var(--ink);">Public</div><div style="font-size:11px;color:var(--light);">Anyone can find and view your parish profile</div></div>
+                  </label>
+                  <label style="display:flex;align-items:center;gap:10px;cursor:pointer;">
+                    <input type="radio" name="visibility" style="accent-color:#d85020;">
+                    <div><div style="font-size:13px;font-weight:600;color:var(--ink);">Communio members only</div><div style="font-size:11px;color:var(--light);">Only verified parishes can view your profile</div></div>
+                  </label>
+                  <label style="display:flex;align-items:center;gap:10px;cursor:pointer;">
+                    <input type="radio" name="visibility" style="accent-color:#d85020;">
+                    <div><div style="font-size:13px;font-weight:600;color:var(--ink);">Hidden</div><div style="font-size:11px;color:var(--light);">Your profile is not listed in the network directory</div></div>
+                  </label>
+                </div>
+              </div>
+              <div class="field">
+                <div class="fl" style="margin-bottom:8px;">Custom domain</div>
+                <input class="fi" type="text" placeholder="e.g. www.stmarysnyc.org (optional)" style="color:var(--light);">
+                <div style="font-size:11px;color:var(--light);">Point your own domain to your Communio site. Contact support to set up DNS.</div>
+              </div>
+              <div style="display:flex;justify-content:flex-end;gap:8px;">
+                <button class="btn-outline btn-sm">Cancel</button>
+                <button class="btn-primary btn-sm" onclick="saveSettingsFlash(this)">Save changes <svg viewBox="0 0 16 16" fill="none" width="13" height="13"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+              </div>
+            </div>
+          </div>
+
+          <!-- PRIVACY -->
+          <div id="sc-privacy" style="display:none;">
+            <div class="settings-title">Privacy</div>
+            <div class="settings-sub">Control what information is visible to other parishes and the public</div>
+            <div style="display:flex;flex-direction:column;gap:0;">
+              <div style="display:flex;flex-direction:column;gap:0;border:1px solid var(--border-l);border-radius:var(--r-lg);overflow:hidden;margin-bottom:14px;">
+                <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 16px;border-bottom:1px solid var(--border-l);">
+                  <div><div style="font-size:13px;font-weight:600;color:var(--ink);">Show contact email publicly</div><div style="font-size:11px;color:var(--light);">Visible on your public profile page</div></div>
+                  <div class="notif-toggle on" onclick="toggleSwitch(this)"></div>
+                </div>
+                <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 16px;border-bottom:1px solid var(--border-l);">
+                  <div><div style="font-size:13px;font-weight:600;color:var(--ink);">Show phone number publicly</div><div style="font-size:11px;color:var(--light);">Visible on your public profile page</div></div>
+                  <div class="notif-toggle" onclick="toggleSwitch(this)"></div>
+                </div>
+                <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 16px;border-bottom:1px solid var(--border-l);">
+                  <div><div style="font-size:13px;font-weight:600;color:var(--ink);">Show donation totals publicly</div><div style="font-size:11px;color:var(--light);">Display total funds raised on your profile</div></div>
+                  <div class="notif-toggle" onclick="toggleSwitch(this)"></div>
+                </div>
+                <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 16px;">
+                  <div><div style="font-size:13px;font-weight:600;color:var(--ink);">Allow parishes to message you</div><div style="font-size:11px;color:var(--light);">Other verified parishes can send direct messages</div></div>
+                  <div class="notif-toggle on" onclick="toggleSwitch(this)"></div>
+                </div>
+              </div>
+              <div style="background:var(--cream);border:1px solid var(--border-l);border-radius:var(--r-lg);padding:14px 16px;">
+                <div style="font-size:12px;font-weight:700;color:var(--ink);margin-bottom:4px;">Data &amp; analytics</div>
+                <div style="font-size:12px;color:var(--mid);line-height:1.6;margin-bottom:10px;">Communio uses anonymised data from your parish activity to improve the platform and generate DCF research insights. Your parish is never individually identified in published research.</div>
+                <div style="display:flex;align-items:center;gap:10px;">
+                  <div class="notif-toggle on" onclick="toggleSwitch(this)"></div>
+                  <span style="font-size:12px;color:var(--mid);">Contribute anonymised data to DCF research</span>
+                </div>
+              </div>
+              <div style="display:flex;justify-content:flex-end;gap:8px;margin-top:14px;">
+                <button class="btn-primary btn-sm" onclick="saveSettingsFlash(this)">Save preferences <svg viewBox="0 0 16 16" fill="none" width="13" height="13"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+              </div>
+            </div>
+          </div>
+
+          <!-- ACCOUNT -->
+          <div id="sc-account" style="display:none;">
+            <div class="settings-title">Account</div>
+            <div class="settings-sub">Manage your login credentials and account security</div>
+            <div style="display:flex;flex-direction:column;gap:14px;">
+              <div class="field">
+                <div class="fl">Login email</div>
+                <input class="fi" type="email" value="fr.obrien@stmarysnyc.org">
+                <div style="font-size:11px;color:var(--light);">Used to log in to Communio — separate from your public contact email</div>
+              </div>
+              <div style="border:1px solid var(--border-l);border-radius:var(--r-lg);overflow:hidden;">
+                <div style="padding:13px 16px;border-bottom:1px solid var(--border-l);background:var(--cream);">
+                  <div style="font-size:12px;font-weight:700;color:var(--ink);">Password</div>
+                </div>
+                <div style="padding:14px 16px;display:flex;flex-direction:column;gap:10px;">
+                  <div class="field"><div class="fl">Current password</div><input class="fi" type="password" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;"></div>
+                  <div class="field"><div class="fl">New password</div><input class="fi" type="password" placeholder="Min 8 characters"></div>
+                  <div class="field"><div class="fl">Confirm new password</div><input class="fi" type="password" placeholder="Repeat new password"></div>
+                  <div style="display:flex;justify-content:flex-end;">
+                    <button class="btn-primary btn-sm" onclick="saveSettingsFlash(this)">Update password</button>
+                  </div>
+                </div>
+              </div>
+              <div style="border:1px solid var(--border-l);border-radius:var(--r-lg);overflow:hidden;">
+                <div style="padding:13px 16px;border-bottom:1px solid var(--border-l);background:var(--cream);">
+                  <div style="font-size:12px;font-weight:700;color:var(--ink);">Authorised administrators</div>
+                </div>
+                <div style="padding:14px 16px;display:flex;flex-direction:column;gap:10px;">
+                  <div style="display:flex;align-items:center;gap:10px;padding:10px;background:var(--cream);border-radius:var(--r-md);">
+                    <div style="width:32px;height:32px;border-radius:50%;background:#d85020;color:#fff;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;">FJ</div>
+                    <div style="flex:1;"><div style="font-size:13px;font-weight:600;color:var(--ink);">Fr. James O'Brien</div><div style="font-size:11px;color:var(--light);">fr.obrien@stmarysnyc.org &middot; Owner</div></div>
+                    <span class="tag tag-sage" style="font-size:10px;">Owner</span>
+                  </div>
+                  <button class="btn-outline btn-sm" style="align-self:flex-start;">+ Invite administrator</button>
+                </div>
+              </div>
+              <div style="border:1.5px solid rgba(200,30,30,0.2);border-radius:var(--r-lg);padding:14px 16px;background:#fff8f8;">
+                <div style="font-size:13px;font-weight:700;color:#c01e1e;margin-bottom:5px;">Danger zone</div>
+                <div style="font-size:12px;color:var(--mid);margin-bottom:12px;">Deactivating your account will remove your parish from the Communio network. This cannot be undone.</div>
+                <button style="font-family:var(--f-sans);font-size:12px;font-weight:700;color:#c01e1e;background:transparent;border:1.5px solid rgba(200,30,30,0.3);border-radius:var(--r-pill);padding:8px 14px;cursor:pointer;">Deactivate parish account</button>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- .settings-content -->
+      </div><!-- .settings-layout -->
+    </div><!-- #panel-settings -->
 
   </div><!-- .main-content -->
 </div><!-- #v-app -->
@@ -2012,6 +2255,37 @@ select.fi { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w
   }
 
   /* Init mini preview on website section load — handled in navTo() directly */  /* Init mini preview on website section load — handled in navTo() directly */
+    /* ── SETTINGS TABS ──────────────────────────────── */
+  function switchSettingsTab(name){
+    /* Update nav items */
+    document.querySelectorAll('[id^="stab-"]').forEach(function(el){
+      el.classList.remove('active');
+    });
+    var tab = document.getElementById('stab-' + name);
+    if(tab) tab.classList.add('active');
+    /* Show correct content panel */
+    ['profile','donations','notifications','website','privacy','account'].forEach(function(t){
+      var el = document.getElementById('sc-' + t);
+      if(el) el.style.display = (t === name) ? 'block' : 'none';
+    });
+  }
+
+  function toggleSwitch(el){
+    el.classList.toggle('on');
+  }
+
+  function saveSettingsFlash(btn){
+    var orig = btn.innerHTML;
+    btn.textContent = 'Saved ✓';
+    btn.style.background = 'var(--sage)';
+    btn.disabled = true;
+    setTimeout(function(){
+      btn.innerHTML = orig;
+      btn.style.background = '#d85020';
+      btn.disabled = false;
+    }, 1800);
+  }
+
     document.addEventListener('DOMContentLoaded', function(){
     /* Hide all views */
     document.querySelectorAll('.view, .app-view').forEach(function(v){
