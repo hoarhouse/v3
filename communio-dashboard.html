@@ -2034,19 +2034,6 @@ function go(viewName,appSection){
   if(viewName==='app'&&appSection==='donations') setTimeout(buildFullChart,50);
 }
 
-);
-  if(viewName==='setup'){
-    var t=document.getElementById('tab-setup');
-    if(t) t.classList.add('active');
-  } else if(viewName==='public'){
-    var t=document.getElementById('tab-public');
-    if(t) t.classList.add('active');
-  } else if(viewName==='app' && appSection){
-    var t=document.getElementById('tab-'+appSection);
-    if(t) t.classList.add('active');
-  }
-}
-
 function navTo(section){
   currentApp = section;
   document.querySelectorAll('.section-panel').forEach(function(p){p.classList.remove('on');});
