@@ -16,6 +16,7 @@ const menuItems = [
   { text: 'Insights', href: '/v3/insights.html', page: 'insights' },
   { text: 'Library', href: '/v3/library.html', page: 'library' },
   { text: 'Budapest Appeal', href: '/v3/budapest-appeal.html', page: 'budapest-appeal' },
+  { text: 'Communio', href: '/v3/communio.html', page: 'communio' },
   { text: 'Get Involved', href: '/v3/get-involved.html', page: 'get-involved' },
   { text: 'Contact', href: '/v3/contact.html', page: 'contact' }
 ];
@@ -532,6 +533,7 @@ function generateFooter() {
                     <a href="/v3/index.html">Home</a>
                     <a href="/v3/about.html">About</a>
                     <a href="/v3/initiatives.html">Initiatives</a>
+                    <a href="/v3/communio.html">Communio</a>
                     <a href="/v3/get-involved.html">Get Involved</a>
                     <a href="/v3/contact.html">Contact</a>
                     <a href="/v3/budapest-appeal.html">Budapest Appeal</a>
