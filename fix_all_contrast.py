@@ -227,7 +227,8 @@ ib_patterns = [
 for pattern, new_color in ib_patterns:
     if re.search(pattern, content, re.DOTALL):
         content = re.sub(pattern, r'\1' + new_color, content, flags=re.DOTALL)
-        print(f"  ✓ {pattern.split('\\\\')[1].split('\\s')[0]}: white text")
+        class_name = pattern.split('(')[1].split('\\')[0].replace('.', '')
+        print(f"  ✓ {class_name}: white text")
 
 print("\n✅ STEP 4 - GLOBAL CHECK:")
 print("=" * 30)
