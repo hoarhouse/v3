@@ -2058,9 +2058,7 @@ function navTo(section){
   if(section === 'home') setTimeout(buildMiniChart, 50);
   if(section === 'donations') setTimeout(buildFullChart, 50);
   // Close sidebar on mobile after navigation
-  document.getElementById('sidebar').classList.remove('open');
-  updateTabBar('app', section);
-  if(section==='home') setTimeout(buildMiniChart,50);
+  document.getElementById('sidebar').classList.remove('open');if(section==='home') setTimeout(buildMiniChart,50);
   if(section==='donations') setTimeout(buildFullChart,50);}
 
 function toggleSidebar(){
