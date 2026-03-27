@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>St. Mary's Parish — Communio</title>
+<title>St. Mary&#39;s Parish — Communio</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Lora:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
@@ -126,7 +126,7 @@ select.fi { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w
 /* ══════════════════════════════════════
    VIEW 2 — SETUP
    ══════════════════════════════════════ */
-#v-setup { background: var(--cream); min-height: 100dvh; padding-top: 58px; }
+#v-setup { background: var(--cream); min-height: 100dvh; padding-top: 94px; }
 .setup-body { max-width: 880px; margin: 0 auto; padding: 28px 16px 100px; display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
 @media(max-width:640px){ .setup-body { grid-template-columns: 1fr; } }
 .setup-steps { grid-column: 1/-1; background: #000; border-radius: var(--r-xl); padding: 16px 20px; display: flex; gap: 0; overflow-x: auto; scrollbar-width: none; border-bottom: 2px solid #e8c040; }
@@ -202,7 +202,7 @@ select.fi { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w
 /* ══════════════════════════════════════
    APP SHELL
    ══════════════════════════════════════ */
-.sidebar { width: 220px; flex-shrink: 0; background: #000000; border-right: 1px solid rgba(232,192,64,0.2); display: flex; flex-direction: column; position: fixed; top: 58px; bottom: 0; left: 0; z-index: 100; overflow-y: auto; transition: transform var(--ease); }
+.sidebar { width: 220px; flex-shrink: 0; background: #000000; border-right: 1px solid rgba(232,192,64,0.2); display: flex; flex-direction: column; position: fixed; top: 94px; bottom: 0; left: 0; z-index: 100; overflow-y: auto; transition: transform var(--ease); }
 @media(max-width:768px){ .sidebar { transform: translateX(-100%); } .sidebar.open { transform: translateX(0); } }
 .sb-parish { padding: 16px; border-bottom: 1px solid rgba(255,255,255,0.07); }
 .sb-av { width: 36px; height: 36px; border-radius: var(--r-md); background: #d85020; color: #fff; font-size: 13px; font-weight: 800; display: flex; align-items: center; justify-content: center; margin-bottom: 8px; }
@@ -472,7 +472,7 @@ select.fi { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w
 /* ══════════════════════════════════════
    PUBLIC PROFILE
    ══════════════════════════════════════ */
-#v-public { background: var(--cream); min-height: 100dvh; padding-top: 58px; }
+#v-public { background: var(--cream); min-height: 100dvh; padding-top: 94px; }
 .pub-hero { background: #000; padding: 32px 20px 0; position: relative; overflow: hidden; }
 .pub-hero::before { content: ''; position: absolute; top: -80px; right: -80px; width: 350px; height: 350px; border-radius: 50%; background: radial-gradient(circle, rgba(216,80,32,0.1) 0%, transparent 70%); pointer-events: none; }
 .pub-inner { max-width: 960px; margin: 0 auto; position: relative; z-index: 1; }
@@ -545,6 +545,12 @@ select.fi { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w
 .notif-toggle::after { content:'';position:absolute;top:2px;left:2px;width:18px;height:18px;border-radius:50%;background:#fff;transition:left .2s;box-shadow:0 1px 3px rgba(0,0,0,0.2); }
 .notif-toggle.on { background:#d85020; }
 .notif-toggle.on::after { left:20px; }
+
+.demo-bar{position:fixed;top:94px;left:0;right:0;z-index:190;background:#111;border-bottom:1px solid rgba(255,255,255,0.1);display:flex;overflow-x:auto;scrollbar-width:none;padding:0 8px;}
+.demo-bar::-webkit-scrollbar{display:none;}
+.db-btn{font-family:var(--f-sans);font-size:11px;font-weight:600;color:rgba(255,255,255,0.4);background:none;border:none;border-bottom:2px solid transparent;padding:8px 12px;cursor:pointer;white-space:nowrap;text-decoration:none;transition:all .2s ease;margin-bottom:-1px;flex-shrink:0;}
+.db-btn:hover{color:rgba(255,255,255,0.8);}
+.db-btn.on{color:#ffffff;border-bottom-color:#d85020;}
 </style>
 </head>
 <body>
@@ -570,7 +576,7 @@ select.fi { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w
     <!-- STEP 1: Enter contact -->
     <div id="invite-step-1" style="padding:24px 24px 20px;">
       <div style="font-size:22px;font-weight:800;color:var(--ink);letter-spacing:-0.025em;margin-bottom:6px;">Who would you like to invite?</div>
-      <div style="font-size:13px;color:var(--mid);line-height:1.6;margin-bottom:22px;">Enter the email address or phone number of the parish contact. We'll send them a personalised invitation from St. Mary's Parish.</div>
+      <div style="font-size:13px;color:var(--mid);line-height:1.6;margin-bottom:22px;">Enter the email address or phone number of the parish contact. We'll send them a personalised invitation from St. Mary&#39;s Parish.</div>
 
       <!-- Toggle email/phone -->
       <div style="display:flex;gap:0;margin-bottom:16px;border:1.5px solid var(--border-l);border-radius:8px;overflow:hidden;">
@@ -677,18 +683,7 @@ select.fi { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w
 </div>
 
 <!-- DEMO SWITCHER -->
-<div class="switcher">
-  <button class="sw-btn on"  onclick="go('welcome')">1 Welcome</button>
-  <button class="sw-btn"     onclick="go('setup')">2 Setup</button>
-  <button class="sw-btn"     onclick="go('app','home')">3 Home</button>
-  <button class="sw-btn"     onclick="go('app','messages')">4 Messages</button>
-  <button class="sw-btn"     onclick="go('app','network')">5 Network</button>
-  <button class="sw-btn"     onclick="go('app','projects')">6 Projects</button>
-  <button class="sw-btn"     onclick="go('app','website')">7 Website</button>
-  <button class="sw-btn"     onclick="go('app','donations')">8 Donations</button>
-  <button class="sw-btn"     onclick="go('app','settings')">9 Settings</button>
-  <button class="sw-btn"     onclick="go('public')">10 Profile</button>
-</div>
+
 
 <!-- SIDEBAR OVERLAY (mobile) -->
 <div class="sb-overlay" id="sb-overlay" onclick="closeSidebar()"></div>
@@ -713,6 +708,18 @@ select.fi { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w
     </div>
   </div>
 </nav>
+<div class="demo-bar">
+  <a class="db-btn" onclick="go('welcome')">1 Welcome</a>
+  <a class="db-btn" onclick="go('setup')">2 Setup</a>
+  <a class="db-btn" onclick="go('app','home')">3 Home</a>
+  <a class="db-btn" onclick="go('app','messages')">4 Messages</a>
+  <a class="db-btn" onclick="go('app','network')">5 Network</a>
+  <a class="db-btn" onclick="go('app','projects')">6 Projects</a>
+  <a class="db-btn" onclick="go('app','website')">7 Website</a>
+  <a class="db-btn" onclick="go('app','donations')">8 Donations</a>
+  <a class="db-btn" onclick="go('app','settings')">9 Settings</a>
+  <a class="db-btn" onclick="go('public')">10 Profile</a>
+</div>
 
 <!-- ══════════════════════════════════════════════════
      VIEW 1 — WELCOME
@@ -726,7 +733,7 @@ select.fi { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w
     </div>
     <div class="wl-tag">Application approved</div>
     <!-- PHP: echo "Welcome to Communio, " . $parish->name -->
-    <h1 class="wl-h1">Welcome to Communio,<br><em>St. Mary's Parish.</em></h1>
+    <h1 class="wl-h1">Welcome to Communio,<br><em>St. Mary&#39;s Parish.</em></h1>
     <p class="wl-p">You're now part of a verified global network. Let's set up your parish so the world can find you.</p>
     <div class="wl-net">
       <div class="wl-net-lbl">You've joined the Communio network</div>
@@ -774,7 +781,7 @@ select.fi { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w
         <div class="sp-av">SM</div>
         <div>
           <!-- PHP: echo $parish->name -->
-          <div class="sp-name">St. Mary's Parish</div>
+          <div class="sp-name">St. Mary&#39;s Parish</div>
           <div class="sp-badges">
             <span class="spb spb-g">✓ Verified by DCF</span>
             <!-- PHP: echo $parish->country_flag . " " . $parish->city . ", " . $parish->country -->
@@ -788,7 +795,7 @@ select.fi { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w
         <div class="field">
           <div class="fl">Description <span class="req">*</span></div>
           <!-- PHP: name="parish_description" value=$parish->description -->
-          <textarea class="fi">St. Mary's Parish has been serving the Lower East Side community since 1887. We are a vibrant, multicultural congregation of over 1,200 families, committed to social justice, youth ministry, and ethical technology advocacy.</textarea>
+          <textarea class="fi">St. Mary&#39;s Parish has been serving the Lower East Side community since 1887. We are a vibrant, multicultural congregation of over 1,200 families, committed to social justice, youth ministry, and ethical technology advocacy.</textarea>
           <div style="font-size:11px;color:var(--light);">Up to 600 characters · shown on your public Communio profile</div>
         </div>
         <div class="field-row">
@@ -927,7 +934,7 @@ select.fi { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w
     <div class="sb-parish">
       <!-- PHP: echo $parish->name, $parish->city, $parish->country -->
       <div class="sb-av">SM</div>
-      <div class="sb-name">St. Mary's Parish</div>
+      <div class="sb-name">St. Mary&#39;s Parish</div>
       <div class="sb-loc">🇺🇸 New York, USA</div>
     </div>
     <div class="sb-nav">
@@ -986,7 +993,7 @@ select.fi { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w
     <div class="section-panel on" id="panel-home">
       <!-- PHP: greeting based on time of day + $parish->contact_first_name -->
       <div class="dash-greeting">Good morning, Fr. James 👋</div>
-      <div class="dash-date">Friday, 27 March 2026 · St. Mary's Parish</div>
+      <div class="dash-date">Friday, 27 March 2026 · St. Mary&#39;s Parish</div>
 
       <!-- Setup progress banner — PHP: only show if setup not complete -->
       <div class="setup-banner">
@@ -1293,7 +1300,13 @@ select.fi { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w
         .we-mob-acc-body { display: none; padding: 14px 16px; background: var(--cream); border-top: 1px solid var(--border-l); }
         .we-mob-acc-body.open { display: block; }
         .we-section-item:hover .we-section-status { color: #d85020; }
-      </style>
+      
+.demo-bar{position:fixed;top:94px;left:0;right:0;z-index:190;background:#111;border-bottom:1px solid rgba(255,255,255,0.1);display:flex;overflow-x:auto;scrollbar-width:none;padding:0 8px;}
+.demo-bar::-webkit-scrollbar{display:none;}
+.db-btn{font-family:var(--f-sans);font-size:11px;font-weight:600;color:rgba(255,255,255,0.4);background:none;border:none;border-bottom:2px solid transparent;padding:8px 12px;cursor:pointer;white-space:nowrap;text-decoration:none;transition:all .2s ease;margin-bottom:-1px;flex-shrink:0;}
+.db-btn:hover{color:rgba(255,255,255,0.8);}
+.db-btn.on{color:#ffffff;border-bottom-color:#d85020;}
+</style>
 
     </div>
 
@@ -1398,14 +1411,14 @@ select.fi { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w
             <div class="settings-title">Parish profile</div>
             <div class="settings-sub">This information appears on your public Communio profile</div>
             <div style="display:flex;flex-direction:column;gap:13px;">
-              <div class="field"><div class="fl">Parish name</div><input class="fi" type="text" value="St. Mary's Parish"></div>
+              <div class="field"><div class="fl">Parish name</div><input class="fi" type="text" value="St. Mary&#39;s Parish"></div>
               <div class="field-row">
                 <div class="field"><div class="fl">City</div><input class="fi" type="text" value="New York"></div>
                 <div class="field"><div class="fl">Country</div><select class="fi"><option>United States</option><option>Hungary</option><option>Ghana</option></select></div>
               </div>
-              <div class="field"><div class="fl">Description</div><textarea class="fi" style="min-height:78px;">St. Mary's Parish has been serving the Lower East Side community since 1887. We are a vibrant, multicultural congregation of over 1,200 families, committed to social justice, youth ministry, and ethical technology advocacy.</textarea></div>
+              <div class="field"><div class="fl">Description</div><textarea class="fi" style="min-height:78px;">St. Mary&#39;s Parish has been serving the Lower East Side community since 1887. We are a vibrant, multicultural congregation of over 1,200 families, committed to social justice, youth ministry, and ethical technology advocacy.</textarea></div>
               <div class="field-row">
-                <div class="field"><div class="fl">Contact person</div><input class="fi" type="text" value="Fr. James O'Brien"></div>
+                <div class="field"><div class="fl">Contact person</div><input class="fi" type="text" value="Fr. James O&#39;Brien"></div>
                 <div class="field"><div class="fl">Role</div><select class="fi"><option>Pastor / Parish Priest</option><option>Administrator</option></select></div>
               </div>
               <div class="field-row">
@@ -1443,7 +1456,7 @@ select.fi { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w
               </div>
               <div class="field">
                 <div class="fl">Donation page title</div>
-                <input class="fi" type="text" value="Support St. Mary's Parish">
+                <input class="fi" type="text" value="Support St. Mary&#39;s Parish">
               </div>
               <div class="field">
                 <div class="fl">Donation description</div>
@@ -1639,7 +1652,7 @@ select.fi { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w
                 <div style="padding:14px 16px;display:flex;flex-direction:column;gap:10px;">
                   <div style="display:flex;align-items:center;gap:10px;padding:10px;background:var(--cream);border-radius:var(--r-md);">
                     <div style="width:32px;height:32px;border-radius:50%;background:#d85020;color:#fff;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;">FJ</div>
-                    <div style="flex:1;"><div style="font-size:13px;font-weight:600;color:var(--ink);">Fr. James O'Brien</div><div style="font-size:11px;color:var(--light);"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="2046520e4f425249454e6053544d415259534e59430e4f5247">[email&#160;protected]</a> &middot; Owner</div></div>
+                    <div style="flex:1;"><div style="font-size:13px;font-weight:600;color:var(--ink);">Fr. James O&#39;Brien</div><div style="font-size:11px;color:var(--light);"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="2046520e4f425249454e6053544d415259534e59430e4f5247">[email&#160;protected]</a> &middot; Owner</div></div>
                     <span class="tag tag-sage" style="font-size:10px;">Owner</span>
                   </div>
                   <button class="btn-outline btn-sm" style="align-self:flex-start;">+ Invite administrator</button>
@@ -1672,7 +1685,7 @@ select.fi { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w
         <div class="pub-av">SM</div>
         <div class="pub-info">
           <!-- PHP: echo $parish->name -->
-          <div class="pub-name">St. Mary's Parish</div>
+          <div class="pub-name">St. Mary&#39;s Parish</div>
           <div class="pub-badges">
             <span class="pub-b pub-bg">✓ Verified by DCF</span>
             <!-- PHP: echo $parish->country_flag . " " . $parish->city . ", " . $parish->country -->
@@ -1711,7 +1724,7 @@ select.fi { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w
       <div class="pub-card">
         <div class="sec-lbl">About this parish</div>
         <!-- PHP: echo $parish->description -->
-        <p class="pub-about">St. Mary's Parish has been serving the Lower East Side community since 1887. A vibrant, multicultural congregation of over 1,200 families, committed to social justice, youth ministry, and ethical technology advocacy spanning more than 40 countries of origin.</p>
+        <p class="pub-about">St. Mary&#39;s Parish has been serving the Lower East Side community since 1887. A vibrant, multicultural congregation of over 1,200 families, committed to social justice, youth ministry, and ethical technology advocacy spanning more than 40 countries of origin.</p>
       </div>
 
       <div class="pub-card">
@@ -1740,7 +1753,7 @@ select.fi { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w
       <div class="dw">
         <div class="dw-lbl">Support this parish</div>
         <!-- PHP: echo $parish->name -->
-        <div class="dw-name">St. Mary's Parish</div>
+        <div class="dw-name">St. Mary&#39;s Parish</div>
         <!-- PHP: echo $parish->donation_description -->
         <div class="dw-desc">Your gift supports community programmes and the upkeep of our historic church.</div>
         <!-- PHP: echo $parish->suggested_amounts as buttons -->
