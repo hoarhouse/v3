@@ -2045,17 +2045,7 @@ function navTo(section){
   document.getElementById('sidebar').classList.remove('open');
   if(section==='home') setTimeout(buildMiniChart,50);
   if(section==='donations') setTimeout(buildFullChart,50);
-});
-  var panel = document.getElementById('panel-' + section);
-  if(panel) panel.classList.add('on');
-  document.querySelectorAll('.sb-item').forEach(function(i){i.classList.remove('active');});
-  var navItem = document.getElementById('nav-' + section);
-  if(navItem) navItem.classList.add('active');
-  if(section === 'home') setTimeout(buildMiniChart, 50);
-  if(section === 'donations') setTimeout(buildFullChart, 50);
-  // Close sidebar on mobile after navigation
-  document.getElementById('sidebar').classList.remove('open');if(section==='home') setTimeout(buildMiniChart,50);
-  if(section==='donations') setTimeout(buildFullChart,50);}
+}
 
 function toggleSidebar(){
   document.getElementById('sidebar').classList.toggle('open');
