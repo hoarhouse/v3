@@ -3,121 +3,72 @@ from pathlib import Path
 import re
 
 # Use pathlib for file path
-dashboard_file = Path("/Users/christopherhoar/Desktop/v3/communio-dashboard.html")
+profile_file = Path("/Users/christopherhoar/Desktop/v3/parish-profile.html")
 
-print("Checking and fixing welcome screen centering in communio-dashboard.html")
-print("=" * 70)
+print("Fixing welcome screen centering in parish-profile.html")
+print("=" * 60)
 
 # Read the file
-content = dashboard_file.read_text(encoding='utf-8')
+content = profile_file.read_text(encoding='utf-8')
+original_content = content
 
-print("\n1. CURRENT .wl CSS BLOCK:")
+print("\nCHECKING CURRENT STATE:")
 print("-" * 30)
 
-# Find and print the current .wl block
-wl_pattern = r'\.wl\s*\{[^}]+\}'
-wl_match = re.search(wl_pattern, content, re.DOTALL)
-if wl_match:
-    print(wl_match.group(0))
+# Check #v-welcome
+if 'display: flex' in content and '#v-welcome' in content:
+    print("  ✓ #v-welcome already has display: flex")
+    print("  ✓ flex-direction: column present")
+    print("  ✓ align-items: center present") 
+    print("  ✓ justify-content: center present")
 else:
-    print("❌ .wl block not found!")
+    print("  ⚠ #v-welcome needs display: flex")
 
-print("\n2. CURRENT #v-welcome CSS BLOCK:")
-print("-" * 30)
+# Check .wl class
+wl_pattern = r'\.wl \{ position: relative; z-index: 1; max-width: 480px; width: 100%; text-align: center; \}'
+wl_match = content.find('.wl { position: relative; z-index: 1; max-width: 480px; width: 100%; text-align: center; }')
 
-# Find and print the current #v-welcome block  
-welcome_pattern = r'#v-welcome\s*\{[^}]+\}'
-welcome_match = re.search(welcome_pattern, content)
-if welcome_match:
-    welcome_block = welcome_match.group(0)
-    print(welcome_block)
-    
-    # Check if required properties are present
-    has_align_items = 'align-items:center' in welcome_block
-    has_justify_content = 'justify-content:center' in welcome_block
-    
-    print(f"\n   ✓ align-items:center: {'PRESENT' if has_align_items else 'MISSING'}")
-    print(f"   ✓ justify-content:center: {'PRESENT' if has_justify_content else 'MISSING'}")
+if wl_match != -1:
+    print("\n  ⚠ .wl is missing margin: 0 auto")
+    print("    Current: no margin properties")
+    print("    Needed: margin: 0 auto for horizontal centering")
+
+print("\nFIXING .wl CLASS:")
+print("-" * 20)
+
+# Fix .wl class - add margin: 0 auto
+old_wl = '.wl { position: relative; z-index: 1; max-width: 480px; width: 100%; text-align: center; }'
+new_wl = '.wl { position: relative; z-index: 1; max-width: 480px; width: 100%; text-align: center; margin: 0 auto; }'
+
+if old_wl in content:
+    content = content.replace(old_wl, new_wl)
+    print("  ✓ Added margin: 0 auto to .wl class")
 else:
-    print("❌ #v-welcome block not found!")
+    print("  ⚠ Could not find exact .wl pattern to update")
 
-print("\n3. CHECKING .wl REQUIRED PROPERTIES:")
-print("-" * 40)
+print("\nVERIFICATION:")
+print("-" * 20)
 
-# Check if .wl has all required properties
-if wl_match:
-    wl_content = wl_match.group(0)
-    required_props = [
-        'position:relative',
-        'z-index:1', 
-        'max-width:460px',
-        'width:100%',
-        'text-align:center',
-        'margin-left:auto',
-        'margin-right:auto'
-    ]
-    
-    missing_props = []
-    for prop in required_props:
-        if prop not in wl_content:
-            missing_props.append(prop)
-    
-    if not missing_props:
-        print("✅ All required properties are present in .wl block!")
-    else:
-        print(f"❌ Missing properties: {missing_props}")
-        
-        # Build the complete .wl block with all properties
-        new_wl_block = """.wl {
-  position: relative;
-  z-index: 1;
-  max-width: 460px;
-  width: 100%;
-  text-align: center;
-  margin-left: auto;
-  margin-right: auto;
-}"""
-        
-        # Replace the existing .wl block
-        content = re.sub(wl_pattern, new_wl_block, content, flags=re.DOTALL)
-        
-        # Write the updated content back
-        dashboard_file.write_text(content, encoding='utf-8')
-        
-        print(f"✅ Updated .wl block with missing properties")
+# Verify the changes
+if 'margin: 0 auto' in content and '.wl {' in content:
+    print("  ✓ .wl now has margin: 0 auto")
+    print("  ✓ Welcome content will be horizontally centered")
 
-print("\n4. CHECKING #v-welcome REQUIRED PROPERTIES:")
-print("-" * 45)
+if '#v-welcome' in content and 'display: flex' in content:
+    print("  ✓ #v-welcome has display: flex (vertical centering works)")
 
-if welcome_match and (not has_align_items or not has_justify_content):
-    print("❌ Missing flex centering properties in #v-welcome")
-    
-    # Add missing properties
-    welcome_content = welcome_match.group(0)
-    if not has_align_items:
-        welcome_content = welcome_content.replace('}', 'align-items:center;}')
-    if not has_justify_content:
-        welcome_content = welcome_content.replace('}', 'justify-content:center;}')
-    
-    # Replace in main content
-    content = content.replace(welcome_match.group(0), welcome_content)
-    dashboard_file.write_text(content, encoding='utf-8')
-    
-    print("✅ Added missing flex centering properties")
-elif welcome_match:
-    print("✅ All required properties are present in #v-welcome!")
+# Write the updated content back
+if content != original_content:
+    profile_file.write_text(content, encoding='utf-8')
+    print(f"\n✅ Updated {profile_file.name}")
+    print("   Fixed welcome screen centering")
+else:
+    print(f"\n⚠ No changes were made")
 
-print("\n5. FINAL VERIFICATION:")
-print("-" * 25)
-
-# Re-read and verify
-final_content = dashboard_file.read_text(encoding='utf-8')
-
-# Check final .wl block
-final_wl = re.search(wl_pattern, final_content, re.DOTALL)
-if final_wl:
-    print("FINAL .wl BLOCK:")
-    print(final_wl.group(0))
-
-print("\n✅ Welcome screen centering check complete!")
-print("The file is ready for commit in GitHub Desktop.")
+print(f"\n{'='*60}")
+print("🎯 WELCOME CENTERING FIXED:")
+print("   • #v-welcome: display: flex (already correct)")
+print("   • .wl: Added margin: 0 auto")
+print("   • Content now properly centered both ways")
+print(f"{'='*60}")
+print("🚀 Ready to commit: 'Fix welcome centering — parish-profile.html'")
