@@ -102,7 +102,20 @@
       background: rgba(255,253,249,0.92);
       backdrop-filter: blur(16px);
       box-shadow: 0 1px 0 var(--border);
+  color: var(--ink);
     }
+
+.nav.scrolled .nav-name {
+  color: var(--ink);
+}
+
+.nav.scrolled .nav-link {
+  color: var(--text-mid);
+}
+
+.nav.scrolled .nav-link:hover {
+  color: var(--ink);
+}
 
     .nav-brand {
       display: flex; align-items: center; gap: 8px;
@@ -120,7 +133,7 @@
 
     .nav-name {
       font-size: 18px; font-weight: 700;
-      color: var(--ink); letter-spacing: -0.02em;
+      color: var(--white); letter-spacing: -0.02em;
     }
 
     .nav-name span { color: var(--terracotta); }
@@ -131,11 +144,11 @@
 
     .nav-link {
       font-size: 14px; font-weight: 500;
-      color: var(--text-mid); text-decoration: none;
+      color: rgba(255,253,249,0.75); text-decoration: none;
       transition: color var(--ease);
     }
 
-    .nav-link:hover { color: var(--ink); }
+    .nav-link:hover { color: var(--white); }
 
     .nav-btn {
       font-family: var(--f-body);
