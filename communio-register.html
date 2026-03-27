@@ -47,31 +47,31 @@
        VARIABLES — matches Communio v2 exactly
        ===================================================== */
     :root {
-      --cream:        #ffffff;
-      --cream-dark:   #f5ede0;
-      --warm-white:   #ffffff;
+      --cream:        #f5f2e8;
+      --cream-dark:   #ede8d8;
+      --warm-white:   #fffdf5;
       --white:        #ffffff;
 
-      --terracotta:   #c85c3a;
-      --terra-light:  #e8856a;
-      --terra-pale:   #fceee9;
+      --terracotta:   #d85020;
+      --terra-light:  #f07040;
+      --terra-pale:   #fff0ea;
       --terra-dim:    rgba(200,92,58,0.12);
 
-      --sage:         #4a7c59;
-      --sage-light:   #6a9e78;
-      --sage-pale:    #eaf3ec;
+      --sage:         #2a8a4a;
+      --sage-light:   #4aaa6a;
+      --sage-pale:    #dff5e8;
 
-      --amber:        #d4922a;
-      --amber-pale:   #fdf3e0;
+      --amber:        #e8c040;
+      --amber-pale:   #fdf8d8;
 
-      --ink:          #16120c;
-      --ink-soft:     #2e2518;
-      --text-mid:     #6b5c48;
-      --text-light:   #9c8b78;
-      --border:       #e8d9c4;
-      --border-light: #f0e4d0;
+      --ink:          #000000;
+      --ink-soft:     #111111;
+      --text-mid:     #5a4a20;
+      --text-light:   #8a7a50;
+      --border:       #e8c040;
+      --border-light: #f0dca0;
 
-      --success:        #4a7c59;
+      --success:        #2a8a4a;
       --success-pale:   #eaf3ec;
       --success-border: #6a9e78;
       --error:          #b94040;
@@ -237,7 +237,7 @@
       display: inline-flex; align-items: center; gap: 6px;
       font-size: 12px; font-weight: 700;
       letter-spacing: 0.06em; text-transform: uppercase;
-      color: var(--terracotta);
+      color: #e8c040;
       border: 1px solid rgba(200,92,58,0.35);
       border-radius: var(--r-pill); padding: 5px 14px;
       margin-bottom: 18px;
@@ -254,7 +254,7 @@
       font-family: var(--f-display);
       font-size: clamp(30px, 5vw, 50px);
       font-weight: 800;
-      color: var(--white);
+      color: #ffffff;
       line-height: 1.1;
       letter-spacing: -0.03em;
       margin-bottom: 16px;
@@ -269,7 +269,7 @@
 
     .header-desc {
       font-size: 16px; font-weight: 400;
-      color: rgba(255,253,249,0.55);
+      color: rgba(255,255,255,0.6);
       max-width: 540px; line-height: 1.72;
     }
 
@@ -282,7 +282,7 @@
     .h-pill {
       display: inline-flex; align-items: center; gap: 6px;
       font-size: 13px; font-weight: 500;
-      color: rgba(255,253,249,0.65);
+      color: rgba(255,255,255,0.7);
       background: rgba(255,255,255,0.06);
       border: 1px solid rgba(255,255,255,0.1);
       border-radius: var(--r-pill); padding: 6px 14px;
@@ -327,7 +327,7 @@
     }
 
     .prog-step.active .prog-num {
-      background: var(--terracotta);
+      background: #d85020;
       border-color: var(--terracotta);
       color: var(--white);
     }
@@ -665,8 +665,8 @@
     }
 
     .focus-opt input:checked + label {
-      border-color: var(--terracotta);
-      background: var(--terra-pale);
+      border-color: #d85020;
+      background: #fff0ea;
       color: var(--ink);
     }
 
@@ -987,12 +987,12 @@
     .btn svg { width: 15px; height: 15px; flex-shrink: 0; }
 
     .btn-primary {
-      background: var(--terracotta); color: var(--white);
+      background: #d85020; color: #ffffff;
       box-shadow: 0 4px 20px rgba(200,92,58,0.25);
     }
 
     .btn-primary:hover {
-      background: var(--terra-light);
+      background: #f07040;
       transform: translateY(-2px);
       box-shadow: 0 8px 32px rgba(200,92,58,0.35);
     }
@@ -1005,7 +1005,7 @@
     .btn-ghost:hover { border-color: var(--ink); color: var(--ink); }
 
     .btn-submit {
-      background: var(--ink); color: var(--white);
+      background: #000000; color: #ffffff;
       padding: 16px 36px; font-size: 15px;
     }
 
