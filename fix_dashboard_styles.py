@@ -5,112 +5,129 @@ import re
 # Use pathlib for file path
 dashboard_file = Path("/Users/christopherhoar/Desktop/v3/communio-dashboard.html")
 
-print("Fixing communio-dashboard.html styling issues")
-print("=" * 50)
+print("Moving demo switcher to top bar and fixing email apostrophes")
+print("=" * 70)
 
 # Read the file
 content = dashboard_file.read_text(encoding='utf-8')
-
-# Store original content for comparison
 original_content = content
 
-print("\nISSUE 1: Fixing welcome screen centering")
-print("-" * 40)
+print("\nCHANGE 1 - MOVE SWITCHER TO SECOND TOP BAR:")
+print("-" * 50)
 
-# Find and update .wl class to ensure centering
-# Look for .wl { pattern and add margin auto if not present
-wl_pattern = r'\.wl\s*\{([^}]+)\}'
-wl_match = re.search(wl_pattern, content)
-if wl_match:
-    wl_content = wl_match.group(1)
-    if 'margin-left: auto' not in wl_content and 'margin-right: auto' not in wl_content:
-        # Add margin auto properties
-        new_wl_content = wl_content.rstrip() + '\n      margin-left: auto;\n      margin-right: auto;'
-        content = content.replace(wl_match.group(0), f'.wl {{{new_wl_content}\n    }}')
-        print("✓ Added margin-left: auto and margin-right: auto to .wl")
-    else:
-        print("- .wl already has margin auto")
+# STEP A - Remove existing .switcher div
+switcher_pattern = r'<div class="switcher">.*?</div>'
+switcher_match = re.search(switcher_pattern, content, re.DOTALL)
 
-# Find and update #v-welcome to ensure flex centering
-vwelcome_pattern = r'#v-welcome\s*\{([^}]+)\}'
-vwelcome_match = re.search(vwelcome_pattern, content)
-if vwelcome_match:
-    vw_content = vwelcome_match.group(1)
-    needs_update = False
-    
-    if 'align-items: center' not in vw_content:
-        vw_content = vw_content.rstrip() + '\n      align-items: center;'
-        needs_update = True
-        
-    if 'justify-content: center' not in vw_content:
-        vw_content = vw_content.rstrip() + '\n      justify-content: center;'
-        needs_update = True
-    
-    if needs_update:
-        content = content.replace(vwelcome_match.group(0), f'#v-welcome {{{vw_content}\n    }}')
-        print("✓ Added flex centering to #v-welcome")
-    else:
-        print("- #v-welcome already has centering")
+if switcher_match:
+    print("  ✓ Found existing switcher div")
+    content = re.sub(switcher_pattern, '', content, flags=re.DOTALL)
+    print("  ✓ Removed existing switcher div")
+else:
+    print("  ⚠ Existing switcher div not found")
 
-print("\nISSUE 2: Reducing border-radius values")
-print("-" * 40)
+# STEP B - Add demo bar after top-nav closing tag
+demo_bar_html = '''
+<div class="demo-bar">
+  <a class="db-btn" onclick="go('welcome')">1 Welcome</a>
+  <a class="db-btn" onclick="go('setup')">2 Setup</a>
+  <a class="db-btn" onclick="go('app','home')">3 Home</a>
+  <a class="db-btn" onclick="go('app','messages')">4 Messages</a>
+  <a class="db-btn" onclick="go('app','network')">5 Network</a>
+  <a class="db-btn" onclick="go('app','projects')">6 Projects</a>
+  <a class="db-btn" onclick="go('app','website')">7 Website</a>
+  <a class="db-btn" onclick="go('app','donations')">8 Donations</a>
+  <a class="db-btn" onclick="go('app','settings')">9 Settings</a>
+  <a class="db-btn" onclick="go('public')">10 Profile</a>
+</div>'''
 
-# Replace CSS variable values
-replacements = [
-    ('--r-md: 12px', '--r-md: 8px'),
-    ('--r-lg: 20px', '--r-lg: 12px'),
-    ('--r-xl: 28px', '--r-xl: 16px'),
+# Find closing </nav> tag and add demo bar after it
+nav_closing_pattern = r'(</nav>)'
+if re.search(nav_closing_pattern, content):
+    content = re.sub(nav_closing_pattern, r'\1' + demo_bar_html, content, count=1)
+    print("  ✓ Added demo bar after top-nav")
+else:
+    print("  ⚠ Could not find </nav> tag")
+
+# STEP C - Add CSS rules before closing </style> tag
+demo_bar_css = '''
+.demo-bar{position:fixed;top:58px;left:0;right:0;z-index:190;background:#111;border-bottom:1px solid rgba(255,255,255,0.1);display:flex;overflow-x:auto;scrollbar-width:none;padding:0 8px;}
+.demo-bar::-webkit-scrollbar{display:none;}
+.db-btn{font-family:var(--f-sans);font-size:11px;font-weight:600;color:rgba(255,255,255,0.4);background:none;border:none;border-bottom:2px solid transparent;padding:8px 12px;cursor:pointer;white-space:nowrap;text-decoration:none;transition:all .2s ease;margin-bottom:-1px;flex-shrink:0;}
+.db-btn:hover{color:rgba(255,255,255,0.8);}
+.db-btn.on{color:#ffffff;border-bottom-color:#d85020;}'''
+
+# Find closing </style> tag and add CSS before it
+style_closing_pattern = r'(</style>)'
+if re.search(style_closing_pattern, content):
+    content = re.sub(style_closing_pattern, demo_bar_css + r'\n\1', content)
+    print("  ✓ Added demo bar CSS")
+else:
+    print("  ⚠ Could not find </style> tag")
+
+# STEP D - Update padding-top and top values
+print("  Updating view offsets for double nav bar...")
+
+# Replace padding-top values
+content = content.replace('padding-top:58px', 'padding-top:94px')
+content = content.replace('padding-top: 58px', 'padding-top: 94px')
+print("    ✓ Updated padding-top values")
+
+# Replace top values (but be careful not to replace z-index values)
+content = re.sub(r'\btop:58px\b', 'top:94px', content)
+content = re.sub(r'\btop: 58px\b', 'top: 94px', content)
+print("    ✓ Updated top positioning values")
+
+print("\nCHANGE 2 - FIX EMAIL APOSTROPHE ISSUE:")
+print("-" * 45)
+
+# Find and fix apostrophes in email content
+apostrophe_fixes = [
+    ("I'd like to invite", "I&#39;d like to invite"),
+    ("you'll", "you&#39;ll"),
+    ("parish's", "parish&#39;s"),
+    ("Fr. James O'Brien", "Fr. James O&#39;Brien"),
+    ("St. Mary's Parish", "St. Mary&#39;s Parish")
 ]
 
-for old, new in replacements:
-    count = content.count(old)
-    if count > 0:
-        content = content.replace(old, new)
-        print(f"✓ Replaced {old} with {new} ({count} occurrence{'s' if count != 1 else ''})")
+fixes_made = 0
+for old_text, new_text in apostrophe_fixes:
+    if old_text in content:
+        content = content.replace(old_text, new_text)
+        fixes_made += 1
+        print(f"  ✓ Fixed: {old_text} → {new_text}")
 
-# Replace hardcoded border-radius values
-# Using exact replacements to avoid unintended changes
-border_replacements = [
-    ('border-radius:var(--r-xl) var(--r-xl) 0 0', 'border-radius:var(--r-lg) var(--r-lg) 0 0'),
-    ('border-radius:14px', 'border-radius:8px'),
-    ('border-radius:10px', 'border-radius:6px'),
-    ('border-radius:13px', 'border-radius:8px'),
-    ('border-radius:17px', 'border-radius:10px'),
-    ('border-radius:18px', 'border-radius:10px'),
-    ('border-radius:16px', 'border-radius:10px'),
-    ('border-radius:20px', 'border-radius:12px'),
-]
+if fixes_made > 0:
+    print(f"  ✅ Fixed {fixes_made} apostrophe issues in email content")
+else:
+    print("  ⚠ No apostrophe patterns found to fix")
 
-# Also check for spaced versions
-border_replacements_spaced = [
-    ('border-radius: var(--r-xl) var(--r-xl) 0 0', 'border-radius: var(--r-lg) var(--r-lg) 0 0'),
-    ('border-radius: 14px', 'border-radius: 8px'),
-    ('border-radius: 10px', 'border-radius: 6px'),
-    ('border-radius: 13px', 'border-radius: 8px'),
-    ('border-radius: 17px', 'border-radius: 10px'),
-    ('border-radius: 18px', 'border-radius: 10px'),
-    ('border-radius: 16px', 'border-radius: 10px'),
-    ('border-radius: 20px', 'border-radius: 12px'),
-]
+print("\nVERIFICATION:")
+print("-" * 20)
 
-all_border_replacements = border_replacements + border_replacements_spaced
+# Count elements
+demo_bar_count = content.count('class="demo-bar"')
+switcher_count = content.count('class="switcher"')
+db_btn_count = content.count('db-btn')
 
-for old, new in all_border_replacements:
-    count = content.count(old)
-    if count > 0:
-        content = content.replace(old, new)
-        print(f"✓ Replaced {old} with {new} ({count} occurrence{'s' if count != 1 else ''})")
+print(f"  demo-bar classes: {demo_bar_count} (should be 1)")
+print(f"  switcher classes: {switcher_count} (should be 0)")
+print(f"  db-btn occurrences: {db_btn_count} (should be > 10)")
 
 # Write the updated content back
 if content != original_content:
     dashboard_file.write_text(content, encoding='utf-8')
-    print("\n✅ File updated successfully!")
-    
-    # Count total changes
-    print("\nSummary of changes:")
-    print(f"- File size: {len(content)} bytes")
-    print(f"- Total replacements made")
+    print(f"\n✅ Updated {dashboard_file.name}")
+    print("   Moved switcher to top demo bar")
+    print("   Fixed email apostrophe issues")
 else:
-    print("\n⚠ No changes were needed")
+    print(f"\n⚠ No changes were made")
 
-print("\nDone!")
+print(f"\n{'='*70}")
+print("🎛️ DEMO BAR IMPLEMENTATION:")
+print("   • Removed bottom switcher")
+print("   • Added top demo navigation bar") 
+print("   • Updated all view offsets for double nav")
+print("   • Fixed email template apostrophes")
+print(f"{'='*70}")
+print("🚀 Ready to verify and commit: 'Move demo switcher to top bar — fix nav'")
