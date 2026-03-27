@@ -1511,6 +1511,13 @@ select.fi { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w
     /* Charts */
     if(section === 'home')      setTimeout(buildMiniChart, 60);
     if(section === 'donations')  setTimeout(buildFullChart, 60);
+    /* Website preview */
+    if(section === 'website'){
+      setTimeout(function(){
+        var mini = document.getElementById('mini-site-preview');
+        if(mini && mini.innerHTML === ''){ mini.innerHTML = getSiteHTML(currentTemplate, false); }
+      }, 60);
+    }
   }
 
   function toggleSidebar(){
@@ -1800,18 +1807,8 @@ select.fi { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w
     }, 1800);
   }
 
-  /* Init mini preview on website section load */
-  var origNavTo = navTo;
-  navTo = function(section){
-    origNavTo(section);
-    if(section === 'website'){
-      setTimeout(function(){
-        var mini = document.getElementById('mini-site-preview');
-        if(mini && mini.innerHTML === ''){ mini.innerHTML = getSiteHTML(currentTemplate, false); }
-      }, 60);
-    }
-  };
-  document.addEventListener('DOMContentLoaded', function(){
+  /* Init mini preview on website section load — handled in navTo() directly */
+    document.addEventListener('DOMContentLoaded', function(){
     /* Hide all views */
     document.querySelectorAll('.view, .app-view').forEach(function(v){
       v.style.display = 'none';
@@ -1820,4 +1817,13 @@ select.fi { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w
     /* Show welcome */
     var welcome = document.getElementById('v-welcome');
     if(welcome){
-      welcome.style.display = 'blo
+      welcome.style.display = 'block';
+      welcome.classList.add('on');
+    }
+    /* Set first switcher button active */
+    var btns = document.querySelectorAll('.sw-btn');
+    if(btns.length > 0){ btns[0].classList.add('on'); }
+  });
+</script>
+</body>
+</html>
