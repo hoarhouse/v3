@@ -34,7 +34,7 @@ img{max-width:100%;display:block;}
 .view{display:none;}
 .view.on{display:block;}
 .app-view{display:none;}
-.app-view.on{display:flex;min-height:100dvh;}
+.app-view.on{display:flex;min-height:100dvh;padding-top:58px;}
 
 /* ── SHARED BUTTONS ────────────────────────────────────── */
 .btn{font-family:var(--f-sans);font-size:13px;font-weight:700;border:none;border-radius:var(--r-pill);cursor:pointer;display:inline-flex;align-items:center;gap:6px;transition:all var(--ease);text-decoration:none;}
@@ -135,7 +135,7 @@ img{max-width:100%;display:block;}
    VIEW 2 — SETUP / ONBOARDING
    ════════════════════════════════════════════════════ */
 #v-setup{background:var(--cream);min-height:100dvh;padding-top:58px;}
-.setup-strip{background:var(--ink);overflow-x:auto;scrollbar-width:none;}
+.setup-strip{background:var(--ink);overflow-x:auto;scrollbar-width:none;position:sticky;top:58px;}
 .setup-strip::-webkit-scrollbar{display:none;}
 .setup-inner{display:flex;min-width:max-content;padding:0 16px;}
 .s-tab{display:flex;align-items:center;gap:7px;padding:12px 14px;border-bottom:2px solid transparent;transition:border-color var(--ease);white-space:nowrap;}
@@ -256,7 +256,7 @@ select.fi{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.o
 @media(max-width:768px){.sb-toggle{display:flex;}}
 
 /* Main content area */
-.main-content{flex:1;margin-left:220px;padding:28px 24px 100px;max-width:100%;min-width:0;}
+.main-content{flex:1;margin-left:220px;padding:86px 24px 100px;max-width:100%;min-width:0;}
 @media(max-width:768px){.main-content{margin-left:0;padding:20px 16px 100px;}}
 
 /* Section panels within main content */
