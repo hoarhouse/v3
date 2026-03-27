@@ -15,28 +15,28 @@
        VARIABLES
        ===================================================== */
     :root {
-      --cream:        #ffffff;
-      --cream-dark:   #f5ede0;
+      --cream:        #f5f2e8;
+      --cream-dark:   #ede8d8;
       --warm-white:   #ffffff;
       --white:        #ffffff;
 
-      --terracotta:   #c85c3a;
-      --terra-light:  #e8856a;
-      --terra-pale:   #fceee9;
+      --terracotta:   #d85020;
+      --terra-light:  #f07040;
+      --terra-pale:   #fff0ea;
 
-      --sage:         #4a7c59;
-      --sage-light:   #6a9e78;
-      --sage-pale:    #eaf3ec;
+      --sage:         #2a8a4a;
+      --sage-light:   #4aaa6a;
+      --sage-pale:    #dff5e8;
 
-      --amber:        #d4922a;
-      --amber-pale:   #fdf3e0;
+      --amber:        #e8c040;
+      --amber-pale:   #fdf8d8;
 
-      --ink:          #16120c;
-      --ink-soft:     #2e2518;
-      --text-mid:     #6b5c48;
-      --text-light:   #9c8b78;
-      --border:       #e8d9c4;
-      --border-light: #f0e4d0;
+      --ink:          #000000;
+      --ink-soft:     #111111;
+      --text-mid:     #5a4a20;
+      --text-light:   #8a7a50;
+      --border:       #e8c040;
+      --border-light: #f0dca0;
 
       --f-display: 'Outfit', system-ui, sans-serif;
       --f-body:    'Outfit', system-ui, sans-serif;
@@ -48,9 +48,9 @@
       --r-xl:   32px;
       --r-pill: 8px;
 
-      --sh-sm: 0 2px 8px rgba(22,18,12,0.06);
-      --sh-md: 0 8px 32px rgba(22,18,12,0.1);
-      --sh-lg: 0 20px 60px rgba(22,18,12,0.15);
+      --sh-sm: 0 2px 8px rgba(0,0,0,0.06);
+      --sh-md: 0 8px 32px rgba(0,0,0,0.1);
+      --sh-lg: 0 20px 60px rgba(0,0,0,0.15);
 
       --ease: 0.25s ease;
     }
@@ -362,7 +362,7 @@
     .hero-photo-wrap::after {
       content: '';
       position: absolute; inset: 0;
-      background: linear-gradient(to bottom, transparent 40%, rgba(22,18,12,0.7) 100%);
+      background: linear-gradient(to bottom, transparent 40%, rgba(0,0,0,0.7) 100%);
     }
 
     .hero-photo-stats {
@@ -373,7 +373,7 @@
     }
 
     .hps-card {
-      background: rgba(22,18,12,0.75);
+      background: rgba(0,0,0,0.75);
       backdrop-filter: blur(12px);
       border: 1px solid rgba(255,255,255,0.08);
       border-radius: 8px;
@@ -1489,7 +1489,7 @@
         <div class="stat-stack">
           <div class="stat-card reveal d1">
             <div class="stat-icon red">
-              <svg width="26" height="26" viewBox="0 0 26 26" fill="none"><circle cx="13" cy="13" r="10" stroke="#c85c3a" stroke-width="1.8"/><path d="M9 13h8M13 9v8" stroke="#c85c3a" stroke-width="1.8" stroke-linecap="round"/><path d="M13 3v2M13 21v2M3 13h2M21 13h2" stroke="#c85c3a" stroke-width="1.5" stroke-linecap="round"/></svg>
+              <svg width="26" height="26" viewBox="0 0 26 26" fill="none"><circle cx="13" cy="13" r="10" stroke="#d85020" stroke-width="1.8"/><path d="M9 13h8M13 9v8" stroke="#d85020" stroke-width="1.8" stroke-linecap="round"/><path d="M13 3v2M13 21v2M3 13h2M21 13h2" stroke="#d85020" stroke-width="1.5" stroke-linecap="round"/></svg>
             </div>
             <div>
               <div class="stat-num">80%</div>
@@ -1498,7 +1498,7 @@
           </div>
           <div class="stat-card reveal d2">
             <div class="stat-icon amber">
-              <svg width="26" height="26" viewBox="0 0 26 26" fill="none"><rect x="3" y="7" width="20" height="14" rx="2" stroke="#d4922a" stroke-width="1.8"/><path d="M3 12h20" stroke="#d4922a" stroke-width="1.8"/><circle cx="8" cy="17" r="1.5" fill="#d4922a"/><path d="M12 17h7" stroke="#d4922a" stroke-width="1.8" stroke-linecap="round"/></svg>
+              <svg width="26" height="26" viewBox="0 0 26 26" fill="none"><rect x="3" y="7" width="20" height="14" rx="2" stroke="#e8c040" stroke-width="1.8"/><path d="M3 12h20" stroke="#e8c040" stroke-width="1.8"/><circle cx="8" cy="17" r="1.5" fill="#e8c040"/><path d="M12 17h7" stroke="#e8c040" stroke-width="1.8" stroke-linecap="round"/></svg>
             </div>
             <div>
               <div class="stat-num">$0</div>
@@ -1507,7 +1507,7 @@
           </div>
           <div class="stat-card reveal d3">
             <div class="stat-icon green">
-              <svg width="26" height="26" viewBox="0 0 26 26" fill="none"><path d="M5 13c0-4.4 3.6-8 8-8s8 3.6 8 8-3.6 8-8 8-8-3.6-8-8z" stroke="#4a7c59" stroke-width="1.8"/><path d="M13 9v4l3 3" stroke="#4a7c59" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <svg width="26" height="26" viewBox="0 0 26 26" fill="none"><path d="M5 13c0-4.4 3.6-8 8-8s8 3.6 8 8-3.6 8-8 8-8-3.6-8-8z" stroke="#2a8a4a" stroke-width="1.8"/><path d="M13 9v4l3 3" stroke="#2a8a4a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </div>
             <div>
               <div class="stat-num">1 voice</div>
@@ -1602,7 +1602,7 @@
           <div class="network-points">
             <div class="network-point reveal d2">
               <div class="np-icon terra">
-                <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="9" stroke="#c85c3a" stroke-width="1.6"/><path d="M2 11h18M11 2a14 14 0 000 18M11 2a14 14 0 010 18" stroke="#c85c3a" stroke-width="1.4" stroke-linecap="round"/></svg>
+                <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="9" stroke="#d85020" stroke-width="1.6"/><path d="M2 11h18M11 2a14 14 0 000 18M11 2a14 14 0 010 18" stroke="#d85020" stroke-width="1.4" stroke-linecap="round"/></svg>
               </div>
               <div>
                 <div class="np-title">A verified, trusted network</div>
@@ -1611,7 +1611,7 @@
             </div>
             <div class="network-point reveal d3">
               <div class="np-icon sage">
-                <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M11 3l1.5 4.5H17l-3.5 2.5 1.5 4.5L11 12l-4 2.5 1.5-4.5L5 7.5h4.5L11 3z" stroke="#4a7c59" stroke-width="1.6" stroke-linejoin="round"/></svg>
+                <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M11 3l1.5 4.5H17l-3.5 2.5 1.5 4.5L11 12l-4 2.5 1.5-4.5L5 7.5h4.5L11 3z" stroke="#2a8a4a" stroke-width="1.6" stroke-linejoin="round"/></svg>
               </div>
               <div>
                 <div class="np-title">Real weight at the highest levels</div>
@@ -1620,7 +1620,7 @@
             </div>
             <div class="network-point reveal d4">
               <div class="np-icon amber">
-                <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M3 11h16M11 3v16" stroke="#d4922a" stroke-width="1.6" stroke-linecap="round"/><circle cx="11" cy="11" r="3" stroke="#d4922a" stroke-width="1.5"/></svg>
+                <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M3 11h16M11 3v16" stroke="#e8c040" stroke-width="1.6" stroke-linecap="round"/><circle cx="11" cy="11" r="3" stroke="#e8c040" stroke-width="1.5"/></svg>
               </div>
               <div>
                 <div class="np-title">Built for every parish, everywhere</div>
@@ -1653,7 +1653,7 @@
 
         <div class="collab-card c-terra reveal d1">
           <div class="collab-card-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 3l1.8 5.4H19l-4.6 3.3 1.7 5.3L12 14l-4.1 3 1.7-5.3L5 8.4h5.2L12 3z" stroke="#c85c3a" stroke-width="1.6" stroke-linejoin="round"/></svg>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 3l1.8 5.4H19l-4.6 3.3 1.7 5.3L12 14l-4.1 3 1.7-5.3L5 8.4h5.2L12 3z" stroke="#d85020" stroke-width="1.6" stroke-linejoin="round"/></svg>
           </div>
           <div class="collab-card-title">Collective advocacy</div>
           <div class="collab-card-desc">Co-sign open letters, advocacy statements, and petitions that carry real institutional weight. Communio aggregates parish voices into unified positions that reach the Holy See, EU policymakers, and the UN.</div>
@@ -1662,7 +1662,7 @@
 
         <div class="collab-card c-sage reveal d2">
           <div class="collab-card-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M17 20H7a4 4 0 01-4-4V8a4 4 0 014-4h10a4 4 0 014 4v8a4 4 0 01-4 4z" stroke="#4a7c59" stroke-width="1.6"/><path d="M8 12h8M8 8.5h5" stroke="#4a7c59" stroke-width="1.6" stroke-linecap="round"/></svg>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M17 20H7a4 4 0 01-4-4V8a4 4 0 014-4h10a4 4 0 014 4v8a4 4 0 01-4 4z" stroke="#2a8a4a" stroke-width="1.6"/><path d="M8 12h8M8 8.5h5" stroke="#2a8a4a" stroke-width="1.6" stroke-linecap="round"/></svg>
           </div>
           <div class="collab-card-title">Shared projects</div>
           <div class="collab-card-desc">Launch or join collaborative projects with other parishes — joint fundraising drives, shared educational programmes, resource exchanges, and cross-border community initiatives. Find parishes by focus area, country, or language.</div>
@@ -1671,7 +1671,7 @@
 
         <div class="collab-card c-amber reveal d3">
           <div class="collab-card-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="9" cy="7" r="3" stroke="#d4922a" stroke-width="1.6"/><circle cx="17" cy="11" r="2.5" stroke="#d4922a" stroke-width="1.5"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6" stroke="#d4922a" stroke-width="1.6" stroke-linecap="round"/><path d="M17 20c0-1.7-.9-3.2-2.3-4.1" stroke="#d4922a" stroke-width="1.5" stroke-linecap="round"/></svg>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="9" cy="7" r="3" stroke="#e8c040" stroke-width="1.6"/><circle cx="17" cy="11" r="2.5" stroke="#e8c040" stroke-width="1.5"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6" stroke="#e8c040" stroke-width="1.6" stroke-linecap="round"/><path d="M17 20c0-1.7-.9-3.2-2.3-4.1" stroke="#e8c040" stroke-width="1.5" stroke-linecap="round"/></svg>
           </div>
           <div class="collab-card-title">Sister parish relationships</div>
           <div class="collab-card-desc">Form direct, lasting relationships with parishes in other countries. Share resources, support each other's needs, exchange pastoral insights, and build the kind of global solidarity that gives the Church its true character.</div>
@@ -1775,28 +1775,28 @@
       <div class="features-grid">
 
         <div class="feat-card c-terra reveal d1">
-          <svg class="feat-icon" width="32" height="32" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="13" stroke="#c85c3a" stroke-width="1.8"/><path d="M3 16h26M16 3a20 20 0 000 26M16 3a20 20 0 010 26" stroke="#c85c3a" stroke-width="1.5" stroke-linecap="round"/></svg>
+          <svg class="feat-icon" width="32" height="32" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="13" stroke="#d85020" stroke-width="1.8"/><path d="M3 16h26M16 3a20 20 0 000 26M16 3a20 20 0 010 26" stroke="#d85020" stroke-width="1.5" stroke-linecap="round"/></svg>
           <div class="feat-title">Your parish on the world map</div>
           <div class="feat-desc">A beautiful public profile on Communio — live the moment you're approved. Your story, your community, your location on the global directory.</div>
           <span class="feat-pill">Instant on approval</span>
         </div>
 
         <div class="feat-card c-sage reveal d2">
-          <svg class="feat-icon" width="32" height="32" viewBox="0 0 32 32" fill="none"><rect x="4" y="6" width="24" height="18" rx="2" stroke="#4a7c59" stroke-width="1.8"/><path d="M4 12h24" stroke="#4a7c59" stroke-width="1.8"/><path d="M9 18h14M9 22h9" stroke="#4a7c59" stroke-width="1.8" stroke-linecap="round"/></svg>
+          <svg class="feat-icon" width="32" height="32" viewBox="0 0 32 32" fill="none"><rect x="4" y="6" width="24" height="18" rx="2" stroke="#2a8a4a" stroke-width="1.8"/><path d="M4 12h24" stroke="#2a8a4a" stroke-width="1.8"/><path d="M9 18h14M9 22h9" stroke="#2a8a4a" stroke-width="1.8" stroke-linecap="round"/></svg>
           <div class="feat-title">A real parish website</div>
           <div class="feat-desc">No developer needed. Choose a template, add your content — published at yourparish.communio.org. Events, news, and contact details all built in.</div>
           <span class="feat-pill">No code needed</span>
         </div>
 
         <div class="feat-card c-amber reveal d3">
-          <svg class="feat-icon" width="32" height="32" viewBox="0 0 32 32" fill="none"><rect x="3" y="8" width="26" height="18" rx="2.5" stroke="#d4922a" stroke-width="1.8"/><path d="M3 14h26" stroke="#d4922a" stroke-width="1.8"/><circle cx="9" cy="21" r="2" fill="#d4922a"/><path d="M15 21h9" stroke="#d4922a" stroke-width="1.8" stroke-linecap="round"/></svg>
+          <svg class="feat-icon" width="32" height="32" viewBox="0 0 32 32" fill="none"><rect x="3" y="8" width="26" height="18" rx="2.5" stroke="#e8c040" stroke-width="1.8"/><path d="M3 14h26" stroke="#e8c040" stroke-width="1.8"/><circle cx="9" cy="21" r="2" fill="#e8c040"/><path d="M15 21h9" stroke="#e8c040" stroke-width="1.8" stroke-linecap="round"/></svg>
           <div class="feat-title">Online donations</div>
           <div class="feat-desc">Accept gifts from anywhere in the world — one-off, recurring, or for specific projects. Funds go directly to your bank account via Stripe. Zero setup fee.</div>
           <span class="feat-pill">Ready in minutes</span>
         </div>
 
         <div class="feat-card c-sage reveal d1">
-          <svg class="feat-icon" width="32" height="32" viewBox="0 0 32 32" fill="none"><path d="M28 18c0 1.5-1 3-2.5 4L16 28l-9.5-6C5 21 4 19.5 4 18V8.5C4 7 5 6 6.5 6h19C27 6 28 7 28 8.5V18z" stroke="#4a7c59" stroke-width="1.8" stroke-linejoin="round"/><path d="M10 13h12M10 17h8" stroke="#4a7c59" stroke-width="1.8" stroke-linecap="round"/></svg>
+          <svg class="feat-icon" width="32" height="32" viewBox="0 0 32 32" fill="none"><path d="M28 18c0 1.5-1 3-2.5 4L16 28l-9.5-6C5 21 4 19.5 4 18V8.5C4 7 5 6 6.5 6h19C27 6 28 7 28 8.5V18z" stroke="#2a8a4a" stroke-width="1.8" stroke-linejoin="round"/><path d="M10 13h12M10 17h8" stroke="#2a8a4a" stroke-width="1.8" stroke-linecap="round"/></svg>
           <div class="feat-title">Direct parish messaging</div>
           <div class="feat-desc">Message any parish on the network directly. Share resources, start conversations, build relationships — the foundation for everything you'll collaborate on.</div>
           <span class="feat-pill">Global community</span>
@@ -1804,7 +1804,7 @@
 
         <div class="feat-card c-terra wide reveal d2">
           <div class="feat-body">
-            <svg class="feat-icon" width="32" height="32" viewBox="0 0 32 32" fill="none"><path d="M6 20V12l18-6v20L6 20z" stroke="#c85c3a" stroke-width="1.8" stroke-linejoin="round"/><path d="M6 16h-3" stroke="#c85c3a" stroke-width="1.8" stroke-linecap="round"/><path d="M3 13v9" stroke="#c85c3a" stroke-width="1.8" stroke-linecap="round"/><path d="M24 14l4-2M24 18l4 2M24 16h4" stroke="#c85c3a" stroke-width="1.5" stroke-linecap="round"/></svg>
+            <svg class="feat-icon" width="32" height="32" viewBox="0 0 32 32" fill="none"><path d="M6 20V12l18-6v20L6 20z" stroke="#d85020" stroke-width="1.8" stroke-linejoin="round"/><path d="M6 16h-3" stroke="#d85020" stroke-width="1.8" stroke-linecap="round"/><path d="M3 13v9" stroke="#d85020" stroke-width="1.8" stroke-linecap="round"/><path d="M24 14l4-2M24 18l4 2M24 16h4" stroke="#d85020" stroke-width="1.5" stroke-linecap="round"/></svg>
             <div class="feat-title">A collective voice that matters</div>
             <div class="feat-desc">500 parishes co-signing a statement on ethical AI carries real weight at the Holy See, the EU, and the UN. Communio gives isolated communities the power of a united, global movement. Launch a campaign. Join one already running. Your parish's voice, amplified thousands of times over.</div>
           </div>
@@ -1830,7 +1830,7 @@
 
         <div class="step-card reveal d1">
           <div class="step-number">Step 01</div>
-          <svg width="36" height="36" viewBox="0 0 36 36" fill="none" style="margin-bottom:14px;display:block;"><rect x="6" y="4" width="24" height="28" rx="3" stroke="#4a7c59" stroke-width="1.8"/><path d="M11 12h14M11 17h14M11 22h8" stroke="#4a7c59" stroke-width="1.8" stroke-linecap="round"/><circle cx="27" cy="27" r="7" fill="#eaf3ec" stroke="#4a7c59" stroke-width="1.5"/><path d="M24 27l2 2 4-3" stroke="#4a7c59" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <svg width="36" height="36" viewBox="0 0 36 36" fill="none" style="margin-bottom:14px;display:block;"><rect x="6" y="4" width="24" height="28" rx="3" stroke="#2a8a4a" stroke-width="1.8"/><path d="M11 12h14M11 17h14M11 22h8" stroke="#2a8a4a" stroke-width="1.8" stroke-linecap="round"/><circle cx="27" cy="27" r="7" fill="#eaf3ec" stroke="#2a8a4a" stroke-width="1.5"/><path d="M24 27l2 2 4-3" stroke="#2a8a4a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           <div class="step-title">Register in under 10 minutes</div>
           <div class="step-desc">We look up your parish automatically and pre-fill what we know. Confirm the details, describe your community, and optionally connect your bank account for donations.</div>
           <span class="step-time">~10 minutes</span>
@@ -1838,7 +1838,7 @@
 
         <div class="step-card reveal d2">
           <div class="step-number">Step 02</div>
-          <svg width="36" height="36" viewBox="0 0 36 36" fill="none" style="margin-bottom:14px;display:block;"><circle cx="16" cy="16" r="11" stroke="#c85c3a" stroke-width="1.8"/><path d="M24 24l7 7" stroke="#c85c3a" stroke-width="1.8" stroke-linecap="round"/><path d="M12 16l3 3 5-5" stroke="#c85c3a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <svg width="36" height="36" viewBox="0 0 36 36" fill="none" style="margin-bottom:14px;display:block;"><circle cx="16" cy="16" r="11" stroke="#d85020" stroke-width="1.8"/><path d="M24 24l7 7" stroke="#d85020" stroke-width="1.8" stroke-linecap="round"/><path d="M12 16l3 3 5-5" stroke="#d85020" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
           <div class="step-title">DCF reviews your application</div>
           <div class="step-desc">Every parish is personally reviewed by the DCF team. This protects the network's integrity. You'll get an email decision with your login credentials.</div>
           <span class="step-time">3–5 business days</span>
@@ -1846,7 +1846,7 @@
 
         <div class="step-card reveal d3">
           <div class="step-number">Step 03</div>
-          <svg width="36" height="36" viewBox="0 0 36 36" fill="none" style="margin-bottom:14px;display:block;"><path d="M18 4l2 8h8l-6.5 5 2.5 8L18 20l-6 5 2.5-8L8 12h8l2-8z" stroke="#d4922a" stroke-width="1.8" stroke-linejoin="round"/><path d="M18 20v12" stroke="#d4922a" stroke-width="1.8" stroke-linecap="round"/><path d="M12 32h12" stroke="#d4922a" stroke-width="1.8" stroke-linecap="round"/></svg>
+          <svg width="36" height="36" viewBox="0 0 36 36" fill="none" style="margin-bottom:14px;display:block;"><path d="M18 4l2 8h8l-6.5 5 2.5 8L18 20l-6 5 2.5-8L8 12h8l2-8z" stroke="#e8c040" stroke-width="1.8" stroke-linejoin="round"/><path d="M18 20v12" stroke="#e8c040" stroke-width="1.8" stroke-linecap="round"/><path d="M12 32h12" stroke="#e8c040" stroke-width="1.8" stroke-linecap="round"/></svg>
           <div class="step-title">Your parish goes live</div>
           <div class="step-desc">Profile published on the global map. Donation page active. Dashboard access granted — build your website, post events, message other parishes, and access the collaboration layer.</div>
           <span class="step-time">Instant on approval</span>
@@ -1854,7 +1854,7 @@
 
         <div class="step-card reveal d4">
           <div class="step-number">Step 04</div>
-          <svg width="36" height="36" viewBox="0 0 36 36" fill="none" style="margin-bottom:14px;display:block;"><path d="M18 32V16" stroke="#4a7c59" stroke-width="1.8" stroke-linecap="round"/><path d="M18 24c0-6 6-10 10-8" stroke="#4a7c59" stroke-width="1.8" stroke-linecap="round"/><path d="M18 20c0-6-6-10-10-8" stroke="#4a7c59" stroke-width="1.8" stroke-linecap="round"/><circle cx="18" cy="32" r="2" fill="#4a7c59"/></svg>
+          <svg width="36" height="36" viewBox="0 0 36 36" fill="none" style="margin-bottom:14px;display:block;"><path d="M18 32V16" stroke="#2a8a4a" stroke-width="1.8" stroke-linecap="round"/><path d="M18 24c0-6 6-10 10-8" stroke="#2a8a4a" stroke-width="1.8" stroke-linecap="round"/><path d="M18 20c0-6-6-10-10-8" stroke="#2a8a4a" stroke-width="1.8" stroke-linecap="round"/><circle cx="18" cy="32" r="2" fill="#2a8a4a"/></svg>
           <div class="step-title">Join the movement</div>
           <div class="step-desc">Browse projects, launch campaigns, form sister-parish relationships, and co-sign advocacy statements. As more parishes join, the network grows stronger — and so does your voice.</div>
           <span class="step-time">Ongoing</span>
@@ -1900,7 +1900,7 @@
           <div class="model-points" style="margin-top:32px;">
             <div class="model-point">
               <div class="mp-num">
-                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="8" width="14" height="10" rx="1.5" stroke="#c85c3a" stroke-width="1.5"/><path d="M7 8V6a3 3 0 016 0v2" stroke="#c85c3a" stroke-width="1.5" stroke-linecap="round"/><circle cx="10" cy="13" r="1.5" fill="#c85c3a"/></svg>
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="8" width="14" height="10" rx="1.5" stroke="#d85020" stroke-width="1.5"/><path d="M7 8V6a3 3 0 016 0v2" stroke="#d85020" stroke-width="1.5" stroke-linecap="round"/><circle cx="10" cy="13" r="1.5" fill="#d85020"/></svg>
               </div>
               <div>
                 <div class="mp-title">Zero cost to get started</div>
@@ -1909,7 +1909,7 @@
             </div>
             <div class="model-point">
               <div class="mp-num">
-                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="1.5" y="5" width="17" height="11.5" rx="1.5" stroke="#c85c3a" stroke-width="1.5"/><path d="M1.5 8.5h17" stroke="#c85c3a" stroke-width="1.5"/><circle cx="5.5" cy="12.5" r="1.5" fill="#c85c3a"/><path d="M9.5 12.5h5" stroke="#c85c3a" stroke-width="1.5" stroke-linecap="round"/></svg>
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="1.5" y="5" width="17" height="11.5" rx="1.5" stroke="#d85020" stroke-width="1.5"/><path d="M1.5 8.5h17" stroke="#d85020" stroke-width="1.5"/><circle cx="5.5" cy="12.5" r="1.5" fill="#d85020"/><path d="M9.5 12.5h5" stroke="#d85020" stroke-width="1.5" stroke-linecap="round"/></svg>
               </div>
               <div>
                 <div class="mp-title">Only when you receive donations</div>
@@ -1918,7 +1918,7 @@
             </div>
             <div class="model-point">
               <div class="mp-num">
-                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2l1.8 5.4H17l-4.6 3.3 1.7 5.3L10 13l-4.1 3 1.7-5.3L3 7.4h5.2L10 2z" stroke="#c85c3a" stroke-width="1.5" stroke-linejoin="round"/></svg>
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2l1.8 5.4H17l-4.6 3.3 1.7 5.3L10 13l-4.1 3 1.7-5.3L3 7.4h5.2L10 2z" stroke="#d85020" stroke-width="1.5" stroke-linejoin="round"/></svg>
               </div>
               <div>
                 <div class="mp-title">Straight to your bank account</div>
@@ -1927,7 +1927,7 @@
             </div>
             <div class="model-point">
               <div class="mp-num">
-                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 18c4.418 0 8-3.582 8-8S14.418 2 10 2 2 5.582 2 10s3.582 8 8 8z" stroke="#c85c3a" stroke-width="1.5"/><path d="M2 10h16M10 2a12 12 0 000 16M10 2a12 12 0 010 16" stroke="#c85c3a" stroke-width="1.5" stroke-linecap="round"/></svg>
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 18c4.418 0 8-3.582 8-8S14.418 2 10 2 2 5.582 2 10s3.582 8 8 8z" stroke="#d85020" stroke-width="1.5"/><path d="M2 10h16M10 2a12 12 0 000 16M10 2a12 12 0 010 16" stroke="#d85020" stroke-width="1.5" stroke-linecap="round"/></svg>
               </div>
               <div>
                 <div class="mp-title">Your 1% funds the whole mission</div>
