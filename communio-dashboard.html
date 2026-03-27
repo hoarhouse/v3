@@ -1673,118 +1673,106 @@ select.fi { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w
 
   function getSiteHTML(t, full) {
     var p = templates[t];
-    var fsize = full ? '' : 'font-size:85%;';
-    return '<div style="' + fsize + 'font-family:Outfit,system-ui,sans-serif;">'
+    var pad = full ? '48px 28px' : '28px 20px';
+    var padSm = full ? '24px 28px' : '16px 20px';
+    var h1size = full ? '36px' : '22px';
+    var subsize = full ? '15px' : '12px';
+    var bodypad = full ? '36px 28px' : '18px 16px';
+    var cardpad = full ? '20px' : '14px';
+    var sectiongap = full ? '20px' : '12px';
+
+    return '<div style="font-family:Outfit,system-ui,sans-serif;line-height:1.5;">'
+
       /* NAV */
-      + '<div style="background:' + p.navBg + ';border-bottom:2px solid ' + p.navBorder + ';padding:12px 20px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:10;">'
-        + '<div style="font-size:14px;font-weight:800;color:#fff;letter-spacing:-0.02em;">St. Mary\'s <span style="color:#d85020;">Parish</span></div>'
-        + '<div style="display:flex;align-items:center;gap:10px;">'
-          + '<a href="#" style="font-size:12px;font-weight:600;color:rgba(255,255,255,0.55);text-decoration:none;">About</a>'
-          + '<a href="#" style="font-size:12px;font-weight:600;color:rgba(255,255,255,0.55);text-decoration:none;">Mass times</a>'
-          + '<a href="#" style="font-size:12px;font-weight:600;color:rgba(255,255,255,0.55);text-decoration:none;">Contact</a>'
-          + '<div style="font-size:11px;font-weight:700;background:#d85020;color:#fff;padding:7px 14px;border-radius:6px;cursor:pointer;">Donate</div>'
+      + '<div style="background:' + p.navBg + ';border-bottom:2px solid ' + p.navBorder + ';padding:11px 20px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:10;">'
+        + '<div style="font-size:' + (full?'15px':'13px') + ';font-weight:800;color:#fff;letter-spacing:-0.02em;white-space:nowrap;">St. Mary's <span style="color:#d85020;">Parish</span></div>'
+        + '<div style="display:flex;align-items:center;gap:' + (full?'14px':'8px') + ';">'
+          + (full ? '<a href="#" style="font-size:13px;font-weight:600;color:rgba(255,255,255,0.5);text-decoration:none;">About</a><a href="#" style="font-size:13px;font-weight:600;color:rgba(255,255,255,0.5);text-decoration:none;">Mass times</a><a href="#" style="font-size:13px;font-weight:600;color:rgba(255,255,255,0.5);text-decoration:none;">Contact</a>' : '')
+          + '<div style="font-size:' + (full?'12px':'11px') + ';font-weight:700;background:#d85020;color:#fff;padding:' + (full?'8px 16px':'6px 11px') + ';border-radius:6px;white-space:nowrap;">Donate</div>'
         + '</div>'
       + '</div>'
+
       /* HERO */
-      + '<div style="position:relative;overflow:hidden;">'      + '<div style="background:' + (heroPhotoUrl ? 'url(\'' + heroPhotoUrl + '\') center/cover no-repeat' : p.heroBg) + ';padding:' + (full ? '56px' : '32px') + ' 24px;position:relative;">'      + (heroPhotoUrl ? '<div style="position:absolute;inset:0;background:rgba(0,0,0,0.52);"></div>' : '')
-        + '<div style="max-width:640px;position:relative;z-index:1;">'
-          + '<div style="font-size:10px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:' + p.accentColor + ';background:' + p.tagBg + ';border:1px solid ' + p.tagBg + ';border-radius:4px;padding:4px 10px;display:inline-block;margin-bottom:12px;">'
-            + (t === 'midnight' ? '✦ Est. 1887 · New York City' : '✓ DCF Verified Parish · New York')
-          + '</div>'
-          + '<div style="font-size:' + (full ? '38px' : '24px') + ';font-weight:800;color:' + p.heroText + ';letter-spacing:-0.03em;line-height:1.1;margin-bottom:10px;">'
-            + 'St. Mary\'s Parish'
-          + '</div>'
-          + '<div style="font-size:' + (full ? '16px' : '13px') + ';color:' + p.heroSubText + ';line-height:1.65;margin-bottom:' + (full ? '28px' : '16px') + ';max-width:480px;">'
-            + 'Serving the Lower East Side community since 1887. A vibrant, multicultural congregation of over 1,200 families committed to social justice, faith, and one another.'
-          + '</div>'
-          + '<div style="display:flex;gap:10px;flex-wrap:wrap;">'
-            + '<div style="font-size:13px;font-weight:700;background:' + p.btnBg + ';color:' + p.btnColor + ';padding:11px 20px;border-radius:6px;cursor:pointer;">Join us this Sunday →</div>'
-            + '<div style="font-size:13px;font-weight:700;background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.7);padding:11px 20px;border-radius:6px;cursor:pointer;">Mass times</div>'
+      + '<div style="position:relative;overflow:hidden;">'
+      + '<div style="background:' + (heroPhotoUrl ? 'url(\'' + heroPhotoUrl + '\') center/cover no-repeat' : p.heroBg) + ';padding:' + pad + ';position:relative;">'
+      + (heroPhotoUrl ? '<div style="position:absolute;inset:0;background:rgba(0,0,0,0.55);"></div>' : '')
+        + '<div style="position:relative;z-index:1;">'
+          + '<div style="font-size:10px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:' + (heroPhotoUrl?'rgba(255,255,255,0.75)':p.accentColor) + ';margin-bottom:10px;">✓ DCF Verified · New York</div>'
+          + '<div style="font-size:' + h1size + ';font-weight:800;color:#fff;letter-spacing:-0.03em;line-height:1.1;margin-bottom:8px;">St. Mary's Parish</div>'
+          + '<div style="font-size:' + subsize + ';color:rgba(255,255,255,0.65);line-height:1.65;margin-bottom:' + (full?'24px':'14px') + ';max-width:460px;">Serving the Lower East Side since 1887. A vibrant, multicultural congregation committed to social justice, faith, and community.</div>'
+          + '<div style="display:flex;gap:8px;flex-wrap:wrap;">'
+            + '<div style="font-size:' + (full?'13px':'12px') + ';font-weight:700;background:' + p.btnBg + ';color:' + p.btnColor + ';padding:' + (full?'10px 18px':'8px 13px') + ';border-radius:6px;cursor:pointer;white-space:nowrap;">Join us Sunday →</div>'
+            + '<div style="font-size:' + (full?'13px':'12px') + ';font-weight:700;background:rgba(255,255,255,0.12);color:rgba(255,255,255,0.8);padding:' + (full?'10px 18px':'8px 13px') + ';border-radius:6px;cursor:pointer;white-space:nowrap;">Mass times</div>'
           + '</div>'
         + '</div>'
       + '</div>'
+      + '</div>'
+
       /* STATS BAR */
-      + '<div style="background:' + p.accentColor + ';padding:12px 24px;display:flex;gap:24px;flex-wrap:wrap;">'
-        + '<div style="font-size:12px;font-weight:700;color:' + (t === 'midnight' ? '#000' : '#fff') + ';">🕊 Founded 1887</div>'
-        + '<div style="font-size:12px;font-weight:700;color:' + (t === 'midnight' ? '#000' : '#fff') + ';">👥 1,200+ Families</div>'
-        + '<div style="font-size:12px;font-weight:700;color:' + (t === 'midnight' ? '#000' : '#fff') + ';">🌍 40+ Countries of origin</div>'
-        + '<div style="font-size:12px;font-weight:700;color:' + (t === 'midnight' ? '#000' : '#fff') + ';">✓ Communio verified</div>'
+      + '<div style="background:' + p.accentColor + ';padding:10px 20px;display:flex;gap:' + (full?'24px':'14px') + ';flex-wrap:wrap;">'
+        + '<div style="font-size:' + (full?'12px':'10px') + ';font-weight:700;color:' + (t==='midnight'?'#000':'#fff') + ';white-space:nowrap;">🕊 Founded 1887</div>'
+        + '<div style="font-size:' + (full?'12px':'10px') + ';font-weight:700;color:' + (t==='midnight'?'#000':'#fff') + ';white-space:nowrap;">👥 1,200+ Families</div>'
+        + (full ? '<div style="font-size:12px;font-weight:700;color:' + (t==='midnight'?'#000':'#fff') + ';white-space:nowrap;">🌍 40+ Countries</div><div style="font-size:12px;font-weight:700;color:' + (t==='midnight'?'#000':'#fff') + ';white-space:nowrap;">✓ Communio verified</div>' : '')
       + '</div>'
+
       /* BODY */
-      + '<div style="background:' + p.bodyBg + ';padding:' + (full ? '40px' : '20px') + ' 24px;">'
-        /* Two col grid */
-        + '<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px;">'
-          /* Mass times */
-          + '<div style="background:' + p.cardBg + ';border:1px solid ' + p.cardBorder + ';border-radius:10px;padding:18px;">'
-            + '<div style="font-size:10px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:' + p.labelColor + ';margin-bottom:10px;">Mass times</div>'
-            + '<div style="font-size:13px;font-weight:600;color:' + p.headingColor + ';margin-bottom:8px;">Weekend Masses</div>'
-            + '<div style="font-size:12px;color:' + p.textColor + ';line-height:1.8;">'
-              + 'Saturday · 5:00pm Vigil<br/>Sunday · 8:00am, 10:00am, 12:00pm<br/>Sunday · 6:00pm (Spanish)'
-            + '</div>'
-            + '<div style="margin-top:12px;padding-top:12px;border-top:1px solid ' + p.cardBorder + ';">'
-              + '<div style="font-size:13px;font-weight:600;color:' + p.headingColor + ';margin-bottom:6px;">Weekday Masses</div>'
-              + '<div style="font-size:12px;color:' + p.textColor + ';line-height:1.8;">Mon–Fri · 7:00am &amp; 12:10pm</div>'
-            + '</div>'
+      + '<div style="background:' + p.bodyBg + ';padding:' + bodypad + ';display:flex;flex-direction:column;gap:' + sectiongap + ';">'
+
+        /* Mass times + Events — single col on mini, 2 col on full */
+        + (full
+          ? '<div style="display:grid;grid-template-columns:1fr 1fr;gap:' + sectiongap + ';">'
+          : '<div style="display:flex;flex-direction:column;gap:' + sectiongap + ';">')
+          + '<div style="background:' + p.cardBg + ';border:1px solid ' + p.cardBorder + ';border-radius:10px;padding:' + cardpad + ';">'
+            + '<div style="font-size:9px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:' + p.labelColor + ';margin-bottom:8px;">Mass times</div>'
+            + '<div style="font-size:' + (full?'13px':'12px') + ';font-weight:600;color:' + p.headingColor + ';margin-bottom:6px;">Weekend</div>'
+            + '<div style="font-size:' + (full?'12px':'11px') + ';color:' + p.textColor + ';line-height:1.8;">Sat 5:00pm · Sun 8am, 10am, 12pm<br/>Sun 6:00pm (Spanish)</div>'
+            + '<div style="margin-top:10px;padding-top:10px;border-top:1px solid ' + p.cardBorder + ';font-size:' + (full?'12px':'11px') + ';color:' + p.textColor + ';">Mon–Fri · 7:00am &amp; 12:10pm</div>'
           + '</div>'
-          /* Events */
-          + '<div style="background:' + p.cardBg + ';border:1px solid ' + p.cardBorder + ';border-radius:10px;padding:18px;">'
-            + '<div style="font-size:10px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:' + p.labelColor + ';margin-bottom:10px;">Upcoming events</div>'
-            + '<div style="display:flex;flex-direction:column;gap:10px;">'
-              + '<div style="display:flex;gap:10px;align-items:flex-start;">'
-                + '<div style="background:' + p.accentColor + ';color:' + (t==='midnight'?'#000':'#fff') + ';border-radius:6px;padding:6px 8px;text-align:center;flex-shrink:0;min-width:38px;">'
-                  + '<div style="font-size:9px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;">Apr</div>'
-                  + '<div style="font-size:16px;font-weight:800;line-height:1;">19</div>'
-                + '</div>'
-                + '<div><div style="font-size:13px;font-weight:700;color:' + p.headingColor + ';">Easter Vigil</div><div style="font-size:11px;color:' + p.textColor + ';">8:00pm · Main Church</div></div>'
+          + '<div style="background:' + p.cardBg + ';border:1px solid ' + p.cardBorder + ';border-radius:10px;padding:' + cardpad + ';">'
+            + '<div style="font-size:9px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:' + p.labelColor + ';margin-bottom:8px;">Upcoming events</div>'
+            + '<div style="display:flex;flex-direction:column;gap:8px;">'
+              + '<div style="display:flex;gap:9px;align-items:center;">'
+                + '<div style="background:' + p.accentColor + ';color:' + (t==='midnight'?'#000':'#fff') + ';border-radius:6px;padding:5px 7px;text-align:center;flex-shrink:0;min-width:34px;"><div style="font-size:8px;font-weight:700;text-transform:uppercase;">Apr</div><div style="font-size:' + (full?'16px':'13px') + ';font-weight:800;line-height:1;">19</div></div>'
+                + '<div><div style="font-size:' + (full?'13px':'12px') + ';font-weight:700;color:' + p.headingColor + ';">Easter Vigil</div><div style="font-size:11px;color:' + p.textColor + ';">8:00pm · Main Church</div></div>'
               + '</div>'
-              + '<div style="display:flex;gap:10px;align-items:flex-start;">'
-                + '<div style="background:' + p.cardBorder + ';border-radius:6px;padding:6px 8px;text-align:center;flex-shrink:0;min-width:38px;">'
-                  + '<div style="font-size:9px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:' + p.textColor + ';">Apr</div>'
-                  + '<div style="font-size:16px;font-weight:800;line-height:1;color:' + p.headingColor + ';">22</div>'
-                + '</div>'
-                + '<div><div style="font-size:13px;font-weight:700;color:' + p.headingColor + ';">Youth Group Meeting</div><div style="font-size:11px;color:' + p.textColor + ';">6:30pm · Parish Hall</div></div>'
-              + '</div>'
-              + '<div style="display:flex;gap:10px;align-items:flex-start;">'
-                + '<div style="background:' + p.cardBorder + ';border-radius:6px;padding:6px 8px;text-align:center;flex-shrink:0;min-width:38px;">'
-                  + '<div style="font-size:9px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:' + p.textColor + ';">May</div>'
-                  + '<div style="font-size:16px;font-weight:800;line-height:1;color:' + p.headingColor + ';">4</div>'
-                + '</div>'
-                + '<div><div style="font-size:13px;font-weight:700;color:' + p.headingColor + ';">First Holy Communion</div><div style="font-size:11px;color:' + p.textColor + ';">10:00am · Main Church</div></div>'
+              + '<div style="display:flex;gap:9px;align-items:center;">'
+                + '<div style="background:' + p.cardBorder + ';border-radius:6px;padding:5px 7px;text-align:center;flex-shrink:0;min-width:34px;"><div style="font-size:8px;font-weight:700;text-transform:uppercase;color:' + p.textColor + ';">Apr</div><div style="font-size:' + (full?'16px':'13px') + ';font-weight:800;line-height:1;color:' + p.headingColor + ';">22</div></div>'
+                + '<div><div style="font-size:' + (full?'13px':'12px') + ';font-weight:700;color:' + p.headingColor + ';">Youth Group</div><div style="font-size:11px;color:' + p.textColor + ';">6:30pm · Parish Hall</div></div>'
               + '</div>'
             + '</div>'
           + '</div>'
         + '</div>'
-        /* About section */
-        + '<div style="background:' + p.cardBg + ';border:1px solid ' + p.cardBorder + ';border-radius:10px;padding:20px;margin-bottom:14px;">'
-          + '<div style="font-size:10px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:' + p.labelColor + ';margin-bottom:10px;">About our parish</div>'
-          + '<div style="font-size:13px;color:' + p.textColor + ';line-height:1.75;">'
-            + 'St. Mary\'s Parish has been a cornerstone of the Lower East Side community since 1887. We are a vibrant, multicultural congregation serving over 1,200 families from more than 40 countries, committed to social justice, compassionate outreach, and the proclamation of the Gospel in a changing world.'
-          + '</div>'
-          + '<div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:12px;">'
-            + '<span style="font-size:11px;font-weight:600;color:' + p.labelColor + ';background:' + p.tagBg.replace('0.2','0.08').replace('0.15','0.08').replace('0.1','0.08') + ';border:1px solid ' + p.cardBorder + ';border-radius:4px;padding:4px 10px;">Peace &amp; reconciliation</span>'
-            + '<span style="font-size:11px;font-weight:600;color:' + p.labelColor + ';background:' + p.tagBg.replace('0.2','0.08').replace('0.15','0.08').replace('0.1','0.08') + ';border:1px solid ' + p.cardBorder + ';border-radius:4px;padding:4px 10px;">Ethical technology</span>'
-            + '<span style="font-size:11px;font-weight:600;color:' + p.labelColor + ';background:' + p.tagBg.replace('0.2','0.08').replace('0.15','0.08').replace('0.1','0.08') + ';border:1px solid ' + p.cardBorder + ';border-radius:4px;padding:4px 10px;">Youth ministry</span>'
-            + '<span style="font-size:11px;font-weight:600;color:' + p.labelColor + ';background:' + p.tagBg.replace('0.2','0.08').replace('0.15','0.08').replace('0.1','0.08') + ';border:1px solid ' + p.cardBorder + ';border-radius:4px;padding:4px 10px;">Social justice</span>'
+
+        /* About */
+        + '<div style="background:' + p.cardBg + ';border:1px solid ' + p.cardBorder + ';border-radius:10px;padding:' + cardpad + ';">'
+          + '<div style="font-size:9px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:' + p.labelColor + ';margin-bottom:8px;">About our parish</div>'
+          + '<div style="font-size:' + (full?'13px':'12px') + ';color:' + p.textColor + ';line-height:1.7;">St. Mary's Parish has been a cornerstone of the Lower East Side since 1887. We serve 1,200+ families from 40+ countries — committed to social justice, compassionate outreach, and the Gospel in a changing world.</div>'
+          + '<div style="display:flex;flex-wrap:wrap;gap:5px;margin-top:10px;">'
+            + '<span style="font-size:11px;font-weight:600;color:' + p.labelColor + ';background:' + (t==='midnight'?'rgba(232,192,64,0.1)':p.cardBorder) + ';border-radius:4px;padding:3px 8px;">Peace &amp; reconciliation</span>'
+            + '<span style="font-size:11px;font-weight:600;color:' + p.labelColor + ';background:' + (t==='midnight'?'rgba(232,192,64,0.1)':p.cardBorder) + ';border-radius:4px;padding:3px 8px;">Ethical technology</span>'
+            + '<span style="font-size:11px;font-weight:600;color:' + p.labelColor + ';background:' + (t==='midnight'?'rgba(232,192,64,0.1)':p.cardBorder) + ';border-radius:4px;padding:3px 8px;">Youth ministry</span>'
           + '</div>'
         + '</div>'
-        /* Donate section */
-        + '<div style="background:' + p.navBg + ';border-radius:10px;padding:22px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;">'
-          + '<div>'
-            + '<div style="font-size:16px;font-weight:800;color:#fff;margin-bottom:5px;">Support St. Mary\'s Parish</div>'
-            + '<div style="font-size:13px;color:rgba(255,255,255,0.5);line-height:1.55;">Your gift sustains our community programmes and the upkeep of our historic church. 100% goes direct to the parish.</div>'
-          + '</div>'
-          + '<div style="font-size:14px;font-weight:700;background:' + p.donBtnBg + ';color:' + p.donBtnColor + ';padding:13px 26px;border-radius:6px;cursor:pointer;flex-shrink:0;">Donate online →</div>'
+
+        /* Donate */
+        + '<div style="background:' + p.navBg + ';border-radius:10px;padding:' + cardpad + ';">'
+          + '<div style="font-size:' + (full?'16px':'14px') + ';font-weight:800;color:#fff;margin-bottom:5px;">Support St. Mary's Parish</div>'
+          + '<div style="font-size:' + (full?'13px':'12px') + ';color:rgba(255,255,255,0.5);line-height:1.55;margin-bottom:12px;">Your gift sustains our community programmes and the upkeep of our historic church. Funds go direct to the parish via Stripe.</div>'
+          + '<div style="font-size:' + (full?'14px':'13px') + ';font-weight:700;background:' + p.donBtnBg + ';color:' + p.donBtnColor + ';padding:' + (full?'12px 22px':'10px 16px') + ';border-radius:6px;cursor:pointer;display:inline-block;">Donate online →</div>'
         + '</div>'
+
       + '</div>'
+
       /* FOOTER */
-      + '<div style="background:' + p.footerBg + ';border-top:1px solid rgba(255,255,255,0.07);padding:20px 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;">'
-        + '<div style="font-size:12px;color:' + p.footerText + ';">St. Mary\'s Parish · 15 Mott Street, New York, NY · info@stmarysnyc.org</div>'
-        + '<div style="font-size:11px;color:rgba(255,255,255,0.25);">Part of the <span style="color:rgba(255,255,255,0.45);">Communio</span> network</div>'
+      + '<div style="background:' + p.footerBg + ';border-top:1px solid rgba(255,255,255,0.07);padding:16px 20px;">'
+        + '<div style="font-size:' + (full?'12px':'11px') + ';color:' + p.footerText + ';margin-bottom:4px;">St. Mary's Parish · 15 Mott Street, New York, NY</div>'
+        + '<div style="font-size:10px;color:rgba(255,255,255,0.25);">Part of the <span style="color:rgba(255,255,255,0.45);">Communio</span> network · EIN 99-1778616</div>'
       + '</div>'
+
     + '</div>';
   }
 
-  function selectTemplate(name){
+    function selectTemplate(name){
     currentTemplate = name;
     /* Update card borders */
     document.querySelectorAll('.site-tmpl').forEach(function(el){
