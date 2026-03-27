@@ -1151,6 +1151,35 @@ select.fi { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w
           </div>
         </div>
 
+        <!-- Photo upload -->
+        <div class="we-panel" style="margin-top:12px;">
+          <div class="we-panel-head">Hero photo</div>
+          <div style="padding:14px 16px;">
+            <div id="hero-photo-preview" style="width:100%;height:90px;border-radius:8px;background:url('https://images.unsplash.com/photo-1548625149-fc4a29cf7092?auto=format&fit=crop&w=600&q=80') center/cover no-repeat;position:relative;margin-bottom:10px;border:1px solid var(--border-l);">
+              <div style="position:absolute;inset:0;background:rgba(0,0,0,0.35);border-radius:8px;display:flex;align-items:center;justify-content:center;">
+                <span style="font-size:10px;font-weight:700;color:#fff;letter-spacing:.05em;">CURRENT HERO PHOTO</span>
+              </div>
+            </div>
+            <label id="photo-upload-label" style="display:flex;align-items:center;justify-content:center;gap:7px;width:100%;padding:9px;border:1.5px dashed var(--border);border-radius:8px;cursor:pointer;font-size:12px;font-weight:700;color:var(--mid);transition:all .2s;background:var(--cream);" onmouseover="this.style.borderColor='#d85020';this.style.color='#d85020';" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--mid)';">
+              <svg viewBox="0 0 16 16" fill="none" width="14" height="14"><path d="M8 2v8M5 5l3-3 3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M2 11v1a2 2 0 002 2h8a2 2 0 002-2v-1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+              Upload new photo
+              <input type="file" accept="image/*" style="display:none;" onchange="handleHeroUpload(event)">
+            </label>
+            <div style="font-size:10px;color:var(--light);margin-top:7px;text-align:center;">JPG or PNG · max 5MB · min 1200px wide recommended</div>
+            <div style="margin-top:10px;">
+              <div style="font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--light);margin-bottom:7px;">Or choose a stock photo</div>
+              <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:5px;">
+                <div onclick="setStockPhoto('church1')" style="height:44px;border-radius:5px;background:url('https://images.unsplash.com/photo-1548625149-fc4a29cf7092?auto=format&fit=crop&w=200&q=70') center/cover;cursor:pointer;border:2px solid #d85020;transition:all .2s;" title="Church interior"></div>
+                <div onclick="setStockPhoto('church2')" style="height:44px;border-radius:5px;background:url('https://images.unsplash.com/photo-1438032005730-c779502df39b?auto=format&fit=crop&w=200&q=70') center/cover;cursor:pointer;border:2px solid transparent;transition:all .2s;" title="Church exterior" onmouseover="this.style.borderColor='#d85020'" onmouseout="this.style.borderColor='transparent'"></div>
+                <div onclick="setStockPhoto('community')" style="height:44px;border-radius:5px;background:url('https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=200&q=70') center/cover;cursor:pointer;border:2px solid transparent;transition:all .2s;" title="Community" onmouseover="this.style.borderColor='#d85020'" onmouseout="this.style.borderColor='transparent'"></div>
+                <div onclick="setStockPhoto('candles')" style="height:44px;border-radius:5px;background:url('https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?auto=format&fit=crop&w=200&q=70') center/cover;cursor:pointer;border:2px solid transparent;transition:all .2s;" title="Candles" onmouseover="this.style.borderColor='#d85020'" onmouseout="this.style.borderColor='transparent'"></div>
+                <div onclick="setStockPhoto('altar')" style="height:44px;border-radius:5px;background:url('https://images.unsplash.com/photo-1545378851-f1e3f3a2e4b6?auto=format&fit=crop&w=200&q=70') center/cover;cursor:pointer;border:2px solid transparent;transition:all .2s;" title="Altar" onmouseover="this.style.borderColor='#d85020'" onmouseout="this.style.borderColor='transparent'"></div>
+                <div onclick="setStockPhoto('stained')" style="height:44px;border-radius:5px;background:url('https://images.unsplash.com/photo-1509565840034-3c385bbe6451?auto=format&fit=crop&w=200&q=70') center/cover;cursor:pointer;border:2px solid transparent;transition:all .2s;" title="Stained glass" onmouseover="this.style.borderColor='#d85020'" onmouseout="this.style.borderColor='transparent'"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <!-- Live mini preview -->
         <div class="we-preview">
           <div class="we-bar">
@@ -1568,6 +1597,7 @@ select.fi { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w
 
   /* ── WEBSITE TEMPLATE SYSTEM ─────────────────────── */
   var currentTemplate = 'warm';
+  var heroPhotoUrl = 'https://images.unsplash.com/photo-1548625149-fc4a29cf7092?auto=format&fit=crop&w=1200&q=80'; /* PHP: $parish->hero_photo_url */
 
   var templates = {
     warm: {
@@ -1656,8 +1686,7 @@ select.fi { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w
         + '</div>'
       + '</div>'
       /* HERO */
-      + '<div style="background:' + p.heroBg + ';padding:' + (full ? '56px' : '32px') + ' 24px;position:relative;overflow:hidden;">'
-        + '<div style="position:absolute;top:-60px;right:-60px;width:250px;height:250px;border-radius:50%;background:radial-gradient(circle,rgba(216,80,32,0.12) 0%,transparent 70%);pointer-events:none;"></div>'
+      + '<div style="position:relative;overflow:hidden;">'      + '<div style="background:' + (heroPhotoUrl ? 'url(\'' + heroPhotoUrl + '\') center/cover no-repeat' : p.heroBg) + ';padding:' + (full ? '56px' : '32px') + ' 24px;position:relative;">'      + (heroPhotoUrl ? '<div style="position:absolute;inset:0;background:rgba(0,0,0,0.52);"></div>' : '')
         + '<div style="max-width:640px;position:relative;z-index:1;">'
           + '<div style="font-size:10px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:' + p.accentColor + ';background:' + p.tagBg + ';border:1px solid ' + p.tagBg + ';border-radius:4px;padding:4px 10px;display:inline-block;margin-bottom:12px;">'
             + (t === 'midnight' ? '✦ Est. 1887 · New York City' : '✓ DCF Verified Parish · New York')
@@ -1772,6 +1801,12 @@ select.fi { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w
     /* Update mini preview */
     var mini = document.getElementById('mini-site-preview');
     if(mini){ mini.innerHTML = getSiteHTML(name, false); }
+    /* Also refresh full preview if open */
+    var modal = document.getElementById('site-preview-modal');
+    if(modal && modal.style.display === 'flex'){
+      var fc = document.getElementById('site-preview-content');
+      if(fc){ fc.innerHTML = getSiteHTML(name, true); }
+    }
   }
 
   function openPreview(){
@@ -1805,6 +1840,57 @@ select.fi { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w
         btn.disabled = false;
       }, 2500);
     }, 1800);
+  }
+
+  /* ── PHOTO UPLOAD ───────────────────────────────── */
+  var stockPhotos = {
+    church1: 'https://images.unsplash.com/photo-1548625149-fc4a29cf7092?auto=format&fit=crop&w=1200&q=80',
+    church2: 'https://images.unsplash.com/photo-1438032005730-c779502df39b?auto=format&fit=crop&w=1200&q=80',
+    community: 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1200&q=80',
+    candles: 'https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?auto=format&fit=crop&w=1200&q=80',
+    altar: 'https://images.unsplash.com/photo-1545378851-f1e3f3a2e4b6?auto=format&fit=crop&w=1200&q=80',
+    stained: 'https://images.unsplash.com/photo-1509565840034-3c385bbe6451?auto=format&fit=crop&w=1200&q=80'
+  };
+
+  function handleHeroUpload(event){
+    var file = event.target.files[0];
+    if(!file) return;
+    if(file.size > 5 * 1024 * 1024){
+      alert('Photo must be under 5MB');
+      return;
+    }
+    var reader = new FileReader();
+    reader.onload = function(e){
+      heroPhotoUrl = e.target.result;
+      updateHeroPreview(heroPhotoUrl);
+    };
+    reader.readAsDataURL(file);
+  }
+
+  function setStockPhoto(key){
+    heroPhotoUrl = stockPhotos[key];
+    updateHeroPreview(heroPhotoUrl);
+    /* Update border on stock grid */
+    var grid = document.querySelectorAll('#hero-photo-preview').length;
+    document.querySelectorAll('[onclick^="setStockPhoto"]').forEach(function(el){
+      el.style.borderColor = 'transparent';
+    });
+    event.currentTarget.style.borderColor = '#d85020';
+  }
+
+  function updateHeroPreview(url){
+    /* Update the thumbnail */
+    var preview = document.getElementById('hero-photo-preview');
+    if(preview){ preview.style.backgroundImage = 'url(\'' + url + '\')'; }
+    /* Refresh the mini site preview */
+    var mini = document.getElementById('mini-site-preview');
+    if(mini){ mini.innerHTML = getSiteHTML(currentTemplate, false); }
+    /* If full preview modal is open, refresh it too */
+    var modal = document.getElementById('site-preview-modal');
+    if(modal && modal.style.display === 'flex'){
+      var content = document.getElementById('site-preview-content');
+      if(content){ content.innerHTML = getSiteHTML(currentTemplate, true); }
+    }
   }
 
   /* Init mini preview on website section load — handled in navTo() directly */
