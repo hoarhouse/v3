@@ -1629,7 +1629,21 @@ select.fi { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w
     }
   };
 
-  function scrollToSection(sectionId){
+  var siteData = {
+    heroTitle:     "St. Mary\'s Parish",
+    heroTagline:   "Serving the Lower East Side since 1887",
+    aboutText:     "St. Mary\'s Parish has been a cornerstone of the Lower East Side since 1887. We serve 1,200+ families from 40+ countries — committed to social justice, compassionate outreach, and the Gospel in a changing world.",
+    massSat:       "5:00pm Vigil",
+    massSun:       "8:00am, 10:00am, 12:00pm, 6:00pm (Spanish)",
+    massWeekday:   "7:00am & 12:10pm (Mon–Fri)",
+    donateTitle:   "Support St. Mary\'s Parish",
+    donateDesc:    "Your gift sustains our community programmes. Funds go direct to the parish via Stripe.",
+    contactEmail:  "info@stmarysnyc.org",
+    contactPhone:  "+1 (212) 555-0182",
+    contactAddress:"15 Mott Street, New York, NY 10013"
+  };
+
+    function scrollToSection(sectionId){
     /* Scroll within the mini preview container or the full modal */
     var containers = ['mini-site-preview','site-preview-content'];
     containers.forEach(function(cid){
@@ -1765,7 +1779,198 @@ select.fi { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w
   }
 
 
-  function selectTemplate(name){
+  var currentEditSection = null;
+
+  var sectionDefs = {
+    hero: {
+      title: 'Hero & intro',
+      fields: [
+        {id:'heroTitle',   label:'Parish name', type:'input'},
+        {id:'heroTagline', label:'Tagline',      type:'input'},
+        {id:'__photo__',   label:'Hero photo',   type:'photo'}
+      ]
+    },
+    about: {
+      title: 'About us',
+      fields: [{id:'aboutText', label:'About paragraph', type:'textarea'}]
+    },
+    mass: {
+      title: 'Mass times & events',
+      fields: [
+        {id:'massSat',     label:'Saturday',  type:'input'},
+        {id:'massSun',     label:'Sunday',    type:'input'},
+        {id:'massWeekday', label:'Weekday',   type:'input'}
+      ]
+    },
+    donate: {
+      title: 'Donations section',
+      fields: [
+        {id:'donateTitle', label:'Heading',     type:'input'},
+        {id:'donateDesc',  label:'Description', type:'textarea'}
+      ]
+    },
+    contact: {
+      title: 'Contact details',
+      fields: [
+        {id:'contactEmail',    label:'Email',   type:'input'},
+        {id:'contactPhone',    label:'Phone',   type:'input'},
+        {id:'contactAddress',  label:'Address', type:'input'}
+      ]
+    }
+  };
+
+  var stockPhotos = {
+    church1:   'https://images.unsplash.com/photo-1548625149-fc4a29cf7092?auto=format&fit=crop&w=1200&q=80',
+    church2:   'https://images.unsplash.com/photo-1438032005730-c779502df39b?auto=format&fit=crop&w=1200&q=80',
+    community: 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1200&q=80',
+    candles:   'https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?auto=format&fit=crop&w=1200&q=80',
+    altar:     'https://images.unsplash.com/photo-1545378851-f1e3f3a2e4b6?auto=format&fit=crop&w=1200&q=80',
+    stained:   'https://images.unsplash.com/photo-1509565840034-3c385bbe6451?auto=format&fit=crop&w=1200&q=80'
+  };
+
+  function editSection(name){
+    currentEditSection = name;
+    var def = sectionDefs[name];
+    /* Highlight nav item */
+    document.querySelectorAll('.we-section-item').forEach(function(el){ el.classList.remove('active'); });
+    var navItem = document.getElementById('wsec-' + name);
+    if(navItem) navItem.classList.add('active');
+    /* Set title */
+    var titleEl = document.getElementById('we-editor-title');
+    if(titleEl) titleEl.textContent = 'Editing: ' + def.title;
+    /* Build fields */
+    var body = document.getElementById('we-editor-body');
+    if(!body) return;
+    body.innerHTML = '';
+    def.fields.forEach(function(f){
+      if(f.type === 'photo'){
+        var wrap = document.createElement('div');
+        wrap.style.cssText = 'display:flex;flex-direction:column;gap:8px;';
+        /* Thumbnail */
+        var thumb = document.createElement('div');
+        thumb.id = 'hero-photo-thumb';
+        thumb.style.cssText = 'width:100%;height:90px;border-radius:8px;background:url(\'' + heroPhotoUrl + '\') center/cover;border:1px solid var(--border-l);position:relative;';
+        var ov = document.createElement('div');
+        ov.style.cssText = 'position:absolute;inset:0;background:rgba(0,0,0,0.3);border-radius:8px;display:flex;align-items:center;justify-content:center;';
+        ov.innerHTML = '<span style="font-size:9px;font-weight:700;color:#fff;letter-spacing:.06em;text-transform:uppercase;">Current hero photo</span>';
+        thumb.appendChild(ov);
+        wrap.appendChild(thumb);
+        /* Upload label */
+        var lbl = document.createElement('label');
+        lbl.style.cssText = 'display:flex;align-items:center;justify-content:center;gap:6px;width:100%;padding:9px;border:1.5px dashed var(--border);border-radius:8px;cursor:pointer;font-size:12px;font-weight:700;color:var(--mid);background:var(--cream);';
+        lbl.innerHTML = '&#8593; Upload photo';
+        var inp = document.createElement('input');
+        inp.type = 'file'; inp.accept = 'image/*'; inp.style.display = 'none';
+        inp.addEventListener('change', handleHeroUpload);
+        lbl.appendChild(inp);
+        wrap.appendChild(lbl);
+        /* Stock photos label */
+        var sl = document.createElement('div');
+        sl.style.cssText = 'font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--light);margin-top:2px;';
+        sl.textContent = 'Or choose a stock photo';
+        wrap.appendChild(sl);
+        /* Stock grid */
+        var grid = document.createElement('div');
+        grid.style.cssText = 'display:grid;grid-template-columns:repeat(3,1fr);gap:5px;';
+        ['church1','church2','community','candles','altar','stained'].forEach(function(key){
+          var tile = document.createElement('div');
+          tile.id = 'stock-' + key;
+          tile.style.cssText = 'height:44px;border-radius:5px;background:url(\'' + stockPhotos[key] + '\') center/cover;cursor:pointer;border:2px solid ' + (heroPhotoUrl === stockPhotos[key] ? '#d85020' : 'transparent') + ';transition:border-color .18s;';
+          tile.addEventListener('click', function(){ setStockPhoto(key); });
+          tile.addEventListener('mouseover', function(){ if(heroPhotoUrl !== stockPhotos[key]) this.style.borderColor='rgba(216,80,32,0.5)'; });
+          tile.addEventListener('mouseout',  function(){ if(heroPhotoUrl !== stockPhotos[key]) this.style.borderColor='transparent'; });
+          grid.appendChild(tile);
+        });
+        wrap.appendChild(grid);
+        body.appendChild(wrap);
+      } else {
+        var wrap = document.createElement('div');
+        wrap.style.cssText = 'display:flex;flex-direction:column;gap:4px;';
+        var lbl = document.createElement('label');
+        lbl.style.cssText = 'font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--light);';
+        lbl.textContent = f.label;
+        var inp = f.type === 'textarea' ? document.createElement('textarea') : document.createElement('input');
+        if(f.type !== 'textarea') inp.type = 'text';
+        inp.style.cssText = 'font-family:var(--f-sans);font-size:13px;color:var(--ink);background:var(--cream);border:1.5px solid var(--border-l);border-radius:8px;padding:9px 11px;outline:none;width:100%;' + (f.type==='textarea' ? 'resize:vertical;min-height:80px;line-height:1.6;' : '');
+        inp.id = 'ed-' + f.id;
+        inp.value = siteData[f.id] || '';
+        inp.addEventListener('focus', function(){ this.style.borderColor='#d85020'; this.style.background='#fff'; });
+        inp.addEventListener('blur',  function(){ this.style.borderColor='var(--border-l)'; this.style.background='var(--cream)'; });
+        wrap.appendChild(lbl);
+        wrap.appendChild(inp);
+        body.appendChild(wrap);
+      }
+    });
+    /* Switch to editor state */
+    var ps = document.getElementById('we-preview-state');
+    var es = document.getElementById('we-editor-state');
+    if(ps) ps.style.display = 'none';
+    if(es) es.style.display = 'block';
+  }
+
+  function showPreview(){
+    _saveEditorValues();
+    var ps = document.getElementById('we-preview-state');
+    var es = document.getElementById('we-editor-state');
+    if(es) es.style.display = 'none';
+    if(ps) ps.style.display = 'block';
+    refreshMiniPreview();
+    document.querySelectorAll('.we-section-item').forEach(function(el){ el.classList.remove('active'); });
+    currentEditSection = null;
+  }
+
+  function _saveEditorValues(){
+    if(!currentEditSection) return;
+    var def = sectionDefs[currentEditSection];
+    def.fields.forEach(function(f){
+      if(f.type === 'photo') return;
+      var inp = document.getElementById('ed-' + f.id);
+      if(inp) siteData[f.id] = inp.value;
+    });
+  }
+
+  function applyEdits(){
+    _saveEditorValues();
+    refreshMiniPreview();
+    var btn = document.getElementById('we-apply-btn');
+    if(btn){
+      var orig = btn.innerHTML;
+      btn.textContent = 'Applied ✓';
+      btn.style.background = 'var(--sage)';
+      setTimeout(function(){ btn.innerHTML = orig; btn.style.background = '#d85020'; }, 1500);
+    }
+  }
+
+  function refreshMiniPreview(){
+    var mini = document.getElementById('mini-site-preview');
+    if(mini) mini.innerHTML = getSiteHTML(currentTemplate, false);
+  }
+
+  function handleHeroUpload(event){
+    var file = event.target.files[0];
+    if(!file) return;
+    if(file.size > 5 * 1024 * 1024){ alert('Photo must be under 5MB'); return; }
+    var reader = new FileReader();
+    reader.onload = function(e){ heroPhotoUrl = e.target.result; _updatePhotoUI(); };
+    reader.readAsDataURL(file);
+  }
+
+  function setStockPhoto(key){
+    heroPhotoUrl = stockPhotos[key];
+    _updatePhotoUI();
+    Object.keys(stockPhotos).forEach(function(k){
+      var tile = document.getElementById('stock-' + k);
+      if(tile) tile.style.borderColor = (k === key) ? '#d85020' : 'transparent';
+    });
+  }
+
+  function _updatePhotoUI(){
+    var thumb = document.getElementById('hero-photo-thumb');
+    if(thumb) thumb.style.backgroundImage = 'url(\'' + heroPhotoUrl + '\')';
+    refreshMiniPreview();
+  }
+
+    function selectTemplate(name){
     currentTemplate = name;
     /* Update card borders */
     document.querySelectorAll('.site-tmpl').forEach(function(el){ el.style.borderColor = 'var(--border-l)'; });
