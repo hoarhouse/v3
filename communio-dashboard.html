@@ -555,132 +555,7 @@ select.fi { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w
 </head>
 <body>
 
-<!-- INVITE MODAL -->
-<div id="invite-modal" style="display:none;position:fixed;inset:0;z-index:600;background:rgba(0,0,0,0.75);align-items:center;justify-content:center;padding:20px;">
-  <div style="background:#fff;border-radius:16px;width:100%;max-width:520px;overflow:hidden;box-shadow:0 24px 80px rgba(0,0,0,0.4);">
 
-    <!-- Modal header -->
-    <div style="background:#000;padding:16px 20px;display:flex;align-items:center;justify-content:space-between;border-bottom:2px solid #e8c040;">
-      <div>
-        <div style="font-size:15px;font-weight:800;color:#fff;letter-spacing:-0.01em;">Invite a parish</div>
-        <div style="font-size:11px;color:rgba(255,255,255,0.4);margin-top:1px;" id="invite-step-label">Step 1 of 3</div>
-      </div>
-      <button onclick="closeInvite()" style="font-family:var(--f-sans);font-size:12px;font-weight:700;color:rgba(255,255,255,0.5);background:rgba(255,255,255,0.08);border:none;border-radius:6px;padding:6px 12px;cursor:pointer;">&#x2715; Close</button>
-    </div>
-
-    <!-- Progress bar -->
-    <div style="height:3px;background:rgba(0,0,0,0.08);">
-      <div id="invite-progress" style="height:100%;background:#d85020;border-radius:0;transition:width .3s ease;width:33%;"></div>
-    </div>
-
-    <!-- STEP 1: Enter contact -->
-    <div id="invite-step-1" style="padding:24px 24px 20px;">
-      <div style="font-size:22px;font-weight:800;color:var(--ink);letter-spacing:-0.025em;margin-bottom:6px;">Who would you like to invite?</div>
-      <div style="font-size:13px;color:var(--mid);line-height:1.6;margin-bottom:22px;">Enter the email address or phone number of the parish contact. We'll send them a personalised invitation from St. Mary&#39;s Parish.</div>
-
-      <!-- Toggle email/phone -->
-      <div style="display:flex;gap:0;margin-bottom:16px;border:1.5px solid var(--border-l);border-radius:8px;overflow:hidden;">
-        <button id="invite-type-email" onclick="setInviteType('email')" style="font-family:var(--f-sans);flex:1;padding:9px;font-size:12px;font-weight:700;background:#d85020;color:#fff;border:none;cursor:pointer;transition:all .18s;">&#9993; Email</button>
-        <button id="invite-type-phone" onclick="setInviteType('phone')" style="font-family:var(--f-sans);flex:1;padding:9px;font-size:12px;font-weight:700;background:#fff;color:var(--mid);border:none;cursor:pointer;transition:all .18s;">&#128222; Text / WhatsApp</button>
-      </div>
-
-      <div style="display:flex;flex-direction:column;gap:12px;">
-        <div class="field">
-          <div class="fl">Parish name <span style="color:var(--terra);">*</span></div>
-          <input class="fi" type="text" id="invite-parish-name" placeholder="e.g. St. Patrick's Parish">
-        </div>
-        <div class="field">
-          <div class="fl" id="invite-contact-label">Email address <span style="color:var(--terra);">*</span></div>
-          <input class="fi" type="text" id="invite-contact" placeholder="info@stpatricks.org">
-        </div>
-        <div class="field">
-          <div class="fl">Country</div>
-          <select class="fi" id="invite-country">
-            <option value="">Select country (optional)</option>
-            <option>United States</option><option>Hungary</option><option>Ghana</option>
-            <option>Nigeria</option><option>Philippines</option><option>Poland</option>
-            <option>Italy</option><option>Brazil</option><option>Kenya</option><option>India</option>
-          </select>
-        </div>
-      </div>
-
-      <div style="display:flex;justify-content:flex-end;margin-top:20px;">
-        <button onclick="inviteStep2()" style="font-family:var(--f-sans);font-size:13px;font-weight:700;background:#d85020;color:#fff;border:none;border-radius:8px;padding:11px 24px;cursor:pointer;display:flex;align-items:center;gap:6px;">Next: Preview message <svg viewBox="0 0 16 16" fill="none" width="13" height="13"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-      </div>
-    </div>
-
-    <!-- STEP 2: Customise & preview -->
-    <div id="invite-step-2" style="display:none;padding:24px 24px 20px;">
-      <div style="font-size:20px;font-weight:800;color:var(--ink);letter-spacing:-0.025em;margin-bottom:6px;">Preview your invitation</div>
-      <div style="font-size:13px;color:var(--mid);line-height:1.6;margin-bottom:18px;">Add a short personal note. The rest of the message is pre-written and cannot be edited — it keeps the invitation professional and consistent.</div>
-
-      <!-- Personal note field -->
-      <div class="field" style="margin-bottom:14px;">
-        <div class="fl">Your personal note (optional)</div>
-        <textarea class="fi" id="invite-note" style="min-height:70px;line-height:1.6;" placeholder="e.g. We met at the diocesan conference last month and I thought Communio would be a great fit for your parish..."></textarea>
-      </div>
-
-      <!-- Message preview card -->
-      <div style="border:1.5px solid var(--border-l);border-radius:10px;overflow:hidden;margin-bottom:18px;">
-        <div style="background:var(--cream);padding:10px 16px;border-bottom:1px solid var(--border-l);display:flex;align-items:center;justify-content:space-between;">
-          <div style="font-size:11px;font-weight:700;color:var(--mid);" id="preview-via-label">&#9993; Email preview</div>
-          <div style="font-size:10px;color:var(--light);">Sent from Communio on behalf of St. Mary&#39;s</div>
-        </div>
-        <div style="padding:16px;background:#fff;font-size:13px;color:var(--mid);line-height:1.75;" id="invite-preview-body">
-        </div>
-      </div>
-
-      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;">
-        <button onclick="inviteStep1()" style="font-family:var(--f-sans);font-size:12px;font-weight:600;color:var(--mid);background:transparent;border:1.5px solid var(--border-l);border-radius:8px;padding:9px 16px;cursor:pointer;">&#8592; Back</button>
-        <button onclick="inviteStep3()" style="font-family:var(--f-sans);font-size:13px;font-weight:700;background:#d85020;color:#fff;border:none;border-radius:8px;padding:11px 24px;cursor:pointer;display:flex;align-items:center;gap:6px;" id="invite-send-btn">Send invitation &#10140;</button>
-      </div>
-    </div>
-
-    <!-- STEP 3: Confirmation -->
-    <div id="invite-step-3" style="display:none;padding:32px 24px 28px;text-align:center;">
-      <div style="width:56px;height:56px;border-radius:50%;background:var(--sage);margin:0 auto 18px;display:flex;align-items:center;justify-content:center;">
-        <svg viewBox="0 0 28 28" fill="none" width="26" height="26"><path d="M5 14l6 6 12-12" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </div>
-      <div style="font-size:22px;font-weight:800;color:var(--ink);letter-spacing:-0.025em;margin-bottom:8px;">Invitation sent!</div>
-      <div style="font-size:14px;color:var(--mid);line-height:1.65;margin-bottom:20px;" id="invite-confirm-text">Your invitation has been sent.</div>
-
-      <!-- What happens next -->
-      <div style="background:var(--cream);border:1px solid var(--border-l);border-radius:10px;padding:16px;text-align:left;margin-bottom:20px;">
-        <div style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--light);margin-bottom:10px;">What happens next</div>
-        <div style="display:flex;flex-direction:column;gap:8px;">
-          <div style="display:flex;align-items:flex-start;gap:10px;">
-            <div style="width:20px;height:20px;border-radius:50%;background:#d85020;color:#fff;font-size:9px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">1</div>
-            <div style="font-size:12px;color:var(--mid);line-height:1.55;" id="invite-next-1">They receive your invitation</div>
-          </div>
-          <div style="display:flex;align-items:flex-start;gap:10px;">
-            <div style="width:20px;height:20px;border-radius:50%;background:#d85020;color:#fff;font-size:9px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">2</div>
-            <div style="font-size:12px;color:var(--mid);line-height:1.55;">They click the link and register their parish — takes about 10 minutes</div>
-          </div>
-          <div style="display:flex;align-items:flex-start;gap:10px;">
-            <div style="width:20px;height:20px;border-radius:50%;background:#d85020;color:#fff;font-size:9px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">3</div>
-            <div style="font-size:12px;color:var(--mid);line-height:1.55;">DCF reviews and approves their parish — usually 3–5 business days</div>
-          </div>
-          <div style="display:flex;align-items:flex-start;gap:10px;">
-            <div style="width:20px;height:20px;border-radius:50%;background:var(--sage);color:#fff;font-size:9px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">4</div>
-            <div style="font-size:12px;color:var(--mid);line-height:1.55;">You get a notification when they join — and you can connect as a sister parish</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Pending invites count -->
-      <div style="background:var(--terra-p);border:1px solid rgba(216,80,32,0.2);border-radius:8px;padding:10px 14px;display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;">
-        <div style="font-size:12px;font-weight:600;color:var(--terra);" id="pending-count-label">You now have 1 pending invite</div>
-        <div style="font-size:11px;color:var(--mid);cursor:pointer;font-weight:600;" onclick="closeInvite();go('app','network');">View all &#8594;</div>
-      </div>
-
-      <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;">
-        <button onclick="inviteAnother()" style="font-family:var(--f-sans);font-size:13px;font-weight:700;background:#d85020;color:#fff;border:none;border-radius:8px;padding:11px 20px;cursor:pointer;">Invite another parish</button>
-        <button onclick="closeInvite()" style="font-family:var(--f-sans);font-size:13px;font-weight:600;color:var(--mid);background:transparent;border:1.5px solid var(--border-l);border-radius:8px;padding:11px 20px;cursor:pointer;">Done</button>
-      </div>
-    </div>
-
-  </div>
-</div>
 
 <!-- DEMO SWITCHER -->
 
@@ -970,10 +845,7 @@ select.fi { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w
         <span class="sb-item-lbl">Projects</span>
       </div>
       <div class="sb-sec">Manage</div>
-      <div class="sb-item" onclick="openInvite('sidebar')" style="background:rgba(216,80,32,0.12);border:1px solid rgba(216,80,32,0.25);">
-        <svg viewBox="0 0 16 16" fill="none" width="16" height="16" style="opacity:1;color:#f07040;"><path d="M8 3v10M3 8h10" stroke="#f07040" stroke-width="1.8" stroke-linecap="round"/><circle cx="13" cy="3" r="2.5" fill="#f07040"/></svg>
-        <span class="sb-item-lbl" style="color:#f07040;font-weight:700;">Invite a parish</span>
-      </div>
+      
       <div class="sb-item" id="nav-website" onclick="navTo('website')">
         <svg viewBox="0 0 16 16" fill="none"><rect x="1" y="2" width="14" height="11" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M1 5.5h14" stroke="currentColor" stroke-width="1.3"/></svg>
         <span class="sb-item-lbl">Website</span>
@@ -1050,10 +922,9 @@ select.fi { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w
             <div class="qa-desc">stmarysnyc.communio.org — 142 visitors this month</div>
             <button onclick="navTo('website')" style="margin-top:4px;font-family:var(--f-sans);font-size:12px;font-weight:700;color:var(--sage);background:#fff;border:none;border-radius:var(--r-pill);padding:8px 14px;cursor:pointer;transition:all var(--ease);">Edit website →</button>
           </div>
-          <div class="qa-card" style="background:var(--terra);border-color:transparent;">
-            <div class="qa-title" style="color:#fff;">Know a parish that should join?</div>
+          
             <div class="qa-desc" style="color:rgba(255,255,255,0.65);">Invite them to Communio — it takes 30 seconds and strengthens the whole network.</div>
-            <button onclick="openInvite('home')" style="margin-top:4px;font-family:var(--f-sans);font-size:12px;font-weight:700;color:var(--terra);background:#fff;border:none;border-radius:var(--r-pill);padding:8px 14px;cursor:pointer;display:inline-flex;align-items:center;gap:5px;"><svg viewBox="0 0 16 16" fill="none" width="11" height="11"><path d="M8 3v10M3 8h10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg> Invite a parish</button>
+            
           </div>
         </div>
       </div>
@@ -1147,10 +1018,7 @@ select.fi { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w
     <div class="section-panel" id="panel-network">
       <div style="margin-bottom:16px;display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:10px;">
         <div><div style="font-size:clamp(18px,4vw,24px);font-weight:800;color:var(--ink);letter-spacing:-0.025em;margin-bottom:3px;">Network</div><div style="font-size:13px;color:var(--light);">4,847 verified parishes across 221 countries</div></div>
-        <button class="btn-primary btn-sm" onclick="openInvite('network')" style="display:flex;align-items:center;gap:6px;flex-shrink:0;">
-          <svg viewBox="0 0 16 16" fill="none" width="13" height="13"><path d="M8 3v10M3 8h10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
-          Invite a parish
-        </button>
+        
       </div>
       <div class="net-filters">
         <!-- PHP: GET params country=XX&focus=YY&search=ZZ -->
@@ -2433,174 +2301,7 @@ select.fi { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w
   }
 
   /* Init mini preview on website section load — handled in navTo() directly */  /* Init mini preview on website section load — handled in navTo() directly */
-    /* ── INVITE A PARISH ────────────────────────────── */
-  var inviteType   = 'email';
-  var pendingInvites = [];
-
-  function openInvite(source){
-    /* Reset to step 1 */
-    inviteStep1();
-    /* Clear fields */
-    var fields = ['invite-parish-name','invite-contact','invite-note'];
-    fields.forEach(function(id){
-      var el = document.getElementById(id);
-      if(el) el.value = '';
-    });
-    var country = document.getElementById('invite-country');
-    if(country) country.value = '';
-    /* Show modal */
-    var modal = document.getElementById('invite-modal');
-    if(modal){ modal.style.display = 'flex'; document.body.style.overflow = 'hidden'; }
-  }
-
-  function closeInvite(){
-    var modal = document.getElementById('invite-modal');
-    if(modal){ modal.style.display = 'none'; document.body.style.overflow = ''; }
-  }
-
-  function setInviteType(type){
-    inviteType = type;
-    var emailBtn = document.getElementById('invite-type-email');
-    var phoneBtn = document.getElementById('invite-type-phone');
-    var lbl      = document.getElementById('invite-contact-label');
-    var inp      = document.getElementById('invite-contact');
-    if(type === 'email'){
-      emailBtn.style.background = '#d85020'; emailBtn.style.color = '#fff';
-      phoneBtn.style.background = '#fff'; phoneBtn.style.color = 'var(--mid)';
-      if(lbl) lbl.innerHTML = 'Email address <span style="color:var(--terra);">*</span>';
-      if(inp){ inp.type = 'email'; inp.placeholder = 'info@stpatricks.org'; }
-      var pvLabel = document.getElementById('preview-via-label');
-      if(pvLabel) pvLabel.textContent = '✉ Email preview';
-    } else {
-      phoneBtn.style.background = '#d85020'; phoneBtn.style.color = '#fff';
-      emailBtn.style.background = '#fff'; emailBtn.style.color = 'var(--mid)';
-      if(lbl) lbl.innerHTML = 'Phone / WhatsApp number <span style="color:var(--terra);">*</span>';
-      if(inp){ inp.type = 'tel'; inp.placeholder = '+1 (212) 555-0000 or WhatsApp number'; }
-      var pvLabel = document.getElementById('preview-via-label');
-      if(pvLabel) pvLabel.textContent = '📱 SMS / WhatsApp preview';
-    }
-  }
-
-  function _setInviteStep(step){
-    [1,2,3].forEach(function(n){
-      var el = document.getElementById('invite-step-' + n);
-      if(el) el.style.display = (n === step) ? 'block' : 'none';
-    });
-    var labels = ['', 'Step 1 of 3 — Contact details', 'Step 2 of 3 — Preview & customise', 'Step 3 of 3 — Invitation sent'];
-    var progress = ['', '33%', '66%', '100%'];
-    var lbl = document.getElementById('invite-step-label');
-    var bar = document.getElementById('invite-progress');
-    if(lbl) lbl.textContent = labels[step];
-    if(bar) bar.style.width = progress[step];
-  }
-
-  function inviteStep1(){
-    _setInviteStep(1);
-  }
-
-  function inviteStep2(){
-    /* Validate */
-    var name    = (document.getElementById('invite-parish-name').value || '').trim();
-    var contact = (document.getElementById('invite-contact').value || '').trim();
-    if(!name){ alert('Please enter the parish name.'); return; }
-    if(!contact){ alert('Please enter an ' + (inviteType === 'email' ? 'email address' : 'phone number') + '.'); return; }
-    /* Build preview */
-    _buildPreview(name, contact);
-    _setInviteStep(2);
-  }
-
-  function _buildPreview(name, contact){
-  var note = document.getElementById('invite-note') ? document.getElementById('invite-note').value : '';
-  var country = document.getElementById('invite-country') ? document.getElementById('invite-country').value : '';
-  var countryStr = country ? ' in ' + country : '';
-  var inviteLink = 'https://communio.org/register?ref=stmarysnyc&invite=' + encodeURIComponent(name.replace(/\s+/g,'-').toLowerCase());
-  var preview = document.getElementById('invite-preview-body');
-  if(!preview) return;
-  var isEmail = inviteType === 'email';
-  if(isEmail){
-    var emailLines = [
-      "Dear " + name + countryStr + ",",
-      note || null,
-      "I would like to invite you to join Communio — the free global network connecting Catholic parishes worldwide, run by the Domus Communis Foundation.",
-      "Communio gives every parish a free public profile, a parish website, online donations direct to your bank account, and a collective voice on global advocacy campaigns.",
-      "Registration takes about 10 minutes. Every parish is personally reviewed and approved by DCF.",
-      "Register here: " + inviteLink,
-      "With warmth in faith, Fr. James O'Brien, St. Mary's Parish New York"
-    ];
-    var html = '<div style="margin-bottom:14px;">';
-    html += '<div style="font-size:11px;color:#8a7a50;margin-bottom:2px;">To:</div>';
-    html += '<div style="font-size:13px;font-weight:600;color:#000;">' + contact + '</div>';
-    html += '</div>';
-    html += '<div style="font-size:11px;color:#8a7a50;margin-bottom:2px;">Subject:</div>';
-    html += '<div style="font-size:13px;font-weight:700;color:#000;margin-bottom:14px;">An invitation to join Communio</div>';
-    html += '<div style="border-top:1px solid #e8c040;padding-top:14px;">';
-    emailLines.forEach(function(line){
-      if(!line) return;
-      html += '<p style="margin:0 0 10px;font-size:13px;color:#5a4a20;line-height:1.65;">' + line + '</p>';
-    });
-    html += '<div style="margin:14px 0;"><div style="display:inline-block;background:#d85020;color:#fff;font-size:13px;font-weight:700;padding:10px 20px;border-radius:6px;">Register your parish &rarr;</div>';
-    html += '<div style="font-size:10px;color:#8a7a50;margin-top:5px;">' + inviteLink + '</div></div>';
-    html += '</div>';
-    preview.innerHTML = html;
-  } else {
-    var smsLines = [
-      "Hi " + name + (countryStr || "") + ",",
-      note || null,
-      "I would like to invite you to join Communio — the free global Catholic parish network. Free website, online donations, and a global voice.",
-      "Register in 10 minutes: " + inviteLink,
-      "— Fr. James, St. Mary's Parish NYC"
-    ];
-    var html2 = '<div style="margin-bottom:12px;">';
-    html2 += '<div style="font-size:11px;color:#8a7a50;margin-bottom:2px;">To:</div>';
-    html2 += '<div style="font-size:13px;font-weight:600;color:#000;">' + contact + '</div>';
-    html2 += '</div><div style="border-top:1px solid #e8c040;padding-top:12px;">';
-    html2 += '<div style="background:#f5f2e8;border-radius:8px;padding:14px;font-size:13px;color:#5a4a20;line-height:1.7;">';
-    smsLines.forEach(function(line){
-      if(!line) return;
-      html2 += line + '<br><br>';
-    });
-    html2 += '</div></div>';
-    preview.innerHTML = html2;
-  }
-}
-
-  function inviteStep3(){
-    var name    = (document.getElementById('invite-parish-name').value || '').trim();
-    var contact = (document.getElementById('invite-contact').value || '').trim();
-    var note    = (document.getElementById('invite-note') ? document.getElementById('invite-note').value : '') || '';
-
-    /* Save to pending list */
-    pendingInvites.push({name:name, contact:contact, type:inviteType, sentAt: new Date().toLocaleString()});
-
-    /* Update confirmation text */
-    var confirmText = document.getElementById('invite-confirm-text');
-    var via = inviteType === 'email' ? 'An email has been sent to <strong>' + contact + '</strong>' : 'A text message has been sent to <strong>' + contact + '</strong>';
-    if(confirmText) confirmText.innerHTML = via + ' inviting <strong>' + name + '</strong> to join Communio. You\'ll get a notification when they register.';
-
-    /* Update next step 1 text */
-    var next1 = document.getElementById('invite-next-1');
-    var channelText = inviteType === 'email' ? 'They receive your email at ' + contact : 'They receive your text/WhatsApp at ' + contact;
-    if(next1) next1.textContent = channelText;
-
-    /* Update pending count */
-    var countLabel = document.getElementById('pending-count-label');
-    if(countLabel) countLabel.textContent = 'You now have ' + pendingInvites.length + ' pending invite' + (pendingInvites.length !== 1 ? 's' : '');
-
-    _setInviteStep(3);
-  }
-
-  function inviteAnother(){
-    var fields = ['invite-parish-name','invite-contact','invite-note'];
-    fields.forEach(function(id){
-      var el = document.getElementById(id);
-      if(el) el.value = '';
-    });
-    var country = document.getElementById('invite-country');
-    if(country) country.value = '';
-    inviteStep1();
-  }
-
-  /* ── SETTINGS TABS ──────────────────────────────── */
+    /* ── SETTINGS TABS ──────────────────────────────── */
   function switchSettingsTab(name){
     /* Update nav items */
     document.querySelectorAll('[id^="stab-"]').forEach(function(el){
