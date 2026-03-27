@@ -2510,68 +2510,59 @@ select.fi { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w
   }
 
   function _buildPreview(name, contact){
-    var note    = (document.getElementById('invite-note') ? document.getElementById('invite-note').value : '') || '';
-    var country = document.getElementById('invite-country') ? document.getElementById('invite-country').value : '';
-    var countryStr = country ? ' in ' + country : '';
-    var inviteLink = 'https://communio.org/register?ref=stmarysnyc&invite=' + encodeURIComponent(name.replace(/\s+/g,'-').toLowerCase());
-
-    var isEmail = inviteType === 'email';
-    var preview = document.getElementById('invite-preview-body');
-    if(!preview) return;
-
-    if(isEmail){
-      preview.innerHTML =
-        '<div style="margin-bottom:14px;">' +
-          '<div style="font-size:11px;color:var(--light);margin-bottom:2px;">To:</div>' +
-          '<div style="font-size:13px;font-weight:600;color:var(--ink);">' + contact + '</div>' +
-        '</div>' +
-        '<div style="font-size:11px;color:var(--light);margin-bottom:2px;">Subject:</div>' +
-        '<div style="font-size:13px;font-weight:700;color:var(--ink);margin-bottom:14px;">An invitation to join Communio — the global Catholic parish network</div>' +
-        '<div style="border-top:1px solid var(--border-l);padding-top:14px;">' +
-          '<p style="margin:0 0 10px;">Dear ' + name + countryStr + ',</p>' +
-          (note ? '<p style="margin:0 0 10px;font-style:italic;color:var(--ink);">' + note + '</p>' : '') +
-          '<p style="margin:0 0 10px;">I\'d like to invite you to join <strong>Communio</strong> — the free global network connecting Catholic parishes worldwide, run by the Domus Communis Foundation.</p>' +
-          '<p style="margin:0 0 10px;">Communio gives every parish:</p>' +
-          '<ul style="margin:0 0 10px;padding-left:18px;display:flex;flex-direction:column;gap:4px;">' +
-            '<li>A free public parish profile on the global directory</li>' +
-            '<li>A parish website at <em>yourparish.communio.org</em></li>' +
-            '<li>Online donations direct to your bank account</li>' +
-            '<li>A voice on global advocacy campaigns and projects</li>' +
-          '</ul>' +
-          '<p style="margin:0 0 16px;">Registration takes about 10 minutes. Every parish is personally reviewed and approved by DCF.</p>' +
-          '<div style="margin:16px 0;">' +
-            '<div style="display:inline-block;background:#d85020;color:#fff;font-size:13px;font-weight:700;padding:11px 22px;border-radius:6px;text-decoration:none;">Register your parish &#8594;</div>' +
-            '<div style="font-size:10px;color:var(--light);margin-top:6px;">' + inviteLink + '</div>' +
-          '</div>' +
-          '<p style="margin:0;font-size:12px;color:var(--light);">With warmth in faith,<br><strong style="color:var(--ink);">Fr. James O\'Brien</strong><br>St. Mary\'s Parish, New York<br>On behalf of the Communio network · EIN 99-1778616</p>' +
-        '</div>';
-    } else {
-      preview.innerHTML =
-        '<div style="margin-bottom:12px;">' +
-          '<div style="font-size:11px;color:var(--light);margin-bottom:2px;">To:</div>' +
-          '<div style="font-size:13px;font-weight:600;color:var(--ink);">' + contact + '</div>' +
-        '</div>' +
-        '<div style="border-top:1px solid var(--border-l);padding-top:12px;">' +
-          '<div style="background:var(--cream);border-radius:8px;padding:14px;font-size:13px;color:var(--ink);line-height:1.65;">' +
-            'Hi ' + name + '' + countryStr + ',
-
-' +
-            (note ? note + '
-
-' : '') +
-            'I\'d like to invite you to join Communio — the free global Catholic parish network by the Domus Communis Foundation. It gives your parish a free website, online donations, and a voice in global advocacy.
-
-Register in 10 minutes: ' + inviteLink + '
-
-— Fr. James O\'Brien, St. Mary\'s Parish NYC' ;
-      preview.querySelector('.\n\n') ;
-      // Fix newlines for SMS
-      var msgDiv = preview.querySelector('div:last-child div');
-      if(msgDiv) msgDiv.innerHTML = msgDiv.innerHTML.replace(/\n/g,'<br>');
-        '</div>' +
-        '</div>';
-    }
+  var note = document.getElementById('invite-note') ? document.getElementById('invite-note').value : '';
+  var country = document.getElementById('invite-country') ? document.getElementById('invite-country').value : '';
+  var countryStr = country ? ' in ' + country : '';
+  var inviteLink = 'https://communio.org/register?ref=stmarysnyc&invite=' + encodeURIComponent(name.replace(/\s+/g,'-').toLowerCase());
+  var preview = document.getElementById('invite-preview-body');
+  if(!preview) return;
+  var isEmail = inviteType === 'email';
+  if(isEmail){
+    var emailLines = [
+      "Dear " + name + countryStr + ",",
+      note || null,
+      "I would like to invite you to join Communio — the free global network connecting Catholic parishes worldwide, run by the Domus Communis Foundation.",
+      "Communio gives every parish a free public profile, a parish website, online donations direct to your bank account, and a collective voice on global advocacy campaigns.",
+      "Registration takes about 10 minutes. Every parish is personally reviewed and approved by DCF.",
+      "Register here: " + inviteLink,
+      "With warmth in faith, Fr. James O'Brien, St. Mary's Parish New York"
+    ];
+    var html = '<div style="margin-bottom:14px;">';
+    html += '<div style="font-size:11px;color:#8a7a50;margin-bottom:2px;">To:</div>';
+    html += '<div style="font-size:13px;font-weight:600;color:#000;">' + contact + '</div>';
+    html += '</div>';
+    html += '<div style="font-size:11px;color:#8a7a50;margin-bottom:2px;">Subject:</div>';
+    html += '<div style="font-size:13px;font-weight:700;color:#000;margin-bottom:14px;">An invitation to join Communio</div>';
+    html += '<div style="border-top:1px solid #e8c040;padding-top:14px;">';
+    emailLines.forEach(function(line){
+      if(!line) return;
+      html += '<p style="margin:0 0 10px;font-size:13px;color:#5a4a20;line-height:1.65;">' + line + '</p>';
+    });
+    html += '<div style="margin:14px 0;"><div style="display:inline-block;background:#d85020;color:#fff;font-size:13px;font-weight:700;padding:10px 20px;border-radius:6px;">Register your parish &rarr;</div>';
+    html += '<div style="font-size:10px;color:#8a7a50;margin-top:5px;">' + inviteLink + '</div></div>';
+    html += '</div>';
+    preview.innerHTML = html;
+  } else {
+    var smsLines = [
+      "Hi " + name + (countryStr || "") + ",",
+      note || null,
+      "I would like to invite you to join Communio — the free global Catholic parish network. Free website, online donations, and a global voice.",
+      "Register in 10 minutes: " + inviteLink,
+      "— Fr. James, St. Mary's Parish NYC"
+    ];
+    var html2 = '<div style="margin-bottom:12px;">';
+    html2 += '<div style="font-size:11px;color:#8a7a50;margin-bottom:2px;">To:</div>';
+    html2 += '<div style="font-size:13px;font-weight:600;color:#000;">' + contact + '</div>';
+    html2 += '</div><div style="border-top:1px solid #e8c040;padding-top:12px;">';
+    html2 += '<div style="background:#f5f2e8;border-radius:8px;padding:14px;font-size:13px;color:#5a4a20;line-height:1.7;">';
+    smsLines.forEach(function(line){
+      if(!line) return;
+      html2 += line + '<br><br>';
+    });
+    html2 += '</div></div>';
+    preview.innerHTML = html2;
   }
+}
 
   function inviteStep3(){
     var name    = (document.getElementById('invite-parish-name').value || '').trim();
