@@ -54,6 +54,10 @@
 
       --ease: 0.25s ease;
     }
+    *:focus-visible {
+      outline: 2px solid var(--terra);
+      outline-offset: 2px;
+    }
 
     /* =====================================================
        BASE
@@ -883,7 +887,7 @@
 
     .btn-sage-outline:hover {
       background: rgba(74,124,89,0.25);
-      border-color: var(--sage);
+      border-color: var(--terra);
       color: var(--white);
     }
 
@@ -1224,7 +1228,7 @@
     .cta-pill {
       display: inline-flex; align-items: center; gap: 6px;
       font-size: 13px; font-weight: 500;
-      color: rgba(255,253,249,0.45);
+      color: var(--terra);
       background: rgba(255,255,255,0.05);
       border: 1px solid rgba(255,255,255,0.08);
       border-radius: var(--r-pill); padding: 6px 14px;
@@ -1235,16 +1239,16 @@
     .cta-h {
       font-family: var(--f-display);
       font-size: clamp(36px, 6vw, 72px);
-      font-weight: 800; color: var(--white);
+      font-weight: 800; color: var(--terra);
       line-height: 1.05; letter-spacing: -0.03em;
       margin-bottom: 18px;
       position: relative; z-index: 1;
     }
 
-    .cta-h .big-accent { color: var(--amber); }
+    .cta-h .big-accent { color: var(--terra); }
 
     .cta-sub {
-      font-size: 18px; color: rgba(255,253,249,0.5);
+      font-size: 18px; color: var(--terra);
       max-width: 520px; margin: 0 auto 44px; line-height: 1.7;
       position: relative; z-index: 1;
     }
@@ -1278,7 +1282,7 @@
 
     .cta-note {
       margin-top: 20px;
-      font-size: 13px; color: rgba(255,253,249,0.25);
+      font-size: 13px; color: var(--terra);
       position: relative; z-index: 1;
     }
 
