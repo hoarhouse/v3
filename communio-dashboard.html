@@ -2035,8 +2035,17 @@ function go(viewName,appSection){
 }
 
 function navTo(section){
-  currentApp = section;
+  currentApp=section;
   document.querySelectorAll('.section-panel').forEach(function(p){p.classList.remove('on');});
+  var panel=document.getElementById('panel-'+section);
+  if(panel) panel.classList.add('on');
+  document.querySelectorAll('.sb-item').forEach(function(i){i.classList.remove('active');});
+  var navItem=document.getElementById('nav-'+section);
+  if(navItem) navItem.classList.add('active');
+  document.getElementById('sidebar').classList.remove('open');
+  if(section==='home') setTimeout(buildMiniChart,50);
+  if(section==='donations') setTimeout(buildFullChart,50);
+});
   var panel = document.getElementById('panel-' + section);
   if(panel) panel.classList.add('on');
   document.querySelectorAll('.sb-item').forEach(function(i){i.classList.remove('active');});
