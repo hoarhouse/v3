@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Parish Registration — DCF Global Parish Network</title>
+  <title>Register Your Parish — Communio</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Lora:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
 
   <!--
   ================================================================
@@ -43,127 +43,237 @@
   -->
 
   <style>
-    /* ============================================================
-       CSS CUSTOM PROPERTIES — DCF Parish Network v3
-       ============================================================ */
+    /* =====================================================
+       VARIABLES — matches Communio v2 exactly
+       ===================================================== */
     :root {
-      --navy:          #12213f;
-      --navy-mid:      #1c3060;
-      --navy-soft:     #243a74;
-      --gold:          #c9a84c;
-      --gold-light:    #e8c96e;
-      --gold-pale:     #f7f0de;
-      --gold-dim:      rgba(201,168,76,0.14);
-      --ivory:         #faf8f3;
-      --white:         #ffffff;
-      --text-dark:     #1a1a2e;
-      --text-mid:      #4a4a6a;
-      --text-light:    #8888aa;
-      --border:        #ddd8cc;
-      --border-active: #c9a84c;
-      --success:       #2d7a4f;
-      --success-pale:  #eaf5ee;
-      --success-border:#9FE1CB;
-      --error:         #b94040;
-      --stripe-purple: #635bff;
-      --r-sm:  4px;
-      --r-md:  8px;
-      --r-lg:  16px;
-      --r-xl:  24px;
-      --sh-sm: 0 1px 4px rgba(18,33,63,0.07);
-      --sh-md: 0 4px 20px rgba(18,33,63,0.11);
-      --sh-lg: 0 12px 48px rgba(18,33,63,0.17);
-      --f-serif: 'Cormorant Garamond', Georgia, serif;
-      --f-sans:  'Jost', system-ui, sans-serif;
-      --ease:    0.2s ease;
+      --cream:        #faf6f0;
+      --cream-dark:   #f2ebe0;
+      --warm-white:   #fffdf9;
+      --white:        #ffffff;
+
+      --terracotta:   #c85c3a;
+      --terra-light:  #e8856a;
+      --terra-pale:   #fceee9;
+      --terra-dim:    rgba(200,92,58,0.12);
+
+      --sage:         #4a7c59;
+      --sage-light:   #6a9e78;
+      --sage-pale:    #eaf3ec;
+
+      --amber:        #e8943a;
+      --amber-pale:   #fef3e8;
+
+      --ink:          #1a1208;
+      --ink-soft:     #3d3020;
+      --text-mid:     #6b5c48;
+      --text-light:   #9c8b78;
+      --border:       #e8ddd0;
+      --border-light: #f0e8dc;
+
+      --success:        #4a7c59;
+      --success-pale:   #eaf3ec;
+      --success-border: #6a9e78;
+      --error:          #b94040;
+      --stripe-purple:  #635bff;
+
+      --f-display: 'Outfit', system-ui, sans-serif;
+      --f-body:    'Outfit', system-ui, sans-serif;
+      --f-serif:   'Lora', Georgia, serif;
+
+      --r-sm:  6px;
+      --r-md:  12px;
+      --r-lg:  20px;
+      --r-xl:  32px;
+      --r-pill: 100px;
+
+      --sh-sm:  0 2px 8px rgba(26,18,8,0.06);
+      --sh-md:  0 8px 32px rgba(26,18,8,0.1);
+      --sh-lg:  0 20px 60px rgba(26,18,8,0.15);
+
+      --ease: 0.25s ease;
     }
 
-    /* ============================================================
-       RESET & BASE
-       ============================================================ */
+    /* =====================================================
+       BASE
+       ===================================================== */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
 
     body {
-      font-family: var(--f-sans);
-      font-size: 15px;
-      color: var(--text-dark);
-      background: var(--ivory);
+      font-family: var(--f-body);
+      font-size: 16px;
+      color: var(--ink);
+      background: var(--warm-white);
       line-height: 1.6;
-      min-height: 100vh;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
     }
 
-    /* ============================================================
-       PAGE HEADER
-       ============================================================ */
+    /* =====================================================
+       NAV — identical to Communio landing page
+       ===================================================== */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      padding: 0 32px;
+      height: 64px;
+      display: flex; align-items: center; justify-content: space-between;
+      background: rgba(255,253,249,0.92);
+      backdrop-filter: blur(16px);
+      box-shadow: 0 1px 0 var(--border);
+    }
+
+    .nav-brand {
+      display: flex; align-items: center; gap: 8px;
+      text-decoration: none;
+    }
+
+    .nav-mark {
+      width: 34px; height: 34px;
+      background: var(--terracotta);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    .nav-mark svg { width: 16px; height: 16px; }
+
+    .nav-name {
+      font-size: 18px; font-weight: 700;
+      color: var(--ink); letter-spacing: -0.02em;
+    }
+
+    .nav-name span { color: var(--terracotta); }
+
+    .nav-links {
+      display: flex; align-items: center; gap: 28px;
+    }
+
+    .nav-link {
+      font-size: 14px; font-weight: 500;
+      color: var(--text-mid); text-decoration: none;
+      transition: color var(--ease);
+    }
+
+    .nav-link:hover { color: var(--ink); }
+
+    .nav-back {
+      font-family: var(--f-body);
+      font-size: 14px; font-weight: 500;
+      color: var(--text-mid);
+      background: transparent;
+      border: 1.5px solid var(--border);
+      border-radius: var(--r-pill);
+      padding: 8px 18px; cursor: pointer;
+      text-decoration: none;
+      transition: all var(--ease);
+      display: inline-flex; align-items: center; gap: 6px;
+    }
+
+    .nav-back:hover { border-color: var(--ink); color: var(--ink); }
+    .nav-back svg { width: 14px; height: 14px; }
+
+    @media (max-width: 640px) {
+      .nav-links { display: none; }
+      .nav { padding: 0 20px; }
+    }
+
+    /* =====================================================
+       PAGE HEADER — warm ink bg with terracotta accents
+       ===================================================== */
     .page-header {
-      background: var(--navy);
+      background: var(--ink);
       position: relative;
       overflow: hidden;
+      padding-top: 64px; /* nav offset */
     }
 
-    .page-header::before,
+    .page-header::before {
+      content: '';
+      position: absolute;
+      width: 600px; height: 600px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(200,92,58,0.1) 0%, transparent 70%);
+      top: -100px; right: -150px;
+      pointer-events: none;
+    }
+
     .page-header::after {
       content: '';
       position: absolute;
-      border-radius: 50%;
-      border: 1px solid rgba(201,168,76,0.09);
+      width: 400px; height: 400px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(74,124,89,0.06) 0%, transparent 70%);
+      bottom: -80px; left: -80px;
+      pointer-events: none;
     }
-    .page-header::before { width: 420px; height: 420px; top: -100px; right: -100px; }
-    .page-header::after  { width: 240px; height: 240px; top: -40px;  right: -40px; }
 
     .header-inner {
-      max-width: 860px;
+      max-width: 900px;
       margin: 0 auto;
-      padding: 52px 32px 44px;
+      padding: 52px 32px 48px;
       position: relative; z-index: 1;
     }
 
-    .dcf-wordmark {
-      display: flex; align-items: center; gap: 12px;
+    /* Communio wordmark in header */
+    .header-brand {
+      display: flex; align-items: center; gap: 10px;
       margin-bottom: 32px;
     }
 
-    .dcf-logo-mark {
-      width: 36px; height: 36px;
-      border: 1.5px solid var(--gold);
-      border-radius: 50%;
+    .header-brand-mark {
+      width: 34px; height: 34px;
+      background: var(--terracotta);
+      border-radius: 10px;
       display: flex; align-items: center; justify-content: center;
       flex-shrink: 0;
     }
 
-    .dcf-name {
-      font-family: var(--f-serif);
-      font-size: 13px; font-weight: 400;
-      letter-spacing: 0.18em; text-transform: uppercase;
-      color: var(--gold);
+    .header-brand-name {
+      font-size: 18px; font-weight: 700;
+      color: var(--white); letter-spacing: -0.02em;
     }
 
+    .header-brand-name span { color: var(--terra-light); }
+
     .header-tag {
-      display: inline-block;
-      font-size: 11px; font-weight: 500;
-      letter-spacing: 0.12em; text-transform: uppercase;
-      color: var(--gold);
-      border: 1px solid rgba(201,168,76,0.38);
-      border-radius: 2px; padding: 4px 10px;
-      margin-bottom: 16px;
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 12px; font-weight: 700;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      color: var(--terracotta);
+      border: 1px solid rgba(200,92,58,0.35);
+      border-radius: var(--r-pill); padding: 5px 14px;
+      margin-bottom: 18px;
+    }
+
+    .header-tag::before {
+      content: '';
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--terracotta);
+      flex-shrink: 0;
     }
 
     .header-title {
-      font-family: var(--f-serif);
-      font-size: clamp(30px, 5vw, 46px);
-      font-weight: 300; color: var(--white);
-      line-height: 1.15; margin-bottom: 14px;
+      font-family: var(--f-display);
+      font-size: clamp(30px, 5vw, 50px);
+      font-weight: 800;
+      color: var(--white);
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      margin-bottom: 16px;
     }
 
-    .header-title em { font-style: italic; color: var(--gold-light); }
+    .header-title em {
+      font-style: italic;
+      font-family: var(--f-serif);
+      font-weight: 400;
+      color: var(--terra-light);
+    }
 
     .header-desc {
-      font-size: 15px; font-weight: 300;
-      color: rgba(255,255,255,0.58);
-      max-width: 520px; line-height: 1.72;
+      font-size: 16px; font-weight: 400;
+      color: rgba(255,253,249,0.55);
+      max-width: 540px; line-height: 1.72;
     }
 
-    /* What you get pills */
+    /* What-you-get pills */
     .header-pills {
       display: flex; flex-wrap: wrap; gap: 8px;
       margin-top: 24px;
@@ -171,79 +281,87 @@
 
     .h-pill {
       display: inline-flex; align-items: center; gap: 6px;
-      font-size: 12px; font-weight: 400;
-      color: rgba(255,255,255,0.7);
-      background: rgba(255,255,255,0.07);
-      border: 1px solid rgba(255,255,255,0.12);
-      border-radius: 20px; padding: 5px 12px;
+      font-size: 13px; font-weight: 500;
+      color: rgba(255,253,249,0.65);
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--r-pill); padding: 6px 14px;
     }
 
     .h-pill-dot {
-      width: 6px; height: 6px;
-      border-radius: 50%; background: var(--gold);
-      flex-shrink: 0;
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--terracotta); flex-shrink: 0;
     }
 
-    /* ============================================================
-       PROGRESS BAR
-       ============================================================ */
+    /* =====================================================
+       PROGRESS BAR — terracotta accent
+       ===================================================== */
     .progress-wrap {
-      background: var(--navy-mid);
-      border-top: 1px solid rgba(201,168,76,0.1);
-      position: sticky; top: 0; z-index: 50;
+      background: var(--ink-soft);
+      border-top: 1px solid rgba(200,92,58,0.12);
+      position: sticky; top: 64px; z-index: 50;
     }
 
     .progress-inner {
-      max-width: 860px; margin: 0 auto;
+      max-width: 900px; margin: 0 auto;
       padding: 0 32px; display: flex;
     }
 
     .prog-step {
-      flex: 1; padding: 13px 0;
+      flex: 1; padding: 14px 0;
       display: flex; align-items: center; gap: 9px;
       border-bottom: 2px solid transparent;
       transition: border-color var(--ease);
     }
 
-    .prog-step.done   { cursor: pointer; border-bottom-color: rgba(201,168,76,0.28); }
-    .prog-step.active { border-bottom-color: var(--gold); }
+    .prog-step.done   { cursor: pointer; border-bottom-color: rgba(200,92,58,0.25); }
+    .prog-step.active { border-bottom-color: var(--terracotta); }
 
     .prog-num {
       width: 24px; height: 24px; border-radius: 50%;
-      border: 1.5px solid rgba(201,168,76,0.22);
+      border: 1.5px solid rgba(255,255,255,0.12);
       display: flex; align-items: center; justify-content: center;
-      font-size: 11px; font-weight: 500;
-      color: rgba(255,255,255,0.28); flex-shrink: 0;
+      font-size: 11px; font-weight: 600;
+      color: rgba(255,255,255,0.25); flex-shrink: 0;
       transition: all var(--ease);
     }
 
-    .prog-step.active .prog-num { background: var(--gold); border-color: var(--gold); color: var(--navy); }
-    .prog-step.done   .prog-num { background: rgba(45,122,79,0.25); border-color: var(--success-border); color: #7fcba0; }
+    .prog-step.active .prog-num {
+      background: var(--terracotta);
+      border-color: var(--terracotta);
+      color: var(--white);
+    }
+
+    .prog-step.done .prog-num {
+      background: var(--sage-pale);
+      border-color: var(--sage-light);
+      color: var(--sage);
+    }
 
     .prog-label {
-      font-size: 11px; font-weight: 400;
-      color: rgba(255,255,255,0.25);
+      font-size: 11px; font-weight: 500;
+      color: rgba(255,255,255,0.22);
       letter-spacing: 0.03em; display: none;
       transition: color var(--ease);
     }
 
     @media (min-width: 500px) { .prog-label { display: block; } }
-    .prog-step.active .prog-label { color: rgba(255,255,255,0.85); }
-    .prog-step.done   .prog-label { color: rgba(255,255,255,0.42); }
+    .prog-step.active .prog-label { color: rgba(255,253,249,0.85); }
+    .prog-step.done   .prog-label { color: rgba(255,253,249,0.38); }
 
-    /* ============================================================
+    /* =====================================================
        MAIN LAYOUT
-       ============================================================ */
+       ===================================================== */
     .form-outer {
-      max-width: 860px; margin: 0 auto;
+      max-width: 900px; margin: 0 auto;
       padding: 40px 32px 100px;
     }
 
     @media (max-width: 520px) { .form-outer { padding: 24px 18px 80px; } }
 
-    /* ============================================================
+    /* =====================================================
        PANELS
-       ============================================================ */
+       ===================================================== */
     .panel { display: none; animation: fadeUp 0.26s ease; }
     .panel.active { display: block; }
 
@@ -258,38 +376,63 @@
     }
 
     .panel-head h2 {
-      font-family: var(--f-serif);
-      font-size: 28px; font-weight: 400;
-      color: var(--navy); margin-bottom: 5px;
+      font-family: var(--f-display);
+      font-size: 26px; font-weight: 800;
+      color: var(--ink); margin-bottom: 5px;
+      letter-spacing: -0.02em;
     }
 
-    .panel-head p { font-size: 14px; color: var(--text-mid); font-weight: 300; }
+    .panel-head p {
+      font-size: 15px; color: var(--text-mid); font-weight: 400;
+    }
 
-    /* ============================================================
-       PARISH FINDER COMPONENT
-       ============================================================ */
+    /* =====================================================
+       SECTION LABELS — matches Communio label-tag style
+       ===================================================== */
+    .label-tag {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 12px; font-weight: 700;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      color: var(--terracotta);
+      margin-bottom: 8px;
+    }
+
+    .label-tag::before {
+      content: '';
+      width: 16px; height: 2px;
+      background: var(--terracotta);
+      border-radius: 1px; display: inline-block;
+    }
+
+    /* =====================================================
+       PARISH FINDER CARD
+       ===================================================== */
     .finder-card {
       background: var(--white);
-      border: 1px solid var(--border);
+      border: 1.5px solid var(--border-light);
       border-radius: var(--r-xl);
       overflow: hidden; margin-bottom: 28px;
       box-shadow: var(--sh-sm);
+      transition: all var(--ease);
     }
 
+    .finder-card:hover { box-shadow: var(--sh-md); }
+
     .finder-head {
-      background: var(--navy);
+      background: var(--ink);
       padding: 20px 26px;
       display: flex; align-items: center;
       justify-content: space-between; gap: 16px;
     }
 
     .finder-head-text h3 {
-      font-family: var(--f-serif);
-      font-size: 20px; font-weight: 400; color: var(--white);
-      margin-bottom: 3px;
+      font-family: var(--f-display);
+      font-size: 17px; font-weight: 700;
+      color: var(--white); margin-bottom: 3px;
+      letter-spacing: -0.01em;
     }
 
-    .finder-head-text p { font-size: 12px; color: rgba(255,255,255,0.48); font-weight: 300; }
+    .finder-head-text p { font-size: 12px; color: rgba(255,253,249,0.4); font-weight: 400; }
 
     .finder-steps-mini {
       display: flex; align-items: center; gap: 6px;
@@ -298,21 +441,17 @@
 
     .fsm-dot {
       width: 8px; height: 8px; border-radius: 50%;
-      background: rgba(255,255,255,0.2);
+      background: rgba(255,255,255,0.15);
       transition: background var(--ease);
     }
 
-    .fsm-dot.active { background: var(--gold); }
-    .fsm-dot.done   { background: rgba(45,122,79,0.7); }
+    .fsm-dot.active { background: var(--terracotta); }
+    .fsm-dot.done   { background: var(--sage); }
 
     .finder-body { padding: 26px; }
 
-    /* Cascade rows — revealed sequentially */
-    .cascade-row {
-      display: none; margin-bottom: 18px;
-      animation: fadeUp 0.2s ease;
-    }
-
+    /* Cascade rows */
+    .cascade-row { display: none; margin-bottom: 18px; animation: fadeUp 0.2s ease; }
     .cascade-row.visible { display: block; }
 
     /* Found parish card */
@@ -334,15 +473,16 @@
     }
 
     .found-name {
-      font-family: var(--f-serif);
-      font-size: 22px; font-weight: 400; color: var(--navy);
+      font-family: var(--f-display);
+      font-size: 20px; font-weight: 700;
+      color: var(--ink); letter-spacing: -0.01em;
     }
 
     .found-badge {
-      font-size: 10px; font-weight: 500;
+      font-size: 10px; font-weight: 700;
       letter-spacing: 0.07em; text-transform: uppercase;
-      background: var(--success); color: var(--white);
-      border-radius: 3px; padding: 3px 8px; flex-shrink: 0;
+      background: var(--sage); color: var(--white);
+      border-radius: var(--r-pill); padding: 4px 10px; flex-shrink: 0;
     }
 
     .found-grid {
@@ -355,34 +495,31 @@
     .found-field { display: flex; flex-direction: column; gap: 2px; }
 
     .found-label {
-      font-size: 10px; font-weight: 500;
+      font-size: 10px; font-weight: 700;
       letter-spacing: 0.08em; text-transform: uppercase;
       color: var(--text-light);
     }
 
-    .found-value { font-size: 13px; color: var(--text-dark); }
+    .found-value { font-size: 13px; color: var(--ink); font-weight: 500; }
 
     .found-note {
-      font-size: 12px; color: var(--text-mid);
-      padding-top: 12px; border-top: 1px solid rgba(45,122,79,0.18);
+      font-size: 13px; color: var(--sage);
+      padding-top: 12px; border-top: 1px solid rgba(74,124,89,0.18);
       display: flex; align-items: center; gap: 6px;
+      font-weight: 500;
     }
 
-    .not-listed {
-      font-size: 13px; color: var(--text-mid);
-      margin-top: 12px; display: none;
-    }
-
+    .not-listed { font-size: 13px; color: var(--text-mid); margin-top: 12px; display: none; }
     .not-listed.visible { display: block; }
-    .not-listed a { color: var(--navy); font-weight: 500; cursor: pointer; text-decoration: underline; }
+    .not-listed a { color: var(--terracotta); font-weight: 600; cursor: pointer; }
 
     /* Autocomplete dropdown */
     .ac-wrap { position: relative; }
 
     .ac-list {
-      position: absolute; top: calc(100% + 3px); left: 0; right: 0;
+      position: absolute; top: calc(100% + 4px); left: 0; right: 0;
       background: var(--white);
-      border: 1px solid var(--border);
+      border: 1.5px solid var(--border);
       border-radius: var(--r-md);
       box-shadow: var(--sh-lg);
       z-index: 200; display: none; overflow: hidden;
@@ -391,26 +528,26 @@
     .ac-list.open { display: block; animation: fadeUp 0.14s ease; }
 
     .ac-item {
-      padding: 11px 16px; cursor: pointer;
-      border-bottom: 1px solid var(--border);
+      padding: 12px 16px; cursor: pointer;
+      border-bottom: 1px solid var(--border-light);
       transition: background var(--ease);
     }
 
     .ac-item:last-of-type { border-bottom: none; }
-    .ac-item:hover, .ac-item.focused { background: var(--gold-pale); }
+    .ac-item:hover, .ac-item.focused { background: var(--terra-pale); }
 
-    .ac-item-name { font-size: 14px; color: var(--text-dark); font-weight: 400; }
-    .ac-item-addr { font-size: 11px; color: var(--text-light); margin-top: 1px; }
+    .ac-item-name { font-size: 14px; color: var(--ink); font-weight: 600; }
+    .ac-item-addr { font-size: 11px; color: var(--text-light); margin-top: 2px; font-weight: 400; }
 
     .ac-powered {
       padding: 7px 14px; font-size: 10px;
       color: var(--text-light); text-align: right;
-      background: #f8f8f6; letter-spacing: 0.03em;
+      background: var(--cream); letter-spacing: 0.03em;
     }
 
-    /* ============================================================
+    /* =====================================================
        STANDARD FIELDS
-       ============================================================ */
+       ===================================================== */
     .field-row { display: grid; gap: 18px; margin-bottom: 18px; }
     .field-row.cols-2 { grid-template-columns: 1fr 1fr; }
     .field-row.cols-3 { grid-template-columns: 1fr 1fr 1fr; }
@@ -424,21 +561,21 @@
     .field { display: flex; flex-direction: column; gap: 6px; }
 
     .field label {
-      font-size: 11px; font-weight: 500;
+      font-size: 11px; font-weight: 700;
       letter-spacing: 0.07em; text-transform: uppercase;
       color: var(--text-mid);
     }
 
-    .field label .req { color: var(--gold); margin-left: 2px; }
+    .field label .req { color: var(--terracotta); margin-left: 2px; }
 
     .field input,
     .field select,
     .field textarea {
-      font-family: var(--f-sans);
-      font-size: 14px; font-weight: 300;
-      color: var(--text-dark);
+      font-family: var(--f-body);
+      font-size: 14px; font-weight: 400;
+      color: var(--ink);
       background: var(--white);
-      border: 1px solid var(--border);
+      border: 1.5px solid var(--border);
       border-radius: var(--r-md);
       padding: 11px 15px;
       transition: border-color var(--ease), box-shadow var(--ease);
@@ -451,20 +588,20 @@
     .field input:focus,
     .field select:focus,
     .field textarea:focus {
-      border-color: var(--border-active);
-      box-shadow: 0 0 0 3px var(--gold-dim);
+      border-color: var(--terracotta);
+      box-shadow: 0 0 0 3px var(--terra-dim);
     }
 
     .field input.prefilled,
     .field select.prefilled,
     .field textarea.prefilled {
-      background: var(--gold-pale);
-      border-color: rgba(201,168,76,0.4);
-      color: var(--navy);
+      background: var(--terra-pale);
+      border-color: rgba(200,92,58,0.35);
+      color: var(--ink);
     }
 
     .field select {
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='7' viewBox='0 0 11 7'%3E%3Cpath d='M1 1l4.5 4.5L10 1' fill='none' stroke='%238888aa' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='7' viewBox='0 0 11 7'%3E%3Cpath d='M1 1l4.5 4.5L10 1' fill='none' stroke='%239c8b78' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
       background-repeat: no-repeat;
       background-position: right 13px center;
       padding-right: 36px; cursor: pointer;
@@ -472,35 +609,35 @@
 
     .field textarea { resize: vertical; min-height: 100px; line-height: 1.65; }
 
-    .field-hint { font-size: 11px; color: var(--text-light); font-weight: 300; line-height: 1.5; }
+    .field-hint { font-size: 12px; color: var(--text-light); font-weight: 400; line-height: 1.5; }
 
     .prefill-tag {
       display: inline-flex; align-items: center; gap: 3px;
-      font-size: 10px; font-weight: 500;
+      font-size: 10px; font-weight: 700;
       letter-spacing: 0.06em; text-transform: uppercase;
-      color: var(--success); background: var(--success-pale);
-      border: 1px solid var(--success-border);
-      border-radius: 3px; padding: 2px 6px;
+      color: var(--sage); background: var(--sage-pale);
+      border: 1px solid var(--sage-light);
+      border-radius: var(--r-pill); padding: 2px 8px;
     }
 
-    /* Section titles */
+    /* Section titles within panels */
     .sec-title {
-      font-family: var(--f-serif);
-      font-size: 19px; font-weight: 400; color: var(--navy);
-      margin: 32px 0 18px; padding-bottom: 10px;
-      border-bottom: 1px solid var(--gold-pale);
+      font-size: 13px; font-weight: 700;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      color: var(--terracotta);
+      margin: 32px 0 8px;
       display: flex; align-items: center; gap: 10px;
     }
 
     .sec-title::before {
       content: '';
-      display: block; width: 3px; height: 18px;
-      background: var(--gold); border-radius: 2px; flex-shrink: 0;
+      display: block; width: 16px; height: 2px;
+      background: var(--terracotta); border-radius: 1px; flex-shrink: 0;
     }
 
-    /* ============================================================
+    /* =====================================================
        FOCUS AREA CHECKBOXES
-       ============================================================ */
+       ===================================================== */
     .focus-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(185px, 1fr));
@@ -512,11 +649,11 @@
 
     .focus-opt label {
       display: flex; align-items: center; gap: 9px;
-      padding: 10px 13px;
-      background: var(--white); border: 1px solid var(--border);
+      padding: 10px 14px;
+      background: var(--white); border: 1.5px solid var(--border-light);
       border-radius: var(--r-md); cursor: pointer;
       transition: all var(--ease);
-      font-size: 13px; color: var(--text-mid);
+      font-size: 13px; font-weight: 500; color: var(--text-mid);
       text-transform: none; letter-spacing: 0;
     }
 
@@ -524,24 +661,24 @@
       content: '';
       width: 15px; height: 15px; flex-shrink: 0;
       border: 1.5px solid var(--border);
-      border-radius: 3px; transition: all var(--ease);
+      border-radius: 4px; transition: all var(--ease);
     }
 
     .focus-opt input:checked + label {
-      border-color: var(--gold); background: var(--gold-pale); color: var(--navy);
+      border-color: var(--terracotta);
+      background: var(--terra-pale);
+      color: var(--ink);
     }
 
     .focus-opt input:checked + label::before {
-      background: var(--gold); border-color: var(--gold);
+      background: var(--terracotta); border-color: var(--terracotta);
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='9' height='7' viewBox='0 0 9 7'%3E%3Cpath d='M1 3.5l2.5 2.5 5-5' fill='none' stroke='%23fff' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
       background-repeat: no-repeat; background-position: center;
     }
 
-    /* ============================================================
+    /* =====================================================
        DONATION SETUP PANEL (Step 4)
-       ============================================================ */
-
-    /* Toggle card: opt in / opt out */
+       ===================================================== */
     .donation-toggle-wrap {
       display: grid; grid-template-columns: 1fr 1fr;
       gap: 12px; margin-bottom: 24px;
@@ -549,139 +686,138 @@
 
     @media (max-width: 480px) { .donation-toggle-wrap { grid-template-columns: 1fr; } }
 
-    .donation-opt {
-      position: relative;
-    }
-
-    .donation-opt input[type="radio"] {
-      position: absolute; opacity: 0; width: 0; height: 0;
-    }
+    .donation-opt { position: relative; }
+    .donation-opt input[type="radio"] { position: absolute; opacity: 0; width: 0; height: 0; }
 
     .donation-opt label {
       display: flex; flex-direction: column;
-      padding: 18px 20px;
-      background: var(--white); border: 1.5px solid var(--border);
-      border-radius: var(--r-lg); cursor: pointer;
+      padding: 20px 22px;
+      background: var(--white); border: 1.5px solid var(--border-light);
+      border-radius: var(--r-xl); cursor: pointer;
       transition: all var(--ease);
       height: 100%;
     }
 
     .donation-opt input:checked + label {
-      border-color: var(--gold);
-      background: var(--gold-pale);
+      border-color: var(--terracotta);
+      background: var(--terra-pale);
       box-shadow: var(--sh-sm);
     }
 
-    .donation-opt label .do-icon {
-      font-size: 28px; margin-bottom: 10px;
-    }
+    .donation-opt label .do-icon { font-size: 28px; margin-bottom: 10px; }
 
     .donation-opt label .do-title {
-      font-size: 15px; font-weight: 500; color: var(--navy);
-      margin-bottom: 5px;
+      font-size: 16px; font-weight: 700; color: var(--ink);
+      margin-bottom: 6px; letter-spacing: -0.01em;
     }
 
     .donation-opt label .do-desc {
-      font-size: 12px; color: var(--text-mid);
-      font-weight: 300; line-height: 1.55;
+      font-size: 13px; color: var(--text-mid);
+      font-weight: 400; line-height: 1.6;
     }
 
-    .donation-opt input:checked + label .do-desc { color: var(--navy); }
+    .donation-opt input:checked + label .do-title { color: var(--ink); }
+    .donation-opt input:checked + label .do-desc  { color: var(--text-mid); }
 
     /* Expandable donation config */
-    .donation-config {
-      display: none;
-      animation: fadeUp 0.22s ease;
-    }
-
+    .donation-config { display: none; animation: fadeUp 0.22s ease; }
     .donation-config.visible { display: block; }
 
-    /* How the fee works — visual explanation */
+    /* Fee explainer — same dark card as donation-card in communio */
     .fee-explainer {
-      background: var(--navy);
-      border-radius: var(--r-lg);
-      padding: 22px 24px;
-      margin-bottom: 22px;
+      background: var(--ink);
+      border-radius: var(--r-xl);
+      padding: 28px 30px;
+      margin-bottom: 24px;
+      position: relative; overflow: hidden;
+    }
+
+    .fee-explainer::before {
+      content: '';
+      position: absolute; top: -60px; right: -60px;
+      width: 250px; height: 250px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(200,92,58,0.12) 0%, transparent 70%);
     }
 
     .fee-ex-title {
-      font-family: var(--f-serif);
-      font-size: 16px; font-weight: 400; color: var(--white);
-      margin-bottom: 16px;
+      font-family: var(--f-display);
+      font-size: 15px; font-weight: 700;
+      color: var(--white); margin-bottom: 20px;
+      position: relative; z-index: 1;
+      letter-spacing: -0.01em;
     }
 
     .fee-flow {
       display: flex; align-items: stretch; gap: 0;
       border-radius: var(--r-md); overflow: hidden;
-      margin-bottom: 14px;
+      margin-bottom: 16px; position: relative; z-index: 1;
     }
 
     .fee-node {
       flex: 1; padding: 14px 10px; text-align: center;
-      background: rgba(255,255,255,0.07);
-      border-right: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.06);
+      border-right: 1px solid rgba(255,255,255,0.07);
     }
 
     .fee-node:last-child { border-right: none; }
 
     .fee-node-label {
-      font-size: 10px; font-weight: 500;
+      font-size: 10px; font-weight: 700;
       letter-spacing: 0.07em; text-transform: uppercase;
-      color: rgba(255,255,255,0.38); margin-bottom: 6px;
+      color: rgba(255,255,255,0.3); margin-bottom: 6px;
     }
 
-    .fee-node-amount { font-size: 20px; font-weight: 500; }
-    .fee-node-sub { font-size: 11px; margin-top: 2px; }
+    .fee-node-amount { font-size: 20px; font-weight: 800; letter-spacing: -0.02em; }
+    .fee-node-sub    { font-size: 11px; margin-top: 2px; }
 
-    .fee-node.donor   .fee-node-amount { color: var(--white); }
-    .fee-node.parish  .fee-node-amount { color: #7fcba0; }
-    .fee-node.dcf     .fee-node-amount { color: var(--gold); }
-    .fee-node.stripe  .fee-node-amount { color: #a8a3ff; }
+    .fee-node.donor  .fee-node-amount { color: var(--white); }
+    .fee-node.parish .fee-node-amount { color: var(--sage-light); }
+    .fee-node.dcf    .fee-node-amount { color: var(--terra-light); }
+    .fee-node.stripe .fee-node-amount { color: #a8a3ff; }
 
-    .fee-node.donor   .fee-node-sub { color: rgba(255,255,255,0.4); }
-    .fee-node.parish  .fee-node-sub { color: rgba(127,203,160,0.6); }
-    .fee-node.dcf     .fee-node-sub { color: rgba(201,168,76,0.55); }
-    .fee-node.stripe  .fee-node-sub { color: rgba(168,163,255,0.6); }
+    .fee-node.donor  .fee-node-sub { color: rgba(255,255,255,0.35); }
+    .fee-node.parish .fee-node-sub { color: rgba(106,158,120,0.6); }
+    .fee-node.dcf    .fee-node-sub { color: rgba(232,133,106,0.55); }
+    .fee-node.stripe .fee-node-sub { color: rgba(168,163,255,0.6); }
 
     .fee-note {
-      font-size: 12px; color: rgba(255,255,255,0.42);
-      line-height: 1.6;
+      font-size: 13px; color: rgba(255,253,249,0.4);
+      line-height: 1.65; position: relative; z-index: 1;
     }
 
-    .fee-note strong { color: var(--gold); font-weight: 500; }
+    .fee-note strong { color: var(--terra-light); font-weight: 600; }
 
-    /* Stripe connect button */
+    /* Stripe connect section */
     .stripe-connect-section {
       background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: var(--r-lg);
-      padding: 22px 24px;
+      border: 1.5px solid var(--border-light);
+      border-radius: var(--r-xl);
+      padding: 24px 26px;
       margin-bottom: 20px;
     }
 
     .stripe-connect-section h4 {
-      font-family: var(--f-serif);
-      font-size: 18px; font-weight: 400; color: var(--navy);
-      margin-bottom: 6px;
+      font-family: var(--f-display);
+      font-size: 18px; font-weight: 700;
+      color: var(--ink); margin-bottom: 6px;
+      letter-spacing: -0.01em;
     }
 
     .stripe-connect-section p {
-      font-size: 13px; color: var(--text-mid);
-      font-weight: 300; line-height: 1.6; margin-bottom: 18px;
+      font-size: 14px; color: var(--text-mid);
+      font-weight: 400; line-height: 1.65; margin-bottom: 20px;
     }
 
-    /* Mimics the official Stripe Connect button style */
     .btn-stripe-connect {
       display: inline-flex; align-items: center; gap: 10px;
       background: var(--stripe-purple);
       color: var(--white);
-      border: none; border-radius: var(--r-md);
-      padding: 13px 22px;
-      font-family: var(--f-sans);
-      font-size: 14px; font-weight: 500;
+      border: none; border-radius: var(--r-pill);
+      padding: 13px 24px;
+      font-family: var(--f-body);
+      font-size: 14px; font-weight: 600;
       cursor: pointer;
       transition: all var(--ease);
-      letter-spacing: 0.02em;
     }
 
     .btn-stripe-connect:hover {
@@ -698,38 +834,29 @@
       border: 1.5px solid var(--success-border);
       border-radius: var(--r-md);
       padding: 14px 18px;
-      display: none; align-items: center; gap: 12px;
-      font-size: 14px; color: var(--success);
+      align-items: center; gap: 12px;
+      font-size: 14px; font-weight: 600;
+      color: var(--success);
     }
 
     .stripe-connected-state.visible {
       display: flex; animation: fadeUp 0.2s ease;
     }
 
-    /* Donation preferences */
-    .donation-prefs {
-      display: none;
-    }
-
+    .donation-prefs { display: none; }
     .donation-prefs.visible { display: block; }
 
     /* Suggested giving amounts builder */
-    .amounts-wrap {
-      display: flex; flex-wrap: wrap; gap: 8px;
-      margin-bottom: 8px;
-    }
+    .amounts-wrap { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 8px; }
 
     .amount-pill {
       display: flex; align-items: center; gap: 0;
-      background: var(--white); border: 1px solid var(--border);
-      border-radius: 20px; overflow: hidden;
+      background: var(--white); border: 1.5px solid var(--border);
+      border-radius: var(--r-pill); overflow: hidden;
       font-size: 13px;
     }
 
-    .amount-pill-val {
-      padding: 6px 12px; font-weight: 400;
-      color: var(--text-dark);
-    }
+    .amount-pill-val { padding: 6px 12px; font-weight: 600; color: var(--ink); }
 
     .amount-pill-remove {
       padding: 6px 10px 6px 4px;
@@ -740,57 +867,62 @@
 
     .amount-pill-remove:hover { color: var(--error); }
 
-    /* ============================================================
+    /* =====================================================
        REVIEW PANEL (Step 5)
-       ============================================================ */
+       ===================================================== */
     .review-card {
-      background: var(--white); border: 1px solid var(--border);
-      border-radius: var(--r-lg); overflow: hidden; margin-bottom: 14px;
+      background: var(--white); border: 1.5px solid var(--border-light);
+      border-radius: var(--r-xl); overflow: hidden; margin-bottom: 14px;
+      transition: all var(--ease);
     }
 
+    .review-card:hover { box-shadow: var(--sh-sm); }
+
     .rc-head {
-      background: var(--navy); padding: 13px 20px;
+      background: var(--ink); padding: 14px 22px;
       display: flex; align-items: center; justify-content: space-between;
     }
 
     .rc-head h3 {
-      font-family: var(--f-serif);
-      font-size: 16px; font-weight: 400; color: var(--white);
+      font-family: var(--f-display);
+      font-size: 15px; font-weight: 700;
+      color: var(--white); letter-spacing: -0.01em;
     }
 
     .btn-edit {
-      font-size: 11px; font-weight: 500;
+      font-size: 11px; font-weight: 700;
       letter-spacing: 0.06em; text-transform: uppercase;
-      color: var(--gold); background: none; border: none;
-      cursor: pointer; font-family: var(--f-sans); padding: 0;
+      color: var(--terra-light); background: none; border: none;
+      cursor: pointer; font-family: var(--f-body); padding: 0;
+      transition: color var(--ease);
     }
 
+    .btn-edit:hover { color: var(--white); }
+
     .rc-body {
-      padding: 18px 20px;
+      padding: 20px 22px;
       display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
     }
 
     @media (max-width: 480px) { .rc-body { grid-template-columns: 1fr; } }
 
-    .rv { display: flex; flex-direction: column; gap: 2px; }
+    .rv { display: flex; flex-direction: column; gap: 3px; }
 
     .rv-l {
-      font-size: 10px; font-weight: 500;
+      font-size: 10px; font-weight: 700;
       text-transform: uppercase; letter-spacing: 0.08em;
       color: var(--text-light);
     }
 
-    .rv-v { font-size: 14px; color: var(--text-dark); }
+    .rv-v { font-size: 14px; font-weight: 500; color: var(--ink); }
 
-    .rv-source {
-      font-size: 10px; color: var(--success); font-weight: 500;
-    }
+    .rv-source { font-size: 11px; color: var(--sage); font-weight: 600; }
 
     /* Donation status in review */
     .donation-status-badge {
       display: inline-flex; align-items: center; gap: 5px;
-      font-size: 12px; font-weight: 500;
-      padding: 4px 10px; border-radius: 20px;
+      font-size: 12px; font-weight: 600;
+      padding: 5px 12px; border-radius: var(--r-pill);
     }
 
     .dsb-active {
@@ -800,39 +932,39 @@
     }
 
     .dsb-later {
-      background: var(--gold-pale);
-      color: #854F0B;
-      border: 1px solid rgba(201,168,76,0.4);
+      background: var(--terra-pale);
+      color: var(--terracotta);
+      border: 1px solid rgba(200,92,58,0.3);
     }
 
-    /* Privacy + dataset notices */
+    /* Notices */
     .notice {
-      border-radius: var(--r-md);
-      padding: 15px 18px;
-      font-size: 13px; line-height: 1.65;
+      border-radius: var(--r-lg);
+      padding: 16px 20px;
+      font-size: 14px; line-height: 1.65;
       margin-bottom: 14px;
     }
 
     .notice-privacy {
-      background: var(--gold-pale);
-      border: 1px solid rgba(201,168,76,0.28);
+      background: var(--cream);
+      border: 1.5px solid var(--border);
       color: var(--text-mid);
     }
 
-    .notice-privacy strong, .notice-mission strong { font-weight: 500; color: var(--navy); }
-    .notice-privacy a { color: var(--navy); }
+    .notice-privacy strong { font-weight: 700; color: var(--ink); }
+    .notice-privacy a { color: var(--terracotta); }
 
     .notice-mission {
-      background: var(--navy);
+      background: var(--ink);
       border: none;
-      color: rgba(255,255,255,0.5);
+      color: rgba(255,253,249,0.45);
     }
 
-    .notice-mission strong { color: var(--gold); }
+    .notice-mission strong { color: var(--terra-light); font-weight: 600; }
 
-    /* ============================================================
+    /* =====================================================
        NAV BUTTONS
-       ============================================================ */
+       ===================================================== */
     .form-nav {
       display: flex; align-items: center;
       justify-content: space-between;
@@ -841,110 +973,182 @@
       gap: 12px;
     }
 
+    /* Primary button — matches Communio btn-main */
     .btn {
-      font-family: var(--f-sans);
-      font-size: 12px; font-weight: 500;
-      letter-spacing: 0.07em; text-transform: uppercase;
-      border: none; border-radius: var(--r-md);
-      padding: 13px 26px; cursor: pointer;
+      font-family: var(--f-body);
+      font-size: 14px; font-weight: 700;
+      border: none; border-radius: var(--r-pill);
+      padding: 14px 28px; cursor: pointer;
       transition: all var(--ease);
       display: inline-flex; align-items: center; gap: 8px;
+      letter-spacing: 0;
     }
 
     .btn svg { width: 15px; height: 15px; flex-shrink: 0; }
 
-    .btn-primary  { background: var(--gold); color: var(--navy); }
-    .btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); box-shadow: var(--sh-md); }
+    .btn-primary {
+      background: var(--terracotta); color: var(--white);
+      box-shadow: 0 4px 20px rgba(200,92,58,0.25);
+    }
 
-    .btn-ghost    { background: transparent; color: var(--text-mid); border: 1px solid var(--border); }
-    .btn-ghost:hover { border-color: var(--text-mid); color: var(--text-dark); }
+    .btn-primary:hover {
+      background: var(--terra-light);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(200,92,58,0.35);
+    }
 
-    .btn-submit   { background: var(--navy); color: var(--white); padding: 15px 34px; font-size: 13px; }
-    .btn-submit:hover { background: var(--navy-mid); transform: translateY(-1px); box-shadow: var(--sh-lg); }
+    .btn-ghost {
+      background: transparent; color: var(--text-mid);
+      border: 1.5px solid var(--border);
+    }
+
+    .btn-ghost:hover { border-color: var(--ink); color: var(--ink); }
+
+    .btn-submit {
+      background: var(--ink); color: var(--white);
+      padding: 16px 36px; font-size: 15px;
+    }
+
+    .btn-submit:hover {
+      background: var(--ink-soft);
+      transform: translateY(-2px);
+      box-shadow: var(--sh-lg);
+    }
 
     .btn-skip {
       background: none; border: none; cursor: pointer;
-      font-family: var(--f-sans); font-size: 12px;
-      font-weight: 400; color: var(--text-light);
+      font-family: var(--f-body); font-size: 13px;
+      font-weight: 500; color: var(--text-light);
       text-decoration: underline; padding: 0;
-      letter-spacing: 0; text-transform: none;
     }
 
     .btn-skip:hover { color: var(--text-mid); }
 
-    /* ============================================================
+    /* =====================================================
        SUCCESS STATE
-       ============================================================ */
+       ===================================================== */
     .success-panel {
-      display: none; text-align: center; padding: 72px 32px;
+      display: none; text-align: center; padding: 80px 32px;
     }
 
     .success-panel.active { display: block; animation: fadeUp 0.4s ease; }
 
     .success-icon {
       width: 80px; height: 80px; border-radius: 50%;
-      background: var(--gold-pale); border: 2px solid var(--gold);
+      background: var(--sage-pale); border: 2px solid var(--sage-light);
       display: flex; align-items: center; justify-content: center;
       margin: 0 auto 28px;
     }
 
-    .success-icon svg { width: 36px; height: 36px; color: var(--gold); }
+    .success-icon svg { width: 36px; height: 36px; color: var(--sage); }
 
     .success-panel h2 {
-      font-family: var(--f-serif);
-      font-size: 40px; font-weight: 300;
-      color: var(--navy); margin-bottom: 14px;
+      font-family: var(--f-display);
+      font-size: 40px; font-weight: 800;
+      color: var(--ink); margin-bottom: 14px;
+      letter-spacing: -0.025em;
     }
 
     .success-panel .success-sub {
-      font-size: 15px; font-weight: 300;
-      color: var(--text-mid); max-width: 500px;
+      font-size: 16px; font-weight: 400;
+      color: var(--text-mid); max-width: 520px;
       margin: 0 auto 10px; line-height: 1.72;
     }
 
     .success-next {
-      margin-top: 32px;
+      margin-top: 36px;
       display: inline-flex; flex-direction: column;
-      gap: 10px; text-align: left;
-      background: var(--white); border: 1px solid var(--border);
-      border-radius: var(--r-lg); padding: 22px 26px;
-      max-width: 420px; width: 100%;
+      gap: 12px; text-align: left;
+      background: var(--white); border: 1.5px solid var(--border-light);
+      border-radius: var(--r-xl); padding: 24px 28px;
+      max-width: 440px; width: 100%;
     }
 
     .success-next-title {
-      font-size: 11px; font-weight: 500;
+      font-size: 11px; font-weight: 700;
       letter-spacing: 0.09em; text-transform: uppercase;
       color: var(--text-light); margin-bottom: 4px;
     }
 
     .sn-item {
-      display: flex; align-items: flex-start; gap: 10px;
-      font-size: 13px; color: var(--text-mid);
+      display: flex; align-items: flex-start; gap: 12px;
+      font-size: 14px; color: var(--text-mid); font-weight: 400;
     }
 
     .sn-dot {
-      width: 20px; height: 20px; border-radius: 50%;
-      background: var(--gold-pale); border: 1px solid rgba(201,168,76,0.4);
+      width: 22px; height: 22px; border-radius: 50%;
+      background: var(--terra-pale); border: 1.5px solid rgba(200,92,58,0.3);
       display: flex; align-items: center; justify-content: center;
-      font-size: 10px; font-weight: 500; color: var(--gold);
+      font-size: 10px; font-weight: 800; color: var(--terracotta);
       flex-shrink: 0; margin-top: 1px;
     }
 
-    /* ============================================================
-       FOOTER
-       ============================================================ */
+    /* =====================================================
+       FOOTER — matches Communio footer exactly
+       ===================================================== */
     .page-footer {
-      background: var(--navy);
-      padding: 22px 32px; text-align: center;
-      font-size: 12px; font-weight: 300;
-      color: rgba(255,255,255,0.28); letter-spacing: 0.04em;
+      background: var(--ink);
+      padding: 32px 64px;
+      display: flex; align-items: center;
+      justify-content: space-between; gap: 20px; flex-wrap: wrap;
     }
 
-    .page-footer a { color: rgba(201,168,76,0.6); text-decoration: none; }
-    .page-footer a:hover { color: var(--gold); }
+    @media (max-width: 600px) { .page-footer { padding: 24px 20px; } }
+
+    .footer-left { display: flex; align-items: center; gap: 12px; }
+
+    .footer-mark {
+      width: 32px; height: 32px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    .footer-name { font-size: 17px; font-weight: 700; color: var(--white); }
+
+    .footer-sub {
+      font-size: 12px; color: rgba(255,253,249,0.28); margin-top: 2px;
+    }
+
+    .footer-links { display: flex; gap: 20px; flex-wrap: wrap; }
+
+    .footer-links a {
+      font-size: 13px; color: rgba(255,253,249,0.35);
+      text-decoration: none; transition: color var(--ease); font-weight: 400;
+    }
+
+    .footer-links a:hover { color: rgba(255,253,249,0.8); }
+
+    @media (max-width: 640px) {
+      .page-footer { flex-direction: column; align-items: flex-start; gap: 16px; }
+    }
   </style>
 </head>
 <body>
+
+  <!-- ============================================================
+       NAV — identical to Communio landing page
+       ============================================================ -->
+  <nav class="nav">
+    <a href="communio-v2.html" class="nav-brand">
+      <div class="nav-mark">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <circle cx="8" cy="8" r="3" fill="white"/>
+          <path d="M8 1v3M8 12v3M1 8h3M12 8h3" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="nav-name">Commun<span>io</span></div>
+    </a>
+    <div class="nav-links">
+      <a href="communio-v2.html#how-it-works" class="nav-link">How it works</a>
+      <a href="communio-v2.html#features" class="nav-link">Features</a>
+      <a href="communio-v2.html#pricing" class="nav-link">Pricing</a>
+    </div>
+    <a href="communio-v2.html" class="nav-back">
+      <svg viewBox="0 0 16 16" fill="none"><path d="M13 8H3M7 12l-4-4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Back to Communio
+    </a>
+  </nav>
 
   <!-- ============================================================
        PAGE HEADER
@@ -952,26 +1156,28 @@
   <header class="page-header">
     <div class="header-inner">
 
-      <div class="dcf-wordmark">
-        <div class="dcf-logo-mark">
-          <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-            <line x1="9" y1="2" x2="9" y2="16" stroke="#c9a84c" stroke-width="1.5" stroke-linecap="round"/>
-            <line x1="3" y1="7" x2="15" y2="7" stroke="#c9a84c" stroke-width="1.5" stroke-linecap="round"/>
+      <div class="header-brand">
+        <div class="header-brand-mark">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <circle cx="8" cy="8" r="3" fill="white"/>
+            <path d="M8 1v3M8 12v3M1 8h3M12 8h3" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
           </svg>
         </div>
-        <span class="dcf-name">Domus Communis Foundation</span>
+        <div class="header-brand-name">Commun<span>io</span></div>
       </div>
 
-      <span class="header-tag">Global Parish Network</span>
+      <div class="header-tag">Join Communio — it's free</div>
 
-      <h1 class="header-title">Give your parish<br>a <em>global voice</em></h1>
+      <h1 class="header-title">
+        Give your parish<br>a <em>global voice</em>
+      </h1>
 
-      <p class="header-desc">Register in minutes. We look up what we can so you don't have to type it all out. Once approved, your parish is live on the world map, connected to thousands of communities, and ready to receive donations online.</p>
+      <p class="header-desc">Register in minutes. We look up what we can so you don't have to type it all out. Once approved by DCF, your parish is live on the world map, connected to thousands of communities, and ready to receive donations online.</p>
 
       <div class="header-pills">
         <div class="h-pill"><div class="h-pill-dot"></div>Free to join</div>
         <div class="h-pill"><div class="h-pill-dot"></div>Parish website included</div>
-        <div class="h-pill"><div class="h-pill-dot"></div>Online donations ready in minutes</div>
+        <div class="h-pill"><div class="h-pill-dot"></div>Online donations in minutes</div>
         <div class="h-pill"><div class="h-pill-dot"></div>No technical knowledge needed</div>
       </div>
 
@@ -1094,7 +1300,7 @@
                 <!-- PHP: populate from database filtered by country -->
                 <!-- JS: in the mockup this is populated by onCountryChange() -->
               </select>
-              <span class="field-hint">Can't find your diocese? <a href="#" style="color:var(--navy)">Type it manually</a></span>
+              <span class="field-hint">Can't find your diocese? <a href="#" style="color:var(--terracotta); font-weight:600;">Type it manually</a></span>
             </div>
           </div>
 
@@ -1290,7 +1496,7 @@
 
       <div class="field-row cols-2">
         <div class="field">
-          <label for="contact_email_public">Public contact email <span style="font-weight:300;text-transform:none;letter-spacing:0">(optional)</span></label>
+          <label for="contact_email_public">Public contact email <span style="font-weight:400;text-transform:none;letter-spacing:0">(optional)</span></label>
           <input type="email" id="contact_email_public" name="contact_email_public" placeholder="info@stmarys.org">
           <span class="field-hint">Shown on your public parish profile — leave blank to use the email above</span>
         </div>
@@ -1303,7 +1509,7 @@
             </span>
           </label>
           <input type="url" id="website_url" name="website_url" placeholder="https://...">
-          <span class="field-hint">Your existing website — if you don't have one, DCF will build you one</span>
+          <span class="field-hint">Your existing website — if you don't have one, Communio will build you one</span>
         </div>
       </div>
 
@@ -1329,19 +1535,19 @@
 
       <div class="panel-head">
         <h2 id="s3-title">Your mission &amp; focus</h2>
-        <p>Help other parishes find you and understand what your community stands for. This builds your public profile.</p>
+        <p>Help other parishes find you and understand what your community stands for. This builds your public Communio profile.</p>
       </div>
 
       <div class="field-row cols-1">
         <div class="field">
           <label for="parish_description">About your parish <span class="req">*</span></label>
           <textarea id="parish_description" name="parish_description" required maxlength="600" placeholder="Describe your community — your history, who you serve, what makes you distinct..."></textarea>
-          <span class="field-hint">Up to 600 characters — appears on your public profile page</span>
+          <span class="field-hint">Up to 600 characters — appears on your public Communio profile page</span>
         </div>
       </div>
 
       <div class="sec-title">Areas of focus</div>
-      <p style="font-size:13px; color:var(--text-mid); margin-bottom:16px; font-weight:300;">Select everything that reflects your parish's priorities. This helps us connect you with like-minded communities.</p>
+      <p style="font-size:14px; color:var(--text-mid); margin-bottom:16px; font-weight:400;">Select everything that reflects your parish's priorities. This helps Communio connect you with like-minded communities.</p>
 
       <!-- PHP: focus_areas[] submitted as an array -->
       <div class="focus-grid">
@@ -1399,15 +1605,16 @@
         <div class="field">
           <label for="ai_interest">How does your parish think about AI and technology?</label>
           <textarea id="ai_interest" name="ai_interest" style="min-height:80px" placeholder="Even a few sentences — we want to understand your community's perspective..."></textarea>
-          <span class="field-hint">Optional — connects you with like-minded parishes on the network</span>
+          <span class="field-hint">Optional — connects you with like-minded parishes on the Communio network</span>
         </div>
       </div>
 
       <div class="field-row cols-1">
         <div class="field">
-          <label for="how_heard">How did you hear about the DCF Parish Network?</label>
+          <label for="how_heard">How did you hear about Communio?</label>
           <select id="how_heard" name="how_heard">
             <option value="" disabled selected>Select one</option>
+            <option value="communio_site">Communio website</option>
             <option value="dcf_site">DCF website</option>
             <option value="another_parish">From another parish</option>
             <option value="social_media">Social media</option>
@@ -1442,7 +1649,7 @@
 
       <div class="panel-head">
         <h2 id="s4-title">Online donations</h2>
-        <p>Accept donations directly from your parish profile — funds go straight to your account. You can always set this up later from your dashboard.</p>
+        <p>Accept donations directly from your Communio parish profile — funds go straight to your account. You can always set this up later from your dashboard.</p>
       </div>
 
       <!-- Fee explainer -->
@@ -1460,7 +1667,7 @@
             <div class="fee-node-sub">96.1%</div>
           </div>
           <div class="fee-node dcf">
-            <div class="fee-node-label">DCF mission contribution</div>
+            <div class="fee-node-label">Communio mission</div>
             <div class="fee-node-amount">$1.00</div>
             <div class="fee-node-sub">1% — funds DCF's global work</div>
           </div>
@@ -1471,7 +1678,7 @@
           </div>
         </div>
         <div class="fee-note">
-          <strong>No hidden fees. No surprises.</strong> Every donation receipt shows this exact breakdown. Parishes receiving under $500/month pay no DCF fee — the 1% applies above that threshold. Larger parishes (&gt;$10k/month) receive a reduced rate of 0.75%.
+          <strong>No hidden fees. No surprises.</strong> Every donation receipt shows this exact breakdown. Parishes receiving under $500/month pay no Communio fee — the 1% applies above that threshold. Larger parishes (&gt;$10k/month) receive a reduced rate of 0.75%.
         </div>
       </div>
 
@@ -1490,7 +1697,7 @@
           <label for="donate-later">
             <span class="do-icon">⏱️</span>
             <span class="do-title">Set up later</span>
-            <span class="do-desc">Skip for now. You'll find the donation setup in your parish dashboard after approval — takes the same 5 minutes whenever you're ready.</span>
+            <span class="do-desc">Skip for now. You'll find the donation setup in your Communio dashboard after approval — takes the same 5 minutes whenever you're ready.</span>
           </label>
         </div>
       </div>
@@ -1550,7 +1757,7 @@
               <label for="donation_description">Short description for donors</label>
               <input type="text" id="donation_description" name="donation_description"
                 placeholder="e.g. Your gift supports our community programmes and upkeep of our church">
-              <span class="field-hint">Shown above the donation form on your parish profile page</span>
+              <span class="field-hint">Shown above the donation form on your Communio parish profile page</span>
             </div>
           </div>
 
@@ -1566,8 +1773,8 @@
               <!-- Hidden input: PHP reads comma-separated values -->
               <input type="hidden" name="suggested_amounts" id="suggested-amounts-hidden" value="10,25,50,100">
               <div style="display:flex; gap:8px; margin-top:8px;">
-                <input type="number" id="amount-add-input" placeholder="Add amount" min="1" style="width:130px; font-family:var(--f-sans); font-size:13px; padding:7px 12px; border:1px solid var(--border); border-radius:var(--r-md); outline:none; background:var(--white);" onkeydown="if(event.key==='Enter'){event.preventDefault();addAmount();}">
-                <button type="button" class="btn btn-ghost" style="padding:7px 16px; font-size:11px;" onclick="addAmount()">Add</button>
+                <input type="number" id="amount-add-input" placeholder="Add amount" min="1" style="width:130px; font-family:var(--f-body); font-size:13px; padding:8px 12px; border:1.5px solid var(--border); border-radius:var(--r-md); outline:none; background:var(--white); color:var(--ink);" onkeydown="if(event.key==='Enter'){event.preventDefault();addAmount();}">
+                <button type="button" class="btn btn-ghost" style="padding:8px 18px; font-size:12px;" onclick="addAmount()">Add</button>
               </div>
               <span class="field-hint">These appear as quick-select buttons on your donation form — donors can always enter a custom amount</span>
             </div>
@@ -1702,11 +1909,11 @@
 
       <!-- Notices -->
       <div class="notice notice-privacy">
-        <strong>Privacy &amp; data.</strong> Your registration data is stored securely and used only to process your application and populate your parish profile. We never sell or share your information with third parties. Request deletion any time: <a href="mailto:network@dcffoundation.org">network@dcffoundation.org</a>
+        <strong>Privacy &amp; data.</strong> Your registration data is stored securely and used only to process your application and populate your Communio parish profile. We never sell or share your information with third parties. Request deletion any time: <a href="mailto:privacy@dcffoundation.org">privacy@dcffoundation.org</a>
       </div>
 
       <div class="notice notice-mission">
-        <strong>You're building something that matters.</strong> Every parish that joins strengthens the collective voice of communities who believe technology should serve human dignity. Your data contributes — anonymously — to DCF's global research and advocacy work.
+        <strong>You're building something that matters.</strong> Every parish that joins Communio strengthens the collective voice of communities who believe technology should serve human dignity. Your data contributes — anonymously — to DCF's global research and advocacy work.
       </div>
 
       <div class="form-nav">
@@ -1735,8 +1942,8 @@
       </svg>
     </div>
     <h2>Application received</h2>
-    <p class="success-sub">Thank you for registering with the DCF Global Parish Network. Your application is now in review — we'll be in touch within 3–5 business days.</p>
-    <p class="success-sub" style="font-size:13px; margin-top:4px;">A confirmation has been sent to <strong id="success-email"></strong></p>
+    <p class="success-sub">Thank you for joining Communio. Your application is now in review — we'll be in touch within 3–5 business days.</p>
+    <p class="success-sub" style="font-size:14px; margin-top:4px;">A confirmation has been sent to <strong id="success-email"></strong></p>
 
     <div class="success-next">
       <div class="success-next-title">What happens next</div>
@@ -1746,11 +1953,11 @@
       </div>
       <div class="sn-item">
         <div class="sn-dot">2</div>
-        You receive an approval email with login credentials for your parish dashboard
+        You receive an approval email with login credentials for your Communio dashboard
       </div>
       <div class="sn-item">
         <div class="sn-dot">3</div>
-        Your parish page goes live on the global map and directory
+        Your parish page goes live on the Communio global map and directory
       </div>
       <div class="sn-item">
         <div class="sn-dot">4</div>
@@ -1762,13 +1969,28 @@
   </main>
 
   <!-- ============================================================
-       FOOTER
+       FOOTER — matches Communio landing page footer exactly
        ============================================================ -->
   <footer class="page-footer">
-    &copy; 2025 Domus Communis Foundation &nbsp;·&nbsp;
-    <a href="/privacy">Privacy Policy</a> &nbsp;·&nbsp;
-    <a href="/contact">Contact</a> &nbsp;·&nbsp;
-    EIN 99-1778616
+    <div class="footer-left">
+      <div class="footer-mark">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+          <circle cx="8" cy="8" r="3" fill="rgba(255,255,255,0.5)"/>
+          <path d="M8 1v3M8 12v3M1 8h3M12 8h3" stroke="rgba(255,255,255,0.5)" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div>
+        <div class="footer-name">Communio</div>
+        <div class="footer-sub">by Domus Communis Foundation &nbsp;·&nbsp; EIN 99-1778616</div>
+      </div>
+    </div>
+    <div class="footer-links">
+      <a href="communio-v2.html">Back to Communio</a>
+      <a href="/about">About DCF</a>
+      <a href="/privacy">Privacy</a>
+      <a href="/contact">Contact</a>
+      <a href="https://dcffoundation.org">dcffoundation.org</a>
+    </div>
   </footer>
 
   <!-- ============================================================
@@ -1815,22 +2037,18 @@
        STEP NAVIGATION
        ---------------------------------------------------------- */
     function goToStep(step) {
-      // Deactivate current
       document.getElementById('panel-' + currentStep).classList.remove('active');
       const oldProg = document.getElementById('prog-' + currentStep);
       oldProg.classList.remove('active');
       if (step > currentStep) oldProg.classList.add('done');
 
-      // Activate new
       currentStep = step;
       document.getElementById('panel-' + currentStep).classList.add('active');
       document.getElementById('prog-' + currentStep).classList.add('active');
       document.getElementById('prog-' + currentStep).classList.remove('done');
 
-      // Populate review if last step
       if (currentStep === totalSteps) populateReview();
 
-      // Scroll
       document.querySelector('.page-header').scrollIntoView({ behavior: 'smooth' });
     }
 
@@ -1877,11 +2095,9 @@
         dioceseSelect.appendChild(opt);
       });
 
-      // Show diocese row
       showCascade('cr-diocese');
       setFinderDot(2);
 
-      // Reset parish search
       document.getElementById('parish-search').value = '';
       document.getElementById('found-card').classList.remove('visible');
       document.getElementById('not-listed').classList.remove('visible');
@@ -1969,7 +2185,6 @@
       items.forEach((item, i) => item.classList.toggle('focused', i === acFocusIndex));
     }
 
-    // Close dropdown on outside click
     document.addEventListener('click', e => {
       if (!e.target.closest('.ac-wrap')) {
         document.getElementById('ac-list').classList.remove('open');
@@ -1979,14 +2194,12 @@
     function selectParish(p) {
       parishData = p;
 
-      // Fill hidden fields (PHP reads these)
       document.getElementById('h-place-id').value          = p.placeId;
       document.getElementById('h-lat').value               = p.lat;
       document.getElementById('h-lng').value               = p.lng;
       document.getElementById('h-formatted-address').value = p.address;
       document.getElementById('h-source').value            = 'google_places';
 
-      // Fill visible found card
       document.getElementById('found-name').textContent    = p.name;
       document.getElementById('found-address').textContent = p.address || '—';
       document.getElementById('found-city').textContent    = p.city    || '—';
@@ -1997,7 +2210,6 @@
       document.getElementById('found-country-label').textContent =
         countrySelect.options[countrySelect.selectedIndex]?.text || '—';
 
-      // Pre-fill step 2 website field
       if (p.website) {
         const wsField = document.getElementById('website_url');
         wsField.value = p.website;
@@ -2090,7 +2302,6 @@
         return s?.options[s.selectedIndex]?.text || '—';
       };
 
-      // Parish name — prefer Google Places data
       const parishName = parishData.name || getVal('parish_name_manual') || '—';
       document.getElementById('rv-name').textContent    = parishName;
       document.getElementById('rv-name-src').textContent =
@@ -2107,15 +2318,13 @@
       document.getElementById('rv-contact-name').textContent  = `${first} ${last}`.trim() || '—';
       document.getElementById('rv-contact-role').textContent  = getLabel('contact_role');
       document.getElementById('rv-contact-email').textContent = getVal('contact_email');
-      document.getElementById('rv-website').textContent       = getVal('website_url') || 'None — DCF will build one';
+      document.getElementById('rv-website').textContent       = getVal('website_url') || 'None — Communio will build one';
 
-      // Focus areas
       const checked = document.querySelectorAll('input[name="focus_areas[]"]:checked');
       const labels  = Array.from(checked).map(c => c.closest('.focus-opt').querySelector('label').textContent.trim());
       document.getElementById('rv-focus').textContent       = labels.length ? labels.join(', ') : 'None selected';
       document.getElementById('rv-description').textContent = getVal('parish_description');
 
-      // Donation
       if (donationEnabled && stripeConnected) {
         document.getElementById('rv-donation-status').innerHTML =
           '<span class="donation-status-badge dsb-active">Active on approval</span>';
@@ -2126,7 +2335,7 @@
           '<span class="donation-status-badge dsb-later">Selected — bank account not yet connected</span>';
       } else {
         document.getElementById('rv-donation-status').innerHTML =
-          '<span class="donation-status-badge dsb-later">Set up later from dashboard</span>';
+          '<span class="donation-status-badge dsb-later">Set up later from Communio dashboard</span>';
       }
     }
 
@@ -2202,11 +2411,7 @@
   suggested_amounts   VARCHAR(200)          -- comma-separated e.g. "10,25,50,100"
   donation_label      VARCHAR(200)
   donation_description TEXT
-  total_donated       DECIMAL(14,2) DEFAULT 0 -- running total for fee tier calc
-
-  -- Metadata
-  created_at          TIMESTAMP DEFAULT NOW()
-  updated_at          TIMESTAMP DEFAULT NOW()
+  total_donated       DECIMAL(12,2) DEFAULT 0.00
   ================================================================
   -->
 
