@@ -111,7 +111,7 @@
     #v-welcome { min-height: 100dvh; background: var(--ink); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 80px 20px 100px; position: relative; overflow: hidden; }
     #v-welcome::before { content: ''; position: absolute; width: 560px; height: 560px; border-radius: 50%; background: radial-gradient(circle, rgba(200,92,58,0.09) 0%, transparent 65%); top: -180px; right: -130px; pointer-events: none; }
     #v-welcome::after  { content: ''; position: absolute; width: 380px; height: 380px; border-radius: 50%; background: radial-gradient(circle, rgba(74,124,89,0.07) 0%, transparent 65%); bottom: -80px; left: -80px; pointer-events: none; }
-    .wl { position: relative; z-index: 1; max-width: 480px; width: 100%; text-align: center; }
+    .wl { position: relative; z-index: 1; max-width: 480px; width: 100%; text-align: center; margin: 0 auto; }
     .wl-check { width: 60px; height: 60px; border-radius: 50%; background: var(--sage); margin: 0 auto 24px; display: flex; align-items: center; justify-content: center; animation: pop .55s cubic-bezier(0.16,1.4,0.3,1) both; }
     .wl-check svg { width: 26px; height: 26px; }
     @keyframes pop { from { opacity:0; transform:scale(0.5); } to { opacity:1; transform:scale(1); } }
