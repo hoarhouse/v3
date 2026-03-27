@@ -2006,47 +2006,35 @@ function buildFullChart(){
 /* ── NAVIGATION ────────────────────────────────────────── */
 var currentApp = 'home';
 
-function go(viewName, appSection){
-  document.querySelectorAll('.view, .app-view').forEach(function(v){
+function go(viewName,appSection){
+  document.querySelectorAll('.view,.app-view').forEach(function(v){
     v.classList.remove('on');
     v.style.display='none';
   });
-  var tabBar = document.getElementById('tab-bar');
   var target;
   if(viewName==='app'){
     target=document.getElementById('v-app');
     target.style.display='flex';
     target.classList.add('on');
     if(appSection) navTo(appSection);
-    tabBar.classList.remove('hidden');
-  } else if(viewName==='welcome'){
-    target=document.getElementById('v-welcome');
-    target.style.display='block';
-    target.classList.add('on');
-    tabBar.classList.add('hidden');
   } else {
     target=document.getElementById('v-'+viewName);
     target.style.display='block';
     target.classList.add('on');
-    tabBar.classList.remove('hidden');
   }
-  updateTabBar(viewName, appSection);
-  document.documentElement.scrollTop=0;
-  document.body.scrollTop=0;
   var viewMap={welcome:0,setup:1,public:9};
   var appMap={home:2,messages:3,network:4,projects:5,website:6,donations:7,settings:8};
   var idx=(viewName==='app')?(appSection?appMap[appSection]:2):viewMap[viewName];
   document.querySelectorAll('.sw-btn').forEach(function(b,i){
     b.classList.toggle('on',i===idx);
   });
+  document.documentElement.scrollTop=0;
+  document.body.scrollTop=0;
   if(viewName==='app'&&appSection==='home') setTimeout(buildMiniChart,50);
   if(viewName==='app'&&appSection==='donations') setTimeout(buildFullChart,50);
 }
 
-function updateTabBar(viewName, appSection){
-  document.querySelectorAll('.tab-item').forEach(function(t){
-    t.classList.remove('active');
-  });
+);
   if(viewName==='setup'){
     var t=document.getElementById('tab-setup');
     if(t) t.classList.add('active');
