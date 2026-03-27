@@ -1,0 +1,2021 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>St. Mary's Parish — Communio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Lora:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+/* ── VARIABLES ─────────────────────────────────────────── */
+:root {
+  --cream:#faf6f0; --cream-dk:#f2ebe0; --ww:#fffdf9; --white:#fff;
+  --terra:#c85c3a; --terra-l:#e8856a; --terra-p:#fceee9;
+  --sage:#4a7c59;  --sage-l:#6a9e78;  --sage-p:#eaf3ec;
+  --amber:#e8943a; --amber-p:#fef3e8;
+  --ink:#1a1208; --ink-s:#3d3020;
+  --mid:#6b5c48; --light:#9c8b78;
+  --border:#e8ddd0; --border-l:#f0e8dc;
+  --f-sans:'Outfit',system-ui,sans-serif;
+  --f-serif:'Lora',Georgia,serif;
+  --r-md:12px; --r-lg:20px; --r-xl:28px; --r-pill:100px;
+  --sh-sm:0 2px 10px rgba(26,18,8,0.07);
+  --sh-md:0 8px 28px rgba(26,18,8,0.10);
+  --ease:0.2s ease;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;}
+body{font-family:var(--f-sans);font-size:15px;color:var(--ink);background:var(--ww);line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased;}
+button,input,select,textarea{font-family:var(--f-sans);}
+img{max-width:100%;display:block;}
+
+/* ── VIEW SYSTEM ───────────────────────────────────────── */
+.view{display:none;}
+.view.on{display:block;}
+.app-view{display:none;}
+.app-view.on{display:flex;min-height:100dvh;}
+
+/* ── SHARED BUTTONS ────────────────────────────────────── */
+.btn{font-family:var(--f-sans);font-size:13px;font-weight:700;border:none;border-radius:var(--r-pill);cursor:pointer;display:inline-flex;align-items:center;gap:6px;transition:all var(--ease);text-decoration:none;}
+.btn svg{width:13px;height:13px;flex-shrink:0;}
+.btn-terra{background:var(--terra);color:#fff;padding:10px 20px;box-shadow:0 3px 12px rgba(200,92,58,0.28);}
+.btn-terra:hover{background:var(--terra-l);transform:translateY(-1px);}
+.btn-outline{background:transparent;color:var(--mid);border:1.5px solid var(--border);padding:9px 18px;}
+.btn-outline:hover{border-color:var(--ink);color:var(--ink);}
+.btn-sage{background:var(--sage);color:#fff;padding:10px 20px;}
+.btn-sage:hover{background:var(--sage-l);}
+.btn-ghost-dark{background:rgba(255,255,255,0.07);color:rgba(255,253,249,0.6);border:1px solid rgba(255,255,255,0.1);padding:9px 16px;}
+.btn-ghost-dark:hover{background:rgba(255,255,255,0.12);color:#fff;}
+.btn-sm{padding:8px 16px;font-size:12px;}
+.btn-xs{padding:5px 12px;font-size:11px;}
+
+/* ── SHARED CARDS ──────────────────────────────────────── */
+.card{background:var(--white);border:1.5px solid var(--border-l);border-radius:var(--r-xl);}
+.card-p{padding:20px;}
+.sec-lbl{font-size:10px;font-weight:700;letter-spacing:0.09em;text-transform:uppercase;color:var(--light);display:flex;align-items:center;gap:8px;margin-bottom:14px;}
+.sec-lbl::after{content:'';flex:1;height:1px;background:var(--border-l);}
+
+/* ── TAGS / BADGES ─────────────────────────────────────── */
+.tag{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;border-radius:var(--r-pill);padding:3px 9px;}
+.tag-sage{background:var(--sage-p);color:var(--sage);}
+.tag-terra{background:var(--terra-p);color:var(--terra);}
+.tag-amber{background:var(--amber-p);color:var(--amber);}
+.tag-dark{background:rgba(255,255,255,0.1);color:rgba(255,253,249,0.6);}
+.tag-neutral{background:var(--cream);color:var(--light);border:1px solid var(--border);}
+
+/* ════════════════════════════════════════════════════
+   TOP NAV (all views)
+   ════════════════════════════════════════════════════ */
+.top-nav{position:fixed;top:0;left:0;right:0;z-index:300;height:58px;padding:0 20px;display:flex;align-items:center;justify-content:space-between;background:rgba(255,253,249,0.94);backdrop-filter:blur(20px);border-bottom:1px solid var(--border-l);}
+.nav-brand{display:flex;align-items:center;gap:8px;text-decoration:none;}
+.nav-mark{width:30px;height:30px;background:var(--terra);border-radius:8px;display:flex;align-items:center;justify-content:center;}
+.nav-mark svg{width:13px;height:13px;}
+.nav-wm{font-size:16px;font-weight:700;color:var(--ink);letter-spacing:-0.02em;}
+.nav-wm span{color:var(--terra);}
+.nav-r{display:flex;align-items:center;gap:8px;}
+.nav-parish{display:flex;align-items:center;gap:7px;background:var(--cream);border:1px solid var(--border);border-radius:var(--r-pill);padding:4px 12px 4px 4px;cursor:pointer;}
+.nav-av{width:24px;height:24px;border-radius:50%;background:var(--terra);color:#fff;font-size:10px;font-weight:800;display:flex;align-items:center;justify-content:center;}
+.nav-pname{font-size:12px;font-weight:600;color:var(--ink);}
+@media(max-width:480px){.nav-pname{display:none;}}
+.nav-notif{width:32px;height:32px;border-radius:50%;background:var(--cream);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;cursor:pointer;position:relative;}
+.nav-notif svg{width:14px;height:14px;}
+.notif-dot{position:absolute;top:6px;right:6px;width:7px;height:7px;border-radius:50%;background:var(--terra);border:1.5px solid var(--ww);}
+
+/* ════════════════════════════════════════════════════
+   DEMO SWITCHER
+   ════════════════════════════════════════════════════ */
+.switcher{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);z-index:999;background:var(--ink);border-radius:var(--r-pill);padding:4px;display:flex;flex-wrap:wrap;justify-content:center;gap:2px;box-shadow:var(--sh-md);max-width:calc(100vw - 32px);}
+.sw-btn{font-family:var(--f-sans);font-size:11px;font-weight:600;color:rgba(255,253,249,0.38);background:none;border:none;border-radius:var(--r-pill);padding:7px 13px;cursor:pointer;transition:all var(--ease);white-space:nowrap;}
+.sw-btn:hover{color:rgba(255,253,249,0.72);}
+.sw-btn.on{background:var(--terra);color:#fff;}
+
+/* ════════════════════════════════════════════════════
+   VIEW 1 — WELCOME
+   ════════════════════════════════════════════════════ */
+#v-welcome{min-height:100dvh;background:var(--ink);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:80px 20px 100px;position:relative;overflow:hidden;}
+#v-welcome::before{content:'';position:absolute;width:550px;height:550px;border-radius:50%;background:radial-gradient(circle,rgba(200,92,58,0.1) 0%,transparent 65%);top:-180px;right:-130px;pointer-events:none;}
+#v-welcome::after{content:'';position:absolute;width:380px;height:380px;border-radius:50%;background:radial-gradient(circle,rgba(74,124,89,0.07) 0%,transparent 65%);bottom:-80px;left:-80px;pointer-events:none;}
+.wl{position:relative;z-index:1;max-width:460px;width:100%;text-align:center;}
+.wl-check{width:60px;height:60px;border-radius:50%;background:var(--sage);margin:0 auto 24px;display:flex;align-items:center;justify-content:center;animation:pop .55s cubic-bezier(0.16,1.4,0.3,1) both;}
+.wl-check svg{width:26px;height:26px;}
+@keyframes pop{from{opacity:0;transform:scale(0.5);}to{opacity:1;transform:scale(1);}}
+.wl-tag{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--sage-l);background:rgba(74,124,89,0.15);border:1px solid rgba(74,124,89,0.25);border-radius:var(--r-pill);padding:5px 13px;margin-bottom:14px;animation:up .5s ease .15s both;}
+.wl-h1{font-size:clamp(28px,7vw,48px);font-weight:800;color:#fff;line-height:1.08;letter-spacing:-0.03em;margin-bottom:12px;animation:up .5s ease .2s both;}
+.wl-h1 em{font-style:italic;font-family:var(--f-serif);font-weight:400;color:var(--terra-l);}
+.wl-p{font-size:15px;color:rgba(255,253,249,0.45);line-height:1.7;margin-bottom:26px;animation:up .5s ease .25s both;}
+.wl-net{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);border-radius:var(--r-xl);padding:18px 20px;margin-bottom:22px;animation:up .5s ease .3s both;}
+.wl-net-lbl{font-size:10px;font-weight:700;letter-spacing:0.09em;text-transform:uppercase;color:rgba(255,253,249,0.2);margin-bottom:14px;text-align:left;}
+.wl-nodes{display:flex;align-items:center;justify-content:center;}
+.wl-node{display:flex;flex-direction:column;align-items:center;gap:5px;padding:0 8px;}
+.wl-dot{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,0.13);}
+.wl-dot.you{width:13px;height:13px;background:var(--terra);box-shadow:0 0 0 3px rgba(200,92,58,0.22),0 0 0 6px rgba(200,92,58,0.1);animation:glow 2s ease infinite;}
+@keyframes glow{0%,100%{box-shadow:0 0 0 3px rgba(200,92,58,0.22),0 0 0 6px rgba(200,92,58,0.1);}50%{box-shadow:0 0 0 5px rgba(200,92,58,0.15),0 0 0 9px rgba(200,92,58,0.06);}}
+.wl-line{width:18px;height:1px;background:rgba(255,255,255,0.1);flex-shrink:0;}
+.wl-flag{font-size:15px;line-height:1;}
+.wl-city{font-size:9px;color:rgba(255,253,249,0.25);font-weight:500;}
+.wl-city.you{color:var(--terra-l);font-weight:700;}
+.wl-count{margin-top:14px;padding-top:12px;border-top:1px solid rgba(255,255,255,0.06);font-size:13px;color:rgba(255,253,249,0.3);text-align:center;}
+.wl-count strong{color:rgba(255,253,249,0.7);font-weight:700;}
+.wl-cta{animation:up .5s ease .35s both;width:100%;justify-content:center;padding:15px;font-size:15px;}
+@keyframes up{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
+
+/* ════════════════════════════════════════════════════
+   VIEW 2 — SETUP / ONBOARDING
+   ════════════════════════════════════════════════════ */
+#v-setup{background:var(--cream);min-height:100dvh;padding-top:58px;}
+.setup-strip{background:var(--ink);overflow-x:auto;scrollbar-width:none;}
+.setup-strip::-webkit-scrollbar{display:none;}
+.setup-inner{display:flex;min-width:max-content;padding:0 16px;}
+.s-tab{display:flex;align-items:center;gap:7px;padding:12px 14px;border-bottom:2px solid transparent;transition:border-color var(--ease);white-space:nowrap;}
+.s-tab.done{border-bottom-color:rgba(74,124,89,0.45);}
+.s-tab.active{border-bottom-color:var(--terra);}
+.s-num{width:20px;height:20px;border-radius:50%;border:1.5px solid rgba(255,255,255,0.1);font-size:10px;font-weight:700;color:rgba(255,255,255,0.22);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all var(--ease);}
+.s-tab.active .s-num{background:var(--terra);border-color:var(--terra);color:#fff;}
+.s-tab.done .s-num{background:var(--sage);border-color:var(--sage);color:#fff;}
+.s-name{font-size:11px;font-weight:600;color:rgba(255,255,255,0.2);transition:color var(--ease);}
+.s-tab.active .s-name{color:rgba(255,253,249,0.9);}
+.s-tab.done .s-name{color:rgba(255,253,249,0.35);}
+.setup-body{max-width:880px;margin:0 auto;padding:24px 16px 100px;display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+@media(max-width:640px){.setup-body{grid-template-columns:1fr;}}
+
+/* Profile card */
+.setup-prof{grid-column:1/-1;}
+.sp-head{background:var(--ink);border-radius:var(--r-xl) var(--r-xl) 0 0;padding:20px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
+.sp-av{width:50px;height:50px;border-radius:13px;background:var(--terra);color:#fff;font-size:17px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.sp-name{font-size:clamp(15px,4vw,20px);font-weight:800;color:#fff;letter-spacing:-0.02em;margin-bottom:4px;}
+.sp-badges{display:flex;flex-wrap:wrap;gap:5px;}
+.sp-b{font-size:10px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;border-radius:var(--r-pill);padding:3px 9px;}
+.spb-g{background:var(--sage);color:#fff;}
+.spb-d{background:rgba(255,255,255,0.08);color:rgba(255,253,249,0.5);}
+.sp-prev{margin-left:auto;font-size:12px;font-weight:600;color:rgba(255,253,249,0.4);background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:var(--r-pill);padding:7px 13px;cursor:pointer;transition:all var(--ease);}
+.sp-prev:hover{color:#fff;border-color:rgba(255,255,255,0.22);}
+@media(max-width:480px){.sp-prev{margin-left:0;}}
+.sp-body{padding:20px;display:flex;flex-direction:column;gap:15px;}
+.sp-foot{padding:0 20px 20px;display:flex;justify-content:flex-end;gap:8px;}
+.field{display:flex;flex-direction:column;gap:5px;}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+@media(max-width:440px){.field-row{grid-template-columns:1fr;}}
+.fl{font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--light);}
+.fl .req{color:var(--terra);}
+.fi{font-size:14px;color:var(--ink);background:var(--cream);border:1.5px solid var(--border);border-radius:var(--r-md);padding:10px 12px;outline:none;width:100%;transition:border-color var(--ease),box-shadow var(--ease);-webkit-appearance:none;}
+.fi:focus{border-color:var(--terra);box-shadow:0 0 0 3px rgba(200,92,58,0.1);background:#fff;}
+.fi::placeholder{color:var(--light);}
+textarea.fi{resize:vertical;min-height:84px;line-height:1.6;}
+select.fi{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%239c8b78' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:30px;cursor:pointer;}
+.fh{font-size:11px;color:var(--light);}
+.fpills{display:flex;flex-wrap:wrap;gap:6px;}
+.fpill{font-size:12px;font-weight:600;color:var(--terra);background:var(--terra-p);border:1.5px solid rgba(200,92,58,0.18);border-radius:var(--r-pill);padding:5px 11px;cursor:pointer;transition:all var(--ease);}
+.fpill:hover{background:var(--terra);color:#fff;}
+.fpill.add{color:var(--light);background:transparent;border-style:dashed;}
+.fpill.add:hover{color:var(--terra);border-color:var(--terra);background:var(--terra-p);}
+
+/* Website & Stripe cards */
+.ws-head{padding:16px 20px;display:flex;align-items:center;justify-content:space-between;gap:10px;border-bottom:1px solid var(--border-l);flex-wrap:wrap;}
+.ws-hl{display:flex;align-items:center;gap:10px;}
+.ws-ico{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.ws-t{font-size:14px;font-weight:800;color:var(--ink);letter-spacing:-0.01em;margin-bottom:2px;}
+.ws-s{font-size:12px;color:var(--mid);}
+.ws-body{padding:16px 20px;}
+.tmpl-row{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px;}
+.tmpl{border:2px solid var(--border-l);border-radius:var(--r-lg);overflow:hidden;cursor:pointer;transition:all var(--ease);}
+.tmpl:hover{border-color:var(--terra);transform:translateY(-2px);}
+.tmpl.sel{border-color:var(--terra);}
+.tp{height:62px;position:relative;}
+.tp-a{background:linear-gradient(145deg,#faf6f0,#f2ebe0);}
+.tp-b{background:linear-gradient(145deg,#eaf3ec,#4a7c59);}
+.tp-c{background:linear-gradient(145deg,#1a1208,#3d3020);}
+.tp-lines{position:absolute;inset:8px;display:flex;flex-direction:column;gap:4px;}
+.tpl{height:5px;border-radius:3px;opacity:.45;}
+.tpl.h{width:55%;height:7px;opacity:.7;}
+.tpl.m{width:68%;}
+.tpl.s{width:38%;}
+.tp-a .tpl{background:var(--terra);}
+.tp-b .tpl{background:#fff;}
+.tp-c .tpl{background:var(--terra-l);}
+.tp-ring{position:absolute;inset:0;display:none;align-items:center;justify-content:center;border:2.5px solid var(--terra);border-radius:10px;}
+.tmpl.sel .tp-ring{display:flex;}
+.tp-dot{width:20px;height:20px;border-radius:50%;background:var(--terra);display:flex;align-items:center;justify-content:center;}
+.tp-dot svg{width:10px;height:10px;}
+.tmpl-name{padding:7px 9px;font-size:11px;font-weight:700;color:var(--mid);border-top:1px solid var(--border-l);}
+.url-row{display:flex;align-items:center;gap:9px;background:var(--cream);border:1.5px solid var(--border);border-radius:var(--r-md);padding:9px 12px;margin-bottom:12px;}
+.url-row svg{width:14px;height:14px;flex-shrink:0;}
+.url-t{font-size:13px;font-weight:600;color:var(--ink);}
+.url-t em{color:var(--terra);font-style:normal;}
+
+/* Stripe section */
+.stripe-sec{padding:18px 20px;}
+.stripe-connect{display:inline-flex;align-items:center;gap:8px;background:#635bff;color:#fff;border:none;border-radius:var(--r-pill);padding:11px 20px;font-family:var(--f-sans);font-size:13px;font-weight:700;cursor:pointer;transition:all var(--ease);}
+.stripe-connect:hover{background:#4f46e5;transform:translateY(-1px);}
+.stripe-connected{display:none;align-items:center;gap:10px;background:var(--sage-p);border:1.5px solid var(--sage-l);border-radius:var(--r-md);padding:12px 16px;font-size:13px;font-weight:600;color:var(--sage);}
+.stripe-connected.show{display:flex;}
+
+/* ════════════════════════════════════════════════════
+   APP SHELL (views 3-9)
+   ════════════════════════════════════════════════════ */
+.app-shell{display:flex;min-height:100dvh;padding-top:58px;}
+
+/* Sidebar */
+.sidebar{width:220px;flex-shrink:0;background:var(--ink);display:flex;flex-direction:column;position:fixed;top:58px;bottom:0;left:0;z-index:100;overflow-y:auto;transition:transform var(--ease);}
+@media(max-width:768px){.sidebar{transform:translateX(-100%);width:200px;}.sidebar.open{transform:translateX(0);}}
+.sb-parish{padding:16px;border-bottom:1px solid rgba(255,255,255,0.06);}
+.sb-av{width:36px;height:36px;border-radius:10px;background:var(--terra);color:#fff;font-size:13px;font-weight:800;display:flex;align-items:center;justify-content:center;margin-bottom:8px;}
+.sb-name{font-size:13px;font-weight:700;color:#fff;letter-spacing:-0.01em;margin-bottom:2px;}
+.sb-loc{font-size:11px;color:rgba(255,253,249,0.3);}
+.sb-nav{padding:12px 8px;flex:1;}
+.sb-section-lbl{font-size:9px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,253,249,0.2);padding:8px 10px 4px;}
+.sb-item{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:var(--r-md);cursor:pointer;transition:all var(--ease);margin-bottom:2px;}
+.sb-item:hover{background:rgba(255,255,255,0.06);}
+.sb-item.active{background:var(--terra);box-shadow:0 3px 10px rgba(200,92,58,0.3);}
+.sb-item svg{width:16px;height:16px;flex-shrink:0;opacity:.6;}
+.sb-item.active svg{opacity:1;}
+.sb-item-label{font-size:13px;font-weight:600;color:rgba(255,253,249,0.5);transition:color var(--ease);}
+.sb-item.active .sb-item-label{color:#fff;}
+.sb-item:hover .sb-item-label{color:rgba(255,253,249,0.8);}
+.sb-badge{margin-left:auto;background:var(--terra);color:#fff;font-size:9px;font-weight:800;border-radius:var(--r-pill);padding:2px 7px;min-width:18px;text-align:center;}
+.sb-item.active .sb-badge{background:rgba(255,255,255,0.25);}
+.sb-bottom{padding:12px;border-top:1px solid rgba(255,255,255,0.06);}
+.sb-profile-link{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:var(--r-md);cursor:pointer;transition:all var(--ease);}
+.sb-profile-link:hover{background:rgba(255,255,255,0.06);}
+.sb-profile-link-label{font-size:12px;font-weight:600;color:rgba(255,253,249,0.4);}
+
+/* Mobile sidebar toggle */
+.sb-toggle{display:none;position:fixed;top:12px;left:16px;z-index:400;width:32px;height:32px;background:var(--terra);border:none;border-radius:8px;align-items:center;justify-content:center;cursor:pointer;}
+.sb-toggle svg{width:14px;height:14px;}
+@media(max-width:768px){.sb-toggle{display:flex;}}
+
+/* Main content area */
+.main-content{flex:1;margin-left:220px;padding:28px 24px 100px;max-width:100%;min-width:0;}
+@media(max-width:768px){.main-content{margin-left:0;padding:20px 16px 100px;}}
+
+/* Section panels within main content */
+.section-panel{display:none;}
+.section-panel.on{display:block;}
+
+/* ════════════════════════════════════════════════════
+   HOME DASHBOARD
+   ════════════════════════════════════════════════════ */
+.dash-header{margin-bottom:24px;}
+.dash-greeting{font-size:clamp(20px,4vw,28px);font-weight:800;color:var(--ink);letter-spacing:-0.025em;margin-bottom:4px;}
+.dash-date{font-size:13px;color:var(--light);}
+
+/* Metric cards */
+.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px;}
+@media(max-width:900px){.metrics{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:480px){.metrics{grid-template-columns:1fr 1fr;}}
+.metric{background:#fff;border:1.5px solid var(--border-l);border-radius:var(--r-lg);padding:16px 18px;}
+.metric-val{font-size:24px;font-weight:800;color:var(--ink);letter-spacing:-0.02em;line-height:1;margin-bottom:4px;}
+.metric-lbl{font-size:11px;color:var(--light);font-weight:500;}
+.metric-change{font-size:11px;font-weight:700;margin-top:5px;}
+.metric-up{color:var(--sage);}
+.metric-down{color:var(--terra);}
+
+/* Two column layout */
+.dash-grid{display:grid;grid-template-columns:1fr 340px;gap:16px;align-items:start;}
+@media(max-width:900px){.dash-grid{grid-template-columns:1fr;}}
+
+/* Mini bar chart */
+.chart-wrap{padding:20px;}
+.chart-bars{display:flex;align-items:flex-end;gap:6px;height:120px;margin-bottom:8px;}
+.c-bar-group{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;}
+.c-bar{width:100%;border-radius:4px 4px 0 0;background:var(--terra-p);transition:all .3s ease;cursor:pointer;min-height:4px;}
+.c-bar:hover{background:var(--terra);}
+.c-bar.active{background:var(--terra);}
+.c-month{font-size:10px;color:var(--light);font-weight:600;text-align:center;}
+.c-val{font-size:10px;color:var(--mid);font-weight:700;text-align:center;}
+.chart-legend{display:flex;align-items:center;gap:16px;margin-top:12px;}
+.cl-item{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--mid);}
+.cl-dot{width:8px;height:8px;border-radius:50%;}
+
+/* Recent activity */
+.activity-list{display:flex;flex-direction:column;gap:0;}
+.activity-item{display:flex;align-items:flex-start;gap:12px;padding:13px 0;border-bottom:1px solid var(--border-l);}
+.activity-item:last-child{border-bottom:none;}
+.act-icon{width:32px;height:32px;border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.act-icon.terra{background:var(--terra-p);}
+.act-icon.sage{background:var(--sage-p);}
+.act-icon.amber{background:var(--amber-p);}
+.act-icon svg{width:15px;height:15px;}
+.act-title{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:2px;}
+.act-meta{font-size:11px;color:var(--light);}
+.act-time{font-size:11px;color:var(--light);margin-left:auto;flex-shrink:0;padding-top:2px;}
+
+/* Quick actions sidebar */
+.quick-actions{display:flex;flex-direction:column;gap:10px;}
+.qa-card{background:#fff;border:1.5px solid var(--border-l);border-radius:var(--r-xl);padding:18px;}
+.qa-title{font-size:13px;font-weight:800;color:var(--ink);letter-spacing:-0.01em;margin-bottom:4px;}
+.qa-desc{font-size:12px;color:var(--mid);line-height:1.5;margin-bottom:12px;}
+.qa-card.dark{background:var(--ink);}
+.qa-card.dark .qa-title{color:#fff;}
+.qa-card.dark .qa-desc{color:rgba(255,253,249,0.38);}
+.setup-progress{margin-bottom:12px;}
+.sp-bar{height:5px;background:var(--border);border-radius:var(--r-pill);overflow:hidden;margin-top:6px;}
+.sp-fill{height:100%;background:var(--terra);border-radius:var(--r-pill);}
+.sp-lbl{font-size:11px;color:var(--mid);display:flex;justify-content:space-between;}
+
+/* ════════════════════════════════════════════════════
+   MESSAGES
+   ════════════════════════════════════════════════════ */
+.messages-layout{display:grid;grid-template-columns:280px 1fr;gap:0;border:1.5px solid var(--border-l);border-radius:var(--r-xl);overflow:hidden;height:calc(100dvh - 160px);min-height:500px;}
+@media(max-width:700px){.messages-layout{grid-template-columns:1fr;height:auto;min-height:0;border:none;gap:14px;}}
+.msg-list{border-right:1px solid var(--border-l);background:#fff;overflow-y:auto;}
+.msg-list-head{padding:16px;border-bottom:1px solid var(--border-l);display:flex;align-items:center;justify-content:space-between;}
+.msg-list-title{font-size:14px;font-weight:800;color:var(--ink);letter-spacing:-0.01em;}
+.msg-section-lbl{padding:8px 16px 4px;font-size:9px;font-weight:700;letter-spacing:0.09em;text-transform:uppercase;color:var(--light);}
+.msg-item{display:flex;align-items:flex-start;gap:10px;padding:12px 16px;cursor:pointer;transition:background var(--ease);border-bottom:1px solid var(--border-l);}
+.msg-item:hover{background:var(--cream);}
+.msg-item.active{background:var(--terra-p);}
+.msg-av{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;color:#fff;flex-shrink:0;}
+.msg-info{flex:1;min-width:0;}
+.msg-name{font-size:13px;font-weight:700;color:var(--ink);margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.msg-preview{font-size:11px;color:var(--light);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.msg-time{font-size:10px;color:var(--light);flex-shrink:0;}
+.msg-unread{width:7px;height:7px;border-radius:50%;background:var(--terra);flex-shrink:0;margin-top:4px;}
+.msg-thread{background:var(--cream);display:flex;flex-direction:column;}
+@media(max-width:700px){.msg-thread{border:1.5px solid var(--border-l);border-radius:var(--r-xl);overflow:hidden;}}
+.mt-head{background:#fff;padding:14px 18px;border-bottom:1px solid var(--border-l);display:flex;align-items:center;gap:12px;}
+.mt-av{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:#fff;flex-shrink:0;}
+.mt-name{font-size:14px;font-weight:800;color:var(--ink);letter-spacing:-0.01em;}
+.mt-loc{font-size:11px;color:var(--light);}
+.mt-badge{margin-left:auto;}
+.mt-body{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:12px;}
+.msg-bubble-wrap{display:flex;gap:8px;align-items:flex-end;}
+.msg-bubble-wrap.me{flex-direction:row-reverse;}
+.bubble-av{width:26px;height:26px;border-radius:8px;background:var(--border);font-size:9px;font-weight:800;color:var(--mid);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.bubble-av.me{background:var(--terra);color:#fff;}
+.bubble{max-width:72%;padding:10px 13px;border-radius:14px;font-size:13px;line-height:1.55;}
+.bubble.them{background:#fff;color:var(--ink);border:1.5px solid var(--border-l);border-bottom-left-radius:4px;}
+.bubble.me{background:var(--terra);color:#fff;border-bottom-right-radius:4px;}
+.bubble-time{font-size:10px;color:var(--light);margin-top:3px;text-align:right;}
+.bubble-time.them{text-align:left;}
+.mt-input{background:#fff;padding:12px 16px;border-top:1px solid var(--border-l);display:flex;gap:8px;align-items:center;}
+.mt-input input{flex:1;background:var(--cream);border:1.5px solid var(--border);border-radius:var(--r-pill);padding:9px 14px;font-size:13px;color:var(--ink);outline:none;}
+.mt-input input:focus{border-color:var(--terra);}
+.mt-send{width:34px;height:34px;border-radius:50%;background:var(--terra);border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;}
+.mt-send svg{width:13px;height:13px;}
+
+/* ════════════════════════════════════════════════════
+   NETWORK BROWSER
+   ════════════════════════════════════════════════════ */
+.network-filters{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap;align-items:center;}
+.nf-search{flex:1;min-width:160px;background:#fff;border:1.5px solid var(--border);border-radius:var(--r-pill);padding:9px 14px;font-size:13px;color:var(--ink);outline:none;}
+.nf-search:focus{border-color:var(--terra);}
+.nf-select{background:#fff;border:1.5px solid var(--border);border-radius:var(--r-pill);padding:9px 14px;font-size:12px;color:var(--ink);outline:none;cursor:pointer;}
+.network-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;}
+.parish-card{background:#fff;border:1.5px solid var(--border-l);border-radius:var(--r-xl);padding:20px;transition:all var(--ease);cursor:pointer;}
+.parish-card:hover{border-color:var(--terra);box-shadow:var(--sh-sm);transform:translateY(-2px);}
+.pc-top{display:flex;align-items:flex-start;gap:12px;margin-bottom:14px;}
+.pc-av2{width:44px;height:44px;border-radius:12px;font-size:15px;font-weight:800;color:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.pc-info-name{font-size:14px;font-weight:800;color:var(--ink);letter-spacing:-0.01em;margin-bottom:4px;}
+.pc-info-loc{font-size:12px;color:var(--light);}
+.pc-tags{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:14px;}
+.pc-focus{font-size:10px;font-weight:600;color:var(--terra);background:var(--terra-p);border-radius:var(--r-pill);padding:3px 9px;}
+.pc-actions{display:flex;gap:7px;}
+.sister-badge{font-size:10px;font-weight:700;color:var(--sage);background:var(--sage-p);border:1px solid var(--sage-l);border-radius:var(--r-pill);padding:4px 10px;display:inline-flex;align-items:center;gap:4px;}
+
+/* ════════════════════════════════════════════════════
+   PROJECTS
+   ════════════════════════════════════════════════════ */
+.projects-tabs{display:flex;gap:0;border-bottom:1px solid var(--border-l);margin-bottom:20px;}
+.proj-tab{font-family:var(--f-sans);font-size:13px;font-weight:600;color:var(--light);background:none;border:none;border-bottom:2px solid transparent;padding:10px 16px 12px;cursor:pointer;transition:all var(--ease);}
+.proj-tab:hover{color:var(--mid);}
+.proj-tab.on{color:var(--terra);border-bottom-color:var(--terra);}
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px;}
+.project-card{background:#fff;border:1.5px solid var(--border-l);border-radius:var(--r-xl);overflow:hidden;transition:all var(--ease);}
+.project-card:hover{box-shadow:var(--sh-md);transform:translateY(-2px);}
+.proj-card-head{padding:18px 20px;border-bottom:1px solid var(--border-l);}
+.proj-type-row{display:flex;align-items:center;gap:8px;margin-bottom:10px;}
+.proj-card-title{font-size:15px;font-weight:800;color:var(--ink);letter-spacing:-0.01em;margin-bottom:5px;}
+.proj-card-desc{font-size:13px;color:var(--mid);line-height:1.55;}
+.proj-card-body{padding:14px 20px;}
+.proj-stat-row{display:flex;align-items:center;justify-content:space-between;gap:10px;}
+.proj-stat{display:flex;flex-direction:column;gap:1px;}
+.proj-stat-n{font-size:16px;font-weight:800;color:var(--ink);letter-spacing:-0.01em;}
+.proj-stat-l{font-size:10px;color:var(--light);font-weight:500;}
+.proj-progress{margin-top:12px;}
+.proj-bar{height:4px;background:var(--border-l);border-radius:var(--r-pill);overflow:hidden;margin-top:4px;}
+.proj-bar-fill{height:100%;border-radius:var(--r-pill);background:var(--terra);}
+.proj-bar-fill.sage{background:var(--sage);}
+.proj-card-foot{padding:0 20px 16px;display:flex;gap:8px;}
+
+/* ════════════════════════════════════════════════════
+   WEBSITE EDITOR
+   ════════════════════════════════════════════════════ */
+.website-layout{display:grid;grid-template-columns:260px 1fr;gap:16px;align-items:start;}
+@media(max-width:700px){.website-layout{grid-template-columns:1fr;}}
+.we-panel{background:#fff;border:1.5px solid var(--border-l);border-radius:var(--r-xl);overflow:hidden;}
+.we-panel-head{padding:14px 18px;border-bottom:1px solid var(--border-l);}
+.we-panel-title{font-size:13px;font-weight:800;color:var(--ink);letter-spacing:-0.01em;}
+.we-section-item{display:flex;align-items:center;gap:10px;padding:11px 18px;border-bottom:1px solid var(--border-l);cursor:pointer;transition:background var(--ease);}
+.we-section-item:last-child{border-bottom:none;}
+.we-section-item:hover{background:var(--cream);}
+.we-section-item.active{background:var(--terra-p);}
+.we-section-icon{width:28px;height:28px;border-radius:7px;background:var(--cream);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.we-section-icon svg{width:13px;height:13px;}
+.we-section-label{font-size:13px;font-weight:600;color:var(--ink);}
+.we-section-status{margin-left:auto;font-size:10px;font-weight:700;color:var(--sage);}
+.we-preview{background:#fff;border:1.5px solid var(--border-l);border-radius:var(--r-xl);overflow:hidden;}
+.we-preview-bar{background:var(--ink);padding:10px 16px;display:flex;align-items:center;gap:10px;}
+.we-dots{display:flex;gap:5px;}
+.we-dot{width:9px;height:9px;border-radius:50%;}
+.we-dot:nth-child(1){background:#ff5f57;}
+.we-dot:nth-child(2){background:#febc2e;}
+.we-dot:nth-child(3){background:#28c840;}
+.we-url{flex:1;background:rgba(255,255,255,0.08);border-radius:var(--r-pill);padding:5px 12px;font-size:11px;color:rgba(255,253,249,0.5);text-align:center;}
+.we-preview-live{display:inline-flex;align-items:center;gap:5px;font-size:10px;font-weight:700;color:var(--sage-l);}
+.we-live-dot{width:6px;height:6px;border-radius:50%;background:var(--sage-l);animation:pulse2 2s ease infinite;}
+@keyframes pulse2{0%,100%{opacity:1;}50%{opacity:.4;}}
+.we-site-mock{background:var(--cream);padding:20px;}
+.wsm-hero{background:var(--ink);border-radius:var(--r-lg);padding:24px;margin-bottom:12px;position:relative;overflow:hidden;}
+.wsm-hero::before{content:'';position:absolute;top:-40px;right:-40px;width:150px;height:150px;border-radius:50%;background:radial-gradient(circle,rgba(200,92,58,0.2) 0%,transparent 70%);}
+.wsm-name{font-size:20px;font-weight:800;color:#fff;letter-spacing:-0.02em;margin-bottom:6px;position:relative;z-index:1;}
+.wsm-tagline{font-size:13px;color:rgba(255,253,249,0.45);position:relative;z-index:1;margin-bottom:14px;}
+.wsm-badges{display:flex;gap:6px;flex-wrap:wrap;position:relative;z-index:1;}
+.wsm-b{font-size:10px;font-weight:700;background:rgba(255,255,255,0.1);color:rgba(255,253,249,0.6);border-radius:var(--r-pill);padding:4px 10px;}
+.wsm-sections{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.wsm-sec{background:#fff;border-radius:var(--r-md);padding:14px;}
+.wsm-sec-title{font-size:12px;font-weight:700;color:var(--ink);margin-bottom:6px;}
+.wsm-line{height:4px;border-radius:2px;background:var(--border-l);margin-bottom:4px;}
+.wsm-line.w60{width:60%;}
+.wsm-line.w80{width:80%;}
+.wsm-line.w45{width:45%;}
+
+/* ════════════════════════════════════════════════════
+   DONATIONS
+   ════════════════════════════════════════════════════ */
+.donations-header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:20px;flex-wrap:wrap;}
+.dh-title{font-size:clamp(18px,4vw,24px);font-weight:800;color:var(--ink);letter-spacing:-0.025em;}
+.don-metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px;}
+@media(max-width:900px){.don-metrics{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:480px){.don-metrics{grid-template-columns:1fr 1fr;}}
+.don-metric{background:#fff;border:1.5px solid var(--border-l);border-radius:var(--r-lg);padding:16px;}
+.dm-val{font-size:22px;font-weight:800;color:var(--ink);letter-spacing:-0.025em;line-height:1;margin-bottom:4px;}
+.dm-lbl{font-size:11px;color:var(--light);font-weight:500;}
+.dm-trend{font-size:11px;font-weight:700;margin-top:4px;}
+.dm-up{color:var(--sage);}
+.don-layout{display:grid;grid-template-columns:1fr 320px;gap:16px;align-items:start;}
+@media(max-width:900px){.don-layout{grid-template-columns:1fr;}}
+
+/* Full chart */
+.full-chart{padding:20px;}
+.fc-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:10px;}
+.fc-title{font-size:15px;font-weight:800;color:var(--ink);letter-spacing:-0.01em;}
+.fc-total{font-size:24px;font-weight:800;color:var(--ink);letter-spacing:-0.03em;}
+.fc-total span{font-size:14px;color:var(--light);font-weight:500;}
+.fc-bars{display:flex;align-items:flex-end;gap:4px;height:140px;margin-bottom:8px;}
+.fc-bar-g{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;min-width:0;}
+.fc-bar{width:100%;border-radius:4px 4px 0 0;background:var(--terra-p);transition:all .3s;cursor:pointer;position:relative;}
+.fc-bar:hover{background:var(--terra);}
+.fc-bar.peak{background:var(--terra);}
+.fc-m{font-size:9px;color:var(--light);font-weight:600;text-align:center;white-space:nowrap;}
+.fc-v{font-size:9px;color:var(--mid);font-weight:700;text-align:center;}
+
+/* Transaction list */
+.tx-list{display:flex;flex-direction:column;gap:0;}
+.tx-item{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--border-l);}
+.tx-item:last-child{border-bottom:none;}
+.tx-av{width:34px;height:34px;border-radius:9px;background:var(--sage-p);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:12px;font-weight:800;color:var(--sage);}
+.tx-name{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:2px;}
+.tx-type{font-size:11px;color:var(--light);}
+.tx-amount{margin-left:auto;text-align:right;}
+.tx-val{font-size:14px;font-weight:800;color:var(--ink);letter-spacing:-0.01em;}
+.tx-date{font-size:11px;color:var(--light);}
+
+/* Payout card */
+.payout-card{background:var(--ink);border-radius:var(--r-xl);padding:22px;position:relative;overflow:hidden;}
+.payout-card::before{content:'';position:absolute;top:-40px;right:-40px;width:160px;height:160px;border-radius:50%;background:radial-gradient(circle,rgba(200,92,58,0.15) 0%,transparent 70%);}
+.pc2-lbl{font-size:10px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:rgba(255,253,249,0.25);margin-bottom:8px;position:relative;z-index:1;}
+.pc2-amount{font-size:34px;font-weight:800;color:#fff;letter-spacing:-0.03em;margin-bottom:16px;position:relative;z-index:1;}
+.pc2-row{display:flex;align-items:center;gap:12px;margin-bottom:10px;position:relative;z-index:1;}
+.pc2-bar-bg{flex:1;height:6px;border-radius:3px;background:rgba(255,255,255,0.08);}
+.pc2-bar-fill{height:100%;border-radius:3px;}
+.pc2-pct{font-size:12px;font-weight:700;width:40px;text-align:right;}
+.pc2-lbl2{font-size:11px;color:rgba(255,253,249,0.4);width:120px;}
+.pc2-foot{margin-top:16px;padding-top:14px;border-top:1px solid rgba(255,255,255,0.07);font-size:12px;color:rgba(255,253,249,0.3);position:relative;z-index:1;line-height:1.55;}
+.pc2-foot strong{color:rgba(232,148,58,0.85);font-weight:600;}
+
+/* ════════════════════════════════════════════════════
+   SETTINGS
+   ════════════════════════════════════════════════════ */
+.settings-layout{display:grid;grid-template-columns:200px 1fr;gap:16px;align-items:start;}
+@media(max-width:640px){.settings-layout{grid-template-columns:1fr;}}
+.settings-nav{background:#fff;border:1.5px solid var(--border-l);border-radius:var(--r-xl);overflow:hidden;}
+.sn-item{display:flex;align-items:center;gap:9px;padding:12px 16px;border-bottom:1px solid var(--border-l);cursor:pointer;transition:background var(--ease);}
+.sn-item:last-child{border-bottom:none;}
+.sn-item:hover{background:var(--cream);}
+.sn-item.active{background:var(--terra-p);}
+.sn-item svg{width:14px;height:14px;color:var(--light);flex-shrink:0;}
+.sn-item.active svg{color:var(--terra);}
+.sn-label{font-size:13px;font-weight:600;color:var(--mid);}
+.sn-item.active .sn-label{color:var(--terra);}
+.settings-content{background:#fff;border:1.5px solid var(--border-l);border-radius:var(--r-xl);padding:24px;}
+.settings-title{font-size:18px;font-weight:800;color:var(--ink);letter-spacing:-0.02em;margin-bottom:4px;}
+.settings-subtitle{font-size:13px;color:var(--mid);margin-bottom:24px;}
+
+/* ════════════════════════════════════════════════════
+   PUBLIC PROFILE
+   ════════════════════════════════════════════════════ */
+#v-public{background:var(--cream);min-height:100dvh;padding-top:58px;}
+.pub-hero{background:var(--ink);padding:32px 20px 0;position:relative;overflow:hidden;}
+.pub-hero::before{content:'';position:absolute;top:-100px;right:-100px;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(200,92,58,0.09) 0%,transparent 70%);pointer-events:none;}
+.pub-inner{max-width:960px;margin:0 auto;position:relative;z-index:1;}
+.pub-top{display:flex;align-items:flex-start;gap:16px;margin-bottom:22px;flex-wrap:wrap;}
+.pub-av{width:68px;height:68px;border-radius:17px;flex-shrink:0;background:var(--terra);color:#fff;font-size:24px;font-weight:800;display:flex;align-items:center;justify-content:center;border:2px solid rgba(255,255,255,0.08);}
+.pub-info{flex:1;min-width:160px;}
+.pub-name{font-size:clamp(20px,5vw,36px);font-weight:800;color:#fff;letter-spacing:-0.025em;line-height:1.1;margin-bottom:9px;}
+.pub-badges{display:flex;flex-wrap:wrap;gap:5px;}
+.pub-b{font-size:10px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;border-radius:var(--r-pill);padding:4px 10px;}
+.pub-bg{background:var(--sage);color:#fff;}
+.pub-bd{background:rgba(255,255,255,0.09);color:rgba(255,253,249,0.55);}
+.pub-actions{display:flex;gap:7px;flex-wrap:wrap;align-self:flex-start;}
+@media(max-width:500px){.pub-actions{width:100%;}.pub-actions .btn{flex:1;justify-content:center;}}
+.btn-don-p{background:#fff;color:var(--sage);padding:10px 18px;}
+.btn-don-p:hover{background:var(--sage-p);}
+.pub-tabs{display:flex;overflow-x:auto;scrollbar-width:none;}
+.pub-tabs::-webkit-scrollbar{display:none;}
+.pub-tab{font-family:var(--f-sans);font-size:13px;font-weight:600;color:rgba(255,253,249,0.35);background:none;border:none;border-bottom:2px solid transparent;padding:10px 15px 12px;cursor:pointer;white-space:nowrap;transition:all var(--ease);}
+.pub-tab:hover{color:rgba(255,253,249,0.65);}
+.pub-tab.on{color:#fff;border-bottom-color:var(--terra);}
+.pub-body{max-width:960px;margin:0 auto;padding:20px 16px 100px;display:grid;grid-template-columns:1fr 280px;gap:14px;align-items:start;}
+@media(max-width:740px){.pub-body{grid-template-columns:1fr;}}
+.pub-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-bottom:12px;}
+.pub-stat{background:#fff;border:1.5px solid var(--border-l);border-radius:var(--r-lg);padding:14px 16px;text-align:center;}
+.pub-stat-n{font-size:20px;font-weight:800;color:var(--ink);letter-spacing:-0.02em;line-height:1;margin-bottom:3px;}
+.pub-stat-l{font-size:11px;color:var(--light);font-weight:500;}
+.pub-card{background:#fff;border:1.5px solid var(--border-l);border-radius:var(--r-xl);padding:20px;margin-bottom:10px;}
+.pub-about{font-size:14px;color:var(--mid);line-height:1.75;}
+.pub-tags{display:flex;flex-wrap:wrap;gap:6px;}
+.pub-tag{font-size:12px;font-weight:600;color:var(--terra);background:var(--terra-p);border-radius:var(--r-pill);padding:5px 11px;}
+.pub-proj-row{display:flex;align-items:center;gap:10px;padding:12px 0;border-bottom:1px solid var(--border-l);}
+.pub-proj-row:last-child{border-bottom:none;}
+.ppr-t{font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;border-radius:var(--r-pill);padding:3px 9px;flex-shrink:0;}
+.ppr-terra{background:var(--terra-p);color:var(--terra);}
+.ppr-sage{background:var(--sage-p);color:var(--sage);}
+.ppr-name{font-size:13px;font-weight:600;color:var(--ink);flex:1;line-height:1.35;}
+.ppr-cnt{font-size:11px;color:var(--light);font-weight:600;flex-shrink:0;white-space:nowrap;}
+.pub-sidebar{display:flex;flex-direction:column;gap:10px;}
+.dw-pub{background:var(--ink);border-radius:var(--r-xl);padding:20px;position:relative;overflow:hidden;}
+.dw-pub::before{content:'';position:absolute;top:-40px;right:-40px;width:160px;height:160px;border-radius:50%;background:radial-gradient(circle,rgba(200,92,58,0.14) 0%,transparent 70%);}
+.dwp-lbl{font-size:10px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:rgba(255,253,249,0.25);margin-bottom:8px;position:relative;z-index:1;}
+.dwp-name{font-size:17px;font-weight:800;color:#fff;letter-spacing:-0.02em;margin-bottom:4px;position:relative;z-index:1;}
+.dwp-desc{font-size:12px;color:rgba(255,253,249,0.33);line-height:1.55;margin-bottom:14px;position:relative;z-index:1;}
+.dwp-amts{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:12px;position:relative;z-index:1;}
+.dwp-amt{font-family:var(--f-sans);font-size:12px;font-weight:700;color:rgba(255,253,249,0.55);background:rgba(255,255,255,0.07);border:1.5px solid rgba(255,255,255,0.09);border-radius:var(--r-pill);padding:6px 12px;cursor:pointer;transition:all var(--ease);}
+.dwp-amt:hover,.dwp-amt.on{background:var(--terra);border-color:var(--terra);color:#fff;}
+.dwp-btn{font-family:var(--f-sans);font-size:13px;font-weight:700;color:#fff;background:var(--terra);border:none;border-radius:var(--r-pill);padding:12px;width:100%;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;transition:all var(--ease);box-shadow:0 3px 12px rgba(200,92,58,0.35);position:relative;z-index:1;}
+.dwp-btn:hover{background:var(--terra-l);transform:translateY(-1px);}
+.dwp-note{font-size:10px;color:rgba(255,253,249,0.2);text-align:center;margin-top:8px;position:relative;z-index:1;}
+.sb-c{background:#fff;border:1.5px solid var(--border-l);border-radius:var(--r-xl);padding:18px;}
+.sb-ct{font-size:10px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--light);margin-bottom:12px;}
+.sb-cr{display:flex;align-items:flex-start;gap:9px;margin-bottom:9px;}
+.sb-cr:last-child{margin-bottom:0;}
+.sb-ci{width:26px;height:26px;border-radius:7px;background:var(--cream);flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+.sb-ci svg{width:12px;height:12px;}
+.sb-cx{font-size:12px;color:var(--mid);line-height:1.5;}
+.sb-cx strong{display:block;font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--light);margin-bottom:1px;}
+.net-sb2{background:var(--sage);border-radius:var(--r-xl);padding:18px;}
+.nsb-t{font-size:14px;font-weight:800;color:#fff;letter-spacing:-0.01em;margin-bottom:5px;}
+.nsb-d{font-size:12px;color:rgba(255,255,255,0.6);line-height:1.6;margin-bottom:14px;}
+</style>
+</head>
+<body>
+
+<!-- ══ DEMO SWITCHER ══════════════════════════════════════ -->
+<div class="switcher">
+  <button class="sw-btn on"  onclick="go('welcome')">1 Welcome</button>
+  <button class="sw-btn"     onclick="go('setup')">2 Setup</button>
+  <button class="sw-btn"     onclick="go('app','home')">3 Home</button>
+  <button class="sw-btn"     onclick="go('app','messages')">4 Messages</button>
+  <button class="sw-btn"     onclick="go('app','network')">5 Network</button>
+  <button class="sw-btn"     onclick="go('app','projects')">6 Projects</button>
+  <button class="sw-btn"     onclick="go('app','website')">7 Website</button>
+  <button class="sw-btn"     onclick="go('app','donations')">8 Donations</button>
+  <button class="sw-btn"     onclick="go('app','settings')">9 Settings</button>
+  <button class="sw-btn"     onclick="go('public')">10 Public</button>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     VIEW 1 — WELCOME
+     PHP: rendered on first login after approval
+     PHP: session_start(); if (!$_SESSION['first_login']) redirect('/dashboard');
+     ══════════════════════════════════════════════════════ -->
+<div class="view on" id="v-welcome">
+  <nav class="top-nav">
+    <a href="communio.html" class="nav-brand">
+      <div class="nav-mark"><svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="3" fill="white"/><path d="M8 1v3M8 12v3M1 8h3M12 8h3" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+      <div class="nav-wm">Commun<span>io</span></div>
+    </a>
+    <!-- PHP: echo $_SESSION['contact_name'] -->
+    <span style="font-size:12px;color:var(--mid);">Fr. James O'Brien</span>
+  </nav>
+  <div class="wl">
+    <div class="wl-check"><svg viewBox="0 0 28 28" fill="none"><path d="M5 14l6 6 12-12" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <div class="wl-tag">Application approved</div>
+    <!-- PHP: echo "Welcome to Communio, " . $parish->name -->
+    <h1 class="wl-h1">Welcome to Communio,<br><em>St. Mary's Parish.</em></h1>
+    <p class="wl-p">You're now part of a verified global network of Catholic parishes. Let's set up your parish so the world can find you.</p>
+    <div class="wl-net">
+      <div class="wl-net-lbl">You've joined the Communio network</div>
+      <div class="wl-nodes">
+        <div class="wl-node"><div class="wl-dot"></div><div class="wl-flag">🇧🇷</div><div class="wl-city">São Paulo</div></div>
+        <div class="wl-line"></div>
+        <div class="wl-node"><div class="wl-dot"></div><div class="wl-flag">🇮🇹</div><div class="wl-city">Rome</div></div>
+        <div class="wl-line"></div>
+        <div class="wl-node"><div class="wl-dot you"></div><div class="wl-flag">🇺🇸</div><div class="wl-city you">You</div></div>
+        <div class="wl-line"></div>
+        <div class="wl-node"><div class="wl-dot"></div><div class="wl-flag">🇬🇭</div><div class="wl-city">Accra</div></div>
+        <div class="wl-line"></div>
+        <div class="wl-node"><div class="wl-dot"></div><div class="wl-flag">🇵🇭</div><div class="wl-city">Manila</div></div>
+      </div>
+      <!-- PHP: echo "Joining " . number_format($parish_count) . " parishes across " . $country_count . " countries" -->
+      <div class="wl-count">Joining <strong>4,847 parishes</strong> across <strong>221 countries</strong></div>
+    </div>
+    <button class="btn btn-terra wl-cta" onclick="go('setup')">
+      Set up your parish
+      <svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     VIEW 2 — SETUP / ONBOARDING
+     PHP: pulled from parishes table WHERE id = $_SESSION['parish_id']
+     PHP: steps completed tracked in parish_setup_progress table
+     ══════════════════════════════════════════════════════ -->
+<div class="view" id="v-setup">
+  <nav class="top-nav">
+    <a href="communio.html" class="nav-brand">
+      <div class="nav-mark"><svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="3" fill="white"/><path d="M8 1v3M8 12v3M1 8h3M12 8h3" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+      <div class="nav-wm">Commun<span>io</span></div>
+    </a>
+    <div class="nav-r">
+      <div class="nav-parish">
+        <div class="nav-av">SM</div>
+        <span class="nav-pname">St. Mary's</span>
+      </div>
+      <button class="btn btn-outline btn-sm" onclick="go('public')">Preview profile →</button>
+    </div>
+  </nav>
+  <div class="setup-strip">
+    <div class="setup-inner">
+      <div class="s-tab done"><div class="s-num">✓</div><span class="s-name">Registered</span></div>
+      <div class="s-tab active"><div class="s-num">2</div><span class="s-name">Complete profile</span></div>
+      <div class="s-tab"><div class="s-num">3</div><span class="s-name">Activate website</span></div>
+      <div class="s-tab"><div class="s-num">4</div><span class="s-name">Set up donations</span></div>
+      <div class="s-tab"><div class="s-num">5</div><span class="s-name">Explore network</span></div>
+    </div>
+  </div>
+  <div class="setup-body">
+
+    <!-- Profile card -->
+    <!-- PHP: pre-populated from parishes table, form action="update-parish.php" method="POST" -->
+    <div class="card setup-prof">
+      <div class="sp-head">
+        <div class="sp-av">SM</div>
+        <div>
+          <!-- PHP: echo $parish->name -->
+          <div class="sp-name">St. Mary's Parish</div>
+          <div class="sp-badges">
+            <span class="sp-b spb-g">✓ Verified by DCF</span>
+            <!-- PHP: echo $parish->country_name -->
+            <span class="sp-b spb-d">🇺🇸 New York, USA</span>
+          </div>
+        </div>
+        <button class="sp-prev" onclick="go('public')">Preview public profile →</button>
+      </div>
+      <div class="sp-body">
+        <div class="sec-lbl" style="margin-bottom:0;">About your parish</div>
+        <div class="field">
+          <div class="fl">Description <span class="req">*</span></div>
+          <!-- PHP: name="parish_description" value=$parish->description -->
+          <textarea class="fi">St. Mary's Parish has been serving the Lower East Side community since 1887. We are a vibrant, multicultural congregation of over 1,200 families, committed to social justice, youth ministry, and ethical technology advocacy.</textarea>
+          <div class="fh">Up to 600 characters · shown on your public Communio profile</div>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <div class="fl">Year founded</div>
+            <!-- PHP: name="year_founded" value=$parish->year_founded -->
+            <input class="fi" type="number" value="1887">
+          </div>
+          <div class="field">
+            <div class="fl">Congregation size</div>
+            <!-- PHP: name="congregation_size" selected=$parish->congregation_size -->
+            <select class="fi"><option>500 – 1,000</option><option>200 – 500</option><option>Over 1,000</option></select>
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <div class="fl">Primary language</div>
+            <input class="fi" type="text" value="English">
+          </div>
+          <div class="field">
+            <div class="fl">Public contact email</div>
+            <!-- PHP: name="contact_email_public" value=$parish->contact_email_public -->
+            <input class="fi" type="email" placeholder="info@stmarysnyc.org">
+          </div>
+        </div>
+        <div class="field">
+          <div class="fl" style="margin-bottom:8px;">Focus areas</div>
+          <!-- PHP: focus_areas stored as JSON array in parishes table -->
+          <div class="fpills">
+            <span class="fpill">Peace &amp; reconciliation</span>
+            <span class="fpill">Ethical technology</span>
+            <span class="fpill">Social justice</span>
+            <span class="fpill">Youth ministry</span>
+            <span class="fpill add">+ Add</span>
+          </div>
+        </div>
+      </div>
+      <div class="sp-foot">
+        <button class="btn btn-outline btn-sm">Discard</button>
+        <!-- PHP: form submit → update-parish.php → redirect back with success message -->
+        <button class="btn btn-terra btn-sm">Save &amp; continue <svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      </div>
+    </div>
+
+    <!-- Website card -->
+    <!-- PHP: check parish_website table for existing template selection -->
+    <div class="card ws-card">
+      <div class="ws-head">
+        <div class="ws-hl">
+          <div class="ws-ico" style="background:var(--sage-p);"><svg viewBox="0 0 22 22" fill="none"><rect x="2" y="3" width="18" height="14" rx="2" stroke="var(--sage)" stroke-width="1.6"/><path d="M2 7h18" stroke="var(--sage)" stroke-width="1.6"/><path d="M5 11h8M5 14h5" stroke="var(--sage)" stroke-width="1.6" stroke-linecap="round"/></svg></div>
+          <div><div class="ws-t">Parish website</div><div class="ws-s">Pick a template, go live instantly</div></div>
+        </div>
+        <span class="tag tag-neutral">Not yet active</span>
+      </div>
+      <div class="ws-body">
+        <!-- PHP: on publish POST to create-parish-website.php with template_id + parish_id -->
+        <div class="tmpl-row">
+          <div class="tmpl sel" onclick="pickT(this)">
+            <div class="tp tp-a"><div class="tp-lines"><div class="tpl h"></div><div class="tpl s"></div><div class="tpl m"></div><div class="tpl s"></div></div><div class="tp-ring"><div class="tp-dot"><svg viewBox="0 0 11 9" fill="none"><path d="M1 4.5l3 3 6-6" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div></div>
+            <div class="tmpl-name">Warm &amp; Classic</div>
+          </div>
+          <div class="tmpl" onclick="pickT(this)">
+            <div class="tp tp-b"><div class="tp-lines"><div class="tpl h"></div><div class="tpl s"></div><div class="tpl m"></div><div class="tpl s"></div></div><div class="tp-ring"><div class="tp-dot"><svg viewBox="0 0 11 9" fill="none"><path d="M1 4.5l3 3 6-6" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div></div>
+            <div class="tmpl-name">Sage &amp; Natural</div>
+          </div>
+          <div class="tmpl" onclick="pickT(this)">
+            <div class="tp tp-c"><div class="tp-lines"><div class="tpl h"></div><div class="tpl s"></div><div class="tpl m"></div><div class="tpl s"></div></div><div class="tp-ring"><div class="tp-dot"><svg viewBox="0 0 11 9" fill="none"><path d="M1 4.5l3 3 6-6" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div></div>
+            <div class="tmpl-name">Midnight &amp; Bold</div>
+          </div>
+        </div>
+        <div class="url-row">
+          <svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="var(--sage)" stroke-width="1.4"/><path d="M2 8h12M8 2a10 10 0 000 12M8 2a10 10 0 010 12" stroke="var(--sage)" stroke-width="1.4" stroke-linecap="round"/></svg>
+          <!-- PHP: echo $parish->slug . ".communio.org" -->
+          <div class="url-t"><em>stmarysnyc</em>.communio.org</div>
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+          <button class="btn btn-terra btn-sm" style="flex:1;justify-content:center;">Publish website <svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <button class="btn btn-outline btn-sm">Preview first</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stripe card -->
+    <!-- PHP: check donations.stripe_account_id for existing connection -->
+    <div class="card">
+      <div class="ws-head">
+        <div class="ws-hl">
+          <div class="ws-ico" style="background:var(--amber-p);"><svg viewBox="0 0 22 22" fill="none"><rect x="2" y="6" width="18" height="12" rx="2.5" stroke="var(--amber)" stroke-width="1.6"/><path d="M2 10.5h18" stroke="var(--amber)" stroke-width="1.6"/><circle cx="6.5" cy="15" r="1.5" fill="var(--amber)"/><path d="M11 15h5.5" stroke="var(--amber)" stroke-width="1.6" stroke-linecap="round"/></svg></div>
+          <div><div class="ws-t">Online donations</div><div class="ws-s">Stripe Connect — funds go direct to you</div></div>
+        </div>
+        <span class="tag tag-neutral">Not connected</span>
+      </div>
+      <div class="stripe-sec">
+        <p style="font-size:13px;color:var(--mid);line-height:1.6;margin-bottom:16px;">Connect your parish bank account via Stripe. DCF never holds your money — it goes direct to you. Setup takes about 5 minutes.</p>
+        <!-- PHP: onclick → POST to /stripe/connect-onboard.php → returns Stripe Connect URL → redirect -->
+        <!-- PHP: on return: update parishes SET stripe_account_id = $stripe_account WHERE id = $parish_id -->
+        <button class="stripe-connect" id="stripe-btn" onclick="simulateStripe()">
+          <svg viewBox="0 0 24 24" fill="none" width="16" height="16"><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z" stroke="white" stroke-width="1.5"/><path d="M9 12l2 2 4-4" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Connect with Stripe
+        </button>
+        <div class="stripe-connected" id="stripe-done">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.3"/><path d="M5 8l2.5 2.5 4.5-4.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Bank account connected — donations go live on profile publish.
+        </div>
+      </div>
+    </div>
+
+    <!-- Network prompt -->
+    <div class="card" style="background:var(--ink);">
+      <div style="padding:20px;">
+        <div style="width:38px;height:38px;border-radius:10px;background:rgba(74,124,89,0.2);display:flex;align-items:center;justify-content:center;margin-bottom:12px;"><svg viewBox="0 0 22 22" fill="none" width="18" height="18"><circle cx="11" cy="11" r="9" stroke="var(--sage-l)" stroke-width="1.6"/><path d="M2 11h18M11 2a14 14 0 000 18M11 2a14 14 0 010 18" stroke="var(--sage-l)" stroke-width="1.4" stroke-linecap="round"/></svg></div>
+        <div style="font-size:15px;font-weight:800;color:#fff;letter-spacing:-0.01em;margin-bottom:5px;">Explore the network</div>
+        <div style="font-size:12px;color:rgba(255,253,249,0.38);line-height:1.6;margin-bottom:14px;">Find parishes by country or mission. Join projects, co-sign advocacy campaigns, form sister-parish relationships.</div>
+        <div style="display:flex;flex-wrap:wrap;gap:5px;margin-bottom:14px;">
+          <span style="font-size:11px;font-weight:600;color:rgba(255,253,249,0.5);background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.08);border-radius:var(--r-pill);padding:4px 10px;">🇬🇭 Ghana</span>
+          <span style="font-size:11px;font-weight:600;color:rgba(255,253,249,0.5);background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.08);border-radius:var(--r-pill);padding:4px 10px;">Ethical technology</span>
+          <span style="font-size:11px;font-weight:600;color:rgba(255,253,249,0.5);background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.08);border-radius:var(--r-pill);padding:4px 10px;">Youth ministry</span>
+        </div>
+        <button class="btn btn-ghost-dark btn-sm" style="width:100%;justify-content:center;" onclick="go('app','network')">Browse the network →</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     APP SHELL (views 3–9)
+     PHP: session_start(); auth gate — redirect to /login if not authenticated
+     PHP: $parish = fetch_parish($_SESSION['parish_id']);
+     ══════════════════════════════════════════════════════ -->
+<div class="app-view" id="v-app">
+
+  <nav class="top-nav">
+    <button class="sb-toggle" onclick="toggleSidebar()"><svg viewBox="0 0 16 16" fill="none"><path d="M2 4h12M2 8h12M2 12h12" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+    <a href="communio.html" class="nav-brand" style="margin-left:44px;">
+      <div class="nav-mark"><svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="3" fill="white"/><path d="M8 1v3M8 12v3M1 8h3M12 8h3" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+      <div class="nav-wm">Commun<span>io</span></div>
+    </a>
+    <div class="nav-r">
+      <div class="nav-notif" onclick="go('app','messages')">
+        <svg viewBox="0 0 16 16" fill="none"><path d="M13 5.5a5 5 0 10-9.9 1L2 12h12l-1.1-5.5z" stroke="var(--mid)" stroke-width="1.3"/><path d="M6.5 12.5a1.5 1.5 0 003 0" stroke="var(--mid)" stroke-width="1.3"/></svg>
+        <!-- PHP: badge count from unread messages WHERE parish_id = $session_id -->
+        <div class="notif-dot"></div>
+      </div>
+      <div class="nav-parish">
+        <div class="nav-av">SM</div>
+        <span class="nav-pname">St. Mary's</span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- SIDEBAR -->
+  <!-- PHP: highlight active item based on current route -->
+  <div class="sidebar" id="sidebar">
+    <div class="sb-parish">
+      <!-- PHP: echo $parish->name, $parish->city, $parish->country -->
+      <div class="sb-av">SM</div>
+      <div class="sb-name">St. Mary's Parish</div>
+      <div class="sb-loc">🇺🇸 New York, USA</div>
+    </div>
+    <div class="sb-nav">
+      <div class="sb-section-lbl">Parish</div>
+      <div class="sb-item active" id="nav-home" onclick="navTo('home')">
+        <svg viewBox="0 0 16 16" fill="none"><path d="M2 7l6-5 6 5v7H10V9H6v5H2V7z" stroke="white" stroke-width="1.3" stroke-linejoin="round"/></svg>
+        <span class="sb-item-label">Home</span>
+      </div>
+      <div class="sb-item" id="nav-messages" onclick="navTo('messages')">
+        <svg viewBox="0 0 16 16" fill="none"><path d="M2 3h12a1 1 0 011 1v7a1 1 0 01-1 1H4l-3 2V4a1 1 0 011-1z" stroke="white" stroke-width="1.3" stroke-linejoin="round"/></svg>
+        <span class="sb-item-label">Messages</span>
+        <!-- PHP: echo count(unread messages) if > 0 -->
+        <span class="sb-badge">3</span>
+      </div>
+      <div class="sb-item" id="nav-network" onclick="navTo('network')">
+        <svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="white" stroke-width="1.3"/><path d="M2 8h12M8 2a10 10 0 000 12M8 2a10 10 0 010 12" stroke="white" stroke-width="1.3" stroke-linecap="round"/></svg>
+        <span class="sb-item-label">Network</span>
+      </div>
+      <div class="sb-item" id="nav-projects" onclick="navTo('projects')">
+        <svg viewBox="0 0 16 16" fill="none"><path d="M2 3h12v3H2zM2 8h8v5H2zM12 8h2v5h-2z" stroke="white" stroke-width="1.3" stroke-linejoin="round"/></svg>
+        <span class="sb-item-label">Projects</span>
+      </div>
+      <div class="sb-section-lbl">Manage</div>
+      <div class="sb-item" id="nav-website" onclick="navTo('website')">
+        <svg viewBox="0 0 16 16" fill="none"><rect x="1" y="2" width="14" height="11" rx="1.5" stroke="white" stroke-width="1.3"/><path d="M1 5.5h14" stroke="white" stroke-width="1.3"/></svg>
+        <span class="sb-item-label">Website</span>
+        <span class="sb-badge" style="background:var(--sage);">Live</span>
+      </div>
+      <div class="sb-item" id="nav-donations" onclick="navTo('donations')">
+        <svg viewBox="0 0 16 16" fill="none"><rect x="1" y="4" width="14" height="9" rx="1.5" stroke="white" stroke-width="1.3"/><path d="M1 7.5h14" stroke="white" stroke-width="1.3"/></svg>
+        <span class="sb-item-label">Donations</span>
+      </div>
+      <div class="sb-item" id="nav-settings" onclick="navTo('settings')">
+        <svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="2.5" stroke="white" stroke-width="1.3"/><path d="M8 1v2M8 13v2M1 8h2M13 8h2M3.05 3.05l1.41 1.41M11.54 11.54l1.41 1.41M3.05 12.95l1.41-1.41M11.54 4.46l1.41-1.41" stroke="white" stroke-width="1.3" stroke-linecap="round"/></svg>
+        <span class="sb-item-label">Settings</span>
+      </div>
+    </div>
+    <div class="sb-bottom">
+      <!-- PHP: link to public profile URL /$parish->slug -->
+      <div class="sb-profile-link" onclick="go('public')">
+        <svg viewBox="0 0 16 16" fill="none" width="14" height="14"><path d="M8 1.5a6.5 6.5 0 100 13 6.5 6.5 0 000-13z" stroke="rgba(255,253,249,0.3)" stroke-width="1.3"/><path d="M3 13c0-2.76 2.24-5 5-5s5 2.24 5 5" stroke="rgba(255,253,249,0.3)" stroke-width="1.3" stroke-linecap="round"/><circle cx="8" cy="6" r="2" stroke="rgba(255,253,249,0.3)" stroke-width="1.3"/></svg>
+        <span class="sb-profile-link-label">View public profile →</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div class="main-content">
+
+    <!-- ══ HOME ══════════════════════════════════════════ -->
+    <!-- PHP: metrics pulled from: donations table (SUM), messages (COUNT unread), projects (COUNT joined) -->
+    <div class="section-panel on" id="panel-home">
+      <div class="dash-header">
+        <!-- PHP: greeting based on time of day + $parish->contact_first_name -->
+        <div class="dash-greeting">Good morning, Fr. James 👋</div>
+        <div class="dash-date">Friday, 27 March 2026 · St. Mary's Parish</div>
+      </div>
+
+      <!-- Setup progress (shown until all steps complete) -->
+      <!-- PHP: only show if parish_setup_progress.complete = false -->
+      <div class="card card-p" style="margin-bottom:20px;background:var(--terra-p);border-color:rgba(200,92,58,0.2);">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;">
+          <div>
+            <div style="font-size:14px;font-weight:800;color:var(--ink);margin-bottom:3px;">Finish setting up your parish</div>
+            <div style="font-size:12px;color:var(--mid);">3 of 5 steps complete — you're almost there</div>
+          </div>
+          <button class="btn btn-terra btn-sm" onclick="go('setup')">Continue setup →</button>
+        </div>
+        <div class="sp-bar" style="margin-top:12px;"><div class="sp-fill" style="width:60%;"></div></div>
+      </div>
+
+      <!-- Metrics -->
+      <div class="metrics">
+        <!-- PHP: SELECT SUM(amount) FROM donations WHERE parish_id=$id AND MONTH(created_at)=MONTH(NOW()) -->
+        <div class="metric">
+          <div class="metric-val">$4,205</div>
+          <div class="metric-lbl">Donations this month</div>
+          <div class="metric-change metric-up">↑ 34.8% vs last month</div>
+        </div>
+        <!-- PHP: SELECT COUNT(*) FROM donations WHERE parish_id=$id AND MONTH(created_at)=MONTH(NOW()) -->
+        <div class="metric">
+          <div class="metric-val">47</div>
+          <div class="metric-lbl">Donors this month</div>
+          <div class="metric-change metric-up">↑ 12 new donors</div>
+        </div>
+        <!-- PHP: SELECT COUNT(*) FROM parish_projects WHERE parish_id=$id AND status='active' -->
+        <div class="metric">
+          <div class="metric-val">4</div>
+          <div class="metric-lbl">Active projects</div>
+          <div class="metric-change metric-up">1 new this week</div>
+        </div>
+        <!-- PHP: SELECT COUNT(*) FROM sister_parishes WHERE parish_id=$id -->
+        <div class="metric">
+          <div class="metric-val">6</div>
+          <div class="metric-lbl">Sister parishes</div>
+          <div class="metric-change metric-up">↑ 2 this month</div>
+        </div>
+      </div>
+
+      <div class="dash-grid">
+        <!-- Mini chart -->
+        <div class="card">
+          <div class="sec-lbl" style="padding:18px 20px 0;">Donations — last 6 months</div>
+          <div class="chart-wrap">
+            <!-- PHP: SELECT MONTH, SUM(amount) FROM donations WHERE parish_id=$id GROUP BY MONTH ORDER BY MONTH DESC LIMIT 6 -->
+            <div class="chart-bars" id="mini-chart"></div>
+            <div class="chart-legend">
+              <div class="cl-item"><div class="cl-dot" style="background:var(--terra);"></div>Monthly donations</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick actions -->
+        <div class="quick-actions">
+          <div class="qa-card">
+            <div class="qa-title">3 unread messages</div>
+            <div class="qa-desc">Holy Spirit Parish (Accra) sent a message 2 hours ago</div>
+            <button class="btn btn-terra btn-sm" onclick="navTo('messages')">Open messages →</button>
+          </div>
+          <div class="qa-card dark">
+            <div class="qa-title">New project to join</div>
+            <div class="qa-desc" style="color:rgba(255,253,249,0.38);">Global Youth Formation Network now has 89 parishes — they're looking for US parishes</div>
+            <button class="btn btn-ghost-dark btn-sm" style="margin-top:2px;" onclick="navTo('projects')">View projects →</button>
+          </div>
+          <div class="qa-card" style="background:var(--sage);border-color:transparent;">
+            <div class="qa-title" style="color:#fff;">Your website is live</div>
+            <div class="qa-desc" style="color:rgba(255,255,255,0.65);">stmarysnyc.communio.org — 142 visitors this month</div>
+            <button class="btn btn-sage" style="background:#fff;color:var(--sage);padding:8px 16px;font-size:12px;margin-top:2px;" onclick="navTo('website')">Edit website →</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Recent activity -->
+      <div class="card" style="margin-top:16px;">
+        <div class="sec-lbl" style="padding:18px 20px 0;">Recent activity</div>
+        <!-- PHP: SELECT * FROM parish_activity WHERE parish_id=$id ORDER BY created_at DESC LIMIT 6 -->
+        <div class="activity-list" style="padding:0 20px 8px;">
+          <div class="activity-item">
+            <div class="act-icon terra"><svg viewBox="0 0 16 16" fill="none" width="15" height="15"><rect x="1" y="4" width="14" height="9" rx="1.5" stroke="var(--terra)" stroke-width="1.3"/><path d="M1 7.5h14" stroke="var(--terra)" stroke-width="1.3"/></svg></div>
+            <div><div class="act-title">$120 donation received</div><div class="act-meta">Anonymous donor · via Communio profile</div></div>
+            <div class="act-time">2h ago</div>
+          </div>
+          <div class="activity-item">
+            <div class="act-icon sage"><svg viewBox="0 0 16 16" fill="none" width="15" height="15"><path d="M2 3h12a1 1 0 011 1v7a1 1 0 01-1 1H4l-3 2V4a1 1 0 011-1z" stroke="var(--sage)" stroke-width="1.3" stroke-linejoin="round"/></svg></div>
+            <div><div class="act-title">Message from Holy Spirit Parish, Accra</div><div class="act-meta">"We'd love to discuss a joint youth programme..."</div></div>
+            <div class="act-time">4h ago</div>
+          </div>
+          <div class="activity-item">
+            <div class="act-icon terra"><svg viewBox="0 0 16 16" fill="none" width="15" height="15"><path d="M8 2l1.5 4.5H14l-3.5 2.5 1.5 4-3.5-2.5L5 13l1.5-4L3 6.5h4.5L8 2z" stroke="var(--terra)" stroke-width="1.3" stroke-linejoin="round"/></svg></div>
+            <div><div class="act-title">Joined "Ethical AI in Catholic Education"</div><div class="act-meta">Now co-signed by 247 parishes</div></div>
+            <div class="act-time">Yesterday</div>
+          </div>
+          <div class="activity-item">
+            <div class="act-icon amber"><svg viewBox="0 0 16 16" fill="none" width="15" height="15"><circle cx="8" cy="8" r="6" stroke="var(--amber)" stroke-width="1.3"/><path d="M2 8h12M8 2a10 10 0 000 12M8 2a10 10 0 010 12" stroke="var(--amber)" stroke-width="1.3" stroke-linecap="round"/></svg></div>
+            <div><div class="act-title">New sister parish — St. Stanisław, Warsaw</div><div class="act-meta">Connection accepted · Poland</div></div>
+            <div class="act-time">2 days ago</div>
+          </div>
+          <div class="activity-item">
+            <div class="act-icon sage"><svg viewBox="0 0 16 16" fill="none" width="15" height="15"><rect x="1" y="2" width="14" height="11" rx="1.5" stroke="var(--sage)" stroke-width="1.3"/><path d="M1 5.5h14" stroke="var(--sage)" stroke-width="1.3"/></svg></div>
+            <div><div class="act-title">Website visited 142 times this month</div><div class="act-meta">stmarysnyc.communio.org · up 28% from February</div></div>
+            <div class="act-time">3 days ago</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ MESSAGES ══════════════════════════════════════ -->
+    <!-- PHP: SELECT * FROM conversations WHERE parish_id=$id ORDER BY last_message_at DESC -->
+    <div class="section-panel" id="panel-messages">
+      <div style="margin-bottom:18px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;">
+        <div style="font-size:clamp(18px,4vw,24px);font-weight:800;color:var(--ink);letter-spacing:-0.025em;">Messages</div>
+        <button class="btn btn-terra btn-sm">New message <svg viewBox="0 0 16 16" fill="none"><path d="M8 3v10M3 8h10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button>
+      </div>
+      <div class="messages-layout">
+        <!-- Conversation list -->
+        <div class="msg-list">
+          <div class="msg-list-head">
+            <div class="msg-list-title">Conversations</div>
+            <span class="tag tag-terra">3 unread</span>
+          </div>
+
+          <div class="msg-section-lbl">Direct messages</div>
+
+          <!-- PHP: foreach ($direct_conversations as $conv) { echo msg-item HTML } -->
+          <div class="msg-item active" onclick="showThread('accra')">
+            <div class="msg-av" style="background:#e8943a;">HS</div>
+            <div class="msg-info">
+              <div class="msg-name">Holy Spirit Parish, Accra</div>
+              <div class="msg-preview">We'd love to discuss a joint youth programme...</div>
+            </div>
+            <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px;">
+              <div class="msg-time">2h ago</div>
+              <div class="msg-unread"></div>
+            </div>
+          </div>
+
+          <div class="msg-item" onclick="showThread('warsaw')">
+            <div class="msg-av" style="background:var(--sage);">SS</div>
+            <div class="msg-info">
+              <div class="msg-name">St. Stanisław, Warsaw</div>
+              <div class="msg-preview">Sister parish confirmed! Excited to connect 🙏</div>
+            </div>
+            <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px;">
+              <div class="msg-time">Yesterday</div>
+              <div class="msg-unread"></div>
+            </div>
+          </div>
+
+          <div class="msg-item" onclick="showThread('manila')">
+            <div class="msg-av" style="background:var(--terra);">SJ</div>
+            <div class="msg-info">
+              <div class="msg-name">San José Parish, Manila</div>
+              <div class="msg-preview">Thank you for co-signing the AI statement</div>
+            </div>
+            <div>
+              <div class="msg-time">3 days ago</div>
+            </div>
+          </div>
+
+          <div class="msg-item" onclick="showThread('budapest')">
+            <div class="msg-av" style="background:var(--ink-s);">SB</div>
+            <div class="msg-info">
+              <div class="msg-name">St. Benedek Parish, Budapest</div>
+              <div class="msg-preview">Would love to share resources on digital...</div>
+            </div>
+            <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px;">
+              <div class="msg-time">1 week ago</div>
+              <div class="msg-unread"></div>
+            </div>
+          </div>
+
+          <div class="msg-section-lbl">Project channels</div>
+
+          <!-- PHP: foreach ($project_channels WHERE parish is member) { echo channel HTML } -->
+          <div class="msg-item" onclick="showThread('ai-channel')">
+            <div class="msg-av" style="background:var(--mid);border-radius:10px;">
+              <svg viewBox="0 0 16 16" fill="none" width="14" height="14"><path d="M8 2l1.5 4.5H14l-3.5 2.5 1.5 4-3.5-2.5L5 13l1.5-4L3 6.5h4.5L8 2z" stroke="white" stroke-width="1.3" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="msg-info">
+              <div class="msg-name"># Ethical AI — Global Statement</div>
+              <div class="msg-preview">Fr. Kofi: The Vatican has acknowledged receipt...</div>
+            </div>
+            <div>
+              <div class="msg-time">5h ago</div>
+            </div>
+          </div>
+
+          <div class="msg-item" onclick="showThread('youth-channel')">
+            <div class="msg-av" style="background:var(--sage);border-radius:10px;">
+              <svg viewBox="0 0 16 16" fill="none" width="14" height="14"><path d="M8 2l1.5 4.5H14l-3.5 2.5 1.5 4-3.5-2.5L5 13l1.5-4L3 6.5h4.5L8 2z" stroke="white" stroke-width="1.3" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="msg-info">
+              <div class="msg-name"># Global Youth Formation Network</div>
+              <div class="msg-preview">Sister Ana: Curriculum pack uploaded to shared drive</div>
+            </div>
+            <div>
+              <div class="msg-time">1 day ago</div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Thread panel -->
+        <div class="msg-thread" id="msg-thread">
+          <!-- PHP: SELECT * FROM messages WHERE conversation_id=$conv_id ORDER BY created_at ASC -->
+          <div class="mt-head">
+            <div class="mt-av" style="background:#e8943a;">HS</div>
+            <div>
+              <div class="mt-name">Holy Spirit Parish, Accra</div>
+              <!-- PHP: echo $parish->city . ", " . $parish->country -->
+              <div class="mt-loc">🇬🇭 Accra, Ghana · Focus: Youth ministry, Education</div>
+            </div>
+            <div class="mt-badge"><span class="tag tag-sage">Sister parish</span></div>
+          </div>
+          <div class="mt-body">
+            <div class="msg-bubble-wrap">
+              <div class="bubble-av">HS</div>
+              <div>
+                <div class="bubble them">Hello! We've been following Communio's work on ethical technology advocacy and it resonates deeply with our community here in Accra.</div>
+                <div class="bubble-time them">Mon 24 Mar, 9:15am</div>
+              </div>
+            </div>
+            <div class="msg-bubble-wrap me">
+              <div class="bubble-av me">SM</div>
+              <div>
+                <div class="bubble me">That's wonderful to hear! We've been very active on the AI statement. Would love to connect further on this — we have a strong technology ethics group in our parish.</div>
+                <div class="bubble-time">Mon 24 Mar, 11:30am</div>
+              </div>
+            </div>
+            <div class="msg-bubble-wrap">
+              <div class="bubble-av">HS</div>
+              <div>
+                <div class="bubble them">Perfect. We'd also love to discuss a joint youth programme — we have about 200 young people in our community who are very engaged with these questions around faith and technology.</div>
+                <div class="bubble-time them">Mon 24 Mar, 2:45pm</div>
+              </div>
+            </div>
+            <div class="msg-bubble-wrap me">
+              <div class="bubble-av me">SM</div>
+              <div>
+                <div class="bubble me">This is exactly what Communio was built for. Let's set up a call — our youth minister, Sr. Catherine, would be the right person to connect you with.</div>
+                <div class="bubble-time">Tue 25 Mar, 9:00am</div>
+              </div>
+            </div>
+            <div class="msg-bubble-wrap">
+              <div class="bubble-av">HS</div>
+              <div>
+                <div class="bubble them">We'd love to discuss a joint youth programme — perhaps an online exchange where young people from both our communities can meet and collaborate?</div>
+                <div class="bubble-time them">Today, 8:30am</div>
+              </div>
+            </div>
+          </div>
+          <div class="mt-input">
+            <input type="text" placeholder="Message Holy Spirit Parish...">
+            <!-- PHP: POST to /messages/send.php with conversation_id, sender_parish_id, message_body -->
+            <button class="mt-send" onclick="this.style.transform='scale(0.9)';setTimeout(()=>this.style.transform='',200)">
+              <svg viewBox="0 0 16 16" fill="none"><path d="M14 2L2 7l4 3 2 4 6-12z" stroke="white" stroke-width="1.3" stroke-linejoin="round"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ NETWORK ════════════════════════════════════════ -->
+    <!-- PHP: SELECT * FROM parishes WHERE status='approved' AND id != $session_id ORDER BY name -->
+    <div class="section-panel" id="panel-network">
+      <div style="margin-bottom:20px;">
+        <div style="font-size:clamp(18px,4vw,24px);font-weight:800;color:var(--ink);letter-spacing:-0.025em;margin-bottom:4px;">Network</div>
+        <div style="font-size:13px;color:var(--light);">4,847 verified parishes across 221 countries</div>
+      </div>
+      <div class="network-filters">
+        <!-- PHP: filter params passed as GET to network.php?country=XX&focus=YY&search=ZZ -->
+        <input class="nf-search" type="text" placeholder="Search parishes by name or city...">
+        <select class="nf-select"><option>All countries</option><option>Ghana</option><option>Hungary</option><option>Italy</option><option>Philippines</option><option>Poland</option><option>Brazil</option></select>
+        <select class="nf-select"><option>All focus areas</option><option>Ethical technology</option><option>Youth ministry</option><option>Social justice</option><option>Peace &amp; reconciliation</option></select>
+      </div>
+
+      <!-- Sister parishes section -->
+      <div class="sec-lbl">Your sister parishes (6)</div>
+      <!-- PHP: SELECT * FROM parishes JOIN sister_parishes ON parishes.id = sister_parishes.partner_parish_id WHERE sister_parishes.parish_id = $id -->
+      <div class="network-grid" style="margin-bottom:28px;">
+        <div class="parish-card">
+          <div class="pc-top">
+            <div class="pc-av2" style="background:#e8943a;">HS</div>
+            <div><div class="pc-info-name">Holy Spirit Parish</div><div class="pc-info-loc">🇬🇭 Accra, Ghana</div></div>
+          </div>
+          <div class="pc-tags"><span class="pc-focus">Youth ministry</span><span class="pc-focus">Education</span></div>
+          <div style="margin-bottom:10px;"><span class="sister-badge">♥ Sister parish</span></div>
+          <div class="pc-actions"><button class="btn btn-outline btn-sm btn-xs">Message</button><button class="btn btn-terra btn-xs">View profile</button></div>
+        </div>
+        <div class="parish-card">
+          <div class="pc-top">
+            <div class="pc-av2" style="background:var(--sage);">SS</div>
+            <div><div class="pc-info-name">St. Stanisław Parish</div><div class="pc-info-loc">🇵🇱 Warsaw, Poland</div></div>
+          </div>
+          <div class="pc-tags"><span class="pc-focus">Ethical technology</span><span class="pc-focus">Peace</span></div>
+          <div style="margin-bottom:10px;"><span class="sister-badge">♥ Sister parish</span></div>
+          <div class="pc-actions"><button class="btn btn-outline btn-sm btn-xs">Message</button><button class="btn btn-terra btn-xs">View profile</button></div>
+        </div>
+        <div class="parish-card">
+          <div class="pc-top">
+            <div class="pc-av2" style="background:var(--terra);">SJ</div>
+            <div><div class="pc-info-name">San José Parish</div><div class="pc-info-loc">🇵🇭 Manila, Philippines</div></div>
+          </div>
+          <div class="pc-tags"><span class="pc-focus">Social justice</span><span class="pc-focus">Youth</span></div>
+          <div style="margin-bottom:10px;"><span class="sister-badge">♥ Sister parish</span></div>
+          <div class="pc-actions"><button class="btn btn-outline btn-sm btn-xs">Message</button><button class="btn btn-terra btn-xs">View profile</button></div>
+        </div>
+      </div>
+
+      <!-- Discover section -->
+      <div class="sec-lbl">Discover parishes</div>
+      <div class="network-grid">
+        <div class="parish-card">
+          <div class="pc-top">
+            <div class="pc-av2" style="background:var(--ink-s);">SB</div>
+            <div><div class="pc-info-name">St. Benedek Parish</div><div class="pc-info-loc">🇭🇺 Budapest, Hungary</div></div>
+          </div>
+          <div class="pc-tags"><span class="pc-focus">Digital sovereignty</span><span class="pc-focus">Theology</span></div>
+          <div class="pc-actions"><button class="btn btn-outline btn-sm btn-xs">Message</button><button class="btn btn-terra btn-xs">Connect</button></div>
+        </div>
+        <div class="parish-card">
+          <div class="pc-top">
+            <div class="pc-av2" style="background:#c85c3a;">SM2</div>
+            <div><div class="pc-info-name">Santa Maria Parish</div><div class="pc-info-loc">🇧🇷 São Paulo, Brazil</div></div>
+          </div>
+          <div class="pc-tags"><span class="pc-focus">Social justice</span><span class="pc-focus">Migration</span></div>
+          <div class="pc-actions"><button class="btn btn-outline btn-sm btn-xs">Message</button><button class="btn btn-terra btn-xs">Connect</button></div>
+        </div>
+        <div class="parish-card">
+          <div class="pc-top">
+            <div class="pc-av2" style="background:var(--amber);">SM3</div>
+            <div><div class="pc-info-name">San Marco Parish</div><div class="pc-info-loc">🇮🇹 Florence, Italy</div></div>
+          </div>
+          <div class="pc-tags"><span class="pc-focus">Research</span><span class="pc-focus">Theology</span></div>
+          <div class="pc-actions"><button class="btn btn-outline btn-sm btn-xs">Message</button><button class="btn btn-terra btn-xs">Connect</button></div>
+        </div>
+        <div class="parish-card">
+          <div class="pc-top">
+            <div class="pc-av2" style="background:var(--sage-l);">SC</div>
+            <div><div class="pc-info-name">St. Catherine Parish</div><div class="pc-info-loc">🇳🇬 Lagos, Nigeria</div></div>
+          </div>
+          <div class="pc-tags"><span class="pc-focus">Ethical technology</span><span class="pc-focus">Education</span></div>
+          <div class="pc-actions"><button class="btn btn-outline btn-sm btn-xs">Message</button><button class="btn btn-terra btn-xs">Connect</button></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ PROJECTS ════════════════════════════════════════ -->
+    <!-- PHP: SELECT * FROM projects JOIN parish_projects ON projects.id = parish_projects.project_id WHERE parish_projects.parish_id = $id -->
+    <div class="section-panel" id="panel-projects">
+      <div style="margin-bottom:20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;">
+        <div style="font-size:clamp(18px,4vw,24px);font-weight:800;color:var(--ink);letter-spacing:-0.025em;">Projects</div>
+        <button class="btn btn-terra btn-sm">Create project <svg viewBox="0 0 16 16" fill="none"><path d="M8 3v10M3 8h10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button>
+      </div>
+      <div class="projects-tabs">
+        <button class="proj-tab on">Joined (4)</button>
+        <button class="proj-tab">Discover</button>
+        <button class="proj-tab">Created by you (1)</button>
+      </div>
+      <div class="projects-grid">
+
+        <!-- PHP: foreach ($joined_projects as $project) -->
+        <div class="project-card">
+          <div class="proj-card-head">
+            <div class="proj-type-row"><span class="tag tag-terra">Advocacy</span></div>
+            <div class="proj-card-title">Ethical AI in Catholic Education — Global Statement</div>
+            <div class="proj-card-desc">Co-signed open letter to the Holy See and EU calling for ethical standards in Catholic schools' use of AI.</div>
+          </div>
+          <div class="proj-card-body">
+            <div class="proj-stat-row">
+              <div class="proj-stat"><div class="proj-stat-n">247</div><div class="proj-stat-l">Parishes signed</div></div>
+              <div class="proj-stat"><div class="proj-stat-n">38</div><div class="proj-stat-l">Countries</div></div>
+              <div class="proj-stat"><div class="proj-stat-n">Target: 500</div><div class="proj-stat-l">Goal</div></div>
+            </div>
+            <div class="proj-progress">
+              <div style="display:flex;justify-content:space-between;"><span style="font-size:11px;color:var(--light);">Progress to goal</span><span style="font-size:11px;font-weight:700;color:var(--terra);">49%</span></div>
+              <div class="proj-bar"><div class="proj-bar-fill" style="width:49%;"></div></div>
+            </div>
+          </div>
+          <div class="proj-card-foot">
+            <button class="btn btn-outline btn-xs">Project channel</button>
+            <button class="btn btn-terra btn-xs">View details</button>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="proj-card-head">
+            <div class="proj-type-row"><span class="tag tag-sage">Project</span></div>
+            <div class="proj-card-title">Global Youth Formation Network</div>
+            <div class="proj-card-desc">Shared curriculum, virtual exchanges, and mentorship pairing between youth groups across parishes worldwide.</div>
+          </div>
+          <div class="proj-card-body">
+            <div class="proj-stat-row">
+              <div class="proj-stat"><div class="proj-stat-n">89</div><div class="proj-stat-l">Parishes</div></div>
+              <div class="proj-stat"><div class="proj-stat-n">22</div><div class="proj-stat-l">Countries</div></div>
+              <div class="proj-stat"><div class="proj-stat-n">Active</div><div class="proj-stat-l">Status</div></div>
+            </div>
+            <div class="proj-progress">
+              <div style="display:flex;justify-content:space-between;"><span style="font-size:11px;color:var(--light);">Curriculum complete</span><span style="font-size:11px;font-weight:700;color:var(--sage);">72%</span></div>
+              <div class="proj-bar"><div class="proj-bar-fill sage" style="width:72%;"></div></div>
+            </div>
+          </div>
+          <div class="proj-card-foot">
+            <button class="btn btn-outline btn-xs">Project channel</button>
+            <button class="btn btn-terra btn-xs">View details</button>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="proj-card-head">
+            <div class="proj-type-row"><span class="tag tag-terra">Advocacy</span></div>
+            <div class="proj-card-title">Migration &amp; Refugee Support — UN Statement</div>
+            <div class="proj-card-desc">Parishes serving migrant communities co-signing a position paper to the UN Special Committee on Migration.</div>
+          </div>
+          <div class="proj-card-body">
+            <div class="proj-stat-row">
+              <div class="proj-stat"><div class="proj-stat-n">163</div><div class="proj-stat-l">Parishes signed</div></div>
+              <div class="proj-stat"><div class="proj-stat-n">41</div><div class="proj-stat-l">Countries</div></div>
+              <div class="proj-stat"><div class="proj-stat-n">Target: 300</div><div class="proj-stat-l">Goal</div></div>
+            </div>
+            <div class="proj-progress">
+              <div style="display:flex;justify-content:space-between;"><span style="font-size:11px;color:var(--light);">Progress to goal</span><span style="font-size:11px;font-weight:700;color:var(--terra);">54%</span></div>
+              <div class="proj-bar"><div class="proj-bar-fill" style="width:54%;"></div></div>
+            </div>
+          </div>
+          <div class="proj-card-foot">
+            <button class="btn btn-outline btn-xs">Project channel</button>
+            <button class="btn btn-terra btn-xs">View details</button>
+          </div>
+        </div>
+
+        <!-- Created by St. Mary's -->
+        <div class="project-card" style="border-color:var(--terra);background:var(--terra-p);">
+          <div class="proj-card-head" style="background:transparent;">
+            <div class="proj-type-row">
+              <span class="tag tag-amber">Research</span>
+              <span style="font-size:10px;font-weight:700;color:var(--terra);background:rgba(200,92,58,0.15);border-radius:var(--r-pill);padding:3px 9px;">Created by you</span>
+            </div>
+            <div class="proj-card-title">Digital Sovereignty &amp; Parish Life Study</div>
+            <div class="proj-card-desc">Research project studying how parishes can maintain digital sovereignty while engaging with modern technology platforms.</div>
+          </div>
+          <div class="proj-card-body" style="background:transparent;">
+            <div class="proj-stat-row">
+              <div class="proj-stat"><div class="proj-stat-n">28</div><div class="proj-stat-l">Parishes</div></div>
+              <div class="proj-stat"><div class="proj-stat-n">14</div><div class="proj-stat-l">Countries</div></div>
+              <div class="proj-stat"><div class="proj-stat-n">Open</div><div class="proj-stat-l">Status</div></div>
+            </div>
+            <div class="proj-progress">
+              <div style="display:flex;justify-content:space-between;"><span style="font-size:11px;color:var(--light);">Target: 50 parishes</span><span style="font-size:11px;font-weight:700;color:var(--amber);">56%</span></div>
+              <div class="proj-bar"><div class="proj-bar-fill" style="width:56%;background:var(--amber);"></div></div>
+            </div>
+          </div>
+          <div class="proj-card-foot">
+            <button class="btn btn-outline btn-xs">Manage</button>
+            <button class="btn btn-terra btn-xs">View &amp; invite</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ══ WEBSITE ════════════════════════════════════════ -->
+    <!-- PHP: SELECT * FROM parish_websites WHERE parish_id=$id -->
+    <div class="section-panel" id="panel-website">
+      <div style="margin-bottom:20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;">
+        <div>
+          <div style="font-size:clamp(18px,4vw,24px);font-weight:800;color:var(--ink);letter-spacing:-0.025em;margin-bottom:2px;">Parish Website</div>
+          <div style="display:flex;align-items:center;gap:8px;"><div class="we-preview-live"><div class="we-live-dot"></div>Live</div><span style="font-size:12px;color:var(--light);">stmarysnyc.communio.org · 142 visitors this month</span></div>
+        </div>
+        <button class="btn btn-terra btn-sm">Save changes <svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      </div>
+      <div class="website-layout">
+        <!-- Editor nav -->
+        <div>
+          <div class="we-panel" style="margin-bottom:12px;">
+            <div class="we-panel-head"><div class="we-panel-title">Page sections</div></div>
+            <!-- PHP: foreach ($website_sections as $section) show editable section -->
+            <div class="we-section-item active">
+              <div class="we-section-icon"><svg viewBox="0 0 14 14" fill="none" width="13" height="13"><rect x="1" y="1" width="12" height="12" rx="2" stroke="var(--terra)" stroke-width="1.2"/><path d="M4 5h6M4 7.5h4" stroke="var(--terra)" stroke-width="1.2" stroke-linecap="round"/></svg></div>
+              <div class="we-section-label">Hero &amp; intro</div>
+              <div class="we-section-status">✓</div>
+            </div>
+            <div class="we-section-item">
+              <div class="we-section-icon"><svg viewBox="0 0 14 14" fill="none" width="13" height="13"><circle cx="7" cy="5" r="2.5" stroke="var(--mid)" stroke-width="1.2"/><path d="M2 13c0-2.76 2.24-5 5-5s5 2.24 5 5" stroke="var(--mid)" stroke-width="1.2" stroke-linecap="round"/></svg></div>
+              <div class="we-section-label">About us</div>
+              <div class="we-section-status">✓</div>
+            </div>
+            <div class="we-section-item">
+              <div class="we-section-icon"><svg viewBox="0 0 14 14" fill="none" width="13" height="13"><rect x="1" y="3" width="12" height="9" rx="1.5" stroke="var(--mid)" stroke-width="1.2"/><path d="M1 6h12" stroke="var(--mid)" stroke-width="1.2"/><circle cx="3.5" cy="4.5" r=".6" fill="var(--mid)"/></svg></div>
+              <div class="we-section-label">Mass times &amp; events</div>
+              <div class="we-section-status">✓</div>
+            </div>
+            <div class="we-section-item">
+              <div class="we-section-icon"><svg viewBox="0 0 14 14" fill="none" width="13" height="13"><rect x="1" y="4" width="12" height="8" rx="1.5" stroke="var(--mid)" stroke-width="1.2"/><path d="M1 7h12" stroke="var(--mid)" stroke-width="1.2"/></svg></div>
+              <div class="we-section-label">Donations</div>
+              <div class="we-section-status" style="color:var(--amber);">Edit</div>
+            </div>
+            <div class="we-section-item">
+              <div class="we-section-icon"><svg viewBox="0 0 14 14" fill="none" width="13" height="13"><path d="M7 1C4.8 1 3 2.8 3 5c0 3 4 7.5 4 7.5S11 8 11 5c0-2.2-1.8-4-4-4z" stroke="var(--mid)" stroke-width="1.2"/></svg></div>
+              <div class="we-section-label">Contact &amp; map</div>
+              <div class="we-section-status">✓</div>
+            </div>
+          </div>
+          <div class="we-panel">
+            <div class="we-panel-head"><div class="we-panel-title">Theme</div></div>
+            <div style="padding:14px 16px;">
+              <div class="tmpl-row" style="grid-template-columns:1fr 1fr;gap:7px;">
+                <div class="tmpl sel" onclick="pickT(this)">
+                  <div class="tp tp-a"><div class="tp-lines"><div class="tpl h"></div><div class="tpl s"></div></div><div class="tp-ring"><div class="tp-dot"><svg viewBox="0 0 11 9" fill="none"><path d="M1 4.5l3 3 6-6" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div></div>
+                  <div class="tmpl-name" style="font-size:10px;">Warm</div>
+                </div>
+                <div class="tmpl" onclick="pickT(this)">
+                  <div class="tp tp-b"><div class="tp-lines"><div class="tpl h"></div><div class="tpl s"></div></div><div class="tp-ring"><div class="tp-dot"><svg viewBox="0 0 11 9" fill="none"><path d="M1 4.5l3 3 6-6" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div></div>
+                  <div class="tmpl-name" style="font-size:10px;">Sage</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Preview -->
+        <div class="we-preview">
+          <div class="we-preview-bar">
+            <div class="we-dots"><div class="we-dot"></div><div class="we-dot"></div><div class="we-dot"></div></div>
+            <!-- PHP: echo "https://" . $parish->slug . ".communio.org" -->
+            <div class="we-url">stmarysnyc.communio.org</div>
+            <div class="we-preview-live"><div class="we-live-dot"></div>Live</div>
+          </div>
+          <div class="we-site-mock">
+            <!-- PHP: actual website template is rendered via separate template engine -->
+            <div class="wsm-hero">
+              <div class="wsm-name">St. Mary's Parish</div>
+              <div class="wsm-tagline">Serving the Lower East Side since 1887</div>
+              <div class="wsm-badges">
+                <span class="wsm-b">🇺🇸 New York</span>
+                <span class="wsm-b">✓ Communio verified</span>
+              </div>
+            </div>
+            <div class="wsm-sections">
+              <div class="wsm-sec">
+                <div class="wsm-sec-title">About us</div>
+                <div class="wsm-line w80"></div>
+                <div class="wsm-line w60"></div>
+                <div class="wsm-line w45"></div>
+              </div>
+              <div class="wsm-sec">
+                <div class="wsm-sec-title">Mass times</div>
+                <div class="wsm-line w60"></div>
+                <div class="wsm-line w80"></div>
+                <div class="wsm-line w45"></div>
+              </div>
+              <div class="wsm-sec">
+                <div class="wsm-sec-title">Upcoming events</div>
+                <div class="wsm-line w80"></div>
+                <div class="wsm-line w60"></div>
+              </div>
+              <div class="wsm-sec">
+                <div class="wsm-sec-title">Donate</div>
+                <div class="wsm-line w45"></div>
+                <div style="height:20px;background:var(--terra);border-radius:var(--r-pill);margin-top:6px;opacity:.7;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ DONATIONS ═════════════════════════════════════ -->
+    <!-- PHP: all data from donations table WHERE parish_id=$id -->
+    <div class="section-panel" id="panel-donations">
+      <div class="donations-header">
+        <div class="dh-title">Donations &amp; Analytics</div>
+        <div style="display:flex;gap:8px;">
+          <button class="btn btn-outline btn-sm">Export CSV</button>
+          <button class="btn btn-terra btn-sm">Stripe dashboard ↗</button>
+        </div>
+      </div>
+
+      <!-- Key metrics -->
+      <!-- PHP: SELECT SUM, COUNT, AVG from donations WHERE parish_id=$id grouped by period -->
+      <div class="don-metrics">
+        <div class="don-metric">
+          <div class="dm-val">$4,205</div>
+          <div class="dm-lbl">This month</div>
+          <div class="dm-trend dm-up">↑ 34.8% vs last month</div>
+        </div>
+        <div class="don-metric">
+          <div class="dm-val">$10,165</div>
+          <div class="dm-lbl">Last 3 months</div>
+          <div class="dm-trend dm-up">↑ 18.2% vs prior period</div>
+        </div>
+        <div class="don-metric">
+          <div class="dm-val">$89.47</div>
+          <div class="dm-lbl">Average donation</div>
+          <div class="dm-trend dm-up">↑ $12.30 vs last month</div>
+        </div>
+        <div class="don-metric">
+          <div class="dm-val">114</div>
+          <div class="dm-lbl">Total donors (3mo)</div>
+          <div class="dm-trend dm-up">28 new donors</div>
+        </div>
+      </div>
+
+      <div class="don-layout">
+        <!-- Chart + transactions -->
+        <div>
+          <div class="card" style="margin-bottom:14px;">
+            <div class="full-chart">
+              <div class="fc-header">
+                <div>
+                  <div class="fc-title">Monthly donation income</div>
+                  <div style="font-size:12px;color:var(--light);">October 2025 — March 2026</div>
+                </div>
+                <div class="fc-total">$10,165 <span>/ 6 months</span></div>
+              </div>
+              <!-- PHP: SELECT MONTH(created_at), SUM(net_amount) FROM donations WHERE parish_id=$id AND created_at >= DATE_SUB(NOW(), INTERVAL 6 MONTH) GROUP BY MONTH ORDER BY MONTH ASC -->
+              <div class="fc-bars" id="full-chart-bars"></div>
+            </div>
+          </div>
+
+          <!-- Recurring vs one-off breakdown -->
+          <div class="card" style="margin-bottom:14px;">
+            <div style="padding:18px 20px;">
+              <div class="sec-lbl">Donation breakdown</div>
+              <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;">
+                <div style="text-align:center;padding:14px;background:var(--sage-p);border-radius:var(--r-lg);">
+                  <div style="font-size:20px;font-weight:800;color:var(--sage);letter-spacing:-0.02em;">$2,640</div>
+                  <div style="font-size:11px;color:var(--sage);font-weight:600;margin-top:3px;">Recurring gifts</div>
+                  <div style="font-size:10px;color:var(--light);margin-top:2px;">18 donors</div>
+                </div>
+                <div style="text-align:center;padding:14px;background:var(--terra-p);border-radius:var(--r-lg);">
+                  <div style="font-size:20px;font-weight:800;color:var(--terra);letter-spacing:-0.02em;">$1,565</div>
+                  <div style="font-size:11px;color:var(--terra);font-weight:600;margin-top:3px;">One-off gifts</div>
+                  <div style="font-size:10px;color:var(--light);margin-top:2px;">29 donors</div>
+                </div>
+                <div style="text-align:center;padding:14px;background:var(--amber-p);border-radius:var(--r-lg);">
+                  <div style="font-size:20px;font-weight:800;color:var(--amber);letter-spacing:-0.02em;">96.1%</div>
+                  <div style="font-size:11px;color:var(--amber);font-weight:600;margin-top:3px;">Reaches parish</div>
+                  <div style="font-size:10px;color:var(--light);margin-top:2px;">After all fees</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Transaction list -->
+          <div class="card">
+            <div style="padding:18px 20px 4px;">
+              <div class="sec-lbl">Recent transactions</div>
+            </div>
+            <!-- PHP: SELECT * FROM donations WHERE parish_id=$id ORDER BY created_at DESC LIMIT 10 -->
+            <div class="tx-list" style="padding:0 20px 16px;">
+              <div class="tx-item">
+                <div class="tx-av">JM</div>
+                <div><div class="tx-name">James Murphy</div><div class="tx-type">Monthly recurring · via Communio profile</div></div>
+                <div class="tx-amount"><div class="tx-val">$150.00</div><div class="tx-date">Today, 6:02am</div></div>
+              </div>
+              <div class="tx-item">
+                <div class="tx-av" style="background:var(--border);color:var(--mid);">—</div>
+                <div><div class="tx-name">Anonymous donor</div><div class="tx-type">One-off · via Communio profile</div></div>
+                <div class="tx-amount"><div class="tx-val">$120.00</div><div class="tx-date">Yesterday, 2:14pm</div></div>
+              </div>
+              <div class="tx-item">
+                <div class="tx-av">SR</div>
+                <div><div class="tx-name">Sister Rosa Delgado</div><div class="tx-type">One-off · via parish website</div></div>
+                <div class="tx-amount"><div class="tx-val">$75.00</div><div class="tx-date">25 Mar, 9:30am</div></div>
+              </div>
+              <div class="tx-item">
+                <div class="tx-av">MC</div>
+                <div><div class="tx-name">Michael Chen</div><div class="tx-type">Monthly recurring · via parish website</div></div>
+                <div class="tx-amount"><div class="tx-val">$200.00</div><div class="tx-date">24 Mar, 11:00am</div></div>
+              </div>
+              <div class="tx-item">
+                <div class="tx-av">PO</div>
+                <div><div class="tx-name">Patricia O'Sullivan</div><div class="tx-type">One-off · Parish restoration fund</div></div>
+                <div class="tx-amount"><div class="tx-val">$500.00</div><div class="tx-date">22 Mar, 3:45pm</div></div>
+              </div>
+              <div class="tx-item">
+                <div class="tx-av">AB</div>
+                <div><div class="tx-name">Anthony Baxter</div><div class="tx-type">Monthly recurring · via Communio profile</div></div>
+                <div class="tx-amount"><div class="tx-val">$50.00</div><div class="tx-date">20 Mar, 8:12am</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Payout card + fee explainer -->
+        <div>
+          <div class="payout-card" style="margin-bottom:14px;">
+            <!-- PHP: fetch pending_payout from Stripe Connect API for $parish->stripe_account_id -->
+            <div class="pc2-lbl">Next payout to your account</div>
+            <div class="pc2-amount">$3,961.00</div>
+            <div class="pc2-row">
+              <div class="pc2-lbl2" style="font-size:11px;color:rgba(255,253,249,0.4);">Your parish receives</div>
+              <div class="pc2-bar-bg"><div class="pc2-bar-fill" style="width:96.1%;background:var(--sage-l);"></div></div>
+              <div class="pc2-pct" style="color:var(--sage-l);">96.1%</div>
+            </div>
+            <div class="pc2-row">
+              <div class="pc2-lbl2" style="font-size:11px;color:rgba(255,253,249,0.4);">Communio mission</div>
+              <div class="pc2-bar-bg"><div class="pc2-bar-fill" style="width:1%;background:var(--terra-l);"></div></div>
+              <div class="pc2-pct" style="color:var(--terra-l);">1%</div>
+            </div>
+            <div class="pc2-row">
+              <div class="pc2-lbl2" style="font-size:11px;color:rgba(255,253,249,0.4);">Stripe processing</div>
+              <div class="pc2-bar-bg"><div class="pc2-bar-fill" style="width:2.9%;background:rgba(255,255,255,0.2);"></div></div>
+              <div class="pc2-pct" style="color:rgba(255,255,255,0.35);">2.9%</div>
+            </div>
+            <div class="pc2-foot"><strong>No hidden fees.</strong> Every donor receipt shows this breakdown. Parishes under $500/month pay zero Communio fee. Payout arrives in 2 business days.</div>
+          </div>
+
+          <!-- Stripe status -->
+          <div class="card card-p" style="margin-bottom:14px;">
+            <div class="sec-lbl">Stripe Connect</div>
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
+              <div style="width:8px;height:8px;border-radius:50%;background:var(--sage);animation:pulse2 2s ease infinite;flex-shrink:0;"></div>
+              <span style="font-size:13px;font-weight:600;color:var(--sage);">Connected &amp; active</span>
+            </div>
+            <div style="font-size:12px;color:var(--mid);margin-bottom:12px;">Account: acct_1PaXb2•••••7qWz · Payouts enabled</div>
+            <button class="btn btn-outline btn-sm" style="width:100%;justify-content:center;">Manage in Stripe ↗</button>
+          </div>
+
+          <!-- Top sources -->
+          <div class="card card-p">
+            <div class="sec-lbl">Top donation sources</div>
+            <!-- PHP: SELECT source, SUM(amount), COUNT(*) FROM donations WHERE parish_id=$id GROUP BY source -->
+            <div style="display:flex;flex-direction:column;gap:10px;">
+              <div style="display:flex;align-items:center;gap:10px;">
+                <div style="font-size:12px;color:var(--mid);width:120px;flex-shrink:0;">Communio profile</div>
+                <div style="flex:1;height:6px;background:var(--border-l);border-radius:3px;overflow:hidden;"><div style="width:62%;height:100%;background:var(--terra);border-radius:3px;"></div></div>
+                <div style="font-size:12px;font-weight:700;color:var(--ink);width:30px;text-align:right;">62%</div>
+              </div>
+              <div style="display:flex;align-items:center;gap:10px;">
+                <div style="font-size:12px;color:var(--mid);width:120px;flex-shrink:0;">Parish website</div>
+                <div style="flex:1;height:6px;background:var(--border-l);border-radius:3px;overflow:hidden;"><div style="width:31%;height:100%;background:var(--sage);border-radius:3px;"></div></div>
+                <div style="font-size:12px;font-weight:700;color:var(--ink);width:30px;text-align:right;">31%</div>
+              </div>
+              <div style="display:flex;align-items:center;gap:10px;">
+                <div style="font-size:12px;color:var(--mid);width:120px;flex-shrink:0;">Direct link</div>
+                <div style="flex:1;height:6px;background:var(--border-l);border-radius:3px;overflow:hidden;"><div style="width:7%;height:100%;background:var(--amber);border-radius:3px;"></div></div>
+                <div style="font-size:12px;font-weight:700;color:var(--ink);width:30px;text-align:right;">7%</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ SETTINGS ════════════════════════════════════════ -->
+    <!-- PHP: $parish loaded from parishes table, $contact from contacts table, $stripe from stripe_accounts table -->
+    <div class="section-panel" id="panel-settings">
+      <div style="margin-bottom:20px;">
+        <div style="font-size:clamp(18px,4vw,24px);font-weight:800;color:var(--ink);letter-spacing:-0.025em;">Settings</div>
+      </div>
+      <div class="settings-layout">
+        <div class="settings-nav">
+          <!-- PHP: highlight active settings section -->
+          <div class="sn-item active">
+            <svg viewBox="0 0 16 16" fill="none" width="14" height="14"><circle cx="8" cy="6" r="2.5" stroke="currentColor" stroke-width="1.3"/><path d="M2 14c0-3.31 2.69-6 6-6s6 2.69 6 6" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+            <span class="sn-label">Parish profile</span>
+          </div>
+          <div class="sn-item">
+            <svg viewBox="0 0 16 16" fill="none" width="14" height="14"><rect x="1" y="4" width="14" height="9" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M1 7.5h14" stroke="currentColor" stroke-width="1.3"/></svg>
+            <span class="sn-label">Donations</span>
+          </div>
+          <div class="sn-item">
+            <svg viewBox="0 0 16 16" fill="none" width="14" height="14"><path d="M8 1v3M8 12v3M1 8h3M12 8h3M3.05 3.05l1.41 1.41M11.54 11.54l1.41 1.41M3.05 12.95l1.41-1.41M11.54 4.46l1.41-1.41" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+            <span class="sn-label">Notifications</span>
+          </div>
+          <div class="sn-item">
+            <svg viewBox="0 0 16 16" fill="none" width="14" height="14"><rect x="1" y="2" width="14" height="11" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M1 5.5h14" stroke="currentColor" stroke-width="1.3"/></svg>
+            <span class="sn-label">Website</span>
+          </div>
+          <div class="sn-item">
+            <svg viewBox="0 0 16 16" fill="none" width="14" height="14"><path d="M8 1.5a6.5 6.5 0 100 13 6.5 6.5 0 000-13z" stroke="currentColor" stroke-width="1.3"/><path d="M2 8h12M8 2a10 10 0 000 12M8 2a10 10 0 010 12" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+            <span class="sn-label">Privacy</span>
+          </div>
+          <div class="sn-item">
+            <svg viewBox="0 0 16 16" fill="none" width="14" height="14"><rect x="2" y="3" width="12" height="10" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M5 3V2M11 3V2M2 7h12" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+            <span class="sn-label">Account</span>
+          </div>
+        </div>
+
+        <!-- Settings content panel -->
+        <!-- PHP: form action="update-parish-settings.php" method="POST" -->
+        <div class="settings-content">
+          <div class="settings-title">Parish profile</div>
+          <div class="settings-subtitle">This information appears on your public Communio profile</div>
+          <div style="display:flex;flex-direction:column;gap:14px;">
+            <div class="field">
+              <div class="fl">Parish name</div>
+              <!-- PHP: name="parish_name" value=$parish->name -->
+              <input class="fi" type="text" value="St. Mary's Parish">
+            </div>
+            <div class="field-row">
+              <div class="field">
+                <div class="fl">City</div>
+                <input class="fi" type="text" value="New York">
+              </div>
+              <div class="field">
+                <div class="fl">Country</div>
+                <select class="fi"><option>United States</option><option>Hungary</option><option>Ghana</option></select>
+              </div>
+            </div>
+            <div class="field">
+              <div class="fl">Description</div>
+              <textarea class="fi" style="min-height:80px;">St. Mary's Parish has been serving the Lower East Side community since 1887. We are a vibrant, multicultural congregation of over 1,200 families, committed to social justice, youth ministry, and ethical technology advocacy.</textarea>
+            </div>
+            <div class="field-row">
+              <div class="field">
+                <div class="fl">Contact person</div>
+                <input class="fi" type="text" value="Fr. James O'Brien">
+              </div>
+              <div class="field">
+                <div class="fl">Role</div>
+                <select class="fi"><option>Pastor / Parish Priest</option><option>Administrator</option></select>
+              </div>
+            </div>
+            <div class="field-row">
+              <div class="field">
+                <div class="fl">Public email</div>
+                <input class="fi" type="email" value="info@stmarysnyc.org">
+              </div>
+              <div class="field">
+                <div class="fl">Phone</div>
+                <input class="fi" type="tel" value="+1 (212) 555-0182">
+              </div>
+            </div>
+            <div style="display:flex;justify-content:flex-end;gap:8px;padding-top:4px;">
+              <button class="btn btn-outline btn-sm">Cancel</button>
+              <!-- PHP: form submit → update-parish.php → redirect with flash message -->
+              <button class="btn btn-terra btn-sm">Save changes <svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- .main-content -->
+</div><!-- #v-app -->
+
+<!-- ══════════════════════════════════════════════════════
+     VIEW 10 — PUBLIC PROFILE
+     PHP: accessible at /$parish->slug — no auth required
+     PHP: $parish = fetch_parish_by_slug($slug); if not found → 404
+     ══════════════════════════════════════════════════════ -->
+<div class="view" id="v-public">
+  <nav class="top-nav">
+    <a href="communio.html" class="nav-brand">
+      <div class="nav-mark"><svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="3" fill="white"/><path d="M8 1v3M8 12v3M1 8h3M12 8h3" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+      <div class="nav-wm">Commun<span>io</span></div>
+    </a>
+    <div class="nav-r">
+      <!-- PHP: if logged in as different parish, show "← Dashboard" -->
+      <button class="nav-lbtn" onclick="navTo('home');go('app');" style="font-size:12px;font-weight:600;color:var(--mid);background:none;border:1px solid var(--border);border-radius:var(--r-pill);padding:7px 14px;cursor:pointer;">← Dashboard</button>
+      <a href="communio-register.html" class="btn btn-terra btn-sm">Register your parish</a>
+    </div>
+  </nav>
+
+  <div class="pub-hero">
+    <div class="pub-inner">
+      <div class="pub-top">
+        <div class="pub-av">SM</div>
+        <div class="pub-info">
+          <!-- PHP: echo $parish->name -->
+          <div class="pub-name">St. Mary's Parish</div>
+          <div class="pub-badges">
+            <span class="pub-b pub-bg">✓ Verified by DCF</span>
+            <!-- PHP: echo $parish->country_flag . " " . $parish->city . ", " . $parish->country_name -->
+            <span class="pub-b pub-bd">🇺🇸 New York, USA</span>
+            <span class="pub-b pub-bd">English</span>
+          </div>
+        </div>
+        <div class="pub-actions">
+          <!-- PHP: if donation_enabled → show donate button -->
+          <button class="btn btn-don-p btn-sm">Donate</button>
+          <!-- PHP: if visitor is logged-in parish → show Connect, else → link to register -->
+          <button class="btn btn-terra btn-sm">Connect <svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        </div>
+      </div>
+      <div class="pub-tabs">
+        <button class="pub-tab on">About</button>
+        <button class="pub-tab">Projects</button>
+        <button class="pub-tab">Network</button>
+        <button class="pub-tab">Donate</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="pub-body">
+    <div>
+      <!-- PHP: stats from parishes table + aggregates from donations/projects tables -->
+      <div class="pub-stats">
+        <div class="pub-stat"><div class="pub-stat-n">1887</div><div class="pub-stat-l">Founded</div></div>
+        <div class="pub-stat"><div class="pub-stat-n">1,200+</div><div class="pub-stat-l">Families</div></div>
+        <div class="pub-stat"><div class="pub-stat-n">4</div><div class="pub-stat-l">Projects</div></div>
+      </div>
+
+      <div class="card pub-card">
+        <div class="sec-lbl">About this parish</div>
+        <!-- PHP: echo $parish->description -->
+        <p class="pub-about">St. Mary's Parish has been serving the Lower East Side community since 1887. A vibrant, multicultural congregation of over 1,200 families, committed to social justice, youth ministry, and ethical technology advocacy spanning more than 40 countries of origin.</p>
+      </div>
+
+      <div class="card pub-card">
+        <div class="sec-lbl">Focus areas</div>
+        <!-- PHP: foreach ($parish->focus_areas as $area) echo tag HTML -->
+        <div class="pub-tags">
+          <span class="pub-tag">Peace &amp; reconciliation</span>
+          <span class="pub-tag">Ethical technology</span>
+          <span class="pub-tag">Social justice</span>
+          <span class="pub-tag">Youth ministry</span>
+        </div>
+      </div>
+
+      <div class="card pub-card">
+        <div class="sec-lbl">Active on the network</div>
+        <!-- PHP: SELECT projects.* FROM projects JOIN parish_projects ON... WHERE parish_projects.parish_id=$id AND projects.public=true -->
+        <div class="pub-proj-row"><span class="ppr-t ppr-terra">Advocacy</span><span class="ppr-name">Ethical AI in Catholic Education — Global Statement</span><span class="ppr-cnt">247 parishes</span></div>
+        <div class="pub-proj-row"><span class="ppr-t ppr-sage">Project</span><span class="ppr-name">Global Youth Formation Network</span><span class="ppr-cnt">89 parishes</span></div>
+        <div class="pub-proj-row"><span class="ppr-t ppr-terra">Advocacy</span><span class="ppr-name">Migration &amp; Refugee Support — UN Statement</span><span class="ppr-cnt">163 parishes</span></div>
+        <div class="pub-proj-row"><span class="ppr-t" style="background:var(--amber-p);color:var(--amber);">Research</span><span class="ppr-name">Digital Sovereignty &amp; Parish Life Study</span><span class="ppr-cnt">28 parishes</span></div>
+      </div>
+    </div>
+
+    <div class="pub-sidebar">
+      <!-- PHP: if $parish->donation_enabled == true -->
+      <div class="dw-pub">
+        <div class="dwp-lbl">Support this parish</div>
+        <!-- PHP: echo $parish->name -->
+        <div class="dwp-name">St. Mary's Parish</div>
+        <!-- PHP: echo $parish->donation_description -->
+        <div class="dwp-desc">Your gift supports community programmes and the upkeep of our historic church.</div>
+        <!-- PHP: echo $parish->suggested_amounts as buttons -->
+        <div class="dwp-amts">
+          <button class="dwp-amt" onclick="pickA(this,'$10')">$10</button>
+          <button class="dwp-amt on" onclick="pickA(this,'$25')">$25</button>
+          <button class="dwp-amt" onclick="pickA(this,'$50')">$50</button>
+          <button class="dwp-amt" onclick="pickA(this,'$100')">$100</button>
+        </div>
+        <!-- PHP: POST to /donations/create.php with amount, parish_id, stripe_account_id -->
+        <button class="dwp-btn" id="dw-cta">Donate $25 <svg viewBox="0 0 16 16" fill="none" width="13" height="13"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="dwp-note">96.1% reaches the parish · 1% supports Communio</div>
+      </div>
+
+      <div class="sb-c">
+        <div class="sb-ct">Contact</div>
+        <!-- PHP: echo $parish->contact_email_public, $parish->slug, $parish->address -->
+        <div class="sb-cr"><div class="sb-ci"><svg viewBox="0 0 14 14" fill="none"><path d="M1 3l6 5 6-5" stroke="var(--mid)" stroke-width="1.2" stroke-linecap="round"/><rect x="1" y="2.5" width="12" height="9" rx="1.5" stroke="var(--mid)" stroke-width="1.2"/></svg></div><div class="sb-cx"><strong>Email</strong>info@stmarysnyc.org</div></div>
+        <div class="sb-cr"><div class="sb-ci"><svg viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.5" stroke="var(--mid)" stroke-width="1.2"/><path d="M1.5 7h11M7 1.5A8.5 8.5 0 007 12.5M7 1.5A8.5 8.5 0 017 12.5" stroke="var(--mid)" stroke-width="1.2" stroke-linecap="round"/></svg></div><div class="sb-cx"><strong>Website</strong>stmarysnyc.communio.org</div></div>
+        <div class="sb-cr"><div class="sb-ci"><svg viewBox="0 0 14 14" fill="none"><path d="M7 1C4.8 1 3 2.8 3 5c0 3 4 7.5 4 7.5S11 8 11 5c0-2.2-1.8-4-4-4z" stroke="var(--mid)" stroke-width="1.2"/><circle cx="7" cy="5" r="1.3" stroke="var(--mid)" stroke-width="1.1"/></svg></div><div class="sb-cx"><strong>Address</strong>15 Mott Street, New York, NY 10013</div></div>
+      </div>
+
+      <div class="net-sb2">
+        <div class="nsb-t">Are you a Communio parish?</div>
+        <div class="nsb-d">Connect with St. Mary's directly — form a sister-parish relationship or join a project together.</div>
+        <button class="btn btn-white btn-sm" style="width:100%;justify-content:center;">Connect as a parish</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ── DATA ──────────────────────────────────────────────────
+   PHP: all chart data would come from server-side queries
+   These arrays represent what PHP would echo as JSON
+   ────────────────────────────────────────────────────────── */
+// PHP: $monthly_donations = fetch_monthly_donations($parish_id, 6);
+// PHP: echo "const chartData = " . json_encode($monthly_donations) . ";";
+var miniData = [
+  {m:'Oct',v:1280},{m:'Nov',v:1640},{m:'Dec',v:2100},
+  {m:'Jan',v:2840},{m:'Feb',v:3120},{m:'Mar',v:4205}
+];
+
+function buildMiniChart(){
+  var el = document.getElementById('mini-chart');
+  if(!el) return;
+  var max = Math.max.apply(null, miniData.map(function(d){return d.v;}));
+  var html = '';
+  miniData.forEach(function(d,i){
+    var h = Math.round((d.v/max)*110);
+    var peak = d.v === max ? ' peak' : '';
+    html += '<div class="c-bar-group">';
+    html += '<div class="c-val" style="font-size:9px;color:var(--mid);font-weight:700;text-align:center;">$'+Math.round(d.v/1000)+'k</div>';
+    html += '<div class="c-bar'+peak+'" style="height:'+h+'px;"></div>';
+    html += '<div class="c-month">'+d.m+'</div>';
+    html += '</div>';
+  });
+  el.innerHTML = html;
+}
+
+function buildFullChart(){
+  var el = document.getElementById('full-chart-bars');
+  if(!el) return;
+  var max = Math.max.apply(null, miniData.map(function(d){return d.v;}));
+  var html = '';
+  miniData.forEach(function(d){
+    var h = Math.round((d.v/max)*130);
+    var peak = d.v === max ? ' peak' : '';
+    html += '<div class="fc-bar-g">';
+    html += '<div class="fc-v">$'+d.v.toLocaleString()+'</div>';
+    html += '<div class="fc-bar'+peak+'" style="height:'+h+'px;"></div>';
+    html += '<div class="fc-m">'+d.m+'</div>';
+    html += '</div>';
+  });
+  el.innerHTML = html;
+}
+
+/* ── NAVIGATION ────────────────────────────────────────── */
+var currentApp = 'home';
+
+function go(viewName, appSection){
+  // Hide all views
+  document.querySelectorAll('.view, .app-view').forEach(function(v){
+    v.classList.remove('on');
+    v.style.display = 'none';
+  });
+
+  var target;
+  if(viewName === 'app'){
+    target = document.getElementById('v-app');
+    target.style.display = 'flex';
+    target.classList.add('on');
+    if(appSection) navTo(appSection);
+  } else {
+    target = document.getElementById('v-' + viewName);
+    target.style.display = 'block';
+    target.classList.add('on');
+  }
+
+  // Update switcher buttons
+  var viewMap = {welcome:0, setup:1, public:9};
+  var appMap  = {home:2, messages:3, network:4, projects:5, website:6, donations:7, settings:8};
+  var idx = (viewName === 'app') ? (appSection ? appMap[appSection] : 2) : viewMap[viewName];
+  document.querySelectorAll('.sw-btn').forEach(function(b,i){
+    b.classList.toggle('on', i === idx);
+  });
+
+  document.documentElement.scrollTop = 0;
+  document.body.scrollTop = 0;
+
+  // Build charts when needed
+  if(viewName === 'app' && appSection === 'home') setTimeout(buildMiniChart, 50);
+  if(viewName === 'app' && appSection === 'donations') setTimeout(buildFullChart, 50);
+}
+
+function navTo(section){
+  currentApp = section;
+  document.querySelectorAll('.section-panel').forEach(function(p){p.classList.remove('on');});
+  var panel = document.getElementById('panel-' + section);
+  if(panel) panel.classList.add('on');
+  document.querySelectorAll('.sb-item').forEach(function(i){i.classList.remove('active');});
+  var navItem = document.getElementById('nav-' + section);
+  if(navItem) navItem.classList.add('active');
+  if(section === 'home') setTimeout(buildMiniChart, 50);
+  if(section === 'donations') setTimeout(buildFullChart, 50);
+  // Close sidebar on mobile after navigation
+  document.getElementById('sidebar').classList.remove('open');
+}
+
+function toggleSidebar(){
+  document.getElementById('sidebar').classList.toggle('open');
+}
+
+// Close sidebar when clicking outside
+document.addEventListener('click', function(e){
+  var sb = document.getElementById('sidebar');
+  var toggle = document.querySelector('.sb-toggle');
+  if(sb && toggle && !sb.contains(e.target) && !toggle.contains(e.target)){
+    sb.classList.remove('open');
+  }
+});
+
+function pickT(el){
+  var parent = el.closest('.tmpl-row') || el.parentNode;
+  parent.querySelectorAll('.tmpl').forEach(function(t){t.classList.remove('sel');});
+  el.classList.add('sel');
+}
+
+function pickA(btn, val){
+  document.querySelectorAll('.dwp-amt').forEach(function(b){b.classList.remove('on');});
+  btn.classList.add('on');
+  var cta = document.getElementById('dw-cta');
+  if(cta) cta.innerHTML = 'Donate ' + val + ' <svg viewBox="0 0 16 16" fill="none" width="13" height="13"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+}
+
+function simulateStripe(){
+  var btn = document.getElementById('stripe-btn');
+  var done = document.getElementById('stripe-done');
+  if(!btn) return;
+  btn.textContent = 'Connecting to Stripe...';
+  btn.disabled = true;
+  // PHP: this would redirect to Stripe Connect URL, then return to /stripe/callback.php
+  setTimeout(function(){
+    btn.style.display = 'none';
+    done.classList.add('show');
+  }, 1800);
+}
+
+/* ── INIT ──────────────────────────────────────────────── */
+document.addEventListener('DOMContentLoaded', function(){
+  // Hide all views except welcome
+  document.querySelectorAll('.view, .app-view').forEach(function(v){
+    v.style.display = 'none';
+    v.classList.remove('on');
+  });
+  var welcome = document.getElementById('v-welcome');
+  welcome.style.display = 'block';
+  welcome.classList.add('on');
+  document.querySelectorAll('.sw-btn')[0].classList.add('on');
+});
+</script>
+</body>
+</html>
