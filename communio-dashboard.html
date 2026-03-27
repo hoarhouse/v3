@@ -2507,7 +2507,7 @@ select.fi { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w
             '<div style="display:inline-block;background:#d85020;color:#fff;font-size:13px;font-weight:700;padding:11px 22px;border-radius:6px;text-decoration:none;">Register your parish &#8594;</div>' +
             '<div style="font-size:10px;color:var(--light);margin-top:6px;">' + inviteLink + '</div>' +
           '</div>' +
-          '<p style="margin:0;font-size:12px;color:var(--light);">With warmth in faith,<br><strong style="color:var(--ink);">Fr. James O'Brien</strong><br>St. Mary's Parish, New York<br>On behalf of the Communio network · EIN 99-1778616</p>' +
+          '<p style="margin:0;font-size:12px;color:var(--light);">With warmth in faith,<br><strong style="color:var(--ink);">Fr. James O\'Brien</strong><br>St. Mary\'s Parish, New York<br>On behalf of the Communio network · EIN 99-1778616</p>' +
         '</div>';
     } else {
       preview.innerHTML =
@@ -2527,7 +2527,7 @@ select.fi { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w
 
 Register in 10 minutes: ' + inviteLink + '
 
-— Fr. James O'Brien, St. Mary's Parish NYC' ;
+— Fr. James O\'Brien, St. Mary\'s Parish NYC' ;
       preview.querySelector('.\n\n') ;
       // Fix newlines for SMS
       var msgDiv = preview.querySelector('div:last-child div');
@@ -2548,7 +2548,7 @@ Register in 10 minutes: ' + inviteLink + '
     /* Update confirmation text */
     var confirmText = document.getElementById('invite-confirm-text');
     var via = inviteType === 'email' ? 'An email has been sent to <strong>' + contact + '</strong>' : 'A text message has been sent to <strong>' + contact + '</strong>';
-    if(confirmText) confirmText.innerHTML = via + ' inviting <strong>' + name + '</strong> to join Communio. You'll get a notification when they register.';
+    if(confirmText) confirmText.innerHTML = via + ' inviting <strong>' + name + '</strong> to join Communio. You\'ll get a notification when they register.';
 
     /* Update next step 1 text */
     var next1 = document.getElementById('invite-next-1');
