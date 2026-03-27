@@ -1032,16 +1032,115 @@ select.fi { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w
     <!-- ── WEBSITE ────────────────────────────────── -->
     <!-- PHP: SELECT * FROM parish_websites WHERE parish_id=$id -->
     <div class="section-panel" id="panel-website">
+
+      <!-- Full-screen preview modal -->
+      <div id="site-preview-modal" style="display:none;position:fixed;inset:0;z-index:500;background:rgba(0,0,0,0.85);align-items:center;justify-content:center;padding:20px;">
+        <div style="background:#fff;border-radius:12px;overflow:hidden;width:100%;max-width:900px;max-height:90dvh;display:flex;flex-direction:column;box-shadow:0 24px 80px rgba(0,0,0,0.5);">
+          <div style="background:#000;padding:10px 16px;display:flex;align-items:center;gap:10px;flex-shrink:0;border-bottom:2px solid #e8c040;">
+            <div style="display:flex;gap:5px;"><div style="width:9px;height:9px;border-radius:50%;background:#ff5f57;"></div><div style="width:9px;height:9px;border-radius:50%;background:#febc2e;"></div><div style="width:9px;height:9px;border-radius:50%;background:#28c840;"></div></div>
+            <div style="flex:1;background:rgba(255,255,255,0.1);border-radius:6px;padding:5px 12px;font-size:12px;color:rgba(255,255,255,0.6);text-align:center;">stmarysnyc.communio.org</div>
+            <button onclick="closePreview()" style="font-family:var(--f-sans);font-size:12px;font-weight:700;color:rgba(255,255,255,0.6);background:rgba(255,255,255,0.1);border:none;border-radius:6px;padding:6px 12px;cursor:pointer;">✕ Close</button>
+          </div>
+          <div style="overflow-y:auto;flex:1;" id="site-preview-content"></div>
+        </div>
+      </div>
+
       <div style="margin-bottom:18px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;">
         <div>
           <div style="font-size:clamp(18px,4vw,24px);font-weight:800;color:var(--ink);letter-spacing:-0.025em;margin-bottom:3px;">Parish Website</div>
           <div style="display:flex;align-items:center;gap:8px;"><div class="we-live"><div class="we-live-dot"></div>Live</div><span style="font-size:12px;color:var(--light);">stmarysnyc.communio.org · 142 visitors this month</span></div>
         </div>
-        <button class="btn-primary btn-sm">Save changes <svg viewBox="0 0 16 16" fill="none" width="13" height="13"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+          <button class="btn-outline btn-sm" onclick="openPreview()">Preview full site ↗</button>
+          <button class="btn-primary btn-sm" id="publish-btn" onclick="publishSite()">Publish changes <svg viewBox="0 0 16 16" fill="none" width="13" height="13"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        </div>
       </div>
+
+      <!-- Template selector -->
+      <div class="card" style="padding:0;margin-bottom:14px;">
+        <div style="padding:14px 18px;border-bottom:1px solid var(--border-l);display:flex;align-items:center;justify-content:space-between;">
+          <div style="font-size:14px;font-weight:800;color:var(--ink);">Choose a template</div>
+          <span style="font-size:11px;color:var(--light);">Click to preview · changes apply on publish</span>
+        </div>
+        <div style="padding:16px 18px;display:grid;grid-template-columns:repeat(3,1fr);gap:12px;" id="template-grid">
+
+          <!-- Template A: Warm & Classic -->
+          <div class="site-tmpl active" id="tmpl-warm" onclick="selectTemplate('warm')" style="border:2px solid #d85020;border-radius:12px;overflow:hidden;cursor:pointer;transition:all .2s;">
+            <div style="background:#f5f2e8;padding:0;">
+              <div style="background:#000;padding:8px 10px;display:flex;align-items:center;justify-content:space-between;">
+                <div style="font-size:9px;font-weight:800;color:#fff;">St. Mary's <span style="color:#d85020;">Parish</span></div>
+                <div style="font-size:8px;font-weight:700;background:#d85020;color:#fff;padding:2px 6px;border-radius:3px;">Donate</div>
+              </div>
+              <div style="background:#d85020;padding:14px 10px;">
+                <div style="font-size:11px;font-weight:800;color:#fff;margin-bottom:3px;">St. Mary's Parish</div>
+                <div style="font-size:8px;color:rgba(255,255,255,0.7);margin-bottom:8px;">Serving New York since 1887</div>
+                <div style="display:flex;gap:4px;"><div style="font-size:8px;font-weight:700;background:#fff;color:#d85020;padding:3px 7px;border-radius:3px;">Join us Sunday</div><div style="font-size:8px;font-weight:700;background:rgba(255,255,255,0.2);color:#fff;padding:3px 7px;border-radius:3px;">Learn more</div></div>
+              </div>
+              <div style="padding:10px;display:grid;grid-template-columns:1fr 1fr;gap:6px;">
+                <div style="background:#fff;border:1px solid #e8c040;border-radius:5px;padding:8px;"><div style="font-size:8px;font-weight:700;color:#000;margin-bottom:4px;">Mass Times</div><div style="font-size:7px;color:#5a4a20;">Sun 8am, 10am, 12pm<br/>Sat 5pm Vigil</div></div>
+                <div style="background:#fff;border:1px solid #e8c040;border-radius:5px;padding:8px;"><div style="font-size:8px;font-weight:700;color:#000;margin-bottom:4px;">Upcoming</div><div style="font-size:7px;color:#5a4a20;">Easter Vigil Apr 19<br/>Youth Group Apr 22</div></div>
+              </div>
+            </div>
+            <div style="padding:8px 10px;background:#fff;border-top:2px solid #d85020;display:flex;align-items:center;justify-content:space-between;">
+              <div style="font-size:9px;font-weight:800;color:#000;">Warm &amp; Classic</div>
+              <div style="font-size:8px;font-weight:700;color:#d85020;background:rgba(216,80,32,0.1);padding:2px 6px;border-radius:3px;">Selected ✓</div>
+            </div>
+          </div>
+
+          <!-- Template B: Sage & Natural -->
+          <div class="site-tmpl" id="tmpl-sage" onclick="selectTemplate('sage')" style="border:2px solid var(--border-l);border-radius:12px;overflow:hidden;cursor:pointer;transition:all .2s;">
+            <div style="background:#f0faf0;padding:0;">
+              <div style="background:#0a2a0a;padding:8px 10px;display:flex;align-items:center;justify-content:space-between;">
+                <div style="font-size:9px;font-weight:800;color:#fff;">St. Mary's <span style="color:#5aaa5a;">Parish</span></div>
+                <div style="font-size:8px;font-weight:700;background:#d85020;color:#fff;padding:2px 6px;border-radius:3px;">Donate</div>
+              </div>
+              <div style="background:#0a2a0a;padding:14px 10px;">
+                <div style="font-size:11px;font-weight:800;color:#fff;margin-bottom:3px;">St. Mary's Parish</div>
+                <div style="font-size:8px;color:rgba(255,255,255,0.6);margin-bottom:8px;">Serving New York since 1887</div>
+                <div style="display:flex;gap:4px;"><div style="font-size:8px;font-weight:700;background:#d85020;color:#fff;padding:3px 7px;border-radius:3px;">Join us Sunday</div><div style="font-size:8px;font-weight:700;background:rgba(255,255,255,0.15);color:#fff;padding:3px 7px;border-radius:3px;">Learn more</div></div>
+              </div>
+              <div style="padding:10px;display:grid;grid-template-columns:1fr 1fr;gap:6px;">
+                <div style="background:#fff;border:1px solid #b8d4b8;border-radius:5px;padding:8px;"><div style="font-size:8px;font-weight:700;color:#0a2a0a;margin-bottom:4px;">Mass Times</div><div style="font-size:7px;color:#2a6a2a;">Sun 8am, 10am, 12pm<br/>Sat 5pm Vigil</div></div>
+                <div style="background:#fff;border:1px solid #b8d4b8;border-radius:5px;padding:8px;"><div style="font-size:8px;font-weight:700;color:#0a2a0a;margin-bottom:4px;">Upcoming</div><div style="font-size:7px;color:#2a6a2a;">Easter Vigil Apr 19<br/>Youth Group Apr 22</div></div>
+              </div>
+            </div>
+            <div style="padding:8px 10px;background:#fff;border-top:1px solid #b8d4b8;display:flex;align-items:center;justify-content:space-between;">
+              <div style="font-size:9px;font-weight:800;color:#0a2a0a;">Sage &amp; Natural</div>
+              <div style="font-size:8px;color:#888;">Click to select</div>
+            </div>
+          </div>
+
+          <!-- Template C: Midnight & Bold -->
+          <div class="site-tmpl" id="tmpl-midnight" onclick="selectTemplate('midnight')" style="border:2px solid var(--border-l);border-radius:12px;overflow:hidden;cursor:pointer;transition:all .2s;">
+            <div style="background:#111;padding:0;">
+              <div style="background:#000;padding:8px 10px;border-bottom:1px solid #e8c040;display:flex;align-items:center;justify-content:space-between;">
+                <div style="font-size:9px;font-weight:800;color:#fff;">St. Mary's <span style="color:#d85020;">Parish</span></div>
+                <div style="font-size:8px;font-weight:700;background:#d85020;color:#fff;padding:2px 6px;border-radius:3px;">Donate</div>
+              </div>
+              <div style="background:#000;padding:14px 10px;">
+                <div style="font-size:8px;font-weight:700;color:#e8c040;letter-spacing:.06em;text-transform:uppercase;margin-bottom:5px;">Est. 1887 · New York</div>
+                <div style="font-size:12px;font-weight:800;color:#fff;margin-bottom:3px;">St. Mary's Parish</div>
+                <div style="font-size:8px;color:rgba(255,255,255,0.5);margin-bottom:8px;">Serving the Lower East Side</div>
+                <div style="display:flex;gap:4px;"><div style="font-size:8px;font-weight:700;background:#d85020;color:#fff;padding:3px 7px;border-radius:3px;">Join us Sunday</div><div style="font-size:8px;font-weight:700;background:rgba(232,192,64,0.15);color:#e8c040;padding:3px 7px;border-radius:3px;">Learn more</div></div>
+              </div>
+              <div style="padding:10px;display:grid;grid-template-columns:1fr 1fr;gap:6px;">
+                <div style="background:#111;border:1px solid rgba(232,192,64,0.3);border-radius:5px;padding:8px;"><div style="font-size:8px;font-weight:700;color:#e8c040;margin-bottom:4px;">Mass Times</div><div style="font-size:7px;color:rgba(255,255,255,0.5);">Sun 8am, 10am, 12pm<br/>Sat 5pm Vigil</div></div>
+                <div style="background:#111;border:1px solid rgba(232,192,64,0.3);border-radius:5px;padding:8px;"><div style="font-size:8px;font-weight:700;color:#e8c040;margin-bottom:4px;">Upcoming</div><div style="font-size:7px;color:rgba(255,255,255,0.5);">Easter Vigil Apr 19<br/>Youth Group Apr 22</div></div>
+              </div>
+            </div>
+            <div style="padding:8px 10px;background:#111;border-top:1px solid rgba(232,192,64,0.2);display:flex;align-items:center;justify-content:space-between;">
+              <div style="font-size:9px;font-weight:800;color:#e8c040;">Midnight &amp; Bold</div>
+              <div style="font-size:8px;color:#666;">Click to select</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Two column: sections editor + live preview -->
       <div class="we-layout">
         <div>
-          <div class="we-panel" style="margin-bottom:12px;">
+          <div class="we-panel">
             <div class="we-panel-head">Page sections</div>
             <!-- PHP: foreach ($website_sections as $section) -->
             <div class="we-section-item active"><div class="we-ico"><svg viewBox="0 0 14 14" fill="none" width="12" height="12"><rect x="1" y="1" width="12" height="12" rx="2" stroke="var(--terra)" stroke-width="1.2"/><path d="M4 5h6M4 7.5h4" stroke="var(--terra)" stroke-width="1.2" stroke-linecap="round"/></svg></div><div class="we-section-lbl">Hero &amp; intro</div><div class="we-section-status">✓</div></div>
@@ -1050,39 +1149,19 @@ select.fi { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w
             <div class="we-section-item"><div class="we-ico"><svg viewBox="0 0 14 14" fill="none" width="12" height="12"><rect x="1" y="4" width="12" height="8" rx="1.5" stroke="var(--mid)" stroke-width="1.2"/><path d="M1 7h12" stroke="var(--mid)" stroke-width="1.2"/></svg></div><div class="we-section-lbl">Donations</div><div class="we-section-status" style="color:var(--amber);">Edit</div></div>
             <div class="we-section-item"><div class="we-ico"><svg viewBox="0 0 14 14" fill="none" width="12" height="12"><path d="M7 1C4.8 1 3 2.8 3 5c0 3 4 7.5 4 7.5S11 8 11 5c0-2.2-1.8-4-4-4z" stroke="var(--mid)" stroke-width="1.2"/></svg></div><div class="we-section-lbl">Contact &amp; map</div><div class="we-section-status">✓</div></div>
           </div>
-          <div class="we-panel">
-            <div class="we-panel-head">Theme</div>
-            <div style="padding:12px 14px;">
-              <div class="tmpl-row" style="grid-template-columns:1fr 1fr;">
-                <div class="tmpl sel" onclick="pickT(this)"><div class="tp tp-a" style="height:52px;"><div class="tp-lines"><div class="tpl h"></div><div class="tpl s"></div></div><div class="tp-ring"><div class="tp-dot"><svg viewBox="0 0 11 9" fill="none"><path d="M1 4.5l3 3 6-6" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div></div><div class="tmpl-name" style="font-size:10px;">Warm</div></div>
-                <div class="tmpl" onclick="pickT(this)"><div class="tp tp-b" style="height:52px;"><div class="tp-lines"><div class="tpl h"></div><div class="tpl s"></div></div><div class="tp-ring"><div class="tp-dot"><svg viewBox="0 0 11 9" fill="none"><path d="M1 4.5l3 3 6-6" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div></div><div class="tmpl-name" style="font-size:10px;">Sage</div></div>
-              </div>
-            </div>
-          </div>
         </div>
+
+        <!-- Live mini preview -->
         <div class="we-preview">
           <div class="we-bar">
             <div class="we-dots"><div class="we-dot"></div><div class="we-dot"></div><div class="we-dot"></div></div>
-            <!-- PHP: echo "https://" . $parish->slug . ".communio.org" -->
             <div class="we-url">stmarysnyc.communio.org</div>
             <div class="we-live"><div class="we-live-dot"></div>Live</div>
           </div>
-          <div class="we-mock">
-            <!-- PHP: actual site rendered via template engine -->
-            <div class="wsm-hero">
-              <div class="wsm-name">St. Mary's Parish</div>
-              <div class="wsm-sub">Serving the Lower East Side since 1887</div>
-              <div class="wsm-badges"><span class="wsm-b">🇺🇸 New York</span><span class="wsm-b">✓ Communio verified</span></div>
-            </div>
-            <div class="wsm-grid">
-              <div class="wsm-sec"><div class="wsm-sec-title">About us</div><div class="wsm-line w80"></div><div class="wsm-line w60"></div><div class="wsm-line w45"></div></div>
-              <div class="wsm-sec"><div class="wsm-sec-title">Mass times</div><div class="wsm-line w60"></div><div class="wsm-line w80"></div><div class="wsm-line w45"></div></div>
-              <div class="wsm-sec"><div class="wsm-sec-title">Events</div><div class="wsm-line w80"></div><div class="wsm-line w60"></div></div>
-              <div class="wsm-sec"><div class="wsm-sec-title">Donate</div><div class="wsm-line w45"></div><div style="height:18px;background:#d85020;border-radius:4px;margin-top:6px;opacity:.8;"></div></div>
-            </div>
-          </div>
+          <div id="mini-site-preview" style="overflow-y:auto;max-height:480px;"></div>
         </div>
       </div>
+
     </div>
 
     <!-- ── DONATIONS ──────────────────────────────── -->
@@ -1310,7 +1389,7 @@ select.fi { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w
       <div class="sb-contact">
         <div class="sb-ct">Contact</div>
         <!-- PHP: echo $parish->contact_email_public, $parish->slug, $parish->address -->
-        <div class="sb-cr"><div class="sb-ci"><svg viewBox="0 0 14 14" fill="none"><path d="M1 3l6 5 6-5" stroke="var(--mid)" stroke-width="1.2" stroke-linecap="round"/><rect x="1" y="2.5" width="12" height="9" rx="1.5" stroke="var(--mid)" stroke-width="1.2"/></svg></div><div class="sb-cx"><strong>Email</strong>info@stmarysnyc.org</div></div>
+        <div class="sb-cr"><div class="sb-ci"><svg viewBox="0 0 14 14" fill="none"><path d="M1 3l6 5 6-5" stroke="var(--mid)" stroke-width="1.2" stroke-linecap="round"/><rect x="1" y="2.5" width="12" height="9" rx="1.5" stroke="var(--mid)" stroke-width="1.2"/></svg></div><div class="sb-cx"><strong>Email</strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="375e5951587744435a56454e44594e5419584550">[email&#160;protected]</a></div></div>
         <div class="sb-cr"><div class="sb-ci"><svg viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.5" stroke="var(--mid)" stroke-width="1.2"/><path d="M1.5 7h11M7 1.5A8.5 8.5 0 007 12.5M7 1.5A8.5 8.5 0 017 12.5" stroke="var(--mid)" stroke-width="1.2" stroke-linecap="round"/></svg></div><div class="sb-cx"><strong>Website</strong>stmarysnyc.communio.org</div></div>
         <div class="sb-cr"><div class="sb-ci"><svg viewBox="0 0 14 14" fill="none"><path d="M7 1C4.8 1 3 2.8 3 5c0 3 4 7.5 4 7.5S11 8 11 5c0-2.2-1.8-4-4-4z" stroke="var(--mid)" stroke-width="1.2"/><circle cx="7" cy="5" r="1.3" stroke="var(--mid)" stroke-width="1.1"/></svg></div><div class="sb-cx"><strong>Address</strong>15 Mott Street, New York, NY 10013</div></div>
       </div>
@@ -1324,7 +1403,7 @@ select.fi { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w
   </div>
 </div>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   /* ── DATA ──────────────────────────────────────────
      PHP: these would be echoed as JSON from server
      $monthly_donations = fetch_monthly_donations($parish_id, 6);
@@ -1479,7 +1558,259 @@ select.fi { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w
     }, 1800);
   }
 
-  /* ── INIT ─────────────────────────────────────────── */
+
+  /* ── WEBSITE TEMPLATE SYSTEM ─────────────────────── */
+  var currentTemplate = 'warm';
+
+  var templates = {
+    warm: {
+      name: 'Warm & Classic',
+      navBg: '#000000',
+      navBorder: '#e8c040',
+      heroBg: '#d85020',
+      heroText: '#ffffff',
+      heroSubText: 'rgba(255,255,255,0.75)',
+      accentColor: '#d85020',
+      bodyBg: '#f5f2e8',
+      cardBg: '#ffffff',
+      cardBorder: '#e8c040',
+      headingColor: '#000000',
+      textColor: '#5a4a20',
+      labelColor: '#d85020',
+      footerBg: '#000000',
+      footerText: '#ffffff',
+      tagBg: 'rgba(255,255,255,0.2)',
+      tagColor: '#ffffff',
+      btnBg: '#ffffff',
+      btnColor: '#d85020',
+      donBtnBg: '#d85020',
+      donBtnColor: '#ffffff',
+    },
+    sage: {
+      name: 'Sage & Natural',
+      navBg: '#0a2a0a',
+      navBorder: '#b8d4b8',
+      heroBg: '#0a2a0a',
+      heroText: '#ffffff',
+      heroSubText: 'rgba(255,255,255,0.6)',
+      accentColor: '#d85020',
+      bodyBg: '#f0faf0',
+      cardBg: '#ffffff',
+      cardBorder: '#b8d4b8',
+      headingColor: '#0a2a0a',
+      textColor: '#2a5a2a',
+      labelColor: '#2a8a4a',
+      footerBg: '#0a2a0a',
+      footerText: '#ffffff',
+      tagBg: 'rgba(255,255,255,0.15)',
+      tagColor: '#ffffff',
+      btnBg: '#d85020',
+      btnColor: '#ffffff',
+      donBtnBg: '#d85020',
+      donBtnColor: '#ffffff',
+    },
+    midnight: {
+      name: 'Midnight & Bold',
+      navBg: '#000000',
+      navBorder: '#e8c040',
+      heroBg: '#000000',
+      heroText: '#ffffff',
+      heroSubText: 'rgba(255,255,255,0.5)',
+      accentColor: '#e8c040',
+      bodyBg: '#111111',
+      cardBg: '#1a1a1a',
+      cardBorder: 'rgba(232,192,64,0.25)',
+      headingColor: '#e8c040',
+      textColor: 'rgba(255,255,255,0.6)',
+      labelColor: '#e8c040',
+      footerBg: '#000000',
+      footerText: 'rgba(255,255,255,0.5)',
+      tagBg: 'rgba(232,192,64,0.15)',
+      tagColor: '#e8c040',
+      btnBg: '#d85020',
+      btnColor: '#ffffff',
+      donBtnBg: '#d85020',
+      donBtnColor: '#ffffff',
+    }
+  };
+
+  function getSiteHTML(t, full) {
+    var p = templates[t];
+    var fsize = full ? '' : 'font-size:85%;';
+    return '<div style="' + fsize + 'font-family:Outfit,system-ui,sans-serif;">'
+      /* NAV */
+      + '<div style="background:' + p.navBg + ';border-bottom:2px solid ' + p.navBorder + ';padding:12px 20px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:10;">'
+        + '<div style="font-size:14px;font-weight:800;color:#fff;letter-spacing:-0.02em;">St. Mary\'s <span style="color:#d85020;">Parish</span></div>'
+        + '<div style="display:flex;align-items:center;gap:10px;">'
+          + '<a href="#" style="font-size:12px;font-weight:600;color:rgba(255,255,255,0.55);text-decoration:none;">About</a>'
+          + '<a href="#" style="font-size:12px;font-weight:600;color:rgba(255,255,255,0.55);text-decoration:none;">Mass times</a>'
+          + '<a href="#" style="font-size:12px;font-weight:600;color:rgba(255,255,255,0.55);text-decoration:none;">Contact</a>'
+          + '<div style="font-size:11px;font-weight:700;background:#d85020;color:#fff;padding:7px 14px;border-radius:6px;cursor:pointer;">Donate</div>'
+        + '</div>'
+      + '</div>'
+      /* HERO */
+      + '<div style="background:' + p.heroBg + ';padding:' + (full ? '56px' : '32px') + ' 24px;position:relative;overflow:hidden;">'
+        + '<div style="position:absolute;top:-60px;right:-60px;width:250px;height:250px;border-radius:50%;background:radial-gradient(circle,rgba(216,80,32,0.12) 0%,transparent 70%);pointer-events:none;"></div>'
+        + '<div style="max-width:640px;position:relative;z-index:1;">'
+          + '<div style="font-size:10px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:' + p.accentColor + ';background:' + p.tagBg + ';border:1px solid ' + p.tagBg + ';border-radius:4px;padding:4px 10px;display:inline-block;margin-bottom:12px;">'
+            + (t === 'midnight' ? '✦ Est. 1887 · New York City' : '✓ DCF Verified Parish · New York')
+          + '</div>'
+          + '<div style="font-size:' + (full ? '38px' : '24px') + ';font-weight:800;color:' + p.heroText + ';letter-spacing:-0.03em;line-height:1.1;margin-bottom:10px;">'
+            + 'St. Mary\'s Parish'
+          + '</div>'
+          + '<div style="font-size:' + (full ? '16px' : '13px') + ';color:' + p.heroSubText + ';line-height:1.65;margin-bottom:' + (full ? '28px' : '16px') + ';max-width:480px;">'
+            + 'Serving the Lower East Side community since 1887. A vibrant, multicultural congregation of over 1,200 families committed to social justice, faith, and one another.'
+          + '</div>'
+          + '<div style="display:flex;gap:10px;flex-wrap:wrap;">'
+            + '<div style="font-size:13px;font-weight:700;background:' + p.btnBg + ';color:' + p.btnColor + ';padding:11px 20px;border-radius:6px;cursor:pointer;">Join us this Sunday →</div>'
+            + '<div style="font-size:13px;font-weight:700;background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.7);padding:11px 20px;border-radius:6px;cursor:pointer;">Mass times</div>'
+          + '</div>'
+        + '</div>'
+      + '</div>'
+      /* STATS BAR */
+      + '<div style="background:' + p.accentColor + ';padding:12px 24px;display:flex;gap:24px;flex-wrap:wrap;">'
+        + '<div style="font-size:12px;font-weight:700;color:' + (t === 'midnight' ? '#000' : '#fff') + ';">🕊 Founded 1887</div>'
+        + '<div style="font-size:12px;font-weight:700;color:' + (t === 'midnight' ? '#000' : '#fff') + ';">👥 1,200+ Families</div>'
+        + '<div style="font-size:12px;font-weight:700;color:' + (t === 'midnight' ? '#000' : '#fff') + ';">🌍 40+ Countries of origin</div>'
+        + '<div style="font-size:12px;font-weight:700;color:' + (t === 'midnight' ? '#000' : '#fff') + ';">✓ Communio verified</div>'
+      + '</div>'
+      /* BODY */
+      + '<div style="background:' + p.bodyBg + ';padding:' + (full ? '40px' : '20px') + ' 24px;">'
+        /* Two col grid */
+        + '<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px;">'
+          /* Mass times */
+          + '<div style="background:' + p.cardBg + ';border:1px solid ' + p.cardBorder + ';border-radius:10px;padding:18px;">'
+            + '<div style="font-size:10px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:' + p.labelColor + ';margin-bottom:10px;">Mass times</div>'
+            + '<div style="font-size:13px;font-weight:600;color:' + p.headingColor + ';margin-bottom:8px;">Weekend Masses</div>'
+            + '<div style="font-size:12px;color:' + p.textColor + ';line-height:1.8;">'
+              + 'Saturday · 5:00pm Vigil<br/>Sunday · 8:00am, 10:00am, 12:00pm<br/>Sunday · 6:00pm (Spanish)'
+            + '</div>'
+            + '<div style="margin-top:12px;padding-top:12px;border-top:1px solid ' + p.cardBorder + ';">'
+              + '<div style="font-size:13px;font-weight:600;color:' + p.headingColor + ';margin-bottom:6px;">Weekday Masses</div>'
+              + '<div style="font-size:12px;color:' + p.textColor + ';line-height:1.8;">Mon–Fri · 7:00am &amp; 12:10pm</div>'
+            + '</div>'
+          + '</div>'
+          /* Events */
+          + '<div style="background:' + p.cardBg + ';border:1px solid ' + p.cardBorder + ';border-radius:10px;padding:18px;">'
+            + '<div style="font-size:10px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:' + p.labelColor + ';margin-bottom:10px;">Upcoming events</div>'
+            + '<div style="display:flex;flex-direction:column;gap:10px;">'
+              + '<div style="display:flex;gap:10px;align-items:flex-start;">'
+                + '<div style="background:' + p.accentColor + ';color:' + (t==='midnight'?'#000':'#fff') + ';border-radius:6px;padding:6px 8px;text-align:center;flex-shrink:0;min-width:38px;">'
+                  + '<div style="font-size:9px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;">Apr</div>'
+                  + '<div style="font-size:16px;font-weight:800;line-height:1;">19</div>'
+                + '</div>'
+                + '<div><div style="font-size:13px;font-weight:700;color:' + p.headingColor + ';">Easter Vigil</div><div style="font-size:11px;color:' + p.textColor + ';">8:00pm · Main Church</div></div>'
+              + '</div>'
+              + '<div style="display:flex;gap:10px;align-items:flex-start;">'
+                + '<div style="background:' + p.cardBorder + ';border-radius:6px;padding:6px 8px;text-align:center;flex-shrink:0;min-width:38px;">'
+                  + '<div style="font-size:9px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:' + p.textColor + ';">Apr</div>'
+                  + '<div style="font-size:16px;font-weight:800;line-height:1;color:' + p.headingColor + ';">22</div>'
+                + '</div>'
+                + '<div><div style="font-size:13px;font-weight:700;color:' + p.headingColor + ';">Youth Group Meeting</div><div style="font-size:11px;color:' + p.textColor + ';">6:30pm · Parish Hall</div></div>'
+              + '</div>'
+              + '<div style="display:flex;gap:10px;align-items:flex-start;">'
+                + '<div style="background:' + p.cardBorder + ';border-radius:6px;padding:6px 8px;text-align:center;flex-shrink:0;min-width:38px;">'
+                  + '<div style="font-size:9px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:' + p.textColor + ';">May</div>'
+                  + '<div style="font-size:16px;font-weight:800;line-height:1;color:' + p.headingColor + ';">4</div>'
+                + '</div>'
+                + '<div><div style="font-size:13px;font-weight:700;color:' + p.headingColor + ';">First Holy Communion</div><div style="font-size:11px;color:' + p.textColor + ';">10:00am · Main Church</div></div>'
+              + '</div>'
+            + '</div>'
+          + '</div>'
+        + '</div>'
+        /* About section */
+        + '<div style="background:' + p.cardBg + ';border:1px solid ' + p.cardBorder + ';border-radius:10px;padding:20px;margin-bottom:14px;">'
+          + '<div style="font-size:10px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:' + p.labelColor + ';margin-bottom:10px;">About our parish</div>'
+          + '<div style="font-size:13px;color:' + p.textColor + ';line-height:1.75;">'
+            + 'St. Mary\'s Parish has been a cornerstone of the Lower East Side community since 1887. We are a vibrant, multicultural congregation serving over 1,200 families from more than 40 countries, committed to social justice, compassionate outreach, and the proclamation of the Gospel in a changing world.'
+          + '</div>'
+          + '<div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:12px;">'
+            + '<span style="font-size:11px;font-weight:600;color:' + p.labelColor + ';background:' + p.tagBg.replace('0.2','0.08').replace('0.15','0.08').replace('0.1','0.08') + ';border:1px solid ' + p.cardBorder + ';border-radius:4px;padding:4px 10px;">Peace &amp; reconciliation</span>'
+            + '<span style="font-size:11px;font-weight:600;color:' + p.labelColor + ';background:' + p.tagBg.replace('0.2','0.08').replace('0.15','0.08').replace('0.1','0.08') + ';border:1px solid ' + p.cardBorder + ';border-radius:4px;padding:4px 10px;">Ethical technology</span>'
+            + '<span style="font-size:11px;font-weight:600;color:' + p.labelColor + ';background:' + p.tagBg.replace('0.2','0.08').replace('0.15','0.08').replace('0.1','0.08') + ';border:1px solid ' + p.cardBorder + ';border-radius:4px;padding:4px 10px;">Youth ministry</span>'
+            + '<span style="font-size:11px;font-weight:600;color:' + p.labelColor + ';background:' + p.tagBg.replace('0.2','0.08').replace('0.15','0.08').replace('0.1','0.08') + ';border:1px solid ' + p.cardBorder + ';border-radius:4px;padding:4px 10px;">Social justice</span>'
+          + '</div>'
+        + '</div>'
+        /* Donate section */
+        + '<div style="background:' + p.navBg + ';border-radius:10px;padding:22px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;">'
+          + '<div>'
+            + '<div style="font-size:16px;font-weight:800;color:#fff;margin-bottom:5px;">Support St. Mary\'s Parish</div>'
+            + '<div style="font-size:13px;color:rgba(255,255,255,0.5);line-height:1.55;">Your gift sustains our community programmes and the upkeep of our historic church. 100% goes direct to the parish.</div>'
+          + '</div>'
+          + '<div style="font-size:14px;font-weight:700;background:' + p.donBtnBg + ';color:' + p.donBtnColor + ';padding:13px 26px;border-radius:6px;cursor:pointer;flex-shrink:0;">Donate online →</div>'
+        + '</div>'
+      + '</div>'
+      /* FOOTER */
+      + '<div style="background:' + p.footerBg + ';border-top:1px solid rgba(255,255,255,0.07);padding:20px 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;">'
+        + '<div style="font-size:12px;color:' + p.footerText + ';">St. Mary\'s Parish · 15 Mott Street, New York, NY · info@stmarysnyc.org</div>'
+        + '<div style="font-size:11px;color:rgba(255,255,255,0.25);">Part of the <span style="color:rgba(255,255,255,0.45);">Communio</span> network</div>'
+      + '</div>'
+    + '</div>';
+  }
+
+  function selectTemplate(name){
+    currentTemplate = name;
+    /* Update card borders */
+    document.querySelectorAll('.site-tmpl').forEach(function(el){
+      el.style.border = '2px solid var(--border-l)';
+      var lbl = el.querySelector('div:last-child div:last-child');
+      if(lbl){ lbl.textContent = 'Click to select'; lbl.style.color = '#888'; lbl.style.background = 'transparent'; }
+    });
+    var sel = document.getElementById('tmpl-' + name);
+    if(sel){
+      sel.style.border = '2px solid #d85020';
+      var lbl2 = sel.querySelector('div:last-child div:last-child');
+      if(lbl2){ lbl2.textContent = 'Selected ✓'; lbl2.style.color = '#d85020'; lbl2.style.background = 'rgba(216,80,32,0.1)'; }
+    }
+    /* Update mini preview */
+    var mini = document.getElementById('mini-site-preview');
+    if(mini){ mini.innerHTML = getSiteHTML(name, false); }
+  }
+
+  function openPreview(){
+    var modal = document.getElementById('site-preview-modal');
+    var content = document.getElementById('site-preview-content');
+    if(modal && content){
+      content.innerHTML = getSiteHTML(currentTemplate, true);
+      modal.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }
+  }
+
+  function closePreview(){
+    var modal = document.getElementById('site-preview-modal');
+    if(modal){ modal.style.display = 'none'; document.body.style.overflow = ''; }
+  }
+
+  function publishSite(){
+    var btn = document.getElementById('publish-btn');
+    if(!btn) return;
+    btn.textContent = 'Publishing...';
+    btn.disabled = true;
+    /* PHP: POST to /website/publish.php with parish_id, template_name */
+    /* PHP: generates static site files at $parish->slug.communio.org */
+    setTimeout(function(){
+      btn.innerHTML = 'Published ✓';
+      btn.style.background = 'var(--sage)';
+      setTimeout(function(){
+        btn.innerHTML = 'Publish changes <svg viewBox="0 0 16 16" fill="none" width="13" height="13"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+        btn.style.background = '#d85020';
+        btn.disabled = false;
+      }, 2500);
+    }, 1800);
+  }
+
+  /* Init mini preview on website section load */
+  var origNavTo = navTo;
+  navTo = function(section){
+    origNavTo(section);
+    if(section === 'website'){
+      setTimeout(function(){
+        var mini = document.getElementById('mini-site-preview');
+        if(mini && mini.innerHTML === ''){ mini.innerHTML = getSiteHTML(currentTemplate, false); }
+      }, 60);
+    }
+  };
   document.addEventListener('DOMContentLoaded', function(){
     /* Hide all views */
     document.querySelectorAll('.view, .app-view').forEach(function(v){
@@ -1489,13 +1820,4 @@ select.fi { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w
     /* Show welcome */
     var welcome = document.getElementById('v-welcome');
     if(welcome){
-      welcome.style.display = 'block';
-      welcome.classList.add('on');
-    }
-    /* Set first switcher button active */
-    var btns = document.querySelectorAll('.sw-btn');
-    if(btns.length > 0){ btns[0].classList.add('on'); }
-  });
-</script>
-</body>
-</html>
+      welcome.style.display = 'blo
