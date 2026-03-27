@@ -624,7 +624,7 @@ select.fi { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w
       <div style="border:1.5px solid var(--border-l);border-radius:10px;overflow:hidden;margin-bottom:18px;">
         <div style="background:var(--cream);padding:10px 16px;border-bottom:1px solid var(--border-l);display:flex;align-items:center;justify-content:space-between;">
           <div style="font-size:11px;font-weight:700;color:var(--mid);" id="preview-via-label">&#9993; Email preview</div>
-          <div style="font-size:10px;color:var(--light);">Sent from Communio on behalf of St. Mary's</div>
+          <div style="font-size:10px;color:var(--light);">Sent from Communio on behalf of St. Mary&#39;s</div>
         </div>
         <div style="padding:16px;background:#fff;font-size:13px;color:var(--mid);line-height:1.75;" id="invite-preview-body">
         </div>
@@ -704,10 +704,22 @@ select.fi { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w
     </div>
     <div class="nav-pill">
       <div class="nav-av">SM</div>
-      <span class="nav-pname">St. Mary's</span>
+      <span class="nav-pname">St. Mary&#39;s</span>
     </div>
   </div>
 </nav>
+<div class="demo-bar" id="demo-bar">
+  <a class="db-btn on" onclick="go('welcome')">1 Welcome</a>
+  <a class="db-btn" onclick="go('setup')">2 Setup</a>
+  <a class="db-btn" onclick="go('app','home')">3 Home</a>
+  <a class="db-btn" onclick="go('app','messages')">4 Messages</a>
+  <a class="db-btn" onclick="go('app','network')">5 Network</a>
+  <a class="db-btn" onclick="go('app','projects')">6 Projects</a>
+  <a class="db-btn" onclick="go('app','website')">7 Website</a>
+  <a class="db-btn" onclick="go('app','donations')">8 Donations</a>
+  <a class="db-btn" onclick="go('app','settings')">9 Settings</a>
+  <a class="db-btn" onclick="go('public')">10 Profile</a>
+</div>
 <div class="demo-bar">
   <a class="db-btn" onclick="go('welcome')">1 Welcome</a>
   <a class="db-btn" onclick="go('setup')">2 Setup</a>
@@ -1306,6 +1318,11 @@ select.fi { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w
 .db-btn{font-family:var(--f-sans);font-size:11px;font-weight:600;color:rgba(255,255,255,0.4);background:none;border:none;border-bottom:2px solid transparent;padding:8px 12px;cursor:pointer;white-space:nowrap;text-decoration:none;transition:all .2s ease;margin-bottom:-1px;flex-shrink:0;}
 .db-btn:hover{color:rgba(255,255,255,0.8);}
 .db-btn.on{color:#ffffff;border-bottom-color:#d85020;}
+.demo-bar{position:fixed;top:94px;left:0;right:0;z-index:190;background:#111;border-bottom:1px solid rgba(255,255,255,0.1);display:flex;overflow-x:auto;scrollbar-width:none;padding:0 8px;}
+.demo-bar::-webkit-scrollbar{display:none;}
+.db-btn{font-family:var(--f-sans);font-size:11px;font-weight:600;color:rgba(255,255,255,0.4);background:none;border:none;border-bottom:2px solid transparent;padding:8px 12px;cursor:pointer;white-space:nowrap;text-decoration:none;display:inline-block;transition:color .2s;flex-shrink:0;}
+.db-btn:hover{color:rgba(255,255,255,0.8);}
+.db-btn.on{color:#fff;border-bottom-color:#d85020;}
 </style>
 
     </div>
@@ -1781,7 +1798,7 @@ select.fi { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w
 
       <div class="net-sb">
         <div class="nsb-title">Are you a Communio parish?</div>
-        <div class="nsb-desc">Connect with St. Mary's directly — form a sister-parish relationship or join a project together.</div>
+        <div class="nsb-desc">Connect with St. Mary&#39;s directly — form a sister-parish relationship or join a project together.</div>
         <button class="btn-white">Connect as a parish</button>
       </div>
     </div>
@@ -1870,7 +1887,13 @@ select.fi { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w
     /* Charts */
     if(viewName === 'app' && appSection === 'home')      setTimeout(buildMiniChart, 60);
     if(viewName === 'app' && appSection === 'donations')  setTimeout(buildFullChart, 60);
-  }
+    /* Update demo bar active state */
+  var allBtns = document.querySelectorAll('.db-btn');
+  var viewMap2 = {welcome:0,setup:1,public:9};
+  var appMap2 = {home:2,messages:3,network:4,projects:5,website:6,donations:7,settings:8};
+  var activeIdx = (viewName==='app')?(appSection?appMap2[appSection]:2):viewMap2[viewName];
+  allBtns.forEach(function(b,i){ b.classList.toggle('on', i===activeIdx); });
+}
 
   function navTo(section){
     /* Switch section panels */
