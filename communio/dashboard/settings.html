@@ -107,7 +107,7 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
 <aside class="sidebar">
   <div class="sb-parish">
     <div class="sb-av">SM</div>
-    <div class="sb-name">St. Mary's Parish</div>
+    <div class="sb-name">St. Mary's Parish<!-- SOURCE: $parish->name → profile p-name, website header --></div>
     <div class="sb-loc">🇺🇸 New York, USA</div>
   </div>
   <nav class="sb-nav">
@@ -143,7 +143,7 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
           <div class="form-group"><label class="form-label">City</label><input class="form-input" type="text" value="New York"></div>
           <div class="form-group"><label class="form-label">Country</label><select class="form-select"><option>United States</option><option>Hungary</option><option>Ghana</option></select></div>
         </div>
-        <div class="form-group"><label class="form-label">Description</label><textarea class="form-textarea">St. Mary's Parish has been serving the Lower East Side community since 1887. We are a vibrant, multicultural congregation of over 1,200 families, committed to social justice, youth ministry, and ethical technology advocacy.</textarea></div>
+        <div class="form-group"><label class="form-label">Description</label><textarea class="form-textarea">St. Mary's Parish has been serving the L<!-- SOURCE: $parish->description → profile about, website -->ower East Side community since 1887. We are a vibrant, multicultural congregation of over 1,200 families, committed to social justice, youth ministry, and ethical technology advocacy.</textarea></div>
         <div class="form-row">
           <div class="form-group"><label class="form-label">Contact person</label><input class="form-input" type="text" value="Fr. James O'Brien"></div>
           <div class="form-group"><label class="form-label">Role</label><select class="form-select"><option>Pastor / Parish Priest</option><option>Administrator</option></select></div>
@@ -154,7 +154,7 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
         </div>
         <div class="form-group"><label class="form-label">Address</label><input class="form-input" type="text" value="15 Mott Street, New York, NY 10013"></div>
         <div class="form-group">
-          <label class="form-label">Focus areas</label>
+          <label class="form-label">Focus areas<!-- SOURCE: $parish->tags → profile p-tags, website --></label>
           <div class="focus-tags">
             <div class="focus-tag on">Peace &amp; reconciliation</div>
             <div class="focus-tag on">Ethical technology</div>
