@@ -648,7 +648,10 @@ function scrollToSection(id) {
     if (!c) return;
     var t = c.querySelector('#ws-' + id);
     if (!t) return;
-    c.scrollTo({top: t.offsetTop - 48, behavior: 'smooth'});
+    var cRect = c.getBoundingClientRect();
+    var tRect = t.getBoundingClientRect();
+    var offset = tRect.top - cRect.top + c.scrollTop - 48;
+    c.scrollTo({top: offset, behavior: 'smooth'});
   });
 }
 
