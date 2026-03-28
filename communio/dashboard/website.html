@@ -78,11 +78,11 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
 .chart-hd{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:18px}
 .chart-title{font-size:14px;font-weight:700;color:var(--ink)}
 .chart-range{font-size:11px;color:var(--light)}
-.bars{display:flex;align-items:flex-end;gap:6px;height:120px}
-.bar-col{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px}
-.bar{width:100%;border-radius:4px 4px 0 0;background:var(--terra-pale);transition:.3s;min-height:4px}
+.bars{display:flex;align-items:flex-end;gap:3px;height:160px;position:relative}
+.bar-col{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:2px;height:100%}
+.bar{width:100%;border-radius:4px 4px 0 0;background:var(--terra-pale);transition:.3s;min-height:3px;flex-shrink:0}
 .bar.hi{background:var(--terra)}
-.bar-lbl{font-size:10px;color:var(--light)}
+.bar-lbl{font-size:9px;color:var(--light);flex-shrink:0}
 /* Analytics 2-col */
 .an-grid{display:grid;grid-template-columns:1fr 280px;gap:18px}
 .src-row{display:flex;align-items:center;gap:10px;margin-bottom:10px}
@@ -331,36 +331,36 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
       <div class="chart-wrap">
         <div class="chart-hd"><span class="chart-title">Daily visitors — last 30 days</span><span class="chart-range">March 2026</span></div>
         <div class="bars">
-          <div class="bar-col"><div class="bar" style="height:35%"></div><div class="bar-lbl">1</div></div>
-          <div class="bar-col"><div class="bar" style="height:42%"></div><div class="bar-lbl">2</div></div>
-          <div class="bar-col"><div class="bar" style="height:38%"></div><div class="bar-lbl">3</div></div>
-          <div class="bar-col"><div class="bar" style="height:55%"></div><div class="bar-lbl">4</div></div>
-          <div class="bar-col"><div class="bar" style="height:60%"></div><div class="bar-lbl">5</div></div>
-          <div class="bar-col"><div class="bar" style="height:48%"></div><div class="bar-lbl">6</div></div>
-          <div class="bar-col"><div class="bar" style="height:44%"></div><div class="bar-lbl">7</div></div>
-          <div class="bar-col"><div class="bar" style="height:50%"></div><div class="bar-lbl">8</div></div>
-          <div class="bar-col"><div class="bar" style="height:65%"></div><div class="bar-lbl">9</div></div>
-          <div class="bar-col"><div class="bar" style="height:70%"></div><div class="bar-lbl">10</div></div>
-          <div class="bar-col"><div class="bar" style="height:58%"></div><div class="bar-lbl">11</div></div>
-          <div class="bar-col"><div class="bar" style="height:62%"></div><div class="bar-lbl">12</div></div>
-          <div class="bar-col"><div class="bar" style="height:55%"></div><div class="bar-lbl">13</div></div>
-          <div class="bar-col"><div class="bar" style="height:72%"></div><div class="bar-lbl">14</div></div>
-          <div class="bar-col"><div class="bar" style="height:68%"></div><div class="bar-lbl">15</div></div>
-          <div class="bar-col"><div class="bar" style="height:75%"></div><div class="bar-lbl">16</div></div>
-          <div class="bar-col"><div class="bar" style="height:80%"></div><div class="bar-lbl">17</div></div>
-          <div class="bar-col"><div class="bar" style="height:74%"></div><div class="bar-lbl">18</div></div>
-          <div class="bar-col"><div class="bar" style="height:78%"></div><div class="bar-lbl">19</div></div>
-          <div class="bar-col"><div class="bar" style="height:85%"></div><div class="bar-lbl">20</div></div>
-          <div class="bar-col"><div class="bar" style="height:90%"></div><div class="bar-lbl">21</div></div>
-          <div class="bar-col"><div class="bar" style="height:82%"></div><div class="bar-lbl">22</div></div>
-          <div class="bar-col"><div class="bar" style="height:76%"></div><div class="bar-lbl">23</div></div>
-          <div class="bar-col"><div class="bar" style="height:88%"></div><div class="bar-lbl">24</div></div>
-          <div class="bar-col"><div class="bar" style="height:92%"></div><div class="bar-lbl">25</div></div>
-          <div class="bar-col"><div class="bar" style="height:85%"></div><div class="bar-lbl">26</div></div>
-          <div class="bar-col"><div class="bar hi" style="height:100%"></div><div class="bar-lbl">27</div></div>
-          <div class="bar-col"><div class="bar" style="height:72%"></div><div class="bar-lbl">28</div></div>
-          <div class="bar-col"><div class="bar" style="height:68%"></div><div class="bar-lbl">29</div></div>
-          <div class="bar-col"><div class="bar" style="height:74%"></div><div class="bar-lbl">30</div></div>
+          <div class="bar-col"><div class="bar" style="flex-grow:35"></div><div class="bar-lbl">1</div></div>
+          <div class="bar-col"><div class="bar" style="flex-grow:42"></div><div class="bar-lbl">2</div></div>
+          <div class="bar-col"><div class="bar" style="flex-grow:38"></div><div class="bar-lbl">3</div></div>
+          <div class="bar-col"><div class="bar" style="flex-grow:55"></div><div class="bar-lbl">4</div></div>
+          <div class="bar-col"><div class="bar" style="flex-grow:60"></div><div class="bar-lbl">5</div></div>
+          <div class="bar-col"><div class="bar" style="flex-grow:48"></div><div class="bar-lbl">6</div></div>
+          <div class="bar-col"><div class="bar" style="flex-grow:44"></div><div class="bar-lbl">7</div></div>
+          <div class="bar-col"><div class="bar" style="flex-grow:50"></div><div class="bar-lbl">8</div></div>
+          <div class="bar-col"><div class="bar" style="flex-grow:65"></div><div class="bar-lbl">9</div></div>
+          <div class="bar-col"><div class="bar" style="flex-grow:70"></div><div class="bar-lbl">10</div></div>
+          <div class="bar-col"><div class="bar" style="flex-grow:58"></div><div class="bar-lbl">11</div></div>
+          <div class="bar-col"><div class="bar" style="flex-grow:62"></div><div class="bar-lbl">12</div></div>
+          <div class="bar-col"><div class="bar" style="flex-grow:55"></div><div class="bar-lbl">13</div></div>
+          <div class="bar-col"><div class="bar" style="flex-grow:72"></div><div class="bar-lbl">14</div></div>
+          <div class="bar-col"><div class="bar" style="flex-grow:68"></div><div class="bar-lbl">15</div></div>
+          <div class="bar-col"><div class="bar" style="flex-grow:75"></div><div class="bar-lbl">16</div></div>
+          <div class="bar-col"><div class="bar" style="flex-grow:80"></div><div class="bar-lbl">17</div></div>
+          <div class="bar-col"><div class="bar" style="flex-grow:74"></div><div class="bar-lbl">18</div></div>
+          <div class="bar-col"><div class="bar" style="flex-grow:78"></div><div class="bar-lbl">19</div></div>
+          <div class="bar-col"><div class="bar" style="flex-grow:85"></div><div class="bar-lbl">20</div></div>
+          <div class="bar-col"><div class="bar" style="flex-grow:90"></div><div class="bar-lbl">21</div></div>
+          <div class="bar-col"><div class="bar" style="flex-grow:82"></div><div class="bar-lbl">22</div></div>
+          <div class="bar-col"><div class="bar" style="flex-grow:76"></div><div class="bar-lbl">23</div></div>
+          <div class="bar-col"><div class="bar" style="flex-grow:88"></div><div class="bar-lbl">24</div></div>
+          <div class="bar-col"><div class="bar" style="flex-grow:92"></div><div class="bar-lbl">25</div></div>
+          <div class="bar-col"><div class="bar" style="flex-grow:85"></div><div class="bar-lbl">26</div></div>
+          <div class="bar-col"><div class="bar hi" style="flex-grow:100"></div><div class="bar-lbl">27</div></div>
+          <div class="bar-col"><div class="bar" style="flex-grow:72"></div><div class="bar-lbl">28</div></div>
+          <div class="bar-col"><div class="bar" style="flex-grow:68"></div><div class="bar-lbl">29</div></div>
+          <div class="bar-col"><div class="bar" style="flex-grow:74"></div><div class="bar-lbl">30</div></div>
         </div>
       </div>
       <!-- <?php echo $analytics->top_pages_html ?> -->
@@ -588,12 +588,12 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
         </div>
         <div class="sv-abt"><div class="sv-cl">About our parish</div><div class="sv-at" id="pm-about">St. Mary's Parish has been a cornerstone of the Lower East Side since 1887. We serve 1,200+ families from 40+ countries — committed to social justice, compassionate outreach, and the Gospel in a changing world.</div><div class="sv-tags"><span class="sv-tag sv-tt">Peace &amp; reconciliation</span><span class="sv-tag sv-ts">Ethical technology</span></div></div>
         <div class="sv-don"><div class="sv-dnt">Support St. Mary's Parish</div><div class="sv-dns">Your gift sustains our community programmes.</div><div class="sv-amts" id="pm-amts"><div class="sv-amt">$10</div><div class="sv-amt on">$25</div><div class="sv-amt">$50</div><div class="sv-amt">$100</div></div><button class="sv-dcta">Donate online →</button><div class="sv-dnote">96.1% reaches the parish · 1% supports Communio</div></div>
-        <div class="sv-con"><div class="sv-cl">Contact us</div><div class="sv-cr">✉️ info@stmarysnyc.org</div><div class="sv-cr">📞 +1 (212) 555-0182</div><div class="sv-cr">📍 15 Mott Street, New York, NY 10013</div></div>
+        <div class="sv-con"><div class="sv-cl">Contact us</div><div class="sv-cr">✉️ <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b4dddad2dbf4c7c0d9d5c6cdc7dacdd79adbc6d3">[email&#160;protected]</a></div><div class="sv-cr">📞 +1 (212) 555-0182</div><div class="sv-cr">📍 15 Mott Street, New York, NY 10013</div></div>
       </div>
     </div>
   </div>
 </div>
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 (function () {
 
   /* ── Tabs ── */
@@ -775,14 +775,4 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
     this.classList.add('on'); document.getElementById('pm-d').classList.remove('on');
     pmBody.style.maxWidth = '390px'; pmBody.style.margin = '0 auto';
   });
-  document.querySelectorAll('#pm-amts .sv-amt').forEach(function (a) {
-    a.addEventListener('click', function () {
-      document.querySelectorAll('#pm-amts .sv-amt').forEach(function (x) { x.classList.remove('on'); });
-      a.classList.add('on');
-    });
-  });
-
-}());
-</script>
-</body>
-</html>
+  document.querySelectorAll('#pm-amts .sv-amt').forEach(function (a
