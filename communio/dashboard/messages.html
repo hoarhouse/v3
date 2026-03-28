@@ -2,139 +2,102 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Messages — Communio</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Lora:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../communio.css">
 <style>
-/* ── SIDEBAR ── */
-.sidebar {
-  width: 220px; flex-shrink: 0;
-  background: var(--ink);
-  border-right: 1px solid rgba(232,192,64,0.2);
-  display: flex; flex-direction: column;
-  position: fixed; top: 56px; bottom: 0; left: 0;
-  z-index: 100; overflow-y: auto;
-}
-.sb-parish { padding: 16px; border-bottom: 1px solid rgba(255,255,255,0.07); }
-.sb-av { width: 36px; height: 36px; border-radius: var(--r-md); background: var(--terra); color: var(--white); font-size: 13px; font-weight: 800; display: flex; align-items: center; justify-content: center; margin-bottom: 8px; }
-.sb-name { font-size: 13px; font-weight: 700; color: var(--white); letter-spacing: -0.01em; margin-bottom: 2px; }
-.sb-loc  { font-size: 11px; color: rgba(255,255,255,0.3); }
-.sb-nav  { padding: 10px 8px; flex: 1; }
-.sb-sec  { font-size: 9px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.2); padding: 8px 10px 4px; }
-.sb-item { display: flex; align-items: center; gap: 10px; padding: 9px 10px; border-radius: var(--r-md); text-decoration: none; margin-bottom: 2px; transition: all var(--ease); }
-.sb-item:hover { background: rgba(255,255,255,0.06); }
-.sb-item.active { background: var(--terra); }
-.sb-item svg { width: 16px; height: 16px; flex-shrink: 0; opacity: 0.55; color: var(--white); }
-.sb-item.active svg { opacity: 1; }
-.sb-item-lbl { font-size: 13px; font-weight: 600; color: rgba(255,255,255,0.45); }
-.sb-item.active .sb-item-lbl { color: var(--white); }
-.sb-item:hover .sb-item-lbl { color: rgba(255,255,255,0.8); }
-.sb-badge { margin-left: auto; background: var(--terra); color: var(--white); font-size: 9px; font-weight: 800; border-radius: 100px; padding: 2px 7px; min-width: 18px; text-align: center; }
-.sb-item.active .sb-badge { background: rgba(255,255,255,0.25); }
-.sb-badge.live { background: var(--sage); }
-.sb-bottom { padding: 12px; border-top: 1px solid rgba(255,255,255,0.07); }
-.sb-profile-link { display: flex; align-items: center; gap: 8px; padding: 8px 10px; border-radius: var(--r-md); text-decoration: none; transition: all var(--ease); }
-.sb-profile-link:hover { background: rgba(255,255,255,0.06); }
-.sb-profile-link span { font-size: 12px; font-weight: 600; color: rgba(255,255,255,0.35); }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-webkit-font-smoothing:antialiased}
+.top-nav{position:fixed;top:0;left:0;right:0;z-index:300;height:52px;background:var(--ink);border-bottom:1px solid rgba(255,255,255,0.06);display:flex;align-items:center;padding:0 20px}
+.nav-brand{display:flex;align-items:center;gap:8px;text-decoration:none;width:220px;flex-shrink:0}
+.nav-mark{width:28px;height:28px;background:var(--terra);border-radius:6px;display:flex;align-items:center;justify-content:center}
+.nav-wm{font-size:16px;font-weight:800;color:var(--white);letter-spacing:-.02em}
+.nav-wm span{color:var(--terra)}
+.nav-right{margin-left:auto;display:flex;align-items:center;gap:10px}
+.nav-notif{width:34px;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.5);text-decoration:none;position:relative;transition:color .2s}
+.nav-notif:hover{color:white;background:rgba(255,255,255,.06)}
+.notif-dot{position:absolute;top:7px;right:7px;width:7px;height:7px;background:var(--terra);border-radius:50%;border:1.5px solid var(--ink)}
+.nav-pill{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:4px 12px 4px 4px;text-decoration:none;transition:all .2s}
+.nav-pill:hover{background:rgba(255,255,255,.12)}
+.nav-av{width:26px;height:26px;background:var(--terra);border-radius:50%;font-size:10px;font-weight:700;color:white;display:flex;align-items:center;justify-content:center}
+.nav-pname{font-size:13px;font-weight:600;color:var(--white)}
+.sidebar{position:fixed;top:52px;left:0;bottom:0;width:220px;background:var(--white);border-right:1px solid var(--border-light);display:flex;flex-direction:column;overflow-y:auto;z-index:200}
+.sb-parish{padding:18px 16px;border-bottom:1px solid var(--border-light)}
+.sb-av{width:38px;height:38px;background:var(--terra);border-radius:9px;font-size:13px;font-weight:800;color:white;display:flex;align-items:center;justify-content:center;margin-bottom:6px}
+.sb-name{font-size:13px;font-weight:700;color:var(--ink);line-height:1.2}
+.sb-loc{font-size:11px;color:var(--light)}
+.sb-nav{flex:1;padding:10px 8px}
+.sb-sec{font-size:10px;font-weight:700;color:var(--light);text-transform:uppercase;letter-spacing:.08em;padding:12px 8px 6px}
+.sb-item{display:flex;align-items:center;gap:9px;padding:8px 10px;border-radius:8px;text-decoration:none;color:var(--text-mid);font-size:13px;font-weight:500;transition:all .18s;position:relative;margin-bottom:1px}
+.sb-item svg{flex-shrink:0;opacity:.6}
+.sb-item:hover{background:var(--cream);color:var(--ink)}
+.sb-item:hover svg{opacity:1}
+.sb-item.active{background:var(--terra-pale);color:var(--terra);font-weight:600}
+.sb-item.active svg{opacity:1}
+.sb-item.active::before{content:'';position:absolute;left:0;top:4px;bottom:4px;width:3px;background:var(--terra);border-radius:0 3px 3px 0}
+.sb-badge{margin-left:auto;background:var(--terra);color:white;font-size:10px;font-weight:700;padding:1px 6px;border-radius:10px;min-width:18px;text-align:center}
+.sb-badge-sage{background:var(--sage)}
+.sb-foot{padding:12px 16px;border-top:1px solid var(--border-light)}
+.sb-foot a{font-size:12px;color:var(--light);text-decoration:none;display:flex;align-items:center;gap:6px}
+.sb-foot a:hover{color:var(--ink)}
+.page-shell{margin-left:220px;padding-top:52px;min-height:100vh}
+.page-inner{max-width:1060px;margin:0 auto;padding:32px 28px}
+.pg-hd{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:24px;flex-wrap:wrap;gap:12px}
+.pg-title{font-size:24px;font-weight:800;color:var(--ink);letter-spacing:-.03em}
+.pg-sub{font-family:'Lora',serif;font-size:13px;color:var(--light);font-style:italic;margin-top:2px}
 
-/* ── TOP NAV ── */
-.top-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; height: 56px; background: var(--ink); border-bottom: 2px solid var(--border); display: flex; align-items: center; padding: 0 20px; }
-.nav-brand { display: flex; align-items: center; gap: 8px; text-decoration: none; margin-right: 16px; }
-.nav-mark { width: 30px; height: 30px; background: var(--terra); border-radius: var(--r-md); display: flex; align-items: center; justify-content: center; }
-.nav-mark svg { width: 13px; height: 13px; }
-.nav-wm { font-size: 16px; font-weight: 700; color: var(--white); letter-spacing: -0.02em; }
-.nav-wm span { color: var(--terra); }
-.nav-right { display: flex; align-items: center; gap: 8px; margin-left: auto; }
-.nav-notif { width: 32px; height: 32px; border-radius: 50%; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12); display: flex; align-items: center; justify-content: center; cursor: pointer; position: relative; text-decoration: none; }
-.nav-notif svg { width: 14px; height: 14px; color: rgba(255,255,255,0.7); }
-.notif-dot { position: absolute; top: 6px; right: 6px; width: 7px; height: 7px; border-radius: 50%; background: var(--terra); border: 1.5px solid var(--ink); }
-.nav-pill { display: flex; align-items: center; gap: 7px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; padding: 4px 12px 4px 4px; text-decoration: none; }
-.nav-av { width: 24px; height: 24px; border-radius: 50%; background: var(--terra); color: var(--white); font-size: 10px; font-weight: 800; display: flex; align-items: center; justify-content: center; }
-.nav-pname { font-size: 12px; font-weight: 600; color: rgba(255,255,255,0.8); }
-@media(max-width:480px){ .nav-pname { display: none; } }
+.msg-layout{display:grid;grid-template-columns:280px 1fr;gap:0;background:var(--white);border:1px solid var(--border-light);border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--sh-sm);height:calc(100vh - 140px);min-height:500px}
+.msg-list{border-right:1px solid var(--border-light);display:flex;flex-direction:column;overflow:hidden}
+.ml-head{padding:14px 16px;border-bottom:1px solid var(--border-light);display:flex;align-items:center;justify-content:space-between}
+.ml-title{font-size:14px;font-weight:700;color:var(--ink)}
+.ml-badge{background:var(--terra);color:white;font-size:10px;font-weight:700;padding:2px 7px;border-radius:10px}
+.ml-sec{font-size:10px;font-weight:700;color:var(--light);text-transform:uppercase;letter-spacing:.08em;padding:10px 16px 4px}
+.ml-item{display:flex;gap:10px;padding:11px 16px;cursor:pointer;transition:background .15s;border-bottom:1px solid var(--border-light);position:relative}
+.ml-item:hover{background:var(--cream)}
+.ml-item.active{background:var(--terra-pale)}
+.ml-item.active::before{content:'';position:absolute;left:0;top:4px;bottom:4px;width:3px;background:var(--terra);border-radius:0 3px 3px 0}
+.ml-av{width:32px;height:32px;border-radius:8px;font-size:10px;font-weight:800;color:white;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.ml-meta{flex:1;min-width:0}
+.ml-name{font-size:12px;font-weight:700;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ml-preview{font-size:11px;color:var(--light);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:1px}
+.ml-time{font-size:10px;color:var(--light);flex-shrink:0}
+.ml-unread{width:7px;height:7px;background:var(--terra);border-radius:50%;margin-top:4px;flex-shrink:0}
+.msg-thread{display:flex;flex-direction:column;overflow:hidden}
+.mt-head{padding:14px 18px;border-bottom:1px solid var(--border-light);display:flex;align-items:center;gap:12px}
+.mt-av{width:36px;height:36px;border-radius:9px;font-size:12px;font-weight:800;color:white;display:flex;align-items:center;justify-content:center;flex-shrink:0;background:var(--sage)}
+.mt-name{font-size:14px;font-weight:700;color:var(--ink)}
+.mt-sub{font-size:11px;color:var(--light)}
+.mt-badge{margin-left:auto;background:var(--sage-pale);color:var(--sage);font-size:11px;font-weight:600;padding:3px 10px;border-radius:10px}
+.msg-body{flex:1;overflow-y:auto;padding:18px;display:flex;flex-direction:column;gap:14px;background:var(--cream)}
+.msg-day{font-size:11px;color:var(--light);text-align:center;font-weight:600;letter-spacing:.04em;margin:4px 0}
+.bubble-wrap{display:flex;gap:8px;align-items:flex-end}
+.bubble-wrap.mine{flex-direction:row-reverse}
+.bub-av{width:24px;height:24px;border-radius:6px;font-size:8px;font-weight:800;color:white;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.bubble{max-width:68%;padding:10px 13px;border-radius:14px;font-family:'Lora',serif;font-size:13px;line-height:1.55;color:var(--ink);background:var(--white);box-shadow:var(--sh-sm)}
+.bubble.mine{background:var(--terra);color:white;border-radius:14px 14px 4px 14px}
+.bub-time{font-size:10px;color:var(--light);margin-top:3px}
+.bubble-wrap.mine .bub-time{text-align:right}
+.msg-compose{padding:12px 16px;border-top:1px solid var(--border-light);display:flex;gap:10px;align-items:center;background:var(--white)}
+.compose-in{flex:1;font-family:'Outfit',sans-serif;font-size:13px;color:var(--ink);background:var(--cream);border:1.5px solid var(--border-light);border-radius:20px;padding:9px 16px;outline:none;transition:border-color .2s}
+.compose-in:focus{border-color:var(--terra)}
+.compose-send{width:36px;height:36px;background:var(--terra);border:none;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s}
+.compose-send:hover{background:var(--terra-light);transform:scale(1.05)}
 
-/* ── APP SHELL ── */
-.app-shell { display: flex; min-height: 100dvh; padding-top: 56px; }
-.main-content { flex: 1; margin-left: 220px; padding: 32px 24px 40px; }
-@media(max-width:768px){ .main-content { margin-left: 0; padding: 24px 16px 40px; } }
-
-/* ── MESSAGES PAGE ── */
-.page-header { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; }
-.page-title  { font-size: clamp(18px,4vw,24px); font-weight: 800; color: var(--ink); letter-spacing: -0.025em; }
-
-.messages-wrap {
-  display: grid;
-  grid-template-columns: 280px 1fr;
-  border: 1px solid var(--border-light);
-  border-radius: var(--r-xl);
-  overflow: hidden;
-  background: var(--white);
-  height: calc(100dvh - 160px);
-  min-height: 500px;
-}
-@media(max-width:700px){ .messages-wrap { grid-template-columns: 1fr; height: auto; } }
-
-/* Conversation list */
-.msg-list { border-right: 1px solid var(--border-light); overflow-y: auto; display: flex; flex-direction: column; }
-.msg-list-head { padding: 14px 16px; border-bottom: 1px solid var(--border-light); display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; }
-.msg-list-title { font-size: 14px; font-weight: 800; color: var(--ink); }
-.msg-sec-lbl { padding: 8px 16px 4px; font-size: 9px; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; color: var(--light); flex-shrink: 0; }
-
-.msg-item { display: flex; align-items: flex-start; gap: 10px; padding: 11px 14px; cursor: pointer; transition: background var(--ease); border-bottom: 1px solid var(--border-light); flex-shrink: 0; }
-.msg-item:hover  { background: var(--cream); }
-.msg-item.active { background: var(--terra-pale); }
-.msg-av { width: 34px; height: 34px; border-radius: var(--r-md); display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 800; color: var(--white); flex-shrink: 0; }
-.msg-info { flex: 1; min-width: 0; }
-.msg-name { font-size: 13px; font-weight: 700; color: var(--ink); margin-bottom: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.msg-prev { font-size: 11px; color: var(--light); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.msg-meta { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; flex-shrink: 0; }
-.msg-time  { font-size: 10px; color: var(--light); }
-.msg-unread { width: 7px; height: 7px; border-radius: 50%; background: var(--terra); }
-
-/* Thread panel */
-.msg-thread { background: var(--cream); display: flex; flex-direction: column; }
-.mt-head { background: var(--white); padding: 13px 16px; border-bottom: 1px solid var(--border-light); display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
-.mt-av { width: 34px; height: 34px; border-radius: var(--r-md); display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 800; color: var(--white); flex-shrink: 0; }
-.mt-name { font-size: 14px; font-weight: 800; color: var(--ink); margin-bottom: 1px; }
-.mt-loc  { font-size: 11px; color: var(--light); }
-.mt-badge { margin-left: auto; }
-
-.mt-body { flex: 1; overflow-y: auto; padding: 14px; display: flex; flex-direction: column; gap: 12px; }
-
-.bubble-wrap    { display: flex; gap: 8px; align-items: flex-end; }
-.bubble-wrap.me { flex-direction: row-reverse; }
-.bav    { width: 24px; height: 24px; border-radius: 6px; background: var(--border-light); font-size: 9px; font-weight: 800; color: var(--mid); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-.bav.me { background: var(--terra); color: var(--white); }
-.bubble { max-width: 72%; padding: 9px 12px; border-radius: var(--r-lg); font-size: 13px; line-height: 1.55; }
-.bubble.them { background: var(--white); color: var(--ink); border: 1px solid var(--border-light); border-bottom-left-radius: 3px; }
-.bubble.me   { background: var(--terra); color: var(--white); border-bottom-right-radius: 3px; }
-.btime    { font-size: 10px; color: var(--light); margin-top: 3px; }
-.btime.me { text-align: right; }
-
-.mt-input { background: var(--white); padding: 10px 14px; border-top: 1px solid var(--border-light); display: flex; gap: 8px; align-items: center; flex-shrink: 0; }
-.mt-input input { flex: 1; background: var(--cream); border: 1.5px solid var(--border-light); border-radius: 8px; padding: 8px 13px; font-size: 13px; outline: none; color: var(--ink); font-family: var(--f-body); transition: border-color var(--ease); }
-.mt-input input:focus { border-color: var(--terra); }
-.mt-send { width: 32px; height: 32px; border-radius: 50%; background: var(--terra); border: none; display: flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0; transition: background var(--ease); }
-.mt-send:hover { background: var(--terra-light); }
-.mt-send svg { width: 12px; height: 12px; color: var(--white); }
+@media(max-width:900px){.sidebar{display:none}.page-shell{margin-left:0}}
 </style>
 </head>
 <body>
-
-<!-- TOP NAV -->
 <nav class="top-nav">
   <a href="../index.html" class="nav-brand">
-    <div class="nav-mark">
-      <svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="3" fill="white"/><path d="M8 1v3M8 12v3M1 8h3M12 8h3" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg>
-    </div>
+    <div class="nav-mark"><svg viewBox="0 0 16 16" fill="none" width="14" height="14"><circle cx="8" cy="8" r="3" fill="white"/><path d="M8 1v3M8 12v3M1 8h3M12 8h3" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg></div>
     <div class="nav-wm">Commun<span>io</span></div>
   </a>
   <div class="nav-right">
     <a href="messages.html" class="nav-notif">
-      <svg viewBox="0 0 16 16" fill="none"><path d="M13 5.5a5 5 0 10-9.9 1L2 12h12l-1.1-5.5z" stroke="currentColor" stroke-width="1.3"/><path d="M6.5 12.5a1.5 1.5 0 003 0" stroke="currentColor" stroke-width="1.3"/></svg>
+      <svg viewBox="0 0 16 16" fill="none" width="17" height="17"><path d="M13 5.5a5 5 0 10-9.9 1L2 12h12l-1.1-5.5z" stroke="currentColor" stroke-width="1.3"/><path d="M6.5 12.5a1.5 1.5 0 003 0" stroke="currentColor" stroke-width="1.3"/></svg>
       <div class="notif-dot"></div>
     </a>
     <a href="../parish/profile.html" class="nav-pill">
@@ -143,282 +106,105 @@
     </a>
   </div>
 </nav>
-
-<!-- APP SHELL -->
-<div class="app-shell">
-
-  <!-- SIDEBAR -->
-  <div class="sidebar">
-    <div class="sb-parish">
-      <div class="sb-av">SM</div>
-      <div class="sb-name">St. Mary's Parish</div>
-      <div class="sb-loc">🇺🇸 New York, USA</div>
-    </div>
-    <nav class="sb-nav">
-      <div class="sb-sec">Parish</div>
-      <a href="home.html"      class="sb-item">
-        <svg viewBox="0 0 16 16" fill="none"><path d="M2 7l6-5 6 5v7H10V9H6v5H2V7z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>
-        <span class="sb-item-lbl">Home</span>
-      </a>
-      <a href="messages.html"  class="sb-item active">
-        <svg viewBox="0 0 16 16" fill="none"><path d="M2 3h12a1 1 0 011 1v7a1 1 0 01-1 1H4l-3 2V4a1 1 0 011-1z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>
-        <span class="sb-item-lbl">Messages</span>
-        <span class="sb-badge">3</span>
-      </a>
-      <a href="network.html"   class="sb-item">
-        <svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.3"/><path d="M2 8h12M8 2a10 10 0 000 12M8 2a10 10 0 010 12" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
-        <span class="sb-item-lbl">Network</span>
-      </a>
-      <a href="../parish/profile.html" class="sb-item">
-        <svg viewBox="0 0 16 16" fill="none"><path d="M8 1.5a6.5 6.5 0 100 13 6.5 6.5 0 000-13z" stroke="currentColor" stroke-width="1.3"/><path d="M2 13c0-2.76 2.24-5 5-5s5 2.24 5 5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><circle cx="8" cy="6" r="2" stroke="currentColor" stroke-width="1.3"/></svg>
-        <span class="sb-item-lbl">My Profile</span>
-      </a>
-      <a href="projects.html"  class="sb-item">
-        <svg viewBox="0 0 16 16" fill="none"><rect x="1" y="3" width="14" height="3" rx="1" stroke="currentColor" stroke-width="1.3"/><rect x="1" y="8" width="8" height="5" rx="1" stroke="currentColor" stroke-width="1.3"/><rect x="11" y="8" width="4" height="5" rx="1" stroke="currentColor" stroke-width="1.3"/></svg>
-        <span class="sb-item-lbl">Projects</span>
-      </a>
-      <div class="sb-sec">Manage</div>
-      <a href="website.html"   class="sb-item">
-        <svg viewBox="0 0 16 16" fill="none"><rect x="1" y="2" width="14" height="11" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M1 5.5h14" stroke="currentColor" stroke-width="1.3"/></svg>
-        <span class="sb-item-lbl">Website</span>
-        <span class="sb-badge live">Live</span>
-      </a>
-      <a href="donations.html" class="sb-item">
-        <svg viewBox="0 0 16 16" fill="none"><rect x="1" y="4" width="14" height="9" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M1 7.5h14" stroke="currentColor" stroke-width="1.3"/></svg>
-        <span class="sb-item-lbl">Donations</span>
-      </a>
-      <a href="settings.html"  class="sb-item">
-        <svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="2.5" stroke="currentColor" stroke-width="1.3"/><path d="M8 1v2M8 13v2M1 8h2M13 8h2M3.05 3.05l1.41 1.41M11.54 11.54l1.41 1.41M3.05 12.95l1.41-1.41M11.54 4.46l1.41-1.41" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
-        <span class="sb-item-lbl">Settings</span>
-      </a>
-    </nav>
-    <div class="sb-bottom">
-      <a href="settings.html" class="sb-profile-link">
-        <svg viewBox="0 0 16 16" fill="none" width="14" height="14"><path d="M8 1.5a6.5 6.5 0 100 13 6.5 6.5 0 000-13z" stroke="rgba(255,255,255,0.3)" stroke-width="1.3"/><path d="M2 13c0-2.76 2.24-5 5-5s5 2.24 5 5" stroke="rgba(255,255,255,0.3)" stroke-width="1.3" stroke-linecap="round"/><circle cx="8" cy="6" r="2" stroke="rgba(255,255,255,0.3)" stroke-width="1.3"/></svg>
-        <span>Settings →</span>
-      </a>
-    </div>
+<aside class="sidebar">
+  <div class="sb-parish">
+    <div class="sb-av">SM</div>
+    <div class="sb-name">St. Mary's Parish</div>
+    <div class="sb-loc">🇺🇸 New York, USA</div>
   </div>
-
-  <!-- MAIN CONTENT -->
-  <main class="main-content">
-
-    <div class="page-header">
-      <div class="page-title">Messages</div>
-      <button class="btn btn-primary btn-sm">
-        New message
-        <svg viewBox="0 0 16 16" fill="none" width="13" height="13"><path d="M8 3v10M3 8h10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
-      </button>
+  <nav class="sb-nav">
+    <div class="sb-sec">Parish</div>
+    <a href="home.html" class="sb-item"><svg viewBox="0 0 16 16" fill="none" width="15" height="15"><path d="M2 7l6-5 6 5v7H10V9H6v5H2V7z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg><span class="sb-item-lbl">Home</span></a><a href="messages.html" class="sb-item active"><svg viewBox="0 0 16 16" fill="none" width="15" height="15"><path d="M2 3h12a1 1 0 011 1v7a1 1 0 01-1 1H4l-3 2V4a1 1 0 011-1z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg><span class="sb-item-lbl">Messages</span><span class="sb-badge">3</span></a><a href="network.html" class="sb-item"><svg viewBox="0 0 16 16" fill="none" width="15" height="15"><circle cx="8" cy="8" r="2.5" stroke="currentColor" stroke-width="1.3"/><circle cx="2.5" cy="3" r="1.5" stroke="currentColor" stroke-width="1.2"/><circle cx="13.5" cy="3" r="1.5" stroke="currentColor" stroke-width="1.2"/><circle cx="8" cy="14" r="1.5" stroke="currentColor" stroke-width="1.2"/><path d="M4 4l2.5 2.5M12 4l-2.5 2.5M8 10.5V12.5" stroke="currentColor" stroke-width="1.2"/></svg><span class="sb-item-lbl">Network</span></a><a href="../parish/profile.html" class="sb-item"><svg viewBox="0 0 16 16" fill="none" width="15" height="15"><circle cx="8" cy="5" r="3" stroke="currentColor" stroke-width="1.3"/><path d="M2 14c0-3.3 2.7-6 6-6s6 2.7 6 6" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg><span class="sb-item-lbl">My Profile</span></a><a href="projects.html" class="sb-item"><svg viewBox="0 0 16 16" fill="none" width="15" height="15"><rect x="2" y="2" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.3"/><rect x="9" y="2" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.3"/><rect x="2" y="9" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.3"/><rect x="9" y="9" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.3"/></svg><span class="sb-item-lbl">Projects</span></a>
+    <div class="sb-sec">Manage</div>
+    <a href="website.html" class="sb-item"><svg viewBox="0 0 16 16" fill="none" width="15" height="15"><rect x="1.5" y="3" width="13" height="10" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M1.5 6h13" stroke="currentColor" stroke-width="1.3"/></svg><span class="sb-item-lbl">Website</span><span class="sb-badge sb-badge-sage" style="font-size:9px;padding:1px 5px">Live</span></a><a href="donations.html" class="sb-item"><svg viewBox="0 0 16 16" fill="none" width="15" height="15"><path d="M8 13.5C4 11 1.5 8.5 1.5 5.5a3 3 0 015-2.2A3 3 0 018 4a3 3 0 015 2.5c0 1-.4 2-1 2.8" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><path d="M8 9v5M6 12h4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg><span class="sb-item-lbl">Donations</span></a><a href="settings.html" class="sb-item"><svg viewBox="0 0 16 16" fill="none" width="15" height="15"><circle cx="8" cy="8" r="2" stroke="currentColor" stroke-width="1.3"/><path d="M8 1v2M8 13v2M1 8h2M13 8h2M3.1 3.1l1.4 1.4M11.5 11.5l1.4 1.4M3.1 12.9l1.4-1.4M11.5 4.5l1.4-1.4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg><span class="sb-item-lbl">Settings</span></a>
+  </nav>
+  <div class="sb-foot">
+    <a href="settings.html"><svg viewBox="0 0 16 16" fill="none" width="13" height="13"><circle cx="8" cy="8" r="2" stroke="currentColor" stroke-width="1.3"/><path d="M8 1v2M8 13v2M1 8h2M13 8h2" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg> Settings →</a>
+  </div>
+</aside>
+<div class="page-shell">
+  <div class="page-inner">
+    <!-- <?php echo $messages->all_html ?> -->
+    <div class="pg-hd">
+      <div><div class="pg-title">Messages</div></div>
+      <a href="#" class="btn btn-primary btn-sm">New message +</a>
     </div>
-
-    <!-- PHP: conversations from DB, active thread from URL param ?conv=hs-accra -->
-    <div class="messages-wrap">
-
-      <!-- LEFT: conversation list -->
+    <div class="msg-layout">
       <div class="msg-list">
-        <div class="msg-list-head">
-          <div class="msg-list-title">Conversations</div>
-          <span class="tag tag-terra">3 unread</span>
+        <div class="ml-head"><span class="ml-title">Conversations</span><span class="ml-badge">3 unread</span></div>
+        <div class="ml-sec">Direct messages</div>
+        <div class="ml-item active">
+          <div class="ml-av" style="background:var(--sage)">HS</div>
+          <div class="ml-meta"><div class="ml-name">Holy Spirit Parish, Accra</div><div class="ml-preview">We'd love to discuss a joint youth…</div></div>
+          <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px"><div class="ml-time">2h ago</div><div class="ml-unread"></div></div>
         </div>
-
-        <div class="msg-sec-lbl">Direct messages</div>
-
-        <!-- PHP: foreach ($direct_conversations as $conv) -->
-        <div class="msg-item active" onclick="showThread('hs')">
-          <div class="msg-av" style="background:#e8943a;">HS</div>
-          <div class="msg-info">
-            <div class="msg-name">Holy Spirit Parish, Accra</div>
-            <div class="msg-prev">We'd love to discuss a joint youth programme...</div>
-          </div>
-          <div class="msg-meta">
-            <div class="msg-time">2h ago</div>
-            <div class="msg-unread"></div>
-          </div>
+        <div class="ml-item">
+          <div class="ml-av" style="background:#5a7ab8">SS</div>
+          <div class="ml-meta"><div class="ml-name">St. Stanislaw, Warsaw</div><div class="ml-preview">Sister parish confirmed! Excited…</div></div>
+          <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px"><div class="ml-time">Yesterday</div><div class="ml-unread"></div></div>
         </div>
-
-        <div class="msg-item" onclick="showThread('ss')">
-          <div class="msg-av" style="background:var(--sage);">SS</div>
-          <div class="msg-info">
-            <div class="msg-name">St. Stanislaw, Warsaw</div>
-            <div class="msg-prev">Sister parish confirmed! Excited to connect</div>
-          </div>
-          <div class="msg-meta">
-            <div class="msg-time">Yesterday</div>
-            <div class="msg-unread"></div>
-          </div>
+        <div class="ml-item">
+          <div class="ml-av" style="background:#8a4a8a">SJ</div>
+          <div class="ml-meta"><div class="ml-name">San José Parish, Manila</div><div class="ml-preview">Thank you for co-signing the AI…</div></div>
+          <div><div class="ml-time">3 days ago</div></div>
         </div>
-
-        <div class="msg-item" onclick="showThread('sj')">
-          <div class="msg-av" style="background:var(--terra);">SJ</div>
-          <div class="msg-info">
-            <div class="msg-name">San José Parish, Manila</div>
-            <div class="msg-prev">Thank you for co-signing the AI statement</div>
-          </div>
-          <div class="msg-meta">
-            <div class="msg-time">3 days ago</div>
-          </div>
+        <div class="ml-item">
+          <div class="ml-av" style="background:var(--ink)">SB</div>
+          <div class="ml-meta"><div class="ml-name">St. Benedek Parish, Budapest</div><div class="ml-preview">Would love to share resources…</div></div>
+          <div><div class="ml-time">1 week ago</div></div>
         </div>
-
-        <div class="msg-item" onclick="showThread('sb')">
-          <div class="msg-av" style="background:#333;">SB</div>
-          <div class="msg-info">
-            <div class="msg-name">St. Benedek Parish, Budapest</div>
-            <div class="msg-prev">Would love to share resources on digital...</div>
-          </div>
-          <div class="msg-meta">
-            <div class="msg-time">1 week ago</div>
-            <div class="msg-unread"></div>
-          </div>
+        <div class="ml-sec">Project channels</div>
+        <div class="ml-item">
+          <div class="ml-av" style="background:var(--amber);color:var(--ink)">★</div>
+          <div class="ml-meta"><div class="ml-name"># Ethical AI — Global Statement</div><div class="ml-preview">Fr. Kofi: The Vatican has acknowledged…</div></div>
+          <div><div class="ml-time">5h ago</div></div>
         </div>
-
-        <div class="msg-sec-lbl">Project channels</div>
-
-        <!-- PHP: foreach ($project_channels WHERE parish is member) -->
-        <div class="msg-item" onclick="showThread('ai-channel')">
-          <div class="msg-av" style="background:var(--mid);border-radius:6px;">
-            <svg viewBox="0 0 16 16" fill="none" width="13" height="13"><path d="M8 2l1.5 4.5H14l-3.5 2.5 1.5 4-3.5-2.5L5 13l1.5-4L3 6.5h4.5L8 2z" stroke="white" stroke-width="1.3" stroke-linejoin="round"/></svg>
-          </div>
-          <div class="msg-info">
-            <div class="msg-name"># Ethical AI — Global Statement</div>
-            <div class="msg-prev">Fr. Kofi: The Vatican has acknowledged receipt...</div>
-          </div>
-          <div class="msg-meta">
-            <div class="msg-time">5h ago</div>
-          </div>
+        <div class="ml-item">
+          <div class="ml-av" style="background:var(--sage)">★</div>
+          <div class="ml-meta"><div class="ml-name"># Global Youth Formation Network</div><div class="ml-preview">Sister Ana: Curriculum pack uploaded…</div></div>
+          <div><div class="ml-time">1 day ago</div></div>
         </div>
-
-        <div class="msg-item" onclick="showThread('youth-channel')">
-          <div class="msg-av" style="background:var(--sage);border-radius:6px;">
-            <svg viewBox="0 0 16 16" fill="none" width="13" height="13"><path d="M8 2l1.5 4.5H14l-3.5 2.5 1.5 4-3.5-2.5L5 13l1.5-4L3 6.5h4.5L8 2z" stroke="white" stroke-width="1.3" stroke-linejoin="round"/></svg>
-          </div>
-          <div class="msg-info">
-            <div class="msg-name"># Global Youth Formation Network</div>
-            <div class="msg-prev">Sister Ana: Curriculum pack uploaded to shared drive</div>
-          </div>
-          <div class="msg-meta">
-            <div class="msg-time">1 day ago</div>
-          </div>
-        </div>
-
-      </div><!-- .msg-list -->
-
-      <!-- RIGHT: message thread -->
-      <!-- PHP: SELECT * FROM messages WHERE conversation_id=$conv_id ORDER BY created_at ASC -->
-      <div class="msg-thread" id="msg-thread">
-
+      </div>
+      <div class="msg-thread">
         <div class="mt-head">
-          <div class="mt-av" style="background:#e8943a;">HS</div>
-          <div>
-            <div class="mt-name">Holy Spirit Parish, Accra</div>
-            <div class="mt-loc">🇬🇭 Accra, Ghana · Focus: Youth ministry, Education</div>
-          </div>
-          <div class="mt-badge"><span class="tag tag-sage">Sister parish</span></div>
+          <div class="mt-av">HS</div>
+          <div><div class="mt-name">Holy Spirit Parish, Accra</div><div class="mt-sub">🇬🇭 Accra, Ghana · Focus: Youth ministry, Education</div></div>
+          <div class="mt-badge">Sister parish</div>
         </div>
-
-        <div class="mt-body" id="mt-body">
-
+        <div class="msg-body">
+          <div class="msg-day">Mon 24 Mar</div>
           <div class="bubble-wrap">
-            <div class="bav">HS</div>
-            <div>
-              <div class="bubble them">Hello! We've been following Communio's work on ethical technology advocacy and it resonates deeply with our community here in Accra.</div>
-              <div class="btime them">Mon 24 Mar, 9:15am</div>
-            </div>
+            <div class="bub-av" style="background:var(--sage)">HS</div>
+            <div><div class="bubble">Hello! We've been following Communio's work on ethical technology advocacy and it resonates deeply with our community here in Accra.</div><div class="bub-time">9:15am</div></div>
           </div>
-
-          <div class="bubble-wrap me">
-            <div class="bav me">SM</div>
-            <div>
-              <div class="bubble me">That's wonderful to hear! We've been very active on the AI statement. Would love to connect further — we have a strong technology ethics group in our parish.</div>
-              <div class="btime me">Mon 24 Mar, 11:30am</div>
-            </div>
+          <div class="bubble-wrap mine">
+            <div class="bub-av" style="background:var(--terra)">SM</div>
+            <div><div class="bubble mine">That's wonderful to hear! We've been very active on the AI statement. Would love to connect further — we have a strong technology ethics group in our parish.</div><div class="bub-time">11:30am</div></div>
           </div>
-
           <div class="bubble-wrap">
-            <div class="bav">HS</div>
-            <div>
-              <div class="bubble them">Perfect. We'd also love to discuss a joint youth programme — we have about 200 young people very engaged with questions around faith and technology.</div>
-              <div class="btime them">Mon 24 Mar, 2:45pm</div>
-            </div>
+            <div class="bub-av" style="background:var(--sage)">HS</div>
+            <div><div class="bubble">Perfect. We'd also love to discuss a joint youth programme — we have about 200 young people very engaged with questions around faith and technology.</div><div class="bub-time">2:45pm</div></div>
           </div>
-
-          <div class="bubble-wrap me">
-            <div class="bav me">SM</div>
-            <div>
-              <div class="bubble me">This is exactly what Communio was built for. Let's set up a call — our youth minister, Sr. Catherine, would be the right person to connect you with.</div>
-              <div class="btime me">Tue 25 Mar, 9:00am</div>
-            </div>
+          <div class="msg-day">Tue 25 Mar</div>
+          <div class="bubble-wrap mine">
+            <div class="bub-av" style="background:var(--terra)">SM</div>
+            <div><div class="bubble mine">This is exactly what Communio was built for. Let's set up a call — our youth minister, Sr. Catherine, would be the right person to connect you with.</div><div class="bub-time">9:00am</div></div>
           </div>
-
+          <div class="msg-day">Today</div>
           <div class="bubble-wrap">
-            <div class="bav">HS</div>
-            <div>
-              <div class="bubble them">We'd love to discuss a joint youth programme — perhaps an online exchange where young people from both communities can meet and collaborate?</div>
-              <div class="btime them">Today, 8:30am</div>
-            </div>
+            <div class="bub-av" style="background:var(--sage)">HS</div>
+            <div><div class="bubble">We'd love to discuss a joint youth programme — perhaps an online exchange where young people from both communities can meet and collaborate?</div><div class="bub-time">8:30am</div></div>
           </div>
-
-        </div><!-- mt-body -->
-
-        <div class="mt-input">
-          <input type="text" id="msg-input" placeholder="Message Holy Spirit Parish...">
-          <!-- PHP: POST to /messages/send.php with conversation_id, sender_parish_id, message_body -->
-          <button class="mt-send" onclick="sendMessage()">
-            <svg viewBox="0 0 16 16" fill="none"><path d="M14 2L2 7l4 3 2 4 6-12z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="msg-compose">
+          <input class="compose-in" type="text" placeholder="Message Holy Spirit Parish…">
+          <button class="compose-send">
+            <svg viewBox="0 0 16 16" fill="none" width="14" height="14"><path d="M14 2L2 7l5 2 2 5 5-12z" fill="white"/></svg>
           </button>
         </div>
-
-      </div><!-- .msg-thread -->
-
-    </div><!-- .messages-wrap -->
-
-  </main>
+      </div>
+    </div>
+  </div>
 </div>
-
-<script>
-function showThread(id) {
-  /* Mark active conversation */
-  document.querySelectorAll('.msg-item').forEach(function(el) {
-    el.classList.remove('active');
-  });
-  event.currentTarget.classList.add('active');
-  /* PHP: in production this would fetch /messages/thread.php?conv_id=X and render the thread */
-}
-
-function sendMessage() {
-  var input = document.getElementById('msg-input');
-  var text  = input.value.trim();
-  if (!text) return;
-
-  var body = document.getElementById('mt-body');
-  var wrap = document.createElement('div');
-  wrap.className = 'bubble-wrap me';
-  wrap.innerHTML = '<div class="bav me">SM</div><div><div class="bubble me">' + escHtml(text) + '</div><div class="btime me">Just now</div></div>';
-  body.appendChild(wrap);
-  body.scrollTop = body.scrollHeight;
-  input.value = '';
-  /* PHP: POST to /messages/send.php */
-}
-
-function escHtml(str) {
-  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-}
-
-/* Scroll thread to bottom on load */
-document.addEventListener('DOMContentLoaded', function() {
-  var body = document.getElementById('mt-body');
-  if (body) body.scrollTop = body.scrollHeight;
-
-  /* Enter key sends message */
-  var input = document.getElementById('msg-input');
-  if (input) {
-    input.addEventListener('keydown', function(e) {
-      if (e.key === 'Enter' && !e.shiftKey) {
-        e.preventDefault();
-        sendMessage();
-      }
-    });
-  }
-});
-</script>
 </body>
 </html>
