@@ -153,7 +153,7 @@
 
   <!-- HERO MASTHEAD -->
   <!-- <?php /* cover: $parish->cover_image_url | identity: $parish->name, $parish->diocese, $parish->location, $parish->verified */ ?> -->
-  <div class="masthead">
+  <div class="masthead"><!-- SHARED: $parish->hero_image -->
     <img class="mh-img" src="https://images.unsplash.com/photo-1548625149-fc4a29cf7092?w=1400&q=80" alt="St. Mary's Parish">
     <div class="mh-overlay"></div>
     <!-- Action buttons — top right, inside hero -->
@@ -171,8 +171,8 @@
       </div>
       <!-- <?php echo $parish->name_block_html; ?> -->
       <div class="mh-id">
-        <div class="p-name">St. Mary's Parish <span class="p-sub">· Diocese of New York</span></div>
-        <div class="p-loc">📍 New York, USA &nbsp;·&nbsp; <span style="color:#6acd8a">✓ Verified by DCF</span></div>
+        <div class="p-name"><!-- SHARED: $parish->name -->St. Mary's Parish <span class="p-sub">· Diocese of New York</span></div>
+        <div class="p-loc"><!-- SHARED: $parish->city, $parish->country -->📍 New York, USA &nbsp;·&nbsp; <span style="color:#6acd8a">✓ Verified by DCF</span></div>
       </div>
     </div>
   </div>
@@ -181,13 +181,13 @@
   <!-- <?php echo $parish->info_bar_html; ?> -->
   <div class="id-bar">
     <div class="id-inner">
-      <div class="p-tags">
+      <div class="p-tags"><!-- SHARED: foreach $parish->tags -->
         <span class="tag tag-terra">Ethical Technology</span>
         <span class="tag tag-sage">Peace &amp; Reconciliation</span>
         <span class="tag tag-amber">Youth Ministry</span>
         <span class="tag tag-ink">Social Justice</span>
       </div>
-      <div class="p-stats">
+      <div class="p-stats"><!-- SHARED: $parish->founded, family_count, project_count, sister_count, visitor_count -->
         <div class="pst"><strong>1887</strong> Founded</div>
         <div class="pst"><strong>1,200+</strong> Families</div>
         <div class="pst"><strong>4</strong> Projects</div>
@@ -379,7 +379,7 @@
       <div class="s-card">
         <div class="s-ttl">Support this Parish</div>
         <div class="don-gl"><a href="/v3/communio/dashboard/settings.html" class="shared-notice">⚙ Shared from Settings — edit in Settings →</a>Monthly giving goal</div>
-        <div class="don-am">$3,400 <span>of $5,000</span></div>
+        <div class="don-am"><!-- SHARED: $parish->donation_current, $parish->donation_goal, $parish->stripe_key -->$3,400 <span>of $5,000</span></div>
         <div class="don-bar"><div class="don-fill"></div></div>
         <div class="don-mt"><span>68% funded</span><span>42 donors</span></div>
         <a href="#" class="btn btn-primary" style="display:block;width:100%;text-align:center;margin-top:12px">Give Now →</a>
@@ -390,7 +390,7 @@
       <!-- <?php echo $parish->contact_card_html; ?> -->
       <div class="s-card">
         <div class="s-ttl">Contact</div>
-        <div class="ct-row"><span class="shared-notice">⚙ Shared from Settings — edit in Settings →</span><div class="ct-ic">✉️</div><span class="ct-tx"><a href="mailto:info@stmarysnyc.org" class="ct-lk">info@stmarysnyc.org</a></span></div>
+        <div class="ct-row"><!-- SHARED: $parish->email / $parish->phone / $parish->address --><span class="shared-notice">⚙ Shared from Settings — edit in Settings →</span><div class="ct-ic">✉️</div><span class="ct-tx"><a href="mailto:info@stmarysnyc.org" class="ct-lk">info@stmarysnyc.org</a></span></div>
         <div class="ct-row"><div class="ct-ic">🌐</div><span class="ct-tx"><a href="#" class="ct-lk">stmarysnyc.communio.org</a></span></div>
         <div class="ct-row"><div class="ct-ic">📍</div><span class="ct-tx" style="font-size:12px">15 Mott Street, New York, NY 10013</span></div>
       </div>
@@ -399,7 +399,7 @@
       <!-- <?php echo $parish->sister_parishes_mini_html; ?> -->
       <div class="s-card">
         <div class="s-ttl">Sister Parishes</div>
-        <div class="sp-row">
+        <div class="sp-row"><!-- SHARED: foreach $parish->sister_parishes -->
           <div class="sp-fl">🇭🇺</div>
           <div><div class="sp-nm">St. Benedek Parish</div><div class="sp-lc">Budapest, Hungary</div></div>
           <a href="#" class="sp-lk">View →</a>
