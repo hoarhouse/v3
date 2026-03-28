@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Donations — Communio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Lora:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../communio.css">
+<style>
+/* ── SIDEBAR ── */
+.sidebar { width:220px;flex-shrink:0;background:var(--ink);border-right:1px solid rgba(232,192,64,0.2);display:flex;flex-direction:column;position:fixed;top:56px;bottom:0;left:0;z-index:100;overflow-y:auto; }
+.sb-parish { padding:16px;border-bottom:1px solid rgba(255,255,255,0.07); }
+.sb-av { width:36px;height:36px;border-radius:var(--r-md);background:var(--terra);color:var(--white);font-size:13px;font-weight:800;display:flex;align-items:center;justify-content:center;margin-bottom:8px; }
+.sb-name { font-size:13px;font-weight:700;color:var(--white);letter-spacing:-0.01em;margin-bottom:2px; }
+.sb-loc  { font-size:11px;color:rgba(255,255,255,0.3); }
+.sb-nav  { padding:10px 8px;flex:1; }
+.sb-sec  { font-size:9px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.2);padding:8px 10px 4px; }
+.sb-item { display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:var(--r-md);text-decoration:none;margin-bottom:2px;transition:all var(--ease); }
+.sb-item:hover { background:rgba(255,255,255,0.06); }
+.sb-item.active { background:var(--terra); }
+.sb-item svg { width:16px;height:16px;flex-shrink:0;opacity:0.55;color:var(--white); }
+.sb-item.active svg { opacity:1; }
+.sb-item-lbl { font-size:13px;font-weight:600;color:rgba(255,255,255,0.45); }
+.sb-item.active .sb-item-lbl { color:var(--white); }
+.sb-item:hover .sb-item-lbl { color:rgba(255,255,255,0.8); }
+.sb-badge { margin-left:auto;background:var(--terra);color:var(--white);font-size:9px;font-weight:800;border-radius:100px;padding:2px 7px;min-width:18px;text-align:center; }
+.sb-item.active .sb-badge { background:rgba(255,255,255,0.25); }
+.sb-badge.live { background:var(--sage); }
+.sb-bottom { padding:12px;border-top:1px solid rgba(255,255,255,0.07); }
+.sb-profile-link { display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:var(--r-md);text-decoration:none;transition:all var(--ease); }
+.sb-profile-link:hover { background:rgba(255,255,255,0.06); }
+.sb-profile-link span { font-size:12px;font-weight:600;color:rgba(255,255,255,0.35); }
+
+/* ── TOP NAV ── */
+.top-nav { position:fixed;top:0;left:0;right:0;z-index:200;height:56px;background:var(--ink);border-bottom:2px solid var(--border);display:flex;align-items:center;padding:0 20px; }
+.nav-brand { display:flex;align-items:center;gap:8px;text-decoration:none;margin-right:16px; }
+.nav-mark { width:30px;height:30px;background:var(--terra);border-radius:var(--r-md);display:flex;align-items:center;justify-content:center; }
+.nav-mark svg { width:13px;height:13px; }
+.nav-wm { font-size:16px;font-weight:700;color:var(--white);letter-spacing:-0.02em; }
+.nav-wm span { color:var(--terra); }
+.nav-right { display:flex;align-items:center;gap:8px;margin-left:auto; }
+.nav-notif { width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);display:flex;align-items:center;justify-content:center;cursor:pointer;position:relative;text-decoration:none; }
+.nav-notif svg { width:14px;height:14px;color:rgba(255,255,255,0.7); }
+.notif-dot { position:absolute;top:6px;right:6px;width:7px;height:7px;border-radius:50%;background:var(--terra);border:1.5px solid var(--ink); }
+.nav-pill { display:flex;align-items:center;gap:7px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:8px;padding:4px 12px 4px 4px;text-decoration:none; }
+.nav-av { width:24px;height:24px;border-radius:50%;background:var(--terra);color:var(--white);font-size:10px;font-weight:800;display:flex;align-items:center;justify-content:center; }
+.nav-pname { font-size:12px;font-weight:600;color:rgba(255,255,255,0.8); }
+@media(max-width:480px){ .nav-pname { display:none; } }
+
+/* ── APP SHELL ── */
+.app-shell { display:flex;min-height:100dvh;padding-top:56px; }
+.main-content { flex:1;margin-left:220px;padding:32px 24px 80px; }
+@media(max-width:768px){ .main-content { margin-left:0;padding:24px 16px 80px; } }
+
+/* ── DONATIONS PAGE ── */
+.page-header { display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:20px; }
+.page-title  { font-size:clamp(18px,4vw,24px);font-weight:800;color:var(--ink);letter-spacing:-0.025em; }
+
+.don-metrics { display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:24px; }
+@media(max-width:900px){ .don-metrics { grid-template-columns:repeat(2,1fr); } }
+@media(max-width:480px){ .don-metrics { grid-template-columns:1fr; } }
+.don-m { background:var(--white);border:1px solid var(--border-light);border-radius:var(--r-lg);padding:16px 18px; }
+.don-m-val { font-size:22px;font-weight:800;color:var(--ink);letter-spacing:-0.025em;line-height:1;margin-bottom:4px; }
+.don-m-lbl { font-size:11px;color:var(--light); }
+.don-m-up  { font-size:11px;font-weight:700;color:var(--sage);margin-top:3px; }
+
+.don-layout { display:grid;grid-template-columns:1fr 300px;gap:16px;align-items:start; }
+@media(max-width:900px){ .don-layout { grid-template-columns:1fr; } }
+
+/* Chart */
+.fc-bars { display:flex;align-items:flex-end;gap:4px;height:120px;margin-bottom:8px; }
+.fc-bar-g { flex:1;display:flex;flex-direction:column;align-items:center;gap:3px; }
+.fc-bar   { width:100%;border-radius:3px 3px 0 0;background:var(--terra-pale);transition:background .3s;cursor:pointer;min-height:4px; }
+.fc-bar:hover, .fc-bar.peak { background:var(--terra); }
+.fc-m { font-size:9px;color:var(--light);font-weight:600;text-align:center; }
+.fc-v { font-size:9px;color:var(--mid);font-weight:700;text-align:center; }
+
+/* Transactions */
+.tx-item { display:flex;align-items:center;gap:11px;padding:11px 0;border-bottom:1px solid var(--border-light); }
+.tx-item:last-child { border-bottom:none; }
+.tx-av   { width:32px;height:32px;border-radius:var(--r-md);background:var(--sage-pale);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:11px;font-weight:800;color:var(--sage); }
+.tx-av.anon { background:var(--border-light);color:var(--mid); }
+.tx-name { font-size:13px;font-weight:600;color:var(--ink);margin-bottom:2px; }
+.tx-type { font-size:11px;color:var(--light); }
+.tx-val  { margin-left:auto;font-size:14px;font-weight:800;color:var(--ink);text-align:right;letter-spacing:-0.01em; }
+.tx-date { font-size:11px;color:var(--light);text-align:right; }
+
+/* Breakdown */
+.don-breakdown { display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px; }
+.dbi { text-align:center;padding:12px;border-radius:var(--r-lg); }
+.dbi-val { font-size:18px;font-weight:800;letter-spacing:-0.02em;margin-bottom:3px; }
+.dbi-lbl { font-size:10px;font-weight:700; }
+.dbi-sub { font-size:10px;opacity:.6;margin-top:2px; }
+
+/* Sources */
+.ds-row  { display:flex;align-items:center;gap:10px;margin-bottom:9px; }
+.ds-row:last-child { margin-bottom:0; }
+.ds-lbl  { font-size:12px;color:var(--mid);width:120px;flex-shrink:0; }
+.ds-bar-bg   { flex:1;height:5px;background:var(--border-light);border-radius:3px;overflow:hidden; }
+.ds-bar-fill { height:100%;border-radius:3px; }
+.ds-pct  { font-size:12px;font-weight:700;color:var(--ink);width:28px;text-align:right; }
+
+/* Payout card */
+.payout-card { background:var(--ink);border:1px solid rgba(232,192,64,0.25);border-radius:var(--r-xl);padding:20px;margin-bottom:12px; }
+.pc-lbl    { font-size:10px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:8px; }
+.pc-amount { font-size:30px;font-weight:800;color:var(--white);letter-spacing:-0.03em;margin-bottom:14px; }
+.pc-row    { display:flex;align-items:center;gap:10px;margin-bottom:8px; }
+.pc-row-lbl { font-size:11px;color:rgba(255,255,255,0.4);width:120px;flex-shrink:0; }
+.pc-bar-bg  { flex:1;height:5px;border-radius:3px;background:rgba(255,255,255,0.08); }
+.pc-bar-fill { height:100%;border-radius:3px; }
+.pc-pct    { font-size:12px;font-weight:700;width:36px;text-align:right; }
+.pc-foot   { margin-top:14px;padding-top:12px;border-top:1px solid rgba(255,255,255,0.08);font-size:12px;color:rgba(255,255,255,0.3);line-height:1.6; }
+.pc-foot strong { color:var(--amber);font-weight:600; }
+</style>
+</head>
+<body>
+
+<!-- TOP NAV -->
+<nav class="top-nav">
+  <a href="../index.html" class="nav-brand">
+    <div class="nav-mark">
+      <svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="3" fill="white"/><path d="M8 1v3M8 12v3M1 8h3M12 8h3" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg>
+    </div>
+    <div class="nav-wm">Commun<span>io</span></div>
+  </a>
+  <div class="nav-right">
+    <a href="messages.html" class="nav-notif">
+      <svg viewBox="0 0 16 16" fill="none"><path d="M13 5.5a5 5 0 10-9.9 1L2 12h12l-1.1-5.5z" stroke="currentColor" stroke-width="1.3"/><path d="M6.5 12.5a1.5 1.5 0 003 0" stroke="currentColor" stroke-width="1.3"/></svg>
+      <div class="notif-dot"></div>
+    </a>
+    <a href="settings.html" class="nav-pill">
+      <div class="nav-av">SM</div>
+      <span class="nav-pname">St. Mary's</span>
+    </a>
+  </div>
+</nav>
+
+<!-- APP SHELL -->
+<div class="app-shell">
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <div class="sb-parish">
+      <div class="sb-av">SM</div>
+      <div class="sb-name">St. Mary's Parish</div>
+      <div class="sb-loc">🇺🇸 New York, USA</div>
+    </div>
+    <nav class="sb-nav">
+      <div class="sb-sec">Parish</div>
+      <a href="home.html"      class="sb-item"><svg viewBox="0 0 16 16" fill="none"><path d="M2 7l6-5 6 5v7H10V9H6v5H2V7z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg><span class="sb-item-lbl">Home</span></a>
+      <a href="messages.html"  class="sb-item"><svg viewBox="0 0 16 16" fill="none"><path d="M2 3h12a1 1 0 011 1v7a1 1 0 01-1 1H4l-3 2V4a1 1 0 011-1z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg><span class="sb-item-lbl">Messages</span><span class="sb-badge">3</span></a>
+      <a href="network.html"   class="sb-item"><svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.3"/><path d="M2 8h12M8 2a10 10 0 000 12M8 2a10 10 0 010 12" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg><span class="sb-item-lbl">Network</span></a>
+      <a href="projects.html"  class="sb-item"><svg viewBox="0 0 16 16" fill="none"><rect x="1" y="3" width="14" height="3" rx="1" stroke="currentColor" stroke-width="1.3"/><rect x="1" y="8" width="8" height="5" rx="1" stroke="currentColor" stroke-width="1.3"/><rect x="11" y="8" width="4" height="5" rx="1" stroke="currentColor" stroke-width="1.3"/></svg><span class="sb-item-lbl">Projects</span></a>
+      <div class="sb-sec">Manage</div>
+      <a href="website.html"   class="sb-item"><svg viewBox="0 0 16 16" fill="none"><rect x="1" y="2" width="14" height="11" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M1 5.5h14" stroke="currentColor" stroke-width="1.3"/></svg><span class="sb-item-lbl">Website</span><span class="sb-badge live">Live</span></a>
+      <a href="donations.html" class="sb-item active"><svg viewBox="0 0 16 16" fill="none"><rect x="1" y="4" width="14" height="9" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M1 7.5h14" stroke="currentColor" stroke-width="1.3"/></svg><span class="sb-item-lbl">Donations</span></a>
+      <a href="settings.html"  class="sb-item"><svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="2.5" stroke="currentColor" stroke-width="1.3"/><path d="M8 1v2M8 13v2M1 8h2M13 8h2M3.05 3.05l1.41 1.41M11.54 11.54l1.41 1.41M3.05 12.95l1.41-1.41M11.54 4.46l1.41-1.41" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg><span class="sb-item-lbl">Settings</span></a>
+    </nav>
+    <div class="sb-bottom">
+      <a href="../parish/profile.html" class="sb-profile-link">
+        <svg viewBox="0 0 16 16" fill="none" width="14" height="14"><path d="M8 1.5a6.5 6.5 0 100 13 6.5 6.5 0 000-13z" stroke="rgba(255,255,255,0.3)" stroke-width="1.3"/><path d="M2 13c0-2.76 2.24-5 5-5s5 2.24 5 5" stroke="rgba(255,255,255,0.3)" stroke-width="1.3" stroke-linecap="round"/><circle cx="8" cy="6" r="2" stroke="rgba(255,255,255,0.3)" stroke-width="1.3"/></svg>
+        <span>View public profile →</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <main class="main-content">
+
+    <div class="page-header">
+      <div class="page-title">Donations &amp; Analytics</div>
+      <div style="display:flex;gap:8px;">
+        <button class="btn btn-secondary btn-sm">Export CSV</button>
+        <button class="btn btn-primary btn-sm">Stripe dashboard ↗</button>
+      </div>
+    </div>
+
+    <!-- Metrics -->
+    <!-- PHP: SELECT SUM, COUNT, AVG FROM donations WHERE parish_id=$id grouped by period -->
+    <div class="don-metrics">
+      <div class="don-m"><div class="don-m-val">$4,205</div><div class="don-m-lbl">This month</div><div class="don-m-up">↑ 34.8% vs last month</div></div>
+      <div class="don-m"><div class="don-m-val">$10,165</div><div class="don-m-lbl">Last 3 months</div><div class="don-m-up">↑ 18.2% vs prior period</div></div>
+      <div class="don-m"><div class="don-m-val">$89.47</div><div class="don-m-lbl">Average donation</div><div class="don-m-up">↑ $12.30 vs last month</div></div>
+      <div class="don-m"><div class="don-m-val">114</div><div class="don-m-lbl">Total donors (3mo)</div><div class="don-m-up">28 new donors</div></div>
+    </div>
+
+    <div class="don-layout">
+
+      <!-- LEFT: chart + transactions -->
+      <div>
+
+        <!-- Monthly chart -->
+        <!-- PHP: SELECT MONTH(created_at), SUM(net_amount) FROM donations WHERE parish_id=$id AND created_at >= DATE_SUB(NOW(), INTERVAL 6 MONTH) GROUP BY MONTH ORDER BY MONTH ASC -->
+        <div class="card" style="padding:20px;margin-bottom:14px;">
+          <div style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:16px;">
+            <div>
+              <div style="font-size:14px;font-weight:800;color:var(--ink);">Monthly donation income</div>
+              <div style="font-size:12px;color:var(--light);">October 2025 — March 2026</div>
+            </div>
+            <div style="font-size:22px;font-weight:800;color:var(--ink);letter-spacing:-0.03em;">$10,165 <span style="font-size:13px;color:var(--light);font-weight:500;">/ 6 months</span></div>
+          </div>
+          <div class="fc-bars" id="fc-bars"></div>
+        </div>
+
+        <!-- Breakdown -->
+        <!-- PHP: SELECT type, SUM(amount), COUNT(*) FROM donations WHERE parish_id=$id GROUP BY type -->
+        <div class="card" style="padding:18px;margin-bottom:14px;">
+          <div class="sec-lbl">Donation breakdown</div>
+          <div class="don-breakdown">
+            <div class="dbi" style="background:var(--sage-pale);">
+              <div class="dbi-val" style="color:var(--sage);">$2,640</div>
+              <div class="dbi-lbl" style="color:var(--sage);">Recurring</div>
+              <div class="dbi-sub" style="color:var(--sage);">18 donors</div>
+            </div>
+            <div class="dbi" style="background:var(--terra-pale);">
+              <div class="dbi-val" style="color:var(--terra);">$1,565</div>
+              <div class="dbi-lbl" style="color:var(--terra);">One-off</div>
+              <div class="dbi-sub" style="color:var(--terra);">29 donors</div>
+            </div>
+            <div class="dbi" style="background:var(--amber-pale);">
+              <div class="dbi-val" style="color:#7a5a00;">96.1%</div>
+              <div class="dbi-lbl" style="color:#7a5a00;">Reaches parish</div>
+              <div class="dbi-sub" style="color:#7a5a00;">After all fees</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Recent transactions -->
+        <!-- PHP: SELECT * FROM donations WHERE parish_id=$id ORDER BY created_at DESC LIMIT 10 -->
+        <div class="card" style="padding:0;">
+          <div style="padding:16px 20px 4px;"><div class="sec-lbl">Recent transactions</div></div>
+          <div style="padding:0 20px 14px;">
+            <div class="tx-item">
+              <div class="tx-av">JM</div>
+              <div><div class="tx-name">James Murphy</div><div class="tx-type">Monthly recurring · via Communio profile</div></div>
+              <div><div class="tx-val">$150.00</div><div class="tx-date">Today, 6:02am</div></div>
+            </div>
+            <div class="tx-item">
+              <div class="tx-av anon">—</div>
+              <div><div class="tx-name">Anonymous donor</div><div class="tx-type">One-off · via Communio profile</div></div>
+              <div><div class="tx-val">$120.00</div><div class="tx-date">Yesterday, 2:14pm</div></div>
+            </div>
+            <div class="tx-item">
+              <div class="tx-av">SR</div>
+              <div><div class="tx-name">Sister Rosa Delgado</div><div class="tx-type">One-off · via parish website</div></div>
+              <div><div class="tx-val">$75.00</div><div class="tx-date">25 Mar, 9:30am</div></div>
+            </div>
+            <div class="tx-item">
+              <div class="tx-av">MC</div>
+              <div><div class="tx-name">Michael Chen</div><div class="tx-type">Monthly recurring · via parish website</div></div>
+              <div><div class="tx-val">$200.00</div><div class="tx-date">24 Mar, 11:00am</div></div>
+            </div>
+            <div class="tx-item">
+              <div class="tx-av">PO</div>
+              <div><div class="tx-name">Patricia O'Sullivan</div><div class="tx-type">One-off · Parish restoration fund</div></div>
+              <div><div class="tx-val">$500.00</div><div class="tx-date">22 Mar, 3:45pm</div></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- RIGHT: payout + stripe + sources -->
+      <div>
+
+        <!-- Payout card -->
+        <!-- PHP: fetch pending payout from Stripe Connect API -->
+        <div class="payout-card">
+          <div class="pc-lbl">Next payout to your account</div>
+          <div class="pc-amount">$3,961.00</div>
+          <div class="pc-row">
+            <div class="pc-row-lbl">Your parish receives</div>
+            <div class="pc-bar-bg"><div class="pc-bar-fill" style="width:96.1%;background:var(--sage-light);"></div></div>
+            <div class="pc-pct" style="color:var(--sage-light);">96.1%</div>
+          </div>
+          <div class="pc-row">
+            <div class="pc-row-lbl">Communio mission</div>
+            <div class="pc-bar-bg"><div class="pc-bar-fill" style="width:1%;background:var(--terra-light);"></div></div>
+            <div class="pc-pct" style="color:var(--terra-light);">1%</div>
+          </div>
+          <div class="pc-row">
+            <div class="pc-row-lbl">Stripe processing</div>
+            <div class="pc-bar-bg"><div class="pc-bar-fill" style="width:2.9%;background:rgba(255,255,255,0.25);"></div></div>
+            <div class="pc-pct" style="color:rgba(255,255,255,0.35);">2.9%</div>
+          </div>
+          <div class="pc-foot"><strong>No hidden fees.</strong> Every donor receipt shows this breakdown. Parishes under $500/month pay zero Communio fee. Payout arrives in 2 business days.</div>
+        </div>
+
+        <!-- Stripe status -->
+        <div class="card" style="padding:16px;margin-bottom:12px;">
+          <div class="sec-lbl">Stripe Connect</div>
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+            <div style="width:7px;height:7px;border-radius:50%;background:var(--sage);flex-shrink:0;"></div>
+            <span style="font-size:13px;font-weight:600;color:var(--sage);">Connected &amp; active</span>
+          </div>
+          <div style="font-size:12px;color:var(--mid);margin-bottom:12px;">Account: acct_1PaXb2•••••7qWz · Payouts enabled</div>
+          <button class="btn btn-secondary btn-sm" style="width:100%;justify-content:center;display:flex;">Manage in Stripe ↗</button>
+        </div>
+
+        <!-- Top sources -->
+        <!-- PHP: SELECT source, SUM(amount) FROM donations WHERE parish_id=$id GROUP BY source -->
+        <div class="card" style="padding:16px;">
+          <div class="sec-lbl">Top donation sources</div>
+          <div class="ds-row">
+            <div class="ds-lbl">Communio profile</div>
+            <div class="ds-bar-bg"><div class="ds-bar-fill" style="width:62%;background:var(--terra);"></div></div>
+            <div class="ds-pct">62%</div>
+          </div>
+          <div class="ds-row">
+            <div class="ds-lbl">Parish website</div>
+            <div class="ds-bar-bg"><div class="ds-bar-fill" style="width:31%;background:var(--sage);"></div></div>
+            <div class="ds-pct">31%</div>
+          </div>
+          <div class="ds-row">
+            <div class="ds-lbl">Direct link</div>
+            <div class="ds-bar-bg"><div class="ds-bar-fill" style="width:7%;background:var(--amber);"></div></div>
+            <div class="ds-pct">7%</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script>
+/* PHP: var chartData = <?php echo json_encode($monthly_donations); ?>; */
+var chartData = [
+  {m:'Oct', v:1280},
+  {m:'Nov', v:1640},
+  {m:'Dec', v:2100},
+  {m:'Jan', v:2840},
+  {m:'Feb', v:3120},
+  {m:'Mar', v:4205}
+];
+
+(function buildChart() {
+  var el = document.getElementById('fc-bars');
+  if (!el) return;
+  var max = Math.max.apply(null, chartData.map(function(d) { return d.v; }));
+  var html = '';
+  chartData.forEach(function(d) {
+    var h    = Math.round((d.v / max) * 110);
+    var peak = d.v === max ? ' peak' : '';
+    html += '<div class="fc-bar-g">';
+    html += '<div class="fc-v">$' + d.v.toLocaleString() + '</div>';
+    html += '<div class="fc-bar' + peak + '" style="height:' + h + 'px;"></div>';
+    html += '<div class="fc-m">' + d.m + '</div>';
+    html += '</div>';
+  });
+  el.innerHTML = html;
+}());
+</script>
+</body>
+</html>
