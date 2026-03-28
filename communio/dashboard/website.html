@@ -378,13 +378,13 @@ function getSiteHTML(t, full) {
   var heroStyle = heroPhoto ? 'url(' + heroPhoto + ') center/cover no-repeat' : p.heroBg;
 
   return '<div style="font-family:Outfit,system-ui,sans-serif;line-height:1.5;">'
-    + '<div style="background:' + p.navBg + ';border-bottom:2px solid ' + p.navBorder + ';padding:10px 16px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:10;">'
+    + '<div id="ws-top" style="background:' + p.navBg + ';border-bottom:2px solid ' + p.navBorder + ';padding:10px 16px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:10;">'
       + '<div style="font-size:' + (full?'14px':'11px') + ';font-weight:800;color:#fff;">St. Mary\'s <span style="color:#d85020;">Parish</span></div>'
       + '<div style="display:flex;align-items:center;gap:' + (full?'14px':'8px') + ';">'
-        + '<span style="font-size:' + (full?'12px':'9px') + ';color:rgba(255,255,255,0.5);">About</span>'
-        + '<span style="font-size:' + (full?'12px':'9px') + ';color:rgba(255,255,255,0.5);">Mass</span>'
-        + '<span style="font-size:' + (full?'12px':'9px') + ';color:rgba(255,255,255,0.5);">Contact</span>'
-        + '<div style="font-size:' + (full?'11px':'8px') + ';font-weight:700;background:#d85020;color:#fff;padding:' + (full?'6px 14px':'3px 8px') + ';border-radius:5px;">Donate</div>'
+        + '<span onclick="scrollToSection(\'about\')" style="font-size:' + (full?'12px':'9px') + ';color:rgba(255,255,255,0.5);cursor:pointer;">About</span>'
+        + '<span onclick="scrollToSection(\'mass\')" style="font-size:' + (full?'12px':'9px') + ';color:rgba(255,255,255,0.5);cursor:pointer;">Mass</span>'
+        + '<span onclick="scrollToSection(\'contact\')" style="font-size:' + (full?'12px':'9px') + ';color:rgba(255,255,255,0.5);cursor:pointer;">Contact</span>'
+        + '<div onclick="scrollToSection(\'donate\')" style="font-size:' + (full?'11px':'8px') + ';font-weight:700;background:#d85020;color:#fff;padding:' + (full?'6px 14px':'3px 8px') + ';border-radius:5px;cursor:pointer;">Donate</div>'
       + '</div>'
     + '</div>'
     + '<div style="background:' + heroStyle + ';position:relative;">'
@@ -394,7 +394,7 @@ function getSiteHTML(t, full) {
         + '<div style="font-size:' + h1 + ';font-weight:800;color:#fff;letter-spacing:-0.03em;line-height:1.1;margin-bottom:6px;">' + data.heroTitle + '</div>'
         + '<div style="font-size:' + sub + ';color:rgba(255,255,255,0.65);margin-bottom:' + (full?'18px':'9px') + ';">' + data.heroTagline + '</div>'
         + '<div style="display:flex;gap:6px;">'
-          + '<div style="font-size:' + (full?'12px':'9px') + ';font-weight:700;background:' + p.btnBg + ';color:' + p.btnClr + ';padding:' + (full?'8px 16px':'4px 9px') + ';border-radius:5px;">Join us Sunday →</div>'
+          + '<div onclick="scrollToSection(\'mass\')" style="font-size:' + (full?'12px':'9px') + ';font-weight:700;background:' + p.btnBg + ';color:' + p.btnClr + ';padding:' + (full?'8px 16px':'4px 9px') + ';border-radius:5px;cursor:pointer;">Join us Sunday →</div>'
           + '<div style="font-size:' + (full?'12px':'9px') + ';font-weight:700;background:rgba(255,255,255,0.12);color:rgba(255,255,255,0.8);padding:' + (full?'8px 16px':'4px 9px') + ';border-radius:5px;">About us</div>'
         + '</div>'
       + '</div>'
@@ -405,8 +405,8 @@ function getSiteHTML(t, full) {
       + (full ? '<span style="font-size:11px;font-weight:700;color:' + (t==='midnight'?'#000':'#fff') + ';">🌍 40+ Countries</span>' : '')
     + '</div>'
     + '<div style="background:' + p.bodyBg + ';padding:' + bp + ';display:flex;flex-direction:column;gap:' + g + ';">'
-      + '<div style="display:grid;grid-template-columns:1fr 1fr;gap:' + g + ';">'
-        + '<div style="background:' + p.cardBg + ';border:1px solid ' + p.cardBorder + ';border-radius:10px;padding:' + cp + ';">'
+      + '<div id="ws-mass" style="display:grid;grid-template-columns:1fr 1fr;gap:' + g + ';">'
+        + '<div id="ws-about" style="background:' + p.cardBg + ';border:1px solid ' + p.cardBorder + ';border-radius:10px;padding:' + cp + ';">'
           + '<div style="font-size:8px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:' + p.lblClr + ';margin-bottom:6px;">Mass times</div>'
           + '<div style="font-size:' + (full?'12px':'9px') + ';font-weight:600;color:' + p.headClr + ';margin-bottom:3px;">Weekend</div>'
           + '<div style="font-size:' + (full?'11px':'8px') + ';color:' + p.txtClr + ';line-height:1.8;">Sat ' + data.massSat + '<br>Sun ' + data.massSun + '</div>'
@@ -428,7 +428,7 @@ function getSiteHTML(t, full) {
           + '<span style="font-size:9px;font-weight:600;color:' + p.lblClr + ';background:' + (t==='midnight'?'rgba(232,192,64,0.1)':p.cardBorder) + ';border-radius:3px;padding:2px 6px;">Ethical technology</span>'
         + '</div>'
       + '</div>'
-      + '<div style="background:#000;border-radius:10px;padding:' + cp + ';">'
+      + '<div id="ws-donate" style="background:#000;border-radius:10px;padding:' + cp + ';">'
         + '<div style="font-size:' + (full?'14px':'11px') + ';font-weight:800;color:#fff;margin-bottom:4px;">' + data.donateTitle + '</div>'
         + '<div style="font-size:' + (full?'11px':'9px') + ';color:rgba(255,255,255,0.5);margin-bottom:9px;">' + data.donateDesc + '</div>'
         + '<div style="display:flex;gap:4px;flex-wrap:wrap;margin-bottom:9px;">'
@@ -640,6 +640,18 @@ function publishSite() {
 }
 
 document.addEventListener('DOMContentLoaded', refreshPv);
+
+function scrollToSection(id) {
+  var containers = ['pv-wrap', 'pm-body'];
+  containers.forEach(function(cid) {
+    var c = document.getElementById(cid);
+    if (!c) return;
+    var t = c.querySelector('#ws-' + id);
+    if (!t) return;
+    c.scrollTo({top: t.offsetTop - 48, behavior: 'smooth'});
+  });
+}
+
 document.getElementById('pm').addEventListener('click', function(e) { if (e.target === this) closePm(); });
 </script>
 </body>
