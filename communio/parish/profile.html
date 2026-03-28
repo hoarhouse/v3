@@ -10,21 +10,30 @@
 <link rel="stylesheet" href="../communio.css">
 <style>
 .profile-shell{min-height:100vh;background:var(--cream)}
-.cover{height:160px;background:linear-gradient(135deg,#0e0a06 0%,#3a1a08 60%,#6a2810 100%);position:relative;overflow:hidden}
-.cover::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M20 20c0-5.5-4.5-10-10-10s-10 4.5-10 10 4.5 10 10 10 10-4.5 10-10zm10 0c0-5.5-4.5-10-10-10s-10 4.5-10 10 4.5 10 10 10 10-4.5 10-10z'/%3E%3C/g%3E%3C/svg%3E")}
-.id-bar{background:var(--white);border-bottom:1px solid var(--border-light);padding:0 24px 20px}
-.id-inner{max-width:1100px;margin:0 auto}
-.av-row{display:flex;align-items:flex-end;gap:16px;margin-top:-40px;margin-bottom:14px;flex-wrap:wrap}
-.p-av{width:88px;height:88px;border-radius:14px;border:4px solid var(--white);background:var(--terra);display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:800;color:var(--white);flex-shrink:0;box-shadow:var(--sh-md);position:relative}
-.p-badge{position:absolute;bottom:-5px;right:-5px;width:22px;height:22px;background:var(--sage);border-radius:50%;border:2px solid var(--white);display:flex;align-items:center;justify-content:center}
-.p-badge svg{width:10px;height:10px}
-.p-acts{margin-left:auto;display:flex;gap:8px;align-items:center;flex-wrap:wrap;padding-top:48px}
-.p-name{font-size:20px;font-weight:800;color:var(--ink);letter-spacing:-.025em;margin-bottom:2px}
-.p-sub{font-size:12px;color:var(--light)}
-.p-loc{font-size:13px;color:var(--light);margin-bottom:8px}
-.p-tags{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:12px}
-.p-stats{display:flex;gap:20px;flex-wrap:wrap}
-.pst{font-size:13px;color:var(--text-mid)}.pst strong{color:var(--ink);font-weight:700}
+/* ── HERO MASTHEAD ── */
+.masthead{position:relative;height:380px;overflow:hidden;background:var(--ink)}
+.mh-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 35%}
+.mh-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(14,10,6,0.88) 0%,rgba(14,10,6,0.35) 55%,rgba(14,10,6,0.1) 100%)}
+.mh-top{position:absolute;top:0;left:0;right:0;padding:80px 28px 0;display:flex;justify-content:flex-end;gap:8px;align-items:center}
+.mh-bottom{position:absolute;bottom:0;left:0;right:0;padding:0 28px 26px;display:flex;align-items:flex-end;gap:16px}
+.p-av{width:78px;height:78px;border-radius:12px;border:3px solid rgba(255,255,255,0.85);background:var(--terra);display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:800;color:var(--white);flex-shrink:0;box-shadow:0 4px 20px rgba(0,0,0,0.45);position:relative}
+.p-badge{position:absolute;bottom:-4px;right:-4px;width:20px;height:20px;background:var(--sage);border-radius:50%;border:2px solid white;display:flex;align-items:center;justify-content:center}
+.p-badge svg{width:9px;height:9px}
+.mh-id{flex:1;padding-bottom:2px}
+.p-name{font-size:22px;font-weight:800;color:var(--white);letter-spacing:-.025em;margin-bottom:3px;text-shadow:0 2px 12px rgba(0,0,0,0.5);line-height:1.1}
+.p-sub{font-size:12px;color:rgba(255,255,255,.5);font-weight:400}
+.p-loc{font-size:13px;color:rgba(255,255,255,.65);margin-top:5px}
+/* ghost action buttons inside hero */
+.btn-hero{font-family:var(--f-body);font-size:13px;font-weight:600;padding:8px 18px;border-radius:var(--r-pill);border:1.5px solid rgba(255,255,255,0.45);background:rgba(0,0,0,0.25);color:white;cursor:pointer;text-decoration:none;display:inline-block;transition:all var(--ease);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.btn-hero:hover{background:rgba(255,255,255,0.18);border-color:rgba(255,255,255,0.75)}
+.btn-hero-primary{background:var(--terra) !important;border-color:var(--terra) !important}
+.btn-hero-primary:hover{background:var(--terra-light) !important;border-color:var(--terra-light) !important;transform:translateY(-1px)}
+/* slim info bar: tags + stats only */
+.id-bar{background:var(--white);border-bottom:1px solid var(--border-light);padding:12px 28px}
+.id-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.p-tags{display:flex;gap:5px;flex-wrap:wrap}
+.p-stats{display:flex;gap:16px;flex-wrap:wrap;margin-left:auto;border-left:1px solid var(--border-light);padding-left:16px}
+.pst{font-size:12px;color:var(--text-mid)}.pst strong{color:var(--ink);font-weight:700}
 .main{max-width:1100px;margin:0 auto;padding:24px;display:grid;grid-template-columns:1fr 292px;gap:22px;align-items:start}
 /* composer */
 .composer{background:var(--white);border-radius:var(--r-lg);border:1px solid var(--border-light);padding:14px;margin-bottom:16px;box-shadow:var(--sh-sm)}
@@ -119,7 +128,7 @@
 .cta-sub{font-size:12px;color:rgba(255,253,245,.45);margin-bottom:12px;line-height:1.4}
 .cta-btn{display:block;background:var(--terra);color:var(--white);font-family:var(--f-body);font-size:13px;font-weight:700;padding:9px 18px;border-radius:var(--r-pill);text-decoration:none;transition:all var(--ease)}
 .cta-btn:hover{background:var(--terra-light);transform:translateY(-1px)}
-@media(max-width:840px){.main{grid-template-columns:1fr}.p-acts{padding-top:14px;margin-left:0;width:100%}.sb{order:2}}
+@media(max-width:840px){.main{grid-template-columns:1fr}.sb{order:2}.masthead{height:300px}.mh-top{padding-top:70px}.p-name{font-size:18px}.id-inner{gap:10px}.p-stats{margin-left:0;border-left:none;padding-left:0;border-top:1px solid var(--border-light);padding-top:8px;width:100%}}
 @media(max-width:480px){.f-tabs{overflow-x:auto}.f-tab{font-size:11px;padding:5px 10px}.p-stats{gap:14px}}
 </style>
 </head>
@@ -142,41 +151,48 @@
 
 <div class="profile-shell" style="padding-top:64px">
 
-  <!-- COVER -->
-  <div class="cover"></div>
-
-  <!-- IDENTITY HEADER -->
-  <!-- <?php /* $parish — dynamic parish object */ ?> -->
-  <div class="id-bar">
-    <div class="id-inner">
-      <div class="av-row">
-        <!-- <?php echo $parish->avatar_html; ?> -->
-        <div class="p-av">SM
-          <div class="p-badge"><svg viewBox="0 0 12 12" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="2,6 5,9 10,3"/></svg></div>
-        </div>
-        <!-- <?php echo $parish->action_buttons_html; ?> -->
-        <div class="p-acts">
-          <a href="#donate" class="btn btn-primary btn-sm">💛 Donate</a>
-          <a href="../register.html" class="btn btn-secondary btn-sm">+ Connect</a>
-          <button class="btn btn-secondary btn-sm">Follow</button>
-        </div>
+  <!-- HERO MASTHEAD -->
+  <!-- <?php /* cover: $parish->cover_image_url | identity: $parish->name, $parish->diocese, $parish->location, $parish->verified */ ?> -->
+  <div class="masthead">
+    <img class="mh-img" src="https://images.unsplash.com/photo-1548625149-fc4a29cf7092?w=1400&q=80" alt="St. Mary's Parish">
+    <div class="mh-overlay"></div>
+    <!-- Action buttons — top right, inside hero -->
+    <!-- <?php echo $parish->action_buttons_html; ?> -->
+    <div class="mh-top">
+      <a href="#donate" class="btn-hero btn-hero-primary">💛 Donate</a>
+      <a href="../register.html" class="btn-hero">+ Connect</a>
+      <button class="btn-hero">Follow</button>
+    </div>
+    <!-- Parish identity — bottom left, over photo -->
+    <div class="mh-bottom">
+      <!-- <?php echo $parish->avatar_html; ?> -->
+      <div class="p-av">SM
+        <div class="p-badge"><svg viewBox="0 0 12 12" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="2,6 5,9 10,3"/></svg></div>
       </div>
       <!-- <?php echo $parish->name_block_html; ?> -->
-      <div class="p-name">St. Mary's Parish <span class="p-sub">· Diocese of New York</span></div>
-      <div class="p-loc">📍 New York, USA · <strong style="color:var(--sage);font-size:12px">✓ Verified by DCF</strong></div>
-      <div class="p-tags" style="margin-top:8px">
+      <div class="mh-id">
+        <div class="p-name">St. Mary's Parish <span class="p-sub">· Diocese of New York</span></div>
+        <div class="p-loc">📍 New York, USA &nbsp;·&nbsp; <span style="color:#6acd8a">✓ Verified by DCF</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- INFO BAR: focus tags + stats -->
+  <!-- <?php echo $parish->info_bar_html; ?> -->
+  <div class="id-bar">
+    <div class="id-inner">
+      <div class="p-tags">
         <span class="tag tag-terra">Ethical Technology</span>
         <span class="tag tag-sage">Peace &amp; Reconciliation</span>
         <span class="tag tag-amber">Youth Ministry</span>
         <span class="tag tag-ink">Social Justice</span>
       </div>
-      <!-- <?php echo $parish->stats_bar_html; ?> -->
       <div class="p-stats">
         <div class="pst"><strong>1887</strong> Founded</div>
         <div class="pst"><strong>1,200+</strong> Families</div>
-        <div class="pst"><strong>4</strong> Active Projects</div>
+        <div class="pst"><strong>4</strong> Projects</div>
         <div class="pst"><strong>3</strong> Sister Parishes</div>
-        <div class="pst"><strong>142</strong> Visitors / month</div>
+        <div class="pst"><strong>142</strong> Visitors / mo</div>
       </div>
     </div>
   </div>
