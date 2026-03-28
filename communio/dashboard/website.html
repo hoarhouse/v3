@@ -11,6 +11,7 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-webkit-font-smoothing:antialiased}
+/* NAV */
 .top-nav{position:fixed;top:0;left:0;right:0;z-index:300;height:52px;background:var(--ink);display:flex;align-items:center;padding:0 20px}
 .nav-brand{display:flex;align-items:center;gap:8px;text-decoration:none;width:220px;flex-shrink:0}
 .nav-mark{width:28px;height:28px;background:var(--terra);border-radius:6px;display:flex;align-items:center;justify-content:center}
@@ -22,6 +23,7 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
 .nav-pill{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:4px 12px 4px 4px;text-decoration:none}
 .nav-av{width:26px;height:26px;background:var(--terra);border-radius:50%;font-size:10px;font-weight:700;color:white;display:flex;align-items:center;justify-content:center}
 .nav-pname{font-size:13px;font-weight:600;color:var(--white)}
+/* SIDEBAR */
 .sidebar{position:fixed;top:52px;left:0;bottom:0;width:220px;background:var(--white);border-right:1px solid var(--border-light);display:flex;flex-direction:column;overflow-y:auto;z-index:200}
 .sb-parish{padding:18px 16px;border-bottom:1px solid var(--border-light)}
 .sb-av{width:38px;height:38px;background:var(--terra);border-radius:9px;font-size:13px;font-weight:800;color:white;display:flex;align-items:center;justify-content:center;margin-bottom:6px}
@@ -39,20 +41,23 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
 .sb-badge-sage{background:var(--sage)}
 .sb-foot{padding:12px 16px;border-top:1px solid var(--border-light)}
 .sb-foot a{font-size:12px;color:var(--light);text-decoration:none;display:flex;align-items:center;gap:6px}
+/* PAGE SHELL */
 .page-shell{margin-left:220px;padding-top:52px;min-height:100vh;display:flex;flex-direction:column}
 .page-inner{padding:28px;flex:1;display:flex;flex-direction:column}
 .pg-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;flex-wrap:wrap;gap:12px}
 .pg-title{font-size:24px;font-weight:800;color:var(--ink);letter-spacing:-.03em}
-.live-pill{display:inline-flex;align-items:center;gap:4px;font-size:12px;font-weight:600;color:var(--sage);margin-left:8px}
 .live-dot{width:7px;height:7px;border-radius:50%;background:var(--sage);display:inline-block}
+.live-pill{display:inline-flex;align-items:center;gap:4px;font-size:12px;font-weight:600;color:var(--sage);margin-left:8px}
 .pg-url{font-family:'Lora',serif;font-size:12px;color:var(--light);font-style:italic;margin-top:2px}
-.section-lbl{font-size:11px;font-weight:700;color:var(--light);text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px;display:flex;justify-content:space-between}
-.section-lbl em{font-weight:400;font-style:italic;font-family:'Lora',serif;text-transform:none;letter-spacing:0}
+/* TEMPLATE ROW */
+.sec-lbl{font-size:11px;font-weight:700;color:var(--light);text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px;display:flex;justify-content:space-between}
+.sec-lbl em{font-weight:400;font-style:italic;font-family:'Lora',serif;text-transform:none;letter-spacing:0}
 .tmpl-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px}
 .tmpl{border-radius:var(--r-md);overflow:hidden;cursor:pointer;border:2px solid var(--border-light);transition:all .2s}
 .tmpl:hover{border-color:var(--terra);box-shadow:var(--sh-md)}
 .tmpl.on{border-color:var(--terra);box-shadow:0 0 0 3px rgba(216,80,32,.15)}
-.th{height:68px}.tb{height:20px;display:flex;align-items:center;padding:0 8px;justify-content:space-between}
+.th{height:68px}
+.tb{height:20px;display:flex;align-items:center;padding:0 8px;justify-content:space-between}
 .tl{font-size:8px;font-weight:800;color:white}
 .td{font-size:7px;font-weight:700;padding:2px 6px;border-radius:8px;background:var(--terra);color:white}
 .tha{padding:5px 8px}
@@ -66,10 +71,11 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
 .tf{padding:5px 10px;background:var(--white);display:flex;align-items:center;justify-content:space-between}
 .tfl{font-size:11px;font-weight:700;color:var(--ink)}
 .tfs{font-size:11px;color:var(--terra);font-weight:700}
-.builder{display:grid;grid-template-columns:230px 1fr;gap:16px;flex:1;padding-bottom:28px}
-.s-col{display:flex;flex-direction:column;gap:12px}
-.sp{background:var(--white);border:1px solid var(--border-light);border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--sh-sm)}
-.sp-h{padding:11px 14px;border-bottom:1px solid var(--border-light);font-size:12px;font-weight:700;color:var(--ink)}
+/* ── BUILDER: 3 columns — sections | edit panel | preview ── */
+.builder{display:grid;grid-template-columns:190px 210px 1fr;gap:14px;flex:1;padding-bottom:28px;align-items:start}
+/* Col 1: Sections list */
+.sections-panel{background:var(--white);border:1px solid var(--border-light);border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--sh-sm)}
+.sp-head{padding:11px 14px;border-bottom:1px solid var(--border-light);font-size:12px;font-weight:700;color:var(--ink)}
 .si{display:flex;align-items:center;gap:10px;padding:10px 14px;border-bottom:1px solid var(--border-light);cursor:pointer;transition:background .15s;position:relative}
 .si:last-child{border-bottom:none}
 .si:hover{background:var(--cream)}
@@ -81,7 +87,8 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
 .si.on .si-lb{color:var(--terra)}
 .si-h{font-size:11px;color:var(--light);opacity:0;transition:.15s}
 .si:hover .si-h{opacity:1}
-.ep{background:var(--white);border:1.5px solid var(--terra);border-radius:var(--r-lg);padding:16px;box-shadow:0 0 0 3px rgba(216,80,32,.08)}
+/* Col 2: Edit panel — RIGHT of sections list */
+.edit-panel{background:var(--white);border:1.5px solid var(--terra);border-radius:var(--r-lg);padding:16px;box-shadow:0 0 0 3px rgba(216,80,32,.08);position:sticky;top:80px}
 .ep-t{font-size:12px;font-weight:700;color:var(--terra);margin-bottom:12px}
 .ep-f{margin-bottom:10px}
 .ep-l{font-size:11px;font-weight:700;color:var(--mid);margin-bottom:3px;display:block}
@@ -90,7 +97,8 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
 .ep-ta{width:100%;font-family:'Outfit',sans-serif;font-size:12px;color:var(--ink);background:var(--cream);border:1.5px solid var(--border-light);border-radius:var(--r-md);padding:7px 10px;outline:none;resize:vertical;min-height:65px;line-height:1.5;transition:border-color .2s}
 .ep-ta:focus{border-color:var(--terra)}
 .ep-ac{display:flex;gap:6px;margin-top:12px;padding-top:10px;border-top:1px solid var(--border-light)}
-.pv-pane{background:var(--white);border:1px solid var(--border-light);border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--sh-sm);display:flex;flex-direction:column}
+/* Col 3: Preview pane */
+.preview-pane{background:var(--white);border:1px solid var(--border-light);border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--sh-sm);display:flex;flex-direction:column;min-height:500px}
 .pv-bar{background:var(--cream-dark);padding:7px 12px;display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--border-light);flex-shrink:0}
 .pv-dots{display:flex;gap:5px}
 .pv-dot{width:10px;height:10px;border-radius:50%}
@@ -102,24 +110,24 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
 .pv-hint{font-size:11px;color:var(--light);font-family:'Lora',serif;font-style:italic;padding:7px 14px;border-bottom:1px solid var(--border-light);background:var(--cream);flex-shrink:0}
 .pv-scroll{flex:1;overflow-y:auto}
 /* Site preview shared styles */
-.sv-nav{background:#0e0a06;padding:0 18px;height:38px;display:flex;align-items:center;justify-content:space-between}
-.sv-logo{font-size:13px;font-weight:800;color:white}
+.sv-nav{background:#0e0a06;padding:0 16px;height:36px;display:flex;align-items:center;justify-content:space-between}
+.sv-logo{font-size:12px;font-weight:800;color:white}
 .sv-logo span{color:var(--terra)}
-.sv-links{display:flex;gap:16px}
+.sv-links{display:flex;gap:14px}
 .sv-link{font-size:10px;color:rgba(255,255,255,.55);text-decoration:none}
 .sv-donate{font-size:10px;font-weight:700;padding:4px 10px;background:var(--terra);color:white;border-radius:8px;text-decoration:none}
-.sv-hero{background:linear-gradient(135deg,#0e0a06 0%,#3a1a08 55%,#6a2810 100%);padding:30px 22px}
+.sv-hero{background:linear-gradient(135deg,#0e0a06 0%,#3a1a08 55%,#6a2810 100%);padding:28px 20px}
 .sv-vfy{font-size:8px;font-weight:700;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px}
-.sv-h1{font-size:22px;font-weight:800;color:white;letter-spacing:-.02em;margin-bottom:3px}
-.sv-sub{font-size:11px;color:rgba(255,255,255,.5);margin-bottom:14px}
+.sv-h1{font-size:20px;font-weight:800;color:white;letter-spacing:-.02em;margin-bottom:3px}
+.sv-sub{font-size:11px;color:rgba(255,255,255,.5);margin-bottom:13px}
 .sv-btns{display:flex;gap:7px}
-.sv-bp{font-size:10px;font-weight:700;padding:6px 14px;background:var(--terra);color:white;border-radius:14px;text-decoration:none}
-.sv-bg{font-size:10px;font-weight:600;padding:6px 14px;background:rgba(255,255,255,.1);color:white;border-radius:14px;text-decoration:none;border:1px solid rgba(255,255,255,.2)}
-.sv-strip{background:var(--terra);padding:7px 22px;display:flex;gap:20px}
+.sv-bp{font-size:10px;font-weight:700;padding:6px 13px;background:var(--terra);color:white;border-radius:14px;text-decoration:none}
+.sv-bg{font-size:10px;font-weight:600;padding:6px 13px;background:rgba(255,255,255,.1);color:white;border-radius:14px;text-decoration:none;border:1px solid rgba(255,255,255,.2)}
+.sv-strip{background:var(--terra);padding:7px 20px;display:flex;gap:18px}
 .sv-si{font-size:10px;font-weight:600;color:rgba(255,255,255,.85)}
-.sv-body{padding:18px 22px}
-.sv-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}
-.sv-card{background:var(--warm-white);border:1px solid var(--border-light);border-radius:8px;padding:12px}
+.sv-body{padding:16px 20px}
+.sv-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:13px}
+.sv-card{background:var(--warm-white);border:1px solid var(--border-light);border-radius:8px;padding:11px}
 .sv-cl{font-size:8px;font-weight:700;color:var(--terra);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px}
 .sv-ct{font-size:12px;font-weight:700;color:var(--ink);margin-bottom:3px}
 .sv-mt{font-size:10px;color:var(--mid);margin-bottom:2px}
@@ -129,34 +137,34 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
 .sv-edy{font-size:13px;font-weight:800;color:white;line-height:1}
 .sv-en{font-size:10px;font-weight:600;color:var(--ink)}
 .sv-es{font-size:9px;color:var(--light)}
-.sv-abt{background:var(--warm-white);border:1px solid var(--border-light);border-radius:8px;padding:12px;margin-bottom:12px}
-.sv-at{font-size:10px;color:var(--mid);line-height:1.5;margin:4px 0 7px}
+.sv-abt{background:var(--warm-white);border:1px solid var(--border-light);border-radius:8px;padding:11px;margin-bottom:11px}
+.sv-at{font-size:10px;color:var(--mid);line-height:1.5;margin:4px 0 6px}
 .sv-tags{display:flex;gap:5px;flex-wrap:wrap}
 .sv-tag{font-size:9px;font-weight:600;padding:2px 7px;border-radius:8px}
 .sv-tt{background:var(--terra-pale);color:var(--terra)}
 .sv-ts{background:var(--sage-pale);color:var(--sage)}
-.sv-don{background:var(--ink);border-radius:8px;padding:14px;margin-bottom:12px}
+.sv-don{background:var(--ink);border-radius:8px;padding:13px;margin-bottom:11px}
 .sv-dnt{font-size:12px;font-weight:700;color:white;margin-bottom:2px}
-.sv-dns{font-size:10px;color:rgba(255,255,255,.4);margin-bottom:10px;font-family:'Lora',serif;font-style:italic}
+.sv-dns{font-size:10px;color:rgba(255,255,255,.4);margin-bottom:9px;font-family:'Lora',serif;font-style:italic}
 .sv-amts{display:flex;gap:5px;margin-bottom:8px}
 .sv-amt{font-size:10px;font-weight:700;padding:4px 9px;border-radius:8px;background:rgba(255,255,255,.1);color:white;cursor:pointer;transition:background .15s;user-select:none}
 .sv-amt.on{background:var(--terra)}
 .sv-dcta{width:100%;font-family:'Outfit',sans-serif;font-size:11px;font-weight:700;padding:8px;background:var(--terra);color:white;border:none;border-radius:12px;cursor:pointer}
 .sv-dnote{font-size:9px;color:rgba(255,255,255,.3);margin-top:5px;text-align:center}
-.sv-con{background:var(--warm-white);border:1px solid var(--border-light);border-radius:8px;padding:12px}
+.sv-con{background:var(--warm-white);border:1px solid var(--border-light);border-radius:8px;padding:11px}
 .sv-cr{font-size:10px;color:var(--mid);margin-bottom:4px}
 /* Preview modal */
 .pm{display:none;position:fixed;inset:0;z-index:9000;background:rgba(14,10,6,.88);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);align-items:center;justify-content:center}
 .pm-box{background:var(--white);border-radius:var(--r-lg);overflow:hidden;width:calc(100% - 80px);max-width:980px;height:calc(100vh - 80px);display:flex;flex-direction:column;box-shadow:0 40px 120px rgba(0,0,0,.5)}
 .pm-bar{background:var(--cream-dark);padding:9px 14px;display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--border-light);flex-shrink:0}
-.pm-dots{display:flex;gap:5px}
 .pm-url{flex:1;background:var(--white);border:1px solid var(--border-light);border-radius:6px;padding:4px 10px;font-size:11px;color:var(--light);text-align:center}
 .pm-tog{display:flex;gap:5px}
 .pmt{font-family:'Outfit',sans-serif;font-size:11px;font-weight:600;padding:4px 10px;border-radius:6px;border:1px solid var(--border-light);background:var(--white);color:var(--ink);cursor:pointer;transition:all .2s}
 .pmt.on{background:var(--ink);color:white;border-color:var(--ink)}
 .pm-close{font-family:'Outfit',sans-serif;font-size:12px;font-weight:700;padding:5px 12px;border-radius:6px;border:none;background:var(--terra);color:white;cursor:pointer}
 .pm-body{flex:1;overflow-y:auto;width:100%;transition:max-width .3s}
-@media(max-width:900px){.sidebar{display:none}.page-shell{margin-left:0}.builder{grid-template-columns:1fr}}
+@media(max-width:1200px){.builder{grid-template-columns:180px 200px 1fr}}
+@media(max-width:900px){.sidebar{display:none}.page-shell{margin-left:0}.builder{grid-template-columns:1fr}.edit-panel{position:static}}
 </style>
 </head>
 <body>
@@ -202,44 +210,47 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
         <div class="pg-url">stmarysnyc.communio.org · 142 visitors this month</div>
       </div>
       <div style="display:flex;gap:8px">
-        <!-- Button — opens fullscreen modal preview, does NOT navigate away -->
         <button class="btn btn-secondary btn-sm" id="pm-open-btn">Preview full site ↗</button>
         <button class="btn btn-primary btn-sm" id="pub-btn">Publish changes →</button>
       </div>
     </div>
 
     <!-- <?php echo $website->template_selector_html ?> -->
-    <div class="section-lbl">Template <em>Click to select · updates preview instantly</em></div>
+    <div class="sec-lbl">Template <em>Click to select · updates preview instantly</em></div>
     <div class="tmpl-row">
       <div class="tmpl tw on" data-t="warm"><div class="th"><div class="tb"><span class="tl">Communio</span><span class="td">Donate</span></div><div class="tha"><div class="tt">✓ DCF Verified · New York</div><div class="tn">St. Mary's Parish</div><div class="ts">Serving the Lower East Side since 1887</div><div class="tbtn">Join us Sunday →</div></div></div><div class="tf"><span class="tfl">Warm &amp; Classic</span><span class="tfs" id="tfs-warm">✓ Selected</span></div></div>
       <div class="tmpl tg" data-t="sage"><div class="th"><div class="tb"><span class="tl">Communio</span><span class="td">Donate</span></div><div class="tha"><div class="tt">✓ DCF Verified · New York</div><div class="tn">St. Mary's Parish</div><div class="ts">Serving the Lower East Side since 1887</div><div class="tbtn">Join us Sunday →</div></div></div><div class="tf"><span class="tfl">Sage &amp; Natural</span><span class="tfs" id="tfs-sage"></span></div></div>
       <div class="tmpl tk" data-t="midnight"><div class="th"><div class="tb"><span class="tl">Communio</span><span class="td">Donate</span></div><div class="tha"><div class="tt">✓ DCF Verified · New York</div><div class="tn">St. Mary's Parish</div><div class="ts">Serving the Lower East Side since 1887</div><div class="tbtn">Join us Sunday →</div></div></div><div class="tf"><span class="tfl">Midnight &amp; Bold</span><span class="tfs" id="tfs-midnight"></span></div></div>
     </div>
 
+    <!-- BUILDER: col 1 = sections list | col 2 = edit panel | col 3 = preview -->
     <div class="builder">
-      <div class="s-col">
-        <!-- <?php echo $website->sections_list_html ?> -->
-        <div class="sp">
-          <div class="sp-h">Page sections</div>
-          <div class="si on" data-s="hero"><div class="si-ic">🏛️</div><span class="si-lb">Hero &amp; intro</span><span class="si-h">✏</span></div>
-          <div class="si" data-s="about"><div class="si-ic">👤</div><span class="si-lb">About us</span><span class="si-h">✏</span></div>
-          <div class="si" data-s="mass"><div class="si-ic">🕊️</div><span class="si-lb">Mass times</span><span class="si-h">✏</span></div>
-          <div class="si" data-s="donations"><div class="si-ic">💛</div><span class="si-lb">Donations</span><span class="si-h">✏</span></div>
-          <div class="si" data-s="contact"><div class="si-ic">📍</div><span class="si-lb">Contact</span><span class="si-h">✏</span></div>
-        </div>
-        <div class="ep">
-          <div class="ep-t">✏ Editing: <span id="ep-name">Hero &amp; intro</span></div>
-          <div id="ep-fields">
-            <div class="ep-f"><label class="ep-l">Headline</label><input class="ep-i" type="text" value="St. Mary's Parish"></div>
-            <div class="ep-f"><label class="ep-l">Tagline</label><input class="ep-i" type="text" value="Serving the Lower East Side since 1887"></div>
-            <div class="ep-f"><label class="ep-l">Button text</label><input class="ep-i" type="text" value="Join us Sunday →"></div>
-          </div>
-          <div class="ep-ac"><button class="btn btn-secondary btn-sm">Cancel</button><button class="btn btn-primary btn-sm">Apply ✓</button></div>
-        </div>
+
+      <!-- COL 1: Page sections list -->
+      <!-- <?php echo $website->sections_list_html ?> -->
+      <div class="sections-panel">
+        <div class="sp-head">Page sections</div>
+        <div class="si on" data-s="hero"><div class="si-ic">🏛️</div><span class="si-lb">Hero &amp; intro</span><span class="si-h">✏</span></div>
+        <div class="si" data-s="about"><div class="si-ic">👤</div><span class="si-lb">About us</span><span class="si-h">✏</span></div>
+        <div class="si" data-s="mass"><div class="si-ic">🕊️</div><span class="si-lb">Mass times</span><span class="si-h">✏</span></div>
+        <div class="si" data-s="donations"><div class="si-ic">💛</div><span class="si-lb">Donations</span><span class="si-h">✏</span></div>
+        <div class="si" data-s="contact"><div class="si-ic">📍</div><span class="si-lb">Contact</span><span class="si-h">✏</span></div>
       </div>
 
-      <!-- Embedded preview — all internal links use onclick="return false" -->
-      <div class="pv-pane">
+      <!-- COL 2: Edit panel — sits to the RIGHT of sections list -->
+      <!-- <?php echo $website->edit_panel_html ?> -->
+      <div class="edit-panel" id="edit-panel">
+        <div class="ep-t">✏ Editing: <span id="ep-name">Hero &amp; intro</span></div>
+        <div id="ep-fields">
+          <div class="ep-f"><label class="ep-l">Headline</label><input class="ep-i" type="text" value="St. Mary's Parish"></div>
+          <div class="ep-f"><label class="ep-l">Tagline</label><input class="ep-i" type="text" value="Serving the Lower East Side since 1887"></div>
+          <div class="ep-f"><label class="ep-l">Button text</label><input class="ep-i" type="text" value="Join us Sunday →"></div>
+        </div>
+        <div class="ep-ac"><button class="btn btn-secondary btn-sm">Cancel</button><button class="btn btn-primary btn-sm">Apply ✓</button></div>
+      </div>
+
+      <!-- COL 3: Live preview — all internal links use onclick="return false" -->
+      <div class="preview-pane">
         <div class="pv-bar">
           <div class="pv-dots"><div class="pv-dot" style="background:#ff5f57"></div><div class="pv-dot" style="background:#febc2e"></div><div class="pv-dot" style="background:#28c840"></div></div>
           <div class="pv-url">stmarysnyc.communio.org</div>
@@ -265,15 +276,16 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
           </div>
         </div>
       </div>
-    </div>
-  </div>
-</div>
 
-<!-- PREVIEW MODAL — fullscreen overlay, closes on Escape or backdrop click -->
+    </div><!-- /builder -->
+  </div><!-- /page-inner -->
+</div><!-- /page-shell -->
+
+<!-- PREVIEW MODAL -->
 <div class="pm" id="pm">
   <div class="pm-box">
     <div class="pm-bar">
-      <div class="pm-dots"><div class="pv-dot" style="background:#ff5f57"></div><div class="pv-dot" style="background:#febc2e"></div><div class="pv-dot" style="background:#28c840"></div></div>
+      <div class="pv-dots"><div class="pv-dot" style="background:#ff5f57"></div><div class="pv-dot" style="background:#febc2e"></div><div class="pv-dot" style="background:#28c840"></div></div>
       <div class="pm-url">stmarysnyc.communio.org — Full preview</div>
       <div class="pm-tog"><button class="pmt on" id="pm-d">Desktop</button><button class="pmt" id="pm-m">Mobile</button></div>
       <button class="pm-close" id="pm-x">✕ Close</button>
@@ -297,7 +309,7 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
 
 <script>
 (function () {
-  /* ── Template selector ── */
+  /* Template selector */
   document.querySelectorAll('.tmpl').forEach(function (t) {
     t.addEventListener('click', function () {
       document.querySelectorAll('.tmpl').forEach(function (x) { x.classList.remove('on'); });
@@ -307,10 +319,10 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
     });
   });
 
-  /* ── Section editor ── */
+  /* Section editor */
   var fm = {
     hero:      {n:'Hero &amp; intro', f:[{l:'Headline',v:"St. Mary's Parish"},{l:'Tagline',v:'Serving the Lower East Side since 1887'},{l:'Button text',v:'Join us Sunday →'}]},
-    about:     {n:'About us',         f:[{l:'Heading',v:'About our parish'},{l:'Description',v:"St. Mary's Parish — a cornerstone of the Lower East Side since 1887.",ta:1}]},
+    about:     {n:'About us',         f:[{l:'Heading',v:'About our parish'},{l:'Description',v:"St. Mary's Parish — cornerstone of the Lower East Side since 1887.",ta:1}]},
     mass:      {n:'Mass times',       f:[{l:'Weekend Vigil',v:'Sat 5:00pm'},{l:'Sunday masses',v:'8:00am, 10:00am, 12:00pm, 6:00pm (Spanish)'},{l:'Weekday masses',v:'7:00am & 12:10pm (Mon–Fri)'}]},
     donations: {n:'Donations',        f:[{l:'Title',v:"Support St. Mary's Parish"},{l:'Description',v:'Your gift sustains our community programmes.',ta:1},{l:'Suggested amounts',v:'$10, $25, $50, $100'}]},
     contact:   {n:'Contact',          f:[{l:'Email',v:'info@stmarysnyc.org'},{l:'Phone',v:'+1 (212) 555-0182'},{l:'Address',v:'15 Mott Street, New York, NY 10013'}]}
@@ -327,13 +339,13 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
     });
   });
 
-  /* ── Builder viewport toggle ── */
+  /* Builder viewport toggle */
   var pvd = document.getElementById('pv-d'), pvm = document.getElementById('pv-m'), pvw = document.getElementById('pv-wrap');
   pvd.addEventListener('click', function () { pvd.classList.add('on'); pvm.classList.remove('on'); pvw.style.maxWidth = ''; pvw.style.margin = ''; });
   pvm.addEventListener('click', function () { pvm.classList.add('on'); pvd.classList.remove('on'); pvw.style.maxWidth = '375px'; pvw.style.margin = '0 auto'; });
 
-  /* ── Amount pickers ── */
-  ['pv-amts', 'pm-amts'].forEach(function (id) {
+  /* Amount pickers */
+  ['pv-amts','pm-amts'].forEach(function (id) {
     document.querySelectorAll('#' + id + ' .sv-amt').forEach(function (a) {
       a.addEventListener('click', function () {
         document.querySelectorAll('#' + id + ' .sv-amt').forEach(function (x) { x.classList.remove('on'); });
@@ -342,14 +354,14 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
     });
   });
 
-  /* ── Publish feedback ── */
+  /* Publish feedback */
   var pub = document.getElementById('pub-btn');
   pub.addEventListener('click', function () {
     pub.textContent = '✓ Published'; pub.style.background = 'var(--sage)';
     setTimeout(function () { pub.textContent = 'Publish changes →'; pub.style.background = ''; }, 2500);
   });
 
-  /* ── Preview modal ── */
+  /* Preview modal */
   var modal = document.getElementById('pm');
   var pmbody = document.getElementById('pm-body');
   document.getElementById('pm-open-btn').addEventListener('click', function () { modal.style.display = 'flex'; });
@@ -357,12 +369,10 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
   modal.addEventListener('click', function (e) { if (e.target === modal) { modal.style.display = 'none'; } });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { modal.style.display = 'none'; } });
   document.getElementById('pm-d').addEventListener('click', function () {
-    this.classList.add('on'); document.getElementById('pm-m').classList.remove('on');
-    pmbody.style.maxWidth = '';
+    this.classList.add('on'); document.getElementById('pm-m').classList.remove('on'); pmbody.style.maxWidth = '';
   });
   document.getElementById('pm-m').addEventListener('click', function () {
-    this.classList.add('on'); document.getElementById('pm-d').classList.remove('on');
-    pmbody.style.maxWidth = '390px';
+    this.classList.add('on'); document.getElementById('pm-d').classList.remove('on'); pmbody.style.maxWidth = '390px';
   });
 }());
 </script>
