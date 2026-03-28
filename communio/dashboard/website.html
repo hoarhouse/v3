@@ -775,4 +775,14 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
     this.classList.add('on'); document.getElementById('pm-d').classList.remove('on');
     pmBody.style.maxWidth = '390px'; pmBody.style.margin = '0 auto';
   });
-  document.querySelectorAll('#pm-amts .sv-amt').forEach(function (a
+  document.querySelectorAll('#pm-amts .sv-amt').forEach(function (a) {
+    a.addEventListener('click', function () {
+      document.querySelectorAll('#pm-amts .sv-amt').forEach(function (x) { x.classList.remove('on'); });
+      a.classList.add('on');
+    });
+  });
+
+}());
+</script>
+</body>
+</html>
