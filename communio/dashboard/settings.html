@@ -140,19 +140,19 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
         <div class="sp-sub">This information appears on your public Communio profile</div>
         <div class="form-group"><label class="form-label">Parish name</label><input class="form-input" type="text" value="St. Mary's Parish"></div>
         <div class="form-row">
-          <div class="form-group"><label class="form-label">City</label><input class="form-input" type="text" value="New York"></div>
+          <div class="form-group"><label class="form-label">City</label><input class="form-input" type="text" value="New York"><!-- SOURCE: $parish->city → profile p-loc, website --></div>
           <div class="form-group"><label class="form-label">Country</label><select class="form-select"><option>United States</option><option>Hungary</option><option>Ghana</option></select></div>
         </div>
         <div class="form-group"><label class="form-label">Description</label><textarea class="form-textarea">St. Mary's Parish has been serving the L<!-- SOURCE: $parish->description → profile about, website -->ower East Side community since 1887. We are a vibrant, multicultural congregation of over 1,200 families, committed to social justice, youth ministry, and ethical technology advocacy.</textarea></div>
         <div class="form-row">
-          <div class="form-group"><label class="form-label">Contact person</label><input class="form-input" type="text" value="Fr. James O'Brien"></div>
+          <div class="form-group"><label class="form-label">Contact person</label><input class="form-input" type="text" value="Fr. James O'Brien"><!-- SOURCE: $parish->contact_name → profile ct-row --></div>
           <div class="form-group"><label class="form-label">Role</label><select class="form-select"><option>Pastor / Parish Priest</option><option>Administrator</option></select></div>
         </div>
         <div class="form-row">
-          <div class="form-group"><label class="form-label">Public email</label><input class="form-input" type="email" value="info@stmarysnyc.org"></div>
-          <div class="form-group"><label class="form-label">Phone</label><input class="form-input" type="tel" value="+1 (212) 555-0182"></div>
+          <div class="form-group"><label class="form-label">Public email</label><input class="form-input" type="email" value="info@stmarysnyc.org"><!-- SOURCE: $parish->email → profile ct-row, website contact --></div>
+          <div class="form-group"><label class="form-label">Phone</label><input class="form-input" type="tel" value="+1 (212) 555-0182"><!-- SOURCE: $parish->phone → profile ct-row, website contact --></div>
         </div>
-        <div class="form-group"><label class="form-label">Address</label><input class="form-input" type="text" value="15 Mott Street, New York, NY 10013"></div>
+        <div class="form-group"><label class="form-label">Address</label><input class="form-input" type="text" value="15 Mott Street, New York, NY 10013"><!-- SOURCE: $parish->address → profile ct-row, website contact --></div>
         <div class="form-group">
           <label class="form-label">Focus areas<!-- SOURCE: $parish->tags → profile p-tags, website --></label>
           <div class="focus-tags">
