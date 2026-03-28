@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>St. Mary's Parish — Communio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Lora:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../communio.css">
+<style>
+/* ── PUBLIC NAV ── */
+.pub-nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  height: 56px;
+  background: rgba(14,10,6,0.92);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(232,192,64,0.2);
+  display: flex; align-items: center;
+  padding: 0 24px;
+}
+.pub-nav-brand { display:flex;align-items:center;gap:8px;text-decoration:none; }
+.pub-nav-mark  { width:28px;height:28px;background:var(--terra);border-radius:5px;display:flex;align-items:center;justify-content:center; }
+.pub-nav-mark svg { width:12px;height:12px; }
+.pub-nav-name  { font-size:15px;font-weight:700;color:var(--white);letter-spacing:-0.02em; }
+.pub-nav-name span { color:var(--terra); }
+.pub-nav-right { display:flex;align-items:center;gap:8px;margin-left:auto; }
+.pub-nav-link  { font-size:13px;font-weight:600;color:rgba(255,255,255,0.5);text-decoration:none;transition:color var(--ease); }
+.pub-nav-link:hover { color:var(--white); }
+.pub-nav-btn   { font-family:var(--f-body);font-size:13px;font-weight:700;background:var(--terra);color:var(--white);border:none;border-radius:var(--r-pill);padding:8px 18px;cursor:pointer;text-decoration:none;transition:all var(--ease); }
+.pub-nav-btn:hover { background:var(--terra-light); }
+@media(max-width:600px){ .pub-nav-link { display:none; } }
+
+/* ── HERO ── */
+.pub-hero {
+  background: var(--ink);
+  padding: 80px 20px 0;
+  position: relative;
+  overflow: hidden;
+  margin-top: 56px;
+}
+.pub-hero::before {
+  content:'';position:absolute;top:-80px;right:-80px;
+  width:350px;height:350px;border-radius:50%;
+  background:radial-gradient(circle, rgba(216,80,32,0.1) 0%, transparent 70%);
+  pointer-events:none;
+}
+.pub-inner { max-width:960px;margin:0 auto;position:relative;z-index:1; }
+
+.pub-top { display:flex;align-items:flex-start;gap:16px;margin-bottom:22px;flex-wrap:wrap; }
+.pub-av  { width:66px;height:66px;border-radius:var(--r-xl);flex-shrink:0;background:var(--terra);color:var(--white);font-size:24px;font-weight:800;display:flex;align-items:center;justify-content:center;border:2px solid rgba(255,255,255,0.1); }
+.pub-info { flex:1;min-width:160px; }
+.pub-name { font-size:clamp(20px,5vw,34px);font-weight:800;color:var(--white);letter-spacing:-0.025em;line-height:1.1;margin-bottom:9px; }
+.pub-badges { display:flex;flex-wrap:wrap;gap:5px; }
+.pub-b  { font-size:10px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;border-radius:4px;padding:4px 9px; }
+.pub-bg { background:var(--sage);color:var(--white); }
+.pub-bd { background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.6); }
+
+.pub-actions { display:flex;gap:7px;flex-wrap:wrap;align-self:flex-start; }
+@media(max-width:500px){ .pub-actions { width:100%; } .pub-actions a,.pub-actions button { flex:1;justify-content:center; } }
+
+.btn-donate-pub  { font-family:var(--f-body);font-size:13px;font-weight:700;background:var(--white);color:var(--sage);border:none;border-radius:var(--r-pill);padding:10px 18px;cursor:pointer;text-decoration:none;display:inline-block;transition:all var(--ease); }
+.btn-donate-pub:hover { background:var(--sage-pale); }
+.btn-connect-pub { font-family:var(--f-body);font-size:13px;font-weight:700;background:var(--terra);color:var(--white);border:none;border-radius:var(--r-pill);padding:10px 18px;cursor:pointer;display:inline-flex;align-items:center;gap:6px;text-decoration:none;transition:all var(--ease); }
+.btn-connect-pub:hover { background:var(--terra-light); }
+
+/* Tabs */
+.pub-tabs { display:flex;overflow-x:auto;scrollbar-width:none; }
+.pub-tabs::-webkit-scrollbar { display:none; }
+.pub-tab { font-family:var(--f-body);font-size:13px;font-weight:600;color:rgba(255,255,255,0.35);background:none;border:none;border-bottom:2px solid transparent;padding:10px 16px 12px;cursor:pointer;white-space:nowrap;transition:all var(--ease); }
+.pub-tab:hover { color:rgba(255,255,255,0.65); }
+.pub-tab.on { color:var(--white);border-bottom-color:var(--terra); }
+
+/* ── BODY ── */
+.pub-body {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 24px 16px 100px;
+  display: grid;
+  grid-template-columns: 1fr 280px;
+  gap: 14px;
+  align-items: start;
+}
+@media(max-width:740px){ .pub-body { grid-template-columns:1fr; } }
+
+/* Stats */
+.pub-stats { display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-bottom:14px; }
+.pub-stat  { background:var(--white);border:1px solid var(--border-light);border-radius:var(--r-lg);padding:13px 15px;text-align:center; }
+.pub-stat-n { font-size:19px;font-weight:800;color:var(--ink);letter-spacing:-0.02em;line-height:1;margin-bottom:3px; }
+.pub-stat-l { font-size:11px;color:var(--light);font-weight:500; }
+
+/* Cards */
+.pub-card { background:var(--white);border:1px solid var(--border-light);border-radius:var(--r-xl);padding:18px;margin-bottom:12px; }
+.pub-about { font-size:14px;color:var(--mid);line-height:1.75; }
+.pub-tags  { display:flex;flex-wrap:wrap;gap:6px; }
+.pub-tag   { font-size:12px;font-weight:600;color:var(--terra);background:var(--terra-pale);border-radius:4px;padding:4px 10px; }
+
+/* Projects list */
+.pub-proj-row { display:flex;align-items:center;gap:10px;padding:11px 0;border-bottom:1px solid var(--border-light); }
+.pub-proj-row:last-child { border-bottom:none; }
+.ppr-t { font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;border-radius:4px;padding:3px 8px;flex-shrink:0; }
+.ppr-terra { background:var(--terra-pale);color:var(--terra); }
+.ppr-sage  { background:var(--sage-pale); color:var(--sage); }
+.ppr-amber { background:var(--amber-pale);color:#7a5a00; }
+.ppr-name  { font-size:13px;font-weight:600;color:var(--ink);flex:1;line-height:1.35; }
+.ppr-cnt   { font-size:11px;color:var(--light);font-weight:600;flex-shrink:0; }
+
+/* ── SIDEBAR ── */
+.pub-sidebar { display:flex;flex-direction:column;gap:12px; }
+
+/* Donation widget */
+.dw { background:var(--ink);border:1px solid rgba(232,192,64,0.2);border-radius:var(--r-xl);padding:20px; }
+.dw-lbl  { font-size:10px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:rgba(255,255,255,0.25);margin-bottom:8px; }
+.dw-name { font-size:16px;font-weight:800;color:var(--white);letter-spacing:-0.02em;margin-bottom:4px; }
+.dw-desc { font-size:12px;color:rgba(255,255,255,0.35);line-height:1.55;margin-bottom:14px; }
+.dw-amts { display:flex;flex-wrap:wrap;gap:5px;margin-bottom:12px; }
+.dw-amt  { font-family:var(--f-body);font-size:12px;font-weight:700;color:rgba(255,255,255,0.55);background:rgba(255,255,255,0.07);border:1.5px solid rgba(255,255,255,0.1);border-radius:8px;padding:6px 12px;cursor:pointer;transition:all var(--ease); }
+.dw-amt:hover, .dw-amt.on { background:var(--terra);border-color:var(--terra);color:var(--white); }
+.dw-btn  { font-family:var(--f-body);font-size:13px;font-weight:700;color:var(--white);background:var(--terra);border:none;border-radius:var(--r-pill);padding:12px;width:100%;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;transition:all var(--ease); }
+.dw-btn:hover { background:var(--terra-light);transform:translateY(-1px); }
+.dw-note { font-size:10px;color:rgba(255,255,255,0.2);text-align:center;margin-top:8px; }
+
+/* Contact */
+.pub-contact { background:var(--white);border:1px solid var(--border-light);border-radius:var(--r-xl);padding:16px; }
+.ct-lbl { font-size:10px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--light);margin-bottom:12px; }
+.ct-row { display:flex;align-items:flex-start;gap:9px;margin-bottom:9px; }
+.ct-row:last-child { margin-bottom:0; }
+.ct-ico { width:24px;height:24px;border-radius:6px;background:var(--cream);flex-shrink:0;display:flex;align-items:center;justify-content:center; }
+.ct-ico svg { width:12px;height:12px; }
+.ct-val { font-size:12px;color:var(--mid);line-height:1.5; }
+.ct-val strong { display:block;font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--light);margin-bottom:1px; }
+
+/* Network CTA */
+.net-sb { background:var(--sage);border-radius:var(--r-xl);padding:16px; }
+.net-sb-title { font-size:14px;font-weight:800;color:var(--white);margin-bottom:5px; }
+.net-sb-desc  { font-size:12px;color:rgba(255,255,255,0.65);line-height:1.6;margin-bottom:14px; }
+.btn-white { font-family:var(--f-body);font-size:12px;font-weight:700;background:var(--white);color:var(--sage);border:none;border-radius:var(--r-pill);padding:9px 16px;cursor:pointer;width:100%;transition:all var(--ease); }
+.btn-white:hover { background:var(--sage-pale); }
+</style>
+</head>
+<body>
+
+<!-- PUBLIC NAV -->
+<!-- PHP: no auth required — public page -->
+<nav class="pub-nav">
+  <a href="../index.html" class="pub-nav-brand">
+    <div class="pub-nav-mark">
+      <svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="3" fill="white"/><path d="M8 1v3M8 12v3M1 8h3M12 8h3" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg>
+    </div>
+    <div class="pub-nav-name">Commun<span>io</span></div>
+  </a>
+  <div class="pub-nav-right">
+    <a href="../index.html" class="pub-nav-link">About</a>
+    <a href="../register.html" class="pub-nav-link">Register your parish</a>
+    <a href="../register.html" class="pub-nav-btn">Join Communio</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<!-- PHP: $parish = fetch_parish_by_slug($slug); if(!$parish) 404; -->
+<div class="pub-hero">
+  <div class="pub-inner">
+    <div class="pub-top">
+      <div class="pub-av">SM</div>
+      <div class="pub-info">
+        <!-- PHP: echo $parish->name -->
+        <div class="pub-name">St. Mary's Parish</div>
+        <div class="pub-badges">
+          <span class="pub-b pub-bg">✓ Verified by DCF</span>
+          <!-- PHP: echo $parish->country_flag . ' ' . $parish->city . ', ' . $parish->country -->
+          <span class="pub-b pub-bd">🇺🇸 New York, USA</span>
+          <span class="pub-b pub-bd">English</span>
+        </div>
+      </div>
+      <div class="pub-actions">
+        <!-- PHP: if $parish->donation_enabled -->
+        <a href="#donate" class="btn-donate-pub">Donate</a>
+        <!-- PHP: if logged in as parish show Connect, else link to register -->
+        <a href="../register.html" class="btn-connect-pub">
+          Connect
+          <svg viewBox="0 0 16 16" fill="none" width="13" height="13"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- Tabs -->
+    <div class="pub-tabs">
+      <button class="pub-tab on">About</button>
+      <button class="pub-tab">Projects</button>
+      <button class="pub-tab">Network</button>
+      <button class="pub-tab">Donate</button>
+    </div>
+  </div>
+</div>
+
+<!-- BODY -->
+<div class="pub-body">
+
+  <!-- LEFT: main content -->
+  <div>
+
+    <!-- Stats -->
+    <!-- PHP: stats from parishes + donations + projects tables -->
+    <div class="pub-stats">
+      <div class="pub-stat"><div class="pub-stat-n">1887</div><div class="pub-stat-l">Founded</div></div>
+      <div class="pub-stat"><div class="pub-stat-n">1,200+</div><div class="pub-stat-l">Families</div></div>
+      <div class="pub-stat"><div class="pub-stat-n">4</div><div class="pub-stat-l">Projects</div></div>
+    </div>
+
+    <!-- About -->
+    <div class="pub-card">
+      <div class="sec-lbl">About this parish</div>
+      <!-- PHP: echo $parish->description -->
+      <p class="pub-about">St. Mary's Parish has been serving the Lower East Side community since 1887. A vibrant, multicultural congregation of over 1,200 families, committed to social justice, youth ministry, and ethical technology advocacy spanning more than 40 countries of origin.</p>
+    </div>
+
+    <!-- Focus areas -->
+    <div class="pub-card">
+      <div class="sec-lbl">Focus areas</div>
+      <!-- PHP: foreach ($parish->focus_areas as $area) -->
+      <div class="pub-tags">
+        <span class="pub-tag">Peace &amp; reconciliation</span>
+        <span class="pub-tag">Ethical technology</span>
+        <span class="pub-tag">Social justice</span>
+        <span class="pub-tag">Youth ministry</span>
+      </div>
+    </div>
+
+    <!-- Active projects -->
+    <div class="pub-card">
+      <div class="sec-lbl">Active on the network</div>
+      <!-- PHP: SELECT projects.* FROM projects JOIN parish_projects ON... WHERE parish_id=$id AND public=true -->
+      <div class="pub-proj-row">
+        <span class="ppr-t ppr-terra">Advocacy</span>
+        <span class="ppr-name">Ethical AI in Catholic Education — Global Statement</span>
+        <span class="ppr-cnt">247 parishes</span>
+      </div>
+      <div class="pub-proj-row">
+        <span class="ppr-t ppr-sage">Project</span>
+        <span class="ppr-name">Global Youth Formation Network</span>
+        <span class="ppr-cnt">89 parishes</span>
+      </div>
+      <div class="pub-proj-row">
+        <span class="ppr-t ppr-terra">Advocacy</span>
+        <span class="ppr-name">Migration &amp; Refugee Support — UN Statement</span>
+        <span class="ppr-cnt">163 parishes</span>
+      </div>
+      <div class="pub-proj-row">
+        <span class="ppr-t ppr-amber">Research</span>
+        <span class="ppr-name">Digital Sovereignty &amp; Parish Life Study</span>
+        <span class="ppr-cnt">28 parishes</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- RIGHT: sidebar -->
+  <div class="pub-sidebar">
+
+    <!-- Donation widget -->
+    <!-- PHP: if $parish->donation_enabled -->
+    <div class="dw" id="donate">
+      <div class="dw-lbl">Support this parish</div>
+      <!-- PHP: echo $parish->name -->
+      <div class="dw-name">St. Mary's Parish</div>
+      <!-- PHP: echo $parish->donation_description -->
+      <div class="dw-desc">Your gift supports community programmes and the upkeep of our historic church.</div>
+      <!-- PHP: echo $parish->suggested_amounts as buttons -->
+      <div class="dw-amts">
+        <button class="dw-amt" onclick="pickAmt(this,'$10')">$10</button>
+        <button class="dw-amt on" onclick="pickAmt(this,'$25')">$25</button>
+        <button class="dw-amt" onclick="pickAmt(this,'$50')">$50</button>
+        <button class="dw-amt" onclick="pickAmt(this,'$100')">$100</button>
+      </div>
+      <!-- PHP: POST to /donations/create.php with amount, parish_id, stripe_account_id -->
+      <button class="dw-btn" id="dw-cta">
+        Donate $25
+        <svg viewBox="0 0 16 16" fill="none" width="13" height="13"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="dw-note">96.1% reaches the parish · 1% supports Communio</div>
+    </div>
+
+    <!-- Contact -->
+    <div class="pub-contact">
+      <div class="ct-lbl">Contact</div>
+      <!-- PHP: echo $parish->contact_email_public, $parish->slug, $parish->address -->
+      <div class="ct-row">
+        <div class="ct-ico"><svg viewBox="0 0 14 14" fill="none"><path d="M1 3l6 5 6-5" stroke="var(--mid)" stroke-width="1.2" stroke-linecap="round"/><rect x="1" y="2.5" width="12" height="9" rx="1.5" stroke="var(--mid)" stroke-width="1.2"/></svg></div>
+        <div class="ct-val"><strong>Email</strong>info@stmarysnyc.org</div>
+      </div>
+      <div class="ct-row">
+        <div class="ct-ico"><svg viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.5" stroke="var(--mid)" stroke-width="1.2"/><path d="M1.5 7h11M7 1.5A8.5 8.5 0 007 12.5M7 1.5A8.5 8.5 0 017 12.5" stroke="var(--mid)" stroke-width="1.2" stroke-linecap="round"/></svg></div>
+        <div class="ct-val"><strong>Website</strong>stmarysnyc.communio.org</div>
+      </div>
+      <div class="ct-row">
+        <div class="ct-ico"><svg viewBox="0 0 14 14" fill="none"><path d="M7 1C4.8 1 3 2.8 3 5c0 3 4 7.5 4 7.5S11 8 11 5c0-2.2-1.8-4-4-4z" stroke="var(--mid)" stroke-width="1.2"/><circle cx="7" cy="5" r="1.3" stroke="var(--mid)" stroke-width="1.1"/></svg></div>
+        <div class="ct-val"><strong>Address</strong>15 Mott Street, New York, NY 10013</div>
+      </div>
+    </div>
+
+    <!-- Network CTA -->
+    <div class="net-sb">
+      <div class="net-sb-title">Are you a Communio parish?</div>
+      <div class="net-sb-desc">Connect with St. Mary's directly — form a sister-parish relationship or join a project together.</div>
+      <button class="btn-white">Connect as a parish</button>
+    </div>
+
+  </div>
+</div>
+
+<script>
+function pickAmt(btn, val) {
+  document.querySelectorAll('.dw-amt').forEach(function(b) { b.classList.remove('on'); });
+  btn.classList.add('on');
+  var cta = document.getElementById('dw-cta');
+  if (cta) cta.firstChild.textContent = 'Donate ' + val + ' ';
+}
+</script>
+</body>
+</html>
