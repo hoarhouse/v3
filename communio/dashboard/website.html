@@ -387,7 +387,7 @@ function getSiteHTML(t, full) {
         + '<div onclick="scrollToSection(\'donate\')" style="font-size:' + (full?'11px':'8px') + ';font-weight:700;background:#d85020;color:#fff;padding:' + (full?'6px 14px':'3px 8px') + ';border-radius:5px;cursor:pointer;">Donate</div>'
       + '</div>'
     + '</div>'
-    + '<div style="background:' + heroStyle + ';position:relative;">'
+    + '<div id="ws-hero" style="background:' + heroStyle + ';position:relative;">'
       + (heroPhoto ? '<div style="position:absolute;inset:0;background:rgba(0,0,0,0.5);"></div>' : '')
       + '<div style="position:relative;z-index:1;padding:' + pad + ';">'
         + '<div style="font-size:9px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:rgba(255,255,255,0.7);margin-bottom:8px;">✓ DCF Verified · New York</div>'
@@ -440,7 +440,7 @@ function getSiteHTML(t, full) {
         + '<div style="font-size:' + (full?'12px':'10px') + ';font-weight:700;background:#d85020;color:#fff;padding:' + (full?'9px 16px':'6px 11px') + ';border-radius:5px;display:inline-block;">Donate online →</div>'
         + '<div style="font-size:9px;color:rgba(255,255,255,0.2);margin-top:5px;">96.1% reaches the parish · 1% supports Communio</div>'
       + '</div>'
-      + '<div style="background:' + p.cardBg + ';border:1px solid ' + p.cardBorder + ';border-radius:10px;padding:' + cp + ';">'
+      + '<div id="ws-contact" style="background:' + p.cardBg + ';border:1px solid ' + p.cardBorder + ';border-radius:10px;padding:' + cp + ';">'
         + '<div style="font-size:8px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:' + p.lblClr + ';margin-bottom:8px;">Contact us</div>'
         + '<div style="display:flex;flex-direction:column;gap:5px;">'
           + '<div style="display:flex;align-items:center;gap:6px;font-size:' + (full?'11px':'9px') + ';color:' + p.txtClr + ';"><span style="font-size:11px;">✉</span>' + data.contactEmail + '</div>'
