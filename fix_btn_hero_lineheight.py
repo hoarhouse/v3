@@ -1,13 +1,12 @@
 from pathlib import Path
 
-p = Path('/Users/christopherhoar/Desktop/v3/communio/communio.css')
-css = p.read_text(encoding='utf-8')
+p = Path('/Users/christopherhoar/Desktop/v3/communio/parish/profile.html')
+html = p.read_text(encoding='utf-8')
 
-# Find the btn-hero rule and add line-height to it
-css = css.replace(
-    '.btn-hero{',
-    '.btn-hero{line-height:20.8px;'
+html = html.replace(
+    '.btn-hero{font-family:var(--f-body);font-size:13px;font-weight:600;padding:8px 18px;',
+    '.btn-hero{font-family:var(--f-body);font-size:13px;font-weight:600;line-height:20.8px;padding:8px 18px;'
 )
 
-p.write_text(css, encoding='utf-8')
-print("Done:", css.count('line-height:20.8px'))
+p.write_text(html, encoding='utf-8')
+print("Done:", html.count('line-height:20.8px'))
