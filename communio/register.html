@@ -1,0 +1,2419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register Your Parish — Communio</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Lora:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+
+  <!--
+  ================================================================
+  DEVELOPER NOTES FOR EGROUP PHP CONVERSION
+  ================================================================
+  1. GOOGLE PLACES API
+     Uncomment the script tag below and replace YOUR_KEY.
+     Restrict the key to your domain in Google Cloud Console.
+     Required libraries: places
+
+  2. STRIPE CONNECT
+     The donation onboarding flow uses Stripe Connect (not standard Stripe).
+     Parish receives funds directly to their own Stripe account.
+     DCF platform fee is collected automatically via Stripe's application_fee_amount.
+     Required: Stripe Connect account at dashboard.stripe.com/connect
+     PHP endpoint needed: /stripe/connect-onboard.php
+     Returns: Stripe account link URL → redirect parish there
+
+  3. DATABASE FIELDS (parishes table)
+     See bottom of file for full schema comment block.
+
+  4. FORM ACTION
+     <form action="parish-register-process.php" method="POST">
+     CSRF token must be injected into the hidden #csrf-token field.
+
+  5. EMAIL
+     On approval: send welcome email via parish_approved.php template
+     On submission: notify admin via admin_new_parish.php template
+  ================================================================
+
+  Google Places API — uncomment when deploying:
+  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_PLACES_API_KEY&libraries=places&callback=initAutocomplete" async defer></script>
+  -->
+
+  <style>
+    /* =====================================================
+       VARIABLES — matches Communio v2 exactly
+       ===================================================== */
+    :root {
+      --cream:        #f5f2e8;
+      --cream-dark:   #ede8d8;
+      --warm-white:   #fffdf5;
+      --white:        #ffffff;
+
+      --terracotta:   #d85020;
+      --terra-light:  #f07040;
+      --terra-pale:   #fff0ea;
+      --terra-dim:    rgba(200,92,58,0.12);
+
+      --sage:         #2a8a4a;
+      --sage-light:   #4aaa6a;
+      --sage-pale:    #dff5e8;
+
+      --amber:        #e8c040;
+      --amber-pale:   #fdf8d8;
+
+      --ink:          #000000;
+      --ink-soft:     #111111;
+      --text-mid:     #5a4a20;
+      --text-light:   #8a7a50;
+      --border:       #e8c040;
+      --border-light: #f0dca0;
+
+      --success:        #2a8a4a;
+      --success-pale:   #eaf3ec;
+      --success-border: #6a9e78;
+      --error:          #b94040;
+      --stripe-purple:  #635bff;
+
+      --f-display: 'Outfit', system-ui, sans-serif;
+      --f-body:    'Outfit', system-ui, sans-serif;
+      --f-serif:   'Lora', Georgia, serif;
+
+      --r-sm:  6px;
+      --r-md:  12px;
+      --r-lg:  20px;
+      --r-xl:  32px;
+      --r-pill: 8px;
+
+      --sh-sm:  0 2px 8px rgba(22,18,12,0.06);
+      --sh-md:  0 8px 32px rgba(22,18,12,0.1);
+      --sh-lg:  0 20px 60px rgba(22,18,12,0.15);
+
+      --ease: 0.25s ease;
+    }
+
+    /* =====================================================
+       BASE
+       ===================================================== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--f-body);
+      font-size: 16px;
+      color: var(--ink);
+      background: var(--warm-white);
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* =====================================================
+       NAV — identical to Communio landing page
+       ===================================================== */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      padding: 0 32px;
+      height: 64px;
+      display: flex; align-items: center; justify-content: space-between;
+      background: rgba(255,253,249,0.92);
+      backdrop-filter: blur(16px);
+      box-shadow: 0 1px 0 var(--border);
+    }
+
+    .nav-brand {
+      display: flex; align-items: center; gap: 8px;
+      text-decoration: none;
+    }
+
+    .nav-mark {
+      width: 34px; height: 34px;
+      background: var(--terracotta);
+      border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    .nav-mark svg { width: 16px; height: 16px; }
+
+    .nav-name {
+      font-size: 18px; font-weight: 700;
+      color: var(--ink); letter-spacing: -0.02em;
+    }
+
+    .nav-name span { color: var(--terracotta); }
+
+    .nav-links {
+      display: flex; align-items: center; gap: 28px;
+    }
+
+    .nav-link {
+      font-size: 14px; font-weight: 500;
+      color: var(--text-mid); text-decoration: none;
+      transition: color var(--ease);
+    }
+
+    .nav-link:hover { color: var(--ink); }
+
+    .nav-back {
+      font-family: var(--f-body);
+      font-size: 14px; font-weight: 500;
+      color: var(--text-mid);
+      background: transparent;
+      border: 1.5px solid var(--border);
+      border-radius: var(--r-pill);
+      padding: 8px 18px; cursor: pointer;
+      text-decoration: none;
+      transition: all var(--ease);
+      display: inline-flex; align-items: center; gap: 6px;
+    }
+
+    .nav-back:hover { border-color: var(--ink); color: var(--ink); }
+    .nav-back svg { width: 14px; height: 14px; }
+
+    @media (max-width: 640px) {
+      .nav-links { display: none; }
+      .nav { padding: 0 20px; }
+    }
+
+    /* =====================================================
+       PAGE HEADER — warm ink bg with terracotta accents
+       ===================================================== */
+    .page-header {
+      background: var(--ink);
+      position: relative;
+      overflow: hidden;
+      padding-top: 64px; /* nav offset */
+    }
+
+    .page-header::before {
+      content: '';
+      position: absolute;
+      width: 600px; height: 600px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(200,92,58,0.1) 0%, transparent 70%);
+      top: -100px; right: -150px;
+      pointer-events: none;
+    }
+
+    .page-header::after {
+      content: '';
+      position: absolute;
+      width: 400px; height: 400px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(74,124,89,0.06) 0%, transparent 70%);
+      bottom: -80px; left: -80px;
+      pointer-events: none;
+    }
+
+    .header-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 52px 32px 48px;
+      position: relative; z-index: 1;
+    }
+
+    /* Communio wordmark in header */
+    .header-brand {
+      display: flex; align-items: center; gap: 10px;
+      margin-bottom: 32px;
+    }
+
+    .header-brand-mark {
+      width: 34px; height: 34px;
+      background: var(--terracotta);
+      border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .header-brand-name {
+      font-size: 18px; font-weight: 700;
+      color: var(--white); letter-spacing: -0.02em;
+    }
+
+    .header-brand-name span { color: var(--terra-light); }
+
+    .header-tag {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 12px; font-weight: 700;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      color: #e8c040;
+      border: 1px solid rgba(200,92,58,0.35);
+      border-radius: var(--r-pill); padding: 5px 14px;
+      margin-bottom: 18px;
+    }
+
+    .header-tag::before {
+      content: '';
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--terracotta);
+      flex-shrink: 0;
+    }
+
+    .header-title {
+      font-family: var(--f-display);
+      font-size: clamp(30px, 5vw, 50px);
+      font-weight: 800;
+      color: #ffffff;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      margin-bottom: 16px;
+    }
+
+    .header-title em {
+      font-style: italic;
+      font-family: var(--f-serif);
+      font-weight: 400;
+      color: var(--terra-light);
+    }
+
+    .header-desc {
+      font-size: 16px; font-weight: 400;
+      color: rgba(255,255,255,0.6);
+      max-width: 540px; line-height: 1.72;
+    }
+
+    /* What-you-get pills */
+    .header-pills {
+      display: flex; flex-wrap: wrap; gap: 8px;
+      margin-top: 24px;
+    }
+
+    .h-pill {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 13px; font-weight: 500;
+      color: rgba(255,255,255,0.7);
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--r-pill); padding: 6px 14px;
+    }
+
+    .h-pill-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--terracotta); flex-shrink: 0;
+    }
+
+    /* =====================================================
+       PROGRESS BAR — terracotta accent
+       ===================================================== */
+    .progress-wrap {
+      background: var(--ink-soft);
+      border-top: 1px solid rgba(200,92,58,0.12);
+      position: sticky; top: 64px; z-index: 50;
+    }
+
+    .progress-inner {
+      max-width: 900px; margin: 0 auto;
+      padding: 0 32px; display: flex;
+    }
+
+    .prog-step {
+      flex: 1; padding: 14px 0;
+      display: flex; align-items: center; gap: 9px;
+      border-bottom: 2px solid transparent;
+      transition: border-color var(--ease);
+    }
+
+    .prog-step.done   { cursor: pointer; border-bottom-color: rgba(200,92,58,0.25); }
+    .prog-step.active { border-bottom-color: var(--terracotta); }
+
+    .prog-num {
+      width: 24px; height: 24px; border-radius: 50%;
+      border: 1.5px solid rgba(255,255,255,0.12);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px; font-weight: 600;
+      color: rgba(255,255,255,0.25); flex-shrink: 0;
+      transition: all var(--ease);
+    }
+
+    .prog-step.active .prog-num {
+      background: #d85020;
+      border-color: var(--terracotta);
+      color: var(--white);
+    }
+
+    .prog-step.done .prog-num {
+      background: var(--sage-pale);
+      border-color: var(--sage-light);
+      color: var(--sage);
+    }
+
+    .prog-label {
+      font-size: 11px; font-weight: 500;
+      color: rgba(255,255,255,0.22);
+      letter-spacing: 0.03em; display: none;
+      transition: color var(--ease);
+    }
+
+    @media (min-width: 500px) { .prog-label { display: block; } }
+    .prog-step.active .prog-label { color: rgba(255,253,249,0.85); }
+    .prog-step.done   .prog-label { color: rgba(255,253,249,0.38); }
+
+    /* =====================================================
+       MAIN LAYOUT
+       ===================================================== */
+    .form-outer {
+      max-width: 900px; margin: 0 auto;
+      padding: 40px 32px 100px;
+    }
+
+    @media (max-width: 520px) { .form-outer { padding: 24px 18px 80px; } }
+
+    /* =====================================================
+       PANELS
+       ===================================================== */
+    .panel { display: none; animation: fadeUp 0.26s ease; }
+    .panel.active { display: block; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .panel-head {
+      margin-bottom: 28px; padding-bottom: 20px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .panel-head h2 {
+      font-family: var(--f-display);
+      font-size: 26px; font-weight: 800;
+      color: var(--ink); margin-bottom: 5px;
+      letter-spacing: -0.02em;
+    }
+
+    .panel-head p {
+      font-size: 15px; color: var(--text-mid); font-weight: 400;
+    }
+
+    /* =====================================================
+       SECTION LABELS — matches Communio label-tag style
+       ===================================================== */
+    .label-tag {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 12px; font-weight: 700;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      color: var(--terracotta);
+      margin-bottom: 8px;
+    }
+
+    .label-tag::before {
+      content: '';
+      width: 16px; height: 2px;
+      background: var(--terracotta);
+      border-radius: 1px; display: inline-block;
+    }
+
+    /* =====================================================
+       PARISH FINDER CARD
+       ===================================================== */
+    .finder-card {
+      background: var(--white);
+      border: 1.5px solid var(--border-light);
+      border-radius: var(--r-xl);
+      overflow: hidden; margin-bottom: 28px;
+      box-shadow: var(--sh-sm);
+      transition: all var(--ease);
+    }
+
+    .finder-card:hover { box-shadow: var(--sh-md); }
+
+    .finder-head {
+      background: var(--ink);
+      padding: 20px 26px;
+      display: flex; align-items: center;
+      justify-content: space-between; gap: 16px;
+    }
+
+    .finder-head-text h3 {
+      font-family: var(--f-display);
+      font-size: 17px; font-weight: 700;
+      color: var(--white); margin-bottom: 3px;
+      letter-spacing: -0.01em;
+    }
+
+    .finder-head-text p { font-size: 12px; color: rgba(255,253,249,0.4); font-weight: 400; }
+
+    .finder-steps-mini {
+      display: flex; align-items: center; gap: 6px;
+      flex-shrink: 0;
+    }
+
+    .fsm-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: rgba(255,255,255,0.15);
+      transition: background var(--ease);
+    }
+
+    .fsm-dot.active { background: var(--terracotta); }
+    .fsm-dot.done   { background: var(--sage); }
+
+    .finder-body { padding: 26px; }
+
+    /* Cascade rows */
+    .cascade-row { display: none; margin-bottom: 18px; animation: fadeUp 0.2s ease; }
+    .cascade-row.visible { display: block; }
+
+    /* Found parish card */
+    .found-card {
+      display: none;
+      background: var(--success-pale);
+      border: 1.5px solid var(--success-border);
+      border-radius: var(--r-md);
+      padding: 20px 22px;
+      animation: fadeUp 0.22s ease;
+    }
+
+    .found-card.visible { display: block; }
+
+    .found-top {
+      display: flex; align-items: flex-start;
+      justify-content: space-between; gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .found-name {
+      font-family: var(--f-display);
+      font-size: 20px; font-weight: 700;
+      color: var(--ink); letter-spacing: -0.01em;
+    }
+
+    .found-badge {
+      font-size: 10px; font-weight: 700;
+      letter-spacing: 0.07em; text-transform: uppercase;
+      background: var(--sage); color: var(--white);
+      border-radius: var(--r-pill); padding: 4px 10px; flex-shrink: 0;
+    }
+
+    .found-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 10px 20px; margin-bottom: 14px;
+    }
+
+    @media (max-width: 480px) { .found-grid { grid-template-columns: 1fr; } }
+
+    .found-field { display: flex; flex-direction: column; gap: 2px; }
+
+    .found-label {
+      font-size: 10px; font-weight: 700;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--text-light);
+    }
+
+    .found-value { font-size: 13px; color: var(--ink); font-weight: 500; }
+
+    .found-note {
+      font-size: 13px; color: var(--sage);
+      padding-top: 12px; border-top: 1px solid rgba(74,124,89,0.18);
+      display: flex; align-items: center; gap: 6px;
+      font-weight: 500;
+    }
+
+    .not-listed { font-size: 13px; color: var(--text-mid); margin-top: 12px; display: none; }
+    .not-listed.visible { display: block; }
+    .not-listed a { color: var(--terracotta); font-weight: 600; cursor: pointer; }
+
+    /* Autocomplete dropdown */
+    .ac-wrap { position: relative; }
+
+    .ac-list {
+      position: absolute; top: calc(100% + 4px); left: 0; right: 0;
+      background: var(--white);
+      border: 1.5px solid var(--border);
+      border-radius: var(--r-md);
+      box-shadow: var(--sh-lg);
+      z-index: 200; display: none; overflow: hidden;
+    }
+
+    .ac-list.open { display: block; animation: fadeUp 0.14s ease; }
+
+    .ac-item {
+      padding: 12px 16px; cursor: pointer;
+      border-bottom: 1px solid var(--border-light);
+      transition: background var(--ease);
+    }
+
+    .ac-item:last-of-type { border-bottom: none; }
+    .ac-item:hover, .ac-item.focused { background: var(--terra-pale); }
+
+    .ac-item-name { font-size: 14px; color: var(--ink); font-weight: 600; }
+    .ac-item-addr { font-size: 11px; color: var(--text-light); margin-top: 2px; font-weight: 400; }
+
+    .ac-powered {
+      padding: 7px 14px; font-size: 10px;
+      color: var(--text-light); text-align: right;
+      background: var(--cream); letter-spacing: 0.03em;
+    }
+
+    /* =====================================================
+       STANDARD FIELDS
+       ===================================================== */
+    .field-row { display: grid; gap: 18px; margin-bottom: 18px; }
+    .field-row.cols-2 { grid-template-columns: 1fr 1fr; }
+    .field-row.cols-3 { grid-template-columns: 1fr 1fr 1fr; }
+    .field-row.cols-1 { grid-template-columns: 1fr; }
+
+    @media (max-width: 540px) {
+      .field-row.cols-2,
+      .field-row.cols-3 { grid-template-columns: 1fr; }
+    }
+
+    .field { display: flex; flex-direction: column; gap: 6px; }
+
+    .field label {
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 0.07em; text-transform: uppercase;
+      color: var(--text-mid);
+    }
+
+    .field label .req { color: var(--terracotta); margin-left: 2px; }
+
+    .field input,
+    .field select,
+    .field textarea {
+      font-family: var(--f-body);
+      font-size: 14px; font-weight: 400;
+      color: var(--ink);
+      background: var(--white);
+      border: 1.5px solid var(--border);
+      border-radius: var(--r-md);
+      padding: 11px 15px;
+      transition: border-color var(--ease), box-shadow var(--ease);
+      outline: none; -webkit-appearance: none; width: 100%;
+    }
+
+    .field input::placeholder,
+    .field textarea::placeholder { color: var(--text-light); }
+
+    .field input:focus,
+    .field select:focus,
+    .field textarea:focus {
+      border-color: var(--terracotta);
+      box-shadow: 0 0 0 3px var(--terra-dim);
+    }
+
+    .field input.prefilled,
+    .field select.prefilled,
+    .field textarea.prefilled {
+      background: var(--terra-pale);
+      border-color: rgba(200,92,58,0.35);
+      color: var(--ink);
+    }
+
+    .field select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='7' viewBox='0 0 11 7'%3E%3Cpath d='M1 1l4.5 4.5L10 1' fill='none' stroke='%239c8b78' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 13px center;
+      padding-right: 36px; cursor: pointer;
+    }
+
+    .field textarea { resize: vertical; min-height: 100px; line-height: 1.65; }
+
+    .field-hint { font-size: 12px; color: var(--text-light); font-weight: 400; line-height: 1.5; }
+
+    .prefill-tag {
+      display: inline-flex; align-items: center; gap: 3px;
+      font-size: 10px; font-weight: 700;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      color: var(--sage); background: var(--sage-pale);
+      border: 1px solid var(--sage-light);
+      border-radius: var(--r-pill); padding: 2px 8px;
+    }
+
+    /* Section titles within panels */
+    .sec-title {
+      font-size: 13px; font-weight: 700;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      color: var(--terracotta);
+      margin: 32px 0 8px;
+      display: flex; align-items: center; gap: 10px;
+    }
+
+    .sec-title::before {
+      content: '';
+      display: block; width: 16px; height: 2px;
+      background: var(--terracotta); border-radius: 1px; flex-shrink: 0;
+    }
+
+    /* =====================================================
+       FOCUS AREA CHECKBOXES
+       ===================================================== */
+    .focus-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(185px, 1fr));
+      gap: 8px; margin-bottom: 20px;
+    }
+
+    .focus-opt { position: relative; }
+    .focus-opt input[type="checkbox"] { position: absolute; opacity: 0; width: 0; height: 0; }
+
+    .focus-opt label {
+      display: flex; align-items: center; gap: 9px;
+      padding: 10px 14px;
+      background: var(--white); border: 1.5px solid var(--border-light);
+      border-radius: var(--r-md); cursor: pointer;
+      transition: all var(--ease);
+      font-size: 13px; font-weight: 500; color: var(--text-mid);
+      text-transform: none; letter-spacing: 0;
+    }
+
+    .focus-opt label::before {
+      content: '';
+      width: 15px; height: 15px; flex-shrink: 0;
+      border: 1.5px solid var(--border);
+      border-radius: 4px; transition: all var(--ease);
+    }
+
+    .focus-opt input:checked + label {
+      border-color: #d85020;
+      background: #fff0ea;
+      color: var(--ink);
+    }
+
+    .focus-opt input:checked + label::before {
+      background: var(--terracotta); border-color: var(--terracotta);
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='9' height='7' viewBox='0 0 9 7'%3E%3Cpath d='M1 3.5l2.5 2.5 5-5' fill='none' stroke='%23fff' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: center;
+    }
+
+    /* =====================================================
+       DONATION SETUP PANEL (Step 4)
+       ===================================================== */
+    .donation-toggle-wrap {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 12px; margin-bottom: 24px;
+    }
+
+    @media (max-width: 480px) { .donation-toggle-wrap { grid-template-columns: 1fr; } }
+
+    .donation-opt { position: relative; }
+    .donation-opt input[type="radio"] { position: absolute; opacity: 0; width: 0; height: 0; }
+
+    .donation-opt label {
+      display: flex; flex-direction: column;
+      padding: 20px 22px;
+      background: var(--white); border: 1.5px solid var(--border-light);
+      border-radius: var(--r-xl); cursor: pointer;
+      transition: all var(--ease);
+      height: 100%;
+    }
+
+    .donation-opt input:checked + label {
+      border-color: var(--terracotta);
+      background: var(--terra-pale);
+      box-shadow: var(--sh-sm);
+    }
+
+    .donation-opt label .do-icon { font-size: 28px; margin-bottom: 10px; }
+
+    .donation-opt label .do-title {
+      font-size: 16px; font-weight: 700; color: var(--ink);
+      margin-bottom: 6px; letter-spacing: -0.01em;
+    }
+
+    .donation-opt label .do-desc {
+      font-size: 13px; color: var(--text-mid);
+      font-weight: 400; line-height: 1.6;
+    }
+
+    .donation-opt input:checked + label .do-title { color: var(--ink); }
+    .donation-opt input:checked + label .do-desc  { color: var(--text-mid); }
+
+    /* Expandable donation config */
+    .donation-config { display: none; animation: fadeUp 0.22s ease; }
+    .donation-config.visible { display: block; }
+
+    /* Fee explainer — same dark card as donation-card in communio */
+    .fee-explainer {
+      background: var(--ink);
+      border-radius: var(--r-xl);
+      padding: 28px 30px;
+      margin-bottom: 24px;
+      position: relative; overflow: hidden;
+    }
+
+    .fee-explainer::before {
+      content: '';
+      position: absolute; top: -60px; right: -60px;
+      width: 250px; height: 250px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(200,92,58,0.12) 0%, transparent 70%);
+    }
+
+    .fee-ex-title {
+      font-family: var(--f-display);
+      font-size: 15px; font-weight: 700;
+      color: var(--white); margin-bottom: 20px;
+      position: relative; z-index: 1;
+      letter-spacing: -0.01em;
+    }
+
+    .fee-flow {
+      display: flex; align-items: stretch; gap: 0;
+      border-radius: var(--r-md); overflow: hidden;
+      margin-bottom: 16px; position: relative; z-index: 1;
+    }
+
+    .fee-node {
+      flex: 1; padding: 14px 10px; text-align: center;
+      background: rgba(255,255,255,0.06);
+      border-right: 1px solid rgba(255,255,255,0.07);
+    }
+
+    .fee-node:last-child { border-right: none; }
+
+    .fee-node-label {
+      font-size: 10px; font-weight: 700;
+      letter-spacing: 0.07em; text-transform: uppercase;
+      color: rgba(255,255,255,0.3); margin-bottom: 6px;
+    }
+
+    .fee-node-amount { font-size: 20px; font-weight: 800; letter-spacing: -0.02em; }
+    .fee-node-sub    { font-size: 11px; margin-top: 2px; }
+
+    .fee-node.donor  .fee-node-amount { color: var(--white); }
+    .fee-node.parish .fee-node-amount { color: var(--sage-light); }
+    .fee-node.dcf    .fee-node-amount { color: var(--terra-light); }
+    .fee-node.stripe .fee-node-amount { color: #a8a3ff; }
+
+    .fee-node.donor  .fee-node-sub { color: rgba(255,255,255,0.35); }
+    .fee-node.parish .fee-node-sub { color: rgba(106,158,120,0.6); }
+    .fee-node.dcf    .fee-node-sub { color: rgba(232,133,106,0.55); }
+    .fee-node.stripe .fee-node-sub { color: rgba(168,163,255,0.6); }
+
+    .fee-note {
+      font-size: 13px; color: rgba(255,253,249,0.4);
+      line-height: 1.65; position: relative; z-index: 1;
+    }
+
+    .fee-note strong { color: var(--terra-light); font-weight: 600; }
+
+    /* Stripe connect section */
+    .stripe-connect-section {
+      background: var(--white);
+      border: 1.5px solid var(--border-light);
+      border-radius: var(--r-xl);
+      padding: 24px 26px;
+      margin-bottom: 20px;
+    }
+
+    .stripe-connect-section h4 {
+      font-family: var(--f-display);
+      font-size: 18px; font-weight: 700;
+      color: var(--ink); margin-bottom: 6px;
+      letter-spacing: -0.01em;
+    }
+
+    .stripe-connect-section p {
+      font-size: 14px; color: var(--text-mid);
+      font-weight: 400; line-height: 1.65; margin-bottom: 20px;
+    }
+
+    .btn-stripe-connect {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--stripe-purple);
+      color: var(--white);
+      border: none; border-radius: var(--r-pill);
+      padding: 13px 24px;
+      font-family: var(--f-body);
+      font-size: 14px; font-weight: 600;
+      cursor: pointer;
+      transition: all var(--ease);
+    }
+
+    .btn-stripe-connect:hover {
+      background: #4f46e5;
+      transform: translateY(-1px);
+      box-shadow: var(--sh-md);
+    }
+
+    .btn-stripe-connect svg { width: 18px; height: 18px; flex-shrink: 0; }
+
+    .stripe-connected-state {
+      display: none;
+      background: var(--success-pale);
+      border: 1.5px solid var(--success-border);
+      border-radius: var(--r-md);
+      padding: 14px 18px;
+      align-items: center; gap: 12px;
+      font-size: 14px; font-weight: 600;
+      color: var(--success);
+    }
+
+    .stripe-connected-state.visible {
+      display: flex; animation: fadeUp 0.2s ease;
+    }
+
+    .donation-prefs { display: none; }
+    .donation-prefs.visible { display: block; }
+
+    /* Suggested giving amounts builder */
+    .amounts-wrap { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 8px; }
+
+    .amount-pill {
+      display: flex; align-items: center; gap: 0;
+      background: var(--white); border: 1.5px solid var(--border);
+      border-radius: var(--r-pill); overflow: hidden;
+      font-size: 13px;
+    }
+
+    .amount-pill-val { padding: 6px 12px; font-weight: 600; color: var(--ink); }
+
+    .amount-pill-remove {
+      padding: 6px 10px 6px 4px;
+      color: var(--text-light); cursor: pointer;
+      background: none; border: none; font-size: 14px; line-height: 1;
+      transition: color var(--ease);
+    }
+
+    .amount-pill-remove:hover { color: var(--error); }
+
+    /* =====================================================
+       REVIEW PANEL (Step 5)
+       ===================================================== */
+    .review-card {
+      background: var(--white); border: 1.5px solid var(--border-light);
+      border-radius: var(--r-xl); overflow: hidden; margin-bottom: 14px;
+      transition: all var(--ease);
+    }
+
+    .review-card:hover { box-shadow: var(--sh-sm); }
+
+    .rc-head {
+      background: var(--ink); padding: 14px 22px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+
+    .rc-head h3 {
+      font-family: var(--f-display);
+      font-size: 15px; font-weight: 700;
+      color: var(--white); letter-spacing: -0.01em;
+    }
+
+    .btn-edit {
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      color: var(--terra-light); background: none; border: none;
+      cursor: pointer; font-family: var(--f-body); padding: 0;
+      transition: color var(--ease);
+    }
+
+    .btn-edit:hover { color: var(--white); }
+
+    .rc-body {
+      padding: 20px 22px;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
+    }
+
+    @media (max-width: 480px) { .rc-body { grid-template-columns: 1fr; } }
+
+    .rv { display: flex; flex-direction: column; gap: 3px; }
+
+    .rv-l {
+      font-size: 10px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.08em;
+      color: var(--text-light);
+    }
+
+    .rv-v { font-size: 14px; font-weight: 500; color: var(--ink); }
+
+    .rv-source { font-size: 11px; color: var(--sage); font-weight: 600; }
+
+    /* Donation status in review */
+    .donation-status-badge {
+      display: inline-flex; align-items: center; gap: 5px;
+      font-size: 12px; font-weight: 600;
+      padding: 5px 12px; border-radius: var(--r-pill);
+    }
+
+    .dsb-active {
+      background: var(--success-pale);
+      color: var(--success);
+      border: 1px solid var(--success-border);
+    }
+
+    .dsb-later {
+      background: var(--terra-pale);
+      color: var(--terracotta);
+      border: 1px solid rgba(200,92,58,0.3);
+    }
+
+    /* Notices */
+    .notice {
+      border-radius: var(--r-lg);
+      padding: 16px 20px;
+      font-size: 14px; line-height: 1.65;
+      margin-bottom: 14px;
+    }
+
+    .notice-privacy {
+      background: var(--cream);
+      border: 1.5px solid var(--border);
+      color: var(--text-mid);
+    }
+
+    .notice-privacy strong { font-weight: 700; color: var(--ink); }
+    .notice-privacy a { color: var(--terracotta); }
+
+    .notice-mission {
+      background: var(--ink);
+      border: none;
+      color: rgba(255,253,249,0.45);
+    }
+
+    .notice-mission strong { color: var(--terra-light); font-weight: 600; }
+
+    /* =====================================================
+       NAV BUTTONS
+       ===================================================== */
+    .form-nav {
+      display: flex; align-items: center;
+      justify-content: space-between;
+      margin-top: 32px; padding-top: 22px;
+      border-top: 1px solid var(--border);
+      gap: 12px;
+    }
+
+    /* Primary button — matches Communio btn-main */
+    .btn {
+      font-family: var(--f-body);
+      font-size: 14px; font-weight: 700;
+      border: none; border-radius: var(--r-pill);
+      padding: 14px 28px; cursor: pointer;
+      transition: all var(--ease);
+      display: inline-flex; align-items: center; gap: 8px;
+      letter-spacing: 0;
+    }
+
+    .btn svg { width: 15px; height: 15px; flex-shrink: 0; }
+
+    .btn-primary {
+      background: #d85020; color: #ffffff;
+      box-shadow: 0 4px 20px rgba(200,92,58,0.25);
+    }
+
+    .btn-primary:hover {
+      background: #f07040;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(200,92,58,0.35);
+    }
+
+    .btn-ghost {
+      background: transparent; color: var(--text-mid);
+      border: 1.5px solid var(--border);
+    }
+
+    .btn-ghost:hover { border-color: var(--ink); color: var(--ink); }
+
+    .btn-submit {
+      background: #000000; color: #ffffff;
+      padding: 16px 36px; font-size: 15px;
+    }
+
+    .btn-submit:hover {
+      background: var(--ink-soft);
+      transform: translateY(-2px);
+      box-shadow: var(--sh-lg);
+    }
+
+    .btn-skip {
+      background: none; border: none; cursor: pointer;
+      font-family: var(--f-body); font-size: 13px;
+      font-weight: 500; color: var(--text-light);
+      text-decoration: underline; padding: 0;
+    }
+
+    .btn-skip:hover { color: var(--text-mid); }
+
+    /* =====================================================
+       SUCCESS STATE
+       ===================================================== */
+    .success-panel {
+      display: none; text-align: center; padding: 80px 32px;
+    }
+
+    .success-panel.active { display: block; animation: fadeUp 0.4s ease; }
+
+    .success-icon {
+      width: 80px; height: 80px; border-radius: 50%;
+      background: var(--sage-pale); border: 2px solid var(--sage-light);
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 28px;
+    }
+
+    .success-icon svg { width: 36px; height: 36px; color: var(--sage); }
+
+    .success-panel h2 {
+      font-family: var(--f-display);
+      font-size: 40px; font-weight: 800;
+      color: var(--ink); margin-bottom: 14px;
+      letter-spacing: -0.025em;
+    }
+
+    .success-panel .success-sub {
+      font-size: 16px; font-weight: 400;
+      color: var(--text-mid); max-width: 520px;
+      margin: 0 auto 10px; line-height: 1.72;
+    }
+
+    .success-next {
+      margin-top: 36px;
+      display: inline-flex; flex-direction: column;
+      gap: 12px; text-align: left;
+      background: var(--white); border: 1.5px solid var(--border-light);
+      border-radius: var(--r-xl); padding: 24px 28px;
+      max-width: 440px; width: 100%;
+    }
+
+    .success-next-title {
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 0.09em; text-transform: uppercase;
+      color: var(--text-light); margin-bottom: 4px;
+    }
+
+    .sn-item {
+      display: flex; align-items: flex-start; gap: 12px;
+      font-size: 14px; color: var(--text-mid); font-weight: 400;
+    }
+
+    .sn-dot {
+      width: 22px; height: 22px; border-radius: 50%;
+      background: var(--terra-pale); border: 1.5px solid rgba(200,92,58,0.3);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 10px; font-weight: 800; color: var(--terracotta);
+      flex-shrink: 0; margin-top: 1px;
+    }
+
+    /* =====================================================
+       FOOTER — matches Communio footer exactly
+       ===================================================== */
+    .page-footer {
+      background: var(--ink);
+      padding: 32px 64px;
+      display: flex; align-items: center;
+      justify-content: space-between; gap: 20px; flex-wrap: wrap;
+    }
+
+    @media (max-width: 600px) { .page-footer { padding: 24px 20px; } }
+
+    .footer-left { display: flex; align-items: center; gap: 12px; }
+
+    .footer-mark {
+      width: 32px; height: 32px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    .footer-name { font-size: 17px; font-weight: 700; color: var(--white); }
+
+    .footer-sub {
+      font-size: 12px; color: rgba(255,253,249,0.28); margin-top: 2px;
+    }
+
+    .footer-links { display: flex; gap: 20px; flex-wrap: wrap; }
+
+    .footer-links a {
+      font-size: 13px; color: rgba(255,253,249,0.35);
+      text-decoration: none; transition: color var(--ease); font-weight: 400;
+    }
+
+    .footer-links a:hover { color: rgba(255,253,249,0.8); }
+
+    @media (max-width: 640px) {
+      .page-footer { flex-direction: column; align-items: flex-start; gap: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================================
+       NAV — identical to Communio landing page
+       ============================================================ -->
+  <nav class="nav">
+    <a href="communio.html" class="nav-brand">
+      <div class="nav-mark">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <circle cx="8" cy="8" r="3" fill="white"/>
+          <path d="M8 1v3M8 12v3M1 8h3M12 8h3" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="nav-name">Commun<span>io</span></div>
+    </a>
+    <div class="nav-links">
+      <a href="communio.html#how-it-works" class="nav-link">How it works</a>
+      <a href="communio.html#features" class="nav-link">Features</a>
+      <a href="communio.html#pricing" class="nav-link">Pricing</a>
+    </div>
+    <a href="communio.html" class="nav-back">
+      <svg viewBox="0 0 16 16" fill="none"><path d="M13 8H3M7 12l-4-4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Back to Communio
+    </a>
+  </nav>
+
+  <!-- ============================================================
+       PAGE HEADER
+       ============================================================ -->
+  <header class="page-header">
+    <div class="header-inner">
+
+      <div class="header-brand">
+        <div class="header-brand-mark">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <circle cx="8" cy="8" r="3" fill="white"/>
+            <path d="M8 1v3M8 12v3M1 8h3M12 8h3" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="header-brand-name">Commun<span>io</span></div>
+      </div>
+
+      <div class="header-tag">Join Communio — it's free</div>
+
+      <h1 class="header-title">
+        Give your parish<br>a <em>global voice</em>
+      </h1>
+
+      <p class="header-desc">Register in minutes. We look up what we can so you don't have to type it all out. Once approved by DCF, your parish is live on the world map, connected to thousands of communities, and ready to receive donations online.</p>
+
+      <div class="header-pills">
+        <div class="h-pill"><div class="h-pill-dot"></div>Free to join</div>
+        <div class="h-pill"><div class="h-pill-dot"></div>Parish website included</div>
+        <div class="h-pill"><div class="h-pill-dot"></div>Online donations in minutes</div>
+        <div class="h-pill"><div class="h-pill-dot"></div>No technical knowledge needed</div>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ============================================================
+       PROGRESS BAR
+       ============================================================ -->
+  <nav class="progress-wrap" aria-label="Registration progress">
+    <div class="progress-inner">
+      <div class="prog-step active" id="prog-1">
+        <div class="prog-num" id="pnum-1">1</div>
+        <span class="prog-label">Find parish</span>
+      </div>
+      <div class="prog-step" id="prog-2">
+        <div class="prog-num" id="pnum-2">2</div>
+        <span class="prog-label">Your details</span>
+      </div>
+      <div class="prog-step" id="prog-3">
+        <div class="prog-num" id="pnum-3">3</div>
+        <span class="prog-label">Mission</span>
+      </div>
+      <div class="prog-step" id="prog-4">
+        <div class="prog-num" id="pnum-4">4</div>
+        <span class="prog-label">Donations</span>
+      </div>
+      <div class="prog-step" id="prog-5">
+        <div class="prog-num" id="pnum-5">5</div>
+        <span class="prog-label">Review</span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ============================================================
+       FORM
+       PHP: action="parish-register-process.php" method="POST"
+       ============================================================ -->
+  <main class="form-outer">
+  <form id="reg-form" action="parish-register-process.php" method="POST" novalidate>
+
+    <!-- Honeypot: PHP die() if this is not empty -->
+    <input type="text" name="_hp" style="display:none" tabindex="-1" autocomplete="off">
+
+    <!-- CSRF: PHP inject token -->
+    <input type="hidden" name="csrf_token" id="csrf-token" value="">
+
+    <!-- Structured data from Google Places / autocomplete -->
+    <!-- PHP: these are the authoritative data fields for the dataset -->
+    <input type="hidden" name="google_place_id"  id="h-place-id">
+    <input type="hidden" name="parish_lat"        id="h-lat">
+    <input type="hidden" name="parish_lng"        id="h-lng">
+    <input type="hidden" name="formatted_address" id="h-formatted-address">
+    <input type="hidden" name="data_source"       id="h-source" value="manual">
+    <input type="hidden" name="stripe_account_id" id="h-stripe-account">
+    <input type="hidden" name="donation_enabled"  id="h-donation-enabled" value="0">
+    <input type="hidden" name="platform_fee_pct"  id="h-fee-pct" value="1.0">
+
+    <!-- ===========================================================
+         STEP 1 — Find Your Parish
+         =========================================================== -->
+    <section class="panel active" id="panel-1" aria-labelledby="s1-title">
+
+      <div class="panel-head">
+        <h2 id="s1-title">Find your parish</h2>
+        <p>Choose your country and diocese, then search for your parish by name. We'll pre-fill everything we can find.</p>
+      </div>
+
+      <!-- PARISH FINDER CARD -->
+      <div class="finder-card">
+        <div class="finder-head">
+          <div class="finder-head-text">
+            <h3>Parish lookup</h3>
+            <p>Select country and diocese, then search — takes under a minute</p>
+          </div>
+          <div class="finder-steps-mini">
+            <div class="fsm-dot active" id="fd1"></div>
+            <div class="fsm-dot" id="fd2"></div>
+            <div class="fsm-dot" id="fd3"></div>
+          </div>
+        </div>
+
+        <div class="finder-body">
+
+          <!-- Finder step 1: Country -->
+          <div class="cascade-row visible" id="cr-country">
+            <div class="field">
+              <label for="country">Country <span class="req">*</span></label>
+              <select id="country" name="country" required onchange="onCountryChange(this.value)">
+                <option value="" disabled selected>Select your country</option>
+                <option value="US">United States</option>
+                <option value="HU">Hungary</option>
+                <option value="GB">United Kingdom</option>
+                <option value="GH">Ghana</option>
+                <option value="IT">Italy</option>
+                <option value="PH">Philippines</option>
+                <option value="BR">Brazil</option>
+                <option value="NG">Nigeria</option>
+                <option value="IN">India</option>
+                <option value="PL">Poland</option>
+                <option value="DE">Germany</option>
+                <option value="FR">France</option>
+                <option value="KE">Kenya</option>
+                <option value="ZA">South Africa</option>
+                <option value="AU">Australia</option>
+                <option value="CA">Canada</option>
+                <option value="MX">Mexico</option>
+                <option value="AR">Argentina</option>
+                <option value="OTHER">Other</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Finder step 2: Diocese -->
+          <div class="cascade-row" id="cr-diocese">
+            <div class="field">
+              <label for="diocese">Diocese <span class="req">*</span></label>
+              <select id="diocese" name="diocese" required onchange="onDioceseChange(this.value)">
+                <option value="" disabled selected>Select your diocese</option>
+                <!-- PHP: populate from database filtered by country -->
+                <!-- JS: in the mockup this is populated by onCountryChange() -->
+              </select>
+              <span class="field-hint">Can't find your diocese? <a href="#" style="color:var(--terracotta); font-weight:600;">Type it manually</a></span>
+            </div>
+          </div>
+
+          <!-- Finder step 3: Parish search -->
+          <div class="cascade-row" id="cr-parish">
+            <div class="field">
+              <label for="parish-search">Search for your parish <span class="req">*</span></label>
+              <div class="ac-wrap">
+                <input
+                  type="text"
+                  id="parish-search"
+                  placeholder="Start typing your parish name..."
+                  autocomplete="off"
+                  oninput="onParishSearch(this.value)"
+                  onkeydown="onSearchKeydown(event)"
+                >
+                <div class="ac-list" id="ac-list" role="listbox">
+                  <!-- JS populates these — in production: Google Places API -->
+                  <div class="ac-powered">Powered by Google Places</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Found parish card — shown when selection is made -->
+          <div class="found-card" id="found-card">
+            <div class="found-top">
+              <div class="found-name" id="found-name">—</div>
+              <div class="found-badge">Parish found</div>
+            </div>
+            <div class="found-grid">
+              <div class="found-field">
+                <div class="found-label">Address</div>
+                <div class="found-value" id="found-address">—</div>
+              </div>
+              <div class="found-field">
+                <div class="found-label">City</div>
+                <div class="found-value" id="found-city">—</div>
+              </div>
+              <div class="found-field">
+                <div class="found-label">Country</div>
+                <div class="found-value" id="found-country-label">—</div>
+              </div>
+              <div class="found-field">
+                <div class="found-label">Phone</div>
+                <div class="found-value" id="found-phone">—</div>
+              </div>
+              <div class="found-field">
+                <div class="found-label">Website</div>
+                <div class="found-value" id="found-website">—</div>
+              </div>
+              <div class="found-field">
+                <div class="found-label">Data source</div>
+                <div class="found-value" id="found-source">Google Places</div>
+              </div>
+            </div>
+            <div class="found-note">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                <circle cx="7" cy="7" r="6" stroke="var(--success)" stroke-width="1.2"/>
+                <path d="M4.5 7l2 2 3-3" stroke="var(--success)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              Pre-filled from Google Places. You can correct any details in the next step.
+            </div>
+          </div>
+
+          <!-- Not listed link -->
+          <div class="not-listed" id="not-listed">
+            Parish not showing up? <a onclick="useManualEntry()">Enter details manually instead</a>
+          </div>
+
+        </div><!-- .finder-body -->
+      </div><!-- .finder-card -->
+
+      <!-- Manual fallback fields (hidden unless "not listed" is clicked) -->
+      <div id="manual-entry" style="display:none; animation: fadeUp 0.2s ease;">
+        <div class="field-row cols-1">
+          <div class="field">
+            <label for="parish_name_manual">Parish name <span class="req">*</span></label>
+            <input type="text" id="parish_name_manual" name="parish_name" placeholder="e.g. St. Mary's Parish">
+          </div>
+        </div>
+        <div class="field-row cols-2">
+          <div class="field">
+            <label for="city_manual">City / Town <span class="req">*</span></label>
+            <input type="text" id="city_manual" name="city" placeholder="e.g. Budapest">
+          </div>
+          <div class="field">
+            <label for="address_manual">Street address</label>
+            <input type="text" id="address_manual" name="address" placeholder="Street address">
+          </div>
+        </div>
+      </div>
+
+      <!-- Parish supplementary info (always shown on step 1) -->
+      <div class="field-row cols-2" style="margin-top: 4px;">
+        <div class="field">
+          <label for="year_founded">Year founded</label>
+          <input type="number" id="year_founded" name="year_founded" placeholder="e.g. 1890" min="100" max="2025">
+        </div>
+        <div class="field">
+          <label for="congregation_size">Approximate congregation size</label>
+          <select id="congregation_size" name="congregation_size">
+            <option value="" disabled selected>Select range</option>
+            <option value="under_50">Under 50</option>
+            <option value="50_200">50 – 200</option>
+            <option value="200_500">200 – 500</option>
+            <option value="500_1000">500 – 1,000</option>
+            <option value="over_1000">Over 1,000</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field-row cols-1">
+        <div class="field">
+          <label for="primary_language">Primary language of worship <span class="req">*</span></label>
+          <select id="primary_language" name="primary_language" required>
+            <option value="" disabled selected>Select language</option>
+            <option value="en">English</option>
+            <option value="hu">Hungarian</option>
+            <option value="es">Spanish</option>
+            <option value="fr">French</option>
+            <option value="pt">Portuguese</option>
+            <option value="it">Italian</option>
+            <option value="de">German</option>
+            <option value="pl">Polish</option>
+            <option value="sw">Swahili</option>
+            <option value="tl">Tagalog</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-nav">
+        <span></span>
+        <button type="button" class="btn btn-primary" onclick="nextStep(1)">
+          Continue
+          <svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+
+    </section>
+
+    <!-- ===========================================================
+         STEP 2 — Contact Person & Parish Details
+         PHP fields: contact_first_name, contact_last_name, contact_role,
+                     contact_email, contact_phone, website_url,
+                     contact_email_public
+         =========================================================== -->
+    <section class="panel" id="panel-2" aria-labelledby="s2-title">
+
+      <div class="panel-head">
+        <h2 id="s2-title">Your contact details</h2>
+        <p>The person who registers manages the parish account. Your details are private unless you choose to share them.</p>
+      </div>
+
+      <div class="field-row cols-2">
+        <div class="field">
+          <label for="contact_first_name">First name <span class="req">*</span></label>
+          <input type="text" id="contact_first_name" name="contact_first_name" required autocomplete="given-name" placeholder="First name">
+        </div>
+        <div class="field">
+          <label for="contact_last_name">Last name <span class="req">*</span></label>
+          <input type="text" id="contact_last_name" name="contact_last_name" required autocomplete="family-name" placeholder="Last name">
+        </div>
+      </div>
+
+      <div class="field-row cols-2">
+        <div class="field">
+          <label for="contact_role">Your role in the parish <span class="req">*</span></label>
+          <select id="contact_role" name="contact_role" required>
+            <option value="" disabled selected>Select role</option>
+            <option value="pastor">Pastor / Parish Priest</option>
+            <option value="deacon">Deacon</option>
+            <option value="administrator">Parish Administrator</option>
+            <option value="council_member">Parish Council Member</option>
+            <option value="communications">Communications / Media</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="contact_phone">Phone number</label>
+          <input type="tel" id="contact_phone" name="contact_phone" placeholder="+1 (555) 000-0000" autocomplete="tel">
+        </div>
+      </div>
+
+      <div class="field-row cols-1">
+        <div class="field">
+          <label for="contact_email">Email address <span class="req">*</span></label>
+          <input type="email" id="contact_email" name="contact_email" required autocomplete="email" placeholder="your@parish.org">
+          <span class="field-hint">Your approval notification will be sent here — this address is private</span>
+        </div>
+      </div>
+
+      <div class="field-row cols-2">
+        <div class="field">
+          <label for="contact_email_public">Public contact email <span style="font-weight:400;text-transform:none;letter-spacing:0">(optional)</span></label>
+          <input type="email" id="contact_email_public" name="contact_email_public" placeholder="info@stmarys.org">
+          <span class="field-hint">Shown on your public parish profile — leave blank to use the email above</span>
+        </div>
+        <div class="field">
+          <label for="website_url">
+            Parish website
+            <span id="website-prefill-tag" class="prefill-tag" style="display:none">
+              <svg width="9" height="7" viewBox="0 0 9 7" fill="none"><path d="M1 3.5l2.5 2.5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Pre-filled
+            </span>
+          </label>
+          <input type="url" id="website_url" name="website_url" placeholder="https://...">
+          <span class="field-hint">Your existing website — if you don't have one, Communio will build you one</span>
+        </div>
+      </div>
+
+      <div class="form-nav">
+        <button type="button" class="btn btn-ghost" onclick="prevStep(2)">
+          <svg viewBox="0 0 16 16" fill="none"><path d="M13 8H3M7 12l-4-4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Back
+        </button>
+        <button type="button" class="btn btn-primary" onclick="nextStep(2)">
+          Continue
+          <svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+
+    </section>
+
+    <!-- ===========================================================
+         STEP 3 — Mission & Focus
+         PHP fields: parish_description, focus_areas[] (array),
+                     ai_interest, how_heard
+         =========================================================== -->
+    <section class="panel" id="panel-3" aria-labelledby="s3-title">
+
+      <div class="panel-head">
+        <h2 id="s3-title">Your mission &amp; focus</h2>
+        <p>Help other parishes find you and understand what your community stands for. This builds your public Communio profile.</p>
+      </div>
+
+      <div class="field-row cols-1">
+        <div class="field">
+          <label for="parish_description">About your parish <span class="req">*</span></label>
+          <textarea id="parish_description" name="parish_description" required maxlength="600" placeholder="Describe your community — your history, who you serve, what makes you distinct..."></textarea>
+          <span class="field-hint">Up to 600 characters — appears on your public Communio profile page</span>
+        </div>
+      </div>
+
+      <div class="sec-title">Areas of focus</div>
+      <p style="font-size:14px; color:var(--text-mid); margin-bottom:16px; font-weight:400;">Select everything that reflects your parish's priorities. This helps Communio connect you with like-minded communities.</p>
+
+      <!-- PHP: focus_areas[] submitted as an array -->
+      <div class="focus-grid">
+        <div class="focus-opt">
+          <input type="checkbox" id="f-peace" name="focus_areas[]" value="peace">
+          <label for="f-peace">Peace &amp; reconciliation</label>
+        </div>
+        <div class="focus-opt">
+          <input type="checkbox" id="f-tech" name="focus_areas[]" value="ethical_technology">
+          <label for="f-tech">Ethical technology</label>
+        </div>
+        <div class="focus-opt">
+          <input type="checkbox" id="f-edu" name="focus_areas[]" value="education">
+          <label for="f-edu">Education</label>
+        </div>
+        <div class="focus-opt">
+          <input type="checkbox" id="f-mentor" name="focus_areas[]" value="mentorship">
+          <label for="f-mentor">Mentorship &amp; formation</label>
+        </div>
+        <div class="focus-opt">
+          <input type="checkbox" id="f-research" name="focus_areas[]" value="research">
+          <label for="f-research">Research &amp; academia</label>
+        </div>
+        <div class="focus-opt">
+          <input type="checkbox" id="f-theology" name="focus_areas[]" value="theology">
+          <label for="f-theology">Theology &amp; philosophy</label>
+        </div>
+        <div class="focus-opt">
+          <input type="checkbox" id="f-social" name="focus_areas[]" value="social_justice">
+          <label for="f-social">Social justice</label>
+        </div>
+        <div class="focus-opt">
+          <input type="checkbox" id="f-digital" name="focus_areas[]" value="digital_sovereignty">
+          <label for="f-digital">Digital sovereignty</label>
+        </div>
+        <div class="focus-opt">
+          <input type="checkbox" id="f-youth" name="focus_areas[]" value="youth">
+          <label for="f-youth">Youth ministry</label>
+        </div>
+        <div class="focus-opt">
+          <input type="checkbox" id="f-migration" name="focus_areas[]" value="migration">
+          <label for="f-migration">Migration &amp; refugees</label>
+        </div>
+        <div class="focus-opt">
+          <input type="checkbox" id="f-env" name="focus_areas[]" value="environment">
+          <label for="f-env">Creation &amp; environment</label>
+        </div>
+        <div class="focus-opt">
+          <input type="checkbox" id="f-health" name="focus_areas[]" value="healthcare">
+          <label for="f-health">Healthcare &amp; wellbeing</label>
+        </div>
+      </div>
+
+      <div class="field-row cols-1">
+        <div class="field">
+          <label for="ai_interest">How does your parish think about AI and technology?</label>
+          <textarea id="ai_interest" name="ai_interest" style="min-height:80px" placeholder="Even a few sentences — we want to understand your community's perspective..."></textarea>
+          <span class="field-hint">Optional — connects you with like-minded parishes on the Communio network</span>
+        </div>
+      </div>
+
+      <div class="field-row cols-1">
+        <div class="field">
+          <label for="how_heard">How did you hear about Communio?</label>
+          <select id="how_heard" name="how_heard">
+            <option value="" disabled selected>Select one</option>
+            <option value="communio_site">Communio website</option>
+            <option value="dcf_site">DCF website</option>
+            <option value="another_parish">From another parish</option>
+            <option value="social_media">Social media</option>
+            <option value="diocese">Our diocese</option>
+            <option value="news">News / press</option>
+            <option value="conference">Conference or event</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-nav">
+        <button type="button" class="btn btn-ghost" onclick="prevStep(3)">
+          <svg viewBox="0 0 16 16" fill="none"><path d="M13 8H3M7 12l-4-4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Back
+        </button>
+        <button type="button" class="btn btn-primary" onclick="nextStep(3)">
+          Continue
+          <svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+
+    </section>
+
+    <!-- ===========================================================
+         STEP 4 — Online Donations Setup
+         PHP fields: donation_enabled (0/1), stripe_account_id,
+                     platform_fee_pct, suggested_amounts,
+                     default_currency, donation_description
+         =========================================================== -->
+    <section class="panel" id="panel-4" aria-labelledby="s4-title">
+
+      <div class="panel-head">
+        <h2 id="s4-title">Online donations</h2>
+        <p>Accept donations directly from your Communio parish profile — funds go straight to your account. You can always set this up later from your dashboard.</p>
+      </div>
+
+      <!-- Fee explainer -->
+      <div class="fee-explainer">
+        <div class="fee-ex-title">How it works — transparent from day one</div>
+        <div class="fee-flow">
+          <div class="fee-node donor">
+            <div class="fee-node-label">Donor gives</div>
+            <div class="fee-node-amount">$100</div>
+            <div class="fee-node-sub">Total</div>
+          </div>
+          <div class="fee-node parish">
+            <div class="fee-node-label">Your parish receives</div>
+            <div class="fee-node-amount">$96.10</div>
+            <div class="fee-node-sub">96.1%</div>
+          </div>
+          <div class="fee-node dcf">
+            <div class="fee-node-label">Communio mission</div>
+            <div class="fee-node-amount">$1.00</div>
+            <div class="fee-node-sub">1% — funds DCF's global work</div>
+          </div>
+          <div class="fee-node stripe">
+            <div class="fee-node-label">Payment processing</div>
+            <div class="fee-node-amount">$2.90</div>
+            <div class="fee-node-sub">Stripe standard rate</div>
+          </div>
+        </div>
+        <div class="fee-note">
+          <strong>No hidden fees. No surprises.</strong> Every donation receipt shows this exact breakdown. Parishes receiving under $500/month pay no Communio fee — the 1% applies above that threshold. Larger parishes (&gt;$10k/month) receive a reduced rate of 0.75%.
+        </div>
+      </div>
+
+      <!-- Opt in / out -->
+      <div class="donation-toggle-wrap">
+        <div class="donation-opt">
+          <input type="radio" id="donate-yes" name="donation_setup" value="now" onchange="showDonationConfig(true)" checked>
+          <label for="donate-yes">
+            <span class="do-icon">💳</span>
+            <span class="do-title">Set up donations now</span>
+            <span class="do-desc">Takes about 5 minutes. Connects your parish bank account via Stripe. Donations go live the moment you're approved.</span>
+          </label>
+        </div>
+        <div class="donation-opt">
+          <input type="radio" id="donate-later" name="donation_setup" value="later" onchange="showDonationConfig(false)">
+          <label for="donate-later">
+            <span class="do-icon">⏱️</span>
+            <span class="do-title">Set up later</span>
+            <span class="do-desc">Skip for now. You'll find the donation setup in your Communio dashboard after approval — takes the same 5 minutes whenever you're ready.</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Donation config (shown when "now" is selected) -->
+      <div class="donation-config visible" id="donation-config">
+
+        <!-- Stripe Connect -->
+        <div class="stripe-connect-section">
+          <h4>Connect your bank account</h4>
+          <p>We use Stripe to handle payments securely. Clicking below opens Stripe's secure setup — you'll add your bank account details there, not here. DCF never sees your banking information.</p>
+
+          <!-- PHP: onclick → call /stripe/connect-onboard.php → redirect to Stripe link -->
+          <button type="button" class="btn-stripe-connect" id="stripe-connect-btn" onclick="simulateStripeConnect()">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z" stroke="white" stroke-width="1.5"/>
+              <path d="M9 12l2 2 4-4" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Connect with Stripe
+          </button>
+
+          <!-- Shown after successful Stripe Connect flow -->
+          <div class="stripe-connected-state" id="stripe-connected">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+              <circle cx="9" cy="9" r="8" stroke="currentColor" stroke-width="1.2"/>
+              <path d="M5.5 9l2.5 2.5 4.5-4.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Bank account connected — donations are ready to go live on approval.
+          </div>
+        </div>
+
+        <!-- Donation preferences (shown after Stripe connected) -->
+        <div class="donation-prefs" id="donation-prefs">
+
+          <div class="field-row cols-2">
+            <div class="field">
+              <label for="default_currency">Default currency</label>
+              <select id="default_currency" name="default_currency">
+                <option value="USD">USD — US Dollar</option>
+                <option value="EUR">EUR — Euro</option>
+                <option value="HUF">HUF — Hungarian Forint</option>
+                <option value="GBP">GBP — British Pound</option>
+                <option value="GHS">GHS — Ghanaian Cedi</option>
+                <option value="NGN">NGN — Nigerian Naira</option>
+                <option value="PHP">PHP — Philippine Peso</option>
+                <option value="BRL">BRL — Brazilian Real</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="donation_label">Donation button label</label>
+              <input type="text" id="donation_label" name="donation_label" value="Support our parish" placeholder="e.g. Support our parish">
+            </div>
+          </div>
+
+          <div class="field-row cols-1">
+            <div class="field">
+              <label for="donation_description">Short description for donors</label>
+              <input type="text" id="donation_description" name="donation_description"
+                placeholder="e.g. Your gift supports our community programmes and upkeep of our church">
+              <span class="field-hint">Shown above the donation form on your Communio parish profile page</span>
+            </div>
+          </div>
+
+          <div class="field-row cols-1">
+            <div class="field">
+              <label>Suggested giving amounts</label>
+              <div class="amounts-wrap" id="amounts-wrap">
+                <div class="amount-pill"><span class="amount-pill-val">$10</span><button type="button" class="amount-pill-remove" onclick="removeAmount(this)" title="Remove">×</button></div>
+                <div class="amount-pill"><span class="amount-pill-val">$25</span><button type="button" class="amount-pill-remove" onclick="removeAmount(this)" title="Remove">×</button></div>
+                <div class="amount-pill"><span class="amount-pill-val">$50</span><button type="button" class="amount-pill-remove" onclick="removeAmount(this)" title="Remove">×</button></div>
+                <div class="amount-pill"><span class="amount-pill-val">$100</span><button type="button" class="amount-pill-remove" onclick="removeAmount(this)" title="Remove">×</button></div>
+              </div>
+              <!-- Hidden input: PHP reads comma-separated values -->
+              <input type="hidden" name="suggested_amounts" id="suggested-amounts-hidden" value="10,25,50,100">
+              <div style="display:flex; gap:8px; margin-top:8px;">
+                <input type="number" id="amount-add-input" placeholder="Add amount" min="1" style="width:130px; font-family:var(--f-body); font-size:13px; padding:8px 12px; border:1.5px solid var(--border); border-radius:var(--r-md); outline:none; background:var(--white); color:var(--ink);" onkeydown="if(event.key==='Enter'){event.preventDefault();addAmount();}">
+                <button type="button" class="btn btn-ghost" style="padding:8px 18px; font-size:12px;" onclick="addAmount()">Add</button>
+              </div>
+              <span class="field-hint">These appear as quick-select buttons on your donation form — donors can always enter a custom amount</span>
+            </div>
+          </div>
+
+        </div><!-- .donation-prefs -->
+
+      </div><!-- .donation-config -->
+
+      <div class="form-nav">
+        <button type="button" class="btn btn-ghost" onclick="prevStep(4)">
+          <svg viewBox="0 0 16 16" fill="none"><path d="M13 8H3M7 12l-4-4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Back
+        </button>
+        <div style="display:flex; align-items:center; gap:16px;">
+          <button type="button" class="btn-skip" onclick="skipDonations()">Skip for now</button>
+          <button type="button" class="btn btn-primary" onclick="nextStep(4)">
+            Review application
+            <svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ===========================================================
+         STEP 5 — Review & Submit
+         =========================================================== -->
+    <section class="panel" id="panel-5" aria-labelledby="s5-title">
+
+      <div class="panel-head">
+        <h2 id="s5-title">Review your application</h2>
+        <p>Check everything below before submitting. Your application will be reviewed by the DCF team — you'll hear back within 3–5 business days.</p>
+      </div>
+
+      <!-- Parish info -->
+      <div class="review-card">
+        <div class="rc-head">
+          <h3>Parish information</h3>
+          <button type="button" class="btn-edit" onclick="goToStep(1)">Edit</button>
+        </div>
+        <div class="rc-body">
+          <div class="rv">
+            <div class="rv-l">Parish name</div>
+            <div class="rv-v" id="rv-name">—</div>
+            <div class="rv-source" id="rv-name-src"></div>
+          </div>
+          <div class="rv">
+            <div class="rv-l">Country</div>
+            <div class="rv-v" id="rv-country">—</div>
+          </div>
+          <div class="rv">
+            <div class="rv-l">Diocese</div>
+            <div class="rv-v" id="rv-diocese">—</div>
+          </div>
+          <div class="rv">
+            <div class="rv-l">City</div>
+            <div class="rv-v" id="rv-city">—</div>
+          </div>
+          <div class="rv">
+            <div class="rv-l">Address</div>
+            <div class="rv-v" id="rv-address">—</div>
+          </div>
+          <div class="rv">
+            <div class="rv-l">Language</div>
+            <div class="rv-v" id="rv-language">—</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Contact -->
+      <div class="review-card">
+        <div class="rc-head">
+          <h3>Contact person</h3>
+          <button type="button" class="btn-edit" onclick="goToStep(2)">Edit</button>
+        </div>
+        <div class="rc-body">
+          <div class="rv">
+            <div class="rv-l">Name</div>
+            <div class="rv-v" id="rv-contact-name">—</div>
+          </div>
+          <div class="rv">
+            <div class="rv-l">Role</div>
+            <div class="rv-v" id="rv-contact-role">—</div>
+          </div>
+          <div class="rv">
+            <div class="rv-l">Email (private)</div>
+            <div class="rv-v" id="rv-contact-email">—</div>
+          </div>
+          <div class="rv">
+            <div class="rv-l">Website</div>
+            <div class="rv-v" id="rv-website">—</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mission -->
+      <div class="review-card">
+        <div class="rc-head">
+          <h3>Mission &amp; focus</h3>
+          <button type="button" class="btn-edit" onclick="goToStep(3)">Edit</button>
+        </div>
+        <div class="rc-body" style="grid-template-columns:1fr;">
+          <div class="rv">
+            <div class="rv-l">Focus areas</div>
+            <div class="rv-v" id="rv-focus">—</div>
+          </div>
+          <div class="rv">
+            <div class="rv-l">Description</div>
+            <div class="rv-v" id="rv-description" style="white-space:pre-line; font-size:13px;">—</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Donations -->
+      <div class="review-card">
+        <div class="rc-head">
+          <h3>Online donations</h3>
+          <button type="button" class="btn-edit" onclick="goToStep(4)">Edit</button>
+        </div>
+        <div class="rc-body">
+          <div class="rv">
+            <div class="rv-l">Status</div>
+            <div class="rv-v" id="rv-donation-status">—</div>
+          </div>
+          <div class="rv" id="rv-currency-row" style="display:none">
+            <div class="rv-l">Currency</div>
+            <div class="rv-v" id="rv-currency">—</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Notices -->
+      <div class="notice notice-privacy">
+        <strong>Privacy &amp; data.</strong> Your registration data is stored securely and used only to process your application and populate your Communio parish profile. We never sell or share your information with third parties. Request deletion any time: <a href="mailto:privacy@dcffoundation.org">privacy@dcffoundation.org</a>
+      </div>
+
+      <div class="notice notice-mission">
+        <strong>You're building something that matters.</strong> Every parish that joins Communio strengthens the collective voice of communities who believe technology should serve human dignity. Your data contributes — anonymously — to DCF's global research and advocacy work.
+      </div>
+
+      <div class="form-nav">
+        <button type="button" class="btn btn-ghost" onclick="prevStep(5)">
+          <svg viewBox="0 0 16 16" fill="none"><path d="M13 8H3M7 12l-4-4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Back
+        </button>
+        <button type="submit" class="btn btn-submit" onclick="handleSubmit(event)">
+          Submit application
+          <svg viewBox="0 0 16 16" fill="none"><path d="M2 8h10M8 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+
+    </section>
+
+  </form><!-- #reg-form -->
+
+  <!-- ============================================================
+       SUCCESS STATE
+       PHP: render this instead of the form on successful POST
+       ============================================================ -->
+  <div class="success-panel" id="success-panel">
+    <div class="success-icon">
+      <svg viewBox="0 0 36 36" fill="none">
+        <path d="M7 18l8 8 14-14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <h2>Application received</h2>
+    <p class="success-sub">Thank you for joining Communio. Your application is now in review — we'll be in touch within 3–5 business days.</p>
+    <p class="success-sub" style="font-size:14px; margin-top:4px;">A confirmation has been sent to <strong id="success-email"></strong></p>
+
+    <div class="success-next">
+      <div class="success-next-title">What happens next</div>
+      <div class="sn-item">
+        <div class="sn-dot">1</div>
+        DCF reviews your application — usually within 3 business days
+      </div>
+      <div class="sn-item">
+        <div class="sn-dot">2</div>
+        You receive an approval email with login credentials for your Communio dashboard
+      </div>
+      <div class="sn-item">
+        <div class="sn-dot">3</div>
+        Your parish page goes live on the Communio global map and directory
+      </div>
+      <div class="sn-item">
+        <div class="sn-dot">4</div>
+        If you set up donations, your giving page activates immediately on approval
+      </div>
+    </div>
+  </div>
+
+  </main>
+
+  <!-- ============================================================
+       FOOTER — matches Communio landing page footer exactly
+       ============================================================ -->
+  <footer class="page-footer">
+    <div class="footer-left">
+      <div class="footer-mark">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+          <circle cx="8" cy="8" r="3" fill="rgba(255,255,255,0.5)"/>
+          <path d="M8 1v3M8 12v3M1 8h3M12 8h3" stroke="rgba(255,255,255,0.5)" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div>
+        <div class="footer-name">Communio</div>
+        <div class="footer-sub">by Domus Communis Foundation &nbsp;·&nbsp; EIN 99-1778616</div>
+      </div>
+    </div>
+    <div class="footer-links">
+      <a href="communio.html">Back to Communio</a>
+      <a href="/about">About DCF</a>
+      <a href="/privacy">Privacy</a>
+      <a href="/contact">Contact</a>
+      <a href="https://dcffoundation.org">dcffoundation.org</a>
+    </div>
+  </footer>
+
+  <!-- ============================================================
+       JAVASCRIPT
+       ============================================================
+       NOTE FOR EGROUP:
+       All business logic here is client-side UX only.
+       Server-side PHP must independently validate all fields,
+       verify CSRF token, sanitise inputs, and handle Stripe Connect.
+       The Google Places API calls replace the mock data below.
+       ============================================================ -->
+  <script>
+
+    /* ----------------------------------------------------------
+       STATE
+       ---------------------------------------------------------- */
+    let currentStep   = 1;
+    const totalSteps  = 5;
+    let parishData    = {};   // filled by Google Places selection
+    let stripeConnected = false;
+    let donationEnabled = true;
+
+    /* Mock diocese data — replace with PHP-generated JSON or API call */
+    const diocesesByCountry = {
+      US: ['Archdiocese of New York','Archdiocese of Los Angeles','Diocese of Chicago','Diocese of Boston','Diocese of Miami','Diocese of Houston','Other'],
+      HU: ['Archdiocese of Esztergom-Budapest','Diocese of Eger','Diocese of Pécs','Diocese of Győr','Diocese of Veszprém','Other'],
+      GB: ['Archdiocese of Westminster','Diocese of Birmingham','Diocese of Liverpool','Diocese of Southwark','Other'],
+      GH: ['Archdiocese of Accra','Diocese of Cape Coast','Diocese of Kumasi','Diocese of Sunyani','Other'],
+      IT: ['Diocese of Rome','Archdiocese of Milan','Diocese of Naples','Diocese of Turin','Other'],
+      PH: ['Archdiocese of Manila','Diocese of Cebu','Diocese of Davao','Other'],
+      DEFAULT: ['Please select country first']
+    };
+
+    /* Mock parish search results — replace with Google Places API */
+    const mockParishes = [
+      { name: "St. Mary's Catholic Church",   address: "123 Main Street, New York, NY 10001", city: "New York",   phone: "+1 212 555 0100", website: "https://stmarynyc.org",     placeId: "mock_001", lat: 40.7128, lng: -74.006  },
+      { name: "St. Patrick's Cathedral",      address: "5th Avenue, New York, NY 10022",      city: "New York",   phone: "+1 212 753 2261", website: "https://saintpatrickscathedral.org", placeId: "mock_002", lat: 40.7584, lng: -73.9762 },
+      { name: "Our Lady of Mercy Parish",     address: "45 Mercy Lane, Brooklyn, NY 11201",   city: "Brooklyn",   phone: "+1 718 555 0200", website: "",                         placeId: "mock_003", lat: 40.6892, lng: -73.9442 },
+      { name: "Sacred Heart Church",          address: "88 Sacred Heart Blvd, Boston, MA",    city: "Boston",     phone: "+1 617 555 0300", website: "https://sacredheartboston.org", placeId: "mock_004", lat: 42.3601, lng: -71.0589 },
+      { name: "St. Stephen's Basilica",       address: "Szt. István tér 1, Budapest 1051",    city: "Budapest",   phone: "+36 1 338 2151",  website: "https://bazilika.biz",     placeId: "mock_005", lat: 47.5007, lng: 19.0533 },
+    ];
+
+    /* ----------------------------------------------------------
+       STEP NAVIGATION
+       ---------------------------------------------------------- */
+    function goToStep(step) {
+      document.getElementById('panel-' + currentStep).classList.remove('active');
+      const oldProg = document.getElementById('prog-' + currentStep);
+      oldProg.classList.remove('active');
+      if (step > currentStep) oldProg.classList.add('done');
+
+      currentStep = step;
+      document.getElementById('panel-' + currentStep).classList.add('active');
+      document.getElementById('prog-' + currentStep).classList.add('active');
+      document.getElementById('prog-' + currentStep).classList.remove('done');
+
+      if (currentStep === totalSteps) populateReview();
+
+      document.querySelector('.page-header').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function nextStep(from) {
+      if (!validateStep(from)) return;
+      if (from < totalSteps) goToStep(from + 1);
+    }
+
+    function prevStep(from) {
+      if (from > 1) goToStep(from - 1);
+    }
+
+    /* ----------------------------------------------------------
+       VALIDATION (client-side — PHP must repeat server-side)
+       ---------------------------------------------------------- */
+    function validateStep(step) {
+      const panel    = document.getElementById('panel-' + step);
+      const required = panel.querySelectorAll('[required]');
+      let valid = true;
+      let firstInvalid = null;
+
+      required.forEach(field => {
+        const empty = !field.value.trim();
+        field.style.borderColor = empty ? 'var(--error)' : '';
+        if (empty) { valid = false; if (!firstInvalid) firstInvalid = field; }
+        field.addEventListener('input', () => field.style.borderColor = '', { once: true });
+      });
+
+      if (!valid && firstInvalid) firstInvalid.focus();
+      return valid;
+    }
+
+    /* ----------------------------------------------------------
+       COUNTRY → DIOCESE CASCADE
+       ---------------------------------------------------------- */
+    function onCountryChange(countryCode) {
+      const dioceseSelect = document.getElementById('diocese');
+      const dioceses = diocesesByCountry[countryCode] || diocesesByCountry.DEFAULT;
+
+      dioceseSelect.innerHTML = '<option value="" disabled selected>Select your diocese</option>';
+      dioceses.forEach(d => {
+        const opt = document.createElement('option');
+        opt.value = d; opt.textContent = d;
+        dioceseSelect.appendChild(opt);
+      });
+
+      showCascade('cr-diocese');
+      setFinderDot(2);
+
+      document.getElementById('parish-search').value = '';
+      document.getElementById('found-card').classList.remove('visible');
+      document.getElementById('not-listed').classList.remove('visible');
+      document.getElementById('cr-parish').classList.remove('visible');
+    }
+
+    function onDioceseChange(value) {
+      if (value) {
+        showCascade('cr-parish');
+        setFinderDot(3);
+        document.getElementById('not-listed').classList.add('visible');
+      }
+    }
+
+    function showCascade(id) {
+      document.getElementById(id).classList.add('visible');
+    }
+
+    function setFinderDot(active) {
+      for (let i = 1; i <= 3; i++) {
+        const dot = document.getElementById('fd' + i);
+        dot.classList.remove('active', 'done');
+        if (i < active)  dot.classList.add('done');
+        if (i === active) dot.classList.add('active');
+      }
+    }
+
+    /* ----------------------------------------------------------
+       PARISH AUTOCOMPLETE (mock — replace with Google Places API)
+       ---------------------------------------------------------- */
+    let acFocusIndex = -1;
+
+    function onParishSearch(query) {
+      const list = document.getElementById('ac-list');
+      if (query.length < 2) { list.classList.remove('open'); return; }
+
+      const matches = mockParishes.filter(p =>
+        p.name.toLowerCase().includes(query.toLowerCase())
+      );
+
+      list.innerHTML = '';
+      acFocusIndex = -1;
+
+      if (matches.length === 0) {
+        list.innerHTML = '<div class="ac-item"><div class="ac-item-name" style="color:var(--text-light)">No results — try a different spelling</div></div>';
+      } else {
+        matches.forEach((p, i) => {
+          const item = document.createElement('div');
+          item.className = 'ac-item';
+          item.setAttribute('role', 'option');
+          item.innerHTML = `<div class="ac-item-name">${p.name}</div><div class="ac-item-addr">${p.address}</div>`;
+          item.onclick = () => selectParish(p);
+          list.appendChild(item);
+        });
+      }
+
+      const powered = document.createElement('div');
+      powered.className = 'ac-powered';
+      powered.textContent = 'Powered by Google Places';
+      list.appendChild(powered);
+
+      list.classList.add('open');
+    }
+
+    function onSearchKeydown(e) {
+      const list = document.getElementById('ac-list');
+      const items = list.querySelectorAll('.ac-item');
+      if (!list.classList.contains('open')) return;
+
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        acFocusIndex = Math.min(acFocusIndex + 1, items.length - 1);
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        acFocusIndex = Math.max(acFocusIndex - 1, 0);
+      } else if (e.key === 'Enter' && acFocusIndex >= 0) {
+        e.preventDefault();
+        items[acFocusIndex].click();
+        return;
+      } else if (e.key === 'Escape') {
+        list.classList.remove('open');
+        return;
+      }
+
+      items.forEach((item, i) => item.classList.toggle('focused', i === acFocusIndex));
+    }
+
+    document.addEventListener('click', e => {
+      if (!e.target.closest('.ac-wrap')) {
+        document.getElementById('ac-list').classList.remove('open');
+      }
+    });
+
+    function selectParish(p) {
+      parishData = p;
+
+      document.getElementById('h-place-id').value          = p.placeId;
+      document.getElementById('h-lat').value               = p.lat;
+      document.getElementById('h-lng').value               = p.lng;
+      document.getElementById('h-formatted-address').value = p.address;
+      document.getElementById('h-source').value            = 'google_places';
+
+      document.getElementById('found-name').textContent    = p.name;
+      document.getElementById('found-address').textContent = p.address || '—';
+      document.getElementById('found-city').textContent    = p.city    || '—';
+      document.getElementById('found-phone').textContent   = p.phone   || 'Not found';
+      document.getElementById('found-website').textContent = p.website || 'Not found';
+
+      const countrySelect = document.getElementById('country');
+      document.getElementById('found-country-label').textContent =
+        countrySelect.options[countrySelect.selectedIndex]?.text || '—';
+
+      if (p.website) {
+        const wsField = document.getElementById('website_url');
+        wsField.value = p.website;
+        wsField.classList.add('prefilled');
+        document.getElementById('website-prefill-tag').style.display = 'inline-flex';
+      }
+
+      document.getElementById('found-card').classList.add('visible');
+      document.getElementById('ac-list').classList.remove('open');
+      document.getElementById('parish-search').value = p.name;
+    }
+
+    function useManualEntry() {
+      document.getElementById('manual-entry').style.display = 'block';
+      document.getElementById('found-card').classList.remove('visible');
+      document.getElementById('h-source').value = 'manual';
+      parishData = {};
+    }
+
+    /* ----------------------------------------------------------
+       DONATION STEP
+       ---------------------------------------------------------- */
+    function showDonationConfig(show) {
+      document.getElementById('donation-config').classList.toggle('visible', show);
+      donationEnabled = show;
+      document.getElementById('h-donation-enabled').value = show ? '1' : '0';
+    }
+
+    function skipDonations() {
+      document.getElementById('donate-later').checked = true;
+      showDonationConfig(false);
+      nextStep(4);
+    }
+
+    /* Simulate Stripe Connect — replace with real PHP redirect */
+    function simulateStripeConnect() {
+      const btn = document.getElementById('stripe-connect-btn');
+      btn.textContent = 'Connecting...';
+      btn.disabled = true;
+
+      setTimeout(() => {
+        stripeConnected = true;
+        document.getElementById('h-stripe-account').value = 'acct_mock_' + Date.now();
+        btn.style.display = 'none';
+        document.getElementById('stripe-connected').classList.add('visible');
+        document.getElementById('donation-prefs').classList.add('visible');
+      }, 1800);
+    }
+
+    /* Suggested amounts */
+    function addAmount() {
+      const input = document.getElementById('amount-add-input');
+      const val   = parseFloat(input.value);
+      if (!val || val <= 0) return;
+
+      const symbol = getCurrencySymbol();
+      const wrap   = document.getElementById('amounts-wrap');
+      const pill   = document.createElement('div');
+      pill.className = 'amount-pill';
+      pill.innerHTML = `<span class="amount-pill-val">${symbol}${val}</span><button type="button" class="amount-pill-remove" onclick="removeAmount(this)" title="Remove">×</button>`;
+      wrap.appendChild(pill);
+
+      input.value = '';
+      updateAmountsHidden();
+    }
+
+    function removeAmount(btn) {
+      btn.closest('.amount-pill').remove();
+      updateAmountsHidden();
+    }
+
+    function updateAmountsHidden() {
+      const vals = Array.from(document.querySelectorAll('.amount-pill-val'))
+        .map(el => el.textContent.replace(/[^0-9.]/g,''));
+      document.getElementById('suggested-amounts-hidden').value = vals.join(',');
+    }
+
+    function getCurrencySymbol() {
+      const symbols = { USD:'$', EUR:'€', GBP:'£', HUF:'Ft ', GHS:'₵', NGN:'₦', PHP:'₱', BRL:'R$' };
+      return symbols[document.getElementById('default_currency')?.value] || '$';
+    }
+
+    /* ----------------------------------------------------------
+       REVIEW PANEL — populate from form state
+       ---------------------------------------------------------- */
+    function populateReview() {
+      const getVal = id => document.getElementById(id)?.value || '—';
+      const getLabel = id => {
+        const s = document.getElementById(id);
+        return s?.options[s.selectedIndex]?.text || '—';
+      };
+
+      const parishName = parishData.name || getVal('parish_name_manual') || '—';
+      document.getElementById('rv-name').textContent    = parishName;
+      document.getElementById('rv-name-src').textContent =
+        parishData.name ? '✓ Verified via Google Places' : '';
+
+      document.getElementById('rv-country').textContent  = getLabel('country');
+      document.getElementById('rv-diocese').textContent  = getLabel('diocese');
+      document.getElementById('rv-city').textContent     = parishData.city || getVal('city_manual') || '—';
+      document.getElementById('rv-address').textContent  = parishData.address || getVal('address_manual') || '—';
+      document.getElementById('rv-language').textContent = getLabel('primary_language');
+
+      const first = getVal('contact_first_name');
+      const last  = getVal('contact_last_name');
+      document.getElementById('rv-contact-name').textContent  = `${first} ${last}`.trim() || '—';
+      document.getElementById('rv-contact-role').textContent  = getLabel('contact_role');
+      document.getElementById('rv-contact-email').textContent = getVal('contact_email');
+      document.getElementById('rv-website').textContent       = getVal('website_url') || 'None — Communio will build one';
+
+      const checked = document.querySelectorAll('input[name="focus_areas[]"]:checked');
+      const labels  = Array.from(checked).map(c => c.closest('.focus-opt').querySelector('label').textContent.trim());
+      document.getElementById('rv-focus').textContent       = labels.length ? labels.join(', ') : 'None selected';
+      document.getElementById('rv-description').textContent = getVal('parish_description');
+
+      if (donationEnabled && stripeConnected) {
+        document.getElementById('rv-donation-status').innerHTML =
+          '<span class="donation-status-badge dsb-active">Active on approval</span>';
+        document.getElementById('rv-currency-row').style.display = 'flex';
+        document.getElementById('rv-currency').textContent = getVal('default_currency');
+      } else if (donationEnabled) {
+        document.getElementById('rv-donation-status').innerHTML =
+          '<span class="donation-status-badge dsb-later">Selected — bank account not yet connected</span>';
+      } else {
+        document.getElementById('rv-donation-status').innerHTML =
+          '<span class="donation-status-badge dsb-later">Set up later from Communio dashboard</span>';
+      }
+    }
+
+    /* ----------------------------------------------------------
+       SUBMIT (mockup — PHP handles real submission)
+       ---------------------------------------------------------- */
+    function handleSubmit(e) {
+      e.preventDefault(); // Remove this line when wiring to PHP
+
+      const email = document.getElementById('contact_email').value || 'your email address';
+      document.getElementById('reg-form').style.display          = 'none';
+      document.getElementById('success-panel').classList.add('active');
+      document.getElementById('success-email').textContent       = email;
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+  </script>
+
+  <!--
+  ================================================================
+  DATABASE SCHEMA NOTE FOR EGROUP
+  ================================================================
+  Table: parishes
+
+  -- Identity
+  id                  UUID PRIMARY KEY DEFAULT gen_random_uuid()
+  google_place_id     VARCHAR(255)          -- Google Places ID for deduplication
+  data_source         ENUM('google_places','manual')
+  dataset_verified    BOOLEAN DEFAULT FALSE -- set true after admin review
+
+  -- Location (dataset-ready — use for mapping, research, advocacy targeting)
+  parish_name         VARCHAR(255) NOT NULL
+  country             CHAR(2) NOT NULL      -- ISO 3166-1 alpha-2
+  diocese             VARCHAR(255) NOT NULL
+  city                VARCHAR(255)
+  address             TEXT
+  parish_lat          DECIMAL(10, 7)        -- for map/directory
+  parish_lng          DECIMAL(10, 7)
+  formatted_address   TEXT                  -- Google-formatted full address
+
+  -- Parish attributes (dataset enrichment)
+  congregation_size   ENUM('under_50','50_200','200_500','500_1000','over_1000')
+  primary_language    VARCHAR(10)           -- BCP 47 language tag
+  year_founded        SMALLINT
+  website_url         VARCHAR(500)
+  phone               VARCHAR(50)
+  parish_description  TEXT
+  focus_areas         JSON                  -- array of focus area strings
+  ai_interest         TEXT
+  how_heard           VARCHAR(100)
+
+  -- Contact (private)
+  contact_first_name  VARCHAR(100) NOT NULL
+  contact_last_name   VARCHAR(100) NOT NULL
+  contact_role        VARCHAR(100) NOT NULL
+  contact_email       VARCHAR(255) NOT NULL -- private, for notifications
+  contact_email_public VARCHAR(255)         -- shown on profile if set
+  contact_phone       VARCHAR(50)
+
+  -- Status & approval
+  status              ENUM('pending','approved','rejected','suspended') DEFAULT 'pending'
+  submitted_at        TIMESTAMP DEFAULT NOW()
+  reviewed_at         TIMESTAMP
+  reviewed_by         UUID REFERENCES admins(id)
+  rejection_reason    TEXT
+
+  -- Donations (Stripe Connect)
+  donation_enabled    BOOLEAN DEFAULT FALSE
+  stripe_account_id   VARCHAR(100)          -- Stripe Connect account ID
+  platform_fee_pct    DECIMAL(4,2) DEFAULT 1.00
+  default_currency    CHAR(3) DEFAULT 'USD'
+  suggested_amounts   VARCHAR(200)          -- comma-separated e.g. "10,25,50,100"
+  donation_label      VARCHAR(200)
+  donation_description TEXT
+  total_donated       DECIMAL(12,2) DEFAULT 0.00
+  ================================================================
+  -->
+
+</body>
+</html>
