@@ -96,7 +96,16 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
       <span class="nav-pname">St. Mary's</span>
     </a>
   </div>
-</nav>
+<button class="nav-burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button></nav>
+<div class="nav-mobile" id="navMobile">
+<a href="home.html">Home</a>
+<a href="messages.html">Messages</a>
+<a href="network.html">Network</a>
+<a href="../parish/profile.html">My Profile</a>
+<a href="projects.html">Projects</a>
+<a href="donations.html">Donations</a>
+<a href="settings.html">Settings</a>
+</div>
 <aside class="sidebar">
   <div class="sb-parish">
     <div class="sb-av">SM</div>
@@ -183,5 +192,16 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
     </script>
   </div>
 </div>
+<script>
+(function(){
+  var b=document.getElementById('burger');
+  var m=document.getElementById('navMobile');
+  if(!b||!m)return;
+  b.addEventListener('click',function(){m.classList.toggle('open');});
+  document.addEventListener('click',function(e){
+    if(!b.contains(e.target)&&!m.contains(e.target))m.classList.remove('open');
+  });
+})();
+</script>
 </body>
 </html>
