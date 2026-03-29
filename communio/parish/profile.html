@@ -457,5 +457,16 @@
   });
 }());
 </script>
+<script>
+(function(){
+  var b=document.getElementById('burger');
+  var m=document.getElementById('navMobile');
+  if(!b||!m)return;
+  b.addEventListener('click',function(){m.classList.toggle('open');});
+  document.addEventListener('click',function(e){
+    if(!b.contains(e.target)&&!m.contains(e.target))m.classList.remove('open');
+  });
+})();
+</script>
 </body>
 </html>
