@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Communio — One parish. thousands voices.</title>
+  <title>Communio — Your parish website. Free.</title>
   <meta name="description" content="Communio connects Catholic parishes worldwide into a single, powerful community. A free platform for collaboration, collective advocacy, and giving your parish a global presence.">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1353,7 +1353,6 @@
 
 
 
-@media(max-width:860px){}
 .hero-v2{background:#f5f0e8;display:grid;grid-template-columns:1fr 1fr;min-height:100vh;padding-top:58px;align-items:center}
 .hero-v2-left{padding:48px 32px 48px 64px;display:flex;flex-direction:column;justify-content:center}
 .hero-h1{font-size:clamp(28px,3.5vw,48px)!important;font-weight:800;color:#0e0a06!important;line-height:1.1;margin-bottom:16px;letter-spacing:-0.02em}
@@ -1369,6 +1368,132 @@
 .hero-tp{display:flex;align-items:center;gap:5px;font-size:11px;color:rgba(14,10,6,0.55)}
 .hero-tick{width:14px;height:14px;border-radius:50%;background:rgba(58,143,86,0.12);border:0.5px solid rgba(58,143,86,0.3);display:flex;align-items:center;justify-content:center;flex-shrink:0}
 @media(max-width:900px){.hero-v2{grid-template-columns:1fr;min-height:auto}.hero-v2-left{padding:48px 24px 24px}.hero-v2-right{padding:0 24px 48px}.hero-v2-img{max-height:280px}}
+
+/* ── HERO V2 ── */
+.hero-v2 {
+  background: #f5f2e8;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 100vh;
+  padding-top: 64px;
+  align-items: center;
+}
+.hero-v2-left {
+  padding: clamp(32px, 5vw, 72px) clamp(24px, 4vw, 48px) clamp(32px, 5vw, 72px) clamp(24px, 6vw, 80px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.hero-h1 {
+  font-size: clamp(26px, 3.2vw, 44px) !important;
+  font-weight: 800 !important;
+  color: #0e0a06 !important;
+  line-height: 1.1 !important;
+  letter-spacing: -0.025em;
+  margin-bottom: 16px;
+}
+.sage-word { color: #2a8a4a; }
+.hero-sub {
+  font-size: clamp(14px, 1.2vw, 16px);
+  color: rgba(14,10,6,0.6) !important;
+  line-height: 1.65;
+  margin-bottom: 24px;
+  max-width: 420px;
+}
+.hero-feats {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 28px;
+}
+.hero-feat {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+.hero-feat-icon {
+  width: 26px; height: 26px;
+  border-radius: 7px;
+  background: rgba(216,80,32,0.1);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.hero-feat strong {
+  display: block;
+  font-size: clamp(12px, 1vw, 14px);
+  font-weight: 700;
+  color: #0e0a06;
+  margin-bottom: 1px;
+}
+.hero-feat span {
+  font-size: clamp(11px, 0.9vw, 13px);
+  color: rgba(14,10,6,0.5);
+  line-height: 1.4;
+}
+.hero-trust {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  margin-top: 20px;
+}
+.hero-tp {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  color: rgba(14,10,6,0.55);
+}
+.hero-tick {
+  width: 15px; height: 15px;
+  border-radius: 50%;
+  background: rgba(42,138,74,0.1);
+  border: 0.5px solid rgba(42,138,74,0.3);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.hero-v2-right {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(24px, 4vw, 56px) clamp(24px, 4vw, 56px) clamp(24px, 4vw, 56px) 0;
+  height: 100%;
+}
+.hero-v2-img {
+  width: 100%;
+  max-height: 72vh;
+  object-fit: cover;
+  object-position: top;
+  border-radius: 16px;
+  display: block;
+  box-shadow: 0 24px 64px rgba(14,10,6,0.1);
+}
+/* Tablet */
+@media (max-width: 900px) {
+  .hero-v2 {
+    grid-template-columns: 1fr;
+    min-height: auto;
+    padding-top: 64px;
+  }
+  .hero-v2-left {
+    padding: 48px 24px 32px;
+    order: 1;
+  }
+  .hero-v2-right {
+    padding: 0 24px 40px;
+    order: 2;
+    height: auto;
+  }
+  .hero-v2-img {
+    max-height: 320px;
+  }
+}
+/* Mobile */
+@media (max-width: 480px) {
+  .hero-v2-img { max-height: 220px; border-radius: 10px; }
+  .hero-trust { gap: 6px 12px; }
+}
+
 </style>
 </head>
 <body>
@@ -1387,7 +1512,7 @@
     <div class="nav-links">
       <a href="#network" class="nav-link">About</a>
       <a href="dashboard/network.html" class="nav-link">Browse Network</a>
-      <a href="register.html" class="nav-link">Register your parish</a>
+      
       
     </div>
     <a href="parish/profile.html" class="nav-link" style="color:var(--terracotta);font-weight:700;">
