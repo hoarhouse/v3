@@ -691,8 +691,14 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
     s.addEventListener('click', function () {
       currentKey = s.dataset.s;
       var d = fm[currentKey];
-      document.querySelectorAll('.si').forEach(function (x) { x.classList.remove('active'); });
+      document.querySelectorAll('.si').forEach(function (x) { 
+        x.classList.remove('active');
+        x.querySelector('.si-arr').textContent = '→';
+      });
       s.classList.add('active');
+      if(window.innerWidth <= 900){
+        s.querySelector('.si-arr').textContent = '✕';
+      }
       document.getElementById('ep-icon').textContent = d.icon;
       document.getElementById('ep-title').innerHTML = d.title;
       document.getElementById('ep-sub').textContent = d.sub;
@@ -710,6 +716,7 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
           e.stopPropagation();
           clone.remove();
           s.classList.remove('active');
+          s.querySelector('.si-arr').textContent = '→';
           document.querySelector('.edit-panel').style.display = '';
         });
         clone.appendChild(closeBtn);
