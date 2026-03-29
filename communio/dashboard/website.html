@@ -405,7 +405,8 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
     </div>
   </div>
 </div>
-    <div class="tab-content" <!-- SHARED: events | <?php foreach($parish->events as $event): ?> ... <?php endforeach; ?> -->id="tab-events">
+    <!-- SHARED: events | <?php foreach($parish->events as $event): ?> ... <?php endforeach; ?> -->
+    <div class="tab-content" id="tab-events">
   <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:18px">
     <div>
       <div style="font-size:16px;font-weight:700;color:var(--ink)">Upcoming events</div>
@@ -454,7 +455,8 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
     <div style="font-size:13px;color:var(--sage)"><strong>Events sync automatically</strong> — each event you add here also creates a card on your Communio network profile feed, and appears in the Events tab on your public profile.</div>
   </div>
 </div>
-    <div class="tab-content" <!-- SHARED: parish_name used in meta title/description | $parish->name -->id="tab-seo">
+    <!-- SHARED: parish_name used in meta title/description | $parish->name -->
+    <div class="tab-content" id="tab-seo">
   <div class="seo-grid">
     <div>
       <!-- <?php echo $seo->fields_html ?> -->
@@ -499,7 +501,8 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
     </div>
   </div>
 </div>
-    <div class="tab-content" <!-- SHARED: stripe_key, donation_goal | $parish->stripe_key, $parish->donation_goal -->id="tab-settings">
+    <!-- SHARED: stripe_key, donation_goal | $parish->stripe_key, $parish->donation_goal -->
+    <div class="tab-content" id="tab-settings">
   <div class="set-grid">
     <div>
       <!-- <?php echo $website->domain_settings_html ?> -->
