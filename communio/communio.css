@@ -536,15 +536,64 @@ tr:hover td { background: var(--cream); }
 .nav-burger span{display:block;width:22px;height:2px;border-radius:2px;transition:all .25s}
 .top-nav .nav-burger span{background:rgba(255,255,255,.7)}
 .nav .nav-burger span{background:var(--ink)}
-.nav-mobile{display:none;position:fixed;top:58px;left:0;right:0;z-index:199;flex-direction:column;gap:0;padding:8px clamp(16px,4vw,32px) 20px;border-bottom:1px solid rgba(0,0,0,.08)}
-.top-nav~.nav-mobile{background:rgba(14,10,6,.97);top:58px}
-.nav~.nav-mobile{background:rgba(255,253,249,.98);backdrop-filter:blur(20px)}
+.nav-mobile{display:none;position:fixed;left:0;right:0;z-index:199;flex-direction:column}
 .nav-mobile.open{display:flex}
-.nav-mobile a{font-size:15px;font-weight:500;padding:11px 0;border-bottom:.5px solid rgba(128,128,128,.15)}
-.top-nav~.nav-mobile a{color:rgba(255,255,255,.8)}
-.nav~.nav-mobile a{color:var(--ink)}
+.top-nav~.nav-mobile{
+  top:58px;
+  background:#1a140e;
+  border-top:2px solid #d85020;
+  box-shadow:0 16px 40px rgba(0,0,0,0.5);
+}
+.nav~.nav-mobile{
+  top:64px;
+  background:rgba(255,253,249,0.98);
+  border-top:2px solid #d85020;
+  box-shadow:0 16px 40px rgba(14,10,6,0.12);
+  backdrop-filter:blur(20px);
+}
+.nav-mobile a{
+  font-family:'Outfit',sans-serif;
+  font-size:15px;
+  font-weight:500;
+  padding:14px 24px;
+  letter-spacing:-0.01em;
+  transition:background 0.15s,color 0.15s,padding-left 0.15s;
+  text-decoration:none;
+}
+.top-nav~.nav-mobile a{
+  color:rgba(255,255,255,0.7);
+  border-bottom:1px solid rgba(255,255,255,0.06);
+}
+.top-nav~.nav-mobile a:hover{
+  color:#fff;
+  background:rgba(216,80,32,0.15);
+  padding-left:32px;
+  border-left:3px solid #d85020;
+}
+.nav~.nav-mobile a{
+  color:#0e0a06;
+  border-bottom:1px solid rgba(14,10,6,0.08);
+}
+.nav~.nav-mobile a:hover{
+  color:#d85020;
+  background:rgba(216,80,32,0.06);
+  padding-left:32px;
+}
 .nav-mobile a:last-child{border-bottom:none}
-.nav-mobile .nm-cta{margin-top:8px;text-align:center;background:var(--terra);color:#fff!important;border-radius:8px;padding:12px;font-weight:700}
+.nav-mobile .nm-cta{
+  margin:12px 16px 16px;
+  padding:13px 24px;
+  background:#d85020!important;
+  color:#fff!important;
+  border-radius:8px;
+  font-weight:700;
+  text-align:center;
+  border-bottom:none!important;
+}
+.nav-mobile .nm-cta:hover{
+  background:#f07040!important;
+  padding-left:24px;
+}
 @media(max-width:720px){
   .nav-burger{display:flex}
   .top-nav .nav-right{display:flex;gap:0}
