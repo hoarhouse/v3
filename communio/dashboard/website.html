@@ -703,6 +703,16 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
         document.querySelectorAll('.edit-panel-inline').forEach(function(el){el.remove();});
         var clone = document.querySelector('.edit-panel').cloneNode(true);
         clone.className = 'edit-panel-inline';
+        var closeBtn = document.createElement('button');
+        closeBtn.textContent = '✕ Close';
+        closeBtn.style.cssText = 'display:block;margin:16px 0 0;padding:8px 16px;background:none;border:1px solid #e8e2d8;border-radius:6px;font-size:13px;font-weight:600;color:#5a4a20;cursor:pointer;width:100%';
+        closeBtn.addEventListener('click', function(e){
+          e.stopPropagation();
+          clone.remove();
+          s.classList.remove('active');
+          document.querySelector('.edit-panel').style.display = '';
+        });
+        clone.appendChild(closeBtn);
         clone.style.display = 'block';
         s.insertAdjacentElement('afterend', clone);
         document.querySelector('.edit-panel').style.display = 'none';
