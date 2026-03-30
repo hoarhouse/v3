@@ -47,6 +47,37 @@ h1,h2,h3,h4,h5,h6{font-family:'Lora',serif;line-height:1.2;}
 .page-footer{background:var(--ink);color:rgba(255,253,245,0.6);padding:2.5rem 2rem;text-align:center;font-size:.85rem;}
 .page-footer a{color:var(--terra);text-decoration:none;}
 .page-footer a:hover{color:#fff;}
+
+a{color:inherit;text-decoration:none;}
+/* PAGE HERO */
+.page-hero{background:var(--ink);padding:8rem 2rem 4rem;text-align:center;}
+.page-hero-overline{display:inline-flex;align-items:center;gap:.5rem;background:rgba(216,80,32,0.2);border:1px solid rgba(216,80,32,0.4);color:rgba(255,255,255,0.9);font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:.4rem 1rem;border-radius:20px;margin-bottom:1.5rem;}
+.page-hero h1{font-family:'Lora',serif;font-weight:700;font-size:clamp(2rem,4vw,3rem);color:#fff;margin-bottom:1rem;}
+.page-hero-sub{font-size:1.05rem;color:rgba(255,255,255,0.65);max-width:560px;margin:0 auto;}
+/* STAFF */
+.staff-section{padding:5rem 2rem;background:var(--cream);}
+.staff-pastor{display:grid;grid-template-columns:280px 1fr;background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 4px 30px rgba(14,10,6,0.08);border:1px solid rgba(14,10,6,0.06);margin-bottom:3rem;}
+.staff-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;}
+.staff-card{background:#fff;border-radius:10px;overflow:hidden;border:1px solid rgba(14,10,6,0.06);transition:all .2s ease;}
+.staff-card:hover{transform:translateY(-3px);box-shadow:0 12px 40px rgba(14,10,6,0.1);}
+.staff-photo{height:220px;background:var(--ink);display:flex;align-items:center;justify-content:center;font-size:3rem;}
+.staff-pastor .staff-photo{height:100%;min-height:260px;font-size:4rem;}
+.staff-photo-placeholder{opacity:.5;color:#fff;}
+.staff-body{padding:1.75rem;display:flex;flex-direction:column;justify-content:center;}
+.staff-card .staff-body{padding:1.25rem;}
+.staff-title{font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--terra);margin-bottom:.35rem;}
+.staff-name{font-family:'Lora',serif;font-weight:700;font-size:1.125rem;color:var(--ink);margin-bottom:.75rem;}
+.staff-pastor .staff-name{font-size:1.5rem;margin-bottom:1rem;}
+.staff-bio{font-size:.85rem;color:var(--text-muted);line-height:1.7;margin-bottom:1.25rem;}
+.staff-email{display:inline-flex;align-items:center;gap:.5rem;font-size:.8rem;font-weight:600;color:var(--terra);text-decoration:none;transition:opacity .2s;}
+.staff-email:hover{opacity:.7;}
+/* FOOTER */
+.page-footer{background:var(--ink);color:rgba(255,253,245,0.6);padding:2.5rem 2rem;text-align:center;font-size:.85rem;}
+.page-footer a{color:var(--terra);}
+.page-footer a:hover{color:#fff;}
+@media(max-width:968px){.staff-pastor{grid-template-columns:1fr;}.staff-pastor .staff-photo{height:240px;}.staff-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:568px){.staff-grid{grid-template-columns:1fr;}}
+
 </style>
 </head>
 <body>
