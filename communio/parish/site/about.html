@@ -520,6 +520,34 @@ a[data-contact]:hover{
   .values-grid{grid-template-columns:1fr;}
   .timeline-item{margin-bottom:2rem;}
 }
+
+.visit{background:var(--ink);padding:5rem 2rem;}
+.visit-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start;}
+.visit-title{font-family:'Lora',serif;font-weight:700;font-size:clamp(1.75rem,3vw,2.25rem);color:#fff;margin-bottom:1rem;}
+.visit-sub{font-size:.95rem;color:rgba(255,255,255,0.65);line-height:1.75;margin-bottom:2rem;}
+.visit-details{display:flex;flex-direction:column;gap:1.25rem;}
+.visit-detail{display:flex;align-items:flex-start;gap:1rem;}
+.visit-detail-icon{width:40px;height:40px;background:rgba(216,80,32,0.2);border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--terra);flex-shrink:0;}
+.visit-detail-label{font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:.25rem;}
+.visit-detail-value{font-size:.9rem;color:rgba(255,255,255,0.9);line-height:1.6;}
+.visit-detail-value a{color:var(--terra);transition:color .2s;}
+.visit-detail-value a:hover{color:#fff;}
+.visit-map{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:12px;overflow:hidden;}
+.visit-map iframe{width:100%;height:320px;border:none;display:block;}
+.visit-directions{display:inline-flex;align-items:center;gap:.5rem;background:var(--terra);color:#fff;font-weight:600;font-size:.875rem;padding:.75rem 1.5rem;border-radius:8px;text-decoration:none;margin-top:1.5rem;transition:background .2s;}
+.visit-directions:hover{background:var(--terra-dark);}
+.visit-what{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:1.5rem;margin-top:1.5rem;}
+.visit-what-title{font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:1rem;}
+.visit-what-list{display:flex;flex-direction:column;gap:.6rem;}
+.visit-what-item{display:flex;align-items:center;gap:.75rem;font-size:.85rem;color:rgba(255,255,255,0.75);}
+.visit-what-item svg{color:var(--sage);flex-shrink:0;}
+.cta-btns{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;}
+.btn-white{background:#fff;color:var(--terra);font-weight:700;font-size:.9rem;padding:.875rem 2rem;border-radius:8px;text-decoration:none;display:inline-block;transition:all .2s;}
+.btn-white:hover{background:var(--cream);}
+.btn-ghost-white{background:transparent;color:#fff;border:2px solid rgba(255,255,255,0.6);font-weight:600;font-size:.9rem;padding:.75rem 1.75rem;border-radius:8px;text-decoration:none;display:inline-block;transition:all .2s;}
+.btn-ghost-white:hover{border-color:#fff;background:rgba(255,255,255,0.1);}
+@media(max-width:968px){.visit-grid{grid-template-columns:1fr;}}
+
 </style>
 </head>
 <body>
@@ -781,6 +809,68 @@ a[data-contact]:hover{
         <a href="#" class="btn-ghost" data-contact data-from="general">
           <svg width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="M2 3h16l-8 8-8-8z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           Get In Touch
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- VISIT -->
+<section class="visit">
+  <div class="container">
+    <div class="visit-grid">
+      <div>
+        <h2 class="visit-title">Plan Your Visit</h2>
+        <p class="visit-sub">Whether you are new to the neighbourhood, visiting New York, or returning to the Church after some time away — we would love to welcome you.</p>
+        <div class="visit-details">
+          <div class="visit-detail">
+            <div class="visit-detail-icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2C7.2 2 5 4.2 5 7c0 4 5 11 5 11s5-7 5-11c0-2.8-2.2-5-5-5z" stroke="currentColor" stroke-width="1.5"/><circle cx="10" cy="7" r="1.5" stroke="currentColor" stroke-width="1.5"/></svg></div>
+            <div>
+              <div class="visit-detail-label">Address</div>
+              <div class="visit-detail-value">123 Rivington Street<br>New York, NY 10002<br><a href="https://maps.google.com/?q=123+Rivington+Street+New+York+NY+10002" target="_blank">Get directions &rarr;</a></div>
+            </div>
+          </div>
+          <div class="visit-detail">
+            <div class="visit-detail-icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M3 4h4l2 4-2 2c1 2 3 4 5 5l2-2 4 2v4c0 1-1 2-2 2C7 19 1 13 1 6c0-1 1-2 2-2z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg></div>
+            <div>
+              <div class="visit-detail-label">Phone</div>
+              <div class="visit-detail-value"><a href="tel:+12125550123">(212) 555-0123</a></div>
+            </div>
+          </div>
+          <div class="visit-detail">
+            <div class="visit-detail-icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="2" y="4" width="16" height="13" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M2 7l8 5 8-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+            <div>
+              <div class="visit-detail-label">Email</div>
+              <div class="visit-detail-value"><a href="#" data-contact data-from="general">Send us a message</a></div>
+            </div>
+          </div>
+          <div class="visit-detail">
+            <div class="visit-detail-icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="2" y="4" width="16" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M2 8h16M6 2v4M14 2v4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+            <div>
+              <div class="visit-detail-label">Office Hours</div>
+              <div class="visit-detail-value">Mon&ndash;Fri 9:00 AM &ndash; 5:00 PM<br>Sat 10:00 AM &ndash; 2:00 PM<br>Sun after 11:00 AM Mass</div>
+            </div>
+          </div>
+        </div>
+        <div class="visit-what">
+          <div class="visit-what-title">What to expect at Mass</div>
+          <div class="visit-what-list">
+            <div class="visit-what-item"><svg width="14" height="14" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Mass lasts approximately one hour</div>
+            <div class="visit-what-item"><svg width="14" height="14" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>No dress code &mdash; come as you are</div>
+            <div class="visit-what-item"><svg width="14" height="14" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Children are always welcome</div>
+            <div class="visit-what-item"><svg width="14" height="14" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Wheelchair accessible entrance on Orchard St</div>
+            <div class="visit-what-item"><svg width="14" height="14" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Nearest subway: F/J/M/Z at Delancey St</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="visit-map">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d756!2d-73.9877!3d40.7185!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c2598a7674b5c5%3A0x2dc9f78e7a65c823!2sRivington+St%2C+New+York%2C+NY!5e0!3m2!1sen!2sus!4v1" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+        <a href="https://maps.google.com/?q=123+Rivington+Street+New+York+NY+10002" target="_blank" class="visit-directions">
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="M10 2C7.2 2 5 4.2 5 7c0 4 5 11 5 11s5-7 5-11c0-2.8-2.2-5-5-5z" stroke="currentColor" stroke-width="1.5"/></svg>
+          Open in Google Maps
         </a>
       </div>
     </div>
