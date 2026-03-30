@@ -1127,6 +1127,47 @@ z-index:2;}
   .footer-grid{grid-template-columns:1fr;}
 }
 .hero .container{width:100%;max-width:1200px;margin:0;padding-left:6%;padding-right:2rem;}
+
+/* NEWSLETTER */
+.newsletter{ background:var(--terra); padding:4rem 2rem; text-align:center; }
+.newsletter-inner{ max-width:560px; margin:0 auto; }
+.newsletter-overline{ font-size:.65rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:rgba(255,255,255,0.7); margin-bottom:.75rem; }
+.newsletter h2{ font-family:"Lora",serif; font-weight:700; font-size:clamp(1.5rem,3vw,2rem); color:#fff; margin-bottom:.75rem; }
+.newsletter-sub{ font-size:.95rem; color:rgba(255,255,255,0.85); margin-bottom:2rem; }
+.newsletter-form{ display:flex; gap:.75rem; max-width:480px; margin:0 auto; }
+.newsletter-form input{ flex:1; background:rgba(255,255,255,0.2); border:1.5px solid rgba(255,255,255,0.4); border-radius:7px; padding:.75rem 1rem; font-size:.9rem; color:#fff; font-family:inherit; }
+.newsletter-form input::placeholder{ color:rgba(255,255,255,0.6); }
+.newsletter-form input:focus{ outline:none; border-color:#fff; background:rgba(255,255,255,0.25); }
+.newsletter-form button{ background:#fff; color:var(--terra); font-weight:700; font-size:.875rem; padding:.75rem 1.5rem; border:none; border-radius:7px; cursor:pointer; font-family:inherit; white-space:nowrap; transition:all .2s ease; }
+.newsletter-form button:hover{ background:var(--cream); }
+@media(max-width:568px){ .newsletter-form{ flex-direction:column; } }
+
+/* CONTACT */
+.contact{ background:var(--warm-white); padding:5rem 2rem; }
+.contact-grid{ display:grid; grid-template-columns:1fr 1.4fr; gap:4rem; align-items:start; }
+.contact-info-title{ font-family:"Lora",serif; font-weight:700; font-size:1.75rem; color:var(--ink); margin-bottom:.5rem; }
+.contact-info-sub{ font-size:.9rem; color:var(--text-muted); margin-bottom:2rem; line-height:1.6; }
+.contact-detail{ display:flex; align-items:flex-start; gap:1rem; margin-bottom:1.5rem; }
+.contact-detail-icon{ width:40px; height:40px; background:rgba(216,80,32,0.1); border-radius:9px; display:flex; align-items:center; justify-content:center; color:var(--terra); flex-shrink:0; margin-top:.1rem; }
+.contact-detail-label{ font-size:.65rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--text-muted); margin-bottom:.25rem; }
+.contact-detail-value{ font-size:.9rem; color:var(--ink); line-height:1.6; font-weight:500; }
+.contact-hours{ background:var(--cream); border-radius:8px; padding:1.25rem 1.5rem; margin-top:1.5rem; }
+.contact-hours-title{ font-size:.65rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--terra); margin-bottom:.75rem; }
+.contact-hours-row{ display:flex; justify-content:space-between; font-size:.8rem; color:var(--text-body); padding:.3rem 0; border-bottom:1px solid rgba(14,10,6,0.06); }
+.contact-hours-row:last-child{ border-bottom:none; }
+.contact-form{ background:#fff; border-radius:12px; padding:2.5rem; box-shadow:0 4px 30px rgba(14,10,6,0.07); border:1px solid rgba(14,10,6,0.06); }
+.contact-form-title{ font-family:"Lora",serif; font-weight:700; font-size:1.25rem; color:var(--ink); margin-bottom:.4rem; }
+.contact-form-sub{ font-size:.85rem; color:var(--text-muted); margin-bottom:1.75rem; }
+.form-row{ display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-bottom:1rem; }
+.form-field{ display:flex; flex-direction:column; gap:.4rem; margin-bottom:1rem; }
+.form-field label{ font-size:.75rem; font-weight:600; color:var(--ink); letter-spacing:.03em; }
+.form-field input, .form-field select, .form-field textarea{ background:var(--warm-white); border:1.5px solid rgba(14,10,6,0.12); border-radius:7px; padding:.65rem .9rem; font-size:.875rem; color:var(--ink); font-family:inherit; transition:border-color .2s ease; }
+.form-field input:focus, .form-field select:focus, .form-field textarea:focus{ outline:none; border-color:var(--terra); }
+.form-field textarea{ resize:vertical; min-height:110px; }
+.btn-submit{ background:var(--terra); color:#fff; font-weight:700; font-size:.9rem; padding:.875rem 2rem; border:none; border-radius:8px; cursor:pointer; font-family:inherit; width:100%; transition:all .2s ease; margin-top:.5rem; }
+.btn-submit:hover{ background:var(--terra-dark); transform:translateY(-1px); }
+@media(max-width:968px){ .contact-grid{ grid-template-columns:1fr; gap:2.5rem; } .form-row{ grid-template-columns:1fr; } }
+
 </style>
 </head>
 <body>
@@ -1144,6 +1185,7 @@ z-index:2;}
       <a href="#events" class="nav-link">Events</a>
       <a href="#involved" class="nav-link">Get Involved</a>
       <a href="#giving" class="nav-link">Give</a>
+        <a href="#contact" class="nav-link">Contact</a>
       <a href="#" class="nav-cta">Plan Your Visit</a>
     </div>
     <button class="nav-hamburger" id="navHamburger">
@@ -1470,6 +1512,88 @@ z-index:2;}
         <h3 class="involved-card-title">Sacraments</h3>
         <p class="involved-desc">Prepare for Baptism, First Communion, Confirmation, Marriage, and more.</p>
         <a href="#" class="involved-link">Learn more →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- NEWSLETTER -->
+<section class="newsletter fade-in">
+  <div class="newsletter-inner">
+    <div class="newsletter-overline">Stay Connected</div>
+    <h2>Parish news, straight to your inbox.</h2>
+    <p class="newsletter-sub">Weekly bulletin, event announcements, and reflections from our pastor — never more than once a week.</p>
+    <div class="newsletter-form">
+      <input type="email" placeholder="Your email address">
+      <button type="button">Subscribe</button>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact fade-in" id="contact">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="contact-info">
+        <h2 class="contact-info-title">Get in Touch</h2>
+        <p class="contact-info-sub">We''d love to hear from you. Reach us by phone, email, or stop by the parish office.</p>
+        <div class="contact-detail">
+          <div class="contact-detail-icon">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2C7.2 2 5 4.2 5 7c0 4 5 11 5 11s5-7 5-11c0-2.8-2.2-5-5-5z" stroke="currentColor" stroke-width="1.5"/><circle cx="10" cy="7" r="1.5" stroke="currentColor" stroke-width="1.5"/></svg>
+          </div>
+          <div>
+            <div class="contact-detail-label">Address</div>
+            <div class="contact-detail-value">123 Rivington Street<br>New York, NY 10002</div>
+          </div>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-detail-icon">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M3 4h4l2 4-2 2c1 2 3 4 5 5l2-2 4 2v4c0 1-1 2-2 2C7 19 1 13 1 6c0-1 1-2 2-2z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+          </div>
+          <div>
+            <div class="contact-detail-label">Phone</div>
+            <div class="contact-detail-value">(212) 555-0123</div>
+          </div>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-detail-icon">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="2" y="4" width="16" height="13" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M2 7l8 5 8-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </div>
+          <div>
+            <div class="contact-detail-label">Email</div>
+            <div class="contact-detail-value">info@stmarysnyc.org</div>
+          </div>
+        </div>
+        <div class="contact-hours">
+          <div class="contact-hours-title">Office Hours</div>
+          <div class="contact-hours-row"><span>Monday – Friday</span><span>9:00 AM – 5:00 PM</span></div>
+          <div class="contact-hours-row"><span>Saturday</span><span>10:00 AM – 2:00 PM</span></div>
+          <div class="contact-hours-row"><span>Sunday</span><span>After 11:00 AM Mass</span></div>
+        </div>
+      </div>
+      <div class="contact-form">
+        <div class="contact-form-title">Send us a message</div>
+        <div class="contact-form-sub">We typically respond within one business day.</div>
+        <div class="form-row">
+          <div class="form-field"><label>First Name</label><input type="text" placeholder="Maria"></div>
+          <div class="form-field"><label>Last Name</label><input type="text" placeholder="Santos"></div>
+        </div>
+        <div class="form-field"><label>Email</label><input type="email" placeholder="maria@example.com"></div>
+        <div class="form-field">
+          <label>Subject</label>
+          <select>
+            <option value="">Select a topic...</option>
+            <option>General Inquiry</option>
+            <option>Mass Times & Liturgy</option>
+            <option>Sacraments</option>
+            <option>Volunteering</option>
+            <option>Facility Rental</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-field"><label>Message</label><textarea placeholder="How can we help you?"></textarea></div>
+        <button class="btn-submit" type="button">Send Message</button>
       </div>
     </div>
   </div>
