@@ -1729,14 +1729,17 @@ z-index:2;}
         <div class="form-field"><label>Email</label><input type="email" placeholder="maria@example.com"></div>
         <div class="form-field">
           <label>Subject</label>
-          <select>
+          <select id="contactSubject">
             <option value="">Select a topic...</option>
-            <option>General Inquiry</option>
-            <option>Mass Times & Liturgy</option>
-            <option>Sacraments</option>
-            <option>Volunteering</option>
-            <option>Facility Rental</option>
-            <option>Other</option>
+            <option value="general">General Inquiry</option>
+            <option value="baptism">Sacraments — Baptism</option>
+            <option value="wedding">Sacraments — Wedding</option>
+            <option value="funeral">Sacraments — Funeral Mass</option>
+            <option value="formation">Faith Formation / RCIA</option>
+            <option value="rcia">Becoming Catholic (RCIA)</option>
+            <option value="volunteer">Volunteering</option>
+            <option value="facility">Facility Rental</option>
+            <option value="other">Other</option>
           </select>
         </div>
         <div class="form-field"><label>Message</label><textarea placeholder="How can we help you?"></textarea></div>
@@ -1882,6 +1885,23 @@ const _nm = document.getElementById('navMobile');
 if(_nh){ _nh.addEventListener('click',()=>_nm.classList.toggle('open')); _nm.addEventListener('click',(e)=>{if(e.target.tagName==='A')_nm.classList.remove('open');}); }
 const _nav = document.getElementById('nav');
 if(_nav){ window.addEventListener('scroll',()=>{ _nav.style.boxShadow = window.scrollY > 20 ? '0 2px 20px rgba(14,10,6,0.1)' : '0 2px 20px rgba(14,10,6,0.08)'; }); }
+</script>
+<script>
+// Pre-select contact form subject from URL param
+(function(){
+  const params = new URLSearchParams(window.location.search);
+  const from = params.get('from');
+  if(!from) return;
+  const sel = document.getElementById('contactSubject');
+  if(!sel) return;
+  const opt = Array.from(sel.options).find(o => o.value === from);
+  if(opt){ 
+    sel.value = from;
+    // Scroll to contact section
+    const section = document.getElementById('contact');
+    if(section) setTimeout(()=>{ section.scrollIntoView({behavior:'smooth'}); }, 300);
+  }
+})();
 </script>
 </body>
 </html>
