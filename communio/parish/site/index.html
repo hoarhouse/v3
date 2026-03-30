@@ -190,14 +190,14 @@ h1,h2,h3,h4,h5,h6{font-family:'Lora',serif;line-height:1.2;}
   height:100vh;
   min-height:600px;
   display:flex;
-  align-items:center;
+  align-items:center;justify-content:flex-start;
   overflow:hidden;
 }
 
 .hero-bg{
   position:absolute;
   inset:0;
-  background-image:url('https://images.unsplash.com/photo-1548625149-720f8d8e4ef4?w=1800&q=80');
+  
   background-size:cover;
   background-position:center;
   transform:scale(1.02);
@@ -214,8 +214,7 @@ h1,h2,h3,h4,h5,h6{font-family:'Lora',serif;line-height:1.2;}
   z-index:2;
   color:#fff;
   max-width:600px;
-  padding-top:64px;
-;padding-left:0;margin-left:0;text-align:left;}
+  padding-top:64px;}
 
 .hero-eyebrow{
   display:inline-flex;
@@ -1126,6 +1125,7 @@ z-index:2;}
 @media (max-width:568px){
   .footer-grid{grid-template-columns:1fr;}
 }
+.hero .container{width:100%;max-width:1200px;margin:0;padding-left:6%;padding-right:2rem;}
 </style>
 </head>
 <body>
@@ -1163,7 +1163,7 @@ z-index:2;}
 
 <!-- HERO -->
 <section class="hero fade-in">
-  <div class="hero-bg"></div>
+  <div class="hero-bg" style="background-image:url('https://images.unsplash.com/photo-1548625149-720f8d8e4ef4?w=1800&q=80');"></div>
   <div class="hero-overlay"></div>
   <div class="container">
     <div class="hero-content">
