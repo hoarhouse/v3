@@ -1251,6 +1251,33 @@ z-index:2;}
 .nav-mobile-section{font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-top:.75rem;}
 @media(max-width:968px){.nav-links{display:none;}.nav-hamburger{display:flex;}}
 
+
+/* CONTACT MODAL */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(14,10,6,0.6);z-index:2000;align-items:center;justify-content:center;padding:1rem;backdrop-filter:blur(4px);}
+.modal-overlay.open{display:flex;}
+.modal-box{background:#fffdf5;border-radius:14px;width:100%;max-width:580px;max-height:90vh;overflow-y:auto;box-shadow:0 24px 80px rgba(14,10,6,0.3);position:relative;animation:modalIn .25s ease;}
+@keyframes modalIn{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
+.modal-header{padding:1.75rem 2rem 0;display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;}
+.modal-title{font-family:'Lora',serif;font-weight:700;font-size:1.375rem;color:var(--ink);}
+.modal-sub{font-size:.85rem;color:var(--text-muted);margin-top:.3rem;}
+.modal-close{width:32px;height:32px;background:rgba(14,10,6,0.07);border:none;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .2s;font-size:1rem;color:var(--ink);}
+.modal-close:hover{background:rgba(14,10,6,0.14);}
+.modal-body{padding:1.5rem 2rem 2rem;}
+.modal-form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem;}
+.modal-field{display:flex;flex-direction:column;gap:.4rem;margin-bottom:1rem;}
+.modal-field label{font-size:.75rem;font-weight:600;color:var(--ink);letter-spacing:.03em;}
+.modal-field input,.modal-field select,.modal-field textarea{background:var(--warm-white);border:1.5px solid rgba(14,10,6,0.12);border-radius:7px;padding:.65rem .9rem;font-size:.875rem;color:var(--ink);font-family:inherit;transition:border-color .2s;}
+.modal-field input:focus,.modal-field select:focus,.modal-field textarea:focus{outline:none;border-color:var(--terra);}
+.modal-field textarea{resize:vertical;min-height:100px;}
+.modal-submit{background:var(--terra);color:#fff;font-weight:700;font-size:.9rem;padding:.875rem 2rem;border:none;border-radius:8px;cursor:pointer;font-family:inherit;width:100%;transition:all .2s;margin-top:.25rem;}
+.modal-submit:hover{background:var(--terra-dark);transform:translateY(-1px);}
+.modal-note{font-size:.75rem;color:var(--text-muted);text-align:center;margin-top:.75rem;}
+.modal-success{text-align:center;padding:3rem 2rem;}
+.modal-success-icon{width:56px;height:56px;background:rgba(42,138,74,0.12);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1.25rem;color:var(--sage);}
+.modal-success h3{font-family:'Lora',serif;font-weight:700;font-size:1.375rem;color:var(--ink);margin-bottom:.5rem;}
+.modal-success p{font-size:.9rem;color:var(--text-muted);line-height:1.6;}
+@media(max-width:568px){.modal-form-row{grid-template-columns:1fr;}.modal-body{padding:1.25rem 1.25rem 1.75rem;}.modal-header{padding:1.25rem 1.25rem 0;}}
+
 </style>
 </head>
 <body>
@@ -1286,7 +1313,7 @@ z-index:2;}
         </div>
       </div>
       <a href="index.html#giving" class="nav-link">Give</a>
-      <a href="index.html#contact" class="nav-link">Contact</a>
+      <a href="#" data-contact data-from="general" class="nav-link">Contact</a>
     </div>
     <a href="index.html#giving" class="nav-cta">Give Now</a>
     <button class="nav-hamburger" id="navHamburger">
@@ -1298,7 +1325,7 @@ z-index:2;}
       <div class="nav-mobile-header">Navigation</div>
       <a href="index.html#mass-times">Mass Times</a>
       <a href="index.html#giving">Give</a>
-      <a href="index.html#contact">Contact</a>
+      <a href="#" data-contact data-from="general" class="">Contact</a>
     </div>
     <div class="nav-mobile-section">
       <div class="nav-mobile-header">Parish Life</div>
@@ -1903,5 +1930,101 @@ if(_nav){ window.addEventListener('scroll',()=>{ _nav.style.boxShadow = window.s
   }
 })();
 </script>
+
+<!-- CONTACT MODAL -->
+<div class="modal-overlay" id="contactModal">
+  <div class="modal-box">
+    <div class="modal-header">
+      <div>
+        <div class="modal-title">Send us a message</div>
+        <div class="modal-sub">We typically respond within one business day.</div>
+      </div>
+      <button class="modal-close" id="modalClose" aria-label="Close">&#x2715;</button>
+    </div>
+    <div class="modal-body" id="modalBody">
+      <div class="modal-form-row">
+        <div class="modal-field"><label>First Name</label><input type="text" id="mFirstName" placeholder="Maria"></div>
+        <div class="modal-field"><label>Last Name</label><input type="text" id="mLastName" placeholder="Santos"></div>
+      </div>
+      <div class="modal-field"><label>Email Address</label><input type="email" id="mEmail" placeholder="maria@example.com"></div>
+      <div class="modal-field"><label>Phone (optional)</label><input type="tel" id="mPhone" placeholder="(212) 555-0000"></div>
+      <div class="modal-field">
+        <label>Subject</label>
+        <select id="mSubject">
+          <option value="">Select a topic...</option>
+          <option value="general">General Inquiry</option>
+          <option value="baptism">Sacraments — Baptism</option>
+          <option value="wedding">Sacraments — Wedding</option>
+          <option value="funeral">Sacraments — Funeral Mass</option>
+          <option value="confirmation">Sacraments — Confirmation</option>
+          <option value="firstcommunion">Sacraments — First Communion</option>
+          <option value="formation">Faith Formation / RCIA</option>
+          <option value="rcia">Becoming Catholic (RCIA)</option>
+          <option value="volunteer">Volunteering</option>
+          <option value="facility">Facility Rental</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+      <div class="modal-field"><label>Message</label><textarea id="mMessage" placeholder="How can we help you?"></textarea></div>
+      <button class="modal-submit" id="modalSubmit" type="button">Send Message</button>
+      <p class="modal-note">St. Mary&#39;s Parish · 123 Rivington Street, New York, NY 10002</p>
+    </div>
+  </div>
+</div>
+
+
+<script>
+(function(){
+  var overlay = document.getElementById('contactModal');
+  var closeBtn = document.getElementById('modalClose');
+  var submitBtn = document.getElementById('modalSubmit');
+  var subjectSel = document.getElementById('mSubject');
+
+  function openModal(from){
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    if(from && subjectSel){
+      var opt = Array.from(subjectSel.options).find(function(o){ return o.value === from; });
+      if(opt) subjectSel.value = from;
+    }
+  }
+
+  function closeModal(){
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  // Close on overlay click
+  overlay.addEventListener('click', function(e){ if(e.target === overlay) closeModal(); });
+  closeBtn.addEventListener('click', closeModal);
+
+  // Close on Escape
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeModal(); });
+
+  // Wire up all contact trigger links
+  document.addEventListener('click', function(e){
+    var el = e.target.closest('[data-contact]');
+    if(el){
+      e.preventDefault();
+      openModal(el.getAttribute('data-from') || '');
+    }
+  });
+
+  // Submit — show success state
+  if(submitBtn){
+    submitBtn.addEventListener('click', function(){
+      var email = document.getElementById('mEmail').value.trim();
+      if(!email){ document.getElementById('mEmail').focus(); return; }
+      document.getElementById('modalBody').innerHTML = '<div class="modal-success"><div class="modal-success-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><h3>Message sent!</h3><p>Thank you for reaching out. Someone from St. Mary\'s will be in touch within one business day.</p></div>';
+    });
+  }
+
+  // Also handle old ?from= URL params on index page
+  var params = new URLSearchParams(window.location.search);
+  var fromParam = params.get('from');
+  if(fromParam) openModal(fromParam);
+})();
+</script>
+
 </body>
 </html>
