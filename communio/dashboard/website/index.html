@@ -176,6 +176,7 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
 .wb-upload-link{color:#d85020;cursor:pointer;text-decoration:underline;}
 .wb-file-input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;}
 .wb-statusbar{display:flex;align-items:center;justify-content:space-between;padding:.875rem 1.25rem;background:#fff;border:1px solid #e8e2d6;border-radius:10px;margin-bottom:1rem;}.wb-status-left{display:flex;align-items:center;gap:.75rem;}.wb-site-url{font-size:.875rem;font-weight:600;color:#0e0a06;}.wb-site-badge{font-size:.75rem;font-weight:600;padding:.2rem .6rem;border-radius:20px;}.wb-badge-live{background:#e6f4eb;color:#2a8a4a;}.wb-view-btn{font-size:.85rem;font-weight:600;color:#d85020;text-decoration:none;border:1.5px solid #d85020;padding:.4rem .9rem;border-radius:7px;}.wb-view-btn:hover{background:#d85020;color:#fff;}.wb-section-divider{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#a89880;padding:.75rem 1.25rem .25rem;}.wb-disabled{opacity:.5;cursor:not-allowed;}.wb-disabled:hover{background:transparent;}.wb-status-soon{color:#a89880;}
+.wb-editor-wrap{display:flex;flex:1;overflow:hidden;}.wb-editor{width:380px;min-width:380px;overflow-y:auto;padding:2rem;border-right:1px solid #e8e2d6;}.wb-preview{flex:1;overflow-y:auto;background:#f5f2e8;}.wb-preview-topbar{background:#0e0a06;padding:.6rem 1rem;display:flex;align-items:center;justify-content:space-between;}.wb-preview-url{font-size:.75rem;color:#a89880;font-family:monospace;}.wb-preview-label{font-size:.7rem;color:#d85020;font-weight:700;text-transform:uppercase;letter-spacing:.06em;}.wb-preview-body{padding:1.5rem;}.wb-preview-section{background:#fff;border-radius:10px;padding:1.5rem;margin-bottom:1rem;}.wb-pv-hidden{display:none!important;}.pvw-section-title{font-size:1rem;font-weight:700;color:#0e0a06;margin-bottom:1rem;padding-bottom:.6rem;border-bottom:2px solid #d85020;}.pvw-mass-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:.75rem;}.pvw-mass-heading{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#6b5c4e;margin-bottom:.35rem;}.pvw-mass-text{font-size:.85rem;color:#0e0a06;line-height:1.6;white-space:pre-line;}.pvw-mass-row{font-size:.85rem;color:#0e0a06;margin-top:.5rem;}.pvw-staff-item{padding:.75rem 0;border-bottom:1px solid #f0ebe0;}.pvw-staff-name{font-weight:700;font-size:.9rem;color:#0e0a06;}.pvw-staff-role{font-size:.8rem;color:#d85020;margin:.1rem 0;}.pvw-staff-email{font-size:.78rem;color:#6b5c4e;}.pvw-event-item{padding:.75rem 0;border-bottom:1px solid #f0ebe0;}.pvw-event-date{font-size:.75rem;font-weight:700;color:#d85020;text-transform:uppercase;letter-spacing:.04em;}.pvw-event-name{font-size:.9rem;font-weight:700;color:#0e0a06;margin:.2rem 0;}.pvw-event-desc{font-size:.82rem;color:#6b5c4e;}.pvw-bulletin-box{text-align:center;padding:1.5rem;border:2px dashed #e8e2d6;border-radius:8px;}.pvw-bulletin-icon{font-size:2rem;margin-bottom:.5rem;}.pvw-bulletin-label{font-size:.9rem;font-weight:600;color:#0e0a06;}.pvw-bulletin-btn{display:inline-block;margin-top:.75rem;background:#d85020;color:#fff;padding:.4rem .9rem;border-radius:6px;font-size:.8rem;font-weight:600;}
 </style>
 </head>
 <body>
@@ -328,7 +329,7 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
           </div>
         </div>
       </div>
-      <div class="wb-editor" id="wb-editor">
+      <div class="wb-editor-wrap"><div class="wb-editor" id="wb-editor">
         <div class="wb-editor-inner" id="wb-panel-mass-times">
           <div class="wb-editor-hd">
             <div class="wb-editor-title">Mass Times</div>
@@ -430,7 +431,7 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
           <button class="wb-save-btn">Save Bulletin Settings</button>
         </div>
       </div>
-    </div>
+    </div><div class="wb-preview" id="wb-preview"><div class="wb-preview-topbar"><div class="wb-preview-url">🌐 stmarysnyc.communio.org</div><div class="wb-preview-label">Live preview</div></div><div class="wb-preview-body" id="wb-preview-body"><div class="wb-preview-section" id="preview-mass-times"><div class="pvw-section-title">Mass Times</div><div class="pvw-mass-grid"><div class="pvw-mass-col"><div class="pvw-mass-heading">Weekday Masses</div><div class="pvw-mass-text" id="pvw-weekday">—</div></div><div class="pvw-mass-col"><div class="pvw-mass-heading">Weekend Masses</div><div class="pvw-mass-text" id="pvw-weekend">—</div></div></div><div class="pvw-mass-row"><span class="pvw-mass-heading">Confession: </span><span class="pvw-mass-text" id="pvw-confession">—</span></div></div><div class="wb-preview-section wb-pv-hidden" id="preview-staff"><div class="pvw-section-title">Our Team</div><div class="pvw-staff-list" id="pvw-staff-list"><div class="pvw-staff-item"><div class="pvw-staff-name">Fr. James O'Brien</div><div class="pvw-staff-role">Pastor</div><div class="pvw-staff-email">info@stmarysnyc.org</div></div></div></div><div class="wb-preview-section wb-pv-hidden" id="preview-events"><div class="pvw-section-title">Upcoming Events</div><div class="pvw-event-list" id="pvw-event-list"><div class="pvw-event-item"><div class="pvw-event-date">—</div><div class="pvw-event-name" id="pvw-event-name">—</div><div class="pvw-event-desc" id="pvw-event-desc">—</div></div></div></div><div class="wb-preview-section wb-pv-hidden" id="preview-bulletin"><div class="pvw-section-title">Bulletin & Newsletter</div><div class="pvw-bulletin-box"><div class="pvw-bulletin-icon">📄</div><div class="pvw-bulletin-label">This week's bulletin</div><div class="pvw-bulletin-btn">Download PDF</div></div></div></div></div></div>
   </div>
 </div>
 
@@ -456,6 +457,61 @@ document.querySelectorAll('.wb-section-item').forEach(function(item){
     if(panel){panel.classList.remove('wb-hidden');}
   });
 });
+</script>
+<script>
+// Live preview sync
+function syncPreview(section){
+  if(section==='mass-times'){
+    var wd=document.querySelector('#wb-panel-mass-times .wb-textarea:nth-of-type(1)');
+    var we=document.querySelector('#wb-panel-mass-times .wb-textarea:nth-of-type(2)');
+    var cf=document.querySelector('#wb-panel-mass-times .wb-input');
+    if(wd)document.getElementById('pvw-weekday').textContent=wd.value||'—';
+    if(we)document.getElementById('pvw-weekend').textContent=we.value||'—';
+    if(cf)document.getElementById('pvw-confession').textContent=cf.value||'—';
+  }
+  if(section==='staff'){
+    var nm=document.querySelector('#wb-panel-staff .wb-field-half:first-child .wb-input');
+    var rl=document.querySelector('#wb-panel-staff .wb-field-half:last-child .wb-input');
+    var em=document.querySelector('#wb-panel-staff input[type="email"]');
+    var list=document.getElementById('pvw-staff-list');
+    if(list&&nm){list.innerHTML='<div class="pvw-staff-item"><div class="pvw-staff-name">'+(nm.value||'Name')+'</div><div class="pvw-staff-role">'+(rl?rl.value:'Role')+'</div><div class="pvw-staff-email">'+(em?em.value:'')+'</div></div>';}
+  }
+  if(section==='events'){
+    var en=document.querySelector('#wb-panel-events .wb-input');
+    var ed=document.querySelector('#wb-panel-events input[type="date"]');
+    var et=document.querySelector('#wb-panel-events input[type="time"]');
+    var edesc=document.querySelector('#wb-panel-events .wb-textarea');
+    if(en)document.getElementById('pvw-event-name').textContent=en.value||'—';
+    if(edesc)document.getElementById('pvw-event-desc').textContent=edesc.value||'—';
+    var dateStr='';
+    if(ed&&ed.value){var d=new Date(ed.value);dateStr=d.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'});}
+    if(et&&et.value){dateStr+=' at '+et.value;}
+    document.getElementById('pvw-event-name').previousElementSibling.textContent=dateStr||'—';
+  }
+}
+// Wire up section switching to show correct preview panel
+var origSectionClick=null;
+document.querySelectorAll('.wb-section-item:not(.wb-disabled)').forEach(function(item){
+  item.addEventListener('click',function(){
+    var section=item.getAttribute('data-section');
+    document.querySelectorAll('.wb-preview-section').forEach(function(p){p.classList.add('wb-pv-hidden');});
+    var pvPanel=document.getElementById('preview-'+section);
+    if(pvPanel){pvPanel.classList.remove('wb-pv-hidden');}
+    syncPreview(section);
+  });
+});
+// Wire up input events for live sync
+document.querySelectorAll('#wb-panel-mass-times textarea, #wb-panel-mass-times input').forEach(function(el){
+  el.addEventListener('input',function(){syncPreview('mass-times');});
+});
+document.querySelectorAll('#wb-panel-staff input').forEach(function(el){
+  el.addEventListener('input',function(){syncPreview('staff');});
+});
+document.querySelectorAll('#wb-panel-events input, #wb-panel-events textarea').forEach(function(el){
+  el.addEventListener('input',function(){syncPreview('events');});
+});
+// Init first preview
+syncPreview('mass-times');
 </script>
 </body>
 </html>
