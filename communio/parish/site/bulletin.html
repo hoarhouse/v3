@@ -68,12 +68,36 @@ h1,h2,h3,h4,h5,h6{font-family:'Lora',serif;line-height:1.2;}
 <body>
 <nav class="nav">
   <div class="nav-inner">
-    <a href="index.html" class="nav-logo"><div class="nav-crest">SM</div>St. Mary's Parish</a>
-    <a href="index.html" class="nav-back">
-      <svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M12 4l-6 6 6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      Back to home
+    <a href="index.html" class="nav-logo">
+      <div class="nav-crest">SM</div>
+      St. Mary's Parish
     </a>
-    <a href="index.html#contact" class="nav-cta">Contact Us</a>
+    <div class="nav-links">
+      <a href="index.html#mass-times" class="nav-link">Mass Times</a>
+      <a href="index.html#welcome" class="nav-link">About</a>
+      <a href="index.html#events" class="nav-link">Events</a>
+      <a href="staff.html" class="nav-link">Our Team</a>
+      <a href="sacraments.html" class="nav-link">Sacraments</a>
+      <a href="bulletin.html" class="nav-link">Bulletin</a>
+      <a href="rcia.html" class="nav-link">Becoming Catholic</a>
+      <a href="index.html#giving" class="nav-link">Give</a>
+      <a href="index.html#contact" class="nav-link">Contact</a>
+    </div>
+    <a href="index.html#giving" class="nav-cta">Give Now</a>
+    <button class="nav-hamburger" id="navHamburger">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="nav-mobile" id="navMobile">
+    <a href="index.html#mass-times">Mass Times</a>
+    <a href="index.html#welcome">About</a>
+    <a href="index.html#events">Events</a>
+    <a href="staff.html">Our Team</a>
+    <a href="sacraments.html">Sacraments</a>
+    <a href="bulletin.html">Bulletin</a>
+    <a href="rcia.html">Becoming Catholic</a>
+    <a href="index.html#giving">Give</a>
+    <a href="index.html#contact">Contact</a>
   </div>
 </nav>
 
@@ -159,5 +183,13 @@ h1,h2,h3,h4,h5,h6{font-family:'Lora',serif;line-height:1.2;}
     <p>© 2024 St. Mary's Parish · <a href="index.html">Back to home</a> · Powered by <span style="color:var(--terra);font-weight:600;">Communio</span></p>
   </div>
 </footer>
-</body>
+
+<script>
+const navHamburger = document.getElementById('navHamburger');
+const navMobile = document.getElementById('navMobile');
+if(navHamburger){
+  navHamburger.addEventListener('click',()=>navMobile.classList.toggle('open'));
+  navMobile.addEventListener('click',(e)=>{if(e.target.tagName==='A')navMobile.classList.remove('open');});
+}
+</script>\n</body>
 </html>
