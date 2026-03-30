@@ -1168,6 +1168,28 @@ z-index:2;}
 .btn-submit:hover{ background:var(--terra-dark); transform:translateY(-1px); }
 @media(max-width:968px){ .contact-grid{ grid-template-columns:1fr; gap:2.5rem; } .form-row{ grid-template-columns:1fr; } }
 
+
+/* STAFF */
+.staff{ background:var(--cream); padding:5rem 2rem; }
+.staff-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:1.5rem; margin-top:2.5rem; }
+.staff-card{ background:#fff; border-radius:10px; overflow:hidden; border:1px solid rgba(14,10,6,0.06); transition:all .2s ease; }
+.staff-card:hover{ transform:translateY(-3px); box-shadow:0 12px 40px rgba(14,10,6,0.1); }
+.staff-photo{ height:220px; background:var(--ink); position:relative; overflow:hidden; }
+.staff-photo img{ width:100%; height:100%; object-fit:cover; display:block; }
+.staff-photo-placeholder{ width:100%; height:100%; display:flex; align-items:center; justify-content:center; background:linear-gradient(135deg,rgba(14,10,6,0.9),rgba(14,10,6,0.7)); color:rgba(255,255,255,0.3); }
+.staff-body{ padding:1.25rem; }
+.staff-name{ font-family:'Lora',serif; font-weight:700; font-size:1rem; color:var(--ink); margin-bottom:.2rem; }
+.staff-title{ font-size:.72rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--terra); margin-bottom:.75rem; }
+.staff-bio{ font-size:.8rem; color:var(--text-muted); line-height:1.6; margin-bottom:1rem; }
+.staff-email{ display:inline-flex; align-items:center; gap:.4rem; font-size:.78rem; font-weight:600; color:var(--terra); text-decoration:none; transition:opacity .2s; }
+.staff-email:hover{ opacity:.7; }
+.staff-feature{ grid-column:span 2; display:grid; grid-template-columns:240px 1fr; }
+.staff-feature .staff-photo{ height:100%; min-height:260px; }
+.staff-feature .staff-body{ padding:2rem; display:flex; flex-direction:column; justify-content:center; }
+.staff-feature .staff-name{ font-size:1.375rem; margin-bottom:.35rem; }
+.staff-feature .staff-bio{ font-size:.875rem; margin-bottom:1.25rem; }
+@media(max-width:1100px){ .staff-grid{ grid-template-columns:repeat(2,1fr); } .staff-feature{ grid-column:span 2; } }
+@media(max-width:568px){ .staff-grid{ grid-template-columns:1fr; } .staff-feature{ grid-column:span 1; grid-template-columns:1fr; } .staff-feature .staff-photo{ height:220px; } }
 </style>
 </head>
 <body>
@@ -1185,6 +1207,7 @@ z-index:2;}
       <a href="#events" class="nav-link">Events</a>
       <a href="#involved" class="nav-link">Get Involved</a>
       <a href="#giving" class="nav-link">Give</a>
+        <a href="#staff" class="nav-link">Our Team</a>
         <a href="#contact" class="nav-link">Contact</a>
       <a href="#" class="nav-cta">Plan Your Visit</a>
     </div>
@@ -1517,6 +1540,128 @@ z-index:2;}
   </div>
 </section>
 
+
+
+<!-- STAFF -->
+<section class="staff fade-in" id="staff">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Meet Our Team</h2>
+      <p class="section-subtitle">The people who serve St. Mary&#39;s Parish every day</p>
+    </div>
+    <div class="staff-grid">
+
+      <!-- Pastor — featured -->
+      <div class="staff-card staff-feature">
+        <div class="staff-photo">
+          <div class="staff-photo-placeholder">
+            <svg width="64" height="64" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="1.5"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </div>
+        </div>
+        <div class="staff-body">
+          <div class="staff-title">Pastor</div>
+          <div class="staff-name">Fr. Michael O&#39;Brien</div>
+          <p class="staff-bio">Father O&#39;Brien has served St. Mary&#39;s since 2015. Ordained in 1998, he holds a doctorate in Sacred Theology from the Gregorian University in Rome. He is passionate about evangelisation, the New Evangelisation, and building authentic community in the heart of New York City.</p>
+          <a href="mailto:pastor@stmarysnyc.org" class="staff-email">
+            <svg width="16" height="16" viewBox="0 0 20 20" fill="none"><rect x="2" y="4" width="16" height="13" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M2 7l8 5 8-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            pastor@stmarysnyc.org
+          </a>
+        </div>
+      </div>
+
+      <!-- Associate Pastor -->
+      <div class="staff-card">
+        <div class="staff-photo">
+          <div class="staff-photo-placeholder">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="1.5"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </div>
+        </div>
+        <div class="staff-body">
+          <div class="staff-title">Associate Pastor</div>
+          <div class="staff-name">Fr. Carlos Reyes</div>
+          <p class="staff-bio">Fr. Reyes leads our Spanish-language ministries and Sunday 1:00 PM Mass community.</p>
+          <a href="mailto:fr.reyes@stmarysnyc.org" class="staff-email">
+            <svg width="14" height="14" viewBox="0 0 20 20" fill="none"><rect x="2" y="4" width="16" height="13" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M2 7l8 5 8-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            fr.reyes@stmarysnyc.org
+          </a>
+        </div>
+      </div>
+
+      <!-- Deacon -->
+      <div class="staff-card">
+        <div class="staff-photo">
+          <div class="staff-photo-placeholder">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="1.5"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </div>
+        </div>
+        <div class="staff-body">
+          <div class="staff-title">Permanent Deacon</div>
+          <div class="staff-name">Dcn. James Thornton</div>
+          <p class="staff-bio">Deacon Thornton coordinates our outreach programmes and serves the homebound community.</p>
+          <a href="mailto:deacon@stmarysnyc.org" class="staff-email">
+            <svg width="14" height="14" viewBox="0 0 20 20" fill="none"><rect x="2" y="4" width="16" height="13" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M2 7l8 5 8-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            deacon@stmarysnyc.org
+          </a>
+        </div>
+      </div>
+
+      <!-- Parish Manager -->
+      <div class="staff-card">
+        <div class="staff-photo">
+          <div class="staff-photo-placeholder">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="1.5"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </div>
+        </div>
+        <div class="staff-body">
+          <div class="staff-title">Parish Manager</div>
+          <div class="staff-name">Mrs. Anne Sullivan</div>
+          <p class="staff-bio">Anne oversees daily parish operations, office administration, and facility scheduling.</p>
+          <a href="mailto:office@stmarysnyc.org" class="staff-email">
+            <svg width="14" height="14" viewBox="0 0 20 20" fill="none"><rect x="2" y="4" width="16" height="13" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M2 7l8 5 8-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            office@stmarysnyc.org
+          </a>
+        </div>
+      </div>
+
+      <!-- Director of Music -->
+      <div class="staff-card">
+        <div class="staff-photo">
+          <div class="staff-photo-placeholder">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="1.5"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </div>
+        </div>
+        <div class="staff-body">
+          <div class="staff-title">Director of Music</div>
+          <div class="staff-name">Mr. David Chen</div>
+          <p class="staff-bio">David leads our choir, organises liturgical music, and directs the parish music programme.</p>
+          <a href="mailto:music@stmarysnyc.org" class="staff-email">
+            <svg width="14" height="14" viewBox="0 0 20 20" fill="none"><rect x="2" y="4" width="16" height="13" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M2 7l8 5 8-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            music@stmarysnyc.org
+          </a>
+        </div>
+      </div>
+
+      <!-- Faith Formation -->
+      <div class="staff-card">
+        <div class="staff-photo">
+          <div class="staff-photo-placeholder">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="1.5"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </div>
+        </div>
+        <div class="staff-body">
+          <div class="staff-title">Director of Faith Formation</div>
+          <div class="staff-name">Ms. Sofia Morales</div>
+          <p class="staff-bio">Sofia oversees religious education for children, RCIA, and adult faith formation programmes.</p>
+          <a href="mailto:formation@stmarysnyc.org" class="staff-email">
+            <svg width="14" height="14" viewBox="0 0 20 20" fill="none"><rect x="2" y="4" width="16" height="13" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M2 7l8 5 8-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            formation@stmarysnyc.org
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
 
 <!-- NEWSLETTER -->
 <section class="newsletter fade-in">
