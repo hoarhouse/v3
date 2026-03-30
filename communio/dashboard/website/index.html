@@ -175,6 +175,7 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
 .wb-upload-sub{font-size:.85rem;color:#6b5c4e;margin-top:.25rem;}
 .wb-upload-link{color:#d85020;cursor:pointer;text-decoration:underline;}
 .wb-file-input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;}
+.wb-statusbar{display:flex;align-items:center;justify-content:space-between;padding:.875rem 1.25rem;background:#fff;border:1px solid #e8e2d6;border-radius:10px;margin-bottom:1rem;}.wb-status-left{display:flex;align-items:center;gap:.75rem;}.wb-site-url{font-size:.875rem;font-weight:600;color:#0e0a06;}.wb-site-badge{font-size:.75rem;font-weight:600;padding:.2rem .6rem;border-radius:20px;}.wb-badge-live{background:#e6f4eb;color:#2a8a4a;}.wb-view-btn{font-size:.85rem;font-weight:600;color:#d85020;text-decoration:none;border:1.5px solid #d85020;padding:.4rem .9rem;border-radius:7px;}.wb-view-btn:hover{background:#d85020;color:#fff;}.wb-section-divider{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#a89880;padding:.75rem 1.25rem .25rem;}.wb-disabled{opacity:.5;cursor:not-allowed;}.wb-disabled:hover{background:transparent;}.wb-status-soon{color:#a89880;}
 </style>
 </head>
 <body>
@@ -277,7 +278,7 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
     <div class="pg-hd">
       <div><div class="pg-title">Website Builder</div><div class="pg-sub">Manage your public parish website</div></div>
     </div>
-    <div class="wb-layout">
+    <div class="wb-statusbar"><div class="wb-status-left"><div class="wb-site-url">🌐 stmarysnyc.communio.org</div><div class="wb-site-badge wb-badge-live">● Live</div></div><div class="wb-status-right"><a href="#" class="wb-view-btn">View public site →</a></div></div><div class="wb-layout">
       <div class="wb-sections">
         <div class="wb-section-item wb-active" data-section="mass-times">
           <div class="wb-section-icon">🕐</div>
@@ -311,7 +312,7 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
           </div>
           <div class="wb-section-arrow">›</div>
         </div>
-      </div>
+      </div><div class="wb-section-divider">Coming soon</div><div class="wb-section-item wb-disabled" data-section="giving"><div class="wb-section-icon">💳</div><div class="wb-section-info"><div class="wb-section-name">Giving</div><div class="wb-section-status wb-status-soon">In development</div></div></div><div class="wb-section-item wb-disabled" data-section="media"><div class="wb-section-icon">📺</div><div class="wb-section-info"><div class="wb-section-name">Media & Livestream</div><div class="wb-section-status wb-status-soon">In development</div></div></div>
       <div class="wb-editor" id="wb-editor">
         <div class="wb-editor-inner" id="wb-panel-mass-times">
           <div class="wb-editor-hd">
