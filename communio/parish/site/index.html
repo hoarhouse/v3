@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>St. Mary's Parish — New York, USA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+/* ── RESET & BASE ── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Outfit',sans-serif;line-height:1.6;color:#0e0a06;background:#fffdf5;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4,h5,h6{font-family:'Lora',serif;font-weight:600;line-height:1.2}
+img{max-width:100%;height:auto}
+a{text-decoration:none;color:inherit}
+button{font-family:inherit}
+
+/* ── VARIABLES ── */
+:root{
+--ink:#0e0a06;
+--cream:#f5f2e8;
+--terra:#d85020;
+--sage:#2a8a4a;
+--warm-white:#fffdf5;
+--max-width:1200px;
+}
+
+/* ── UTILITIES ── */
+.container{max-width:var(--max-width);margin:0 auto;padding:0 2rem}
+@media(max-width:768px){.container{padding:0 1.5rem}}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+/* ── TOP NAV ── */
+.nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:white;border-bottom:1px solid rgba(14,10,6,0.08);backdrop-filter:blur(20px)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:70px;max-width:var(--max-width);margin:0 auto;padding:0 2rem}
+@media(max-width:768px){.nav-inner{padding:0 1.5rem}}
+
+.nav-brand{display:flex;flex-direction:column}
+.nav-parish{font-family:'Lora',serif;font-style:italic;font-size:1.25rem;font-weight:600;color:var(--ink);line-height:1.1}
+.nav-location{font-size:0.75rem;color:rgba(14,10,6,0.6);font-weight:400;margin-top:0.1rem}
+
+.nav-links{display:flex;align-items:center;gap:2rem}
+@media(max-width:768px){.nav-links{display:none}}
+.nav-link{font-size:0.9rem;font-weight:500;color:var(--ink);transition:color 0.2s}
+.nav-link:hover{color:var(--terra)}
+
+.nav-cta{background:var(--terra);color:white;padding:0.6rem 1.2rem;border-radius:6px;font-size:0.9rem;font-weight:600;transition:all 0.2s;border:none;cursor:pointer}
+.nav-cta:hover{background:#c04418;transform:translateY(-1px)}
+
+.nav-burger{display:none;flex-direction:column;gap:3px;background:none;border:none;cursor:pointer;padding:0.5rem}
+@media(max-width:768px){.nav-burger{display:flex}}
+.nav-burger span{display:block;width:20px;height:2px;background:var(--ink);border-radius:2px;transition:all 0.3s}
+.nav-burger.active span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+.nav-burger.active span:nth-child(2){opacity:0}
+.nav-burger.active span:nth-child(3){transform:rotate(-45deg) translate(7px,-6px)}
+
+.nav-mobile{display:none;position:fixed;top:70px;left:0;right:0;background:white;border-bottom:1px solid rgba(14,10,6,0.08);padding:1rem 1.5rem;z-index:999}
+@media(max-width:768px){.nav-mobile.active{display:block}}
+.nav-mobile a{display:block;padding:0.8rem 0;border-bottom:1px solid rgba(14,10,6,0.05);font-weight:500;color:var(--ink)}
+.nav-mobile a:last-child{border-bottom:none}
+.nav-mobile .nav-cta{display:inline-block;margin-top:0.5rem}
+
+/* ── HERO SECTION ── */
+.hero{position:relative;height:85vh;min-height:600px;display:flex;align-items:center;background-image:linear-gradient(rgba(14,10,6,0.6),rgba(14,10,6,0.4)),url('https://images.unsplash.com/photo-1548625149-720f8d8e4ef4?w=1600');background-size:cover;background-position:center;color:white}
+.hero-content{max-width:60%;position:relative;z-index:2}
+@media(max-width:768px){.hero{height:75vh;min-height:500px}.hero-content{max-width:100%}}
+
+.hero-overline{font-size:0.8rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--terra);font-weight:600;margin-bottom:0.5rem}
+.hero-title{font-size:clamp(2.5rem,5vw,4rem);font-family:'Lora',serif;font-weight:600;margin-bottom:1rem;line-height:1.1}
+.hero-subtitle{font-size:1.1rem;color:rgba(255,255,255,0.9);margin-bottom:2rem;max-width:500px;line-height:1.5}
+
+.hero-buttons{display:flex;gap:1rem;margin-bottom:3rem}
+@media(max-width:480px){.hero-buttons{flex-direction:column;gap:0.8rem}}
+.btn-primary{background:var(--terra);color:white;padding:0.8rem 1.5rem;border-radius:8px;font-weight:600;transition:all 0.2s;display:inline-flex;align-items:center;gap:0.5rem;border:none;cursor:pointer}
+.btn-primary:hover{background:#c04418;transform:translateY(-1px)}
+.btn-outline{background:transparent;color:white;border:2px solid white;padding:0.7rem 1.4rem;border-radius:8px;font-weight:600;transition:all 0.2s;display:inline-flex;align-items:center;gap:0.5rem;cursor:pointer}
+.btn-outline:hover{background:white;color:var(--ink)}
+
+.hero-card{position:absolute;bottom:2rem;left:2rem;right:2rem;background:white;color:var(--ink);padding:1rem 1.5rem;border-radius:10px;box-shadow:0 10px 40px rgba(0,0,0,0.1);display:flex;align-items:center;justify-content:space-between}
+@media(max-width:768px){.hero-card{position:static;margin-top:2rem}}
+.hero-card-text{font-size:0.9rem}
+.hero-card strong{font-weight:600;color:var(--terra)}
+
+/* ── MASS TIMES SECTION ── */
+.mass-times{padding:4rem 0;background:var(--cream)}
+.section-title{text-align:center;font-size:2.5rem;font-family:'Lora',serif;margin-bottom:3rem;color:var(--ink)}
+@media(max-width:768px){.section-title{font-size:2rem}}
+
+.mass-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;max-width:800px;margin:0 auto;margin-bottom:2rem}
+@media(max-width:768px){.mass-grid{grid-template-columns:1fr;gap:2rem}}
+
+.mass-column h3{font-size:1.3rem;color:var(--terra);margin-bottom:1rem;font-family:'Lora',serif}
+.mass-times-list{font-size:1rem;line-height:1.8}
+.mass-times-list div{margin-bottom:0.3rem}
+
+.confession{text-align:center;max-width:600px;margin:0 auto 1.5rem;padding:1.5rem;background:rgba(255,255,255,0.7);border-radius:8px}
+.confession strong{color:var(--sage)}
+
+.view-schedule{text-align:center}
+.view-schedule a{color:var(--sage);font-weight:500;font-size:0.9rem}
+.view-schedule a:hover{text-decoration:underline}
+
+/* ── WELCOME SECTION ── */
+.welcome{padding:5rem 0;background:white}
+.welcome-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+@media(max-width:768px){.welcome-grid{grid-template-columns:1fr;gap:3rem}}
+
+.welcome-quote{font-size:1.8rem;font-family:'Lora',serif;font-style:italic;color:var(--ink);line-height:1.3;margin-bottom:1rem}
+@media(max-width:768px){.welcome-quote{font-size:1.5rem}}
+
+.welcome-content p{margin-bottom:1.5rem;color:rgba(14,10,6,0.8);line-height:1.6}
+.welcome-buttons{display:flex;gap:1rem;margin-top:1.5rem}
+@media(max-width:480px){.welcome-buttons{flex-direction:column}}
+.btn-secondary{background:transparent;color:var(--sage);border:none;font-weight:600;cursor:pointer;padding:0}
+.btn-secondary:hover{text-decoration:underline}
+
+/* ── EVENTS SECTION ── */
+.events{padding:4rem 0;background:var(--cream)}
+.events-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin-top:3rem}
+@media(max-width:768px){.events-grid{grid-template-columns:1fr;gap:1.5rem}}
+
+.event-card{background:white;border-radius:10px;padding:1.5rem;box-shadow:0 4px 20px rgba(0,0,0,0.06);transition:transform 0.2s}
+.event-card:hover{transform:translateY(-2px)}
+
+.event-date{background:var(--terra);color:white;padding:0.4rem 0.8rem;border-radius:6px;font-size:0.8rem;font-weight:600;text-transform:uppercase;display:inline-block;margin-bottom:1rem}
+.event-title{font-size:1.2rem;font-family:'Lora',serif;margin-bottom:0.8rem;color:var(--ink)}
+.event-description{color:rgba(14,10,6,0.7);font-size:0.9rem;line-height:1.5;margin-bottom:1rem}
+.event-link{color:var(--sage);font-weight:500;font-size:0.9rem}
+.event-link:hover{text-decoration:underline}
+
+/* ── GIVING SECTION ── */
+.giving{padding:4rem 0;background:var(--ink);color:white;text-align:center}
+.giving-title{font-size:2.5rem;font-family:'Lora',serif;margin-bottom:1rem}
+@media(max-width:768px){.giving-title{font-size:2rem}}
+.giving-subtitle{font-size:1.1rem;color:rgba(255,255,255,0.8);margin-bottom:3rem;max-width:500px;margin-left:auto;margin-right:auto}
+
+.giving-amounts{display:flex;justify-content:center;gap:1rem;margin-bottom:2rem;flex-wrap:wrap}
+.amount-btn{background:rgba(255,255,255,0.1);color:white;border:2px solid rgba(255,255,255,0.2);padding:0.8rem 1.2rem;border-radius:8px;font-weight:600;cursor:pointer;transition:all 0.2s}
+.amount-btn:hover,.amount-btn.active{background:rgba(216,133,32,0.2);border-color:var(--terra)}
+.amount-other{color:rgba(255,255,255,0.7);font-size:0.9rem;margin-left:1rem;cursor:pointer}
+.amount-other:hover{color:white;text-decoration:underline}
+
+.giving-cta{margin:2rem 0}
+.btn-giving{background:var(--terra);color:white;padding:1rem 2rem;border-radius:10px;font-size:1.1rem;font-weight:700;border:none;cursor:pointer;transition:all 0.2s}
+.btn-giving:hover{background:#c04418;transform:translateY(-1px)}
+
+.giving-note{font-size:0.85rem;color:rgba(255,255,255,0.6)}
+
+/* ── FOOTER ── */
+.footer{background:var(--ink);color:rgba(255,255,255,0.8);padding:3rem 0 2rem}
+.footer-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:3rem;margin-bottom:2rem}
+@media(max-width:768px){.footer-grid{grid-template-columns:1fr;gap:2rem}}
+
+.footer-column h4{color:white;margin-bottom:1rem;font-family:'Lora',serif;font-size:1.1rem}
+.footer-column p,.footer-column a{color:rgba(255,255,255,0.7);line-height:1.6;display:block;margin-bottom:0.3rem}
+.footer-column a:hover{color:white}
+
+.footer-bottom{border-top:1px solid rgba(255,255,255,0.1);padding-top:1.5rem;display:flex;justify-content:space-between;align-items:center;font-size:0.85rem;color:rgba(255,255,255,0.5)}
+@media(max-width:768px){.footer-bottom{flex-direction:column;gap:1rem;text-align:center}}
+
+.communio-credit{display:flex;align-items:center;gap:0.5rem}
+.communio-mark{font-family:'Lora',serif;font-style:italic;color:var(--terra)}
+</style>
+</head>
+<body>
+
+<!-- TOP NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="nav-brand">
+      <div class="nav-parish">St. Mary's Parish</div><!-- SHARED: $parish->name -->
+      <div class="nav-location">New York, USA</div><!-- SHARED: $parish->city, $parish->state -->
+    </div>
+    <div class="nav-links">
+      <a href="#mass-times" class="nav-link">Mass Times</a>
+      <a href="#about" class="nav-link">About</a>
+      <a href="#events" class="nav-link">Events</a>
+      <a href="#give" class="nav-link">Give</a>
+      <button class="nav-cta">Contact us</button>
+    </div>
+    <button class="nav-burger" id="navBurger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+  <div class="nav-mobile" id="navMobile">
+    <a href="#mass-times">Mass Times</a>
+    <a href="#about">About</a>
+    <a href="#events">Events</a>
+    <a href="#give">Give</a>
+    <button class="nav-cta">Contact us</button>
+  </div>
+</nav>
+
+<!-- HERO SECTION -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-overline">Welcome to our parish</div>
+      <h1 class="hero-title">A community of faith in the heart of New York</h1>
+      <p class="hero-subtitle">St. Mary's Parish has been serving the Lower East Side since 1887. All are welcome.</p><!-- SHARED: $parish->description -->
+      <div class="hero-buttons">
+        <button class="btn-primary">Plan your visit →</button>
+        <button class="btn-outline">Watch live stream</button>
+      </div>
+    </div>
+    <div class="hero-card">
+      <div class="hero-card-text">
+        <strong>Next Mass</strong> — Sunday 9:00 AM · Main Church · Starts in 2h 15m
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MASS TIMES SECTION -->
+<section class="mass-times" id="mass-times">
+  <div class="container">
+    <h2 class="section-title">Join us for Mass</h2>
+    <div class="mass-grid">
+      <div class="mass-column">
+        <h3>Weekday Masses</h3><!-- SHARED: $parish->mass_times_weekday_title -->
+        <div class="mass-times-list">
+          <div>Monday–Friday: 9:00 AM</div>
+          <div>Tuesday & Thursday: 6:45 PM</div>
+          <div>Saturday: 10:00 AM</div>
+        </div><!-- SHARED: $parish->mass_times_weekday -->
+      </div>
+      <div class="mass-column">
+        <h3>Weekend Masses</h3><!-- SHARED: $parish->mass_times_weekend_title -->
+        <div class="mass-times-list">
+          <div>Saturday Vigil: 5:00 PM</div>
+          <div>Sunday: 7:00 AM, 9:00 AM, 11:00 AM</div>
+          <div>Sunday: 1:00 PM (Español)</div>
+          <div>Sunday: 6:00 PM</div>
+        </div><!-- SHARED: $parish->mass_times_weekend -->
+      </div>
+    </div>
+    <div class="confession">
+      <strong>Confession</strong> — Saturday 3:30–4:30 PM or by appointment<!-- SHARED: $parish->confession_times -->
+    </div>
+    <div class="view-schedule">
+      <a href="#">View full schedule →</a>
+    </div>
+  </div>
+</section>
+
+<!-- WELCOME SECTION -->
+<section class="welcome" id="about">
+  <div class="container">
+    <div class="welcome-grid">
+      <div class="welcome-quote">
+        "We believe Our Lord calls us beyond membership to become His true disciples."<!-- SHARED: $parish->mission_quote -->
+      </div>
+      <div class="welcome-content">
+        <p>For over 135 years, St. Mary's has been a beacon of faith and community in New York's Lower East Side. We are a diverse Catholic community that welcomes all people to experience the love of Christ through worship, fellowship, and service.</p><!-- SHARED: $parish->description -->
+        <p>Whether you're visiting New York, new to the neighborhood, or seeking a spiritual home, we invite you to join our parish family and grow in faith together.</p><!-- SHARED: $parish->welcome_text -->
+        <div class="welcome-buttons">
+          <button class="btn-primary">I'm New Here →</button>
+          <button class="btn-secondary">Meet our pastor →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- UPCOMING EVENTS -->
+<section class="events" id="events">
+  <div class="container">
+    <h2 class="section-title">Upcoming Events</h2>
+    <div class="events-grid">
+      <div class="event-card">
+        <div class="event-date">Apr 19</div><!-- SHARED: $events[0]->date -->
+        <h3 class="event-title">Easter Vigil</h3><!-- SHARED: $events[0]->title -->
+        <p class="event-description">Join us for the most sacred celebration of the liturgical year as we welcome new members into the Church.</p><!-- SHARED: $events[0]->description -->
+        <a href="#" class="event-link">Learn more →</a>
+      </div>
+      <div class="event-card">
+        <div class="event-date">Apr 27</div><!-- SHARED: $events[1]->date -->
+        <h3 class="event-title">Parish Picnic</h3><!-- SHARED: $events[1]->title -->
+        <p class="event-description">Bring your family for food, games, and fellowship in Central Park. All ages welcome for this beloved annual tradition.</p><!-- SHARED: $events[1]->description -->
+        <a href="#" class="event-link">Learn more →</a>
+      </div>
+      <div class="event-card">
+        <div class="event-date">May 3</div><!-- SHARED: $events[2]->date -->
+        <h3 class="event-title">Youth Retreat</h3><!-- SHARED: $events[2]->title -->
+        <p class="event-description">High school students are invited to a weekend retreat focused on faith, friendship, and discovering God's call.</p><!-- SHARED: $events[2]->description -->
+        <a href="#" class="event-link">Learn more →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GIVING SECTION -->
+<section class="giving" id="give">
+  <div class="container">
+    <h2 class="giving-title">Support our parish mission</h2>
+    <p class="giving-subtitle">Your generosity keeps our community strong and our doors open to all.</p><!-- SHARED: $parish->giving_description -->
+    <div class="giving-amounts">
+      <button class="amount-btn" data-amount="25">$25</button>
+      <button class="amount-btn" data-amount="50">$50</button>
+      <button class="amount-btn active" data-amount="100">$100</button>
+      <button class="amount-btn" data-amount="250">$250</button>
+      <span class="amount-other">Give another amount</span>
+    </div>
+    <div class="giving-cta">
+      <button class="btn-giving">Donate now →</button>
+    </div>
+    <div class="giving-note">
+      Secure giving · Tax deductible · Recurring options available
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-column">
+        <h4>St. Mary's Parish</h4><!-- SHARED: $parish->name -->
+        <p>123 Rivington Street<br>New York, NY 10002</p><!-- SHARED: $parish->address -->
+        <p>(212) 555-0123</p><!-- SHARED: $parish->phone -->
+        <p>info@stmarysnyc.org</p><!-- SHARED: $parish->email -->
+      </div>
+      <div class="footer-column">
+        <h4>Quick Links</h4>
+        <a href="#mass-times">Mass Times</a>
+        <a href="#">Sacraments</a>
+        <a href="#">Our Staff</a>
+        <a href="#events">Events</a>
+        <a href="#give">Giving</a>
+      </div>
+      <div class="footer-column">
+        <h4>Connect</h4>
+        <a href="#">Facebook</a>
+        <a href="#">Instagram</a>
+        <a href="#">YouTube</a>
+        <a href="#">Newsletter</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2024 St. Mary's Parish. All rights reserved.</div><!-- SHARED: $parish->name -->
+      <div class="communio-credit">
+        Powered by <span class="communio-mark">Communio</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- JavaScript -->
+<script>
+// Mobile navigation toggle
+const navBurger = document.getElementById('navBurger');
+const navMobile = document.getElementById('navMobile');
+
+navBurger.addEventListener('click', () => {
+  navBurger.classList.toggle('active');
+  navMobile.classList.toggle('active');
+});
+
+// Close mobile nav when clicking links
+navMobile.addEventListener('click', (e) => {
+  if (e.target.tagName === 'A') {
+    navBurger.classList.remove('active');
+    navMobile.classList.remove('active');
+  }
+});
+
+// Giving amount selection
+document.querySelectorAll('.amount-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.amount-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  });
+});
+</script>
+
+</body>
+</html>
