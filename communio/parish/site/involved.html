@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Get Involved — St. Mary's Parish</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0e0a06;--terra:#d85020;--terra-dark:#b84018;--sage:#2a8a4a;--cream:#f5f2e8;--warm-white:#fffdf5;--text-body:#3d2f22;--text-muted:#7a6555;--gold:#c8973a;}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+a{color:inherit;text-decoration:none;}
+body{font-family:'Outfit',sans-serif;line-height:1.6;color:var(--text-body);background:var(--warm-white);-webkit-font-smoothing:antialiased;}
+h1,h2,h3,h4,h5,h6{font-family:'Lora',serif;line-height:1.2;}
+.container{max-width:1200px;margin:0 auto;padding:0 2rem;}
+
+/* NAVIGATION */
+.nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:64px;background:rgba(255,253,245,0.96);backdrop-filter:blur(12px);box-shadow:0 2px 20px rgba(14,10,6,0.08);}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:100%;max-width:1200px;margin:0 auto;padding:0 2rem;gap:1rem;}
+.nav-logo{display:flex;align-items:center;gap:.75rem;font-family:'Lora',serif;font-weight:600;font-size:1.125rem;color:var(--ink);text-decoration:none;flex-shrink:0;}
+.nav-crest{width:36px;height:36px;background:var(--terra);border-radius:50%;display:flex;align-items:center;justify-content:center;font-style:italic;font-weight:700;color:#fff;font-size:.85rem;}
+.nav-links{display:flex;align-items:center;gap:.25rem;flex:1;justify-content:center;}
+.nav-link{font-size:.8rem;font-weight:500;color:var(--text-body);text-decoration:none;white-space:nowrap;padding:.5rem .75rem;border-radius:6px;transition:all .2s ease;}
+.nav-link:hover{color:var(--terra);background:rgba(216,80,32,0.06);}
+.nav-dropdown{position:relative;}
+.nav-dropdown-btn{display:flex;align-items:center;gap:.3rem;font-size:.8rem;font-weight:500;color:var(--text-body);padding:.5rem .75rem;border-radius:6px;cursor:pointer;background:none;border:none;font-family:inherit;transition:all .2s ease;white-space:nowrap;}
+.nav-dropdown-btn:hover{color:var(--terra);background:rgba(216,80,32,0.06);}
+.nav-dropdown-btn svg{transition:transform .2s ease;}
+.nav-dropdown:hover .nav-dropdown-btn svg{transform:rotate(180deg);}
+.nav-dropdown-menu::before{content:"";position:absolute;top:-12px;left:0;right:0;height:12px;}
+.nav-dropdown-menu{display:none;position:absolute;top:100%;left:50%;transform:translateX(-50%);background:#fffdf5;border:1px solid rgba(14,10,6,0.1);border-radius:10px;padding:.5rem;padding-top:12px;margin-top:0;min-width:180px;box-shadow:0 8px 30px rgba(14,10,6,0.12);z-index:200;}
+.nav-dropdown:hover .nav-dropdown-menu{display:block;}
+.nav-dropdown-item{display:block;padding:.5rem .875rem;font-size:.8rem;color:var(--text-body);text-decoration:none;border-radius:6px;white-space:nowrap;transition:all .2s ease;}
+.nav-dropdown-item:hover{background:rgba(216,80,32,0.08);color:var(--terra);}
+.nav-cta{background:var(--terra);color:#fff;font-size:.8rem;font-weight:600;padding:.55rem 1.25rem;border-radius:6px;text-decoration:none;white-space:nowrap;flex-shrink:0;transition:background .2s ease;}
+.nav-cta:hover{background:var(--terra-dark);}
+.nav-hamburger{display:none;flex-direction:column;gap:4px;cursor:pointer;background:none;border:none;padding:4px;flex-shrink:0;}
+.nav-hamburger span{display:block;width:22px;height:2px;background:var(--ink);border-radius:1px;}
+.nav-mobile{display:none;position:fixed;top:64px;left:0;right:0;bottom:0;background:var(--ink);flex-direction:column;align-items:center;justify-content:center;gap:1.25rem;z-index:999;overflow-y:auto;padding:2rem 0;}
+.nav-mobile.open{display:flex;}
+.nav-mobile a{font-family:'Lora',serif;font-size:1.125rem;font-weight:600;color:#fff;text-decoration:none;opacity:.9;}
+.nav-mobile a:hover{color:var(--terra);}
+.nav-mobile-section{font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-top:.75rem;}
+@media(max-width:968px){.nav-links{display:none;}.nav-hamburger{display:flex;}}
+
+/* PAGE HERO */
+.page-hero{background:var(--ink);padding:8rem 2rem 5rem;text-align:center;}
+.page-hero-overline{display:inline-flex;align-items:center;gap:.5rem;background:rgba(216,80,32,0.2);border:1px solid rgba(216,80,32,0.4);color:rgba(255,255,255,0.9);font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:.4rem 1rem;border-radius:20px;margin-bottom:1.5rem;}
+.page-hero h1{font-family:'Lora',serif;font-weight:700;font-size:clamp(2rem,4vw,3rem);color:#fff;margin-bottom:1rem;}
+.page-hero-sub{font-size:1.1rem;color:rgba(255,255,255,0.7);max-width:580px;margin:0 auto 2.5rem;}
+.hero-stats{display:flex;justify-content:center;gap:3rem;font-size:.875rem;color:rgba(255,255,255,0.6);}
+.hero-stat strong{display:block;color:rgba(255,255,255,0.9);font-weight:600;margin-bottom:.2rem;font-size:1rem;}
+
+/* MINISTRIES */
+.ministries{background:var(--cream);padding:5rem 2rem;}
+.section-title{font-family:'Lora',serif;font-weight:700;font-size:clamp(1.75rem,4vw,2.25rem);color:var(--ink);text-align:center;margin-bottom:.5rem;}
+.section-subtitle{text-align:center;font-size:.95rem;color:var(--text-muted);margin-bottom:3rem;}
+.ministries-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;}
+.ministry-card{background:#fff;border-radius:10px;padding:2rem 1.5rem;text-align:center;border:1px solid rgba(14,10,6,0.06);transition:all .2s ease;}
+.ministry-card:hover{transform:translateY(-3px);box-shadow:0 8px 30px rgba(14,10,6,0.1);}
+.ministry-icon{width:56px;height:56px;background:rgba(216,80,32,0.1);border-radius:14px;display:flex;align-items:center;justify-content:center;margin:0 auto 1.25rem;color:var(--terra);}
+.ministry-title{font-family:'Lora',serif;font-weight:700;font-size:1.125rem;color:var(--ink);margin-bottom:.75rem;}
+.ministry-desc{font-size:.85rem;color:var(--text-muted);line-height:1.6;margin-bottom:1.25rem;}
+.ministry-link{display:inline-flex;align-items:center;gap:.4rem;color:var(--terra);font-weight:600;font-size:.875rem;text-decoration:none;transition:all .2s ease;}
+.ministry-link:hover{color:var(--terra-dark);gap:.6rem;}
+
+/* VOLUNTEER FORM */
+.volunteer-form-section{background:#fff;padding:5rem 2rem;}
+.form-container{max-width:720px;margin:0 auto;}
+.volunteer-form{background:var(--cream);border-radius:12px;padding:2.5rem;border:1px solid rgba(14,10,6,0.06);}
+.form-title{font-family:'Lora',serif;font-weight:700;font-size:1.75rem;color:var(--ink);margin-bottom:.75rem;text-align:center;}
+.form-subtitle{text-align:center;font-size:.9rem;color:var(--text-muted);margin-bottom:2rem;line-height:1.6;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem;}
+.form-field{display:flex;flex-direction:column;gap:.4rem;margin-bottom:1rem;}
+.form-field label{font-size:.75rem;font-weight:600;color:var(--ink);letter-spacing:.03em;}
+.form-field input,.form-field select,.form-field textarea{background:#fff;border:1.5px solid rgba(14,10,6,0.15);border-radius:7px;padding:.65rem .9rem;font-size:.875rem;color:var(--ink);font-family:inherit;transition:border-color .2s;}
+.form-field input::placeholder,.form-field textarea::placeholder{color:rgba(14,10,6,0.4);}
+.form-field input:focus,.form-field select:focus,.form-field textarea:focus{outline:none;border-color:var(--terra);}
+.form-field textarea{resize:vertical;min-height:100px;}
+.ministry-checkboxes{display:grid;grid-template-columns:repeat(2,1fr);gap:.75rem;margin-bottom:1rem;}
+.checkbox-field{display:flex;align-items:center;gap:.5rem;}
+.checkbox-field input[type="checkbox"]{width:18px;height:18px;accent-color:var(--terra);}
+.checkbox-field label{font-size:.85rem;font-weight:500;color:var(--text-body);}
+.btn-submit{background:var(--terra);color:#fff;font-weight:700;font-size:.9rem;padding:.875rem 2rem;border:none;border-radius:8px;cursor:pointer;font-family:inherit;width:100%;transition:all .2s;margin-top:.5rem;}
+.btn-submit:hover{background:var(--terra-dark);transform:translateY(-1px);}
+
+/* ONGOING NEEDS */
+.ongoing-needs{background:var(--cream);padding:5rem 2rem;}
+.needs-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem;margin-top:2.5rem;}
+.need-card{background:#fff;border-radius:10px;padding:1.5rem;border-left:4px solid var(--terra);transition:all .2s ease;}
+.need-card:hover{transform:translateY(-2px);box-shadow:0 6px 24px rgba(14,10,6,0.08);}
+.need-urgency{font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--terra);margin-bottom:.5rem;}
+.need-title{font-family:'Lora',serif;font-weight:700;font-size:1rem;color:var(--ink);margin-bottom:.5rem;}
+.need-desc{font-size:.85rem;color:var(--text-muted);line-height:1.6;margin-bottom:1rem;}
+.need-commitment{font-size:.75rem;color:var(--text-body);background:rgba(216,80,32,0.05);padding:.4rem .75rem;border-radius:6px;display:inline-block;}
+
+/* TESTIMONIALS */
+.testimonials{background:#fff;padding:5rem 2rem;}
+.testimonials-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2rem;margin-top:2.5rem;}
+.testimonial-card{background:var(--cream);border-radius:10px;padding:2rem;border:1px solid rgba(14,10,6,0.06);}
+.testimonial-quote{font-family:'Lora',serif;font-style:italic;font-size:1rem;color:var(--text-body);line-height:1.6;margin-bottom:1.5rem;}
+.testimonial-author{display:flex;align-items:center;gap:1rem;}
+.testimonial-avatar{width:48px;height:48px;background:var(--terra);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-family:'Lora',serif;font-weight:700;font-size:1.125rem;}
+.testimonial-info h4{font-family:'Lora',serif;font-weight:600;font-size:.95rem;color:var(--ink);}
+.testimonial-info p{font-size:.8rem;color:var(--text-muted);}
+
+/* CONTACT MODAL */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(14,10,6,0.6);z-index:2000;align-items:center;justify-content:center;padding:1rem;backdrop-filter:blur(4px);}
+.modal-overlay.open{display:flex;}
+.modal-box{background:#fffdf5;border-radius:14px;width:100%;max-width:580px;max-height:90vh;overflow-y:auto;box-shadow:0 24px 80px rgba(14,10,6,0.3);position:relative;animation:modalIn .25s ease;}
+@keyframes modalIn{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
+.modal-header{padding:1.75rem 2rem 0;display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;}
+.modal-title{font-family:'Lora',serif;font-weight:700;font-size:1.375rem;color:var(--ink);}
+.modal-sub{font-size:.85rem;color:var(--text-muted);margin-top:.3rem;}
+.modal-close{width:32px;height:32px;background:rgba(14,10,6,0.07);border:none;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1rem;color:var(--ink);}
+.modal-close:hover{background:rgba(14,10,6,0.14);}
+.modal-body{padding:1.5rem 2rem 2rem;}
+.modal-form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem;}
+.modal-field{display:flex;flex-direction:column;gap:.4rem;margin-bottom:1rem;}
+.modal-field label{font-size:.75rem;font-weight:600;color:var(--ink);}
+.modal-field input,.modal-field select,.modal-field textarea{background:var(--warm-white);border:1.5px solid rgba(14,10,6,0.12);border-radius:7px;padding:.65rem .9rem;font-size:.875rem;color:var(--ink);font-family:inherit;transition:border-color .2s;}
+.modal-field input:focus,.modal-field select:focus,.modal-field textarea:focus{outline:none;border-color:var(--terra);}
+.modal-field textarea{resize:vertical;min-height:100px;}
+.modal-submit{background:var(--terra);color:#fff;font-weight:700;font-size:.9rem;padding:.875rem 2rem;border:none;border-radius:8px;cursor:pointer;font-family:inherit;width:100%;transition:all .2s;margin-top:.25rem;}
+.modal-submit:hover{background:var(--terra-dark);}
+.modal-success{text-align:center;padding:3rem 2rem;}
+.modal-success-icon{width:56px;height:56px;background:rgba(42,138,74,0.12);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1.25rem;color:var(--sage);}
+.modal-success h3{font-family:'Lora',serif;font-weight:700;font-size:1.375rem;color:var(--ink);margin-bottom:.5rem;}
+.modal-success p{font-size:.9rem;color:var(--text-muted);line-height:1.6;}
+
+/* CONTACT LINKS */
+a[data-contact]{display:inline-flex;align-items:center;gap:.4rem;color:var(--terra);font-weight:600;font-size:.95rem;text-decoration:none;border-bottom:1.5px solid rgba(216,80,32,0.3);padding-bottom:.1rem;transition:all .2s ease;}
+a[data-contact]:hover{color:var(--terra-dark);border-bottom-color:var(--terra-dark);gap:.6rem;}
+
+/* FOOTER */
+.page-footer{background:var(--ink);color:rgba(255,253,245,0.6);padding:2.5rem 2rem;text-align:center;font-size:.85rem;}
+.page-footer a{color:var(--terra);}
+.page-footer a:hover{color:#fff;}
+
+/* RESPONSIVE */
+@media(max-width:968px){.ministries-grid{grid-template-columns:repeat(2,1fr);}.needs-grid{grid-template-columns:1fr;}.testimonials-grid{grid-template-columns:1fr;}.form-row{grid-template-columns:1fr;}.modal-form-row{grid-template-columns:1fr;}.ministry-checkboxes{grid-template-columns:1fr;}}
+@media(max-width:568px){.ministries-grid{grid-template-columns:1fr;}.hero-stats{flex-direction:column;gap:1rem;}}
+</style>
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <div class="nav-crest">SM</div>
+      St. Mary's Parish
+    </a>
+    <div class="nav-links">
+      <a href="index.html#mass-times" class="nav-link">Mass Times</a>
+      <div class="nav-dropdown">
+        <button class="nav-dropdown-btn">
+          Parish Life
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M3 4.5l3 3 3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </button>
+        <div class="nav-dropdown-menu">
+          <a href="about.html" class="nav-dropdown-item">About Us</a>
+          <a href="events.html" class="nav-dropdown-item">Events</a>
+          <a href="staff.html" class="nav-dropdown-item">Our Team</a>
+          <a href="bulletin.html" class="nav-dropdown-item">Parish Bulletin</a>
+          <a href="involved.html" class="nav-dropdown-item">Get Involved</a>
+        </div>
+      </div>
+      <div class="nav-dropdown">
+        <button class="nav-dropdown-btn">
+          Sacraments
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M3 4.5l3 3 3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </button>
+        <div class="nav-dropdown-menu">
+          <a href="sacraments.html#baptism" class="nav-dropdown-item">Baptism</a>
+          <a href="sacraments.html#wedding" class="nav-dropdown-item">Wedding</a>
+          <a href="sacraments.html#funeral" class="nav-dropdown-item">Funeral Mass</a>
+          <a href="sacraments.html#confirmation" class="nav-dropdown-item">Confirmation</a>
+          <a href="sacraments.html#firstcommunion" class="nav-dropdown-item">First Communion</a>
+        </div>
+      </div>
+      <a href="rcia.html" class="nav-link">Becoming Catholic</a>
+      <a href="#" class="nav-link" data-contact data-from="general">Contact</a>
+    </div>
+    <a href="index.html#giving" class="nav-cta">Give Now</a>
+    <button class="nav-hamburger" id="navHamburger">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="nav-mobile" id="navMobile">
+    <a href="index.html#mass-times">Mass Times</a>
+    <div class="nav-mobile-section">Parish Life</div>
+    <a href="about.html">About Us</a>
+    <a href="events.html">Events</a>
+    <a href="staff.html">Our Team</a>
+    <a href="bulletin.html">Parish Bulletin</a>
+    <a href="involved.html">Get Involved</a>
+    <div class="nav-mobile-section">Sacraments</div>
+    <a href="sacraments.html">All Sacraments</a>
+    <a href="rcia.html">Becoming Catholic</a>
+    <a href="#" data-contact data-from="general">Contact</a>
+    <a href="index.html#giving" style="margin-top:.5rem;background:var(--terra);padding:.625rem 2rem;border-radius:8px;">Give Now</a>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <div class="container">
+    <div class="page-hero-overline">
+      <svg width="6" height="6" viewBox="0 0 6 6" fill="none"><circle cx="3" cy="3" r="3" fill="currentColor"/></svg>
+      Get Involved
+    </div>
+    <h1>There's a place for you<br><em>at St. Mary's</em></h1>
+    <p class="page-hero-sub">Whether you have an hour a month or a few hours each week — your gifts and talents can make a real difference in our parish community.</p>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <strong>150+</strong>
+        Active volunteers
+      </div>
+      <div class="hero-stat">
+        <strong>12</strong>
+        Ministry areas
+      </div>
+      <div class="hero-stat">
+        <strong>Year-round</strong>
+        Opportunities
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MINISTRIES -->
+<section class="ministries">
+  <div class="container">
+    <h2 class="section-title">Where will you serve?</h2>
+    <p class="section-subtitle">Every ministry is vital to the life of our parish. Find where your heart is called.</p>
+    <div class="ministries-grid">
+      
+      <div class="ministry-card">
+        <div class="ministry-icon">
+          <svg width="28" height="28" viewBox="0 0 20 20" fill="none"><path d="M10 3v14M3 10h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <h3 class="ministry-title">Altar Servers</h3>
+        <p class="ministry-desc">Assist the priest during Mass, helping with the sacred liturgy. Training provided for youth and adults.</p>
+        <a href="#" class="ministry-link" data-contact data-from="volunteer">
+          Learn more
+          <svg width="14" height="14" viewBox="0 0 20 20" fill="none"><path d="M5 10h10M11 6l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+
+      <div class="ministry-card">
+        <div class="ministry-icon">
+          <svg width="28" height="28" viewBox="0 0 20 20" fill="none"><path d="M9 16V6l8-2v10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="7" cy="16" r="2" stroke="currentColor" stroke-width="1.5"/><circle cx="15" cy="14" r="2" stroke="currentColor" stroke-width="1.5"/></svg>
+        </div>
+        <h3 class="ministry-title">Parish Choir</h3>
+        <p class="ministry-desc">Lift voices in praise during Sunday Mass. Weekly rehearsals Thursday evenings. All skill levels welcome.</p>
+        <a href="#" class="ministry-link" data-contact data-from="volunteer">
+          Learn more
+          <svg width="14" height="14" viewBox="0 0 20 20" fill="none"><path d="M5 10h10M11 6l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+
+      <div class="ministry-card">
+        <div class="ministry-icon">
+          <svg width="28" height="28" viewBox="0 0 20 20" fill="none"><path d="M4 4h6v14H4a2 2 0 01-2-2V6a2 2 0 012-2z" stroke="currentColor" stroke-width="1.5"/><path d="M10 4h6a2 2 0 012 2v10a2 2 0 01-2 2h-6V4z" stroke="currentColor" stroke-width="1.5"/></svg>
+        </div>
+        <h3 class="ministry-title">Lectors</h3>
+        <p class="ministry-desc">Proclaim the Word of God during Mass. Share the Gospel message with clarity and reverence.</p>
+        <a href="#" class="ministry-link" data-contact data-from="volunteer">
+          Learn more
+          <svg width="14" height="14" viewBox="0 0 20 20" fill="none"><path d="M5 10h10M11 6l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+
+      <div class="ministry-card">
+        <div class="ministry-icon">
+          <svg width="28" height="28" viewBox="0 0 20 20" fill="none"><circle cx="8" cy="7" r="3" stroke="currentColor" stroke-width="1.5"/><path d="M2 17c0-3.3 2.7-6 6-6s6 2.7 6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M14 11c2.2.5 4 2.5 4 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="14" cy="7" r="2.5" stroke="currentColor" stroke-width="1.5"/></svg>
+        </div>
+        <h3 class="ministry-title">Greeters & Ushers</h3>
+        <p class="ministry-desc">Welcome parishioners and visitors, assist with seating, and help during the collection and Communion.</p>
+        <a href="#" class="ministry-link" data-contact data-from="volunteer">
+          Learn more
+          <svg width="14" height="14" viewBox="0 0 20 20" fill="none"><path d="M5 10h10M11 6l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+
+      <div class="ministry-card">
+        <div class="ministry-icon">
+          <svg width="28" height="28" viewBox="0 0 20 20" fill="none"><path d="M10 17s-7-4.5-7-9a4 4 0 018 0 4 4 0 018 0c0 4.5-7 9-7 9z" stroke="currentColor" stroke-width="1.5"/></svg>
+        </div>
+        <h3 class="ministry-title">Food Pantry</h3>
+        <p class="ministry-desc">Pack and distribute food to families in need across the Lower East Side. Weekly commitment, flexible hours.</p>
+        <a href="#" class="ministry-link" data-contact data-from="volunteer">
+          Learn more
+          <svg width="14" height="14" viewBox="0 0 20 20" fill="none"><path d="M5 10h10M11 6l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+
+      <div class="ministry-card">
+        <div class="ministry-icon">
+          <svg width="28" height="28" viewBox="0 0 20 20" fill="none"><path d="M10 2l2.4 5 5.6.8-4 3.9.9 5.5L10 14.5l-4.9 2.7.9-5.5L2 7.8l5.6-.8L10 2z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+        </div>
+        <h3 class="ministry-title">Youth Ministry</h3>
+        <p class="ministry-desc">Guide young people in their faith journey through fun activities, retreats, and service projects.</p>
+        <a href="#" class="ministry-link" data-contact data-from="volunteer">
+          Learn more
+          <svg width="14" height="14" viewBox="0 0 20 20" fill="none"><path d="M5 10h10M11 6l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- VOLUNTEER FORM -->
+<section class="volunteer-form-section">
+  <div class="container">
+    <div class="form-container">
+      <div class="volunteer-form">
+        <h2 class="form-title">Express Your Interest</h2>
+        <p class="form-subtitle">Tell us about yourself and where you'd like to get involved. We'll connect you with the right ministry leader who can answer your questions and help you get started.</p>
+        
+        <form id="volunteerForm">
+          <div class="form-row">
+            <div class="form-field">
+              <label>First Name</label>
+              <input type="text" name="firstName" required placeholder="Maria">
+            </div>
+            <div class="form-field">
+              <label>Last Name</label>
+              <input type="text" name="lastName" required placeholder="Santos">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-field">
+              <label>Email Address</label>
+              <input type="email" name="email" required placeholder="maria@example.com">
+            </div>
+            <div class="form-field">
+              <label>Phone (optional)</label>
+              <input type="tel" name="phone" placeholder="(212) 555-0000">
+            </div>
+          </div>
+
+          <div class="form-field">
+            <label>Which ministries interest you? (Check all that apply)</label>
+            <div class="ministry-checkboxes">
+              <div class="checkbox-field">
+                <input type="checkbox" name="ministries" value="altar-servers" id="altar-servers">
+                <label for="altar-servers">Altar Servers</label>
+              </div>
+              <div class="checkbox-field">
+                <input type="checkbox" name="ministries" value="choir" id="choir">
+                <label for="choir">Parish Choir</label>
+              </div>
+              <div class="checkbox-field">
+                <input type="checkbox" name="ministries" value="lectors" id="lectors">
+                <label for="lectors">Lectors</label>
+              </div>
+              <div class="checkbox-field">
+                <input type="checkbox" name="ministries" value="greeters" id="greeters">
+                <label for="greeters">Greeters & Ushers</label>
+              </div>
+              <div class="checkbox-field">
+                <input type="checkbox" name="ministries" value="food-pantry" id="food-pantry">
+                <label for="food-pantry">Food Pantry</label>
+              </div>
+              <div class="checkbox-field">
+                <input type="checkbox" name="ministries" value="youth" id="youth">
+                <label for="youth">Youth Ministry</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-field">
+            <label>How much time can you commit?</label>
+            <select name="commitment" required>
+              <option value="">Please select...</option>
+              <option>A few hours per month</option>
+              <option>A few hours per week</option>
+              <option>Several hours per week</option>
+              <option>I'm flexible</option>
+            </select>
+          </div>
+
+          <div class="form-field">
+            <label>Tell us about yourself (optional)</label>
+            <textarea name="message" placeholder="Share any relevant experience, questions, or how you'd like to contribute to St. Mary's..."></textarea>
+          </div>
+
+          <button type="submit" class="btn-submit">Send My Interest</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ONGOING NEEDS -->
+<section class="ongoing-needs">
+  <div class="container">
+    <h2 class="section-title">Immediate Opportunities</h2>
+    <p class="section-subtitle">These ministries especially need volunteers right now.</p>
+    <div class="needs-grid">
+      
+      <div class="need-card">
+        <div class="need-urgency">Urgent Need</div>
+        <h3 class="need-title">Sunday Morning Greeters</h3>
+        <p class="need-desc">We need friendly faces to welcome parishioners and visitors at the 9:00 AM and 11:00 AM Sunday Masses.</p>
+        <div class="need-commitment">1-2 Sundays per month</div>
+      </div>
+
+      <div class="need-card">
+        <div class="need-urgency">High Priority</div>
+        <h3 class="need-title">Food Pantry Volunteers</h3>
+        <p class="need-desc">Help pack and distribute groceries to families in need. Perfect for individuals or families wanting to serve together.</p>
+        <div class="need-commitment">Saturday mornings, 2-3 hours</div>
+      </div>
+
+      <div class="need-card">
+        <div class="need-urgency">Flexible Schedule</div>
+        <h3 class="need-title">Church Cleaning Team</h3>
+        <p class="need-desc">Keep our sacred space beautiful for worship. Work with a team or individually, weekdays or weekends.</p>
+        <div class="need-commitment">2 hours monthly, your schedule</div>
+      </div>
+
+      <div class="need-card">
+        <div class="need-urgency">Special Skills</div>
+        <h3 class="need-title">Website & Social Media</h3>
+        <p class="need-desc">Help share our parish story online. Looking for someone with basic social media or website experience.</p>
+        <div class="need-commitment">2-3 hours weekly, remote work</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+  <div class="container">
+    <h2 class="section-title">Why our volunteers love serving</h2>
+    <p class="section-subtitle">Hear from fellow parishioners about their volunteer experiences.</p>
+    <div class="testimonials-grid">
+      
+      <div class="testimonial-card">
+        <p class="testimonial-quote">"Volunteering as a lector has deepened my relationship with Scripture. Every time I proclaim God's word, I feel His presence in a new way."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">M</div>
+          <div class="testimonial-info">
+            <h4>Maria Gonzalez</h4>
+            <p>Lector, 3 years</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <p class="testimonial-quote">"The food pantry isn't just about distributing groceries — it's about showing Christ's love to our neighbors. My whole family volunteers together."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">D</div>
+          <div class="testimonial-info">
+            <h4>David Chen</h4>
+            <p>Food Pantry Coordinator, 5 years</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer class="page-footer">
+  <div class="container">
+    <p>© 2024 St. Mary's Parish · 123 Rivington Street, New York, NY 10002 · <a href="index.html">Back to home</a> · Powered by <span style="color:var(--terra);font-weight:600;">Communio</span></p>
+  </div>
+</footer>
+
+<!-- CONTACT MODAL -->
+<div class="modal-overlay" id="contactModal">
+  <div class="modal-box">
+    <div class="modal-header">
+      <div>
+        <div class="modal-title">Get in touch</div>
+        <div class="modal-sub">We typically respond within one business day.</div>
+      </div>
+      <button class="modal-close" id="modalClose">&#x2715;</button>
+    </div>
+    <div class="modal-body" id="modalBody">
+      <div class="modal-form-row">
+        <div class="modal-field">
+          <label>First Name</label>
+          <input type="text" placeholder="Maria">
+        </div>
+        <div class="modal-field">
+          <label>Last Name</label>
+          <input type="text" placeholder="Santos">
+        </div>
+      </div>
+      <div class="modal-field">
+        <label>Email Address</label>
+        <input type="email" id="mEmail" placeholder="maria@example.com">
+      </div>
+      <div class="modal-field">
+        <label>Phone (optional)</label>
+        <input type="tel" placeholder="(212) 555-0000">
+      </div>
+      <div class="modal-field">
+        <label>Subject</label>
+        <select id="mSubject">
+          <option value="">Select a topic...</option>
+          <option value="general">General Inquiry</option>
+          <option value="volunteer">Volunteering</option>
+          <option value="formation">Faith Formation</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+      <div class="modal-field">
+        <label>Message</label>
+        <textarea placeholder="How can we help you?"></textarea>
+      </div>
+      <button class="modal-submit" id="modalSubmit" type="button">Send Message</button>
+      <p style="font-size:.75rem;color:var(--text-muted);text-align:center;margin-top:.75rem;">St. Mary's Parish · 123 Rivington Street, New York, NY 10002</p>
+    </div>
+  </div>
+</div>
+
+<script>
+// Navigation functionality
+const _nh = document.getElementById('navHamburger');
+const _nm = document.getElementById('navMobile');
+if(_nh){ 
+  _nh.addEventListener('click',()=>_nm.classList.toggle('open')); 
+  _nm.addEventListener('click',(e)=>{if(e.target.tagName==='A')_nm.classList.remove('open');}); 
+}
+
+// Contact modal functionality
+(function(){
+  var overlay = document.getElementById('contactModal');
+  var closeBtn = document.getElementById('modalClose');
+  var submitBtn = document.getElementById('modalSubmit');
+  
+  function openModal(from){
+    overlay.classList.add('open');
+    document.body.style.overflow='hidden';
+    if(from && document.getElementById('mSubject')){
+      var opt = Array.from(document.getElementById('mSubject').options).find(function(o){return o.value===from;});
+      if(opt) document.getElementById('mSubject').value=from;
+    }
+  }
+  
+  function closeModal(){ 
+    overlay.classList.remove('open'); 
+    document.body.style.overflow=''; 
+  }
+  
+  overlay.addEventListener('click',function(e){ 
+    if(e.target===overlay) closeModal(); 
+  });
+  closeBtn.addEventListener('click',closeModal);
+  
+  document.addEventListener('keydown',function(e){ 
+    if(e.key==='Escape') closeModal(); 
+  });
+  
+  document.addEventListener('click',function(e){
+    var el = e.target.closest('[data-contact]');
+    if(el){ 
+      e.preventDefault(); 
+      openModal(el.getAttribute('data-from')||''); 
+    }
+  });
+  
+  if(submitBtn){
+    submitBtn.addEventListener('click',function(){
+      var email = document.getElementById('mEmail').value.trim();
+      if(!email){ 
+        document.getElementById('mEmail').focus(); 
+        return; 
+      }
+      document.getElementById('modalBody').innerHTML='<div class="modal-success"><div class="modal-success-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><h3>Message sent!</h3><p>Thank you for reaching out. Someone from St. Mary\'s will be in touch within one business day.</p></div>';
+    });
+  }
+})();
+
+// Volunteer form submission
+document.getElementById('volunteerForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  
+  // Simple form validation
+  var firstName = this.querySelector('[name="firstName"]').value.trim();
+  var lastName = this.querySelector('[name="lastName"]').value.trim();
+  var email = this.querySelector('[name="email"]').value.trim();
+  var commitment = this.querySelector('[name="commitment"]').value;
+  
+  if (!firstName || !lastName || !email || !commitment) {
+    alert('Please fill in all required fields.');
+    return;
+  }
+  
+  // Get selected ministries
+  var selectedMinistries = [];
+  this.querySelectorAll('[name="ministries"]:checked').forEach(function(checkbox) {
+    selectedMinistries.push(checkbox.value);
+  });
+  
+  if (selectedMinistries.length === 0) {
+    alert('Please select at least one ministry that interests you.');
+    return;
+  }
+  
+  // Show success message
+  this.innerHTML = '<div style="text-align:center;padding:2rem;"><div style="width:56px;height:56px;background:rgba(42,138,74,0.12);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1.25rem;color:var(--sage);"><svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><h3 style="font-family:\'Lora\',serif;font-weight:700;font-size:1.375rem;color:var(--ink);margin-bottom:.5rem;">Thank you for your interest!</h3><p style="font-size:.9rem;color:var(--text-muted);line-height:1.6;">Someone from our volunteer coordination team will reach out to you within 2 business days to discuss next steps.</p></div>';
+});
+</script>
+
+</body>
+</html>
