@@ -141,6 +141,29 @@ a[data-contact]:hover{color:var(--terra-dark);border-bottom-color:var(--terra-da
 /* RESPONSIVE */
 @media(max-width:968px){.ministries-grid{grid-template-columns:repeat(2,1fr);}.needs-grid{grid-template-columns:1fr;}.testimonials-grid{grid-template-columns:1fr;}.form-row{grid-template-columns:1fr;}.modal-form-row{grid-template-columns:1fr;}.ministry-checkboxes{grid-template-columns:1fr;}}
 @media(max-width:568px){.ministries-grid{grid-template-columns:1fr;}.hero-stats{flex-direction:column;gap:1rem;}}
+
+/* TOGGLEABLE MINISTRY SECTIONS */
+.ministry-section{padding:4rem 2rem;background:#fff;}
+.ministry-section-alt{background:var(--cream);}
+.ministry-section[style*="display:none"]{display:none !important;}
+.ministry-section-inner{display:grid;grid-template-columns:80px 1fr;gap:2rem;align-items:start;max-width:860px;margin:0 auto;}
+.ministry-section-icon{width:64px;height:64px;background:rgba(216,80,32,0.1);border-radius:14px;display:flex;align-items:center;justify-content:center;color:var(--terra);flex-shrink:0;}
+.ministry-section-label{font-size:.65rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--terra);margin-bottom:.4rem;}
+.ministry-section-title{font-family:'Lora',serif;font-weight:700;font-size:1.625rem;color:var(--ink);margin-bottom:.875rem;}
+.ministry-section-desc{font-size:.95rem;color:var(--text-body);line-height:1.75;margin-bottom:1.25rem;}
+.ministry-section-contact{font-size:.8rem;color:var(--text-muted);margin-bottom:1rem;}
+.ministry-section-contact strong{color:var(--ink);}
+.ministry-section-link{display:inline-flex;align-items:center;gap:.4rem;color:var(--terra);font-weight:600;font-size:.9rem;text-decoration:none;border-bottom:1.5px solid rgba(216,80,32,0.3);padding-bottom:.1rem;transition:all .2s;}
+.ministry-section-link:hover{color:var(--terra-dark);border-bottom-color:var(--terra-dark);}
+.ministry-section-groups{display:flex;flex-direction:column;gap:.5rem;margin-bottom:1.25rem;}
+.ministry-group-item{display:flex;align-items:center;gap:.6rem;font-size:.875rem;color:var(--text-body);}
+.ministry-group-item svg{color:var(--sage);flex-shrink:0;}
+/* Sections header */
+.ministries-header{background:var(--ink);padding:3rem 2rem;text-align:center;}
+.ministries-header h2{font-family:'Lora',serif;font-weight:700;font-size:clamp(1.75rem,3vw,2.25rem);color:#fff;margin-bottom:.5rem;}
+.ministries-header p{font-size:.95rem;color:rgba(255,255,255,0.6);}
+@media(max-width:768px){.ministry-section-inner{grid-template-columns:1fr;gap:1rem;}.ministry-section-icon{width:48px;height:48px;}}
+
 </style>
 </head>
 <body>
@@ -229,387 +252,169 @@ a[data-contact]:hover{color:var(--terra-dark);border-bottom-color:var(--terra-da
 </div>
 
 <!-- MINISTRIES -->
-<section class="ministries">
+
+<!-- MINISTRIES HEADER -->
+<div class="ministries-header">
   <div class="container">
-    <h2 class="section-title">Where will you serve?</h2>
-    <p class="section-subtitle">Every ministry is vital to the life of our parish. Find where your heart is called.</p>
-    <div class="ministries-grid">
-      
-      <div class="ministry-card">
-        <div class="ministry-icon">
-          <svg width="28" height="28" viewBox="0 0 20 20" fill="none"><path d="M10 3v14M3 10h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-        </div>
-        <h3 class="ministry-title">Altar Servers</h3>
-        <p class="ministry-desc">Assist the priest during Mass, helping with the sacred liturgy. Training provided for youth and adults.</p>
-        <a href="#" class="ministry-link" data-contact data-from="volunteer">
-          Learn more
-          <svg width="14" height="14" viewBox="0 0 20 20" fill="none"><path d="M5 10h10M11 6l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
-      </div>
-
-      <div class="ministry-card">
-        <div class="ministry-icon">
-          <svg width="28" height="28" viewBox="0 0 20 20" fill="none"><path d="M9 16V6l8-2v10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="7" cy="16" r="2" stroke="currentColor" stroke-width="1.5"/><circle cx="15" cy="14" r="2" stroke="currentColor" stroke-width="1.5"/></svg>
-        </div>
-        <h3 class="ministry-title">Parish Choir</h3>
-        <p class="ministry-desc">Lift voices in praise during Sunday Mass. Weekly rehearsals Thursday evenings. All skill levels welcome.</p>
-        <a href="#" class="ministry-link" data-contact data-from="volunteer">
-          Learn more
-          <svg width="14" height="14" viewBox="0 0 20 20" fill="none"><path d="M5 10h10M11 6l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
-      </div>
-
-      <div class="ministry-card">
-        <div class="ministry-icon">
-          <svg width="28" height="28" viewBox="0 0 20 20" fill="none"><path d="M4 4h6v14H4a2 2 0 01-2-2V6a2 2 0 012-2z" stroke="currentColor" stroke-width="1.5"/><path d="M10 4h6a2 2 0 012 2v10a2 2 0 01-2 2h-6V4z" stroke="currentColor" stroke-width="1.5"/></svg>
-        </div>
-        <h3 class="ministry-title">Lectors</h3>
-        <p class="ministry-desc">Proclaim the Word of God during Mass. Share the Gospel message with clarity and reverence.</p>
-        <a href="#" class="ministry-link" data-contact data-from="volunteer">
-          Learn more
-          <svg width="14" height="14" viewBox="0 0 20 20" fill="none"><path d="M5 10h10M11 6l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
-      </div>
-
-      <div class="ministry-card">
-        <div class="ministry-icon">
-          <svg width="28" height="28" viewBox="0 0 20 20" fill="none"><circle cx="8" cy="7" r="3" stroke="currentColor" stroke-width="1.5"/><path d="M2 17c0-3.3 2.7-6 6-6s6 2.7 6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M14 11c2.2.5 4 2.5 4 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="14" cy="7" r="2.5" stroke="currentColor" stroke-width="1.5"/></svg>
-        </div>
-        <h3 class="ministry-title">Greeters & Ushers</h3>
-        <p class="ministry-desc">Welcome parishioners and visitors, assist with seating, and help during the collection and Communion.</p>
-        <a href="#" class="ministry-link" data-contact data-from="volunteer">
-          Learn more
-          <svg width="14" height="14" viewBox="0 0 20 20" fill="none"><path d="M5 10h10M11 6l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
-      </div>
-
-      <div class="ministry-card">
-        <div class="ministry-icon">
-          <svg width="28" height="28" viewBox="0 0 20 20" fill="none"><path d="M10 17s-7-4.5-7-9a4 4 0 018 0 4 4 0 018 0c0 4.5-7 9-7 9z" stroke="currentColor" stroke-width="1.5"/></svg>
-        </div>
-        <h3 class="ministry-title">Food Pantry</h3>
-        <p class="ministry-desc">Pack and distribute food to families in need across the Lower East Side. Weekly commitment, flexible hours.</p>
-        <a href="#" class="ministry-link" data-contact data-from="volunteer">
-          Learn more
-          <svg width="14" height="14" viewBox="0 0 20 20" fill="none"><path d="M5 10h10M11 6l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
-      </div>
-
-      <div class="ministry-card">
-        <div class="ministry-icon">
-          <svg width="28" height="28" viewBox="0 0 20 20" fill="none"><path d="M10 2l2.4 5 5.6.8-4 3.9.9 5.5L10 14.5l-4.9 2.7.9-5.5L2 7.8l5.6-.8L10 2z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
-        </div>
-        <h3 class="ministry-title">Youth Ministry</h3>
-        <p class="ministry-desc">Guide young people in their faith journey through fun activities, retreats, and service projects.</p>
-        <a href="#" class="ministry-link" data-contact data-from="volunteer">
-          Learn more
-          <svg width="14" height="14" viewBox="0 0 20 20" fill="none"><path d="M5 10h10M11 6l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- VOLUNTEER FORM -->
-<section class="volunteer-form-section">
-  <div class="container">
-    <div class="form-container">
-      <div class="volunteer-form">
-        <h2 class="form-title">Express Your Interest</h2>
-        <p class="form-subtitle">Tell us about yourself and where you'd like to get involved. We'll connect you with the right ministry leader who can answer your questions and help you get started.</p>
-        
-        <form id="volunteerForm">
-          <div class="form-row">
-            <div class="form-field">
-              <label>First Name</label>
-              <input type="text" name="firstName" required placeholder="Maria">
-            </div>
-            <div class="form-field">
-              <label>Last Name</label>
-              <input type="text" name="lastName" required placeholder="Santos">
-            </div>
-          </div>
-
-          <div class="form-row">
-            <div class="form-field">
-              <label>Email Address</label>
-              <input type="email" name="email" required placeholder="maria@example.com">
-            </div>
-            <div class="form-field">
-              <label>Phone (optional)</label>
-              <input type="tel" name="phone" placeholder="(212) 555-0000">
-            </div>
-          </div>
-
-          <div class="form-field">
-            <label>Which ministries interest you? (Check all that apply)</label>
-            <div class="ministry-checkboxes">
-              <div class="checkbox-field">
-                <input type="checkbox" name="ministries" value="altar-servers" id="altar-servers">
-                <label for="altar-servers">Altar Servers</label>
-              </div>
-              <div class="checkbox-field">
-                <input type="checkbox" name="ministries" value="choir" id="choir">
-                <label for="choir">Parish Choir</label>
-              </div>
-              <div class="checkbox-field">
-                <input type="checkbox" name="ministries" value="lectors" id="lectors">
-                <label for="lectors">Lectors</label>
-              </div>
-              <div class="checkbox-field">
-                <input type="checkbox" name="ministries" value="greeters" id="greeters">
-                <label for="greeters">Greeters & Ushers</label>
-              </div>
-              <div class="checkbox-field">
-                <input type="checkbox" name="ministries" value="food-pantry" id="food-pantry">
-                <label for="food-pantry">Food Pantry</label>
-              </div>
-              <div class="checkbox-field">
-                <input type="checkbox" name="ministries" value="youth" id="youth">
-                <label for="youth">Youth Ministry</label>
-              </div>
-            </div>
-          </div>
-
-          <div class="form-field">
-            <label>How much time can you commit?</label>
-            <select name="commitment" required>
-              <option value="">Please select...</option>
-              <option>A few hours per month</option>
-              <option>A few hours per week</option>
-              <option>Several hours per week</option>
-              <option>I'm flexible</option>
-            </select>
-          </div>
-
-          <div class="form-field">
-            <label>Tell us about yourself (optional)</label>
-            <textarea name="message" placeholder="Share any relevant experience, questions, or how you'd like to contribute to St. Mary's..."></textarea>
-          </div>
-
-          <button type="submit" class="btn-submit">Send My Interest</button>
-        </form>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ONGOING NEEDS -->
-<section class="ongoing-needs">
-  <div class="container">
-    <h2 class="section-title">Immediate Opportunities</h2>
-    <p class="section-subtitle">These ministries especially need volunteers right now.</p>
-    <div class="needs-grid">
-      
-      <div class="need-card">
-        <div class="need-urgency">Urgent Need</div>
-        <h3 class="need-title">Sunday Morning Greeters</h3>
-        <p class="need-desc">We need friendly faces to welcome parishioners and visitors at the 9:00 AM and 11:00 AM Sunday Masses.</p>
-        <div class="need-commitment">1-2 Sundays per month</div>
-      </div>
-
-      <div class="need-card">
-        <div class="need-urgency">High Priority</div>
-        <h3 class="need-title">Food Pantry Volunteers</h3>
-        <p class="need-desc">Help pack and distribute groceries to families in need. Perfect for individuals or families wanting to serve together.</p>
-        <div class="need-commitment">Saturday mornings, 2-3 hours</div>
-      </div>
-
-      <div class="need-card">
-        <div class="need-urgency">Flexible Schedule</div>
-        <h3 class="need-title">Church Cleaning Team</h3>
-        <p class="need-desc">Keep our sacred space beautiful for worship. Work with a team or individually, weekdays or weekends.</p>
-        <div class="need-commitment">2 hours monthly, your schedule</div>
-      </div>
-
-      <div class="need-card">
-        <div class="need-urgency">Special Skills</div>
-        <h3 class="need-title">Website & Social Media</h3>
-        <p class="need-desc">Help share our parish story online. Looking for someone with basic social media or website experience.</p>
-        <div class="need-commitment">2-3 hours weekly, remote work</div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- TESTIMONIALS -->
-<section class="testimonials">
-  <div class="container">
-    <h2 class="section-title">Why our volunteers love serving</h2>
-    <p class="section-subtitle">Hear from fellow parishioners about their volunteer experiences.</p>
-    <div class="testimonials-grid">
-      
-      <div class="testimonial-card">
-        <p class="testimonial-quote">"Volunteering as a lector has deepened my relationship with Scripture. Every time I proclaim God's word, I feel His presence in a new way."</p>
-        <div class="testimonial-author">
-          <div class="testimonial-avatar">M</div>
-          <div class="testimonial-info">
-            <h4>Maria Gonzalez</h4>
-            <p>Lector, 3 years</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="testimonial-card">
-        <p class="testimonial-quote">"The food pantry isn't just about distributing groceries — it's about showing Christ's love to our neighbors. My whole family volunteers together."</p>
-        <div class="testimonial-author">
-          <div class="testimonial-avatar">D</div>
-          <div class="testimonial-info">
-            <h4>David Chen</h4>
-            <p>Food Pantry Coordinator, 5 years</p>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<footer class="page-footer">
-  <div class="container">
-    <p>© 2024 St. Mary's Parish · 123 Rivington Street, New York, NY 10002 · <a href="index.html">Back to home</a> · Powered by <span style="color:var(--terra);font-weight:600;">Communio</span></p>
-  </div>
-</footer>
-
-<!-- CONTACT MODAL -->
-<div class="modal-overlay" id="contactModal">
-  <div class="modal-box">
-    <div class="modal-header">
-      <div>
-        <div class="modal-title">Get in touch</div>
-        <div class="modal-sub">We typically respond within one business day.</div>
-      </div>
-      <button class="modal-close" id="modalClose">&#x2715;</button>
-    </div>
-    <div class="modal-body" id="modalBody">
-      <div class="modal-form-row">
-        <div class="modal-field">
-          <label>First Name</label>
-          <input type="text" placeholder="Maria">
-        </div>
-        <div class="modal-field">
-          <label>Last Name</label>
-          <input type="text" placeholder="Santos">
-        </div>
-      </div>
-      <div class="modal-field">
-        <label>Email Address</label>
-        <input type="email" id="mEmail" placeholder="maria@example.com">
-      </div>
-      <div class="modal-field">
-        <label>Phone (optional)</label>
-        <input type="tel" placeholder="(212) 555-0000">
-      </div>
-      <div class="modal-field">
-        <label>Subject</label>
-        <select id="mSubject">
-          <option value="">Select a topic...</option>
-          <option value="general">General Inquiry</option>
-          <option value="volunteer">Volunteering</option>
-          <option value="formation">Faith Formation</option>
-          <option value="other">Other</option>
-        </select>
-      </div>
-      <div class="modal-field">
-        <label>Message</label>
-        <textarea placeholder="How can we help you?"></textarea>
-      </div>
-      <button class="modal-submit" id="modalSubmit" type="button">Send Message</button>
-      <p style="font-size:.75rem;color:var(--text-muted);text-align:center;margin-top:.75rem;">St. Mary's Parish · 123 Rivington Street, New York, NY 10002</p>
-    </div>
+    <h2>Our Ministries</h2>
+    <p>Find the ministry that fits your gifts, your schedule, and your heart.</p>
   </div>
 </div>
+<div id="ministry-sections">
 
-<script>
-// Navigation functionality
-const _nh = document.getElementById('navHamburger');
-const _nm = document.getElementById('navMobile');
-if(_nh){ 
-  _nh.addEventListener('click',()=>_nm.classList.toggle('open')); 
-  _nm.addEventListener('click',(e)=>{if(e.target.tagName==='A')_nm.classList.remove('open');}); 
-}
+<section class="ministry-section" id="ministry-volunteer" data-section="volunteer">
+  <div class="container">
+    <div class="ministry-section-inner">
+      <div class="ministry-section-icon">
+        <svg width="28" height="28" viewBox="0 0 20 20" fill="none"><path d="M10 17s-7-4.5-7-9a4 4 0 018 0 4 4 0 018 0c0 4.5-7 9-7 9z" stroke="currentColor" stroke-width="1.5"/></svg>
+      </div>
+      <div class="ministry-section-body">
+        <div class="ministry-section-label">Ministry</div>
+        <h2 class="ministry-section-title">Volunteer</h2>
+        <p class="ministry-section-desc">Share your time and talents to serve our parish and community. Whether you have an hour a week or a whole weekend, your contribution makes a real difference. Roles include hospitality, event support, parish office assistance, and more.</p>
+        <div class="ministry-section-contact"><strong>Contact:</strong> Parish Office — Maria Santos</div>
+        <a href="#volunteer-form" class="ministry-section-link">Express your interest below →</a>
+      </div>
+    </div>
+  </div>
+</section>
 
-// Contact modal functionality
-(function(){
-  var overlay = document.getElementById('contactModal');
-  var closeBtn = document.getElementById('modalClose');
-  var submitBtn = document.getElementById('modalSubmit');
-  
-  function openModal(from){
-    overlay.classList.add('open');
-    document.body.style.overflow='hidden';
-    if(from && document.getElementById('mSubject')){
-      var opt = Array.from(document.getElementById('mSubject').options).find(function(o){return o.value===from;});
-      if(opt) document.getElementById('mSubject').value=from;
-    }
-  }
-  
-  function closeModal(){ 
-    overlay.classList.remove('open'); 
-    document.body.style.overflow=''; 
-  }
-  
-  overlay.addEventListener('click',function(e){ 
-    if(e.target===overlay) closeModal(); 
-  });
-  closeBtn.addEventListener('click',closeModal);
-  
-  document.addEventListener('keydown',function(e){ 
-    if(e.key==='Escape') closeModal(); 
-  });
-  
-  document.addEventListener('click',function(e){
-    var el = e.target.closest('[data-contact]');
-    if(el){ 
-      e.preventDefault(); 
-      openModal(el.getAttribute('data-from')||''); 
-    }
-  });
-  
-  if(submitBtn){
-    submitBtn.addEventListener('click',function(){
-      var email = document.getElementById('mEmail').value.trim();
-      if(!email){ 
-        document.getElementById('mEmail').focus(); 
-        return; 
-      }
-      document.getElementById('modalBody').innerHTML='<div class="modal-success"><div class="modal-success-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><h3>Message sent!</h3><p>Thank you for reaching out. Someone from St. Mary\'s will be in touch within one business day.</p></div>';
-    });
-  }
-})();
+<section class="ministry-section ministry-section-alt" id="ministry-small-groups" data-section="small-groups">
+  <div class="container">
+    <div class="ministry-section-inner">
+      <div class="ministry-section-icon">
+        <svg width="28" height="28" viewBox="0 0 20 20" fill="none"><circle cx="8" cy="7" r="3" stroke="currentColor" stroke-width="1.5"/><path d="M2 17c0-3.3 2.7-6 6-6s6 2.7 6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="14" cy="7" r="2.5" stroke="currentColor" stroke-width="1.5"/><path d="M14 11c2.2.5 4 2.5 4 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </div>
+      <div class="ministry-section-body">
+        <div class="ministry-section-label">Ministry</div>
+        <h2 class="ministry-section-title">Small Groups</h2>
+        <p class="ministry-section-desc">Deepen your faith in community through our small group programmes. We currently offer weekly Bible study, a men's faith group, a women's prayer circle, and seasonal Lenten and Advent reflection groups. All are welcome regardless of experience.</p>
+        <div class="ministry-section-groups">
+          <div class="ministry-group-item">
+            <svg width="14" height="14" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Bible Study — Sunday mornings after 9:00 AM Mass
+          </div>
+          <div class="ministry-group-item">
+            <svg width="14" height="14" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Men's Faith Group — First Saturday of each month
+          </div>
+          <div class="ministry-group-item">
+            <svg width="14" height="14" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Women's Prayer Circle — Wednesday evenings
+          </div>
+          <div class="ministry-group-item">
+            <svg width="14" height="14" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Seasonal reflection groups — Lent and Advent
+          </div>
+        </div>
+        <div class="ministry-section-contact"><strong>Contact:</strong> Sofia Morales, Faith Formation</div>
+        <a href="#" class="ministry-section-link" data-contact data-from="formation">Get in touch to join a group →</a>
+      </div>
+    </div>
+  </div>
+</section>
 
-// Volunteer form submission
-document.getElementById('volunteerForm').addEventListener('submit', function(e) {
-  e.preventDefault();
-  
-  // Simple form validation
-  var firstName = this.querySelector('[name="firstName"]').value.trim();
-  var lastName = this.querySelector('[name="lastName"]').value.trim();
-  var email = this.querySelector('[name="email"]').value.trim();
-  var commitment = this.querySelector('[name="commitment"]').value;
-  
-  if (!firstName || !lastName || !email || !commitment) {
-    alert('Please fill in all required fields.');
-    return;
-  }
-  
-  // Get selected ministries
-  var selectedMinistries = [];
-  this.querySelectorAll('[name="ministries"]:checked').forEach(function(checkbox) {
-    selectedMinistries.push(checkbox.value);
-  });
-  
-  if (selectedMinistries.length === 0) {
-    alert('Please select at least one ministry that interests you.');
-    return;
-  }
-  
-  // Show success message
-  this.innerHTML = '<div style="text-align:center;padding:2rem;"><div style="width:56px;height:56px;background:rgba(42,138,74,0.12);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1.25rem;color:var(--sage);"><svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><h3 style="font-family:\'Lora\',serif;font-weight:700;font-size:1.375rem;color:var(--ink);margin-bottom:.5rem;">Thank you for your interest!</h3><p style="font-size:.9rem;color:var(--text-muted);line-height:1.6;">Someone from our volunteer coordination team will reach out to you within 2 business days to discuss next steps.</p></div>';
-});
-</script>
+<section class="ministry-section" id="ministry-liturgical" data-section="liturgical">
+  <div class="container">
+    <div class="ministry-section-inner">
+      <div class="ministry-section-icon">
+        <svg width="28" height="28" viewBox="0 0 20 20" fill="none"><path d="M10 3v14M3 10h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </div>
+      <div class="ministry-section-body">
+        <div class="ministry-section-label">Ministry</div>
+        <h2 class="ministry-section-title">Liturgical Ministries</h2>
+        <p class="ministry-section-desc">Serve at Mass as an altar server, lector, Eucharistic minister, or usher. These roles are the backbone of our liturgical life and are open to all confirmed Catholics. Training is provided for all new ministers.</p>
+        <div class="ministry-section-contact"><strong>Contact:</strong> Parish Office</div>
+        <a href="#volunteer-form" class="ministry-section-link">Express your interest below →</a>
+      </div>
+    </div>
+  </div>
+</section>
 
-</body>
-</html>
+<section class="ministry-section ministry-section-alt" id="ministry-music" data-section="music">
+  <div class="container">
+    <div class="ministry-section-inner">
+      <div class="ministry-section-icon">
+        <svg width="28" height="28" viewBox="0 0 20 20" fill="none"><path d="M9 16V6l8-2v10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="7" cy="16" r="2" stroke="currentColor" stroke-width="1.5"/><circle cx="15" cy="14" r="2" stroke="currentColor" stroke-width="1.5"/></svg>
+      </div>
+      <div class="ministry-section-body">
+        <div class="ministry-section-label">Ministry</div>
+        <h2 class="ministry-section-title">Music Ministry</h2>
+        <p class="ministry-section-desc">Join our parish choir or one of our smaller music groups. Singers and instrumentalists of all levels are welcome. Choir rehearsals are held on Thursday evenings at 7:00 PM in the Main Church.</p>
+        <div class="ministry-section-contact"><strong>Contact:</strong> David Chen, Director of Music</div>
+        <a href="#" class="ministry-section-link" data-contact data-from="volunteer">Get in touch →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="ministry-section" id="ministry-youth" data-section="youth">
+  <div class="container">
+    <div class="ministry-section-inner">
+      <div class="ministry-section-icon">
+        <svg width="28" height="28" viewBox="0 0 20 20" fill="none"><path d="M10 2l2.4 5 5.6.8-4 3.9.9 5.5L10 14.5l-4.9 2.7.9-5.5L2 7.8l5.6-.8L10 2z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="ministry-section-body">
+        <div class="ministry-section-label">Ministry</div>
+        <h2 class="ministry-section-title">Youth Ministry</h2>
+        <p class="ministry-section-desc">Work with our middle and high school students through retreats, service projects, and weekly gatherings. Adult volunteers and young adult leaders are always needed. A background check is required for all youth volunteers.</p>
+        <div class="ministry-section-contact"><strong>Contact:</strong> Michael Rivera, Youth Coordinator</div>
+        <a href="#" class="ministry-section-link" data-contact data-from="volunteer">Get in touch →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="ministry-section ministry-section-alt" id="ministry-outreach" data-section="outreach">
+  <div class="container">
+    <div class="ministry-section-inner">
+      <div class="ministry-section-icon">
+        <svg width="28" height="28" viewBox="0 0 20 20" fill="none"><path d="M10 17s-7-4.5-7-9a4 4 0 018 0 4 4 0 018 0c0 4.5-7 9-7 9z" stroke="currentColor" stroke-width="1.5"/></svg>
+      </div>
+      <div class="ministry-section-body">
+        <div class="ministry-section-label">Ministry</div>
+        <h2 class="ministry-section-title">Community Outreach</h2>
+        <p class="ministry-section-desc">Serve our neighbours through the parish food pantry, visits to the homebound, and our partnership with local social services. Volunteer shifts are available every Saturday morning and on weekday evenings.</p>
+        <div class="ministry-section-contact"><strong>Contact:</strong> Deacon Robert Chen</div>
+        <a href="#" class="ministry-section-link" data-contact data-from="volunteer">Get in touch →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="ministry-section" id="ministry-formation" data-section="formation">
+  <div class="container">
+    <div class="ministry-section-inner">
+      <div class="ministry-section-icon">
+        <svg width="28" height="28" viewBox="0 0 20 20" fill="none"><path d="M4 4h6v14H4a2 2 0 01-2-2V6a2 2 0 012-2z" stroke="currentColor" stroke-width="1.5"/><path d="M10 4h6a2 2 0 012 2v10a2 2 0 01-2 2h-6V4z" stroke="currentColor" stroke-width="1.5"/></svg>
+      </div>
+      <div class="ministry-section-body">
+        <div class="ministry-section-label">Ministry</div>
+        <h2 class="ministry-section-title">Faith Formation</h2>
+        <p class="ministry-section-desc">Teach religious education to children, assist with RCIA, or lead an adult study group. No formal theology background is required — just a love of the faith and a willingness to share it.</p>
+        <div class="ministry-section-contact"><strong>Contact:</strong> Sofia Morales, Director of Faith Formation</div>
+        <a href="#" class="ministry-section-link" data-contact data-from="formation">Get in touch →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="ministry-section ministry-section-alt" id="ministry-hospitality" data-section="hospitality">
+  <div class="container">
+    <div class="ministry-section-inner">
+      <div class="ministry-section-icon">
+        <svg width="28" height="28" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M10 7v4l2.5 2.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </div>
+      <div class="ministry-section-body">
+        <div class="ministry-section-label">Ministry</div>
+        <h2 class="ministry-section-title">Hospitality &amp; Events</h2>
+        <p class="ministry-section-desc">Help create a warm and welcoming environment at parish events, coffee socials, and special celebrations. Perfect for those who love bringing people together and making everyone feel at home.</p>
+        <div class="ministry-section-contact"><strong>Contact:</strong> Parish Manager — Maria Santos</div>
+        <a href="#volunteer-form" class="ministry-section-link">Express your interest below →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</div><!-- end ministry-sections -->
+>
