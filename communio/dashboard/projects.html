@@ -180,7 +180,7 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
 .wz-upload{border:2px dashed var(--border-light);border-radius:var(--r-md);padding:22px;text-align:center;cursor:pointer;position:relative;overflow:hidden;background:var(--cream);transition:border-color .2s}
 .wz-upload:hover{border-color:var(--terra)}
 .wz-frow{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.wz-vis-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px}
+.wz-vis-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:20px}
 .wz-vis{border:1.5px solid var(--border-light);border-radius:var(--r-md);padding:14px;cursor:pointer;transition:all .15s}
 .wz-vis:hover{border-color:var(--terra)}
 .wz-vis.sel{border-color:var(--terra);background:var(--terra-pale)}
@@ -808,13 +808,17 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
         <div class="wz-panel-sub">Choose how this project appears across the Communio network</div>
         <div style="font-size:12px;font-weight:700;color:var(--mid);letter-spacing:.04em;margin-bottom:10px">Visibility</div>
         <div class="wz-vis-grid">
-          <div class="wz-vis sel" onclick="wzSelectVis(this)">
-            <div class="wz-vis-title">Open network</div>
-            <div class="wz-vis-desc">Any parish on Communio can discover and join this project</div>
+          <div class="wz-vis sel" data-vis="open" onclick="wzSelectVis(this)">
+            <div class="wz-vis-title">Open to all</div>
+            <div class="wz-vis-desc">Any parish can discover and join instantly — no approval needed</div>
           </div>
-          <div class="wz-vis" onclick="wzSelectVis(this)">
+          <div class="wz-vis" data-vis="apply" onclick="wzSelectVis(this)">
+            <div class="wz-vis-title">Apply to join</div>
+            <div class="wz-vis-desc">Parishes request to join — you review and accept or decline each application</div>
+          </div>
+          <div class="wz-vis" data-vis="invite" onclick="wzSelectVis(this)">
             <div class="wz-vis-title">Invite only</div>
-            <div class="wz-vis-desc">You invite specific parishes — not visible in discovery</div>
+            <div class="wz-vis-desc">Not visible in discovery — you invite specific parishes directly</div>
           </div>
         </div>
         <div class="wz-announce">
@@ -827,9 +831,9 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
             <input type="checkbox" id="wz-announce" checked style="width:16px;height:16px">
           </label>
         </div>
-        <div class="wz-launch-info">
+        <div class="wz-launch-info" id="wz-launch-info">
           <div style="font-size:12px;font-weight:700;color:var(--terra);margin-bottom:4px">Your project will appear in discovery for:</div>
-          <div style="font-size:12px;color:var(--text-mid);line-height:1.7">Parishes with matching focus areas · Parishes in your network · Parishes in similar regions · Parishes searching for this project type</div>
+          <div id="wz-launch-info-text" style="font-size:12px;color:var(--text-mid);line-height:1.7">Parishes with matching focus areas · Parishes in your network · Parishes in similar regions · Any parish searching for this project type</div>
         </div>
         <div class="wz-foot">
           <button class="btn btn-secondary btn-sm" onclick="wzGoTo(3)">← Back</button>
@@ -910,6 +914,20 @@ function wzSelectType(el, color){
 function wzSelectVis(el){
   document.querySelectorAll('.wz-vis').forEach(function(v){ v.classList.remove('sel'); });
   el.classList.add('sel');
+  var vis = el.dataset.vis;
+  var info = document.getElementById('wz-launch-info');
+  var txt = document.getElementById('wz-launch-info-text');
+  var hd = info ? info.querySelector('div') : null;
+  if(vis === 'open'){
+    if(hd) hd.textContent = 'Your project will appear in discovery for:';
+    if(txt) txt.textContent = 'Parishes with matching focus areas · Parishes in your network · Parishes in similar regions · Any parish searching for this project type';
+  } else if(vis === 'apply'){
+    if(hd) hd.textContent = 'Parishes can apply to join — you review each application:';
+    if(txt) txt.textContent = 'Visible in discovery with an "Apply to join" button · You accept or decline each parish · Accepted parishes receive a notification and gain full access';
+  } else if(vis === 'invite'){
+    if(hd) hd.textContent = 'This project will not appear in discovery:';
+    if(txt) txt.textContent = 'Only parishes you invite directly can see and join this project · Use the Members tab to search for and invite specific parishes after launch';
+  }
 }
 
 document.getElementById('wz-img-input').addEventListener('change', function(){
