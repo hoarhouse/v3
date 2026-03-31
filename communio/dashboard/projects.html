@@ -61,6 +61,23 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
 .pj-project::before{background:var(--sage)}
 .pj-research::before{background:var(--amber)}
 .pj-type{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;padding-top:6px}
+.pj-modal-overlay{position:fixed;inset:0;background:rgba(14,10,6,.5);z-index:400;display:none;align-items:center;justify-content:center;padding:20px}
+.pj-modal-overlay.open{display:flex}
+.pj-modal{background:var(--white);border-radius:var(--r-lg);padding:28px;width:100%;max-width:520px;max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.2)}
+.pj-modal-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+.pj-modal-title{font-size:17px;font-weight:800;color:var(--ink);letter-spacing:-.02em}
+.pj-modal-close{background:none;border:none;cursor:pointer;font-size:18px;color:var(--light);padding:4px;border-radius:6px;line-height:1}
+.pj-modal-close:hover{color:var(--ink);background:var(--cream)}
+.pj-fg{margin-bottom:16px}
+.pj-fl{display:block;font-size:12px;font-weight:700;color:var(--mid);margin-bottom:5px;letter-spacing:.01em}
+.pj-fi{width:100%;font-family:'Outfit',sans-serif;font-size:13px;color:var(--ink);background:var(--cream);border:1.5px solid var(--border-light);border-radius:var(--r-md);padding:9px 13px;outline:none;transition:border-color .2s}
+.pj-fi:focus{border-color:var(--terra)}
+.pj-fta{width:100%;font-family:'Outfit',sans-serif;font-size:13px;color:var(--ink);background:var(--cream);border:1.5px solid var(--border-light);border-radius:var(--r-md);padding:9px 13px;outline:none;resize:vertical;min-height:80px;line-height:1.5;transition:border-color .2s}
+.pj-fta:focus{border-color:var(--terra)}
+.pj-thumb-upload{border:2px dashed var(--border-light);border-radius:var(--r-md);padding:20px;text-align:center;cursor:pointer;transition:border-color .2s;position:relative;overflow:hidden}
+.pj-thumb-upload:hover{border-color:var(--terra)}
+.pj-thumb-preview{width:100%;max-height:120px;object-fit:cover;border-radius:6px;display:none;margin-top:8px}
+.pj-modal-ft{display:flex;gap:8px;justify-content:flex-end;margin-top:20px;padding-top:16px;border-top:1px solid var(--border-light)}
 .pj-advocacy .pj-type{color:var(--terra)}
 .pj-project .pj-type{color:var(--sage)}
 .pj-research .pj-type{color:#8a6800}
@@ -129,7 +146,60 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
     <!-- <?php echo $projects->all_html ?> -->
     <div class="pg-hd">
       <div><div class="pg-title">Projects</div></div>
-      <a href="#" class="btn btn-primary btn-sm">Create project +</a>
+      <button class="btn btn-primary btn-sm" id="open-create-pj">Create project +</button>
+    </div>
+  </div>
+</div>
+
+<!-- Create project modal -->
+<div class="pj-modal-overlay" id="pj-modal-overlay">
+  <div class="pj-modal">
+    <div class="pj-modal-hd">
+      <div class="pj-modal-title">Create a project</div>
+      <button class="pj-modal-close" id="pj-modal-close">✕</button>
+    </div>
+    <div class="pj-fg">
+      <label class="pj-fl">Project title</label>
+      <input class="pj-fi" type="text" id="pj-title" placeholder="e.g. Global Youth Formation Network">
+    </div>
+    <div class="pj-fg">
+      <label class="pj-fl">Project type</label>
+      <select class="pj-fi" id="pj-type">
+        <option value="">Select a type...</option>
+        <option value="advocacy">Advocacy — co-signed statement or open letter</option>
+        <option value="project">Project — active collaboration between parishes</option>
+        <option value="research">Research — study or data collection</option>
+      </select>
+    </div>
+    <div class="pj-fg">
+      <label class="pj-fl">Description</label>
+      <textarea class="pj-fta" id="pj-desc" placeholder="What is this project about? What are you trying to achieve?"></textarea>
+    </div>
+    <div class="pj-fg">
+      <label class="pj-fl">Project thumbnail <span style="font-weight:400;color:var(--light)">(optional)</span></label>
+      <div class="pj-thumb-upload" id="pj-thumb-area">
+        <input type="file" id="pj-thumb-input" accept="image/*" style="position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%">
+        <div id="pj-thumb-placeholder">
+          <div style="font-size:24px;margin-bottom:6px">🖼️</div>
+          <div style="font-size:13px;font-weight:600;color:var(--ink)">Upload a thumbnail</div>
+          <div style="font-size:11px;color:var(--light);margin-top:3px">Recommended 800×400px · JPG or PNG</div>
+        </div>
+        <img id="pj-thumb-preview" class="pj-thumb-preview" src="" alt="">
+      </div>
+    </div>
+    <div class="pj-fg">
+      <label class="pj-fl">Target parishes <span style="font-weight:400;color:var(--light)">(optional — for advocacy)</span></label>
+      <input class="pj-fi" type="number" id="pj-target" placeholder="e.g. 500">
+    </div>
+    <div class="pj-modal-ft">
+      <button class="btn btn-secondary btn-sm" id="pj-cancel">Cancel</button>
+      <button class="btn btn-primary btn-sm" id="pj-submit">Create project →</button>
+    </div>
+  </div>
+</div>
+
+<div class="page-shell"><div class="page-inner"><div class="pg-hd"><div><div class="pg-title">Projects</div></div>
+      <button style="visibility:hidden" class="btn btn-primary btn-sm">placeholder</button>
     </div>
     <div class="tabs">
       <button class="tab on">Joined (4)</button>
@@ -204,6 +274,48 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
     if(!b.contains(e.target)&&!m.contains(e.target))m.classList.remove('open');
   });
 })();
+
+  // Create project modal
+  var overlay = document.getElementById('pj-modal-overlay');
+  var thumbInput = document.getElementById('pj-thumb-input');
+  var thumbPreview = document.getElementById('pj-thumb-preview');
+  var thumbPlaceholder = document.getElementById('pj-thumb-placeholder');
+
+  document.getElementById('open-create-pj').addEventListener('click', function(){
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  });
+
+  function closeModal(){
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  document.getElementById('pj-modal-close').addEventListener('click', closeModal);
+  document.getElementById('pj-cancel').addEventListener('click', closeModal);
+  overlay.addEventListener('click', function(e){ if(e.target === overlay) closeModal(); });
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeModal(); });
+
+  thumbInput.addEventListener('change', function(){
+    var file = this.files[0];
+    if(!file) return;
+    var reader = new FileReader();
+    reader.onload = function(e){
+      thumbPreview.src = e.target.result;
+      thumbPreview.style.display = 'block';
+      thumbPlaceholder.style.display = 'none';
+    };
+    reader.readAsDataURL(file);
+  });
+
+  document.getElementById('pj-submit').addEventListener('click', function(){
+    var title = document.getElementById('pj-title').value.trim();
+    if(!title){ document.getElementById('pj-title').focus(); return; }
+    var b = document.getElementById('pj-submit');
+    b.textContent = '✓ Project created';
+    b.style.background = 'var(--sage)';
+    setTimeout(function(){ closeModal(); b.textContent = 'Create project →'; b.style.background = ''; }, 1500);
+  });
 </script>
 </body>
 </html>
