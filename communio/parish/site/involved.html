@@ -177,6 +177,13 @@ a[data-contact]:hover{color:var(--terra-dark);border-bottom-color:var(--terra-da
 .role-apply:hover{background:var(--terra-dark);}
 @media(max-width:768px){.roles-grid{grid-template-columns:1fr;}}
 
+
+.groups-list{display:flex;flex-direction:column;gap:1rem;margin-bottom:1.25rem;}
+.group-card{background:#fff;border:1.5px solid rgba(14,10,6,0.08);border-radius:10px;padding:1.25rem;}
+.ministry-section-alt .group-card{background:var(--warm-white);}
+.group-card-header{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;}
+.group-desc{font-size:.85rem;color:var(--text-muted);line-height:1.7;}
+
 </style>
 </head>
 <body>
@@ -333,19 +340,49 @@ a[data-contact]:hover{color:var(--terra-dark);border-bottom-color:var(--terra-da
             Seasonal reflection groups — Lent and Advent
           </div>
         </div>
-        <div class="roles-label">Available roles</div><div class="roles-grid"><div class="role-card">
-          <div><div class="role-title">Bible Study</div><div class="role-meta">Sunday mornings after 9 AM Mass</div></div>
-          <button class="role-apply" data-contact data-from="small-groups:bible-study">Apply →</button>
-        </div><div class="role-card">
-          <div><div class="role-title">Men's Faith Group</div><div class="role-meta">First Saturday of each month</div></div>
-          <button class="role-apply" data-contact data-from="small-groups:mens-group">Apply →</button>
-        </div><div class="role-card">
-          <div><div class="role-title">Women's Prayer Circle</div><div class="role-meta">Wednesday evenings 7 PM</div></div>
-          <button class="role-apply" data-contact data-from="small-groups:womens-group">Apply →</button>
-        </div><div class="role-card">
-          <div><div class="role-title">Lenten Reflection Group</div><div class="role-meta">Weekly during Lent</div></div>
-          <button class="role-apply" data-contact data-from="small-groups:lenten-group">Apply →</button>
-        </div></div>
+        <div class="roles-label">Our Groups</div>
+<div class="groups-list">
+  <div class="group-card">
+    <div class="group-card-header">
+      <div>
+        <div class="role-title">Bible Study</div>
+        <div class="role-meta">Sunday mornings after 9 AM Mass</div>
+      </div>
+      <button class="role-apply" data-contact data-from="small-groups:bible-study">Join →</button>
+    </div>
+    <p class="group-desc">A friendly, discussion-based exploration of Sunday's Scripture readings. No prior biblical knowledge required — just an open mind and a willingness to share. Led by Sofia Morales, this group welcomes everyone from lifelong Catholics to those just beginning to explore the faith.</p>
+  </div>
+  <div class="group-card">
+    <div class="group-card-header">
+      <div>
+        <div class="role-title">Men's Faith Group</div>
+        <div class="role-meta">First Saturday of each month · 8:00 AM</div>
+      </div>
+      <button class="role-apply" data-contact data-from="small-groups:mens-group">Join →</button>
+    </div>
+    <p class="group-desc">A relaxed gathering of men of all ages over coffee and conversation. Each month focuses on a different theme — fatherhood, work, prayer, service — grounded in Catholic teaching. A great way to build brotherhood and accountability in faith.</p>
+  </div>
+  <div class="group-card">
+    <div class="group-card-header">
+      <div>
+        <div class="role-title">Women's Prayer Circle</div>
+        <div class="role-meta">Wednesday evenings · 7:00 PM</div>
+      </div>
+      <button class="role-apply" data-contact data-from="small-groups:womens-group">Join →</button>
+    </div>
+    <p class="group-desc">A warm, supportive group of women who gather weekly for shared prayer, reflection, and friendship. The group rotates through the Rosary, Lectio Divina, and guided meditation. New members are always warmly welcomed.</p>
+  </div>
+  <div class="group-card">
+    <div class="group-card-header">
+      <div>
+        <div class="role-title">Lenten Reflection Group</div>
+        <div class="role-meta">Weekly during Lent · Tuesday evenings</div>
+      </div>
+      <button class="role-apply" data-contact data-from="small-groups:lenten-group">Join →</button>
+    </div>
+    <p class="group-desc">A seasonal group running through the six weeks of Lent. Each week follows a structured reflection on the Sunday Gospel, paired with practical suggestions for fasting, prayer, and almsgiving. Perfect for those who want to make Lent more intentional.</p>
+  </div>
+</div></div></div>
         <div class="ministry-section-contact"><strong>Contact:</strong> Sofia Morales, Faith Formation</div>
         <a href="#" class="ministry-section-link" data-contact data-from="formation">Get in touch to join a group →</a>
       </div>
