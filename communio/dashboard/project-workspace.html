@@ -191,7 +191,23 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
     .rd-activity-icon{font-size:14px;flex-shrink:0;margin-top:1px}
     .rd-activity-text{font-size:12px;color:var(--ink);flex:1;line-height:1.4}
     .rd-activity-time{font-size:10px;color:var(--light);margin-top:2px}
-    </style>
+    
+#pw-invite-overlay{position:fixed;inset:0;background:rgba(14,10,6,.5);z-index:600;display:none;align-items:center;justify-content:center}
+#pw-invite-overlay.open{display:flex}
+.pw-invite-modal{background:var(--white);border-radius:var(--r-lg);padding:28px;width:100%;max-width:480px;box-shadow:0 20px 60px rgba(14,10,6,.2)}
+.pw-invite-title{font-size:17px;font-weight:800;color:var(--ink);margin-bottom:4px;letter-spacing:-.02em}
+.pw-invite-sub{font-family:'Lora',serif;font-size:12px;color:var(--light);font-style:italic;margin-bottom:18px}
+.pw-invite-search{width:100%;border:1.5px solid var(--border-light);border-radius:8px;padding:10px 13px;font-size:13px;font-family:'Outfit',sans-serif;color:var(--ink);background:var(--cream);outline:none;margin-bottom:14px}
+.pw-invite-search:focus{border-color:var(--terra)}
+.pw-invite-list{display:flex;flex-direction:column;gap:8px;max-height:280px;overflow-y:auto}
+.pw-invite-row{display:flex;align-items:center;gap:10px;padding:10px 12px;border:1px solid var(--border-light);border-radius:8px;background:var(--cream)}
+.pw-invite-av{width:34px;height:34px;border-radius:8px;font-size:10px;font-weight:700;color:white;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.pw-invite-info{flex:1}
+.pw-invite-name{font-size:13px;font-weight:600;color:var(--ink)}
+.pw-invite-loc{font-size:11px;color:var(--light)}
+.pw-invite-btn{background:var(--terra);color:white;border:none;padding:5px 12px;border-radius:6px;font-size:11px;font-weight:700;cursor:pointer;font-family:'Outfit',sans-serif;flex-shrink:0;transition:all .15s}
+.pw-invite-footer{display:flex;justify-content:flex-end;margin-top:16px;padding-top:14px;border-top:1px solid var(--border-light)}
+</style>
 </head>
 <body>
 
@@ -390,8 +406,8 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
     </div>
     <div class="pw-actions">
       <button class="btn btn-primary btn-sm">+ Invite parishes</button>
-      <button class="btn btn-secondary btn-sm">Share link</button>
-      <button class="btn btn-secondary btn-sm">Edit</button>
+      <button class="btn btn-secondary btn-sm" onclick="pwShareLink(this)">Share link</button>
+      <button class="btn btn-secondary btn-sm" onclick="window.location.href='projects.html'">Edit project</button>
     </div>
   </div>
   <div class="pw-presence">
@@ -474,7 +490,7 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
         </div>
         <div style="display:flex;gap:8px;justify-content:flex-end">
           <button onclick="toggleNewTopic()" style="background:none;border:1.5px solid var(--border-light);border-radius:7px;padding:7px 14px;font-size:12px;font-weight:600;cursor:pointer;font-family:'Outfit',sans-serif;color:var(--mid)">Cancel</button>
-          <button style="background:var(--terra);color:white;border:none;padding:7px 16px;border-radius:7px;font-size:12px;font-weight:700;cursor:pointer;font-family:'Outfit',sans-serif">Post topic →</button>
+          <button style="background:var(--terra);color:white;border:none;padding:7px 16px;border-radius:7px;font-size:12px;font-weight:700;cursor:pointer;font-family:'Outfit',sans-serif" onclick="pwPostTopic()">Post topic →</button>
         </div>
       </div>
 
@@ -526,7 +542,7 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
           </div>
           <div class="pw-reply-box">
             <input class="pw-reply-in" type="text" placeholder="Reply to this topic…">
-            <button class="pw-reply-send">Post</button>
+            <button class="pw-reply-send" onclick="pwSendReply(this)">Post</button>
           </div>
         </div>
       </div>
@@ -557,7 +573,7 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
           </div>
           <div class="pw-reply-box">
             <input class="pw-reply-in" type="text" placeholder="Reply to this topic…">
-            <button class="pw-reply-send">Post</button>
+            <button class="pw-reply-send" onclick="pwSendReply(this)">Post</button>
           </div>
         </div>
       </div>
@@ -588,7 +604,7 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
           </div>
           <div class="pw-reply-box">
             <input class="pw-reply-in" type="text" placeholder="Reply to this topic…">
-            <button class="pw-reply-send">Post</button>
+            <button class="pw-reply-send" onclick="pwSendReply(this)">Post</button>
           </div>
         </div>
       </div>
@@ -611,7 +627,7 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
         <div class="pw-replies">
           <div class="pw-reply-box">
             <input class="pw-reply-in" type="text" placeholder="Reply to this topic…">
-            <button class="pw-reply-send">Post</button>
+            <button class="pw-reply-send" onclick="pwSendReply(this)">Post</button>
           </div>
         </div>
       </div>
@@ -719,7 +735,7 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
       <div class="pw-card">
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
           <div class="pw-card-title" style="margin:0">All parishes (28)</div>
-          <button class="btn btn-primary btn-sm">+ Invite parishes</button>
+          <button class="btn btn-primary btn-sm" onclick="pwOpenInvite()">+ Invite parishes</button>
         </div>
         <div style="display:flex;align-items:center;gap:8px;padding:10px 12px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;margin-bottom:14px;font-size:12px;font-weight:700;color:#15803d">
           <div style="width:7px;height:7px;border-radius:50%;background:#22c55e;animation:pwpulse 2s infinite;flex-shrink:0"></div>
@@ -793,7 +809,7 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
           </div>
           <div style="display:flex;gap:8px">
             <button class="btn btn-secondary btn-sm">View results</button>
-            <button class="btn btn-secondary btn-sm">Edit</button>
+            <button class="btn btn-secondary btn-sm" onclick="window.location.href='projects.html'">Edit project</button>
           </div>
         </div>
 
@@ -815,7 +831,7 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
           </div>
           <div style="display:flex;gap:8px">
             <button class="btn btn-primary btn-sm">Launch</button>
-            <button class="btn btn-secondary btn-sm">Edit</button>
+            <button class="btn btn-secondary btn-sm" onclick="window.location.href='projects.html'">Edit project</button>
           </div>
         </div>
       </div>
@@ -898,6 +914,95 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
 </div>
 
 <script>
+function pwShareLink(btn) {
+  var url = window.location.href;
+  if(navigator.clipboard) {
+    navigator.clipboard.writeText(url).then(function(){
+      var orig = btn.textContent;
+      btn.textContent = 'Link copied ✓';
+      btn.style.color = 'var(--sage)';
+      btn.style.borderColor = 'var(--sage)';
+      setTimeout(function(){ btn.textContent = orig; btn.style.color = ''; btn.style.borderColor = ''; }, 2000);
+    });
+  } else {
+    pwToast('Link: ' + url);
+  }
+}
+
+function pwToast(msg) {
+  var t = document.createElement('div');
+  t.textContent = msg;
+  t.style.cssText = 'position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--ink);color:white;padding:10px 20px;border-radius:8px;font-size:13px;font-weight:600;z-index:9999;font-family:Outfit,sans-serif;box-shadow:0 4px 20px rgba(0,0,0,.2);transition:opacity .3s';
+  document.body.appendChild(t);
+  setTimeout(function(){ t.style.opacity='0'; setTimeout(function(){ t.remove(); }, 300); }, 2500);
+}
+
+function pwPostTopic() {
+  var titleEl = document.querySelector('#new-topic-form input[type="text"]');
+  var msgEl = document.querySelector('#new-topic-form textarea');
+  var title = titleEl ? titleEl.value.trim() : '';
+  var msg = msgEl ? msgEl.value.trim() : '';
+  if(!title) { if(titleEl) titleEl.focus(); return; }
+  var thread = document.createElement('div');
+  thread.className = 'pw-thread';
+  thread.onclick = function(e){ toggleThread(e, this); };
+  thread.innerHTML = '<div class="pw-thread-hd">' +
+    '<div class="pw-thread-av" style="background:var(--terra)">SM</div>' +
+    '<div class="pw-thread-body"><div class="pw-thread-title">' + title + '</div>' +
+    '<div class="pw-thread-meta">St. Mary's Parish · Just now</div></div>' +
+    '<div class="pw-thread-right"><span class="pw-thread-count"><svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M2 3h12a1 1 0 011 1v7a1 1 0 01-1 1H4l-3 2V4a1 1 0 011-1z" stroke="currentColor" stroke-width="1.3"/></svg> 0</span>' +
+    '<span class="pw-thread-chevron">›</span></div></div>' +
+    '<div class="pw-replies">' +
+    (msg ? '<div class="pw-reply"><div class="pw-reply-av" style="background:var(--terra)">SM</div><div class="pw-reply-body"><div class="pw-reply-who">St. Mary's Parish</div><div class="pw-reply-text">' + msg + '</div><div class="pw-reply-time">Just now</div></div></div>' : '') +
+    '<div class="pw-reply-box"><input class="pw-reply-in" type="text" placeholder="Reply to this topic…"><button class="pw-reply-send" onclick="pwSendReply(this)">Post</button></div></div>';
+  var newTopicBtn = document.querySelector('.pw-new-topic');
+  if(newTopicBtn) newTopicBtn.after(thread);
+  if(titleEl) titleEl.value = '';
+  if(msgEl) msgEl.value = '';
+  toggleNewTopic();
+  thread.classList.add('open');
+  pwToast('Topic posted successfully');
+}
+
+function pwSendReply(btn) {
+  var box = btn.closest('.pw-reply-box');
+  var input = box ? box.querySelector('.pw-reply-in') : null;
+  var text = input ? input.value.trim() : '';
+  if(!text) { if(input) input.focus(); return; }
+  var reply = document.createElement('div');
+  reply.className = 'pw-reply';
+  reply.innerHTML = '<div class="pw-reply-av" style="background:var(--terra)">SM</div>' +
+    '<div class="pw-reply-body"><div class="pw-reply-who">St. Mary's Parish</div>' +
+    '<div class="pw-reply-text">' + text + '</div>' +
+    '<div class="pw-reply-time">Just now</div></div>';
+  box.before(reply);
+  input.value = '';
+  input.focus();
+  var countEl = btn.closest('.pw-thread').querySelector('.pw-thread-count');
+  if(countEl) {
+    var svg = countEl.querySelector('svg');
+    var n = parseInt(countEl.textContent.trim()) || 0;
+    countEl.innerHTML = '';
+    if(svg) countEl.appendChild(svg);
+    countEl.appendChild(document.createTextNode(' ' + (n+1)));
+  }
+}
+
+function pwOpenInvite() {
+  document.getElementById('pw-invite-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function pwCloseInvite() {
+  document.getElementById('pw-invite-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function pwInviteParish(btn) {
+  btn.textContent = 'Invited ✓';
+  btn.style.background = 'var(--sage)';
+  btn.style.borderColor = 'var(--sage)';
+  btn.disabled = true;
+}
+
 function toggleResLink() {
   var form = document.getElementById('res-link-form');
   form.style.display = form.style.display === 'none' ? 'block' : 'none';
@@ -1023,5 +1128,48 @@ function pwShowTab(id) {
       alert('Add finding form would open here');
     }
     </script>
+<div id="pw-invite-overlay" onclick="if(event.target===this)pwCloseInvite()">
+  <div class="pw-invite-modal">
+    <div class="pw-invite-title">Invite parishes</div>
+    <div class="pw-invite-sub">Search for parishes in the Communio network to invite to this project</div>
+    <input class="pw-invite-search" type="text" placeholder="Search by parish name, city or country…">
+    <div class="pw-invite-list">
+      <div class="pw-invite-row">
+        <div class="pw-invite-av" style="background:#d85020">AP</div>
+        <div class="pw-invite-info"><div class="pw-invite-name">Assumption Parish</div><div class="pw-invite-loc">Chicago, USA</div></div>
+        <button class="pw-invite-btn" onclick="pwInviteParish(this)">Invite</button>
+      </div>
+      <div class="pw-invite-row">
+        <div class="pw-invite-av" style="background:#185FA5">SP</div>
+        <div class="pw-invite-info"><div class="pw-invite-name">St. Patrick's Cathedral</div><div class="pw-invite-loc">Dublin, Ireland</div></div>
+        <button class="pw-invite-btn" onclick="pwInviteParish(this)">Invite</button>
+      </div>
+      <div class="pw-invite-row">
+        <div class="pw-invite-av" style="background:#2a8a4a">SJ</div>
+        <div class="pw-invite-info"><div class="pw-invite-name">St. Joseph Parish</div><div class="pw-invite-loc">São Paulo, Brazil</div></div>
+        <button class="pw-invite-btn" onclick="pwInviteParish(this)">Invite</button>
+      </div>
+      <div class="pw-invite-row">
+        <div class="pw-invite-av" style="background:#534AB7">SM</div>
+        <div class="pw-invite-info"><div class="pw-invite-name">Santa Maria Parish</div><div class="pw-invite-loc">Rome, Italy</div></div>
+        <button class="pw-invite-btn" onclick="pwInviteParish(this)">Invite</button>
+      </div>
+      <div class="pw-invite-row">
+        <div class="pw-invite-av" style="background:#BA7517">SL</div>
+        <div class="pw-invite-info"><div class="pw-invite-name">St. Luke Parish</div><div class="pw-invite-loc">Nairobi, Kenya</div></div>
+        <button class="pw-invite-btn" onclick="pwInviteParish(this)">Invite</button>
+      </div>
+      <div class="pw-invite-row">
+        <div class="pw-invite-av" style="background:#0F6E56">SC</div>
+        <div class="pw-invite-info"><div class="pw-invite-name">St. Clare Parish</div><div class="pw-invite-loc">Melbourne, Australia</div></div>
+        <button class="pw-invite-btn" onclick="pwInviteParish(this)">Invite</button>
+      </div>
+    </div>
+    <div class="pw-invite-footer">
+      <button class="btn btn-secondary btn-sm" onclick="pwCloseInvite()">Done</button>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>
