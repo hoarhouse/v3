@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Terms of Use — St. Mary's Parish</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0e0a06;--terra:#d85020;--terra-dark:#b84018;--sage:#2a8a4a;--cream:#f5f2e8;--warm-white:#fffdf5;--text-body:#3d2f22;--text-muted:#7a6555;--gold:#c8973a;}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+a{color:inherit;text-decoration:none;}
+body{font-family:'Outfit',sans-serif;line-height:1.6;color:var(--text-body);background:var(--warm-white);-webkit-font-smoothing:antialiased;}
+h1,h2,h3,h4,h5,h6{font-family:'Lora',serif;line-height:1.2;}
+.container{max-width:800px;margin:0 auto;padding:0 2rem;}
+.nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:64px;background:rgba(255,253,245,0.96);backdrop-filter:blur(12px);box-shadow:0 2px 20px rgba(14,10,6,0.08);}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:100%;max-width:1200px;margin:0 auto;padding:0 2rem;gap:1rem;}
+.nav-logo{display:flex;align-items:center;gap:.75rem;font-family:'Lora',serif;font-weight:600;font-size:1.125rem;color:var(--ink);text-decoration:none;flex-shrink:0;}
+.nav-crest{width:36px;height:36px;background:var(--terra);border-radius:50%;display:flex;align-items:center;justify-content:center;font-style:italic;font-weight:700;color:#fff;font-size:.85rem;}
+.nav-links{display:flex;align-items:center;gap:.25rem;flex:1;justify-content:center;}
+.nav-link{font-size:.8rem;font-weight:500;color:var(--text-body);text-decoration:none;white-space:nowrap;padding:.5rem .75rem;border-radius:6px;transition:all .2s ease;font-family:'Outfit',sans-serif;}
+.nav-link:hover{color:var(--terra);background:rgba(216,80,32,0.06);}
+.nav-dropdown{position:relative;}
+.nav-dropdown-btn{display:flex;align-items:center;gap:.3rem;font-size:.8rem;font-weight:500;color:var(--text-body);padding:.5rem .75rem;border-radius:6px;cursor:pointer;background:none;border:none;font-family:'Outfit',sans-serif;transition:all .2s ease;white-space:nowrap;}
+.nav-dropdown-btn:hover{color:var(--terra);background:rgba(216,80,32,0.06);}
+.nav-dropdown-btn svg{transition:transform .2s ease;}
+.nav-dropdown:hover .nav-dropdown-btn svg{transform:rotate(180deg);}
+.nav-dropdown-menu::before{content:"";position:absolute;top:-12px;left:0;right:0;height:12px;}
+.nav-dropdown-menu{display:none;position:absolute;top:100%;left:50%;transform:translateX(-50%);background:#fffdf5;border:1px solid rgba(14,10,6,0.1);border-radius:10px;padding:.5rem;padding-top:12px;margin-top:0;min-width:180px;box-shadow:0 8px 30px rgba(14,10,6,0.12);z-index:200;}
+.nav-dropdown:hover .nav-dropdown-menu{display:block;}
+.nav-dropdown-item{display:block;padding:.5rem .875rem;font-size:.8rem;color:var(--text-body);text-decoration:none;border-radius:6px;white-space:nowrap;transition:all .2s ease;}
+.nav-dropdown-item:hover{background:rgba(216,80,32,0.08);color:var(--terra);}
+.nav-cta{background:var(--terra);color:#fff;font-size:.8rem;font-weight:600;padding:.55rem 1.25rem;border-radius:6px;text-decoration:none;white-space:nowrap;flex-shrink:0;transition:background .2s ease;}
+.nav-cta:hover{background:var(--terra-dark);}
+.nav-hamburger{display:none;flex-direction:column;gap:4px;cursor:pointer;background:none;border:none;padding:4px;flex-shrink:0;}
+.nav-hamburger span{display:block;width:22px;height:2px;background:var(--ink);border-radius:1px;}
+.nav-mobile{display:none;position:fixed;top:64px;left:0;right:0;bottom:0;background:var(--ink);flex-direction:column;align-items:center;justify-content:center;gap:1.25rem;z-index:999;overflow-y:auto;padding:2rem 0;}
+.nav-mobile.open{display:flex;}
+.nav-mobile a{font-family:'Lora',serif;font-size:1.125rem;font-weight:600;color:#fff;text-decoration:none;opacity:.9;}
+.nav-mobile a:hover{color:var(--terra);}
+.nav-mobile-section{font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-top:.75rem;}
+@media(max-width:968px){.nav-links{display:none;}.nav-hamburger{display:flex;}}
+/* CONTENT */
+.legal-hero{background:var(--ink);padding:7rem 2rem 3rem;text-align:center;}
+.legal-hero h1{font-family:'Lora',serif;font-weight:700;font-size:clamp(1.75rem,4vw,2.5rem);color:#fff;margin-bottom:.5rem;}
+.legal-hero-sub{font-size:.9rem;color:rgba(255,255,255,0.5);}
+.legal-content{padding:4rem 2rem 6rem;}
+.legal-content h2{font-family:'Lora',serif;font-weight:700;font-size:1.25rem;color:var(--ink);margin:2rem 0 .75rem;}
+.legal-content h2:first-child{margin-top:0;}
+.legal-content p{font-size:.925rem;color:var(--text-body);line-height:1.75;margin-bottom:1rem;}
+.legal-content ul{font-size:.925rem;color:var(--text-body);line-height:1.75;margin-bottom:1rem;padding-left:1.5rem;}
+.legal-content ul li{margin-bottom:.4rem;}
+.legal-content a{color:var(--terra);text-decoration:underline;}
+.legal-updated{font-size:.8rem;color:var(--text-muted);margin-bottom:2rem;padding-bottom:2rem;border-bottom:1px solid rgba(14,10,6,0.08);}
+.page-footer{background:var(--ink);color:rgba(255,253,245,0.6);padding:2.5rem 2rem;text-align:center;font-size:.85rem;}
+.page-footer a{color:var(--terra);}
+.page-footer a:hover{color:#fff;}
+</style>
+</head>
+<body>
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo"><div class="nav-crest">SM</div>St. Mary's Parish</a>
+    <div class="nav-links">
+      <a href="index.html#mass-times" class="nav-link">Mass Times</a>
+      <div class="nav-dropdown">
+        <button class="nav-dropdown-btn">Parish Life<svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M3 4.5l3 3 3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+        <div class="nav-dropdown-menu">
+          <a href="about.html" class="nav-dropdown-item">About Us</a>
+          <a href="events.html" class="nav-dropdown-item">Events</a>
+          <a href="staff.html" class="nav-dropdown-item">Our Team</a>
+          <a href="bulletin.html" class="nav-dropdown-item">Parish Bulletin</a>
+          <a href="involved.html" class="nav-dropdown-item">Get Involved</a>
+        </div>
+      </div>
+      <div class="nav-dropdown">
+        <button class="nav-dropdown-btn">Sacraments<svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M3 4.5l3 3 3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+        <div class="nav-dropdown-menu">
+          <a href="sacraments.html#baptism" class="nav-dropdown-item">Baptism</a>
+          <a href="sacraments.html#wedding" class="nav-dropdown-item">Wedding</a>
+          <a href="sacraments.html#funeral" class="nav-dropdown-item">Funeral Mass</a>
+          <a href="sacraments.html#confirmation" class="nav-dropdown-item">Confirmation</a>
+          <a href="sacraments.html#firstcommunion" class="nav-dropdown-item">First Communion</a>
+        </div>
+      </div>
+      <a href="rcia.html" class="nav-link">Becoming Catholic</a>
+      <a href="#" class="nav-link" data-contact data-from="general">Contact</a>
+    </div>
+    <a href="index.html#giving" class="nav-cta">Give Now</a>
+    <button class="nav-hamburger" id="navHamburger"><span></span><span></span><span></span></button>
+  </div>
+  <div class="nav-mobile" id="navMobile">
+    <a href="index.html#mass-times">Mass Times</a>
+    <div class="nav-mobile-section">Parish Life</div>
+    <a href="about.html">About Us</a>
+    <a href="events.html">Events</a>
+    <a href="staff.html">Our Team</a>
+    <a href="bulletin.html">Parish Bulletin</a>
+    <a href="involved.html">Get Involved</a>
+    <div class="nav-mobile-section">Sacraments</div>
+    <a href="sacraments.html">All Sacraments</a>
+    <a href="rcia.html">Becoming Catholic</a>
+    <a href="#" data-contact data-from="general">Contact</a>
+    <a href="index.html#giving" style="margin-top:.5rem;background:var(--terra);padding:.625rem 2rem;border-radius:8px;">Give Now</a>
+  </div>
+</nav>
+<div class="legal-hero">
+  <div class="container">
+    <h1>Terms of Use</h1>
+    <p class="legal-hero-sub">St. Mary's Parish — New York</p>
+  </div>
+</div>
+<div class="legal-content">
+  <div class="container">
+    <p class="legal-updated">Last updated: March 2025</p>
+    <h2>Acceptance of terms</h2>
+    <p>By accessing and using the St. Mary's Parish website, you accept and agree to be bound by these Terms of Use. If you do not agree to these terms, please do not use our website.</p>
+    <h2>Use of this website</h2>
+    <p>This website is provided for informational purposes and to support the pastoral mission of St. Mary's Parish. You may use this site for personal, non-commercial purposes only. You agree not to:</p>
+    <ul>
+      <li>Use the site in any way that violates applicable laws or regulations</li>
+      <li>Reproduce or republish any content from this site without permission</li>
+      <li>Attempt to gain unauthorised access to any part of our systems</li>
+      <li>Use automated tools to scrape or collect data from this site</li>
+    </ul>
+    <h2>Intellectual property</h2>
+    <p>All content on this website — including text, images, logos, and design — is the property of St. Mary's Parish or its licensors and is protected by copyright. You may not reproduce, distribute, or create derivative works without our written permission.</p>
+    <h2>Forms and submissions</h2>
+    <p>When you submit information through our contact, registration, or sacrament request forms, you confirm that the information provided is accurate. We reserve the right to decline any request at our discretion.</p>
+    <h2>External links</h2>
+    <p>Our website may contain links to third-party websites. These links are provided for convenience only. St. Mary's Parish is not responsible for the content or privacy practices of any external sites.</p>
+    <h2>Disclaimer</h2>
+    <p>This website is provided "as is" without warranties of any kind. We make every effort to ensure information is accurate and up to date, but we cannot guarantee that all content is free from errors or omissions. Mass times, event details, and staff information may change — please contact the parish office to confirm.</p>
+    <h2>Limitation of liability</h2>
+    <p>St. Mary's Parish shall not be liable for any damages arising from your use of, or inability to use, this website or its content.</p>
+    <h2>Changes to these terms</h2>
+    <p>We reserve the right to update these terms at any time. Continued use of the website after changes are posted constitutes acceptance of the revised terms.</p>
+    <h2>Contact us</h2>
+    <p>If you have questions about these terms, please <a href="#" data-contact data-from="general">get in touch</a> or contact us at 123 Rivington Street, New York, NY 10002, or call (212) 555-0123.</p>
+  </div>
+</div>
+<footer class="page-footer">
+  <div class="container">
+    <p>&copy; 2024 St. Mary's Parish &middot; <a href="index.html">Back to home</a> &middot; <a href="privacy.html">Privacy Policy</a> &middot; Powered by <span style="color:var(--terra);font-weight:600;">Communio</span></p>
+  </div>
+</footer>
+<script>
+const _nh=document.getElementById('navHamburger');
+const _nm=document.getElementById('navMobile');
+if(_nh){_nh.addEventListener('click',()=>_nm.classList.toggle('open'));_nm.addEventListener('click',(e)=>{if(e.target.tagName==='A')_nm.classList.remove('open');});}
+(function(){
+  var overlay=document.getElementById('contactModal');
+  if(!overlay)return;
+  var closeBtn=document.getElementById('modalClose');
+  function openModal(from){overlay.classList.add('open');document.body.style.overflow='hidden';}
+  function closeModal(){overlay.classList.remove('open');document.body.style.overflow='';}
+  overlay.addEventListener('click',function(e){if(e.target===overlay)closeModal();});
+  if(closeBtn)closeBtn.addEventListener('click',closeModal);
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')closeModal();});
+  document.addEventListener('click',function(e){var el=e.target.closest('[data-contact]');if(el){e.preventDefault();openModal(el.getAttribute('data-from')||'');}});
+})();
+</script>
+</body>
+</html>
