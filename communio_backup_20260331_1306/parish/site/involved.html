@@ -1,0 +1,1702 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Get Involved — St. Mary's Parish</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0e0a06;--terra:#d85020;--terra-dark:#b84018;--sage:#2a8a4a;--cream:#f5f2e8;--warm-white:#fffdf5;--text-body:#3d2f22;--text-muted:#7a6555;--gold:#c8973a;}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+a{color:inherit;text-decoration:none;}
+body{font-family:'Outfit',sans-serif;line-height:1.6;color:var(--text-body);background:var(--warm-white);-webkit-font-smoothing:antialiased;}
+h1,h2,h3,h4,h5,h6{font-family:'Lora',serif;line-height:1.2;}
+.container{max-width:1200px;margin:0 auto;padding:0 2rem;}
+
+/* NAVIGATION */
+.nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:64px;background:rgba(255,253,245,0.96);backdrop-filter:blur(12px);box-shadow:0 2px 20px rgba(14,10,6,0.08);}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:100%;max-width:1200px;margin:0 auto;padding:0 2rem;gap:1rem;}
+.nav-logo{display:flex;align-items:center;gap:.75rem;font-family:'Lora',serif;font-weight:600;font-size:1.125rem;color:var(--ink);text-decoration:none;flex-shrink:0;}
+.nav-crest{width:36px;height:36px;background:var(--terra);border-radius:50%;display:flex;align-items:center;justify-content:center;font-style:italic;font-weight:700;color:#fff;font-size:.85rem;}
+.nav-links{display:flex;align-items:center;gap:.25rem;flex:1;justify-content:center;}
+.nav-link{font-size:.8rem;font-weight:500;color:var(--text-body);text-decoration:none;white-space:nowrap;padding:.5rem .75rem;border-radius:6px;transition:all .2s ease;font-family:'Outfit',sans-serif;}
+.nav-link:hover{color:var(--terra);background:rgba(216,80,32,0.06);}
+.nav-dropdown{position:relative;}
+.nav-dropdown-btn{display:flex;align-items:center;gap:.3rem;font-size:.8rem;font-weight:500;color:var(--text-body);padding:.5rem .75rem;border-radius:6px;cursor:pointer;background:none;border:none;font-family:'Outfit',sans-serif;transition:all .2s ease;white-space:nowrap;}
+.nav-dropdown-btn:hover{color:var(--terra);background:rgba(216,80,32,0.06);}
+.nav-dropdown-btn svg{transition:transform .2s ease;}
+.nav-dropdown:hover .nav-dropdown-btn svg{transform:rotate(180deg);}
+.nav-dropdown-menu::before{content:"";position:absolute;top:-12px;left:0;right:0;height:12px;}
+.nav-dropdown-menu{display:none;position:absolute;top:100%;left:50%;transform:translateX(-50%);background:#fffdf5;border:1px solid rgba(14,10,6,0.1);border-radius:10px;padding:.5rem;padding-top:12px;margin-top:0;min-width:180px;box-shadow:0 8px 30px rgba(14,10,6,0.12);z-index:200;}
+.nav-dropdown:hover .nav-dropdown-menu{display:block;}
+.nav-dropdown-item{display:block;padding:.5rem .875rem;font-size:.8rem;color:var(--text-body);text-decoration:none;border-radius:6px;white-space:nowrap;transition:all .2s ease;}
+.nav-dropdown-item:hover{background:rgba(216,80,32,0.08);color:var(--terra);}
+.nav-cta{background:var(--terra);color:#fff;font-size:.8rem;font-weight:600;padding:.55rem 1.25rem;border-radius:6px;text-decoration:none;white-space:nowrap;flex-shrink:0;transition:background .2s ease;}
+.nav-cta:hover{background:var(--terra-dark);}
+.nav-hamburger{display:none;flex-direction:column;gap:4px;cursor:pointer;background:none;border:none;padding:4px;flex-shrink:0;}
+.nav-hamburger span{display:block;width:22px;height:2px;background:var(--ink);border-radius:1px;}
+.nav-mobile{display:none;position:fixed;top:64px;left:0;right:0;bottom:0;background:var(--ink);flex-direction:column;align-items:center;justify-content:center;gap:1.25rem;z-index:999;overflow-y:auto;padding:2rem 0;}
+.nav-mobile.open{display:flex;}
+.nav-mobile a{font-family:'Lora',serif;font-size:1.125rem;font-weight:600;color:#fff;text-decoration:none;opacity:.9;}
+.nav-mobile a:hover{color:var(--terra);}
+.nav-mobile-section{font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-top:.75rem;}
+@media(max-width:968px){.nav-links{display:none;}.nav-hamburger{display:flex;}}
+
+/* PAGE HERO */
+.page-hero{background:var(--ink);padding:8rem 2rem 5rem;text-align:center;}
+.page-hero-overline{display:inline-flex;align-items:center;gap:.5rem;background:rgba(216,80,32,0.2);border:1px solid rgba(216,80,32,0.4);color:rgba(255,255,255,0.9);font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:.4rem 1rem;border-radius:20px;margin-bottom:1.5rem;}
+.page-hero h1{font-family:'Lora',serif;font-weight:700;font-size:clamp(2rem,4vw,3rem);color:#fff;margin-bottom:1rem;}
+.page-hero-sub{font-size:1.1rem;color:rgba(255,255,255,0.7);max-width:580px;margin:0 auto 2.5rem;}
+.hero-stats{display:flex;justify-content:center;gap:3rem;font-size:.875rem;color:rgba(255,255,255,0.6);}
+.hero-stat strong{display:block;color:rgba(255,255,255,0.9);font-weight:600;margin-bottom:.2rem;font-size:1rem;}
+
+/* MINISTRIES */
+.ministries{background:var(--cream);padding:5rem 2rem;}
+.section-title{font-family:'Lora',serif;font-weight:700;font-size:clamp(1.75rem,4vw,2.25rem);color:var(--ink);text-align:center;margin-bottom:.5rem;}
+.section-subtitle{text-align:center;font-size:.95rem;color:var(--text-muted);margin-bottom:3rem;}
+.ministries-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;}
+.ministry-card{background:#fff;border-radius:10px;padding:2rem 1.5rem;text-align:center;border:1px solid rgba(14,10,6,0.06);transition:all .2s ease;}
+.ministry-card:hover{transform:translateY(-3px);box-shadow:0 8px 30px rgba(14,10,6,0.1);}
+.ministry-icon{width:56px;height:56px;background:rgba(216,80,32,0.1);border-radius:14px;display:flex;align-items:center;justify-content:center;margin:0 auto 1.25rem;color:var(--terra);}
+.ministry-title{font-family:'Lora',serif;font-weight:700;font-size:1.125rem;color:var(--ink);margin-bottom:.75rem;}
+.ministry-desc{font-size:.85rem;color:var(--text-muted);line-height:1.6;margin-bottom:1.25rem;}
+.ministry-link{display:inline-flex;align-items:center;gap:.4rem;color:var(--terra);font-weight:600;font-size:.875rem;text-decoration:none;transition:all .2s ease;}
+.ministry-link:hover{color:var(--terra-dark);gap:.6rem;}
+
+/* VOLUNTEER FORM */
+.volunteer-form-section{background:#fff;padding:5rem 2rem;}
+.form-container{max-width:720px;margin:0 auto;}
+.volunteer-form{background:var(--cream);border-radius:12px;padding:2.5rem;border:1px solid rgba(14,10,6,0.06);}
+.form-title{font-family:'Lora',serif;font-weight:700;font-size:1.75rem;color:var(--ink);margin-bottom:.75rem;text-align:center;}
+.form-subtitle{text-align:center;font-size:.9rem;color:var(--text-muted);margin-bottom:2rem;line-height:1.6;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem;}
+.form-field{display:flex;flex-direction:column;gap:.4rem;margin-bottom:1rem;}
+.form-field label{font-size:.75rem;font-weight:600;color:var(--ink);letter-spacing:.03em;}
+.form-field input,.form-field select,.form-field textarea{background:#fff;border:1.5px solid rgba(14,10,6,0.15);border-radius:7px;padding:.65rem .9rem;font-size:.875rem;color:var(--ink);font-family:inherit;transition:border-color .2s;}
+.form-field input::placeholder,.form-field textarea::placeholder{color:rgba(14,10,6,0.4);}
+.form-field input:focus,.form-field select:focus,.form-field textarea:focus{outline:none;border-color:var(--terra);}
+.form-field textarea{resize:vertical;min-height:100px;}
+.ministry-checkboxes{display:grid;grid-template-columns:repeat(2,1fr);gap:.75rem;margin-bottom:1rem;}
+.checkbox-field{display:flex;align-items:center;gap:.5rem;}
+.checkbox-field input[type="checkbox"]{width:18px;height:18px;accent-color:var(--terra);}
+.checkbox-field label{font-size:.85rem;font-weight:500;color:var(--text-body);}
+.btn-submit{background:var(--terra);color:#fff;font-weight:700;font-size:.9rem;padding:.875rem 2rem;border:none;border-radius:8px;cursor:pointer;font-family:inherit;width:100%;transition:all .2s;margin-top:.5rem;}
+.btn-submit:hover{background:var(--terra-dark);transform:translateY(-1px);}
+
+/* ONGOING NEEDS */
+.ongoing-needs{background:var(--cream);padding:5rem 2rem;}
+.needs-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem;margin-top:2.5rem;}
+.need-card{background:#fff;border-radius:10px;padding:1.5rem;border-left:4px solid var(--terra);transition:all .2s ease;}
+.need-card:hover{transform:translateY(-2px);box-shadow:0 6px 24px rgba(14,10,6,0.08);}
+.need-urgency{font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--terra);margin-bottom:.5rem;}
+.need-title{font-family:'Lora',serif;font-weight:700;font-size:1rem;color:var(--ink);margin-bottom:.5rem;}
+.need-desc{font-size:.85rem;color:var(--text-muted);line-height:1.6;margin-bottom:1rem;}
+.need-commitment{font-size:.75rem;color:var(--text-body);background:rgba(216,80,32,0.05);padding:.4rem .75rem;border-radius:6px;display:inline-block;}
+
+/* TESTIMONIALS */
+.testimonials{background:#fff;padding:5rem 2rem;}
+.testimonials-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2rem;margin-top:2.5rem;}
+.testimonial-card{background:var(--cream);border-radius:10px;padding:2rem;border:1px solid rgba(14,10,6,0.06);}
+.testimonial-quote{font-family:'Lora',serif;font-style:italic;font-size:1rem;color:var(--text-body);line-height:1.6;margin-bottom:1.5rem;}
+.testimonial-author{display:flex;align-items:center;gap:1rem;}
+.testimonial-avatar{width:48px;height:48px;background:var(--terra);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-family:'Lora',serif;font-weight:700;font-size:1.125rem;}
+.testimonial-info h4{font-family:'Lora',serif;font-weight:600;font-size:.95rem;color:var(--ink);}
+.testimonial-info p{font-size:.8rem;color:var(--text-muted);}
+
+/* CONTACT MODAL */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(14,10,6,0.6);z-index:2000;align-items:center;justify-content:center;padding:1rem;backdrop-filter:blur(4px);}
+.modal-overlay.open{display:flex;}
+.modal-box{background:#fffdf5;border-radius:14px;width:100%;max-width:580px;max-height:90vh;overflow-y:auto;box-shadow:0 24px 80px rgba(14,10,6,0.3);position:relative;animation:modalIn .25s ease;}
+@keyframes modalIn{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
+.modal-header{padding:1.75rem 2rem 0;display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;}
+.modal-title{font-family:'Lora',serif;font-weight:700;font-size:1.375rem;color:var(--ink);}
+.modal-sub{font-size:.85rem;color:var(--text-muted);margin-top:.3rem;}
+.modal-close{width:32px;height:32px;background:rgba(14,10,6,0.07);border:none;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1rem;color:var(--ink);}
+.modal-close:hover{background:rgba(14,10,6,0.14);}
+.modal-body{padding:1.5rem 2rem 2rem;}
+.modal-form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem;}
+.modal-field{display:flex;flex-direction:column;gap:.4rem;margin-bottom:1rem;}
+.modal-field label{font-size:.75rem;font-weight:600;color:var(--ink);}
+.modal-field input,.modal-field select,.modal-field textarea{background:var(--warm-white);border:1.5px solid rgba(14,10,6,0.12);border-radius:7px;padding:.65rem .9rem;font-size:.875rem;color:var(--ink);font-family:inherit;transition:border-color .2s;}
+.modal-field input:focus,.modal-field select:focus,.modal-field textarea:focus{outline:none;border-color:var(--terra);}
+.modal-field textarea{resize:vertical;min-height:100px;}
+.modal-submit{background:var(--terra);color:#fff;font-weight:700;font-size:.9rem;padding:.875rem 2rem;border:none;border-radius:8px;cursor:pointer;font-family:inherit;width:100%;transition:all .2s;margin-top:.25rem;}
+.modal-submit:hover{background:var(--terra-dark);}
+.modal-success{text-align:center;padding:3rem 2rem;}
+.modal-success-icon{width:56px;height:56px;background:rgba(42,138,74,0.12);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1.25rem;color:var(--sage);}
+.modal-success h3{font-family:'Lora',serif;font-weight:700;font-size:1.375rem;color:var(--ink);margin-bottom:.5rem;}
+.modal-success p{font-size:.9rem;color:var(--text-muted);line-height:1.6;}
+
+/* CONTACT LINKS */
+a[data-contact].nav-link{display:inline;border-bottom:none;font-size:.8rem;font-weight:500;color:var(--text-body);padding:.5rem .75rem;border-radius:6px;} a[data-contact]{display:inline-flex;align-items:center;gap:.4rem;color:var(--terra);font-weight:600;font-size:.95rem;text-decoration:none;border-bottom:1.5px solid rgba(216,80,32,0.3);padding-bottom:.1rem;transition:all .2s ease;}
+a[data-contact]:hover{color:var(--terra-dark);border-bottom-color:var(--terra-dark);gap:.6rem;}
+
+/* FOOTER */
+.page-footer{background:var(--ink);color:rgba(255,253,245,0.6);padding:2.5rem 2rem;text-align:center;font-size:.85rem;}
+.page-footer a{color:var(--terra);}
+.page-footer a:hover{color:#fff;}
+
+/* RESPONSIVE */
+@media(max-width:968px){.ministries-grid{grid-template-columns:repeat(2,1fr);}.needs-grid{grid-template-columns:1fr;}.testimonials-grid{grid-template-columns:1fr;}.form-row{grid-template-columns:1fr;}.modal-form-row{grid-template-columns:1fr;}.ministry-checkboxes{grid-template-columns:1fr;}}
+@media(max-width:568px){.ministries-grid{grid-template-columns:1fr;}.hero-stats{flex-direction:column;gap:1rem;}}
+
+/* TOGGLEABLE MINISTRY SECTIONS */
+.ministry-section{padding:4rem 2rem;background:#fff;}
+.ministry-section-alt{background:var(--cream);}
+.ministry-section[style*="display:none"]{display:none !important;}
+.ministry-section-inner{display:grid;grid-template-columns:80px 1fr;gap:2rem;align-items:start;max-width:860px;margin:0 auto;}
+.ministry-section-icon{width:64px;height:64px;background:rgba(216,80,32,0.1);border-radius:14px;display:flex;align-items:center;justify-content:center;color:var(--terra);flex-shrink:0;}
+.ministry-section-label{font-size:.65rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--terra);margin-bottom:.4rem;}
+.ministry-section-title{font-family:'Lora',serif;font-weight:700;font-size:1.625rem;color:var(--ink);margin-bottom:.875rem;}
+.ministry-section-desc{font-size:.95rem;color:var(--text-body);line-height:1.75;margin-bottom:1.25rem;}
+.ministry-section-contact{font-size:.8rem;color:var(--text-muted);margin-bottom:1rem;}
+.ministry-section-contact strong{color:var(--ink);}
+.ministry-section-link{display:inline-flex;align-items:center;gap:.4rem;color:var(--terra);font-weight:600;font-size:.9rem;text-decoration:none;border-bottom:1.5px solid rgba(216,80,32,0.3);padding-bottom:.1rem;transition:all .2s;}
+.ministry-section-link:hover{color:var(--terra-dark);border-bottom-color:var(--terra-dark);}
+.ministry-section-groups{display:flex;flex-direction:column;gap:.5rem;margin-bottom:1.25rem;}
+.ministry-group-item{display:flex;align-items:center;gap:.6rem;font-size:.875rem;color:var(--text-body);}
+.ministry-group-item svg{color:var(--sage);flex-shrink:0;}
+/* Sections header */
+.ministries-header{background:var(--ink);padding:3rem 2rem;text-align:center;}
+.ministries-header h2{font-family:'Lora',serif;font-weight:700;font-size:clamp(1.75rem,3vw,2.25rem);color:#fff;margin-bottom:.5rem;}
+.ministries-header p{font-size:.95rem;color:rgba(255,255,255,0.6);}
+@media(max-width:768px){.ministry-section-inner{grid-template-columns:1fr;gap:1rem;}.ministry-section-icon{width:48px;height:48px;}}
+
+
+.roles-label{font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);margin:1.25rem 0 .6rem;}
+.roles-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.75rem;margin-bottom:1.25rem;}
+.role-card{background:#fff;border:1.5px solid rgba(14,10,6,0.08);border-radius:10px;overflow:hidden;transition:all .2s ease;}
+.role-card:hover{border-color:var(--terra);box-shadow:0 4px 16px rgba(216,80,32,0.1);}
+.ministry-section-alt .role-card{background:#fff;border:1.5px solid rgba(14,10,6,0.08);border-radius:10px;overflow:hidden;transition:all .2s ease;}
+.ministry-section-alt .role-card:hover{background:#fff;}
+.role-title{font-family:'Lora',serif;font-weight:700;font-size:.9rem;color:var(--ink);margin-bottom:.2rem;}
+.role-meta{font-size:.72rem;color:var(--text-muted);}
+.role-apply{background:var(--terra);color:#fff;border:none;font-size:.72rem;font-weight:700;padding:.4rem .85rem;border-radius:6px;cursor:pointer;font-family:inherit;white-space:nowrap;transition:background .2s;flex-shrink:0;}
+.role-apply:hover{background:var(--terra-dark);}
+@media(max-width:768px){.roles-grid{grid-template-columns:1fr;}}
+
+
+.groups-list{display:flex;flex-direction:column;gap:1rem;margin-bottom:1.25rem;}
+.group-card{background:#fff;border:1.5px solid rgba(14,10,6,0.08);border-radius:10px;padding:1.25rem;}
+.ministry-section-alt .group-card{background:var(--warm-white);}
+.group-card-header{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;}
+.group-desc{font-size:.85rem;color:var(--text-muted);line-height:1.7;}
+
+
+.role-card{background:#fff;border:1.5px solid rgba(14,10,6,0.08);border-radius:10px;overflow:hidden;transition:all .2s ease;} 
+ 
+.role-expand{display:none;margin-top:1rem;padding-top:1rem;border-top:1px solid rgba(14,10,6,0.07);}
+.role-card.expanded .role-expand{display:block;}
+.role-expand-about{font-size:.85rem;color:var(--text-body);line-height:1.7;margin-bottom:.875rem;}
+.role-reqs{display:flex;flex-direction:column;gap:.35rem;}
+.role-reqs-label{font-size:.7rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text-muted);margin-bottom:.4rem;}
+.role-req-item{display:flex;align-items:flex-start;gap:.5rem;font-size:.82rem;color:var(--text-body);line-height:1.5;}
+.role-req-item svg{color:var(--sage);flex-shrink:0;margin-top:.15rem;}
+.role-toggle-hint{font-size:.72rem;color:var(--text-muted);margin-top:.5rem;font-style:italic;}
+
+
+/* NEEDS SECTION */
+.needs-section{background:var(--cream);padding:5rem 2rem;}
+.needs-header{text-align:center;margin-bottom:3rem;}
+.needs-title{font-family:'Lora',serif;font-weight:700;font-size:clamp(1.75rem,3vw,2.25rem);color:var(--ink);margin-bottom:.75rem;}
+.needs-sub{font-size:.95rem;color:var(--text-muted);max-width:560px;margin:0 auto;}
+.needs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;max-width:1100px;margin:0 auto;}
+.need-card{background:#fff;border:1.5px solid rgba(14,10,6,0.07);border-radius:10px;padding:1.5rem;transition:all .2s ease;display:flex;flex-direction:column;}
+.need-card:hover{border-color:var(--terra);box-shadow:0 6px 24px rgba(216,80,32,0.1);transform:translateY(-2px);}
+.need-category{font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.75rem;display:inline-block;padding:.25rem .75rem;border-radius:20px;}
+.need-cat-goods{background:rgba(216,80,32,0.1);color:var(--terra);}
+.need-cat-skills{background:rgba(42,138,74,0.1);color:var(--sage);}
+.need-cat-services{background:rgba(200,151,58,0.1);color:#9a6f1a;}
+.need-title{font-family:'Lora',serif;font-weight:700;font-size:1.05rem;color:var(--ink);margin-bottom:.5rem;}
+.need-desc{font-size:.85rem;color:var(--text-muted);line-height:1.7;flex:1;margin-bottom:1.25rem;}
+.need-urgency{display:flex;align-items:center;gap:.4rem;font-size:.72rem;color:var(--text-muted);margin-bottom:1rem;}
+.need-urgency-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
+.urgency-high .need-urgency-dot{background:var(--terra);}
+.urgency-med .need-urgency-dot{background:var(--gold);}
+.urgency-low .need-urgency-dot{background:var(--sage);}
+.need-btn{background:var(--terra);color:#fff;border:none;font-size:.8rem;font-weight:600;padding:.6rem 1.25rem;border-radius:7px;cursor:pointer;font-family:inherit;transition:all .2s;text-align:center;}
+.need-btn:hover{background:var(--terra-dark);transform:translateY(-1px);}
+.needs-cta{text-align:center;margin-top:2.5rem;}
+.needs-cta p{font-size:.875rem;color:var(--text-muted);margin-bottom:1rem;}
+.needs-cta a{display:inline-flex;align-items:center;gap:.5rem;color:var(--terra);font-weight:600;font-size:.875rem;text-decoration:none;border-bottom:1.5px solid rgba(216,80,32,0.3);padding-bottom:.1rem;}
+@media(max-width:968px){.needs-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:568px){.needs-grid{grid-template-columns:1fr;}}
+
+
+.role-card{background:#fff;border:1.5px solid rgba(14,10,6,0.08);border-radius:10px;overflow:hidden;transition:all .2s ease;cursor:pointer;}
+.role-card:hover{border-color:var(--terra);}
+.role-card.open{border-color:var(--terra);box-shadow:0 4px 20px rgba(216,80,32,0.1);}
+.role-card-top{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:1rem 1.25rem;}
+.role-card-expand{display:none;padding:1rem 1.25rem;border-top:1px solid rgba(14,10,6,0.07);background:rgba(245,242,232,0.5);}
+.role-card.open .role-card-expand{display:block;}
+
+/* ── SHARED FOOTER ── */
+.site-footer{background:var(--ink);color:rgba(255,253,245,0.7);padding:4rem 2rem 0;}
+.site-footer .container{max-width:1200px;margin:0 auto;}
+.footer-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:3rem;padding-bottom:3rem;border-bottom:1px solid rgba(255,255,255,0.08);}
+.footer-brand{font-family:'Lora',serif;font-style:italic;font-size:1.25rem;color:var(--warm-white);margin-bottom:.75rem;}
+.footer-tagline{font-size:.85rem;color:rgba(255,253,245,0.45);line-height:1.6;margin-bottom:1.25rem;}
+.footer-detail{display:flex;align-items:flex-start;gap:.6rem;font-size:.82rem;color:rgba(255,253,245,0.65);line-height:1.6;margin-bottom:.6rem;}
+.footer-detail svg{flex-shrink:0;margin-top:.15rem;color:var(--terra);}
+.footer-detail a{color:var(--terra);transition:color .2s;}
+.footer-detail a:hover{color:#fff;}
+.footer-col-title{font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,253,245,0.35);margin-bottom:1rem;}
+.footer-nav{display:flex;flex-direction:column;gap:.5rem;}
+.footer-nav a{font-size:.85rem;color:rgba(255,253,245,0.65);text-decoration:none;transition:color .2s;}
+.footer-nav a:hover{color:#fff;}
+.footer-mass-item{font-size:.82rem;color:rgba(255,253,245,0.65);margin-bottom:.4rem;line-height:1.5;}
+.footer-mass-item strong{color:rgba(255,253,245,0.9);display:block;}
+.footer-social{display:flex;gap:.6rem;margin-bottom:1.25rem;}
+.footer-social a{width:36px;height:36px;background:rgba(255,255,255,0.07);border-radius:8px;display:flex;align-items:center;justify-content:center;color:rgba(255,253,245,0.6);text-decoration:none;transition:all .2s;font-size:.8rem;font-weight:700;}
+.footer-social a:hover{background:var(--terra);color:#fff;}
+.footer-newsletter-label{font-size:.75rem;color:rgba(255,253,245,0.45);margin-bottom:.6rem;}
+.footer-newsletter-form{display:flex;gap:.5rem;}
+.footer-newsletter-form input{flex:1;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);border-radius:6px;padding:.5rem .75rem;font-size:.8rem;color:#fff;font-family:inherit;}
+.footer-newsletter-form input::placeholder{color:rgba(255,255,255,0.3);}
+.footer-newsletter-form input:focus{outline:none;border-color:var(--terra);}
+.footer-newsletter-form button{background:var(--terra);color:#fff;border:none;border-radius:6px;padding:.5rem 1rem;font-size:.78rem;font-weight:600;cursor:pointer;font-family:inherit;white-space:nowrap;transition:background .2s;}
+.footer-newsletter-form button:hover{background:var(--terra-dark);}
+.footer-bottom{padding:1.25rem 0;display:flex;align-items:center;justify-content:space-between;font-size:.78rem;color:rgba(255,253,245,0.35);}
+.footer-bottom-links{display:flex;gap:1.25rem;align-items:center;}
+.footer-bottom-links a{color:rgba(255,253,245,0.35);text-decoration:none;transition:color .2s;}
+.footer-bottom-links a:hover{color:#fff;}
+.communio-credit{color:var(--terra);font-weight:600;}
+@media(max-width:968px){.footer-grid{grid-template-columns:1fr 1fr;gap:2rem;}}
+@media(max-width:568px){.footer-grid{grid-template-columns:1fr;}.footer-bottom{flex-direction:column;gap:.75rem;text-align:center;}.footer-bottom-links{flex-wrap:wrap;justify-content:center;}}
+
+
+/* ── CHUNK 1: CRITICAL MOBILE OVERFLOW FIXES ── */
+
+/* Global overflow prevention */
+html, body { overflow-x: hidden; max-width: 100%; }
+*, *::before, *::after { box-sizing: border-box; }
+.container { padding: 0 1.25rem; }
+
+/* NAV — fix overflow on small screens */
+@media(max-width:968px){
+  .nav-inner { padding: 0 1rem; gap: .5rem; }
+  .nav-logo { font-size: .95rem; gap: .5rem; }
+  .nav-logo .nav-crest { width: 30px; height: 30px; font-size: .75rem; flex-shrink: 0; }
+  .nav-cta { display: none; }
+}
+@media(max-width:480px){
+  .nav-logo span, .nav-logo > *:last-child { 
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 160px;
+  }
+}
+
+/* HERO — fix overflow */
+@media(max-width:768px){
+  .hero { min-height: 100svh; padding: 0; }
+  .hero .container { padding-left: 1.25rem; padding-right: 1.25rem; }
+  .hero-content { padding-top: 80px; padding-bottom: 100px; max-width: 100%; }
+  .hero h1 { font-size: clamp(1.65rem, 7vw, 2.25rem); }
+  .hero-subtitle { font-size: 1rem; }
+  .hero-ctas { flex-direction: column; gap: .75rem; }
+  .btn-primary, .btn-ghost { width: 100%; justify-content: center; padding: .875rem 1rem; }
+  .hero-stats { flex-direction: row; flex-wrap: wrap; gap: 1rem; }
+  .hero-stat { flex: 1; min-width: 80px; }
+  .hero-live-card { 
+    position: relative; 
+    margin: 1.5rem 1.25rem 0;
+    transform: none;
+    left: auto;
+    bottom: auto;
+    width: calc(100% - 2.5rem);
+    flex-wrap: wrap;
+  }
+}
+
+/* STAFF FEATURE — fix two-column grid on mobile */
+@media(max-width:968px){
+  .staff-feature { grid-template-columns: 1fr !important; }
+  .staff-feature .staff-photo { height: 220px !important; min-height: unset !important; }
+  .staff-feature .staff-body { padding: 1.5rem; }
+}
+
+/* CONTACT — fix form overflow */
+@media(max-width:968px){
+  .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .form-row { grid-template-columns: 1fr; }
+  .contact { padding: 3rem 1.25rem; }
+}
+@media(max-width:568px){
+  .contact-form { padding: 1.5rem 1.25rem; }
+}
+
+/* WELCOME SECTION */
+@media(max-width:968px){
+  .welcome-grid { grid-template-columns: 1fr; border-radius: 10px; }
+  .welcome-photo { min-height: 280px; }
+  .welcome-content { padding: 2rem 1.5rem; }
+}
+
+/* MEDIA SECTION */
+@media(max-width:968px){
+  .media-grid { grid-template-columns: 1fr; gap: 2rem; }
+}
+
+/* NEWSLETTER STRIP */
+@media(max-width:568px){
+  .newsletter-form { flex-direction: column; }
+  .newsletter-form input, .newsletter-form button { width: 100%; }
+}
+
+/* FOOTER */
+@media(max-width:968px){
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+  .site-footer { padding: 3rem 1.25rem 0; }
+}
+@media(max-width:568px){
+  .footer-grid { grid-template-columns: 1fr; }
+  .footer-bottom { flex-direction: column; gap: .75rem; text-align: center; }
+  .footer-bottom-links { flex-wrap: wrap; justify-content: center; }
+}
+
+/* INVOLVED PAGE */
+@media(max-width:768px){
+  .ministry-section { padding: 2.5rem 1.25rem; }
+  .ministry-section-inner { grid-template-columns: 1fr; gap: 1rem; }
+  .roles-grid { grid-template-columns: 1fr; }
+  .needs-grid { grid-template-columns: 1fr; }
+  .groups-list .group-card-header { flex-direction: column; align-items: flex-start; gap: .75rem; }
+}
+
+/* EVENTS PAGE */
+@media(max-width:768px){
+  .featured-inner { grid-template-columns: 1fr; }
+  .featured-img { min-height: 200px; }
+  .featured-body { padding: 1.5rem; }
+  .events-grid { grid-template-columns: 1fr; }
+}
+
+/* SACRAMENTS PAGE */
+@media(max-width:768px){
+  .sac-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .sacrament-nav-inner { padding: .5rem 1rem; }
+  .sac-tab { padding: .75rem 1rem; font-size: .75rem; }
+}
+
+/* RCIA PAGE */
+@media(max-width:768px){
+  .rcia-intro-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .journey-steps { grid-template-columns: 1fr 1fr; }
+  .faq-grid { grid-template-columns: 1fr; }
+  .register-form { padding: 1.5rem 1.25rem; }
+  .modal-form-row { grid-template-columns: 1fr; }
+}
+
+/* STAFF PAGE */
+@media(max-width:968px){
+  .staff-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media(max-width:568px){
+  .staff-grid { grid-template-columns: 1fr; }
+}
+
+/* ABOUT PAGE */
+@media(max-width:968px){
+  .history-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .values-grid { grid-template-columns: 1fr 1fr; }
+  .visit-grid { grid-template-columns: 1fr; gap: 2rem; }
+}
+@media(max-width:568px){
+  .values-grid { grid-template-columns: 1fr; }
+}
+
+/* BULLETIN PAGE */
+@media(max-width:768px){
+  .bulletin-current { grid-template-columns: 1fr; gap: 1.5rem; }
+  .archive-grid { grid-template-columns: 1fr; }
+}
+
+/* MODAL */
+@media(max-width:568px){
+  .modal-box { border-radius: 10px; margin: .5rem; max-height: 95vh; }
+  .modal-header { padding: 1.25rem 1.25rem 0; }
+  .modal-body { padding: 1.25rem; }
+  .modal-form-row { grid-template-columns: 1fr; }
+}
+
+/* GIVING SECTION */
+@media(max-width:568px){
+  .amount-grid { gap: .5rem; }
+  .amount-btn { padding: .5rem .75rem; font-size: .85rem; }
+  .giving-trust { flex-direction: column; gap: .5rem; align-items: center; }
+}
+
+/* MASS TIMES */
+@media(max-width:768px){
+  .mass-times { padding: 4rem 1.25rem 2.5rem; }
+  .mass-grid { grid-template-columns: 1fr; }
+}
+
+/* GENERAL SECTION PADDING ON MOBILE */
+@media(max-width:768px){
+  .events, .giving, .involved, .welcome, .media, .newsletter,
+  .staff-section, .rcia-journey, .rcia-faq, .values, .history,
+  .volunteer, .intro, .ministries { padding: 3rem 1.25rem; }
+  section.page-hero, .page-hero { padding: 7rem 1.25rem 3rem; }
+}
+
+
+/* ── CHUNK 2: LAYOUT & USABILITY MOBILE FIXES ── */
+
+/* Contact info title too large on mobile */
+@media(max-width:768px){
+  .contact-info-title{font-size:clamp(1.25rem,5vw,1.75rem);}
+  .contact-form-title{font-size:1.1rem;}
+  .contact-detail{gap:.75rem;}
+  .contact-hours{padding:1rem;}
+}
+
+/* Sacrament tabs — horizontal scroll on mobile */
+@media(max-width:768px){
+  .sacrament-nav{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+  .sacrament-nav-inner{min-width:max-content;padding:.5rem 1rem;}
+  .sac-tab{padding:.75rem .875rem;font-size:.75rem;gap:.3rem;}
+  .sac-tab svg{width:13px;height:13px;}
+  .sac-grid{grid-template-columns:1fr;gap:2rem;}
+  .booking-form{padding:1.5rem 1.25rem;}
+}
+
+/* Touch targets — minimum 44px for all interactive elements */
+@media(max-width:968px){
+  .nav-link{min-height:44px;display:flex;align-items:center;}
+  .nav-mobile a{min-height:44px;display:flex;align-items:center;justify-content:center;}
+  .btn-primary,.btn-ghost,.btn-outline,.btn-give,.btn-white,.btn-ghost-white{
+    min-height:48px;display:inline-flex;align-items:center;justify-content:center;
+  }
+  .amount-btn{min-height:44px;}
+  .filter-btn{min-height:40px;}
+  .wb-save-btn,.wb-add-btn{min-height:44px;}
+  .role-apply{min-height:40px;padding:.5rem 1rem;}
+  .need-btn{min-height:44px;}
+  .footer-nav a{min-height:36px;display:flex;align-items:center;}
+  .footer-social a{width:44px;height:44px;}
+}
+
+/* Involved page touch targets */
+@media(max-width:768px){
+  .ministry-section-link{min-height:44px;display:inline-flex;align-items:center;}
+  .group-card-header .role-apply{min-height:44px;}
+}
+
+/* Modal on mobile — better spacing */
+@media(max-width:568px){
+  .modal-overlay{padding:.5rem;}
+  .modal-box{border-radius:12px;width:100%;max-height:95vh;}
+  .modal-header{padding:1.25rem 1.25rem 0;}
+  .modal-body{padding:1rem 1.25rem 1.5rem;}
+  .modal-form-row{grid-template-columns:1fr;gap:.75rem;}
+  .modal-submit{min-height:48px;}
+}
+
+/* RCIA page mobile */
+@media(max-width:768px){
+  .rcia-who-grid{grid-template-columns:1fr;}
+  .journey-steps{grid-template-columns:1fr;}
+  .journey-steps::before{display:none;}
+  .faq-grid{grid-template-columns:1fr;}
+  .rcia-register{padding:3rem 1.25rem;}
+  .register-form{padding:1.5rem 1.25rem;}
+  .hero-cta{width:100%;justify-content:center;}
+}
+
+/* About page mobile */
+@media(max-width:768px){
+  .timeline-item{grid-template-columns:60px 1fr;gap:1rem;}
+  .timeline-year{font-size:.85rem;}
+  .values-grid{grid-template-columns:1fr;}
+  .visit-grid{grid-template-columns:1fr;gap:2rem;}
+  .visit-map{min-height:240px;}
+  .visit-map iframe{min-height:240px;}
+  .visit-what{padding:1rem;}
+  .cta-btns{flex-direction:column;align-items:center;}
+  .cta-btns a{width:100%;max-width:320px;text-align:center;}
+}
+
+/* Staff page mobile */
+@media(max-width:768px){
+  .staff-section{padding:3rem 1.25rem;}
+  .staff-pastor{grid-template-columns:1fr;}
+  .staff-pastor .staff-photo{height:240px;}
+  .staff-body{padding:1.25rem;}
+}
+
+/* Bulletin mobile */
+@media(max-width:768px){
+  .bulletin-main{padding:2.5rem 1.25rem;}
+  .archive-grid{grid-template-columns:1fr;}
+  .newsletter-strip-form{flex-direction:column;}
+  .newsletter-strip-form input,.newsletter-strip-form button{width:100%;}
+}
+
+/* Events page mobile */
+@media(max-width:768px){
+  .events-filter-inner{padding:.5rem 1rem;gap:.4rem;}
+  .filter-btn{font-size:.72rem;padding:.4rem .75rem;}
+  .event-card{margin-bottom:0;}
+}
+
+/* Footer newsletter mobile */
+@media(max-width:568px){
+  .footer-newsletter-form{flex-direction:column;}
+  .footer-newsletter-form input,.footer-newsletter-form button{width:100%;}
+}
+
+/* Giving section mobile */
+@media(max-width:568px){
+  .giving{padding:3rem 1.25rem;}
+  .giving-inner{max-width:100%;}
+  .btn-give{padding:.875rem 1rem;}
+}
+
+/* General mobile typography improvements */
+@media(max-width:568px){
+  .section-title{font-size:clamp(1.5rem,6vw,2rem);}
+  .page-hero h1{font-size:clamp(1.75rem,7vw,2.5rem);}
+  .page-hero-sub{font-size:.95rem;}
+  .body-text{font-size:.9rem;}
+}
+
+/* Prevent text overflow on mobile */
+@media(max-width:768px){
+  p, h1, h2, h3, h4, h5, h6, div, span, a{
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+}
+
+/* Image responsiveness */
+img{max-width:100%;height:auto;}
+
+
+/* ── CHUNK 3: POLISH & FINAL MOBILE FIXES ── */
+
+/* Hero live card — fix overlap on mobile */
+@media(max-width:768px){
+  .hero{overflow:visible;}
+  .hero-live-card{
+    position:relative;
+    bottom:auto;
+    left:auto;
+    transform:none;
+    margin:1.5rem auto 0;
+    width:calc(100% - 2.5rem);
+    max-width:100%;
+    flex-wrap:nowrap;
+    gap:1rem;
+  }
+  .live-btn{margin-left:auto;flex-shrink:0;}
+}
+
+/* Hero title — tighter on very small screens */
+@media(max-width:480px){
+  .hero h1{font-size:clamp(1.5rem,8vw,2rem);line-height:1.15;}
+  .hero-subtitle{font-size:.9rem;}
+  .hero-eyebrow{font-size:.65rem;}
+}
+
+/* Small labels — minimum readable size */
+@media(max-width:768px){
+  .mass-overline, .confession-text, .event-meta,
+  .footer-col-title, .overline, .sac-overline,
+  .ministry-section-label, .need-category,
+  .role-meta, .staff-title{font-size:.72rem;}
+}
+
+/* Section title sizing on mobile */
+@media(max-width:480px){
+  .involved-title, .values-title, .ministries-title,
+  .timeline-title, .needs-title{
+    font-size:clamp(1.4rem,6vw,1.75rem);
+  }
+}
+
+/* Fix hero container padding on mobile */
+@media(max-width:768px){
+  .hero .container{
+    padding-left:1.25rem;
+    padding-right:1.25rem;
+    width:100%;
+  }
+}
+
+/* Fix get involved intro grid on mobile */
+@media(max-width:768px){
+  .intro-grid{grid-template-columns:1fr;gap:2rem;}
+  .stats-row{flex-direction:row;flex-wrap:wrap;gap:1rem;}
+  .stat{flex:1;min-width:80px;text-align:center;}
+  .intro-quote{padding:1.5rem;}
+  .intro-quote blockquote{font-size:1.05rem;}
+}
+
+/* Fix needs grid on mobile */
+@media(max-width:568px){
+  .needs-section{padding:3rem 1.25rem;}
+  .needs-grid{grid-template-columns:1fr;}
+  .need-card{padding:1.25rem;}
+}
+
+/* Fix role cards on mobile */
+@media(max-width:568px){
+  .roles-grid{grid-template-columns:1fr;}
+  .role-card-top{gap:.5rem;}
+  .role-apply{font-size:.7rem;padding:.4rem .75rem;}
+}
+
+/* Fix group cards on mobile */
+@media(max-width:568px){
+  .group-card{padding:1rem;}
+  .group-card-header{flex-direction:column;align-items:flex-start;gap:.75rem;}
+  .group-card-header .role-apply{width:100%;text-align:center;}
+}
+
+/* Ministry section icon on mobile */
+@media(max-width:768px){
+  .ministry-section-inner{grid-template-columns:1fr;gap:1.25rem;}
+  .ministry-section-icon{width:52px;height:52px;}
+}
+
+/* Footer social icons — bigger tap targets */
+@media(max-width:768px){
+  .footer-social a{width:48px;height:48px;font-size:.85rem;}
+  .footer-social{gap:.75rem;}
+}
+
+/* Footer bottom on mobile */
+@media(max-width:568px){
+  .footer-bottom{padding:1rem 0;gap:.5rem;}
+  .footer-bottom-links{gap:.75rem;font-size:.72rem;}
+}
+
+/* Confession banner on mobile */
+@media(max-width:568px){
+  .confession-banner{flex-direction:column;text-align:center;gap:.5rem;}
+  .confession-text{font-size:.8rem;}
+}
+
+/* Events filter scroll on mobile */
+@media(max-width:568px){
+  .events-filter{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+  .events-filter-inner{min-width:max-content;}
+}
+
+/* Staff photo on mobile */
+@media(max-width:568px){
+  .staff-photo{height:180px;}
+}
+
+/* About timeline on mobile */
+@media(max-width:568px){
+  .timeline-item{grid-template-columns:50px 1fr;gap:.75rem;}
+  .timeline-year{font-size:.78rem;padding-top:.25rem;}
+  .timeline-content h3{font-size:.9rem;}
+  .timeline-content p{font-size:.8rem;}
+}
+
+/* RCIA journey on mobile */
+@media(max-width:568px){
+  .journey-steps{grid-template-columns:1fr;}
+  .journey-num{width:44px;height:44px;font-size:1rem;}
+}
+
+/* Sacrament booking form on mobile */
+@media(max-width:568px){
+  .sac-step-num{width:24px;height:24px;font-size:.7rem;flex-shrink:0;}
+  .sac-contact-box{font-size:.82rem;padding:1rem;}
+}
+
+/* Bulletin archive on mobile */
+@media(max-width:568px){
+  .archive-card{padding:1rem;}
+  .archive-icon{width:34px;height:34px;}
+  .archive-info-title{font-size:.82rem;}
+}
+
+/* Legal pages on mobile */
+@media(max-width:568px){
+  .legal-content{padding:2.5rem 1.25rem 4rem;}
+  .legal-content h2{font-size:1.1rem;}
+  .legal-content p, .legal-content ul{font-size:.875rem;}
+}
+
+/* Smooth scrolling globally */
+html{scroll-behavior:smooth;}
+
+/* Better focus styles for accessibility */
+a:focus-visible, button:focus-visible, input:focus-visible, 
+select:focus-visible, textarea:focus-visible{
+  outline:2px solid var(--terra);
+  outline-offset:2px;
+}
+
+</style>
+  <script src="parish-data.js"></script>
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <div class="nav-crest">SM</div>
+      St. Mary's Parish
+    </a>
+    <div class="nav-links">
+      <a href="index.html#mass-times" class="nav-link">Mass Times</a>
+      <div class="nav-dropdown">
+        <button class="nav-dropdown-btn">
+          Parish Life
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M3 4.5l3 3 3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </button>
+        <div class="nav-dropdown-menu">
+          <a href="about.html" class="nav-dropdown-item">About Us</a>
+          <a href="events.html" class="nav-dropdown-item">Events</a>
+          <a href="staff.html" class="nav-dropdown-item">Our Team</a>
+          <a href="bulletin.html" class="nav-dropdown-item">Parish Bulletin</a>
+          <a href="involved.html" class="nav-dropdown-item">Get Involved</a>
+        </div>
+      </div>
+      <div class="nav-dropdown">
+        <button class="nav-dropdown-btn">
+          Sacraments
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M3 4.5l3 3 3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </button>
+        <div class="nav-dropdown-menu">
+          <a href="sacraments.html#baptism" class="nav-dropdown-item">Baptism</a>
+          <a href="sacraments.html#wedding" class="nav-dropdown-item">Wedding</a>
+          <a href="sacraments.html#funeral" class="nav-dropdown-item">Funeral Mass</a>
+          <a href="sacraments.html#confirmation" class="nav-dropdown-item">Confirmation</a>
+          <a href="sacraments.html#firstcommunion" class="nav-dropdown-item">First Communion</a>
+        </div>
+      </div>
+      <a href="rcia.html" class="nav-link">Becoming Catholic</a>
+      <a href="#" class="nav-link" data-contact data-from="general">Contact</a>
+    </div>
+    <a href="index.html#giving" class="nav-cta">Give Now</a>
+    <button class="nav-hamburger" id="navHamburger">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="nav-mobile" id="navMobile">
+    <a href="index.html#mass-times">Mass Times</a>
+    <div class="nav-mobile-section">Parish Life</div>
+    <a href="about.html">About Us</a>
+    <a href="events.html">Events</a>
+    <a href="staff.html">Our Team</a>
+    <a href="bulletin.html">Parish Bulletin</a>
+    <a href="involved.html">Get Involved</a>
+    <div class="nav-mobile-section">Sacraments</div>
+    <a href="sacraments.html">All Sacraments</a>
+    <a href="rcia.html">Becoming Catholic</a>
+    <a href="#" data-contact data-from="general">Contact</a>
+    <a href="index.html#giving" style="margin-top:.5rem;background:var(--terra);padding:.625rem 2rem;border-radius:8px;">Give Now</a>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <div class="container">
+    <div class="page-hero-overline">
+      <svg width="6" height="6" viewBox="0 0 6 6" fill="none"><circle cx="3" cy="3" r="3" fill="currentColor"/></svg>
+      Get Involved
+    </div>
+    <h1>There's a place for you<br><em>at St. Mary's</em></h1>
+    <p class="page-hero-sub">Whether you have an hour a month or a few hours each week — your gifts and talents can make a real difference in our parish community.</p>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <strong>150+</strong>
+        Active volunteers
+      </div>
+      <div class="hero-stat">
+        <strong>12</strong>
+        Ministry areas
+      </div>
+      <div class="hero-stat">
+        <strong>Year-round</strong>
+        Opportunities
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MINISTRIES -->
+
+<!-- MINISTRIES HEADER -->
+<div class="ministries-header">
+  <div class="container">
+    <h2>Our Ministries</h2>
+    <p>Find the ministry that fits your gifts, your schedule, and your heart.</p>
+  </div>
+</div>
+<div id="ministry-sections">
+
+<section class="ministry-section" id="ministry-volunteer" data-section="volunteer">
+  <div class="container">
+    <div class="ministry-section-inner">
+      <div class="ministry-section-icon">
+        <svg width="28" height="28" viewBox="0 0 20 20" fill="none"><path d="M10 17s-7-4.5-7-9a4 4 0 018 0 4 4 0 018 0c0 4.5-7 9-7 9z" stroke="currentColor" stroke-width="1.5"/></svg>
+      </div>
+      <div class="ministry-section-body">
+        <div class="ministry-section-label">Ministry</div>
+        <h2 class="ministry-section-title">Volunteer</h2>
+        <p class="ministry-section-desc">Share your time and talents to serve our parish and community. Whether you have an hour a week or a whole weekend, your contribution makes a real difference. Roles include hospitality, event support, parish office assistance, and more.</p>
+        <div class="roles-label">Available roles</div><div class="roles-grid">
+        <div class="role-card">
+          <div class="role-card-top">
+            <div>
+              <div class="role-title">Welcome Team</div>
+              <div class="role-meta">Sunday mornings · 1–2 hrs/week</div>
+            </div>
+            <button class="role-apply" data-contact data-from="volunteer:welcome-team">Apply →</button>
+          </div>
+          <div class="role-card-expand">
+            <p class="role-expand-about">Be the first face visitors see at St. Mary's. Greeters welcome parishioners at the church doors before Mass, distribute the weekly bulletin, help newcomers find a seat, and answer basic questions about the parish. Training and a team leader are provided.</p>
+            <div class="role-reqs-label">What we are looking for</div>
+            <div class="role-reqs"><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Warm, friendly, and approachable personality</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Available at least one Sunday per month</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>No prior church experience needed</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Comfortable speaking with strangers</div></div>
+          </div>
+        </div>
+        <div class="role-card">
+          <div class="role-card-top">
+            <div>
+              <div class="role-title">Food Pantry Helper</div>
+              <div class="role-meta">Saturday mornings · 3 hrs/week</div>
+            </div>
+            <button class="role-apply" data-contact data-from="volunteer:food-pantry">Apply →</button>
+          </div>
+          <div class="role-card-expand">
+            <p class="role-expand-about">Help pack and distribute food to families in need across the Lower East Side. Volunteers sort donations, prepare food parcels, and assist clients at our weekly Saturday distribution. One of our most impactful community ministries.</p>
+            <div class="role-reqs-label">What we are looking for</div>
+            <div class="role-reqs"><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Available Saturday mornings 9 AM–12 PM</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Able to lift boxes up to 25 lbs</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Commitment of at least twice per month preferred</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Background check required for leadership roles</div></div>
+          </div>
+        </div>
+        <div class="role-card">
+          <div class="role-card-top">
+            <div>
+              <div class="role-title">Parish Office Assistant</div>
+              <div class="role-meta">Weekday hours · flexible</div>
+            </div>
+            <button class="role-apply" data-contact data-from="volunteer:office-assistant">Apply →</button>
+          </div>
+          <div class="role-card-expand">
+            <p class="role-expand-about">Support the parish office team with administrative tasks including answering phones, helping with data entry, preparing mailings, and welcoming visitors to the office. Great for someone who wants to be at the heart of parish life.</p>
+            <div class="role-reqs-label">What we are looking for</div>
+            <div class="role-reqs"><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Basic computer skills helpful</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Friendly and organized</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Weekday availability (flexible hours)</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Discretion with confidential parish information</div></div>
+          </div>
+        </div>
+        <div class="role-card">
+          <div class="role-card-top">
+            <div>
+              <div class="role-title">Event Setup & Cleanup</div>
+              <div class="role-meta">As needed · occasional weekends</div>
+            </div>
+            <button class="role-apply" data-contact data-from="volunteer:events">Apply →</button>
+          </div>
+          <div class="role-card-expand">
+            <p class="role-expand-about">Help set up and clean up at parish events including the annual picnic, fundraising dinners, and seasonal celebrations. A vital behind-the-scenes role that makes every parish event possible.</p>
+            <div class="role-reqs-label">What we are looking for</div>
+            <div class="role-reqs"><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Physical ability to move tables, chairs, and equipment</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Available for occasional weekend events</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Team player who doesn't mind getting hands dirty</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>No experience necessary</div></div>
+          </div>
+        </div>
+        </div>
+        <div class="ministry-section-contact"><strong>Contact:</strong> Parish Office — Maria Santos</div>
+        <a href="#" class="ministry-section-link" data-contact data-from="volunteer">Express your interest below →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="ministry-section ministry-section-alt" id="ministry-small-groups" data-section="small-groups">
+  <div class="container">
+    <div class="ministry-section-inner">
+      <div class="ministry-section-icon">
+        <svg width="28" height="28" viewBox="0 0 20 20" fill="none"><circle cx="8" cy="7" r="3" stroke="currentColor" stroke-width="1.5"/><path d="M2 17c0-3.3 2.7-6 6-6s6 2.7 6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="14" cy="7" r="2.5" stroke="currentColor" stroke-width="1.5"/><path d="M14 11c2.2.5 4 2.5 4 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </div>
+      <div class="ministry-section-body">
+        <div class="ministry-section-label">Ministry</div>
+        <h2 class="ministry-section-title">Small Groups</h2>
+        <p class="ministry-section-desc">Deepen your faith in community. Our small groups meet regularly throughout the year — all are welcome regardless of experience or background. Click any group below to learn more and join.</p>
+        <div class="roles-label">Our Groups</div>
+<div class="groups-list">
+  <div class="group-card">
+    <div class="group-card-header">
+      <div>
+        <div class="role-title">Bible Study</div>
+        <div class="role-meta">Sunday mornings after 9 AM Mass</div>
+      </div>
+      <button class="role-apply" data-contact data-from="small-groups:bible-study">Join →</button>
+    </div>
+    <p class="group-desc">A friendly, discussion-based exploration of Sunday's Scripture readings. No prior biblical knowledge required — just an open mind and a willingness to share. Led by Sofia Morales, this group welcomes everyone from lifelong Catholics to those just beginning to explore the faith.</p>
+  </div>
+  <div class="group-card">
+    <div class="group-card-header">
+      <div>
+        <div class="role-title">Men's Faith Group</div>
+        <div class="role-meta">First Saturday of each month · 8:00 AM</div>
+      </div>
+      <button class="role-apply" data-contact data-from="small-groups:mens-group">Join →</button>
+    </div>
+    <p class="group-desc">A relaxed gathering of men of all ages over coffee and conversation. Each month focuses on a different theme — fatherhood, work, prayer, service — grounded in Catholic teaching. A great way to build brotherhood and accountability in faith.</p>
+  </div>
+  <div class="group-card">
+    <div class="group-card-header">
+      <div>
+        <div class="role-title">Women's Prayer Circle</div>
+        <div class="role-meta">Wednesday evenings · 7:00 PM</div>
+      </div>
+      <button class="role-apply" data-contact data-from="small-groups:womens-group">Join →</button>
+    </div>
+    <p class="group-desc">A warm, supportive group of women who gather weekly for shared prayer, reflection, and friendship. The group rotates through the Rosary, Lectio Divina, and guided meditation. New members are always warmly welcomed.</p>
+  </div>
+  <div class="group-card">
+    <div class="group-card-header">
+      <div>
+        <div class="role-title">Lenten Reflection Group</div>
+        <div class="role-meta">Weekly during Lent · Tuesday evenings</div>
+      </div>
+      <button class="role-apply" data-contact data-from="small-groups:lenten-group">Join →</button>
+    </div>
+    <p class="group-desc">A seasonal group running through the six weeks of Lent. Each week follows a structured reflection on the Sunday Gospel, paired with practical suggestions for fasting, prayer, and almsgiving. Perfect for those who want to make Lent more intentional.</p>
+  </div>
+</div></div></div>
+        <div class="ministry-section-contact"><strong>Contact:</strong> Sofia Morales, Faith Formation</div>
+        <a href="#" class="ministry-section-link" data-contact data-from="formation">Get in touch to join a group →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="ministry-section" id="ministry-liturgical" data-section="liturgical">
+  <div class="container">
+    <div class="ministry-section-inner">
+      <div class="ministry-section-icon">
+        <svg width="28" height="28" viewBox="0 0 20 20" fill="none"><path d="M10 3v14M3 10h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </div>
+      <div class="ministry-section-body">
+        <div class="ministry-section-label">Ministry</div>
+        <h2 class="ministry-section-title">Liturgical Ministries</h2>
+        <p class="ministry-section-desc">Serve at Mass as an altar server, lector, Eucharistic minister, or usher. These roles are the backbone of our liturgical life and are open to all confirmed Catholics. Training is provided for all new ministers.</p>
+        <div class="roles-label">Available roles</div><div class="roles-grid">
+        <div class="role-card">
+          <div class="role-card-top">
+            <div>
+              <div class="role-title">Altar Server</div>
+              <div class="role-meta">Sunday Mass · training provided</div>
+            </div>
+            <button class="role-apply" data-contact data-from="liturgical:altar-server">Apply →</button>
+          </div>
+          <div class="role-card-expand">
+            <p class="role-expand-about">Assist the priest at Mass by carrying the cross and candles, preparing the altar, and helping with the sacred vessels. Altar servers are a visible and honoured part of our liturgical life. Full training is provided.</p>
+            <div class="role-reqs-label">What we are looking for</div>
+            <div class="role-reqs"><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Baptised and received First Communion</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Available for at least one Mass per week</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Ability to commit to a training programme</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Open to middle school age and above</div></div>
+          </div>
+        </div>
+        <div class="role-card">
+          <div class="role-card-top">
+            <div>
+              <div class="role-title">Lector</div>
+              <div class="role-meta">Proclaim Scripture at Mass</div>
+            </div>
+            <button class="role-apply" data-contact data-from="liturgical:lector">Apply →</button>
+          </div>
+          <div class="role-card-expand">
+            <p class="role-expand-about">Proclaim the Word of God at Mass by reading the First and Second Readings from the Ambo. Lectors are trained in proclamation technique, pronunciation, and the theology of the Liturgy of the Word.</p>
+            <div class="role-reqs-label">What we are looking for</div>
+            <div class="role-reqs"><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Confident reader with clear speaking voice</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Willing to attend a preparation session</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Confirmed Catholic in good standing</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Available for at least two Masses per month</div></div>
+          </div>
+        </div>
+        <div class="role-card">
+          <div class="role-card-top">
+            <div>
+              <div class="role-title">Eucharistic Minister</div>
+              <div class="role-meta">Must be confirmed Catholic</div>
+            </div>
+            <button class="role-apply" data-contact data-from="liturgical:eucharistic-minister">Apply →</button>
+          </div>
+          <div class="role-card-expand">
+            <p class="role-expand-about">Assist in the distribution of Holy Communion at Mass. Extraordinary Ministers also bring Communion to the sick and homebound. One of the most sacred and trusted roles in parish ministry.</p>
+            <div class="role-reqs-label">What we are looking for</div>
+            <div class="role-reqs"><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Confirmed Catholic in good standing</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Completed a diocesan training programme (we can arrange)</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Available for at least two Masses per month</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Willingness to also serve the homebound preferred</div></div>
+          </div>
+        </div>
+        <div class="role-card">
+          <div class="role-card-top">
+            <div>
+              <div class="role-title">Usher / Greeter</div>
+              <div class="role-meta">Sunday mornings · welcoming role</div>
+            </div>
+            <button class="role-apply" data-contact data-from="liturgical:usher">Apply →</button>
+          </div>
+          <div class="role-card-expand">
+            <p class="role-expand-about">Ushers serve at Mass by welcoming parishioners, directing seating, taking up the collection, and maintaining order and safety in the church. Often the first or last person a visitor interacts with.</p>
+            <div class="role-reqs-label">What we are looking for</div>
+            <div class="role-reqs"><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Reliable and punctual</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Available for at least one Mass per week</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Comfortable with crowd management</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Must be a practicing Catholic</div></div>
+          </div>
+        </div>
+        </div>
+        <div class="ministry-section-contact"><strong>Contact:</strong> Parish Office</div>
+        <a href="#" class="ministry-section-link" data-contact data-from="volunteer">Express your interest below →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="ministry-section ministry-section-alt" id="ministry-music" data-section="music">
+  <div class="container">
+    <div class="ministry-section-inner">
+      <div class="ministry-section-icon">
+        <svg width="28" height="28" viewBox="0 0 20 20" fill="none"><path d="M9 16V6l8-2v10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="7" cy="16" r="2" stroke="currentColor" stroke-width="1.5"/><circle cx="15" cy="14" r="2" stroke="currentColor" stroke-width="1.5"/></svg>
+      </div>
+      <div class="ministry-section-body">
+        <div class="ministry-section-label">Ministry</div>
+        <h2 class="ministry-section-title">Music Ministry</h2>
+        <p class="ministry-section-desc">Join our parish choir or one of our smaller music groups. Singers and instrumentalists of all levels are welcome. Choir rehearsals are held on Thursday evenings at 7:00 PM in the Main Church.</p>
+        <div class="roles-label">Available roles</div><div class="roles-grid">
+        <div class="role-card">
+          <div class="role-card-top">
+            <div>
+              <div class="role-title">Choir Singer — Soprano/Alto</div>
+              <div class="role-meta">Thursday rehearsals 7 PM + Sunday</div>
+            </div>
+            <button class="role-apply" data-contact data-from="music:choir-sa">Apply →</button>
+          </div>
+          <div class="role-card-expand">
+            <p class="role-expand-about">Join our soprano or alto section in the parish choir. The choir sings at the Sunday 11 AM Mass and for special liturgies throughout the year including Christmas, Holy Week, and the Easter Vigil.</p>
+            <div class="role-reqs-label">What we are looking for</div>
+            <div class="role-reqs"><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Ability to read music is helpful but not required</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Available Thursday evenings 7–9 PM for rehearsal</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Available Sunday mornings by 10:15 AM</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Willingness to learn a wide repertoire</div></div>
+          </div>
+        </div>
+        <div class="role-card">
+          <div class="role-card-top">
+            <div>
+              <div class="role-title">Choir Singer — Tenor/Bass</div>
+              <div class="role-meta">Thursday rehearsals 7 PM + Sunday</div>
+            </div>
+            <button class="role-apply" data-contact data-from="music:choir-tb">Apply →</button>
+          </div>
+          <div class="role-card-expand">
+            <p class="role-expand-about">Join our tenor or bass section in the parish choir. We are especially in need of male voices. The choir sings at the Sunday 11 AM Mass and for special liturgies.</p>
+            <div class="role-reqs-label">What we are looking for</div>
+            <div class="role-reqs"><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Ability to read music is helpful but not required</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Available Thursday evenings 7–9 PM for rehearsal</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Available Sunday mornings by 10:15 AM</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Male voices particularly welcomed</div></div>
+          </div>
+        </div>
+        <div class="role-card">
+          <div class="role-card-top">
+            <div>
+              <div class="role-title">Instrumentalist</div>
+              <div class="role-meta">Guitar, piano, violin, brass welcome</div>
+            </div>
+            <button class="role-apply" data-contact data-from="music:instrumentalist">Apply →</button>
+          </div>
+          <div class="role-card-expand">
+            <p class="role-expand-about">Share your musical gifts in service of the liturgy. We welcome guitarists, pianists, violinists, brass players, and other instrumentalists to play at weekend Masses and special celebrations.</p>
+            <div class="role-reqs-label">What we are looking for</div>
+            <div class="role-reqs"><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Intermediate or advanced playing ability</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Instrument suitable for liturgical use</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Availability for at least one Mass per month</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Willingness to coordinate repertoire with the Music Director</div></div>
+          </div>
+        </div>
+        <div class="role-card">
+          <div class="role-card-top">
+            <div>
+              <div class="role-title">Cantor / Soloist</div>
+              <div class="role-meta">Lead congregational singing at Mass</div>
+            </div>
+            <button class="role-apply" data-contact data-from="music:cantor">Apply →</button>
+          </div>
+          <div class="role-card-expand">
+            <p class="role-expand-about">Lead the congregation in sung prayer as a cantor at Mass. Cantors sing the Psalm, lead the assembly in the hymns and acclamations, and help create an atmosphere of prayerful worship.</p>
+            <div class="role-reqs-label">What we are looking for</div>
+            <div class="role-reqs"><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Strong, confident singing voice</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Ability to read music</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Comfortable leading a congregation</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Previous liturgical cantor experience preferred but not essential</div></div>
+          </div>
+        </div>
+        </div>
+        <div class="ministry-section-contact"><strong>Contact:</strong> David Chen, Director of Music</div>
+        <a href="#" class="ministry-section-link" data-contact data-from="volunteer">Get in touch →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="ministry-section" id="ministry-youth" data-section="youth">
+  <div class="container">
+    <div class="ministry-section-inner">
+      <div class="ministry-section-icon">
+        <svg width="28" height="28" viewBox="0 0 20 20" fill="none"><path d="M10 2l2.4 5 5.6.8-4 3.9.9 5.5L10 14.5l-4.9 2.7.9-5.5L2 7.8l5.6-.8L10 2z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="ministry-section-body">
+        <div class="ministry-section-label">Ministry</div>
+        <h2 class="ministry-section-title">Youth Ministry</h2>
+        <p class="ministry-section-desc">Work with our middle and high school students through retreats, service projects, and weekly gatherings. Adult volunteers and young adult leaders are always needed. A background check is required for all youth volunteers.</p>
+        <div class="roles-label">Available roles</div><div class="roles-grid">
+        <div class="role-card">
+          <div class="role-card-top">
+            <div>
+              <div class="role-title">Teen Group Leader</div>
+              <div class="role-meta">Sunday evenings · 18+ required</div>
+            </div>
+            <button class="role-apply" data-contact data-from="youth:teen-leader">Apply →</button>
+          </div>
+          <div class="role-card-expand">
+            <p class="role-expand-about">Accompany and lead our high school youth group in weekly gatherings, service projects, and seasonal events. Teen Group Leaders are mentors and role models who help young people grow in faith and friendship.</p>
+            <div class="role-reqs-label">What we are looking for</div>
+            <div class="role-reqs"><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Must be 18 years or older</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Background check and Safe Environment training required</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Passion for working with teenagers</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Practicing Catholic preferred</div></div>
+          </div>
+        </div>
+        <div class="role-card">
+          <div class="role-card-top">
+            <div>
+              <div class="role-title">Retreat Chaperone</div>
+              <div class="role-meta">Occasional weekends · background check</div>
+            </div>
+            <button class="role-apply" data-contact data-from="youth:retreat-chaperone">Apply →</button>
+          </div>
+          <div class="role-card-expand">
+            <p class="role-expand-about">Accompany youth on overnight retreat weekends as a chaperone and companion. Retreats are some of the most transformative experiences in a young person's faith journey — your presence makes them possible.</p>
+            <div class="role-reqs-label">What we are looking for</div>
+            <div class="role-reqs"><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Must be 21 years or older</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Background check and Safe Environment training required</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Available for occasional overnight weekends</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Previous youth ministry experience helpful</div></div>
+          </div>
+        </div>
+        <div class="role-card">
+          <div class="role-card-top">
+            <div>
+              <div class="role-title">Sunday School Helper</div>
+              <div class="role-meta">Sunday mornings during 9 AM Mass</div>
+            </div>
+            <button class="role-apply" data-contact data-from="youth:sunday-school">Apply →</button>
+          </div>
+          <div class="role-card-expand">
+            <p class="role-expand-about">Help our religious education teachers during the Sunday 9 AM Mass hour. Sunday School Helpers assist with classroom activities, accompany children, and support the lead teacher.</p>
+            <div class="role-reqs-label">What we are looking for</div>
+            <div class="role-reqs"><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Patient and caring with children ages 5–11</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Available Sunday mornings 9–10:15 AM</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Background check required</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>No teaching experience necessary — full support provided</div></div>
+          </div>
+        </div>
+        <div class="role-card">
+          <div class="role-card-top">
+            <div>
+              <div class="role-title">Youth Events Coordinator</div>
+              <div class="role-meta">Plan & run youth social events</div>
+            </div>
+            <button class="role-apply" data-contact data-from="youth:events">Apply →</button>
+          </div>
+          <div class="role-card-expand">
+            <p class="role-expand-about">Plan and organise youth social events including game nights, service days, and seasonal gatherings. Work alongside the Youth Coordinator to create memorable experiences that build community.</p>
+            <div class="role-reqs-label">What we are looking for</div>
+            <div class="role-reqs"><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Creative and organised</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Experience with event planning a plus</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Good communication skills</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Passion for building community among young people</div></div>
+          </div>
+        </div>
+        </div>
+        <div class="ministry-section-contact"><strong>Contact:</strong> Michael Rivera, Youth Coordinator</div>
+        <a href="#" class="ministry-section-link" data-contact data-from="volunteer">Get in touch →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="ministry-section ministry-section-alt" id="ministry-outreach" data-section="outreach">
+  <div class="container">
+    <div class="ministry-section-inner">
+      <div class="ministry-section-icon">
+        <svg width="28" height="28" viewBox="0 0 20 20" fill="none"><path d="M10 17s-7-4.5-7-9a4 4 0 018 0 4 4 0 018 0c0 4.5-7 9-7 9z" stroke="currentColor" stroke-width="1.5"/></svg>
+      </div>
+      <div class="ministry-section-body">
+        <div class="ministry-section-label">Ministry</div>
+        <h2 class="ministry-section-title">Community Outreach</h2>
+        <p class="ministry-section-desc">Serve our neighbours through the parish food pantry, visits to the homebound, and our partnership with local social services. Volunteer shifts are available every Saturday morning and on weekday evenings.</p>
+        <div class="roles-label">Available roles</div><div class="roles-grid">
+        <div class="role-card">
+          <div class="role-card-top">
+            <div>
+              <div class="role-title">Food Pantry Volunteer</div>
+              <div class="role-meta">Saturday 9 AM–12 PM · weekly</div>
+            </div>
+            <button class="role-apply" data-contact data-from="outreach:food-pantry">Apply →</button>
+          </div>
+          <div class="role-card-expand">
+            <p class="role-expand-about">Our food pantry serves hundreds of families each week. Volunteers help sort and pack donations, manage inventory, and assist clients with dignity and care.</p>
+            <div class="role-reqs-label">What we are looking for</div>
+            <div class="role-reqs"><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Available Saturday mornings 9 AM–12 PM</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Able to be on your feet for 2–3 hours</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Comfortable working in a fast-paced environment</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Spanish language skills a significant bonus</div></div>
+          </div>
+        </div>
+        <div class="role-card">
+          <div class="role-card-top">
+            <div>
+              <div class="role-title">Homebound Visitor</div>
+              <div class="role-meta">Visit elderly & sick parishioners</div>
+            </div>
+            <button class="role-apply" data-contact data-from="outreach:homebound">Apply →</button>
+          </div>
+          <div class="role-card-expand">
+            <p class="role-expand-about">Visit elderly and housebound parishioners who cannot attend Mass. Bring them Communion, spend time in conversation, and let them know they are still part of our parish family.</p>
+            <div class="role-reqs-label">What we are looking for</div>
+            <div class="role-reqs"><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Compassionate and patient</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Reliable availability on a regular schedule</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Comfortable visiting care homes and private homes</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Trained Eucharistic Minister status required (we can arrange)</div></div>
+          </div>
+        </div>
+        <div class="role-card">
+          <div class="role-card-top">
+            <div>
+              <div class="role-title">Refugee Support</div>
+              <div class="role-meta">English tutoring & resettlement help</div>
+            </div>
+            <button class="role-apply" data-contact data-from="outreach:refugee">Apply →</button>
+          </div>
+          <div class="role-card-expand">
+            <p class="role-expand-about">Support newly arrived refugee and immigrant families in our community. Volunteers assist with English tutoring, navigating city services, and practical resettlement tasks.</p>
+            <div class="role-reqs-label">What we are looking for</div>
+            <div class="role-reqs"><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Patience and cultural sensitivity</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Spanish language skills strongly preferred</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Available weekday evenings or weekend mornings</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>No professional qualifications required</div></div>
+          </div>
+        </div>
+        <div class="role-card">
+          <div class="role-card-top">
+            <div>
+              <div class="role-title">Fundraising & Awareness</div>
+              <div class="role-meta">Organise charity drives & campaigns</div>
+            </div>
+            <button class="role-apply" data-contact data-from="outreach:fundraising">Apply →</button>
+          </div>
+          <div class="role-card-expand">
+            <p class="role-expand-about">Help organise fundraising drives, awareness campaigns, and donor communication for our outreach programmes.</p>
+            <div class="role-reqs-label">What we are looking for</div>
+            <div class="role-reqs"><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Organised and creative</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Experience in communications or fundraising a plus</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Good writing skills helpful</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Comfortable using social media and email</div></div>
+          </div>
+        </div>
+        </div>
+        <div class="ministry-section-contact"><strong>Contact:</strong> Deacon Robert Chen</div>
+        <a href="#" class="ministry-section-link" data-contact data-from="volunteer">Get in touch →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="ministry-section" id="ministry-formation" data-section="formation">
+  <div class="container">
+    <div class="ministry-section-inner">
+      <div class="ministry-section-icon">
+        <svg width="28" height="28" viewBox="0 0 20 20" fill="none"><path d="M4 4h6v14H4a2 2 0 01-2-2V6a2 2 0 012-2z" stroke="currentColor" stroke-width="1.5"/><path d="M10 4h6a2 2 0 012 2v10a2 2 0 01-2 2h-6V4z" stroke="currentColor" stroke-width="1.5"/></svg>
+      </div>
+      <div class="ministry-section-body">
+        <div class="ministry-section-label">Ministry</div>
+        <h2 class="ministry-section-title">Faith Formation</h2>
+        <p class="ministry-section-desc">Teach religious education to children, assist with RCIA, or lead an adult study group. No formal theology background is required — just a love of the faith and a willingness to share it.</p>
+        <div class="roles-label">Available roles</div><div class="roles-grid">
+        <div class="role-card">
+          <div class="role-card-top">
+            <div>
+              <div class="role-title">Children's RE Teacher</div>
+              <div class="role-meta">Sunday mornings · Sept–May</div>
+            </div>
+            <button class="role-apply" data-contact data-from="formation:re-teacher">Apply →</button>
+          </div>
+          <div class="role-card-expand">
+            <p class="role-expand-about">Teach religious education to children from Kindergarten through Grade 8 on Sunday mornings during the school year. Full curriculum and resources are provided.</p>
+            <div class="role-reqs-label">What we are looking for</div>
+            <div class="role-reqs"><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Practicing Catholic in good standing</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Comfortable speaking to a group of children</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Background check required</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Willing to complete a short orientation programme before September</div></div>
+          </div>
+        </div>
+        <div class="role-card">
+          <div class="role-card-top">
+            <div>
+              <div class="role-title">RCIA Sponsor</div>
+              <div class="role-meta">Walk with a candidate through initiation</div>
+            </div>
+            <button class="role-apply" data-contact data-from="formation:rcia-sponsor">Apply →</button>
+          </div>
+          <div class="role-card-expand">
+            <p class="role-expand-about">Walk alongside an RCIA candidate through their journey of initiation into the Catholic Church. A sponsor attends weekly sessions, answers questions, and shares their own faith story.</p>
+            <div class="role-reqs-label">What we are looking for</div>
+            <div class="role-reqs"><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Confirmed Catholic with active parish life</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Able to attend weekly RCIA sessions from October to Easter</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Willingness to share openly about your own faith journey</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>No formal theology background required</div></div>
+          </div>
+        </div>
+        <div class="role-card">
+          <div class="role-card-top">
+            <div>
+              <div class="role-title">Adult Study Group Leader</div>
+              <div class="role-meta">Lead weekly faith discussions</div>
+            </div>
+            <button class="role-apply" data-contact data-from="formation:adult-study">Apply →</button>
+          </div>
+          <div class="role-card-expand">
+            <p class="role-expand-about">Facilitate weekly adult faith formation discussions using provided materials. Groups cover topics from Scripture to Catholic social teaching. Leaders do not need to be experts — just good listeners.</p>
+            <div class="role-reqs-label">What we are looking for</div>
+            <div class="role-reqs"><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Comfortable facilitating group discussion</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Practicing Catholic with a love of learning</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Reliable availability for weekly meetings</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Able to complete a brief leader orientation</div></div>
+          </div>
+        </div>
+        <div class="role-card">
+          <div class="role-card-top">
+            <div>
+              <div class="role-title">Confirmation Mentor</div>
+              <div class="role-meta">Guide a teen through Confirmation prep</div>
+            </div>
+            <button class="role-apply" data-contact data-from="formation:confirmation-mentor">Apply →</button>
+          </div>
+          <div class="role-card-expand">
+            <p class="role-expand-about">Be paired with a teenage Confirmation candidate as their personal mentor through the two-year preparation programme. Meet monthly and offer support as they prepare to receive the Holy Spirit.</p>
+            <div class="role-reqs-label">What we are looking for</div>
+            <div class="role-reqs"><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Confirmed Catholic in good standing</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Background check required</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Able to meet monthly with your candidate for two years</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Comfortable talking about faith with a teenager</div></div>
+          </div>
+        </div>
+        </div>
+        <div class="ministry-section-contact"><strong>Contact:</strong> Sofia Morales, Director of Faith Formation</div>
+        <a href="#" class="ministry-section-link" data-contact data-from="formation">Get in touch →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="ministry-section ministry-section-alt" id="ministry-hospitality" data-section="hospitality">
+  <div class="container">
+    <div class="ministry-section-inner">
+      <div class="ministry-section-icon">
+        <svg width="28" height="28" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M10 7v4l2.5 2.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </div>
+      <div class="ministry-section-body">
+        <div class="ministry-section-label">Ministry</div>
+        <h2 class="ministry-section-title">Hospitality &amp; Events</h2>
+        <p class="ministry-section-desc">Help create a warm and welcoming environment at parish events, coffee socials, and special celebrations. Perfect for those who love bringing people together and making everyone feel at home.</p>
+        <div class="roles-label">Available roles</div><div class="roles-grid">
+        <div class="role-card">
+          <div class="role-card-top">
+            <div>
+              <div class="role-title">Sunday Coffee Hour Host</div>
+              <div class="role-meta">After 11 AM Mass · occasional</div>
+            </div>
+            <button class="role-apply" data-contact data-from="hospitality:coffee-hour">Apply →</button>
+          </div>
+          <div class="role-card-expand">
+            <p class="role-expand-about">Host the after-Mass coffee and refreshments gathering in the parish hall. Set up tables, brew coffee, lay out food, and help welcome parishioners — especially newcomers.</p>
+            <div class="role-reqs-label">What we are looking for</div>
+            <div class="role-reqs"><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Available Sunday mornings until approximately 12:30 PM</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Organised and comfortable hosting</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Rotating schedule — commitment of one Sunday per month</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Enjoy meeting and chatting with people</div></div>
+          </div>
+        </div>
+        <div class="role-card">
+          <div class="role-card-top">
+            <div>
+              <div class="role-title">Event Planning Committee</div>
+              <div class="role-meta">Help plan parish socials & fundraisers</div>
+            </div>
+            <button class="role-apply" data-contact data-from="hospitality:event-planning">Apply →</button>
+          </div>
+          <div class="role-card-expand">
+            <p class="role-expand-about">Join the parish events committee to help plan and execute our social calendar including the annual spring picnic, Christmas social, and fundraising dinners.</p>
+            <div class="role-reqs-label">What we are looking for</div>
+            <div class="role-reqs"><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Organised with an eye for detail</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Creative and enthusiastic</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Able to attend occasional planning meetings</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Experience with event coordination helpful but not essential</div></div>
+          </div>
+        </div>
+        <div class="role-card">
+          <div class="role-card-top">
+            <div>
+              <div class="role-title">New Parishioner Welcome Team</div>
+              <div class="role-meta">Meet & greet newcomers after Mass</div>
+            </div>
+            <button class="role-apply" data-contact data-from="hospitality:new-parishioner">Apply →</button>
+          </div>
+          <div class="role-card-expand">
+            <p class="role-expand-about">Be part of the team that welcomes new parishioners to St. Mary's. Introduce yourself to visitors, share information about the parish, and help newcomers feel genuinely at home.</p>
+            <div class="role-reqs-label">What we are looking for</div>
+            <div class="role-reqs"><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Warm, outgoing, and approachable</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Good knowledge of parish life and programmes</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Available on the first Sunday of each month</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Willing to follow up with new parishioners</div></div>
+          </div>
+        </div>
+        <div class="role-card">
+          <div class="role-card-top">
+            <div>
+              <div class="role-title">Parish Decorating Team</div>
+              <div class="role-meta">Liturgical seasons & special events</div>
+            </div>
+            <button class="role-apply" data-contact data-from="hospitality:decorating">Apply →</button>
+          </div>
+          <div class="role-card-expand">
+            <p class="role-expand-about">Transform our church for the major liturgical seasons — Advent, Christmas, Lent, and Easter — as well as special celebrations. Work with the liturgy committee to ensure our sacred space is beautiful.</p>
+            <div class="role-reqs-label">What we are looking for</div>
+            <div class="role-reqs"><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Creative eye for design and arrangement</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Physically able to handle ladders and carry decorations</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Available for seasonal decoration days (4–6 times per year)</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Knowledge of liturgical seasons a plus</div></div>
+          </div>
+        </div>
+        </div>
+        <div class="ministry-section-contact"><strong>Contact:</strong> Parish Manager — Maria Santos</div>
+        <a href="#" class="ministry-section-link" data-contact data-from="volunteer">Express your interest below →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</div><!-- end ministry-sections -->
+
+
+<div class="modal-overlay" id="contactModal">
+  <div class="modal-box">
+    <div class="modal-header">
+      <div>
+        <div class="modal-title" id="modalTitle">Get Involved</div>
+        <div class="modal-sub">We will be in touch within a week.</div>
+      </div>
+      <button class="modal-close" id="modalClose">&#x2715;</button>
+    </div>
+    <div class="modal-body" id="modalBody">
+      <div class="modal-form-row">
+        <div class="modal-field"><label>First Name</label><input type="text" placeholder="Maria"></div>
+        <div class="modal-field"><label>Last Name</label><input type="text" placeholder="Santos"></div>
+      </div>
+      <div class="modal-field"><label>Email Address</label><input type="email" id="mEmail" placeholder="maria@example.com"></div>
+      <div class="modal-field"><label>Phone (optional)</label><input type="tel" placeholder="(212) 555-0000"></div>
+      <div class="modal-field">
+        <label>I am interested in...</label>
+        <select id="mSubject">
+          <option value="">Select a ministry or role...</option>
+          <option value="volunteer:welcome-team">Volunteer — Welcome Team</option>
+          <option value="volunteer:food-pantry">Volunteer — Food Pantry Helper</option>
+          <option value="volunteer:office-assistant">Volunteer — Parish Office Assistant</option>
+          <option value="volunteer:events">Volunteer — Event Setup &amp; Cleanup</option>
+          <option value="small-groups:bible-study">Small Groups — Bible Study</option>
+          <option value="small-groups:mens-group">Small Groups — Men's Faith Group</option>
+          <option value="small-groups:womens-group">Small Groups — Women's Prayer Circle</option>
+          <option value="small-groups:lenten-group">Small Groups — Lenten Reflection Group</option>
+          <option value="liturgical:altar-server">Liturgical — Altar Server</option>
+          <option value="liturgical:lector">Liturgical — Lector</option>
+          <option value="liturgical:eucharistic-minister">Liturgical — Eucharistic Minister</option>
+          <option value="liturgical:usher">Liturgical — Usher / Greeter</option>
+          <option value="music:choir-sa">Music — Choir Singer (Soprano/Alto)</option>
+          <option value="music:choir-tb">Music — Choir Singer (Tenor/Bass)</option>
+          <option value="music:instrumentalist">Music — Instrumentalist</option>
+          <option value="music:cantor">Music — Cantor / Soloist</option>
+          <option value="youth:teen-leader">Youth — Teen Group Leader</option>
+          <option value="youth:retreat-chaperone">Youth — Retreat Chaperone</option>
+          <option value="youth:sunday-school">Youth — Sunday School Helper</option>
+          <option value="youth:events">Youth — Events Coordinator</option>
+          <option value="outreach:food-pantry">Outreach — Food Pantry</option>
+          <option value="outreach:homebound">Outreach — Homebound Visitor</option>
+          <option value="outreach:refugee">Outreach — Refugee Support</option>
+          <option value="outreach:fundraising">Outreach — Fundraising</option>
+          <option value="formation:re-teacher">Faith Formation — Children's RE Teacher</option>
+          <option value="formation:rcia-sponsor">Faith Formation — RCIA Sponsor</option>
+          <option value="formation:adult-study">Faith Formation — Adult Study Leader</option>
+          <option value="formation:confirmation-mentor">Faith Formation — Confirmation Mentor</option>
+          <option value="hospitality:coffee-hour">Hospitality — Sunday Coffee Hour</option>
+          <option value="hospitality:event-planning">Hospitality — Event Planning</option>
+          <option value="hospitality:new-parishioner">Hospitality — New Parishioner Welcome</option>
+          <option value="hospitality:decorating">Hospitality — Decorating Team</option>
+          <option value="general">Not sure yet — help me find the right fit</option>
+          <optgroup label="Goods &amp; Services Donations">
+            <option value="need:food-donations">Donate — Tinned &amp; Dry Food</option>
+            <option value="need:childrens-clothing">Donate — Children's Winter Clothing</option>
+            <option value="need:accountant">Offer Skill — Accountant / Bookkeeper</option>
+            <option value="need:computer">Donate — Computer Equipment</option>
+            <option value="need:social-media">Offer Skill — Web &amp; Social Media</option>
+            <option value="need:plumber">Offer Service — Plumber</option>
+            <option value="need:other">Other donation or offer</option>
+          </optgroup>
+        </select>
+      </div>
+      <div class="modal-field"><label>Anything you'd like to share?</label><textarea placeholder="Your availability, experience, or any questions..."></textarea></div>
+      <button class="modal-submit" id="modalSubmit" type="button">Send My Interest</button>
+      <p style="font-size:.75rem;color:var(--text-muted);text-align:center;margin-top:.75rem;">A ministry leader will be in touch within one week.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var overlay=document.getElementById('contactModal');
+  var closeBtn=document.getElementById('modalClose');
+  var submitBtn=document.getElementById('modalSubmit');
+  var titleEl=document.getElementById('modalTitle');
+  if(!overlay)return;
+  function openModal(from){
+    overlay.classList.add('open');
+    document.body.style.overflow='hidden';
+    var sel=document.getElementById('mSubject');
+    if(from&&sel){
+      var opt=Array.from(sel.options).find(function(o){return o.value===from;});
+      if(opt){sel.value=from;if(titleEl)titleEl.textContent='Apply: '+opt.textContent.trim();}
+      else{if(titleEl)titleEl.textContent='Get Involved';}
+    }
+  }
+  function closeModal(){overlay.classList.remove('open');document.body.style.overflow='';if(titleEl)titleEl.textContent='Get Involved';}
+  overlay.addEventListener('click',function(e){if(e.target===overlay)closeModal();});
+  if(closeBtn)closeBtn.addEventListener('click',closeModal);
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')closeModal();});
+  document.addEventListener('click',function(e){
+    var el=e.target.closest('[data-contact]');
+    if(el){e.preventDefault();openModal(el.getAttribute('data-from')||'');}
+  });
+  if(submitBtn){
+    submitBtn.addEventListener('click',function(){
+      var email=document.getElementById('mEmail').value.trim();
+      if(!email){document.getElementById('mEmail').focus();return;}
+      document.getElementById('modalBody').innerHTML='<div class="modal-success"><div class="modal-success-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><h3>Message sent!</h3><p>Thank you. A ministry leader will be in touch within one week.</p></div>';
+    });
+  }
+})();
+</script>
+
+
+
+
+<!-- NEEDS SECTION -->
+<section class="needs-section" id="parish-needs">
+  <div class="container">
+    <div class="needs-header">
+      <h2 class="needs-title">What we need right now</h2>
+      <p class="needs-sub">Beyond volunteering, our parish often needs specific goods, skills, and services. If you can help with any of the below, please get in touch.</p>
+    </div>
+    <div class="needs-grid">
+<div class="need-card urgency-high">
+    <span class="need-category need-cat-goods">Goods</span>
+    <div class="need-title">Tinned &amp; Dry Food</div>
+    <p class="need-desc">Our food pantry serves 200+ families weekly. We are always in need of tinned vegetables, pasta, rice, lentils, and cooking oil. Donations can be left at the parish office or brought to Saturday distribution.</p>
+    <div class="need-urgency">
+      <div class="need-urgency-dot"></div>
+      Urgent need
+    </div>
+    <button class="need-btn" data-contact data-from="need:food-donations">Donate goods →</button>
+  </div><div class="need-card urgency-high">
+    <span class="need-category need-cat-goods">Goods</span>
+    <div class="need-title">Children's Winter Clothing</div>
+    <p class="need-desc">We are collecting warm clothing for children aged 2–12 for distribution to families in our community. Coats, hats, gloves, and boots in good condition are especially needed.</p>
+    <div class="need-urgency">
+      <div class="need-urgency-dot"></div>
+      Needed this month
+    </div>
+    <button class="need-btn" data-contact data-from="need:childrens-clothing">Donate clothing →</button>
+  </div><div class="need-card urgency-med">
+    <span class="need-category need-cat-skills">Skills</span>
+    <div class="need-title">Accountant or Bookkeeper</div>
+    <p class="need-desc">We are looking for a qualified accountant or bookkeeper to assist with parish financial reporting on a voluntary basis — approximately 4–6 hours per month. Ideal for a retired or semi-retired professional.</p>
+    <div class="need-urgency">
+      <div class="need-urgency-dot"></div>
+      Ongoing need
+    </div>
+    <button class="need-btn" data-contact data-from="need:accountant">Offer this skill →</button>
+  </div><div class="need-card urgency-med">
+    <span class="need-category need-cat-goods">Goods</span>
+    <div class="need-title">Laptop or Desktop Computer</div>
+    <p class="need-desc">Our faith formation team needs a reliable computer for Sunday school classroom use. Any working laptop or desktop donated in good condition would be gratefully received.</p>
+    <div class="need-urgency">
+      <div class="need-urgency-dot"></div>
+      Needed soon
+    </div>
+    <button class="need-btn" data-contact data-from="need:computer">Donate equipment →</button>
+  </div><div class="need-card urgency-med">
+    <span class="need-category need-cat-skills">Skills</span>
+    <div class="need-title">Web &amp; Social Media Help</div>
+    <p class="need-desc">Looking for someone with social media or basic web skills to help manage our Facebook and Instagram presence. A few hours per week, fully remote. Great for a student or young professional.</p>
+    <div class="need-urgency">
+      <div class="need-urgency-dot"></div>
+      Ongoing need
+    </div>
+    <button class="need-btn" data-contact data-from="need:social-media">Offer this skill →</button>
+  </div><div class="need-card urgency-low">
+    <span class="need-category need-cat-services">Services</span>
+    <div class="need-title">Plumber — One-off Job</div>
+    <p class="need-desc">We have a minor plumbing issue in the parish hall kitchen that needs attention. If you are a licensed plumber willing to donate your time, we would be very grateful.</p>
+    <div class="need-urgency">
+      <div class="need-urgency-dot"></div>
+      Needed soon
+    </div>
+    <button class="need-btn" data-contact data-from="need:plumber">Offer this service →</button>
+  </div>
+    </div>
+    <div class="needs-cta">
+      <p>Have something else to offer? We are always grateful.</p>
+      <a href="#" data-contact data-from="need:other">Get in touch with us →</a>
+    </div>
+  </div>
+</section>
+
+
+
+<script>
+document.querySelectorAll('.role-card').forEach(function(card){
+  card.addEventListener('click', function(e){
+    if(e.target.closest('.role-apply')) return;
+    card.classList.toggle('open');
+  });
+});
+</script>
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+
+      <!-- Col 1: Parish Info -->
+      <div>
+        <div class="footer-brand">St. Mary's Parish</div>
+        <p class="footer-tagline">A vibrant Catholic community in the heart of New York's Lower East Side, serving our neighbours since 1887.</p>
+        <div class="footer-detail">
+          <svg width="14" height="14" viewBox="0 0 20 20" fill="none"><path d="M10 2C7.2 2 5 4.2 5 7c0 4 5 11 5 11s5-7 5-11c0-2.8-2.2-5-5-5z" stroke="currentColor" stroke-width="1.5"/></svg>
+          123 Rivington Street, New York, NY 10002
+        </div>
+        <div class="footer-detail">
+          <svg width="14" height="14" viewBox="0 0 20 20" fill="none"><path d="M3 4h4l2 4-2 2c1 2 3 4 5 5l2-2 4 2v4c0 1-1 2-2 2C7 19 1 13 1 6c0-1 1-2 2-2z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+          <a href="tel:+12125550123">(212) 555-0123</a>
+        </div>
+        <div class="footer-detail">
+          <svg width="14" height="14" viewBox="0 0 20 20" fill="none"><rect x="2" y="4" width="16" height="13" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M2 7l8 5 8-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          <a href="#" data-contact data-from="general">info@stmarysnyc.org</a>
+        </div>
+        <div class="footer-detail">
+          <svg width="14" height="14" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M10 7v4l2.5 2.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          Office: Mon–Fri 9 AM–5 PM · Sat 10 AM–2 PM
+        </div>
+        <div class="footer-detail">
+          <svg width="14" height="14" viewBox="0 0 20 20" fill="none"><path d="M10 2C7.2 2 5 4.2 5 7c0 4 5 11 5 11s5-7 5-11c0-2.8-2.2-5-5-5z" stroke="currentColor" stroke-width="1.5"/></svg>
+          <a href="https://maps.google.com/?q=123+Rivington+Street+New+York+NY+10002" target="_blank">Get directions →</a>
+        </div>
+      </div>
+
+      <!-- Col 2: Mass Times -->
+      <div>
+        <div class="footer-col-title">Mass Times</div>
+        <div class="footer-mass-item"><strong>Weekdays</strong>Mon–Fri 9:00 AM · Tue &amp; Thu 6:45 PM</div>
+        <div class="footer-mass-item"><strong>Saturday</strong>10:00 AM · Vigil 5:00 PM</div>
+        <div class="footer-mass-item"><strong>Sunday</strong>7:00 · 9:00 · 11:00 AM<br>1:00 PM (Español) · 6:00 PM</div>
+        <div class="footer-mass-item" style="margin-top:.75rem;font-size:.78rem;color:rgba(255,253,245,0.4);">Confession: Saturday 3:30–4:30 PM</div>
+        <a href="index.html#mass-times" style="display:inline-block;margin-top:.875rem;font-size:.8rem;font-weight:600;color:var(--terra);text-decoration:none;">Full schedule →</a>
+      </div>
+
+      <!-- Col 3: Navigate -->
+      <div>
+        <div class="footer-col-title">Navigate</div>
+        <nav class="footer-nav">
+          <a href="about.html">About Us</a>
+          <a href="staff.html">Our Team</a>
+          <a href="events.html">Events</a>
+          <a href="bulletin.html">Parish Bulletin</a>
+          <a href="sacraments.html">Sacraments</a>
+          <a href="rcia.html">Becoming Catholic</a>
+          <a href="involved.html">Get Involved</a>
+          <a href="index.html#giving">Give Online</a>
+          <a href="#" data-contact data-from="general">Contact Us</a>
+        </nav>
+      </div>
+
+      <!-- Col 4: Connect -->
+      <div>
+        <div class="footer-col-title">Stay Connected</div>
+        <div class="footer-social">
+          <a href="https://facebook.com" target="_blank" aria-label="Facebook">f</a>
+          <a href="https://instagram.com" target="_blank" aria-label="Instagram">in</a>
+          <a href="https://youtube.com" target="_blank" aria-label="YouTube">yt</a>
+          <a href="https://spotify.com" target="_blank" aria-label="Spotify">sp</a>
+        </div>
+        <div class="footer-newsletter-label">Get our weekly bulletin by email</div>
+        <div class="footer-newsletter-form">
+          <input type="email" placeholder="Your email">
+          <button type="button">Subscribe</button>
+        </div>
+      </div>
+
+    </div>
+    <div class="footer-bottom">
+      <div>&copy; 2024 St. Mary's Parish, New York</div>
+      <div class="footer-bottom-links">
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html">Terms of Use</a>
+        <a href="sitemap.html">Sitemap</a>
+        <span>Powered by <span class="communio-credit">Communio</span></span>
+      </div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Welcome to Communio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Lora:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../communio.css">
+<style>
+/* ── FULL PAGE ── */
+.welcome-page {
+  min-height: 100dvh;
+  background: var(--ink);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px 80px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Background glows */
+.welcome-page::before {
+  content: '';
+  position: absolute;
+  width: 500px; height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(216,80,32,0.12) 0%, transparent 65%);
+  top: -150px; right: -100px;
+  pointer-events: none;
+}
+.welcome-page::after {
+  content: '';
+  position: absolute;
+  width: 350px; height: 350px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(232,192,64,0.08) 0%, transparent 65%);
+  bottom: -80px; left: -60px;
+  pointer-events: none;
+}
+
+/* ── CONTENT ── */
+.wl {
+  position: relative;
+  z-index: 1;
+  max-width: 460px;
+  width: 100%;
+  text-align: center;
+}
+
+/* Check icon */
+.wl-check {
+  width: 60px; height: 60px;
+  border-radius: 50%;
+  background: var(--sage);
+  margin: 0 auto 24px;
+  display: flex; align-items: center; justify-content: center;
+  animation: pop 0.55s cubic-bezier(0.16,1.4,0.3,1) both;
+}
+.wl-check svg { width: 26px; height: 26px; }
+
+@keyframes pop {
+  from { opacity:0; transform:scale(0.5); }
+  to   { opacity:1; transform:scale(1); }
+}
+@keyframes up {
+  from { opacity:0; transform:translateY(12px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+
+/* Approved badge */
+.wl-badge {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--sage-light);
+  background: rgba(42,138,74,0.15);
+  border: 1px solid rgba(42,138,74,0.3);
+  border-radius: 8px;
+  padding: 5px 13px;
+  margin-bottom: 14px;
+  animation: up 0.5s ease 0.15s both;
+}
+
+/* Heading */
+.wl-h1 {
+  font-size: clamp(28px,7vw,48px);
+  font-weight: 800;
+  color: var(--white);
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  margin-bottom: 12px;
+  animation: up 0.5s ease 0.2s both;
+}
+.wl-h1 em {
+  font-style: italic;
+  font-family: var(--f-serif);
+  font-weight: 400;
+  color: var(--terra-light);
+}
+
+/* Subtext */
+.wl-p {
+  font-size: 16px;
+  color: rgba(255,255,255,0.5);
+  line-height: 1.7;
+  margin-bottom: 28px;
+  animation: up 0.5s ease 0.25s both;
+}
+
+/* Network visualiser */
+.wl-net {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: var(--r-xl);
+  padding: 18px 20px;
+  margin-bottom: 24px;
+  animation: up 0.5s ease 0.3s both;
+}
+.wl-net-lbl {
+  font-size: 10px; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase;
+  color: rgba(255,255,255,0.2);
+  margin-bottom: 14px;
+  text-align: left;
+}
+.wl-nodes {
+  display: flex; align-items: center; justify-content: center;
+}
+.wl-node {
+  display: flex; flex-direction: column; align-items: center; gap: 5px;
+  padding: 0 8px;
+}
+.wl-dot {
+  width: 9px; height: 9px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.15);
+}
+.wl-dot.you {
+  width: 13px; height: 13px;
+  background: var(--terra);
+  box-shadow: 0 0 0 3px rgba(216,80,32,0.25), 0 0 0 6px rgba(216,80,32,0.1);
+  animation: glow 2s ease infinite;
+}
+@keyframes glow {
+  0%,100% { box-shadow: 0 0 0 3px rgba(216,80,32,0.25), 0 0 0 6px rgba(216,80,32,0.1); }
+  50%      { box-shadow: 0 0 0 5px rgba(216,80,32,0.15), 0 0 0 9px rgba(216,80,32,0.06); }
+}
+.wl-line  { width: 18px; height: 1px; background: rgba(255,255,255,0.1); flex-shrink: 0; }
+.wl-flag  { font-size: 15px; line-height: 1; }
+.wl-city  { font-size: 9px; color: rgba(255,255,255,0.25); font-weight: 500; }
+.wl-city.you { color: var(--terra-light); font-weight: 700; }
+
+.wl-count {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255,255,255,0.07);
+  font-size: 13px;
+  color: rgba(255,255,255,0.3);
+  text-align: center;
+}
+.wl-count strong { color: rgba(255,255,255,0.75); font-weight: 700; }
+
+/* CTA */
+.wl-cta {
+  width: 100%;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  font-family: var(--f-body);
+  font-size: 15px; font-weight: 700;
+  background: var(--terra);
+  color: var(--white);
+  border: none;
+  border-radius: var(--r-pill);
+  padding: 15px;
+  cursor: pointer;
+  text-decoration: none;
+  box-shadow: 0 4px 16px rgba(216,80,32,0.35);
+  transition: all var(--ease);
+  animation: up 0.5s ease 0.35s both;
+}
+.wl-cta:hover {
+  background: var(--terra-light);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(216,80,32,0.45);
+}
+</style>
+</head>
+<body>
+
+<!-- PHP: render on first login after approval -->
+<!-- PHP: $_SESSION['parish_id'] required, $parish = fetch_parish($_SESSION['parish_id']) -->
+<div class="welcome-page">
+  <div class="wl">
+
+    <div class="wl-check">
+      <svg viewBox="0 0 28 28" fill="none">
+        <path d="M5 14l6 6 12-12" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+
+    <div class="wl-badge">Application approved</div>
+
+    <!-- PHP: echo "Welcome to Communio, " . $parish->name -->
+    <h1 class="wl-h1">Welcome to Communio,<br><em>St. Mary's Parish.</em></h1>
+
+    <p class="wl-p">You're now part of a verified global network. Let's set up your parish so the world can find you.</p>
+
+    <!-- Network visualiser -->
+    <div class="wl-net">
+      <div class="wl-net-lbl">You've joined the Communio network</div>
+      <div class="wl-nodes">
+        <div class="wl-node">
+          <div class="wl-dot"></div>
+          <div class="wl-flag">🇧🇷</div>
+          <div class="wl-city">São Paulo</div>
+        </div>
+        <div class="wl-line"></div>
+        <div class="wl-node">
+          <div class="wl-dot"></div>
+          <div class="wl-flag">🇮🇹</div>
+          <div class="wl-city">Rome</div>
+        </div>
+        <div class="wl-line"></div>
+        <div class="wl-node">
+          <div class="wl-dot you"></div>
+          <div class="wl-flag">🇺🇸</div>
+          <div class="wl-city you">You</div>
+        </div>
+        <div class="wl-line"></div>
+        <div class="wl-node">
+          <div class="wl-dot"></div>
+          <div class="wl-flag">🇬🇭</div>
+          <div class="wl-city">Accra</div>
+        </div>
+        <div class="wl-line"></div>
+        <div class="wl-node">
+          <div class="wl-dot"></div>
+          <div class="wl-flag">🇵🇭</div>
+          <div class="wl-city">Manila</div>
+        </div>
+      </div>
+      <!-- PHP: echo number_format($parish_count) . " parishes across " . $country_count . " countries" -->
+      <div class="wl-count">Joining <strong>4,847 parishes</strong> across <strong>221 countries</strong></div>
+    </div>
+
+    <!-- PHP: redirect to /dashboard/setup after click -->
+    <a href="setup.html" class="wl-cta">
+      Set up your parish
+      <svg viewBox="0 0 16 16" fill="none" width="16" height="16">
+        <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </a>
+
+  </div>
+</div>
+
+</body>
+</html>
