@@ -342,25 +342,25 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
         <div class="wb-editor-inner" id="wb-panel-mass-times">
           <div class="wb-editor-hd">
             <div class="wb-editor-title">Mass Times</div>
-            <div class="wb-editor-desc">Set your regular Mass schedule. This will appear prominently on your public parish website.</div>
+            <div class="wb-editor-desc">Mass times are managed in <a href="../settings.html" style="color:#d85020">Settings → Mass &amp; sacraments</a>. Your current schedule is shown below.</div>
           </div>
           <div class="wb-field-group">
             <div class="wb-field-label">Weekday Masses</div>
-            <textarea class="wb-textarea" placeholder="e.g. Monday–Friday: 9:00 AM&#10;Tuesday & Thursday: 6:45 PM"></textarea>
+            <div id="ro-massWeekday" style="padding:.6rem .85rem;border:1.5px solid #e8e2d6;border-radius:8px;font-size:.9rem;color:#0e0a06;background:#faf8f4;min-height:42px;">—</div>
           </div>
           <div class="wb-field-group">
-            <div class="wb-field-label">Weekend Masses</div>
-            <textarea class="wb-textarea" placeholder="e.g. Saturday Vigil: 5:00 PM&#10;Sunday: 7 AM, 9 AM, 11 AM, 1 PM (Español), 6 PM"></textarea>
+            <div class="wb-field-label">Saturday Masses</div>
+            <div id="ro-massSaturday" style="padding:.6rem .85rem;border:1.5px solid #e8e2d6;border-radius:8px;font-size:.9rem;color:#0e0a06;background:#faf8f4;min-height:42px;">—</div>
+          </div>
+          <div class="wb-field-group">
+            <div class="wb-field-label">Sunday Masses</div>
+            <div id="ro-massSunday" style="padding:.6rem .85rem;border:1.5px solid #e8e2d6;border-radius:8px;font-size:.9rem;color:#0e0a06;background:#faf8f4;min-height:42px;">—</div>
           </div>
           <div class="wb-field-group">
             <div class="wb-field-label">Confession / Reconciliation</div>
-            <input type="text" class="wb-input" placeholder="e.g. Saturday 3:30–4:30 PM or by appointment">
+            <div id="ro-confession" style="padding:.6rem .85rem;border:1.5px solid #e8e2d6;border-radius:8px;font-size:.9rem;color:#0e0a06;background:#faf8f4;min-height:42px;">—</div>
           </div>
-          <div class="wb-field-group">
-            <div class="wb-field-label">Additional notes</div>
-            <textarea class="wb-textarea wb-textarea-sm" placeholder="Holiday schedules, special notices, etc."></textarea>
-          </div>
-          <button class="wb-save-btn">Save Mass Times</button>
+          <a href="../settings.html" style="display:inline-block;margin-top:.5rem;background:#d85020;color:#fff;padding:.7rem 1.5rem;border-radius:8px;font-size:.9rem;font-weight:600;text-decoration:none;">Edit in Settings →</a>
         </div>
         <div class="wb-editor-inner wb-hidden" id="wb-panel-staff">
           <div class="wb-editor-hd">
@@ -563,12 +563,13 @@ document.querySelectorAll('.wb-section-item').forEach(function(item){
 // Live preview sync
 function syncPreview(section){
   if(section==='mass-times'){
-    var wd=document.querySelector('#wb-panel-mass-times .wb-textarea:nth-of-type(1)');
-    var we=document.querySelector('#wb-panel-mass-times .wb-textarea:nth-of-type(2)');
-    var cf=document.querySelector('#wb-panel-mass-times .wb-input');
-    if(wd)document.getElementById('pvw-weekday').textContent=wd.value||'—';
-    if(we)document.getElementById('pvw-weekend').textContent=we.value||'—';
-    if(cf)document.getElementById('pvw-confession').textContent=cf.value||'—';
+    try{var pd=JSON.parse(localStorage.getItem('parish_data')||'{}');
+    var pvwd=document.getElementById('pvw-weekday');
+    var pvwe=document.getElementById('pvw-weekend');
+    var pvcf=document.getElementById('pvw-confession');
+    if(pvwd)pvwd.textContent=pd.massWeekday||'—';
+    if(pvwe)pvwe.textContent=pd.massSaturday||'—';
+    if(pvcf)pvcf.textContent=pd.confession||'—';}catch(e){}
   }
   if(section==='staff'){
     var nm=document.querySelector('#wb-panel-staff .wb-field-half:first-child .wb-input');
@@ -622,6 +623,7 @@ syncPreview('mass-times');
 function toggleMinistry(key,visible){try{var pd=JSON.parse(localStorage.getItem('parish_data')||'{}');if(!pd.ministries)pd.ministries={};pd.ministries[key]=visible;localStorage.setItem('parish_data',JSON.stringify(pd));}catch(e){}}
 
 (function(){try{var pd=JSON.parse(localStorage.getItem('parish_data')||'{}');var mins=(pd&&pd.ministries)||{};document.querySelectorAll('#wb-panel-involved input[type="checkbox"]').forEach(function(toggle){var onch=toggle.getAttribute('onchange');var match=onch&&onch.match(/toggleMinistry\('([^']+)'/);if(match){var key=match[1];if(mins[key]===false)toggle.checked=false;}});}catch(e){}})();
+(function(){try{var pd=JSON.parse(localStorage.getItem('parish_data')||'{}');var fields={massWeekday:'ro-massWeekday',massSaturday:'ro-massSaturday',massSunday:'ro-massSunday',confession:'ro-confession'};Object.keys(fields).forEach(function(k){var el=document.getElementById(fields[k]);if(el&&pd[k])el.textContent=pd[k];});}catch(e){}})();
 </script>
 </body>
 </html>
