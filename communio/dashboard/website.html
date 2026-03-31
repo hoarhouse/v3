@@ -52,6 +52,10 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
 .tab-btn:hover{color:var(--ink)}
 .tab-btn.on{color:var(--terra);border-bottom-color:var(--terra)}
 .tab-content{display:none}.tab-content.on{display:block}
+.mtoggle-slider{position:absolute;cursor:pointer;inset:0;background:#ddd6c8;border-radius:22px;transition:.2s}
+.mtoggle-slider:before{position:absolute;content:"";height:16px;width:16px;left:3px;bottom:3px;background:white;border-radius:50%;transition:.2s}
+input:checked+.mtoggle-slider{background:var(--terra)}
+input:checked+.mtoggle-slider:before{transform:translateX(16px)}
 /* Shared card */
 .card{background:var(--white);border:1px solid var(--border-light);border-radius:var(--r-lg);padding:22px;box-shadow:var(--sh-sm);margin-bottom:18px}
 .card-title{font-size:13px;font-weight:700;color:var(--ink);margin-bottom:4px}
@@ -375,6 +379,44 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
       <button class="btn btn-primary btn-sm" id="save-bulletin-btn">Save bulletin settings →</button>
     </div>
   </div>
+  <div class="card" style="margin-top:18px">
+    <div class="card-title">Get involved — ministry sections</div>
+    <div class="card-sub">Toggle which ministry sections appear on your public Get Involved page</div>
+    <div id="ministry-toggles">
+      <div class="ministry-row" style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border-light)">
+        <div><div style="font-size:13px;font-weight:600;color:var(--ink)">Volunteer</div><div style="font-size:12px;color:var(--light)">General volunteering opportunities</div></div>
+        <label style="position:relative;display:inline-block;width:38px;height:22px;flex-shrink:0"><input type="checkbox" checked onchange="toggleMinistryWebsite('volunteer',this.checked)" style="opacity:0;width:0;height:0"><span class="mtoggle-slider"></span></label>
+      </div>
+      <div class="ministry-row" style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border-light)">
+        <div><div style="font-size:13px;font-weight:600;color:var(--ink)">Small Groups</div><div style="font-size:12px;color:var(--light)">Bible study, prayer groups, men's &amp; women's groups</div></div>
+        <label style="position:relative;display:inline-block;width:38px;height:22px;flex-shrink:0"><input type="checkbox" checked onchange="toggleMinistryWebsite('small-groups',this.checked)" style="opacity:0;width:0;height:0"><span class="mtoggle-slider"></span></label>
+      </div>
+      <div class="ministry-row" style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border-light)">
+        <div><div style="font-size:13px;font-weight:600;color:var(--ink)">Liturgical Ministries</div><div style="font-size:12px;color:var(--light)">Altar servers, lectors, Eucharistic ministers, ushers</div></div>
+        <label style="position:relative;display:inline-block;width:38px;height:22px;flex-shrink:0"><input type="checkbox" checked onchange="toggleMinistryWebsite('liturgical',this.checked)" style="opacity:0;width:0;height:0"><span class="mtoggle-slider"></span></label>
+      </div>
+      <div class="ministry-row" style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border-light)">
+        <div><div style="font-size:13px;font-weight:600;color:var(--ink)">Music Ministry</div><div style="font-size:12px;color:var(--light)">Choir, instrumentalists, cantors</div></div>
+        <label style="position:relative;display:inline-block;width:38px;height:22px;flex-shrink:0"><input type="checkbox" checked onchange="toggleMinistryWebsite('music',this.checked)" style="opacity:0;width:0;height:0"><span class="mtoggle-slider"></span></label>
+      </div>
+      <div class="ministry-row" style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border-light)">
+        <div><div style="font-size:13px;font-weight:600;color:var(--ink)">Youth Ministry</div><div style="font-size:12px;color:var(--light)">Middle &amp; high school programmes, retreats</div></div>
+        <label style="position:relative;display:inline-block;width:38px;height:22px;flex-shrink:0"><input type="checkbox" checked onchange="toggleMinistryWebsite('youth',this.checked)" style="opacity:0;width:0;height:0"><span class="mtoggle-slider"></span></label>
+      </div>
+      <div class="ministry-row" style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border-light)">
+        <div><div style="font-size:13px;font-weight:600;color:var(--ink)">Community Outreach</div><div style="font-size:12px;color:var(--light)">Food pantry, homebound visits, social services</div></div>
+        <label style="position:relative;display:inline-block;width:38px;height:22px;flex-shrink:0"><input type="checkbox" checked onchange="toggleMinistryWebsite('outreach',this.checked)" style="opacity:0;width:0;height:0"><span class="mtoggle-slider"></span></label>
+      </div>
+      <div class="ministry-row" style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border-light)">
+        <div><div style="font-size:13px;font-weight:600;color:var(--ink)">Faith Formation</div><div style="font-size:12px;color:var(--light)">Religious education, RCIA support, adult study</div></div>
+        <label style="position:relative;display:inline-block;width:38px;height:22px;flex-shrink:0"><input type="checkbox" checked onchange="toggleMinistryWebsite('formation',this.checked)" style="opacity:0;width:0;height:0"><span class="mtoggle-slider"></span></label>
+      </div>
+      <div class="ministry-row" style="display:flex;align-items:center;justify-content:space-between;padding:10px 0">
+        <div><div style="font-size:13px;font-weight:600;color:var(--ink)">Hospitality &amp; Events</div><div style="font-size:12px;color:var(--light)">Coffee socials, welcome team, event support</div></div>
+        <label style="position:relative;display:inline-block;width:38px;height:22px;flex-shrink:0"><input type="checkbox" checked onchange="toggleMinistryWebsite('hospitality',this.checked)" style="opacity:0;width:0;height:0"><span class="mtoggle-slider"></span></label>
+      </div>
+    </div>
+  </div>
 </div>
     <div class="tab-content" id="tab-analytics">
   <!-- <?php echo $analytics->summary_html ?> -->
@@ -674,6 +716,25 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
   document.getElementById('bulletin-upload').addEventListener('click', function(e){
     if(e.target.tagName !== 'SPAN') document.getElementById('bulletin-file').click();
   });
+  function toggleMinistryWebsite(key, visible) {
+    try {
+      var pd = JSON.parse(localStorage.getItem('parish_data') || '{}');
+      if (!pd.ministries) pd.ministries = {};
+      pd.ministries[key] = visible;
+      localStorage.setItem('parish_data', JSON.stringify(pd));
+    } catch(e) {}
+  }
+  (function(){
+    try {
+      var pd = JSON.parse(localStorage.getItem('parish_data') || '{}');
+      var mins = (pd && pd.ministries) || {};
+      document.querySelectorAll('#ministry-toggles input[type="checkbox"]').forEach(function(cb){
+        var onch = cb.getAttribute('onchange');
+        var match = onch && onch.match(/toggleMinistryWebsite\('([^']+)'/);
+        if(match && mins[match[1]] === false) cb.checked = false;
+      });
+    } catch(e) {}
+  })();
   document.getElementById('save-bulletin-btn').addEventListener('click', function(){
     var b = document.getElementById('save-bulletin-btn');
     b.textContent = '✓ Saved';
