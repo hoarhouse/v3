@@ -847,27 +847,6 @@ div.cta-strip div.cta-btns a{display:inline-block !important;width:auto !importa
   </div>
 </section>
 
-<!-- CTA -->
-<section class="about-cta">
-  <div class="container">
-    <div class="cta-content">
-      <h2 class="cta-title">Come and see</h2>
-      <p class="cta-text">Whether you're visiting New York, new to the neighborhood, or seeking a spiritual home, we invite you to join our parish family and grow in faith together.</p>
-      <div class="cta-buttons">
-        <a href="index.html#mass-times" class="btn-primary">
-          <svg width="18" height="18" viewBox="0 0 20 20" fill="none"><rect x="2" y="4" width="16" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M2 8h16M6 2v4M14 2v4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-          Plan Your Visit
-        </a>
-        <a href="#" class="btn-ghost" data-contact data-from="general">
-          <svg width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="M2 3h16l-8 8-8-8z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          Get In Touch
-        </a>
-      </div>
-    </div>
-  </div>
-</section>
-
-
 <!-- VISIT -->
 <section class="visit">
   <div class="container">
@@ -930,39 +909,3 @@ div.cta-strip div.cta-btns a{display:inline-block !important;width:auto !importa
 </section>
 
 
-<!-- CTA -->
-<div class="cta-strip">
-  <div class="container">
-    <h2>Come and see for yourself.</h2>
-    <p>Join us for Mass this Sunday — no experience required. All are welcome.</p>
-    <div class="cta-btns">
-      <a href="index.html#mass-times" class="btn-white">See Mass Times</a>
-      <a href="staff.html" class="btn-ghost-white">Meet Our Team</a>
-    </div>
-  </div>
-</div>
-
-<footer class="page-footer">
-  <div class="container">
-    <p>© 2024 St. Mary's Parish · 123 Rivington Street, New York, NY 10002 · <a href="index.html">Back to home</a> · Powered by <span style="color:var(--terra);font-weight:600;">Communio</span></p>
-  </div>
-</footer>
-
-<script>
-const _nh = document.getElementById('navHamburger');
-const _nm = document.getElementById('navMobile');
-if(_nh){ _nh.addEventListener('click',()=>_nm.classList.toggle('open')); _nm.addEventListener('click',(e)=>{if(e.target.tagName==='A')_nm.classList.remove('open');}); }
-
-// Contact modal functionality - placeholder for integration with main site modal
-document.addEventListener('click', function(e) {
-  if(e.target.hasAttribute('data-contact')) {
-    e.preventDefault();
-    // Redirect to main site contact with context
-    const from = e.target.getAttribute('data-from') || 'general';
-    window.location.href = `index.html#contact?from=${from}`;
-  }
-});
-</script>
-
-</body>
-</html>
