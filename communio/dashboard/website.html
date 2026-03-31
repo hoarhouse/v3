@@ -588,6 +588,18 @@ input:checked+.mtoggle-slider:before{transform:translateX(16px)}
       <div class="fg"><label class="fl">Time</label><input class="fi" type="time" value="10:00"></div>
     </div>
     <div class="fg" style="margin-bottom:16px"><label class="fl">Description (optional)</label><textarea class="fta" rows="2" placeholder="Brief details about this event…"></textarea></div>
+    <div class="fg" style="margin-bottom:16px">
+      <label class="fl">Event photo <span style="color:var(--light);font-weight:400">(optional)</span></label>
+      <div id="ev-upload-area" style="border:2px dashed var(--border-light);border-radius:var(--r-md);padding:16px;text-align:center;cursor:pointer;transition:border-color .2s;position:relative" onmouseover="this.style.borderColor='var(--terra)'" onmouseout="this.style.borderColor='var(--border-light)'">
+        <input type="file" id="ev-photo" accept="image/*" style="position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%">
+        <div id="ev-upload-placeholder">
+          <div style="font-size:20px;margin-bottom:4px">📷</div>
+          <div style="font-size:13px;font-weight:600;color:var(--ink)">Upload event photo</div>
+          <div style="font-size:11px;color:var(--light);margin-top:2px">JPG or PNG · Recommended 1200×630px</div>
+        </div>
+        <img id="ev-photo-preview" src="" alt="" style="display:none;max-width:100%;max-height:140px;border-radius:6px;object-fit:cover">
+      </div>
+    </div>
     <div style="display:flex;gap:8px;justify-content:flex-end">
       <button class="btn btn-secondary btn-sm" id="cancel-ev-btn">Cancel</button>
       <button class="btn btn-primary btn-sm" id="save-ev-btn">Add to website →</button>
@@ -1044,8 +1056,24 @@ if(window.innerWidth<=900){
   document.getElementById('add-ev-btn').addEventListener('click', function () {
     document.getElementById('add-ev-form').classList.add('visible');
   });
+  document.getElementById('ev-photo').addEventListener('change', function(){
+    var file = this.files[0];
+    if(!file) return;
+    var reader = new FileReader();
+    reader.onload = function(e){
+      var preview = document.getElementById('ev-photo-preview');
+      var placeholder = document.getElementById('ev-upload-placeholder');
+      preview.src = e.target.result;
+      preview.style.display = 'block';
+      placeholder.style.display = 'none';
+    };
+    reader.readAsDataURL(file);
+  });
   document.getElementById('cancel-ev-btn').addEventListener('click', function () {
     document.getElementById('add-ev-form').classList.remove('visible');
+    document.getElementById('ev-photo').value = '';
+    document.getElementById('ev-photo-preview').style.display = 'none';
+    document.getElementById('ev-upload-placeholder').style.display = 'block';
   });
   document.getElementById('save-ev-btn').addEventListener('click', function () {
     document.getElementById('add-ev-form').classList.remove('visible');
