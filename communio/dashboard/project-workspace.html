@@ -136,6 +136,41 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
   .sidebar{display:none}
   .page-shell{margin-left:0}
 }
+
+.pw-new-topic{display:flex;align-items:center;justify-content:center;gap:7px;width:100%;border:2px dashed var(--border-light);border-radius:var(--r-lg);padding:13px;background:none;font-size:13px;font-weight:600;color:var(--light);cursor:pointer;font-family:'Outfit',sans-serif;transition:all .15s;margin-bottom:14px}
+.pw-new-topic:hover{border-color:var(--terra);color:var(--terra)}
+.pw-thread{border:1px solid var(--border-light);border-radius:var(--r-lg);overflow:hidden;background:var(--white);cursor:pointer;transition:border-color .15s;margin-bottom:8px;box-shadow:var(--sh-sm)}
+.pw-thread:hover{border-color:var(--terra)}
+.pw-thread.pinned{border-left:3px solid var(--terra)}
+.pw-thread-hd{display:flex;align-items:center;gap:12px;padding:14px 16px}
+.pw-thread-av{width:34px;height:34px;border-radius:9px;font-size:10px;font-weight:700;color:white;display:flex;align-items:center;justify-content:center;flex-shrink:0;position:relative}
+.pw-thread-av-dot{position:absolute;bottom:-1px;right:-1px;width:8px;height:8px;border-radius:50%;border:1.5px solid var(--white);background:#22c55e}
+.pw-thread-body{flex:1;min-width:0}
+.pw-thread-title{font-size:13px;font-weight:700;color:var(--ink);margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pw-thread-meta{font-size:11px;color:var(--light)}
+.pw-thread-right{display:flex;align-items:center;gap:14px;flex-shrink:0}
+.pw-thread-count{font-size:11px;color:var(--light);display:flex;align-items:center;gap:4px}
+.pw-thread-unread{font-size:10px;font-weight:700;background:var(--terra);color:white;padding:1px 6px;border-radius:10px}
+.pw-thread-chevron{color:var(--light);font-size:14px;transition:transform .2s}
+.pw-thread.open .pw-thread-chevron{transform:rotate(90deg)}
+.pw-replies{display:none;border-top:1px solid var(--cream-dark);background:var(--cream)}
+.pw-thread.open .pw-replies{display:block}
+.pw-reply{display:flex;gap:10px;padding:12px 16px;border-bottom:1px solid var(--cream-dark)}
+.pw-reply:last-of-type{border-bottom:none}
+.pw-reply-av{width:28px;height:28px;border-radius:7px;font-size:9px;font-weight:700;color:white;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;position:relative}
+.pw-reply-av-dot{position:absolute;bottom:-1px;right:-1px;width:7px;height:7px;border-radius:50%;border:1.5px solid var(--cream);background:#22c55e}
+.pw-reply-body{flex:1}
+.pw-reply-who{font-size:11px;font-weight:700;color:var(--ink);margin-bottom:3px;display:flex;align-items:center;gap:6px}
+.pw-reply-online{font-size:9px;font-weight:700;color:#15803d;background:#dcfce7;padding:1px 5px;border-radius:10px}
+.pw-reply-text{font-family:'Lora',serif;font-size:12px;color:var(--text-mid);font-style:italic;line-height:1.6}
+.pw-reply-time{font-size:10px;color:var(--light);margin-top:4px}
+.pw-reply-box{display:flex;gap:8px;padding:12px 16px;border-top:1px solid var(--cream-dark);background:var(--white)}
+.pw-reply-in{flex:1;border:1.5px solid var(--border-light);border-radius:8px;padding:8px 12px;font-size:12px;font-family:'Outfit',sans-serif;color:var(--ink);background:var(--cream);outline:none;transition:border-color .2s}
+.pw-reply-in:focus{border-color:var(--terra);background:var(--warm-white)}
+.pw-reply-send{background:var(--terra);color:white;border:none;padding:8px 14px;border-radius:7px;font-size:12px;font-weight:700;cursor:pointer;font-family:'Outfit',sans-serif;flex-shrink:0}
+.pw-reply-send:hover{background:#c04418}
+.pw-new-form{background:var(--white);border:1.5px solid var(--terra);border-radius:var(--r-lg);padding:20px;margin-bottom:14px;display:none;box-shadow:0 0 0 3px rgba(216,80,32,.08)}
+.pw-new-form.open{display:block}
 </style>
 </head>
 <body>
@@ -406,11 +441,161 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
     </div>
 
     <div class="pw-pane" id="pwpane-discussion">
-      <div class="pw-card" style="text-align:center;padding:40px">
-        <div style="font-size:28px;margin-bottom:10px">💬</div>
-        <div style="font-size:14px;font-weight:700;color:var(--ink);margin-bottom:4px">Discussion coming in Chunk 2</div>
-        <div style="font-family:'Lora',serif;font-size:12px;color:var(--light);font-style:italic">Threaded topics with replies</div>
+
+      <div class="pw-new-form" id="new-topic-form">
+        <div style="font-size:14px;font-weight:700;color:var(--ink);margin-bottom:14px">New discussion topic</div>
+        <div style="margin-bottom:12px">
+          <label style="font-size:11px;font-weight:700;color:var(--mid);display:block;margin-bottom:4px;letter-spacing:.04em">Topic title</label>
+          <input type="text" placeholder="e.g. Survey methodology — how should we collect data?" style="width:100%;border:1.5px solid var(--border-light);border-radius:7px;padding:9px 12px;font-size:13px;font-family:'Outfit',sans-serif;color:var(--ink);background:var(--cream);outline:none">
+        </div>
+        <div style="margin-bottom:14px">
+          <label style="font-size:11px;font-weight:700;color:var(--mid);display:block;margin-bottom:4px;letter-spacing:.04em">Opening message</label>
+          <textarea placeholder="Share your thoughts to start the discussion…" style="width:100%;border:1.5px solid var(--border-light);border-radius:7px;padding:9px 12px;font-size:13px;font-family:'Outfit',sans-serif;color:var(--ink);background:var(--cream);outline:none;resize:vertical;min-height:80px;line-height:1.5"></textarea>
+        </div>
+        <div style="display:flex;gap:8px;justify-content:flex-end">
+          <button onclick="toggleNewTopic()" style="background:none;border:1.5px solid var(--border-light);border-radius:7px;padding:7px 14px;font-size:12px;font-weight:600;cursor:pointer;font-family:'Outfit',sans-serif;color:var(--mid)">Cancel</button>
+          <button style="background:var(--terra);color:white;border:none;padding:7px 16px;border-radius:7px;font-size:12px;font-weight:700;cursor:pointer;font-family:'Outfit',sans-serif">Post topic →</button>
+        </div>
       </div>
+
+      <button class="pw-new-topic" onclick="toggleNewTopic()">
+        <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        Start a new topic
+      </button>
+
+      <div class="pw-thread pinned open" onclick="toggleThread(event,this)">
+        <div class="pw-thread-hd">
+          <div class="pw-thread-av" style="background:var(--terra)">SM<div class="pw-thread-av-dot"></div></div>
+          <div class="pw-thread-body">
+            <div class="pw-thread-title">📌 Survey methodology — how are we collecting data?</div>
+            <div class="pw-thread-meta">St. Mary's Parish · Started 3 days ago · Pinned</div>
+          </div>
+          <div class="pw-thread-right">
+            <span class="pw-thread-unread">2 new</span>
+            <span class="pw-thread-count">
+              <svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M2 3h12a1 1 0 011 1v7a1 1 0 01-1 1H4l-3 2V4a1 1 0 011-1z" stroke="currentColor" stroke-width="1.3"/></svg>
+              8
+            </span>
+            <span class="pw-thread-chevron">›</span>
+          </div>
+        </div>
+        <div class="pw-replies">
+          <div class="pw-reply">
+            <div class="pw-reply-av" style="background:#2a8a4a">HS<div class="pw-reply-av-dot"></div></div>
+            <div class="pw-reply-body">
+              <div class="pw-reply-who">Holy Spirit Parish, Accra <span class="pw-reply-online">Online</span></div>
+              <div class="pw-reply-text">We suggest a shared Google Form with anonymised parish IDs — we used this for our diocesan survey last year and it worked very well for cross-parish data collection.</div>
+              <div class="pw-reply-time">2 days ago</div>
+            </div>
+          </div>
+          <div class="pw-reply">
+            <div class="pw-reply-av" style="background:#534AB7">SB<div class="pw-reply-av-dot"></div></div>
+            <div class="pw-reply-body">
+              <div class="pw-reply-who">St. Benedek Parish, Budapest <span class="pw-reply-online">Online</span></div>
+              <div class="pw-reply-text">Agreed on anonymisation. We should also consider a short interview option for parishes who want to share more qualitative detail alongside the quantitative data.</div>
+              <div class="pw-reply-time">Yesterday</div>
+            </div>
+          </div>
+          <div class="pw-reply">
+            <div class="pw-reply-av" style="background:#185FA5">SS</div>
+            <div class="pw-reply-body">
+              <div class="pw-reply-who">St. Stanislaw Parish, Warsaw</div>
+              <div class="pw-reply-text">Could we also include a question about which cloud providers parishes currently use? That data would be very useful for the sovereignty analysis section.</div>
+              <div class="pw-reply-time">5 hours ago</div>
+            </div>
+          </div>
+          <div class="pw-reply-box">
+            <input class="pw-reply-in" type="text" placeholder="Reply to this topic…">
+            <button class="pw-reply-send">Post</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="pw-thread" onclick="toggleThread(event,this)">
+        <div class="pw-thread-hd">
+          <div class="pw-thread-av" style="background:#2a8a4a">HS</div>
+          <div class="pw-thread-body">
+            <div class="pw-thread-title">Our findings so far — Accra diocese digital policy</div>
+            <div class="pw-thread-meta">Holy Spirit Parish · 5 days ago</div>
+          </div>
+          <div class="pw-thread-right">
+            <span class="pw-thread-count">
+              <svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M2 3h12a1 1 0 011 1v7a1 1 0 01-1 1H4l-3 2V4a1 1 0 011-1z" stroke="currentColor" stroke-width="1.3"/></svg>
+              3
+            </span>
+            <span class="pw-thread-chevron">›</span>
+          </div>
+        </div>
+        <div class="pw-replies">
+          <div class="pw-reply">
+            <div class="pw-reply-av" style="background:#185FA5">SS</div>
+            <div class="pw-reply-body">
+              <div class="pw-reply-who">St. Stanislaw, Warsaw</div>
+              <div class="pw-reply-text">This is really helpful context. We have a similar policy document from our diocese — I can share it in the Resources tab.</div>
+              <div class="pw-reply-time">4 days ago</div>
+            </div>
+          </div>
+          <div class="pw-reply-box">
+            <input class="pw-reply-in" type="text" placeholder="Reply to this topic…">
+            <button class="pw-reply-send">Post</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="pw-thread" onclick="toggleThread(event,this)">
+        <div class="pw-thread-hd">
+          <div class="pw-thread-av" style="background:#185FA5">SS</div>
+          <div class="pw-thread-body">
+            <div class="pw-thread-title">Recruiting more parishes — which regions should we target next?</div>
+            <div class="pw-thread-meta">St. Stanislaw, Warsaw · 1 week ago</div>
+          </div>
+          <div class="pw-thread-right">
+            <span class="pw-thread-count">
+              <svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M2 3h12a1 1 0 011 1v7a1 1 0 01-1 1H4l-3 2V4a1 1 0 011-1z" stroke="currentColor" stroke-width="1.3"/></svg>
+              5
+            </span>
+            <span class="pw-thread-chevron">›</span>
+          </div>
+        </div>
+        <div class="pw-replies">
+          <div class="pw-reply">
+            <div class="pw-reply-av" style="background:#BA7517">SJ</div>
+            <div class="pw-reply-body">
+              <div class="pw-reply-who">San José Parish, Manila</div>
+              <div class="pw-reply-text">Southeast Asia is underrepresented. I know several parishes in the Philippines, Indonesia, and Vietnam who would be interested.</div>
+              <div class="pw-reply-time">6 days ago</div>
+            </div>
+          </div>
+          <div class="pw-reply-box">
+            <input class="pw-reply-in" type="text" placeholder="Reply to this topic…">
+            <button class="pw-reply-send">Post</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="pw-thread" onclick="toggleThread(event,this)">
+        <div class="pw-thread-hd">
+          <div class="pw-thread-av" style="background:#d85020">SM</div>
+          <div class="pw-thread-body">
+            <div class="pw-thread-title">Final report format — what should we produce?</div>
+            <div class="pw-thread-meta">St. Mary's Parish · 2 weeks ago</div>
+          </div>
+          <div class="pw-thread-right">
+            <span class="pw-thread-count">
+              <svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M2 3h12a1 1 0 011 1v7a1 1 0 01-1 1H4l-3 2V4a1 1 0 011-1z" stroke="currentColor" stroke-width="1.3"/></svg>
+              4
+            </span>
+            <span class="pw-thread-chevron">›</span>
+          </div>
+        </div>
+        <div class="pw-replies">
+          <div class="pw-reply-box">
+            <input class="pw-reply-in" type="text" placeholder="Reply to this topic…">
+            <button class="pw-reply-send">Post</button>
+          </div>
+        </div>
+      </div>
+
     </div>
 
     <div class="pw-pane" id="pwpane-resources">
@@ -483,6 +668,14 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
 </div>
 
 <script>
+function toggleThread(e, el) {
+  if(e.target.closest('.pw-reply-box') || e.target.closest('.pw-reply-send') || e.target.closest('.pw-reply-in')) return;
+  el.classList.toggle('open');
+}
+function toggleNewTopic() {
+  var form = document.getElementById('new-topic-form');
+  form.classList.toggle('open');
+}
 function pwShowTab(id) {
   document.querySelectorAll('.pw-pane').forEach(function(p){ p.classList.remove('on'); });
   document.querySelectorAll('.pw-tab').forEach(function(t){ t.classList.remove('on'); });
