@@ -218,6 +218,184 @@ a[data-contact]:hover{
 @media(max-width:968px){.footer-grid{grid-template-columns:1fr 1fr;gap:2rem;}}
 @media(max-width:568px){.footer-grid{grid-template-columns:1fr;}.footer-bottom{flex-direction:column;gap:.75rem;text-align:center;}.footer-bottom-links{flex-wrap:wrap;justify-content:center;}}
 
+
+/* ── CHUNK 1: CRITICAL MOBILE OVERFLOW FIXES ── */
+
+/* Global overflow prevention */
+html, body { overflow-x: hidden; max-width: 100%; }
+*, *::before, *::after { box-sizing: border-box; }
+.container { padding: 0 1.25rem; }
+
+/* NAV — fix overflow on small screens */
+@media(max-width:968px){
+  .nav-inner { padding: 0 1rem; gap: .5rem; }
+  .nav-logo { font-size: .95rem; gap: .5rem; }
+  .nav-logo .nav-crest { width: 30px; height: 30px; font-size: .75rem; flex-shrink: 0; }
+  .nav-cta { display: none; }
+}
+@media(max-width:480px){
+  .nav-logo span, .nav-logo > *:last-child { 
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 160px;
+  }
+}
+
+/* HERO — fix overflow */
+@media(max-width:768px){
+  .hero { min-height: 100svh; padding: 0; }
+  .hero .container { padding-left: 1.25rem; padding-right: 1.25rem; }
+  .hero-content { padding-top: 80px; padding-bottom: 100px; max-width: 100%; }
+  .hero h1 { font-size: clamp(1.65rem, 7vw, 2.25rem); }
+  .hero-subtitle { font-size: 1rem; }
+  .hero-ctas { flex-direction: column; gap: .75rem; }
+  .btn-primary, .btn-ghost { width: 100%; justify-content: center; padding: .875rem 1rem; }
+  .hero-stats { flex-direction: row; flex-wrap: wrap; gap: 1rem; }
+  .hero-stat { flex: 1; min-width: 80px; }
+  .hero-live-card { 
+    position: relative; 
+    margin: 1.5rem 1.25rem 0;
+    transform: none;
+    left: auto;
+    bottom: auto;
+    width: calc(100% - 2.5rem);
+    flex-wrap: wrap;
+  }
+}
+
+/* STAFF FEATURE — fix two-column grid on mobile */
+@media(max-width:968px){
+  .staff-feature { grid-template-columns: 1fr !important; }
+  .staff-feature .staff-photo { height: 220px !important; min-height: unset !important; }
+  .staff-feature .staff-body { padding: 1.5rem; }
+}
+
+/* CONTACT — fix form overflow */
+@media(max-width:968px){
+  .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .form-row { grid-template-columns: 1fr; }
+  .contact { padding: 3rem 1.25rem; }
+}
+@media(max-width:568px){
+  .contact-form { padding: 1.5rem 1.25rem; }
+}
+
+/* WELCOME SECTION */
+@media(max-width:968px){
+  .welcome-grid { grid-template-columns: 1fr; border-radius: 10px; }
+  .welcome-photo { min-height: 280px; }
+  .welcome-content { padding: 2rem 1.5rem; }
+}
+
+/* MEDIA SECTION */
+@media(max-width:968px){
+  .media-grid { grid-template-columns: 1fr; gap: 2rem; }
+}
+
+/* NEWSLETTER STRIP */
+@media(max-width:568px){
+  .newsletter-form { flex-direction: column; }
+  .newsletter-form input, .newsletter-form button { width: 100%; }
+}
+
+/* FOOTER */
+@media(max-width:968px){
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+  .site-footer { padding: 3rem 1.25rem 0; }
+}
+@media(max-width:568px){
+  .footer-grid { grid-template-columns: 1fr; }
+  .footer-bottom { flex-direction: column; gap: .75rem; text-align: center; }
+  .footer-bottom-links { flex-wrap: wrap; justify-content: center; }
+}
+
+/* INVOLVED PAGE */
+@media(max-width:768px){
+  .ministry-section { padding: 2.5rem 1.25rem; }
+  .ministry-section-inner { grid-template-columns: 1fr; gap: 1rem; }
+  .roles-grid { grid-template-columns: 1fr; }
+  .needs-grid { grid-template-columns: 1fr; }
+  .groups-list .group-card-header { flex-direction: column; align-items: flex-start; gap: .75rem; }
+}
+
+/* EVENTS PAGE */
+@media(max-width:768px){
+  .featured-inner { grid-template-columns: 1fr; }
+  .featured-img { min-height: 200px; }
+  .featured-body { padding: 1.5rem; }
+  .events-grid { grid-template-columns: 1fr; }
+}
+
+/* SACRAMENTS PAGE */
+@media(max-width:768px){
+  .sac-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .sacrament-nav-inner { padding: .5rem 1rem; }
+  .sac-tab { padding: .75rem 1rem; font-size: .75rem; }
+}
+
+/* RCIA PAGE */
+@media(max-width:768px){
+  .rcia-intro-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .journey-steps { grid-template-columns: 1fr 1fr; }
+  .faq-grid { grid-template-columns: 1fr; }
+  .register-form { padding: 1.5rem 1.25rem; }
+  .modal-form-row { grid-template-columns: 1fr; }
+}
+
+/* STAFF PAGE */
+@media(max-width:968px){
+  .staff-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media(max-width:568px){
+  .staff-grid { grid-template-columns: 1fr; }
+}
+
+/* ABOUT PAGE */
+@media(max-width:968px){
+  .history-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .values-grid { grid-template-columns: 1fr 1fr; }
+  .visit-grid { grid-template-columns: 1fr; gap: 2rem; }
+}
+@media(max-width:568px){
+  .values-grid { grid-template-columns: 1fr; }
+}
+
+/* BULLETIN PAGE */
+@media(max-width:768px){
+  .bulletin-current { grid-template-columns: 1fr; gap: 1.5rem; }
+  .archive-grid { grid-template-columns: 1fr; }
+}
+
+/* MODAL */
+@media(max-width:568px){
+  .modal-box { border-radius: 10px; margin: .5rem; max-height: 95vh; }
+  .modal-header { padding: 1.25rem 1.25rem 0; }
+  .modal-body { padding: 1.25rem; }
+  .modal-form-row { grid-template-columns: 1fr; }
+}
+
+/* GIVING SECTION */
+@media(max-width:568px){
+  .amount-grid { gap: .5rem; }
+  .amount-btn { padding: .5rem .75rem; font-size: .85rem; }
+  .giving-trust { flex-direction: column; gap: .5rem; align-items: center; }
+}
+
+/* MASS TIMES */
+@media(max-width:768px){
+  .mass-times { padding: 4rem 1.25rem 2.5rem; }
+  .mass-grid { grid-template-columns: 1fr; }
+}
+
+/* GENERAL SECTION PADDING ON MOBILE */
+@media(max-width:768px){
+  .events, .giving, .involved, .welcome, .media, .newsletter,
+  .staff-section, .rcia-journey, .rcia-faq, .values, .history,
+  .volunteer, .intro, .ministries { padding: 3rem 1.25rem; }
+  section.page-hero, .page-hero { padding: 7rem 1.25rem 3rem; }
+}
+
 </style>
 </head>
 <body>
