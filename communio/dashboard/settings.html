@@ -135,21 +135,21 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
       <div class="settings-panel">
         <div class="sp-title">Parish profile</div>
         <div class="sp-sub">This information appears on your public Communio profile</div>
-        <div class="form-group"><label class="form-label">Parish name</label><input class="form-input" type="text" value="St. Mary's Parish"></div>
+        <div class="form-group"><label class="form-label">Parish name</label><input class="form-input" type="text" id="pd_name" value="St. Mary's Parish"></div>
         <div class="form-row">
-          <div class="form-group"><label class="form-label">City</label><input class="form-input" type="text" value="New York"><!-- SOURCE: $parish->city → profile p-loc, website --></div>
+          <div class="form-group"><label class="form-label">City</label><input class="form-input" type="text" id="pd_city" value="New York"><!-- SOURCE: $parish->city → profile p-loc, website --></div>
           <div class="form-group"><label class="form-label">Country</label><select class="form-select"><option>United States</option><option>Hungary</option><option>Ghana</option></select></div>
         </div>
         <div class="form-group"><label class="form-label">Description</label><textarea class="form-textarea">St. Mary's Parish has been serving the Lower East Side community since 1887. We are a vibrant, multicultural congregation of over 1,200 families, committed to social justice, youth ministry, and ethical technology advocacy.</textarea></div>
         <div class="form-row">
-          <div class="form-group"><label class="form-label">Contact person</label><input class="form-input" type="text" value="Fr. James O'Brien"><!-- SOURCE: $parish->contact_name → profile ct-row --></div>
+          <div class="form-group"><label class="form-label">Contact person</label><input class="form-input" type="text" id="pd_pastor" value="Fr. James O'Brien"><!-- SOURCE: $parish->contact_name → profile ct-row --></div>
           <div class="form-group"><label class="form-label">Role</label><select class="form-select"><option>Pastor / Parish Priest</option><option>Administrator</option></select></div>
         </div>
         <div class="form-row">
-          <div class="form-group"><label class="form-label">Public email</label><input class="form-input" type="email" value="info@stmarysnyc.org"><!-- SOURCE: $parish->email → profile ct-row, website contact --></div>
-          <div class="form-group"><label class="form-label">Phone</label><input class="form-input" type="tel" value="+1 (212) 555-0182"><!-- SOURCE: $parish->phone → profile ct-row, website contact --></div>
+          <div class="form-group"><label class="form-label">Public email</label><input class="form-input" type="email" id="pd_email" value="info@stmarysnyc.org"><!-- SOURCE: $parish->email → profile ct-row, website contact --></div>
+          <div class="form-group"><label class="form-label">Phone</label><input class="form-input" type="tel" id="pd_phone" value="+1 (212) 555-0182"><!-- SOURCE: $parish->phone → profile ct-row, website contact --></div>
         </div>
-        <div class="form-group"><label class="form-label">Address</label><input class="form-input" type="text" value="15 Mott Street, New York, NY 10013"><!-- SOURCE: $parish->address → profile ct-row, website contact --></div>
+        <div class="form-group"><label class="form-label">Address</label><input class="form-input" type="text" id="pd_address" value="15 Mott Street, New York, NY 10013"><!-- SOURCE: $parish->address → profile ct-row, website contact --></div>
         <div class="form-group">
           <label class="form-label">Focus areas<!-- SOURCE: $parish->tags → profile p-tags, website --></label>
           <div class="focus-tags">
@@ -190,6 +190,44 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
   b.addEventListener('click',function(){m.classList.toggle('open');});
   document.addEventListener('click',function(e){
     if(!b.contains(e.target)&&!m.contains(e.target))m.classList.remove('open');
+  });
+})();
+</script>
+
+<script>
+(function(){
+  var FIELDS = ['name','city','pastor','email','phone','address',
+    'massWeekday','massSaturday','massSunday','confession',
+    'officeWeekday','officeSaturday','officeSunday',
+    'socialFacebook','socialInstagram','socialYoutube','givingUrl'];
+
+  function loadForm(){
+    try{
+      var stored = localStorage.getItem('parish_data');
+      if(!stored) return;
+      var data = JSON.parse(stored);
+      FIELDS.forEach(function(key){
+        var el = document.getElementById('pd_' + key);
+        if(el && data[key] !== undefined) el.value = data[key];
+      });
+    }catch(e){}
+  }
+
+  function saveForm(){
+    var data = {};
+    FIELDS.forEach(function(key){
+      var el = document.getElementById('pd_' + key);
+      if(el) data[key] = el.value.trim();
+    });
+    localStorage.setItem('parish_data', JSON.stringify(data));
+    var s = document.getElementById('saveStatus');
+    if(s){ s.textContent = '✓ Saved — website updated'; setTimeout(function(){ s.textContent=''; },3000); }
+  }
+
+  document.addEventListener('DOMContentLoaded', function(){
+    loadForm();
+    var btn = document.getElementById('saveParishData');
+    if(btn) btn.addEventListener('click', saveForm);
   });
 })();
 </script>
