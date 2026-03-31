@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Project Workspace — Communio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Lora:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../communio.css">
+<style>
+/* ── LAYOUT SHELL ── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-webkit-font-smoothing:antialiased}
+
+/* ── TOP NAV ── */
+.top-nav{position:fixed;top:0;left:0;right:0;z-index:300;height:52px;background:var(--ink);border-bottom:1px solid rgba(255,255,255,0.06);display:flex;align-items:center;padding:0 20px;gap:0}
+.nav-brand{display:flex;align-items:center;gap:8px;text-decoration:none;width:220px;flex-shrink:0}
+.nav-mark{width:28px;height:28px;background:var(--terra);border-radius:6px;display:flex;align-items:center;justify-content:center}
+.nav-mark svg{width:14px;height:14px}
+.nav-wm{font-size:16px;font-weight:800;color:var(--white);letter-spacing:-.02em}
+.nav-wm span{color:var(--terra)}
+.nav-right{margin-left:auto;display:flex;align-items:center;gap:10px}
+.nav-notif{width:34px;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.5);text-decoration:none;position:relative;transition:color .2s}
+.nav-notif:hover{color:white;background:rgba(255,255,255,.06)}
+.nav-notif svg{width:17px;height:17px}
+.notif-dot{position:absolute;top:7px;right:7px;width:7px;height:7px;background:var(--terra);border-radius:50%;border:1.5px solid var(--ink)}
+.nav-pill{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:4px 12px 4px 4px;text-decoration:none;transition:all .2s}
+.nav-pill:hover{background:rgba(255,255,255,.12)}
+.nav-av{width:26px;height:26px;background:var(--terra);border-radius:50%;font-size:10px;font-weight:700;color:white;display:flex;align-items:center;justify-content:center}
+.nav-pname{font-size:13px;font-weight:600;color:var(--white)}
+
+/* ── SIDEBAR ── */
+.sidebar{position:fixed;top:52px;left:0;bottom:0;width:220px;background:var(--white);border-right:1px solid var(--border-light);display:flex;flex-direction:column;overflow-y:auto;z-index:200}
+.sb-parish{padding:18px 16px;border-bottom:1px solid var(--border-light);display:flex;flex-direction:column;align-items:flex-start;gap:3px}
+.sb-av{width:38px;height:38px;background:var(--terra);border-radius:9px;font-size:13px;font-weight:800;color:white;display:flex;align-items:center;justify-content:center;margin-bottom:6px}
+.sb-name{font-size:13px;font-weight:700;color:var(--ink);line-height:1.2}
+.sb-loc{font-size:11px;color:var(--light)}
+.sb-nav{flex:1;padding:10px 8px}
+.sb-sec{font-size:10px;font-weight:700;color:var(--light);text-transform:uppercase;letter-spacing:.08em;padding:12px 8px 6px}
+.sb-item{display:flex;align-items:center;gap:9px;padding:8px 10px;border-radius:8px;text-decoration:none;color:var(--text-mid);font-size:13px;font-weight:500;transition:all .18s;position:relative;margin-bottom:1px}
+.sb-item svg{width:15px;height:15px;flex-shrink:0;opacity:.6}
+.sb-item:hover{background:var(--cream);color:var(--ink)}
+.sb-item:hover svg{opacity:1}
+.sb-item.active{background:var(--terra-pale);color:var(--terra);font-weight:600}
+.sb-item.active svg{opacity:1;color:var(--terra)}
+.sb-item.active::before{content:'';position:absolute;left:0;top:4px;bottom:4px;width:3px;background:var(--terra);border-radius:0 3px 3px 0}
+.sb-badge{margin-left:auto;background:var(--terra);color:white;font-size:10px;font-weight:700;padding:1px 6px;border-radius:10px;min-width:18px;text-align:center}
+.sb-badge-sage{background:var(--sage)}
+.sb-foot{padding:12px 16px;border-top:1px solid var(--border-light)}
+.sb-foot a{font-size:12px;color:var(--light);text-decoration:none;display:flex;align-items:center;gap:6px}
+.sb-foot a:hover{color:var(--ink)}
+.sb-foot svg{width:13px;height:13px}
+
+/* ── PAGE SHELL ── */
+.page-shell{margin-left:220px;padding-top:52px;min-height:100vh}
+.page-inner{max-width:1060px;margin:0 auto;padding:32px 28px}
+
+/* ── PAGE HEADER ── */
+.pg-hd{margin-bottom:28px}
+.pg-greeting{font-size:26px;font-weight:800;color:var(--ink);letter-spacing:-.03em;line-height:1.1}
+.pg-greeting em{font-family:'Lora',serif;font-style:italic;font-weight:400;color:var(--terra)}
+.pg-sub{font-size:13px;color:var(--light);margin-top:4px}
+
+/* ── SETUP BANNER ── */
+.setup-banner{background:var(--white);border:1px solid var(--border-light);border-left:4px solid var(--terra);border-radius:var(--r-lg);padding:16px 20px;display:flex;align-items:center;gap:16px;margin-bottom:24px;box-shadow:var(--sh-sm)}
+.setup-text{flex:1}
+.setup-title{font-size:14px;font-weight:700;color:var(--ink);margin-bottom:2px}
+.setup-sub{font-size:12px;color:var(--light)}
+.setup-bar{height:4px;background:var(--cream-dark);border-radius:4px;margin-top:8px;overflow:hidden}
+.setup-fill{height:100%;width:60%;background:var(--terra);border-radius:4px}
+
+/* ── MAIN GRID ── */
+.home-grid{display:grid;grid-template-columns:1fr 280px;gap:22px;align-items:start}
+
+/* ── STAT CARDS ── */
+.stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:22px}
+.sc{background:var(--white);border:1px solid var(--border-light);border-radius:var(--r-lg);padding:18px 20px;box-shadow:var(--sh-sm);position:relative;overflow:hidden}
+.sc::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;border-radius:3px 0 0 3px}
+.sc-terra::before{background:var(--terra)}
+.sc-sage::before{background:var(--sage)}
+.sc-amber::before{background:var(--amber)}
+.sc-ink::before{background:var(--ink)}
+.sc-val{font-size:26px;font-weight:800;color:var(--ink);letter-spacing:-.035em;line-height:1}
+.sc-lbl{font-family:'Lora',serif;font-size:12px;color:var(--light);margin-top:3px;font-style:italic}
+.sc-delta{font-size:11px;font-weight:600;margin-top:8px;display:inline-flex;align-items:center;gap:3px}
+.sc-delta.up{color:var(--sage)}
+.sc-delta.new{color:var(--terra)}
+
+/* ── CHART CARD ── */
+.chart-card{background:var(--white);border:1px solid var(--border-light);border-radius:var(--r-lg);padding:22px;margin-bottom:22px;box-shadow:var(--sh-sm)}
+.chart-hd{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:20px}
+.chart-title{font-size:14px;font-weight:700;color:var(--ink)}
+.chart-range{font-size:11px;color:var(--light)}
+.chart-total{font-size:20px;font-weight:800;color:var(--ink);letter-spacing:-.03em}
+.chart-total span{font-family:'Lora',serif;font-size:12px;font-weight:400;color:var(--light);font-style:italic;margin-left:4px}
+.bar-chart{display:flex;align-items:flex-end;gap:8px;height:100px}
+.bar-col{flex:1;display:flex;flex-direction:column;align-items:center;gap:5px}
+.bar-amt{font-size:10px;color:var(--light);font-weight:500}
+.bar-fill{width:100%;border-radius:4px 4px 0 0;background:var(--terra-pale);transition:.3s}
+.bar-fill.current{background:var(--terra)}
+.bar-lbl{font-size:10px;color:var(--light)}
+
+/* ── ACTIVITY FEED ── */
+.section-title{font-size:11px;font-weight:700;color:var(--light);text-transform:uppercase;letter-spacing:.08em;margin-bottom:12px}
+.act-item{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid var(--border-light)}
+.act-item:last-child{border-bottom:none}
+.act-dot{width:34px;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;background:var(--cream)}
+.act-body{flex:1}
+.act-title{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:1px}
+.act-sub{font-family:'Lora',serif;font-size:12px;color:var(--light);font-style:italic}
+.act-time{font-size:11px;color:var(--light);margin-top:3px}
+.act-wrap{background:var(--white);border:1px solid var(--border-light);border-radius:var(--r-lg);padding:16px 20px;box-shadow:var(--sh-sm)}
+
+/* ── SIDEBAR CARDS ── */
+.sb-card{background:var(--white);border:1px solid var(--border-light);border-radius:var(--r-lg);padding:18px;box-shadow:var(--sh-sm);margin-bottom:14px}
+.sb-card-title{font-size:11px;font-weight:700;color:var(--light);text-transform:uppercase;letter-spacing:.07em;margin-bottom:12px}
+.profile-preview{display:flex;gap:10px;align-items:center;margin-bottom:10px}
+.pp-av{width:40px;height:40px;background:var(--terra);border-radius:9px;font-size:13px;font-weight:800;color:white;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.pp-name{font-size:13px;font-weight:700;color:var(--ink)}
+.pp-url{font-size:11px;color:var(--light)}
+.pp-tags{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:10px}
+.pp-meta{font-family:'Lora',serif;font-size:12px;color:var(--text-mid);font-style:italic;margin-bottom:12px;line-height:1.4}
+.notif-item{display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--border-light)}
+.notif-item:last-child{border-bottom:none}
+.ni-av{width:28px;height:28px;border-radius:6px;flex-shrink:0;font-size:9px;font-weight:700;color:white;display:flex;align-items:center;justify-content:center}
+.ni-text{font-size:12px;color:var(--ink);line-height:1.35}
+.ni-time{font-size:10px;color:var(--light);margin-top:2px}
+.cta-strip{background:var(--ink);border-radius:var(--r-lg);padding:16px;margin-bottom:14px}
+.cta-strip-title{font-size:13px;font-weight:700;color:var(--white);margin-bottom:3px}
+.cta-strip-sub{font-family:'Lora',serif;font-size:12px;color:rgba(255,253,245,.45);font-style:italic;margin-bottom:12px;line-height:1.4}
+
+@media(max-width:900px){
+  .home-grid{grid-template-columns:1fr}
+  .stat-row{grid-template-columns:1fr 1fr}
+  .sidebar{display:none}
+  .page-shell{margin-left:0}
+}
+</style>
+</head>
+<body>
+
+<!-- TOP NAV -->
+<nav class="top-nav">
+  <a href="../index.html" class="nav-brand">
+    <div class="nav-mark">
+      <svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="3" fill="white"/><path d="M8 1v3M8 12v3M1 8h3M12 8h3" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg>
+    </div>
+    <div class="nav-wm">Commun<span>io</span></div>
+  </a>
+  <div class="nav-right">
+    <a href="messages.html" class="nav-notif">
+      <svg viewBox="0 0 16 16" fill="none"><path d="M13 5.5a5 5 0 10-9.9 1L2 12h12l-1.1-5.5z" stroke="currentColor" stroke-width="1.3"/><path d="M6.5 12.5a1.5 1.5 0 003 0" stroke="currentColor" stroke-width="1.3"/></svg>
+      <div class="notif-dot"></div>
+    </a>
+    <a href="../parish/profile.html" class="nav-pill">
+      <div class="nav-av">SM</div>
+      <!-- <?php echo $parish->short_name ?> -->
+      <span class="nav-pname">St. Mary's</span>
+    </a>
+    <button class="nav-burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="nav-mobile" id="navMobile">
+<a href="home.html">Home</a>
+<a href="messages.html">Messages</a>
+<a href="network.html">Network</a>
+<a href="../parish/profile.html">My Profile</a>
+<a href="projects.html">Projects</a>
+<a href="website.html">Website</a>
+<a href="donations.html">Donations</a>
+<a href="settings.html">Settings</a>
+
+</div>
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <div class="sb-parish">
+    <!-- <?php echo $parish->avatar, $parish->name, $parish->location ?> -->
+    <div class="sb-av">SM</div>
+    <div class="sb-name">St. Mary's Parish</div>
+    <div class="sb-loc">🇺🇸 New York, USA</div>
+  </div>
+  <nav class="sb-nav">
+    <div class="sb-sec">Parish</div>
+    <a href="home.html" class="sb-item">
+      <svg viewBox="0 0 16 16" fill="none"><path d="M2 7l6-5 6 5v7H10V9H6v5H2V7z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>
+      <span class="sb-item-lbl">Home</span>
+    </a>
+    <a href="messages.html" class="sb-item">
+      <svg viewBox="0 0 16 16" fill="none"><path d="M2 3h12a1 1 0 011 1v7a1 1 0 01-1 1H4l-3 2V4a1 1 0 011-1z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>
+      <span class="sb-item-lbl">Messages</span>
+      <!-- <?php if ($unread > 0): ?> -->
+      <span class="sb-badge">3</span>
+      <!-- <?php endif ?> -->
+    </a>
+    <a href="network.html" class="sb-item">
+      <svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="2.5" stroke="currentColor" stroke-width="1.3"/><circle cx="2.5" cy="3" r="1.5" stroke="currentColor" stroke-width="1.2"/><circle cx="13.5" cy="3" r="1.5" stroke="currentColor" stroke-width="1.2"/><circle cx="8" cy="14" r="1.5" stroke="currentColor" stroke-width="1.2"/><path d="M4 4l2.5 2.5M12 4l-2.5 2.5M8 10.5V12.5" stroke="currentColor" stroke-width="1.2"/></svg>
+      <span class="sb-item-lbl">Network</span>
+    </a>
+    <a href="../parish/profile.html" class="sb-item">
+      <svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="5" r="3" stroke="currentColor" stroke-width="1.3"/><path d="M2 14c0-3.3 2.7-6 6-6s6 2.7 6 6" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+      <span class="sb-item-lbl">My Profile</span>
+    </a>
+    <a href="projects.html" class="sb-item active">
+      <svg viewBox="0 0 16 16" fill="none"><rect x="2" y="2" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.3"/><rect x="9" y="2" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.3"/><rect x="2" y="9" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.3"/><rect x="9" y="9" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.3"/></svg>
+      <span class="sb-item-lbl">Projects</span>
+    </a>
+    <div class="sb-sec">Manage</div>
+    <a href="website.html" class="sb-item">
+      <svg viewBox="0 0 16 16" fill="none"><rect x="1.5" y="3" width="13" height="10" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M1.5 6h13" stroke="currentColor" stroke-width="1.3"/></svg>
+      <span class="sb-item-lbl">Website</span>
+      <span class="sb-badge sb-badge-sage" style="font-size:9px;padding:1px 5px">Live</span>
+    </a>
+    <a href="donations.html" class="sb-item">
+      <svg viewBox="0 0 16 16" fill="none"><path d="M8 13.5C4 11 1.5 8.5 1.5 5.5a3 3 0 015-2.2A3 3 0 018 4a3 3 0 015 2.5c0 1-.4 2-1 2.8" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><path d="M8 9v5M6 12h4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+      <span class="sb-item-lbl">Donations</span>
+    </a>
+    <a href="settings.html" class="sb-item">
+      <svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="2" stroke="currentColor" stroke-width="1.3"/><path d="M8 1v2M8 13v2M1 8h2M13 8h2M3.1 3.1l1.4 1.4M11.5 11.5l1.4 1.4M3.1 12.9l1.4-1.4M11.5 4.5l1.4-1.4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+      <span class="sb-item-lbl">Settings</span>
+    </a>
+    
+  </nav>
+  <div class="sb-foot">
+    <a href="settings.html">
+      <svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="2" stroke="currentColor" stroke-width="1.3"/><path d="M8 1v2M8 13v2M1 8h2M13 8h2" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+      Settings →
+    </a>
+  </div>
+</aside>
+
+<!-- PAGE CONTENT -->
+<div class="page-shell">
+  <div class="page-inner" style="padding:0;max-width:none">
+
+<style>
+@keyframes pwpulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.6;transform:scale(.85)}}
+.pw-header{background:var(--white);border-bottom:1px solid var(--border-light);padding:20px 28px;position:sticky;top:52px;z-index:100}
+.pw-back{font-size:12px;color:var(--light);cursor:pointer;display:inline-flex;align-items:center;gap:5px;margin-bottom:14px;font-weight:600;text-decoration:none;transition:color .15s}
+.pw-back:hover{color:var(--terra)}
+.pw-title-row{display:flex;align-items:flex-start;gap:14px;margin-bottom:14px}
+.pw-type-bar{width:5px;min-height:70px;border-radius:3px;flex-shrink:0;margin-top:3px}
+.pw-meta-row{display:flex;align-items:center;gap:8px;margin-bottom:6px;flex-wrap:wrap}
+.pw-badge{font-size:10px;font-weight:700;padding:2px 9px;border-radius:20px;text-transform:uppercase;letter-spacing:.05em}
+.pw-status{font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px;background:#e6f4eb;color:#1a6b2a}
+.pw-created{font-size:10px;color:var(--light)}
+.pw-title{font-size:20px;font-weight:800;color:var(--ink);letter-spacing:-.03em;line-height:1.2;margin-bottom:5px}
+.pw-desc{font-family:'Lora',serif;font-size:13px;color:var(--text-mid);font-style:italic;line-height:1.55}
+.pw-stats-row{display:flex;align-items:center;gap:16px;margin-top:8px;flex-wrap:wrap}
+.pw-stat{font-size:12px;color:var(--text-mid)}
+.pw-stat strong{color:var(--ink);font-weight:700}
+.pw-prog-mini{display:flex;align-items:center;gap:8px}
+.pw-prog-track{width:120px;height:5px;background:var(--cream-dark);border-radius:5px;overflow:hidden}
+.pw-prog-fill{height:100%;border-radius:5px}
+.pw-actions{display:flex;gap:8px;margin-left:auto;flex-shrink:0;align-self:flex-start;margin-top:3px}
+.pw-presence{display:flex;align-items:center;gap:12px;padding:10px 14px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px}
+.pw-pulse{width:7px;height:7px;border-radius:50%;background:#22c55e;animation:pwpulse 2s infinite;flex-shrink:0}
+.pw-online-lbl{font-size:11px;font-weight:700;color:#15803d;white-space:nowrap}
+.pw-avs{display:flex;align-items:center}
+.pw-av{width:26px;height:26px;border-radius:7px;font-size:9px;font-weight:700;color:white;display:flex;align-items:center;justify-content:center;margin-left:-5px;border:2px solid white;position:relative;cursor:pointer;flex-shrink:0;transition:transform .15s}
+.pw-av:first-child{margin-left:0}
+.pw-av:hover{transform:translateY(-2px);z-index:2}
+.pw-av-dot{position:absolute;bottom:-1px;right:-1px;width:7px;height:7px;border-radius:50%;border:1.5px solid white}
+.pw-members-btn{margin-left:auto;background:none;border:1.5px solid #bbf7d0;border-radius:6px;padding:4px 11px;font-size:11px;font-weight:700;color:#15803d;cursor:pointer;font-family:'Outfit',sans-serif;white-space:nowrap;transition:all .15s}
+.pw-members-btn:hover{background:#dcfce7}
+.pw-tabs{display:flex;background:var(--white);border-bottom:2px solid var(--border-light);padding:0 28px}
+.pw-tab{font-size:13px;font-weight:600;color:var(--light);background:none;border:none;padding:10px 18px 12px;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;font-family:'Outfit',sans-serif;transition:color .18s;display:flex;align-items:center;gap:5px;white-space:nowrap}
+.pw-tab:hover{color:var(--ink)}.pw-tab.on{color:var(--terra);border-bottom-color:var(--terra)}
+.pw-tab-count{background:var(--cream-dark);color:var(--mid);font-size:10px;font-weight:700;padding:1px 5px;border-radius:10px}
+.pw-body{display:grid;grid-template-columns:1fr 270px;gap:0;min-height:calc(100vh - 280px)}
+.pw-main{padding:24px 28px;border-right:1px solid var(--border-light)}
+.pw-side{padding:20px 20px;background:var(--cream)}
+.pw-pane{display:none}.pw-pane.on{display:block}
+.pw-card{background:var(--white);border:1px solid var(--border-light);border-radius:var(--r-lg);padding:18px;margin-bottom:14px;box-shadow:var(--sh-sm)}
+.pw-card-title{font-size:11px;font-weight:700;color:var(--ink);text-transform:uppercase;letter-spacing:.07em;margin-bottom:14px}
+.pw-act-row{display:flex;gap:10px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--cream-dark)}
+.pw-act-row:last-child{border-bottom:none}
+.pw-act-av{width:30px;height:30px;border-radius:8px;font-size:9px;font-weight:700;color:white;display:flex;align-items:center;justify-content:center;flex-shrink:0;position:relative}
+.pw-act-dot{position:absolute;bottom:-2px;right:-2px;width:8px;height:8px;border-radius:50%;border:1.5px solid white;background:#22c55e}
+.pw-act-body{flex:1}
+.pw-act-title{font-size:12px;font-weight:600;color:var(--ink);margin-bottom:2px;line-height:1.4}
+.pw-act-meta{font-size:11px;color:var(--light)}
+.pw-act-online{color:#22c55e;font-weight:600}
+.pw-about-text{font-family:'Lora',serif;font-size:13px;color:var(--text-mid);font-style:italic;line-height:1.7;margin-bottom:16px}
+.pw-goal-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.pw-goal-box{background:var(--cream);border-radius:8px;padding:12px;text-align:center}
+.pw-goal-val{font-size:20px;font-weight:800;color:var(--ink);letter-spacing:-.03em;line-height:1}
+.pw-goal-lbl{font-family:'Lora',serif;font-size:11px;color:var(--light);font-style:italic;margin-top:3px}
+.pw-side-card{background:var(--white);border:1px solid var(--border-light);border-radius:var(--r-lg);padding:14px;margin-bottom:12px;box-shadow:var(--sh-sm)}
+.pw-side-title{font-size:11px;font-weight:700;color:var(--ink);text-transform:uppercase;letter-spacing:.07em;margin-bottom:10px}
+.pw-online-card{background:var(--white);border:1px solid #bbf7d0;border-radius:var(--r-lg);padding:14px;margin-bottom:12px;box-shadow:var(--sh-sm)}
+.pw-online-hd{display:flex;align-items:center;gap:6px;margin-bottom:10px}
+.pw-online-title{font-size:11px;font-weight:700;color:#15803d;text-transform:uppercase;letter-spacing:.06em}
+.pw-online-count{font-size:10px;font-weight:700;background:#dcfce7;color:#15803d;padding:1px 6px;border-radius:10px;margin-left:auto}
+.pw-om{display:flex;align-items:center;gap:9px;padding:7px 0;border-bottom:1px solid var(--cream-dark);cursor:pointer}
+.pw-om:last-of-type{border-bottom:none;padding-bottom:0}
+.pw-om-av{position:relative;flex-shrink:0}
+.pw-om-inner{width:28px;height:28px;border-radius:7px;font-size:9px;font-weight:700;color:white;display:flex;align-items:center;justify-content:center}
+.pw-om-dot{position:absolute;bottom:-1px;right:-1px;width:8px;height:8px;border-radius:50%;border:1.5px solid white;background:#22c55e}
+.pw-om-name{font-size:12px;font-weight:600;color:var(--ink);flex:1}
+.pw-om-status{font-size:10px;color:#15803d}
+.pw-chat-btn{background:var(--terra);color:white;border:none;padding:4px 9px;border-radius:5px;font-size:10px;font-weight:700;cursor:pointer;font-family:'Outfit',sans-serif;opacity:0;transition:opacity .15s;flex-shrink:0}
+.pw-om:hover .pw-chat-btn{opacity:1}
+.pw-qs-row{display:flex;justify-content:space-between;font-size:12px;padding:5px 0;border-bottom:1px solid var(--cream-dark)}
+.pw-qs-row:last-child{border-bottom:none}
+.pw-qs-lbl{color:var(--text-mid)}.pw-qs-val{font-weight:700;color:var(--ink)}
+@media(max-width:900px){.pw-body{grid-template-columns:1fr}.pw-side{display:none}}
+</style>
+
+<div class="pw-header">
+  <a href="projects.html" class="pw-back">
+    <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    Back to projects
+  </a>
+  <div class="pw-title-row">
+    <div class="pw-type-bar" id="pw-type-bar" style="background:#185FA5"></div>
+    <div style="flex:1">
+      <div class="pw-meta-row">
+        <span class="pw-badge" id="pw-badge" style="background:#E6F1FB;color:#0C447C">Research</span>
+        <span class="pw-status">Open</span>
+        <span class="pw-created">Created by you · 14 Jan 2026</span>
+      </div>
+      <div class="pw-title" id="pw-title">Digital Sovereignty &amp; Parish Life Study</div>
+      <div class="pw-desc" id="pw-desc">Research project studying how parishes can maintain digital sovereignty while engaging with modern technology and digital platforms.</div>
+      <div class="pw-stats-row">
+        <span class="pw-stat"><strong>28</strong> parishes</span>
+        <span class="pw-stat"><strong>14</strong> countries</span>
+        <span class="pw-stat"><strong>50</strong> target</span>
+        <div class="pw-prog-mini">
+          <div class="pw-prog-track"><div class="pw-prog-fill" style="width:56%;background:#185FA5"></div></div>
+          <span style="font-size:11px;color:var(--light)">56%</span>
+        </div>
+      </div>
+    </div>
+    <div class="pw-actions">
+      <button class="btn btn-primary btn-sm">+ Invite parishes</button>
+      <button class="btn btn-secondary btn-sm">Share link</button>
+      <button class="btn btn-secondary btn-sm">Edit</button>
+    </div>
+  </div>
+  <div class="pw-presence">
+    <div class="pw-pulse"></div>
+    <span class="pw-online-lbl">3 parishes online now</span>
+    <div class="pw-avs">
+      <div class="pw-av" style="background:#2a8a4a" title="Holy Spirit, Accra — Active now">HS<div class="pw-av-dot" style="background:#22c55e"></div></div>
+      <div class="pw-av" style="background:#534AB7" title="St. Benedek, Budapest — Active now">SB<div class="pw-av-dot" style="background:#22c55e"></div></div>
+      <div class="pw-av" style="background:#185FA5" title="St. Stanislaw, Warsaw — Away 5m">SS<div class="pw-av-dot" style="background:#f59e0b"></div></div>
+    </div>
+    <button class="pw-members-btn" onclick="pwShowTab('members')">See all members →</button>
+  </div>
+</div>
+
+<div class="pw-tabs">
+  <button class="pw-tab on" onclick="pwShowTab('overview')">Overview</button>
+  <button class="pw-tab" onclick="pwShowTab('discussion')">Discussion <span class="pw-tab-count">7</span></button>
+  <button class="pw-tab" onclick="pwShowTab('resources')">Resources <span class="pw-tab-count">4</span></button>
+  <button class="pw-tab" onclick="pwShowTab('members')">Members <span class="pw-tab-count">28</span></button>
+  <button class="pw-tab" onclick="pwShowTab('type')">Research data</button>
+</div>
+
+<div class="pw-body">
+  <div class="pw-main">
+
+    <div class="pw-pane on" id="pwpane-overview">
+      <div class="pw-card">
+        <div class="pw-card-title">About this project</div>
+        <div class="pw-about-text">This study examines how parishes globally are navigating digital sovereignty — maintaining control of their data, communications, and digital identity while adopting modern technology tools. Findings will be published as an open report available to all Communio parishes.</div>
+        <div class="pw-goal-grid">
+          <div class="pw-goal-box"><div class="pw-goal-val">28</div><div class="pw-goal-lbl">Parishes enrolled</div></div>
+          <div class="pw-goal-box"><div class="pw-goal-val">14</div><div class="pw-goal-lbl">Countries</div></div>
+          <div class="pw-goal-box"><div class="pw-goal-val" style="color:#185FA5">56%</div><div class="pw-goal-lbl">To target</div></div>
+        </div>
+      </div>
+      <div class="pw-card">
+        <div class="pw-card-title">Recent activity</div>
+        <div class="pw-act-row">
+          <div class="pw-act-av" style="background:#2a8a4a">HS<div class="pw-act-dot"></div></div>
+          <div class="pw-act-body">
+            <div class="pw-act-title">Holy Spirit Parish replied to <em style="color:var(--terra)">Survey methodology</em></div>
+            <div class="pw-act-meta">Accra, Ghana · 12 minutes ago · <span class="pw-act-online">Online now</span></div>
+          </div>
+        </div>
+        <div class="pw-act-row">
+          <div class="pw-act-av" style="background:#534AB7">SB<div class="pw-act-dot"></div></div>
+          <div class="pw-act-body">
+            <div class="pw-act-title">St. Benedek uploaded <em style="color:var(--terra)">Survey Template v1.xlsx</em></div>
+            <div class="pw-act-meta">Budapest, Hungary · 2 hours ago · <span class="pw-act-online">Online now</span></div>
+          </div>
+        </div>
+        <div class="pw-act-row">
+          <div class="pw-act-av" style="background:#BA7517">SJ</div>
+          <div class="pw-act-body">
+            <div class="pw-act-title">San José Parish joined the project</div>
+            <div class="pw-act-meta">Manila, Philippines · Yesterday</div>
+          </div>
+        </div>
+        <div class="pw-act-row">
+          <div class="pw-act-av" style="background:#d85020">SM</div>
+          <div class="pw-act-body">
+            <div class="pw-act-title">St. Mary's started a new discussion topic</div>
+            <div class="pw-act-meta">New York, USA · 3 days ago</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pw-pane" id="pwpane-discussion">
+      <div class="pw-card" style="text-align:center;padding:40px">
+        <div style="font-size:28px;margin-bottom:10px">💬</div>
+        <div style="font-size:14px;font-weight:700;color:var(--ink);margin-bottom:4px">Discussion coming in Chunk 2</div>
+        <div style="font-family:'Lora',serif;font-size:12px;color:var(--light);font-style:italic">Threaded topics with replies</div>
+      </div>
+    </div>
+
+    <div class="pw-pane" id="pwpane-resources">
+      <div class="pw-card" style="text-align:center;padding:40px">
+        <div style="font-size:28px;margin-bottom:10px">📁</div>
+        <div style="font-size:14px;font-weight:700;color:var(--ink);margin-bottom:4px">Resources coming in Chunk 3</div>
+        <div style="font-family:'Lora',serif;font-size:12px;color:var(--light);font-style:italic">Shared files, docs and links</div>
+      </div>
+    </div>
+
+    <div class="pw-pane" id="pwpane-members">
+      <div class="pw-card" style="text-align:center;padding:40px">
+        <div style="font-size:28px;margin-bottom:10px">🌍</div>
+        <div style="font-size:14px;font-weight:700;color:var(--ink);margin-bottom:4px">Members coming in Chunk 3</div>
+        <div style="font-family:'Lora',serif;font-size:12px;color:var(--light);font-style:italic">Presence indicators and chat</div>
+      </div>
+    </div>
+
+    <div class="pw-pane" id="pwpane-type">
+      <div class="pw-card" style="text-align:center;padding:40px">
+        <div style="font-size:28px;margin-bottom:10px">🔬</div>
+        <div style="font-size:14px;font-weight:700;color:var(--ink);margin-bottom:4px">Research data coming in Chunk 4</div>
+        <div style="font-family:'Lora',serif;font-size:12px;color:var(--light);font-style:italic">Survey responses and findings</div>
+      </div>
+    </div>
+
+  </div>
+  <div class="pw-side">
+
+    <div class="pw-online-card">
+      <div class="pw-online-hd">
+        <div class="pw-pulse" style="width:7px;height:7px;border-radius:50%;background:#22c55e;animation:pwpulse 2s infinite;flex-shrink:0"></div>
+        <span class="pw-online-title">Online now</span>
+        <span class="pw-online-count">3</span>
+      </div>
+      <div class="pw-om">
+        <div class="pw-om-av"><div class="pw-om-inner" style="background:#2a8a4a">HS</div><div class="pw-om-dot"></div></div>
+        <div style="flex:1"><div class="pw-om-name">Holy Spirit, Accra</div><div class="pw-om-status">Active now</div></div>
+        <button class="pw-chat-btn" onclick="window.location.href='messages.html'">Chat</button>
+      </div>
+      <div class="pw-om">
+        <div class="pw-om-av"><div class="pw-om-inner" style="background:#534AB7">SB</div><div class="pw-om-dot"></div></div>
+        <div style="flex:1"><div class="pw-om-name">St. Benedek, Budapest</div><div class="pw-om-status">Active now</div></div>
+        <button class="pw-chat-btn" onclick="window.location.href='messages.html'">Chat</button>
+      </div>
+      <div class="pw-om">
+        <div class="pw-om-av"><div class="pw-om-inner" style="background:#185FA5">SS</div><div class="pw-om-dot" style="background:#f59e0b"></div></div>
+        <div style="flex:1"><div class="pw-om-name">St. Stanislaw, Warsaw</div><div class="pw-om-status" style="color:#b45309">Away 5 mins</div></div>
+        <button class="pw-chat-btn" onclick="window.location.href='messages.html'">Chat</button>
+      </div>
+    </div>
+
+    <div class="pw-side-card">
+      <div class="pw-side-title">Quick stats</div>
+      <div class="pw-qs-row"><span class="pw-qs-lbl">Parishes joined</span><span class="pw-qs-val">28 / 50</span></div>
+      <div class="pw-qs-row"><span class="pw-qs-lbl">Countries</span><span class="pw-qs-val">14</span></div>
+      <div class="pw-qs-row"><span class="pw-qs-lbl">Online now</span><span class="pw-qs-val" style="color:#15803d">3 parishes</span></div>
+      <div class="pw-qs-row"><span class="pw-qs-lbl">Discussion topics</span><span class="pw-qs-val">7</span></div>
+      <div class="pw-qs-row"><span class="pw-qs-lbl">Resources shared</span><span class="pw-qs-val">4</span></div>
+      <div class="pw-qs-row"><span class="pw-qs-lbl">Target date</span><span class="pw-qs-val">1 Jun 2026</span></div>
+    </div>
+
+    <div class="pw-side-card">
+      <div class="pw-side-title">Your contribution</div>
+      <div style="font-family:'Lora',serif;font-size:12px;color:var(--text-mid);font-style:italic;line-height:1.5;margin-bottom:10px">2 discussion topics · 0 resources uploaded · Data: pending</div>
+      <button class="btn btn-primary btn-sm" style="width:100%">Submit parish data →</button>
+    </div>
+
+  </div>
+</div>
+
+<script>
+function pwShowTab(id) {
+  document.querySelectorAll('.pw-pane').forEach(function(p){ p.classList.remove('on'); });
+  document.querySelectorAll('.pw-tab').forEach(function(t){ t.classList.remove('on'); });
+  var pane = document.getElementById('pwpane-' + id);
+  if(pane) pane.classList.add('on');
+  var tabs = document.querySelectorAll('.pw-tab');
+  var map = {overview:0, discussion:1, resources:2, members:3, type:4};
+  if(map[id] !== undefined && tabs[map[id]]) tabs[map[id]].classList.add('on');
+}
+</script>
+
+</div>
+</div>
+<script>
+(function(){
+  var b=document.getElementById('burger');
+  var m=document.getElementById('navMobile');
+  if(!b||!m)return;
+  b.addEventListener('click',function(){m.classList.toggle('open');});
+  document.addEventListener('click',function(e){
+    if(!b.contains(e.target)&&!m.contains(e.target))m.classList.remove('open');
+  });
+})();
+</script>
+</body>
+</html>
