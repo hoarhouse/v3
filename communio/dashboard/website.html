@@ -354,6 +354,27 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
       <button class="btn btn-primary btn-sm" id="save-staff-btn">Save staff directory →</button>
     </div>
   </div>
+  <div class="card" style="margin-top:18px">
+    <div class="card-title">Bulletin &amp; newsletter</div>
+    <div class="card-sub">Upload your weekly bulletin PDF — shown on your public website for download</div>
+    <div class="fg">
+      <label class="fl">Weekly bulletin (PDF)</label>
+      <div id="bulletin-upload" style="border:2px dashed var(--border-light);border-radius:var(--r-md);padding:24px;text-align:center;cursor:pointer;transition:border-color .2s" onmouseover="this.style.borderColor='var(--terra)'" onmouseout="this.style.borderColor='var(--border-light)'">
+        <input type="file" accept=".pdf" id="bulletin-file" style="position:absolute;opacity:0;width:0;height:0">
+        <div style="font-size:24px;margin-bottom:6px">📄</div>
+        <div style="font-size:13px;font-weight:600;color:var(--ink)">Drop your bulletin PDF here</div>
+        <div style="font-size:12px;color:var(--light);margin-top:4px">or <span style="color:var(--terra);cursor:pointer;text-decoration:underline" onclick="document.getElementById('bulletin-file').click()">browse to upload</span></div>
+        <div id="bulletin-filename" style="font-size:12px;color:var(--sage);margin-top:8px;display:none"></div>
+      </div>
+    </div>
+    <div class="fg-row">
+      <div class="fg"><label class="fl">Bulletin date</label><input class="fi" type="date" id="bulletin-date"></div>
+      <div class="fg"><label class="fl">Newsletter signup link <span style="color:var(--light);font-weight:400">(optional)</span></label><input class="fi" type="url" id="bulletin-newsletter" placeholder="https://mailchimp.com/..."></div>
+    </div>
+    <div style="display:flex;justify-content:flex-end">
+      <button class="btn btn-primary btn-sm" id="save-bulletin-btn">Save bulletin settings →</button>
+    </div>
+  </div>
 </div>
     <div class="tab-content" id="tab-analytics">
   <!-- <?php echo $analytics->summary_html ?> -->
@@ -644,6 +665,20 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
     item.style.cssText = 'background:var(--cream);border-radius:var(--r-md);padding:16px;margin-bottom:12px';
     item.innerHTML = '<div class="fg-row"><div class="fg"><label class="fl">Name</label><input class="fi" type="text" placeholder="Name"></div><div class="fg"><label class="fl">Role / Title</label><input class="fi" type="text" placeholder="Role"></div></div><div class="fg" style="margin-bottom:0"><label class="fl">Email</label><input class="fi" type="email" placeholder="email@parish.org"></div>';
     document.getElementById('staff-list').appendChild(item);
+  });
+  document.getElementById('bulletin-file').addEventListener('change', function(){
+    var name = this.files[0] ? this.files[0].name : '';
+    var lbl = document.getElementById('bulletin-filename');
+    if(name){ lbl.textContent = '✓ ' + name; lbl.style.display = 'block'; }
+  });
+  document.getElementById('bulletin-upload').addEventListener('click', function(e){
+    if(e.target.tagName !== 'SPAN') document.getElementById('bulletin-file').click();
+  });
+  document.getElementById('save-bulletin-btn').addEventListener('click', function(){
+    var b = document.getElementById('save-bulletin-btn');
+    b.textContent = '✓ Saved';
+    b.style.background = 'var(--sage)';
+    setTimeout(function(){ b.textContent = 'Save bulletin settings →'; b.style.background = ''; }, 2000);
   });
   document.getElementById('save-staff-btn').addEventListener('click', function(){
     var b = document.getElementById('save-staff-btn');
