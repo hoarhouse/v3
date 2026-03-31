@@ -131,6 +131,7 @@
 @media(max-width:840px){.main{grid-template-columns:1fr}.sb{order:2}.masthead{height:300px}.mh-top{padding-top:70px}.p-name{font-size:18px}.id-inner{gap:10px}.p-stats{margin-left:0;border-left:none;padding-left:0;border-top:1px solid var(--border-light);padding-top:8px;width:100%}}
 @media(max-width:480px){.f-tabs{overflow-x:auto}.f-tab{font-size:11px;padding:5px 10px}.p-stats{gap:14px}}
 </style>
+  <script src="site/parish-data.js"></script>
 </head>
 <body>
 
@@ -183,7 +184,7 @@
       </div>
       <!-- <?php echo $parish->name_block_html; ?> -->
       <div class="mh-id">
-        <div class="p-name"><!-- SHARED: $parish->name -->St. Mary's Parish <span class="p-sub">· Diocese of New York</span></div>
+        <div class="p-name"><!-- SHARED: $parish->name --><span data-parish="name">St. Mary's Parish</span> <span class="p-sub">· <span data-parish="diocese">Diocese of New York</span></span></div>
         <div class="p-loc"><!-- SHARED: $parish->city, $parish->country -->📍 New York, USA &nbsp;·&nbsp; <span style="color:#6acd8a">✓ Verified by DCF</span></div>
       </div>
     </div>
@@ -402,9 +403,9 @@
       <!-- <?php echo $parish->contact_card_html; ?> -->
       <div class="s-card">
         <div class="s-ttl">Contact</div>
-        <div class="ct-row"><!-- SHARED: $parish->email / $parish->phone / $parish->address --><div class="ct-ic">✉️</div><span class="ct-tx"><a href="mailto:info@stmarysnyc.org" class="ct-lk">info@stmarysnyc.org</a></span></div>
+        <div class="ct-row"><!-- SHARED: $parish->email / $parish->phone / $parish->address --><div class="ct-ic">✉️</div><span class="ct-tx"><a href="mailto:<!-- injected -->" class="ct-lk">info@stmarysnyc.org</a></span></div>
         <div class="ct-row"><div class="ct-ic">🌐</div><span class="ct-tx"><a href="#" class="ct-lk">stmarysnyc.communio.org</a></span></div>
-        <div class="ct-row"><div class="ct-ic">📍</div><span class="ct-tx" style="font-size:12px">15 Mott Street, New York, NY 10013</span></div>
+        <div class="ct-row"><div class="ct-ic">📍</div><span class="ct-tx" style="font-size:12px" data-parish="address">15 Mott Street, New York, NY 10013</span></div>
       </div>
 
       <!-- SISTER PARISHES -->
@@ -474,6 +475,52 @@
     if(!b.contains(e.target)&&!m.contains(e.target))m.classList.remove('open');
   });
 })();
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+  try {
+    var stored = localStorage.getItem('parish_data');
+    if(!stored) return;
+    var d = JSON.parse(stored);
+
+    // City in location bar
+    if(d.city) {
+      var cityEl = document.querySelector('[data-parish-city]');
+      if(cityEl) cityEl.textContent = d.city + ', ' + (d.state || 'USA');
+    }
+
+    // Email link
+    if(d.email) {
+      var emailLinks = document.querySelectorAll('a[href^="mailto:"]');
+      emailLinks.forEach(function(el){
+        el.href = 'mailto:' + d.email;
+        el.textContent = d.email;
+      });
+    }
+
+    // Phone
+    if(d.phone) {
+      var phoneTx = document.querySelector('.ct-tx a[href^="tel:"]');
+      if(phoneTx){ phoneTx.href = 'tel:' + d.phone; phoneTx.textContent = d.phone; }
+    }
+
+    // Address
+    if(d.address) {
+      var addrEl = document.querySelector('[data-parish="address"]');
+      if(addrEl) addrEl.textContent = d.address + ', ' + (d.city||'') + ', ' + (d.state||'') + ' ' + (d.zip||'');
+    }
+
+    // Website URL
+    if(d.name) {
+      var websiteLink = document.querySelector('.ct-lk');
+      if(websiteLink && websiteLink.textContent.includes('communio.org')) {
+        // leave as is — this is the Communio network URL
+      }
+    }
+
+  } catch(e) { console.error('Parish data inject error:', e); }
+});
 </script>
 </body>
 </html>
