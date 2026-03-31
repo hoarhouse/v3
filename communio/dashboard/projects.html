@@ -149,55 +149,6 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
       <button class="btn btn-primary btn-sm" id="open-create-pj">Create project +</button>
     </div>
 
-    <!-- Project content continues here -->
-<div class="pj-modal-overlay" id="pj-modal-overlay">
-  <div class="pj-modal">
-    <div class="pj-modal-hd">
-      <div class="pj-modal-title">Create a project</div>
-      <button class="pj-modal-close" id="pj-modal-close">✕</button>
-    </div>
-    <div class="pj-fg">
-      <label class="pj-fl">Project title</label>
-      <input class="pj-fi" type="text" id="pj-title" placeholder="e.g. Global Youth Formation Network">
-    </div>
-    <div class="pj-fg">
-      <label class="pj-fl">Project type</label>
-      <select class="pj-fi" id="pj-type">
-        <option value="">Select a type...</option>
-        <option value="advocacy">Advocacy — co-signed statement or open letter</option>
-        <option value="project">Project — active collaboration between parishes</option>
-        <option value="research">Research — study or data collection</option>
-      </select>
-    </div>
-    <div class="pj-fg">
-      <label class="pj-fl">Description</label>
-      <textarea class="pj-fta" id="pj-desc" placeholder="What is this project about? What are you trying to achieve?"></textarea>
-    </div>
-    <div class="pj-fg">
-      <label class="pj-fl">Project thumbnail <span style="font-weight:400;color:var(--light)">(optional)</span></label>
-      <div class="pj-thumb-upload" id="pj-thumb-area">
-        <input type="file" id="pj-thumb-input" accept="image/*" style="position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%">
-        <div id="pj-thumb-placeholder">
-          <div style="font-size:24px;margin-bottom:6px">🖼️</div>
-          <div style="font-size:13px;font-weight:600;color:var(--ink)">Upload a thumbnail</div>
-          <div style="font-size:11px;color:var(--light);margin-top:3px">Recommended 800×400px · JPG or PNG</div>
-        </div>
-        <img id="pj-thumb-preview" class="pj-thumb-preview" src="" alt="">
-      </div>
-    </div>
-    <div class="pj-fg">
-      <label class="pj-fl">Target parishes <span style="font-weight:400;color:var(--light)">(optional — for advocacy)</span></label>
-      <input class="pj-fi" type="number" id="pj-target" placeholder="e.g. 500">
-    </div>
-    <div class="pj-modal-ft">
-      <button class="btn btn-secondary btn-sm" id="pj-cancel">Cancel</button>
-      <button class="btn btn-primary btn-sm" id="pj-submit">Create project →</button>
-    </div>
-  </div>
-</div>
-
-
-    </div>
     <div class="tabs">
       <button class="tab on">Joined (4)</button>
       <button class="tab">Discover</button>
@@ -261,6 +212,54 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
     </script>
   </div>
 </div>
+
+<!-- Create project modal -->
+<div class="pj-modal-overlay" id="pj-modal-overlay">
+  <div class="pj-modal">
+    <div class="pj-modal-hd">
+      <div class="pj-modal-title">Create a project</div>
+      <button class="pj-modal-close" id="pj-modal-close">✕</button>
+    </div>
+    <div class="pj-fg">
+      <label class="pj-fl">Project title</label>
+      <input class="pj-fi" type="text" id="pj-title" placeholder="e.g. Global Youth Formation Network">
+    </div>
+    <div class="pj-fg">
+      <label class="pj-fl">Project type</label>
+      <select class="pj-fi" id="pj-type">
+        <option value="">Select a type...</option>
+        <option value="advocacy">Advocacy — co-signed statement or open letter</option>
+        <option value="project">Project — active collaboration between parishes</option>
+        <option value="research">Research — study or data collection</option>
+      </select>
+    </div>
+    <div class="pj-fg">
+      <label class="pj-fl">Description</label>
+      <textarea class="pj-fta" id="pj-desc" placeholder="What is this project about? What are you trying to achieve?"></textarea>
+    </div>
+    <div class="pj-fg">
+      <label class="pj-fl">Project thumbnail <span style="font-weight:400;color:var(--light)">(optional)</span></label>
+      <div class="pj-thumb-upload" id="pj-thumb-area">
+        <input type="file" id="pj-thumb-input" accept="image/*" style="position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%">
+        <div id="pj-thumb-placeholder">
+          <div style="font-size:24px;margin-bottom:6px">🖼️</div>
+          <div style="font-size:13px;font-weight:600;color:var(--ink)">Upload a thumbnail</div>
+          <div style="font-size:11px;color:var(--light);margin-top:3px">Recommended 800×400px · JPG or PNG</div>
+        </div>
+        <img id="pj-thumb-preview" class="pj-thumb-preview" src="" alt="">
+      </div>
+    </div>
+    <div class="pj-fg">
+      <label class="pj-fl">Target parishes <span style="font-weight:400;color:var(--light)">(optional — for advocacy)</span></label>
+      <input class="pj-fi" type="number" id="pj-target" placeholder="e.g. 500">
+    </div>
+    <div class="pj-modal-ft">
+      <button class="btn btn-secondary btn-sm" id="pj-cancel">Cancel</button>
+      <button class="btn btn-primary btn-sm" id="pj-submit">Create project →</button>
+    </div>
+  </div>
+</div>
+
 <script>
 (function(){
   var b=document.getElementById('burger');
