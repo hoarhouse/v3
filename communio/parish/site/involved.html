@@ -167,9 +167,9 @@ a[data-contact]:hover{color:var(--terra-dark);border-bottom-color:var(--terra-da
 
 .roles-label{font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);margin:1.25rem 0 .6rem;}
 .roles-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.75rem;margin-bottom:1.25rem;}
-.role-card{background:#fff;border:1.5px solid rgba(14,10,6,0.08);border-radius:10px;padding:1rem 1.25rem;display:flex;flex-direction:column;gap:.75rem;transition:all .2s ease;cursor:pointer;}
+.role-card{background:#fff;border:1.5px solid rgba(14,10,6,0.08);border-radius:10px;overflow:hidden;transition:all .2s ease;}
 .role-card:hover{border-color:var(--terra);box-shadow:0 4px 16px rgba(216,80,32,0.1);}
-.ministry-section-alt .role-card{background:var(--warm-white);}
+.ministry-section-alt .role-card{background:#fff;border:1.5px solid rgba(14,10,6,0.08);border-radius:10px;overflow:hidden;transition:all .2s ease;}
 .ministry-section-alt .role-card:hover{background:#fff;}
 .role-title{font-family:'Lora',serif;font-weight:700;font-size:.9rem;color:var(--ink);margin-bottom:.2rem;}
 .role-meta{font-size:.72rem;color:var(--text-muted);}
@@ -185,8 +185,8 @@ a[data-contact]:hover{color:var(--terra-dark);border-bottom-color:var(--terra-da
 .group-desc{font-size:.85rem;color:var(--text-muted);line-height:1.7;}
 
 
-.role-card{cursor:pointer;} .role-card-top{display:flex;align-items:center;justify-content:space-between;gap:1rem;}
-.role-card.expanded{border-color:var(--terra);box-shadow:0 4px 20px rgba(216,80,32,0.12);} 
+.role-card{background:#fff;border:1.5px solid rgba(14,10,6,0.08);border-radius:10px;overflow:hidden;transition:all .2s ease;} 
+ 
 .role-expand{display:none;margin-top:1rem;padding-top:1rem;border-top:1px solid rgba(14,10,6,0.07);}
 .role-card.expanded .role-expand{display:block;}
 .role-expand-about{font-size:.85rem;color:var(--text-body);line-height:1.7;margin-bottom:.875rem;}
@@ -224,6 +224,13 @@ a[data-contact]:hover{color:var(--terra-dark);border-bottom-color:var(--terra-da
 @media(max-width:968px){.needs-grid{grid-template-columns:repeat(2,1fr);}}
 @media(max-width:568px){.needs-grid{grid-template-columns:1fr;}}
 
+
+.role-card{background:#fff;border:1.5px solid rgba(14,10,6,0.08);border-radius:10px;overflow:hidden;transition:all .2s ease;cursor:pointer;}
+.role-card:hover{border-color:var(--terra);}
+.role-card.open{border-color:var(--terra);box-shadow:0 4px 20px rgba(216,80,32,0.1);}
+.role-card-top{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:1rem 1.25rem;}
+.role-card-expand{display:none;padding:1rem 1.25rem;border-top:1px solid rgba(14,10,6,0.07);background:rgba(245,242,232,0.5);}
+.role-card.open .role-card-expand{display:block;}
 </style>
 </head>
 <body>
@@ -332,44 +339,62 @@ a[data-contact]:hover{color:var(--terra-dark);border-bottom-color:var(--terra-da
         <div class="ministry-section-label">Ministry</div>
         <h2 class="ministry-section-title">Volunteer</h2>
         <p class="ministry-section-desc">Share your time and talents to serve our parish and community. Whether you have an hour a week or a whole weekend, your contribution makes a real difference. Roles include hospitality, event support, parish office assistance, and more.</p>
-        <div class="roles-label">Available roles</div><div class="roles-grid"><div class="role-card">
-          <div class="role-card-top"><div><div class="role-title">Welcome Team</div><div class="role-meta">Sunday mornings · 1–2 hrs/week</div></div>
-          </div></div>
-          <button class="role-apply" data-contact data-from="volunteer:welcome-team">Apply →</button></div>
-        <div class="role-expand">
-          <p class="role-expand-about">Be the first face visitors see at St. Mary's. Greeters welcome parishioners at the church doors before Mass, distribute the weekly bulletin, help newcomers find a seat, and answer basic questions about the parish. Training and a team leader are provided.</p>
-          <div class="role-reqs-label">What we are looking for</div>
-          <div class="role-reqs"><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Warm, friendly, and approachable personality</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Available at least one Sunday per month</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>No prior church experience needed</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Comfortable speaking with strangers</div></div>
-        </div>
+        <div class="roles-label">Available roles</div><div class="roles-grid">
+        <div class="role-card">
+          <div class="role-card-top">
+            <div>
+              <div class="role-title">Welcome Team</div>
+              <div class="role-meta">Sunday mornings · 1–2 hrs/week</div>
+            </div>
+            <button class="role-apply" data-contact data-from="volunteer:welcome-team">Apply →</button>
+          </div>
+          <div class="role-card-expand">
+            <p class="role-expand-about">Be the first face visitors see at St. Mary's. Greeters welcome parishioners at the church doors before Mass, distribute the weekly bulletin, help newcomers find a seat, and answer basic questions about the parish. Training and a team leader are provided.</p>
+            <div class="role-reqs-label">What we are looking for</div>
+            <div class="role-reqs"><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Warm, friendly, and approachable personality</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Available at least one Sunday per month</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>No prior church experience needed</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Comfortable speaking with strangers</div></div>
+          </div>
         </div>
         <div class="role-card">
-          <div class="role-card-top"><div><div class="role-title">Food Pantry Helper</div><div class="role-meta">Saturday mornings · 3 hrs/week</div></div>
-          </div></div>
-          <button class="role-apply" data-contact data-from="volunteer:food-pantry">Apply →</button></div>
-        <div class="role-expand">
-          <p class="role-expand-about">Help pack and distribute food to families in need across the Lower East Side. Volunteers sort donations, prepare food parcels, and assist clients at our weekly Saturday distribution. This is one of our most impactful community ministries.</p>
-          <div class="role-reqs-label">What we are looking for</div>
-          <div class="role-reqs"><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Available Saturday mornings 9 AM–12 PM</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Able to lift boxes up to 25 lbs</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Commitment of at least twice per month preferred</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Background check required for leadership roles</div></div>
-        </div>
-        </div>
-        <div class="role-card">
-          <div class="role-card-top"><div><div class="role-title">Parish Office Assistant</div><div class="role-meta">Weekday hours · flexible</div></div>
-          </div></div>
-          <button class="role-apply" data-contact data-from="volunteer:office-assistant">Apply →</button></div>
-        <div class="role-expand">
-          <p class="role-expand-about">Support the parish office team with administrative tasks including answering phones, helping with data entry, preparing mailings, and welcoming visitors to the office. Great for someone who wants to be at the heart of parish life.</p>
-          <div class="role-reqs-label">What we are looking for</div>
-          <div class="role-reqs"><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Basic computer skills helpful</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Friendly and organized</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Weekday availability (flexible hours)</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Discretion with confidential parish information</div></div>
-        </div>
+          <div class="role-card-top">
+            <div>
+              <div class="role-title">Food Pantry Helper</div>
+              <div class="role-meta">Saturday mornings · 3 hrs/week</div>
+            </div>
+            <button class="role-apply" data-contact data-from="volunteer:food-pantry">Apply →</button>
+          </div>
+          <div class="role-card-expand">
+            <p class="role-expand-about">Help pack and distribute food to families in need across the Lower East Side. Volunteers sort donations, prepare food parcels, and assist clients at our weekly Saturday distribution. One of our most impactful community ministries.</p>
+            <div class="role-reqs-label">What we are looking for</div>
+            <div class="role-reqs"><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Available Saturday mornings 9 AM–12 PM</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Able to lift boxes up to 25 lbs</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Commitment of at least twice per month preferred</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Background check required for leadership roles</div></div>
+          </div>
         </div>
         <div class="role-card">
-          <div class="role-card-top"><div><div class="role-title">Event Setup &amp; Cleanup</div><div class="role-meta">As needed · occasional weekends</div></div>
-          </div></div>
-          <button class="role-apply" data-contact data-from="volunteer:events">Apply →</button></div>
-        <div class="role-expand">
-          <p class="role-expand-about">Help set up and clean up at parish events including the annual picnic, fundraising dinners, and seasonal celebrations. A vital behind-the-scenes role that makes every parish event possible.</p>
-          <div class="role-reqs-label">What we are looking for</div>
-          <div class="role-reqs"><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Physical ability to move tables, chairs, and equipment</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Available for occasional weekend events</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Team player who doesn't mind getting hands dirty</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>No experience necessary</div></div>
+          <div class="role-card-top">
+            <div>
+              <div class="role-title">Parish Office Assistant</div>
+              <div class="role-meta">Weekday hours · flexible</div>
+            </div>
+            <button class="role-apply" data-contact data-from="volunteer:office-assistant">Apply →</button>
+          </div>
+          <div class="role-card-expand">
+            <p class="role-expand-about">Support the parish office team with administrative tasks including answering phones, helping with data entry, preparing mailings, and welcoming visitors to the office. Great for someone who wants to be at the heart of parish life.</p>
+            <div class="role-reqs-label">What we are looking for</div>
+            <div class="role-reqs"><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Basic computer skills helpful</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Friendly and organized</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Weekday availability (flexible hours)</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Discretion with confidential parish information</div></div>
+          </div>
+        </div>
+        <div class="role-card">
+          <div class="role-card-top">
+            <div>
+              <div class="role-title">Event Setup & Cleanup</div>
+              <div class="role-meta">As needed · occasional weekends</div>
+            </div>
+            <button class="role-apply" data-contact data-from="volunteer:events">Apply →</button>
+          </div>
+          <div class="role-card-expand">
+            <p class="role-expand-about">Help set up and clean up at parish events including the annual picnic, fundraising dinners, and seasonal celebrations. A vital behind-the-scenes role that makes every parish event possible.</p>
+            <div class="role-reqs-label">What we are looking for</div>
+            <div class="role-reqs"><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Physical ability to move tables, chairs, and equipment</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Available for occasional weekend events</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Team player who doesn't mind getting hands dirty</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>No experience necessary</div></div>
+          </div>
         </div>
         </div>
         <div class="ministry-section-contact"><strong>Contact:</strong> Parish Office — Maria Santos</div>
@@ -467,44 +492,62 @@ a[data-contact]:hover{color:var(--terra-dark);border-bottom-color:var(--terra-da
         <div class="ministry-section-label">Ministry</div>
         <h2 class="ministry-section-title">Liturgical Ministries</h2>
         <p class="ministry-section-desc">Serve at Mass as an altar server, lector, Eucharistic minister, or usher. These roles are the backbone of our liturgical life and are open to all confirmed Catholics. Training is provided for all new ministers.</p>
-        <div class="roles-label">Available roles</div><div class="roles-grid"><div class="role-card">
-          <div class="role-card-top"><div><div class="role-title">Altar Server</div><div class="role-meta">Sunday Mass · training provided</div></div>
-          </div></div>
-          <button class="role-apply" data-contact data-from="liturgical:altar-server">Apply →</button></div>
-        <div class="role-expand">
-          <p class="role-expand-about">Assist the priest at Mass by carrying the cross and candles, preparing the altar, and helping with the sacred vessels. Altar servers are a visible and honoured part of our liturgical life. Full training is provided for all new servers.</p>
-          <div class="role-reqs-label">What we are looking for</div>
-          <div class="role-reqs"><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Baptised and received First Communion</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Available for at least one Mass per week</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Ability to commit to a training programme</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Open to middle school age and above</div></div>
-        </div>
+        <div class="roles-label">Available roles</div><div class="roles-grid">
+        <div class="role-card">
+          <div class="role-card-top">
+            <div>
+              <div class="role-title">Altar Server</div>
+              <div class="role-meta">Sunday Mass · training provided</div>
+            </div>
+            <button class="role-apply" data-contact data-from="liturgical:altar-server">Apply →</button>
+          </div>
+          <div class="role-card-expand">
+            <p class="role-expand-about">Assist the priest at Mass by carrying the cross and candles, preparing the altar, and helping with the sacred vessels. Altar servers are a visible and honoured part of our liturgical life. Full training is provided.</p>
+            <div class="role-reqs-label">What we are looking for</div>
+            <div class="role-reqs"><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Baptised and received First Communion</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Available for at least one Mass per week</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Ability to commit to a training programme</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Open to middle school age and above</div></div>
+          </div>
         </div>
         <div class="role-card">
-          <div class="role-card-top"><div><div class="role-title">Lector</div><div class="role-meta">Proclaim Scripture at Mass</div></div>
-          </div></div>
-          <button class="role-apply" data-contact data-from="liturgical:lector">Apply →</button></div>
-        <div class="role-expand">
-          <p class="role-expand-about">Proclaim the Word of God at Mass by reading the First and Second Readings from the Ambo. Lectors are trained in proclamation technique, pronunciation, and the theology of the Liturgy of the Word. A powerful and visible ministry.</p>
-          <div class="role-reqs-label">What we are looking for</div>
-          <div class="role-reqs"><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Confident reader with clear speaking voice</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Willing to attend a preparation session</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Confirmed Catholic in good standing</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Available for at least two Masses per month</div></div>
-        </div>
-        </div>
-        <div class="role-card">
-          <div class="role-card-top"><div><div class="role-title">Eucharistic Minister</div><div class="role-meta">Must be confirmed Catholic</div></div>
-          </div></div>
-          <button class="role-apply" data-contact data-from="liturgical:eucharistic-minister">Apply →</button></div>
-        <div class="role-expand">
-          <p class="role-expand-about">Assist in the distribution of Holy Communion at Mass. Extraordinary Ministers of Holy Communion also bring Communion to the sick and homebound. One of the most sacred and trusted roles in parish ministry.</p>
-          <div class="role-reqs-label">What we are looking for</div>
-          <div class="role-reqs"><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Confirmed Catholic in good standing</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Completed a diocesan training programme (we can arrange)</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Available for at least two Masses per month</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Willingness to also serve the homebound preferred</div></div>
-        </div>
+          <div class="role-card-top">
+            <div>
+              <div class="role-title">Lector</div>
+              <div class="role-meta">Proclaim Scripture at Mass</div>
+            </div>
+            <button class="role-apply" data-contact data-from="liturgical:lector">Apply →</button>
+          </div>
+          <div class="role-card-expand">
+            <p class="role-expand-about">Proclaim the Word of God at Mass by reading the First and Second Readings from the Ambo. Lectors are trained in proclamation technique, pronunciation, and the theology of the Liturgy of the Word.</p>
+            <div class="role-reqs-label">What we are looking for</div>
+            <div class="role-reqs"><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Confident reader with clear speaking voice</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Willing to attend a preparation session</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Confirmed Catholic in good standing</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Available for at least two Masses per month</div></div>
+          </div>
         </div>
         <div class="role-card">
-          <div class="role-card-top"><div><div class="role-title">Usher / Greeter</div><div class="role-meta">Sunday mornings · welcoming role</div></div>
-          </div></div>
-          <button class="role-apply" data-contact data-from="liturgical:usher">Apply →</button></div>
-        <div class="role-expand">
-          <p class="role-expand-about">Ushers serve at Mass by welcoming parishioners, directing seating, taking up the collection, and maintaining order and safety in the church. Often the first or last person a visitor interacts with — a ministry of hospitality.</p>
-          <div class="role-reqs-label">What we are looking for</div>
-          <div class="role-reqs"><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Reliable and punctual</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Available for at least one Mass per week</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Comfortable with crowd management</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Must be a practicing Catholic</div></div>
+          <div class="role-card-top">
+            <div>
+              <div class="role-title">Eucharistic Minister</div>
+              <div class="role-meta">Must be confirmed Catholic</div>
+            </div>
+            <button class="role-apply" data-contact data-from="liturgical:eucharistic-minister">Apply →</button>
+          </div>
+          <div class="role-card-expand">
+            <p class="role-expand-about">Assist in the distribution of Holy Communion at Mass. Extraordinary Ministers also bring Communion to the sick and homebound. One of the most sacred and trusted roles in parish ministry.</p>
+            <div class="role-reqs-label">What we are looking for</div>
+            <div class="role-reqs"><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Confirmed Catholic in good standing</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Completed a diocesan training programme (we can arrange)</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Available for at least two Masses per month</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Willingness to also serve the homebound preferred</div></div>
+          </div>
+        </div>
+        <div class="role-card">
+          <div class="role-card-top">
+            <div>
+              <div class="role-title">Usher / Greeter</div>
+              <div class="role-meta">Sunday mornings · welcoming role</div>
+            </div>
+            <button class="role-apply" data-contact data-from="liturgical:usher">Apply →</button>
+          </div>
+          <div class="role-card-expand">
+            <p class="role-expand-about">Ushers serve at Mass by welcoming parishioners, directing seating, taking up the collection, and maintaining order and safety in the church. Often the first or last person a visitor interacts with.</p>
+            <div class="role-reqs-label">What we are looking for</div>
+            <div class="role-reqs"><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Reliable and punctual</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Available for at least one Mass per week</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Comfortable with crowd management</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Must be a practicing Catholic</div></div>
+          </div>
         </div>
         </div>
         <div class="ministry-section-contact"><strong>Contact:</strong> Parish Office</div>
@@ -524,44 +567,62 @@ a[data-contact]:hover{color:var(--terra-dark);border-bottom-color:var(--terra-da
         <div class="ministry-section-label">Ministry</div>
         <h2 class="ministry-section-title">Music Ministry</h2>
         <p class="ministry-section-desc">Join our parish choir or one of our smaller music groups. Singers and instrumentalists of all levels are welcome. Choir rehearsals are held on Thursday evenings at 7:00 PM in the Main Church.</p>
-        <div class="roles-label">Available roles</div><div class="roles-grid"><div class="role-card">
-          <div class="role-card-top"><div><div class="role-title">Choir Singer — Soprano/Alto</div><div class="role-meta">Thursday rehearsals 7 PM + Sunday</div></div>
-          </div></div>
-          <button class="role-apply" data-contact data-from="music:choir-sa">Apply →</button></div>
-        <div class="role-expand">
-          <p class="role-expand-about">Join our soprano or alto section in the parish choir. The choir sings at the Sunday 11 AM Mass and for special liturgies throughout the year including Christmas, Holy Week, and the Easter Vigil. A joyful and close-knit community.</p>
-          <div class="role-reqs-label">What we are looking for</div>
-          <div class="role-reqs"><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Ability to read music is helpful but not required</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Available Thursday evenings 7–9 PM for rehearsal</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Available Sunday mornings by 10:15 AM</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Willingness to learn a wide repertoire from chant to contemporary</div></div>
-        </div>
+        <div class="roles-label">Available roles</div><div class="roles-grid">
+        <div class="role-card">
+          <div class="role-card-top">
+            <div>
+              <div class="role-title">Choir Singer — Soprano/Alto</div>
+              <div class="role-meta">Thursday rehearsals 7 PM + Sunday</div>
+            </div>
+            <button class="role-apply" data-contact data-from="music:choir-sa">Apply →</button>
+          </div>
+          <div class="role-card-expand">
+            <p class="role-expand-about">Join our soprano or alto section in the parish choir. The choir sings at the Sunday 11 AM Mass and for special liturgies throughout the year including Christmas, Holy Week, and the Easter Vigil.</p>
+            <div class="role-reqs-label">What we are looking for</div>
+            <div class="role-reqs"><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Ability to read music is helpful but not required</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Available Thursday evenings 7–9 PM for rehearsal</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Available Sunday mornings by 10:15 AM</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Willingness to learn a wide repertoire</div></div>
+          </div>
         </div>
         <div class="role-card">
-          <div class="role-card-top"><div><div class="role-title">Choir Singer — Tenor/Bass</div><div class="role-meta">Thursday rehearsals 7 PM + Sunday</div></div>
-          </div></div>
-          <button class="role-apply" data-contact data-from="music:choir-tb">Apply →</button></div>
-        <div class="role-expand">
-          <p class="role-expand-about">Join our tenor or bass section in the parish choir. We are especially in need of male voices. The choir sings at the Sunday 11 AM Mass and for special liturgies. Tenors and basses make the whole choir shine.</p>
-          <div class="role-reqs-label">What we are looking for</div>
-          <div class="role-reqs"><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Ability to read music is helpful but not required</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Available Thursday evenings 7–9 PM for rehearsal</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Available Sunday mornings by 10:15 AM</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Male voices particularly welcomed</div></div>
-        </div>
-        </div>
-        <div class="role-card">
-          <div class="role-card-top"><div><div class="role-title">Instrumentalist</div><div class="role-meta">Guitar, piano, violin, brass welcome</div></div>
-          </div></div>
-          <button class="role-apply" data-contact data-from="music:instrumentalist">Apply →</button></div>
-        <div class="role-expand">
-          <p class="role-expand-about">Share your musical gifts in service of the liturgy. We welcome guitarists, pianists, violinists, brass players, and other instrumentalists to play at weekend Masses and special celebrations. Skill level should be at least intermediate.</p>
-          <div class="role-reqs-label">What we are looking for</div>
-          <div class="role-reqs"><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Intermediate or advanced playing ability</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Instrument must be suitable for liturgical use</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Availability for at least one Mass per month</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Willingness to coordinate repertoire with the Music Director</div></div>
-        </div>
+          <div class="role-card-top">
+            <div>
+              <div class="role-title">Choir Singer — Tenor/Bass</div>
+              <div class="role-meta">Thursday rehearsals 7 PM + Sunday</div>
+            </div>
+            <button class="role-apply" data-contact data-from="music:choir-tb">Apply →</button>
+          </div>
+          <div class="role-card-expand">
+            <p class="role-expand-about">Join our tenor or bass section in the parish choir. We are especially in need of male voices. The choir sings at the Sunday 11 AM Mass and for special liturgies.</p>
+            <div class="role-reqs-label">What we are looking for</div>
+            <div class="role-reqs"><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Ability to read music is helpful but not required</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Available Thursday evenings 7–9 PM for rehearsal</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Available Sunday mornings by 10:15 AM</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Male voices particularly welcomed</div></div>
+          </div>
         </div>
         <div class="role-card">
-          <div class="role-card-top"><div><div class="role-title">Cantor / Soloist</div><div class="role-meta">Lead congregational singing at Mass</div></div>
-          </div></div>
-          <button class="role-apply" data-contact data-from="music:cantor">Apply →</button></div>
-        <div class="role-expand">
-          <p class="role-expand-about">Lead the congregation in sung prayer as a cantor at Mass. Cantors sing the Psalm, lead the assembly in the hymns and acclamations, and help create an atmosphere of prayerful worship. A ministry that combines musical skill with spiritual leadership.</p>
-          <div class="role-reqs-label">What we are looking for</div>
-          <div class="role-reqs"><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Strong, confident singing voice</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Ability to read music</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Comfortable leading a congregation</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Previous liturgical cantor experience preferred but not essential</div></div>
+          <div class="role-card-top">
+            <div>
+              <div class="role-title">Instrumentalist</div>
+              <div class="role-meta">Guitar, piano, violin, brass welcome</div>
+            </div>
+            <button class="role-apply" data-contact data-from="music:instrumentalist">Apply →</button>
+          </div>
+          <div class="role-card-expand">
+            <p class="role-expand-about">Share your musical gifts in service of the liturgy. We welcome guitarists, pianists, violinists, brass players, and other instrumentalists to play at weekend Masses and special celebrations.</p>
+            <div class="role-reqs-label">What we are looking for</div>
+            <div class="role-reqs"><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Intermediate or advanced playing ability</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Instrument suitable for liturgical use</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Availability for at least one Mass per month</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Willingness to coordinate repertoire with the Music Director</div></div>
+          </div>
+        </div>
+        <div class="role-card">
+          <div class="role-card-top">
+            <div>
+              <div class="role-title">Cantor / Soloist</div>
+              <div class="role-meta">Lead congregational singing at Mass</div>
+            </div>
+            <button class="role-apply" data-contact data-from="music:cantor">Apply →</button>
+          </div>
+          <div class="role-card-expand">
+            <p class="role-expand-about">Lead the congregation in sung prayer as a cantor at Mass. Cantors sing the Psalm, lead the assembly in the hymns and acclamations, and help create an atmosphere of prayerful worship.</p>
+            <div class="role-reqs-label">What we are looking for</div>
+            <div class="role-reqs"><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Strong, confident singing voice</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Ability to read music</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Comfortable leading a congregation</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Previous liturgical cantor experience preferred but not essential</div></div>
+          </div>
         </div>
         </div>
         <div class="ministry-section-contact"><strong>Contact:</strong> David Chen, Director of Music</div>
@@ -581,44 +642,62 @@ a[data-contact]:hover{color:var(--terra-dark);border-bottom-color:var(--terra-da
         <div class="ministry-section-label">Ministry</div>
         <h2 class="ministry-section-title">Youth Ministry</h2>
         <p class="ministry-section-desc">Work with our middle and high school students through retreats, service projects, and weekly gatherings. Adult volunteers and young adult leaders are always needed. A background check is required for all youth volunteers.</p>
-        <div class="roles-label">Available roles</div><div class="roles-grid"><div class="role-card">
-          <div class="role-card-top"><div><div class="role-title">Teen Group Leader</div><div class="role-meta">Sunday evenings · 18+ required</div></div>
-          </div></div>
-          <button class="role-apply" data-contact data-from="youth:teen-leader">Apply →</button></div>
-        <div class="role-expand">
-          <p class="role-expand-about">Accompany and lead our high school youth group in weekly gatherings, service projects, and seasonal events. Teen Group Leaders are mentors and role models who help young people grow in faith and friendship in a safe, fun environment.</p>
-          <div class="role-reqs-label">What we are looking for</div>
-          <div class="role-reqs"><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Must be 18 years or older</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Background check and Safe Environment training required</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Passion for working with teenagers</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Practicing Catholic preferred</div></div>
-        </div>
+        <div class="roles-label">Available roles</div><div class="roles-grid">
+        <div class="role-card">
+          <div class="role-card-top">
+            <div>
+              <div class="role-title">Teen Group Leader</div>
+              <div class="role-meta">Sunday evenings · 18+ required</div>
+            </div>
+            <button class="role-apply" data-contact data-from="youth:teen-leader">Apply →</button>
+          </div>
+          <div class="role-card-expand">
+            <p class="role-expand-about">Accompany and lead our high school youth group in weekly gatherings, service projects, and seasonal events. Teen Group Leaders are mentors and role models who help young people grow in faith and friendship.</p>
+            <div class="role-reqs-label">What we are looking for</div>
+            <div class="role-reqs"><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Must be 18 years or older</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Background check and Safe Environment training required</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Passion for working with teenagers</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Practicing Catholic preferred</div></div>
+          </div>
         </div>
         <div class="role-card">
-          <div class="role-card-top"><div><div class="role-title">Retreat Chaperone</div><div class="role-meta">Occasional weekends · background check</div></div>
-          </div></div>
-          <button class="role-apply" data-contact data-from="youth:retreat-chaperone">Apply →</button></div>
-        <div class="role-expand">
-          <p class="role-expand-about">Accompany youth on overnight retreat weekends as a chaperone and companion. Retreats are some of the most transformative experiences in a young person's faith journey — your presence makes them possible.</p>
-          <div class="role-reqs-label">What we are looking for</div>
-          <div class="role-reqs"><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Must be 21 years or older</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Background check and Safe Environment training required</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Available for occasional overnight weekends</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Previous youth ministry experience helpful</div></div>
-        </div>
-        </div>
-        <div class="role-card">
-          <div class="role-card-top"><div><div class="role-title">Sunday School Helper</div><div class="role-meta">Sunday mornings during 9 AM Mass</div></div>
-          </div></div>
-          <button class="role-apply" data-contact data-from="youth:sunday-school">Apply →</button></div>
-        <div class="role-expand">
-          <p class="role-expand-about">Help our religious education teachers during the Sunday 9 AM Mass hour. Sunday School Helpers assist with classroom activities, accompany children, and support the lead teacher. A wonderful introduction to faith formation ministry.</p>
-          <div class="role-reqs-label">What we are looking for</div>
-          <div class="role-reqs"><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Patient and caring with children ages 5–11</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Available Sunday mornings 9–10:15 AM</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Background check required</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>No teaching experience necessary — full support provided</div></div>
-        </div>
+          <div class="role-card-top">
+            <div>
+              <div class="role-title">Retreat Chaperone</div>
+              <div class="role-meta">Occasional weekends · background check</div>
+            </div>
+            <button class="role-apply" data-contact data-from="youth:retreat-chaperone">Apply →</button>
+          </div>
+          <div class="role-card-expand">
+            <p class="role-expand-about">Accompany youth on overnight retreat weekends as a chaperone and companion. Retreats are some of the most transformative experiences in a young person's faith journey — your presence makes them possible.</p>
+            <div class="role-reqs-label">What we are looking for</div>
+            <div class="role-reqs"><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Must be 21 years or older</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Background check and Safe Environment training required</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Available for occasional overnight weekends</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Previous youth ministry experience helpful</div></div>
+          </div>
         </div>
         <div class="role-card">
-          <div class="role-card-top"><div><div class="role-title">Youth Events Coordinator</div><div class="role-meta">Plan &amp; run youth social events</div></div>
-          </div></div>
-          <button class="role-apply" data-contact data-from="youth:events">Apply →</button></div>
-        <div class="role-expand">
-          <p class="role-expand-about">Plan and organise youth social events including game nights, service days, and seasonal gatherings. Work alongside the Youth Coordinator to create memorable experiences that build community among our young parishioners.</p>
-          <div class="role-reqs-label">What we are looking for</div>
-          <div class="role-reqs"><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Creative and organised</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Experience with event planning a plus</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Good communication skills</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Passion for building community among young people</div></div>
+          <div class="role-card-top">
+            <div>
+              <div class="role-title">Sunday School Helper</div>
+              <div class="role-meta">Sunday mornings during 9 AM Mass</div>
+            </div>
+            <button class="role-apply" data-contact data-from="youth:sunday-school">Apply →</button>
+          </div>
+          <div class="role-card-expand">
+            <p class="role-expand-about">Help our religious education teachers during the Sunday 9 AM Mass hour. Sunday School Helpers assist with classroom activities, accompany children, and support the lead teacher.</p>
+            <div class="role-reqs-label">What we are looking for</div>
+            <div class="role-reqs"><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Patient and caring with children ages 5–11</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Available Sunday mornings 9–10:15 AM</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Background check required</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>No teaching experience necessary — full support provided</div></div>
+          </div>
+        </div>
+        <div class="role-card">
+          <div class="role-card-top">
+            <div>
+              <div class="role-title">Youth Events Coordinator</div>
+              <div class="role-meta">Plan & run youth social events</div>
+            </div>
+            <button class="role-apply" data-contact data-from="youth:events">Apply →</button>
+          </div>
+          <div class="role-card-expand">
+            <p class="role-expand-about">Plan and organise youth social events including game nights, service days, and seasonal gatherings. Work alongside the Youth Coordinator to create memorable experiences that build community.</p>
+            <div class="role-reqs-label">What we are looking for</div>
+            <div class="role-reqs"><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Creative and organised</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Experience with event planning a plus</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Good communication skills</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Passion for building community among young people</div></div>
+          </div>
         </div>
         </div>
         <div class="ministry-section-contact"><strong>Contact:</strong> Michael Rivera, Youth Coordinator</div>
@@ -638,44 +717,62 @@ a[data-contact]:hover{color:var(--terra-dark);border-bottom-color:var(--terra-da
         <div class="ministry-section-label">Ministry</div>
         <h2 class="ministry-section-title">Community Outreach</h2>
         <p class="ministry-section-desc">Serve our neighbours through the parish food pantry, visits to the homebound, and our partnership with local social services. Volunteer shifts are available every Saturday morning and on weekday evenings.</p>
-        <div class="roles-label">Available roles</div><div class="roles-grid"><div class="role-card">
-          <div class="role-card-top"><div><div class="role-title">Food Pantry Volunteer</div><div class="role-meta">Saturday 9 AM–12 PM · weekly</div></div>
-          </div></div>
-          <button class="role-apply" data-contact data-from="outreach:food-pantry">Apply →</button></div>
-        <div class="role-expand">
-          <p class="role-expand-about">Our food pantry serves hundreds of families each week. Volunteers help sort and pack donations, manage inventory, and assist clients with dignity and care. One of the most direct ways to live the Gospel in our neighbourhood.</p>
-          <div class="role-reqs-label">What we are looking for</div>
-          <div class="role-reqs"><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Available Saturday mornings 9 AM–12 PM</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Able to be on your feet for 2–3 hours</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Comfortable working in a fast-paced environment</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Spanish language skills a significant bonus</div></div>
-        </div>
+        <div class="roles-label">Available roles</div><div class="roles-grid">
+        <div class="role-card">
+          <div class="role-card-top">
+            <div>
+              <div class="role-title">Food Pantry Volunteer</div>
+              <div class="role-meta">Saturday 9 AM–12 PM · weekly</div>
+            </div>
+            <button class="role-apply" data-contact data-from="outreach:food-pantry">Apply →</button>
+          </div>
+          <div class="role-card-expand">
+            <p class="role-expand-about">Our food pantry serves hundreds of families each week. Volunteers help sort and pack donations, manage inventory, and assist clients with dignity and care.</p>
+            <div class="role-reqs-label">What we are looking for</div>
+            <div class="role-reqs"><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Available Saturday mornings 9 AM–12 PM</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Able to be on your feet for 2–3 hours</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Comfortable working in a fast-paced environment</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Spanish language skills a significant bonus</div></div>
+          </div>
         </div>
         <div class="role-card">
-          <div class="role-card-top"><div><div class="role-title">Homebound Visitor</div><div class="role-meta">Visit elderly &amp; sick parishioners</div></div>
-          </div></div>
-          <button class="role-apply" data-contact data-from="outreach:homebound">Apply →</button></div>
-        <div class="role-expand">
-          <p class="role-expand-about">Visit elderly and housebound parishioners who cannot attend Mass. Bring them Communion, spend time in conversation, and let them know they are still part of our parish family. One of the most tender and important ministries we have.</p>
-          <div class="role-reqs-label">What we are looking for</div>
-          <div class="role-reqs"><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Compassionate and patient</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Reliable availability on a regular schedule (weekly or fortnightly)</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Comfortable visiting care homes and private homes</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Trained Eucharistic Minister status required (we can arrange training)</div></div>
-        </div>
-        </div>
-        <div class="role-card">
-          <div class="role-card-top"><div><div class="role-title">Refugee Support</div><div class="role-meta">English tutoring &amp; resettlement help</div></div>
-          </div></div>
-          <button class="role-apply" data-contact data-from="outreach:refugee">Apply →</button></div>
-        <div class="role-expand">
-          <p class="role-expand-about">Support newly arrived refugee and immigrant families in our community. Volunteers assist with English tutoring, navigating city services, and practical resettlement tasks. This ministry is particularly needed among our Central American community.</p>
-          <div class="role-reqs-label">What we are looking for</div>
-          <div class="role-reqs"><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Patience and cultural sensitivity</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Spanish language skills strongly preferred</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Available weekday evenings or weekend mornings</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>No professional qualifications required — just willingness to help</div></div>
-        </div>
+          <div class="role-card-top">
+            <div>
+              <div class="role-title">Homebound Visitor</div>
+              <div class="role-meta">Visit elderly & sick parishioners</div>
+            </div>
+            <button class="role-apply" data-contact data-from="outreach:homebound">Apply →</button>
+          </div>
+          <div class="role-card-expand">
+            <p class="role-expand-about">Visit elderly and housebound parishioners who cannot attend Mass. Bring them Communion, spend time in conversation, and let them know they are still part of our parish family.</p>
+            <div class="role-reqs-label">What we are looking for</div>
+            <div class="role-reqs"><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Compassionate and patient</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Reliable availability on a regular schedule</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Comfortable visiting care homes and private homes</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Trained Eucharistic Minister status required (we can arrange)</div></div>
+          </div>
         </div>
         <div class="role-card">
-          <div class="role-card-top"><div><div class="role-title">Fundraising &amp; Awareness</div><div class="role-meta">Organise charity drives &amp; campaigns</div></div>
-          </div></div>
-          <button class="role-apply" data-contact data-from="outreach:fundraising">Apply →</button></div>
-        <div class="role-expand">
-          <p class="role-expand-about">Help organise fundraising drives, awareness campaigns, and donor communication for our outreach programmes. If you have skills in marketing, communications, or events, this is a great way to put them to use for a good cause.</p>
-          <div class="role-reqs-label">What we are looking for</div>
-          <div class="role-reqs"><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Organised and creative</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Experience in communications, marketing, or fundraising a plus</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Good writing skills helpful</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Comfortable using social media and email</div></div>
+          <div class="role-card-top">
+            <div>
+              <div class="role-title">Refugee Support</div>
+              <div class="role-meta">English tutoring & resettlement help</div>
+            </div>
+            <button class="role-apply" data-contact data-from="outreach:refugee">Apply →</button>
+          </div>
+          <div class="role-card-expand">
+            <p class="role-expand-about">Support newly arrived refugee and immigrant families in our community. Volunteers assist with English tutoring, navigating city services, and practical resettlement tasks.</p>
+            <div class="role-reqs-label">What we are looking for</div>
+            <div class="role-reqs"><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Patience and cultural sensitivity</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Spanish language skills strongly preferred</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Available weekday evenings or weekend mornings</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>No professional qualifications required</div></div>
+          </div>
+        </div>
+        <div class="role-card">
+          <div class="role-card-top">
+            <div>
+              <div class="role-title">Fundraising & Awareness</div>
+              <div class="role-meta">Organise charity drives & campaigns</div>
+            </div>
+            <button class="role-apply" data-contact data-from="outreach:fundraising">Apply →</button>
+          </div>
+          <div class="role-card-expand">
+            <p class="role-expand-about">Help organise fundraising drives, awareness campaigns, and donor communication for our outreach programmes.</p>
+            <div class="role-reqs-label">What we are looking for</div>
+            <div class="role-reqs"><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Organised and creative</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Experience in communications or fundraising a plus</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Good writing skills helpful</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Comfortable using social media and email</div></div>
+          </div>
         </div>
         </div>
         <div class="ministry-section-contact"><strong>Contact:</strong> Deacon Robert Chen</div>
@@ -695,44 +792,62 @@ a[data-contact]:hover{color:var(--terra-dark);border-bottom-color:var(--terra-da
         <div class="ministry-section-label">Ministry</div>
         <h2 class="ministry-section-title">Faith Formation</h2>
         <p class="ministry-section-desc">Teach religious education to children, assist with RCIA, or lead an adult study group. No formal theology background is required — just a love of the faith and a willingness to share it.</p>
-        <div class="roles-label">Available roles</div><div class="roles-grid"><div class="role-card">
-          <div class="role-card-top"><div><div class="role-title">Children's RE Teacher</div><div class="role-meta">Sunday mornings · Sept–May</div></div>
-          </div></div>
-          <button class="role-apply" data-contact data-from="formation:re-teacher">Apply →</button></div>
-        <div class="role-expand">
-          <p class="role-expand-about">Teach religious education to children from Kindergarten through Grade 8 on Sunday mornings during the school year. Full curriculum and resources are provided. No formal theology degree required — just a love of the faith and a willingness to share it.</p>
-          <div class="role-reqs-label">What we are looking for</div>
-          <div class="role-reqs"><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Practicing Catholic in good standing</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Comfortable speaking to a group of children</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Background check required</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Willing to complete a short orientation programme before September</div></div>
-        </div>
+        <div class="roles-label">Available roles</div><div class="roles-grid">
+        <div class="role-card">
+          <div class="role-card-top">
+            <div>
+              <div class="role-title">Children's RE Teacher</div>
+              <div class="role-meta">Sunday mornings · Sept–May</div>
+            </div>
+            <button class="role-apply" data-contact data-from="formation:re-teacher">Apply →</button>
+          </div>
+          <div class="role-card-expand">
+            <p class="role-expand-about">Teach religious education to children from Kindergarten through Grade 8 on Sunday mornings during the school year. Full curriculum and resources are provided.</p>
+            <div class="role-reqs-label">What we are looking for</div>
+            <div class="role-reqs"><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Practicing Catholic in good standing</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Comfortable speaking to a group of children</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Background check required</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Willing to complete a short orientation programme before September</div></div>
+          </div>
         </div>
         <div class="role-card">
-          <div class="role-card-top"><div><div class="role-title">RCIA Sponsor</div><div class="role-meta">Walk with a candidate through initiation</div></div>
-          </div></div>
-          <button class="role-apply" data-contact data-from="formation:rcia-sponsor">Apply →</button></div>
-        <div class="role-expand">
-          <p class="role-expand-about">Walk alongside an RCIA candidate through their journey of initiation into the Catholic Church. A sponsor attends weekly sessions with their candidate, answers questions, shares their own faith story, and supports them through to Easter Vigil.</p>
-          <div class="role-reqs-label">What we are looking for</div>
-          <div class="role-reqs"><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Confirmed Catholic with active parish life</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Able to attend weekly RCIA sessions from October to Easter</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Willingness to share openly about your own faith journey</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>No formal theology background required</div></div>
-        </div>
-        </div>
-        <div class="role-card">
-          <div class="role-card-top"><div><div class="role-title">Adult Study Group Leader</div><div class="role-meta">Lead weekly faith discussions</div></div>
-          </div></div>
-          <button class="role-apply" data-contact data-from="formation:adult-study">Apply →</button></div>
-        <div class="role-expand">
-          <p class="role-expand-about">Facilitate weekly adult faith formation discussions using provided materials. Groups meet in parishioners' homes or the parish hall and cover topics from Scripture to Catholic social teaching. Leaders do not need to be experts — just good listeners.</p>
-          <div class="role-reqs-label">What we are looking for</div>
-          <div class="role-reqs"><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Comfortable facilitating group discussion</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Practicing Catholic with a love of learning</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Reliable availability for weekly meetings</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Able to complete a brief leader orientation</div></div>
-        </div>
+          <div class="role-card-top">
+            <div>
+              <div class="role-title">RCIA Sponsor</div>
+              <div class="role-meta">Walk with a candidate through initiation</div>
+            </div>
+            <button class="role-apply" data-contact data-from="formation:rcia-sponsor">Apply →</button>
+          </div>
+          <div class="role-card-expand">
+            <p class="role-expand-about">Walk alongside an RCIA candidate through their journey of initiation into the Catholic Church. A sponsor attends weekly sessions, answers questions, and shares their own faith story.</p>
+            <div class="role-reqs-label">What we are looking for</div>
+            <div class="role-reqs"><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Confirmed Catholic with active parish life</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Able to attend weekly RCIA sessions from October to Easter</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Willingness to share openly about your own faith journey</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>No formal theology background required</div></div>
+          </div>
         </div>
         <div class="role-card">
-          <div class="role-card-top"><div><div class="role-title">Confirmation Mentor</div><div class="role-meta">Guide a teen through Confirmation prep</div></div>
-          </div></div>
-          <button class="role-apply" data-contact data-from="formation:confirmation-mentor">Apply →</button></div>
-        <div class="role-expand">
-          <p class="role-expand-about">Be paired with a teenage Confirmation candidate as their personal mentor through the two-year preparation programme. Meet monthly, attend sessions together, and offer support and example as they prepare to receive the Holy Spirit.</p>
-          <div class="role-reqs-label">What we are looking for</div>
-          <div class="role-reqs"><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Confirmed Catholic in good standing</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Background check required</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Able to meet monthly with your candidate for two years</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Comfortable talking about faith with a teenager</div></div>
+          <div class="role-card-top">
+            <div>
+              <div class="role-title">Adult Study Group Leader</div>
+              <div class="role-meta">Lead weekly faith discussions</div>
+            </div>
+            <button class="role-apply" data-contact data-from="formation:adult-study">Apply →</button>
+          </div>
+          <div class="role-card-expand">
+            <p class="role-expand-about">Facilitate weekly adult faith formation discussions using provided materials. Groups cover topics from Scripture to Catholic social teaching. Leaders do not need to be experts — just good listeners.</p>
+            <div class="role-reqs-label">What we are looking for</div>
+            <div class="role-reqs"><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Comfortable facilitating group discussion</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Practicing Catholic with a love of learning</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Reliable availability for weekly meetings</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Able to complete a brief leader orientation</div></div>
+          </div>
+        </div>
+        <div class="role-card">
+          <div class="role-card-top">
+            <div>
+              <div class="role-title">Confirmation Mentor</div>
+              <div class="role-meta">Guide a teen through Confirmation prep</div>
+            </div>
+            <button class="role-apply" data-contact data-from="formation:confirmation-mentor">Apply →</button>
+          </div>
+          <div class="role-card-expand">
+            <p class="role-expand-about">Be paired with a teenage Confirmation candidate as their personal mentor through the two-year preparation programme. Meet monthly and offer support as they prepare to receive the Holy Spirit.</p>
+            <div class="role-reqs-label">What we are looking for</div>
+            <div class="role-reqs"><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Confirmed Catholic in good standing</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Background check required</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Able to meet monthly with your candidate for two years</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Comfortable talking about faith with a teenager</div></div>
+          </div>
         </div>
         </div>
         <div class="ministry-section-contact"><strong>Contact:</strong> Sofia Morales, Director of Faith Formation</div>
@@ -752,44 +867,62 @@ a[data-contact]:hover{color:var(--terra-dark);border-bottom-color:var(--terra-da
         <div class="ministry-section-label">Ministry</div>
         <h2 class="ministry-section-title">Hospitality &amp; Events</h2>
         <p class="ministry-section-desc">Help create a warm and welcoming environment at parish events, coffee socials, and special celebrations. Perfect for those who love bringing people together and making everyone feel at home.</p>
-        <div class="roles-label">Available roles</div><div class="roles-grid"><div class="role-card">
-          <div class="role-card-top"><div><div class="role-title">Sunday Coffee Hour Host</div><div class="role-meta">After 11 AM Mass · occasional</div></div>
-          </div></div>
-          <button class="role-apply" data-contact data-from="hospitality:coffee-hour">Apply →</button></div>
-        <div class="role-expand">
-          <p class="role-expand-about">Host the after-Mass coffee and refreshments gathering in the parish hall following the 11 AM Sunday Mass. Set up tables, brew coffee, lay out food, and help welcome parishioners — especially newcomers. A simple act of hospitality that builds real community.</p>
-          <div class="role-reqs-label">What we are looking for</div>
-          <div class="role-reqs"><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Available Sunday mornings until approximately 12:30 PM</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Organised and comfortable hosting</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Rotating schedule — commitment of one Sunday per month</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Enjoy meeting and chatting with people</div></div>
-        </div>
+        <div class="roles-label">Available roles</div><div class="roles-grid">
+        <div class="role-card">
+          <div class="role-card-top">
+            <div>
+              <div class="role-title">Sunday Coffee Hour Host</div>
+              <div class="role-meta">After 11 AM Mass · occasional</div>
+            </div>
+            <button class="role-apply" data-contact data-from="hospitality:coffee-hour">Apply →</button>
+          </div>
+          <div class="role-card-expand">
+            <p class="role-expand-about">Host the after-Mass coffee and refreshments gathering in the parish hall. Set up tables, brew coffee, lay out food, and help welcome parishioners — especially newcomers.</p>
+            <div class="role-reqs-label">What we are looking for</div>
+            <div class="role-reqs"><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Available Sunday mornings until approximately 12:30 PM</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Organised and comfortable hosting</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Rotating schedule — commitment of one Sunday per month</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Enjoy meeting and chatting with people</div></div>
+          </div>
         </div>
         <div class="role-card">
-          <div class="role-card-top"><div><div class="role-title">Event Planning Committee</div><div class="role-meta">Help plan parish socials &amp; fundraisers</div></div>
-          </div></div>
-          <button class="role-apply" data-contact data-from="hospitality:event-planning">Apply →</button></div>
-        <div class="role-expand">
-          <p class="role-expand-about">Join the parish events committee to help plan and execute our social calendar including the annual spring picnic, Christmas social, and fundraising dinners. Bring your creativity, organisational skills, and love of community.</p>
-          <div class="role-reqs-label">What we are looking for</div>
-          <div class="role-reqs"><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Organised with an eye for detail</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Creative and enthusiastic</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Able to attend occasional planning meetings</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Experience with event coordination helpful but not essential</div></div>
-        </div>
-        </div>
-        <div class="role-card">
-          <div class="role-card-top"><div><div class="role-title">New Parishioner Welcome Team</div><div class="role-meta">Meet &amp; greet newcomers after Mass</div></div>
-          </div></div>
-          <button class="role-apply" data-contact data-from="hospitality:new-parishioner">Apply →</button></div>
-        <div class="role-expand">
-          <p class="role-expand-about">Be part of the team that welcomes new parishioners to St. Mary's. After the 11 AM Mass on designated Sundays, team members introduce themselves to visitors, share information about the parish, and help newcomers feel genuinely at home.</p>
-          <div class="role-reqs-label">What we are looking for</div>
-          <div class="role-reqs"><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Warm, outgoing, and approachable</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Good knowledge of parish life and programmes</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Available on the first Sunday of each month</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Willing to follow up with new parishioners by email or phone</div></div>
-        </div>
+          <div class="role-card-top">
+            <div>
+              <div class="role-title">Event Planning Committee</div>
+              <div class="role-meta">Help plan parish socials & fundraisers</div>
+            </div>
+            <button class="role-apply" data-contact data-from="hospitality:event-planning">Apply →</button>
+          </div>
+          <div class="role-card-expand">
+            <p class="role-expand-about">Join the parish events committee to help plan and execute our social calendar including the annual spring picnic, Christmas social, and fundraising dinners.</p>
+            <div class="role-reqs-label">What we are looking for</div>
+            <div class="role-reqs"><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Organised with an eye for detail</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Creative and enthusiastic</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Able to attend occasional planning meetings</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Experience with event coordination helpful but not essential</div></div>
+          </div>
         </div>
         <div class="role-card">
-          <div class="role-card-top"><div><div class="role-title">Parish Decorating Team</div><div class="role-meta">Liturgical seasons &amp; special events</div></div>
-          </div></div>
-          <button class="role-apply" data-contact data-from="hospitality:decorating">Apply →</button></div>
-        <div class="role-expand">
-          <p class="role-expand-about">Transform our church for the major liturgical seasons — Advent, Christmas, Lent, and Easter — as well as special celebrations. Work with the liturgy committee to ensure our sacred space reflects the beauty and meaning of each season.</p>
-          <div class="role-reqs-label">What we are looking for</div>
-          <div class="role-reqs"><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Creative eye for design and arrangement</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Physically able to handle ladders and carry decorations</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Available for seasonal decoration days (approximately 4–6 times per year)</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Knowledge of liturgical seasons a plus</div></div>
+          <div class="role-card-top">
+            <div>
+              <div class="role-title">New Parishioner Welcome Team</div>
+              <div class="role-meta">Meet & greet newcomers after Mass</div>
+            </div>
+            <button class="role-apply" data-contact data-from="hospitality:new-parishioner">Apply →</button>
+          </div>
+          <div class="role-card-expand">
+            <p class="role-expand-about">Be part of the team that welcomes new parishioners to St. Mary's. Introduce yourself to visitors, share information about the parish, and help newcomers feel genuinely at home.</p>
+            <div class="role-reqs-label">What we are looking for</div>
+            <div class="role-reqs"><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Warm, outgoing, and approachable</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Good knowledge of parish life and programmes</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Available on the first Sunday of each month</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Willing to follow up with new parishioners</div></div>
+          </div>
+        </div>
+        <div class="role-card">
+          <div class="role-card-top">
+            <div>
+              <div class="role-title">Parish Decorating Team</div>
+              <div class="role-meta">Liturgical seasons & special events</div>
+            </div>
+            <button class="role-apply" data-contact data-from="hospitality:decorating">Apply →</button>
+          </div>
+          <div class="role-card-expand">
+            <p class="role-expand-about">Transform our church for the major liturgical seasons — Advent, Christmas, Lent, and Easter — as well as special celebrations. Work with the liturgy committee to ensure our sacred space is beautiful.</p>
+            <div class="role-reqs-label">What we are looking for</div>
+            <div class="role-reqs"><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Creative eye for design and arrangement</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Physically able to handle ladders and carry decorations</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Available for seasonal decoration days (4–6 times per year)</div><div class="role-req-item"><svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M4 10l5 5 7-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Knowledge of liturgical seasons a plus</div></div>
+          </div>
         </div>
         </div>
         <div class="ministry-section-contact"><strong>Contact:</strong> Parish Manager — Maria Santos</div>
@@ -983,20 +1116,12 @@ a[data-contact]:hover{color:var(--terra-dark);border-bottom-color:var(--terra-da
 </section>
 
 
+
 <script>
 document.querySelectorAll('.role-card').forEach(function(card){
   card.addEventListener('click', function(e){
     if(e.target.closest('.role-apply')) return;
-    // Find next sibling role-expand
-    var next = card.nextElementSibling;
-    while(next && !next.classList.contains('role-expand')){
-      next = next.nextElementSibling;
-    }
-    if(!next) return;
-    var isOpen = next.style.display === 'block';
-    next.style.display = isOpen ? 'none' : 'block';
-    card.style.borderColor = isOpen ? '' : 'var(--terra)';
-    card.style.boxShadow = isOpen ? '' : '0 4px 20px rgba(216,80,32,0.12)';
+    card.classList.toggle('open');
   });
 });
 </script>
