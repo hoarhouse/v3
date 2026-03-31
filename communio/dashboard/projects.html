@@ -142,6 +142,54 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
 .pj-disc-sub{font-family:'Lora',serif;font-size:12px;color:var(--light);font-style:italic;margin-top:1px}
 .pj-disc-link{font-size:12px;color:var(--terra);cursor:pointer;font-weight:600}
 @media(max-width:760px){.pj-grid{grid-template-columns:1fr}.impact-row{grid-template-columns:1fr 1fr}}
+
+.wz-overlay{position:fixed;inset:0;background:var(--cream);z-index:500;display:none;flex-direction:column;overflow-y:auto}
+.wz-overlay.open{display:flex}
+.wz-topbar{display:flex;align-items:center;justify-content:space-between;padding:16px 28px;background:var(--white);border-bottom:1px solid var(--border-light);flex-shrink:0}
+.wz-brand{font-size:15px;font-weight:800;color:var(--ink);letter-spacing:-.02em}
+.wz-brand span{color:var(--terra)}
+.wz-close{background:none;border:1.5px solid var(--border-light);border-radius:8px;padding:7px 14px;font-size:13px;font-weight:600;cursor:pointer;font-family:'Outfit',sans-serif;color:var(--mid);display:flex;align-items:center;gap:6px}
+.wz-close:hover{border-color:var(--terra);color:var(--terra)}
+.wz-body{flex:1;display:flex;flex-direction:column;align-items:center;padding:40px 24px}
+.wz-inner{width:100%;max-width:600px}
+.wz-steps{display:flex;align-items:center;margin-bottom:40px;position:relative}
+.wz-steps::before{content:'';position:absolute;top:14px;left:14px;right:14px;height:2px;background:var(--border-light);z-index:0}
+.wz-step{display:flex;flex-direction:column;align-items:center;gap:7px;flex:1;position:relative;z-index:1}
+.wz-dot{width:28px;height:28px;border-radius:50%;border:2px solid var(--border-light);background:var(--white);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--light);transition:all .2s;font-family:'Outfit',sans-serif}
+.wz-dot.active{border-color:var(--terra);color:var(--terra)}
+.wz-dot.done{background:var(--terra);border-color:var(--terra);color:white}
+.wz-step-lbl{font-size:11px;font-weight:600;color:var(--light);font-family:'Outfit',sans-serif}
+.wz-step-lbl.active{color:var(--terra)}
+.wz-panel{background:var(--white);border:1px solid var(--border-light);border-radius:var(--r-lg);padding:28px;box-shadow:var(--sh-sm)}
+.wz-panel-title{font-size:19px;font-weight:800;color:var(--ink);letter-spacing:-.03em;margin-bottom:4px}
+.wz-panel-sub{font-family:'Lora',serif;font-size:13px;color:var(--light);font-style:italic;margin-bottom:24px;line-height:1.5}
+.wz-type-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:6px}
+.wz-tc{border:1.5px solid var(--border-light);border-radius:10px;padding:16px 10px;text-align:center;cursor:pointer;transition:all .15s;background:var(--white)}
+.wz-tc:hover{border-color:var(--terra);transform:translateY(-1px)}
+.wz-tc.sel{border-color:transparent;color:white}
+.wz-tc-icon{font-size:24px;margin-bottom:8px}
+.wz-tc-name{font-size:12px;font-weight:700;font-family:'Outfit',sans-serif;display:block}
+.wz-tc-desc{font-size:10px;margin-top:3px;font-family:'Outfit',sans-serif;opacity:.75}
+.wz-fg{margin-bottom:18px}
+.wz-fl{display:block;font-size:12px;font-weight:700;color:var(--mid);margin-bottom:5px;letter-spacing:.04em}
+.wz-fl span{font-weight:400;color:var(--light)}
+.wz-fi{width:100%;font-family:'Outfit',sans-serif;font-size:13px;color:var(--ink);background:var(--cream);border:1.5px solid var(--border-light);border-radius:var(--r-md);padding:9px 13px;outline:none;transition:border-color .2s}
+.wz-fi:focus{border-color:var(--terra);background:var(--warm-white)}
+.wz-fta{width:100%;font-family:'Outfit',sans-serif;font-size:13px;color:var(--ink);background:var(--cream);border:1.5px solid var(--border-light);border-radius:var(--r-md);padding:9px 13px;outline:none;resize:vertical;min-height:90px;line-height:1.55;transition:border-color .2s}
+.wz-fta:focus{border-color:var(--terra)}
+.wz-upload{border:2px dashed var(--border-light);border-radius:var(--r-md);padding:22px;text-align:center;cursor:pointer;position:relative;overflow:hidden;background:var(--cream);transition:border-color .2s}
+.wz-upload:hover{border-color:var(--terra)}
+.wz-frow{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.wz-vis-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px}
+.wz-vis{border:1.5px solid var(--border-light);border-radius:var(--r-md);padding:14px;cursor:pointer;transition:all .15s}
+.wz-vis:hover{border-color:var(--terra)}
+.wz-vis.sel{border-color:var(--terra);background:var(--terra-pale)}
+.wz-vis-title{font-size:13px;font-weight:700;color:var(--ink);margin-bottom:3px}
+.wz-vis-desc{font-size:11px;color:var(--light);line-height:1.4}
+.wz-announce{background:var(--cream);border:1px solid var(--border-light);border-radius:var(--r-md);padding:14px 16px;display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+.wz-launch-info{background:var(--terra-pale);border:1px solid rgba(216,80,32,.15);border-radius:var(--r-md);padding:14px 16px;margin-bottom:4px}
+.wz-foot{display:flex;align-items:center;justify-content:space-between;margin-top:24px;padding-top:18px;border-top:1px solid var(--border-light)}
+.wz-foot-progress{font-size:12px;color:var(--light);font-family:'Outfit',sans-serif}
 </style>
 </head>
 <body>
@@ -630,5 +678,263 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
   });
 })();
 </script>
+
+<div class="wz-overlay" id="wz-overlay">
+  <div class="wz-topbar">
+    <div class="wz-brand">Commun<span>io</span> <span style="font-weight:400;color:var(--light);font-size:13px">/ New project</span></div>
+    <button class="wz-close" onclick="wzClose()">
+      <svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      Cancel
+    </button>
+  </div>
+  <div class="wz-body">
+    <div class="wz-inner">
+
+      <div class="wz-steps">
+        <div class="wz-step"><div class="wz-dot active" id="wdot-1">1</div><span class="wz-step-lbl active" id="wlbl-1">Type</span></div>
+        <div class="wz-step"><div class="wz-dot" id="wdot-2">2</div><span class="wz-step-lbl" id="wlbl-2">Details</span></div>
+        <div class="wz-step"><div class="wz-dot" id="wdot-3">3</div><span class="wz-step-lbl" id="wlbl-3">Goals</span></div>
+        <div class="wz-step"><div class="wz-dot" id="wdot-4">4</div><span class="wz-step-lbl" id="wlbl-4">Launch</span></div>
+      </div>
+
+      <div class="wz-panel" id="wzp-1">
+        <div class="wz-panel-title">What kind of project is this?</div>
+        <div class="wz-panel-sub">Choose the type that best describes what you want to do together with other parishes</div>
+        <div class="wz-type-grid">
+          <div class="wz-tc" data-wtype="advocacy" onclick="wzSelectType(this,'#D85A30')">
+            <div class="wz-tc-icon">📢</div>
+            <span class="wz-tc-name">Advocacy</span>
+            <span class="wz-tc-desc">Co-sign a statement</span>
+          </div>
+          <div class="wz-tc" data-wtype="formation" onclick="wzSelectType(this,'#3B6D11')">
+            <div class="wz-tc-icon">📚</div>
+            <span class="wz-tc-name">Formation</span>
+            <span class="wz-tc-desc">Share curriculum</span>
+          </div>
+          <div class="wz-tc" data-wtype="mission" onclick="wzSelectType(this,'#BA7517')">
+            <div class="wz-tc-icon">🤝</div>
+            <span class="wz-tc-name">Mission</span>
+            <span class="wz-tc-desc">Coordinate outreach</span>
+          </div>
+          <div class="wz-tc" data-wtype="ecology" onclick="wzSelectType(this,'#0F6E56')">
+            <div class="wz-tc-icon">🌱</div>
+            <span class="wz-tc-name">Ecology</span>
+            <span class="wz-tc-desc">Laudato Si action</span>
+          </div>
+          <div class="wz-tc" data-wtype="research" onclick="wzSelectType(this,'#185FA5')">
+            <div class="wz-tc-icon">🔬</div>
+            <span class="wz-tc-name">Research</span>
+            <span class="wz-tc-desc">Study &amp; data</span>
+          </div>
+          <div class="wz-tc" data-wtype="solidarity" onclick="wzSelectType(this,'#534AB7')">
+            <div class="wz-tc-icon">🌍</div>
+            <span class="wz-tc-name">Solidarity</span>
+            <span class="wz-tc-desc">Parish twinning</span>
+          </div>
+          <div class="wz-tc" data-wtype="build" onclick="wzSelectType(this,'#5F5E5A')">
+            <div class="wz-tc-icon">⚙️</div>
+            <span class="wz-tc-name">Build</span>
+            <span class="wz-tc-desc">Make something</span>
+          </div>
+        </div>
+        <div class="wz-foot">
+          <span class="wz-foot-progress">Step 1 of 4</span>
+          <button class="btn btn-primary btn-sm" onclick="wzGoTo(2)">Continue →</button>
+        </div>
+      </div>
+
+      <div class="wz-panel" id="wzp-2" style="display:none">
+        <div class="wz-panel-title">Tell us about the project</div>
+        <div class="wz-panel-sub">A clear title and description helps other parishes understand what you're doing and why it matters</div>
+        <div class="wz-fg">
+          <label class="wz-fl">Project title</label>
+          <input class="wz-fi" type="text" id="wz-title" placeholder="e.g. Ethical AI in Catholic Schools — Global Statement">
+        </div>
+        <div class="wz-fg">
+          <label class="wz-fl">Description</label>
+          <textarea class="wz-fta" id="wz-desc" placeholder="What is this project about? What do you want to achieve? How can other parishes participate?"></textarea>
+        </div>
+        <div class="wz-fg">
+          <label class="wz-fl">Cover image <span>(optional — shown in discovery and project feed)</span></label>
+          <div class="wz-upload" id="wz-img-area">
+            <input type="file" id="wz-img-input" accept="image/*" style="position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%">
+            <div id="wz-img-ph">
+              <div style="font-size:24px;margin-bottom:6px">🖼️</div>
+              <div style="font-size:13px;font-weight:600;color:var(--ink)">Upload a cover image</div>
+              <div style="font-size:11px;color:var(--light);margin-top:3px">1200 × 400px recommended · JPG or PNG · Max 5MB</div>
+            </div>
+            <img id="wz-img-preview" src="" alt="" style="display:none;max-width:100%;max-height:140px;border-radius:6px;object-fit:cover">
+          </div>
+        </div>
+        <div class="wz-foot">
+          <button class="btn btn-secondary btn-sm" onclick="wzGoTo(1)">← Back</button>
+          <span class="wz-foot-progress">Step 2 of 4</span>
+          <button class="btn btn-primary btn-sm" onclick="wzGoTo(3)">Continue →</button>
+        </div>
+      </div>
+
+      <div class="wz-panel" id="wzp-3" style="display:none">
+        <div class="wz-panel-title">Set your goals</div>
+        <div class="wz-panel-sub">Clear targets help parishes understand the scope and show momentum as the project grows</div>
+        <div class="wz-frow">
+          <div class="wz-fg">
+            <label class="wz-fl">Target parishes</label>
+            <input class="wz-fi" type="number" id="wz-target-parishes" placeholder="e.g. 100">
+          </div>
+          <div class="wz-fg">
+            <label class="wz-fl">Target countries <span>(optional)</span></label>
+            <input class="wz-fi" type="number" id="wz-target-countries" placeholder="e.g. 20">
+          </div>
+        </div>
+        <div class="wz-frow">
+          <div class="wz-fg">
+            <label class="wz-fl">Target date <span>(optional)</span></label>
+            <input class="wz-fi" type="date" id="wz-target-date">
+          </div>
+          <div class="wz-fg">
+            <label class="wz-fl" id="wz-link-label">External link <span>(optional)</span></label>
+            <input class="wz-fi" type="url" id="wz-link" placeholder="https://...">
+          </div>
+        </div>
+        <div class="wz-foot">
+          <button class="btn btn-secondary btn-sm" onclick="wzGoTo(2)">← Back</button>
+          <span class="wz-foot-progress">Step 3 of 4</span>
+          <button class="btn btn-primary btn-sm" onclick="wzGoTo(4)">Continue →</button>
+        </div>
+      </div>
+
+      <div class="wz-panel" id="wzp-4" style="display:none">
+        <div class="wz-panel-title">Ready to launch?</div>
+        <div class="wz-panel-sub">Choose how this project appears across the Communio network</div>
+        <div style="font-size:12px;font-weight:700;color:var(--mid);letter-spacing:.04em;margin-bottom:10px">Visibility</div>
+        <div class="wz-vis-grid">
+          <div class="wz-vis sel" onclick="wzSelectVis(this)">
+            <div class="wz-vis-title">Open network</div>
+            <div class="wz-vis-desc">Any parish on Communio can discover and join this project</div>
+          </div>
+          <div class="wz-vis" onclick="wzSelectVis(this)">
+            <div class="wz-vis-title">Invite only</div>
+            <div class="wz-vis-desc">You invite specific parishes — not visible in discovery</div>
+          </div>
+        </div>
+        <div class="wz-announce">
+          <div>
+            <div style="font-size:13px;font-weight:600;color:var(--ink);margin-bottom:2px">Announce to your sister parishes</div>
+            <div style="font-family:'Lora',serif;font-size:12px;color:var(--light);font-style:italic">Send a message to your 6 sister parishes inviting them to join</div>
+          </div>
+          <label style="cursor:pointer;display:flex;align-items:center;gap:8px">
+            <span style="font-size:12px;color:var(--mid)">Yes</span>
+            <input type="checkbox" id="wz-announce" checked style="width:16px;height:16px">
+          </label>
+        </div>
+        <div class="wz-launch-info">
+          <div style="font-size:12px;font-weight:700;color:var(--terra);margin-bottom:4px">Your project will appear in discovery for:</div>
+          <div style="font-size:12px;color:var(--text-mid);line-height:1.7">Parishes with matching focus areas · Parishes in your network · Parishes in similar regions · Parishes searching for this project type</div>
+        </div>
+        <div class="wz-foot">
+          <button class="btn btn-secondary btn-sm" onclick="wzGoTo(3)">← Back</button>
+          <span class="wz-foot-progress">Step 4 of 4</span>
+          <button class="btn btn-sm" style="background:var(--sage);color:white;border-color:var(--sage)" id="wz-launch-btn" onclick="wzLaunch()">Launch project →</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+var wzCurrentStep = 1;
+var wzSelectedType = null;
+var wzSelectedColor = null;
+
+document.getElementById('open-create-pj').addEventListener('click', function(){
+  document.getElementById('wz-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+});
+
+function wzClose(){
+  document.getElementById('wz-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.addEventListener('keydown', function(e){
+  if(e.key === 'Escape') wzClose();
+});
+
+function wzGoTo(n){
+  document.getElementById('wzp-'+wzCurrentStep).style.display = 'none';
+  document.getElementById('wzp-'+n).style.display = 'block';
+  for(var i=1;i<=4;i++){
+    var dot = document.getElementById('wdot-'+i);
+    var lbl = document.getElementById('wlbl-'+i);
+    dot.classList.remove('active','done');
+    lbl.classList.remove('active');
+    if(i < n){ dot.classList.add('done'); dot.textContent = '✓'; }
+    else if(i === n){ dot.classList.add('active'); lbl.classList.add('active'); dot.textContent = i; }
+    else { dot.textContent = i; }
+  }
+  wzCurrentStep = n;
+  document.querySelector('.wz-body').scrollTop = 0;
+}
+
+function wzSelectType(el, color){
+  document.querySelectorAll('.wz-tc').forEach(function(c){
+    c.classList.remove('sel');
+    c.style.background = '';
+    c.style.borderColor = '';
+    c.querySelector('.wz-tc-name').style.color = '';
+    c.querySelector('.wz-tc-desc').style.color = '';
+  });
+  el.classList.add('sel');
+  el.style.background = color;
+  el.style.borderColor = color;
+  el.querySelector('.wz-tc-name').style.color = 'white';
+  el.querySelector('.wz-tc-desc').style.color = 'rgba(255,255,255,.75)';
+  wzSelectedType = el.dataset.wtype;
+  wzSelectedColor = color;
+  var linkLabels = {
+    'advocacy':'Petition or document link',
+    'formation':'Curriculum or resource link',
+    'mission':'Organisation or partner link',
+    'ecology':'Laudato Si platform link',
+    'research':'Research brief or survey link',
+    'solidarity':'Sister parish programme link',
+    'build':'GitHub or project link'
+  };
+  var lbl = document.getElementById('wz-link-label');
+  if(lbl && linkLabels[wzSelectedType]){
+    lbl.innerHTML = linkLabels[wzSelectedType] + ' <span>(optional)</span>';
+  }
+}
+
+function wzSelectVis(el){
+  document.querySelectorAll('.wz-vis').forEach(function(v){ v.classList.remove('sel'); });
+  el.classList.add('sel');
+}
+
+document.getElementById('wz-img-input').addEventListener('change', function(){
+  var file = this.files[0];
+  if(!file) return;
+  var reader = new FileReader();
+  reader.onload = function(e){
+    var prev = document.getElementById('wz-img-preview');
+    var ph = document.getElementById('wz-img-ph');
+    prev.src = e.target.result;
+    prev.style.display = 'block';
+    ph.style.display = 'none';
+  };
+  reader.readAsDataURL(file);
+});
+
+function wzLaunch(){
+  var title = document.getElementById('wz-title').value.trim();
+  if(!title){ wzGoTo(2); document.getElementById('wz-title').focus(); return; }
+  var btn = document.getElementById('wz-launch-btn');
+  btn.textContent = '✓ Project launched!';
+  btn.style.background = 'var(--sage)';
+  setTimeout(function(){ wzClose(); btn.textContent = 'Launch project →'; }, 1800);
+}
+</script>
+
 </body>
 </html>
