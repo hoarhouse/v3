@@ -674,6 +674,48 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
     </div>
 
     <div class="pw-pane" id="pwpane-members">
+
+      <div style="background:white;border:1.5px solid var(--terra);border-radius:var(--r-lg);padding:18px;margin-bottom:16px;box-shadow:0 0 0 3px rgba(216,80,32,.06)">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
+          <div style="display:flex;align-items:center;gap:8px">
+            <div style="width:8px;height:8px;border-radius:50%;background:var(--terra)"></div>
+            <span style="font-size:12px;font-weight:700;color:var(--terra);text-transform:uppercase;letter-spacing:.06em">Pending applications</span>
+            <span style="font-size:11px;font-weight:700;background:var(--terra);color:white;padding:1px 7px;border-radius:10px">2</span>
+          </div>
+          <span style="font-family:'Lora',serif;font-size:12px;color:var(--light);font-style:italic">Review and respond</span>
+        </div>
+
+        <div id="app-sp" style="border:1px solid var(--border-light);border-radius:10px;padding:16px;margin-bottom:10px;background:var(--cream)">
+          <div style="display:flex;align-items:flex-start;gap:12px">
+            <div style="width:38px;height:38px;border-radius:10px;background:#BA7517;font-size:11px;font-weight:700;color:white;display:flex;align-items:center;justify-content:center;flex-shrink:0">SP</div>
+            <div style="flex:1">
+              <div style="font-size:13px;font-weight:700;color:var(--ink);margin-bottom:2px">St. Paul Parish</div>
+              <div style="font-size:11px;color:var(--light);margin-bottom:8px">Nairobi, Kenya · Applied 2 hours ago</div>
+              <div style="font-family:'Lora',serif;font-size:12px;color:var(--text-mid);font-style:italic;background:white;border:1px solid var(--border-light);border-radius:7px;padding:10px;line-height:1.6">"We are conducting similar research in East Africa and believe cross-regional comparison would strengthen the findings. We have 3 staff with data analysis experience."</div>
+            </div>
+          </div>
+          <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:12px">
+            <button class="btn btn-secondary btn-sm" onclick="wzDecline('app-sp')">Decline</button>
+            <button class="btn btn-primary btn-sm" style="background:#2a8a4a;border-color:#2a8a4a" onclick="wzAccept('app-sp')">Accept →</button>
+          </div>
+        </div>
+
+        <div id="app-sa" style="border:1px solid var(--border-light);border-radius:10px;padding:16px;background:var(--cream)">
+          <div style="display:flex;align-items:flex-start;gap:12px">
+            <div style="width:38px;height:38px;border-radius:10px;background:#0F6E56;font-size:11px;font-weight:700;color:white;display:flex;align-items:center;justify-content:center;flex-shrink:0">SA</div>
+            <div style="flex:1">
+              <div style="font-size:13px;font-weight:700;color:var(--ink);margin-bottom:2px">St. Augustine Parish</div>
+              <div style="font-size:11px;color:var(--light);margin-bottom:8px">Cape Town, South Africa · Applied yesterday</div>
+              <div style="font-family:'Lora',serif;font-size:12px;color:var(--text-mid);font-style:italic;background:white;border:1px solid var(--border-light);border-radius:7px;padding:10px;line-height:1.6">"Our diocese is actively debating digital sovereignty policy and this research would directly inform our submissions. We can contribute survey responses from 4 parishes in our cluster."</div>
+            </div>
+          </div>
+          <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:12px">
+            <button class="btn btn-secondary btn-sm" onclick="wzDecline('app-sa')">Decline</button>
+            <button class="btn btn-primary btn-sm" style="background:#2a8a4a;border-color:#2a8a4a" onclick="wzAccept('app-sa')">Accept →</button>
+          </div>
+        </div>
+      </div>
+
       <div class="pw-card">
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
           <div class="pw-card-title" style="margin:0">All parishes (28)</div>
@@ -867,6 +909,28 @@ function toggleThread(e, el) {
 function toggleNewTopic() {
   var form = document.getElementById('new-topic-form');
   form.classList.toggle('open');
+}
+function wzAccept(id) {
+  var el = document.getElementById(id);
+  if(!el) return;
+  el.style.border = '1px solid #bbf7d0';
+  el.style.background = '#f0fdf4';
+  el.innerHTML = '<div style="display:flex;align-items:center;gap:10px;padding:4px 0"><div style="font-size:18px">✓</div><div style="font-size:13px;font-weight:600;color:#15803d">Application accepted — parish will be notified and added to the project</div></div>';
+  updatePendingCount();
+}
+function wzDecline(id) {
+  var el = document.getElementById(id);
+  if(!el) return;
+  el.style.border = '1px solid var(--border-light)';
+  el.style.background = 'var(--cream)';
+  el.style.opacity = '0.5';
+  el.innerHTML = '<div style="display:flex;align-items:center;gap:10px;padding:4px 0"><div style="font-size:18px">✕</div><div style="font-size:13px;font-weight:600;color:var(--light)">Application declined — parish will be notified</div></div>';
+  updatePendingCount();
+}
+function updatePendingCount() {
+  var remaining = document.querySelectorAll('[id^="app-"] button').length;
+  var badge = document.querySelector('[style*="background:var(--terra);color:white"]');
+  if(badge) badge.textContent = remaining;
 }
 function pwShowTab(id) {
   document.querySelectorAll('.pw-pane').forEach(function(p){ p.classList.remove('on'); });
