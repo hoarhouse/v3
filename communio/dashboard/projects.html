@@ -95,6 +95,53 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
 .pj-actions{display:flex;gap:8px;margin-top:4px}
 
 @media(max-width:900px){.sidebar{display:none}.page-shell{margin-left:0}}
+
+/* ── PROJECT REDESIGN ──────────────────────────── */
+.impact-row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:22px}
+.ic{background:var(--white);border:1px solid var(--border-light);border-radius:var(--r-lg);padding:16px 18px;box-shadow:var(--sh-sm);position:relative;overflow:hidden}
+.ic::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;border-radius:3px 0 0 3px}
+.ic-terra::before{background:var(--terra)}.ic-sage::before{background:var(--sage)}.ic-amber::before{background:var(--amber)}.ic-ink::before{background:var(--ink)}
+.ic-val{font-size:26px;font-weight:800;color:var(--ink);letter-spacing:-.035em;line-height:1}
+.ic-lbl{font-family:'Lora',serif;font-size:12px;color:var(--light);margin-top:3px;font-style:italic}
+.pj-hd{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:18px;gap:12px;flex-wrap:wrap}
+.pj-tabs{display:flex;border-bottom:2px solid var(--border-light);margin-bottom:18px}
+.pj-tab{font-size:13px;font-weight:600;color:var(--light);background:none;border:none;padding:9px 18px 11px;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;font-family:'Outfit',sans-serif;transition:color .18s;display:flex;align-items:center;gap:6px}
+.pj-tab:hover{color:var(--ink)}.pj-tab.on{color:var(--terra);border-bottom-color:var(--terra)}
+.pj-tab-count{background:var(--cream-dark);color:var(--mid);font-size:10px;font-weight:700;padding:1px 6px;border-radius:10px;line-height:1.5}
+.pj-filters{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:20px}
+.pj-fp{font-size:12px;font-weight:600;padding:5px 12px;border-radius:20px;cursor:pointer;border:1.5px solid var(--border-light);background:var(--white);color:var(--mid);font-family:'Outfit',sans-serif;transition:all .15s}
+.pj-fp:hover{border-color:var(--terra);color:var(--terra)}.pj-fp.on{background:var(--ink);border-color:var(--ink);color:white}
+.pj-tab-pane{display:none}.pj-tab-pane.on{display:block}
+.pj-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.pj-card{background:var(--white);border:1px solid var(--border-light);border-radius:var(--r-lg);overflow:hidden;display:flex;flex-direction:column;box-shadow:var(--sh-sm);transition:box-shadow .15s}
+.pj-card:hover{box-shadow:0 4px 20px rgba(14,10,6,.1)}
+.pj-card-bar{height:4px;width:100%}
+.pj-card-body{padding:16px 18px;flex:1;display:flex;flex-direction:column}
+.pj-card-hd{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:10px;gap:8px}
+.pj-badge{font-size:10px;font-weight:700;padding:3px 9px;border-radius:20px;text-transform:uppercase;letter-spacing:.06em;white-space:nowrap}
+.pj-status{font-size:10px;font-weight:700;padding:3px 9px;border-radius:20px;white-space:nowrap}
+.st-active{background:#e6f4eb;color:#1a6b2a}.st-open{background:#E6F1FB;color:#185FA5}
+.pj-card-title{font-size:14px;font-weight:700;color:var(--ink);line-height:1.35;margin-bottom:6px}
+.pj-card-desc{font-family:'Lora',serif;font-size:12px;color:var(--text-mid);font-style:italic;line-height:1.5;margin-bottom:14px;flex:1}
+.pj-stats-row{display:flex;gap:16px;margin-bottom:12px}
+.pj-sv{font-size:16px;font-weight:800;color:var(--ink);letter-spacing:-.02em;line-height:1}
+.pj-sl{font-size:10px;color:var(--light);margin-top:1px}
+.pj-prog{margin-bottom:14px}
+.pj-prog-lbl{display:flex;justify-content:space-between;font-size:11px;color:var(--light);margin-bottom:4px}
+.pj-prog-track{height:4px;background:var(--cream-dark);border-radius:4px;overflow:hidden}
+.pj-prog-fill{height:100%;border-radius:4px}
+.pj-card-ft{display:flex;align-items:center;justify-content:space-between;padding-top:12px;border-top:1px solid var(--cream-dark)}
+.pj-avs{display:flex}
+.pj-av{width:22px;height:22px;border-radius:50%;border:2px solid var(--white);font-size:8px;font-weight:700;color:white;display:flex;align-items:center;justify-content:center;margin-left:-5px;flex-shrink:0}
+.pj-av:first-child{margin-left:0}
+.pj-av-more{background:var(--cream-dark);color:var(--mid);font-size:9px}
+.pj-created-tag{font-size:9px;background:var(--cream);border:1px solid var(--border-light);color:var(--mid);padding:2px 7px;border-radius:20px;font-weight:600}
+.pj-disc-section{margin-bottom:28px}
+.pj-disc-hd{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:12px}
+.pj-disc-title{font-size:13px;font-weight:700;color:var(--ink)}
+.pj-disc-sub{font-family:'Lora',serif;font-size:12px;color:var(--light);font-style:italic;margin-top:1px}
+.pj-disc-link{font-size:12px;color:var(--terra);cursor:pointer;font-weight:600}
+@media(max-width:760px){.pj-grid{grid-template-columns:1fr}.impact-row{grid-template-columns:1fr 1fr}}
 </style>
 </head>
 <body>
@@ -143,123 +190,247 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
 </aside>
 <div class="page-shell">
   <div class="page-inner">
-    <!-- <?php echo $projects->all_html ?> -->
-    <div class="pg-hd">
-      <div><div class="pg-title">Projects</div></div>
-      <button class="btn btn-primary btn-sm" id="open-create-pj">Create project +</button>
-    </div>
 
-    <div class="tabs">
-      <button class="tab on">Joined (4)</button>
-      <button class="tab">Discover</button>
-      <button class="tab">Created by you (1)</button>
-    </div>
-    <div class="proj-grid">
-      <div class="pj pj-advocacy">
-        <div class="pj-type">Advocacy</div>
-        <div class="pj-name">Ethical AI in Catholic Education — Global Statement</div>
-        <div class="pj-desc">Co-signed open letter to the Holy See and EU calling for ethical standards in Catholic schools' use of AI.</div>
-        <div class="pj-stats">
-          <div><div class="pj-stat-val">247</div><div class="pj-stat-lbl">Parishes signed</div></div>
-          <div><div class="pj-stat-val">38</div><div class="pj-stat-lbl">Countries</div></div>
-          <div><div class="pj-stat-val">500</div><div class="pj-stat-lbl">Goal</div></div>
-        </div>
-        <div><div class="pj-prog-lbl"><span>Progress to goal</span><span>49%</span></div><div class="pj-prog"><div class="pj-fill" style="width:49%"></div></div></div>
-        <div class="pj-actions"><a href="messages.html" class="btn btn-secondary btn-sm">Project channel</a><a href="#" class="btn btn-primary btn-sm">View details</a></div>
-      </div>
-      <div class="pj pj-project">
-        <div class="pj-type">Project</div>
-        <div class="pj-name">Global Youth Formation Network</div>
-        <div class="pj-desc">Shared curriculum, virtual exchanges, and mentorship pairing between youth groups across parishes worldwide.</div>
-        <div class="pj-stats">
-          <div><div class="pj-stat-val">89</div><div class="pj-stat-lbl">Parishes</div></div>
-          <div><div class="pj-stat-val">22</div><div class="pj-stat-lbl">Countries</div></div>
-          <div><div class="pj-stat-val" style="color:var(--sage)">Active</div><div class="pj-stat-lbl">Status</div></div>
-        </div>
-        <div><div class="pj-prog-lbl"><span>Curriculum complete</span><span>72%</span></div><div class="pj-prog"><div class="pj-fill" style="width:72%"></div></div></div>
-        <div class="pj-actions"><a href="messages.html" class="btn btn-secondary btn-sm">Project channel</a><a href="#" class="btn btn-primary btn-sm">View details</a></div>
-      </div>
-      <div class="pj pj-advocacy">
-        <div class="pj-type">Advocacy</div>
-        <div class="pj-name">Migration &amp; Refugee Support — UN Statement</div>
-        <div class="pj-desc">Parishes serving migrant communities co-signing a position paper to the UN Special Committee on Migration.</div>
-        <div class="pj-stats">
-          <div><div class="pj-stat-val">163</div><div class="pj-stat-lbl">Parishes signed</div></div>
-          <div><div class="pj-stat-val">41</div><div class="pj-stat-lbl">Countries</div></div>
-          <div><div class="pj-stat-val">300</div><div class="pj-stat-lbl">Goal</div></div>
-        </div>
-        <div><div class="pj-prog-lbl"><span>Progress to goal</span><span>54%</span></div><div class="pj-prog"><div class="pj-fill" style="width:54%"></div></div></div>
-        <div class="pj-actions"><a href="messages.html" class="btn btn-secondary btn-sm">Project channel</a><a href="#" class="btn btn-primary btn-sm">View details</a></div>
-      </div>
-      <div class="pj pj-research">
-        <div class="pj-type">Research · Created by you</div>
-        <div class="pj-name">Digital Sovereignty &amp; Parish Life Study</div>
-        <div class="pj-desc">Research project studying how parishes can maintain digital sovereignty while engaging with modern technology.</div>
-        <div class="pj-stats">
-          <div><div class="pj-stat-val">28</div><div class="pj-stat-lbl">Parishes</div></div>
-          <div><div class="pj-stat-val">14</div><div class="pj-stat-lbl">Countries</div></div>
-          <div><div class="pj-stat-val" style="color:var(--sage)">Open</div><div class="pj-stat-lbl">Status</div></div>
-        </div>
-        <div><div class="pj-prog-lbl"><span>Target: 50 parishes</span><span>56%</span></div><div class="pj-prog"><div class="pj-fill" style="width:56%"></div></div></div>
-        <div class="pj-actions"><a href="#" class="btn btn-secondary btn-sm">Manage</a><a href="#" class="btn btn-primary btn-sm">View &amp; invite</a></div>
-      </div>
-    </div>
-    <script>
-    (function(){
-      var tabs=document.querySelectorAll('.tab');
-      tabs.forEach(function(t){t.addEventListener('click',function(){tabs.forEach(function(x){x.classList.remove('on')});t.classList.add('on')})});
-    }());
-    </script>
+  <div class="impact-row">
+    <div class="ic ic-terra"><div class="ic-val">4</div><div class="ic-lbl">Projects joined</div></div>
+    <div class="ic ic-sage"><div class="ic-val">617</div><div class="ic-lbl">Total parishes</div></div>
+    <div class="ic ic-amber"><div class="ic-val">115</div><div class="ic-lbl">Countries reached</div></div>
+    <div class="ic ic-ink"><div class="ic-val">1</div><div class="ic-lbl">Created by you</div></div>
   </div>
+
+  <div class="pj-hd">
+    <div>
+      <div class="pg-title">Projects</div>
+      <div style="font-family:'Lora',serif;font-size:12px;color:var(--light);font-style:italic;margin-top:2px">Global collaboration across the Communio network</div>
+    </div>
+    <button class="btn btn-primary btn-sm" id="open-create-pj">Create project +</button>
+  </div>
+
+  <div class="pj-tabs">
+    <button class="pj-tab on" data-tab="my">My projects <span class="pj-tab-count">4</span></button>
+    <button class="pj-tab" data-tab="discover">Discover</button>
+    <button class="pj-tab" data-tab="mine">Created by me <span class="pj-tab-count">1</span></button>
+  </div>
+
+  <div class="pj-tab-pane on" id="pjtab-my">
+    <div class="pj-filters">
+      <button class="pj-fp on" data-t="all">All types</button>
+      <button class="pj-fp" data-t="advocacy">Advocacy</button>
+      <button class="pj-fp" data-t="formation">Formation</button>
+      <button class="pj-fp" data-t="mission">Mission</button>
+      <button class="pj-fp" data-t="ecology">Ecology</button>
+      <button class="pj-fp" data-t="research">Research</button>
+      <button class="pj-fp" data-t="solidarity">Solidarity</button>
+      <button class="pj-fp" data-t="build">Build</button>
+    </div>
+    <div class="pj-grid" id="proj-grid">
+
+      <div class="pj-card" data-type="advocacy">
+        <div class="pj-card-bar" style="background:#D85A30"></div>
+        <div class="pj-card-body">
+          <div class="pj-card-hd">
+            <span class="pj-badge" style="background:#FAECE7;color:#712B13">Advocacy</span>
+            <span class="pj-status st-active">Active</span>
+          </div>
+          <div class="pj-card-title">Ethical AI in Catholic Education — Global Statement</div>
+          <div class="pj-card-desc">Co-signed open letter to the Holy See and EU calling for ethical standards in Catholic schools' use of AI tools.</div>
+          <div class="pj-stats-row">
+            <div><div class="pj-sv">247</div><div class="pj-sl">Parishes signed</div></div>
+            <div><div class="pj-sv">38</div><div class="pj-sl">Countries</div></div>
+            <div><div class="pj-sv">500</div><div class="pj-sl">Goal</div></div>
+          </div>
+          <div class="pj-prog">
+            <div class="pj-prog-lbl"><span>Progress to goal</span><span>49%</span></div>
+            <div class="pj-prog-track"><div class="pj-prog-fill" style="width:49%;background:#D85A30"></div></div>
+          </div>
+          <div class="pj-card-ft">
+            <div class="pj-avs">
+              <div class="pj-av" style="background:var(--terra)">SM</div>
+              <div class="pj-av" style="background:var(--sage)">HS</div>
+              <div class="pj-av" style="background:#185FA5">SS</div>
+              <div class="pj-av pj-av-more">+244</div>
+            </div>
+            <div style="display:flex;gap:6px">
+              <a href="messages.html" class="btn btn-secondary btn-sm">Channel</a>
+              <a href="#" class="btn btn-primary btn-sm" style="background:#D85A30;border-color:#D85A30">Details</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pj-card" data-type="formation">
+        <div class="pj-card-bar" style="background:#3B6D11"></div>
+        <div class="pj-card-body">
+          <div class="pj-card-hd">
+            <span class="pj-badge" style="background:#EAF3DE;color:#27500A">Formation</span>
+            <span class="pj-status st-active">Active</span>
+          </div>
+          <div class="pj-card-title">Global Youth Formation Network</div>
+          <div class="pj-card-desc">Shared curriculum, virtual exchanges, and mentorship pairing between youth groups across parishes worldwide.</div>
+          <div class="pj-stats-row">
+            <div><div class="pj-sv">89</div><div class="pj-sl">Parishes</div></div>
+            <div><div class="pj-sv">22</div><div class="pj-sl">Countries</div></div>
+            <div><div class="pj-sv">Active</div><div class="pj-sl">Status</div></div>
+          </div>
+          <div class="pj-prog">
+            <div class="pj-prog-lbl"><span>Curriculum complete</span><span>72%</span></div>
+            <div class="pj-prog-track"><div class="pj-prog-fill" style="width:72%;background:#3B6D11"></div></div>
+          </div>
+          <div class="pj-card-ft">
+            <div class="pj-avs">
+              <div class="pj-av" style="background:var(--terra)">SM</div>
+              <div class="pj-av" style="background:var(--sage)">HS</div>
+              <div class="pj-av pj-av-more">+87</div>
+            </div>
+            <div style="display:flex;gap:6px">
+              <a href="messages.html" class="btn btn-secondary btn-sm">Channel</a>
+              <a href="#" class="btn btn-primary btn-sm" style="background:#3B6D11;border-color:#3B6D11">Details</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pj-card" data-type="advocacy">
+        <div class="pj-card-bar" style="background:#D85A30"></div>
+        <div class="pj-card-body">
+          <div class="pj-card-hd">
+            <span class="pj-badge" style="background:#FAECE7;color:#712B13">Advocacy</span>
+            <span class="pj-status st-active">Active</span>
+          </div>
+          <div class="pj-card-title">Migration &amp; Refugee Support — UN Statement</div>
+          <div class="pj-card-desc">Parishes serving migrant communities co-signing a position paper to the UN Special Committee on Migration.</div>
+          <div class="pj-stats-row">
+            <div><div class="pj-sv">163</div><div class="pj-sl">Parishes signed</div></div>
+            <div><div class="pj-sv">41</div><div class="pj-sl">Countries</div></div>
+            <div><div class="pj-sv">300</div><div class="pj-sl">Goal</div></div>
+          </div>
+          <div class="pj-prog">
+            <div class="pj-prog-lbl"><span>Progress to goal</span><span>54%</span></div>
+            <div class="pj-prog-track"><div class="pj-prog-fill" style="width:54%;background:#D85A30"></div></div>
+          </div>
+          <div class="pj-card-ft">
+            <div class="pj-avs">
+              <div class="pj-av" style="background:var(--terra)">SM</div>
+              <div class="pj-av" style="background:var(--amber)">SJ</div>
+              <div class="pj-av pj-av-more">+161</div>
+            </div>
+            <div style="display:flex;gap:6px">
+              <a href="messages.html" class="btn btn-secondary btn-sm">Channel</a>
+              <a href="#" class="btn btn-primary btn-sm" style="background:#D85A30;border-color:#D85A30">Details</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pj-card" data-type="research">
+        <div class="pj-card-bar" style="background:#185FA5"></div>
+        <div class="pj-card-body">
+          <div class="pj-card-hd">
+            <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">
+              <span class="pj-badge" style="background:#E6F1FB;color:#0C447C">Research</span>
+              <span class="pj-created-tag">Created by you</span>
+            </div>
+            <span class="pj-status st-open">Open</span>
+          </div>
+          <div class="pj-card-title">Digital Sovereignty &amp; Parish Life Study</div>
+          <div class="pj-card-desc">Research project studying how parishes can maintain digital sovereignty while engaging with modern technology.</div>
+          <div class="pj-stats-row">
+            <div><div class="pj-sv">28</div><div class="pj-sl">Parishes</div></div>
+            <div><div class="pj-sv">14</div><div class="pj-sl">Countries</div></div>
+            <div><div class="pj-sv">50</div><div class="pj-sl">Target</div></div>
+          </div>
+          <div class="pj-prog">
+            <div class="pj-prog-lbl"><span>Target: 50 parishes</span><span>56%</span></div>
+            <div class="pj-prog-track"><div class="pj-prog-fill" style="width:56%;background:#185FA5"></div></div>
+          </div>
+          <div class="pj-card-ft">
+            <div class="pj-avs">
+              <div class="pj-av" style="background:var(--terra)">SM</div>
+              <div class="pj-av pj-av-more">+27</div>
+            </div>
+            <div style="display:flex;gap:6px">
+              <a href="#" class="btn btn-secondary btn-sm">Manage</a>
+              <a href="#" class="btn btn-primary btn-sm" style="background:#185FA5;border-color:#185FA5">View &amp; invite</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="pj-tab-pane" id="pjtab-discover">
+    <div style="padding:60px 0;text-align:center">
+      <div style="font-size:32px;margin-bottom:12px">🌍</div>
+      <div style="font-size:15px;font-weight:700;color:var(--ink);margin-bottom:6px">Discover is coming next</div>
+      <div style="font-family:'Lora',serif;font-size:13px;color:var(--light);font-style:italic">Recommended projects and your network's activity — Chunk 2</div>
+    </div>
+  </div>
+
+  <div class="pj-tab-pane" id="pjtab-mine">
+    <div class="pj-grid">
+      <div class="pj-card" data-type="research">
+        <div class="pj-card-bar" style="background:#185FA5"></div>
+        <div class="pj-card-body">
+          <div class="pj-card-hd">
+            <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">
+              <span class="pj-badge" style="background:#E6F1FB;color:#0C447C">Research</span>
+              <span class="pj-created-tag">Created by you</span>
+            </div>
+            <span class="pj-status st-open">Open</span>
+          </div>
+          <div class="pj-card-title">Digital Sovereignty &amp; Parish Life Study</div>
+          <div class="pj-card-desc">Research project studying how parishes can maintain digital sovereignty while engaging with modern technology.</div>
+          <div class="pj-stats-row">
+            <div><div class="pj-sv">28</div><div class="pj-sl">Parishes</div></div>
+            <div><div class="pj-sv">14</div><div class="pj-sl">Countries</div></div>
+            <div><div class="pj-sv">50</div><div class="pj-sl">Target</div></div>
+          </div>
+          <div class="pj-prog">
+            <div class="pj-prog-lbl"><span>Target: 50 parishes</span><span>56%</span></div>
+            <div class="pj-prog-track"><div class="pj-prog-fill" style="width:56%;background:#185FA5"></div></div>
+          </div>
+          <div class="pj-card-ft">
+            <div class="pj-avs">
+              <div class="pj-av" style="background:var(--terra)">SM</div>
+              <div class="pj-av pj-av-more">+27</div>
+            </div>
+            <div style="display:flex;gap:6px">
+              <a href="#" class="btn btn-secondary btn-sm">Manage</a>
+              <a href="#" class="btn btn-primary btn-sm" style="background:#185FA5;border-color:#185FA5">View &amp; invite</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
 </div>
 
-<!-- Create project modal -->
-<div class="pj-modal-overlay" id="pj-modal-overlay">
-  <div class="pj-modal">
-    <div class="pj-modal-hd">
-      <div class="pj-modal-title">Create a project</div>
-      <button class="pj-modal-close" id="pj-modal-close">✕</button>
-    </div>
-    <div class="pj-fg">
-      <label class="pj-fl">Project title</label>
-      <input class="pj-fi" type="text" id="pj-title" placeholder="e.g. Global Youth Formation Network">
-    </div>
-    <div class="pj-fg">
-      <label class="pj-fl">Project type</label>
-      <select class="pj-fi" id="pj-type">
-        <option value="">Select a type...</option>
-        <option value="advocacy">Advocacy — co-signed statement or open letter</option>
-        <option value="project">Project — active collaboration between parishes</option>
-        <option value="research">Research — study or data collection</option>
-      </select>
-    </div>
-    <div class="pj-fg">
-      <label class="pj-fl">Description</label>
-      <textarea class="pj-fta" id="pj-desc" placeholder="What is this project about? What are you trying to achieve?"></textarea>
-    </div>
-    <div class="pj-fg">
-      <label class="pj-fl">Project thumbnail <span style="font-weight:400;color:var(--light)">(optional)</span></label>
-      <div class="pj-thumb-upload" id="pj-thumb-area">
-        <input type="file" id="pj-thumb-input" accept="image/*" style="position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%">
-        <div id="pj-thumb-placeholder">
-          <div style="font-size:24px;margin-bottom:6px">🖼️</div>
-          <div style="font-size:13px;font-weight:600;color:var(--ink)">Upload a thumbnail</div>
-          <div style="font-size:11px;color:var(--light);margin-top:3px">Recommended 800×400px · JPG or PNG</div>
-        </div>
-        <img id="pj-thumb-preview" class="pj-thumb-preview" src="" alt="">
-      </div>
-    </div>
-    <div class="pj-fg">
-      <label class="pj-fl">Target parishes <span style="font-weight:400;color:var(--light)">(optional — for advocacy)</span></label>
-      <input class="pj-fi" type="number" id="pj-target" placeholder="e.g. 500">
-    </div>
-    <div class="pj-modal-ft">
-      <button class="btn btn-secondary btn-sm" id="pj-cancel">Cancel</button>
-      <button class="btn btn-primary btn-sm" id="pj-submit">Create project →</button>
-    </div>
-  </div>
-</div>
-
+<script>
+(function(){
+  document.querySelectorAll('.pj-tab').forEach(function(tab){
+    tab.addEventListener('click',function(){
+      document.querySelectorAll('.pj-tab').forEach(function(t){t.classList.remove('on')});
+      document.querySelectorAll('.pj-tab-pane').forEach(function(p){p.classList.remove('on')});
+      tab.classList.add('on');
+      var pane=document.getElementById('pjtab-'+tab.dataset.tab);
+      if(pane)pane.classList.add('on');
+    });
+  });
+  document.querySelectorAll('.pj-fp').forEach(function(fp){
+    fp.addEventListener('click',function(){
+      document.querySelectorAll('.pj-fp').forEach(function(f){f.classList.remove('on')});
+      fp.classList.add('on');
+      var t=fp.dataset.t;
+      document.querySelectorAll('#proj-grid .pj-card').forEach(function(c){
+        c.style.display=(t==='all'||c.dataset.type===t)?'':'none';
+      });
+    });
+  });
+})();
+</script>
 <script>
 (function(){
   var b=document.getElementById('burger');
@@ -270,48 +441,6 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
     if(!b.contains(e.target)&&!m.contains(e.target))m.classList.remove('open');
   });
 })();
-
-  // Create project modal
-  var overlay = document.getElementById('pj-modal-overlay');
-  var thumbInput = document.getElementById('pj-thumb-input');
-  var thumbPreview = document.getElementById('pj-thumb-preview');
-  var thumbPlaceholder = document.getElementById('pj-thumb-placeholder');
-
-  document.getElementById('open-create-pj').addEventListener('click', function(){
-    overlay.classList.add('open');
-    document.body.style.overflow = 'hidden';
-  });
-
-  function closeModal(){
-    overlay.classList.remove('open');
-    document.body.style.overflow = '';
-  }
-
-  document.getElementById('pj-modal-close').addEventListener('click', closeModal);
-  document.getElementById('pj-cancel').addEventListener('click', closeModal);
-  overlay.addEventListener('click', function(e){ if(e.target === overlay) closeModal(); });
-  document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeModal(); });
-
-  thumbInput.addEventListener('change', function(){
-    var file = this.files[0];
-    if(!file) return;
-    var reader = new FileReader();
-    reader.onload = function(e){
-      thumbPreview.src = e.target.result;
-      thumbPreview.style.display = 'block';
-      thumbPlaceholder.style.display = 'none';
-    };
-    reader.readAsDataURL(file);
-  });
-
-  document.getElementById('pj-submit').addEventListener('click', function(){
-    var title = document.getElementById('pj-title').value.trim();
-    if(!title){ document.getElementById('pj-title').focus(); return; }
-    var b = document.getElementById('pj-submit');
-    b.textContent = '✓ Project created';
-    b.style.background = 'var(--sage)';
-    setTimeout(function(){ closeModal(); b.textContent = 'Create project →'; b.style.background = ''; }, 1500);
-  });
 </script>
 </body>
 </html>
