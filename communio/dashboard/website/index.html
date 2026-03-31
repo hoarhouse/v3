@@ -619,23 +619,9 @@ syncPreview('mass-times');
 </script>
 
 <script>
-function toggleMinistry(key, visible) {
-  localStorage.setItem('ministry_' + key, visible ? 'visible' : 'hidden');
-}
+function toggleMinistry(key,visible){try{var pd=JSON.parse(localStorage.getItem('parish_data')||'{}');if(!pd.ministries)pd.ministries={};pd.ministries[key]=visible;localStorage.setItem('parish_data',JSON.stringify(pd));}catch(e){}}
 
-// Init toggles from localStorage
-(function(){
-  var toggles = document.querySelectorAll('#wb-panel-involved input[type="checkbox"]');
-  toggles.forEach(function(toggle) {
-    var onchange = toggle.getAttribute('onchange');
-    var match = onchange && onchange.match(/toggleMinistry\('([^']+)'/);
-    if(match) {
-      var key = match[1];
-      var state = localStorage.getItem('ministry_' + key);
-      if(state === 'hidden') toggle.checked = false;
-    }
-  });
-})();
+(function(){try{var pd=JSON.parse(localStorage.getItem('parish_data')||'{}');var mins=(pd&&pd.ministries)||{};document.querySelectorAll('#wb-panel-involved input[type="checkbox"]').forEach(function(toggle){var onch=toggle.getAttribute('onchange');var match=onch&&onch.match(/toggleMinistry\('([^']+)'/);if(match){var key=match[1];if(mins[key]===false)toggle.checked=false;}});}catch(e){}})();
 </script>
 </body>
 </html>
