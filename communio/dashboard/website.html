@@ -439,6 +439,44 @@ input:checked+.mtoggle-slider:before{transform:translateX(16px)}
       <button class="btn btn-primary btn-sm" id="save-media-btn">Save media settings →</button>
     </div>
   </div>
+  <div class="card" style="margin-top:18px">
+    <div class="card-title">Online giving</div>
+    <div class="card-sub">Set up and manage your online giving — shown on your public parish website</div>
+    <div class="fg-row">
+      <div class="fg">
+        <label class="fl">Giving platform</label>
+        <select class="fi" id="giving-platform">
+          <option value="">Select a platform...</option>
+          <option value="stripe">Stripe</option>
+          <option value="paypal">PayPal</option>
+          <option value="tithely">Tithe.ly</option>
+          <option value="pushpay">Pushpay</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+      <div class="fg"><label class="fl">Giving page URL</label><input class="fi" type="url" id="giving-url" placeholder="https://your-giving-platform.com"></div>
+    </div>
+    <div class="fg"><label class="fl">Default giving amounts</label>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px">
+        <input class="fi" type="number" id="giving-amt1" placeholder="$10" value="10" style="text-align:center">
+        <input class="fi" type="number" id="giving-amt2" placeholder="$25" value="25" style="text-align:center">
+        <input class="fi" type="number" id="giving-amt3" placeholder="$50" value="50" style="text-align:center">
+        <input class="fi" type="number" id="giving-amt4" placeholder="$100" value="100" style="text-align:center">
+      </div>
+    </div>
+    <div class="fg"><label class="fl">Giving statement <span style="color:var(--light);font-weight:400">(shown on website)</span></label><textarea class="fta" id="giving-statement" rows="2" placeholder="Your generosity supports our parish community and mission."></textarea></div>
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-top:1px solid var(--border-light)">
+      <div><div style="font-size:13px;font-weight:600;color:var(--ink)">Enable recurring donations</div><div style="font-size:12px;color:var(--light)">Allow parishioners to set up weekly or monthly giving</div></div>
+      <label style="position:relative;display:inline-block;width:38px;height:22px;flex-shrink:0"><input type="checkbox" id="giving-recurring" checked style="opacity:0;width:0;height:0"><span class="mtoggle-slider"></span></label>
+    </div>
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-top:1px solid var(--border-light)">
+      <div><div style="font-size:13px;font-weight:600;color:var(--ink)">Show giving total</div><div style="font-size:12px;color:var(--light)">Display a fundraising progress bar on your website</div></div>
+      <label style="position:relative;display:inline-block;width:38px;height:22px;flex-shrink:0"><input type="checkbox" id="giving-showtotal" style="opacity:0;width:0;height:0"><span class="mtoggle-slider"></span></label>
+    </div>
+    <div style="display:flex;justify-content:flex-end;margin-top:16px">
+      <button class="btn btn-primary btn-sm" id="save-giving-btn">Save giving settings →</button>
+    </div>
+  </div>
 </div>
     <div class="tab-content" id="tab-analytics">
   <!-- <?php echo $analytics->summary_html ?> -->
@@ -738,6 +776,39 @@ input:checked+.mtoggle-slider:before{transform:translateX(16px)}
   document.getElementById('bulletin-upload').addEventListener('click', function(e){
     if(e.target.tagName !== 'SPAN') document.getElementById('bulletin-file').click();
   });
+  document.getElementById('save-giving-btn').addEventListener('click', function(){
+    try {
+      var pd = JSON.parse(localStorage.getItem('parish_data') || '{}');
+      pd.givingPlatform   = document.getElementById('giving-platform').value;
+      pd.givingUrl        = document.getElementById('giving-url').value.trim();
+      pd.givingAmt1       = document.getElementById('giving-amt1').value;
+      pd.givingAmt2       = document.getElementById('giving-amt2').value;
+      pd.givingAmt3       = document.getElementById('giving-amt3').value;
+      pd.givingAmt4       = document.getElementById('giving-amt4').value;
+      pd.givingStatement  = document.getElementById('giving-statement').value.trim();
+      pd.givingRecurring  = document.getElementById('giving-recurring').checked;
+      pd.givingShowTotal  = document.getElementById('giving-showtotal').checked;
+      localStorage.setItem('parish_data', JSON.stringify(pd));
+    } catch(e) {}
+    var b = document.getElementById('save-giving-btn');
+    b.textContent = '✓ Saved';
+    b.style.background = 'var(--sage)';
+    setTimeout(function(){ b.textContent = 'Save giving settings →'; b.style.background = ''; }, 2000);
+  });
+  (function(){
+    try {
+      var pd = JSON.parse(localStorage.getItem('parish_data') || '{}');
+      if(pd.givingPlatform)  document.getElementById('giving-platform').value    = pd.givingPlatform;
+      if(pd.givingUrl)       document.getElementById('giving-url').value         = pd.givingUrl;
+      if(pd.givingAmt1)      document.getElementById('giving-amt1').value        = pd.givingAmt1;
+      if(pd.givingAmt2)      document.getElementById('giving-amt2').value        = pd.givingAmt2;
+      if(pd.givingAmt3)      document.getElementById('giving-amt3').value        = pd.givingAmt3;
+      if(pd.givingAmt4)      document.getElementById('giving-amt4').value        = pd.givingAmt4;
+      if(pd.givingStatement) document.getElementById('giving-statement').value   = pd.givingStatement;
+      if(pd.givingRecurring  === false) document.getElementById('giving-recurring').checked  = false;
+      if(pd.givingShowTotal  === true)  document.getElementById('giving-showtotal').checked  = true;
+    } catch(e) {}
+  })();
   document.getElementById('save-media-btn').addEventListener('click', function(){
     try {
       var pd = JSON.parse(localStorage.getItem('parish_data') || '{}');
