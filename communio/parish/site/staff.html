@@ -470,6 +470,167 @@ html, body { overflow-x: hidden; max-width: 100%; }
 /* Image responsiveness */
 img{max-width:100%;height:auto;}
 
+
+/* ── CHUNK 3: POLISH & FINAL MOBILE FIXES ── */
+
+/* Hero live card — fix overlap on mobile */
+@media(max-width:768px){
+  .hero{overflow:visible;}
+  .hero-live-card{
+    position:relative;
+    bottom:auto;
+    left:auto;
+    transform:none;
+    margin:1.5rem auto 0;
+    width:calc(100% - 2.5rem);
+    max-width:100%;
+    flex-wrap:nowrap;
+    gap:1rem;
+  }
+  .live-btn{margin-left:auto;flex-shrink:0;}
+}
+
+/* Hero title — tighter on very small screens */
+@media(max-width:480px){
+  .hero h1{font-size:clamp(1.5rem,8vw,2rem);line-height:1.15;}
+  .hero-subtitle{font-size:.9rem;}
+  .hero-eyebrow{font-size:.65rem;}
+}
+
+/* Small labels — minimum readable size */
+@media(max-width:768px){
+  .mass-overline, .confession-text, .event-meta,
+  .footer-col-title, .overline, .sac-overline,
+  .ministry-section-label, .need-category,
+  .role-meta, .staff-title{font-size:.72rem;}
+}
+
+/* Section title sizing on mobile */
+@media(max-width:480px){
+  .involved-title, .values-title, .ministries-title,
+  .timeline-title, .needs-title{
+    font-size:clamp(1.4rem,6vw,1.75rem);
+  }
+}
+
+/* Fix hero container padding on mobile */
+@media(max-width:768px){
+  .hero .container{
+    padding-left:1.25rem;
+    padding-right:1.25rem;
+    width:100%;
+  }
+}
+
+/* Fix get involved intro grid on mobile */
+@media(max-width:768px){
+  .intro-grid{grid-template-columns:1fr;gap:2rem;}
+  .stats-row{flex-direction:row;flex-wrap:wrap;gap:1rem;}
+  .stat{flex:1;min-width:80px;text-align:center;}
+  .intro-quote{padding:1.5rem;}
+  .intro-quote blockquote{font-size:1.05rem;}
+}
+
+/* Fix needs grid on mobile */
+@media(max-width:568px){
+  .needs-section{padding:3rem 1.25rem;}
+  .needs-grid{grid-template-columns:1fr;}
+  .need-card{padding:1.25rem;}
+}
+
+/* Fix role cards on mobile */
+@media(max-width:568px){
+  .roles-grid{grid-template-columns:1fr;}
+  .role-card-top{gap:.5rem;}
+  .role-apply{font-size:.7rem;padding:.4rem .75rem;}
+}
+
+/* Fix group cards on mobile */
+@media(max-width:568px){
+  .group-card{padding:1rem;}
+  .group-card-header{flex-direction:column;align-items:flex-start;gap:.75rem;}
+  .group-card-header .role-apply{width:100%;text-align:center;}
+}
+
+/* Ministry section icon on mobile */
+@media(max-width:768px){
+  .ministry-section-inner{grid-template-columns:1fr;gap:1.25rem;}
+  .ministry-section-icon{width:52px;height:52px;}
+}
+
+/* Footer social icons — bigger tap targets */
+@media(max-width:768px){
+  .footer-social a{width:48px;height:48px;font-size:.85rem;}
+  .footer-social{gap:.75rem;}
+}
+
+/* Footer bottom on mobile */
+@media(max-width:568px){
+  .footer-bottom{padding:1rem 0;gap:.5rem;}
+  .footer-bottom-links{gap:.75rem;font-size:.72rem;}
+}
+
+/* Confession banner on mobile */
+@media(max-width:568px){
+  .confession-banner{flex-direction:column;text-align:center;gap:.5rem;}
+  .confession-text{font-size:.8rem;}
+}
+
+/* Events filter scroll on mobile */
+@media(max-width:568px){
+  .events-filter{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+  .events-filter-inner{min-width:max-content;}
+}
+
+/* Staff photo on mobile */
+@media(max-width:568px){
+  .staff-photo{height:180px;}
+}
+
+/* About timeline on mobile */
+@media(max-width:568px){
+  .timeline-item{grid-template-columns:50px 1fr;gap:.75rem;}
+  .timeline-year{font-size:.78rem;padding-top:.25rem;}
+  .timeline-content h3{font-size:.9rem;}
+  .timeline-content p{font-size:.8rem;}
+}
+
+/* RCIA journey on mobile */
+@media(max-width:568px){
+  .journey-steps{grid-template-columns:1fr;}
+  .journey-num{width:44px;height:44px;font-size:1rem;}
+}
+
+/* Sacrament booking form on mobile */
+@media(max-width:568px){
+  .sac-step-num{width:24px;height:24px;font-size:.7rem;flex-shrink:0;}
+  .sac-contact-box{font-size:.82rem;padding:1rem;}
+}
+
+/* Bulletin archive on mobile */
+@media(max-width:568px){
+  .archive-card{padding:1rem;}
+  .archive-icon{width:34px;height:34px;}
+  .archive-info-title{font-size:.82rem;}
+}
+
+/* Legal pages on mobile */
+@media(max-width:568px){
+  .legal-content{padding:2.5rem 1.25rem 4rem;}
+  .legal-content h2{font-size:1.1rem;}
+  .legal-content p, .legal-content ul{font-size:.875rem;}
+}
+
+/* Smooth scrolling globally */
+html{scroll-behavior:smooth;}
+
+/* Better focus styles for accessibility */
+a:focus-visible, button:focus-visible, input:focus-visible, 
+select:focus-visible, textarea:focus-visible{
+  outline:2px solid var(--terra);
+  outline-offset:2px;
+}
+
 </style>
 </head>
 <body>
