@@ -185,8 +185,8 @@ a[data-contact]:hover{color:var(--terra-dark);border-bottom-color:var(--terra-da
 .group-desc{font-size:.85rem;color:var(--text-muted);line-height:1.7;}
 
 
-.role-card{cursor:pointer;}
-.role-card.expanded{border-color:var(--terra);box-shadow:0 4px 20px rgba(216,80,32,0.12);} .role-card-top{display:flex;align-items:center;justify-content:space-between;gap:1rem;}
+.role-card{cursor:pointer;} .role-card-top{display:flex;align-items:center;justify-content:space-between;gap:1rem;}
+.role-card.expanded{border-color:var(--terra);box-shadow:0 4px 20px rgba(216,80,32,0.12);} 
 .role-expand{display:none;margin-top:1rem;padding-top:1rem;border-top:1px solid rgba(14,10,6,0.07);}
 .role-card.expanded .role-expand{display:block;}
 .role-expand-about{font-size:.85rem;color:var(--text-body);line-height:1.7;margin-bottom:.875rem;}
@@ -982,15 +982,19 @@ a[data-contact]:hover{color:var(--terra-dark);border-bottom-color:var(--terra-da
   </div>
 </section>
 
+
 <script>
 document.querySelectorAll('.role-card').forEach(function(card){
-  card.style.cursor = 'pointer';
   card.addEventListener('click', function(e){
-    if(e.target.closest('button')) return;
-    var expand = card.querySelector('.role-expand');
-    if(!expand) return;
-    var isOpen = expand.style.display === 'block';
-    expand.style.display = isOpen ? 'none' : 'block';
+    if(e.target.closest('.role-apply')) return;
+    // Find next sibling role-expand
+    var next = card.nextElementSibling;
+    while(next && !next.classList.contains('role-expand')){
+      next = next.nextElementSibling;
+    }
+    if(!next) return;
+    var isOpen = next.style.display === 'block';
+    next.style.display = isOpen ? 'none' : 'block';
     card.style.borderColor = isOpen ? '' : 'var(--terra)';
     card.style.boxShadow = isOpen ? '' : '0 4px 20px rgba(216,80,32,0.12)';
   });
