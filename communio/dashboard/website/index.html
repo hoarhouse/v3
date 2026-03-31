@@ -322,7 +322,15 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
             <div class="wb-section-status wb-status-soon">In development</div>
           </div>
         </div>
-        <div class="wb-section-item" data-section="media">
+        <div class="wb-section-item" data-section="involved">
+        <div class="wb-section-icon">🤝</div>
+        <div class="wb-section-info">
+          <div class="wb-section-name">Get Involved</div>
+          <div class="wb-section-status wb-status-live">7 ministries</div>
+        </div>
+        <div class="wb-section-arrow">›</div>
+      </div>
+      <div class="wb-section-item" data-section="media">
           <div class="wb-section-icon">📺</div>
           <div class="wb-section-info">
             <div class="wb-section-name">Media & Livestream</div>
@@ -432,7 +440,97 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
           <button class="wb-save-btn">Save Bulletin Settings</button>
         </div>
         <div class="wb-editor-inner wb-hidden" id="wb-panel-giving"><div class="wb-editor-hd"><div class="wb-editor-title">Giving</div><div class="wb-editor-desc">Set up online giving for your parish. Parishioners can donate directly from your public website.</div></div><div class="wb-field-group"><div class="wb-field-label">Giving platform</div><select class="wb-input"><option value="">Select a platform...</option><option>Stripe</option><option>PayPal</option><option>Tithe.ly</option><option>Pushpay</option><option>Other</option></select></div><div class="wb-field-group"><div class="wb-field-label">Giving page URL</div><input type="url" class="wb-input" placeholder="https://your-giving-page.com"></div><div class="wb-field-group"><div class="wb-field-label">Default giving amounts</div><div class="wb-amount-grid"><input type="number" class="wb-input wb-amount-input" placeholder=""><input type="number" class="wb-input wb-amount-input" placeholder=""><input type="number" class="wb-input wb-amount-input" placeholder=""><input type="number" class="wb-input wb-amount-input" placeholder=""></div></div><div class="wb-field-group"><div class="wb-field-label">Giving statement (shown on website)</div><textarea class="wb-textarea wb-textarea-sm" placeholder="e.g. Your generosity supports our parish community and mission..."></textarea></div><div class="wb-toggle-row"><div class="wb-toggle-info"><div class="wb-toggle-label">Enable recurring donations</div><div class="wb-toggle-sub">Allow parishioners to set up weekly or monthly giving</div></div><label class="wb-toggle"><input type="checkbox" checked><span class="wb-toggle-slider"></span></label></div><div class="wb-toggle-row"><div class="wb-toggle-info"><div class="wb-toggle-label">Show giving total</div><div class="wb-toggle-sub">Display a fundraising progress bar on your website</div></div><label class="wb-toggle"><input type="checkbox"><span class="wb-toggle-slider"></span></label></div><button class="wb-save-btn">Save Giving Settings</button></div>
-        <div class="wb-editor-inner wb-hidden" id="wb-panel-media"><div class="wb-editor-hd"><div class="wb-editor-title">Media & Livestream</div><div class="wb-editor-desc">Connect your media channels so parishioners can watch Mass live and access recordings.</div></div><div class="wb-field-group"><div class="wb-field-label">YouTube channel URL</div><input type="url" class="wb-input" placeholder="https://youtube.com/@yourchannelname"></div><div class="wb-field-group"><div class="wb-field-label">Live stream schedule</div><input type="text" class="wb-input" placeholder="e.g. Sunday 9 AM Mass streamed live"></div><div class="wb-field-group"><div class="wb-field-label">Podcast / Audio feed URL</div><input type="url" class="wb-input" placeholder="https://anchor.fm/yourparish or Spotify link"></div><div class="wb-field-group"><div class="wb-field-label">Spotify playlist (optional)</div><input type="url" class="wb-input" placeholder="https://open.spotify.com/playlist/..."></div><div class="wb-field-group"><div class="wb-field-label">Formed.org parish code (optional)</div><input type="text" class="wb-input" placeholder="Your Formed.org parish access code"></div><div class="wb-toggle-row"><div class="wb-toggle-info"><div class="wb-toggle-label">Show livestream on homepage</div><div class="wb-toggle-sub">Embed live YouTube stream prominently on your parish website</div></div><label class="wb-toggle"><input type="checkbox" checked><span class="wb-toggle-slider"></span></label></div><button class="wb-save-btn">Save Media Settings</button></div>
+        
+      <div class="wb-editor-inner wb-hidden" id="wb-panel-involved">
+        <div class="wb-editor-hd">
+          <div class="wb-editor-title">Get Involved — Ministry Sections</div>
+          <div class="wb-editor-desc">Toggle individual ministry sections on or off on your public Get Involved page. Changes take effect immediately for visitors.</div>
+        </div>
+        <div class="wb-toggle-row">
+          <div class="wb-toggle-info">
+            <div class="wb-toggle-label">Volunteer</div>
+            <div class="wb-toggle-sub">General volunteering opportunities</div>
+          </div>
+          <label class="wb-toggle">
+            <input type="checkbox" checked onchange="toggleMinistry('volunteer', this.checked)">
+            <span class="wb-toggle-slider"></span>
+          </label>
+        </div>
+        <div class="wb-toggle-row">
+          <div class="wb-toggle-info">
+            <div class="wb-toggle-label">Small Groups</div>
+            <div class="wb-toggle-sub">Bible study, prayer groups, men's & women's groups</div>
+          </div>
+          <label class="wb-toggle">
+            <input type="checkbox" checked onchange="toggleMinistry('small-groups', this.checked)">
+            <span class="wb-toggle-slider"></span>
+          </label>
+        </div>
+        <div class="wb-toggle-row">
+          <div class="wb-toggle-info">
+            <div class="wb-toggle-label">Liturgical Ministries</div>
+            <div class="wb-toggle-sub">Altar servers, lectors, Eucharistic ministers, ushers</div>
+          </div>
+          <label class="wb-toggle">
+            <input type="checkbox" checked onchange="toggleMinistry('liturgical', this.checked)">
+            <span class="wb-toggle-slider"></span>
+          </label>
+        </div>
+        <div class="wb-toggle-row">
+          <div class="wb-toggle-info">
+            <div class="wb-toggle-label">Music Ministry</div>
+            <div class="wb-toggle-sub">Choir, instrumentalists, cantors</div>
+          </div>
+          <label class="wb-toggle">
+            <input type="checkbox" checked onchange="toggleMinistry('music', this.checked)">
+            <span class="wb-toggle-slider"></span>
+          </label>
+        </div>
+        <div class="wb-toggle-row">
+          <div class="wb-toggle-info">
+            <div class="wb-toggle-label">Youth Ministry</div>
+            <div class="wb-toggle-sub">Middle & high school programmes, retreats</div>
+          </div>
+          <label class="wb-toggle">
+            <input type="checkbox" checked onchange="toggleMinistry('youth', this.checked)">
+            <span class="wb-toggle-slider"></span>
+          </label>
+        </div>
+        <div class="wb-toggle-row">
+          <div class="wb-toggle-info">
+            <div class="wb-toggle-label">Community Outreach</div>
+            <div class="wb-toggle-sub">Food pantry, homebound visits, social services</div>
+          </div>
+          <label class="wb-toggle">
+            <input type="checkbox" checked onchange="toggleMinistry('outreach', this.checked)">
+            <span class="wb-toggle-slider"></span>
+          </label>
+        </div>
+        <div class="wb-toggle-row">
+          <div class="wb-toggle-info">
+            <div class="wb-toggle-label">Faith Formation</div>
+            <div class="wb-toggle-sub">Religious education, RCIA support, adult study</div>
+          </div>
+          <label class="wb-toggle">
+            <input type="checkbox" checked onchange="toggleMinistry('formation', this.checked)">
+            <span class="wb-toggle-slider"></span>
+          </label>
+        </div>
+        <div class="wb-toggle-row">
+          <div class="wb-toggle-info">
+            <div class="wb-toggle-label">Hospitality &amp; Events</div>
+            <div class="wb-toggle-sub">Coffee socials, welcome team, event support</div>
+          </div>
+          <label class="wb-toggle">
+            <input type="checkbox" checked onchange="toggleMinistry('hospitality', this.checked)">
+            <span class="wb-toggle-slider"></span>
+          </label>
+        </div>
+        <div style="margin-top:1.5rem;padding:1rem;background:var(--cream);border-radius:8px;font-size:.8rem;color:#6b5c4e;line-height:1.5;">
+          <strong style="color:var(--ink);">How this works:</strong> Toggle state is saved in the visitor's browser. When the backend is connected, toggles will sync across all devices instantly.
+        </div>
+      </div>
+      <div class="wb-editor-inner wb-hidden" id="wb-panel-media"><div class="wb-editor-hd"><div class="wb-editor-title">Media & Livestream</div><div class="wb-editor-desc">Connect your media channels so parishioners can watch Mass live and access recordings.</div></div><div class="wb-field-group"><div class="wb-field-label">YouTube channel URL</div><input type="url" class="wb-input" placeholder="https://youtube.com/@yourchannelname"></div><div class="wb-field-group"><div class="wb-field-label">Live stream schedule</div><input type="text" class="wb-input" placeholder="e.g. Sunday 9 AM Mass streamed live"></div><div class="wb-field-group"><div class="wb-field-label">Podcast / Audio feed URL</div><input type="url" class="wb-input" placeholder="https://anchor.fm/yourparish or Spotify link"></div><div class="wb-field-group"><div class="wb-field-label">Spotify playlist (optional)</div><input type="url" class="wb-input" placeholder="https://open.spotify.com/playlist/..."></div><div class="wb-field-group"><div class="wb-field-label">Formed.org parish code (optional)</div><input type="text" class="wb-input" placeholder="Your Formed.org parish access code"></div><div class="wb-toggle-row"><div class="wb-toggle-info"><div class="wb-toggle-label">Show livestream on homepage</div><div class="wb-toggle-sub">Embed live YouTube stream prominently on your parish website</div></div><label class="wb-toggle"><input type="checkbox" checked><span class="wb-toggle-slider"></span></label></div><button class="wb-save-btn">Save Media Settings</button></div>
       </div>
     </div></div>
   </div>
@@ -518,6 +616,26 @@ document.querySelectorAll('#wb-panel-events input, #wb-panel-events textarea').f
 });
 // Init first preview
 syncPreview('mass-times');
+</script>
+
+<script>
+function toggleMinistry(key, visible) {
+  localStorage.setItem('ministry_' + key, visible ? 'visible' : 'hidden');
+}
+
+// Init toggles from localStorage
+(function(){
+  var toggles = document.querySelectorAll('#wb-panel-involved input[type="checkbox"]');
+  toggles.forEach(function(toggle) {
+    var onchange = toggle.getAttribute('onchange');
+    var match = onchange && onchange.match(/toggleMinistry\('([^']+)'/);
+    if(match) {
+      var key = match[1];
+      var state = localStorage.getItem('ministry_' + key);
+      if(state === 'hidden') toggle.checked = false;
+    }
+  });
+})();
 </script>
 </body>
 </html>
