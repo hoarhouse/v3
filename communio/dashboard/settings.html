@@ -164,7 +164,37 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
         </div>
         <div class="form-footer">
           <button class="btn btn-secondary btn-sm">Cancel</button>
-          <button class="btn btn-primary btn-sm">Save changes →</button>
+          
+        <div class="sp-divider" style="border-top:1px solid #e8e2d6;margin:1.5rem 0;"></div>
+        <div class="sp-title" style="font-size:.85rem;font-weight:700;color:#0e0a06;margin-bottom:1rem;">Mass Times</div>
+        <div class="form-group"><label class="form-label">Weekday Masses</label><input class="form-input" type="text" id="pd_massWeekday" placeholder="e.g. Mon–Fri 9:00 AM · Tue &amp; Thu 6:45 PM"></div>
+        <div class="form-group"><label class="form-label">Saturday Masses</label><input class="form-input" type="text" id="pd_massSaturday" placeholder="e.g. 10:00 AM · Vigil 5:00 PM"></div>
+        <div class="form-group"><label class="form-label">Sunday Masses</label><input class="form-input" type="text" id="pd_massSunday" placeholder="e.g. 7:00 · 9:00 · 11:00 AM · 1:00 PM (Español) · 6:00 PM"></div>
+        <div class="form-group"><label class="form-label">Confession / Reconciliation</label><input class="form-input" type="text" id="pd_confession" placeholder="e.g. Saturday 3:30–4:30 PM"></div>
+
+        <div class="sp-divider" style="border-top:1px solid #e8e2d6;margin:1.5rem 0;"></div>
+        <div class="sp-title" style="font-size:.85rem;font-weight:700;color:#0e0a06;margin-bottom:1rem;">Office Hours</div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Weekdays</label><input class="form-input" type="text" id="pd_officeWeekday" placeholder="Mon–Fri 9 AM – 5 PM"></div>
+          <div class="form-group"><label class="form-label">Saturday</label><input class="form-input" type="text" id="pd_officeSaturday" placeholder="10 AM – 2 PM"></div>
+        </div>
+        <div class="form-group"><label class="form-label">Sunday</label><input class="form-input" type="text" id="pd_officeSunday" placeholder="After 11 AM Mass"></div>
+
+        <div class="sp-divider" style="border-top:1px solid #e8e2d6;margin:1.5rem 0;"></div>
+        <div class="sp-title" style="font-size:.85rem;font-weight:700;color:#0e0a06;margin-bottom:1rem;">Social Media &amp; Giving</div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Facebook</label><input class="form-input" type="url" id="pd_socialFacebook" placeholder="https://facebook.com/yourparish"></div>
+          <div class="form-group"><label class="form-label">Instagram</label><input class="form-input" type="url" id="pd_socialInstagram" placeholder="https://instagram.com/yourparish"></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">YouTube</label><input class="form-input" type="url" id="pd_socialYoutube" placeholder="https://youtube.com/@yourparish"></div>
+          <div class="form-group"><label class="form-label">Giving Page URL</label><input class="form-input" type="url" id="pd_givingUrl" placeholder="https://your-giving-platform.com"></div>
+        </div>
+        <div style="display:flex;align-items:center;gap:1rem;margin:.5rem 0 1.5rem;">
+          <button id="saveParishData" style="background:#d85020;color:#fff;border:none;padding:.65rem 1.5rem;border-radius:8px;font-size:.875rem;font-weight:600;cursor:pointer;font-family:inherit;">Save all changes</button>
+          <span id="saveStatus" style="font-size:.82rem;color:#2a8a4a;font-weight:500;"></span>
+        </div>
+        <button class="btn btn-primary btn-sm" style="display:none;">Save changes →</button>
         </div>
         <div class="danger-zone">
           <div class="dz-title">Danger zone</div>
