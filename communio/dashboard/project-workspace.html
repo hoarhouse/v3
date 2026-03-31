@@ -172,40 +172,25 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
 .pw-new-form{background:var(--white);border:1.5px solid var(--terra);border-radius:var(--r-lg);padding:20px;margin-bottom:14px;display:none;box-shadow:0 0 0 3px rgba(216,80,32,.08)}
 .pw-new-form.open{display:block}
 
-    .survey-list { display: flex; flex-direction: column; gap: var(--s3); }
-    .survey-item { display: flex; justify-content: space-between; align-items: center; padding: var(--s3); border: 1px solid var(--fade); border-radius: 8px; }
-    .survey-title { font-weight: 600; margin-bottom: 4px; }
-    .survey-status { font-size: 12px; }
-    .survey-active { color: var(--green); }
-    .survey-complete { color: var(--blue); }
-    .survey-draft { color: var(--light); }
-    .survey-actions { display: flex; gap: var(--s2); }
-    
-    .findings-list { display: flex; flex-direction: column; gap: var(--s3); }
-    .finding-item { padding: var(--s3); border-left: 4px solid var(--fade); }
-    .finding-priority { font-size: 11px; font-weight: 700; text-transform: uppercase; margin-bottom: 6px; }
-    .finding-high { color: var(--red); }
-    .finding-medium { color: var(--orange); }
-    .finding-low { color: var(--green); }
-    .finding-text { font-size: 13px; margin-bottom: 6px; }
-    .finding-meta { font-size: 11px; color: var(--light); }
-    
-    .analytics-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s3); }
-    .metric-card { text-align: center; padding: var(--s3); background: var(--wash); border-radius: 8px; }
-    .metric-value { font-size: 20px; font-weight: 700; color: var(--ink); }
-    .metric-label { font-size: 11px; color: var(--light); text-transform: uppercase; margin-top: 4px; }
-    
-    .activity-feed { display: flex; flex-direction: column; gap: var(--s2); }
-    .activity-item { display: flex; gap: var(--s2); align-items: flex-start; }
-    .activity-icon { font-size: 14px; }
-    .activity-text { flex: 1; }
-    .activity-text > div:first-child { font-size: 12px; }
-    .activity-time { font-size: 11px; color: var(--light); }
-    
-    .export-buttons { display: flex; flex-direction: column; gap: var(--s2); }
-    
-    .chart-container { height: 200px; background: var(--wash); border-radius: 8px; display: flex; align-items: center; justify-content: center; margin: var(--s3) 0; }
-    .chart-placeholder { color: var(--light); font-size: 12px; }
+    .rd-survey-item{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border:1px solid var(--border-light);border-radius:10px;background:var(--cream);margin-bottom:10px}
+    .rd-survey-title{font-size:13px;font-weight:700;color:var(--ink);margin-bottom:4px}
+    .rd-survey-status{font-size:12px}
+    .rd-active{color:#15803d;font-weight:600}.rd-closed{color:#185FA5;font-weight:600}.rd-draft{color:var(--light)}
+    .rd-finding{padding:16px;border-left:4px solid var(--border-light);background:var(--cream);border-radius:0 8px 8px 0;margin-bottom:12px}
+    .rd-finding-high{border-left-color:#e24b4a}.rd-finding-medium{border-left-color:#EF9F27}.rd-finding-low{border-left-color:#2a8a4a}
+    .rd-priority{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px}
+    .rd-priority-high{color:#a32d2d}.rd-priority-med{color:#854F0B}.rd-priority-low{color:#27500A}
+    .rd-finding-text{font-size:13px;color:var(--ink);line-height:1.55;margin-bottom:6px}
+    .rd-finding-meta{font-size:11px;color:var(--light)}
+    .rd-metric-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
+    .rd-metric{text-align:center;padding:14px 10px;background:var(--cream);border-radius:8px;border:1px solid var(--border-light)}
+    .rd-metric-val{font-size:22px;font-weight:800;color:var(--ink);letter-spacing:-.03em;line-height:1}
+    .rd-metric-lbl{font-family:'Lora',serif;font-size:11px;color:var(--light);font-style:italic;margin-top:3px}
+    .rd-activity{display:flex;gap:10px;align-items:flex-start;padding:9px 0;border-bottom:1px solid var(--cream-dark)}
+    .rd-activity:last-child{border-bottom:none}
+    .rd-activity-icon{font-size:14px;flex-shrink:0;margin-top:1px}
+    .rd-activity-text{font-size:12px;color:var(--ink);flex:1;line-height:1.4}
+    .rd-activity-time{font-size:10px;color:var(--light);margin-top:2px}
     </style>
 </head>
 <body>
@@ -753,151 +738,75 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
     </div>
 
     <div class="pw-pane" id="pwpane-type">
-      <div class="pw-grid" style="grid-template-columns:1fr 320px;gap:var(--s4)">
-        <div>
-          <div class="pw-card">
-            <div class="pw-card-hd">
-              <h4>Survey Results</h4>
-              <div class="pw-card-ac">
-                <button class="btn btn-sm" onclick="showNewSurveyForm()">+ New Survey</button>
-              </div>
-            </div>
-            <div class="survey-list">
-              <div class="survey-item">
-                <div class="survey-meta">
-                  <div class="survey-title">Community Needs Assessment</div>
-                  <div class="survey-status survey-active">Active • 127 responses</div>
-                </div>
-                <div class="survey-actions">
-                  <button class="btn btn-xs" onclick="viewSurveyResults('needs')">View Results</button>
-                  <button class="btn btn-xs btn-ghost">Edit</button>
-                </div>
-              </div>
-              <div class="survey-item">
-                <div class="survey-meta">
-                  <div class="survey-title">Youth Program Feedback</div>
-                  <div class="survey-status survey-complete">Closed • 89 responses</div>
-                </div>
-                <div class="survey-actions">
-                  <button class="btn btn-xs" onclick="viewSurveyResults('youth')">View Results</button>
-                  <button class="btn btn-xs btn-ghost">Archive</button>
-                </div>
-              </div>
-              <div class="survey-item">
-                <div class="survey-meta">
-                  <div class="survey-title">Worship Preferences Study</div>
-                  <div class="survey-status survey-draft">Draft • 0 responses</div>
-                </div>
-                <div class="survey-actions">
-                  <button class="btn btn-xs">Launch</button>
-                  <button class="btn btn-xs btn-ghost">Edit</button>
-                </div>
-              </div>
-            </div>
+      <div class="pw-card" style="margin-bottom:16px">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:18px">
+          <div class="pw-card-title" style="margin:0">Surveys</div>
+          <button class="btn btn-primary btn-sm">+ Create survey</button>
+        </div>
+
+        <div class="rd-survey-item">
+          <div>
+            <div class="rd-survey-title">Community Needs Assessment</div>
+            <div class="rd-survey-status rd-active">Active · 127 responses</div>
           </div>
-          
-          <div class="pw-card" id="survey-results" style="display:none">
-            <div class="pw-card-hd">
-              <h4 id="results-title">Survey Results</h4>
-              <div class="pw-card-ac">
-                <button class="btn btn-xs btn-ghost" onclick="closeSurveyResults()">← Back to List</button>
-              </div>
-            </div>
-            <div id="results-content"></div>
-          </div>
-          
-          <div class="pw-card">
-            <div class="pw-card-hd">
-              <h4>Key Findings</h4>
-              <div class="pw-card-ac">
-                <button class="btn btn-sm" onclick="addFinding()">+ Add Finding</button>
-              </div>
-            </div>
-            <div class="findings-list">
-              <div class="finding-item">
-                <div class="finding-priority finding-high">High Priority</div>
-                <div class="finding-text">85% of respondents want expanded evening programs for working families</div>
-                <div class="finding-meta">From: Community Needs Assessment • Added 3 days ago</div>
-              </div>
-              <div class="finding-item">
-                <div class="finding-priority finding-medium">Medium Priority</div>
-                <div class="finding-text">Youth group shows strong preference for service-based activities over social events</div>
-                <div class="finding-meta">From: Youth Program Feedback • Added 1 week ago</div>
-              </div>
-              <div class="finding-item">
-                <div class="finding-priority finding-low">Low Priority</div>
-                <div class="finding-text">Traditional hymns remain popular across all age groups (78% approval)</div>
-                <div class="finding-meta">From: Worship Preferences Study • Added 2 weeks ago</div>
-              </div>
-            </div>
+          <div style="display:flex;gap:8px">
+            <button class="btn btn-secondary btn-sm">View results</button>
+            <button class="btn btn-secondary btn-sm">Edit</button>
           </div>
         </div>
-        
-        <div class="sidebar">
-          <div class="pw-card">
-            <div class="pw-card-hd">
-              <h5>Analytics Overview</h5>
-            </div>
-            <div class="analytics-grid">
-              <div class="metric-card">
-                <div class="metric-value">216</div>
-                <div class="metric-label">Total Responses</div>
-              </div>
-              <div class="metric-card">
-                <div class="metric-value">3</div>
-                <div class="metric-label">Active Surveys</div>
-              </div>
-              <div class="metric-card">
-                <div class="metric-value">12</div>
-                <div class="metric-label">Key Findings</div>
-              </div>
-              <div class="metric-card">
-                <div class="metric-value">94%</div>
-                <div class="metric-label">Response Rate</div>
-              </div>
-            </div>
+
+        <div class="rd-survey-item">
+          <div>
+            <div class="rd-survey-title">Digital Tools Usage — Parish Survey</div>
+            <div class="rd-survey-status rd-closed">Closed · 89 responses</div>
           </div>
-          
-          <div class="pw-card">
-            <div class="pw-card-hd">
-              <h5>Recent Activity</h5>
-            </div>
-            <div class="activity-feed">
-              <div class="activity-item">
-                <div class="activity-icon">📊</div>
-                <div class="activity-text">
-                  <div>New responses to Community Needs</div>
-                  <div class="activity-time">2 hours ago</div>
-                </div>
-              </div>
-              <div class="activity-item">
-                <div class="activity-icon">🔍</div>
-                <div class="activity-text">
-                  <div>Sarah added finding about evening programs</div>
-                  <div class="activity-time">1 day ago</div>
-                </div>
-              </div>
-              <div class="activity-item">
-                <div class="activity-icon">📝</div>
-                <div class="activity-text">
-                  <div>Youth survey closed with 89 responses</div>
-                  <div class="activity-time">3 days ago</div>
-                </div>
-              </div>
-            </div>
-          </div>
-          
-          <div class="pw-card">
-            <div class="pw-card-hd">
-              <h5>Export Options</h5>
-            </div>
-            <div class="export-buttons">
-              <button class="btn btn-sm btn-block">📊 Export to Excel</button>
-              <button class="btn btn-sm btn-block btn-ghost">📄 Generate Report</button>
-              <button class="btn btn-sm btn-block btn-ghost">📈 Create Presentation</button>
-            </div>
+          <div style="display:flex;gap:8px">
+            <button class="btn btn-secondary btn-sm">View results</button>
+            <button class="btn btn-secondary btn-sm">Archive</button>
           </div>
         </div>
+
+        <div class="rd-survey-item" style="margin-bottom:0">
+          <div>
+            <div class="rd-survey-title">Data Sovereignty Awareness — Draft</div>
+            <div class="rd-survey-status rd-draft">Draft · not launched yet</div>
+          </div>
+          <div style="display:flex;gap:8px">
+            <button class="btn btn-primary btn-sm">Launch</button>
+            <button class="btn btn-secondary btn-sm">Edit</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="pw-card">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:18px">
+          <div class="pw-card-title" style="margin:0">Key findings</div>
+          <button class="btn btn-secondary btn-sm">+ Add finding</button>
+        </div>
+
+        <div class="rd-finding rd-finding-high">
+          <div class="rd-priority rd-priority-high">High priority</div>
+          <div class="rd-finding-text">57% of parishes currently use a third-party cloud provider with no data sovereignty agreement in place — significantly higher than expected.</div>
+          <div class="rd-finding-meta">From: Community Needs Assessment · Added 3 days ago</div>
+        </div>
+
+        <div class="rd-finding rd-finding-medium">
+          <div class="rd-priority rd-priority-med">Medium priority</div>
+          <div class="rd-finding-text">Parishes in Eastern Europe show significantly higher awareness of data sovereignty issues compared to those in North America and sub-Saharan Africa.</div>
+          <div class="rd-finding-meta">From: Digital Tools Usage Survey · Added 1 week ago</div>
+        </div>
+
+        <div class="rd-finding rd-finding-low" style="margin-bottom:0">
+          <div class="rd-priority rd-priority-low">Lower priority</div>
+          <div class="rd-finding-text">78% of parishes would adopt a Communio-hosted alternative if it were available and free — suggesting strong potential for a sovereign parish cloud offering.</div>
+          <div class="rd-finding-meta">From: Community Needs Assessment · Added 1 week ago</div>
+        </div>
+      </div>
+
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <button class="btn btn-secondary btn-sm">Export as Excel</button>
+        <button class="btn btn-secondary btn-sm">Export full report</button>
+        <button class="btn btn-secondary btn-sm">Share with network</button>
       </div>
     </div>
 
