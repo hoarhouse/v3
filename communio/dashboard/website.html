@@ -346,11 +346,23 @@ input:checked+.mtoggle-slider:before{transform:translateX(16px)}
     <div class="card-sub">Your clergy and staff — shown on your public parish website</div>
     <div id="staff-list">
       <div class="staff-item" style="background:var(--cream);border-radius:var(--r-md);padding:16px;margin-bottom:12px">
-        <div class="fg-row">
-          <div class="fg"><label class="fl">Name</label><input class="fi" type="text" placeholder="Fr. James Murphy"></div>
-          <div class="fg"><label class="fl">Role / Title</label><input class="fi" type="text" placeholder="Pastor"></div>
+        <div style="display:flex;gap:14px;align-items:flex-start">
+          <div style="flex-shrink:0;text-align:center">
+            <div class="staff-photo-wrap" style="width:60px;height:60px;border-radius:50%;border:2px dashed var(--border-light);cursor:pointer;position:relative;overflow:hidden;background:var(--white);display:flex;align-items:center;justify-content:center;transition:border-color .2s" onmouseover="this.style.borderColor='var(--terra)'" onmouseout="this.style.borderColor='var(--border-light)'">
+              <input type="file" accept="image/*" class="staff-photo-input" style="position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%">
+              <div class="staff-photo-ph" style="font-size:22px;pointer-events:none">👤</div>
+              <img class="staff-photo-preview" src="" alt="" style="display:none;position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+            </div>
+            <div style="font-size:9px;color:var(--light);margin-top:4px">Photo</div>
+          </div>
+          <div style="flex:1">
+            <div class="fg-row">
+              <div class="fg"><label class="fl">Name</label><input class="fi" type="text" placeholder="Fr. James Murphy"></div>
+              <div class="fg"><label class="fl">Role / Title</label><input class="fi" type="text" placeholder="Pastor"></div>
+            </div>
+            <div class="fg" style="margin-bottom:0"><label class="fl">Email</label><input class="fi" type="email" placeholder="pastor@stmarys.org"></div>
+          </div>
         </div>
-        <div class="fg" style="margin-bottom:0"><label class="fl">Email</label><input class="fi" type="email" placeholder="pastor@stmarys.org"></div>
       </div>
     </div>
     <button class="btn btn-secondary btn-sm" id="add-staff-btn" style="margin-bottom:16px">+ Add staff member</button>
@@ -777,8 +789,24 @@ input:checked+.mtoggle-slider:before{transform:translateX(16px)}
     var item = document.createElement('div');
     item.className = 'staff-item';
     item.style.cssText = 'background:var(--cream);border-radius:var(--r-md);padding:16px;margin-bottom:12px';
-    item.innerHTML = '<div class="fg-row"><div class="fg"><label class="fl">Name</label><input class="fi" type="text" placeholder="Name"></div><div class="fg"><label class="fl">Role / Title</label><input class="fi" type="text" placeholder="Role"></div></div><div class="fg" style="margin-bottom:0"><label class="fl">Email</label><input class="fi" type="email" placeholder="email@parish.org"></div>';
+    item.innerHTML = '<div style="display:flex;gap:14px;align-items:flex-start"><div style="flex-shrink:0;text-align:center"><div class="staff-photo-wrap" style="width:60px;height:60px;border-radius:50%;border:2px dashed var(--border-light);cursor:pointer;position:relative;overflow:hidden;background:var(--white);display:flex;align-items:center;justify-content:center;transition:border-color .2s" onmouseover="this.style.borderColor=\'var(--terra)\'" onmouseout="this.style.borderColor=\'var(--border-light)\'"><input type="file" accept="image/*" class="staff-photo-input" style="position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%"><div class="staff-photo-ph" style="font-size:22px;pointer-events:none">👤</div><img class="staff-photo-preview" src="" alt="" style="display:none;position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></div><div style="font-size:9px;color:var(--light);margin-top:4px">Photo</div></div><div style="flex:1"><div class="fg-row"><div class="fg"><label class="fl">Name</label><input class="fi" type="text" placeholder="Name"></div><div class="fg"><label class="fl">Role / Title</label><input class="fi" type="text" placeholder="Role"></div></div><div class="fg" style="margin-bottom:0"><label class="fl">Email</label><input class="fi" type="email" placeholder="email@parish.org"></div></div></div>';
     document.getElementById('staff-list').appendChild(item);
+  });
+  // Staff photo upload — event delegation handles both initial and dynamic items
+  document.getElementById('staff-list').addEventListener('change', function(e){
+    if(!e.target.classList.contains('staff-photo-input')) return;
+    var file = e.target.files[0];
+    if(!file) return;
+    var wrap = e.target.closest('.staff-photo-wrap');
+    var preview = wrap.querySelector('.staff-photo-preview');
+    var placeholder = wrap.querySelector('.staff-photo-ph');
+    var reader = new FileReader();
+    reader.onload = function(ev){
+      preview.src = ev.target.result;
+      preview.style.display = 'block';
+      placeholder.style.display = 'none';
+    };
+    reader.readAsDataURL(file);
   });
   document.getElementById('bulletin-file').addEventListener('change', function(){
     var name = this.files[0] ? this.files[0].name : '';
