@@ -952,6 +952,21 @@ function wzLaunch(){
   btn.style.background = 'var(--sage)';
   setTimeout(function(){ wzClose(); btn.textContent = 'Launch project →'; }, 1800);
 }
+
+function wzRequestJoin(btn) {
+  btn.textContent = 'Application sent ✓';
+  btn.style.background = 'var(--sage)';
+  btn.style.borderColor = 'var(--sage)';
+  btn.disabled = true;
+  btn.style.opacity = '0.9';
+  btn.onclick = null;
+  setTimeout(function(){
+    btn.textContent = 'Pending review…';
+    btn.style.background = 'var(--cream-dark)';
+    btn.style.borderColor = 'var(--border-light)';
+    btn.style.color = 'var(--mid)';
+  }, 2000);
+}
 </script>
 
 </body>
