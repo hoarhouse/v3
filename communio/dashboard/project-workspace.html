@@ -171,7 +171,42 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
 .pw-reply-send:hover{background:#c04418}
 .pw-new-form{background:var(--white);border:1.5px solid var(--terra);border-radius:var(--r-lg);padding:20px;margin-bottom:14px;display:none;box-shadow:0 0 0 3px rgba(216,80,32,.08)}
 .pw-new-form.open{display:block}
-</style>
+
+    .survey-list { display: flex; flex-direction: column; gap: var(--s3); }
+    .survey-item { display: flex; justify-content: space-between; align-items: center; padding: var(--s3); border: 1px solid var(--fade); border-radius: 8px; }
+    .survey-title { font-weight: 600; margin-bottom: 4px; }
+    .survey-status { font-size: 12px; }
+    .survey-active { color: var(--green); }
+    .survey-complete { color: var(--blue); }
+    .survey-draft { color: var(--light); }
+    .survey-actions { display: flex; gap: var(--s2); }
+    
+    .findings-list { display: flex; flex-direction: column; gap: var(--s3); }
+    .finding-item { padding: var(--s3); border-left: 4px solid var(--fade); }
+    .finding-priority { font-size: 11px; font-weight: 700; text-transform: uppercase; margin-bottom: 6px; }
+    .finding-high { color: var(--red); }
+    .finding-medium { color: var(--orange); }
+    .finding-low { color: var(--green); }
+    .finding-text { font-size: 13px; margin-bottom: 6px; }
+    .finding-meta { font-size: 11px; color: var(--light); }
+    
+    .analytics-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s3); }
+    .metric-card { text-align: center; padding: var(--s3); background: var(--wash); border-radius: 8px; }
+    .metric-value { font-size: 20px; font-weight: 700; color: var(--ink); }
+    .metric-label { font-size: 11px; color: var(--light); text-transform: uppercase; margin-top: 4px; }
+    
+    .activity-feed { display: flex; flex-direction: column; gap: var(--s2); }
+    .activity-item { display: flex; gap: var(--s2); align-items: flex-start; }
+    .activity-icon { font-size: 14px; }
+    .activity-text { flex: 1; }
+    .activity-text > div:first-child { font-size: 12px; }
+    .activity-time { font-size: 11px; color: var(--light); }
+    
+    .export-buttons { display: flex; flex-direction: column; gap: var(--s2); }
+    
+    .chart-container { height: 200px; background: var(--wash); border-radius: 8px; display: flex; align-items: center; justify-content: center; margin: var(--s3) 0; }
+    .chart-placeholder { color: var(--light); font-size: 12px; }
+    </style>
 </head>
 <body>
 
@@ -599,26 +634,270 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
     </div>
 
     <div class="pw-pane" id="pwpane-resources">
-      <div class="pw-card" style="text-align:center;padding:40px">
-        <div style="font-size:28px;margin-bottom:10px">📁</div>
-        <div style="font-size:14px;font-weight:700;color:var(--ink);margin-bottom:4px">Resources coming in Chunk 3</div>
-        <div style="font-family:'Lora',serif;font-size:12px;color:var(--light);font-style:italic">Shared files, docs and links</div>
+      <div class="pw-card">
+        <div class="pw-card-title" style="margin-bottom:16px">Shared files &amp; links</div>
+        <div id="resources-list" style="display:flex;flex-direction:column;gap:8px;margin-bottom:14px">
+          <div style="display:flex;align-items:center;gap:12px;padding:12px 14px;background:var(--cream);border-radius:8px;border:1px solid var(--border-light)">
+            <div style="font-size:22px;flex-shrink:0">📄</div>
+            <div style="flex:1;min-width:0">
+              <div style="font-size:13px;font-weight:600;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Accra Diocese Digital Policy 2024.pdf</div>
+              <div style="font-size:11px;color:var(--light);margin-top:2px">Uploaded by Holy Spirit, Accra · 240 KB · 3 days ago</div>
+            </div>
+            <button class="btn btn-secondary btn-sm" style="flex-shrink:0">Download</button>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;padding:12px 14px;background:var(--cream);border-radius:8px;border:1px solid var(--border-light)">
+            <div style="font-size:22px;flex-shrink:0">🔗</div>
+            <div style="flex:1;min-width:0">
+              <div style="font-size:13px;font-weight:600;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Vatican AI Ethics Guidelines 2025 — Dicastery for Culture</div>
+              <div style="font-size:11px;color:var(--light);margin-top:2px">Shared by St. Mary's · External link · 5 days ago</div>
+            </div>
+            <button class="btn btn-secondary btn-sm" style="flex-shrink:0">Open →</button>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;padding:12px 14px;background:var(--cream);border-radius:8px;border:1px solid var(--border-light)">
+            <div style="font-size:22px;flex-shrink:0">📊</div>
+            <div style="flex:1;min-width:0">
+              <div style="font-size:13px;font-weight:600;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Survey Template v1.xlsx</div>
+              <div style="font-size:11px;color:var(--light);margin-top:2px">Uploaded by St. Benedek, Budapest · 45 KB · 2 hours ago</div>
+            </div>
+            <button class="btn btn-secondary btn-sm" style="flex-shrink:0">Download</button>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;padding:12px 14px;background:var(--cream);border-radius:8px;border:1px solid var(--border-light)">
+            <div style="font-size:22px;flex-shrink:0">📝</div>
+            <div style="flex:1;min-width:0">
+              <div style="font-size:13px;font-weight:600;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Warsaw Diocese — Technology & Data Governance Notes.docx</div>
+              <div style="font-size:11px;color:var(--light);margin-top:2px">Uploaded by St. Stanislaw, Warsaw · 89 KB · 1 week ago</div>
+            </div>
+            <button class="btn btn-secondary btn-sm" style="flex-shrink:0">Download</button>
+          </div>
+        </div>
+        <div id="res-upload-area" style="border:2px dashed var(--border-light);border-radius:var(--r-md);padding:20px;text-align:center;cursor:pointer;background:var(--cream);transition:border-color .2s;position:relative;overflow:hidden" onmouseover="this.style.borderColor='var(--terra)'" onmouseout="this.style.borderColor='var(--border-light)'">
+          <input type="file" id="res-file-input" style="position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%">
+          <div style="font-size:20px;margin-bottom:6px">📎</div>
+          <div style="font-size:13px;font-weight:600;color:var(--ink)">Upload a file or drop it here</div>
+          <div style="font-size:11px;color:var(--light);margin-top:3px">PDF, Word, Excel, images · Max 25MB</div>
+          <div id="res-link-toggle" style="margin-top:10px;font-size:12px;color:var(--terra);font-weight:600;cursor:pointer;position:relative;z-index:1" onclick="event.stopPropagation();toggleResLink()">+ Add a link instead</div>
+        </div>
+        <div id="res-link-form" style="display:none;margin-top:10px;padding:14px;background:var(--cream);border-radius:8px;border:1px solid var(--border-light)">
+          <div style="margin-bottom:8px"><label style="font-size:11px;font-weight:700;color:var(--mid);display:block;margin-bottom:4px;letter-spacing:.04em">Link title</label><input type="text" placeholder="e.g. Vatican AI Ethics Guidelines" style="width:100%;border:1.5px solid var(--border-light);border-radius:7px;padding:8px 11px;font-size:12px;font-family:'Outfit',sans-serif;color:var(--ink);background:var(--white);outline:none"></div>
+          <div style="margin-bottom:10px"><label style="font-size:11px;font-weight:700;color:var(--mid);display:block;margin-bottom:4px;letter-spacing:.04em">URL</label><input type="url" placeholder="https://..." style="width:100%;border:1.5px solid var(--border-light);border-radius:7px;padding:8px 11px;font-size:12px;font-family:'Outfit',sans-serif;color:var(--ink);background:var(--white);outline:none"></div>
+          <div style="display:flex;gap:8px;justify-content:flex-end">
+            <button onclick="toggleResLink()" style="background:none;border:1.5px solid var(--border-light);border-radius:6px;padding:5px 12px;font-size:12px;font-weight:600;cursor:pointer;font-family:'Outfit',sans-serif;color:var(--mid)">Cancel</button>
+            <button style="background:var(--terra);color:white;border:none;padding:5px 14px;border-radius:6px;font-size:12px;font-weight:700;cursor:pointer;font-family:'Outfit',sans-serif">Add link</button>
+          </div>
+        </div>
       </div>
     </div>
 
     <div class="pw-pane" id="pwpane-members">
-      <div class="pw-card" style="text-align:center;padding:40px">
-        <div style="font-size:28px;margin-bottom:10px">🌍</div>
-        <div style="font-size:14px;font-weight:700;color:var(--ink);margin-bottom:4px">Members coming in Chunk 3</div>
-        <div style="font-family:'Lora',serif;font-size:12px;color:var(--light);font-style:italic">Presence indicators and chat</div>
+      <div class="pw-card">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
+          <div class="pw-card-title" style="margin:0">All parishes (28)</div>
+          <button class="btn btn-primary btn-sm">+ Invite parishes</button>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;padding:10px 12px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;margin-bottom:14px;font-size:12px;font-weight:700;color:#15803d">
+          <div style="width:7px;height:7px;border-radius:50%;background:#22c55e;animation:pwpulse 2s infinite;flex-shrink:0"></div>
+          3 parishes online now
+        </div>
+        <div style="display:flex;flex-direction:column">
+
+          <div style="display:flex;align-items:center;gap:11px;padding:11px 0;border-bottom:1px solid var(--cream-dark)">
+            <div style="position:relative;flex-shrink:0"><div style="width:38px;height:38px;border-radius:10px;background:var(--terra);font-size:11px;font-weight:700;color:white;display:flex;align-items:center;justify-content:center">SM</div><div style="position:absolute;bottom:-1px;right:-1px;width:10px;height:10px;border-radius:50%;border:2px solid white;background:#22c55e"></div></div>
+            <div style="flex:1"><div style="font-size:13px;font-weight:700;color:var(--ink)">St. Mary's Parish <span style="font-size:9px;background:var(--cream-dark);color:var(--mid);padding:1px 6px;border-radius:10px;margin-left:4px;font-weight:700">You · Organiser</span></div><div style="font-size:11px;color:var(--light)">New York, USA</div><div style="font-size:10px;font-weight:600;color:#15803d;margin-top:1px">● Active now</div></div>
+          </div>
+
+          <div style="display:flex;align-items:center;gap:11px;padding:11px 0;border-bottom:1px solid var(--cream-dark)">
+            <div style="position:relative;flex-shrink:0"><div style="width:38px;height:38px;border-radius:10px;background:#2a8a4a;font-size:11px;font-weight:700;color:white;display:flex;align-items:center;justify-content:center">HS</div><div style="position:absolute;bottom:-1px;right:-1px;width:10px;height:10px;border-radius:50%;border:2px solid white;background:#22c55e"></div></div>
+            <div style="flex:1"><div style="font-size:13px;font-weight:700;color:var(--ink)">Holy Spirit Parish</div><div style="font-size:11px;color:var(--light)">Accra, Ghana</div><div style="font-size:10px;font-weight:600;color:#15803d;margin-top:1px">● Active now</div></div>
+            <div style="display:flex;gap:6px;flex-shrink:0">
+              <button class="btn btn-primary btn-sm" style="font-size:11px;padding:5px 10px" onclick="window.location.href='messages.html'">Chat now</button>
+            </div>
+          </div>
+
+          <div style="display:flex;align-items:center;gap:11px;padding:11px 0;border-bottom:1px solid var(--cream-dark)">
+            <div style="position:relative;flex-shrink:0"><div style="width:38px;height:38px;border-radius:10px;background:#534AB7;font-size:11px;font-weight:700;color:white;display:flex;align-items:center;justify-content:center">SB</div><div style="position:absolute;bottom:-1px;right:-1px;width:10px;height:10px;border-radius:50%;border:2px solid white;background:#22c55e"></div></div>
+            <div style="flex:1"><div style="font-size:13px;font-weight:700;color:var(--ink)">St. Benedek Parish</div><div style="font-size:11px;color:var(--light)">Budapest, Hungary</div><div style="font-size:10px;font-weight:600;color:#15803d;margin-top:1px">● Active now</div></div>
+            <div style="display:flex;gap:6px;flex-shrink:0">
+              <button class="btn btn-primary btn-sm" style="font-size:11px;padding:5px 10px" onclick="window.location.href='messages.html'">Chat now</button>
+            </div>
+          </div>
+
+          <div style="display:flex;align-items:center;gap:11px;padding:11px 0;border-bottom:1px solid var(--cream-dark)">
+            <div style="position:relative;flex-shrink:0"><div style="width:38px;height:38px;border-radius:10px;background:#185FA5;font-size:11px;font-weight:700;color:white;display:flex;align-items:center;justify-content:center">SS</div><div style="position:absolute;bottom:-1px;right:-1px;width:10px;height:10px;border-radius:50%;border:2px solid white;background:#f59e0b"></div></div>
+            <div style="flex:1"><div style="font-size:13px;font-weight:700;color:var(--ink)">St. Stanislaw Parish</div><div style="font-size:11px;color:var(--light)">Warsaw, Poland</div><div style="font-size:10px;font-weight:600;color:#b45309;margin-top:1px">● Away — 5 mins ago</div></div>
+            <div style="display:flex;gap:6px;flex-shrink:0">
+              <button class="btn btn-secondary btn-sm" style="font-size:11px;padding:5px 10px" onclick="window.location.href='messages.html'">Message</button>
+            </div>
+          </div>
+
+          <div style="display:flex;align-items:center;gap:11px;padding:11px 0;border-bottom:1px solid var(--cream-dark)">
+            <div style="position:relative;flex-shrink:0"><div style="width:38px;height:38px;border-radius:10px;background:#BA7517;font-size:11px;font-weight:700;color:white;display:flex;align-items:center;justify-content:center">SJ</div><div style="position:absolute;bottom:-1px;right:-1px;width:10px;height:10px;border-radius:50%;border:2px solid white;background:#d1d5db"></div></div>
+            <div style="flex:1"><div style="font-size:13px;font-weight:700;color:var(--ink)">San José Parish <span style="font-size:9px;background:#e6f4eb;color:#1a6b2a;padding:1px 6px;border-radius:10px;margin-left:4px;font-weight:700">Just joined</span></div><div style="font-size:11px;color:var(--light)">Manila, Philippines</div><div style="font-size:10px;color:var(--light);margin-top:1px">Last seen yesterday</div></div>
+            <div style="display:flex;gap:6px;flex-shrink:0">
+              <button class="btn btn-secondary btn-sm" style="font-size:11px;padding:5px 10px" onclick="window.location.href='messages.html'">Message</button>
+            </div>
+          </div>
+
+          <div style="display:flex;align-items:center;gap:11px;padding:11px 0;border-bottom:1px solid var(--cream-dark)">
+            <div style="position:relative;flex-shrink:0"><div style="width:38px;height:38px;border-radius:10px;background:#0F6E56;font-size:11px;font-weight:700;color:white;display:flex;align-items:center;justify-content:center">SC</div><div style="position:absolute;bottom:-1px;right:-1px;width:10px;height:10px;border-radius:50%;border:2px solid white;background:#d1d5db"></div></div>
+            <div style="flex:1"><div style="font-size:13px;font-weight:700;color:var(--ink)">St. Catherine Parish</div><div style="font-size:11px;color:var(--light)">Lagos, Nigeria</div><div style="font-size:10px;color:var(--light);margin-top:1px">Last seen 3 days ago</div></div>
+            <div style="display:flex;gap:6px;flex-shrink:0">
+              <button class="btn btn-secondary btn-sm" style="font-size:11px;padding:5px 10px" onclick="window.location.href='messages.html'">Message</button>
+            </div>
+          </div>
+
+          <div style="padding:12px 0;text-align:center;font-family:'Lora',serif;font-size:12px;color:var(--light);font-style:italic">
+            + 22 more parishes — <span style="color:var(--terra);cursor:pointer;font-weight:600;font-style:normal">Show all</span>
+          </div>
+        </div>
       </div>
     </div>
 
     <div class="pw-pane" id="pwpane-type">
-      <div class="pw-card" style="text-align:center;padding:40px">
-        <div style="font-size:28px;margin-bottom:10px">🔬</div>
-        <div style="font-size:14px;font-weight:700;color:var(--ink);margin-bottom:4px">Research data coming in Chunk 4</div>
-        <div style="font-family:'Lora',serif;font-size:12px;color:var(--light);font-style:italic">Survey responses and findings</div>
+      <div class="pw-grid" style="grid-template-columns:1fr 320px;gap:var(--s4)">
+        <div>
+          <div class="pw-card">
+            <div class="pw-card-hd">
+              <h4>Survey Results</h4>
+              <div class="pw-card-ac">
+                <button class="btn btn-sm" onclick="showNewSurveyForm()">+ New Survey</button>
+              </div>
+            </div>
+            <div class="survey-list">
+              <div class="survey-item">
+                <div class="survey-meta">
+                  <div class="survey-title">Community Needs Assessment</div>
+                  <div class="survey-status survey-active">Active • 127 responses</div>
+                </div>
+                <div class="survey-actions">
+                  <button class="btn btn-xs" onclick="viewSurveyResults('needs')">View Results</button>
+                  <button class="btn btn-xs btn-ghost">Edit</button>
+                </div>
+              </div>
+              <div class="survey-item">
+                <div class="survey-meta">
+                  <div class="survey-title">Youth Program Feedback</div>
+                  <div class="survey-status survey-complete">Closed • 89 responses</div>
+                </div>
+                <div class="survey-actions">
+                  <button class="btn btn-xs" onclick="viewSurveyResults('youth')">View Results</button>
+                  <button class="btn btn-xs btn-ghost">Archive</button>
+                </div>
+              </div>
+              <div class="survey-item">
+                <div class="survey-meta">
+                  <div class="survey-title">Worship Preferences Study</div>
+                  <div class="survey-status survey-draft">Draft • 0 responses</div>
+                </div>
+                <div class="survey-actions">
+                  <button class="btn btn-xs">Launch</button>
+                  <button class="btn btn-xs btn-ghost">Edit</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="pw-card" id="survey-results" style="display:none">
+            <div class="pw-card-hd">
+              <h4 id="results-title">Survey Results</h4>
+              <div class="pw-card-ac">
+                <button class="btn btn-xs btn-ghost" onclick="closeSurveyResults()">← Back to List</button>
+              </div>
+            </div>
+            <div id="results-content"></div>
+          </div>
+          
+          <div class="pw-card">
+            <div class="pw-card-hd">
+              <h4>Key Findings</h4>
+              <div class="pw-card-ac">
+                <button class="btn btn-sm" onclick="addFinding()">+ Add Finding</button>
+              </div>
+            </div>
+            <div class="findings-list">
+              <div class="finding-item">
+                <div class="finding-priority finding-high">High Priority</div>
+                <div class="finding-text">85% of respondents want expanded evening programs for working families</div>
+                <div class="finding-meta">From: Community Needs Assessment • Added 3 days ago</div>
+              </div>
+              <div class="finding-item">
+                <div class="finding-priority finding-medium">Medium Priority</div>
+                <div class="finding-text">Youth group shows strong preference for service-based activities over social events</div>
+                <div class="finding-meta">From: Youth Program Feedback • Added 1 week ago</div>
+              </div>
+              <div class="finding-item">
+                <div class="finding-priority finding-low">Low Priority</div>
+                <div class="finding-text">Traditional hymns remain popular across all age groups (78% approval)</div>
+                <div class="finding-meta">From: Worship Preferences Study • Added 2 weeks ago</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="sidebar">
+          <div class="pw-card">
+            <div class="pw-card-hd">
+              <h5>Analytics Overview</h5>
+            </div>
+            <div class="analytics-grid">
+              <div class="metric-card">
+                <div class="metric-value">216</div>
+                <div class="metric-label">Total Responses</div>
+              </div>
+              <div class="metric-card">
+                <div class="metric-value">3</div>
+                <div class="metric-label">Active Surveys</div>
+              </div>
+              <div class="metric-card">
+                <div class="metric-value">12</div>
+                <div class="metric-label">Key Findings</div>
+              </div>
+              <div class="metric-card">
+                <div class="metric-value">94%</div>
+                <div class="metric-label">Response Rate</div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="pw-card">
+            <div class="pw-card-hd">
+              <h5>Recent Activity</h5>
+            </div>
+            <div class="activity-feed">
+              <div class="activity-item">
+                <div class="activity-icon">📊</div>
+                <div class="activity-text">
+                  <div>New responses to Community Needs</div>
+                  <div class="activity-time">2 hours ago</div>
+                </div>
+              </div>
+              <div class="activity-item">
+                <div class="activity-icon">🔍</div>
+                <div class="activity-text">
+                  <div>Sarah added finding about evening programs</div>
+                  <div class="activity-time">1 day ago</div>
+                </div>
+              </div>
+              <div class="activity-item">
+                <div class="activity-icon">📝</div>
+                <div class="activity-text">
+                  <div>Youth survey closed with 89 responses</div>
+                  <div class="activity-time">3 days ago</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="pw-card">
+            <div class="pw-card-hd">
+              <h5>Export Options</h5>
+            </div>
+            <div class="export-buttons">
+              <button class="btn btn-sm btn-block">📊 Export to Excel</button>
+              <button class="btn btn-sm btn-block btn-ghost">📄 Generate Report</button>
+              <button class="btn btn-sm btn-block btn-ghost">📈 Create Presentation</button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -668,6 +947,10 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
 </div>
 
 <script>
+function toggleResLink() {
+  var form = document.getElementById('res-link-form');
+  form.style.display = form.style.display === 'none' ? 'block' : 'none';
+}
 function toggleThread(e, el) {
   if(e.target.closest('.pw-reply-box') || e.target.closest('.pw-reply-send') || e.target.closest('.pw-reply-in')) return;
   el.classList.toggle('open');
@@ -699,6 +982,73 @@ function pwShowTab(id) {
     if(!b.contains(e.target)&&!m.contains(e.target))m.classList.remove('open');
   });
 })();
-</script>
+
+    
+    function showNewSurveyForm() {
+      alert('Survey creation form would open here');
+    }
+    
+    function viewSurveyResults(surveyId) {
+      const surveyList = document.querySelector('.survey-list').parentNode.parentNode;
+      const resultsCard = document.getElementById('survey-results');
+      const resultsTitle = document.getElementById('results-title');
+      const resultsContent = document.getElementById('results-content');
+      
+      surveyList.style.display = 'none';
+      resultsCard.style.display = 'block';
+      
+      if (surveyId === 'needs') {
+        resultsTitle.textContent = 'Community Needs Assessment Results';
+        resultsContent.innerHTML = `
+          <div class="chart-container">
+            <div class="chart-placeholder">📊 Response distribution chart would appear here</div>
+          </div>
+          <div class="pw-grid" style="grid-template-columns: 1fr 1fr; gap: var(--s4)">
+            <div>
+              <h6>Top Priorities</h6>
+              <div style="margin-top: var(--s3)">
+                <div style="margin-bottom: var(--s2)">1. Evening programs (85%)</div>
+                <div style="margin-bottom: var(--s2)">2. Youth activities (72%)</div>
+                <div style="margin-bottom: var(--s2)">3. Community outreach (68%)</div>
+              </div>
+            </div>
+            <div>
+              <h6>Demographics</h6>
+              <div style="margin-top: var(--s3)">
+                <div style="margin-bottom: var(--s2)">Working families: 45%</div>
+                <div style="margin-bottom: var(--s2)">Seniors: 32%</div>
+                <div style="margin-bottom: var(--s2)">Young adults: 23%</div>
+              </div>
+            </div>
+          </div>`;
+      } else if (surveyId === 'youth') {
+        resultsTitle.textContent = 'Youth Program Feedback Results';
+        resultsContent.innerHTML = `
+          <div class="chart-container">
+            <div class="chart-placeholder">📈 Satisfaction ratings chart would appear here</div>
+          </div>
+          <div>
+            <h6>Key Insights</h6>
+            <div style="margin-top: var(--s3)">
+              <div style="margin-bottom: var(--s2)">• Service projects rated highest (4.8/5)</div>
+              <div style="margin-bottom: var(--s2)">• Want more leadership opportunities</div>
+              <div style="margin-bottom: var(--s2)">• Prefer small group discussions</div>
+            </div>
+          </div>`;
+      }
+    }
+    
+    function closeSurveyResults() {
+      const surveyList = document.querySelector('.survey-list').parentNode.parentNode;
+      const resultsCard = document.getElementById('survey-results');
+      
+      surveyList.style.display = 'block';
+      resultsCard.style.display = 'none';
+    }
+    
+    function addFinding() {
+      alert('Add finding form would open here');
+    }
+    </script>
 </body>
 </html>
