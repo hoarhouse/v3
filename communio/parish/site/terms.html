@@ -56,6 +56,41 @@ h1,h2,h3,h4,h5,h6{font-family:'Lora',serif;line-height:1.2;}
 .page-footer{background:var(--ink);color:rgba(255,253,245,0.6);padding:2.5rem 2rem;text-align:center;font-size:.85rem;}
 .page-footer a{color:var(--terra);}
 .page-footer a:hover{color:#fff;}
+
+/* ── SHARED FOOTER ── */
+.site-footer{background:var(--ink);color:rgba(255,253,245,0.7);padding:4rem 2rem 0;}
+.site-footer .container{max-width:1200px;margin:0 auto;}
+.footer-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:3rem;padding-bottom:3rem;border-bottom:1px solid rgba(255,255,255,0.08);}
+.footer-brand{font-family:'Lora',serif;font-style:italic;font-size:1.25rem;color:var(--warm-white);margin-bottom:.75rem;}
+.footer-tagline{font-size:.85rem;color:rgba(255,253,245,0.45);line-height:1.6;margin-bottom:1.25rem;}
+.footer-detail{display:flex;align-items:flex-start;gap:.6rem;font-size:.82rem;color:rgba(255,253,245,0.65);line-height:1.6;margin-bottom:.6rem;}
+.footer-detail svg{flex-shrink:0;margin-top:.15rem;color:var(--terra);}
+.footer-detail a{color:var(--terra);transition:color .2s;}
+.footer-detail a:hover{color:#fff;}
+.footer-col-title{font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,253,245,0.35);margin-bottom:1rem;}
+.footer-nav{display:flex;flex-direction:column;gap:.5rem;}
+.footer-nav a{font-size:.85rem;color:rgba(255,253,245,0.65);text-decoration:none;transition:color .2s;}
+.footer-nav a:hover{color:#fff;}
+.footer-mass-item{font-size:.82rem;color:rgba(255,253,245,0.65);margin-bottom:.4rem;line-height:1.5;}
+.footer-mass-item strong{color:rgba(255,253,245,0.9);display:block;}
+.footer-social{display:flex;gap:.6rem;margin-bottom:1.25rem;}
+.footer-social a{width:36px;height:36px;background:rgba(255,255,255,0.07);border-radius:8px;display:flex;align-items:center;justify-content:center;color:rgba(255,253,245,0.6);text-decoration:none;transition:all .2s;font-size:.8rem;font-weight:700;}
+.footer-social a:hover{background:var(--terra);color:#fff;}
+.footer-newsletter-label{font-size:.75rem;color:rgba(255,253,245,0.45);margin-bottom:.6rem;}
+.footer-newsletter-form{display:flex;gap:.5rem;}
+.footer-newsletter-form input{flex:1;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);border-radius:6px;padding:.5rem .75rem;font-size:.8rem;color:#fff;font-family:inherit;}
+.footer-newsletter-form input::placeholder{color:rgba(255,255,255,0.3);}
+.footer-newsletter-form input:focus{outline:none;border-color:var(--terra);}
+.footer-newsletter-form button{background:var(--terra);color:#fff;border:none;border-radius:6px;padding:.5rem 1rem;font-size:.78rem;font-weight:600;cursor:pointer;font-family:inherit;white-space:nowrap;transition:background .2s;}
+.footer-newsletter-form button:hover{background:var(--terra-dark);}
+.footer-bottom{padding:1.25rem 0;display:flex;align-items:center;justify-content:space-between;font-size:.78rem;color:rgba(255,253,245,0.35);}
+.footer-bottom-links{display:flex;gap:1.25rem;align-items:center;}
+.footer-bottom-links a{color:rgba(255,253,245,0.35);text-decoration:none;transition:color .2s;}
+.footer-bottom-links a:hover{color:#fff;}
+.communio-credit{color:var(--terra);font-weight:600;}
+@media(max-width:968px){.footer-grid{grid-template-columns:1fr 1fr;gap:2rem;}}
+@media(max-width:568px){.footer-grid{grid-template-columns:1fr;}.footer-bottom{flex-direction:column;gap:.75rem;text-align:center;}.footer-bottom-links{flex-wrap:wrap;justify-content:center;}}
+
 </style>
 </head>
 <body>
@@ -140,11 +175,7 @@ h1,h2,h3,h4,h5,h6{font-family:'Lora',serif;line-height:1.2;}
     <p>If you have questions about these terms, please <a href="#" data-contact data-from="general">get in touch</a> or contact us at 123 Rivington Street, New York, NY 10002, or call (212) 555-0123.</p>
   </div>
 </div>
-<footer class="page-footer">
-  <div class="container">
-    <p>&copy; 2024 St. Mary's Parish &middot; <a href="index.html">Back to home</a> &middot; <a href="privacy.html">Privacy Policy</a> &middot; Powered by <span style="color:var(--terra);font-weight:600;">Communio</span></p>
-  </div>
-</footer>
+
 <script>
 const _nh=document.getElementById('navHamburger');
 const _nm=document.getElementById('navMobile');
@@ -161,5 +192,89 @@ if(_nh){_nh.addEventListener('click',()=>_nm.classList.toggle('open'));_nm.addEv
   document.addEventListener('click',function(e){var el=e.target.closest('[data-contact]');if(el){e.preventDefault();openModal(el.getAttribute('data-from')||'');}});
 })();
 </script>
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+
+      <!-- Col 1: Parish Info -->
+      <div>
+        <div class="footer-brand">St. Mary's Parish</div>
+        <p class="footer-tagline">A vibrant Catholic community in the heart of New York's Lower East Side, serving our neighbours since 1887.</p>
+        <div class="footer-detail">
+          <svg width="14" height="14" viewBox="0 0 20 20" fill="none"><path d="M10 2C7.2 2 5 4.2 5 7c0 4 5 11 5 11s5-7 5-11c0-2.8-2.2-5-5-5z" stroke="currentColor" stroke-width="1.5"/></svg>
+          123 Rivington Street, New York, NY 10002
+        </div>
+        <div class="footer-detail">
+          <svg width="14" height="14" viewBox="0 0 20 20" fill="none"><path d="M3 4h4l2 4-2 2c1 2 3 4 5 5l2-2 4 2v4c0 1-1 2-2 2C7 19 1 13 1 6c0-1 1-2 2-2z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+          <a href="tel:+12125550123">(212) 555-0123</a>
+        </div>
+        <div class="footer-detail">
+          <svg width="14" height="14" viewBox="0 0 20 20" fill="none"><rect x="2" y="4" width="16" height="13" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M2 7l8 5 8-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          <a href="#" data-contact data-from="general">info@stmarysnyc.org</a>
+        </div>
+        <div class="footer-detail">
+          <svg width="14" height="14" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M10 7v4l2.5 2.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          Office: Mon–Fri 9 AM–5 PM · Sat 10 AM–2 PM
+        </div>
+        <div class="footer-detail">
+          <svg width="14" height="14" viewBox="0 0 20 20" fill="none"><path d="M10 2C7.2 2 5 4.2 5 7c0 4 5 11 5 11s5-7 5-11c0-2.8-2.2-5-5-5z" stroke="currentColor" stroke-width="1.5"/></svg>
+          <a href="https://maps.google.com/?q=123+Rivington+Street+New+York+NY+10002" target="_blank">Get directions →</a>
+        </div>
+      </div>
+
+      <!-- Col 2: Mass Times -->
+      <div>
+        <div class="footer-col-title">Mass Times</div>
+        <div class="footer-mass-item"><strong>Weekdays</strong>Mon–Fri 9:00 AM · Tue &amp; Thu 6:45 PM</div>
+        <div class="footer-mass-item"><strong>Saturday</strong>10:00 AM · Vigil 5:00 PM</div>
+        <div class="footer-mass-item"><strong>Sunday</strong>7:00 · 9:00 · 11:00 AM<br>1:00 PM (Español) · 6:00 PM</div>
+        <div class="footer-mass-item" style="margin-top:.75rem;font-size:.78rem;color:rgba(255,253,245,0.4);">Confession: Saturday 3:30–4:30 PM</div>
+        <a href="index.html#mass-times" style="display:inline-block;margin-top:.875rem;font-size:.8rem;font-weight:600;color:var(--terra);text-decoration:none;">Full schedule →</a>
+      </div>
+
+      <!-- Col 3: Navigate -->
+      <div>
+        <div class="footer-col-title">Navigate</div>
+        <nav class="footer-nav">
+          <a href="about.html">About Us</a>
+          <a href="staff.html">Our Team</a>
+          <a href="events.html">Events</a>
+          <a href="bulletin.html">Parish Bulletin</a>
+          <a href="sacraments.html">Sacraments</a>
+          <a href="rcia.html">Becoming Catholic</a>
+          <a href="involved.html">Get Involved</a>
+          <a href="index.html#giving">Give Online</a>
+          <a href="#" data-contact data-from="general">Contact Us</a>
+        </nav>
+      </div>
+
+      <!-- Col 4: Connect -->
+      <div>
+        <div class="footer-col-title">Stay Connected</div>
+        <div class="footer-social">
+          <a href="https://facebook.com" target="_blank" aria-label="Facebook">f</a>
+          <a href="https://instagram.com" target="_blank" aria-label="Instagram">in</a>
+          <a href="https://youtube.com" target="_blank" aria-label="YouTube">yt</a>
+          <a href="https://spotify.com" target="_blank" aria-label="Spotify">sp</a>
+        </div>
+        <div class="footer-newsletter-label">Get our weekly bulletin by email</div>
+        <div class="footer-newsletter-form">
+          <input type="email" placeholder="Your email">
+          <button type="button">Subscribe</button>
+        </div>
+      </div>
+
+    </div>
+    <div class="footer-bottom">
+      <div>&copy; 2024 St. Mary's Parish, New York</div>
+      <div class="footer-bottom-links">
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html">Terms of Use</a>
+        <a href="sitemap.html">Sitemap</a>
+        <span>Powered by <span class="communio-credit">Communio</span></span>
+      </div>
+    </div>
+  </div>
+</footer>
 </body>
 </html>
