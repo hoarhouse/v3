@@ -417,6 +417,28 @@ input:checked+.mtoggle-slider:before{transform:translateX(16px)}
       </div>
     </div>
   </div>
+  <div class="card" style="margin-top:18px">
+    <div class="card-title">Media &amp; livestream</div>
+    <div class="card-sub">Connect your media channels so parishioners can watch Mass live and access recordings</div>
+    <div class="fg-row">
+      <div class="fg"><label class="fl">Live stream schedule</label><input class="fi" type="text" id="media-schedule" placeholder="e.g. Sunday 9 AM Mass streamed live"></div>
+      <div class="fg"><label class="fl">Podcast / audio feed URL</label><input class="fi" type="url" id="media-podcast" placeholder="https://anchor.fm/yourparish"></div>
+    </div>
+    <div class="fg-row">
+      <div class="fg"><label class="fl">Spotify playlist <span style="color:var(--light);font-weight:400">(optional)</span></label><input class="fi" type="url" id="media-spotify" placeholder="https://open.spotify.com/playlist/..."></div>
+      <div class="fg"><label class="fl">Formed.org parish code <span style="color:var(--light);font-weight:400">(optional)</span></label><input class="fi" type="text" id="media-formed" placeholder="Your Formed.org access code"></div>
+    </div>
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-top:1px solid var(--border-light);margin-top:4px">
+      <div><div style="font-size:13px;font-weight:600;color:var(--ink)">Show livestream on homepage</div><div style="font-size:12px;color:var(--light)">Embed live YouTube stream prominently on your parish website</div></div>
+      <label style="position:relative;display:inline-block;width:38px;height:22px;flex-shrink:0"><input type="checkbox" id="media-livestream-toggle" checked style="opacity:0;width:0;height:0"><span class="mtoggle-slider"></span></label>
+    </div>
+    <div style="background:var(--cream);border-radius:var(--r-md);padding:12px 14px;margin-top:12px;font-size:12px;color:var(--light)">
+      YouTube channel URL is managed in <a href="settings.html" style="color:var(--terra)">Settings → Stay connected</a>
+    </div>
+    <div style="display:flex;justify-content:flex-end;margin-top:16px">
+      <button class="btn btn-primary btn-sm" id="save-media-btn">Save media settings →</button>
+    </div>
+  </div>
 </div>
     <div class="tab-content" id="tab-analytics">
   <!-- <?php echo $analytics->summary_html ?> -->
@@ -716,6 +738,31 @@ input:checked+.mtoggle-slider:before{transform:translateX(16px)}
   document.getElementById('bulletin-upload').addEventListener('click', function(e){
     if(e.target.tagName !== 'SPAN') document.getElementById('bulletin-file').click();
   });
+  document.getElementById('save-media-btn').addEventListener('click', function(){
+    try {
+      var pd = JSON.parse(localStorage.getItem('parish_data') || '{}');
+      pd.mediaSchedule  = document.getElementById('media-schedule').value.trim();
+      pd.mediaPodcast   = document.getElementById('media-podcast').value.trim();
+      pd.mediaSpotify   = document.getElementById('media-spotify').value.trim();
+      pd.mediaFormed    = document.getElementById('media-formed').value.trim();
+      pd.mediaLivestream = document.getElementById('media-livestream-toggle').checked;
+      localStorage.setItem('parish_data', JSON.stringify(pd));
+    } catch(e) {}
+    var b = document.getElementById('save-media-btn');
+    b.textContent = '✓ Saved';
+    b.style.background = 'var(--sage)';
+    setTimeout(function(){ b.textContent = 'Save media settings →'; b.style.background = ''; }, 2000);
+  });
+  (function(){
+    try {
+      var pd = JSON.parse(localStorage.getItem('parish_data') || '{}');
+      if(pd.mediaSchedule)  document.getElementById('media-schedule').value  = pd.mediaSchedule;
+      if(pd.mediaPodcast)   document.getElementById('media-podcast').value   = pd.mediaPodcast;
+      if(pd.mediaSpotify)   document.getElementById('media-spotify').value   = pd.mediaSpotify;
+      if(pd.mediaFormed)    document.getElementById('media-formed').value    = pd.mediaFormed;
+      if(pd.mediaLivestream === false) document.getElementById('media-livestream-toggle').checked = false;
+    } catch(e) {}
+  })();
   function toggleMinistryWebsite(key, visible) {
     try {
       var pd = JSON.parse(localStorage.getItem('parish_data') || '{}');
