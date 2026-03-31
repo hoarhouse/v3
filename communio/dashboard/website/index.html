@@ -298,14 +298,13 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
           </div>
           <div class="wb-section-arrow">›</div>
         </div>
-        <div class="wb-section-item" data-section="events">
+        <a href="../website.html" class="wb-section-item" style="text-decoration:none" title="Manage events in Website">
           <div class="wb-section-icon">📅</div>
           <div class="wb-section-info">
             <div class="wb-section-name">Events</div>
-            <div class="wb-section-status wb-status-empty">Not set up</div>
+            <div class="wb-section-status wb-status-live">Manage in Website →</div>
           </div>
-          <div class="wb-section-arrow">›</div>
-        </div>
+        </a>
         <div class="wb-section-item" data-section="bulletin">
           <div class="wb-section-icon">📄</div>
           <div class="wb-section-info">
@@ -391,32 +390,14 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
         <div class="wb-editor-inner wb-hidden" id="wb-panel-events">
           <div class="wb-editor-hd">
             <div class="wb-editor-title">Events</div>
-            <div class="wb-editor-desc">Add upcoming events to your parish website. Parishioners can register and add events to their calendar.</div>
+            <div class="wb-editor-desc">Events are now managed in one place — the Website dashboard.</div>
           </div>
-          <div class="wb-field-group">
-            <div class="wb-field-label">Event name</div>
-            <input type="text" class="wb-input" placeholder="Easter Vigil Mass">
+          <div style="background:var(--cream,#faf8f4);border-radius:8px;padding:24px;text-align:center">
+            <div style="font-size:32px;margin-bottom:12px">📅</div>
+            <div style="font-size:14px;font-weight:700;color:#0e0a06;margin-bottom:6px">Manage events in Website</div>
+            <div style="font-size:13px;color:#6b5c4e;margin-bottom:20px;line-height:1.5">Add, edit and remove events — they sync automatically to your Communio network profile feed.</div>
+            <a href="../website.html" style="display:inline-block;background:#d85020;color:#fff;padding:.7rem 1.5rem;border-radius:8px;font-size:.9rem;font-weight:600;text-decoration:none">Go to Website → Events tab →</a>
           </div>
-          <div class="wb-field-row">
-            <div class="wb-field-group wb-field-half">
-              <div class="wb-field-label">Date</div>
-              <input type="date" class="wb-input">
-            </div>
-            <div class="wb-field-group wb-field-half">
-              <div class="wb-field-label">Time</div>
-              <input type="time" class="wb-input">
-            </div>
-          </div>
-          <div class="wb-field-group">
-            <div class="wb-field-label">Description</div>
-            <textarea class="wb-textarea" placeholder="Brief description of the event..."></textarea>
-          </div>
-          <div class="wb-field-group">
-            <div class="wb-field-label">Registration link (optional)</div>
-            <input type="url" class="wb-input" placeholder="https://...">
-          </div>
-          <button class="wb-add-btn">+ Add another event</button>
-          <button class="wb-save-btn">Save Events</button>
         </div>
         <div class="wb-editor-inner wb-hidden" id="wb-panel-bulletin">
           <div class="wb-editor-hd">
