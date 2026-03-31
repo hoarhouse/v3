@@ -384,6 +384,138 @@ html, body { overflow-x: hidden; max-width: 100%; }
   section.page-hero, .page-hero { padding: 7rem 1.25rem 3rem; }
 }
 
+
+/* ── CHUNK 2: LAYOUT & USABILITY MOBILE FIXES ── */
+
+/* Contact info title too large on mobile */
+@media(max-width:768px){
+  .contact-info-title{font-size:clamp(1.25rem,5vw,1.75rem);}
+  .contact-form-title{font-size:1.1rem;}
+  .contact-detail{gap:.75rem;}
+  .contact-hours{padding:1rem;}
+}
+
+/* Sacrament tabs — horizontal scroll on mobile */
+@media(max-width:768px){
+  .sacrament-nav{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+  .sacrament-nav-inner{min-width:max-content;padding:.5rem 1rem;}
+  .sac-tab{padding:.75rem .875rem;font-size:.75rem;gap:.3rem;}
+  .sac-tab svg{width:13px;height:13px;}
+  .sac-grid{grid-template-columns:1fr;gap:2rem;}
+  .booking-form{padding:1.5rem 1.25rem;}
+}
+
+/* Touch targets — minimum 44px for all interactive elements */
+@media(max-width:968px){
+  .nav-link{min-height:44px;display:flex;align-items:center;}
+  .nav-mobile a{min-height:44px;display:flex;align-items:center;justify-content:center;}
+  .btn-primary,.btn-ghost,.btn-outline,.btn-give,.btn-white,.btn-ghost-white{
+    min-height:48px;display:inline-flex;align-items:center;justify-content:center;
+  }
+  .amount-btn{min-height:44px;}
+  .filter-btn{min-height:40px;}
+  .wb-save-btn,.wb-add-btn{min-height:44px;}
+  .role-apply{min-height:40px;padding:.5rem 1rem;}
+  .need-btn{min-height:44px;}
+  .footer-nav a{min-height:36px;display:flex;align-items:center;}
+  .footer-social a{width:44px;height:44px;}
+}
+
+/* Involved page touch targets */
+@media(max-width:768px){
+  .ministry-section-link{min-height:44px;display:inline-flex;align-items:center;}
+  .group-card-header .role-apply{min-height:44px;}
+}
+
+/* Modal on mobile — better spacing */
+@media(max-width:568px){
+  .modal-overlay{padding:.5rem;}
+  .modal-box{border-radius:12px;width:100%;max-height:95vh;}
+  .modal-header{padding:1.25rem 1.25rem 0;}
+  .modal-body{padding:1rem 1.25rem 1.5rem;}
+  .modal-form-row{grid-template-columns:1fr;gap:.75rem;}
+  .modal-submit{min-height:48px;}
+}
+
+/* RCIA page mobile */
+@media(max-width:768px){
+  .rcia-who-grid{grid-template-columns:1fr;}
+  .journey-steps{grid-template-columns:1fr;}
+  .journey-steps::before{display:none;}
+  .faq-grid{grid-template-columns:1fr;}
+  .rcia-register{padding:3rem 1.25rem;}
+  .register-form{padding:1.5rem 1.25rem;}
+  .hero-cta{width:100%;justify-content:center;}
+}
+
+/* About page mobile */
+@media(max-width:768px){
+  .timeline-item{grid-template-columns:60px 1fr;gap:1rem;}
+  .timeline-year{font-size:.85rem;}
+  .values-grid{grid-template-columns:1fr;}
+  .visit-grid{grid-template-columns:1fr;gap:2rem;}
+  .visit-map{min-height:240px;}
+  .visit-map iframe{min-height:240px;}
+  .visit-what{padding:1rem;}
+  .cta-btns{flex-direction:column;align-items:center;}
+  .cta-btns a{width:100%;max-width:320px;text-align:center;}
+}
+
+/* Staff page mobile */
+@media(max-width:768px){
+  .staff-section{padding:3rem 1.25rem;}
+  .staff-pastor{grid-template-columns:1fr;}
+  .staff-pastor .staff-photo{height:240px;}
+  .staff-body{padding:1.25rem;}
+}
+
+/* Bulletin mobile */
+@media(max-width:768px){
+  .bulletin-main{padding:2.5rem 1.25rem;}
+  .archive-grid{grid-template-columns:1fr;}
+  .newsletter-strip-form{flex-direction:column;}
+  .newsletter-strip-form input,.newsletter-strip-form button{width:100%;}
+}
+
+/* Events page mobile */
+@media(max-width:768px){
+  .events-filter-inner{padding:.5rem 1rem;gap:.4rem;}
+  .filter-btn{font-size:.72rem;padding:.4rem .75rem;}
+  .event-card{margin-bottom:0;}
+}
+
+/* Footer newsletter mobile */
+@media(max-width:568px){
+  .footer-newsletter-form{flex-direction:column;}
+  .footer-newsletter-form input,.footer-newsletter-form button{width:100%;}
+}
+
+/* Giving section mobile */
+@media(max-width:568px){
+  .giving{padding:3rem 1.25rem;}
+  .giving-inner{max-width:100%;}
+  .btn-give{padding:.875rem 1rem;}
+}
+
+/* General mobile typography improvements */
+@media(max-width:568px){
+  .section-title{font-size:clamp(1.5rem,6vw,2rem);}
+  .page-hero h1{font-size:clamp(1.75rem,7vw,2.5rem);}
+  .page-hero-sub{font-size:.95rem;}
+  .body-text{font-size:.9rem;}
+}
+
+/* Prevent text overflow on mobile */
+@media(max-width:768px){
+  p, h1, h2, h3, h4, h5, h6, div, span, a{
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+}
+
+/* Image responsiveness */
+img{max-width:100%;height:auto;}
+
 </style>
 </head>
 <body>
