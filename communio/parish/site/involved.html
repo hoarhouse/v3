@@ -534,4 +534,104 @@ a[data-contact]:hover{color:var(--terra-dark);border-bottom-color:var(--terra-da
 </section>
 
 </div><!-- end ministry-sections -->
->
+
+
+<div class="modal-overlay" id="contactModal">
+  <div class="modal-box">
+    <div class="modal-header">
+      <div>
+        <div class="modal-title" id="modalTitle">Get Involved</div>
+        <div class="modal-sub">We will be in touch within a week.</div>
+      </div>
+      <button class="modal-close" id="modalClose">&#x2715;</button>
+    </div>
+    <div class="modal-body" id="modalBody">
+      <div class="modal-form-row">
+        <div class="modal-field"><label>First Name</label><input type="text" placeholder="Maria"></div>
+        <div class="modal-field"><label>Last Name</label><input type="text" placeholder="Santos"></div>
+      </div>
+      <div class="modal-field"><label>Email Address</label><input type="email" id="mEmail" placeholder="maria@example.com"></div>
+      <div class="modal-field"><label>Phone (optional)</label><input type="tel" placeholder="(212) 555-0000"></div>
+      <div class="modal-field">
+        <label>I am interested in...</label>
+        <select id="mSubject">
+          <option value="">Select a ministry or role...</option>
+          <option value="volunteer:welcome-team">Volunteer — Welcome Team</option>
+          <option value="volunteer:food-pantry">Volunteer — Food Pantry Helper</option>
+          <option value="volunteer:office-assistant">Volunteer — Parish Office Assistant</option>
+          <option value="volunteer:events">Volunteer — Event Setup &amp; Cleanup</option>
+          <option value="small-groups:bible-study">Small Groups — Bible Study</option>
+          <option value="small-groups:mens-group">Small Groups — Men's Faith Group</option>
+          <option value="small-groups:womens-group">Small Groups — Women's Prayer Circle</option>
+          <option value="small-groups:lenten-group">Small Groups — Lenten Reflection Group</option>
+          <option value="liturgical:altar-server">Liturgical — Altar Server</option>
+          <option value="liturgical:lector">Liturgical — Lector</option>
+          <option value="liturgical:eucharistic-minister">Liturgical — Eucharistic Minister</option>
+          <option value="liturgical:usher">Liturgical — Usher / Greeter</option>
+          <option value="music:choir-sa">Music — Choir Singer (Soprano/Alto)</option>
+          <option value="music:choir-tb">Music — Choir Singer (Tenor/Bass)</option>
+          <option value="music:instrumentalist">Music — Instrumentalist</option>
+          <option value="music:cantor">Music — Cantor / Soloist</option>
+          <option value="youth:teen-leader">Youth — Teen Group Leader</option>
+          <option value="youth:retreat-chaperone">Youth — Retreat Chaperone</option>
+          <option value="youth:sunday-school">Youth — Sunday School Helper</option>
+          <option value="youth:events">Youth — Events Coordinator</option>
+          <option value="outreach:food-pantry">Outreach — Food Pantry</option>
+          <option value="outreach:homebound">Outreach — Homebound Visitor</option>
+          <option value="outreach:refugee">Outreach — Refugee Support</option>
+          <option value="outreach:fundraising">Outreach — Fundraising</option>
+          <option value="formation:re-teacher">Faith Formation — Children's RE Teacher</option>
+          <option value="formation:rcia-sponsor">Faith Formation — RCIA Sponsor</option>
+          <option value="formation:adult-study">Faith Formation — Adult Study Leader</option>
+          <option value="formation:confirmation-mentor">Faith Formation — Confirmation Mentor</option>
+          <option value="hospitality:coffee-hour">Hospitality — Sunday Coffee Hour</option>
+          <option value="hospitality:event-planning">Hospitality — Event Planning</option>
+          <option value="hospitality:new-parishioner">Hospitality — New Parishioner Welcome</option>
+          <option value="hospitality:decorating">Hospitality — Decorating Team</option>
+          <option value="general">Not sure yet — help me find the right fit</option>
+        </select>
+      </div>
+      <div class="modal-field"><label>Anything you'd like to share?</label><textarea placeholder="Your availability, experience, or any questions..."></textarea></div>
+      <button class="modal-submit" id="modalSubmit" type="button">Send My Interest</button>
+      <p style="font-size:.75rem;color:var(--text-muted);text-align:center;margin-top:.75rem;">A ministry leader will be in touch within one week.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var overlay=document.getElementById('contactModal');
+  var closeBtn=document.getElementById('modalClose');
+  var submitBtn=document.getElementById('modalSubmit');
+  var titleEl=document.getElementById('modalTitle');
+  if(!overlay)return;
+  function openModal(from){
+    overlay.classList.add('open');
+    document.body.style.overflow='hidden';
+    var sel=document.getElementById('mSubject');
+    if(from&&sel){
+      var opt=Array.from(sel.options).find(function(o){return o.value===from;});
+      if(opt){sel.value=from;if(titleEl)titleEl.textContent='Apply: '+opt.textContent.trim();}
+      else{if(titleEl)titleEl.textContent='Get Involved';}
+    }
+  }
+  function closeModal(){overlay.classList.remove('open');document.body.style.overflow='';if(titleEl)titleEl.textContent='Get Involved';}
+  overlay.addEventListener('click',function(e){if(e.target===overlay)closeModal();});
+  if(closeBtn)closeBtn.addEventListener('click',closeModal);
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')closeModal();});
+  document.addEventListener('click',function(e){
+    var el=e.target.closest('[data-contact]');
+    if(el){e.preventDefault();openModal(el.getAttribute('data-from')||'');}
+  });
+  if(submitBtn){
+    submitBtn.addEventListener('click',function(){
+      var email=document.getElementById('mEmail').value.trim();
+      if(!email){document.getElementById('mEmail').focus();return;}
+      document.getElementById('modalBody').innerHTML='<div class="modal-success"><div class="modal-success-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><h3>Message sent!</h3><p>Thank you. A ministry leader will be in touch within one week.</p></div>';
+    });
+  }
+})();
+</script>
+
+</body>
+</html>
