@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>St. Mary's Parish — Communio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Lora:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../communio.css">
+<style>
+.profile-shell{min-height:100vh;background:var(--cream)}
+/* ── HERO MASTHEAD ── */
+.masthead{position:relative;height:380px;overflow:hidden;background:var(--ink)}
+.mh-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 35%}
+.mh-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(14,10,6,0.88) 0%,rgba(14,10,6,0.35) 55%,rgba(14,10,6,0.1) 100%)}
+.mh-top{position:absolute;top:0;left:0;right:0;padding:80px 28px 0;display:flex;justify-content:flex-end;gap:8px;align-items:center}
+.mh-bottom{position:absolute;bottom:0;left:0;right:0;padding:0 28px 26px;display:flex;align-items:flex-end;gap:16px}
+.p-av{width:78px;height:78px;border-radius:12px;border:3px solid rgba(255,255,255,0.85);background:var(--terra);display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:800;color:var(--white);flex-shrink:0;box-shadow:0 4px 20px rgba(0,0,0,0.45);position:relative}
+.p-badge{position:absolute;bottom:-4px;right:-4px;width:20px;height:20px;background:var(--sage);border-radius:50%;border:2px solid white;display:flex;align-items:center;justify-content:center}
+.p-badge svg{width:9px;height:9px}
+.mh-id{flex:1;padding-bottom:2px}
+.p-name{font-size:22px;font-weight:800;color:var(--white);letter-spacing:-.025em;margin-bottom:3px;text-shadow:0 2px 12px rgba(0,0,0,0.5);line-height:1.1}
+.p-sub{font-size:12px;color:rgba(255,255,255,.5);font-weight:400}
+.p-loc{font-size:13px;color:rgba(255,255,255,.65);margin-top:5px}
+/* ghost action buttons inside hero */
+.btn-hero{font-family:var(--f-body);font-size:13px;font-weight:600;line-height:20.8px;padding:8px 18px;border-radius:var(--r-pill);border:1.5px solid rgba(255,255,255,0.45);background:rgba(0,0,0,0.25);color:white;cursor:pointer;text-decoration:none;display:inline-block;transition:all var(--ease);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.btn-hero:hover{background:rgba(255,255,255,0.18);border-color:rgba(255,255,255,0.75)}
+.btn-hero-primary{background:var(--terra) !important;border-color:var(--terra) !important}
+.btn-hero-primary:hover{background:var(--terra-light) !important;border-color:var(--terra-light) !important;transform:translateY(-1px)}
+/* slim info bar: tags + stats only */
+.id-bar{background:var(--white);border-bottom:1px solid var(--border-light);padding:12px 28px}
+.id-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.p-tags{display:flex;gap:5px;flex-wrap:wrap}
+.p-stats{display:flex;gap:16px;flex-wrap:wrap;margin-left:auto;border-left:1px solid var(--border-light);padding-left:16px}
+.pst{font-size:12px;color:var(--text-mid)}.pst strong{color:var(--ink);font-weight:700}
+.main{max-width:1100px;margin:0 auto;padding:24px;display:grid;grid-template-columns:1fr 292px;gap:22px;align-items:start}
+/* composer */
+.composer{background:var(--white);border-radius:var(--r-lg);border:1px solid var(--border-light);padding:14px;margin-bottom:16px;box-shadow:var(--sh-sm)}
+.c-row{display:flex;gap:10px;align-items:center}
+.c-av{width:34px;height:34px;border-radius:8px;background:var(--terra);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--white);flex-shrink:0}
+.c-in{flex:1;font-family:var(--f-body);font-size:13px;color:var(--light);background:var(--cream);border:1.5px solid var(--border-light);border-radius:var(--r-md);padding:9px 13px;outline:none;transition:border-color var(--ease)}
+.c-in:focus{border-color:var(--terra)}
+.c-btns{display:flex;gap:5px;margin-top:10px;padding-top:10px;border-top:1px solid var(--border-light)}
+.c-opt{font-family:var(--f-body);font-size:12px;font-weight:600;color:var(--text-mid);background:var(--cream);border:none;border-radius:var(--r-sm);padding:5px 11px;cursor:pointer;display:flex;align-items:center;gap:4px;transition:all var(--ease)}
+.c-opt:hover{background:var(--cream-dark);color:var(--ink)}
+/* tabs */
+.f-tabs{display:flex;gap:3px;margin-bottom:14px;background:var(--white);border-radius:var(--r-md);padding:4px;border:1px solid var(--border-light)}
+.f-tab{font-family:var(--f-body);font-size:12px;font-weight:500;color:var(--light);background:transparent;border:none;border-radius:var(--r-sm);padding:6px 13px;cursor:pointer;flex:1;transition:all var(--ease);white-space:nowrap}
+.f-tab.on{background:var(--ink);color:var(--white);font-weight:700}
+.f-tab:hover:not(.on){color:var(--ink);background:var(--cream)}
+/* feed card base */
+.fc{background:var(--white);border-radius:var(--r-lg);border:1px solid var(--border-light);margin-bottom:14px;overflow:hidden;box-shadow:var(--sh-sm);transition:box-shadow var(--ease)}
+.fc:hover{box-shadow:var(--sh-md)}
+.fc-hd{display:flex;align-items:center;gap:10px;padding:13px 14px 0}
+.fc-av{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--white);flex-shrink:0}
+.fc-m{flex:1}.fc-who{font-size:13px;font-weight:700;color:var(--ink)}.fc-when{font-size:11px;color:var(--light)}
+.fc-lbl{font-size:10px;font-weight:700;padding:3px 8px;border-radius:20px;text-transform:uppercase;letter-spacing:.05em}
+.fc-body{padding:10px 14px;font-family:var(--f-serif);font-size:14px;color:var(--mid);line-height:1.65}
+.fc-img{width:100%;max-height:220px;object-fit:cover;display:block}
+.fc-ft{display:flex;align-items:center;gap:12px;padding:9px 14px;border-top:1px solid var(--border-light)}
+.fc-r{font-size:12px;color:var(--light);font-weight:500}
+.fc-a{font-size:12px;font-weight:600;color:var(--terra);text-decoration:none;margin-left:auto}
+/* update */
+.fc-update{border-left:3px solid var(--terra)}
+.lbl-u{background:var(--terra-pale);color:var(--terra)}
+/* event */
+.fc-event{border-left:3px solid var(--sage)}
+.lbl-e{background:var(--sage-pale);color:var(--sage)}
+.e-row{display:flex;gap:12px;padding:12px 14px}
+.e-date{width:50px;background:var(--sage);border-radius:9px;text-align:center;padding:7px 4px;flex-shrink:0}
+.e-mon{font-size:9px;font-weight:700;color:rgba(255,255,255,.75);text-transform:uppercase;letter-spacing:.08em}
+.e-day{font-size:22px;font-weight:800;color:var(--white);line-height:1}
+.e-ttl{font-size:14px;font-weight:700;color:var(--ink);margin-bottom:2px}
+.e-loc{font-size:12px;color:var(--light);margin-bottom:5px}
+.e-desc{font-family:var(--f-serif);font-size:13px;color:var(--mid);line-height:1.5}
+/* project */
+.fc-project{border-left:3px solid var(--amber)}
+.lbl-p{background:var(--amber-pale);color:#8a6800}
+.p-proj-b{padding:10px 14px}
+.p-proj-n{font-size:14px;font-weight:700;color:var(--ink);margin-bottom:3px}
+.p-proj-d{font-family:var(--f-serif);font-size:13px;color:var(--mid);line-height:1.5}
+.p-proj-s{display:inline-flex;align-items:center;gap:5px;margin-top:8px;font-size:12px;font-weight:600;color:var(--sage);background:var(--sage-pale);padding:3px 9px;border-radius:20px}
+/* milestone */
+.fc-ms{background:linear-gradient(135deg,#fdf8d8 0%,var(--warm-white) 100%);border:1px solid #f0dca0}
+.ms-in{display:flex;align-items:center;gap:14px;padding:18px}
+.ms-em{font-size:36px;line-height:1}
+.ms-ttl{font-size:15px;font-weight:800;color:var(--ink);margin-bottom:2px}
+.ms-sub{font-size:13px;color:var(--text-mid)}
+/* donation highlight */
+.fc-dh{background:var(--terra-pale);border:1px solid rgba(216,80,32,.15)}
+.dh-in{display:flex;align-items:center;gap:12px;padding:14px}
+.dh-ico{font-size:28px}
+.dh-hd{font-size:14px;font-weight:700;color:var(--ink)}
+.dh-sub{font-size:12px;color:var(--light)}
+/* collective */
+.fc-coll{border:2px solid var(--ink)}
+.coll-bar{background:var(--ink);padding:8px 14px;display:flex;align-items:center;gap:8px}
+.coll-lbl{font-size:10px;font-weight:700;color:var(--amber);text-transform:uppercase;letter-spacing:.08em}
+.coll-ct{font-size:10px;color:rgba(255,253,245,.45);margin-left:auto}
+.signers{display:flex;align-items:center;padding:10px 14px 0}
+.s-dot{width:20px;height:20px;border-radius:50%;border:2px solid var(--white);margin-right:-5px;font-size:7px;font-weight:700;color:white;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.s-more{font-size:11px;color:var(--light);margin-left:12px}
+/* sidebar */
+.sb{display:flex;flex-direction:column;gap:14px}
+.s-card{background:var(--white);border-radius:var(--r-lg);border:1px solid var(--border-light);padding:18px;box-shadow:var(--sh-sm)}
+.s-ttl{font-size:11px;font-weight:700;color:var(--light);text-transform:uppercase;letter-spacing:.07em;margin-bottom:12px}
+.don-gl{font-size:12px;color:var(--light);margin-bottom:1px}
+.don-am{font-size:22px;font-weight:800;color:var(--ink);letter-spacing:-.03em}
+.don-am span{font-size:13px;font-weight:400;color:var(--light)}
+.don-bar{background:var(--cream-dark);border-radius:6px;height:7px;overflow:hidden;margin:8px 0}
+.don-fill{height:100%;background:linear-gradient(90deg,var(--terra),var(--terra-light));border-radius:6px;width:68%}
+.don-mt{display:flex;justify-content:space-between;font-size:11px;color:var(--light)}
+.don-note{font-size:11px;color:var(--light);margin-top:7px;text-align:center}
+.ct-row{display:flex;align-items:center;gap:9px;margin-bottom:8px}
+.ct-ic{width:26px;height:26px;background:var(--cream);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0}
+.ct-tx{font-size:13px;color:var(--mid)}
+.ct-lk{color:var(--terra);text-decoration:none}
+.ct-lk:hover{text-decoration:underline}
+.sp-row{display:flex;align-items:center;gap:9px;margin-bottom:10px}
+.sp-fl{font-size:17px;flex-shrink:0}
+.sp-nm{font-size:13px;font-weight:600;color:var(--ink)}
+.sp-lc{font-size:11px;color:var(--light)}
+.sp-lk{font-size:11px;font-weight:600;color:var(--terra);text-decoration:none;margin-left:auto}
+.cta-box{background:var(--ink);border-radius:var(--r-lg);padding:20px;text-align:center}
+.cta-em{font-size:26px;margin-bottom:6px}
+.cta-ttl{font-size:13px;font-weight:700;color:var(--white);margin-bottom:3px}
+.cta-sub{font-size:12px;color:rgba(255,253,245,.45);margin-bottom:12px;line-height:1.4}
+.cta-btn{display:block;background:var(--terra);color:var(--white);font-family:var(--f-body);font-size:13px;font-weight:700;padding:9px 18px;border-radius:var(--r-pill);text-decoration:none;transition:all var(--ease)}
+.cta-btn:hover{background:var(--terra-light);transform:translateY(-1px)}
+@media(max-width:840px){.main{grid-template-columns:1fr}.sb{order:2}.masthead{height:300px}.mh-top{padding-top:70px}.p-name{font-size:18px}.id-inner{gap:10px}.p-stats{margin-left:0;border-left:none;padding-left:0;border-top:1px solid var(--border-light);padding-top:8px;width:100%}}
+@media(max-width:480px){.f-tabs{overflow-x:auto}.f-tab{font-size:11px;padding:5px 10px}.p-stats{gap:14px}}
+</style>
+</head>
+<body>
+
+<!-- PUBLIC NAV -->
+<nav class="nav scrolled">
+  <a href="../index.html" class="nav-brand">
+    <div class="nav-mark">
+      <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" width="16" height="16"><circle cx="12" cy="12" r="4"/><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+    </div>
+    <span class="nav-name">Communio</span>
+  </a>
+  <div class="nav-links">
+    <a href="../index.html" class="nav-link">About</a>
+    <a href="../dashboard/network.html" class="nav-link">Browse Network</a>
+    <a href="../register.html" class="nav-link">Register your parish</a>
+  </div>
+  <!-- <?php if($logged_in): ?> -->
+  <a href="../dashboard/home.html" class="nav-pill"><div class="nav-av">SM</div><span class="nav-pname">St. Mary's</span></a>
+  <!-- <?php else: ?> -->
+  <a href="../register.html" class="nav-btn">Join Communio</a>
+  <!-- <?php endif ?> -->
+  <button class="nav-burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+<div class="nav-mobile" id="navMobile">
+  <a href="../index.html">Home</a>
+  <a href="../dashboard/home.html">Dashboard</a>
+  <a href="../dashboard/network.html">Browse Network</a>
+  <a href="../register.html">Register your parish</a>
+</div>
+
+<div class="profile-shell" style="padding-top:64px">
+
+  <!-- HERO MASTHEAD -->
+  <!-- <?php /* cover: $parish->cover_image_url | identity: $parish->name, $parish->diocese, $parish->location, $parish->verified */ ?> -->
+  <div class="masthead"><!-- SHARED: $parish->hero_image -->
+    <img class="mh-img" src="https://plus.unsplash.com/premium_photo-1725408073556-8987b1adcc4c?q=80&w=2532&auto=format&fit=crop" alt="St. Mary's Parish">
+    <div class="mh-overlay"></div>
+    <!-- Action buttons — top right, inside hero -->
+    <!-- <?php echo $parish->action_buttons_html; ?> -->
+    <div class="mh-top">
+      <a href="#donate" class="btn-hero btn-hero-primary">💛 Donate</a>
+      <a href="../register.html" class="btn-hero">+ Connect</a>
+      <button class="btn-hero">Follow</button>
+    </div>
+    <!-- Parish identity — bottom left, over photo -->
+    <div class="mh-bottom">
+      <!-- <?php echo $parish->avatar_html; ?> -->
+      <div class="p-av">SM
+        <div class="p-badge"><svg viewBox="0 0 12 12" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="2,6 5,9 10,3"/></svg></div>
+      </div>
+      <!-- <?php echo $parish->name_block_html; ?> -->
+      <div class="mh-id">
+        <div class="p-name"><!-- SHARED: $parish->name -->St. Mary's Parish <span class="p-sub">· Diocese of New York</span></div>
+        <div class="p-loc"><!-- SHARED: $parish->city, $parish->country -->📍 New York, USA &nbsp;·&nbsp; <span style="color:#6acd8a">✓ Verified by DCF</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- INFO BAR: focus tags + stats -->
+  <!-- <?php echo $parish->info_bar_html; ?> -->
+  <div class="id-bar">
+    <div class="id-inner">
+      <div class="p-tags"><!-- SHARED: foreach $parish->tags -->
+        <span class="tag tag-terra">Ethical Technology</span>
+        <span class="tag tag-sage">Peace &amp; Reconciliation</span>
+        <span class="tag tag-amber">Youth Ministry</span>
+        <span class="tag tag-ink">Social Justice</span>
+      </div>
+      <div class="p-stats"><!-- SHARED: $parish->founded, family_count, project_count, sister_count, visitor_count -->
+        <div class="pst"><strong>1887</strong> Founded</div>
+        <div class="pst"><strong>1,200+</strong> Families</div>
+        <div class="pst"><strong>4</strong> Projects</div>
+        <div class="pst"><strong>3</strong> Sister Parishes</div>
+        <div class="pst"><strong>142</strong> Visitors / mo</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN 2-COL -->
+  <div class="main">
+
+    <!-- FEED COLUMN -->
+    <div>
+
+      <!-- COMPOSER — admin only -->
+      <!-- <?php if ($is_parish_admin): ?> -->
+      <div class="composer">
+        <div class="c-row">
+          <div class="c-av">SM</div>
+          <!-- <?php echo $composer->input_html; ?> -->
+          <input class="c-in" type="text" placeholder="Share an update with the network…">
+        </div>
+        <div class="c-btns">
+          <button class="c-opt">📷 Photo</button>
+          <button class="c-opt">📅 Event</button>
+          <button class="c-opt">🌿 Project</button>
+          <button class="btn btn-primary btn-sm" style="margin-left:auto">Post</button>
+        </div>
+      </div>
+      <!-- <?php endif; ?> -->
+
+      <!-- FEED TABS -->
+      <div class="f-tabs">
+        <button class="f-tab on" data-tab="all">All</button>
+        <button class="f-tab" data-tab="updates">Updates</button>
+        <button class="f-tab" data-tab="events">Events</button>
+        <button class="f-tab" data-tab="projects">Projects</button>
+        <button class="f-tab" data-tab="milestones">Milestones</button>
+      </div>
+
+      <!-- ═══ FEED CARDS (chronological) ═══ -->
+      <!-- <?php foreach ($feed->items as $card): echo $card->render(); endforeach; ?> -->
+
+      <!-- MILESTONE -->
+      <article class="fc fc-ms" data-type="milestones">
+        <div class="ms-in">
+          <!-- <?php echo $card->milestone_content_html; ?> -->
+          <div class="ms-em">🎉</div>
+          <div>
+            <div class="ms-ttl">3rd Sister Parish — Connected!</div>
+            <div class="ms-sub">St. Benedict Parish, Budapest · Now partnered across 3 continents · 2 days ago</div>
+          </div>
+        </div>
+      </article>
+
+      <!-- UPDATE with photo -->
+      <article class="fc fc-update" data-type="updates">
+        <div class="fc-hd">
+          <div class="fc-av" style="background:var(--terra)">SM</div>
+          <div class="fc-m">
+            <!-- <?php echo $card->author_meta_html; ?> -->
+            <div class="fc-who">St. Mary's Parish</div>
+            <div class="fc-when">Yesterday · 10:15 AM</div>
+          </div>
+          <span class="fc-lbl lbl-u">Update</span>
+        </div>
+        <!-- <?php echo $card->body_html; ?> -->
+        <p class="fc-body">Our community gathered Sunday for the launch of our Digital Literacy programme — 34 families exploring ethical technology and online safety together. A morning of learning and fellowship grounded in the Gospel.</p>
+        <img class="fc-img" src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=680&q=75" alt="Parish community gathering" loading="lazy">
+        <div class="fc-ft">
+          <span class="fc-r">❤️ 47 reactions</span>
+          <span class="fc-r">💬 8 comments</span>
+          <a href="#" class="fc-a">Share →</a>
+        </div>
+      </article>
+
+      <!-- COLLECTIVE (network-wide) -->
+      <article class="fc fc-coll" data-type="all">
+        <div class="coll-bar">
+          <span>🌐</span>
+          <span class="coll-lbl">Network Post · Digital Literacy Initiative</span>
+          <span class="coll-ct">Co-signed by 247 parishes</span>
+        </div>
+        <!-- <?php echo $card->signers_html; ?> -->
+        <div class="signers">
+          <div class="s-dot" style="background:var(--terra)">SM</div>
+          <div class="s-dot" style="background:var(--sage)">SB</div>
+          <div class="s-dot" style="background:#5a7ab8">SS</div>
+          <div class="s-dot" style="background:#8a4a8a">SJ</div>
+          <span class="s-more">+243 more parishes</span>
+        </div>
+        <!-- <?php echo $card->body_html; ?> -->
+        <p class="fc-body">The Digital Literacy Initiative now reaches 247 parishes across 38 countries. Together we have trained over 4,200 families in ethical technology use, online safety, and digital discernment grounded in Catholic Social Teaching.</p>
+        <div class="fc-ft">
+          <span class="fc-r">🌍 247 co-signers</span>
+          <a href="#" class="fc-a">View project →</a>
+        </div>
+      </article>
+
+      <!-- EVENT -->
+      <article class="fc fc-event" data-type="events">
+        <div class="fc-hd">
+          <div class="fc-av" style="background:var(--sage)">SM</div>
+          <div class="fc-m">
+            <div class="fc-who">St. Mary's Parish</div>
+            <div class="fc-when">Upcoming · 8 days away</div>
+          </div>
+          <span class="fc-lbl lbl-e">Event</span>
+        </div>
+        <!-- <?php echo $card->event_content_html; ?> -->
+        <div class="e-row">
+          <div class="e-date">
+            <div class="e-mon">APR</div>
+            <div class="e-day">15</div>
+          </div>
+          <div>
+            <div class="e-ttl">Community Dinner &amp; Tech Ethics Forum</div>
+            <div class="e-loc">📍 Parish Hall, 15 Mott Street · 6:30 – 9:00 PM</div>
+            <div class="e-desc">An evening of shared meals and open conversation on how our parishes can lead in ethical technology. All are welcome — families, students, and visitors.</div>
+          </div>
+        </div>
+        <div class="fc-ft">
+          <span class="fc-r">✅ 62 attending</span>
+          <a href="#" class="fc-a">RSVP →</a>
+        </div>
+      </article>
+
+      <!-- DONATION HIGHLIGHT -->
+      <article class="fc fc-dh" data-type="all">
+        <div class="dh-in">
+          <div class="dh-ico">💚</div>
+          <div style="flex:1">
+            <!-- <?php echo $card->donation_highlight_html; ?> -->
+            <div class="dh-hd">14 donors gave this week</div>
+            <div class="dh-sub">$1,240 raised · Anonymous · Thank you</div>
+          </div>
+          <a href="#donate" class="btn btn-primary btn-sm">Give Now</a>
+        </div>
+      </article>
+
+      <!-- PROJECT ACTIVITY -->
+      <article class="fc fc-project" data-type="projects">
+        <div class="fc-hd">
+          <div class="fc-av" style="background:var(--amber);color:var(--ink)">SM</div>
+          <div class="fc-m">
+            <div class="fc-who">St. Mary's Parish</div>
+            <div class="fc-when">2 weeks ago</div>
+          </div>
+          <span class="fc-lbl lbl-p">Project</span>
+        </div>
+        <!-- <?php echo $card->project_activity_html; ?> -->
+        <div class="p-proj-b">
+          <div class="p-proj-n">Joined: Ethical AI in Catholic Education — Global Statement</div>
+          <div class="p-proj-d">Co-authoring a practical governance framework for parishes and schools navigating AI — grounded in Catholic Social Teaching and the Laudato Sí vision for integral ecology.</div>
+          <span class="p-proj-s">🌿 Co-signed by 247 parishes worldwide</span>
+        </div>
+        <div class="fc-ft">
+          <a href="#" class="fc-a">View project →</a>
+        </div>
+      </article>
+
+      <!-- UPDATE (text-only) -->
+      <article class="fc fc-update" data-type="updates">
+        <div class="fc-hd">
+          <div class="fc-av" style="background:var(--terra)">SM</div>
+          <div class="fc-m">
+            <div class="fc-who">St. Mary's Parish</div>
+            <div class="fc-when">3 weeks ago</div>
+          </div>
+          <span class="fc-lbl lbl-u">Update</span>
+        </div>
+        <!-- <?php echo $card->body_html; ?> -->
+        <p class="fc-body">We are delighted to welcome Fr. James O'Brien as our new Associate Pastor. Fr. James brings eight years of ministry in East Africa and a deep passion for youth formation in the digital age.</p>
+        <div class="fc-ft">
+          <span class="fc-r">❤️ 89 reactions</span>
+          <span class="fc-r">💬 23 comments</span>
+          <a href="#" class="fc-a">Share →</a>
+        </div>
+      </article>
+
+    </div><!-- /feed col -->
+
+    <!-- SIDEBAR -->
+    <aside class="sb" id="donate">
+
+      <!-- DONATION WIDGET -->
+      <!-- <?php echo $parish->donation_widget_html; ?> -->
+      <div class="s-card">
+        <div class="s-ttl">Support this Parish</div>
+        <div class="don-gl">Monthly giving goal</div>
+        <div class="don-am"><!-- SHARED: $parish->donation_current, $parish->donation_goal, $parish->stripe_key -->$3,400 <span>of $5,000</span></div>
+        <div class="don-bar"><div class="don-fill"></div></div>
+        <div class="don-mt"><span>68% funded</span><span>42 donors</span></div>
+        <a href="#" class="btn btn-primary" style="display:block;width:100%;text-align:center;margin-top:12px">Give Now →</a>
+        <p class="don-note">Anonymous · Secure · Tax deductible</p>
+      </div>
+
+      <!-- CONTACT -->
+      <!-- <?php echo $parish->contact_card_html; ?> -->
+      <div class="s-card">
+        <div class="s-ttl">Contact</div>
+        <div class="ct-row"><!-- SHARED: $parish->email / $parish->phone / $parish->address --><div class="ct-ic">✉️</div><span class="ct-tx"><a href="mailto:info@stmarysnyc.org" class="ct-lk">info@stmarysnyc.org</a></span></div>
+        <div class="ct-row"><div class="ct-ic">🌐</div><span class="ct-tx"><a href="#" class="ct-lk">stmarysnyc.communio.org</a></span></div>
+        <div class="ct-row"><div class="ct-ic">📍</div><span class="ct-tx" style="font-size:12px">15 Mott Street, New York, NY 10013</span></div>
+      </div>
+
+      <!-- SISTER PARISHES -->
+      <!-- <?php echo $parish->sister_parishes_mini_html; ?> -->
+      <div class="s-card">
+        <div class="s-ttl">Sister Parishes</div>
+        <div class="sp-row"><!-- SHARED: foreach $parish->sister_parishes -->
+          <div class="sp-fl">🇭🇺</div>
+          <div><div class="sp-nm">St. Benedek Parish</div><div class="sp-lc">Budapest, Hungary</div></div>
+          <a href="#" class="sp-lk">View →</a>
+        </div>
+        <div class="sp-row">
+          <div class="sp-fl">🇬🇭</div>
+          <div><div class="sp-nm">Holy Spirit Parish</div><div class="sp-lc">Accra, Ghana</div></div>
+          <a href="#" class="sp-lk">View →</a>
+        </div>
+        <div class="sp-row" style="margin-bottom:0">
+          <div class="sp-fl">🇵🇱</div>
+          <div><div class="sp-nm">St. Stanislaw Parish</div><div class="sp-lc">Warsaw, Poland</div></div>
+          <a href="#" class="sp-lk">View →</a>
+        </div>
+      </div>
+
+      <!-- PARISH CTA -->
+      <div class="cta-box">
+        <div class="cta-em">⛪</div>
+        <div class="cta-ttl">Are you a parish?</div>
+        <div class="cta-sub">Connect with St. Mary's — form a sister-parish relationship or join a project together.</div>
+        <a href="../register.html" class="cta-btn">Connect as a parish →</a>
+      </div>
+
+    </aside>
+
+  </div><!-- /main -->
+</div><!-- /profile-shell -->
+
+<script>
+(function () {
+  var tabs = document.querySelectorAll('.f-tab');
+  var cards = document.querySelectorAll('.fc[data-type]');
+
+  function filter(tab) {
+    var t = tab.dataset.tab;
+    tabs.forEach(function (b) { b.classList.remove('on'); });
+    tab.classList.add('on');
+    cards.forEach(function (c) {
+      if (t === 'all' || c.dataset.type === t) {
+        c.style.display = '';
+      } else {
+        c.style.display = 'none';
+      }
+    });
+  }
+
+  tabs.forEach(function (b) {
+    b.addEventListener('click', function () { filter(b); });
+  });
+}());
+</script>
+<script>
+(function(){
+  var b=document.getElementById('burger');
+  var m=document.getElementById('navMobile');
+  if(!b||!m)return;
+  b.addEventListener('click',function(){m.classList.toggle('open');});
+  document.addEventListener('click',function(e){
+    if(!b.contains(e.target)&&!m.contains(e.target))m.classList.remove('open');
+  });
+})();
+</script>
+</body>
+</html>

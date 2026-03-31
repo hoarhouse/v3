@@ -1805,6 +1805,7 @@ select:focus-visible, textarea:focus-visible{
 }
 
 </style>
+  <script src="parish-data.js"></script>
 </head>
 <body>
 
@@ -1813,7 +1814,7 @@ select:focus-visible, textarea:focus-visible{
   <div class="nav-inner">
     <a href="index.html" class="nav-logo">
       <div class="nav-crest">SM</div>
-      St. Mary's Parish
+      <span data-parish="name">St. Mary's Parish</span>
     </a>
     <div class="nav-links">
       <a href="index.html#mass-times" class="nav-link">Mass Times</a>
@@ -1898,11 +1899,11 @@ select:focus-visible, textarea:focus-visible{
       </div>
       <div class="hero-stats">
         <div class="hero-stat">
-          <strong>1,200+</strong>
+          <strong data-parish="stats.families">1,200+</strong>
           Families
         </div>
         <div class="hero-stat">
-          <strong>7</strong>
+          <strong data-parish="stats.sundayMasses">7</strong>
           Sunday Masses
         </div>
         <div class="hero-stat">
@@ -2244,7 +2245,7 @@ select:focus-visible, textarea:focus-visible{
           </div>
           <div>
             <div class="contact-detail-label">Address</div>
-            <div class="contact-detail-value">123 Rivington Street<br>New York, NY 10002</div>
+            <div class="contact-detail-value"><span data-parish="address">123 Rivington Street</span><br>New York, NY 10002</div>
           </div>
         </div>
         <div class="contact-detail">
@@ -2553,10 +2554,10 @@ if(_nav){ window.addEventListener('scroll',()=>{ _nav.style.boxShadow = window.s
       <div>
         <div class="footer-col-title">Stay Connected</div>
         <div class="footer-social">
-          <a href="https://facebook.com" target="_blank" aria-label="Facebook">f</a>
-          <a href="https://instagram.com" target="_blank" aria-label="Instagram">in</a>
-          <a href="https://youtube.com" target="_blank" aria-label="YouTube">yt</a>
-          <a href="https://spotify.com" target="_blank" aria-label="Spotify">sp</a>
+          <a href="https://facebook.com" target="_blank" aria-label="Facebook" data-parish-social="facebook">f</a>
+          <a href="https://instagram.com" target="_blank" aria-label="Instagram" data-parish-social="instagram">in</a>
+          <a href="https://youtube.com" target="_blank" aria-label="YouTube" data-parish-social="youtube">yt</a>
+          <a href="https://spotify.com" target="_blank" aria-label="Spotify" data-parish-social="spotify">sp</a>
         </div>
         <div class="footer-newsletter-label">Get our weekly bulletin by email</div>
         <div class="footer-newsletter-form">

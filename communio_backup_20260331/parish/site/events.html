@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Events — St. Mary's Parish</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0e0a06;--terra:#d85020;--terra-dark:#b84018;--sage:#2a8a4a;--cream:#f5f2e8;--warm-white:#fffdf5;--text-body:#3d2f22;--text-muted:#7a6555;--gold:#c8973a;}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+a{color:inherit;text-decoration:none;}
+body{font-family:'Outfit',sans-serif;line-height:1.6;color:var(--text-body);background:var(--warm-white);-webkit-font-smoothing:antialiased;}
+h1,h2,h3,h4,h5,h6{font-family:'Lora',serif;line-height:1.2;}
+.container{max-width:1200px;margin:0 auto;padding:0 2rem;}
+.nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:64px;background:rgba(255,253,245,0.96);backdrop-filter:blur(12px);box-shadow:0 2px 20px rgba(14,10,6,0.08);}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:100%;max-width:1200px;margin:0 auto;padding:0 2rem;gap:1rem;}
+.nav-logo{display:flex;align-items:center;gap:.75rem;font-family:'Lora',serif;font-weight:600;font-size:1.125rem;color:var(--ink);text-decoration:none;flex-shrink:0;}
+.nav-crest{width:36px;height:36px;background:var(--terra);border-radius:50%;display:flex;align-items:center;justify-content:center;font-style:italic;font-weight:700;color:#fff;font-size:.85rem;}
+.nav-links{display:flex;align-items:center;gap:.25rem;flex:1;justify-content:center;}
+.nav-link{font-size:.8rem;font-weight:500;color:var(--text-body);text-decoration:none;white-space:nowrap;padding:.5rem .75rem;border-radius:6px;transition:all .2s ease;font-family:'Outfit',sans-serif;}
+.nav-link:hover{color:var(--terra);background:rgba(216,80,32,0.06);}
+.nav-dropdown{position:relative;}
+.nav-dropdown-btn{display:flex;align-items:center;gap:.3rem;font-size:.8rem;font-weight:500;color:var(--text-body);padding:.5rem .75rem;border-radius:6px;cursor:pointer;background:none;border:none;font-family:'Outfit',sans-serif;transition:all .2s ease;white-space:nowrap;}
+.nav-dropdown-btn:hover{color:var(--terra);background:rgba(216,80,32,0.06);}
+.nav-dropdown-btn svg{transition:transform .2s ease;}
+.nav-dropdown:hover .nav-dropdown-btn svg{transform:rotate(180deg);}
+.nav-dropdown-menu::before{content:"";position:absolute;top:-12px;left:0;right:0;height:12px;}
+.nav-dropdown-menu{display:none;position:absolute;top:100%;left:50%;transform:translateX(-50%);background:#fffdf5;border:1px solid rgba(14,10,6,0.1);border-radius:10px;padding:.5rem;padding-top:12px;margin-top:0;min-width:180px;box-shadow:0 8px 30px rgba(14,10,6,0.12);z-index:200;}
+.nav-dropdown:hover .nav-dropdown-menu{display:block;}
+.nav-dropdown-item{display:block;padding:.5rem .875rem;font-size:.8rem;color:var(--text-body);text-decoration:none;border-radius:6px;white-space:nowrap;transition:all .2s ease;}
+.nav-dropdown-item:hover{background:rgba(216,80,32,0.08);color:var(--terra);}
+.nav-cta{background:var(--terra);color:#fff;font-size:.8rem;font-weight:600;padding:.55rem 1.25rem;border-radius:6px;text-decoration:none;white-space:nowrap;flex-shrink:0;transition:background .2s ease;}
+.nav-cta:hover{background:var(--terra-dark);}
+.nav-hamburger{display:none;flex-direction:column;gap:4px;cursor:pointer;background:none;border:none;padding:4px;flex-shrink:0;}
+.nav-hamburger span{display:block;width:22px;height:2px;background:var(--ink);border-radius:1px;}
+.nav-mobile{display:none;position:fixed;top:64px;left:0;right:0;bottom:0;background:var(--ink);flex-direction:column;align-items:center;justify-content:center;gap:1.25rem;z-index:999;overflow-y:auto;padding:2rem 0;}
+.nav-mobile.open{display:flex;}
+.nav-mobile a{font-family:'Lora',serif;font-size:1.125rem;font-weight:600;color:#fff;text-decoration:none;opacity:.9;}
+.nav-mobile a:hover{color:var(--terra);}
+.nav-mobile-section{font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-top:.75rem;}
+@media(max-width:968px){.nav-links{display:none;}.nav-hamburger{display:flex;}}
+/* PAGE HERO */
+.page-hero{background:var(--ink);padding:8rem 2rem 4rem;text-align:center;}
+.page-hero-overline{display:inline-flex;align-items:center;gap:.5rem;background:rgba(216,80,32,0.2);border:1px solid rgba(216,80,32,0.4);color:rgba(255,255,255,0.9);font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:.4rem 1rem;border-radius:20px;margin-bottom:1.5rem;}
+.page-hero h1{font-family:'Lora',serif;font-weight:700;font-size:clamp(2rem,4vw,3rem);color:#fff;margin-bottom:1rem;}
+.page-hero-sub{font-size:1.05rem;color:rgba(255,255,255,0.65);max-width:560px;margin:0 auto;}
+/* FILTERS */
+.events-filter{background:#fff;border-bottom:1px solid rgba(14,10,6,0.08);position:sticky;top:64px;z-index:100;}
+.events-filter-inner{display:flex;align-items:center;gap:.5rem;max-width:1200px;margin:0 auto;padding:.75rem 2rem;overflow-x:auto;}
+.filter-btn{padding:.45rem 1rem;font-size:.8rem;font-weight:600;border:1.5px solid rgba(14,10,6,0.12);border-radius:20px;background:none;cursor:pointer;font-family:inherit;color:var(--text-muted);white-space:nowrap;transition:all .2s ease;}
+.filter-btn:hover{border-color:var(--terra);color:var(--terra);}
+.filter-btn.active{background:var(--terra);border-color:var(--terra);color:#fff;}
+/* FEATURED EVENT */
+.featured-event{background:var(--cream);padding:4rem 2rem 3rem;}
+.featured-inner{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 4px 30px rgba(14,10,6,0.08);}
+.featured-img{background:url('ep.jpg') center/cover;min-height:380px;position:relative;}
+.featured-badge{position:absolute;top:1.25rem;left:1.25rem;background:var(--terra);color:#fff;font-size:.7rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:.35rem .9rem;border-radius:20px;}
+.featured-body{padding:2.5rem;}
+.featured-overline{font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--terra);margin-bottom:.75rem;}
+.featured-title{font-family:'Lora',serif;font-weight:700;font-size:1.75rem;color:var(--ink);margin-bottom:.75rem;line-height:1.25;}
+.featured-desc{font-size:.925rem;color:var(--text-body);line-height:1.7;margin-bottom:1.5rem;}
+.featured-meta{display:flex;flex-direction:column;gap:.5rem;margin-bottom:2rem;}
+.featured-meta-row{display:flex;align-items:center;gap:.75rem;font-size:.875rem;color:var(--text-muted);}
+.featured-meta-row svg{color:var(--terra);flex-shrink:0;}
+.btn-primary{display:inline-flex;align-items:center;gap:.5rem;background:var(--terra);color:#fff;font-weight:600;font-size:.9rem;padding:.875rem 2rem;border-radius:8px;text-decoration:none;transition:all .2s ease;}
+.btn-primary:hover{background:var(--terra-dark);transform:translateY(-1px);}
+/* EVENTS GRID */
+.events-main{background:var(--warm-white);padding:3rem 2rem 5rem;}
+.events-section-title{font-family:'Lora',serif;font-weight:700;font-size:1.375rem;color:var(--ink);margin-bottom:1.75rem;}
+.events-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-bottom:3rem;}
+.event-card{background:#fff;border-radius:10px;border:1px solid rgba(14,10,6,0.06);overflow:hidden;transition:all .2s ease;}
+.event-card:hover{transform:translateY(-2px);box-shadow:0 12px 40px rgba(14,10,6,0.1);}
+.event-img{height:180px;background:var(--cream);position:relative;overflow:hidden;}
+.event-img-inner{width:100%;height:100%;object-fit:cover;display:block;}
+.event-img-placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--cream),#e8e0d0);}
+.event-date-badge{position:absolute;top:1rem;left:1rem;background:#fff;border-radius:8px;padding:.4rem .6rem;text-align:center;min-width:48px;box-shadow:0 2px 8px rgba(14,10,6,0.1);}
+.event-date-badge-day{font-family:'Lora',serif;font-weight:700;font-size:1.25rem;color:var(--terra);line-height:1;}
+.event-date-badge-mon{font-size:.65rem;font-weight:700;text-transform:uppercase;color:var(--text-muted);letter-spacing:.06em;}
+.event-body{padding:1.25rem;}
+.event-category{font-size:.65rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--terra);margin-bottom:.4rem;}
+.event-title{font-family:'Lora',serif;font-weight:700;font-size:1.05rem;color:var(--ink);margin-bottom:.5rem;line-height:1.3;}
+.event-desc{font-size:.825rem;color:var(--text-muted);line-height:1.6;margin-bottom:.875rem;}
+.event-footer{display:flex;align-items:center;justify-content:space-between;}
+.event-time{font-size:.75rem;color:var(--text-muted);display:flex;align-items:center;gap:.35rem;}
+.event-link{font-size:.8rem;font-weight:600;color:var(--terra);transition:color .2s;}
+.event-link:hover{color:var(--terra-dark);}
+/* NEWSLETTER */
+.events-newsletter{background:var(--terra);padding:4rem 2rem;text-align:center;}
+.events-newsletter h2{font-family:'Lora',serif;font-weight:700;font-size:clamp(1.5rem,3vw,2rem);color:#fff;margin-bottom:.75rem;}
+.events-newsletter p{font-size:.95rem;color:rgba(255,255,255,0.85);margin-bottom:2rem;}
+.newsletter-form{display:flex;gap:.75rem;max-width:440px;margin:0 auto;}
+.newsletter-form input{flex:1;background:rgba(255,255,255,0.2);border:1.5px solid rgba(255,255,255,0.4);border-radius:7px;padding:.75rem 1rem;font-size:.9rem;color:#fff;font-family:inherit;}
+.newsletter-form input::placeholder{color:rgba(255,255,255,0.6);}
+.newsletter-form input:focus{outline:none;border-color:#fff;}
+.newsletter-form button{background:#fff;color:var(--terra);font-weight:700;font-size:.875rem;padding:.75rem 1.5rem;border:none;border-radius:7px;cursor:pointer;font-family:inherit;white-space:nowrap;transition:all .2s;}
+.newsletter-form button:hover{background:var(--cream);}
+/* FOOTER */
+.page-footer{background:var(--ink);color:rgba(255,253,245,0.6);padding:2.5rem 2rem;text-align:center;font-size:.85rem;}
+.page-footer a{color:var(--terra);}
+.page-footer a:hover{color:#fff;}
+/* MODAL */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(14,10,6,0.6);z-index:2000;align-items:center;justify-content:center;padding:1rem;backdrop-filter:blur(4px);}
+.modal-overlay.open{display:flex;}
+.modal-box{background:#fffdf5;border-radius:14px;width:100%;max-width:580px;max-height:90vh;overflow-y:auto;box-shadow:0 24px 80px rgba(14,10,6,0.3);position:relative;animation:modalIn .25s ease;}
+@keyframes modalIn{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
+.modal-header{padding:1.75rem 2rem 0;display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;}
+.modal-title{font-family:'Lora',serif;font-weight:700;font-size:1.375rem;color:var(--ink);}
+.modal-sub{font-size:.85rem;color:var(--text-muted);margin-top:.3rem;}
+.modal-close{width:32px;height:32px;background:rgba(14,10,6,0.07);border:none;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1rem;color:var(--ink);}
+.modal-close:hover{background:rgba(14,10,6,0.14);}
+.modal-body{padding:1.5rem 2rem 2rem;}
+.modal-form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem;}
+.modal-field{display:flex;flex-direction:column;gap:.4rem;margin-bottom:1rem;}
+.modal-field label{font-size:.75rem;font-weight:600;color:var(--ink);}
+.modal-field input,.modal-field select,.modal-field textarea{background:var(--warm-white);border:1.5px solid rgba(14,10,6,0.12);border-radius:7px;padding:.65rem .9rem;font-size:.875rem;color:var(--ink);font-family:inherit;transition:border-color .2s;}
+.modal-field input:focus,.modal-field select:focus,.modal-field textarea:focus{outline:none;border-color:var(--terra);}
+.modal-field textarea{resize:vertical;min-height:100px;}
+.modal-submit{background:var(--terra);color:#fff;font-weight:700;font-size:.9rem;padding:.875rem 2rem;border:none;border-radius:8px;cursor:pointer;font-family:inherit;width:100%;transition:all .2s;margin-top:.25rem;}
+.modal-submit:hover{background:var(--terra-dark);}
+.modal-success{text-align:center;padding:3rem 2rem;}
+.modal-success-icon{width:56px;height:56px;background:rgba(42,138,74,0.12);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1.25rem;color:var(--sage);}
+.modal-success h3{font-family:'Lora',serif;font-weight:700;font-size:1.375rem;color:var(--ink);margin-bottom:.5rem;}
+.modal-success p{font-size:.9rem;color:var(--text-muted);line-height:1.6;}
+a[data-contact].nav-link{display:inline;border-bottom:none;font-size:.8rem;font-weight:500;color:var(--text-body);padding:.5rem .75rem;border-radius:6px;} a[data-contact]{display:inline-flex;align-items:center;gap:.4rem;color:var(--terra);font-weight:600;font-size:.95rem;text-decoration:none;border-bottom:1.5px solid rgba(216,80,32,0.3);padding-bottom:.1rem;transition:all .2s ease;}
+a[data-contact]:hover{color:var(--terra-dark);}
+@media(max-width:968px){.featured-inner{grid-template-columns:1fr;}.events-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:568px){.events-grid{grid-template-columns:1fr;}.newsletter-form{flex-direction:column;}.modal-form-row{grid-template-columns:1fr;}}
+
+/* ── SHARED FOOTER ── */
+.site-footer{background:var(--ink);color:rgba(255,253,245,0.7);padding:4rem 2rem 0;}
+.site-footer .container{max-width:1200px;margin:0 auto;}
+.footer-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:3rem;padding-bottom:3rem;border-bottom:1px solid rgba(255,255,255,0.08);}
+.footer-brand{font-family:'Lora',serif;font-style:italic;font-size:1.25rem;color:var(--warm-white);margin-bottom:.75rem;}
+.footer-tagline{font-size:.85rem;color:rgba(255,253,245,0.45);line-height:1.6;margin-bottom:1.25rem;}
+.footer-detail{display:flex;align-items:flex-start;gap:.6rem;font-size:.82rem;color:rgba(255,253,245,0.65);line-height:1.6;margin-bottom:.6rem;}
+.footer-detail svg{flex-shrink:0;margin-top:.15rem;color:var(--terra);}
+.footer-detail a{color:var(--terra);transition:color .2s;}
+.footer-detail a:hover{color:#fff;}
+.footer-col-title{font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,253,245,0.35);margin-bottom:1rem;}
+.footer-nav{display:flex;flex-direction:column;gap:.5rem;}
+.footer-nav a{font-size:.85rem;color:rgba(255,253,245,0.65);text-decoration:none;transition:color .2s;}
+.footer-nav a:hover{color:#fff;}
+.footer-mass-item{font-size:.82rem;color:rgba(255,253,245,0.65);margin-bottom:.4rem;line-height:1.5;}
+.footer-mass-item strong{color:rgba(255,253,245,0.9);display:block;}
+.footer-social{display:flex;gap:.6rem;margin-bottom:1.25rem;}
+.footer-social a{width:36px;height:36px;background:rgba(255,255,255,0.07);border-radius:8px;display:flex;align-items:center;justify-content:center;color:rgba(255,253,245,0.6);text-decoration:none;transition:all .2s;font-size:.8rem;font-weight:700;}
+.footer-social a:hover{background:var(--terra);color:#fff;}
+.footer-newsletter-label{font-size:.75rem;color:rgba(255,253,245,0.45);margin-bottom:.6rem;}
+.footer-newsletter-form{display:flex;gap:.5rem;}
+.footer-newsletter-form input{flex:1;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);border-radius:6px;padding:.5rem .75rem;font-size:.8rem;color:#fff;font-family:inherit;}
+.footer-newsletter-form input::placeholder{color:rgba(255,255,255,0.3);}
+.footer-newsletter-form input:focus{outline:none;border-color:var(--terra);}
+.footer-newsletter-form button{background:var(--terra);color:#fff;border:none;border-radius:6px;padding:.5rem 1rem;font-size:.78rem;font-weight:600;cursor:pointer;font-family:inherit;white-space:nowrap;transition:background .2s;}
+.footer-newsletter-form button:hover{background:var(--terra-dark);}
+.footer-bottom{padding:1.25rem 0;display:flex;align-items:center;justify-content:space-between;font-size:.78rem;color:rgba(255,253,245,0.35);}
+.footer-bottom-links{display:flex;gap:1.25rem;align-items:center;}
+.footer-bottom-links a{color:rgba(255,253,245,0.35);text-decoration:none;transition:color .2s;}
+.footer-bottom-links a:hover{color:#fff;}
+.communio-credit{color:var(--terra);font-weight:600;}
+@media(max-width:968px){.footer-grid{grid-template-columns:1fr 1fr;gap:2rem;}}
+@media(max-width:568px){.footer-grid{grid-template-columns:1fr;}.footer-bottom{flex-direction:column;gap:.75rem;text-align:center;}.footer-bottom-links{flex-wrap:wrap;justify-content:center;}}
+
+
+/* ── CHUNK 1: CRITICAL MOBILE OVERFLOW FIXES ── */
+
+/* Global overflow prevention */
+html, body { overflow-x: hidden; max-width: 100%; }
+*, *::before, *::after { box-sizing: border-box; }
+.container { padding: 0 1.25rem; }
+
+/* NAV — fix overflow on small screens */
+@media(max-width:968px){
+  .nav-inner { padding: 0 1rem; gap: .5rem; }
+  .nav-logo { font-size: .95rem; gap: .5rem; }
+  .nav-logo .nav-crest { width: 30px; height: 30px; font-size: .75rem; flex-shrink: 0; }
+  .nav-cta { display: none; }
+}
+@media(max-width:480px){
+  .nav-logo span, .nav-logo > *:last-child { 
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 160px;
+  }
+}
+
+/* HERO — fix overflow */
+@media(max-width:768px){
+  .hero { min-height: 100svh; padding: 0; }
+  .hero .container { padding-left: 1.25rem; padding-right: 1.25rem; }
+  .hero-content { padding-top: 80px; padding-bottom: 100px; max-width: 100%; }
+  .hero h1 { font-size: clamp(1.65rem, 7vw, 2.25rem); }
+  .hero-subtitle { font-size: 1rem; }
+  .hero-ctas { flex-direction: column; gap: .75rem; }
+  .btn-primary, .btn-ghost { width: 100%; justify-content: center; padding: .875rem 1rem; }
+  .hero-stats { flex-direction: row; flex-wrap: wrap; gap: 1rem; }
+  .hero-stat { flex: 1; min-width: 80px; }
+  .hero-live-card { 
+    position: relative; 
+    margin: 1.5rem 1.25rem 0;
+    transform: none;
+    left: auto;
+    bottom: auto;
+    width: calc(100% - 2.5rem);
+    flex-wrap: wrap;
+  }
+}
+
+/* STAFF FEATURE — fix two-column grid on mobile */
+@media(max-width:968px){
+  .staff-feature { grid-template-columns: 1fr !important; }
+  .staff-feature .staff-photo { height: 220px !important; min-height: unset !important; }
+  .staff-feature .staff-body { padding: 1.5rem; }
+}
+
+/* CONTACT — fix form overflow */
+@media(max-width:968px){
+  .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .form-row { grid-template-columns: 1fr; }
+  .contact { padding: 3rem 1.25rem; }
+}
+@media(max-width:568px){
+  .contact-form { padding: 1.5rem 1.25rem; }
+}
+
+/* WELCOME SECTION */
+@media(max-width:968px){
+  .welcome-grid { grid-template-columns: 1fr; border-radius: 10px; }
+  .welcome-photo { min-height: 280px; }
+  .welcome-content { padding: 2rem 1.5rem; }
+}
+
+/* MEDIA SECTION */
+@media(max-width:968px){
+  .media-grid { grid-template-columns: 1fr; gap: 2rem; }
+}
+
+/* NEWSLETTER STRIP */
+@media(max-width:568px){
+  .newsletter-form { flex-direction: column; }
+  .newsletter-form input, .newsletter-form button { width: 100%; }
+}
+
+/* FOOTER */
+@media(max-width:968px){
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+  .site-footer { padding: 3rem 1.25rem 0; }
+}
+@media(max-width:568px){
+  .footer-grid { grid-template-columns: 1fr; }
+  .footer-bottom { flex-direction: column; gap: .75rem; text-align: center; }
+  .footer-bottom-links { flex-wrap: wrap; justify-content: center; }
+}
+
+/* INVOLVED PAGE */
+@media(max-width:768px){
+  .ministry-section { padding: 2.5rem 1.25rem; }
+  .ministry-section-inner { grid-template-columns: 1fr; gap: 1rem; }
+  .roles-grid { grid-template-columns: 1fr; }
+  .needs-grid { grid-template-columns: 1fr; }
+  .groups-list .group-card-header { flex-direction: column; align-items: flex-start; gap: .75rem; }
+}
+
+/* EVENTS PAGE */
+@media(max-width:768px){
+  .featured-inner { grid-template-columns: 1fr; }
+  .featured-img { min-height: 200px; }
+  .featured-body { padding: 1.5rem; }
+  .events-grid { grid-template-columns: 1fr; }
+}
+
+/* SACRAMENTS PAGE */
+@media(max-width:768px){
+  .sac-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .sacrament-nav-inner { padding: .5rem 1rem; }
+  .sac-tab { padding: .75rem 1rem; font-size: .75rem; }
+}
+
+/* RCIA PAGE */
+@media(max-width:768px){
+  .rcia-intro-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .journey-steps { grid-template-columns: 1fr 1fr; }
+  .faq-grid { grid-template-columns: 1fr; }
+  .register-form { padding: 1.5rem 1.25rem; }
+  .modal-form-row { grid-template-columns: 1fr; }
+}
+
+/* STAFF PAGE */
+@media(max-width:968px){
+  .staff-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media(max-width:568px){
+  .staff-grid { grid-template-columns: 1fr; }
+}
+
+/* ABOUT PAGE */
+@media(max-width:968px){
+  .history-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .values-grid { grid-template-columns: 1fr 1fr; }
+  .visit-grid { grid-template-columns: 1fr; gap: 2rem; }
+}
+@media(max-width:568px){
+  .values-grid { grid-template-columns: 1fr; }
+}
+
+/* BULLETIN PAGE */
+@media(max-width:768px){
+  .bulletin-current { grid-template-columns: 1fr; gap: 1.5rem; }
+  .archive-grid { grid-template-columns: 1fr; }
+}
+
+/* MODAL */
+@media(max-width:568px){
+  .modal-box { border-radius: 10px; margin: .5rem; max-height: 95vh; }
+  .modal-header { padding: 1.25rem 1.25rem 0; }
+  .modal-body { padding: 1.25rem; }
+  .modal-form-row { grid-template-columns: 1fr; }
+}
+
+/* GIVING SECTION */
+@media(max-width:568px){
+  .amount-grid { gap: .5rem; }
+  .amount-btn { padding: .5rem .75rem; font-size: .85rem; }
+  .giving-trust { flex-direction: column; gap: .5rem; align-items: center; }
+}
+
+/* MASS TIMES */
+@media(max-width:768px){
+  .mass-times { padding: 4rem 1.25rem 2.5rem; }
+  .mass-grid { grid-template-columns: 1fr; }
+}
+
+/* GENERAL SECTION PADDING ON MOBILE */
+@media(max-width:768px){
+  .events, .giving, .involved, .welcome, .media, .newsletter,
+  .staff-section, .rcia-journey, .rcia-faq, .values, .history,
+  .volunteer, .intro, .ministries { padding: 3rem 1.25rem; }
+  section.page-hero, .page-hero { padding: 7rem 1.25rem 3rem; }
+}
+
+
+/* ── CHUNK 2: LAYOUT & USABILITY MOBILE FIXES ── */
+
+/* Contact info title too large on mobile */
+@media(max-width:768px){
+  .contact-info-title{font-size:clamp(1.25rem,5vw,1.75rem);}
+  .contact-form-title{font-size:1.1rem;}
+  .contact-detail{gap:.75rem;}
+  .contact-hours{padding:1rem;}
+}
+
+/* Sacrament tabs — horizontal scroll on mobile */
+@media(max-width:768px){
+  .sacrament-nav{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+  .sacrament-nav-inner{min-width:max-content;padding:.5rem 1rem;}
+  .sac-tab{padding:.75rem .875rem;font-size:.75rem;gap:.3rem;}
+  .sac-tab svg{width:13px;height:13px;}
+  .sac-grid{grid-template-columns:1fr;gap:2rem;}
+  .booking-form{padding:1.5rem 1.25rem;}
+}
+
+/* Touch targets — minimum 44px for all interactive elements */
+@media(max-width:968px){
+  .nav-link{min-height:44px;display:flex;align-items:center;}
+  .nav-mobile a{min-height:44px;display:flex;align-items:center;justify-content:center;}
+  .btn-primary,.btn-ghost,.btn-outline,.btn-give,.btn-white,.btn-ghost-white{
+    min-height:48px;display:inline-flex;align-items:center;justify-content:center;
+  }
+  .amount-btn{min-height:44px;}
+  .filter-btn{min-height:40px;}
+  .wb-save-btn,.wb-add-btn{min-height:44px;}
+  .role-apply{min-height:40px;padding:.5rem 1rem;}
+  .need-btn{min-height:44px;}
+  .footer-nav a{min-height:36px;display:flex;align-items:center;}
+  .footer-social a{width:44px;height:44px;}
+}
+
+/* Involved page touch targets */
+@media(max-width:768px){
+  .ministry-section-link{min-height:44px;display:inline-flex;align-items:center;}
+  .group-card-header .role-apply{min-height:44px;}
+}
+
+/* Modal on mobile — better spacing */
+@media(max-width:568px){
+  .modal-overlay{padding:.5rem;}
+  .modal-box{border-radius:12px;width:100%;max-height:95vh;}
+  .modal-header{padding:1.25rem 1.25rem 0;}
+  .modal-body{padding:1rem 1.25rem 1.5rem;}
+  .modal-form-row{grid-template-columns:1fr;gap:.75rem;}
+  .modal-submit{min-height:48px;}
+}
+
+/* RCIA page mobile */
+@media(max-width:768px){
+  .rcia-who-grid{grid-template-columns:1fr;}
+  .journey-steps{grid-template-columns:1fr;}
+  .journey-steps::before{display:none;}
+  .faq-grid{grid-template-columns:1fr;}
+  .rcia-register{padding:3rem 1.25rem;}
+  .register-form{padding:1.5rem 1.25rem;}
+  .hero-cta{width:100%;justify-content:center;}
+}
+
+/* About page mobile */
+@media(max-width:768px){
+  .timeline-item{grid-template-columns:60px 1fr;gap:1rem;}
+  .timeline-year{font-size:.85rem;}
+  .values-grid{grid-template-columns:1fr;}
+  .visit-grid{grid-template-columns:1fr;gap:2rem;}
+  .visit-map{min-height:240px;}
+  .visit-map iframe{min-height:240px;}
+  .visit-what{padding:1rem;}
+  .cta-btns{flex-direction:column;align-items:center;}
+  .cta-btns a{width:100%;max-width:320px;text-align:center;}
+}
+
+/* Staff page mobile */
+@media(max-width:768px){
+  .staff-section{padding:3rem 1.25rem;}
+  .staff-pastor{grid-template-columns:1fr;}
+  .staff-pastor .staff-photo{height:240px;}
+  .staff-body{padding:1.25rem;}
+}
+
+/* Bulletin mobile */
+@media(max-width:768px){
+  .bulletin-main{padding:2.5rem 1.25rem;}
+  .archive-grid{grid-template-columns:1fr;}
+  .newsletter-strip-form{flex-direction:column;}
+  .newsletter-strip-form input,.newsletter-strip-form button{width:100%;}
+}
+
+/* Events page mobile */
+@media(max-width:768px){
+  .events-filter-inner{padding:.5rem 1rem;gap:.4rem;}
+  .filter-btn{font-size:.72rem;padding:.4rem .75rem;}
+  .event-card{margin-bottom:0;}
+}
+
+/* Footer newsletter mobile */
+@media(max-width:568px){
+  .footer-newsletter-form{flex-direction:column;}
+  .footer-newsletter-form input,.footer-newsletter-form button{width:100%;}
+}
+
+/* Giving section mobile */
+@media(max-width:568px){
+  .giving{padding:3rem 1.25rem;}
+  .giving-inner{max-width:100%;}
+  .btn-give{padding:.875rem 1rem;}
+}
+
+/* General mobile typography improvements */
+@media(max-width:568px){
+  .section-title{font-size:clamp(1.5rem,6vw,2rem);}
+  .page-hero h1{font-size:clamp(1.75rem,7vw,2.5rem);}
+  .page-hero-sub{font-size:.95rem;}
+  .body-text{font-size:.9rem;}
+}
+
+/* Prevent text overflow on mobile */
+@media(max-width:768px){
+  p, h1, h2, h3, h4, h5, h6, div, span, a{
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+}
+
+/* Image responsiveness */
+img{max-width:100%;height:auto;}
+
+
+/* ── CHUNK 3: POLISH & FINAL MOBILE FIXES ── */
+
+/* Hero live card — fix overlap on mobile */
+@media(max-width:768px){
+  .hero{overflow:visible;}
+  .hero-live-card{
+    position:relative;
+    bottom:auto;
+    left:auto;
+    transform:none;
+    margin:1.5rem auto 0;
+    width:calc(100% - 2.5rem);
+    max-width:100%;
+    flex-wrap:nowrap;
+    gap:1rem;
+  }
+  .live-btn{margin-left:auto;flex-shrink:0;}
+}
+
+/* Hero title — tighter on very small screens */
+@media(max-width:480px){
+  .hero h1{font-size:clamp(1.5rem,8vw,2rem);line-height:1.15;}
+  .hero-subtitle{font-size:.9rem;}
+  .hero-eyebrow{font-size:.65rem;}
+}
+
+/* Small labels — minimum readable size */
+@media(max-width:768px){
+  .mass-overline, .confession-text, .event-meta,
+  .footer-col-title, .overline, .sac-overline,
+  .ministry-section-label, .need-category,
+  .role-meta, .staff-title{font-size:.72rem;}
+}
+
+/* Section title sizing on mobile */
+@media(max-width:480px){
+  .involved-title, .values-title, .ministries-title,
+  .timeline-title, .needs-title{
+    font-size:clamp(1.4rem,6vw,1.75rem);
+  }
+}
+
+/* Fix hero container padding on mobile */
+@media(max-width:768px){
+  .hero .container{
+    padding-left:1.25rem;
+    padding-right:1.25rem;
+    width:100%;
+  }
+}
+
+/* Fix get involved intro grid on mobile */
+@media(max-width:768px){
+  .intro-grid{grid-template-columns:1fr;gap:2rem;}
+  .stats-row{flex-direction:row;flex-wrap:wrap;gap:1rem;}
+  .stat{flex:1;min-width:80px;text-align:center;}
+  .intro-quote{padding:1.5rem;}
+  .intro-quote blockquote{font-size:1.05rem;}
+}
+
+/* Fix needs grid on mobile */
+@media(max-width:568px){
+  .needs-section{padding:3rem 1.25rem;}
+  .needs-grid{grid-template-columns:1fr;}
+  .need-card{padding:1.25rem;}
+}
+
+/* Fix role cards on mobile */
+@media(max-width:568px){
+  .roles-grid{grid-template-columns:1fr;}
+  .role-card-top{gap:.5rem;}
+  .role-apply{font-size:.7rem;padding:.4rem .75rem;}
+}
+
+/* Fix group cards on mobile */
+@media(max-width:568px){
+  .group-card{padding:1rem;}
+  .group-card-header{flex-direction:column;align-items:flex-start;gap:.75rem;}
+  .group-card-header .role-apply{width:100%;text-align:center;}
+}
+
+/* Ministry section icon on mobile */
+@media(max-width:768px){
+  .ministry-section-inner{grid-template-columns:1fr;gap:1.25rem;}
+  .ministry-section-icon{width:52px;height:52px;}
+}
+
+/* Footer social icons — bigger tap targets */
+@media(max-width:768px){
+  .footer-social a{width:48px;height:48px;font-size:.85rem;}
+  .footer-social{gap:.75rem;}
+}
+
+/* Footer bottom on mobile */
+@media(max-width:568px){
+  .footer-bottom{padding:1rem 0;gap:.5rem;}
+  .footer-bottom-links{gap:.75rem;font-size:.72rem;}
+}
+
+/* Confession banner on mobile */
+@media(max-width:568px){
+  .confession-banner{flex-direction:column;text-align:center;gap:.5rem;}
+  .confession-text{font-size:.8rem;}
+}
+
+/* Events filter scroll on mobile */
+@media(max-width:568px){
+  .events-filter{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+  .events-filter-inner{min-width:max-content;}
+}
+
+/* Staff photo on mobile */
+@media(max-width:568px){
+  .staff-photo{height:180px;}
+}
+
+/* About timeline on mobile */
+@media(max-width:568px){
+  .timeline-item{grid-template-columns:50px 1fr;gap:.75rem;}
+  .timeline-year{font-size:.78rem;padding-top:.25rem;}
+  .timeline-content h3{font-size:.9rem;}
+  .timeline-content p{font-size:.8rem;}
+}
+
+/* RCIA journey on mobile */
+@media(max-width:568px){
+  .journey-steps{grid-template-columns:1fr;}
+  .journey-num{width:44px;height:44px;font-size:1rem;}
+}
+
+/* Sacrament booking form on mobile */
+@media(max-width:568px){
+  .sac-step-num{width:24px;height:24px;font-size:.7rem;flex-shrink:0;}
+  .sac-contact-box{font-size:.82rem;padding:1rem;}
+}
+
+/* Bulletin archive on mobile */
+@media(max-width:568px){
+  .archive-card{padding:1rem;}
+  .archive-icon{width:34px;height:34px;}
+  .archive-info-title{font-size:.82rem;}
+}
+
+/* Legal pages on mobile */
+@media(max-width:568px){
+  .legal-content{padding:2.5rem 1.25rem 4rem;}
+  .legal-content h2{font-size:1.1rem;}
+  .legal-content p, .legal-content ul{font-size:.875rem;}
+}
+
+/* Smooth scrolling globally */
+html{scroll-behavior:smooth;}
+
+/* Better focus styles for accessibility */
+a:focus-visible, button:focus-visible, input:focus-visible, 
+select:focus-visible, textarea:focus-visible{
+  outline:2px solid var(--terra);
+  outline-offset:2px;
+}
+
+</style>
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo"><div class="nav-crest">SM</div>St. Mary's Parish</a>
+    <div class="nav-links">
+      <a href="index.html#mass-times" class="nav-link">Mass Times</a>
+      <div class="nav-dropdown">
+        <button class="nav-dropdown-btn">Parish Life
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M3 4.5l3 3 3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </button>
+        <div class="nav-dropdown-menu">
+          <a href="about.html" class="nav-dropdown-item">About Us</a>
+          <a href="events.html" class="nav-dropdown-item">Events</a>
+          <a href="staff.html" class="nav-dropdown-item">Our Team</a>
+          <a href="bulletin.html" class="nav-dropdown-item">Parish Bulletin</a>
+          <a href="involved.html" class="nav-dropdown-item">Get Involved</a>
+        </div>
+      </div>
+      <div class="nav-dropdown">
+        <button class="nav-dropdown-btn">Sacraments
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M3 4.5l3 3 3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </button>
+        <div class="nav-dropdown-menu">
+          <a href="sacraments.html#baptism" class="nav-dropdown-item">Baptism</a>
+          <a href="sacraments.html#wedding" class="nav-dropdown-item">Wedding</a>
+          <a href="sacraments.html#funeral" class="nav-dropdown-item">Funeral Mass</a>
+          <a href="sacraments.html#confirmation" class="nav-dropdown-item">Confirmation</a>
+          <a href="sacraments.html#firstcommunion" class="nav-dropdown-item">First Communion</a>
+        </div>
+      </div>
+      <a href="rcia.html" class="nav-link">Becoming Catholic</a>
+      <a href="#" class="nav-link" data-contact data-from="general">Contact</a>
+    </div>
+    <a href="index.html#giving" class="nav-cta">Give Now</a>
+    <button class="nav-hamburger" id="navHamburger"><span></span><span></span><span></span></button>
+  </div>
+  <div class="nav-mobile" id="navMobile">
+    <a href="index.html#mass-times">Mass Times</a>
+    <div class="nav-mobile-section">Parish Life</div>
+    <a href="about.html">About Us</a>
+    <a href="events.html">Events</a>
+    <a href="staff.html">Our Team</a>
+    <a href="bulletin.html">Parish Bulletin</a>
+    <a href="involved.html">Get Involved</a>
+    <div class="nav-mobile-section">Sacraments</div>
+    <a href="sacraments.html">All Sacraments</a>
+    <a href="rcia.html">Becoming Catholic</a>
+    <a href="#" data-contact data-from="general">Contact</a>
+    <a href="index.html#giving" style="margin-top:.5rem;background:var(--terra);padding:.625rem 2rem;border-radius:8px;">Give Now</a>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <div class="container">
+    <div class="page-hero-overline">
+      <svg width="6" height="6" viewBox="0 0 6 6" fill="none"><circle cx="3" cy="3" r="3" fill="currentColor"/></svg>
+      Parish Calendar
+    </div>
+    <h1>What's Happening<br><em>at St. Mary's</em></h1>
+    <p class="page-hero-sub">From sacred celebrations to community gatherings — there is always something to be part of here.</p>
+  </div>
+</div>
+
+<div class="events-filter">
+  <div class="events-filter-inner">
+    <button class="filter-btn active" onclick="filterEvents('all',this)">All Events</button>
+    <button class="filter-btn" onclick="filterEvents('liturgy',this)">Liturgy & Prayer</button>
+    <button class="filter-btn" onclick="filterEvents('community',this)">Community</button>
+    <button class="filter-btn" onclick="filterEvents('youth',this)">Youth</button>
+    <button class="filter-btn" onclick="filterEvents('formation',this)">Faith Formation</button>
+    <button class="filter-btn" onclick="filterEvents('outreach',this)">Outreach</button>
+  </div>
+</div>
+
+<section class="featured-event">
+  <div class="container">
+    <div class="featured-inner">
+      <div class="featured-img">
+        <div class="featured-badge">Featured Event</div>
+      </div>
+      <div class="featured-body">
+        <div class="featured-overline">Liturgy & Prayer</div>
+        <h2 class="featured-title">Easter Vigil Mass</h2>
+        <p class="featured-desc">The most sacred celebration of the liturgical year. We welcome new members into the Church and celebrate the Resurrection of Christ together as one community. All are invited to this beautiful and moving ceremony.</p>
+        <div class="featured-meta">
+          <div class="featured-meta-row">
+            <svg width="16" height="16" viewBox="0 0 20 20" fill="none"><rect x="2" y="4" width="16" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M2 8h16M6 2v4M14 2v4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            Saturday, April 19, 2025
+          </div>
+          <div class="featured-meta-row">
+            <svg width="16" height="16" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M10 7v4l2.5 2.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            9:00 PM — Main Church
+          </div>
+          <div class="featured-meta-row">
+            <svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M10 2C7.2 2 5 4.2 5 7c0 4 5 11 5 11s5-7 5-11c0-2.8-2.2-5-5-5z" stroke="currentColor" stroke-width="1.5"/></svg>
+            St. Mary's Parish, 123 Rivington Street
+          </div>
+        </div>
+        <a href="#" class="btn-primary" data-contact data-from="events">
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="none"><rect x="2" y="4" width="16" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M2 8h16M6 2v4M14 2v4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          Register for this event
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="events-main">
+  <div class="container">
+    <h2 class="events-section-title">Upcoming Events</h2>
+    <div class="events-grid" id="eventsGrid">
+
+      <div class="event-card" data-category="community">
+        <div class="event-img">
+          <div class="event-img-placeholder">
+            <svg width="40" height="40" viewBox="0 0 20 20" fill="none" style="opacity:.3;"><circle cx="8" cy="7" r="3" stroke="currentColor" stroke-width="1.5"/><path d="M2 17c0-3.3 2.7-6 6-6s6 2.7 6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </div>
+          <div class="event-date-badge"><div class="event-date-badge-day">27</div><div class="event-date-badge-mon">Apr</div></div>
+        </div>
+        <div class="event-body">
+          <div class="event-category">Community</div>
+          <h3 class="event-title">Parish Spring Picnic</h3>
+          <p class="event-desc">Food, games, and fellowship for the whole family. An annual tradition beloved by parishioners of all ages.</p>
+          <div class="event-footer">
+            <div class="event-time">
+              <svg width="13" height="13" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M10 7v4l2.5 2.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+              12:00 PM · Parish Grounds
+            </div>
+            <a href="#" class="event-link" data-contact data-from="events">Register →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="event-card" data-category="youth">
+        <div class="event-img">
+          <div class="event-img-placeholder">
+            <svg width="40" height="40" viewBox="0 0 20 20" fill="none" style="opacity:.3;"><path d="M10 2l2.4 5 5.6.8-4 3.9.9 5.5L10 14.5l-4.9 2.7.9-5.5L2 7.8l5.6-.8L10 2z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="event-date-badge"><div class="event-date-badge-day">3</div><div class="event-date-badge-mon">May</div></div>
+        </div>
+        <div class="event-body">
+          <div class="event-category">Youth</div>
+          <h3 class="event-title">Youth Ministry Retreat</h3>
+          <p class="event-desc">A weekend retreat for high school students focused on faith, friendship, and discernment.</p>
+          <div class="event-footer">
+            <div class="event-time">
+              <svg width="13" height="13" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M10 7v4l2.5 2.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+              Overnight · Retreat Centre
+            </div>
+            <a href="#" class="event-link" data-contact data-from="events">Register →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="event-card" data-category="formation">
+        <div class="event-img">
+          <div class="event-img-placeholder">
+            <svg width="40" height="40" viewBox="0 0 20 20" fill="none" style="opacity:.3;"><path d="M4 4h6v14H4a2 2 0 01-2-2V6a2 2 0 012-2z" stroke="currentColor" stroke-width="1.5"/><path d="M10 4h6a2 2 0 012 2v10a2 2 0 01-2 2h-6V4z" stroke="currentColor" stroke-width="1.5"/></svg>
+          </div>
+          <div class="event-date-badge"><div class="event-date-badge-day">11</div><div class="event-date-badge-mon">May</div></div>
+        </div>
+        <div class="event-body">
+          <div class="event-category">Faith Formation</div>
+          <h3 class="event-title">Adult Bible Study — Begins</h3>
+          <p class="event-desc">A six-week series exploring the Gospel of John. Open to all adults, no prior experience needed.</p>
+          <div class="event-footer">
+            <div class="event-time">
+              <svg width="13" height="13" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M10 7v4l2.5 2.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+              7:00 PM · Parish Hall
+            </div>
+            <a href="#" class="event-link" data-contact data-from="events">Register →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="event-card" data-category="outreach">
+        <div class="event-img">
+          <div class="event-img-placeholder">
+            <svg width="40" height="40" viewBox="0 0 20 20" fill="none" style="opacity:.3;"><path d="M10 17s-7-4.5-7-9a4 4 0 018 0 4 4 0 018 0c0 4.5-7 9-7 9z" stroke="currentColor" stroke-width="1.5"/></svg>
+          </div>
+          <div class="event-date-badge"><div class="event-date-badge-day">17</div><div class="event-date-badge-mon">May</div></div>
+        </div>
+        <div class="event-body">
+          <div class="event-category">Outreach</div>
+          <h3 class="event-title">Food Pantry Volunteer Day</h3>
+          <p class="event-desc">Help pack and distribute food to families in need across the Lower East Side. All welcome.</p>
+          <div class="event-footer">
+            <div class="event-time">
+              <svg width="13" height="13" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M10 7v4l2.5 2.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+              9:00 AM · Parish Centre
+            </div>
+            <a href="#" class="event-link" data-contact data-from="events">Register →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="event-card" data-category="liturgy">
+        <div class="event-img">
+          <div class="event-img-placeholder">
+            <svg width="40" height="40" viewBox="0 0 20 20" fill="none" style="opacity:.3;"><path d="M10 3v14M3 10h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </div>
+          <div class="event-date-badge"><div class="event-date-badge-day">24</div><div class="event-date-badge-mon">May</div></div>
+        </div>
+        <div class="event-body">
+          <div class="event-category">Liturgy & Prayer</div>
+          <h3 class="event-title">Pentecost Sunday Mass</h3>
+          <p class="event-desc">Celebrate the descent of the Holy Spirit with a solemn Mass and special music programme.</p>
+          <div class="event-footer">
+            <div class="event-time">
+              <svg width="13" height="13" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M10 7v4l2.5 2.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+              11:00 AM · Main Church
+            </div>
+            <a href="#" class="event-link" data-contact data-from="events">Learn more →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="event-card" data-category="community">
+        <div class="event-img">
+          <div class="event-img-placeholder">
+            <svg width="40" height="40" viewBox="0 0 20 20" fill="none" style="opacity:.3;"><circle cx="8" cy="7" r="3" stroke="currentColor" stroke-width="1.5"/><path d="M2 17c0-3.3 2.7-6 6-6s6 2.7 6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="14" cy="7" r="2.5" stroke="currentColor" stroke-width="1.5"/><path d="M14 11c2.2.5 4 2.5 4 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </div>
+          <div class="event-date-badge"><div class="event-date-badge-day">7</div><div class="event-date-badge-mon">Jun</div></div>
+        </div>
+        <div class="event-body">
+          <div class="event-category">Community</div>
+          <h3 class="event-title">New Parishioner Welcome</h3>
+          <p class="event-desc">A warm gathering for those who are new to St. Mary's — meet Fr. O'Brien and fellow parishioners over coffee.</p>
+          <div class="event-footer">
+            <div class="event-time">
+              <svg width="13" height="13" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M10 7v4l2.5 2.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+              After 11 AM Mass · Parish Hall
+            </div>
+            <a href="#" class="event-link" data-contact data-from="events">Register →</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="events-newsletter">
+  <div class="container">
+    <h2>Never miss an event.</h2>
+    <p>Subscribe to our weekly bulletin and get upcoming events straight to your inbox.</p>
+    <div class="newsletter-form">
+      <input type="email" placeholder="Your email address">
+      <button type="button">Subscribe</button>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="modal-overlay" id="contactModal">
+  <div class="modal-box">
+    <div class="modal-header">
+      <div><div class="modal-title">Send us a message</div><div class="modal-sub">We typically respond within one business day.</div></div>
+      <button class="modal-close" id="modalClose">&#x2715;</button>
+    </div>
+    <div class="modal-body" id="modalBody">
+      <div class="modal-form-row">
+        <div class="modal-field"><label>First Name</label><input type="text" placeholder="Maria"></div>
+        <div class="modal-field"><label>Last Name</label><input type="text" placeholder="Santos"></div>
+      </div>
+      <div class="modal-field"><label>Email Address</label><input type="email" id="mEmail" placeholder="maria@example.com"></div>
+      <div class="modal-field"><label>Phone (optional)</label><input type="tel" placeholder="(212) 555-0000"></div>
+      <div class="modal-field">
+        <label>Subject</label>
+        <select id="mSubject">
+          <option value="">Select a topic...</option>
+          <option value="general">General Inquiry</option>
+          <option value="events">Events & Registration</option>
+          <option value="volunteer">Volunteering</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+      <div class="modal-field"><label>Message</label><textarea placeholder="How can we help you?"></textarea></div>
+      <button class="modal-submit" id="modalSubmit" type="button">Send Message</button>
+      <p style="font-size:.75rem;color:var(--text-muted);text-align:center;margin-top:.75rem;">St. Mary's Parish · 123 Rivington Street, New York, NY 10002</p>
+    </div>
+  </div>
+</div>
+
+<script>
+const _nh = document.getElementById('navHamburger');
+const _nm = document.getElementById('navMobile');
+if(_nh){ _nh.addEventListener('click',()=>_nm.classList.toggle('open')); _nm.addEventListener('click',(e)=>{if(e.target.tagName==='A')_nm.classList.remove('open');}); }
+
+function filterEvents(cat, btn){
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.event-card').forEach(card=>{
+    card.style.display = (cat==='all' || card.dataset.category===cat) ? 'block' : 'none';
+  });
+}
+
+(function(){
+  var overlay = document.getElementById('contactModal');
+  var closeBtn = document.getElementById('modalClose');
+  var submitBtn = document.getElementById('modalSubmit');
+  function openModal(from){
+    overlay.classList.add('open');
+    document.body.style.overflow='hidden';
+    if(from && document.getElementById('mSubject')){
+      var opt = Array.from(document.getElementById('mSubject').options).find(function(o){return o.value===from;});
+      if(opt) document.getElementById('mSubject').value=from;
+    }
+  }
+  function closeModal(){ overlay.classList.remove('open'); document.body.style.overflow=''; }
+  overlay.addEventListener('click',function(e){ if(e.target===overlay) closeModal(); });
+  closeBtn.addEventListener('click',closeModal);
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape') closeModal(); });
+  document.addEventListener('click',function(e){
+    var el = e.target.closest('[data-contact]');
+    if(el){ e.preventDefault(); openModal(el.getAttribute('data-from')||''); }
+  });
+  if(submitBtn){
+    submitBtn.addEventListener('click',function(){
+      var email = document.getElementById('mEmail').value.trim();
+      if(!email){ document.getElementById('mEmail').focus(); return; }
+      document.getElementById('modalBody').innerHTML='<div class="modal-success"><div class="modal-success-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><h3>Message sent!</h3><p>Thank you for reaching out. Someone from St. Mary's will be in touch within one business day.</p></div>';
+    });
+  }
+})();
+</script>
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+
+      <!-- Col 1: Parish Info -->
+      <div>
+        <div class="footer-brand">St. Mary's Parish</div>
+        <p class="footer-tagline">A vibrant Catholic community in the heart of New York's Lower East Side, serving our neighbours since 1887.</p>
+        <div class="footer-detail">
+          <svg width="14" height="14" viewBox="0 0 20 20" fill="none"><path d="M10 2C7.2 2 5 4.2 5 7c0 4 5 11 5 11s5-7 5-11c0-2.8-2.2-5-5-5z" stroke="currentColor" stroke-width="1.5"/></svg>
+          123 Rivington Street, New York, NY 10002
+        </div>
+        <div class="footer-detail">
+          <svg width="14" height="14" viewBox="0 0 20 20" fill="none"><path d="M3 4h4l2 4-2 2c1 2 3 4 5 5l2-2 4 2v4c0 1-1 2-2 2C7 19 1 13 1 6c0-1 1-2 2-2z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+          <a href="tel:+12125550123">(212) 555-0123</a>
+        </div>
+        <div class="footer-detail">
+          <svg width="14" height="14" viewBox="0 0 20 20" fill="none"><rect x="2" y="4" width="16" height="13" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M2 7l8 5 8-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          <a href="#" data-contact data-from="general">info@stmarysnyc.org</a>
+        </div>
+        <div class="footer-detail">
+          <svg width="14" height="14" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M10 7v4l2.5 2.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          Office: Mon–Fri 9 AM–5 PM · Sat 10 AM–2 PM
+        </div>
+        <div class="footer-detail">
+          <svg width="14" height="14" viewBox="0 0 20 20" fill="none"><path d="M10 2C7.2 2 5 4.2 5 7c0 4 5 11 5 11s5-7 5-11c0-2.8-2.2-5-5-5z" stroke="currentColor" stroke-width="1.5"/></svg>
+          <a href="https://maps.google.com/?q=123+Rivington+Street+New+York+NY+10002" target="_blank">Get directions →</a>
+        </div>
+      </div>
+
+      <!-- Col 2: Mass Times -->
+      <div>
+        <div class="footer-col-title">Mass Times</div>
+        <div class="footer-mass-item"><strong>Weekdays</strong>Mon–Fri 9:00 AM · Tue &amp; Thu 6:45 PM</div>
+        <div class="footer-mass-item"><strong>Saturday</strong>10:00 AM · Vigil 5:00 PM</div>
+        <div class="footer-mass-item"><strong>Sunday</strong>7:00 · 9:00 · 11:00 AM<br>1:00 PM (Español) · 6:00 PM</div>
+        <div class="footer-mass-item" style="margin-top:.75rem;font-size:.78rem;color:rgba(255,253,245,0.4);">Confession: Saturday 3:30–4:30 PM</div>
+        <a href="index.html#mass-times" style="display:inline-block;margin-top:.875rem;font-size:.8rem;font-weight:600;color:var(--terra);text-decoration:none;">Full schedule →</a>
+      </div>
+
+      <!-- Col 3: Navigate -->
+      <div>
+        <div class="footer-col-title">Navigate</div>
+        <nav class="footer-nav">
+          <a href="about.html">About Us</a>
+          <a href="staff.html">Our Team</a>
+          <a href="events.html">Events</a>
+          <a href="bulletin.html">Parish Bulletin</a>
+          <a href="sacraments.html">Sacraments</a>
+          <a href="rcia.html">Becoming Catholic</a>
+          <a href="involved.html">Get Involved</a>
+          <a href="index.html#giving">Give Online</a>
+          <a href="#" data-contact data-from="general">Contact Us</a>
+        </nav>
+      </div>
+
+      <!-- Col 4: Connect -->
+      <div>
+        <div class="footer-col-title">Stay Connected</div>
+        <div class="footer-social">
+          <a href="https://facebook.com" target="_blank" aria-label="Facebook">f</a>
+          <a href="https://instagram.com" target="_blank" aria-label="Instagram">in</a>
+          <a href="https://youtube.com" target="_blank" aria-label="YouTube">yt</a>
+          <a href="https://spotify.com" target="_blank" aria-label="Spotify">sp</a>
+        </div>
+        <div class="footer-newsletter-label">Get our weekly bulletin by email</div>
+        <div class="footer-newsletter-form">
+          <input type="email" placeholder="Your email">
+          <button type="button">Subscribe</button>
+        </div>
+      </div>
+
+    </div>
+    <div class="footer-bottom">
+      <div>&copy; 2024 St. Mary's Parish, New York</div>
+      <div class="footer-bottom-links">
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html">Terms of Use</a>
+        <a href="sitemap.html">Sitemap</a>
+        <span>Powered by <span class="communio-credit">Communio</span></span>
+      </div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

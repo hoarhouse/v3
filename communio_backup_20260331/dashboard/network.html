@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Network — Communio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Lora:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../communio.css">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-webkit-font-smoothing:antialiased}
+.top-nav{position:fixed;top:0;left:0;right:0;z-index:300;height:52px;background:var(--ink);border-bottom:1px solid rgba(255,255,255,0.06);display:flex;align-items:center;padding:0 20px}
+.nav-brand{display:flex;align-items:center;gap:8px;text-decoration:none;width:220px;flex-shrink:0}
+.nav-mark{width:28px;height:28px;background:var(--terra);border-radius:6px;display:flex;align-items:center;justify-content:center}
+.nav-wm{font-size:16px;font-weight:800;color:var(--white);letter-spacing:-.02em}
+.nav-wm span{color:var(--terra)}
+.nav-right{margin-left:auto;display:flex;align-items:center;gap:10px}
+.nav-notif{width:34px;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.5);text-decoration:none;position:relative;transition:color .2s}
+.nav-notif:hover{color:white;background:rgba(255,255,255,.06)}
+.notif-dot{position:absolute;top:7px;right:7px;width:7px;height:7px;background:var(--terra);border-radius:50%;border:1.5px solid var(--ink)}
+.nav-pill{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:4px 12px 4px 4px;text-decoration:none;transition:all .2s}
+.nav-pill:hover{background:rgba(255,255,255,.12)}
+.nav-av{width:26px;height:26px;background:var(--terra);border-radius:50%;font-size:10px;font-weight:700;color:white;display:flex;align-items:center;justify-content:center}
+.nav-pname{font-size:13px;font-weight:600;color:var(--white)}
+.sidebar{position:fixed;top:52px;left:0;bottom:0;width:220px;background:var(--white);border-right:1px solid var(--border-light);display:flex;flex-direction:column;overflow-y:auto;z-index:200}
+.sb-parish{padding:18px 16px;border-bottom:1px solid var(--border-light)}
+.sb-av{width:38px;height:38px;background:var(--terra);border-radius:9px;font-size:13px;font-weight:800;color:white;display:flex;align-items:center;justify-content:center;margin-bottom:6px}
+.sb-name{font-size:13px;font-weight:700;color:var(--ink);line-height:1.2}
+.sb-loc{font-size:11px;color:var(--light)}
+.sb-nav{flex:1;padding:10px 8px}
+.sb-sec{font-size:10px;font-weight:700;color:var(--light);text-transform:uppercase;letter-spacing:.08em;padding:12px 8px 6px}
+.sb-item{display:flex;align-items:center;gap:9px;padding:8px 10px;border-radius:8px;text-decoration:none;color:var(--text-mid);font-size:13px;font-weight:500;transition:all .18s;position:relative;margin-bottom:1px}
+.sb-item svg{flex-shrink:0;opacity:.6}
+.sb-item:hover{background:var(--cream);color:var(--ink)}
+.sb-item:hover svg{opacity:1}
+.sb-item.active{background:var(--terra-pale);color:var(--terra);font-weight:600}
+.sb-item.active svg{opacity:1}
+.sb-item.active::before{content:'';position:absolute;left:0;top:4px;bottom:4px;width:3px;background:var(--terra);border-radius:0 3px 3px 0}
+.sb-badge{margin-left:auto;background:var(--terra);color:white;font-size:10px;font-weight:700;padding:1px 6px;border-radius:10px;min-width:18px;text-align:center}
+.sb-badge-sage{background:var(--sage)}
+.sb-foot{padding:12px 16px;border-top:1px solid var(--border-light)}
+.sb-foot a{font-size:12px;color:var(--light);text-decoration:none;display:flex;align-items:center;gap:6px}
+.sb-foot a:hover{color:var(--ink)}
+.page-shell{margin-left:220px;padding-top:52px;min-height:100vh}
+.page-inner{max-width:1060px;margin:0 auto;padding:32px 28px}
+.pg-hd{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:24px;flex-wrap:wrap;gap:12px}
+.pg-title{font-size:24px;font-weight:800;color:var(--ink);letter-spacing:-.03em}
+.pg-sub{font-family:'Lora',serif;font-size:13px;color:var(--light);font-style:italic;margin-top:2px}
+
+.net-banner{background:var(--ink);border-radius:var(--r-lg);padding:16px 20px;display:flex;align-items:center;gap:16px;margin-bottom:24px}
+.nb-av{width:40px;height:40px;background:var(--terra);border-radius:9px;font-size:13px;font-weight:800;color:white;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.nb-text{flex:1}.nb-title{font-size:14px;font-weight:700;color:white;margin-bottom:2px}
+.nb-sub{font-family:'Lora',serif;font-size:12px;color:rgba(255,253,245,.45);font-style:italic}
+.filter-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:22px}
+.filter-select{font-family:'Outfit',sans-serif;font-size:12px;color:var(--ink);background:var(--white);border:1.5px solid var(--border-light);border-radius:var(--r-md);padding:7px 28px 7px 12px;appearance:none;cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%238a7a50' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center;transition:border-color .2s}
+.filter-select:focus{outline:none;border-color:var(--terra)}
+.search-input{font-family:'Outfit',sans-serif;font-size:13px;color:var(--ink);background:var(--white);border:1.5px solid var(--border-light);border-radius:var(--r-md);padding:8px 14px;flex:1;min-width:200px;outline:none;transition:border-color .2s}
+.search-input:focus{border-color:var(--terra)}
+.section-title{font-size:11px;font-weight:700;color:var(--light);text-transform:uppercase;letter-spacing:.08em;margin-bottom:14px}
+.pc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;margin-bottom:28px}
+.pc{background:var(--white);border:1px solid var(--border-light);border-radius:var(--r-lg);padding:16px;box-shadow:var(--sh-sm);display:flex;flex-direction:column;gap:5px;transition:box-shadow .2s}
+.pc:hover{box-shadow:var(--sh-md)}
+.pc-av{width:38px;height:38px;border-radius:9px;font-size:12px;font-weight:800;color:white;display:flex;align-items:center;justify-content:center;margin-bottom:4px}
+.pc-name{font-size:13px;font-weight:700;color:var(--ink)}
+.pc-loc{font-size:11px;color:var(--light);margin-bottom:2px}
+.pc-tags{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:4px}
+.pc-sister{font-size:11px;font-weight:600;color:var(--sage);background:var(--sage-pale);padding:2px 8px;border-radius:10px;display:inline-block}
+.pc-actions{display:flex;gap:6px;margin-top:6px}
+
+@media(max-width:900px){.sidebar{display:none}.page-shell{margin-left:0}}
+</style>
+</head>
+<body>
+<nav class="top-nav">
+  <a href="../index.html" class="nav-brand">
+    <div class="nav-mark"><svg viewBox="0 0 16 16" fill="none" width="14" height="14"><circle cx="8" cy="8" r="3" fill="white"/><path d="M8 1v3M8 12v3M1 8h3M12 8h3" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+    <div class="nav-wm">Commun<span>io</span></div>
+  </a>
+  <div class="nav-right">
+    <a href="messages.html" class="nav-notif">
+      <svg viewBox="0 0 16 16" fill="none" width="17" height="17"><path d="M13 5.5a5 5 0 10-9.9 1L2 12h12l-1.1-5.5z" stroke="currentColor" stroke-width="1.3"/><path d="M6.5 12.5a1.5 1.5 0 003 0" stroke="currentColor" stroke-width="1.3"/></svg>
+      <div class="notif-dot"></div>
+    </a>
+    <a href="../parish/profile.html" class="nav-pill">
+      <div class="nav-av">SM</div>
+      <span class="nav-pname">St. Mary's</span>
+    </a>
+    <button class="nav-burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="nav-mobile" id="navMobile">
+<a href="home.html">Home</a>
+<a href="messages.html">Messages</a>
+<a href="network.html">Network</a>
+<a href="../parish/profile.html">My Profile</a>
+<a href="projects.html">Projects</a>
+<a href="website.html">Website</a>
+<a href="donations.html">Donations</a>
+<a href="settings.html">Settings</a>
+</div>
+<aside class="sidebar">
+  <div class="sb-parish">
+    <div class="sb-av">SM</div>
+    <div class="sb-name">St. Mary's Parish</div>
+    <div class="sb-loc">🇺🇸 New York, USA</div>
+  </div>
+  <nav class="sb-nav">
+    <div class="sb-sec">Parish</div>
+    <a href="home.html" class="sb-item"><svg viewBox="0 0 16 16" fill="none" width="15" height="15"><path d="M2 7l6-5 6 5v7H10V9H6v5H2V7z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg><span class="sb-item-lbl">Home</span></a><a href="messages.html" class="sb-item"><svg viewBox="0 0 16 16" fill="none" width="15" height="15"><path d="M2 3h12a1 1 0 011 1v7a1 1 0 01-1 1H4l-3 2V4a1 1 0 011-1z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg><span class="sb-item-lbl">Messages</span><span class="sb-badge">3</span></a><a href="network.html" class="sb-item active"><svg viewBox="0 0 16 16" fill="none" width="15" height="15"><circle cx="8" cy="8" r="2.5" stroke="currentColor" stroke-width="1.3"/><circle cx="2.5" cy="3" r="1.5" stroke="currentColor" stroke-width="1.2"/><circle cx="13.5" cy="3" r="1.5" stroke="currentColor" stroke-width="1.2"/><circle cx="8" cy="14" r="1.5" stroke="currentColor" stroke-width="1.2"/><path d="M4 4l2.5 2.5M12 4l-2.5 2.5M8 10.5V12.5" stroke="currentColor" stroke-width="1.2"/></svg><span class="sb-item-lbl">Network</span></a><a href="../parish/profile.html" class="sb-item"><svg viewBox="0 0 16 16" fill="none" width="15" height="15"><circle cx="8" cy="5" r="3" stroke="currentColor" stroke-width="1.3"/><path d="M2 14c0-3.3 2.7-6 6-6s6 2.7 6 6" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg><span class="sb-item-lbl">My Profile</span></a><a href="projects.html" class="sb-item"><svg viewBox="0 0 16 16" fill="none" width="15" height="15"><rect x="2" y="2" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.3"/><rect x="9" y="2" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.3"/><rect x="2" y="9" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.3"/><rect x="9" y="9" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.3"/></svg><span class="sb-item-lbl">Projects</span></a>
+    <div class="sb-sec">Manage</div>
+    <a href="website.html" class="sb-item"><svg viewBox="0 0 16 16" fill="none" width="15" height="15"><rect x="1.5" y="3" width="13" height="10" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M1.5 6h13" stroke="currentColor" stroke-width="1.3"/></svg><span class="sb-item-lbl">Website</span><span class="sb-badge sb-badge-sage" style="font-size:9px;padding:1px 5px">Live</span></a><a href="donations.html" class="sb-item"><svg viewBox="0 0 16 16" fill="none" width="15" height="15"><path d="M8 13.5C4 11 1.5 8.5 1.5 5.5a3 3 0 015-2.2A3 3 0 018 4a3 3 0 015 2.5c0 1-.4 2-1 2.8" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><path d="M8 9v5M6 12h4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg><span class="sb-item-lbl">Donations</span></a><a href="settings.html" class="sb-item"><svg viewBox="0 0 16 16" fill="none" width="15" height="15"><circle cx="8" cy="8" r="2" stroke="currentColor" stroke-width="1.3"/><path d="M8 1v2M8 13v2M1 8h2M13 8h2M3.1 3.1l1.4 1.4M11.5 11.5l1.4 1.4M3.1 12.9l1.4-1.4M11.5 4.5l1.4-1.4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg><span class="sb-item-lbl">Settings</span></a><a href="website/index.html" class="sb-item"><svg viewBox="0 0 16 16" fill="none" width="16" height="16"><rect x="2" y="2" width="12" height="3" rx="1" stroke="currentColor" stroke-width="1.3"/><rect x="2" y="7" width="5" height="7" rx="1" stroke="currentColor" stroke-width="1.3"/><rect x="9" y="7" width="5" height="7" rx="1" stroke="currentColor" stroke-width="1.3"/></svg><span class="sb-item-lbl">Website Builder</span></a>
+  </nav>
+  <div class="sb-foot">
+    <a href="settings.html"><svg viewBox="0 0 16 16" fill="none" width="13" height="13"><circle cx="8" cy="8" r="2" stroke="currentColor" stroke-width="1.3"/><path d="M8 1v2M8 13v2M1 8h2M13 8h2" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg> Settings →</a>
+  </div>
+</aside>
+<div class="page-shell">
+  <div class="page-inner">
+    <!-- <?php echo $parish->name, $stats->total_parishes, $stats->total_countries ?> -->
+    <div class="pg-hd">
+      <div><div class="pg-title">Network</div><div class="pg-sub">4,847 verified parishes across 221 countries</div></div>
+    </div>
+    <div class="net-banner">
+      <div class="nb-av">SM</div>
+      <div class="nb-text">
+        <div class="nb-title">St. Mary's Parish — Your public profile</div>
+        <div class="nb-sub">This is what other parishes see when they find you · 142 visitors this month</div>
+      </div>
+      <a href="../parish/profile.html" class="btn btn-primary btn-sm">View my profile →</a>
+    </div>
+    <div class="filter-row">
+      <input class="search-input" type="text" placeholder="Search parishes by name or city…">
+      <select class="filter-select">
+        <option>All countries</option>
+        <option>Ghana</option><option>Hungary</option><option>Italy</option>
+        <option>Philippines</option><option>Poland</option><option>Brazil</option><option>Nigeria</option>
+      </select>
+      <select class="filter-select">
+        <option>All focus areas</option>
+        <option>Ethical technology</option><option>Youth ministry</option>
+        <option>Social justice</option><option>Peace &amp; reconciliation</option>
+        <option>Digital sovereignty</option><option>Research</option>
+      </select>
+    </div>
+    <!-- <?php echo $parish->sister_parishes_html ?> -->
+    <div class="section-title">Your sister parishes (6)</div>
+    <div class="pc-grid"><div class="pc">
+      <div class="pc-av" style="background:#2a8a4a">HS</div>
+      <div class="pc-name">Holy Spirit Parish</div>
+      <div class="pc-loc">🇬🇭 Accra, Ghana</div>
+      <div class="pc-tags"><span class="tag tag-terra">Youth ministry</span><span class="tag tag-ink">Education</span></div>
+      <div class="pc-sister">♥ Sister parish</div>
+      <div class="pc-actions"><a href="messages.html" class="btn btn-secondary btn-sm">Message</a><a href="../parish/profile.html" class="btn btn-primary btn-sm">View profile</a></div>
+    </div><div class="pc">
+      <div class="pc-av" style="background:#8a6820">SS</div>
+      <div class="pc-name">St. Stanislaw Parish</div>
+      <div class="pc-loc">🇵🇱 Warsaw, Poland</div>
+      <div class="pc-tags"><span class="tag tag-terra">Ethical technology</span><span class="tag tag-ink">Peace</span></div>
+      <div class="pc-sister">♥ Sister parish</div>
+      <div class="pc-actions"><a href="messages.html" class="btn btn-secondary btn-sm">Message</a><a href="../parish/profile.html" class="btn btn-primary btn-sm">View profile</a></div>
+    </div><div class="pc">
+      <div class="pc-av" style="background:#2a8a4a">SJ</div>
+      <div class="pc-name">San José Parish</div>
+      <div class="pc-loc">🇵🇭 Manila, Philippines</div>
+      <div class="pc-tags"><span class="tag tag-terra">Social justice</span><span class="tag tag-ink">Youth</span></div>
+      <div class="pc-sister">♥ Sister parish</div>
+      <div class="pc-actions"><a href="messages.html" class="btn btn-secondary btn-sm">Message</a><a href="../parish/profile.html" class="btn btn-primary btn-sm">View profile</a></div>
+    </div></div>
+    <!-- <?php echo $network->discover_parishes_html ?> -->
+    <div class="section-title">Discover parishes</div>
+    <div class="pc-grid"><div class="pc">
+      <div class="pc-av" style="background:#8a2a4a">SB</div>
+      <div class="pc-name">St. Benedek Parish</div>
+      <div class="pc-loc">🇭🇺 Budapest, Hungary</div>
+      <div class="pc-tags"><span class="tag tag-terra">Digital sovereignty</span><span class="tag tag-ink">Theology</span></div>
+      
+      <div class="pc-actions"><a href="messages.html" class="btn btn-secondary btn-sm">Message</a><a href="#" class="btn btn-primary btn-sm">Connect</a></div>
+    </div><div class="pc">
+      <div class="pc-av" style="background:#6a8a2a">SM</div>
+      <div class="pc-name">Santa Maria Parish</div>
+      <div class="pc-loc">🇧🇷 São Paulo, Brazil</div>
+      <div class="pc-tags"><span class="tag tag-terra">Social justice</span><span class="tag tag-ink">Migration</span></div>
+      
+      <div class="pc-actions"><a href="messages.html" class="btn btn-secondary btn-sm">Message</a><a href="#" class="btn btn-primary btn-sm">Connect</a></div>
+    </div><div class="pc">
+      <div class="pc-av" style="background:#6a8a2a">SM</div>
+      <div class="pc-name">San Marco Parish</div>
+      <div class="pc-loc">🇮🇹 Florence, Italy</div>
+      <div class="pc-tags"><span class="tag tag-terra">Research</span><span class="tag tag-ink">Theology</span></div>
+      
+      <div class="pc-actions"><a href="messages.html" class="btn btn-secondary btn-sm">Message</a><a href="#" class="btn btn-primary btn-sm">Connect</a></div>
+    </div><div class="pc">
+      <div class="pc-av" style="background:#2a8a4a">SC</div>
+      <div class="pc-name">St. Catherine Parish</div>
+      <div class="pc-loc">🇳🇬 Lagos, Nigeria</div>
+      <div class="pc-tags"><span class="tag tag-terra">Ethical technology</span><span class="tag tag-ink">Education</span></div>
+      
+      <div class="pc-actions"><a href="messages.html" class="btn btn-secondary btn-sm">Message</a><a href="#" class="btn btn-primary btn-sm">Connect</a></div>
+    </div><div class="pc">
+      <div class="pc-av" style="background:#8a6820">SP</div>
+      <div class="pc-name">St. Paul Parish</div>
+      <div class="pc-loc">🇰🇪 Nairobi, Kenya</div>
+      <div class="pc-tags"><span class="tag tag-terra">Youth ministry</span><span class="tag tag-ink">Peace</span></div>
+      
+      <div class="pc-actions"><a href="messages.html" class="btn btn-secondary btn-sm">Message</a><a href="#" class="btn btn-primary btn-sm">Connect</a></div>
+    </div><div class="pc">
+      <div class="pc-av" style="background:#2a8a4a">SA</div>
+      <div class="pc-name">St. Augustine Parish</div>
+      <div class="pc-loc">🇿🇦 Cape Town, S. Africa</div>
+      <div class="pc-tags"><span class="tag tag-terra">Social justice</span><span class="tag tag-ink">Reconciliation</span></div>
+      
+      <div class="pc-actions"><a href="messages.html" class="btn btn-secondary btn-sm">Message</a><a href="#" class="btn btn-primary btn-sm">Connect</a></div>
+    </div></div>
+  </div>
+</div>
+<script>
+(function(){
+  var b=document.getElementById('burger');
+  var m=document.getElementById('navMobile');
+  if(!b||!m)return;
+  b.addEventListener('click',function(){m.classList.toggle('open');});
+  document.addEventListener('click',function(e){
+    if(!b.contains(e.target)&&!m.contains(e.target))m.classList.remove('open');
+  });
+})();
+</script>
+</body>
+</html>
