@@ -296,6 +296,7 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
     <!-- TAB BAR -->
     <div class="tab-bar">
       <button class="tab-btn on" data-tab="edit">Edit</button>
+      <button class="tab-btn" data-tab="content">Content</button>
       <button class="tab-btn" data-tab="analytics">Analytics</button>
       <button class="tab-btn" data-tab="events">Events</button>
       <button class="tab-btn" data-tab="seo">SEO</button>
@@ -332,6 +333,25 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
         <div class="ep-body ep-grid" id="ep-body"></div>
         <div class="ep-foot"><span class="ep-hint">Changes go live after publishing</span><button class="btn btn-secondary btn-sm" id="ep-cancel">Discard</button><button class="btn btn-primary btn-sm" id="ep-save">Save changes →</button></div>
       </div>
+    </div>
+  </div>
+</div>
+    <div class="tab-content" id="tab-content">
+  <div class="card">
+    <div class="card-title">Staff directory</div>
+    <div class="card-sub">Your clergy and staff — shown on your public parish website</div>
+    <div id="staff-list">
+      <div class="staff-item" style="background:var(--cream);border-radius:var(--r-md);padding:16px;margin-bottom:12px">
+        <div class="fg-row">
+          <div class="fg"><label class="fl">Name</label><input class="fi" type="text" placeholder="Fr. James Murphy"></div>
+          <div class="fg"><label class="fl">Role / Title</label><input class="fi" type="text" placeholder="Pastor"></div>
+        </div>
+        <div class="fg" style="margin-bottom:0"><label class="fl">Email</label><input class="fi" type="email" placeholder="pastor@stmarys.org"></div>
+      </div>
+    </div>
+    <button class="btn btn-secondary btn-sm" id="add-staff-btn" style="margin-bottom:16px">+ Add staff member</button>
+    <div style="display:flex;justify-content:flex-end">
+      <button class="btn btn-primary btn-sm" id="save-staff-btn">Save staff directory →</button>
     </div>
   </div>
 </div>
@@ -617,6 +637,20 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 (function () {
 
+  /* ── Staff directory ── */
+  document.getElementById('add-staff-btn').addEventListener('click', function(){
+    var item = document.createElement('div');
+    item.className = 'staff-item';
+    item.style.cssText = 'background:var(--cream);border-radius:var(--r-md);padding:16px;margin-bottom:12px';
+    item.innerHTML = '<div class="fg-row"><div class="fg"><label class="fl">Name</label><input class="fi" type="text" placeholder="Name"></div><div class="fg"><label class="fl">Role / Title</label><input class="fi" type="text" placeholder="Role"></div></div><div class="fg" style="margin-bottom:0"><label class="fl">Email</label><input class="fi" type="email" placeholder="email@parish.org"></div>';
+    document.getElementById('staff-list').appendChild(item);
+  });
+  document.getElementById('save-staff-btn').addEventListener('click', function(){
+    var b = document.getElementById('save-staff-btn');
+    b.textContent = '✓ Saved';
+    b.style.background = 'var(--sage)';
+    setTimeout(function(){ b.textContent = 'Save staff directory →'; b.style.background = ''; }, 2000);
+  });
   /* ── Tabs ── */
   var tabBtns = document.querySelectorAll('.tab-btn');
   var tabPanes = document.querySelectorAll('.tab-content');
