@@ -165,170 +165,137 @@
 
 <script>
 (function(){
-var MT_DAYS = ['monday','tuesday','wednesday','thursday','friday','satmorning','satvigil','sunday','confession','adoration'];
-var MT_TIMES_AM = ['6:00 AM','6:30 AM','7:00 AM','7:30 AM','8:00 AM','8:30 AM','9:00 AM','9:30 AM','10:00 AM','10:30 AM','11:00 AM','11:30 AM','12:00 PM'];
-var MT_TIMES_PM = ['1:00 PM','2:00 PM','3:00 PM','3:30 PM','4:00 PM','5:00 PM','5:30 PM','6:00 PM','6:30 PM','7:00 PM','7:30 PM','8:00 PM'];
-var MT_CONF = ['Sat 3:00–4:00 PM','Sat 3:30–4:30 PM','Sat 4:00–5:00 PM','Sun after 9:00 AM','Sun after 11:00 AM','By appointment'];
-var MT_LANGS = ['(Spanish)','(Polish)','(Portuguese)','(French)','(Italian)','(Filipino)','(Vietnamese)','(Korean)'];
-var mtData = {};
+var DAYS=['monday','tuesday','wednesday','thursday','friday','satmorning','satvigil','sunday','confession','adoration'];
+var AM=['6:00 AM','6:30 AM','7:00 AM','7:30 AM','8:00 AM','8:30 AM','9:00 AM','9:30 AM','10:00 AM','10:30 AM','11:00 AM','11:30 AM','12:00 PM'];
+var PM=['1:00 PM','2:00 PM','3:00 PM','3:30 PM','4:00 PM','5:00 PM','5:30 PM','6:00 PM','6:30 PM','7:00 PM','7:30 PM'];
+var CONF=['Sat 3:00-4:00 PM','Sat 3:30-4:30 PM','Sat 4:00-5:00 PM','Sun after 9:00 AM','Sun after 11:00 AM','By appointment'];
+var LANGS=['(Spanish)','(Polish)','(Portuguese)','(French)','(Italian)','(Filipino)'];
+var data={};
 
-function buildPicker(day) {
-  var p = document.getElementById('picker-' + day);
-  if(!p) return;
-  var isConf = (day === 'confession');
-  var isAdoration = (day === 'adoration');
-  var html = '';
-  if(isConf) {
-    html += '<div class="mt-picker-hd">Common slots</div><div class="mt-picker-lang">';
-    MT_CONF.forEach(function(t){ html += '<button class="mt-picker-li" onclick="mtAddChip(''+day+'',''+t+'')">' + t + '</button>'; });
-    html += '</div>';
-  } else {
-    html += '<div class="mt-picker-hd">Morning</div><div class="mt-picker-grid">';
-    MT_TIMES_AM.forEach(function(t){ html += '<button class="mt-picker-t" onclick="mtAddChip(''+day+'',''+t+'')">' + t.replace(' AM','').replace(' PM','') + '<br><span style="font-size:9px;color:var(--light)">' + (t.includes('AM')?'AM':'PM') + '</span></button>'; });
-    html += '</div><div class="mt-picker-div"></div><div class="mt-picker-hd">Afternoon / Evening</div><div class="mt-picker-grid">';
-    MT_TIMES_PM.forEach(function(t){ html += '<button class="mt-picker-t" onclick="mtAddChip(''+day+'',''+t+'')">' + t.replace(' AM','').replace(' PM','') + '<br><span style="font-size:9px;color:var(--light)">PM</span></button>'; });
-    html += '</div><div class="mt-picker-div"></div><div class="mt-picker-hd">Add language</div><div class="mt-picker-lang">';
-    MT_LANGS.forEach(function(l){
-      html += '<button class="mt-picker-li" onclick="mtAddLang(''+day+'',''+l+'')">+ Mass ' + l + '</button>';
+function save(){
+  try{
+    var pd=JSON.parse(localStorage.getItem('parish_data')||'{}');
+    DAYS.forEach(function(d){
+      var noEl=document.getElementById('noMass-'+d);
+      pd['mt_'+d]=(noEl&&noEl.checked)?'none':(data[d]||[]).join(', ');
     });
-    html += '</div>';
-  }
-  p.innerHTML = html;
+    ['baptism','marriage'].forEach(function(k){var el=document.getElementById('pd_'+k);if(el)pd[k]=el.value;});
+    localStorage.setItem('parish_data',JSON.stringify(pd));
+  }catch(e){}
 }
 
-function mtOpenPicker(btn, day) {
-  document.querySelectorAll('.mt-picker').forEach(function(p){ p.classList.remove('open'); });
-  buildPicker(day);
-  document.getElementById('picker-' + day).classList.add('open');
-}
-
-function mtAddChip(day, time, isVigil) {
-  if(!mtData[day]) mtData[day] = [];
-  if(mtData[day].indexOf(time) === -1) mtData[day].push(time);
-  renderSlots(day);
-  document.getElementById('picker-' + day).classList.remove('open');
-  mtSave();
-}
-
-function mtAddLang(day, lang) {
-  var slots = document.getElementById('slots-' + day);
-  var chips = slots.querySelectorAll('.mt-chip');
-  if(chips.length === 0) return;
-  var last = chips[chips.length-1];
-  var cur = last.dataset.time;
-  if(!mtData[day]) return;
-  var idx = mtData[day].indexOf(cur);
-  if(idx > -1) { mtData[day][idx] = cur + ' ' + lang; }
-  renderSlots(day);
-  document.getElementById('picker-' + day).classList.remove('open');
-  mtSave();
-}
-
-window.mtAddChip = mtAddChip;
-window.mtOpenPicker = mtOpenPicker;
-
-function mtRemoveChip(day, time) {
-  if(!mtData[day]) return;
-  mtData[day] = mtData[day].filter(function(t){ return t !== time; });
-  renderSlots(day);
-  mtSave();
-}
-
-function renderSlots(day) {
-  var slots = document.getElementById('slots-' + day);
-  if(!slots) return;
-  var times = mtData[day] || [];
-  var noMassEl = document.getElementById('noMass-' + day);
-  if(noMassEl && noMassEl.checked) {
-    slots.innerHTML = '<span style="font-size:12px;color:var(--light);font-style:italic">No Mass</span>';
-    return;
-  }
-  if(times.length === 0) {
-    slots.innerHTML = '';
-    return;
-  }
-  slots.innerHTML = times.map(function(t){
-    var isVigil = (day === 'satvigil');
-    return '<span class="mt-chip' + (isVigil?' vigil':'') + '" data-time="' + t + '">' + t +
-      '<button class="mt-chip-x" onclick="mtRemoveChip('' + day + '','' + t + '')">✕</button></span>';
+function renderSlots(d){
+  var el=document.getElementById('slots-'+d);
+  if(!el)return;
+  var noEl=document.getElementById('noMass-'+d);
+  if(noEl&&noEl.checked){el.innerHTML='<span style="font-size:12px;color:var(--light);font-style:italic">No Mass</span>';return;}
+  var times=data[d]||[];
+  if(!times.length){el.innerHTML='';return;}
+  el.innerHTML=times.map(function(t){
+    var isV=(d==='satvigil');
+    var safe=t.replace(/'/g,'&#39;');
+    return '<span class="mt-chip'+(isV?' vigil':'')+'" data-time="'+safe+'">'+t+'<button class="mt-chip-x" onclick="mtDel(''+d+'',''+safe+'')">x</button></span>';
   }).join('');
 }
 
-window.mtToggleNoMass = function(day, checked) {
-  var addBtn = document.querySelector('#mt-' + day + ' .mt-add');
-  if(addBtn) addBtn.style.display = checked ? 'none' : '';
-  renderSlots(day);
-  mtSave();
-};
-
-window.mtCopyToAll = function(fromDay) {
-  ['tuesday','wednesday','thursday','friday'].forEach(function(d){
-    mtData[d] = (mtData[fromDay]||[]).slice();
-    var noMassEl = document.getElementById('noMass-' + d);
-    if(noMassEl) noMassEl.checked = false;
-    renderSlots(d);
-  });
-  mtSave();
-};
-
-function mtSave() {
-  try {
-    var pd = JSON.parse(localStorage.getItem('parish_data')||'{}');
-    MT_DAYS.forEach(function(d){
-      var noEl = document.getElementById('noMass-' + d);
-      if(noEl && noEl.checked) { pd['mt_'+d] = 'none'; }
-      else { pd['mt_'+d] = (mtData[d]||[]).join(', '); }
+function buildPicker(d){
+  var el=document.getElementById('picker-'+d);
+  if(!el)return;
+  var isC=(d==='confession');
+  var rows=isC?CONF:AM.concat(PM);
+  var html='<div style="max-height:280px;overflow-y:auto">';
+  if(!isC){
+    html+='<div class="mt-picker-hd">Morning</div><div class="mt-picker-grid">';
+    AM.forEach(function(t){html+='<button class="mt-picker-t" onclick="mtAdd(''+d+'',''+t.replace(/'/g,'&#39;')+'')">'+t+'</button>';});
+    html+='</div><div class="mt-picker-div"></div><div class="mt-picker-hd">Afternoon/Evening</div><div class="mt-picker-grid">';
+    PM.forEach(function(t){html+='<button class="mt-picker-t" onclick="mtAdd(''+d+'',''+t.replace(/'/g,'&#39;')+'')">'+t+'</button>';});
+    html+='</div><div class="mt-picker-div"></div><div class="mt-picker-hd">With language</div><div class="mt-picker-lang">';
+    LANGS.forEach(function(l){
+      var times2=AM.slice(3,6);
+      times2.forEach(function(t){
+        var v=t+' '+l;
+        html+='<button class="mt-picker-li" onclick="mtAdd(''+d+'',''+v.replace(/'/g,'&#39;')+'')">'+v+'</button>';
+      });
     });
-    localStorage.setItem('parish_data', JSON.stringify(pd));
-  } catch(e){}
+    html+='</div>';
+  } else {
+    html+='<div class="mt-picker-hd">Common slots</div><div class="mt-picker-lang">';
+    CONF.forEach(function(t){html+='<button class="mt-picker-li" onclick="mtAdd(''+d+'',''+t.replace(/'/g,'&#39;')+'')">'+t+'</button>';});
+    html+='</div>';
+  }
+  html+='</div>';
+  el.innerHTML=html;
 }
 
-function mtLoad() {
-  try {
-    var pd = JSON.parse(localStorage.getItem('parish_data')||'{}');
-    MT_DAYS.forEach(function(d){
-      var val = pd['mt_'+d] || '';
-      if(val === 'none') {
-        var noEl = document.getElementById('noMass-' + d);
-        if(noEl) { noEl.checked = true; mtToggleNoMass(d, true); }
-      } else if(val) {
-        mtData[d] = val.split(', ').filter(Boolean);
+window.mtAdd=function(d,t){
+  if(!data[d])data[d]=[];
+  if(data[d].indexOf(t)===-1)data[d].push(t);
+  renderSlots(d);
+  var pk=document.getElementById('picker-'+d);
+  if(pk)pk.classList.remove('open');
+  save();
+};
+
+window.mtDel=function(d,t){
+  if(!data[d])return;
+  data[d]=data[d].filter(function(x){return x!==t;});
+  renderSlots(d);
+  save();
+};
+
+window.mtOpenPicker=function(btn,d){
+  document.querySelectorAll('.mt-picker').forEach(function(p){p.classList.remove('open');});
+  buildPicker(d);
+  var pk=document.getElementById('picker-'+d);
+  if(pk)pk.classList.add('open');
+};
+
+window.mtToggleNoMass=function(d,checked){
+  var addBtn=document.querySelector('#mt-'+d+' .mt-add');
+  if(addBtn)addBtn.style.display=checked?'none':'';
+  renderSlots(d);
+  save();
+};
+
+window.mtCopyToAll=function(){
+  var src=data['monday']||[];
+  ['tuesday','wednesday','thursday','friday'].forEach(function(d){
+    data[d]=src.slice();
+    var noEl=document.getElementById('noMass-'+d);
+    if(noEl)noEl.checked=false;
+    renderSlots(d);
+  });
+  save();
+};
+
+document.addEventListener('click',function(e){
+  if(!e.target.closest('.mt-wrap'))
+    document.querySelectorAll('.mt-picker').forEach(function(p){p.classList.remove('open');});
+});
+
+['baptism','marriage'].forEach(function(k){
+  var el=document.getElementById('pd_'+k);
+  if(el)el.addEventListener('change',function(){save();});
+});
+
+function load(){
+  try{
+    var pd=JSON.parse(localStorage.getItem('parish_data')||'{}');
+    DAYS.forEach(function(d){
+      var v=pd['mt_'+d]||'';
+      if(v==='none'){
+        var noEl=document.getElementById('noMass-'+d);
+        if(noEl){noEl.checked=true;mtToggleNoMass(d,true);}
+      } else if(v){
+        data[d]=v.split(', ').filter(Boolean);
         renderSlots(d);
       }
     });
-    // Also load baptism/marriage
-    ['baptism','marriage'].forEach(function(k){
-      var el = document.getElementById('pd_'+k);
-      if(el && pd[k]) el.value = pd[k];
-    });
-  } catch(e){}
+    ['baptism','marriage'].forEach(function(k){var el=document.getElementById('pd_'+k);if(el&&pd[k])el.value=pd[k];});
+  }catch(e){}
 }
 
-// Close picker when clicking outside
-document.addEventListener('click', function(e){
-  if(!e.target.closest('.mt-wrap')) {
-    document.querySelectorAll('.mt-picker').forEach(function(p){ p.classList.remove('open'); });
-  }
-});
-
-// Wire baptism/marriage save
-['baptism','marriage'].forEach(function(k){
-  var el = document.getElementById('pd_'+k);
-  if(el) el.addEventListener('change', function(){
-    try {
-      var pd = JSON.parse(localStorage.getItem('parish_data')||'{}');
-      pd[k] = el.value;
-      localStorage.setItem('parish_data', JSON.stringify(pd));
-    } catch(e){}
-  });
-});
-
-// Load on init
-if(document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', mtLoad);
-} else {
-  mtLoad();
-}
+if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',load);}else{load();}
 })();
 </script><div class="form-footer"><button class="btn btn-secondary btn-sm">Cancel</button><button class="btn btn-primary btn-sm" id="saveMassSacraments" onclick="saveForm()">Save changes →</button></div></div><div id="our-team" class="tab-panel" style="display:none"><div class="sp-title">Our team</div><div class="sp-sub">Primary contact and leadership information</div><div class="form-group"><label class="form-label">Pastor / Contact name</label><input class="form-input" type="text" id="pd_pastorName" value="Fr. James O'Brien"></div><div class="form-group"><label class="form-label">Role</label><select class="form-select" id="pd_pastorRole"><option>Pastor</option><option>Parish Priest</option><option>Administrator</option><option>Deacon</option></select></div><div class="form-group"><label class="form-label">Pastor's email</label><input class="form-input" type="email" id="pd_pastorEmail" placeholder="pastor@stmarysnyc.org"></div><div class="form-group"><label class="form-label">In this role since</label><input class="form-input" type="text" id="pd_pastorSince" placeholder="e.g. 2015"></div><div style="margin-top:16px;font-size:12px;color:var(--light);font-style:italic">To manage your full staff directory, go to Website → Content tab</div><div class="form-footer"><button class="btn btn-secondary btn-sm">Cancel</button><button class="btn btn-primary btn-sm" id="saveOurTeam" onclick="saveForm()">Save changes →</button></div></div><div id="stay-connected" class="tab-panel" style="display:none"><div class="sp-title">Stay connected</div><div class="sp-sub">Social media and giving information</div><div style="margin-bottom:16px;font-size:14px;font-weight:700;color:var(--ink)">Social media</div><div class="form-row"><div class="form-group"><label class="form-label">Facebook</label><input class="form-input" type="url" id="pd_socialFacebook" placeholder="https://facebook.com/yourparish"></div><div class="form-group"><label class="form-label">Instagram</label><input class="form-input" type="url" id="pd_socialInstagram" placeholder="https://instagram.com/yourparish"></div></div><div class="form-row"><div class="form-group"><label class="form-label">YouTube</label><input class="form-input" type="url" id="pd_socialYoutube" placeholder="https://youtube.com/@yourparish"></div><div class="form-group"><label class="form-label">Spotify</label><input class="form-input" type="url" id="pd_socialSpotify" placeholder="https://open.spotify.com/show/..."></div></div><div style="margin-top:24px;margin-bottom:16px;font-size:14px;font-weight:700;color:var(--ink)">Giving</div><div class="form-group"><label class="form-label">Giving page URL</label><input class="form-input" type="url" id="pd_givingUrl" placeholder="https://your-giving-platform.com"><span class="field-hint">Shown on your Communio profile donate button</span></div><div class="form-footer"><button class="btn btn-secondary btn-sm">Cancel</button><button class="btn btn-primary btn-sm" id="saveStayConnected" onclick="saveForm()">Save changes →</button></div></div><div id="account" class="tab-panel" style="display:none"><div class="sp-title">Account</div><div class="sp-sub">Manage your parish account settings</div><div class="danger-zone"><div class="dz-title">Danger zone</div><div class="dz-sub">Deactivating your account will remove your parish from the Communio network. This cannot be undone.</div><button class="btn btn-sm" style="background:var(--terra);color:white">Deactivate parish account</button></div></div></div></div><span id="saveStatus" style="position:fixed;top:70px;right:20px;font-size:13px;color:#2a8a4a;font-weight:600;background:white;padding:8px 16px;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,.1);display:none"></span><script>(function(){document.querySelectorAll('.toggle').forEach(function(t){t.addEventListener('click',function(){t.classList.toggle('on')})});document.querySelectorAll('.focus-tag').forEach(function(t){if(t.textContent!=='+ Add')t.addEventListener('click',function(){t.classList.toggle('on')})});document.querySelectorAll('.sn-item').forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();document.querySelectorAll('.sn-item').forEach(function(x){x.classList.remove('sn-active')});a.classList.add('sn-active');document.querySelectorAll('.tab-panel').forEach(function(p){p.style.display='none'});var tab=a.getAttribute('data-tab');if(tab){var panel=document.getElementById(tab);if(panel)panel.style.display='block'}})})}());</script></div></div><script>(function(){var b=document.getElementById('burger');var m=document.getElementById('navMobile');if(!b||!m)return;b.addEventListener('click',function(){m.classList.toggle('open');});document.addEventListener('click',function(e){if(!b.contains(e.target)&&!m.contains(e.target))m.classList.remove('open');});})();</script><script>(function(){var FIELDS=['name','shortName','tagline','founded','diocese','country','description','address','city','state','zip','phone','email','mapsUrl','officeWeekday','officeSaturday','officeSunday','confession','adoration','baptism','marriage','pastorName','pastorRole','pastorEmail','pastorSince','socialFacebook','socialInstagram','socialYoutube','socialSpotify','givingUrl'];function loadForm(){try{var stored=localStorage.getItem('parish_data');if(!stored)return;var data=JSON.parse(stored);FIELDS.forEach(function(key){var el=document.getElementById('pd_'+key);if(el&&data[key]!==undefined)el.value=data[key]})}catch(e){}}function saveForm(){var data={};FIELDS.forEach(function(key){var el=document.getElementById('pd_'+key);if(el)data[key]=el.value.trim()});localStorage.setItem('parish_data',JSON.stringify(data));var s=document.getElementById('saveStatus');if(s){s.textContent='✓ Saved — profile updated';s.style.display='block';setTimeout(function(){s.style.display='none'},3000)}}window.saveForm=saveForm;document.addEventListener('DOMContentLoaded',function(){loadForm()})})();</script><script>
 (function(){
