@@ -240,177 +240,460 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
 
 <!-- PAGE CONTENT -->
 <div class="page-shell">
-  <div class="page-inner">
+<div class="page-inner" style="padding:0;max-width:none">
+
 <style>
-.ev-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px;flex-wrap:wrap;gap:12px}
-.ev-layout{display:grid;grid-template-columns:1fr 340px;gap:20px}
-.ev-list{display:flex;flex-direction:column;gap:10px}
-.ev-item{background:var(--white);border:1px solid var(--border-light);border-radius:var(--r-lg);padding:16px 18px;display:flex;align-items:center;gap:16px;box-shadow:var(--sh-sm);transition:box-shadow .15s}
-.ev-item:hover{box-shadow:0 4px 16px rgba(14,10,6,.08)}
-.ev-date-block{width:52px;text-align:center;flex-shrink:0;background:var(--terra-pale);border-radius:var(--r-md);padding:8px 0}
-.ev-mon{font-size:11px;font-weight:700;color:var(--terra);text-transform:uppercase;letter-spacing:.06em}
-.ev-day{font-size:24px;font-weight:800;color:var(--ink);line-height:1;letter-spacing:-.03em}
-.ev-info{flex:1;min-width:0}
-.ev-title{font-size:14px;font-weight:700;color:var(--ink);margin-bottom:3px}
-.ev-meta{font-size:12px;color:var(--light);margin-bottom:4px;font-family:'Lora',serif;font-style:italic}
-.ev-tags{display:flex;gap:6px;flex-wrap:wrap}
-.ev-tag{font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px}
-.ev-tag-web{background:var(--terra-pale);color:var(--terra)}
-.ev-tag-net{background:#e6f4eb;color:#1a6b2a}
-.ev-tag-open{background:#E6F1FB;color:#185FA5}
-.ev-acts{display:flex;gap:6px;flex-shrink:0}
-.add-ev-form{background:var(--white);border:1.5px solid var(--terra);border-radius:var(--r-lg);padding:22px;margin-bottom:16px;box-shadow:0 0 0 3px rgba(216,80,32,.06);display:none}
+/* ── EVENTS PAGE — restrained palette, terra only ── */
+.ev-hd{padding:20px 28px 0;background:var(--white);border-bottom:2px solid var(--border-light)}
+.ev-hd-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:16px;gap:16px}
+.ev-hd-title{font-size:22px;font-weight:800;color:var(--ink);letter-spacing:-.03em}
+.ev-hd-sub{font-family:'Lora',serif;font-size:13px;color:var(--light);font-style:italic;margin-top:3px}
+.ev-stats{display:flex;gap:28px}
+.ev-stat{text-align:right}
+.ev-stat-val{font-size:20px;font-weight:800;color:var(--ink);letter-spacing:-.03em;line-height:1}
+.ev-stat-lbl{font-size:10px;color:var(--light);margin-top:2px;text-transform:uppercase;letter-spacing:.05em}
+.ev-tabs{display:flex;gap:0;margin-top:0}
+.ev-tab{font-size:13px;font-weight:600;color:var(--light);background:none;border:none;padding:12px 20px 11px;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;font-family:'Outfit',sans-serif;transition:color .15s}
+.ev-tab:hover{color:var(--ink)}
+.ev-tab.on{color:var(--terra);border-bottom-color:var(--terra)}
+
+/* ── LAYOUT ── */
+.ev-body{display:grid;grid-template-columns:1fr 300px;gap:24px;padding:24px 28px;align-items:start}
+.ev-pane{display:none}.ev-pane.on{display:block}
+
+/* ── FILTER BAR ── */
+.ev-filter-bar{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap;align-items:center}
+.ev-pill{font-size:12px;font-weight:600;padding:6px 14px;border-radius:20px;border:1.5px solid var(--border-light);background:var(--white);color:var(--mid);cursor:pointer;font-family:'Outfit',sans-serif;transition:all .15s}
+.ev-pill:hover{border-color:var(--ink);color:var(--ink)}
+.ev-pill.on{background:var(--ink);border-color:var(--ink);color:white}
+.ev-search{flex:1;max-width:240px;font-family:'Outfit',sans-serif;font-size:13px;color:var(--ink);background:var(--white);border:1.5px solid var(--border-light);border-radius:var(--r-md);padding:7px 14px;outline:none;transition:border-color .2s;margin-left:auto}
+.ev-search:focus{border-color:var(--terra)}
+
+/* ── FEATURED EVENT ── */
+.ev-featured{background:var(--white);border:1px solid var(--border-light);border-left:4px solid var(--terra);border-radius:var(--r-lg);padding:20px 22px;margin-bottom:16px;box-shadow:var(--sh-sm)}
+.ev-featured-label{font-size:10px;font-weight:700;color:var(--terra);text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px}
+.ev-featured-row{display:flex;gap:16px;align-items:flex-start}
+.ev-featured-date{flex-shrink:0;text-align:center;width:54px}
+.ev-featured-mon{font-size:11px;font-weight:700;color:var(--terra);text-transform:uppercase;letter-spacing:.06em}
+.ev-featured-day{font-size:32px;font-weight:800;color:var(--ink);line-height:1;letter-spacing:-.04em}
+.ev-featured-body{flex:1}
+.ev-featured-title{font-size:17px;font-weight:800;color:var(--ink);letter-spacing:-.02em;margin-bottom:4px}
+.ev-featured-meta{font-size:13px;color:var(--text-mid);margin-bottom:8px;font-family:'Lora',serif;font-style:italic}
+.ev-featured-desc{font-size:13px;color:var(--text-mid);line-height:1.55;margin-bottom:12px}
+.ev-featured-acts{display:flex;gap:8px;align-items:center}
+.ev-featured-pill{font-size:11px;font-weight:600;padding:3px 10px;border-radius:10px;background:var(--cream);color:var(--mid)}
+
+/* ── EVENT LIST ── */
+.ev-list{display:flex;flex-direction:column;gap:8px}
+.ev-card{background:var(--white);border:1px solid var(--border-light);border-left:3px solid var(--border-light);border-radius:var(--r-lg);padding:14px 16px;display:flex;align-items:center;gap:14px;box-shadow:var(--sh-sm);transition:all .15s}
+.ev-card:hover{box-shadow:0 3px 14px rgba(14,10,6,.07);transform:translateY(-1px)}
+.ev-card.cat-mass{border-left-color:#a78740}
+.ev-card.cat-community{border-left-color:var(--terra)}
+.ev-card.cat-youth{border-left-color:#185FA5}
+.ev-card.cat-formation{border-left-color:#534AB7}
+.ev-card.cat-open{border-left-color:#3B6D11}
+.ev-date-block{width:48px;text-align:center;flex-shrink:0}
+.ev-mon{font-size:10px;font-weight:700;color:var(--light);text-transform:uppercase;letter-spacing:.06em}
+.ev-day{font-size:22px;font-weight:800;color:var(--ink);line-height:1;letter-spacing:-.03em}
+.ev-card-body{flex:1;min-width:0}
+.ev-card-title{font-size:14px;font-weight:700;color:var(--ink);margin-bottom:2px}
+.ev-card-meta{font-size:12px;color:var(--light);font-family:'Lora',serif;font-style:italic}
+.ev-card-tag{font-size:10px;font-weight:600;color:var(--light);margin-top:4px}
+.ev-card-acts{display:flex;gap:6px;flex-shrink:0}
+.ev-section-lbl{font-size:11px;font-weight:700;color:var(--light);text-transform:uppercase;letter-spacing:.07em;margin:20px 0 10px}
+
+/* ── PAST EVENTS ── */
+.ev-past-card{background:var(--white);border:1px solid var(--border-light);border-radius:var(--r-lg);padding:14px 16px;display:flex;align-items:center;gap:14px;opacity:.75;box-shadow:var(--sh-sm);margin-bottom:8px}
+.ev-past-stat{font-size:11px;font-weight:700;color:var(--sage);margin-top:3px}
+
+/* ── NETWORK EVENTS ── */
+.nev-card{background:var(--white);border:1px solid var(--border-light);border-radius:var(--r-lg);padding:16px;margin-bottom:10px;box-shadow:var(--sh-sm);transition:box-shadow .15s}
+.nev-card:hover{box-shadow:0 3px 14px rgba(14,10,6,.07)}
+.nev-top{display:flex;align-items:flex-start;gap:12px;margin-bottom:10px}
+.nev-av{width:38px;height:38px;border-radius:9px;flex-shrink:0;font-size:10px;font-weight:800;color:white;display:flex;align-items:center;justify-content:center;background:var(--mid)}
+.nev-parish{font-size:12px;font-weight:700;color:var(--ink)}
+.nev-loc{font-size:11px;color:var(--light);margin-top:1px}
+.nev-title{font-size:14px;font-weight:700;color:var(--ink);margin-bottom:3px}
+.nev-meta{font-size:12px;color:var(--light);font-family:'Lora',serif;font-style:italic;margin-bottom:10px}
+.nev-open-badge{font-size:10px;font-weight:700;color:#3B6D11;background:#f0fdf4;border:1px solid #bbf7d0;padding:2px 8px;border-radius:10px;display:inline-block;margin-bottom:10px}
+
+/* ── ADD EVENT FORM ── */
+.add-ev-form{background:var(--white);border:1.5px solid var(--terra);border-radius:var(--r-lg);padding:22px;margin-bottom:18px;box-shadow:0 0 0 3px rgba(216,80,32,.05);display:none}
 .add-ev-form.visible{display:block}
 .fg-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.card{background:var(--white);border:1px solid var(--border-light);border-radius:var(--r-lg);padding:18px;margin-bottom:14px;box-shadow:var(--sh-sm)}
-.card-title{font-size:12px;font-weight:700;color:var(--ink);text-transform:uppercase;letter-spacing:.07em;margin-bottom:4px}
-.card-sub{font-family:'Lora',serif;font-size:12px;color:var(--light);font-style:italic;margin-bottom:14px}
+.fg{display:flex;flex-direction:column;gap:4px}
+.fl{font-size:12px;font-weight:700;color:var(--mid)}
+.fi{font-family:'Outfit',sans-serif;font-size:13px;color:var(--ink);background:var(--white);border:1.5px solid var(--border-light);border-radius:var(--r-md);padding:8px 12px;outline:none;transition:border-color .2s;width:100%}
+.fi:focus{border-color:var(--terra)}
+.fta{font-family:'Outfit',sans-serif;font-size:13px;color:var(--ink);background:var(--white);border:1.5px solid var(--border-light);border-radius:var(--r-md);padding:8px 12px;outline:none;resize:vertical;width:100%}
+.fta:focus{border-color:var(--terra)}
+.form-check{display:flex;align-items:center;gap:7px;font-size:13px;font-weight:600;color:var(--ink);cursor:pointer}
+.form-check input{cursor:pointer;width:14px;height:14px}
+
+/* ── RIGHT SIDEBAR ── */
+.ev-side-card{background:var(--white);border:1px solid var(--border-light);border-radius:var(--r-lg);padding:16px 18px;margin-bottom:14px;box-shadow:var(--sh-sm)}
+.ev-side-title{font-size:11px;font-weight:700;color:var(--light);text-transform:uppercase;letter-spacing:.07em;margin-bottom:12px}
+.ev-side-item{display:flex;gap:10px;padding:9px 0;border-bottom:1px solid var(--cream-dark);align-items:center}
+.ev-side-item:last-child{border-bottom:none}
+.ev-side-date{width:36px;text-align:center;flex-shrink:0}
+.ev-side-mon{font-size:9px;font-weight:700;color:var(--terra);text-transform:uppercase}
+.ev-side-day{font-size:16px;font-weight:800;color:var(--ink);line-height:1}
 .toggle-row{display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border-light)}
-.toggle-row:last-child{border-bottom:none}
+.toggle-row:last-child{border-bottom:none;padding-bottom:0}
 .tr-lbl{font-size:13px;font-weight:600;color:var(--ink)}
 .tr-sub{font-size:11px;color:var(--light);margin-top:2px;font-family:'Lora',serif;font-style:italic}
+.toggle{width:36px;height:20px;border-radius:10px;background:var(--border-light);border:none;cursor:pointer;position:relative;transition:background .2s;flex-shrink:0}
+.toggle.on{background:var(--terra)}
+.toggle::after{content:'';position:absolute;top:3px;left:3px;width:14px;height:14px;border-radius:50%;background:white;transition:left .2s}
+.toggle.on::after{left:19px}
+@media(max-width:900px){.ev-body{grid-template-columns:1fr}}
 </style>
 
+<!-- HEADER -->
 <div class="ev-hd">
-  <div>
-    <div class="pg-title">Events</div>
-    <div style="font-family:'Lora',serif;font-size:13px;color:var(--light);font-style:italic;margin-top:2px">Manage your parish calendar — syncs to your website and network profile</div>
+  <div class="ev-hd-top">
+    <div>
+      <div class="ev-hd-title">Events</div>
+      <div class="ev-hd-sub">Your parish calendar — syncs to your website and network profile automatically</div>
+    </div>
+    <div style="display:flex;align-items:center;gap:16px">
+      <div class="ev-stats">
+        <div class="ev-stat"><div class="ev-stat-val">4</div><div class="ev-stat-lbl">Upcoming</div></div>
+        <div class="ev-stat"><div class="ev-stat-val">18</div><div class="ev-stat-lbl">This month</div></div>
+        <div class="ev-stat"><div class="ev-stat-val">340</div><div class="ev-stat-lbl">RSVPs</div></div>
+      </div>
+      <button class="btn btn-primary btn-sm" id="add-ev-btn">+ Add event</button>
+    </div>
   </div>
-  <button class="btn btn-primary btn-sm" id="add-ev-btn">+ Add event</button>
-</div>
-
-<div class="add-ev-form" id="add-ev-form">
-  <div style="font-size:15px;font-weight:700;color:var(--ink);margin-bottom:16px">New event</div>
-  <div class="fg-row" style="margin-bottom:14px">
-    <div class="fg"><label class="fl">Event title</label><input class="fi" type="text" placeholder="e.g. Easter Vigil Mass" id="ev-title"></div>
-    <div class="fg"><label class="fl">Location</label><input class="fi" type="text" placeholder="e.g. Main Church" id="ev-location"></div>
-  </div>
-  <div class="fg-row" style="margin-bottom:14px">
-    <div class="fg"><label class="fl">Date</label><input class="fi" type="date" id="ev-date"></div>
-    <div class="fg"><label class="fl">Time</label><input class="fi" type="time" value="10:00" id="ev-time"></div>
-  </div>
-  <div class="fg" style="margin-bottom:14px"><label class="fl">Description <span style="color:var(--light);font-weight:400">(optional)</span></label><textarea class="fta" rows="2" placeholder="Brief details about this event…" id="ev-desc"></textarea></div>
-  <div style="display:flex;align-items:center;gap:16px;margin-bottom:16px;flex-wrap:wrap">
-    <label style="display:flex;align-items:center;gap:7px;cursor:pointer;font-size:13px;font-weight:600;color:var(--ink)"><input type="checkbox" id="ev-show-web" checked style="width:15px;height:15px"> Show on website</label>
-    <label style="display:flex;align-items:center;gap:7px;cursor:pointer;font-size:13px;font-weight:600;color:var(--ink)"><input type="checkbox" id="ev-show-net" checked style="width:15px;height:15px"> Post to network feed</label>
-    <label style="display:flex;align-items:center;gap:7px;cursor:pointer;font-size:13px;font-weight:600;color:var(--ink)"><input type="checkbox" id="ev-open-all" style="width:15px;height:15px"> Open to all</label>
-  </div>
-  <div style="display:flex;gap:8px;justify-content:flex-end">
-    <button class="btn btn-secondary btn-sm" id="cancel-ev-btn">Cancel</button>
-    <button class="btn btn-primary btn-sm" id="save-ev-btn">Save event →</button>
+  <div class="ev-tabs">
+    <button class="ev-tab on" onclick="evTab(this,'upcoming')">Upcoming</button>
+    <button class="ev-tab" onclick="evTab(this,'past')">Past events</button>
+    <button class="ev-tab" onclick="evTab(this,'network')">Network events <span style="background:var(--terra);color:white;font-size:10px;font-weight:700;padding:1px 6px;border-radius:10px;margin-left:4px">3</span></button>
   </div>
 </div>
 
-<div class="ev-layout">
-  <div>
-    <div style="font-size:11px;font-weight:700;color:var(--light);text-transform:uppercase;letter-spacing:.07em;margin-bottom:10px">Upcoming</div>
+<div class="ev-body">
+<div>
+
+  <!-- UPCOMING TAB -->
+  <div class="ev-pane on" id="ev-upcoming">
+
+    <!-- Add event form -->
+    <div class="add-ev-form" id="add-ev-form">
+      <div style="font-size:15px;font-weight:700;color:var(--ink);margin-bottom:16px">New event</div>
+      <div class="fg-row" style="margin-bottom:12px">
+        <div class="fg"><label class="fl">Event title</label><input class="fi" type="text" id="ev-title" placeholder="e.g. Easter Vigil Mass"></div>
+        <div class="fg"><label class="fl">Category</label>
+          <select class="fi" id="ev-cat">
+            <option value="">Select category...</option>
+            <option value="mass">Mass / Liturgy</option>
+            <option value="community">Community</option>
+            <option value="youth">Youth</option>
+            <option value="formation">Faith formation</option>
+            <option value="open">Open to all</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+      </div>
+      <div class="fg-row" style="margin-bottom:12px">
+        <div class="fg"><label class="fl">Location</label><input class="fi" type="text" id="ev-location" placeholder="e.g. Main Church"></div>
+        <div class="fg"><label class="fl">Date</label><input class="fi" type="date" id="ev-date"></div>
+      </div>
+      <div class="fg-row" style="margin-bottom:12px">
+        <div class="fg"><label class="fl">Time</label><input class="fi" type="time" id="ev-time" value="10:00"></div>
+        <div class="fg"><label class="fl">Capacity <span style="font-weight:400;color:var(--light)">(optional)</span></label><input class="fi" type="number" id="ev-capacity" placeholder="Leave blank for unlimited"></div>
+      </div>
+      <div class="fg" style="margin-bottom:12px"><label class="fl">Description <span style="font-weight:400;color:var(--light)">(optional)</span></label><textarea class="fta" rows="2" id="ev-desc" placeholder="Brief details about this event…"></textarea></div>
+      <div style="display:flex;gap:16px;margin-bottom:16px;flex-wrap:wrap">
+        <label class="form-check"><input type="checkbox" id="ev-show-web" checked> Show on website</label>
+        <label class="form-check"><input type="checkbox" id="ev-show-net" checked> Post to network feed</label>
+        <label class="form-check"><input type="checkbox" id="ev-open-all"> Open to all parishes</label>
+        <label class="form-check"><input type="checkbox" id="ev-recurring"> Recurring event</label>
+      </div>
+      <div style="display:flex;gap:8px;justify-content:flex-end">
+        <button class="btn btn-secondary btn-sm" id="cancel-ev-btn">Cancel</button>
+        <button class="btn btn-primary btn-sm" id="save-ev-btn">Save event →</button>
+      </div>
+    </div>
+
+    <!-- Filter bar -->
+    <div class="ev-filter-bar">
+      <button class="ev-pill on" onclick="evFilter(this,'all')">All</button>
+      <button class="ev-pill" onclick="evFilter(this,'mass')">Mass & Liturgy</button>
+      <button class="ev-pill" onclick="evFilter(this,'community')">Community</button>
+      <button class="ev-pill" onclick="evFilter(this,'youth')">Youth</button>
+      <button class="ev-pill" onclick="evFilter(this,'formation')">Formation</button>
+      <button class="ev-pill" onclick="evFilter(this,'open')">Open to all</button>
+      <input type="text" class="ev-search" placeholder="Search events…" id="ev-search-in">
+    </div>
+
+    <!-- Featured event -->
+    <div class="ev-featured">
+      <div class="ev-featured-label">Next event</div>
+      <div class="ev-featured-row">
+        <div class="ev-featured-date">
+          <div class="ev-featured-mon">Apr</div>
+          <div class="ev-featured-day">19</div>
+        </div>
+        <div class="ev-featured-body">
+          <div class="ev-featured-title">Easter Vigil</div>
+          <div class="ev-featured-meta">8:00pm · Main Church · Mass & Liturgy</div>
+          <div class="ev-featured-desc">The most important celebration of the liturgical year. All parishioners and their families warmly invited. Expect the celebration to last approximately 2.5 hours.</div>
+          <div class="ev-featured-acts">
+            <span class="ev-featured-pill">Website</span>
+            <span class="ev-featured-pill">Network feed</span>
+            <button class="btn btn-secondary btn-sm" style="margin-left:auto">Edit</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Event list -->
+    <div class="ev-section-lbl">All upcoming events</div>
     <div class="ev-list" id="ev-list">
-      <div class="ev-item">
-        <div class="ev-date-block"><div class="ev-mon">Apr</div><div class="ev-day">19</div></div>
-        <div class="ev-info">
-          <div class="ev-title">Easter Vigil</div>
-          <div class="ev-meta">8:00pm · Main Church</div>
-          <div class="ev-tags"><span class="ev-tag ev-tag-web">Website</span><span class="ev-tag ev-tag-net">Network feed</span></div>
-        </div>
-        <div class="ev-acts"><button class="btn btn-secondary btn-sm">Edit</button><button class="btn btn-secondary btn-sm" style="color:var(--terra)">Remove</button></div>
-      </div>
-      <div class="ev-item">
+      <div class="ev-card cat-community" data-cat="community">
         <div class="ev-date-block"><div class="ev-mon">Apr</div><div class="ev-day">22</div></div>
-        <div class="ev-info">
-          <div class="ev-title">Youth Group Meeting</div>
-          <div class="ev-meta">6:30pm · Parish Hall</div>
-          <div class="ev-tags"><span class="ev-tag ev-tag-web">Website</span><span class="ev-tag ev-tag-net">Network feed</span></div>
+        <div class="ev-card-body">
+          <div class="ev-card-title">Youth Group Meeting</div>
+          <div class="ev-card-meta">6:30pm · Parish Hall · 24 attending</div>
+          <div class="ev-card-tag">Community · Website · Network feed</div>
         </div>
-        <div class="ev-acts"><button class="btn btn-secondary btn-sm">Edit</button><button class="btn btn-secondary btn-sm" style="color:var(--terra)">Remove</button></div>
+        <div class="ev-card-acts"><button class="btn btn-secondary btn-sm">Edit</button><button class="btn btn-secondary btn-sm" style="color:var(--terra)" onclick="this.closest('.ev-card').remove()">Remove</button></div>
       </div>
-      <div class="ev-item">
+      <div class="ev-card cat-open" data-cat="open">
         <div class="ev-date-block"><div class="ev-mon">May</div><div class="ev-day">4</div></div>
-        <div class="ev-info">
-          <div class="ev-title">Community Dinner</div>
-          <div class="ev-meta">6:00pm · Parish Hall</div>
-          <div class="ev-tags"><span class="ev-tag ev-tag-web">Website</span><span class="ev-tag ev-tag-net">Network feed</span><span class="ev-tag ev-tag-open">Open to all</span></div>
+        <div class="ev-card-body">
+          <div class="ev-card-title">Community Dinner</div>
+          <div class="ev-card-meta">6:00pm · Parish Hall · 62 attending</div>
+          <div class="ev-card-tag">Open to all · Website · Network feed</div>
         </div>
-        <div class="ev-acts"><button class="btn btn-secondary btn-sm">Edit</button><button class="btn btn-secondary btn-sm" style="color:var(--terra)">Remove</button></div>
+        <div class="ev-card-acts"><button class="btn btn-secondary btn-sm">Edit</button><button class="btn btn-secondary btn-sm" style="color:var(--terra)" onclick="this.closest('.ev-card').remove()">Remove</button></div>
       </div>
-      <div class="ev-item">
+      <div class="ev-card cat-other" data-cat="other">
         <div class="ev-date-block"><div class="ev-mon">May</div><div class="ev-day">18</div></div>
-        <div class="ev-info">
-          <div class="ev-title">Parish Pilgrimage to Washington DC</div>
-          <div class="ev-meta">All day · Departs 7:00am</div>
-          <div class="ev-tags"><span class="ev-tag ev-tag-net">Network feed</span><span class="ev-tag ev-tag-open">Open to all</span></div>
+        <div class="ev-card-body">
+          <div class="ev-card-title">Parish Pilgrimage to Washington DC</div>
+          <div class="ev-card-meta">All day · Departs 7:00am · 38 attending</div>
+          <div class="ev-card-tag">Open to all · Network feed</div>
         </div>
-        <div class="ev-acts"><button class="btn btn-secondary btn-sm">Edit</button><button class="btn btn-secondary btn-sm" style="color:var(--terra)">Remove</button></div>
+        <div class="ev-card-acts"><button class="btn btn-secondary btn-sm">Edit</button><button class="btn btn-secondary btn-sm" style="color:var(--terra)" onclick="this.closest('.ev-card').remove()">Remove</button></div>
       </div>
     </div>
   </div>
 
-  <div>
-    <div class="card">
-      <div class="card-title">Sync settings</div>
-      <div class="card-sub">Control where your events appear automatically</div>
-      <div class="toggle-row">
-        <div><div class="tr-lbl">Show on parish website</div><div class="tr-sub">Displays next 3 events on communio.io/stmarysnyc</div></div>
-        <button class="toggle on" onclick="this.classList.toggle('on')"></button>
-      </div>
-      <div class="toggle-row">
-        <div><div class="tr-lbl">Post to network feed</div><div class="tr-sub">New events appear on your Communio profile</div></div>
-        <button class="toggle on" onclick="this.classList.toggle('on')"></button>
-      </div>
-      <div class="toggle-row">
-        <div><div class="tr-lbl">Notify sister parishes</div><div class="tr-sub">Open events notified to your 18 connections</div></div>
-        <button class="toggle" onclick="this.classList.toggle('on')"></button>
+  <!-- PAST TAB -->
+  <div class="ev-pane" id="ev-past">
+    <div class="ev-section-lbl" style="margin-top:0">March 2026</div>
+    <div class="ev-past-card">
+      <div class="ev-date-block"><div class="ev-mon">Mar</div><div class="ev-day">25</div></div>
+      <div class="ev-card-body">
+        <div class="ev-card-title">Palm Sunday Mass</div>
+        <div class="ev-card-meta">10:00am · Main Church</div>
+        <div class="ev-past-stat">↑ 284 attended · 42 via network</div>
       </div>
     </div>
-    <div class="card" style="background:var(--sage-pale);border-color:var(--sage-pale)">
-      <div class="card-title" style="color:var(--sage)">One place, everywhere</div>
-      <div style="font-size:13px;color:var(--ink);line-height:1.6">Events you add here automatically appear on your <strong>public website</strong> and your <strong>Communio network profile</strong> — no duplication needed.</div>
+    <div class="ev-past-card">
+      <div class="ev-date-block"><div class="ev-mon">Mar</div><div class="ev-day">18</div></div>
+      <div class="ev-card-body">
+        <div class="ev-card-title">Youth Retreat</div>
+        <div class="ev-card-meta">All day · St. Mary's retreat centre</div>
+        <div class="ev-past-stat">↑ 47 attended</div>
+      </div>
+    </div>
+    <div class="ev-past-card">
+      <div class="ev-date-block"><div class="ev-mon">Mar</div><div class="ev-day">10</div></div>
+      <div class="ev-card-body">
+        <div class="ev-card-title">Parish Council Meeting</div>
+        <div class="ev-card-meta">7:00pm · Parish Hall</div>
+        <div class="ev-past-stat">↑ 28 attended</div>
+      </div>
+    </div>
+    <div class="ev-section-lbl">February 2026</div>
+    <div class="ev-past-card">
+      <div class="ev-date-block"><div class="ev-mon">Feb</div><div class="ev-day">26</div></div>
+      <div class="ev-card-body">
+        <div class="ev-card-title">Ash Wednesday Mass</div>
+        <div class="ev-card-meta">12:10pm & 7:00pm · Main Church</div>
+        <div class="ev-past-stat">↑ 412 attended across both Masses</div>
+      </div>
     </div>
   </div>
+
+  <!-- NETWORK TAB -->
+  <div class="ev-pane" id="ev-network">
+    <div style="font-family:'Lora',serif;font-size:13px;color:var(--light);font-style:italic;margin-bottom:18px">Events hosted by your 18 sister parishes — open events are shown to your community too</div>
+    <div class="nev-card">
+      <div class="nev-top">
+        <div class="nev-av">HS</div>
+        <div>
+          <div class="nev-parish">🇬🇭 Holy Spirit Parish, Accra</div>
+          <div class="nev-loc">Accra, Ghana</div>
+        </div>
+        <div style="margin-left:auto;text-align:right">
+          <div class="ev-mon">May</div>
+          <div style="font-size:18px;font-weight:800;color:var(--ink);line-height:1">12</div>
+        </div>
+      </div>
+      <div class="nev-open-badge">Open to all parishes</div>
+      <div class="nev-title">Global Youth Faith & Technology Summit</div>
+      <div class="nev-meta">10:00am GMT · Online & in-person · 89 parishes registered</div>
+      <div style="display:flex;gap:8px">
+        <button class="btn btn-secondary btn-sm">Share to my network</button>
+        <a href="messages.html" class="btn btn-primary btn-sm">Connect with organiser →</a>
+      </div>
+    </div>
+    <div class="nev-card">
+      <div class="nev-top">
+        <div class="nev-av">SS</div>
+        <div>
+          <div class="nev-parish">🇵🇱 St. Stanislaw Parish, Warsaw</div>
+          <div class="nev-loc">Warsaw, Poland</div>
+        </div>
+        <div style="margin-left:auto;text-align:right">
+          <div class="ev-mon">May</div>
+          <div style="font-size:18px;font-weight:800;color:var(--ink);line-height:1">20</div>
+        </div>
+      </div>
+      <div class="nev-title">Digital Sovereignty in the Parish: A Practical Workshop</div>
+      <div class="nev-meta">2:00pm CET · Online only · 12 parishes registered</div>
+      <div style="display:flex;gap:8px;margin-top:10px">
+        <button class="btn btn-secondary btn-sm">Share to my network</button>
+        <a href="messages.html" class="btn btn-primary btn-sm">Connect with organiser →</a>
+      </div>
+    </div>
+    <div class="nev-card">
+      <div class="nev-top">
+        <div class="nev-av">SB</div>
+        <div>
+          <div class="nev-parish">🇭🇺 St. Benedek Parish, Budapest</div>
+          <div class="nev-loc">Budapest, Hungary</div>
+        </div>
+        <div style="margin-left:auto;text-align:right">
+          <div class="ev-mon">Jun</div>
+          <div style="font-size:18px;font-weight:800;color:var(--ink);line-height:1">7</div>
+        </div>
+      </div>
+      <div class="nev-open-badge">Open to all parishes</div>
+      <div class="nev-title">Theology & Technology Conference 2026</div>
+      <div class="nev-meta">All day · Budapest & online · 34 parishes registered</div>
+      <div style="display:flex;gap:8px;margin-top:10px">
+        <button class="btn btn-secondary btn-sm">Share to my network</button>
+        <a href="messages.html" class="btn btn-primary btn-sm">Connect with organiser →</a>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /left -->
+
+<!-- RIGHT SIDEBAR -->
+<div>
+  <div class="ev-side-card">
+    <div class="ev-side-title">This week</div>
+    <div style="font-family:'Lora',serif;font-size:12px;color:var(--light);font-style:italic;margin-bottom:10px">No events this week</div>
+    <div class="ev-side-title" style="margin-top:14px">Next up</div>
+    <div class="ev-side-item">
+      <div class="ev-side-date"><div class="ev-side-mon">Apr</div><div class="ev-side-day">19</div></div>
+      <div><div style="font-size:13px;font-weight:600;color:var(--ink)">Easter Vigil</div><div style="font-size:11px;color:var(--light);font-family:'Lora',serif;font-style:italic">8:00pm · Main Church</div></div>
+    </div>
+    <div class="ev-side-item">
+      <div class="ev-side-date"><div class="ev-side-mon">Apr</div><div class="ev-side-day">22</div></div>
+      <div><div style="font-size:13px;font-weight:600;color:var(--ink)">Youth Group Meeting</div><div style="font-size:11px;color:var(--light);font-family:'Lora',serif;font-style:italic">6:30pm · Parish Hall</div></div>
+    </div>
+    <div class="ev-side-item">
+      <div class="ev-side-date"><div class="ev-side-mon">May</div><div class="ev-side-day">4</div></div>
+      <div><div style="font-size:13px;font-weight:600;color:var(--ink)">Community Dinner</div><div style="font-size:11px;color:var(--light);font-family:'Lora',serif;font-style:italic">6:00pm · Parish Hall</div></div>
+    </div>
+  </div>
+
+  <div class="ev-side-card">
+    <div class="ev-side-title">Sync settings</div>
+    <div class="toggle-row">
+      <div><div class="tr-lbl">Show on parish website</div><div class="tr-sub">Next 3 events on communio.io/stmarysnyc</div></div>
+      <button class="toggle on" onclick="this.classList.toggle('on')"></button>
+    </div>
+    <div class="toggle-row">
+      <div><div class="tr-lbl">Post to network feed</div><div class="tr-sub">New events on your Communio profile</div></div>
+      <button class="toggle on" onclick="this.classList.toggle('on')"></button>
+    </div>
+    <div class="toggle-row">
+      <div><div class="tr-lbl">Notify sister parishes</div><div class="tr-sub">Open events sent to your 18 connections</div></div>
+      <button class="toggle" onclick="this.classList.toggle('on')"></button>
+    </div>
+  </div>
+
+  <div style="background:var(--sage-pale);border:1px solid #bbf7d0;border-radius:var(--r-lg);padding:14px 16px">
+    <div style="font-size:12px;font-weight:700;color:#15803d;margin-bottom:6px">One place, everywhere</div>
+    <div style="font-size:12px;color:var(--ink);line-height:1.6">Events added here automatically appear on your <strong>website</strong> and <strong>network profile</strong> — no duplication needed.</div>
+  </div>
 </div>
+
+</div><!-- /ev-body -->
 
 <script>
-document.getElementById('add-ev-btn').addEventListener('click', function(){
+function evTab(btn,tab){
+  document.querySelectorAll('.ev-tab').forEach(function(b){b.classList.remove('on');});
+  document.querySelectorAll('.ev-pane').forEach(function(p){p.classList.remove('on');});
+  btn.classList.add('on');
+  document.getElementById('ev-'+tab).classList.add('on');
+}
+function evFilter(btn,cat){
+  document.querySelectorAll('.ev-pill').forEach(function(b){b.classList.remove('on');});
+  btn.classList.add('on');
+  document.querySelectorAll('#ev-list .ev-card').forEach(function(c){
+    c.style.display=(cat==='all'||c.dataset.cat===cat)?'':'none';
+  });
+}
+document.getElementById('ev-search-in').addEventListener('input',function(){
+  var q=this.value.toLowerCase();
+  document.querySelectorAll('#ev-list .ev-card').forEach(function(c){
+    c.style.display=(!q||c.textContent.toLowerCase().includes(q))?'':'none';
+  });
+});
+document.getElementById('add-ev-btn').addEventListener('click',function(){
   document.getElementById('add-ev-form').classList.add('visible');
-  this.style.display = 'none';
+  this.style.display='none';
 });
-document.getElementById('cancel-ev-btn').addEventListener('click', function(){
+document.getElementById('cancel-ev-btn').addEventListener('click',function(){
   document.getElementById('add-ev-form').classList.remove('visible');
-  document.getElementById('add-ev-btn').style.display = '';
+  document.getElementById('add-ev-btn').style.display='';
 });
-document.getElementById('save-ev-btn').addEventListener('click', function(){
-  var title = document.getElementById('ev-title').value.trim();
-  if(!title){ document.getElementById('ev-title').focus(); return; }
-  var dateVal = document.getElementById('ev-date').value;
-  var timeVal = document.getElementById('ev-time').value;
-  var loc = document.getElementById('ev-location').value.trim();
-  var showWeb = document.getElementById('ev-show-web').checked;
-  var showNet = document.getElementById('ev-show-net').checked;
-  var openAll = document.getElementById('ev-open-all').checked;
-  var tags = '';
-  if(showWeb) tags += '<span class="ev-tag ev-tag-web">Website</span>';
-  if(showNet) tags += '<span class="ev-tag ev-tag-net">Network feed</span>';
-  if(openAll) tags += '<span class="ev-tag ev-tag-open">Open to all</span>';
-  var d = dateVal ? new Date(dateVal + 'T12:00:00') : null;
-  var mon = d ? d.toLocaleString('en',{month:'short'}) : '---';
-  var day = d ? d.getDate() : '--';
-  var meta = (timeVal || '') + (loc ? ' · ' + loc : '');
-  var item = document.createElement('div');
-  item.className = 'ev-item';
-  item.innerHTML = '<div class="ev-date-block"><div class="ev-mon">' + mon + '</div><div class="ev-day">' + day + '</div></div>' +
-    '<div class="ev-info"><div class="ev-title">' + title + '</div><div class="ev-meta">' + meta + '</div><div class="ev-tags">' + tags + '</div></div>' +
-    '<div class="ev-acts"><button class="btn btn-secondary btn-sm">Edit</button><button class="btn btn-secondary btn-sm" style="color:var(--terra)" onclick="this.closest('.ev-item').remove()">Remove</button></div>';
-  document.getElementById('ev-list').prepend(item);
+document.getElementById('save-ev-btn').addEventListener('click',function(){
+  var title=document.getElementById('ev-title').value.trim();
+  if(!title){document.getElementById('ev-title').focus();return;}
+  var dateVal=document.getElementById('ev-date').value;
+  var timeVal=document.getElementById('ev-time').value;
+  var loc=document.getElementById('ev-location').value.trim();
+  var cat=document.getElementById('ev-cat').value||'other';
+  var d=dateVal?new Date(dateVal+'T12:00:00'):null;
+  var mon=d?d.toLocaleString('en',{month:'short'}):'---';
+  var day=d?d.getDate():'--';
+  var meta=(timeVal||'')+(loc?' · '+loc:'');
+  var showWeb=document.getElementById('ev-show-web').checked;
+  var showNet=document.getElementById('ev-show-net').checked;
+  var openAll=document.getElementById('ev-open-all').checked;
+  var tagTxt=[showWeb?'Website':'',showNet?'Network feed':'',openAll?'Open to all':''].filter(Boolean).join(' · ');
+  var card=document.createElement('div');
+  card.className='ev-card cat-'+cat;
+  card.dataset.cat=cat;
+  card.innerHTML=
+    '<div class="ev-date-block"><div class="ev-mon">'+mon+'</div><div class="ev-day">'+day+'</div></div>'+
+    '<div class="ev-card-body"><div class="ev-card-title">'+title+'</div>'+
+    '<div class="ev-card-meta">'+meta+'</div>'+
+    '<div class="ev-card-tag">'+tagTxt+'</div></div>'+
+    '<div class="ev-card-acts"><button class="btn btn-secondary btn-sm">Edit</button>'+
+    '<button class="btn btn-secondary btn-sm" style="color:var(--terra)" onclick="this.closest('.ev-card').remove()">Remove</button></div>';
+  document.getElementById('ev-list').prepend(card);
   document.getElementById('add-ev-form').classList.remove('visible');
-  document.getElementById('add-ev-btn').style.display = '';
-  document.getElementById('ev-title').value = '';
-  document.getElementById('ev-location').value = '';
-  document.getElementById('ev-date').value = '';
-  document.getElementById('ev-desc').value = '';
+  document.getElementById('add-ev-btn').style.display='';
+  ['ev-title','ev-location','ev-date','ev-desc'].forEach(function(id){
+    document.getElementById(id).value='';
+  });
 });
 </script>
 
-</div>
-</div>
+</div><!-- /page-inner -->
+</div><!-- /page-shell -->
+
 <script>
 (function(){
   var b=document.getElementById('burger');
