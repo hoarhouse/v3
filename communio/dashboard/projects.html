@@ -265,15 +265,15 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
     <button class="btn btn-primary btn-sm" onclick="document.getElementById('create-modal').classList.add('open')">+ New project</button>
   </div>
   <div class="pj-tabs">
-    <button class="pj-tab on" data-tab="pj-my">My projects <span class="pj-tab-count">4</span></button>
-    <button class="pj-tab" data-tab="pj-discover">Discover</button>
-    <button class="pj-tab" data-tab="pj-mine">Created by me <span class="pj-tab-count">1</span></button>
+    <button class="pj-tab on" data-tab="my">My projects <span class="pj-tab-count">4</span></button>
+    <button class="pj-tab" data-tab="discover">Discover</button>
+    <button class="pj-tab" data-tab="mine">Created by me <span class="pj-tab-count">1</span></button>
   </div>
 </div>
 
 
 
-<div class="pj-tab-pane on" id="pj-my">
+<div class="pj-tab-pane on" id="pjtab-my">
 <div class="pg-body"><div class="impact-row">
     <div class="ic ic-terra"><div class="ic-val">4</div><div class="ic-lbl">Projects joined</div></div>
     <div class="ic ic-sage"><div class="ic-val">617</div><div class="ic-lbl">Total parishes</div></div>
@@ -427,7 +427,7 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
     </div>
   </div>
 
-  <div class="pj-tab-pane" id="pj-discover">
+  <div class="pj-tab-pane" id="pjtab-discover">
 
     <div class="pj-disc-section" style="margin-top:4px">
       <div style="background:var(--white);border:1px solid var(--border-light);border-radius:var(--r-lg);padding:14px 18px;margin-bottom:20px;display:flex;align-items:center;gap:12px;box-shadow:var(--sh-sm)">
@@ -623,7 +623,7 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
 
   </div>
 
-  <div class="pj-tab-pane" id="pj-mine">
+  <div class="pj-tab-pane" id="pjtab-mine">
     <div class="pj-grid">
       <div class="pj-card" data-type="research">
         <div class="pj-card-bar" style=""></div>
