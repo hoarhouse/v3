@@ -7,7 +7,30 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Lora:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="site.css">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Outfit',sans-serif;-webkit-font-smoothing:antialiased}
+.container{max-width:1160px;margin:0 auto;padding:0 28px}
+.top-nav{position:fixed;top:0;left:0;right:0;z-index:300;background:rgba(14,10,6,.95);backdrop-filter:blur(8px);padding:0 28px;height:64px;display:flex;align-items:center;justify-content:space-between}
+.nav-brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+.nav-logo{width:32px;height:32px;background:#d85020;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:white}
+.nav-name{font-size:15px;font-weight:700;color:white}
+.nav-links{display:flex;align-items:center;gap:4px}
+.nav-links a{font-size:13px;font-weight:500;color:rgba(255,255,255,.7);text-decoration:none;padding:6px 12px;border-radius:6px;transition:all .2s}
+.nav-links a:hover,.nav-links a.nav-active{color:white;background:rgba(255,255,255,.08)}
+.nav-cta{display:flex;align-items:center;gap:10px}
+.btn-give{background:#d85020;color:white;font-size:13px;font-weight:700;padding:8px 18px;border-radius:8px;text-decoration:none;transition:background .2s}
+.btn-give:hover{background:#c04418}
+.nav-hamburger{display:none;background:none;border:none;cursor:pointer;flex-direction:column;gap:5px;padding:4px}
+.nav-hamburger span{display:block;width:22px;height:2px;background:white;border-radius:2px}
+.nav-mobile{display:none;position:fixed;top:64px;left:0;right:0;background:#0e0a06;padding:16px;z-index:299;flex-direction:column;gap:4px}
+.nav-mobile.open{display:flex}
+.nav-mobile a{color:rgba(255,255,255,.7);text-decoration:none;padding:10px 14px;border-radius:8px;font-size:14px}
+.nav-mobile a:hover{background:rgba(255,255,255,.06);color:white}
+body{padding-top:64px}
+@media(max-width:900px){.nav-links{display:none}.nav-hamburger{display:flex}}
+</style>
 <style>
 .contact-hero{background:linear-gradient(135deg,#1a0f0a 0%,#2d1a10 100%);padding:80px 0 60px;text-align:center}
 .contact-hero-eyebrow{font-size:12px;font-weight:700;color:#d85020;text-transform:uppercase;letter-spacing:.1em;margin-bottom:16px}
@@ -74,7 +97,7 @@
       <div class="nav-dropdown">
         <a href="sacraments.html">Sacraments</a>
       </div>
-      <a href="contact.html" class="nav-active">Contact</a>
+      <a href="contact.html" class="nav-active" style="color:white;background:rgba(255,255,255,.1)">Contact</a>
     </div>
     <div class="nav-cta">
       <a href="index.html#giving" class="btn-give">Give Now</a>
