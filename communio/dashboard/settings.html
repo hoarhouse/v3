@@ -7,36 +7,39 @@
       <svg viewBox="0 0 16 16" fill="none" width="16" height="16"><rect x="2" y="3" width="12" height="11" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M5 1v4M11 1v4M2 7h12" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
       <span class="sb-item-lbl">Events</span>
     </a><div class="sb-sec">Manage</div><a href="website.html" class="sb-item"><svg viewBox="0 0 16 16" fill="none" width="15" height="15"><rect x="1.5" y="3" width="13" height="10" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M1.5 6h13" stroke="currentColor" stroke-width="1.3"/></svg><span class="sb-item-lbl">Website</span><span class="sb-badge sb-badge-sage" style="font-size:9px;padding:1px 5px">Live</span></a><a href="donations.html" class="sb-item"><svg viewBox="0 0 16 16" fill="none" width="15" height="15"><path d="M8 13.5C4 11 1.5 8.5 1.5 5.5a3 3 0 015-2.2A3 3 0 018 4a3 3 0 015 2.5c0 1-.4 2-1 2.8" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><path d="M8 9v5M6 12h4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg><span class="sb-item-lbl">Donations</span></a><a href="settings.html" class="sb-item active"><svg viewBox="0 0 16 16" fill="none" width="15" height="15"><circle cx="8" cy="8" r="2" stroke="currentColor" stroke-width="1.3"/><path d="M8 1v2M8 13v2M1 8h2M13 8h2M3.1 3.1l1.4 1.4M11.5 11.5l1.4 1.4M3.1 12.9l1.4-1.4M11.5 4.5l1.4-1.4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg><span class="sb-item-lbl">Settings</span></a></nav><div class="sb-foot"><a href="settings.html"><svg viewBox="0 0 16 16" fill="none" width="13" height="13"><circle cx="8" cy="8" r="2" stroke="currentColor" stroke-width="1.3"/><path d="M8 1v2M8 13v2M1 8h2M13 8h2" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg> Settings →</a></div></aside><div class="page-shell"><div class="page-inner"><!-- <?php echo $settings->all_html ?> --><div class="pg-hd"><div><div class="pg-title">Settings</div></div></div><div class="settings-layout"><div class="settings-nav"><div class="sn-item sn-active" data-tab="who-we-are">Who we are</div><div class="sn-item" data-tab="find-us">Find us</div><div class="sn-item" data-tab="mass-sacraments">Mass & sacraments</div><div class="sn-item" data-tab="our-team">Our team</div><div class="sn-item" data-tab="stay-connected">Stay connected</div><div class="sn-item" data-tab="account">Account</div></div><div class="settings-panel"><div id="who-we-are" class="tab-panel"><div class="sp-title">Who we are</div><div class="sp-sub">This information appears on your public Communio profile</div><div style="display:grid;grid-template-columns:120px 1fr;gap:20px;margin-bottom:24px;padding-bottom:24px;border-bottom:1px solid var(--border-light)"><div><div style="font-size:12px;font-weight:700;color:var(--mid);margin-bottom:8px;letter-spacing:.01em">PARISH LOGO</div><div id="logo-upload-area" style="width:80px;height:80px;border-radius:12px;border:2px dashed var(--border-light);display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;overflow:hidden;position:relative;transition:border-color .2s" onmouseover="this.style.borderColor='var(--terra)'" onmouseout="this.style.borderColor='var(--border-light)'"><input type="file" id="logo-input" accept="image/*" style="position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%"><div id="logo-placeholder" style="text-align:center"><div style="font-size:20px">🏛️</div><div style="font-size:9px;color:var(--light);margin-top:2px">Upload</div></div><img id="logo-preview" src="" alt="" style="display:none;width:100%;height:100%;object-fit:cover"></div><div style="font-size:10px;color:var(--light);margin-top:6px;line-height:1.3">Square · PNG or JPG</div></div><div><div style="font-size:12px;font-weight:700;color:var(--mid);margin-bottom:8px;letter-spacing:.01em">COVER PHOTO</div><div id="cover-upload-area" style="height:80px;border-radius:12px;border:2px dashed var(--border-light);display:flex;align-items:center;justify-content:center;cursor:pointer;overflow:hidden;position:relative;transition:border-color .2s;background:var(--cream)" onmouseover="this.style.borderColor='var(--terra)'" onmouseout="this.style.borderColor='var(--border-light)'"><input type="file" id="cover-input" accept="image/*" style="position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%"><div id="cover-placeholder" style="text-align:center"><div style="font-size:18px">🖼️</div><div style="font-size:11px;color:var(--light);margin-top:2px">Upload cover photo · 1200×400px recommended</div></div><img id="cover-preview" src="" alt="" style="display:none;width:100%;height:100%;object-fit:cover"></div></div></div><div class="form-group"><label class="form-label">Parish name</label><input class="form-input" type="text" id="pd_name" value="St. Mary's Parish"><span class="field-hint">Your full official parish name</span></div><div class="form-group"><label class="form-label">Short name</label><input class="form-input" type="text" id="pd_shortName" value="St. Mary's"><span class="field-hint">e.g. St. Mary's — used in notifications</span></div><div class="form-group"><label class="form-label">Tagline</label><textarea class="form-textarea" id="pd_tagline" style="min-height:60px">Serving Lower East Side families since 1887</textarea><span class="field-hint">One sentence — shown on your Communio profile</span></div><div class="form-row"><div class="form-group"><label class="form-label">Year founded</label><input class="form-input" type="text" id="pd_founded" value="1887"></div><div class="form-group"><label class="form-label">Diocese</label><input class="form-input" type="text" id="pd_diocese" value="Archdiocese of New York"></div></div><div class="form-group"><label class="form-label">Country</label><select class="form-select" id="pd_country"><option>United States</option><option>Hungary</option><option>Ghana</option></select></div><div class="form-group"><label class="form-label">About your parish</label><textarea class="form-textarea" id="pd_description">St. Mary's Parish has been serving the Lower East Side community since 1887. We are a vibrant, multicultural congregation of over 1,200 families, committed to social justice, youth ministry, and ethical technology advocacy.</textarea></div><div class="form-group"><label class="form-label">Focus areas<!-- SOURCE: $parish->tags → profile p-tags, website --></label><div class="focus-tags"><div class="focus-tag on">Peace & reconciliation</div><div class="focus-tag on">Ethical technology</div><div class="focus-tag on">Social justice</div><div class="focus-tag on">Youth ministry</div><div class="focus-tag">Digital sovereignty</div><div class="focus-tag">Research</div><div class="focus-tag">+ Add</div></div></div><div class="form-footer"><button class="btn btn-secondary btn-sm">Cancel</button><button class="btn btn-primary btn-sm" id="saveWhoWeAre" onclick="saveForm()">Save changes →</button></div></div><div id="find-us" class="tab-panel" style="display:none"><div class="sp-title">Find us</div><div class="sp-sub">Location and contact information</div><div class="form-group"><label class="form-label">Street address</label><input class="form-input" type="text" id="pd_address" value="15 Mott Street"></div><div class="form-row"><div class="form-group"><label class="form-label">City</label><input class="form-input" type="text" id="pd_city" value="New York"></div><div class="form-group"><label class="form-label">State / Region</label><input class="form-input" type="text" id="pd_state" value="NY"></div></div><div class="form-row"><div class="form-group"><label class="form-label">Postal code</label><input class="form-input" type="text" id="pd_zip" value="10013"></div><div class="form-group"><label class="form-label">Phone</label><input class="form-input" type="tel" id="pd_phone" value="+1 (212) 555-0182"></div></div><div class="form-group"><label class="form-label">Public email</label><input class="form-input" type="email" id="pd_email" value="info@stmarysnyc.org"></div><div class="form-group"><label class="form-label">Google Maps link</label><input class="form-input" type="url" id="pd_mapsUrl" placeholder="https://maps.google.com/..."><span class="field-hint">Paste a Google Maps URL for your address</span></div><div style="margin-top:24px;margin-bottom:16px;font-size:14px;font-weight:700;color:var(--ink)">Office hours</div><div class="form-group"><label class="form-label">Weekdays</label><input class="form-input" type="text" id="pd_officeWeekday" placeholder="Mon–Fri 9 AM – 5 PM"></div><div class="form-row"><div class="form-group"><label class="form-label">Saturday</label><input class="form-input" type="text" id="pd_officeSaturday" placeholder="10 AM – 2 PM"></div><div class="form-group"><label class="form-label">Sunday</label><input class="form-input" type="text" id="pd_officeSunday" placeholder="After 11 AM Mass"></div></div><div class="form-footer"><button class="btn btn-secondary btn-sm">Cancel</button><button class="btn btn-primary btn-sm" id="saveFindUs" onclick="saveForm()">Save changes →</button></div></div><div id="mass-sacraments" class="tab-panel" style="display:none"><div class="sp-title">Mass & sacraments</div><div class="sp-sub">Schedule information for your parish</div><style>
-.mt-block{background:var(--white);border:1px solid var(--border-light);border-radius:var(--r-lg);overflow:hidden;margin-bottom:16px}
-.mt-sec-hd{font-size:10px;font-weight:700;color:var(--light);text-transform:uppercase;letter-spacing:.07em;padding:10px 14px 8px;border-bottom:1px solid var(--cream-dark);background:var(--cream)}
-.mt-row{display:flex;align-items:flex-start;gap:10px;padding:10px 14px;border-bottom:1px solid var(--cream-dark)}
+.mt-block{background:var(--warm-white);border:1.5px solid var(--border-light);border-radius:var(--r-md);overflow:visible;margin-bottom:20px}
+.mt-sec-hd{font-size:11px;font-weight:700;color:var(--mid);text-transform:uppercase;letter-spacing:.07em;padding:10px 16px 8px;border-bottom:1px solid var(--border-light);background:var(--cream)}
+.mt-row{display:flex;align-items:flex-start;gap:14px;padding:12px 16px;border-bottom:1px solid var(--border-light)}
 .mt-row:last-child{border-bottom:none}
-.mt-day{width:100px;flex-shrink:0;padding-top:4px}
+.mt-day{width:110px;flex-shrink:0;padding-top:4px}
 .mt-day-lbl{font-size:13px;font-weight:700;color:var(--ink)}
-.mt-day-sub{font-size:10px;color:var(--light);margin-top:1px}
-.mt-slots{flex:1;display:flex;flex-wrap:wrap;gap:6px;align-items:center;min-height:30px}
-.mt-chip{display:inline-flex;align-items:center;gap:5px;background:var(--white);border:1.5px solid var(--border-light);border-radius:20px;padding:4px 10px;font-size:12px;font-weight:600;color:var(--ink)}
-.mt-chip.vigil{border-color:var(--terra);color:var(--terra)}
-.mt-chip-x{background:none;border:none;cursor:pointer;color:var(--light);font-size:13px;line-height:1;padding:0 0 0 2px;font-family:inherit}
+.mt-day-sub{font-size:10px;color:var(--light);margin-top:2px}
+.mt-slots{flex:1;display:flex;flex-wrap:wrap;gap:6px;align-items:center;min-height:28px}
+.mt-chip{display:inline-flex;align-items:center;gap:6px;background:var(--white);border:1.5px solid var(--border-light);border-radius:20px;padding:5px 12px;font-size:13px;font-weight:600;color:var(--ink)}
+.mt-chip.vigil{border-color:var(--terra);background:var(--terra-pale);color:var(--terra)}
+.mt-chip-x{background:none;border:none;cursor:pointer;color:var(--light);font-size:14px;line-height:1;padding:0;font-family:inherit;transition:color .15s}
 .mt-chip-x:hover{color:var(--terra)}
-.mt-add{display:inline-flex;align-items:center;gap:4px;background:none;border:1.5px dashed var(--border-light);border-radius:20px;padding:4px 10px;font-size:12px;font-weight:600;color:var(--light);cursor:pointer;font-family:inherit;transition:all .15s}
-.mt-add:hover{border-color:var(--terra);color:var(--terra)}
-.mt-no-mass{font-size:12px;color:var(--light);font-style:italic;padding-top:4px}
-.mt-no-toggle{display:flex;align-items:center;gap:5px;margin-top:5px;cursor:pointer;font-size:11px;color:var(--light);user-select:none}
-.mt-no-toggle input{cursor:pointer}
-.mt-copy{background:none;border:none;font-size:11px;font-weight:600;color:#185FA5;cursor:pointer;padding:0;margin-top:5px;display:block;font-family:inherit}
-.mt-copy:hover{text-decoration:underline}
-.mt-picker{position:absolute;top:calc(100% + 4px);left:0;background:var(--white);border:1.5px solid var(--border-light);border-radius:10px;box-shadow:0 8px 24px rgba(14,10,6,.12);z-index:200;width:220px;display:none}
-.mt-picker.open{display:block}
-.mt-picker-hd{font-size:10px;font-weight:700;color:var(--light);text-transform:uppercase;letter-spacing:.06em;padding:8px 12px 4px}
-.mt-picker-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:2px;padding:2px 8px 8px}
-.mt-picker-t{font-size:12px;padding:5px 4px;border-radius:5px;cursor:pointer;text-align:center;border:none;background:none;font-family:inherit;color:var(--ink);transition:background .1s;width:100%}
-.mt-picker-t:hover{background:var(--terra-pale);color:var(--terra);font-weight:600}
-.mt-picker-div{height:1px;background:var(--cream-dark);margin:3px 8px}
-.mt-picker-lang{padding:2px 8px 8px;display:flex;flex-direction:column;gap:1px}
-.mt-picker-li{font-size:12px;padding:5px 8px;border-radius:5px;cursor:pointer;border:none;background:none;font-family:inherit;color:var(--ink);text-align:left;width:100%}
-.mt-picker-li:hover{background:var(--terra-pale);color:var(--terra)}
+.mt-controls{display:flex;align-items:center;gap:10px;margin-top:8px;flex-wrap:wrap}
+.mt-add{display:inline-flex;align-items:center;gap:5px;background:var(--white);border:1.5px solid var(--border-light);border-radius:8px;padding:6px 12px;font-size:12px;font-weight:600;color:var(--mid);cursor:pointer;font-family:inherit;transition:all .15s}
+.mt-add:hover{border-color:var(--terra);color:var(--terra);background:var(--terra-pale)}
+.mt-no-toggle{display:flex;align-items:center;gap:6px;cursor:pointer;font-size:12px;font-weight:600;color:var(--light);user-select:none;padding:5px 10px;border-radius:8px;border:1.5px solid var(--border-light);background:var(--white);transition:all .15s}
+.mt-no-toggle:hover{border-color:var(--mid);color:var(--ink)}
+.mt-no-toggle input{cursor:pointer;width:13px;height:13px}
+.mt-copy{background:none;border:none;font-size:12px;font-weight:600;color:#185FA5;cursor:pointer;padding:5px 10px;border-radius:8px;border:1.5px solid #dbeafe;background:#eff6ff;font-family:inherit;transition:all .15s}
+.mt-copy:hover{background:#dbeafe}
 .mt-wrap{position:relative;display:inline-block}
+.mt-picker{position:absolute;top:calc(100% + 6px);left:0;background:var(--white);border:1.5px solid var(--border-light);border-radius:var(--r-md);box-shadow:0 8px 32px rgba(14,10,6,.12);z-index:500;width:260px;display:none}
+.mt-picker.open{display:block}
+.mt-picker-hd{font-size:10px;font-weight:700;color:var(--light);text-transform:uppercase;letter-spacing:.06em;padding:10px 14px 5px}
+.mt-picker-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:3px;padding:2px 10px 10px}
+.mt-picker-t{font-size:12px;padding:7px 4px;border-radius:6px;cursor:pointer;text-align:center;border:none;background:none;font-family:inherit;color:var(--ink);transition:all .1s;width:100%}
+.mt-picker-t:hover{background:var(--terra-pale);color:var(--terra);font-weight:700}
+.mt-picker-div{height:1px;background:var(--border-light);margin:3px 10px}
+.mt-picker-lang{padding:3px 10px 10px;display:flex;flex-direction:column;gap:1px}
+.mt-picker-li{font-size:12px;padding:7px 10px;border-radius:6px;cursor:pointer;border:none;background:none;font-family:inherit;color:var(--ink);text-align:left;width:100%;transition:all .1s}
+.mt-picker-li:hover{background:var(--terra-pale);color:var(--terra)}
+.mt-vigil-row{background:var(--terra-pale)}
+.mt-none-label{font-size:12px;color:var(--light);font-style:italic;padding-top:4px}
 </style>
 
 <div class="mt-block">
@@ -44,52 +47,58 @@
   <div class="mt-row" id="mt-monday">
     <div class="mt-day">
       <div class="mt-day-lbl">Monday</div>
-      <button class="mt-copy" onclick="mtCopyToAll('monday')">Copy to all weekdays →</button>
     </div>
-    <div>
+    <div style="flex:1">
       <div class="mt-slots" id="slots-monday"></div>
-      <div style="display:flex;align-items:center;gap:10px;margin-top:6px">
-        <div class="mt-wrap"><button class="mt-add" onclick="mtOpenPicker(this,'monday')">+ Add time</button><div class="mt-picker" id="picker-monday"></div></div>
+      <div class="mt-controls">
+        <div class="mt-wrap">
+          <button class="mt-add" onclick="mtOpenPicker(this,'monday')">
+            <svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            Add time
+          </button>
+          <div class="mt-picker" id="picker-monday"></div>
+        </div>
         <label class="mt-no-toggle"><input type="checkbox" id="noMass-monday" onchange="mtToggleNoMass('monday',this.checked)"> No Mass</label>
+        <button class="mt-copy" onclick="mtCopyToAll()">Copy to Tue–Fri →</button>
       </div>
     </div>
   </div>
   <div class="mt-row" id="mt-tuesday">
     <div class="mt-day"><div class="mt-day-lbl">Tuesday</div></div>
-    <div>
+    <div style="flex:1">
       <div class="mt-slots" id="slots-tuesday"></div>
-      <div style="display:flex;align-items:center;gap:10px;margin-top:6px">
-        <div class="mt-wrap"><button class="mt-add" onclick="mtOpenPicker(this,'tuesday')">+ Add time</button><div class="mt-picker" id="picker-tuesday"></div></div>
+      <div class="mt-controls">
+        <div class="mt-wrap"><button class="mt-add" onclick="mtOpenPicker(this,'tuesday')"><svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Add time</button><div class="mt-picker" id="picker-tuesday"></div></div>
         <label class="mt-no-toggle"><input type="checkbox" id="noMass-tuesday" onchange="mtToggleNoMass('tuesday',this.checked)"> No Mass</label>
       </div>
     </div>
   </div>
   <div class="mt-row" id="mt-wednesday">
     <div class="mt-day"><div class="mt-day-lbl">Wednesday</div></div>
-    <div>
+    <div style="flex:1">
       <div class="mt-slots" id="slots-wednesday"></div>
-      <div style="display:flex;align-items:center;gap:10px;margin-top:6px">
-        <div class="mt-wrap"><button class="mt-add" onclick="mtOpenPicker(this,'wednesday')">+ Add time</button><div class="mt-picker" id="picker-wednesday"></div></div>
+      <div class="mt-controls">
+        <div class="mt-wrap"><button class="mt-add" onclick="mtOpenPicker(this,'wednesday')"><svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Add time</button><div class="mt-picker" id="picker-wednesday"></div></div>
         <label class="mt-no-toggle"><input type="checkbox" id="noMass-wednesday" onchange="mtToggleNoMass('wednesday',this.checked)"> No Mass</label>
       </div>
     </div>
   </div>
   <div class="mt-row" id="mt-thursday">
     <div class="mt-day"><div class="mt-day-lbl">Thursday</div></div>
-    <div>
+    <div style="flex:1">
       <div class="mt-slots" id="slots-thursday"></div>
-      <div style="display:flex;align-items:center;gap:10px;margin-top:6px">
-        <div class="mt-wrap"><button class="mt-add" onclick="mtOpenPicker(this,'thursday')">+ Add time</button><div class="mt-picker" id="picker-thursday"></div></div>
+      <div class="mt-controls">
+        <div class="mt-wrap"><button class="mt-add" onclick="mtOpenPicker(this,'thursday')"><svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Add time</button><div class="mt-picker" id="picker-thursday"></div></div>
         <label class="mt-no-toggle"><input type="checkbox" id="noMass-thursday" onchange="mtToggleNoMass('thursday',this.checked)"> No Mass</label>
       </div>
     </div>
   </div>
   <div class="mt-row" id="mt-friday">
     <div class="mt-day"><div class="mt-day-lbl">Friday</div></div>
-    <div>
+    <div style="flex:1">
       <div class="mt-slots" id="slots-friday"></div>
-      <div style="display:flex;align-items:center;gap:10px;margin-top:6px">
-        <div class="mt-wrap"><button class="mt-add" onclick="mtOpenPicker(this,'friday')">+ Add time</button><div class="mt-picker" id="picker-friday"></div></div>
+      <div class="mt-controls">
+        <div class="mt-wrap"><button class="mt-add" onclick="mtOpenPicker(this,'friday')"><svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Add time</button><div class="mt-picker" id="picker-friday"></div></div>
         <label class="mt-no-toggle"><input type="checkbox" id="noMass-friday" onchange="mtToggleNoMass('friday',this.checked)"> No Mass</label>
       </div>
     </div>
@@ -100,20 +109,20 @@
   <div class="mt-sec-hd">Saturday</div>
   <div class="mt-row" id="mt-satmorning">
     <div class="mt-day"><div class="mt-day-lbl">Morning</div><div class="mt-day-sub">optional</div></div>
-    <div>
+    <div style="flex:1">
       <div class="mt-slots" id="slots-satmorning"></div>
-      <div style="display:flex;align-items:center;gap:10px;margin-top:6px">
-        <div class="mt-wrap"><button class="mt-add" onclick="mtOpenPicker(this,'satmorning')">+ Add time</button><div class="mt-picker" id="picker-satmorning"></div></div>
+      <div class="mt-controls">
+        <div class="mt-wrap"><button class="mt-add" onclick="mtOpenPicker(this,'satmorning')"><svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Add time</button><div class="mt-picker" id="picker-satmorning"></div></div>
         <label class="mt-no-toggle"><input type="checkbox" id="noMass-satmorning" onchange="mtToggleNoMass('satmorning',this.checked)"> No Mass</label>
       </div>
     </div>
   </div>
-  <div class="mt-row" id="mt-satvigil" style="background:var(--terra-pale)">
+  <div class="mt-row mt-vigil-row" id="mt-satvigil">
     <div class="mt-day"><div class="mt-day-lbl" style="color:var(--terra)">Vigil Mass</div></div>
-    <div>
+    <div style="flex:1">
       <div class="mt-slots" id="slots-satvigil"></div>
-      <div style="display:flex;align-items:center;gap:10px;margin-top:6px">
-        <div class="mt-wrap"><button class="mt-add" style="border-color:var(--terra);color:var(--terra)" onclick="mtOpenPicker(this,'satvigil')">+ Add time</button><div class="mt-picker" id="picker-satvigil"></div></div>
+      <div class="mt-controls">
+        <div class="mt-wrap"><button class="mt-add" style="border-color:var(--terra);color:var(--terra)" onclick="mtOpenPicker(this,'satvigil')"><svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Add time</button><div class="mt-picker" id="picker-satvigil"></div></div>
       </div>
     </div>
   </div>
@@ -123,10 +132,10 @@
   <div class="mt-sec-hd">Sunday Masses</div>
   <div class="mt-row" id="mt-sunday">
     <div class="mt-day"><div class="mt-day-lbl">Sunday</div></div>
-    <div>
+    <div style="flex:1">
       <div class="mt-slots" id="slots-sunday"></div>
-      <div style="margin-top:6px">
-        <div class="mt-wrap"><button class="mt-add" onclick="mtOpenPicker(this,'sunday')">+ Add time</button><div class="mt-picker" id="picker-sunday"></div></div>
+      <div class="mt-controls">
+        <div class="mt-wrap"><button class="mt-add" onclick="mtOpenPicker(this,'sunday')"><svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Add time</button><div class="mt-picker" id="picker-sunday"></div></div>
       </div>
     </div>
   </div>
@@ -136,33 +145,33 @@
   <div class="mt-sec-hd">Confession &amp; Sacraments</div>
   <div class="mt-row" id="mt-confession">
     <div class="mt-day"><div class="mt-day-lbl">Confession</div></div>
-    <div>
+    <div style="flex:1">
       <div class="mt-slots" id="slots-confession"></div>
-      <div style="margin-top:6px">
-        <div class="mt-wrap"><button class="mt-add" onclick="mtOpenPicker(this,'confession')">+ Add slot</button><div class="mt-picker" id="picker-confession"></div></div>
+      <div class="mt-controls">
+        <div class="mt-wrap"><button class="mt-add" onclick="mtOpenPicker(this,'confession')"><svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Add slot</button><div class="mt-picker" id="picker-confession"></div></div>
       </div>
     </div>
   </div>
   <div class="mt-row" id="mt-adoration">
     <div class="mt-day"><div class="mt-day-lbl">Adoration</div><div class="mt-day-sub">optional</div></div>
-    <div>
+    <div style="flex:1">
       <div class="mt-slots" id="slots-adoration"></div>
-      <div style="display:flex;align-items:center;gap:10px;margin-top:6px">
-        <div class="mt-wrap"><button class="mt-add" onclick="mtOpenPicker(this,'adoration')">+ Add time</button><div class="mt-picker" id="picker-adoration"></div></div>
+      <div class="mt-controls">
+        <div class="mt-wrap"><button class="mt-add" onclick="mtOpenPicker(this,'adoration')"><svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Add time</button><div class="mt-picker" id="picker-adoration"></div></div>
         <label class="mt-no-toggle"><input type="checkbox" id="noMass-adoration" onchange="mtToggleNoMass('adoration',this.checked)"> Not offered</label>
       </div>
     </div>
   </div>
   <div class="mt-row">
     <div class="mt-day"><div class="mt-day-lbl">Baptism</div></div>
-    <div style="flex:1"><input class="form-input" type="text" id="pd_baptism" placeholder="e.g. Contact parish office · 6 weeks notice" style="width:100%"></div>
+    <div style="flex:1"><input class="form-input" type="text" id="pd_baptism" placeholder="e.g. Contact parish office · 6 weeks notice required"></div>
   </div>
-  <div class="mt-row">
+  <div class="mt-row" style="border-bottom:none">
     <div class="mt-day"><div class="mt-day-lbl">Marriage</div></div>
-    <div style="flex:1"><input class="form-input" type="text" id="pd_marriage" placeholder="e.g. Contact parish office · 6 months notice" style="width:100%"></div>
+    <div style="flex:1"><input class="form-input" type="text" id="pd_marriage" placeholder="e.g. Contact parish office · 6 months notice required"></div>
   </div>
 </div>
-
+<div style="font-family:'Lora',serif;font-size:12px;color:var(--light);font-style:italic;margin-bottom:6px">Leave any day empty and it won't appear on your public site or profile.</div>
 <script>
 (function(){
 var DAYS=['monday','tuesday','wednesday','thursday','friday','satmorning','satvigil','sunday','confession','adoration'];
