@@ -1091,10 +1091,10 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
 <script>
 function ptTab(btn, tab) {
   document.querySelectorAll('.pt-tab').forEach(function(b){b.classList.remove('on');});
-  document.querySelectorAll('.pt-pane').forEach(function(p){p.style.display='none';});
+  document.querySelectorAll('.pt-pane').forEach(function(p){p.classList.remove('on');});
   btn.classList.add('on');
   var pane = document.getElementById('pt-' + tab);
-  if(pane) pane.style.display = 'block';
+  if(pane) pane.classList.add('on');
 }
 </script>
 
