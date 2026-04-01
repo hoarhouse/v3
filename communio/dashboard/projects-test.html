@@ -1,0 +1,1228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Projects — Communio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Lora:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../communio.css">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-webkit-font-smoothing:antialiased}
+.top-nav{position:fixed;top:0;left:0;right:0;z-index:300;height:52px;background:var(--ink);border-bottom:1px solid rgba(255,255,255,0.06);display:flex;align-items:center;padding:0 20px}
+.nav-brand{display:flex;align-items:center;gap:8px;text-decoration:none;width:220px;flex-shrink:0}
+.nav-mark{width:28px;height:28px;background:var(--terra);border-radius:6px;display:flex;align-items:center;justify-content:center}
+.nav-wm{font-size:16px;font-weight:800;color:var(--white);letter-spacing:-.02em}
+.nav-wm span{color:var(--terra)}
+.nav-right{margin-left:auto;display:flex;align-items:center;gap:10px}
+.nav-notif{width:34px;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.5);text-decoration:none;position:relative;transition:color .2s}
+.nav-notif:hover{color:white;background:rgba(255,255,255,.06)}
+.notif-dot{position:absolute;top:7px;right:7px;width:7px;height:7px;background:var(--terra);border-radius:50%;border:1.5px solid var(--ink)}
+.nav-pill{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:4px 12px 4px 4px;text-decoration:none;transition:all .2s}
+.nav-pill:hover{background:rgba(255,255,255,.12)}
+.nav-av{width:26px;height:26px;background:var(--terra);border-radius:50%;font-size:10px;font-weight:700;color:white;display:flex;align-items:center;justify-content:center}
+.nav-pname{font-size:13px;font-weight:600;color:var(--white)}
+.sidebar{position:fixed;top:52px;left:0;bottom:0;width:220px;background:var(--white);border-right:1px solid var(--border-light);display:flex;flex-direction:column;overflow:hidden;z-index:200}
+.sb-parish{padding:18px 16px;border-bottom:1px solid var(--border-light)}
+.sb-av{width:38px;height:38px;background:var(--terra);border-radius:9px;font-size:13px;font-weight:800;color:white;display:flex;align-items:center;justify-content:center;margin-bottom:6px}
+.sb-name{font-size:13px;font-weight:700;color:var(--ink);line-height:1.2}
+.sb-loc{font-size:11px;color:var(--light)}
+.sb-nav{flex:1;padding:10px 8px;overflow-y:auto}
+.sb-sec{font-size:10px;font-weight:700;color:var(--light);text-transform:uppercase;letter-spacing:.08em;padding:12px 8px 6px}
+.sb-item{display:flex;align-items:center;gap:9px;padding:8px 10px;border-radius:8px;text-decoration:none;color:var(--text-mid);font-size:13px;font-weight:500;transition:all .18s;position:relative;margin-bottom:1px}
+.sb-item svg{flex-shrink:0;opacity:.6}
+.sb-item:hover{background:var(--cream);color:var(--ink)}
+.sb-item:hover svg{opacity:1}
+.sb-item.active{background:var(--terra-pale);color:var(--terra);font-weight:600}
+.sb-item.active svg{opacity:1}
+.sb-item.active::before{content:'';position:absolute;left:0;top:4px;bottom:4px;width:3px;background:var(--terra);border-radius:0 3px 3px 0}
+.sb-badge{margin-left:auto;background:var(--terra);color:white;font-size:10px;font-weight:700;padding:1px 6px;border-radius:10px;min-width:18px;text-align:center}
+.sb-badge-sage{background:var(--sage)}
+.sb-foot{padding:14px 16px 20px;border-top:1px solid var(--border-light);flex-shrink:0;background:var(--white)}.sb-foot svg{width:13px;height:13px;flex-shrink:0}
+.sb-foot a{font-size:12px;color:var(--light);text-decoration:none;display:flex;align-items:center;gap:6px}
+.sb-foot a:hover{color:var(--ink)}
+.page-shell{margin-left:220px;padding-top:52px;min-height:100vh}
+.page-inner{max-width:1060px;margin:0 auto;padding:32px 28px}
+.pg-hd{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:24px;flex-wrap:wrap;gap:12px}
+.pg-title{font-size:24px;font-weight:800;color:var(--ink);letter-spacing:-.03em}
+.pg-sub{font-family:'Lora',serif;font-size:13px;color:var(--light);font-style:italic;margin-top:2px}
+
+.tabs{display:flex;gap:0;border-bottom:2px solid var(--border-light);margin-bottom:24px}
+.tab{font-family:'Outfit',sans-serif;font-size:13px;font-weight:600;color:var(--light);background:none;border:none;padding:10px 18px 12px;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;transition:all .2s}
+.tab.on{color:var(--terra);border-bottom-color:var(--terra)}
+.tab:hover:not(.on){color:var(--ink)}
+.proj-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+.pj{background:var(--white);border:1px solid var(--border-light);border-radius:var(--r-lg);padding:20px;box-shadow:var(--sh-sm);display:flex;flex-direction:column;gap:10px;transition:box-shadow .2s;position:relative;overflow:hidden}
+.pj:hover{box-shadow:var(--sh-md)}
+.pj::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+.pj-advocacy::before{background:var(--terra)}
+.pj-project::before{background:var(--sage)}
+.pj-research::before{background:var(--amber)}
+.pj-type{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;padding-top:6px}
+.pj-modal-overlay{position:fixed;inset:0;background:rgba(14,10,6,.5);z-index:400;display:none;align-items:center;justify-content:center;padding:20px}
+.pj-modal-overlay.open{display:flex}
+.pj-modal{background:var(--white);border-radius:var(--r-lg);padding:28px;width:100%;max-width:520px;max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.2)}
+.pj-modal-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+.pj-modal-title{font-size:17px;font-weight:800;color:var(--ink);letter-spacing:-.02em}
+.pj-modal-close{background:none;border:none;cursor:pointer;font-size:18px;color:var(--light);padding:4px;border-radius:6px;line-height:1}
+.pj-modal-close:hover{color:var(--ink);background:var(--cream)}
+.pj-fg{margin-bottom:16px}
+.pj-fl{display:block;font-size:12px;font-weight:700;color:var(--mid);margin-bottom:5px;letter-spacing:.01em}
+.pj-fi{width:100%;font-family:'Outfit',sans-serif;font-size:13px;color:var(--ink);background:var(--cream);border:1.5px solid var(--border-light);border-radius:var(--r-md);padding:9px 13px;outline:none;transition:border-color .2s}
+.pj-fi:focus{border-color:var(--terra)}
+.pj-fta{width:100%;font-family:'Outfit',sans-serif;font-size:13px;color:var(--ink);background:var(--cream);border:1.5px solid var(--border-light);border-radius:var(--r-md);padding:9px 13px;outline:none;resize:vertical;min-height:80px;line-height:1.5;transition:border-color .2s}
+.pj-fta:focus{border-color:var(--terra)}
+.pj-thumb-upload{border:2px dashed var(--border-light);border-radius:var(--r-md);padding:20px;text-align:center;cursor:pointer;transition:border-color .2s;position:relative;overflow:hidden}
+.pj-thumb-upload:hover{border-color:var(--terra)}
+.pj-thumb-preview{width:100%;max-height:120px;object-fit:cover;border-radius:6px;display:none;margin-top:8px}
+.pj-modal-ft{display:flex;gap:8px;justify-content:flex-end;margin-top:20px;padding-top:16px;border-top:1px solid var(--border-light)}
+.pj-advocacy .pj-type{color:var(--light)}
+.pj-project .pj-type{color:var(--light)}
+.pj-research .pj-type{color:var(--light)}
+.pj-name{font-size:15px;font-weight:700;color:var(--ink);line-height:1.3}
+.pj-desc{font-family:'Lora',serif;font-size:13px;color:var(--mid);line-height:1.55;font-style:italic}
+.pj-stats{display:flex;gap:16px}
+.pj-stat-val{font-size:18px;font-weight:800;color:var(--ink);letter-spacing:-.02em}
+.pj-stat-lbl{font-size:10px;color:var(--light);margin-top:1px}
+.pj-prog-lbl{display:flex;justify-content:space-between;font-size:11px;color:var(--light);margin-bottom:4px}
+.pj-prog{height:5px;background:var(--cream-dark);border-radius:5px;overflow:hidden}
+.pj-fill{height:100%;background:var(--terra);border-radius:5px}
+
+
+
+.pj-actions{display:flex;gap:8px;margin-top:4px}
+
+@media(max-width:900px){.sidebar{display:none}.page-shell{margin-left:0}}
+
+/* ── PROJECT REDESIGN ──────────────────────────── */
+.impact-row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:22px}
+.ic{background:var(--white);border:1px solid var(--border-light);border-radius:var(--r-lg);padding:16px 18px;box-shadow:var(--sh-sm);position:relative;overflow:hidden}
+.ic::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;border-radius:3px 0 0 3px}
+.ic-terra::before{background:var(--border-light)}.ic-sage::before{background:var(--border-light)}.ic-amber::before{background:var(--border-light)}.ic-ink::before{background:var(--ink)}
+.ic-val{font-size:26px;font-weight:800;color:var(--ink);letter-spacing:-.035em;line-height:1}
+.ic-lbl{font-family:'Lora',serif;font-size:12px;color:var(--light);margin-top:3px;font-style:italic}
+.pj-hd{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:18px;gap:12px;flex-wrap:wrap}
+.pj-tabs{display:flex;border-bottom:2px solid var(--border-light);margin-bottom:18px}
+.pj-tab{font-size:13px;font-weight:600;color:var(--light);background:none;border:none;padding:9px 18px 11px;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;font-family:'Outfit',sans-serif;transition:color .18s;display:flex;align-items:center;gap:6px}
+.pj-tab:hover{color:var(--ink)}.pj-tab.on{color:var(--terra);border-bottom-color:var(--terra)}
+.pj-tab-count{background:var(--cream-dark);color:var(--mid);font-size:10px;font-weight:700;padding:1px 6px;border-radius:10px;line-height:1.5}
+.pj-filters{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:20px}
+.pj-fp{font-size:12px;font-weight:600;padding:5px 12px;border-radius:20px;cursor:pointer;border:1.5px solid var(--border-light);background:var(--white);color:var(--mid);font-family:'Outfit',sans-serif;transition:all .15s}
+.pj-fp:hover{border-color:var(--terra);color:var(--terra)}.pj-fp.on{background:var(--ink);border-color:var(--ink);color:white}
+.pj-tab-pane{display:none}.pj-tab-pane.on{display:block}
+.pj-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.pj-card{background:var(--white);border:1px solid var(--border-light);border-left:3px solid var(--border-light);border-radius:var(--r-lg);overflow:hidden;display:flex;flex-direction:column;box-shadow:var(--sh-sm);transition:box-shadow .15s}
+.pj-card:hover{box-shadow:0 4px 20px rgba(14,10,6,.1)}
+.pj-card.type-advocacy{border-left-color:var(--terra)}
+.pj-card.type-formation{border-left-color:#a78740}
+.pj-card.type-mission{border-left-color:#185FA5}
+.pj-card.type-ecology{border-left-color:#3B6D11}
+.pj-card.type-research{border-left-color:#8a6800}
+.pj-card.type-solidarity{border-left-color:#6b4c9e}
+.pj-card.type-build{border-left-color:#5c6672}
+.pj-card-bar{display:none}
+.pj-card-body{padding:16px 18px;flex:1;display:flex;flex-direction:column}
+.pj-card-hd{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:10px;gap:8px}
+.pj-badge{font-size:10px;font-weight:700;padding:3px 9px;border-radius:20px;text-transform:uppercase;letter-spacing:.06em;white-space:nowrap}
+.pj-status{font-size:10px;font-weight:700;padding:3px 9px;border-radius:20px;white-space:nowrap}
+.st-active{background:var(--cream);color:var(--mid);border:1px solid var(--border-light)}.st-open{background:var(--cream);color:var(--mid);border:1px solid var(--border-light)}
+.pj-card-title{font-size:14px;font-weight:700;color:var(--ink);line-height:1.35;margin-bottom:6px}
+.pj-card-desc{font-family:'Lora',serif;font-size:12px;color:var(--text-mid);font-style:italic;line-height:1.5;margin-bottom:14px;flex:1}
+.pj-stats-row{display:flex;gap:16px;margin-bottom:12px}
+.pj-sv{font-size:16px;font-weight:800;color:var(--ink);letter-spacing:-.02em;line-height:1}
+.pj-sl{font-size:10px;color:var(--light);margin-top:1px}
+.pj-prog{margin-bottom:14px}
+.pj-prog-lbl{display:flex;justify-content:space-between;font-size:11px;color:var(--light);margin-bottom:4px}
+.pj-prog-track{height:4px;background:var(--cream-dark);border-radius:4px;overflow:hidden}
+.pj-prog-fill{height:100%;border-radius:4px}
+.pj-card-ft{display:flex;align-items:center;justify-content:space-between;padding-top:12px;border-top:1px solid var(--cream-dark)}
+.pj-avs{display:flex}
+.pj-av{width:22px;height:22px;border-radius:50%;border:2px solid var(--white);font-size:8px;font-weight:700;color:white;display:flex;align-items:center;justify-content:center;margin-left:-5px;flex-shrink:0}
+.pj-av:first-child{margin-left:0}
+.pj-av-more{background:var(--cream-dark);color:var(--mid);font-size:9px}
+.pj-created-tag{font-size:9px;background:var(--cream);border:1px solid var(--border-light);color:var(--mid);padding:2px 7px;border-radius:20px;font-weight:600}
+.pj-disc-section{margin-bottom:28px}
+.pj-disc-hd{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:12px}
+.pj-disc-title{font-size:13px;font-weight:700;color:var(--ink)}
+.pj-disc-sub{font-family:'Lora',serif;font-size:12px;color:var(--light);font-style:italic;margin-top:1px}
+.pj-disc-link{font-size:12px;color:var(--terra);cursor:pointer;font-weight:600}
+@media(max-width:760px){.pj-grid{grid-template-columns:1fr}.impact-row{grid-template-columns:1fr 1fr}}
+
+.wz-overlay{position:fixed;inset:0;background:var(--cream);z-index:500;display:none;flex-direction:column;overflow-y:auto}
+.wz-overlay.open{display:flex}
+.wz-topbar{display:flex;align-items:center;justify-content:space-between;padding:16px 28px;background:var(--white);border-bottom:1px solid var(--border-light);flex-shrink:0}
+.wz-brand{font-size:15px;font-weight:800;color:var(--ink);letter-spacing:-.02em}
+.wz-brand span{color:var(--terra)}
+.wz-close{background:none;border:1.5px solid var(--border-light);border-radius:8px;padding:7px 14px;font-size:13px;font-weight:600;cursor:pointer;font-family:'Outfit',sans-serif;color:var(--mid);display:flex;align-items:center;gap:6px}
+.wz-close:hover{border-color:var(--terra);color:var(--terra)}
+.wz-body{flex:1;display:flex;flex-direction:column;align-items:center;padding:40px 24px}
+.wz-inner{width:100%;max-width:600px}
+.wz-steps{display:flex;align-items:center;margin-bottom:40px;position:relative}
+.wz-steps::before{content:'';position:absolute;top:14px;left:14px;right:14px;height:2px;background:var(--border-light);z-index:0}
+.wz-step{display:flex;flex-direction:column;align-items:center;gap:7px;flex:1;position:relative;z-index:1}
+.wz-dot{width:28px;height:28px;border-radius:50%;border:2px solid var(--border-light);background:var(--white);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--light);transition:all .2s;font-family:'Outfit',sans-serif}
+.wz-dot.active{border-color:var(--terra);color:var(--terra)}
+.wz-dot.done{background:var(--terra);border-color:var(--terra);color:white}
+.wz-step-lbl{font-size:11px;font-weight:600;color:var(--light);font-family:'Outfit',sans-serif}
+.wz-step-lbl.active{color:var(--terra)}
+.wz-panel{background:var(--white);border:1px solid var(--border-light);border-radius:var(--r-lg);padding:28px;box-shadow:var(--sh-sm)}
+.wz-panel-title{font-size:19px;font-weight:800;color:var(--ink);letter-spacing:-.03em;margin-bottom:4px}
+.wz-panel-sub{font-family:'Lora',serif;font-size:13px;color:var(--light);font-style:italic;margin-bottom:24px;line-height:1.5}
+.wz-type-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:6px}
+.wz-tc{border:1.5px solid var(--border-light);border-radius:10px;padding:16px 10px;text-align:center;cursor:pointer;transition:all .15s;background:var(--white)}
+.wz-tc:hover{border-color:var(--terra);transform:translateY(-1px)}
+.wz-tc.sel{border-color:var(--ink);background:var(--ink);color:white}
+.wz-tc-icon{font-size:24px;margin-bottom:8px}
+.wz-tc-name{font-size:12px;font-weight:700;font-family:'Outfit',sans-serif;display:block}
+.wz-tc-desc{font-size:10px;margin-top:3px;font-family:'Outfit',sans-serif;opacity:.75}
+.wz-fg{margin-bottom:18px}
+.wz-fl{display:block;font-size:12px;font-weight:700;color:var(--mid);margin-bottom:5px;letter-spacing:.04em}
+.wz-fl span{font-weight:400;color:var(--light)}
+.wz-fi{width:100%;font-family:'Outfit',sans-serif;font-size:13px;color:var(--ink);background:var(--cream);border:1.5px solid var(--border-light);border-radius:var(--r-md);padding:9px 13px;outline:none;transition:border-color .2s}
+.wz-fi:focus{border-color:var(--terra);background:var(--warm-white)}
+.wz-fta{width:100%;font-family:'Outfit',sans-serif;font-size:13px;color:var(--ink);background:var(--cream);border:1.5px solid var(--border-light);border-radius:var(--r-md);padding:9px 13px;outline:none;resize:vertical;min-height:90px;line-height:1.55;transition:border-color .2s}
+.wz-fta:focus{border-color:var(--terra)}
+.wz-upload{border:2px dashed var(--border-light);border-radius:var(--r-md);padding:22px;text-align:center;cursor:pointer;position:relative;overflow:hidden;background:var(--cream);transition:border-color .2s}
+.wz-upload:hover{border-color:var(--terra)}
+.wz-frow{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.wz-vis-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:20px}
+.wz-vis{border:1.5px solid var(--border-light);border-radius:var(--r-md);padding:14px;cursor:pointer;transition:all .15s}
+.wz-vis:hover{border-color:var(--terra)}
+.wz-vis.sel{border-color:var(--terra);background:var(--terra-pale)}
+.wz-vis-title{font-size:13px;font-weight:700;color:var(--ink);margin-bottom:3px}
+.wz-vis-desc{font-size:11px;color:var(--light);line-height:1.4}
+.wz-announce{background:var(--cream);border:1px solid var(--border-light);border-radius:var(--r-md);padding:14px 16px;display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+.wz-launch-info{background:var(--terra-pale);border:1px solid rgba(216,80,32,.15);border-radius:var(--r-md);padding:14px 16px;margin-bottom:4px}
+.wz-foot{display:flex;align-items:center;justify-content:space-between;margin-top:24px;padding-top:18px;border-top:1px solid var(--border-light)}
+.wz-foot-progress{font-size:12px;color:var(--light);font-family:'Outfit',sans-serif}
+</style>
+</head>
+<body>
+<nav class="top-nav">
+  <a href="../index.html" class="nav-brand">
+    <div class="nav-mark"><svg viewBox="0 0 16 16" fill="none" width="14" height="14"><circle cx="8" cy="8" r="3" fill="white"/><path d="M8 1v3M8 12v3M1 8h3M12 8h3" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+    <div class="nav-wm">Commun<span>io</span></div>
+  </a>
+  <div class="nav-right">
+    <a href="messages.html" class="nav-notif">
+      <svg viewBox="0 0 16 16" fill="none" width="17" height="17"><path d="M13 5.5a5 5 0 10-9.9 1L2 12h12l-1.1-5.5z" stroke="currentColor" stroke-width="1.3"/><path d="M6.5 12.5a1.5 1.5 0 003 0" stroke="currentColor" stroke-width="1.3"/></svg>
+      <div class="notif-dot"></div>
+    </a>
+    <a href="../parish/profile.html" class="nav-pill">
+      <div class="nav-av">SM</div>
+      <span class="nav-pname">St. Mary's</span>
+    </a>
+    <button class="nav-burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="nav-mobile" id="navMobile">
+<a href="home.html">Home</a>
+<a href="messages.html">Messages</a>
+<a href="network.html">Network</a>
+<a href="projects.html">Projects</a>
+<a href="website.html">Website</a>
+<a href="donations.html">Donations</a>
+<a href="settings.html">Settings</a>
+</div>
+<aside class="sidebar">
+  <div class="sb-parish">
+    <div class="sb-av">SM</div>
+    <div class="sb-name">St. Mary's Parish</div>
+    <div class="sb-loc">🇺🇸 New York, USA</div>
+  </div>
+  <nav class="sb-nav">
+    <div class="sb-sec">Parish</div>
+    <a href="home.html" class="sb-item"><svg viewBox="0 0 16 16" fill="none" width="15" height="15"><path d="M2 7l6-5 6 5v7H10V9H6v5H2V7z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg><span class="sb-item-lbl">Home</span></a><a href="messages.html" class="sb-item"><svg viewBox="0 0 16 16" fill="none" width="15" height="15"><path d="M2 3h12a1 1 0 011 1v7a1 1 0 01-1 1H4l-3 2V4a1 1 0 011-1z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg><span class="sb-item-lbl">Messages</span><span class="sb-badge">3</span></a><a href="network.html" class="sb-item"><svg viewBox="0 0 16 16" fill="none" width="15" height="15"><circle cx="8" cy="8" r="2.5" stroke="currentColor" stroke-width="1.3"/><circle cx="2.5" cy="3" r="1.5" stroke="currentColor" stroke-width="1.2"/><circle cx="13.5" cy="3" r="1.5" stroke="currentColor" stroke-width="1.2"/><circle cx="8" cy="14" r="1.5" stroke="currentColor" stroke-width="1.2"/><path d="M4 4l2.5 2.5M12 4l-2.5 2.5M8 10.5V12.5" stroke="currentColor" stroke-width="1.2"/></svg><span class="sb-item-lbl">Network</span></a><a href="projects.html" class="sb-item active"><svg viewBox="0 0 16 16" fill="none" width="15" height="15"><rect x="2" y="2" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.3"/><rect x="9" y="2" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.3"/><rect x="2" y="9" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.3"/><rect x="9" y="9" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.3"/></svg><span class="sb-item-lbl">Projects</span></a>
+    <a href="analytics.html" class="sb-item">
+      <svg viewBox="0 0 16 16" fill="none" width="16" height="16"><rect x="2" y="8" width="3" height="6" rx="1" stroke="currentColor" stroke-width="1.3"/><rect x="6.5" y="5" width="3" height="9" rx="1" stroke="currentColor" stroke-width="1.3"/><rect x="11" y="2" width="3" height="12" rx="1" stroke="currentColor" stroke-width="1.3"/></svg>
+      <span class="sb-item-lbl">Analytics</span>
+    </a>
+    <a href="events.html" class="sb-item">
+      <svg viewBox="0 0 16 16" fill="none" width="16" height="16"><rect x="2" y="3" width="12" height="11" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M5 1v4M11 1v4M2 7h12" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+      <span class="sb-item-lbl">Events</span>
+    </a>
+    <div class="sb-sec">Manage</div>
+    <a href="website.html" class="sb-item"><svg viewBox="0 0 16 16" fill="none" width="15" height="15"><rect x="1.5" y="3" width="13" height="10" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M1.5 6h13" stroke="currentColor" stroke-width="1.3"/></svg><span class="sb-item-lbl">Website</span><span class="sb-badge sb-badge-sage" style="font-size:9px;padding:1px 5px">Live</span></a><a href="donations.html" class="sb-item"><svg viewBox="0 0 16 16" fill="none" width="15" height="15"><path d="M8 13.5C4 11 1.5 8.5 1.5 5.5a3 3 0 015-2.2A3 3 0 018 4a3 3 0 015 2.5c0 1-.4 2-1 2.8" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><path d="M8 9v5M6 12h4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg><span class="sb-item-lbl">Donations</span></a><a href="settings.html" class="sb-item"><svg viewBox="0 0 16 16" fill="none" width="15" height="15"><circle cx="8" cy="8" r="2" stroke="currentColor" stroke-width="1.3"/><path d="M8 1v2M8 13v2M1 8h2M13 8h2M3.1 3.1l1.4 1.4M11.5 11.5l1.4 1.4M3.1 12.9l1.4-1.4M11.5 4.5l1.4-1.4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg><span class="sb-item-lbl">Settings</span></a>
+  </nav>
+  <div class="sb-foot">
+    <a href="settings.html">
+      <svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="2" stroke="currentColor" stroke-width="1.3"/><path d="M8 1v2M8 13v2M1 8h2M13 8h2" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+      Settings →
+    </a>
+    <a href="../parish/profile.html" target="_blank" style="margin-top:6px;font-size:11px;color:var(--light);text-decoration:none;display:flex;align-items:center;gap:5px"><svg viewBox="0 0 16 16" fill="none" width="11" height="11"><circle cx="8" cy="5" r="3" stroke="currentColor" stroke-width="1.3"/><path d="M2 14c0-3.3 2.7-6 6-6s6 2.7 6 6" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg> View public profile ↗</a>
+  </div>
+</aside>
+
+<div class="page-shell">
+<div class="page-inner" style="padding:0;max-width:none">
+
+<style>
+/* PROJECTS TEST - Clean single-source CSS */
+.pt-header{background:var(--white);padding:20px 28px 16px;border-bottom:2px solid var(--border-light);min-height:105px;box-sizing:border-box;display:flex;flex-direction:column}
+.pt-header-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:16px}
+.pt-header-title{font-size:22px;font-weight:800;color:var(--ink);letter-spacing:-.03em;line-height:1}
+.pt-header-sub{font-family:'Lora',serif;font-size:13px;color:var(--light);font-style:italic;margin-top:4px}
+.pt-tabs{display:flex;gap:0;border-bottom:none;margin-top:auto}
+.pt-tab{font-size:13px;font-weight:600;color:var(--light);background:none;border:none;padding:10px 20px 0;cursor:pointer;border-bottom:2px solid transparent;font-family:'Outfit',sans-serif;transition:color .15s;margin-bottom:-2px}
+.pt-tab:hover{color:var(--ink)}
+.pt-tab.on{color:var(--terra);border-bottom-color:var(--terra)}
+.pt-pane{display:none}
+.pt-pane.on{display:block;padding:24px 28px 28px}
+</style>
+
+<div class="pt-header">
+  <div class="pt-header-top">
+    <div>
+      <div class="pt-header-title">Projects</div>
+      <div class="pt-header-sub">Collaborate with parishes in your network on shared missions</div>
+    </div>
+    <button class="btn btn-primary btn-sm" onclick="document.getElementById('create-modal').classList.add('open')">+ New project</button>
+  </div>
+  <div class="pt-tabs">
+    <button class="pt-tab on" onclick="ptTab(this,'my')">My projects <span class="pj-tab-count">4</span></button>
+    <button class="pt-tab" onclick="ptTab(this,'discover')">Discover</button>
+    <button class="pt-tab" onclick="ptTab(this,'mine')">Created by me <span class="pj-tab-count">1</span></button>
+  </div>
+</div>
+
+<div class="pt-pane on" id="pt-my">
+
+<div class="pg-body"><div class="impact-row">
+    <div class="ic ic-terra"><div class="ic-val">4</div><div class="ic-lbl">Projects joined</div></div>
+    <div class="ic ic-sage"><div class="ic-val">617</div><div class="ic-lbl">Total parishes</div></div>
+    <div class="ic ic-amber"><div class="ic-val">115</div><div class="ic-lbl">Countries reached</div></div>
+    <div class="ic ic-ink"><div class="ic-val">1</div><div class="ic-lbl">Created by you</div></div>
+  </div>
+
+    <div class="pj-filters">
+      <button class="pj-fp on" data-t="all">All types</button>
+      <button class="pj-fp" data-t="advocacy">Advocacy</button>
+      <button class="pj-fp" data-t="formation">Formation</button>
+      <button class="pj-fp" data-t="mission">Mission</button>
+      <button class="pj-fp" data-t="ecology">Ecology</button>
+      <button class="pj-fp" data-t="research">Research</button>
+      <button class="pj-fp" data-t="solidarity">Solidarity</button>
+      <button class="pj-fp" data-t="build">Build</button>
+    </div>
+    <div class="pj-grid" id="proj-grid">
+
+      <div class="pj-card" data-type="advocacy">
+        <div class="pj-card-bar" style=""></div>
+        <div class="pj-card-body">
+          <div class="pj-card-hd">
+            <span class="pj-badge" style="background:var(--cream);color:var(--mid)">Advocacy</span>
+            <span class="pj-status st-active">Active</span>
+          </div>
+          <div class="pj-card-title">Ethical AI in Catholic Education — Global Statement</div>
+          <div class="pj-card-desc">Co-signed open letter to the Holy See and EU calling for ethical standards in Catholic schools' use of AI tools.</div>
+          <div class="pj-stats-row">
+            <div><div class="pj-sv">247</div><div class="pj-sl">Parishes signed</div></div>
+            <div><div class="pj-sv">38</div><div class="pj-sl">Countries</div></div>
+            <div><div class="pj-sv">500</div><div class="pj-sl">Goal</div></div>
+          </div>
+          <div class="pj-prog">
+            <div class="pj-prog-lbl"><span>Progress to goal</span><span>49%</span></div>
+            <div class="pj-prog-track"><div class="pj-prog-fill" style="background:var(--terra)"></div></div>
+          </div>
+          <div class="pj-card-ft">
+            <div class="pj-avs">
+              <div class="pj-av" style="background:var(--terra)">SM</div>
+              <div class="pj-av" style="background:var(--sage)">HS</div>
+              <div class="pj-av" style="background:#5c6672">SS</div>
+              <div class="pj-av pj-av-more">+244</div>
+            </div>
+            <div style="display:flex;gap:6px">
+              <a href="messages.html" class="btn btn-secondary btn-sm">Channel</a>
+              <a href="project-workspace.html" class="btn btn-primary btn-sm" style="background:#d85020;border-color:#d85020">Details →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pj-card" data-type="formation">
+        <div class="pj-card-bar" style=""></div>
+        <div class="pj-card-body">
+          <div class="pj-card-hd">
+            <span class="pj-badge" style="background:var(--cream);color:var(--mid)">Formation</span>
+            <span class="pj-status st-active">Active</span>
+          </div>
+          <div class="pj-card-title">Global Youth Formation Network</div>
+          <div class="pj-card-desc">Shared curriculum, virtual exchanges, and mentorship pairing between youth groups across parishes worldwide.</div>
+          <div class="pj-stats-row">
+            <div><div class="pj-sv">89</div><div class="pj-sl">Parishes</div></div>
+            <div><div class="pj-sv">22</div><div class="pj-sl">Countries</div></div>
+            <div><div class="pj-sv">Active</div><div class="pj-sl">Status</div></div>
+          </div>
+          <div class="pj-prog">
+            <div class="pj-prog-lbl"><span>Curriculum complete</span><span>72%</span></div>
+            <div class="pj-prog-track"><div class="pj-prog-fill" style="background:var(--terra)"></div></div>
+          </div>
+          <div class="pj-card-ft">
+            <div class="pj-avs">
+              <div class="pj-av" style="background:var(--terra)">SM</div>
+              <div class="pj-av" style="background:var(--sage)">HS</div>
+              <div class="pj-av pj-av-more">+87</div>
+            </div>
+            <div style="display:flex;gap:6px">
+              <a href="messages.html" class="btn btn-secondary btn-sm">Channel</a>
+              <a href="project-workspace.html" class="btn btn-primary btn-sm" style="background:#5c6672;border-color:var(--border-light)">Details →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pj-card" data-type="advocacy">
+        <div class="pj-card-bar" style=""></div>
+        <div class="pj-card-body">
+          <div class="pj-card-hd">
+            <span class="pj-badge" style="background:var(--cream);color:var(--mid)">Advocacy</span>
+            <span class="pj-status st-active">Active</span>
+          </div>
+          <div class="pj-card-title">Migration &amp; Refugee Support — UN Statement</div>
+          <div class="pj-card-desc">Parishes serving migrant communities co-signing a position paper to the UN Special Committee on Migration.</div>
+          <div class="pj-stats-row">
+            <div><div class="pj-sv">163</div><div class="pj-sl">Parishes signed</div></div>
+            <div><div class="pj-sv">41</div><div class="pj-sl">Countries</div></div>
+            <div><div class="pj-sv">300</div><div class="pj-sl">Goal</div></div>
+          </div>
+          <div class="pj-prog">
+            <div class="pj-prog-lbl"><span>Progress to goal</span><span>54%</span></div>
+            <div class="pj-prog-track"><div class="pj-prog-fill" style="background:var(--terra)"></div></div>
+          </div>
+          <div class="pj-card-ft">
+            <div class="pj-avs">
+              <div class="pj-av" style="background:var(--terra)">SM</div>
+              <div class="pj-av" style="background:var(--amber)">SJ</div>
+              <div class="pj-av pj-av-more">+161</div>
+            </div>
+            <div style="display:flex;gap:6px">
+              <a href="messages.html" class="btn btn-secondary btn-sm">Channel</a>
+              <a href="project-workspace.html" class="btn btn-primary btn-sm" style="background:#d85020;border-color:#d85020">Details →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pj-card" data-type="research">
+        <div class="pj-card-bar" style=""></div>
+        <div class="pj-card-body">
+          <div class="pj-card-hd">
+            <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">
+              <span class="pj-badge" style="background:var(--cream);color:var(--mid)">Research</span>
+              <span class="pj-created-tag">Created by you</span>
+            </div>
+            <span class="pj-status st-open">Open</span>
+          </div>
+          <div class="pj-card-title">Digital Sovereignty &amp; Parish Life Study</div>
+          <div class="pj-card-desc">Research project studying how parishes can maintain digital sovereignty while engaging with modern technology.</div>
+          <div class="pj-stats-row">
+            <div><div class="pj-sv">28</div><div class="pj-sl">Parishes</div></div>
+            <div><div class="pj-sv">14</div><div class="pj-sl">Countries</div></div>
+            <div><div class="pj-sv">50</div><div class="pj-sl">Target</div></div>
+          </div>
+          <div class="pj-prog">
+            <div class="pj-prog-lbl"><span>Target: 50 parishes</span><span>56%</span></div>
+            <div class="pj-prog-track"><div class="pj-prog-fill" style="background:var(--terra)"></div></div>
+          </div>
+          <div class="pj-card-ft">
+            <div class="pj-avs">
+              <div class="pj-av" style="background:var(--terra)">SM</div>
+              <div class="pj-av pj-av-more">+27</div>
+            </div>
+            <div style="display:flex;gap:6px">
+              <a href="#" class="btn btn-secondary btn-sm">Manage</a>
+              <a href="project-workspace.html" class="btn btn-primary btn-sm" style="background:#5c6672;border-color:var(--border-light)">View &amp; invite →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="pj-tab-pane" id="pjtab-discover">
+
+    <div class="pj-disc-section" style="margin-top:4px">
+      <div style="background:var(--white);border:1px solid var(--border-light);border-radius:var(--r-lg);padding:14px 18px;margin-bottom:20px;display:flex;align-items:center;gap:12px;box-shadow:var(--sh-sm)">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="7" cy="7" r="4.5" stroke="var(--terra)" stroke-width="1.3"/><path d="M10.5 10.5l3 3" stroke="var(--terra)" stroke-width="1.3" stroke-linecap="round"/></svg>
+        <input type="text" placeholder="Search projects by name, type, or country…" style="flex:1;border:none;background:none;font-size:13px;font-family:'Outfit',sans-serif;color:var(--ink);outline:none">
+        <div style="display:flex;gap:6px">
+          <select style="font-size:12px;border:1.5px solid var(--border-light);border-radius:6px;padding:4px 8px;font-family:'Outfit',sans-serif;color:var(--mid);background:var(--cream);outline:none">
+            <option>All types</option>
+            <option>Advocacy</option>
+            <option>Formation</option>
+            <option>Mission</option>
+            <option>Ecology</option>
+            <option>Research</option>
+            <option>Solidarity</option>
+            <option>Build</option>
+          </select>
+          <select style="font-size:12px;border:1.5px solid var(--border-light);border-radius:6px;padding:4px 8px;font-family:'Outfit',sans-serif;color:var(--mid);background:var(--cream);outline:none">
+            <option>All regions</option>
+            <option>North America</option>
+            <option>Europe</option>
+            <option>Africa</option>
+            <option>Asia-Pacific</option>
+            <option>Latin America</option>
+          </select>
+          <select style="font-size:12px;border:1.5px solid var(--border-light);border-radius:6px;padding:4px 8px;font-family:'Outfit',sans-serif;color:var(--mid);background:var(--cream);outline:none">
+            <option>Any status</option>
+            <option>Open to join</option>
+            <option>Active</option>
+            <option>Completed</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="pj-disc-section">
+      <div class="pj-disc-hd">
+        <div>
+          <div class="pj-disc-title">Recommended for St. Mary's</div>
+          <div class="pj-disc-sub">Based on your focus areas: Ethical technology · Social justice · Youth ministry</div>
+        </div>
+        <span class="pj-disc-link">See all →</span>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px">
+
+        <div class="pj-card" style="cursor:pointer">
+          <div class="pj-card-bar" style=""></div>
+          <div class="pj-card-body">
+            <div class="pj-card-hd">
+              <span class="pj-badge" style="background:var(--cream);color:var(--mid)">Research</span>
+            </div>
+            <div style="font-size:10px;font-weight:700;color:var(--terra);margin-bottom:6px">Matches: Ethical technology</div>
+            <div class="pj-card-title" style="font-size:13px">Catholic AI Ethics Framework</div>
+            <div class="pj-card-desc" style="font-size:11px">Developing a shared ethical framework for AI adoption in Catholic institutions worldwide.</div>
+            <div class="pj-stats-row" style="gap:12px">
+              <div><div class="pj-sv" style="font-size:14px">84</div><div class="pj-sl">Parishes</div></div>
+              <div><div class="pj-sv" style="font-size:14px">19</div><div class="pj-sl">Countries</div></div>
+            </div>
+            <div class="pj-card-ft">
+              <span></span>
+              <div style="display:flex;gap:6px">
+                <button class="btn btn-secondary btn-sm" onclick="window.location.href='project-workspace.html'">Learn more</button>
+                <button class="btn btn-primary btn-sm" style="background:#5c6672;border-color:var(--border-light)" onclick="window.location.href='project-workspace.html'">Join</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pj-card" style="cursor:pointer">
+          <div class="pj-card-bar" style=""></div>
+          <div class="pj-card-body">
+            <div class="pj-card-hd">
+              <span class="pj-badge" style="background:var(--cream);color:var(--mid)">Formation</span>
+            </div>
+            <div style="font-size:10px;font-weight:700;color:var(--terra);margin-bottom:6px">Matches: Youth ministry</div>
+            <div class="pj-card-title" style="font-size:13px">Youth Digital Literacy Initiative</div>
+            <div class="pj-card-desc" style="font-size:11px">Shared curriculum helping young Catholics navigate technology and digital life faithfully.</div>
+            <div class="pj-stats-row" style="gap:12px">
+              <div><div class="pj-sv" style="font-size:14px">52</div><div class="pj-sl">Parishes</div></div>
+              <div><div class="pj-sv" style="font-size:14px">16</div><div class="pj-sl">Countries</div></div>
+            </div>
+            <div class="pj-card-ft">
+              <span></span>
+              <div style="display:flex;gap:6px">
+                <button class="btn btn-secondary btn-sm" onclick="window.location.href='project-workspace.html'">Learn more</button>
+                <button class="btn btn-primary btn-sm" style="background:#5c6672;border-color:var(--border-light)" onclick="window.location.href='project-workspace.html'">Join</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pj-card" style="cursor:pointer">
+          <div class="pj-card-bar" style=""></div>
+          <div class="pj-card-body">
+            <div class="pj-card-hd">
+              <span class="pj-badge" style="background:var(--cream);color:var(--mid)">Advocacy</span>
+            </div>
+            <div style="font-size:10px;font-weight:700;color:var(--terra);margin-bottom:6px">Matches: Social justice · 18 sister parishes joined</div>
+            <div class="pj-card-title" style="font-size:13px">Synod 2028 — Parish Input Drive</div>
+            <div class="pj-card-desc" style="font-size:11px">Coordinated parish submissions to the Synodal Assembly process ahead of October 2028.</div>
+            <div class="pj-stats-row" style="gap:12px">
+              <div><div class="pj-sv" style="font-size:14px">312</div><div class="pj-sl">Parishes</div></div>
+              <div><div class="pj-sv" style="font-size:14px">67</div><div class="pj-sl">Countries</div></div>
+            </div>
+            <div class="pj-card-ft">
+              <span></span>
+              <div style="display:flex;gap:6px">
+                <button class="btn btn-secondary btn-sm" onclick="window.location.href='project-workspace.html'">Learn more</button>
+                <button class="btn btn-primary btn-sm" style="background:#d85020;border-color:#d85020" onclick="window.location.href='project-workspace.html'">Join</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="pj-disc-section">
+      <div class="pj-disc-hd">
+        <div>
+          <div class="pj-disc-title">In your network</div>
+          <div class="pj-disc-sub">Projects your sister parishes and connections are already working on</div>
+        </div>
+        <span class="pj-disc-link">See all →</span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:10px">
+
+        <div style="background:var(--white);border:1px solid var(--border-light);border-radius:var(--r-lg);padding:16px 18px;display:flex;align-items:center;gap:14px;box-shadow:var(--sh-sm);transition:box-shadow .15s" onmouseover="this.style.boxShadow='0 4px 16px rgba(14,10,6,.08)'" onmouseout="this.style.boxShadow='var(--sh-sm)'">
+          <div style="width:5px;height:52px;border-radius:3px;background:var(--terra);flex-shrink:0"></div>
+          <div style="flex:1">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:3px">
+              <span style="font-size:13px;font-weight:700;color:var(--ink)">Laudato Si Parish Pledge — North America</span>
+              <span class="pj-badge" style="background:var(--cream);color:var(--mid)">Ecology</span>
+            </div>
+            <div style="font-size:11px;color:var(--light);margin-bottom:3px">141 parishes · 8 countries · Open to join</div>
+            <div style="font-family:'Lora',serif;font-size:11px;color:var(--text-mid);font-style:italic">Holy Spirit Parish, Accra and St. Stanislaw, Warsaw are participating</div>
+          </div>
+          <div style="display:flex;gap:6px;flex-shrink:0">
+            <button class="btn btn-secondary btn-sm" onclick="window.location.href='project-workspace.html'">Details</button>
+            <button class="btn btn-primary btn-sm" style="background:var(--terra);border-color:#0F6E56" onclick="window.location.href='project-workspace.html'">Join</button>
+          </div>
+        </div>
+
+        <div style="background:var(--white);border:1px solid var(--border-light);border-radius:var(--r-lg);padding:16px 18px;display:flex;align-items:center;gap:14px;box-shadow:var(--sh-sm);transition:box-shadow .15s" onmouseover="this.style.boxShadow='0 4px 16px rgba(14,10,6,.08)'" onmouseout="this.style.boxShadow='var(--sh-sm)'">
+          <div style="width:5px;height:52px;border-radius:3px;background:#5c6672;flex-shrink:0"></div>
+          <div style="flex:1">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:3px">
+              <span style="font-size:13px;font-weight:700;color:var(--ink)">East–West Parish Solidarity Exchange</span>
+              <span class="pj-badge" style="background:var(--cream);color:var(--mid)">Solidarity</span>
+            </div>
+            <div style="font-size:11px;color:var(--light);margin-bottom:3px">38 parishes · 24 countries · Open to join</div>
+            <div style="font-family:'Lora',serif;font-size:11px;color:var(--text-mid);font-style:italic">San José Parish, Manila invited you to join · 2 days ago</div>
+          </div>
+          <div style="display:flex;gap:6px;flex-shrink:0">
+            <button class="btn btn-secondary btn-sm" onclick="window.location.href='project-workspace.html'">Details</button>
+            <button class="btn btn-primary btn-sm" style="background:#5c6672;border-color:var(--border-light)" onclick="window.location.href='project-workspace.html'">Join</button>
+          </div>
+        </div>
+
+        <div style="background:var(--white);border:1px solid var(--border-light);border-radius:var(--r-lg);padding:16px 18px;display:flex;align-items:center;gap:14px;box-shadow:var(--sh-sm);transition:box-shadow .15s" onmouseover="this.style.boxShadow='0 4px 16px rgba(14,10,6,.08)'" onmouseout="this.style.boxShadow='var(--sh-sm)'">
+          <div style="width:5px;height:52px;border-radius:3px;background:var(--terra);flex-shrink:0"></div>
+          <div style="flex:1">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:3px">
+              <span style="font-size:13px;font-weight:700;color:var(--ink)">Open Source Parish App — Catholic Commons</span>
+              <span class="pj-badge" style="background:var(--cream);color:var(--mid)">Build</span>
+            </div>
+            <div style="font-size:11px;color:var(--light);margin-bottom:3px">23 parishes · 11 countries · Recruiting contributors</div>
+            <div style="font-family:'Lora',serif;font-size:11px;color:var(--text-mid);font-style:italic">St. Benedek Parish, Budapest is a co-founder of this project</div>
+          </div>
+          <div style="display:flex;gap:6px;flex-shrink:0">
+            <button class="btn btn-secondary btn-sm" onclick="window.location.href='project-workspace.html'">Details</button>
+            <button class="btn btn-primary btn-sm" style="background:var(--terra);border-color:#5F5E5A" onclick="window.location.href='project-workspace.html'">Join</button>
+          </div>
+        </div>
+
+        <div style="background:var(--white);border:1px solid var(--border-light);border-radius:var(--r-lg);padding:16px 18px;display:flex;align-items:center;gap:14px;box-shadow:var(--sh-sm);transition:box-shadow .15s" onmouseover="this.style.boxShadow='0 4px 16px rgba(14,10,6,.08)'" onmouseout="this.style.boxShadow='var(--sh-sm)'">
+          <div style="width:5px;height:52px;border-radius:3px;background:#5c6672;flex-shrink:0"></div>
+          <div style="flex:1">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:3px">
+              <span style="font-size:13px;font-weight:700;color:var(--ink)">Global Hunger Response — Parish Network</span>
+              <span class="pj-badge" style="background:var(--cream);color:var(--mid)">Mission</span>
+            </div>
+            <div style="font-size:11px;color:var(--light);margin-bottom:3px">207 parishes · 53 countries · Active</div>
+            <div style="font-family:'Lora',serif;font-size:11px;color:var(--text-mid);font-style:italic">St. Catherine Parish, Lagos recently joined this project</div>
+          </div>
+          <div style="display:flex;gap:6px;flex-shrink:0">
+            <button class="btn btn-secondary btn-sm" onclick="window.location.href='project-workspace.html'">Details</button>
+            <button class="btn btn-primary btn-sm" style="background:#5c6672;border-color:var(--border-light)" onclick="window.location.href='project-workspace.html'">Join</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <div class="pj-tab-pane" id="pjtab-mine">
+    <div class="pj-grid">
+      <div class="pj-card" data-type="research">
+        <div class="pj-card-bar" style=""></div>
+        <div class="pj-card-body">
+          <div class="pj-card-hd">
+            <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">
+              <span class="pj-badge" style="background:var(--cream);color:var(--mid)">Research</span>
+              <span class="pj-created-tag">Created by you</span>
+            </div>
+            <span class="pj-status st-open">Open</span>
+          </div>
+          <div class="pj-card-title">Digital Sovereignty &amp; Parish Life Study</div>
+          <div class="pj-card-desc">Research project studying how parishes can maintain digital sovereignty while engaging with modern technology.</div>
+          <div class="pj-stats-row">
+            <div><div class="pj-sv">28</div><div class="pj-sl">Parishes</div></div>
+            <div><div class="pj-sv">14</div><div class="pj-sl">Countries</div></div>
+            <div><div class="pj-sv">50</div><div class="pj-sl">Target</div></div>
+          </div>
+          <div class="pj-prog">
+            <div class="pj-prog-lbl"><span>Target: 50 parishes</span><span>56%</span></div>
+            <div class="pj-prog-track"><div class="pj-prog-fill" style="background:var(--terra)"></div></div>
+          </div>
+          <div class="pj-card-ft">
+            <div class="pj-avs">
+              <div class="pj-av" style="background:var(--terra)">SM</div>
+              <div class="pj-av pj-av-more">+27</div>
+            </div>
+            <div style="display:flex;gap:6px">
+              <a href="#" class="btn btn-secondary btn-sm">Manage</a>
+              <a href="project-workspace.html" class="btn btn-primary btn-sm" style="background:#5c6672;border-color:var(--border-light)">View &amp; invite →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+
+<div class="pt-pane" id="pt-discover">
+
+
+    <div class="pj-disc-section" style="margin-top:4px">
+      <div style="background:var(--white);border:1px solid var(--border-light);border-radius:var(--r-lg);padding:14px 18px;margin-bottom:20px;display:flex;align-items:center;gap:12px;box-shadow:var(--sh-sm)">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="7" cy="7" r="4.5" stroke="var(--terra)" stroke-width="1.3"/><path d="M10.5 10.5l3 3" stroke="var(--terra)" stroke-width="1.3" stroke-linecap="round"/></svg>
+        <input type="text" placeholder="Search projects by name, type, or country…" style="flex:1;border:none;background:none;font-size:13px;font-family:'Outfit',sans-serif;color:var(--ink);outline:none">
+        <div style="display:flex;gap:6px">
+          <select style="font-size:12px;border:1.5px solid var(--border-light);border-radius:6px;padding:4px 8px;font-family:'Outfit',sans-serif;color:var(--mid);background:var(--cream);outline:none">
+            <option>All types</option>
+            <option>Advocacy</option>
+            <option>Formation</option>
+            <option>Mission</option>
+            <option>Ecology</option>
+            <option>Research</option>
+            <option>Solidarity</option>
+            <option>Build</option>
+          </select>
+          <select style="font-size:12px;border:1.5px solid var(--border-light);border-radius:6px;padding:4px 8px;font-family:'Outfit',sans-serif;color:var(--mid);background:var(--cream);outline:none">
+            <option>All regions</option>
+            <option>North America</option>
+            <option>Europe</option>
+            <option>Africa</option>
+            <option>Asia-Pacific</option>
+            <option>Latin America</option>
+          </select>
+          <select style="font-size:12px;border:1.5px solid var(--border-light);border-radius:6px;padding:4px 8px;font-family:'Outfit',sans-serif;color:var(--mid);background:var(--cream);outline:none">
+            <option>Any status</option>
+            <option>Open to join</option>
+            <option>Active</option>
+            <option>Completed</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="pj-disc-section">
+      <div class="pj-disc-hd">
+        <div>
+          <div class="pj-disc-title">Recommended for St. Mary's</div>
+          <div class="pj-disc-sub">Based on your focus areas: Ethical technology · Social justice · Youth ministry</div>
+        </div>
+        <span class="pj-disc-link">See all →</span>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px">
+
+        <div class="pj-card" style="cursor:pointer">
+          <div class="pj-card-bar" style=""></div>
+          <div class="pj-card-body">
+            <div class="pj-card-hd">
+              <span class="pj-badge" style="background:var(--cream);color:var(--mid)">Research</span>
+            </div>
+            <div style="font-size:10px;font-weight:700;color:var(--terra);margin-bottom:6px">Matches: Ethical technology</div>
+            <div class="pj-card-title" style="font-size:13px">Catholic AI Ethics Framework</div>
+            <div class="pj-card-desc" style="font-size:11px">Developing a shared ethical framework for AI adoption in Catholic institutions worldwide.</div>
+            <div class="pj-stats-row" style="gap:12px">
+              <div><div class="pj-sv" style="font-size:14px">84</div><div class="pj-sl">Parishes</div></div>
+              <div><div class="pj-sv" style="font-size:14px">19</div><div class="pj-sl">Countries</div></div>
+            </div>
+            <div class="pj-card-ft">
+              <span></span>
+              <div style="display:flex;gap:6px">
+                <button class="btn btn-secondary btn-sm" onclick="window.location.href='project-workspace.html'">Learn more</button>
+                <button class="btn btn-primary btn-sm" style="background:#5c6672;border-color:var(--border-light)" onclick="window.location.href='project-workspace.html'">Join</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pj-card" style="cursor:pointer">
+          <div class="pj-card-bar" style=""></div>
+          <div class="pj-card-body">
+            <div class="pj-card-hd">
+              <span class="pj-badge" style="background:var(--cream);color:var(--mid)">Formation</span>
+            </div>
+            <div style="font-size:10px;font-weight:700;color:var(--terra);margin-bottom:6px">Matches: Youth ministry</div>
+            <div class="pj-card-title" style="font-size:13px">Youth Digital Literacy Initiative</div>
+            <div class="pj-card-desc" style="font-size:11px">Shared curriculum helping young Catholics navigate technology and digital life faithfully.</div>
+            <div class="pj-stats-row" style="gap:12px">
+              <div><div class="pj-sv" style="font-size:14px">52</div><div class="pj-sl">Parishes</div></div>
+              <div><div class="pj-sv" style="font-size:14px">16</div><div class="pj-sl">Countries</div></div>
+            </div>
+            <div class="pj-card-ft">
+              <span></span>
+              <div style="display:flex;gap:6px">
+                <button class="btn btn-secondary btn-sm" onclick="window.location.href='project-workspace.html'">Learn more</button>
+                <button class="btn btn-primary btn-sm" style="background:#5c6672;border-color:var(--border-light)" onclick="window.location.href='project-workspace.html'">Join</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pj-card" style="cursor:pointer">
+          <div class="pj-card-bar" style=""></div>
+          <div class="pj-card-body">
+            <div class="pj-card-hd">
+              <span class="pj-badge" style="background:var(--cream);color:var(--mid)">Advocacy</span>
+            </div>
+            <div style="font-size:10px;font-weight:700;color:var(--terra);margin-bottom:6px">Matches: Social justice · 18 sister parishes joined</div>
+            <div class="pj-card-title" style="font-size:13px">Synod 2028 — Parish Input Drive</div>
+            <div class="pj-card-desc" style="font-size:11px">Coordinated parish submissions to the Synodal Assembly process ahead of October 2028.</div>
+            <div class="pj-stats-row" style="gap:12px">
+              <div><div class="pj-sv" style="font-size:14px">312</div><div class="pj-sl">Parishes</div></div>
+              <div><div class="pj-sv" style="font-size:14px">67</div><div class="pj-sl">Countries</div></div>
+            </div>
+            <div class="pj-card-ft">
+              <span></span>
+              <div style="display:flex;gap:6px">
+                <button class="btn btn-secondary btn-sm" onclick="window.location.href='project-workspace.html'">Learn more</button>
+                <button class="btn btn-primary btn-sm" style="background:#d85020;border-color:#d85020" onclick="window.location.href='project-workspace.html'">Join</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="pj-disc-section">
+      <div class="pj-disc-hd">
+        <div>
+          <div class="pj-disc-title">In your network</div>
+          <div class="pj-disc-sub">Projects your sister parishes and connections are already working on</div>
+        </div>
+        <span class="pj-disc-link">See all →</span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:10px">
+
+        <div style="background:var(--white);border:1px solid var(--border-light);border-radius:var(--r-lg);padding:16px 18px;display:flex;align-items:center;gap:14px;box-shadow:var(--sh-sm);transition:box-shadow .15s" onmouseover="this.style.boxShadow='0 4px 16px rgba(14,10,6,.08)'" onmouseout="this.style.boxShadow='var(--sh-sm)'">
+          <div style="width:5px;height:52px;border-radius:3px;background:var(--terra);flex-shrink:0"></div>
+          <div style="flex:1">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:3px">
+              <span style="font-size:13px;font-weight:700;color:var(--ink)">Laudato Si Parish Pledge — North America</span>
+              <span class="pj-badge" style="background:var(--cream);color:var(--mid)">Ecology</span>
+            </div>
+            <div style="font-size:11px;color:var(--light);margin-bottom:3px">141 parishes · 8 countries · Open to join</div>
+            <div style="font-family:'Lora',serif;font-size:11px;color:var(--text-mid);font-style:italic">Holy Spirit Parish, Accra and St. Stanislaw, Warsaw are participating</div>
+          </div>
+          <div style="display:flex;gap:6px;flex-shrink:0">
+            <button class="btn btn-secondary btn-sm" onclick="window.location.href='project-workspace.html'">Details</button>
+            <button class="btn btn-primary btn-sm" style="background:var(--terra);border-color:#0F6E56" onclick="window.location.href='project-workspace.html'">Join</button>
+          </div>
+        </div>
+
+        <div style="background:var(--white);border:1px solid var(--border-light);border-radius:var(--r-lg);padding:16px 18px;display:flex;align-items:center;gap:14px;box-shadow:var(--sh-sm);transition:box-shadow .15s" onmouseover="this.style.boxShadow='0 4px 16px rgba(14,10,6,.08)'" onmouseout="this.style.boxShadow='var(--sh-sm)'">
+          <div style="width:5px;height:52px;border-radius:3px;background:#5c6672;flex-shrink:0"></div>
+          <div style="flex:1">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:3px">
+              <span style="font-size:13px;font-weight:700;color:var(--ink)">East–West Parish Solidarity Exchange</span>
+              <span class="pj-badge" style="background:var(--cream);color:var(--mid)">Solidarity</span>
+            </div>
+            <div style="font-size:11px;color:var(--light);margin-bottom:3px">38 parishes · 24 countries · Open to join</div>
+            <div style="font-family:'Lora',serif;font-size:11px;color:var(--text-mid);font-style:italic">San José Parish, Manila invited you to join · 2 days ago</div>
+          </div>
+          <div style="display:flex;gap:6px;flex-shrink:0">
+            <button class="btn btn-secondary btn-sm" onclick="window.location.href='project-workspace.html'">Details</button>
+            <button class="btn btn-primary btn-sm" style="background:#5c6672;border-color:var(--border-light)" onclick="window.location.href='project-workspace.html'">Join</button>
+          </div>
+        </div>
+
+        <div style="background:var(--white);border:1px solid var(--border-light);border-radius:var(--r-lg);padding:16px 18px;display:flex;align-items:center;gap:14px;box-shadow:var(--sh-sm);transition:box-shadow .15s" onmouseover="this.style.boxShadow='0 4px 16px rgba(14,10,6,.08)'" onmouseout="this.style.boxShadow='var(--sh-sm)'">
+          <div style="width:5px;height:52px;border-radius:3px;background:var(--terra);flex-shrink:0"></div>
+          <div style="flex:1">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:3px">
+              <span style="font-size:13px;font-weight:700;color:var(--ink)">Open Source Parish App — Catholic Commons</span>
+              <span class="pj-badge" style="background:var(--cream);color:var(--mid)">Build</span>
+            </div>
+            <div style="font-size:11px;color:var(--light);margin-bottom:3px">23 parishes · 11 countries · Recruiting contributors</div>
+            <div style="font-family:'Lora',serif;font-size:11px;color:var(--text-mid);font-style:italic">St. Benedek Parish, Budapest is a co-founder of this project</div>
+          </div>
+          <div style="display:flex;gap:6px;flex-shrink:0">
+            <button class="btn btn-secondary btn-sm" onclick="window.location.href='project-workspace.html'">Details</button>
+            <button class="btn btn-primary btn-sm" style="background:var(--terra);border-color:#5F5E5A" onclick="window.location.href='project-workspace.html'">Join</button>
+          </div>
+        </div>
+
+        <div style="background:var(--white);border:1px solid var(--border-light);border-radius:var(--r-lg);padding:16px 18px;display:flex;align-items:center;gap:14px;box-shadow:var(--sh-sm);transition:box-shadow .15s" onmouseover="this.style.boxShadow='0 4px 16px rgba(14,10,6,.08)'" onmouseout="this.style.boxShadow='var(--sh-sm)'">
+          <div style="width:5px;height:52px;border-radius:3px;background:#5c6672;flex-shrink:0"></div>
+          <div style="flex:1">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:3px">
+              <span style="font-size:13px;font-weight:700;color:var(--ink)">Global Hunger Response — Parish Network</span>
+              <span class="pj-badge" style="background:var(--cream);color:var(--mid)">Mission</span>
+            </div>
+            <div style="font-size:11px;color:var(--light);margin-bottom:3px">207 parishes · 53 countries · Active</div>
+            <div style="font-family:'Lora',serif;font-size:11px;color:var(--text-mid);font-style:italic">St. Catherine Parish, Lagos recently joined this project</div>
+          </div>
+          <div style="display:flex;gap:6px;flex-shrink:0">
+            <button class="btn btn-secondary btn-sm" onclick="window.location.href='project-workspace.html'">Details</button>
+            <button class="btn btn-primary btn-sm" style="background:#5c6672;border-color:var(--border-light)" onclick="window.location.href='project-workspace.html'">Join</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  
+</div>
+
+<div class="pt-pane" id="pt-mine">
+
+    <div class="pj-grid">
+      <div class="pj-card" data-type="research">
+        <div class="pj-card-bar" style=""></div>
+        <div class="pj-card-body">
+          <div class="pj-card-hd">
+            <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">
+              <span class="pj-badge" style="background:var(--cream);color:var(--mid)">Research</span>
+              <span class="pj-created-tag">Created by you</span>
+            </div>
+            <span class="pj-status st-open">Open</span>
+          </div>
+          <div class="pj-card-title">Digital Sovereignty &amp; Parish Life Study</div>
+          <div class="pj-card-desc">Research project studying how parishes can maintain digital sovereignty while engaging with modern technology.</div>
+          <div class="pj-stats-row">
+            <div><div class="pj-sv">28</div><div class="pj-sl">Parishes</div></div>
+            <div><div class="pj-sv">14</div><div class="pj-sl">Countries</div></div>
+            <div><div class="pj-sv">50</div><div class="pj-sl">Target</div></div>
+          </div>
+          <div class="pj-prog">
+            <div class="pj-prog-lbl"><span>Target: 50 parishes</span><span>56%</span></div>
+            <div class="pj-prog-track"><div class="pj-prog-fill" style="background:var(--terra)"></div></div>
+          </div>
+          <div class="pj-card-ft">
+            <div class="pj-avs">
+              <div class="pj-av" style="background:var(--terra)">SM</div>
+              <div class="pj-av pj-av-more">+27</div>
+            </div>
+            <div style="display:flex;gap:6px">
+              <a href="#" class="btn btn-secondary btn-sm">Manage</a>
+              <a href="project-workspace.html" class="btn btn-primary btn-sm" style="background:#5c6672;border-color:var(--border-light)">View &amp; invite →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+</div>
+
+
+<div class="wz-overlay" id="wz-overlay">
+  <div class="wz-topbar">
+    <div class="wz-brand">Commun<span>io</span> <span style="font-weight:400;color:var(--light);font-size:13px">/ New project</span></div>
+    <button class="wz-close" onclick="wzClose()">
+      <svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      Cancel
+    </button>
+  </div>
+  <div class="wz-body">
+    <div class="wz-inner">
+
+      <div class="wz-steps">
+        <div class="wz-step"><div class="wz-dot active" id="wdot-1">1</div><span class="wz-step-lbl active" id="wlbl-1">Type</span></div>
+        <div class="wz-step"><div class="wz-dot" id="wdot-2">2</div><span class="wz-step-lbl" id="wlbl-2">Details</span></div>
+        <div class="wz-step"><div class="wz-dot" id="wdot-3">3</div><span class="wz-step-lbl" id="wlbl-3">Goals</span></div>
+        <div class="wz-step"><div class="wz-dot" id="wdot-4">4</div><span class="wz-step-lbl" id="wlbl-4">Launch</span></div>
+      </div>
+
+      <div class="wz-panel" id="wzp-1">
+        <div class="wz-panel-title">What kind of project is this?</div>
+        <div class="wz-panel-sub">Choose the type that best describes what you want to do together with other parishes</div>
+        <div class="wz-type-grid">
+          <div class="wz-tc" data-wtype="advocacy" onclick="wzSelectType(this,'#d85020')">
+            <div class="wz-tc-icon">📢</div>
+            <span class="wz-tc-name">Advocacy</span>
+            <span class="wz-tc-desc">Co-sign a statement</span>
+          </div>
+          <div class="wz-tc" data-wtype="formation" onclick="wzSelectType(this,'#5c6672')">
+            <div class="wz-tc-icon">📚</div>
+            <span class="wz-tc-name">Formation</span>
+            <span class="wz-tc-desc">Share curriculum</span>
+          </div>
+          <div class="wz-tc" data-wtype="mission" onclick="wzSelectType(this,'#5c6672')">
+            <div class="wz-tc-icon">🤝</div>
+            <span class="wz-tc-name">Mission</span>
+            <span class="wz-tc-desc">Coordinate outreach</span>
+          </div>
+          <div class="wz-tc" data-wtype="ecology" onclick="wzSelectType(this,'#0F6E56')">
+            <div class="wz-tc-icon">🌱</div>
+            <span class="wz-tc-name">Ecology</span>
+            <span class="wz-tc-desc">Laudato Si action</span>
+          </div>
+          <div class="wz-tc" data-wtype="research" onclick="wzSelectType(this,'#5c6672')">
+            <div class="wz-tc-icon">🔬</div>
+            <span class="wz-tc-name">Research</span>
+            <span class="wz-tc-desc">Study &amp; data</span>
+          </div>
+          <div class="wz-tc" data-wtype="solidarity" onclick="wzSelectType(this,'#5c6672')">
+            <div class="wz-tc-icon">🌍</div>
+            <span class="wz-tc-name">Solidarity</span>
+            <span class="wz-tc-desc">Parish twinning</span>
+          </div>
+          <div class="wz-tc" data-wtype="build" onclick="wzSelectType(this,'#5F5E5A')">
+            <div class="wz-tc-icon">⚙️</div>
+            <span class="wz-tc-name">Build</span>
+            <span class="wz-tc-desc">Make something</span>
+          </div>
+        </div>
+        <div class="wz-foot">
+          <span class="wz-foot-progress">Step 1 of 4</span>
+          <button class="btn btn-primary btn-sm" onclick="wzGoTo(2)">Continue →</button>
+        </div>
+      </div>
+
+      <div class="wz-panel" id="wzp-2" style="display:none">
+        <div class="wz-panel-title">Tell us about the project</div>
+        <div class="wz-panel-sub">A clear title and description helps other parishes understand what you're doing and why it matters</div>
+        <div class="wz-fg">
+          <label class="wz-fl">Project title</label>
+          <input class="wz-fi" type="text" id="wz-title" placeholder="e.g. Ethical AI in Catholic Schools — Global Statement">
+        </div>
+        <div class="wz-fg">
+          <label class="wz-fl">Description</label>
+          <textarea class="wz-fta" id="wz-desc" placeholder="What is this project about? What do you want to achieve? How can other parishes participate?"></textarea>
+        </div>
+        <div class="wz-fg">
+          <label class="wz-fl">Cover image <span>(optional — shown in discovery and project feed)</span></label>
+          <div class="wz-upload" id="wz-img-area">
+            <input type="file" id="wz-img-input" accept="image/*" style="position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%">
+            <div id="wz-img-ph">
+              <div style="font-size:24px;margin-bottom:6px">🖼️</div>
+              <div style="font-size:13px;font-weight:600;color:var(--ink)">Upload a cover image</div>
+              <div style="font-size:11px;color:var(--light);margin-top:3px">1200 × 400px recommended · JPG or PNG · Max 5MB</div>
+            </div>
+            <img id="wz-img-preview" src="" alt="" style="display:none;max-width:100%;max-height:140px;border-radius:6px;object-fit:cover">
+          </div>
+        </div>
+        <div class="wz-foot">
+          <button class="btn btn-secondary btn-sm" onclick="wzGoTo(1)">← Back</button>
+          <span class="wz-foot-progress">Step 2 of 4</span>
+          <button class="btn btn-primary btn-sm" onclick="wzGoTo(3)">Continue →</button>
+        </div>
+      </div>
+
+      <div class="wz-panel" id="wzp-3" style="display:none">
+        <div class="wz-panel-title">Set your goals</div>
+        <div class="wz-panel-sub">Clear targets help parishes understand the scope and show momentum as the project grows</div>
+        <div class="wz-frow">
+          <div class="wz-fg">
+            <label class="wz-fl">Target parishes</label>
+            <input class="wz-fi" type="number" id="wz-target-parishes" placeholder="e.g. 100">
+          </div>
+          <div class="wz-fg">
+            <label class="wz-fl">Target countries <span>(optional)</span></label>
+            <input class="wz-fi" type="number" id="wz-target-countries" placeholder="e.g. 20">
+          </div>
+        </div>
+        <div class="wz-frow">
+          <div class="wz-fg">
+            <label class="wz-fl">Target date <span>(optional)</span></label>
+            <input class="wz-fi" type="date" id="wz-target-date">
+          </div>
+          <div class="wz-fg">
+            <label class="wz-fl" id="wz-link-label">External link <span>(optional)</span></label>
+            <input class="wz-fi" type="url" id="wz-link" placeholder="https://...">
+          </div>
+        </div>
+        <div class="wz-foot">
+          <button class="btn btn-secondary btn-sm" onclick="wzGoTo(2)">← Back</button>
+          <span class="wz-foot-progress">Step 3 of 4</span>
+          <button class="btn btn-primary btn-sm" onclick="wzGoTo(4)">Continue →</button>
+        </div>
+      </div>
+
+      <div class="wz-panel" id="wzp-4" style="display:none">
+        <div class="wz-panel-title">Ready to launch?</div>
+        <div class="wz-panel-sub">Choose how this project appears across the Communio network</div>
+        <div style="font-size:12px;font-weight:700;color:var(--mid);letter-spacing:.04em;margin-bottom:10px">Visibility</div>
+        <div class="wz-vis-grid">
+          <div class="wz-vis sel" data-vis="open" onclick="wzSelectVis(this)">
+            <div class="wz-vis-title">Open to all</div>
+            <div class="wz-vis-desc">Any parish can discover and join instantly — no approval needed</div>
+          </div>
+          <div class="wz-vis" data-vis="apply" onclick="wzSelectVis(this)">
+            <div class="wz-vis-title">Apply to join</div>
+            <div class="wz-vis-desc">Parishes request to join — you review and accept or decline each application</div>
+          </div>
+          <div class="wz-vis" data-vis="invite" onclick="wzSelectVis(this)">
+            <div class="wz-vis-title">Invite only</div>
+            <div class="wz-vis-desc">Not visible in discovery — you invite specific parishes directly</div>
+          </div>
+        </div>
+        <div class="wz-announce">
+          <div>
+            <div style="font-size:13px;font-weight:600;color:var(--ink);margin-bottom:2px">Announce to your sister parishes</div>
+            <div style="font-family:'Lora',serif;font-size:12px;color:var(--light);font-style:italic">Send a message to your 18 sister parishes inviting them to join</div>
+          </div>
+          <label style="cursor:pointer;display:flex;align-items:center;gap:8px">
+            <span style="font-size:12px;color:var(--mid)">Yes</span>
+            <input type="checkbox" id="wz-announce" checked style="width:16px;height:16px">
+          </label>
+        </div>
+        <div class="wz-launch-info" id="wz-launch-info">
+          <div style="font-size:12px;font-weight:700;color:var(--terra);margin-bottom:4px">Your project will appear in discovery for:</div>
+          <div id="wz-launch-info-text" style="font-size:12px;color:var(--text-mid);line-height:1.7">Parishes with matching focus areas · Parishes in your network · Parishes in similar regions · Any parish searching for this project type</div>
+        </div>
+        <div class="wz-foot">
+          <button class="btn btn-secondary btn-sm" onclick="wzGoTo(3)">← Back</button>
+          <span class="wz-foot-progress">Step 4 of 4</span>
+          <button class="btn btn-sm" style="background:var(--sage);color:white;border-color:var(--sage)" id="wz-launch-btn" onclick="wzLaunch()">Launch project →</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+</div>
+</div>
+
+<script>
+function ptTab(btn, tab) {
+  document.querySelectorAll('.pt-tab').forEach(function(b){b.classList.remove('on');});
+  document.querySelectorAll('.pt-pane').forEach(function(p){p.style.display='none';});
+  btn.classList.add('on');
+  var pane = document.getElementById('pt-' + tab);
+  if(pane) pane.style.display = 'block';
+}
+</script>
+
+<script>
+var wzCurrentStep = 1;
+var wzSelectedType = null;
+var wzSelectedColor = null;
+
+document.getElementById('open-create-pj').addEventListener('click', function(){
+  document.getElementById('wz-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+});
+
+function wzClose(){
+  document.getElementById('wz-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.addEventListener('keydown', function(e){
+  if(e.key === 'Escape') wzClose();
+});
+
+function wzGoTo(n){
+  document.getElementById('wzp-'+wzCurrentStep).style.display = 'none';
+  document.getElementById('wzp-'+n).style.display = 'block';
+  for(var i=1;i<=4;i++){
+    var dot = document.getElementById('wdot-'+i);
+    var lbl = document.getElementById('wlbl-'+i);
+    dot.classList.remove('active','done');
+    lbl.classList.remove('active');
+    if(i < n){ dot.classList.add('done'); dot.textContent = '✓'; }
+    else if(i === n){ dot.classList.add('active'); lbl.classList.add('active'); dot.textContent = i; }
+    else { dot.textContent = i; }
+  }
+  wzCurrentStep = n;
+  document.querySelector('.wz-body').scrollTop = 0;
+}
+
+function wzSelectType(el, color){
+  document.querySelectorAll('.wz-tc').forEach(function(c){
+    c.classList.remove('sel');
+    c.style.background = '';
+    c.style.borderColor = '';
+    c.querySelector('.wz-tc-name').style.color = '';
+    c.querySelector('.wz-tc-desc').style.color = '';
+  });
+  el.classList.add('sel');
+  el.style.background = color;
+  el.style.borderColor = color;
+  el.querySelector('.wz-tc-name').style.color = 'white';
+  el.querySelector('.wz-tc-desc').style.color = 'rgba(255,255,255,.75)';
+  wzSelectedType = el.dataset.wtype;
+  wzSelectedColor = color;
+  var linkLabels = {
+    'advocacy':'Petition or document link',
+    'formation':'Curriculum or resource link',
+    'mission':'Organisation or partner link',
+    'ecology':'Laudato Si platform link',
+    'research':'Research brief or survey link',
+    'solidarity':'Sister parish programme link',
+    'build':'GitHub or project link'
+  };
+  var lbl = document.getElementById('wz-link-label');
+  if(lbl && linkLabels[wzSelectedType]){
+    lbl.innerHTML = linkLabels[wzSelectedType] + ' <span>(optional)</span>';
+  }
+}
+
+function wzSelectVis(el){
+  document.querySelectorAll('.wz-vis').forEach(function(v){ v.classList.remove('sel'); });
+  el.classList.add('sel');
+  var vis = el.dataset.vis;
+  var info = document.getElementById('wz-launch-info');
+  var txt = document.getElementById('wz-launch-info-text');
+  var hd = info ? info.querySelector('div') : null;
+  if(vis === 'open'){
+    if(hd) hd.textContent = 'Your project will appear in discovery for:';
+    if(txt) txt.textContent = 'Parishes with matching focus areas · Parishes in your network · Parishes in similar regions · Any parish searching for this project type';
+  } else if(vis === 'apply'){
+    if(hd) hd.textContent = 'Parishes can apply to join — you review each application:';
+    if(txt) txt.textContent = 'Visible in discovery with an "Apply to join" button · You accept or decline each parish · Accepted parishes receive a notification and gain full access';
+  } else if(vis === 'invite'){
+    if(hd) hd.textContent = 'This project will not appear in discovery:';
+    if(txt) txt.textContent = 'Only parishes you invite directly can see and join this project · Use the Members tab to search for and invite specific parishes after launch';
+  }
+}
+
+document.getElementById('wz-img-input').addEventListener('change', function(){
+  var file = this.files[0];
+  if(!file) return;
+  var reader = new FileReader();
+  reader.onload = function(e){
+    var prev = document.getElementById('wz-img-preview');
+    var ph = document.getElementById('wz-img-ph');
+    prev.src = e.target.result;
+    prev.style.display = 'block';
+    ph.style.display = 'none';
+  };
+  reader.readAsDataURL(file);
+});
+
+function wzLaunch(){
+  var title = document.getElementById('wz-title').value.trim();
+  if(!title){ wzGoTo(2); document.getElementById('wz-title').focus(); return; }
+  var btn = document.getElementById('wz-launch-btn');
+  btn.textContent = '✓ Project launched!';
+  btn.style.background = 'var(--sage)';
+  setTimeout(function(){ wzClose(); btn.textContent = 'Launch project →'; }, 1800);
+}
+
+function wzRequestJoin(btn) {
+  btn.textContent = 'Application sent ✓';
+  btn.style.background = 'var(--sage)';
+  btn.style.borderColor = 'var(--sage)';
+  btn.disabled = true;
+  btn.style.opacity = '0.9';
+  btn.onclick = null;
+  setTimeout(function(){
+    btn.textContent = 'Pending review…';
+    btn.style.background = 'var(--cream-dark)';
+    btn.style.borderColor = 'var(--border-light)';
+    btn.style.color = 'var(--mid)';
+  }, 2000);
+}
+</script>
+
+<script src="js/communio-chat.js?v=3"></script>
+</body>
+</html>
+</body>
+</html>
