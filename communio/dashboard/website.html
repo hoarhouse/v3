@@ -247,6 +247,37 @@ input:checked+.mtoggle-slider:before{transform:translateX(16px)}
   .si.active + .edit-panel-inline{display:block}
   .edit-panel-inline{display:none;background:#fff;border:1px solid #e8e2d8;border-radius:8px;padding:16px;margin-bottom:8px}
 }
+
+.design-card{background:var(--white);border:2px solid var(--border-light);border-radius:var(--r-lg);overflow:hidden;cursor:pointer;transition:all .18s}
+.design-card:hover{border-color:var(--terra);box-shadow:0 4px 20px rgba(14,10,6,.1)}
+.design-card.on{border-color:var(--terra);box-shadow:0 0 0 3px rgba(216,80,32,.12)}
+.dc-preview{border-radius:8px 8px 0 0;overflow:hidden}
+.dc-nav{display:flex;align-items:center;justify-content:space-between;padding:8px 12px;font-size:9px;font-weight:700}
+.dc-nav-brand{font-size:10px;font-weight:800;color:var(--ink)}
+.dc-nav-links{display:flex;gap:8px;align-items:center;color:var(--mid);font-size:8px}
+.dc-nav-btn{background:var(--terra);color:white;padding:2px 6px;border-radius:4px}
+.dc-nav-sage{background:#f0f7f0}.dc-nav-midnight{background:#1a2744}
+.dc-btn-sage{background:#3B6D11}.dc-btn-midnight{background:rgba(255,255,255,.15);color:rgba(255,255,255,.9)}
+.dc-hero{padding:16px 12px 12px;position:relative}
+.dc-warm{background:linear-gradient(135deg,#fdf4f0 0%,#faf0eb 100%)}
+.dc-hero{background:linear-gradient(135deg,rgba(216,80,32,.08) 0%,rgba(216,80,32,.04) 100%)}
+.dc-hero-sage{background:linear-gradient(135deg,rgba(59,109,17,.12) 0%,rgba(59,109,17,.05) 100%)}
+.dc-hero-midnight{background:linear-gradient(135deg,#1a2744 0%,#0e1a38 100%)}
+.dc-verified{font-size:8px;font-weight:600;color:var(--terra);margin-bottom:4px}
+.dc-parish-name{font-size:14px;font-weight:800;color:var(--ink);letter-spacing:-.02em;margin-bottom:3px;line-height:1.2}
+.dc-tagline{font-size:9px;color:var(--text-mid);margin-bottom:8px;font-style:italic}
+.dc-cta{display:inline-block;background:var(--terra);color:white;font-size:8px;font-weight:700;padding:4px 10px;border-radius:4px}
+.dc-cta-sage{background:#3B6D11}
+.dc-cta-midnight{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);color:white}
+.dc-strip{display:flex;border-top:1px solid rgba(0,0,0,.06)}
+.dc-strip-sage{border-top-color:rgba(59,109,17,.15)}
+.dc-strip-midnight{background:#0e1a38;border-top-color:rgba(255,255,255,.08)}
+.dc-strip-item{flex:1;padding:8px;text-align:center;border-right:1px solid rgba(0,0,0,.06)}
+.dc-strip-item:last-child{border-right:none}
+.dc-strip-val{font-size:10px;font-weight:800;color:var(--ink);line-height:1}
+.dc-strip-lbl{font-size:8px;color:var(--light);margin-top:1px}
+.dc-foot{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;border-top:1px solid var(--border-light)}
+.dc-selected{font-size:10px;font-weight:700;color:var(--terra);background:var(--terra-pale);padding:2px 8px;border-radius:10px}
 </style>
 </head>
 <body>
@@ -308,18 +339,12 @@ input:checked+.mtoggle-slider:before{transform:translateX(16px)}
     <!-- TAB BAR -->
     <div class="tab-bar">
       <button class="tab-btn on" data-tab="edit">Pages</button>
+      <button class="tab-btn" data-tab="design">Design</button>
       <button class="tab-btn" data-tab="seo">SEO</button>
       <button class="tab-btn" data-tab="settings">Settings</button>
     </div>
     <!-- TAB CONTENT -->
     <div class="tab-content on" id="tab-edit">
-  <!-- <?php echo $website->template_selector_html ?> -->
-  <div class="tmpl-lbl">Template <em>Click to select</em></div>
-  <div class="tmpl-row">
-    <div class="tmpl tw on" data-t="warm"><div class="th"><div class="tb"><span class="tl">Communio</span><span class="tdb">Donate</span></div><div class="tha"><div class="tt" id="tmpl-verified">✓ DCF Verified · New York</div><div class="tn tmpl-name">St. Mary's Parish</div><div class="ts tmpl-tagline">Serving the Lower East Side since 1887</div><div class="tbtn">Join us Sunday →</div></div></div><div class="tf"><span class="tf-lbl">Warm &amp; Classic</span><span class="tf-sel" id="sel-warm">✓ Selected</span></div></div>
-    <div class="tmpl tg" data-t="sage"><div class="th"><div class="tb"><span class="tl">Communio</span><span class="tdb">Donate</span></div><div class="tha"><div class="tt">✓ DCF Verified · New York</div><div class="tn tmpl-name">St. Mary's Parish</div><div class="ts tmpl-tagline">Serving the Lower East Side since 1887</div><div class="tbtn">Join us Sunday →</div></div></div><div class="tf"><span class="tf-lbl">Sage &amp; Natural</span><span class="tf-sel" id="sel-sage"></span></div></div>
-    <div class="tmpl tk" data-t="midnight"><div class="th"><div class="tb"><span class="tl">Communio</span><span class="tdb">Donate</span></div><div class="tha"><div class="tt">✓ DCF Verified · New York</div><div class="tn tmpl-name">St. Mary's Parish</div><div class="ts tmpl-tagline">Serving the Lower East Side since 1887</div><div class="tbtn">Join us Sunday →</div></div></div><div class="tf"><span class="tf-lbl">Midnight &amp; Bold</span><span class="tf-sel" id="sel-midnight"></span></div></div>
-  </div>
   <div class="builder">
     <!-- LEFT: sections list -->
     <div class="sections-list">
@@ -709,6 +734,105 @@ input:checked+.mtoggle-slider:before{transform:translateX(16px)}
   </div>
     <!-- SHARED: events | <?php foreach($parish->events as $event): ?> ... <?php endforeach; ?> -->
     <div class="tab-content" id="tab-events" style="display:none"><!-- events moved to dedicated section --></div>
+    <div class="tab-content" id="tab-design">
+  <!-- <?php echo $website->design_html ?> -->
+  <div style="margin-bottom:20px">
+    <div style="font-size:15px;font-weight:700;color:var(--ink);margin-bottom:4px">Choose your design</div>
+    <div style="font-family:'Lora',serif;font-size:13px;color:var(--light);font-style:italic">Select a colour scheme and style for your public parish website. Changes go live after publishing.</div>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-bottom:24px">
+
+    <div class="design-card on" data-t="warm" onclick="selectDesign(this)">
+      <div class="dc-preview dc-warm">
+        <div class="dc-nav">
+          <span class="dc-nav-brand">Communio</span>
+          <div class="dc-nav-links"><span>About</span><span>Mass</span><span>Contact</span><span class="dc-nav-btn">Donate</span></div>
+        </div>
+        <div class="dc-hero">
+          <div class="dc-verified">✓ DCF Verified · New York</div>
+          <div class="dc-parish-name tmpl-name">St. Mary's Parish</div>
+          <div class="dc-tagline tmpl-tagline">Serving the Lower East Side since 1887</div>
+          <div class="dc-cta">Join us Sunday →</div>
+        </div>
+        <div class="dc-strip">
+          <div class="dc-strip-item"><div class="dc-strip-val">1,200+</div><div class="dc-strip-lbl">Families</div></div>
+          <div class="dc-strip-item"><div class="dc-strip-val">Founded</div><div class="dc-strip-lbl">1887</div></div>
+          <div class="dc-strip-item"><div class="dc-strip-val">40+</div><div class="dc-strip-lbl">Countries</div></div>
+        </div>
+      </div>
+      <div class="dc-foot">
+        <div>
+          <div style="font-size:13px;font-weight:700;color:var(--ink)">Warm &amp; Classic</div>
+          <div style="font-size:11px;color:var(--light);margin-top:2px">Terra warm tones · Traditional feel</div>
+        </div>
+        <span class="dc-selected" id="sel-warm">✓ Selected</span>
+      </div>
+    </div>
+
+    <div class="design-card" data-t="sage" onclick="selectDesign(this)">
+      <div class="dc-preview dc-sage">
+        <div class="dc-nav dc-nav-sage">
+          <span class="dc-nav-brand">Communio</span>
+          <div class="dc-nav-links"><span>About</span><span>Mass</span><span>Contact</span><span class="dc-nav-btn dc-btn-sage">Donate</span></div>
+        </div>
+        <div class="dc-hero dc-hero-sage">
+          <div class="dc-verified" style="color:rgba(255,255,255,.8)">✓ DCF Verified · New York</div>
+          <div class="dc-parish-name tmpl-name">St. Mary's Parish</div>
+          <div class="dc-tagline tmpl-tagline">Serving the Lower East Side since 1887</div>
+          <div class="dc-cta dc-cta-sage">Join us Sunday →</div>
+        </div>
+        <div class="dc-strip dc-strip-sage">
+          <div class="dc-strip-item"><div class="dc-strip-val">1,200+</div><div class="dc-strip-lbl">Families</div></div>
+          <div class="dc-strip-item"><div class="dc-strip-val">Founded</div><div class="dc-strip-lbl">1887</div></div>
+          <div class="dc-strip-item"><div class="dc-strip-val">40+</div><div class="dc-strip-lbl">Countries</div></div>
+        </div>
+      </div>
+      <div class="dc-foot">
+        <div>
+          <div style="font-size:13px;font-weight:700;color:var(--ink)">Sage &amp; Natural</div>
+          <div style="font-size:11px;color:var(--light);margin-top:2px">Green sage tones · Fresh, natural</div>
+        </div>
+        <span class="dc-selected" id="sel-sage"></span>
+      </div>
+    </div>
+
+    <div class="design-card" data-t="midnight" onclick="selectDesign(this)">
+      <div class="dc-preview dc-midnight">
+        <div class="dc-nav dc-nav-midnight">
+          <span class="dc-nav-brand" style="color:white">Communio</span>
+          <div class="dc-nav-links" style="color:rgba(255,255,255,.7)"><span>About</span><span>Mass</span><span>Contact</span><span class="dc-nav-btn dc-btn-midnight">Donate</span></div>
+        </div>
+        <div class="dc-hero dc-hero-midnight">
+          <div class="dc-verified" style="color:rgba(255,255,255,.7)">✓ DCF Verified · New York</div>
+          <div class="dc-parish-name tmpl-name" style="color:white">St. Mary's Parish</div>
+          <div class="dc-tagline tmpl-tagline" style="color:rgba(255,255,255,.8)">Serving the Lower East Side since 1887</div>
+          <div class="dc-cta dc-cta-midnight">Join us Sunday →</div>
+        </div>
+        <div class="dc-strip dc-strip-midnight">
+          <div class="dc-strip-item"><div class="dc-strip-val" style="color:white">1,200+</div><div class="dc-strip-lbl" style="color:rgba(255,255,255,.6)">Families</div></div>
+          <div class="dc-strip-item"><div class="dc-strip-val" style="color:white">Founded</div><div class="dc-strip-lbl" style="color:rgba(255,255,255,.6)">1887</div></div>
+          <div class="dc-strip-item"><div class="dc-strip-val" style="color:white">40+</div><div class="dc-strip-lbl" style="color:rgba(255,255,255,.6)">Countries</div></div>
+        </div>
+      </div>
+      <div class="dc-foot">
+        <div>
+          <div style="font-size:13px;font-weight:700;color:var(--ink)">Midnight &amp; Bold</div>
+          <div style="font-size:11px;color:var(--light);margin-top:2px">Dark navy · High contrast, modern</div>
+        </div>
+        <span class="dc-selected" id="sel-midnight"></span>
+      </div>
+    </div>
+
+  </div>
+  <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 18px;background:var(--white);border:1px solid var(--border-light);border-radius:var(--r-lg)">
+    <div style="font-size:13px;color:var(--text-mid)">Design changes go live when you <strong>Publish</strong></div>
+    <div style="display:flex;gap:8px">
+      <a href="../parish/site/index.html" target="_blank" class="btn btn-secondary btn-sm">Preview site →</a>
+      <button class="btn btn-primary btn-sm" id="pub-btn-design" onclick="document.getElementById('pub-btn').click()">Publish now →</button>
+    </div>
+  </div>
+</div>
+
     <!-- SHARED: parish_name used in meta title/description | $parish->name -->
     <div class="tab-content" id="tab-seo">
   <div class="seo-grid">
@@ -1118,25 +1242,22 @@ input:checked+.mtoggle-slider:before{transform:translateX(16px)}
     });
   });
 
-  /* ── Template selector ── */
-  document.querySelectorAll('.tmpl').forEach(function (t) {
-    t.addEventListener('click', function () {
-      document.querySelectorAll('.tmpl').forEach(function (x) { x.classList.remove('on'); });
-      document.querySelectorAll('.tf-sel').forEach(function (x) { x.textContent = ''; });
-      t.classList.add('on');
-      document.getElementById('sel-' + t.dataset.t).textContent = '✓ Selected';
-    });
-  });
-  /* ── Populate template previews from parish data ── */
+  /* ── Design selector ── */
+  function selectDesign(card) {
+    document.querySelectorAll('.design-card').forEach(function(c){ c.classList.remove('on'); });
+    document.querySelectorAll('.dc-selected').forEach(function(s){ s.textContent = ''; });
+    card.classList.add('on');
+    var selEl = document.getElementById('sel-' + card.dataset.t);
+    if(selEl) selEl.textContent = '✓ Selected';
+  }
+  /* ── Populate design previews from parish data ── */
   (function(){
     try {
       var pd = JSON.parse(localStorage.getItem('parish_data') || '{}');
       var name = pd.parishName || pd.name || '';
       var tagline = pd.tagline || pd.heroTagline || '';
-      var city = pd.city || pd.location || '';
-      if(name) document.querySelectorAll('.tmpl-name').forEach(function(el){ el.textContent = name; });
-      if(tagline) document.querySelectorAll('.tmpl-tagline').forEach(function(el){ el.textContent = tagline; });
-      if(city) document.querySelectorAll('#tmpl-verified').forEach(function(el){ el.textContent = '✓ DCF Verified · ' + city; });
+      if(name) document.querySelectorAll('.dc-parish-name').forEach(function(el){ el.textContent = name; });
+      if(tagline) document.querySelectorAll('.dc-tagline').forEach(function(el){ el.textContent = tagline; });
     } catch(e) {}
   })();
 
