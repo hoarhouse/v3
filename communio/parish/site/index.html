@@ -1886,7 +1886,7 @@ select:focus-visible, textarea:focus-visible{
         Welcome to our parish
       </div>
       <h1>A Community of <span class="hero-faith">Faith</span><br>in the Heart of New York</h1>
-      <p class="hero-subtitle">St. Mary's Parish has been serving the Lower East Side since 1887. We are a vibrant, multicultural community — and all are welcome here.</p>
+      <p class="hero-subtitle">St. Mary's Parish has been serving the Lower East Side since <span class="parish-founded">1887</span>. We are a vibrant, multicultural community — and all are welcome here.</p>
       <div class="hero-ctas">
         <a href="#mass-times" class="btn-primary">
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="2" y="4" width="16" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M2 8h16M6 2v4M14 2v4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
@@ -1907,7 +1907,7 @@ select:focus-visible, textarea:focus-visible{
           Sunday Masses
         </div>
         <div class="hero-stat">
-          <strong>Est. 1887</strong>
+          <strong>Est. <span class="parish-founded">1887</span></strong>
           Serving NYC
         </div>
       </div>
@@ -2245,7 +2245,7 @@ select:focus-visible, textarea:focus-visible{
           </div>
           <div>
             <div class="contact-detail-label">Address</div>
-            <div class="contact-detail-value"><span data-parish="address"><span class="parish-address">15 Mott Street</span></span><br>New York, NY 10002</div>
+            <div class="contact-detail-value"><span data-parish="address"><span class="parish-address">15 Mott Street</span><br>New York, NY 10002</div>
           </div>
         </div>
         <div class="contact-detail">
@@ -2501,7 +2501,7 @@ if(_nav){ window.addEventListener('scroll',()=>{ _nav.style.boxShadow = window.s
       <!-- Col 1: Parish Info -->
       <div>
         <div class="footer-brand" class="parish-name">St. Mary's Parish</div>
-        <p class="footer-tagline">A vibrant Catholic community in the heart of New York's Lower East Side, serving our neighbours since 1887.</p>
+        <p class="footer-tagline">A vibrant Catholic community in the heart of New York's Lower East Side, serving our neighbours since <span class="parish-founded">1887</span>.</p>
         <div class="footer-detail">
           <svg width="14" height="14" viewBox="0 0 20 20" fill="none"><path d="M10 2C7.2 2 5 4.2 5 7c0 4 5 11 5 11s5-7 5-11c0-2.8-2.2-5-5-5z" stroke="currentColor" stroke-width="1.5"/></svg>
           15 Mott Street, New York, NY 10002
@@ -2625,6 +2625,14 @@ if(_nav){ window.addEventListener('scroll',()=>{ _nav.style.boxShadow = window.s
       document.querySelectorAll('.parish-pastor-name').forEach(function(el){ el.textContent = pd.pastorName; });
     }
 
+    // Founded year
+    if (pd.founded) {
+      document.querySelectorAll('.parish-founded').forEach(function(el){ el.textContent = pd.founded; });
+    }
+    // Description
+    if (pd.description) {
+      document.querySelectorAll('.parish-description').forEach(function(el){ el.textContent = pd.description; });
+    }
   } catch(e) {}
 })();
 </script>
