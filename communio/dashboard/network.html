@@ -129,30 +129,31 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
 <div class="page-inner" style="padding:0;max-width:none">
 
 <style>
-.net-hd{background:var(--ink);padding:20px 28px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
-.net-hd-title{font-size:22px;font-weight:800;color:white;letter-spacing:-.03em}
-.net-hd-sub{font-size:13px;color:rgba(255,255,255,.5);margin-top:3px;font-family:'Lora',serif;font-style:italic}
-.net-stats-strip{display:flex;gap:28px;flex-wrap:wrap}
-.net-stat{text-align:center}
-.net-stat-val{font-size:22px;font-weight:800;color:white;letter-spacing:-.03em;line-height:1}
-.net-stat-lbl{font-size:10px;color:rgba(255,255,255,.45);margin-top:2px;text-transform:uppercase;letter-spacing:.05em}
+.net-hd{background:var(--white);padding:20px 28px 0;border-bottom:2px solid var(--border-light)}
+.net-hd-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:16px;gap:16px}
+.net-hd-title{font-size:22px;font-weight:800;color:var(--ink);letter-spacing:-.03em}
+.net-hd-sub{font-family:'Lora',serif;font-size:13px;color:var(--light);font-style:italic;margin-top:3px}
+.net-stats-strip{display:flex;gap:28px;padding-bottom:0;flex-wrap:wrap}
+.net-stat{text-align:center;padding-bottom:14px}
+.net-stat-val{font-size:22px;font-weight:800;color:var(--ink);letter-spacing:-.03em;line-height:1}
+.net-stat-lbl{font-size:10px;color:var(--light);margin-top:2px;text-transform:uppercase;letter-spacing:.05em}
 .net-tabs{background:var(--white);border-bottom:2px solid var(--border-light);padding:0 28px;display:flex}
 .net-tab{font-size:13px;font-weight:600;color:var(--light);background:none;border:none;padding:14px 20px 12px;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;font-family:'Outfit',sans-serif;transition:color .15s;display:flex;align-items:center;gap:6px}
 .net-tab:hover{color:var(--ink)}
 .net-tab.on{color:var(--terra);border-bottom-color:var(--terra)}
 .net-tab-badge{background:var(--terra);color:white;font-size:10px;font-weight:700;padding:1px 6px;border-radius:10px}
-.net-body{padding:24px 28px;display:grid;grid-template-columns:1fr 300px;gap:20px;align-items:start}
+.net-body{padding:28px 28px;display:grid;grid-template-columns:1fr 300px;gap:24px;align-items:start}
 .net-pane{display:none}.net-pane.on{display:block}
 .pending-banner{background:var(--cream);border:1px solid var(--border-light);border-left:3px solid var(--terra);border-radius:var(--r-lg);padding:16px 18px;margin-bottom:18px}
 .pending-hd{font-size:13px;font-weight:700;color:var(--terra);margin-bottom:12px;display:flex;align-items:center;gap:8px}
-.pending-item{display:flex;align-items:center;gap:12px;padding:10px 0;border-top:1px solid rgba(216,80,32,.15)}
+.pending-item{display:flex;align-items:center;gap:12px;padding:13px 0;border-top:1px solid rgba(216,80,32,.15)}
 .pending-av{width:40px;height:40px;border-radius:10px;flex-shrink:0;font-size:11px;font-weight:800;color:white;display:flex;align-items:center;justify-content:center}
 .pending-info{flex:1}
 .pending-name{font-size:13px;font-weight:700;color:var(--ink)}
 .pending-loc{font-size:11px;color:var(--light);margin-top:1px}
 .pending-actions{display:flex;gap:6px}
-.pc-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-bottom:20px}
-.pc{background:var(--white);border:1px solid var(--border-light);border-radius:var(--r-lg);padding:16px;box-shadow:var(--sh-sm);transition:all .18s;position:relative}
+.pc-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-bottom:24px}
+.pc{background:var(--white);border:1px solid var(--border-light);border-radius:var(--r-lg);padding:20px;box-shadow:var(--sh-sm);transition:all .18s;position:relative}
 .pc:hover{box-shadow:0 4px 20px rgba(14,10,6,.1);transform:translateY(-1px)}
 .pc-top{display:flex;align-items:flex-start;gap:12px;margin-bottom:10px}
 .pc-av{width:46px;height:46px;border-radius:12px;flex-shrink:0;font-size:13px;font-weight:800;color:white;display:flex;align-items:center;justify-content:center;position:relative}
@@ -173,7 +174,7 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
 .net-filter-sel{font-family:'Outfit',sans-serif;font-size:12px;color:var(--ink);background:var(--white);border:1.5px solid var(--border-light);border-radius:var(--r-md);padding:9px 12px;outline:none;cursor:pointer}
 .net-sec-lbl{font-size:11px;font-weight:700;color:var(--light);text-transform:uppercase;letter-spacing:.07em;margin-bottom:12px;display:flex;align-items:center;gap:8px}
 .net-sec-lbl span{color:var(--mid);font-weight:400;text-transform:none;letter-spacing:0}
-.act-item{display:flex;gap:12px;padding:13px 0;border-bottom:1px solid var(--cream-dark)}
+.act-item{display:flex;gap:12px;padding:16px 0;border-bottom:1px solid var(--cream-dark)}
 .act-item:last-child{border-bottom:none}
 .act-av{width:40px;height:40px;border-radius:10px;flex-shrink:0;font-size:11px;font-weight:800;color:white;display:flex;align-items:center;justify-content:center}
 .act-av.icon{background:var(--cream-dark);font-size:18px}
@@ -533,6 +534,6 @@ if(ns) ns.addEventListener('input',function(){
   });
 })();
 </script>
-<script src="js/communio-chat.js?v=2"></script>
+<script src="js/communio-chat.js?v=3"></script>
 </body>
 </html>
