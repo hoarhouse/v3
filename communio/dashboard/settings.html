@@ -342,7 +342,282 @@ function mtLoad(){
 
 if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',mtLoad);}else{mtLoad();}
 })();
-</script><div class="form-footer"><button class="btn btn-secondary btn-sm">Cancel</button><button class="btn btn-primary btn-sm" id="saveMassSacraments" onclick="saveForm()">Save changes →</button></div></div><div id="our-team" class="tab-panel" style="display:none"><div class="sp-title">Our team</div><div class="sp-sub">Primary contact and leadership information</div><div class="form-group"><label class="form-label">Pastor / Contact name</label><input class="form-input" type="text" id="pd_pastorName" value="Fr. James O'Brien"></div><div class="form-group"><label class="form-label">Role</label><select class="form-select" id="pd_pastorRole"><option>Pastor</option><option>Parish Priest</option><option>Administrator</option><option>Deacon</option></select></div><div class="form-group"><label class="form-label">Pastor's email</label><input class="form-input" type="email" id="pd_pastorEmail" placeholder="pastor@stmarysnyc.org"></div><div class="form-group"><label class="form-label">In this role since</label><input class="form-input" type="text" id="pd_pastorSince" placeholder="e.g. 2015"></div><div style="margin-top:16px;font-size:12px;color:var(--light);font-style:italic">To manage your full staff directory, go to Website → Content tab</div><div class="form-footer"><button class="btn btn-secondary btn-sm">Cancel</button><button class="btn btn-primary btn-sm" id="saveOurTeam" onclick="saveForm()">Save changes →</button></div></div><div id="stay-connected" class="tab-panel" style="display:none"><div class="sp-title">Stay connected</div><div class="sp-sub">Social media and giving information</div><div style="margin-bottom:16px;font-size:14px;font-weight:700;color:var(--ink)">Social media</div><div class="form-row"><div class="form-group"><label class="form-label">Facebook</label><input class="form-input" type="url" id="pd_socialFacebook" placeholder="https://facebook.com/yourparish"></div><div class="form-group"><label class="form-label">Instagram</label><input class="form-input" type="url" id="pd_socialInstagram" placeholder="https://instagram.com/yourparish"></div></div><div class="form-row"><div class="form-group"><label class="form-label">YouTube</label><input class="form-input" type="url" id="pd_socialYoutube" placeholder="https://youtube.com/@yourparish"></div><div class="form-group"><label class="form-label">Spotify</label><input class="form-input" type="url" id="pd_socialSpotify" placeholder="https://open.spotify.com/show/..."></div></div><div style="margin-top:24px;margin-bottom:16px;font-size:14px;font-weight:700;color:var(--ink)">Giving</div><div class="form-group"><label class="form-label">Giving page URL</label><input class="form-input" type="url" id="pd_givingUrl" placeholder="https://your-giving-platform.com"><span class="field-hint">Shown on your Communio profile donate button</span></div><div class="form-footer"><button class="btn btn-secondary btn-sm">Cancel</button><button class="btn btn-primary btn-sm" id="saveStayConnected" onclick="saveForm()">Save changes →</button></div></div><div id="account" class="tab-panel" style="display:none"><div class="sp-title">Account</div><div class="sp-sub">Manage your parish account settings</div><div class="danger-zone"><div class="dz-title">Danger zone</div><div class="dz-sub">Deactivating your account will remove your parish from the Communio network. This cannot be undone.</div><button class="btn btn-sm" style="background:var(--terra);color:white">Deactivate parish account</button></div></div></div></div><span id="saveStatus" style="position:fixed;top:70px;right:20px;font-size:13px;color:#2a8a4a;font-weight:600;background:white;padding:8px 16px;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,.1);display:none"></span><script>(function(){document.querySelectorAll('.toggle').forEach(function(t){t.addEventListener('click',function(){t.classList.toggle('on')})});document.querySelectorAll('.focus-tag').forEach(function(t){if(t.textContent!=='+ Add')t.addEventListener('click',function(){t.classList.toggle('on')})});document.querySelectorAll('.sn-item').forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();document.querySelectorAll('.sn-item').forEach(function(x){x.classList.remove('sn-active')});a.classList.add('sn-active');document.querySelectorAll('.tab-panel').forEach(function(p){p.style.display='none'});var tab=a.getAttribute('data-tab');if(tab){var panel=document.getElementById(tab);if(panel)panel.style.display='block'}})})}());</script></div></div><script>(function(){var b=document.getElementById('burger');var m=document.getElementById('navMobile');if(!b||!m)return;b.addEventListener('click',function(){m.classList.toggle('open');});document.addEventListener('click',function(e){if(!b.contains(e.target)&&!m.contains(e.target))m.classList.remove('open');});})();</script><script>(function(){var FIELDS=['name','shortName','tagline','founded','diocese','country','description','address','city','state','zip','phone','email','mapsUrl','officeWeekday','officeSaturday','officeSunday','confession','adoration','baptism','marriage','pastorName','pastorRole','pastorEmail','pastorSince','socialFacebook','socialInstagram','socialYoutube','socialSpotify','givingUrl'];function loadForm(){try{var stored=localStorage.getItem('parish_data');if(!stored)return;var data=JSON.parse(stored);FIELDS.forEach(function(key){var el=document.getElementById('pd_'+key);if(el&&data[key]!==undefined)el.value=data[key]})}catch(e){}}function saveForm(){var data={};FIELDS.forEach(function(key){var el=document.getElementById('pd_'+key);if(el)data[key]=el.value.trim()});localStorage.setItem('parish_data',JSON.stringify(data));var s=document.getElementById('saveStatus');if(s){s.textContent='✓ Saved — profile updated';s.style.display='block';setTimeout(function(){s.style.display='none'},3000)}}window.saveForm=saveForm;document.addEventListener('DOMContentLoaded',function(){loadForm()})})();</script><script>
+</script><div class="form-footer"><button class="btn btn-secondary btn-sm">Cancel</button><button class="btn btn-primary btn-sm" id="saveMassSacraments" onclick="saveForm()">Save changes →</button></div></div><div id="our-team" class="tab-panel" style="display:none">
+  <div class="sp-title">Our team</div>
+  <div class="sp-sub">Your clergy and staff — shown on your public Communio profile and parish website</div>
+
+  <div id="staff-list" style="display:flex;flex-direction:column;gap:12px;margin-bottom:16px"></div>
+
+  <button class="btn btn-secondary btn-sm" id="add-staff-btn" style="width:100%">+ Add staff member</button>
+
+  <div style="display:flex;justify-content:flex-end;gap:8px;margin-top:20px">
+    <button class="btn btn-secondary btn-sm" onclick="staffLoad()">Cancel</button>
+    <button class="btn btn-primary btn-sm" onclick="staffSave()">Save team →</button>
+  </div>
+</div>
+
+<div id="stay-connected" class="tab-panel" style="display:none"><div class="sp-title">Stay connected</div><div class="sp-sub">Social media and giving information</div><div style="margin-bottom:16px;font-size:14px;font-weight:700;color:var(--ink)">Social media</div><div class="form-row"><div class="form-group"><label class="form-label">Facebook</label><input class="form-input" type="url" id="pd_socialFacebook" placeholder="https://facebook.com/yourparish"></div><div class="form-group"><label class="form-label">Instagram</label><input class="form-input" type="url" id="pd_socialInstagram" placeholder="https://instagram.com/yourparish"></div></div><div class="form-row"><div class="form-group"><label class="form-label">YouTube</label><input class="form-input" type="url" id="pd_socialYoutube" placeholder="https://youtube.com/@yourparish"></div><div class="form-group"><label class="form-label">Spotify</label><input class="form-input" type="url" id="pd_socialSpotify" placeholder="https://open.spotify.com/show/..."></div></div><div style="margin-top:24px;margin-bottom:16px;font-size:14px;font-weight:700;color:var(--ink)">Giving</div><div class="form-group"><label class="form-label">Giving page URL</label><input class="form-input" type="url" id="pd_givingUrl" placeholder="https://your-giving-platform.com"><span class="field-hint">Shown on your Communio profile donate button</span></div><div class="form-footer"><button class="btn btn-secondary btn-sm">Cancel</button><button class="btn btn-primary btn-sm" id="saveStayConnected" onclick="saveForm()">Save changes →</button></div></div><div id="account" class="tab-panel" style="display:none">
+  <div class="sp-title">Account</div>
+  <div class="sp-sub">Manage your parish account, admin access and notification preferences</div>
+
+  <!-- Admin user -->
+  <div style="background:var(--warm-white);border:1.5px solid var(--border-light);border-radius:var(--r-md);overflow:hidden;margin-bottom:20px">
+    <div style="font-size:11px;font-weight:700;color:var(--mid);text-transform:uppercase;letter-spacing:.07em;padding:10px 16px 8px;border-bottom:1px solid var(--border-light);background:var(--cream)">Account owner</div>
+    <div style="padding:16px;display:grid;grid-template-columns:1fr 1fr;gap:14px">
+      <div class="form-group" style="margin:0"><label class="form-label">Full name</label><input class="form-input" type="text" id="acc_name" placeholder="Your full name"></div>
+      <div class="form-group" style="margin:0"><label class="form-label">Login email</label><input class="form-input" type="email" id="acc_email" placeholder="your@email.com"></div>
+      <div class="form-group" style="margin:0"><label class="form-label">Phone</label><input class="form-input" type="tel" id="acc_phone" placeholder="+1 (212) 555-0000"></div>
+      <div class="form-group" style="margin:0"><label class="form-label">Your role at this parish</label>
+        <select class="form-input" id="acc_role">
+          <option value="">Select role...</option>
+          <option>Pastor</option>
+          <option>Parish Administrator</option>
+          <option>Communications Manager</option>
+          <option>Business Manager</option>
+          <option>Deacon</option>
+          <option>Volunteer</option>
+          <option>Other</option>
+        </select>
+      </div>
+    </div>
+    <div style="padding:0 16px 16px;display:flex;justify-content:space-between;align-items:center">
+      <button class="btn btn-secondary btn-sm">Change password →</button>
+      <button class="btn btn-primary btn-sm" onclick="accSave()">Save account details →</button>
+    </div>
+  </div>
+
+  <!-- Admin permissions -->
+  <div style="background:var(--warm-white);border:1.5px solid var(--border-light);border-radius:var(--r-md);overflow:hidden;margin-bottom:20px">
+    <div style="font-size:11px;font-weight:700;color:var(--mid);text-transform:uppercase;letter-spacing:.07em;padding:10px 16px 8px;border-bottom:1px solid var(--border-light);background:var(--cream);display:flex;align-items:center;justify-content:space-between">
+      <span>Admin access</span>
+      <button class="btn btn-secondary btn-sm" style="font-size:10px;padding:3px 10px" id="invite-admin-btn">+ Invite admin</button>
+    </div>
+    <div id="admin-list">
+      <div style="display:flex;align-items:center;gap:12px;padding:12px 16px;border-bottom:1px solid var(--border-light)">
+        <div style="width:36px;height:36px;border-radius:50%;background:var(--terra);color:white;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;flex-shrink:0">JO</div>
+        <div style="flex:1">
+          <div style="font-size:13px;font-weight:700;color:var(--ink)">Fr. James O'Brien <span style="font-size:10px;font-weight:600;background:var(--sage-pale);color:var(--sage);padding:2px 7px;border-radius:10px;margin-left:4px">You</span></div>
+          <div style="font-size:11px;color:var(--light);margin-top:1px">info@stmarysnyc.org</div>
+        </div>
+        <select style="font-size:12px;border:1.5px solid var(--border-light);border-radius:6px;padding:4px 8px;background:var(--white);color:var(--ink);font-family:inherit">
+          <option selected>Owner</option>
+        </select>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px;padding:12px 16px">
+        <div style="width:36px;height:36px;border-radius:50%;background:var(--sage);color:white;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;flex-shrink:0">SC</div>
+        <div style="flex:1">
+          <div style="font-size:13px;font-weight:700;color:var(--ink)">Sr. Catherine Murphy</div>
+          <div style="font-size:11px;color:var(--light);margin-top:1px">c.murphy@stmarysnyc.org</div>
+        </div>
+        <select style="font-size:12px;border:1.5px solid var(--border-light);border-radius:6px;padding:4px 8px;background:var(--white);color:var(--ink);font-family:inherit">
+          <option>Owner</option>
+          <option selected>Editor</option>
+          <option>Viewer</option>
+        </select>
+        <button style="background:none;border:none;cursor:pointer;color:var(--light);font-size:18px;line-height:1" title="Remove">×</button>
+      </div>
+    </div>
+    <div id="invite-admin-form" style="display:none;padding:14px 16px;border-top:1px solid var(--border-light);background:var(--cream)">
+      <div style="display:grid;grid-template-columns:1fr 1fr auto;gap:10px;align-items:end">
+        <div class="form-group" style="margin:0"><label class="form-label">Email address</label><input class="form-input" type="email" placeholder="colleague@stmarysnyc.org"></div>
+        <div class="form-group" style="margin:0"><label class="form-label">Role</label>
+          <select class="form-input">
+            <option>Editor</option>
+            <option>Viewer</option>
+          </select>
+        </div>
+        <button class="btn btn-primary btn-sm" style="margin-bottom:1px">Send invite →</button>
+      </div>
+    </div>
+    <div style="padding:10px 16px;font-size:11px;color:var(--light);border-top:1px solid var(--border-light);font-family:'Lora',serif;font-style:italic">
+      Owners can manage everything. Editors can update content and settings. Viewers can see the dashboard but not make changes.
+    </div>
+  </div>
+
+  <!-- Notifications -->
+  <div style="background:var(--warm-white);border:1.5px solid var(--border-light);border-radius:var(--r-md);overflow:hidden;margin-bottom:20px">
+    <div style="font-size:11px;font-weight:700;color:var(--mid);text-transform:uppercase;letter-spacing:.07em;padding:10px 16px 8px;border-bottom:1px solid var(--border-light);background:var(--cream)">Notification preferences</div>
+    <div style="padding:4px 0">
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:11px 16px;border-bottom:1px solid var(--border-light)">
+        <div><div style="font-size:13px;font-weight:600;color:var(--ink)">New connection requests</div><div style="font-size:11px;color:var(--light);margin-top:1px">When a parish wants to connect with you</div></div>
+        <button class="toggle on" onclick="this.classList.toggle('on')"></button>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:11px 16px;border-bottom:1px solid var(--border-light)">
+        <div><div style="font-size:13px;font-weight:600;color:var(--ink)">New messages</div><div style="font-size:11px;color:var(--light);margin-top:1px">Email digest of unread messages</div></div>
+        <button class="toggle on" onclick="this.classList.toggle('on')"></button>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:11px 16px;border-bottom:1px solid var(--border-light)">
+        <div><div style="font-size:13px;font-weight:600;color:var(--ink)">Project activity</div><div style="font-size:11px;color:var(--light);margin-top:1px">Updates from projects you're part of</div></div>
+        <button class="toggle on" onclick="this.classList.toggle('on')"></button>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:11px 16px;border-bottom:1px solid var(--border-light)">
+        <div><div style="font-size:13px;font-weight:600;color:var(--ink)">Monthly analytics summary</div><div style="font-size:11px;color:var(--light);margin-top:1px">Profile views, website traffic, network growth</div></div>
+        <button class="toggle on" onclick="this.classList.toggle('on')"></button>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:11px 16px">
+        <div><div style="font-size:13px;font-weight:600;color:var(--ink)">Communio platform updates</div><div style="font-size:11px;color:var(--light);margin-top:1px">New features and important announcements</div></div>
+        <button class="toggle" onclick="this.classList.toggle('on')"></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Plan -->
+  <div style="background:var(--warm-white);border:1.5px solid var(--border-light);border-radius:var(--r-md);overflow:hidden;margin-bottom:20px">
+    <div style="font-size:11px;font-weight:700;color:var(--mid);text-transform:uppercase;letter-spacing:.07em;padding:10px 16px 8px;border-bottom:1px solid var(--border-light);background:var(--cream)">Plan &amp; billing</div>
+    <div style="padding:16px;display:flex;align-items:center;justify-content:space-between">
+      <div>
+        <div style="font-size:15px;font-weight:800;color:var(--ink)">Communio Pro <span style="font-size:11px;font-weight:700;background:var(--terra);color:white;padding:2px 8px;border-radius:10px;margin-left:6px">Active</span></div>
+        <div style="font-size:12px;color:var(--light);margin-top:3px;font-family:'Lora',serif;font-style:italic">Unlimited connections · Full analytics · Custom domain · Priority support</div>
+        <div style="font-size:12px;color:var(--mid);margin-top:6px">Next billing: <strong>1 May 2026</strong> · $49/month</div>
+      </div>
+      <button class="btn btn-secondary btn-sm">Manage billing →</button>
+    </div>
+    <div style="padding:12px 16px;border-top:1px solid var(--border-light);display:flex;gap:10px">
+      <button class="btn btn-secondary btn-sm">Download invoice</button>
+      <button class="btn btn-secondary btn-sm">Export parish data</button>
+    </div>
+  </div>
+
+  <!-- Danger zone -->
+  <div class="danger-zone">
+    <div class="dz-title">Danger zone</div>
+    <div class="dz-sub">Deactivating your account will remove your parish from the Communio network. Your data is preserved for 30 days and can be restored. This action cannot be undone after 30 days.</div>
+    <button class="btn btn-sm" style="background:var(--terra);color:white">Deactivate parish account</button>
+  </div>
+</div>
+
+</div></div><span id="saveStatus" style="position:fixed;top:70px;right:20px;font-size:13px;color:#2a8a4a;font-weight:600;background:white;padding:8px 16px;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,.1);display:none"></span><script>(function(){document.querySelectorAll('.toggle').forEach(function(t){t.addEventListener('click',function(){t.classList.toggle('on')})});document.querySelectorAll('.focus-tag').forEach(function(t){if(t.textContent!=='+ Add')t.addEventListener('click',function(){t.classList.toggle('on')})});document.querySelectorAll('.sn-item').forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();document.querySelectorAll('.sn-item').forEach(function(x){x.classList.remove('sn-active')});a.classList.add('sn-active');document.querySelectorAll('.tab-panel').forEach(function(p){p.style.display='none'});var tab=a.getAttribute('data-tab');if(tab){var panel=document.getElementById(tab);if(panel)panel.style.display='block'}})})}());</script></div></div><script>(function(){var b=document.getElementById('burger');var m=document.getElementById('navMobile');if(!b||!m)return;b.addEventListener('click',function(){m.classList.toggle('open');});document.addEventListener('click',function(e){if(!b.contains(e.target)&&!m.contains(e.target))m.classList.remove('open');});})();</script><script>(function(){var FIELDS=['name','shortName','tagline','founded','diocese','country','description','address','city','state','zip','phone','email','mapsUrl','officeWeekday','officeSaturday','officeSunday','confession','adoration','baptism','marriage','pastorName','pastorRole','pastorEmail','pastorSince','socialFacebook','socialInstagram','socialYoutube','socialSpotify','givingUrl'];function loadForm(){try{var stored=localStorage.getItem('parish_data');if(!stored)return;var data=JSON.parse(stored);FIELDS.forEach(function(key){var el=document.getElementById('pd_'+key);if(el&&data[key]!==undefined)el.value=data[key]})}catch(e){}}function saveForm(){var data={};FIELDS.forEach(function(key){var el=document.getElementById('pd_'+key);if(el)data[key]=el.value.trim()});localStorage.setItem('parish_data',JSON.stringify(data));var s=document.getElementById('saveStatus');if(s){s.textContent='✓ Saved — profile updated';s.style.display='block';setTimeout(function(){s.style.display='none'},3000)}}window.saveForm=saveForm;document.addEventListener('DOMContentLoaded',function(){loadForm()})})()
+
+// ── Staff directory ─────────────────────────────────────────────
+;(function(){
+var ROLES=['Pastor','Parish Priest','Associate Pastor','Deacon','Parish Administrator','Business Manager','Director of Religious Education','Youth Minister','Music Director','Communications Manager','Secretary','Facilities Manager','Volunteer Coordinator','Other'];
+
+var staffData=[];
+
+function staffCard(member, idx){
+  var div=document.createElement('div');
+  div.className='staff-card';
+  div.style.cssText='background:var(--warm-white);border:1.5px solid var(--border-light);border-radius:var(--r-md);padding:16px;position:relative';
+  div.dataset.idx=idx;
+
+  var photoUrl=member.photo||'';
+  var roleOpts=ROLES.map(function(r){return '<option'+(r===member.role?' selected':'')+'>'+r+'</option>';}).join('');
+
+  div.innerHTML=
+    '<div style="display:flex;gap:14px;align-items:flex-start">'+
+    '<div style="flex-shrink:0;text-align:center">'+
+    '<div style="width:64px;height:64px;border-radius:50%;border:2px dashed var(--border-light);cursor:pointer;position:relative;overflow:hidden;background:var(--white);display:flex;align-items:center;justify-content:center;transition:border-color .2s" onmouseover="this.style.borderColor='var(--terra)'" onmouseout="this.style.borderColor='var(--border-light)'">'+
+    '<input type="file" accept="image/*" style="position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%" onchange="staffPhotoChange(this,'+idx+')">'+
+    (photoUrl?'<img src="'+photoUrl+'" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">':'<span style="font-size:24px;pointer-events:none">👤</span>')+
+    '</div><div style="font-size:9px;color:var(--light);margin-top:4px">Photo</div></div>'+
+    '<div style="flex:1;display:grid;grid-template-columns:1fr 1fr;gap:10px">'+
+    '<div class="form-group" style="margin:0"><label class="form-label">Full name</label><input class="form-input" type="text" value="'+(member.name||'')+'" placeholder="e.g. Fr. James O'Brien" onchange="staffField('+idx+','name',this.value)"></div>'+
+    '<div class="form-group" style="margin:0"><label class="form-label">Role / Title</label><select class="form-input" onchange="staffField('+idx+','role',this.value)"><option value="">Select role...</option>'+roleOpts+'</select></div>'+
+    '<div class="form-group" style="margin:0"><label class="form-label">Email <span style="font-weight:400;color:var(--light)">(optional)</span></label><input class="form-input" type="email" value="'+(member.email||'')+'" placeholder="name@parish.org" onchange="staffField('+idx+','email',this.value)"></div>'+
+    '<div class="form-group" style="margin:0"><label class="form-label">Phone <span style="font-weight:400;color:var(--light)">(optional)</span></label><input class="form-input" type="tel" value="'+(member.phone||'')+'" placeholder="+1 (212) 555-0000" onchange="staffField('+idx+','phone',this.value)"></div>'+
+    '<div class="form-group" style="margin:0;grid-column:1/-1"><label class="form-label">Bio <span style="font-weight:400;color:var(--light)">(optional — shown on website)</span></label><textarea class="form-input" rows="2" placeholder="Brief bio..." onchange="staffField('+idx+','bio',this.value)">'+(member.bio||'')+'</textarea></div>'+
+    '</div>'+
+    '<button onclick="staffRemove('+idx+')" style="position:absolute;top:12px;right:12px;background:none;border:none;cursor:pointer;color:var(--light);font-size:18px;line-height:1" title="Remove">×</button>'+
+    '</div>';
+  return div;
+}
+
+function renderStaff(){
+  var list=document.getElementById('staff-list');
+  if(!list)return;
+  list.innerHTML='';
+  if(!staffData.length){
+    list.innerHTML='<div style="text-align:center;padding:24px;color:var(--light);font-family:'Lora',serif;font-style:italic;font-size:13px">No staff members added yet. Click below to add your first.</div>';
+    return;
+  }
+  staffData.forEach(function(m,i){list.appendChild(staffCard(m,i));});
+}
+
+window.staffField=function(idx,key,val){if(staffData[idx])staffData[idx][key]=val;};
+
+window.staffPhotoChange=function(input,idx){
+  var file=input.files[0];
+  if(!file)return;
+  var reader=new FileReader();
+  reader.onload=function(e){
+    if(staffData[idx])staffData[idx].photo=e.target.result;
+    var wrap=input.parentElement;
+    var existing=wrap.querySelector('img');
+    if(existing)existing.src=e.target.result;
+    else{var img=document.createElement('img');img.src=e.target.result;img.style.cssText='position:absolute;inset:0;width:100%;height:100%;object-fit:cover';wrap.appendChild(img);}
+  };
+  reader.readAsDataURL(file);
+};
+
+window.staffRemove=function(idx){
+  staffData.splice(idx,1);
+  renderStaff();
+};
+
+window.staffSave=function(){
+  try{
+    var pd=JSON.parse(localStorage.getItem('parish_data')||'{}');
+    pd.staff=staffData;
+    localStorage.setItem('parish_data',JSON.stringify(pd));
+    var btn=document.querySelector('[onclick="staffSave()"]');
+    if(btn){btn.textContent='✓ Saved';btn.style.background='var(--sage)';setTimeout(function(){btn.textContent='Save team →';btn.style.background='';},2000);}
+  }catch(e){}
+};
+
+window.staffLoad=function(){
+  try{
+    var pd=JSON.parse(localStorage.getItem('parish_data')||'{}');
+    staffData=pd.staff||[];
+    // Pre-populate from pastor fields if no staff yet
+    if(!staffData.length&&pd.pastorName){
+      staffData=[{name:pd.pastorName,role:pd.pastorRole||'Pastor',email:pd.pastorEmail||'',phone:'',bio:'',photo:''}];
+    }
+    renderStaff();
+  }catch(e){}
+};
+
+document.addEventListener('DOMContentLoaded',function(){
+  staffLoad();
+  var btn=document.getElementById('add-staff-btn');
+  if(btn)btn.addEventListener('click',function(){
+    staffData.push({name:'',role:'',email:'',phone:'',bio:'',photo:''});
+    renderStaff();
+    var list=document.getElementById('staff-list');
+    if(list)list.lastElementChild.scrollIntoView({behavior:'smooth'});
+  });
+});
+})()
+
+// ── Account JS ──────────────────────────────────────────────────
+;(function(){
+var ACC_FIELDS=['acc_name','acc_email','acc_phone','acc_role'];
+
+function accLoad(){
+  try{
+    var pd=JSON.parse(localStorage.getItem('parish_data')||'{}');
+    ACC_FIELDS.forEach(function(k){var el=document.getElementById(k);if(el&&pd[k])el.value=pd[k];});
+  }catch(e){}
+}
+
+window.accSave=function(){
+  try{
+    var pd=JSON.parse(localStorage.getItem('parish_data')||'{}');
+    ACC_FIELDS.forEach(function(k){var el=document.getElementById(k);if(el)pd[k]=el.value;});
+    localStorage.setItem('parish_data',JSON.stringify(pd));
+    var btn=document.querySelector('[onclick="accSave()"]');
+    if(btn){btn.textContent='✓ Saved';btn.style.background='var(--sage)';setTimeout(function(){btn.textContent='Save account details →';btn.style.background='';},2000);}
+  }catch(e){}
+};
+
+document.addEventListener('DOMContentLoaded',function(){
+  accLoad();
+  var invBtn=document.getElementById('invite-admin-btn');
+  var invForm=document.getElementById('invite-admin-form');
+  if(invBtn&&invForm)invBtn.addEventListener('click',function(){
+    invForm.style.display=invForm.style.display==='none'?'block':'none';
+  });
+});
+})();</script><script>
 (function(){
   function wireUpload(inputId, previewId, placeholderId, areaId) {
     var input = document.getElementById(inputId);
