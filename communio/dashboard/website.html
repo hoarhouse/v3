@@ -299,8 +299,7 @@ input:checked+.mtoggle-slider:before{transform:translateX(16px)}
     </div>
     <!-- TAB BAR -->
     <div class="tab-bar">
-      <button class="tab-btn on" data-tab="edit">Edit</button>
-      <button class="tab-btn" data-tab="content">Content</button>
+      <button class="tab-btn on" data-tab="edit">Pages</button>
       <button class="tab-btn" data-tab="analytics">Analytics</button>
       <button class="tab-btn" data-tab="seo">SEO</button>
       <button class="tab-btn" data-tab="settings">Settings</button>
@@ -1009,6 +1008,36 @@ input:checked+.mtoggle-slider:before{transform:translateX(16px)}
       sub: 'Your regular schedule — displayed on the public site',
       fields: '<div class="fg"><label class="fl">Saturday Vigil</label><input class="fi" type="text" value="5:00pm"></div><div class="fg"><label class="fl">Sunday morning</label><input class="fi" type="text" value="8:00am, 10:00am, 12:00pm"></div><div class="fg"><label class="fl">Sunday evening</label><input class="fi" type="text" value="6:00pm (Spanish)"></div><div class="fg"><label class="fl">Weekday masses</label><input class="fi" type="text" value="7:00am &amp; 12:10pm (Mon–Fri)"></div><div class="ep-full fg"><label class="fl">Additional notes (optional)</label><input class="fi" type="text" placeholder="e.g. Confession: Sat 4:00–4:45pm"></div>',
       save: function () {}
+    },
+    staff: {
+      icon: '👥', title: 'Staff directory',
+      sub: 'Your clergy and staff — shown on your public parish website',
+      fields: '<div id="ep-staff-list"></div><div style="margin-top:12px"><button class="btn btn-secondary btn-sm" id="ep-add-staff">+ Add staff member</button></div>',
+      save: function(){ var b=document.getElementById('ep-save'); b.textContent='✓ Saved'; b.style.background='var(--sage)'; setTimeout(function(){b.textContent='Save changes →';b.style.background='';},2000); }
+    },
+    bulletin: {
+      icon: '📋', title: 'Bulletin & newsletter',
+      sub: 'Upload your weekly bulletin PDF — shown on your public website for download',
+      fields: '<div class="fg"><label class="fl">Weekly bulletin (PDF)</label><div style="border:2px dashed var(--border-light);border-radius:var(--r-md);padding:20px;text-align:center;cursor:pointer;background:var(--cream)" onclick="document.getElementById(\'bulletin-file\').click()"><div style="font-size:20px;margin-bottom:4px">📄</div><div style="font-size:13px;font-weight:600;color:var(--ink)">Drop your bulletin PDF here or browse to upload</div></div></div><div class="fg"><label class="fl">Bulletin date</label><input class="fi" type="date" value=""></div><div class="fg"><label class="fl">Newsletter signup link <span style="color:var(--light);font-weight:400">(optional)</span></label><input class="fi" type="url" placeholder="https://mailchimp.com/..."></div>',
+      save: function(){ var b=document.getElementById('ep-save'); b.textContent='✓ Saved'; b.style.background='var(--sage)'; setTimeout(function(){b.textContent='Save changes →';b.style.background='';},2000); }
+    },
+    ministries: {
+      icon: '🤝', title: 'Get involved',
+      sub: 'Toggle which ministry sections appear on your public Get Involved page',
+      fields: '<div style="display:flex;flex-direction:column;gap:0"><div style="display:flex;align-items:center;justify-content:space-between;padding:11px 0;border-bottom:1px solid var(--border-light)"><div style="font-size:13px;font-weight:600;color:var(--ink)">Volunteer</div><input type="checkbox" checked style="width:16px;height:16px;cursor:pointer"></div><div style="display:flex;align-items:center;justify-content:space-between;padding:11px 0;border-bottom:1px solid var(--border-light)"><div style="font-size:13px;font-weight:600;color:var(--ink)">Small Groups</div><input type="checkbox" checked style="width:16px;height:16px;cursor:pointer"></div><div style="display:flex;align-items:center;justify-content:space-between;padding:11px 0;border-bottom:1px solid var(--border-light)"><div style="font-size:13px;font-weight:600;color:var(--ink)">Liturgical Ministries</div><input type="checkbox" checked style="width:16px;height:16px;cursor:pointer"></div><div style="display:flex;align-items:center;justify-content:space-between;padding:11px 0;border-bottom:1px solid var(--border-light)"><div style="font-size:13px;font-weight:600;color:var(--ink)">Music Ministry</div><input type="checkbox" checked style="width:16px;height:16px;cursor:pointer"></div><div style="display:flex;align-items:center;justify-content:space-between;padding:11px 0;border-bottom:1px solid var(--border-light)"><div style="font-size:13px;font-weight:600;color:var(--ink)">Youth Ministry</div><input type="checkbox" checked style="width:16px;height:16px;cursor:pointer"></div><div style="display:flex;align-items:center;justify-content:space-between;padding:11px 0;border-bottom:1px solid var(--border-light)"><div style="font-size:13px;font-weight:600;color:var(--ink)">Community Outreach</div><input type="checkbox" checked style="width:16px;height:16px;cursor:pointer"></div><div style="display:flex;align-items:center;justify-content:space-between;padding:11px 0"><div style="font-size:13px;font-weight:600;color:var(--ink)">Faith Formation</div><input type="checkbox" checked style="width:16px;height:16px;cursor:pointer"></div></div>',
+      save: function(){ var b=document.getElementById('ep-save'); b.textContent='✓ Saved'; b.style.background='var(--sage)'; setTimeout(function(){b.textContent='Save changes →';b.style.background='';},2000); }
+    },
+    media: {
+      icon: '🎬', title: 'Media & livestream',
+      sub: 'Connect your media channels so parishioners can watch Mass live and access recordings',
+      fields: '<div class="fg"><label class="fl">Live stream schedule</label><input class="fi" type="text" placeholder="e.g. Sunday 9 AM Mass streamed live"></div><div class="fg"><label class="fl">Podcast / audio feed URL</label><input class="fi" type="url" placeholder="https://anchor.fm/yourparish"></div><div class="fg"><label class="fl">Spotify playlist <span style="color:var(--light);font-weight:400">(optional)</span></label><input class="fi" type="url" placeholder="https://open.spotify.com/playlist/..."></div><div class="fg"><label class="fl">Formed.org parish code <span style="color:var(--light);font-weight:400">(optional)</span></label><input class="fi" type="text" placeholder="Your Formed.org access code"></div><div style="display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-top:1px solid var(--border-light);margin-top:4px"><div><div style="font-size:13px;font-weight:600;color:var(--ink)">Show livestream on homepage</div><div style="font-size:12px;color:var(--light);margin-top:2px">Embed live YouTube stream prominently</div></div><input type="checkbox" checked style="width:16px;height:16px;cursor:pointer"></div>',
+      save: function(){ var b=document.getElementById('ep-save'); b.textContent='✓ Saved'; b.style.background='var(--sage)'; setTimeout(function(){b.textContent='Save changes →';b.style.background='';},2000); }
+    },
+    giving: {
+      icon: '💛', title: 'Online giving',
+      sub: 'Set up and manage your online giving — shown on your public parish website',
+      fields: '<div class="fg"><label class="fl">Giving platform</label><select class="fi"><option value="">Select a platform...</option><option>Stripe</option><option>PayPal</option><option>Tithe.ly</option><option>Pushpay</option><option>Other</option></select></div><div class="fg"><label class="fl">Giving page URL</label><input class="fi" type="url" placeholder="https://give.stripe.com/..."></div><div class="fg-row"><div class="fg"><label class="fl">Amount 1</label><input class="fi" type="text" value="$10"></div><div class="fg"><label class="fl">Amount 2</label><input class="fi" type="text" value="$25"></div><div class="fg"><label class="fl">Amount 3</label><input class="fi" type="text" value="$50"></div><div class="fg"><label class="fl">Amount 4</label><input class="fi" type="text" value="$100"></div></div><div class="fg"><label class="fl">Giving statement</label><textarea class="fta" rows="2">Your gift sustains our community programmes.</textarea></div>',
+      save: function(){ var b=document.getElementById('ep-save'); b.textContent='✓ Saved'; b.style.background='var(--sage)'; setTimeout(function(){b.textContent='Save changes →';b.style.background='';},2000); }
     },
     donations: {
       icon: '💛', title: 'Donations',
