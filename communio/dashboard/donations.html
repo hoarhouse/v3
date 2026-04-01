@@ -162,16 +162,21 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
   </div>
 </aside>
 <div class="page-shell">
-  <div class="page-inner">
+  <div class="page-inner" style="padding:0;max-width:none">
     <!-- <?php echo $donations->analytics_html ?> -->
-    <div class="pg-hd">
-      <div><div class="pg-title">Donations &amp; Analytics</div></div>
-      <div style="display:flex;gap:8px">
-        <a href="#" class="btn btn-secondary btn-sm">Export CSV</a>
-        <a href="#" class="btn btn-primary btn-sm">Stripe dashboard ↗</a>
-      </div>
+    <div style="background:var(--white);padding:20px 28px 0;border-bottom:2px solid var(--border-light)">
+  <div style="display:flex;align-items:flex-start;justify-content:space-between;padding-bottom:16px;gap:16px">
+    <div>
+      <div style="font-size:22px;font-weight:800;color:var(--ink);letter-spacing:-.03em">Donations</div>
+      <div style="font-family:'Lora',serif;font-size:13px;color:var(--light);font-style:italic;margin-top:3px">Track giving, manage campaigns and connect to your payment provider</div>
     </div>
-    <div class="stat-row">
+    <div style="display:flex;gap:8px">
+      <button class="btn btn-secondary btn-sm">Export CSV</button>
+      <button class="btn btn-primary btn-sm">+ Add donation</button>
+    </div>
+  </div>
+</div>
+    <div style="padding:24px 28px 28px"><div class="stat-row">
       <div class="sc sc-terra"><div class="sc-val">$4,205</div><div class="sc-lbl">This month</div><div class="sc-delta up">↑ 34.8% vs last month</div></div>
       <div class="sc sc-sage"><div class="sc-val">$10,165</div><div class="sc-lbl">Last 3 months</div><div class="sc-delta up">↑ 18.2% vs prior period</div></div>
       <div class="sc sc-amber"><div class="sc-val">$89.47</div><div class="sc-lbl">Average donation</div><div class="sc-delta up">↑ $12.30 vs last month</div></div>
@@ -231,7 +236,7 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
       </div>
     </div>
   </div>
-</div>
+</div></div>
 <script>
 (function(){
   var b=document.getElementById('burger');
