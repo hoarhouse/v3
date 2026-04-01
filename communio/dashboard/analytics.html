@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Analytics — Communio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Lora:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../communio.css">
+<style>
+/* ── LAYOUT SHELL ── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-webkit-font-smoothing:antialiased}
+
+/* ── TOP NAV ── */
+.top-nav{position:fixed;top:0;left:0;right:0;z-index:300;height:52px;background:var(--ink);border-bottom:1px solid rgba(255,255,255,0.06);display:flex;align-items:center;padding:0 20px;gap:0}
+.nav-brand{display:flex;align-items:center;gap:8px;text-decoration:none;width:220px;flex-shrink:0}
+.nav-mark{width:28px;height:28px;background:var(--terra);border-radius:6px;display:flex;align-items:center;justify-content:center}
+.nav-mark svg{width:14px;height:14px}
+.nav-wm{font-size:16px;font-weight:800;color:var(--white);letter-spacing:-.02em}
+.nav-wm span{color:var(--terra)}
+.nav-right{margin-left:auto;display:flex;align-items:center;gap:10px}
+.nav-notif{width:34px;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.5);text-decoration:none;position:relative;transition:color .2s}
+.nav-notif:hover{color:white;background:rgba(255,255,255,.06)}
+.nav-notif svg{width:17px;height:17px}
+.notif-dot{position:absolute;top:7px;right:7px;width:7px;height:7px;background:var(--terra);border-radius:50%;border:1.5px solid var(--ink)}
+.nav-pill{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:4px 12px 4px 4px;text-decoration:none;transition:all .2s}
+.nav-pill:hover{background:rgba(255,255,255,.12)}
+.nav-av{width:26px;height:26px;background:var(--terra);border-radius:50%;font-size:10px;font-weight:700;color:white;display:flex;align-items:center;justify-content:center}
+.nav-pname{font-size:13px;font-weight:600;color:var(--white)}
+
+/* ── SIDEBAR ── */
+.sidebar{position:fixed;top:52px;left:0;bottom:0;width:220px;background:var(--white);border-right:1px solid var(--border-light);display:flex;flex-direction:column;overflow-y:auto;z-index:200}
+.sb-parish{padding:18px 16px;border-bottom:1px solid var(--border-light);display:flex;flex-direction:column;align-items:flex-start;gap:3px}
+.sb-av{width:38px;height:38px;background:var(--terra);border-radius:9px;font-size:13px;font-weight:800;color:white;display:flex;align-items:center;justify-content:center;margin-bottom:6px}
+.sb-name{font-size:13px;font-weight:700;color:var(--ink);line-height:1.2}
+.sb-loc{font-size:11px;color:var(--light)}
+.sb-nav{flex:1;padding:10px 8px}
+.sb-sec{font-size:10px;font-weight:700;color:var(--light);text-transform:uppercase;letter-spacing:.08em;padding:12px 8px 6px}
+.sb-item{display:flex;align-items:center;gap:9px;padding:8px 10px;border-radius:8px;text-decoration:none;color:var(--text-mid);font-size:13px;font-weight:500;transition:all .18s;position:relative;margin-bottom:1px}
+.sb-item svg{width:15px;height:15px;flex-shrink:0;opacity:.6}
+.sb-item:hover{background:var(--cream);color:var(--ink)}
+.sb-item:hover svg{opacity:1}
+.sb-item.active{background:var(--terra-pale);color:var(--terra);font-weight:600}
+.sb-item.active svg{opacity:1;color:var(--terra)}
+.sb-item.active::before{content:'';position:absolute;left:0;top:4px;bottom:4px;width:3px;background:var(--terra);border-radius:0 3px 3px 0}
+.sb-badge{margin-left:auto;background:var(--terra);color:white;font-size:10px;font-weight:700;padding:1px 6px;border-radius:10px;min-width:18px;text-align:center}
+.sb-badge-sage{background:var(--sage)}
+.sb-foot{padding:12px 16px;border-top:1px solid var(--border-light)}
+.sb-foot a{font-size:12px;color:var(--light);text-decoration:none;display:flex;align-items:center;gap:6px}
+.sb-foot a:hover{color:var(--ink)}
+.sb-foot svg{width:13px;height:13px}
+
+/* ── PAGE SHELL ── */
+.page-shell{margin-left:220px;padding-top:52px;min-height:100vh}
+.page-inner{max-width:1060px;margin:0 auto;padding:32px 28px}
+
+/* ── PAGE HEADER ── */
+.pg-hd{margin-bottom:28px}
+.pg-greeting{font-size:26px;font-weight:800;color:var(--ink);letter-spacing:-.03em;line-height:1.1}
+.pg-greeting em{font-family:'Lora',serif;font-style:italic;font-weight:400;color:var(--terra)}
+.pg-sub{font-size:13px;color:var(--light);margin-top:4px}
+
+/* ── SETUP BANNER ── */
+.setup-banner{background:var(--white);border:1px solid var(--border-light);border-left:4px solid var(--terra);border-radius:var(--r-lg);padding:16px 20px;display:flex;align-items:center;gap:16px;margin-bottom:24px;box-shadow:var(--sh-sm)}
+.setup-text{flex:1}
+.setup-title{font-size:14px;font-weight:700;color:var(--ink);margin-bottom:2px}
+.setup-sub{font-size:12px;color:var(--light)}
+.setup-bar{height:4px;background:var(--cream-dark);border-radius:4px;margin-top:8px;overflow:hidden}
+.setup-fill{height:100%;width:60%;background:var(--terra);border-radius:4px}
+
+/* ── MAIN GRID ── */
+.home-grid{display:grid;grid-template-columns:1fr 280px;gap:22px;align-items:start}
+
+/* ── STAT CARDS ── */
+.stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:22px}
+.sc{background:var(--white);border:1px solid var(--border-light);border-radius:var(--r-lg);padding:18px 20px;box-shadow:var(--sh-sm);position:relative;overflow:hidden}
+.sc::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;border-radius:3px 0 0 3px}
+.sc-terra::before{background:var(--terra)}
+.sc-sage::before{background:var(--sage)}
+.sc-amber::before{background:var(--amber)}
+.sc-ink::before{background:var(--ink)}
+.sc-val{font-size:26px;font-weight:800;color:var(--ink);letter-spacing:-.035em;line-height:1}
+.sc-lbl{font-family:'Lora',serif;font-size:12px;color:var(--light);margin-top:3px;font-style:italic}
+.sc-delta{font-size:11px;font-weight:600;margin-top:8px;display:inline-flex;align-items:center;gap:3px}
+.sc-delta.up{color:var(--sage)}
+.sc-delta.new{color:var(--terra)}
+
+/* ── CHART CARD ── */
+.chart-card{background:var(--white);border:1px solid var(--border-light);border-radius:var(--r-lg);padding:22px;margin-bottom:22px;box-shadow:var(--sh-sm)}
+.chart-hd{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:20px}
+.chart-title{font-size:14px;font-weight:700;color:var(--ink)}
+.chart-range{font-size:11px;color:var(--light)}
+.chart-total{font-size:20px;font-weight:800;color:var(--ink);letter-spacing:-.03em}
+.chart-total span{font-family:'Lora',serif;font-size:12px;font-weight:400;color:var(--light);font-style:italic;margin-left:4px}
+.bar-chart{display:flex;align-items:flex-end;gap:8px;height:100px}
+.bar-col{flex:1;display:flex;flex-direction:column;align-items:center;gap:5px}
+.bar-amt{font-size:10px;color:var(--light);font-weight:500}
+.bar-fill{width:100%;border-radius:4px 4px 0 0;background:var(--terra-pale);transition:.3s}
+.bar-fill.current{background:var(--terra)}
+.bar-lbl{font-size:10px;color:var(--light)}
+
+/* ── ACTIVITY FEED ── */
+.section-title{font-size:11px;font-weight:700;color:var(--light);text-transform:uppercase;letter-spacing:.08em;margin-bottom:12px}
+.act-item{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid var(--border-light)}
+.act-item:last-child{border-bottom:none}
+.act-dot{width:34px;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;background:var(--cream)}
+.act-body{flex:1}
+.act-title{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:1px}
+.act-sub{font-family:'Lora',serif;font-size:12px;color:var(--light);font-style:italic}
+.act-time{font-size:11px;color:var(--light);margin-top:3px}
+.act-wrap{background:var(--white);border:1px solid var(--border-light);border-radius:var(--r-lg);padding:16px 20px;box-shadow:var(--sh-sm)}
+
+/* ── SIDEBAR CARDS ── */
+.sb-card{background:var(--white);border:1px solid var(--border-light);border-radius:var(--r-lg);padding:18px;box-shadow:var(--sh-sm);margin-bottom:14px}
+.sb-card-title{font-size:11px;font-weight:700;color:var(--light);text-transform:uppercase;letter-spacing:.07em;margin-bottom:12px}
+.profile-preview{display:flex;gap:10px;align-items:center;margin-bottom:10px}
+.pp-av{width:40px;height:40px;background:var(--terra);border-radius:9px;font-size:13px;font-weight:800;color:white;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.pp-name{font-size:13px;font-weight:700;color:var(--ink)}
+.pp-url{font-size:11px;color:var(--light)}
+.pp-tags{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:10px}
+.pp-meta{font-family:'Lora',serif;font-size:12px;color:var(--text-mid);font-style:italic;margin-bottom:12px;line-height:1.4}
+.notif-item{display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--border-light)}
+.notif-item:last-child{border-bottom:none}
+.ni-av{width:28px;height:28px;border-radius:6px;flex-shrink:0;font-size:9px;font-weight:700;color:white;display:flex;align-items:center;justify-content:center}
+.ni-text{font-size:12px;color:var(--ink);line-height:1.35}
+.ni-time{font-size:10px;color:var(--light);margin-top:2px}
+.cta-strip{background:var(--ink);border-radius:var(--r-lg);padding:16px;margin-bottom:14px}
+.cta-strip-title{font-size:13px;font-weight:700;color:var(--white);margin-bottom:3px}
+.cta-strip-sub{font-family:'Lora',serif;font-size:12px;color:rgba(255,253,245,.45);font-style:italic;margin-bottom:12px;line-height:1.4}
+
+@media(max-width:900px){
+  .home-grid{grid-template-columns:1fr}
+  .stat-row{grid-template-columns:1fr 1fr}
+  .sidebar{display:none}
+  .page-shell{margin-left:0}
+}
+</style>
+</head>
+<body>
+
+<!-- TOP NAV -->
+<nav class="top-nav">
+  <a href="../index.html" class="nav-brand">
+    <div class="nav-mark">
+      <svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="3" fill="white"/><path d="M8 1v3M8 12v3M1 8h3M12 8h3" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg>
+    </div>
+    <div class="nav-wm">Commun<span>io</span></div>
+  </a>
+  <div class="nav-right">
+    <a href="messages.html" class="nav-notif">
+      <svg viewBox="0 0 16 16" fill="none"><path d="M13 5.5a5 5 0 10-9.9 1L2 12h12l-1.1-5.5z" stroke="currentColor" stroke-width="1.3"/><path d="M6.5 12.5a1.5 1.5 0 003 0" stroke="currentColor" stroke-width="1.3"/></svg>
+      <div class="notif-dot"></div>
+    </a>
+    <a href="../parish/profile.html" class="nav-pill">
+      <div class="nav-av">SM</div>
+      <!-- <?php echo $parish->short_name ?> -->
+      <span class="nav-pname">St. Mary's</span>
+    </a>
+    <button class="nav-burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="nav-mobile" id="navMobile">
+<a href="home.html">Home</a>
+<a href="messages.html">Messages</a>
+<a href="network.html">Network</a>
+<a href="../parish/profile.html">My Profile</a>
+<a href="projects.html">Projects</a>
+<a href="website.html">Website</a>
+<a href="donations.html">Donations</a>
+<a href="settings.html">Settings</a>
+
+</div>
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <div class="sb-parish">
+    <!-- <?php echo $parish->avatar, $parish->name, $parish->location ?> -->
+    <div class="sb-av">SM</div>
+    <div class="sb-name">St. Mary's Parish</div>
+    <div class="sb-loc">🇺🇸 New York, USA</div>
+  </div>
+  <nav class="sb-nav">
+    <div class="sb-sec">Parish</div>
+    <a href="home.html" class="sb-item">
+      <svg viewBox="0 0 16 16" fill="none"><path d="M2 7l6-5 6 5v7H10V9H6v5H2V7z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>
+      <span class="sb-item-lbl">Home</span>
+    </a>
+    <a href="messages.html" class="sb-item">
+      <svg viewBox="0 0 16 16" fill="none"><path d="M2 3h12a1 1 0 011 1v7a1 1 0 01-1 1H4l-3 2V4a1 1 0 011-1z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>
+      <span class="sb-item-lbl">Messages</span>
+      <!-- <?php if ($unread > 0): ?> -->
+      <span class="sb-badge">3</span>
+      <!-- <?php endif ?> -->
+    </a>
+    <a href="network.html" class="sb-item">
+      <svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="2.5" stroke="currentColor" stroke-width="1.3"/><circle cx="2.5" cy="3" r="1.5" stroke="currentColor" stroke-width="1.2"/><circle cx="13.5" cy="3" r="1.5" stroke="currentColor" stroke-width="1.2"/><circle cx="8" cy="14" r="1.5" stroke="currentColor" stroke-width="1.2"/><path d="M4 4l2.5 2.5M12 4l-2.5 2.5M8 10.5V12.5" stroke="currentColor" stroke-width="1.2"/></svg>
+      <span class="sb-item-lbl">Network</span>
+    </a>
+    <a href="../parish/profile.html" class="sb-item">
+      <svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="5" r="3" stroke="currentColor" stroke-width="1.3"/><path d="M2 14c0-3.3 2.7-6 6-6s6 2.7 6 6" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+      <span class="sb-item-lbl">My Profile</span>
+    </a>
+    <a href="projects.html" class="sb-item">
+      <svg viewBox="0 0 16 16" fill="none"><rect x="2" y="2" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.3"/><rect x="9" y="2" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.3"/><rect x="2" y="9" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.3"/><rect x="9" y="9" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.3"/></svg>
+      <span class="sb-item-lbl">Projects</span>
+    </a>
+    <div class="sb-sec">Manage</div>
+    <a href="website.html" class="sb-item">
+      <svg viewBox="0 0 16 16" fill="none"><rect x="1.5" y="3" width="13" height="10" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M1.5 6h13" stroke="currentColor" stroke-width="1.3"/></svg>
+      <span class="sb-item-lbl">Website</span>
+      <span class="sb-badge sb-badge-sage" style="font-size:9px;padding:1px 5px">Live</span>
+    </a>
+    <a href="donations.html" class="sb-item">
+      <svg viewBox="0 0 16 16" fill="none"><path d="M8 13.5C4 11 1.5 8.5 1.5 5.5a3 3 0 015-2.2A3 3 0 018 4a3 3 0 015 2.5c0 1-.4 2-1 2.8" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><path d="M8 9v5M6 12h4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+      <span class="sb-item-lbl">Donations</span>
+    </a>
+    <a href="settings.html" class="sb-item">
+      <svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="2" stroke="currentColor" stroke-width="1.3"/><path d="M8 1v2M8 13v2M1 8h2M13 8h2M3.1 3.1l1.4 1.4M11.5 11.5l1.4 1.4M3.1 12.9l1.4-1.4M11.5 4.5l1.4-1.4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+      <span class="sb-item-lbl">Settings</span>
+    </a>
+    
+  </nav>
+  <div class="sb-foot">
+    <a href="settings.html">
+      <svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="2" stroke="currentColor" stroke-width="1.3"/><path d="M8 1v2M8 13v2M1 8h2M13 8h2" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+      Settings →
+    </a>
+  </div>
+</aside>
+
+<!-- PAGE CONTENT -->
+<div class="page-shell">
+  <div class="page-inner" style="padding:0;max-width:none">
+<style>
+.an-hd{padding:20px 28px 0;background:var(--white);border-bottom:2px solid var(--border-light)}
+.an-hd-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.an-period{display:flex;gap:6px}
+.an-period-btn{font-size:12px;font-weight:600;padding:5px 12px;border-radius:20px;border:1.5px solid var(--border-light);background:var(--white);color:var(--mid);cursor:pointer;font-family:'Outfit',sans-serif;transition:all .15s}
+.an-period-btn:hover{border-color:var(--terra);color:var(--terra)}
+.an-period-btn.on{background:var(--ink);border-color:var(--ink);color:white}
+.an-tabs{display:flex}
+.an-tab{font-size:13px;font-weight:600;color:var(--light);background:none;border:none;padding:10px 20px 12px;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;font-family:'Outfit',sans-serif;transition:color .15s}
+.an-tab:hover{color:var(--ink)}
+.an-tab.on{color:var(--terra);border-bottom-color:var(--terra)}
+.an-body{padding:24px 28px}
+.an-pane{display:none}.an-pane.on{display:block}
+.stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:22px}
+.sc{background:var(--white);border:1px solid var(--border-light);border-radius:var(--r-lg);padding:16px 18px;box-shadow:var(--sh-sm);position:relative;overflow:hidden}
+.sc::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;border-radius:3px 0 0 3px}
+.sc-terra::before{background:var(--terra)}.sc-sage::before{background:var(--sage)}.sc-amber::before{background:var(--amber)}.sc-ink::before{background:var(--ink)}.sc-blue::before{background:#185FA5}.sc-purple::before{background:#534AB7}
+.sc-val{font-size:26px;font-weight:800;color:var(--ink);letter-spacing:-.035em;line-height:1}
+.sc-lbl{font-family:'Lora',serif;font-size:12px;color:var(--light);margin-top:3px;font-style:italic}
+.sc-delta{font-size:11px;font-weight:600;margin-top:4px}
+.sc-delta.up{color:var(--sage)}.sc-delta.dn{color:var(--terra)}
+.an-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.card{background:var(--white);border:1px solid var(--border-light);border-radius:var(--r-lg);padding:18px;margin-bottom:14px;box-shadow:var(--sh-sm)}
+.card-title{font-size:12px;font-weight:700;color:var(--ink);text-transform:uppercase;letter-spacing:.07em;margin-bottom:4px}
+.card-sub{font-family:'Lora',serif;font-size:12px;color:var(--light);font-style:italic;margin-bottom:14px}
+.chart-wrap{background:var(--white);border:1px solid var(--border-light);border-radius:var(--r-lg);padding:18px;margin-bottom:14px;box-shadow:var(--sh-sm)}
+.chart-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.chart-title{font-size:12px;font-weight:700;color:var(--ink);text-transform:uppercase;letter-spacing:.07em}
+.chart-range{font-size:12px;color:var(--light)}
+.bars{display:flex;align-items:flex-end;gap:3px;height:80px}
+.bar-col{display:flex;flex-direction:column;align-items:center;flex:1;gap:4px;height:100%}
+.bar{background:var(--terra-pale);border-radius:3px 3px 0 0;width:100%;flex-grow:35;opacity:.7;transition:opacity .15s}
+.bar:hover{opacity:1}
+.bar.hi{background:var(--terra);opacity:1}
+.bar-lbl{font-size:8px;color:var(--light);flex-shrink:0}
+.src-row{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.src-lbl{font-size:12px;color:var(--ink);width:140px;flex-shrink:0}
+.src-bar{flex:1;height:6px;background:var(--cream-dark);border-radius:3px;overflow:hidden}
+.src-fill{height:100%;border-radius:3px}
+.src-pct{font-size:12px;font-weight:700;color:var(--ink);width:36px;text-align:right;flex-shrink:0}
+.dev-row{display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--cream-dark);font-size:13px;color:var(--ink)}
+.dev-row:last-child{border-bottom:none}
+.dev-pct{font-weight:700;color:var(--ink)}
+.net-activity-row{display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid var(--cream-dark)}
+.net-activity-row:last-child{border-bottom:none}
+.net-act-av{width:36px;height:36px;border-radius:9px;font-size:10px;font-weight:800;color:white;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.net-act-body{flex:1}
+.net-act-title{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:2px}
+.net-act-meta{font-size:11px;color:var(--light);font-family:'Lora',serif;font-style:italic}
+.net-act-val{font-size:13px;font-weight:800;color:var(--ink);flex-shrink:0}
+.health-ring{width:90px;height:90px;position:relative;flex-shrink:0}
+.health-ring svg{transform:rotate(-90deg)}
+.health-score-val{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+</style>
+
+<div class="an-hd">
+  <div class="an-hd-top">
+    <div>
+      <div style="font-size:22px;font-weight:800;color:var(--ink);letter-spacing:-.03em">Analytics</div>
+      <div style="font-family:'Lora',serif;font-size:12px;color:var(--light);font-style:italic;margin-top:2px">St. Mary's Parish performance overview</div>
+    </div>
+    <div class="an-period">
+      <button class="an-period-btn">7d</button>
+      <button class="an-period-btn on">30d</button>
+      <button class="an-period-btn">90d</button>
+      <button class="an-period-btn">12m</button>
+    </div>
+  </div>
+  <div class="an-tabs">
+    <button class="an-tab on" onclick="anTab(this,'website')">Website</button>
+    <button class="an-tab" onclick="anTab(this,'network')">Network</button>
+  </div>
+</div>
+
+<div class="an-body">
+
+  <!-- WEBSITE TAB -->
+  <div class="an-pane on" id="an-website">
+    <!-- <?php echo $analytics->website->summary_html ?> -->
+    <div class="stat-row">
+      <div class="sc sc-terra"><div class="sc-val">1,284</div><div class="sc-lbl">Visitors this month</div><div class="sc-delta up">↑ 28% vs last month</div></div>
+      <div class="sc sc-sage"><div class="sc-val">3,940</div><div class="sc-lbl">Page views</div><div class="sc-delta up">↑ 19% vs last month</div></div>
+      <div class="sc sc-amber"><div class="sc-val">2m 34s</div><div class="sc-lbl">Avg. time on site</div><div class="sc-delta up">↑ 12s vs last month</div></div>
+      <div class="sc sc-ink"><div class="sc-val">61%</div><div class="sc-lbl">Bounce rate</div><div class="sc-delta dn">↑ 4% vs last month</div></div>
+    </div>
+    <div class="an-grid">
+      <div>
+        <div class="chart-wrap">
+          <div class="chart-hd"><span class="chart-title">Daily visitors — last 30 days</span><span class="chart-range">March 2026</span></div>
+          <div class="bars">
+            <div class="bar-col"><div class="bar" style="flex-grow:35"></div><div class="bar-lbl">1</div></div>
+            <div class="bar-col"><div class="bar" style="flex-grow:42"></div><div class="bar-lbl">2</div></div>
+            <div class="bar-col"><div class="bar" style="flex-grow:38"></div><div class="bar-lbl">3</div></div>
+            <div class="bar-col"><div class="bar" style="flex-grow:55"></div><div class="bar-lbl">4</div></div>
+            <div class="bar-col"><div class="bar" style="flex-grow:60"></div><div class="bar-lbl">5</div></div>
+            <div class="bar-col"><div class="bar" style="flex-grow:48"></div><div class="bar-lbl">6</div></div>
+            <div class="bar-col"><div class="bar" style="flex-grow:44"></div><div class="bar-lbl">7</div></div>
+            <div class="bar-col"><div class="bar" style="flex-grow:50"></div><div class="bar-lbl">8</div></div>
+            <div class="bar-col"><div class="bar" style="flex-grow:65"></div><div class="bar-lbl">9</div></div>
+            <div class="bar-col"><div class="bar" style="flex-grow:70"></div><div class="bar-lbl">10</div></div>
+            <div class="bar-col"><div class="bar" style="flex-grow:58"></div><div class="bar-lbl">11</div></div>
+            <div class="bar-col"><div class="bar" style="flex-grow:62"></div><div class="bar-lbl">12</div></div>
+            <div class="bar-col"><div class="bar" style="flex-grow:55"></div><div class="bar-lbl">13</div></div>
+            <div class="bar-col"><div class="bar" style="flex-grow:72"></div><div class="bar-lbl">14</div></div>
+            <div class="bar-col"><div class="bar" style="flex-grow:68"></div><div class="bar-lbl">15</div></div>
+            <div class="bar-col"><div class="bar" style="flex-grow:75"></div><div class="bar-lbl">16</div></div>
+            <div class="bar-col"><div class="bar" style="flex-grow:80"></div><div class="bar-lbl">17</div></div>
+            <div class="bar-col"><div class="bar" style="flex-grow:74"></div><div class="bar-lbl">18</div></div>
+            <div class="bar-col"><div class="bar" style="flex-grow:78"></div><div class="bar-lbl">19</div></div>
+            <div class="bar-col"><div class="bar" style="flex-grow:85"></div><div class="bar-lbl">20</div></div>
+            <div class="bar-col"><div class="bar" style="flex-grow:90"></div><div class="bar-lbl">21</div></div>
+            <div class="bar-col"><div class="bar" style="flex-grow:82"></div><div class="bar-lbl">22</div></div>
+            <div class="bar-col"><div class="bar" style="flex-grow:76"></div><div class="bar-lbl">23</div></div>
+            <div class="bar-col"><div class="bar" style="flex-grow:88"></div><div class="bar-lbl">24</div></div>
+            <div class="bar-col"><div class="bar" style="flex-grow:92"></div><div class="bar-lbl">25</div></div>
+            <div class="bar-col"><div class="bar" style="flex-grow:85"></div><div class="bar-lbl">26</div></div>
+            <div class="bar-col"><div class="bar hi" style="flex-grow:100"></div><div class="bar-lbl">27</div></div>
+            <div class="bar-col"><div class="bar" style="flex-grow:72"></div><div class="bar-lbl">28</div></div>
+            <div class="bar-col"><div class="bar" style="flex-grow:68"></div><div class="bar-lbl">29</div></div>
+            <div class="bar-col"><div class="bar" style="flex-grow:74"></div><div class="bar-lbl">30</div></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">Top pages</div>
+          <div class="card-sub">Most visited sections of your site</div>
+          <div class="src-row"><span class="src-lbl">Home</span><div class="src-bar"><div class="src-fill" style="width:100%;background:var(--terra)"></div></div><span class="src-pct">48%</span></div>
+          <div class="src-row"><span class="src-lbl">About us</span><div class="src-bar"><div class="src-fill" style="width:52%;background:var(--terra)"></div></div><span class="src-pct">25%</span></div>
+          <div class="src-row"><span class="src-lbl">Mass times</span><div class="src-bar"><div class="src-fill" style="width:38%;background:var(--terra)"></div></div><span class="src-pct">18%</span></div>
+          <div class="src-row" style="margin-bottom:0"><span class="src-lbl">Donations</span><div class="src-bar"><div class="src-fill" style="width:19%;background:var(--terra)"></div></div><span class="src-pct">9%</span></div>
+        </div>
+      </div>
+      <div>
+        <div class="card">
+          <div class="card-title">Traffic sources</div>
+          <div class="card-sub">Where your visitors come from</div>
+          <div class="src-row"><span class="src-lbl">Communio profile</span><div class="src-bar"><div class="src-fill" style="width:58%;background:var(--terra)"></div></div><span class="src-pct">58%</span></div>
+          <div class="src-row"><span class="src-lbl">Direct / bookmark</span><div class="src-bar"><div class="src-fill" style="width:22%;background:var(--sage)"></div></div><span class="src-pct">22%</span></div>
+          <div class="src-row"><span class="src-lbl">Google search</span><div class="src-bar"><div class="src-fill" style="width:13%;background:var(--amber)"></div></div><span class="src-pct">13%</span></div>
+          <div class="src-row" style="margin-bottom:0"><span class="src-lbl">Social media</span><div class="src-bar"><div class="src-fill" style="width:7%;background:var(--ink)"></div></div><span class="src-pct">7%</span></div>
+        </div>
+        <div class="card">
+          <div class="card-title">Devices</div>
+          <div class="card-sub">How visitors view your site</div>
+          <div class="dev-row"><span>📱 Mobile</span><span class="dev-pct">62%</span></div>
+          <div class="dev-row"><span>💻 Desktop</span><span class="dev-pct">31%</span></div>
+          <div class="dev-row"><span>📟 Tablet</span><span class="dev-pct">7%</span></div>
+        </div>
+        <div class="card">
+          <div class="card-title">Top countries</div>
+          <div class="card-sub">Where your visitors are located</div>
+          <div class="dev-row"><span>🇺🇸 United States</span><span class="dev-pct">68%</span></div>
+          <div class="dev-row"><span>🇵🇭 Philippines</span><span class="dev-pct">9%</span></div>
+          <div class="dev-row"><span>🇲🇽 Mexico</span><span class="dev-pct">7%</span></div>
+          <div class="dev-row"><span>🇮🇪 Ireland</span><span class="dev-pct">5%</span></div>
+          <div class="dev-row"><span>🇬🇧 United Kingdom</span><span class="dev-pct">4%</span></div>
+          <div class="dev-row"><span>Other</span><span class="dev-pct">7%</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- NETWORK TAB -->
+  <div class="an-pane" id="an-network">
+    <!-- <?php echo $analytics->network->summary_html ?> -->
+    <div class="stat-row">
+      <div class="sc sc-terra"><div class="sc-val">847</div><div class="sc-lbl">Profile views this month</div><div class="sc-delta up">↑ 34% vs last month</div></div>
+      <div class="sc sc-sage"><div class="sc-val">23</div><div class="sc-lbl">New connections</div><div class="sc-delta up">↑ 5 vs last month</div></div>
+      <div class="sc sc-blue" style="--sc-col:#185FA5"><div class="sc-val">4</div><div class="sc-lbl">Projects joined</div><div class="sc-delta up">↑ 1 this month</div></div>
+      <div class="sc sc-purple" style="--sc-col:#534AB7"><div class="sc-val">92%</div><div class="sc-lbl">Network health score</div><div class="sc-delta up">↑ 3% vs last month</div></div>
+    </div>
+    <div class="an-grid">
+      <div>
+        <div class="chart-wrap">
+          <div class="chart-hd"><span class="chart-title">Profile views — last 30 days</span><span class="chart-range">March 2026</span></div>
+          <div class="bars">
+            <div class="bar-col"><div class="bar" style="flex-grow:22;background:rgba(83,74,183,.2)"></div><div class="bar-lbl">1</div></div>
+            <div class="bar-col"><div class="bar" style="flex-grow:28;background:rgba(83,74,183,.2)"></div><div class="bar-lbl">2</div></div>
+            <div class="bar-col"><div class="bar" style="flex-grow:31;background:rgba(83,74,183,.2)"></div><div class="bar-lbl">3</div></div>
+            <div class="bar-col"><div class="bar" style="flex-grow:38;background:rgba(83,74,183,.2)"></div><div class="bar-lbl">4</div></div>
+            <div class="bar-col"><div class="bar" style="flex-grow:44;background:rgba(83,74,183,.2)"></div><div class="bar-lbl">5</div></div>
+            <div class="bar-col"><div class="bar" style="flex-grow:40;background:rgba(83,74,183,.2)"></div><div class="bar-lbl">6</div></div>
+            <div class="bar-col"><div class="bar" style="flex-grow:35;background:rgba(83,74,183,.2)"></div><div class="bar-lbl">7</div></div>
+            <div class="bar-col"><div class="bar" style="flex-grow:42;background:rgba(83,74,183,.2)"></div><div class="bar-lbl">8</div></div>
+            <div class="bar-col"><div class="bar" style="flex-grow:48;background:rgba(83,74,183,.2)"></div><div class="bar-lbl">9</div></div>
+            <div class="bar-col"><div class="bar" style="flex-grow:55;background:rgba(83,74,183,.2)"></div><div class="bar-lbl">10</div></div>
+            <div class="bar-col"><div class="bar" style="flex-grow:50;background:rgba(83,74,183,.2)"></div><div class="bar-lbl">11</div></div>
+            <div class="bar-col"><div class="bar" style="flex-grow:58;background:rgba(83,74,183,.2)"></div><div class="bar-lbl">12</div></div>
+            <div class="bar-col"><div class="bar" style="flex-grow:52;background:rgba(83,74,183,.2)"></div><div class="bar-lbl">13</div></div>
+            <div class="bar-col"><div class="bar" style="flex-grow:62;background:rgba(83,74,183,.2)"></div><div class="bar-lbl">14</div></div>
+            <div class="bar-col"><div class="bar" style="flex-grow:60;background:rgba(83,74,183,.2)"></div><div class="bar-lbl">15</div></div>
+            <div class="bar-col"><div class="bar" style="flex-grow:68;background:rgba(83,74,183,.2)"></div><div class="bar-lbl">16</div></div>
+            <div class="bar-col"><div class="bar" style="flex-grow:72;background:rgba(83,74,183,.2)"></div><div class="bar-lbl">17</div></div>
+            <div class="bar-col"><div class="bar" style="flex-grow:66;background:rgba(83,74,183,.2)"></div><div class="bar-lbl">18</div></div>
+            <div class="bar-col"><div class="bar" style="flex-grow:74;background:rgba(83,74,183,.2)"></div><div class="bar-lbl">19</div></div>
+            <div class="bar-col"><div class="bar" style="flex-grow:78;background:rgba(83,74,183,.2)"></div><div class="bar-lbl">20</div></div>
+            <div class="bar-col"><div class="bar" style="flex-grow:82;background:rgba(83,74,183,.2)"></div><div class="bar-lbl">21</div></div>
+            <div class="bar-col"><div class="bar" style="flex-grow:76;background:rgba(83,74,183,.2)"></div><div class="bar-lbl">22</div></div>
+            <div class="bar-col"><div class="bar" style="flex-grow:80;background:rgba(83,74,183,.2)"></div><div class="bar-lbl">23</div></div>
+            <div class="bar-col"><div class="bar" style="flex-grow:88;background:rgba(83,74,183,.2)"></div><div class="bar-lbl">24</div></div>
+            <div class="bar-col"><div class="bar" style="flex-grow:85;background:rgba(83,74,183,.2)"></div><div class="bar-lbl">25</div></div>
+            <div class="bar-col"><div class="bar" style="flex-grow:90;background:rgba(83,74,183,.2)"></div><div class="bar-lbl">26</div></div>
+            <div class="bar-col"><div class="bar" style="flex-grow:100;background:#534AB7"></div><div class="bar-lbl">27</div></div>
+            <div class="bar-col"><div class="bar" style="flex-grow:82;background:rgba(83,74,183,.2)"></div><div class="bar-lbl">28</div></div>
+            <div class="bar-col"><div class="bar" style="flex-grow:78;background:rgba(83,74,183,.2)"></div><div class="bar-lbl">29</div></div>
+            <div class="bar-col"><div class="bar" style="flex-grow:84;background:rgba(83,74,183,.2)"></div><div class="bar-lbl">30</div></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">Most viewed profile sections</div>
+          <div class="card-sub">Which parts of your Communio profile get the most attention</div>
+          <div class="src-row"><span class="src-lbl">About &amp; mission</span><div class="src-bar"><div class="src-fill" style="width:100%;background:#534AB7"></div></div><span class="src-pct">38%</span></div>
+          <div class="src-row"><span class="src-lbl">Mass times</span><div class="src-bar"><div class="src-fill" style="width:66%;background:#534AB7"></div></div><span class="src-pct">25%</span></div>
+          <div class="src-row"><span class="src-lbl">Events</span><div class="src-bar"><div class="src-fill" style="width:47%;background:#534AB7"></div></div><span class="src-pct">18%</span></div>
+          <div class="src-row"><span class="src-lbl">Projects</span><div class="src-bar"><div class="src-fill" style="width:26%;background:#534AB7"></div></div><span class="src-pct">10%</span></div>
+          <div class="src-row" style="margin-bottom:0"><span class="src-lbl">Contact</span><div class="src-bar"><div class="src-fill" style="width:18%;background:#534AB7"></div></div><span class="src-pct">9%</span></div>
+        </div>
+      </div>
+      <div>
+        <div class="card">
+          <div class="card-title">Recent network activity</div>
+          <div class="card-sub">Connections, messages and project interactions</div>
+          <div class="net-activity-row">
+            <div class="net-act-av" style="background:#2a8a4a">HS</div>
+            <div class="net-act-body">
+              <div class="net-act-title">Holy Spirit, Accra viewed your profile</div>
+              <div class="net-act-meta">2 hours ago · Accra, Ghana</div>
+            </div>
+          </div>
+          <div class="net-activity-row">
+            <div class="net-act-av" style="background:#BA7517">SJ</div>
+            <div class="net-act-body">
+              <div class="net-act-title">San José, Manila sent a connection request</div>
+              <div class="net-act-meta">Yesterday · Manila, Philippines</div>
+            </div>
+            <a href="network.html" class="btn btn-secondary btn-sm" style="flex-shrink:0">Accept</a>
+          </div>
+          <div class="net-activity-row">
+            <div class="net-act-av" style="background:#185FA5">SS</div>
+            <div class="net-act-body">
+              <div class="net-act-title">St. Stanislaw, Warsaw joined your project</div>
+              <div class="net-act-meta">3 days ago · Digital Sovereignty Study</div>
+            </div>
+          </div>
+          <div class="net-activity-row">
+            <div class="net-act-av" style="background:#534AB7">SB</div>
+            <div class="net-act-body">
+              <div class="net-act-title">St. Benedek, Budapest shared your profile</div>
+              <div class="net-act-meta">1 week ago · Budapest, Hungary</div>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">Network health</div>
+          <div class="card-sub">How active and connected your parish is on Communio</div>
+          <div style="display:flex;align-items:center;gap:18px;margin-bottom:16px">
+            <div class="health-ring">
+              <svg width="90" height="90" viewBox="0 0 90 90">
+                <circle cx="45" cy="45" r="38" fill="none" stroke="var(--cream-dark)" stroke-width="8"/>
+                <circle cx="45" cy="45" r="38" fill="none" stroke="#3B6D11" stroke-width="8" stroke-dasharray="218" stroke-dashoffset="26" stroke-linecap="round"/>
+              </svg>
+              <div class="health-score-val">
+                <div style="font-size:20px;font-weight:800;color:var(--ink);line-height:1">92</div>
+                <div style="font-size:10px;color:var(--light)">/ 100</div>
+              </div>
+            </div>
+            <div style="flex:1">
+              <div style="font-size:13px;font-weight:700;color:var(--ink);margin-bottom:6px">Excellent network presence</div>
+              <div style="font-family:'Lora',serif;font-size:12px;color:var(--text-mid);font-style:italic;line-height:1.5">Your parish is highly connected and active across the Communio network — top 8% globally.</div>
+            </div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:7px">
+            <div style="display:flex;align-items:center;gap:8px;font-size:12px"><span style="color:var(--sage)">✓</span><span style="color:var(--ink)">Profile fully completed</span></div>
+            <div style="display:flex;align-items:center;gap:8px;font-size:12px"><span style="color:var(--sage)">✓</span><span style="color:var(--ink)">18 sister parish connections</span></div>
+            <div style="display:flex;align-items:center;gap:8px;font-size:12px"><span style="color:var(--sage)">✓</span><span style="color:var(--ink)">Active in 4 projects</span></div>
+            <div style="display:flex;align-items:center;gap:8px;font-size:12px"><span style="color:var(--sage)">✓</span><span style="color:var(--ink)">Responding to messages within 4 hours</span></div>
+            <div style="display:flex;align-items:center;gap:8px;font-size:12px"><span style="color:var(--terra)">✗</span><span style="color:var(--text-mid)">No posts published this month</span><span style="font-size:10px;font-weight:700;background:var(--terra-pale);color:var(--terra);padding:1px 6px;border-radius:10px">Fix</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function anTab(btn, tab) {
+  document.querySelectorAll('.an-tab').forEach(function(b){ b.classList.remove('on'); });
+  document.querySelectorAll('.an-pane').forEach(function(p){ p.classList.remove('on'); });
+  btn.classList.add('on');
+  document.getElementById('an-' + tab).classList.add('on');
+}
+document.querySelectorAll('.an-period-btn').forEach(function(btn){
+  btn.addEventListener('click', function(){
+    document.querySelectorAll('.an-period-btn').forEach(function(b){ b.classList.remove('on'); });
+    btn.classList.add('on');
+  });
+});
+</script>
+
+</div>
+</div>
+<script>
+(function(){
+  var b=document.getElementById('burger');
+  var m=document.getElementById('navMobile');
+  if(!b||!m)return;
+  b.addEventListener('click',function(){m.classList.toggle('open');});
+  document.addEventListener('click',function(e){
+    if(!b.contains(e.target)&&!m.contains(e.target))m.classList.remove('open');
+  });
+})();
+</script>
+</body>
+</html>
