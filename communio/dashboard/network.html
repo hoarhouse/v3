@@ -143,7 +143,7 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
 .net-tab-badge{background:var(--terra);color:white;font-size:10px;font-weight:700;padding:1px 6px;border-radius:10px}
 .net-body{padding:24px 28px;display:grid;grid-template-columns:1fr 300px;gap:20px;align-items:start}
 .net-pane{display:none}.net-pane.on{display:block}
-.pending-banner{background:var(--terra-pale);border:1.5px solid var(--terra);border-radius:var(--r-lg);padding:16px 18px;margin-bottom:18px}
+.pending-banner{background:var(--cream);border:1px solid var(--border-light);border-left:3px solid var(--terra);border-radius:var(--r-lg);padding:16px 18px;margin-bottom:18px}
 .pending-hd{font-size:13px;font-weight:700;color:var(--terra);margin-bottom:12px;display:flex;align-items:center;gap:8px}
 .pending-item{display:flex;align-items:center;gap:12px;padding:10px 0;border-top:1px solid rgba(216,80,32,.15)}
 .pending-av{width:40px;height:40px;border-radius:10px;flex-shrink:0;font-size:11px;font-weight:800;color:white;display:flex;align-items:center;justify-content:center}
@@ -156,12 +156,12 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
 .pc:hover{box-shadow:0 4px 20px rgba(14,10,6,.1);transform:translateY(-1px)}
 .pc-top{display:flex;align-items:flex-start;gap:12px;margin-bottom:10px}
 .pc-av{width:46px;height:46px;border-radius:12px;flex-shrink:0;font-size:13px;font-weight:800;color:white;display:flex;align-items:center;justify-content:center;position:relative}
-.pc-online-dot{position:absolute;bottom:1px;right:1px;width:9px;height:9px;background:#22c55e;border-radius:50%;border:2px solid var(--white)}
+.pc-online-dot{position:absolute;bottom:1px;right:1px;width:8px;height:8px;background:#6ee7b7;border-radius:50%;border:2px solid var(--white)}
 .pc-info{flex:1;min-width:0}
 .pc-name{font-size:14px;font-weight:700;color:var(--ink);line-height:1.2}
 .pc-loc{font-size:11px;color:var(--light);margin-top:2px}
-.pc-sister-badge{font-size:10px;font-weight:700;color:var(--terra);background:var(--terra-pale);padding:2px 8px;border-radius:10px;display:inline-block;margin-top:4px}
-.pc-match-badge{font-size:10px;font-weight:700;color:#534AB7;background:#f3f0ff;padding:2px 8px;border-radius:10px;display:inline-block;margin-top:4px}
+.pc-sister-badge{font-size:10px;font-weight:700;color:var(--mid);background:var(--cream);border:1px solid var(--border-light);padding:2px 8px;border-radius:10px;display:inline-block;margin-top:4px}
+.pc-match-badge{font-size:10px;font-weight:700;color:var(--mid);background:var(--cream);padding:2px 8px;border-radius:10px;display:inline-block;margin-top:4px}
 .pc-tags{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:10px}
 .pc-tag{font-size:10px;font-weight:600;padding:3px 8px;border-radius:10px;background:var(--cream);color:var(--mid)}
 .pc-shared{font-size:11px;color:var(--text-mid);margin-bottom:10px;font-family:'Lora',serif;font-style:italic}
@@ -207,7 +207,7 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
     <div class="net-stat"><div class="net-stat-val">14</div><div class="net-stat-lbl">Countries</div></div>
     <div class="net-stat"><div class="net-stat-val">4</div><div class="net-stat-lbl">Active projects</div></div>
     <div class="net-stat"><div class="net-stat-val">847</div><div class="net-stat-lbl">Profile views/mo</div></div>
-    <div class="net-stat"><div class="net-stat-val" style="color:#22c55e">3</div><div class="net-stat-lbl">Online now</div></div>
+    <div class="net-stat"><div class="net-stat-val">3</div><div class="net-stat-lbl">Online now</div></div>
   </div>
 </div>
 
@@ -228,7 +228,7 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
       2 connection requests waiting
     </div>
     <div class="pending-item">
-      <div class="pending-av" style="background:#BA7517">SJ</div>
+      <div class="pending-av" style="background:#5c6672">SJ</div>
       <div class="pending-info">
         <div class="pending-name">🇵🇭 San José Parish, Manila</div>
         <div class="pending-loc">Youth ministry · Social justice · Mutual connection: Holy Spirit, Accra</div>
@@ -239,7 +239,7 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
       </div>
     </div>
     <div class="pending-item">
-      <div class="pending-av" style="background:#8a2a4a">SK</div>
+      <div class="pending-av" style="background:#5c6672">SK</div>
       <div class="pending-info">
         <div class="pending-name">🇰🇷 Sacred Heart, Seoul</div>
         <div class="pending-loc">Ethical technology · Digital sovereignty</div>
@@ -256,7 +256,7 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
     <div class="pc">
       <div class="pc-last">Active now</div>
       <div class="pc-top">
-        <div class="pc-av" style="background:#2a8a4a">HS<div class="pc-online-dot"></div></div>
+        <div class="pc-av" style="background:#5c6672">HS<div class="pc-online-dot"></div></div>
         <div class="pc-info"><div class="pc-name">Holy Spirit Parish</div><div class="pc-loc">🇬🇭 Accra, Ghana</div><div class="pc-sister-badge">♥ Sister parish</div></div>
       </div>
       <div class="pc-tags"><span class="pc-tag">Youth ministry</span><span class="pc-tag">Education</span><span class="pc-tag">Ethical tech</span></div>
@@ -266,7 +266,7 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
     <div class="pc">
       <div class="pc-last">1h ago</div>
       <div class="pc-top">
-        <div class="pc-av" style="background:#534AB7">SB</div>
+        <div class="pc-av" style="background:#5c6672">SB</div>
         <div class="pc-info"><div class="pc-name">St. Benedek Parish</div><div class="pc-loc">🇭🇺 Budapest, Hungary</div><div class="pc-sister-badge">♥ Sister parish</div></div>
       </div>
       <div class="pc-tags"><span class="pc-tag">Digital sovereignty</span><span class="pc-tag">Theology</span></div>
@@ -276,7 +276,7 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
     <div class="pc">
       <div class="pc-last">2h ago</div>
       <div class="pc-top">
-        <div class="pc-av" style="background:#185FA5">SS</div>
+        <div class="pc-av" style="background:#5c6672">SS</div>
         <div class="pc-info"><div class="pc-name">St. Stanislaw Parish</div><div class="pc-loc">🇵🇱 Warsaw, Poland</div><div class="pc-sister-badge">♥ Sister parish</div></div>
       </div>
       <div class="pc-tags"><span class="pc-tag">Ethical technology</span><span class="pc-tag">Peace</span></div>
@@ -286,7 +286,7 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
     <div class="pc">
       <div class="pc-last">3h ago</div>
       <div class="pc-top">
-        <div class="pc-av" style="background:#BA7517">SJ</div>
+        <div class="pc-av" style="background:#5c6672">SJ</div>
         <div class="pc-info"><div class="pc-name">San José Parish</div><div class="pc-loc">🇵🇭 Manila, Philippines</div><div class="pc-sister-badge">♥ Sister parish</div></div>
       </div>
       <div class="pc-tags"><span class="pc-tag">Social justice</span><span class="pc-tag">Youth</span></div>
@@ -296,7 +296,7 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
     <div class="pc">
       <div class="pc-last">Yesterday</div>
       <div class="pc-top">
-        <div class="pc-av" style="background:#166534">SM</div>
+        <div class="pc-av" style="background:#5c6672">SM</div>
         <div class="pc-info"><div class="pc-name">Santa Maria Parish</div><div class="pc-loc">🇧🇷 São Paulo, Brazil</div><div class="pc-sister-badge">♥ Sister parish</div></div>
       </div>
       <div class="pc-tags"><span class="pc-tag">Social justice</span><span class="pc-tag">Migration</span></div>
@@ -306,7 +306,7 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
     <div class="pc">
       <div class="pc-last">2 days ago</div>
       <div class="pc-top">
-        <div class="pc-av" style="background:#7c3aed">SC</div>
+        <div class="pc-av" style="background:#5c6672">SC</div>
         <div class="pc-info"><div class="pc-name">St. Catherine Parish</div><div class="pc-loc">🇳🇬 Lagos, Nigeria</div><div class="pc-sister-badge">♥ Sister parish</div></div>
       </div>
       <div class="pc-tags"><span class="pc-tag">Ethical technology</span><span class="pc-tag">Education</span></div>
@@ -328,7 +328,7 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
   <div class="pc-grid">
     <div class="pc">
       <div class="pc-top">
-        <div class="pc-av" style="background:#b91c1c">SR</div>
+        <div class="pc-av" style="background:#5c6672">SR</div>
         <div class="pc-info"><div class="pc-name">St. Raphael Parish</div><div class="pc-loc">🇮🇪 Dublin, Ireland</div><div class="pc-match-badge">94% match</div></div>
       </div>
       <div class="pc-tags"><span class="pc-tag">Ethical technology</span><span class="pc-tag">Social justice</span><span class="pc-tag">Youth ministry</span></div>
@@ -337,7 +337,7 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
     </div>
     <div class="pc">
       <div class="pc-top">
-        <div class="pc-av" style="background:#0369a1">SL</div>
+        <div class="pc-av" style="background:#5c6672">SL</div>
         <div class="pc-info"><div class="pc-name">St. Laurence Parish</div><div class="pc-loc">🇦🇺 Melbourne, Australia</div><div class="pc-match-badge">88% match</div></div>
       </div>
       <div class="pc-tags"><span class="pc-tag">Digital sovereignty</span><span class="pc-tag">Ethical technology</span></div>
@@ -346,7 +346,7 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
     </div>
     <div class="pc">
       <div class="pc-top">
-        <div class="pc-av" style="background:#be185d">SMF</div>
+        <div class="pc-av" style="background:#5c6672">SMF</div>
         <div class="pc-info"><div class="pc-name">San Marco Parish</div><div class="pc-loc">🇮🇹 Florence, Italy</div><div class="pc-match-badge">82% match</div></div>
       </div>
       <div class="pc-tags"><span class="pc-tag">Research</span><span class="pc-tag">Theology</span></div>
@@ -357,25 +357,25 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
   <div class="net-sec-lbl" style="margin-top:8px">All parishes <span>4,847 verified · 221 countries</span></div>
   <div class="pc-grid" id="discover-grid">
     <div class="pc">
-      <div class="pc-top"><div class="pc-av" style="background:#8a6820">SP</div><div class="pc-info"><div class="pc-name">St. Paul Parish</div><div class="pc-loc">🇰🇪 Nairobi, Kenya</div></div></div>
+      <div class="pc-top"><div class="pc-av" style="background:#5c6672">SP</div><div class="pc-info"><div class="pc-name">St. Paul Parish</div><div class="pc-loc">🇰🇪 Nairobi, Kenya</div></div></div>
       <div class="pc-tags"><span class="pc-tag">Youth ministry</span><span class="pc-tag">Peace</span></div>
       <div class="pc-shared">1 mutual connection</div>
       <div class="pc-actions"><a href="messages.html" class="btn btn-secondary btn-sm">Message</a><button class="btn btn-primary btn-sm" onclick="this.textContent='✓ Sent';this.disabled=true;this.style.background='var(--sage)'">Connect</button></div>
     </div>
     <div class="pc">
-      <div class="pc-top"><div class="pc-av" style="background:#2a8a4a">SA</div><div class="pc-info"><div class="pc-name">St. Augustine Parish</div><div class="pc-loc">🇿🇦 Cape Town, S. Africa</div></div></div>
+      <div class="pc-top"><div class="pc-av" style="background:#5c6672">SA</div><div class="pc-info"><div class="pc-name">St. Augustine Parish</div><div class="pc-loc">🇿🇦 Cape Town, S. Africa</div></div></div>
       <div class="pc-tags"><span class="pc-tag">Social justice</span><span class="pc-tag">Reconciliation</span></div>
       <div class="pc-shared">No mutual connections yet</div>
       <div class="pc-actions"><a href="messages.html" class="btn btn-secondary btn-sm">Message</a><button class="btn btn-primary btn-sm" onclick="this.textContent='✓ Sent';this.disabled=true;this.style.background='var(--sage)'">Connect</button></div>
     </div>
     <div class="pc">
-      <div class="pc-top"><div class="pc-av" style="background:#7c3aed">SI</div><div class="pc-info"><div class="pc-name">St. Ignatius Parish</div><div class="pc-loc">🇮🇳 Mumbai, India</div></div></div>
+      <div class="pc-top"><div class="pc-av" style="background:#5c6672">SI</div><div class="pc-info"><div class="pc-name">St. Ignatius Parish</div><div class="pc-loc">🇮🇳 Mumbai, India</div></div></div>
       <div class="pc-tags"><span class="pc-tag">Social justice</span><span class="pc-tag">Education</span></div>
       <div class="pc-shared">2 mutual connections</div>
       <div class="pc-actions"><a href="messages.html" class="btn btn-secondary btn-sm">Message</a><button class="btn btn-primary btn-sm" onclick="this.textContent='✓ Sent';this.disabled=true;this.style.background='var(--sage)'">Connect</button></div>
     </div>
     <div class="pc">
-      <div class="pc-top"><div class="pc-av" style="background:#b91c1c">ST</div><div class="pc-info"><div class="pc-name">St. Thomas Parish</div><div class="pc-loc">🇨🇦 Toronto, Canada</div></div></div>
+      <div class="pc-top"><div class="pc-av" style="background:#5c6672">ST</div><div class="pc-info"><div class="pc-name">St. Thomas Parish</div><div class="pc-loc">🇨🇦 Toronto, Canada</div></div></div>
       <div class="pc-tags"><span class="pc-tag">Ethical technology</span><span class="pc-tag">Research</span></div>
       <div class="pc-shared">1 mutual connection</div>
       <div class="pc-actions"><a href="messages.html" class="btn btn-secondary btn-sm">Message</a><button class="btn btn-primary btn-sm" onclick="this.textContent='✓ Sent';this.disabled=true;this.style.background='var(--sage)'">Connect</button></div>
@@ -389,7 +389,7 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
     <div style="font-size:12px;font-weight:700;color:var(--ink);text-transform:uppercase;letter-spacing:.07em;margin-bottom:4px">Network activity</div>
     <div style="font-family:'Lora',serif;font-size:12px;color:var(--light);font-style:italic;margin-bottom:16px">What's happening across your 18 sister parishes</div>
     <div class="act-item">
-      <div class="act-av" style="background:#2a8a4a">HS</div>
+      <div class="act-av" style="background:#5c6672">HS</div>
       <div class="act-body">
         <div class="act-title">🇬🇭 Holy Spirit, Accra replied to your project discussion</div>
         <div class="act-sub">"We agree with your survey approach — let's include cloud provider data"</div>
@@ -407,7 +407,7 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
       </div>
     </div>
     <div class="act-item">
-      <div class="act-av" style="background:#185FA5">SS</div>
+      <div class="act-av" style="background:#5c6672">SS</div>
       <div class="act-body">
         <div class="act-title">🇵🇱 St. Stanislaw, Warsaw uploaded a survey template</div>
         <div class="act-sub">Now available in your shared project resources</div>
@@ -425,7 +425,7 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
       </div>
     </div>
     <div class="act-item">
-      <div class="act-av" style="background:#BA7517">SJ</div>
+      <div class="act-av" style="background:#5c6672">SJ</div>
       <div class="act-body">
         <div class="act-title">🇵🇭 San José, Manila joined your project</div>
         <div class="act-sub">Now participating in Digital Sovereignty Study</div>
@@ -446,7 +446,7 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
       <div class="health-ring">
         <svg width="80" height="80" viewBox="0 0 80 80">
           <circle cx="40" cy="40" r="33" fill="none" stroke="var(--cream-dark)" stroke-width="7"/>
-          <circle cx="40" cy="40" r="33" fill="none" stroke="#3B6D11" stroke-width="7" stroke-dasharray="207" stroke-dashoffset="25" stroke-linecap="round"/>
+          <circle cx="40" cy="40" r="33" fill="none" stroke="var(--terra)" stroke-width="7" stroke-dasharray="207" stroke-dashoffset="25" stroke-linecap="round"/>
         </svg>
         <div class="health-ring-val">
           <div style="font-size:18px;font-weight:800;color:var(--ink);line-height:1">92</div>
@@ -459,9 +459,9 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
       </div>
     </div>
     <div style="font-size:12px;color:var(--text-mid);display:flex;flex-direction:column;gap:5px">
-      <div style="display:flex;align-items:center;gap:6px"><span style="color:var(--sage)">✓</span>Profile fully completed</div>
-      <div style="display:flex;align-items:center;gap:6px"><span style="color:var(--sage)">✓</span>Active in 4 projects</div>
-      <div style="display:flex;align-items:center;gap:6px"><span style="color:var(--sage)">✓</span>Responding within 4 hours</div>
+      <div style="display:flex;align-items:center;gap:6px"><span style="color:var(--terra)">✓</span>Profile fully completed</div>
+      <div style="display:flex;align-items:center;gap:6px"><span style="color:var(--terra)">✓</span>Active in 4 projects</div>
+      <div style="display:flex;align-items:center;gap:6px"><span style="color:var(--terra)">✓</span>Responding within 4 hours</div>
       <div style="display:flex;align-items:center;gap:6px"><span style="color:var(--terra)">✗</span>No posts published this month</div>
     </div>
   </div>
@@ -469,17 +469,17 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
   <div class="rc-card">
     <div class="rc-title">Recently viewed your profile</div>
     <div class="viewer-item">
-      <div class="viewer-av" style="background:#b91c1c">SR</div>
+      <div class="viewer-av" style="background:#5c6672">SR</div>
       <div class="viewer-info"><div class="viewer-name">🇮🇪 St. Raphael, Dublin</div><div class="viewer-time">30 min ago</div></div>
       <button class="btn btn-secondary btn-sm" style="font-size:10px;padding:3px 8px" onclick="this.textContent='✓ Sent';this.style.color='var(--sage)'">Connect</button>
     </div>
     <div class="viewer-item">
-      <div class="viewer-av" style="background:#0369a1">SL</div>
+      <div class="viewer-av" style="background:#5c6672">SL</div>
       <div class="viewer-info"><div class="viewer-name">🇦🇺 St. Laurence, Melbourne</div><div class="viewer-time">2 hours ago</div></div>
       <button class="btn btn-secondary btn-sm" style="font-size:10px;padding:3px 8px" onclick="this.textContent='✓ Sent';this.style.color='var(--sage)'">Connect</button>
     </div>
     <div class="viewer-item">
-      <div class="viewer-av" style="background:#7c3aed">SI</div>
+      <div class="viewer-av" style="background:#5c6672">SI</div>
       <div class="viewer-info"><div class="viewer-name">🇮🇳 St. Ignatius, Mumbai</div><div class="viewer-time">4 hours ago</div></div>
       <button class="btn btn-secondary btn-sm" style="font-size:10px;padding:3px 8px" onclick="this.textContent='✓ Sent';this.style.color='var(--sage)'">Connect</button>
     </div>
