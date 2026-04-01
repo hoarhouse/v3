@@ -293,7 +293,7 @@ input:checked+.mtoggle-slider:before{transform:translateX(16px)}
         <div class="pg-url">stmarysnyc.communio.org · 1,284 visitors this month</div>
       </div>
       <div style="display:flex;gap:8px">
-        <button class="btn btn-secondary btn-sm" id="pm-open-btn">Preview full site ↗</button>
+        <a href="../parish/profile.html" target="_blank" class="btn btn-secondary btn-sm">Preview full site ↗</a>
         <button class="btn btn-primary btn-sm" id="pub-btn">Publish changes →</button>
       </div>
     </div>
@@ -302,7 +302,6 @@ input:checked+.mtoggle-slider:before{transform:translateX(16px)}
       <button class="tab-btn on" data-tab="edit">Edit</button>
       <button class="tab-btn" data-tab="content">Content</button>
       <button class="tab-btn" data-tab="analytics">Analytics</button>
-      <button class="tab-btn" data-tab="events">Events</button>
       <button class="tab-btn" data-tab="seo">SEO</button>
       <button class="tab-btn" data-tab="settings">Settings</button>
     </div>
@@ -693,67 +692,7 @@ input:checked+.mtoggle-slider:before{transform:translateX(16px)}
   </div>
 </div>
     <!-- SHARED: events | <?php foreach($parish->events as $event): ?> ... <?php endforeach; ?> -->
-    <div class="tab-content" id="tab-events">
-  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:18px">
-    <div>
-      <div style="font-size:16px;font-weight:700;color:var(--ink)">Upcoming events</div>
-      <div style="font-family:'Lora',serif;font-size:12px;color:var(--light);font-style:italic;margin-top:2px">Events shown on your public parish website · shared to your network feed</div>
-    </div>
-    <button class="btn btn-primary btn-sm" id="add-ev-btn">+ Add event</button>
-  </div>
-  <!-- Add event form (hidden by default) -->
-  <!-- <?php echo $events->add_form_html ?> -->
-  <div class="add-ev-form" id="add-ev-form">
-    <div style="font-size:14px;font-weight:700;color:var(--ink);margin-bottom:16px">New event</div>
-    <div class="fg-row" style="margin-bottom:14px">
-      <div class="fg"><label class="fl">Event title</label><input class="fi" type="text" placeholder="e.g. Easter Vigil Mass"></div>
-      <div class="fg"><label class="fl">Location</label><input class="fi" type="text" placeholder="e.g. Main Church"></div>
-    </div>
-    <div class="fg-row" style="margin-bottom:14px">
-      <div class="fg"><label class="fl">Date</label><input class="fi" type="date"></div>
-      <div class="fg"><label class="fl">Time</label><input class="fi" type="time" value="10:00"></div>
-    </div>
-    <div class="fg" style="margin-bottom:16px"><label class="fl">Description (optional)</label><textarea class="fta" rows="2" placeholder="Brief details about this event…"></textarea></div>
-    <div class="fg" style="margin-bottom:16px">
-      <label class="fl">Event photo <span style="color:var(--light);font-weight:400">(optional)</span></label>
-      <div id="ev-upload-area" style="border:2px dashed var(--border-light);border-radius:var(--r-md);padding:16px;text-align:center;cursor:pointer;transition:border-color .2s;position:relative" onmouseover="this.style.borderColor='var(--terra)'" onmouseout="this.style.borderColor='var(--border-light)'">
-        <input type="file" id="ev-photo" accept="image/*" style="position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%">
-        <div id="ev-upload-placeholder">
-          <div style="font-size:20px;margin-bottom:4px">📷</div>
-          <div style="font-size:13px;font-weight:600;color:var(--ink)">Upload event photo</div>
-          <div style="font-size:11px;color:var(--light);margin-top:2px">JPG or PNG · Recommended 1200×630px</div>
-        </div>
-        <img id="ev-photo-preview" src="" alt="" style="display:none;max-width:100%;max-height:140px;border-radius:6px;object-fit:cover">
-      </div>
-    </div>
-    <div style="display:flex;gap:8px;justify-content:flex-end">
-      <button class="btn btn-secondary btn-sm" id="cancel-ev-btn">Cancel</button>
-      <button class="btn btn-primary btn-sm" id="save-ev-btn">Add to website →</button>
-    </div>
-  </div>
-  <!-- <?php foreach ($events->items as $ev): echo $ev->render(); endforeach ?> -->
-  <div class="ev-list" id="ev-list">
-    <div class="ev-item">
-      <div class="ev-date-block"><div class="ev-mon">Apr</div><div class="ev-day">19</div></div>
-      <div class="ev-info"><div class="ev-title">Easter Vigil</div><div class="ev-meta">8:00pm · Main Church</div></div>
-      <div class="ev-acts"><button class="btn btn-secondary btn-sm">Edit</button><button class="btn btn-secondary btn-sm" style="color:var(--terra)">Remove</button></div>
-    </div>
-    <div class="ev-item">
-      <div class="ev-date-block"><div class="ev-mon">Apr</div><div class="ev-day">22</div></div>
-      <div class="ev-info"><div class="ev-title">Youth Group Meeting</div><div class="ev-meta">6:30pm · Parish Hall</div></div>
-      <div class="ev-acts"><button class="btn btn-secondary btn-sm">Edit</button><button class="btn btn-secondary btn-sm" style="color:var(--terra)">Remove</button></div>
-    </div>
-    <div class="ev-item">
-      <div class="ev-date-block"><div class="ev-mon">May</div><div class="ev-day">4</div></div>
-      <div class="ev-info"><div class="ev-title">Community Dinner</div><div class="ev-meta">6:00pm · Parish Hall · Open to all</div></div>
-      <div class="ev-acts"><button class="btn btn-secondary btn-sm">Edit</button><button class="btn btn-secondary btn-sm" style="color:var(--terra)">Remove</button></div>
-    </div>
-  </div>
-  <div style="background:var(--sage-pale);border:1px solid var(--sage-pale);border-radius:var(--r-md);padding:14px 16px;display:flex;gap:10px;align-items:flex-start">
-    <span style="font-size:16px">🌿</span>
-    <div style="font-size:13px;color:var(--sage)"><strong>Events sync automatically</strong> — each event you add here also creates a card on your Communio network profile feed, and appears in the Events tab on your public profile.</div>
-  </div>
-</div>
+    <div class="tab-content" id="tab-events" style="display:none"><!-- events moved to dedicated section --></div>
     <!-- SHARED: parish_name used in meta title/description | $parish->name -->
     <div class="tab-content" id="tab-seo">
   <div class="seo-grid">
@@ -1195,28 +1134,9 @@ if(window.innerWidth<=900){
   });
 
   /* ── Events add form ── */
-  document.getElementById('add-ev-btn').addEventListener('click', function () {
-    document.getElementById('add-ev-form').classList.add('visible');
-  });
-  document.getElementById('ev-photo').addEventListener('change', function(){
-    var file = this.files[0];
-    if(!file) return;
-    var reader = new FileReader();
-    reader.onload = function(e){
-      var preview = document.getElementById('ev-photo-preview');
-      var placeholder = document.getElementById('ev-upload-placeholder');
-      preview.src = e.target.result;
-      preview.style.display = 'block';
-      placeholder.style.display = 'none';
-    };
-    reader.readAsDataURL(file);
-  });
-  document.getElementById('cancel-ev-btn').addEventListener('click', function () {
-    document.getElementById('add-ev-form').classList.remove('visible');
-    document.getElementById('ev-photo').value = '';
-    document.getElementById('ev-photo-preview').style.display = 'none';
-    document.getElementById('ev-upload-placeholder').style.display = 'block';
-  });
+  // events JS removed — events managed in dashboard
+  // events JS removed — events managed in dashboard
+  // events JS removed — events managed in dashboard
   document.getElementById('save-ev-btn').addEventListener('click', function () {
     document.getElementById('add-ev-form').classList.remove('visible');
     var b = document.getElementById('add-ev-btn');
@@ -1227,7 +1147,7 @@ if(window.innerWidth<=900){
   /* ── Preview modal ── */
   var modal = document.getElementById('pm');
   var pmBody = document.getElementById('pm-body');
-  document.getElementById('pm-open-btn').addEventListener('click', function () { modal.style.display = 'flex'; });
+  // Preview opens real site via <a> tag — no JS needed
   document.getElementById('pm-x').addEventListener('click', function () { modal.style.display = 'none'; });
   modal.addEventListener('click', function (e) { if (e.target === modal) { modal.style.display = 'none'; } });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { modal.style.display = 'none'; } });
