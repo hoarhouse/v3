@@ -2580,5 +2580,53 @@ if(_nav){ window.addEventListener('scroll',()=>{ _nav.style.boxShadow = window.s
     </div>
   </div>
 </footer>
+
+<script>
+// ── Communio Admin Sync — Chunk 1: Basic parish info ──────────────
+(function(){
+  try {
+    var pd = JSON.parse(localStorage.getItem('parish_data') || '{}');
+    if (!pd.name) return; // nothing saved yet
+
+    // Parish name
+    if (pd.name) {
+      document.querySelectorAll('.parish-name, .site-name').forEach(function(el){ el.textContent = pd.name; });
+    }
+
+    // Tagline
+    if (pd.tagline) {
+      document.querySelectorAll('.parish-tagline').forEach(function(el){ el.textContent = pd.tagline; });
+    }
+
+    // Address
+    if (pd.address && pd.city && pd.state && pd.zip) {
+      var fullAddr = pd.address + ', ' + pd.city + ', ' + pd.state + ' ' + pd.zip;
+      document.querySelectorAll('.parish-address').forEach(function(el){ el.textContent = fullAddr; });
+    }
+
+    // Phone
+    if (pd.phone) {
+      document.querySelectorAll('.parish-phone').forEach(function(el){ el.textContent = pd.phone; });
+    }
+
+    // Email
+    if (pd.email) {
+      document.querySelectorAll('.parish-email').forEach(function(el){ el.textContent = pd.email; });
+      document.querySelectorAll('a.parish-email').forEach(function(el){ el.href = 'mailto:' + pd.email; });
+    }
+
+    // About / description
+    if (pd.description) {
+      document.querySelectorAll('.parish-description').forEach(function(el){ el.textContent = pd.description; });
+    }
+
+    // Pastor name
+    if (pd.pastorName) {
+      document.querySelectorAll('.parish-pastor-name').forEach(function(el){ el.textContent = pd.pastorName; });
+    }
+
+  } catch(e) {}
+})();
+</script>
 </body>
 </html>
