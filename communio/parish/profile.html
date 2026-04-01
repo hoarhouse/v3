@@ -184,7 +184,7 @@
       </div>
       <!-- <?php echo $parish->name_block_html; ?> -->
       <div class="mh-id">
-        <div class="p-name"><!-- SHARED: $parish->name --><span data-parish="name">St. Mary's Parish</span> <span class="p-sub">· <span data-parish="diocese">Diocese of New York</span></span></div>
+        <div class="p-name"><!-- SHARED: $parish->name --><span data-parish="name"><span class="parish-name">St. Mary's Parish</span></span> <span class="p-sub">· <span data-parish="diocese">Diocese of New York</span></span></div>
         <div class="p-loc"><!-- SHARED: $parish->city, $parish->country -->📍 New York, USA &nbsp;·&nbsp; <span style="color:#6acd8a">✓ DCF Verified</span></div>
       </div>
     </div>
@@ -201,7 +201,7 @@
         <span class="tag tag-ink">Social Justice</span>
       </div>
       <div class="p-stats"><!-- SHARED: $parish->founded, family_count, project_count, sister_count, visitor_count -->
-        <div class="pst"><strong>1887</strong> Founded</div>
+        <div class="pst"><strong><span class="parish-founded">1887</span></strong> Founded</div>
         <div class="pst"><strong>1,200+</strong> Families</div>
         <div class="pst"><strong>4</strong> Projects</div>
         <div class="pst"><strong>3</strong> Sister Parishes</div>
@@ -268,7 +268,7 @@
           <div class="fc-av" style="background:var(--terra)">SM</div>
           <div class="fc-m">
             <!-- <?php echo $card->author_meta_html; ?> -->
-            <div class="fc-who">St. Mary's Parish</div>
+            <div class="fc-who"><span class="parish-name">St. Mary's Parish</span></div>
             <div class="fc-when">Yesterday · 10:15 AM</div>
           </div>
           <span class="fc-lbl lbl-u">Update</span>
@@ -311,7 +311,7 @@
         <div class="fc-hd">
           <div class="fc-av" style="background:var(--sage)">SM</div>
           <div class="fc-m">
-            <div class="fc-who">St. Mary's Parish</div>
+            <div class="fc-who"><span class="parish-name">St. Mary's Parish</span></div>
             <div class="fc-when">Upcoming · 8 days away</div>
           </div>
           <span class="fc-lbl lbl-e">Event</span>
@@ -324,7 +324,7 @@
           </div>
           <div>
             <div class="e-ttl">Community Dinner &amp; Tech Ethics Forum</div>
-            <div class="e-loc">📍 Parish Hall, 15 Mott Street · 6:30 – 9:00 PM</div>
+            <div class="e-loc">📍 Parish Hall, <span class="parish-address-street">15 Mott Street</span> · 6:30 – 9:00 PM</div>
             <div class="e-desc">An evening of shared meals and open conversation on how our parishes can lead in ethical technology. All are welcome — families, students, and visitors.</div>
           </div>
         </div>
@@ -352,7 +352,7 @@
         <div class="fc-hd">
           <div class="fc-av" style="background:var(--amber);color:var(--ink)">SM</div>
           <div class="fc-m">
-            <div class="fc-who">St. Mary's Parish</div>
+            <div class="fc-who"><span class="parish-name">St. Mary's Parish</span></div>
             <div class="fc-when">2 weeks ago</div>
           </div>
           <span class="fc-lbl lbl-p">Project</span>
@@ -373,13 +373,13 @@
         <div class="fc-hd">
           <div class="fc-av" style="background:var(--terra)">SM</div>
           <div class="fc-m">
-            <div class="fc-who">St. Mary's Parish</div>
+            <div class="fc-who"><span class="parish-name">St. Mary's Parish</span></div>
             <div class="fc-when">3 weeks ago</div>
           </div>
           <span class="fc-lbl lbl-u">Update</span>
         </div>
         <!-- <?php echo $card->body_html; ?> -->
-        <p class="fc-body">We are delighted to welcome Fr. James O'Brien as our new Associate Pastor. Fr. James brings eight years of ministry in East Africa and a deep passion for youth formation in the digital age.</p>
+        <p class="fc-body">We are delighted to welcome <span class="parish-pastor-name">Fr. James O'Brien</span> as our new Associate Pastor. Fr. James brings eight years of ministry in East Africa and a deep passion for youth formation in the digital age.</p>
         <div class="fc-ft">
           <span class="fc-r">❤️ 89 reactions</span>
           <span class="fc-r">💬 23 comments</span>
@@ -557,5 +557,20 @@ document.addEventListener('DOMContentLoaded', function(){
     });
   }
 </script>
-</body>
+
+<script>
+(function(){
+  try {
+    var pd = JSON.parse(localStorage.getItem('parish_data') || '{}');
+    if (!Object.keys(pd).length) return;
+    if (pd.name) document.querySelectorAll('.parish-name').forEach(function(el){ el.textContent = pd.name; });
+    if (pd.founded) document.querySelectorAll('.parish-founded').forEach(function(el){ el.textContent = pd.founded; });
+    if (pd.pastorName) document.querySelectorAll('.parish-pastor-name').forEach(function(el){ el.textContent = pd.pastorName; });
+    if (pd.address) document.querySelectorAll('.parish-address-street').forEach(function(el){ el.textContent = pd.address; });
+    if (pd.tagline) document.querySelectorAll('.parish-tagline').forEach(function(el){ el.textContent = pd.tagline; });
+    if (pd.description) document.querySelectorAll('.parish-description').forEach(function(el){ el.textContent = pd.description; });
+    if (pd.diocese) document.querySelectorAll('[data-parish="diocese"]').forEach(function(el){ el.textContent = 'Diocese of ' + pd.diocese; });
+  } catch(e) {}
+})();
+</script></body>
 </html>
