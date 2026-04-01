@@ -78,32 +78,25 @@ body{padding-top:64px}
 </head>
 <body>
 
-<nav class="top-nav" id="nav">
-  <div class="nav-container" style="display:flex;align-items:center;justify-content:space-between;width:100%;gap:16px">
-    <a href="index.html" class="nav-brand">
+<nav class="top-nav" id="nav" style="display:flex;align-items:center;justify-content:space-between;padding:0 28px;height:64px;position:fixed;top:0;left:0;right:0;z-index:300;background:rgba(14,10,6,.95);backdrop-filter:blur(8px)">
+    <a href="index.html" class="nav-brand" style="flex-shrink:0">
       <div class="nav-logo">SM</div>
       <span class="nav-name">St. Mary's Parish</span>
     </a>
-    <div class="nav-links">
+    <div class="nav-links" style="display:flex;align-items:center;gap:2px">
       <a href="index.html#mass-times">Mass Times</a>
-      <div class="nav-dropdown">
-        <a href="#">Parish Life</a>
-      </div>
       <a href="about.html">About Us</a>
       <a href="events.html">Events</a>
       <a href="team.html">Our Team</a>
       <a href="bulletin.html">Parish Bulletin</a>
       <a href="involved.html">Get Involved</a>
-      <div class="nav-dropdown">
-        <a href="sacraments.html">Sacraments</a>
-      </div>
-      <a href="contact.html" class="nav-active" style="color:white;background:rgba(255,255,255,.1)">Contact</a>
+      <a href="sacraments.html">Sacraments</a>
+      <a href="contact.html" style="color:white;background:rgba(255,255,255,.1)">Contact</a>
     </div>
-    <div class="nav-cta">
+    <div style="display:flex;align-items:center;gap:10px;flex-shrink:0">
       <a href="index.html#giving" class="btn-give">Give Now</a>
       <button class="nav-hamburger" id="navHamburger"><span></span><span></span><span></span></button>
     </div>
-  </div>
 </nav>
 
 <div class="nav-mobile" id="navMobile">
