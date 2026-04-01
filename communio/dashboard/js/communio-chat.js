@@ -5,7 +5,7 @@ var CSS = `
 @keyframes cm-pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.6;transform:scale(.85)}}
 @keyframes cm-toast-in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 @keyframes cm-panel-in{from{opacity:0;transform:translateY(10px) scale(.97)}to{opacity:1;transform:translateY(0) scale(1)}}
-#cm-chat-root,#cm-chat-root *{box-sizing:border-box!important;font-family:'Outfit',sans-serif!important}#cm-chat-root *{margin:0!important;padding:0!important}
+#cm-chat-root,#cm-chat-root *{box-sizing:border-box!important;font-family:'Outfit',sans-serif!important}#cm-chat-root *{margin:0;padding:0}
 #cm-chat-root{position:fixed;bottom:24px;right:24px;z-index:9999;display:flex;flex-direction:column;align-items:flex-end;gap:8px}
 .cm-context-strip{background:#f0fdf4;border:1px solid #bbf7d0;border-radius:20px;padding:7px 14px!important;font-size:12px!important;font-weight:700;color:#15803d;display:none;align-items:center;gap:5px;cursor:pointer;white-space:nowrap}
 .cm-context-strip.show{display:flex}
@@ -48,7 +48,7 @@ var CSS = `
 .cm-thread-body{flex:1;min-width:0}
 .cm-thread-name{font-size:13px!important;font-weight:700;color:#0e0a06;margin-bottom:3px!important}
 .cm-thread-prev{font-size:12px!important;color:#a89880;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-style:italic}
-.cm-thread-right{text-align:right;flex-shrink:0}
+.cm-thread-right{text-align:right;flex-shrink:0;min-width:36px}
 .cm-thread-time{font-size:10px;color:#a89880}
 .cm-thread-unread{font-size:9px;font-weight:800;background:#d85020;color:white;padding:1px 5px;border-radius:10px;margin-top:3px;display:inline-block}
 .cm-msgs{padding:14px 16px!important;max-height:210px;overflow-y:auto;display:flex;flex-direction:column;gap:8px;background:#faf8f4}
