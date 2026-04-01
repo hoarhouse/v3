@@ -680,4 +680,31 @@ document.addEventListener('DOMContentLoaded',function(){
   } catch(e) {}
 })();
 </script><script src="js/communio-chat.js?v=3"></script>
-</body></html>
+<script>
+// Standalone saveForm — guaranteed to work
+(function(){
+var FIELDS=['name','shortName','tagline','founded','diocese','country','description',
+'address','city','state','zip','phone','email','mapsUrl',
+'officeWeekday','officeSaturday','officeSunday',
+'pastorName','pastorRole','pastorEmail','pastorSince',
+'socialFacebook','socialInstagram','socialYoutube','socialSpotify','givingUrl'];
+
+window.saveForm = function(){
+  try {
+    var data = JSON.parse(localStorage.getItem('parish_data') || '{}');
+    FIELDS.forEach(function(key){
+      var el = document.getElementById('pd_' + key);
+      if(el) data[key] = el.value.trim();
+    });
+    localStorage.setItem('parish_data', JSON.stringify(data));
+    var btn = document.querySelector('[onclick="saveForm()"]');
+    if(btn){
+      var orig = btn.textContent;
+      btn.textContent = '✓ Saved!';
+      btn.style.background = 'var(--sage)';
+      setTimeout(function(){ btn.textContent = orig; btn.style.background = ''; }, 2000);
+    }
+  } catch(e) { console.error(e); }
+};
+})();
+</script></body></html>
