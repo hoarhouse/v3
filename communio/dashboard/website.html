@@ -1301,7 +1301,7 @@ input:checked+.mtoggle-slider:before{transform:translateX(16px)}
       try{ pd=JSON.parse(localStorage.getItem('parish_data')||'{}'); }catch(e){}
       var row = function(lbl,val){ return '<div style="display:flex;gap:10px;font-size:13px;padding:5px 0;border-bottom:1px solid var(--cream-dark)"><span style=\"color:var(--light);width:120px;flex-shrink:0\">'+lbl+'</span><span>'+(val||'<em style=\"color:var(--light)\">Not set in Settings</em>')+'</span></div>'; };
       var info = function(rows){ return '<div style=\"background:var(--cream);border-radius:var(--r-md);padding:14px 16px;margin-bottom:14px;border:1px solid var(--border-light)\"><div style=\"font-size:11px;font-weight:700;color:var(--mid);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px\">From your Settings</div>'+rows+'</div><div style=\"background:#f0fdf4;border:1px solid #bbf7d0;border-radius:var(--r-md);padding:11px 16px;display:flex;align-items:center;justify-content:space-between;margin-bottom:14px\"><span style=\"font-size:13px;color:#15803d\">Edit this data in Settings — updates everywhere instantly.</span><a href=\"settings.html\" class=\"btn btn-secondary btn-sm\">Edit in Settings →</a></div>'; };
-      return info(row('Saturday Vigil', pd.massSaturday) + row('Sunday', pd.massSunday) + row('Weekday', pd.massWeekday) + row('Confession', pd.confession) + row('Office hours', pd.officeWeekday));
+      return info(row('Saturday Masses', pd.massSaturday) + row('Sunday Masses', pd.massSunday) + row('Weekday Masses', pd.massWeekday) + row('Confession / Reconciliation', pd.confession) + row('Office hours (weekday)', pd.officeWeekday));
     })(),
       save: function(){}
     },
@@ -1349,7 +1349,7 @@ input:checked+.mtoggle-slider:before{transform:translateX(16px)}
       try{ pd=JSON.parse(localStorage.getItem('parish_data')||'{}'); }catch(e){}
       var row = function(lbl,val){ return '<div style="display:flex;gap:10px;font-size:13px;padding:5px 0;border-bottom:1px solid var(--cream-dark)"><span style=\"color:var(--light);width:120px;flex-shrink:0\">'+lbl+'</span><span>'+(val||'<em style=\"color:var(--light)\">Not set in Settings</em>')+'</span></div>'; };
       var info = function(rows){ return '<div style=\"background:var(--cream);border-radius:var(--r-md);padding:14px 16px;margin-bottom:14px;border:1px solid var(--border-light)\"><div style=\"font-size:11px;font-weight:700;color:var(--mid);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px\">From your Settings</div>'+rows+'</div><div style=\"background:#f0fdf4;border:1px solid #bbf7d0;border-radius:var(--r-md);padding:11px 16px;display:flex;align-items:center;justify-content:space-between;margin-bottom:14px\"><span style=\"font-size:13px;color:#15803d\">Edit this data in Settings — updates everywhere instantly.</span><a href=\"settings.html\" class=\"btn btn-secondary btn-sm\">Edit in Settings →</a></div>'; };
-      return info(row('Email', pd.email) + row('Phone', pd.phone) + row('Address', pd.address) + row('City', pd.city + (pd.state ? ', '+pd.state : '') + (pd.zip ? ' '+pd.zip : '')) + row('Maps URL', pd.mapsUrl ? '<a href=\"'+pd.mapsUrl+'\" target=\"_blank\">View map →</a>' : ''));
+      return info(row('Public email', pd.email) + row('Phone', pd.phone) + row('Address', pd.address) + row('City', pd.city + (pd.state ? ', '+pd.state : '') + (pd.zip ? ' '+pd.zip : '')) + row('Maps URL', pd.mapsUrl ? '<a href=\"'+pd.mapsUrl+'\" target=\"_blank\">View map →</a>' : ''));
     })(),
       save: function(){}
     }
