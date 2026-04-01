@@ -312,9 +312,9 @@ input:checked+.mtoggle-slider:before{transform:translateX(16px)}
   <!-- <?php echo $website->template_selector_html ?> -->
   <div class="tmpl-lbl">Template <em>Click to select</em></div>
   <div class="tmpl-row">
-    <div class="tmpl tw on" data-t="warm"><div class="th"><div class="tb"><span class="tl">Communio</span><span class="tdb">Donate</span></div><div class="tha"><div class="tt">✓ DCF Verified · New York</div><div class="tn">St. Mary's Parish</div><div class="ts">Serving the Lower East Side since 1887</div><div class="tbtn">Join us Sunday →</div></div></div><div class="tf"><span class="tf-lbl">Warm &amp; Classic</span><span class="tf-sel" id="sel-warm">✓ Selected</span></div></div>
-    <div class="tmpl tg" data-t="sage"><div class="th"><div class="tb"><span class="tl">Communio</span><span class="tdb">Donate</span></div><div class="tha"><div class="tt">✓ DCF Verified · New York</div><div class="tn">St. Mary's Parish</div><div class="ts">Serving the Lower East Side since 1887</div><div class="tbtn">Join us Sunday →</div></div></div><div class="tf"><span class="tf-lbl">Sage &amp; Natural</span><span class="tf-sel" id="sel-sage"></span></div></div>
-    <div class="tmpl tk" data-t="midnight"><div class="th"><div class="tb"><span class="tl">Communio</span><span class="tdb">Donate</span></div><div class="tha"><div class="tt">✓ DCF Verified · New York</div><div class="tn">St. Mary's Parish</div><div class="ts">Serving the Lower East Side since 1887</div><div class="tbtn">Join us Sunday →</div></div></div><div class="tf"><span class="tf-lbl">Midnight &amp; Bold</span><span class="tf-sel" id="sel-midnight"></span></div></div>
+    <div class="tmpl tw on" data-t="warm"><div class="th"><div class="tb"><span class="tl">Communio</span><span class="tdb">Donate</span></div><div class="tha"><div class="tt" id="tmpl-verified">✓ DCF Verified · New York</div><div class="tn tmpl-name">St. Mary's Parish</div><div class="ts tmpl-tagline">Serving the Lower East Side since 1887</div><div class="tbtn">Join us Sunday →</div></div></div><div class="tf"><span class="tf-lbl">Warm &amp; Classic</span><span class="tf-sel" id="sel-warm">✓ Selected</span></div></div>
+    <div class="tmpl tg" data-t="sage"><div class="th"><div class="tb"><span class="tl">Communio</span><span class="tdb">Donate</span></div><div class="tha"><div class="tt">✓ DCF Verified · New York</div><div class="tn tmpl-name">St. Mary's Parish</div><div class="ts tmpl-tagline">Serving the Lower East Side since 1887</div><div class="tbtn">Join us Sunday →</div></div></div><div class="tf"><span class="tf-lbl">Sage &amp; Natural</span><span class="tf-sel" id="sel-sage"></span></div></div>
+    <div class="tmpl tk" data-t="midnight"><div class="th"><div class="tb"><span class="tl">Communio</span><span class="tdb">Donate</span></div><div class="tha"><div class="tt">✓ DCF Verified · New York</div><div class="tn tmpl-name">St. Mary's Parish</div><div class="ts tmpl-tagline">Serving the Lower East Side since 1887</div><div class="tbtn">Join us Sunday →</div></div></div><div class="tf"><span class="tf-lbl">Midnight &amp; Bold</span><span class="tf-sel" id="sel-midnight"></span></div></div>
   </div>
   <div class="builder">
     <!-- LEFT: sections list -->
@@ -1123,6 +1123,18 @@ input:checked+.mtoggle-slider:before{transform:translateX(16px)}
       document.getElementById('sel-' + t.dataset.t).textContent = '✓ Selected';
     });
   });
+  /* ── Populate template previews from parish data ── */
+  (function(){
+    try {
+      var pd = JSON.parse(localStorage.getItem('parish_data') || '{}');
+      var name = pd.parishName || pd.name || '';
+      var tagline = pd.tagline || pd.heroTagline || '';
+      var city = pd.city || pd.location || '';
+      if(name) document.querySelectorAll('.tmpl-name').forEach(function(el){ el.textContent = name; });
+      if(tagline) document.querySelectorAll('.tmpl-tagline').forEach(function(el){ el.textContent = tagline; });
+      if(city) document.querySelectorAll('#tmpl-verified').forEach(function(el){ el.textContent = '✓ DCF Verified · ' + city; });
+    } catch(e) {}
+  })();
 
   /* ── Section editor ── */
   var fm = {
