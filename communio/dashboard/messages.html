@@ -42,7 +42,7 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
 .sb-item.active::before{content:'';position:absolute;left:0;top:4px;bottom:4px;width:3px;background:var(--terra);border-radius:0 3px 3px 0}
 .sb-badge{margin-left:auto;background:var(--terra);color:white;font-size:10px;font-weight:700;padding:1px 6px;border-radius:10px;min-width:18px;text-align:center}
 .sb-badge-sage{background:var(--sage)}
-.sb-foot{padding:12px 16px;border-top:1px solid var(--border-light)}
+.sb-foot{padding:14px 16px 24px;border-top:1px solid var(--border-light)}
 .sb-foot a{font-size:12px;color:var(--light);text-decoration:none;display:flex;align-items:center;gap:6px}
 .sb-foot a:hover{color:var(--ink)}
 .page-shell{margin-left:220px;padding-top:52px;min-height:100vh}
@@ -215,7 +215,11 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
     <a href="website.html" class="sb-item"><svg viewBox="0 0 16 16" fill="none" width="15" height="15"><rect x="1.5" y="3" width="13" height="10" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M1.5 6h13" stroke="currentColor" stroke-width="1.3"/></svg><span class="sb-item-lbl">Website</span><span class="sb-badge sb-badge-sage" style="font-size:9px;padding:1px 5px">Live</span></a><a href="donations.html" class="sb-item"><svg viewBox="0 0 16 16" fill="none" width="15" height="15"><path d="M8 13.5C4 11 1.5 8.5 1.5 5.5a3 3 0 015-2.2A3 3 0 018 4a3 3 0 015 2.5c0 1-.4 2-1 2.8" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><path d="M8 9v5M6 12h4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg><span class="sb-item-lbl">Donations</span></a><a href="settings.html" class="sb-item"><svg viewBox="0 0 16 16" fill="none" width="15" height="15"><circle cx="8" cy="8" r="2" stroke="currentColor" stroke-width="1.3"/><path d="M8 1v2M8 13v2M1 8h2M13 8h2M3.1 3.1l1.4 1.4M11.5 11.5l1.4 1.4M3.1 12.9l1.4-1.4M11.5 4.5l1.4-1.4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg><span class="sb-item-lbl">Settings</span></a>
   </nav>
   <div class="sb-foot">
-    <a href="settings.html"><svg viewBox="0 0 16 16" fill="none" width="13" height="13"><circle cx="8" cy="8" r="2" stroke="currentColor" stroke-width="1.3"/><path d="M8 1v2M8 13v2M1 8h2M13 8h2" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg> Settings →</a>
+    <a href="settings.html">
+      <svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="2" stroke="currentColor" stroke-width="1.3"/><path d="M8 1v2M8 13v2M1 8h2M13 8h2" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+      Settings →
+    </a>
+    <a href="../parish/profile.html" target="_blank" style="margin-top:6px;font-size:11px;color:var(--light);text-decoration:none;display:flex;align-items:center;gap:5px"><svg viewBox="0 0 16 16" fill="none" width="11" height="11"><circle cx="8" cy="5" r="3" stroke="currentColor" stroke-width="1.3"/><path d="M2 14c0-3.3 2.7-6 6-6s6 2.7 6 6" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg> View public profile ↗</a>
   </div>
 </aside>
 <div class="page-shell">
