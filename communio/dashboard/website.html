@@ -349,10 +349,10 @@ input:checked+.mtoggle-slider:before{transform:translateX(16px)}
     </div>
     <!-- TAB CONTENT -->
     <div class="tab-content on" id="tab-edit">
-  <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:var(--r-md);padding:10px 16px;margin-bottom:16px;display:flex;align-items:center;gap:10px;font-size:12px;color:#15803d">
-    <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="#15803d" stroke-width="1.3"/><path d="M8 5v3.5M8 11v.5" stroke="#15803d" stroke-width="1.3" stroke-linecap="round"/></svg>
+  <div style="background:var(--cream);border:1px solid var(--border-light);border-radius:var(--r-md);padding:10px 16px;margin-bottom:16px;display:flex;align-items:center;gap:10px;font-size:12px;color:var(--mid)">
+    <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="var(--mid)" stroke-width="1.3"/><path d="M8 5v3.5M8 11v.5" stroke="var(--mid)" stroke-width="1.3" stroke-linecap="round"/></svg>
     <span><strong>Single source of truth:</strong> Data shown below is pulled live from your Settings. Update it once there and it reflects everywhere — website, profile and network feed.</span>
-    <a href="settings.html" style="margin-left:auto;font-weight:700;color:#15803d;text-decoration:underline;white-space:nowrap;flex-shrink:0">Open Settings →</a>
+    <a href="settings.html" style="margin-left:auto;font-weight:700;color:var(--mid);text-decoration:underline;white-space:nowrap;flex-shrink:0">Open Settings →</a>
   </div>
   <div class="builder">
     <!-- LEFT: sections list -->
@@ -946,7 +946,7 @@ input:checked+.mtoggle-slider:before{transform:translateX(16px)}
           <div style="display:flex;align-items:center;gap:10px;font-size:13px">
             <span style="color:var(--amber);font-size:16px;flex-shrink:0">~</span>
             <span style="color:var(--text-mid)">Google Business Profile — not connected</span>
-            <span style="font-size:10px;font-weight:700;background:#FAEEDA;color:#633806;padding:1px 6px;border-radius:10px;flex-shrink:0">Optional</span>
+            <span style="font-size:10px;font-weight:700;background:var(--cream);color:var(--mid);padding:1px 6px;border-radius:10px;flex-shrink:0">Optional</span>
           </div>
         </div>
         <div style="margin-top:14px;padding-top:12px;border-top:1px solid var(--border-light);display:flex;align-items:center;justify-content:space-between">
@@ -1093,7 +1093,7 @@ input:checked+.mtoggle-slider:before{transform:translateX(16px)}
 <div class="pm" id="pm">
   <div class="pm-box">
     <div class="pm-bar">
-      <div class="pm-dots"><div class="pm-dot" style="background:#ff5f57"></div><div class="pm-dot" style="background:#febc2e"></div><div class="pm-dot" style="background:#28c840"></div></div>
+      <div class="pm-dots"><div class="pm-dot" style="background:#ff5f57"></div><div class="pm-dot" style="background:var(--amber)"></div><div class="pm-dot" style="background:var(--sage)"></div></div>
       <div class="pm-url">communio.io/stmarysnyc — Preview</div>
       <div class="pm-tog"><button class="pmt on" id="pm-d">Desktop</button><button class="pmt" id="pm-m">Mobile</button></div>
       <button class="pm-close" id="pm-x">✕ Close</button>
@@ -1279,7 +1279,7 @@ input:checked+.mtoggle-slider:before{transform:translateX(16px)}
       var pd={};
       try{ pd=JSON.parse(localStorage.getItem('parish_data')||'{}'); }catch(e){}
       var row = function(lbl,val){ return '<div style="display:flex;gap:10px;font-size:13px;padding:5px 0;border-bottom:1px solid var(--cream-dark)"><span style=\"color:var(--light);width:120px;flex-shrink:0\">'+lbl+'</span><span>'+(val||'<em style=\"color:var(--light)\">Not set in Settings</em>')+'</span></div>'; };
-      var info = function(rows){ return '<div style=\"background:var(--cream);border-radius:var(--r-md);padding:14px 16px;margin-bottom:14px;border:1px solid var(--border-light)\"><div style=\"font-size:11px;font-weight:700;color:var(--mid);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px\">From your Settings</div>'+rows+'</div><div style=\"background:#f0fdf4;border:1px solid #bbf7d0;border-radius:var(--r-md);padding:11px 16px;display:flex;align-items:center;justify-content:space-between;margin-bottom:14px\"><span style=\"font-size:13px;color:#15803d\">Edit this data in Settings — updates everywhere instantly.</span><a href=\"settings.html\" class=\"btn btn-secondary btn-sm\">Edit in Settings →</a></div>'; };
+      var info = function(rows){ return '<div style=\"background:var(--cream);border-radius:var(--r-md);padding:14px 16px;margin-bottom:14px;border:1px solid var(--border-light)\"><div style=\"font-size:11px;font-weight:700;color:var(--mid);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px\">From your Settings</div>'+rows+'</div><div style=\"background:var(--cream);border:1px solid var(--border-light);border-radius:var(--r-md);padding:11px 16px;display:flex;align-items:center;justify-content:space-between;margin-bottom:14px\"><span style=\"font-size:13px;color:var(--mid)\">Edit this data in Settings — updates everywhere instantly.</span><a href=\"settings.html\" class=\"btn btn-secondary btn-sm\">Edit in Settings →</a></div>'; };
       return info(row('Parish name', pd.name) + row('Tagline', pd.tagline) + row('City', pd.city)) +
         '<div class="ep-full fg"><label class="fl">Hero photo</label><div class="photo-upload"><input type="file" id="hero-file" accept="image/*"><div class="pu-icon">📷</div><div class="pu-title">Upload a hero photo</div><div class="pu-sub">JPG, PNG or WebP · 1400×600px recommended</div><img class="pu-preview" id="pu-preview" src="" alt=""></div></div><div class="fg"><label class="fl">Button text</label><input class="fi" id="f-btn" type="text" value="Join us Sunday →"></div>';
     })(),
@@ -1292,7 +1292,7 @@ input:checked+.mtoggle-slider:before{transform:translateX(16px)}
       var pd={};
       try{ pd=JSON.parse(localStorage.getItem('parish_data')||'{}'); }catch(e){}
       var row = function(lbl,val){ return '<div style="display:flex;gap:10px;font-size:13px;padding:5px 0;border-bottom:1px solid var(--cream-dark)"><span style=\"color:var(--light);width:120px;flex-shrink:0\">'+lbl+'</span><span>'+(val||'<em style=\"color:var(--light)\">Not set in Settings</em>')+'</span></div>'; };
-      var info = function(rows){ return '<div style=\"background:var(--cream);border-radius:var(--r-md);padding:14px 16px;margin-bottom:14px;border:1px solid var(--border-light)\"><div style=\"font-size:11px;font-weight:700;color:var(--mid);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px\">From your Settings</div>'+rows+'</div><div style=\"background:#f0fdf4;border:1px solid #bbf7d0;border-radius:var(--r-md);padding:11px 16px;display:flex;align-items:center;justify-content:space-between;margin-bottom:14px\"><span style=\"font-size:13px;color:#15803d\">Edit this data in Settings — updates everywhere instantly.</span><a href=\"settings.html\" class=\"btn btn-secondary btn-sm\">Edit in Settings →</a></div>'; };
+      var info = function(rows){ return '<div style=\"background:var(--cream);border-radius:var(--r-md);padding:14px 16px;margin-bottom:14px;border:1px solid var(--border-light)\"><div style=\"font-size:11px;font-weight:700;color:var(--mid);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px\">From your Settings</div>'+rows+'</div><div style=\"background:var(--cream);border:1px solid var(--border-light);border-radius:var(--r-md);padding:11px 16px;display:flex;align-items:center;justify-content:space-between;margin-bottom:14px\"><span style=\"font-size:13px;color:var(--mid)\">Edit this data in Settings — updates everywhere instantly.</span><a href=\"settings.html\" class=\"btn btn-secondary btn-sm\">Edit in Settings →</a></div>'; };
       return info(row('Description', pd.description ? pd.description.substring(0,100)+'…' : '') + row('Founded', pd.founded) + row('Diocese', pd.diocese));
     })(),
       save: function(){}
@@ -1304,7 +1304,7 @@ input:checked+.mtoggle-slider:before{transform:translateX(16px)}
       var pd={};
       try{ pd=JSON.parse(localStorage.getItem('parish_data')||'{}'); }catch(e){}
       var row = function(lbl,val){ return '<div style="display:flex;gap:10px;font-size:13px;padding:5px 0;border-bottom:1px solid var(--cream-dark)"><span style=\"color:var(--light);width:120px;flex-shrink:0\">'+lbl+'</span><span>'+(val||'<em style=\"color:var(--light)\">Not set in Settings</em>')+'</span></div>'; };
-      var info = function(rows){ return '<div style=\"background:var(--cream);border-radius:var(--r-md);padding:14px 16px;margin-bottom:14px;border:1px solid var(--border-light)\"><div style=\"font-size:11px;font-weight:700;color:var(--mid);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px\">From your Settings</div>'+rows+'</div><div style=\"background:#f0fdf4;border:1px solid #bbf7d0;border-radius:var(--r-md);padding:11px 16px;display:flex;align-items:center;justify-content:space-between;margin-bottom:14px\"><span style=\"font-size:13px;color:#15803d\">Edit this data in Settings — updates everywhere instantly.</span><a href=\"settings.html\" class=\"btn btn-secondary btn-sm\">Edit in Settings →</a></div>'; };
+      var info = function(rows){ return '<div style=\"background:var(--cream);border-radius:var(--r-md);padding:14px 16px;margin-bottom:14px;border:1px solid var(--border-light)\"><div style=\"font-size:11px;font-weight:700;color:var(--mid);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px\">From your Settings</div>'+rows+'</div><div style=\"background:var(--cream);border:1px solid var(--border-light);border-radius:var(--r-md);padding:11px 16px;display:flex;align-items:center;justify-content:space-between;margin-bottom:14px\"><span style=\"font-size:13px;color:var(--mid)\">Edit this data in Settings — updates everywhere instantly.</span><a href=\"settings.html\" class=\"btn btn-secondary btn-sm\">Edit in Settings →</a></div>'; };
       return info(row('Saturday Masses', pd.massSaturday) + row('Sunday Masses', pd.massSunday) + row('Weekday Masses', pd.massWeekday) + row('Confession / Reconciliation', pd.confession) + row('Office hours (weekday)', pd.officeWeekday));
     })(),
       save: function(){}
@@ -1352,7 +1352,7 @@ input:checked+.mtoggle-slider:before{transform:translateX(16px)}
       var pd={};
       try{ pd=JSON.parse(localStorage.getItem('parish_data')||'{}'); }catch(e){}
       var row = function(lbl,val){ return '<div style="display:flex;gap:10px;font-size:13px;padding:5px 0;border-bottom:1px solid var(--cream-dark)"><span style=\"color:var(--light);width:120px;flex-shrink:0\">'+lbl+'</span><span>'+(val||'<em style=\"color:var(--light)\">Not set in Settings</em>')+'</span></div>'; };
-      var info = function(rows){ return '<div style=\"background:var(--cream);border-radius:var(--r-md);padding:14px 16px;margin-bottom:14px;border:1px solid var(--border-light)\"><div style=\"font-size:11px;font-weight:700;color:var(--mid);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px\">From your Settings</div>'+rows+'</div><div style=\"background:#f0fdf4;border:1px solid #bbf7d0;border-radius:var(--r-md);padding:11px 16px;display:flex;align-items:center;justify-content:space-between;margin-bottom:14px\"><span style=\"font-size:13px;color:#15803d\">Edit this data in Settings — updates everywhere instantly.</span><a href=\"settings.html\" class=\"btn btn-secondary btn-sm\">Edit in Settings →</a></div>'; };
+      var info = function(rows){ return '<div style=\"background:var(--cream);border-radius:var(--r-md);padding:14px 16px;margin-bottom:14px;border:1px solid var(--border-light)\"><div style=\"font-size:11px;font-weight:700;color:var(--mid);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px\">From your Settings</div>'+rows+'</div><div style=\"background:var(--cream);border:1px solid var(--border-light);border-radius:var(--r-md);padding:11px 16px;display:flex;align-items:center;justify-content:space-between;margin-bottom:14px\"><span style=\"font-size:13px;color:var(--mid)\">Edit this data in Settings — updates everywhere instantly.</span><a href=\"settings.html\" class=\"btn btn-secondary btn-sm\">Edit in Settings →</a></div>'; };
       return info(row('Public email', pd.email) + row('Phone', pd.phone) + row('Address', pd.address) + row('City', pd.city + (pd.state ? ', '+pd.state : '') + (pd.zip ? ' '+pd.zip : '')) + row('Maps URL', pd.mapsUrl ? '<a href=\"'+pd.mapsUrl+'\" target=\"_blank\">View map →</a>' : ''));
     })(),
       save: function(){}
