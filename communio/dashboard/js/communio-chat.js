@@ -7,9 +7,9 @@ var CSS = `
 @keyframes cm-panel-in{from{opacity:0;transform:translateY(10px) scale(.97)}to{opacity:1;transform:translateY(0) scale(1)}}
 #cm-chat-root,#cm-chat-root *{box-sizing:border-box!important;font-family:'Outfit',sans-serif!important}#cm-chat-root *{margin:0;padding:0}
 #cm-chat-root{position:fixed;bottom:24px;right:24px;z-index:9999;display:flex;flex-direction:column;align-items:flex-end;gap:8px}
-.cm-context-strip{background:#f0fdf4;border:1px solid #bbf7d0;border-radius:20px;padding:7px 14px!important;font-size:12px!important;font-weight:700;color:#15803d;display:none;align-items:center;gap:5px;cursor:pointer;white-space:nowrap}
+.cm-context-strip{background:var(--cream,#faf8f4);border:1px solid var(--border-light,#e8e2d6);border-radius:20px;padding:7px 14px!important;font-size:12px!important;font-weight:700;color:var(--mid,#6b5c4e);display:none;align-items:center;gap:5px;cursor:pointer;white-space:nowrap}
 .cm-context-strip.show{display:flex}
-.cm-context-dot{width:6px;height:6px;border-radius:50%;background:#22c55e;animation:cm-pulse 2s infinite;flex-shrink:0}
+.cm-context-dot{width:6px;height:6px;border-radius:50%;background:#c8bfb2;animation:cm-pulse 2s infinite;flex-shrink:0}
 .cm-btn{width:52px;height:52px;border-radius:50%;background:#d85020;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;position:relative;transition:background .15s;flex-shrink:0}
 .cm-btn:hover{background:#c04418}
 .cm-badge{position:absolute;top:-2px;right:-2px;min-width:18px;height:18px;border-radius:9px;background:#e24b4a;border:2px solid #faf8f4;font-size:10px;font-weight:800;color:white;display:none;align-items:center;justify-content:center;padding:0 4px}
@@ -35,7 +35,7 @@ var CSS = `
 .cm-hd-info{flex:1}
 .cm-hd-name{font-size:14px!important;font-weight:700;color:white}
 .cm-hd-status{font-size:11px!important;color:rgba(255,255,255,.8);display:flex;align-items:center;gap:4px}
-.cm-online-dot{width:5px;height:5px;border-radius:50%;background:#22c55e}
+.cm-online-dot{width:5px;height:5px;border-radius:50%;background:#c8bfb2}
 .cm-tabs{display:flex;border-bottom:1px solid #f0ebe0}
 .cm-tab{flex:1;font-size:12px;font-weight:700;color:#a89880;background:none;border:none;border-bottom:2px solid transparent;padding:10px 0!important;cursor:pointer;font-family:'Outfit',sans-serif;margin-bottom:-1px;transition:color .15s}
 .cm-tab:hover{color:#0e0a06}
@@ -107,9 +107,9 @@ var THREADS = [
 var PROJECT_THREADS = [
   {id:'proj1', name:'Digital Sovereignty Study', av:'DS', color:'#5c6672', online:false, time:'12m', unread:3,
    preview:'Survey methodology discussion…'},
-  {id:'proj2', name:'Ethical AI Statement', av:'AI', color:'#D85A30', online:false, time:'1h', unread:0,
+  {id:'proj2', name:'Ethical AI Statement', av:'AI', color:'#5c6672', online:false, time:'1h', unread:0,
    preview:'247 parishes have now signed'},
-  {id:'proj3', name:'Global Youth Formation', av:'YF', color:'#3B6D11', online:false, time:'2d', unread:0,
+  {id:'proj3', name:'Global Youth Formation', av:'YF', color:'#5c6672', online:false, time:'2d', unread:0,
    preview:'New curriculum section uploaded'}
 ];
 
@@ -164,7 +164,7 @@ function buildInbox() {
   var threadsHtml = threads.length ? threads.map(function(t){
     return '<div class="cm-thread" onclick="cmOpenThread(\''+t.id+'\',\''+state.activeTab+'\')">'+
       '<div class="cm-thread-av" style="background:'+t.color+'">'+t.av+
-      (t.online ? '<div class="cm-thread-dot" style="background:#22c55e"></div>' : '')+
+      (t.online ? '<div class="cm-thread-dot" style="background:#c8bfb2"></div>' : '')+
       '</div><div class="cm-thread-body">'+
       '<div class="cm-thread-name">'+t.name+'</div>'+
       '<div class="cm-thread-prev">'+t.preview+'</div></div>'+
