@@ -51,7 +51,7 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
 .pg-title{font-size:22px;font-weight:800;color:var(--ink);letter-spacing:-.03em}
 
 /* ── NEW MESSAGE LAYOUT ── */
-.msg-layout{display:grid;grid-template-columns:320px 1fr;gap:0;background:var(--white);border:1px solid var(--border-light);border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--sh-sm);height:calc(100vh - 250px);min-height:480px}
+.msg-layout{display:grid;grid-template-columns:320px 1fr;gap:0;background:var(--white);border:1px solid var(--border-light);border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--sh-sm);height:calc(100vh - 196px);min-height:480px}
 
 /* LEFT PANEL */
 .msg-left{border-right:1px solid var(--border-light);display:flex;flex-direction:column;overflow:hidden;background:var(--white)}
@@ -223,16 +223,16 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
   </div>
 </aside>
 <div class="page-shell">
-  <div class="page-inner" style="padding:20px 24px;max-width:none;box-sizing:border-box">
+  <div class="page-inner" style="padding:0;max-width:none">
     
-    <div style="background:var(--white);padding:16px 24px;border-bottom:2px solid var(--border-light);display:flex;align-items:center;justify-content:space-between">
+    <div style="background:var(--white);padding:16px 28px;border-bottom:2px solid var(--border-light);display:flex;align-items:center;justify-content:space-between">
   <div>
     <div style="font-size:22px;font-weight:800;color:var(--ink);letter-spacing:-.03em">Messages</div>
     <div style="font-family:'Lora',serif;font-size:13px;color:var(--light);font-style:italic;margin-top:2px">Communicate with your 18 sister parishes</div>
   </div>
   <button class="btn btn-primary btn-sm" onclick="document.querySelector('.msg-thread-item').click()">+ New message</button>
 </div>
-<div class="msg-layout">
+<div style="padding:20px 24px 24px"><div style="padding:20px 24px 24px"><div class="msg-layout">
       <div class="msg-left">
         <div class="msg-search-wrap">
           <div class="msg-search-box">
@@ -432,7 +432,7 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
       </div>
     </div>
   </div>
-</div>
+</div></div></div>
 
 <script>
 (function(){
