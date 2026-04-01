@@ -224,10 +224,17 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
 </aside>
 <div class="page-shell">
   <div class="page-inner" style="padding:0;max-width:none">
+<div class="pg-header">
+  <div class="pg-header-top">
+    <div>
+      <div class="pg-header-title">Messages</div>
+      <div class="pg-header-sub">Communicate with your 18 sister parishes</div>
+    </div>
+    <button class="btn btn-primary btn-sm">+ New message</button>
+  </div>
+</div>
+
     
-    <div style="background:var(--white);padding:16px 28px;border-bottom:2px solid var(--border-light);display:flex;align-items:center;justify-content:space-between">
-  <div>
-    <div style="font-size:22px;font-weight:800;color:var(--ink);letter-spacing:-.03em">Messages</div>
     <div style="font-family:'Lora',serif;font-size:13px;color:var(--light);font-style:italic;margin-top:2px">Communicate with your 18 sister parishes</div>
   </div>
   <button class="btn btn-primary btn-sm" onclick="document.querySelector('.msg-thread-item').click()">+ New message</button>

@@ -256,28 +256,35 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
 </aside>
 <div class="page-shell">
   <div class="page-inner" style="padding:0;max-width:none">
+<div class="pg-header">
+  <div class="pg-header-top">
+    <div>
+      <div class="pg-header-title">Projects</div>
+      <div class="pg-header-sub">Collaborate with parishes in your network on shared missions</div>
+    </div>
+    <button class="btn btn-primary btn-sm" onclick="document.getElementById('create-modal').classList.add('open')">+ New project</button>
+  </div>
+  <div class="pj-tabs">
+    <button class="pj-tab on" data-tab="my">My projects <span class="pj-tab-count">4</span></button>
+    <button class="pj-tab" data-tab="discover">Discover</button>
+    <button class="pj-tab" data-tab="mine">Created by me <span class="pj-tab-count">1</span></button>
+  </div>
+</div>
+
 
   <div style="padding:20px 28px 28px">
 
-  <div style="background:var(--white);padding:20px 28px 0;border-bottom:2px solid var(--border-light)">
-  <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:16px;gap:16px">
-    <div>
-      <div class="pg-title">Projects</div>
-      <div style="font-family:'Lora',serif;font-size:13px;color:var(--light);font-style:italic;margin-top:3px">Collaborate with parishes in your network on shared missions</div>
+  <div style="font-family:'Lora',serif;font-size:13px;color:var(--light);font-style:italic;margin-top:3px">Collaborate with parishes in your network on shared missions</div>
     </div>
     <button class="btn btn-primary btn-sm" onclick="document.getElementById('create-modal').classList.add('open')">+ New project</button>
   </div>
   
 </div>
 
-  <div class="pj-tabs">
-    <button class="pj-tab on" data-tab="my">My projects <span class="pj-tab-count">4</span></button>
-    <button class="pj-tab" data-tab="discover">Discover</button>
-    <button class="pj-tab" data-tab="mine">Created by me <span class="pj-tab-count">1</span></button>
-  </div>
+  
 
   <div class="pj-tab-pane on" id="pjtab-my">
-<div class="impact-row">
+<div class="pg-body"><div class="impact-row">
     <div class="ic ic-terra"><div class="ic-val">4</div><div class="ic-lbl">Projects joined</div></div>
     <div class="ic ic-sage"><div class="ic-val">617</div><div class="ic-lbl">Total parishes</div></div>
     <div class="ic ic-amber"><div class="ic-val">115</div><div class="ic-lbl">Countries reached</div></div>
@@ -867,7 +874,7 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
 
     </div>
   </div>
-</div>
+</div></div>
 
 <script>
 var wzCurrentStep = 1;
