@@ -681,7 +681,7 @@ document.getElementById('save-ev-btn').addEventListener('click',function(){
     '<div class="ev-card-meta">'+meta+'</div>'+
     '<div class="ev-card-tag">'+tagTxt+'</div></div>'+
     '<div class="ev-card-acts"><button class="btn btn-secondary btn-sm">Edit</button>'+
-    '<button class="btn btn-secondary btn-sm" style="color:var(--terra)" onclick="this.closest('.ev-card').remove()">Remove</button></div>';
+    '<button class="btn btn-secondary btn-sm" style="color:var(--terra)" onclick="this.closest(this.parentElement.parentElement).remove()">Remove</button></div>';
   document.getElementById('ev-list').prepend(card);
   document.getElementById('add-ev-form').classList.remove('visible');
   document.getElementById('add-ev-btn').style.display='';
