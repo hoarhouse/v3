@@ -277,6 +277,10 @@ input:checked+.mtoggle-slider:before{transform:translateX(16px)}
     <a href="network.html" class="sb-item"><svg viewBox="0 0 16 16" fill="none" width="15" height="15" stroke="currentColor"><circle cx="8" cy="8" r="2.5" stroke-width="1.3"/><circle cx="2.5" cy="3" r="1.5" stroke-width="1.2"/><circle cx="13.5" cy="3" r="1.5" stroke-width="1.2"/><circle cx="8" cy="14" r="1.5" stroke-width="1.2"/><path d="M4 4l2.5 2.5M12 4l-2.5 2.5M8 10.5V12.5" stroke-width="1.2"/></svg> Network</a>
     <a href="../parish/profile.html" class="sb-item"><svg viewBox="0 0 16 16" fill="none" width="15" height="15" stroke="currentColor" stroke-width="1.3"><circle cx="8" cy="5" r="3"/><path d="M2 14c0-3.3 2.7-6 6-6s6 2.7 6 6" stroke-linecap="round"/></svg> My Profile</a>
     <a href="projects.html" class="sb-item"><svg viewBox="0 0 16 16" fill="none" width="15" height="15" stroke="currentColor" stroke-width="1.3"><rect x="2" y="2" width="5" height="5" rx="1"/><rect x="9" y="2" width="5" height="5" rx="1"/><rect x="2" y="9" width="5" height="5" rx="1"/><rect x="9" y="9" width="5" height="5" rx="1"/></svg> Projects</a>
+    <a href="analytics.html" class="sb-item">
+      <svg viewBox="0 0 16 16" fill="none" width="16" height="16"><rect x="2" y="8" width="3" height="6" rx="1" stroke="currentColor" stroke-width="1.3"/><rect x="6.5" y="5" width="3" height="9" rx="1" stroke="currentColor" stroke-width="1.3"/><rect x="11" y="2" width="3" height="12" rx="1" stroke="currentColor" stroke-width="1.3"/></svg>
+      <span class="sb-item-lbl">Analytics</span>
+    </a>
     <div class="sb-sec">Manage</div>
     <a href="website.html" class="sb-item active"><svg viewBox="0 0 16 16" fill="none" width="15" height="15" stroke="currentColor" stroke-width="1.3"><rect x="1.5" y="3" width="13" height="10" rx="1.5"/><path d="M1.5 6h13"/></svg> Website<span class="sb-badge sb-badge-sage" style="font-size:9px;padding:1px 5px">Live</span></a>
     <a href="donations.html" class="sb-item"><svg viewBox="0 0 16 16" fill="none" width="15" height="15" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"><path d="M8 13.5C4 11 1.5 8.5 1.5 5.5a3 3 0 015-2.2A3 3 0 018 4a3 3 0 015 2.5c0 1-.4 2-1 2.8"/><path d="M8 9v5M6 12h4"/></svg> Donations</a>
@@ -300,7 +304,6 @@ input:checked+.mtoggle-slider:before{transform:translateX(16px)}
     <!-- TAB BAR -->
     <div class="tab-bar">
       <button class="tab-btn on" data-tab="edit">Pages</button>
-      <button class="tab-btn" data-tab="analytics">Analytics</button>
       <button class="tab-btn" data-tab="seo">SEO</button>
       <button class="tab-btn" data-tab="settings">Settings</button>
     </div>
@@ -607,8 +610,13 @@ input:checked+.mtoggle-slider:before{transform:translateX(16px)}
   </div>
 </div>
     <div class="tab-content" id="tab-analytics">
-  <!-- <?php echo $analytics->summary_html ?> -->
-  <div class="stat-row">
+  <div style="background:var(--white);border:1px solid var(--border-light);border-radius:var(--r-lg);padding:32px;text-align:center;box-shadow:var(--sh-sm)">
+    <div style="font-size:32px;margin-bottom:12px">📊</div>
+    <div style="font-size:16px;font-weight:700;color:var(--ink);margin-bottom:6px">Analytics have moved</div>
+    <div style="font-family:'Lora',serif;font-size:13px;color:var(--light);font-style:italic;margin-bottom:20px">Website and network analytics are now in one place — including your Communio profile performance.</div>
+    <a href="analytics.html" class="btn btn-primary btn-sm">Go to Analytics →</a>
+  </div>
+  <div style="display:none"><div class="stat-row">
     <div class="sc sc-terra"><div class="sc-val">1,284</div><div class="sc-lbl">Visitors this month</div><div class="sc-delta up">↑ 28% vs last month</div></div>
     <div class="sc sc-sage"><div class="sc-val">3,940</div><div class="sc-lbl">Page views</div><div class="sc-delta up">↑ 19% vs last month</div></div>
     <div class="sc sc-amber"><div class="sc-val">2m 34s</div><div class="sc-lbl">Avg. time on site</div><div class="sc-delta up">↑ 12s vs last month</div></div>
@@ -694,6 +702,7 @@ input:checked+.mtoggle-slider:before{transform:translateX(16px)}
     </div>
   </div>
 </div>
+  </div>
     <!-- SHARED: events | <?php foreach($parish->events as $event): ?> ... <?php endforeach; ?> -->
     <div class="tab-content" id="tab-events" style="display:none"><!-- events moved to dedicated section --></div>
     <!-- SHARED: parish_name used in meta title/description | $parish->name -->
