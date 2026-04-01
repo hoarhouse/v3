@@ -78,38 +78,77 @@ body{padding-top:64px}
 </head>
 <body>
 
-<nav class="top-nav" id="nav" style="display:flex;align-items:center;justify-content:space-between;padding:0 28px;height:64px;position:fixed;top:0;left:0;right:0;z-index:300;background:rgba(14,10,6,.95);backdrop-filter:blur(8px)">
-    <a href="index.html" class="nav-brand" style="flex-shrink:0">
-      <div class="nav-logo">SM</div>
-      <span class="nav-name">St. Mary's Parish</span>
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <div class="nav-crest">SM</div>
+      St. Mary's Parish
     </a>
-    <div class="nav-links" style="display:flex;align-items:center;gap:2px">
-      <a href="index.html#mass-times">Mass Times</a>
-      <a href="about.html">About Us</a>
-      <a href="events.html">Events</a>
-      <a href="team.html">Our Team</a>
-      <a href="bulletin.html">Parish Bulletin</a>
-      <a href="involved.html">Get Involved</a>
-      <a href="sacraments.html">Sacraments</a>
-      <a href="contact.html" style="color:white;background:rgba(255,255,255,.1)">Contact</a>
+    <div class="nav-links">
+      <a href="index.html#mass-times" class="nav-link">Mass Times</a>
+      <div class="nav-dropdown">
+        <button class="nav-dropdown-btn">
+          Parish Life
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M3 4.5l3 3 3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </button>
+        <div class="nav-dropdown-menu">
+          <a href="about.html" class="nav-dropdown-item">About Us</a>
+          <a href="events.html" class="nav-dropdown-item">Events</a>
+          <a href="staff.html" class="nav-dropdown-item">Our Team</a>
+          <a href="bulletin.html" class="nav-dropdown-item">Parish Bulletin</a>
+          <a href="involved.html" class="nav-dropdown-item">Get Involved</a>
+        </div>
+      </div>
+      <div class="nav-dropdown">
+        <button class="nav-dropdown-btn">
+          Sacraments
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M3 4.5l3 3 3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </button>
+        <div class="nav-dropdown-menu">
+          <a href="sacraments.html#baptism" class="nav-dropdown-item">Baptism</a>
+          <a href="sacraments.html#wedding" class="nav-dropdown-item">Wedding</a>
+          <a href="sacraments.html#funeral" class="nav-dropdown-item">Funeral Mass</a>
+          <a href="sacraments.html#confirmation" class="nav-dropdown-item">Confirmation</a>
+          <a href="sacraments.html#firstcommunion" class="nav-dropdown-item">First Communion</a>
+        </div>
+      </div>
+      <a href="rcia.html" class="nav-link">Becoming Catholic</a>
+      <a href="#" class="nav-link" data-contact-old data-from="general">Contact</a>
     </div>
-    <div style="display:flex;align-items:center;gap:10px;flex-shrink:0">
-      <a href="index.html#giving" class="btn-give">Give Now</a>
-      <button class="nav-hamburger" id="navHamburger"><span></span><span></span><span></span></button>
-    </div>
+    <a href="index.html#giving" class="nav-cta">Give Now</a>
+    <button class="nav-hamburger" id="navHamburger">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="nav-mobile" id="navMobile">
+    <a href="index.html#mass-times">Mass Times</a>
+    <div class="nav-mobile-section">Parish Life</div>
+    <a href="about.html">About Us</a>
+    <a href="events.html">Events</a>
+    <a href="staff.html">Our Team</a>
+    <a href="bulletin.html">Parish Bulletin</a>
+    <a href="involved.html">Get Involved</a>
+    <div class="nav-mobile-section">Sacraments</div>
+    <a href="sacraments.html">All Sacraments</a>
+    <a href="rcia.html">Becoming Catholic</a>
+    <a href="#" data-contact-old data-from="general">Contact</a>
+    <a href="index.html#giving" style="margin-top:.5rem;background:var(--terra);padding:.625rem 2rem;border-radius:8px;">Give Now</a>
+  </div>
 </nav>
-
 <div class="nav-mobile" id="navMobile">
-  <a href="index.html#mass-times">Mass Times</a>
-  <a href="about.html">About Us</a>
-  <a href="events.html">Events</a>
-  <a href="team.html">Our Team</a>
-  <a href="bulletin.html">Parish Bulletin</a>
-  <a href="involved.html">Get Involved</a>
-  <a href="sacraments.html">Sacraments</a>
-  <a href="contact.html">Contact</a>
-  <a href="index.html#giving" class="mobile-give">Give Now</a>
-</div>
+    <a href="index.html#mass-times">Mass Times</a>
+    <div class="nav-mobile-section">Parish Life</div>
+    <a href="about.html">About Us</a>
+    <a href="events.html">Events</a>
+    <a href="staff.html">Our Team</a>
+    <a href="bulletin.html">Parish Bulletin</a>
+    <a href="involved.html">Get Involved</a>
+    <div class="nav-mobile-section">Sacraments</div>
+    <a href="sacraments.html">All Sacraments</a>
+    <a href="rcia.html">Becoming Catholic</a>
+    <a href="#" data-contact-old data-from="general">Contact</a>
+    <a href="index.html#giving" style="margin-top:.5rem;background:var(--terra);padding:.625rem 2rem;border-radius:8px;">Give Now</a>
+  </div>
 
 <!-- Hero -->
 <div class="contact-hero">
