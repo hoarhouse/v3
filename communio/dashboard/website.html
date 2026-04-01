@@ -701,37 +701,63 @@ input:checked+.mtoggle-slider:before{transform:translateX(16px)}
   <div class="seo-grid">
     <div>
       <!-- <?php echo $seo->fields_html ?> -->
-      <div class="card">
-        <div class="card-title">Search engine optimisation</div>
-        <div class="card-sub">Controls how your site appears in Google and when shared on social media</div>
-        <div class="fg"><label class="fl">Page title <span style="color:var(--light);font-weight:400">(shown in browser tab &amp; Google results)</span></label><input class="fi" id="seo-title" type="text" value="St. Mary's Parish, New York — Lower East Side Catholic Church"></div>
-        <div class="fg"><label class="fl">Meta description <span style="color:var(--light);font-weight:400">(shown under title in Google)</span></label><textarea class="fta" id="seo-desc" rows="3">Serving the Lower East Side since 1887. A vibrant, multicultural community of 1,200+ families committed to social justice, youth ministry and ethical technology.</textarea></div>
-        <div class="fg" style="margin-bottom:0"><label class="fl">Social share image <span style="color:var(--light);font-weight:400">(shown when link shared on WhatsApp, Facebook etc.)</span></label>
-          <div class="photo-upload" style="padding:18px">
-            <input type="file" accept="image/*">
-            <div class="pu-icon">🖼️</div>
+      <div class="card" style="margin-bottom:16px">
+        <div class="card-title">Search basics</div>
+        <div class="card-sub">How your site appears in Google search results</div>
+        <div class="fg">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:5px">
+            <label class="fl" style="margin:0">Page title</label>
+            <span id="seo-title-count" style="font-size:11px;color:var(--light)">62 / 60</span>
+          </div>
+          <input class="fi" id="seo-title" type="text" value="St. Mary's Parish, New York — Lower East Side Catholic Church" oninput="seoCounters()">
+          <div style="font-size:11px;color:var(--light);margin-top:3px">Shown in browser tab and Google results · Keep under 60 characters</div>
+        </div>
+        <div class="fg">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:5px">
+            <label class="fl" style="margin:0">Meta description</label>
+            <span id="seo-desc-count" style="font-size:11px;color:var(--sage)">158 / 160</span>
+          </div>
+          <textarea class="fta" id="seo-desc" rows="3" oninput="seoCounters()">Serving the Lower East Side since 1887. A vibrant, multicultural community of 1,200+ families committed to social justice, youth ministry and ethical technology.</textarea>
+          <div style="font-size:11px;color:var(--light);margin-top:3px">Shown under your title in Google · Keep under 160 characters</div>
+        </div>
+        <div class="fg" style="margin-bottom:0">
+          <label class="fl">Focus keywords <span style="color:var(--light);font-weight:400">(comma separated)</span></label>
+          <input class="fi" id="seo-keywords" type="text" value="Catholic church New York, Lower East Side parish, St Mary's NYC, Sunday Mass Manhattan">
+          <div style="font-size:11px;color:var(--light);margin-top:3px">Terms you want to rank for on Google</div>
+        </div>
+      </div>
+      <div class="card" style="margin-bottom:16px">
+        <div class="card-title">Social sharing</div>
+        <div class="card-sub">Image and text shown when your link is shared on WhatsApp, Facebook, Twitter etc.</div>
+        <div class="fg" style="margin-bottom:0">
+          <label class="fl">Social share image (OG image)</label>
+          <div class="photo-upload" style="padding:16px">
+            <input type="file" accept="image/*" id="seo-og-file" onchange="seoOgPreview(this)">
+            <div class="pu-icon" id="seo-og-icon">🖼️</div>
             <div class="pu-title">Upload OG image</div>
-            <div class="pu-sub">Recommended 1200×630px · JPG or PNG</div>
+            <div class="pu-sub">1200×630px recommended · JPG or PNG · Max 5MB</div>
+            <img id="seo-og-preview" src="" alt="" style="display:none;max-width:100%;max-height:120px;border-radius:6px;object-fit:cover;margin-top:8px">
           </div>
         </div>
       </div>
       <div style="display:flex;justify-content:flex-end;gap:8px">
-        <button class="btn btn-secondary btn-sm">Discard</button>
-        <button class="btn btn-primary btn-sm" id="seo-save">Save SEO settings →</button>
+        <button class="btn btn-secondary btn-sm" onclick="document.getElementById('seo-title').value='St. Mary\'s Parish, New York — Lower East Side Catholic Church';document.getElementById('seo-desc').value='Serving the Lower East Side since 1887. A vibrant, multicultural community of 1,200+ families committed to social justice, youth ministry and ethical technology.';seoCounters()">Discard</button>
+        <button class="btn btn-primary btn-sm" id="seo-save" onclick="var b=this;b.textContent='✓ Saved';b.style.background='var(--sage)';setTimeout(function(){b.textContent='Save SEO settings →';b.style.background=''},2000)">Save SEO settings →</button>
       </div>
     </div>
+
     <div>
       <!-- <?php echo $seo->previews_html ?> -->
-      <div class="google-preview">
+      <div class="google-preview" style="margin-bottom:16px">
         <div class="gp-label">Google search preview</div>
         <div class="gp-card">
           <div class="gp-url">communio.io/stmarysnyc</div>
           <div class="gp-title" id="gp-title">St. Mary's Parish, New York — Lower East Side Catholic Church</div>
           <div class="gp-desc" id="gp-desc">Serving the Lower East Side since 1887. A vibrant, multicultural community of 1,200+ families committed to social justice, youth ministry and ethical technology.</div>
         </div>
-        <div class="gp-label" style="margin-top:18px">Social share preview</div>
+        <div class="gp-label" style="margin-top:16px">Social share preview</div>
         <div class="og-card">
-          <div class="og-img">No image uploaded</div>
+          <div class="og-img" id="og-img-wrap">No image uploaded</div>
           <div class="og-body">
             <div class="og-site">communio.io/stmarysnyc</div>
             <div class="og-title" id="og-title">St. Mary's Parish, New York</div>
@@ -739,8 +765,114 @@ input:checked+.mtoggle-slider:before{transform:translateX(16px)}
           </div>
         </div>
       </div>
+
+      <!-- SEO health score -->
+      <div class="card" style="margin-bottom:16px">
+        <!-- <?php echo $seo->health_score_html ?> -->
+        <div class="card-title">SEO health</div>
+        <div class="card-sub">Quick checklist — fix issues to improve your Google ranking</div>
+        <div style="display:flex;flex-direction:column;gap:8px;margin-top:12px">
+          <div style="display:flex;align-items:center;gap:10px;font-size:13px">
+            <span style="color:var(--sage);font-size:16px;flex-shrink:0">✓</span>
+            <span style="color:var(--ink)">Page title set and optimised</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;font-size:13px">
+            <span style="color:var(--sage);font-size:16px;flex-shrink:0">✓</span>
+            <span style="color:var(--ink)">Meta description set</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;font-size:13px">
+            <span style="color:var(--sage);font-size:16px;flex-shrink:0">✓</span>
+            <span style="color:var(--ink)">Focus keywords defined</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;font-size:13px">
+            <span style="color:var(--terra);font-size:16px;flex-shrink:0">✗</span>
+            <span style="color:var(--text-mid)">Social share image not uploaded</span>
+            <span style="font-size:10px;font-weight:700;background:var(--terra-pale);color:var(--terra);padding:1px 6px;border-radius:10px;flex-shrink:0">Fix</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;font-size:13px">
+            <span style="color:var(--sage);font-size:16px;flex-shrink:0">✓</span>
+            <span style="color:var(--ink)">Parish schema markup active</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;font-size:13px">
+            <span style="color:var(--sage);font-size:16px;flex-shrink:0">✓</span>
+            <span style="color:var(--ink)">XML sitemap generated &amp; active</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;font-size:13px">
+            <span style="color:var(--amber);font-size:16px;flex-shrink:0">~</span>
+            <span style="color:var(--text-mid)">Google Business Profile — not connected</span>
+            <span style="font-size:10px;font-weight:700;background:#FAEEDA;color:#633806;padding:1px 6px;border-radius:10px;flex-shrink:0">Optional</span>
+          </div>
+        </div>
+        <div style="margin-top:14px;padding-top:12px;border-top:1px solid var(--border-light);display:flex;align-items:center;justify-content:space-between">
+          <div style="font-size:13px;font-weight:700;color:var(--ink)">SEO score</div>
+          <div style="display:flex;align-items:center;gap:8px">
+            <div style="width:80px;height:7px;background:var(--cream-dark);border-radius:4px;overflow:hidden">
+              <div style="width:75%;height:100%;background:var(--sage);border-radius:4px"></div>
+            </div>
+            <span style="font-size:13px;font-weight:800;color:var(--sage)">75 / 100</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Communio network advantage -->
+      <div style="background:var(--sage-pale);border:1px solid var(--sage-pale);border-radius:var(--r-lg);padding:16px">
+        <!-- <?php echo $seo->network_links_html ?> -->
+        <div style="font-size:12px;font-weight:700;color:var(--sage);margin-bottom:6px;text-transform:uppercase;letter-spacing:.05em">Communio network advantage</div>
+        <div style="font-size:13px;color:var(--ink);margin-bottom:8px">Your site is linked from <strong>3 partner parishes</strong> on the Communio network — incoming links strengthen your Google ranking.</div>
+        <div style="font-size:11px;color:var(--text-mid);font-family:'Lora',serif;font-style:italic">Holy Spirit, Accra · St. Benedek, Budapest · St. Stanislaw, Warsaw</div>
+        <div style="margin-top:10px;font-size:12px;color:var(--text-mid)">The more parishes you connect with, the stronger your SEO becomes.</div>
+      </div>
     </div>
   </div>
+
+  <script>
+  function seoCounters(){
+    var t = document.getElementById('seo-title');
+    var d = document.getElementById('seo-desc');
+    var tc = document.getElementById('seo-title-count');
+    var dc = document.getElementById('seo-desc-count');
+    var gpt = document.getElementById('gp-title');
+    var gpd = document.getElementById('gp-desc');
+    var ogt = document.getElementById('og-title');
+    var ogd = document.getElementById('og-desc');
+    if(t && tc){
+      var tl = t.value.length;
+      tc.textContent = tl + ' / 60';
+      tc.style.color = tl > 60 ? 'var(--terra)' : tl > 50 ? 'var(--amber)' : 'var(--sage)';
+      if(gpt) gpt.textContent = t.value;
+      if(ogt) ogt.textContent = t.value.split('—')[0].trim();
+    }
+    if(d && dc){
+      var dl = d.value.length;
+      dc.textContent = dl + ' / 160';
+      dc.style.color = dl > 160 ? 'var(--terra)' : dl > 140 ? 'var(--amber)' : 'var(--sage)';
+      if(gpd) gpd.textContent = d.value;
+      if(ogd) ogd.textContent = d.value.substring(0,60) + (d.value.length > 60 ? '...' : '');
+    }
+  }
+  seoCounters();
+  function seoOgPreview(input){
+    var file = input.files[0];
+    if(!file) return;
+    var reader = new FileReader();
+    reader.onload = function(e){
+      var prev = document.getElementById('seo-og-preview');
+      var icon = document.getElementById('seo-og-icon');
+      var ogWrap = document.getElementById('og-img-wrap');
+      prev.src = e.target.result;
+      prev.style.display = 'block';
+      if(icon) icon.style.display = 'none';
+      if(ogWrap){
+        ogWrap.innerHTML = '';
+        var img = document.createElement('img');
+        img.src = e.target.result;
+        img.style.cssText = 'width:100%;height:100%;object-fit:cover;border-radius:6px 6px 0 0';
+        ogWrap.appendChild(img);
+      }
+    };
+    reader.readAsDataURL(file);
+  }
+  </script>
 </div>
     <!-- SHARED: stripe_key, donation_goal | $parish->stripe_key, $parish->donation_goal -->
     <div class="tab-content" id="tab-settings">
