@@ -255,7 +255,7 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
 .an-tab:hover{color:var(--ink)}
 .an-tab.on{color:var(--terra);border-bottom-color:var(--terra)}
 .an-body{padding:24px 28px}
-.an-pane{display:none}.an-pane.on{display:block}
+.an-pane{display:none;padding:0}.an-pane.on{display:block;padding:24px 28px 28px}.an-pane.on{display:block}
 .stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:22px}
 .sc{background:var(--white);border:1px solid var(--border-light);border-radius:var(--r-lg);padding:16px 18px;box-shadow:var(--sh-sm);position:relative;overflow:hidden}
 .sc::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;border-radius:3px 0 0 3px}
@@ -311,8 +311,8 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
     </div>
   </div>
   <div class="an-tabs">
-    <button class="an-tab on" data-tab="website">Website</button>
-    <button class="an-tab" data-tab="network">Network</button>
+    <button class="an-tab on" data-tab="website" onclick="anTab(this,'website')">Website</button>
+    <button class="an-tab" data-tab="network" onclick="anTab(this,'network')">Network</button>
   </div>
 </div>
 
