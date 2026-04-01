@@ -111,7 +111,7 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
 .pj-filters{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:20px}
 .pj-fp{font-size:12px;font-weight:600;padding:5px 12px;border-radius:20px;cursor:pointer;border:1.5px solid var(--border-light);background:var(--white);color:var(--mid);font-family:'Outfit',sans-serif;transition:all .15s}
 .pj-fp:hover{border-color:var(--terra);color:var(--terra)}.pj-fp.on{background:var(--ink);border-color:var(--ink);color:white}
-
+.pj-tab-pane{display:none}.pj-tab-pane.on{display:block}
 .pj-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
 .pj-card{background:var(--white);border:1px solid var(--border-light);border-left:3px solid var(--border-light);border-radius:var(--r-lg);overflow:hidden;display:flex;flex-direction:column;box-shadow:var(--sh-sm);transition:box-shadow .15s}
 .pj-card:hover{box-shadow:0 4px 20px rgba(14,10,6,.1)}
@@ -197,7 +197,7 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
 .wz-launch-info{background:var(--terra-pale);border:1px solid rgba(216,80,32,.15);border-radius:var(--r-md);padding:14px 16px;margin-bottom:4px}
 .wz-foot{display:flex;align-items:center;justify-content:space-between;margin-top:24px;padding-top:18px;border-top:1px solid var(--border-light)}
 .wz-foot-progress{font-size:12px;color:var(--light);font-family:'Outfit',sans-serif}
-.pj-tab-pane{display:none}.pj-tab-pane.on{display:block}</style>
+</style>
 </head>
 <body>
 <nav class="top-nav">
@@ -254,26 +254,41 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
     <a href="../parish/profile.html" target="_blank" style="margin-top:6px;font-size:11px;color:var(--light);text-decoration:none;display:flex;align-items:center;gap:5px"><svg viewBox="0 0 16 16" fill="none" width="11" height="11"><circle cx="8" cy="5" r="3" stroke="currentColor" stroke-width="1.3"/><path d="M2 14c0-3.3 2.7-6 6-6s6 2.7 6 6" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg> View public profile ↗</a>
   </div>
 </aside>
+
 <div class="page-shell">
-  <div class="page-inner" style="padding:0;max-width:none">
-<div class="pg-header">
-  <div class="pg-header-top">
+<div class="page-inner" style="padding:0;max-width:none">
+
+<style>
+/* PROJECTS TEST - Clean single-source CSS */
+.pt-header{background:var(--white);padding:20px 28px 16px;border-bottom:2px solid var(--border-light);min-height:105px;box-sizing:border-box;display:flex;flex-direction:column}
+.pt-header-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:16px}
+.pt-header-title{font-size:22px;font-weight:800;color:var(--ink);letter-spacing:-.03em;line-height:1}
+.pt-header-sub{font-family:'Lora',serif;font-size:13px;color:var(--light);font-style:italic;margin-top:4px}
+.pt-tabs{display:flex;gap:0;border-bottom:none;margin-top:auto}
+.pt-tab{font-size:13px;font-weight:600;color:var(--light);background:none;border:none;padding:10px 20px 0;cursor:pointer;border-bottom:2px solid transparent;font-family:'Outfit',sans-serif;transition:color .15s;margin-bottom:-2px}
+.pt-tab:hover{color:var(--ink)}
+.pt-tab.on{color:var(--terra);border-bottom-color:var(--terra)}
+.pt-pane{display:none}
+.pt-pane.on{display:block;padding:24px 28px 28px}
+</style>
+
+<div class="pt-header">
+  <div class="pt-header-top">
     <div>
-      <div class="pg-header-title">Projects</div>
-      <div class="pg-header-sub">Collaborate with parishes in your network on shared missions</div>
+      <div class="pt-header-title">Projects</div>
+      <div class="pt-header-sub">Collaborate with parishes in your network on shared missions</div>
     </div>
     <button class="btn btn-primary btn-sm" onclick="document.getElementById('create-modal').classList.add('open')">+ New project</button>
   </div>
-  <div class="pj-tabs">
-    <button class="pj-tab on" data-tab="my">My projects <span class="pj-tab-count">4</span></button>
-    <button class="pj-tab" data-tab="discover">Discover</button>
-    <button class="pj-tab" data-tab="mine">Created by me <span class="pj-tab-count">1</span></button>
+  <div class="pt-tabs">
+    <button class="pt-tab on" onclick="ptTab(this,'my')">My projects <span class="pj-tab-count">4</span></button>
+    <button class="pt-tab" onclick="ptTab(this,'discover')">Discover</button>
+    <button class="pt-tab" onclick="ptTab(this,'mine')">Created by me <span class="pj-tab-count">1</span></button>
   </div>
 </div>
 
+<div class="pt-pane on" id="pt-my">
 
-
-<div class="pj-tab-pane on" id="pjtab-my">
 <div class="pg-body"><div class="impact-row">
     <div class="ic ic-terra"><div class="ic-val">4</div><div class="ic-lbl">Projects joined</div></div>
     <div class="ic ic-sage"><div class="ic-val">617</div><div class="ic-lbl">Total parishes</div></div>
@@ -427,8 +442,7 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
     </div>
   </div>
 
-  </div>
-<div class="pj-tab-pane" id="pjtab-discover">
+  <div class="pj-tab-pane" id="pjtab-discover">
 
     <div class="pj-disc-section" style="margin-top:4px">
       <div style="background:var(--white);border:1px solid var(--border-light);border-radius:var(--r-lg);padding:14px 18px;margin-bottom:20px;display:flex;align-items:center;gap:12px;box-shadow:var(--sh-sm)">
@@ -623,7 +637,8 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
     </div>
 
   </div>
-<div class="pj-tab-pane" id="pjtab-mine">
+
+  <div class="pj-tab-pane" id="pjtab-mine">
     <div class="pj-grid">
       <div class="pj-card" data-type="research">
         <div class="pj-card-bar" style=""></div>
@@ -663,42 +678,245 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
 
 
 </div>
-</div></div>
 
-<script>
-(function(){
-  document.querySelectorAll('.pj-tab').forEach(function(tab){
-    tab.addEventListener('click',function(){
-      document.querySelectorAll('.pj-tab').forEach(function(t){t.classList.remove('on')});
-      document.querySelectorAll('.pj-tab-pane').forEach(function(p){p.classList.remove('on')});
-      tab.classList.add('on');
-      var pane=document.getElementById('pjtab-'+tab.dataset.tab);
-      if(pane)pane.classList.add('on');
-    });
-  });
-  document.querySelectorAll('.pj-fp').forEach(function(fp){
-    fp.addEventListener('click',function(){
-      document.querySelectorAll('.pj-fp').forEach(function(f){f.classList.remove('on')});
-      fp.classList.add('on');
-      var t=fp.dataset.t;
-      document.querySelectorAll('#proj-grid .pj-card').forEach(function(c){
-        c.style.display=(t==='all'||c.dataset.type===t)?'':'none';
-      });
-    });
-  });
-})();
-</script>
-<script>
-(function(){
-  var b=document.getElementById('burger');
-  var m=document.getElementById('navMobile');
-  if(!b||!m)return;
-  b.addEventListener('click',function(){m.classList.toggle('open');});
-  document.addEventListener('click',function(e){
-    if(!b.contains(e.target)&&!m.contains(e.target))m.classList.remove('open');
-  });
-})();
-</script>
+<div class="pt-pane" id="pt-discover">
+
+
+    <div class="pj-disc-section" style="margin-top:4px">
+      <div style="background:var(--white);border:1px solid var(--border-light);border-radius:var(--r-lg);padding:14px 18px;margin-bottom:20px;display:flex;align-items:center;gap:12px;box-shadow:var(--sh-sm)">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="7" cy="7" r="4.5" stroke="var(--terra)" stroke-width="1.3"/><path d="M10.5 10.5l3 3" stroke="var(--terra)" stroke-width="1.3" stroke-linecap="round"/></svg>
+        <input type="text" placeholder="Search projects by name, type, or country…" style="flex:1;border:none;background:none;font-size:13px;font-family:'Outfit',sans-serif;color:var(--ink);outline:none">
+        <div style="display:flex;gap:6px">
+          <select style="font-size:12px;border:1.5px solid var(--border-light);border-radius:6px;padding:4px 8px;font-family:'Outfit',sans-serif;color:var(--mid);background:var(--cream);outline:none">
+            <option>All types</option>
+            <option>Advocacy</option>
+            <option>Formation</option>
+            <option>Mission</option>
+            <option>Ecology</option>
+            <option>Research</option>
+            <option>Solidarity</option>
+            <option>Build</option>
+          </select>
+          <select style="font-size:12px;border:1.5px solid var(--border-light);border-radius:6px;padding:4px 8px;font-family:'Outfit',sans-serif;color:var(--mid);background:var(--cream);outline:none">
+            <option>All regions</option>
+            <option>North America</option>
+            <option>Europe</option>
+            <option>Africa</option>
+            <option>Asia-Pacific</option>
+            <option>Latin America</option>
+          </select>
+          <select style="font-size:12px;border:1.5px solid var(--border-light);border-radius:6px;padding:4px 8px;font-family:'Outfit',sans-serif;color:var(--mid);background:var(--cream);outline:none">
+            <option>Any status</option>
+            <option>Open to join</option>
+            <option>Active</option>
+            <option>Completed</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="pj-disc-section">
+      <div class="pj-disc-hd">
+        <div>
+          <div class="pj-disc-title">Recommended for St. Mary's</div>
+          <div class="pj-disc-sub">Based on your focus areas: Ethical technology · Social justice · Youth ministry</div>
+        </div>
+        <span class="pj-disc-link">See all →</span>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px">
+
+        <div class="pj-card" style="cursor:pointer">
+          <div class="pj-card-bar" style=""></div>
+          <div class="pj-card-body">
+            <div class="pj-card-hd">
+              <span class="pj-badge" style="background:var(--cream);color:var(--mid)">Research</span>
+            </div>
+            <div style="font-size:10px;font-weight:700;color:var(--terra);margin-bottom:6px">Matches: Ethical technology</div>
+            <div class="pj-card-title" style="font-size:13px">Catholic AI Ethics Framework</div>
+            <div class="pj-card-desc" style="font-size:11px">Developing a shared ethical framework for AI adoption in Catholic institutions worldwide.</div>
+            <div class="pj-stats-row" style="gap:12px">
+              <div><div class="pj-sv" style="font-size:14px">84</div><div class="pj-sl">Parishes</div></div>
+              <div><div class="pj-sv" style="font-size:14px">19</div><div class="pj-sl">Countries</div></div>
+            </div>
+            <div class="pj-card-ft">
+              <span></span>
+              <div style="display:flex;gap:6px">
+                <button class="btn btn-secondary btn-sm" onclick="window.location.href='project-workspace.html'">Learn more</button>
+                <button class="btn btn-primary btn-sm" style="background:#5c6672;border-color:var(--border-light)" onclick="window.location.href='project-workspace.html'">Join</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pj-card" style="cursor:pointer">
+          <div class="pj-card-bar" style=""></div>
+          <div class="pj-card-body">
+            <div class="pj-card-hd">
+              <span class="pj-badge" style="background:var(--cream);color:var(--mid)">Formation</span>
+            </div>
+            <div style="font-size:10px;font-weight:700;color:var(--terra);margin-bottom:6px">Matches: Youth ministry</div>
+            <div class="pj-card-title" style="font-size:13px">Youth Digital Literacy Initiative</div>
+            <div class="pj-card-desc" style="font-size:11px">Shared curriculum helping young Catholics navigate technology and digital life faithfully.</div>
+            <div class="pj-stats-row" style="gap:12px">
+              <div><div class="pj-sv" style="font-size:14px">52</div><div class="pj-sl">Parishes</div></div>
+              <div><div class="pj-sv" style="font-size:14px">16</div><div class="pj-sl">Countries</div></div>
+            </div>
+            <div class="pj-card-ft">
+              <span></span>
+              <div style="display:flex;gap:6px">
+                <button class="btn btn-secondary btn-sm" onclick="window.location.href='project-workspace.html'">Learn more</button>
+                <button class="btn btn-primary btn-sm" style="background:#5c6672;border-color:var(--border-light)" onclick="window.location.href='project-workspace.html'">Join</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pj-card" style="cursor:pointer">
+          <div class="pj-card-bar" style=""></div>
+          <div class="pj-card-body">
+            <div class="pj-card-hd">
+              <span class="pj-badge" style="background:var(--cream);color:var(--mid)">Advocacy</span>
+            </div>
+            <div style="font-size:10px;font-weight:700;color:var(--terra);margin-bottom:6px">Matches: Social justice · 18 sister parishes joined</div>
+            <div class="pj-card-title" style="font-size:13px">Synod 2028 — Parish Input Drive</div>
+            <div class="pj-card-desc" style="font-size:11px">Coordinated parish submissions to the Synodal Assembly process ahead of October 2028.</div>
+            <div class="pj-stats-row" style="gap:12px">
+              <div><div class="pj-sv" style="font-size:14px">312</div><div class="pj-sl">Parishes</div></div>
+              <div><div class="pj-sv" style="font-size:14px">67</div><div class="pj-sl">Countries</div></div>
+            </div>
+            <div class="pj-card-ft">
+              <span></span>
+              <div style="display:flex;gap:6px">
+                <button class="btn btn-secondary btn-sm" onclick="window.location.href='project-workspace.html'">Learn more</button>
+                <button class="btn btn-primary btn-sm" style="background:#d85020;border-color:#d85020" onclick="window.location.href='project-workspace.html'">Join</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="pj-disc-section">
+      <div class="pj-disc-hd">
+        <div>
+          <div class="pj-disc-title">In your network</div>
+          <div class="pj-disc-sub">Projects your sister parishes and connections are already working on</div>
+        </div>
+        <span class="pj-disc-link">See all →</span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:10px">
+
+        <div style="background:var(--white);border:1px solid var(--border-light);border-radius:var(--r-lg);padding:16px 18px;display:flex;align-items:center;gap:14px;box-shadow:var(--sh-sm);transition:box-shadow .15s" onmouseover="this.style.boxShadow='0 4px 16px rgba(14,10,6,.08)'" onmouseout="this.style.boxShadow='var(--sh-sm)'">
+          <div style="width:5px;height:52px;border-radius:3px;background:var(--terra);flex-shrink:0"></div>
+          <div style="flex:1">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:3px">
+              <span style="font-size:13px;font-weight:700;color:var(--ink)">Laudato Si Parish Pledge — North America</span>
+              <span class="pj-badge" style="background:var(--cream);color:var(--mid)">Ecology</span>
+            </div>
+            <div style="font-size:11px;color:var(--light);margin-bottom:3px">141 parishes · 8 countries · Open to join</div>
+            <div style="font-family:'Lora',serif;font-size:11px;color:var(--text-mid);font-style:italic">Holy Spirit Parish, Accra and St. Stanislaw, Warsaw are participating</div>
+          </div>
+          <div style="display:flex;gap:6px;flex-shrink:0">
+            <button class="btn btn-secondary btn-sm" onclick="window.location.href='project-workspace.html'">Details</button>
+            <button class="btn btn-primary btn-sm" style="background:var(--terra);border-color:#0F6E56" onclick="window.location.href='project-workspace.html'">Join</button>
+          </div>
+        </div>
+
+        <div style="background:var(--white);border:1px solid var(--border-light);border-radius:var(--r-lg);padding:16px 18px;display:flex;align-items:center;gap:14px;box-shadow:var(--sh-sm);transition:box-shadow .15s" onmouseover="this.style.boxShadow='0 4px 16px rgba(14,10,6,.08)'" onmouseout="this.style.boxShadow='var(--sh-sm)'">
+          <div style="width:5px;height:52px;border-radius:3px;background:#5c6672;flex-shrink:0"></div>
+          <div style="flex:1">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:3px">
+              <span style="font-size:13px;font-weight:700;color:var(--ink)">East–West Parish Solidarity Exchange</span>
+              <span class="pj-badge" style="background:var(--cream);color:var(--mid)">Solidarity</span>
+            </div>
+            <div style="font-size:11px;color:var(--light);margin-bottom:3px">38 parishes · 24 countries · Open to join</div>
+            <div style="font-family:'Lora',serif;font-size:11px;color:var(--text-mid);font-style:italic">San José Parish, Manila invited you to join · 2 days ago</div>
+          </div>
+          <div style="display:flex;gap:6px;flex-shrink:0">
+            <button class="btn btn-secondary btn-sm" onclick="window.location.href='project-workspace.html'">Details</button>
+            <button class="btn btn-primary btn-sm" style="background:#5c6672;border-color:var(--border-light)" onclick="window.location.href='project-workspace.html'">Join</button>
+          </div>
+        </div>
+
+        <div style="background:var(--white);border:1px solid var(--border-light);border-radius:var(--r-lg);padding:16px 18px;display:flex;align-items:center;gap:14px;box-shadow:var(--sh-sm);transition:box-shadow .15s" onmouseover="this.style.boxShadow='0 4px 16px rgba(14,10,6,.08)'" onmouseout="this.style.boxShadow='var(--sh-sm)'">
+          <div style="width:5px;height:52px;border-radius:3px;background:var(--terra);flex-shrink:0"></div>
+          <div style="flex:1">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:3px">
+              <span style="font-size:13px;font-weight:700;color:var(--ink)">Open Source Parish App — Catholic Commons</span>
+              <span class="pj-badge" style="background:var(--cream);color:var(--mid)">Build</span>
+            </div>
+            <div style="font-size:11px;color:var(--light);margin-bottom:3px">23 parishes · 11 countries · Recruiting contributors</div>
+            <div style="font-family:'Lora',serif;font-size:11px;color:var(--text-mid);font-style:italic">St. Benedek Parish, Budapest is a co-founder of this project</div>
+          </div>
+          <div style="display:flex;gap:6px;flex-shrink:0">
+            <button class="btn btn-secondary btn-sm" onclick="window.location.href='project-workspace.html'">Details</button>
+            <button class="btn btn-primary btn-sm" style="background:var(--terra);border-color:#5F5E5A" onclick="window.location.href='project-workspace.html'">Join</button>
+          </div>
+        </div>
+
+        <div style="background:var(--white);border:1px solid var(--border-light);border-radius:var(--r-lg);padding:16px 18px;display:flex;align-items:center;gap:14px;box-shadow:var(--sh-sm);transition:box-shadow .15s" onmouseover="this.style.boxShadow='0 4px 16px rgba(14,10,6,.08)'" onmouseout="this.style.boxShadow='var(--sh-sm)'">
+          <div style="width:5px;height:52px;border-radius:3px;background:#5c6672;flex-shrink:0"></div>
+          <div style="flex:1">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:3px">
+              <span style="font-size:13px;font-weight:700;color:var(--ink)">Global Hunger Response — Parish Network</span>
+              <span class="pj-badge" style="background:var(--cream);color:var(--mid)">Mission</span>
+            </div>
+            <div style="font-size:11px;color:var(--light);margin-bottom:3px">207 parishes · 53 countries · Active</div>
+            <div style="font-family:'Lora',serif;font-size:11px;color:var(--text-mid);font-style:italic">St. Catherine Parish, Lagos recently joined this project</div>
+          </div>
+          <div style="display:flex;gap:6px;flex-shrink:0">
+            <button class="btn btn-secondary btn-sm" onclick="window.location.href='project-workspace.html'">Details</button>
+            <button class="btn btn-primary btn-sm" style="background:#5c6672;border-color:var(--border-light)" onclick="window.location.href='project-workspace.html'">Join</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  
+</div>
+
+<div class="pt-pane" id="pt-mine">
+
+    <div class="pj-grid">
+      <div class="pj-card" data-type="research">
+        <div class="pj-card-bar" style=""></div>
+        <div class="pj-card-body">
+          <div class="pj-card-hd">
+            <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">
+              <span class="pj-badge" style="background:var(--cream);color:var(--mid)">Research</span>
+              <span class="pj-created-tag">Created by you</span>
+            </div>
+            <span class="pj-status st-open">Open</span>
+          </div>
+          <div class="pj-card-title">Digital Sovereignty &amp; Parish Life Study</div>
+          <div class="pj-card-desc">Research project studying how parishes can maintain digital sovereignty while engaging with modern technology.</div>
+          <div class="pj-stats-row">
+            <div><div class="pj-sv">28</div><div class="pj-sl">Parishes</div></div>
+            <div><div class="pj-sv">14</div><div class="pj-sl">Countries</div></div>
+            <div><div class="pj-sv">50</div><div class="pj-sl">Target</div></div>
+          </div>
+          <div class="pj-prog">
+            <div class="pj-prog-lbl"><span>Target: 50 parishes</span><span>56%</span></div>
+            <div class="pj-prog-track"><div class="pj-prog-fill" style="background:var(--terra)"></div></div>
+          </div>
+          <div class="pj-card-ft">
+            <div class="pj-avs">
+              <div class="pj-av" style="background:var(--terra)">SM</div>
+              <div class="pj-av pj-av-more">+27</div>
+            </div>
+            <div style="display:flex;gap:6px">
+              <a href="#" class="btn btn-secondary btn-sm">Manage</a>
+              <a href="project-workspace.html" class="btn btn-primary btn-sm" style="background:#5c6672;border-color:var(--border-light)">View &amp; invite →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+</div>
+
 
 <div class="wz-overlay" id="wz-overlay">
   <div class="wz-topbar">
@@ -865,7 +1083,20 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
 
     </div>
   </div>
-</div></div>
+</div>
+
+</div>
+</div>
+
+<script>
+function ptTab(btn, tab) {
+  document.querySelectorAll('.pt-tab').forEach(function(b){b.classList.remove('on');});
+  document.querySelectorAll('.pt-pane').forEach(function(p){p.style.display='none';});
+  btn.classList.add('on');
+  var pane = document.getElementById('pt-' + tab);
+  if(pane) pane.style.display = 'block';
+}
+</script>
 
 <script>
 var wzCurrentStep = 1;
@@ -991,5 +1222,7 @@ function wzRequestJoin(btn) {
 </script>
 
 <script src="js/communio-chat.js?v=3"></script>
+</body>
+</html>
 </body>
 </html>
