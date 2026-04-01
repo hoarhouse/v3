@@ -240,216 +240,458 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
 
 <!-- PAGE CONTENT -->
 <div class="page-shell">
-  <div class="page-inner">
+<div class="page-inner" style="padding:0;max-width:none">
 
-    <!-- PAGE HEADER -->
-    <!-- <?php echo $greeting, $parish->name, $current_date ?> -->
-    <div class="pg-hd">
-      <div class="pg-greeting">Good morning, <em>Fr. James</em> 👋</div>
-      <div class="pg-sub">Friday, 27 March 2026 · St. Mary's Parish</div>
+<style>
+/* ── HOME DASHBOARD ── */
+.hd-greeting{padding:20px 28px 16px;background:var(--white);border-bottom:1px solid var(--border-light);display:flex;align-items:flex-start;justify-content:space-between;gap:16px}
+.hd-greet-text{}
+.hd-greet-name{font-size:22px;font-weight:800;color:var(--ink);letter-spacing:-.03em}
+.hd-greet-name em{color:var(--terra);font-style:normal}
+.hd-greet-sub{font-family:'Lora',serif;font-size:13px;color:var(--light);font-style:italic;margin-top:3px}
+.hd-highlight{background:var(--sage-pale);border:1px solid #bbf7d0;border-radius:var(--r-md);padding:10px 16px;max-width:340px;text-align:right}
+.hd-highlight-val{font-size:18px;font-weight:800;color:#15803d;letter-spacing:-.02em}
+.hd-highlight-lbl{font-size:11px;color:#166534;margin-top:1px;font-family:'Lora',serif;font-style:italic}
+
+/* ── PULSE STRIP ── */
+.pulse-strip{display:grid;grid-template-columns:repeat(6,1fr);gap:0;border-bottom:1px solid var(--border-light);background:var(--white)}
+.pulse-card{padding:14px 18px;border-right:1px solid var(--border-light);cursor:pointer;transition:background .15s;text-decoration:none;display:block}
+.pulse-card:last-child{border-right:none}
+.pulse-card:hover{background:var(--cream)}
+.pc-val{font-size:24px;font-weight:800;color:var(--ink);letter-spacing:-.04em;line-height:1}
+.pc-lbl{font-size:11px;color:var(--light);margin-top:3px;font-family:'Lora',serif;font-style:italic}
+.pc-trend{font-size:11px;font-weight:700;margin-top:4px;display:flex;align-items:center;gap:3px}
+.pc-trend.up{color:var(--sage)}
+.pc-trend.hot{color:#7c3aed}
+.pc-trend.new{color:var(--terra)}
+.pc-trend.flat{color:var(--light)}
+.pc-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;animation:pulse-dot 2s infinite}
+@keyframes pulse-dot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.7)}}
+
+/* ── HIGHLIGHT CARDS ── */
+.highlights{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;padding:20px 28px 0}
+.hl-card{background:var(--white);border:1px solid var(--border-light);border-radius:var(--r-lg);padding:16px 18px;box-shadow:var(--sh-sm);cursor:pointer;transition:all .18s;text-decoration:none;display:block}
+.hl-card:hover{box-shadow:0 4px 20px rgba(14,10,6,.1);transform:translateY(-1px)}
+.hl-card.green{border-left:3px solid var(--sage)}
+.hl-card.terra{border-left:3px solid var(--terra)}
+.hl-card.purple{border-left:3px solid #7c3aed}
+.hl-card.blue{border-left:3px solid #185FA5}
+.hl-icon{font-size:20px;margin-bottom:8px}
+.hl-val{font-size:20px;font-weight:800;color:var(--ink);letter-spacing:-.03em;line-height:1.1}
+.hl-label{font-size:12px;color:var(--text-mid);margin-top:3px}
+.hl-time{font-size:11px;color:var(--light);margin-top:6px;font-family:'Lora',serif;font-style:italic}
+.hl-action{font-size:12px;font-weight:700;color:var(--terra);margin-top:8px}
+
+/* ── MAIN GRID ── */
+.home-grid{display:grid;grid-template-columns:1fr 340px;gap:20px;padding:20px 28px;align-items:start}
+
+/* Charts */
+.chart-card{background:var(--white);border:1px solid var(--border-light);border-radius:var(--r-lg);padding:18px;margin-bottom:16px;box-shadow:var(--sh-sm)}
+.chart-hd{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:16px}
+.chart-title{font-size:13px;font-weight:700;color:var(--ink);text-transform:uppercase;letter-spacing:.05em}
+.chart-range{font-size:11px;color:var(--light);margin-top:2px;font-family:'Lora',serif;font-style:italic}
+.chart-total{font-size:20px;font-weight:800;color:var(--ink);letter-spacing:-.03em}
+.chart-total span{font-size:13px;font-weight:400;color:var(--light)}
+.bar-chart{display:flex;align-items:flex-end;gap:8px;height:100px}
+.bar-col{display:flex;flex-direction:column;align-items:center;flex:1;gap:5px}
+.bar-amt{font-size:10px;color:var(--light);flex-shrink:0}
+.bar-fill{width:100%;background:var(--terra-pale);border-radius:4px 4px 0 0;transition:height .3s}
+.bar-fill.current{background:var(--terra)}
+.bar-lbl{font-size:10px;color:var(--light);flex-shrink:0}
+
+/* Traffic mini chart */
+.mini-bars{display:flex;align-items:flex-end;gap:3px;height:40px;margin-top:8px}
+.mini-bar{flex:1;background:rgba(83,74,183,.15);border-radius:2px 2px 0 0;transition:background .15s}
+.mini-bar:hover{background:rgba(83,74,183,.4)}
+.mini-bar.peak{background:#534AB7}
+
+/* Activity feed */
+.feed-hd{font-size:12px;font-weight:700;color:var(--ink);text-transform:uppercase;letter-spacing:.07em;margin-bottom:12px}
+.act-item{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid var(--cream-dark)}
+.act-item:last-child{border-bottom:none}
+.act-av{width:38px;height:38px;border-radius:10px;flex-shrink:0;font-size:11px;font-weight:800;color:white;display:flex;align-items:center;justify-content:center}
+.act-body{flex:1;min-width:0}
+.act-title{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:2px}
+.act-sub{font-size:12px;color:var(--text-mid);font-family:'Lora',serif;font-style:italic;margin-bottom:3px}
+.act-time{font-size:11px;color:var(--light)}
+.act-action{font-size:12px;font-weight:700;color:var(--terra);margin-top:4px;cursor:pointer}
+.act-flag{font-size:14px;margin-right:2px}
+
+/* Right column */
+.rc-card{background:var(--white);border:1px solid var(--border-light);border-radius:var(--r-lg);padding:16px 18px;margin-bottom:14px;box-shadow:var(--sh-sm)}
+.rc-title{font-size:11px;font-weight:700;color:var(--light);text-transform:uppercase;letter-spacing:.07em;margin-bottom:12px}
+.rc-stat-row{display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--cream-dark)}
+.rc-stat-row:last-child{border-bottom:none}
+.rc-stat-lbl{font-size:12px;color:var(--ink)}
+.rc-stat-val{font-size:13px;font-weight:800;color:var(--ink)}
+.conn-item{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--cream-dark)}
+.conn-item:last-child{border-bottom:none}
+.conn-av{width:34px;height:34px;border-radius:8px;flex-shrink:0;font-size:10px;font-weight:800;color:white;display:flex;align-items:center;justify-content:center}
+.conn-name{font-size:12px;font-weight:700;color:var(--ink);flex:1}
+.conn-loc{font-size:10px;color:var(--light)}
+.conn-status{font-size:10px;font-weight:700;padding:2px 7px;border-radius:10px}
+.conn-online{background:#dcfce7;color:#15803d}
+.conn-recent{background:var(--cream);color:var(--mid)}
+.ev-item{display:flex;gap:10px;padding:9px 0;border-bottom:1px solid var(--cream-dark);align-items:center}
+.ev-item:last-child{border-bottom:none}
+.ev-date{width:40px;text-align:center;flex-shrink:0}
+.ev-mon{font-size:9px;font-weight:700;color:var(--terra);text-transform:uppercase}
+.ev-day{font-size:18px;font-weight:800;color:var(--ink);line-height:1}
+.ev-info{}
+.ev-name{font-size:12px;font-weight:700;color:var(--ink)}
+.ev-meta{font-size:11px;color:var(--light);margin-top:1px}
+
+/* Quick actions */
+.qa-bar{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;padding:0 28px 24px}
+.qa-btn{display:flex;align-items:center;justify-content:center;gap:8px;background:var(--white);border:1.5px solid var(--border-light);border-radius:var(--r-lg);padding:14px;font-size:13px;font-weight:700;color:var(--ink);text-decoration:none;transition:all .18s;cursor:pointer}
+.qa-btn:hover{border-color:var(--terra);color:var(--terra);background:var(--terra-pale);box-shadow:0 4px 16px rgba(216,80,32,.1)}
+.qa-btn svg{flex-shrink:0;opacity:.6}
+.qa-btn:hover svg{opacity:1}
+
+/* Setup banner */
+.setup-banner{margin:16px 28px;background:linear-gradient(135deg,var(--terra) 0%,#c45a15 100%);border-radius:var(--r-lg);padding:16px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.setup-text{}
+.setup-title{font-size:14px;font-weight:700;color:white}
+.setup-sub{font-size:12px;color:rgba(255,255,255,.8);margin-top:2px;font-family:'Lora',serif;font-style:italic}
+.setup-bar{width:160px;height:4px;background:rgba(255,255,255,.25);border-radius:2px;margin-top:8px}
+.setup-fill{width:60%;height:100%;background:white;border-radius:2px}
+
+@media(max-width:900px){.pulse-strip{grid-template-columns:repeat(3,1fr)}.home-grid{grid-template-columns:1fr}.highlights{grid-template-columns:1fr 1fr}.qa-bar{grid-template-columns:1fr 1fr}}
+</style>
+
+<!-- GREETING -->
+<!-- <?php echo $greeting, $parish->name, $current_date ?> -->
+<div class="hd-greeting">
+  <div class="hd-greet-text">
+    <div class="hd-greet-name">Good morning, <em>Fr. James</em> 👋</div>
+    <div class="hd-greet-sub">Friday, 27 March 2026 · St. Mary's Parish · Here's what's happening today</div>
+  </div>
+  <div class="hd-highlight">
+    <div class="hd-highlight-val">47 people</div>
+    <div class="hd-highlight-lbl">visited your website yesterday — best day this week 🎉</div>
+  </div>
+</div>
+
+<!-- SETUP BANNER -->
+<!-- <?php if ($parish->setup_incomplete): ?> -->
+<div class="setup-banner">
+  <div class="setup-text">
+    <div class="setup-title">Finish setting up your parish</div>
+    <div class="setup-sub">3 of 5 steps complete — you're almost there</div>
+    <div class="setup-bar"><div class="setup-fill"></div></div>
+  </div>
+  <a href="settings.html" style="background:white;color:var(--terra);font-size:13px;font-weight:700;padding:8px 16px;border-radius:8px;text-decoration:none;white-space:nowrap">Continue setup →</a>
+</div>
+<!-- <?php endif ?> -->
+
+<!-- LIVE PULSE STRIP -->
+<!-- <?php echo $parish->pulse_stats_html ?> -->
+<div class="pulse-strip">
+  <a href="analytics.html" class="pulse-card">
+    <div class="pc-val">142</div>
+    <div class="pc-lbl">Website visitors this month</div>
+    <div class="pc-trend up"><div class="pc-dot" style="background:var(--sage)"></div> ↑ 28% vs last month</div>
+  </a>
+  <a href="analytics.html" class="pulse-card">
+    <div class="pc-val">847</div>
+    <div class="pc-lbl">Profile views this month</div>
+    <div class="pc-trend hot"><div class="pc-dot" style="background:#7c3aed"></div> ↑ 34% — best month yet</div>
+  </a>
+  <a href="messages.html" class="pulse-card">
+    <div class="pc-val" style="color:var(--terra)">3</div>
+    <div class="pc-lbl">Unread messages</div>
+    <div class="pc-trend new"><div class="pc-dot" style="background:var(--terra)"></div> 2 new since yesterday</div>
+  </a>
+  <a href="donations.html" class="pulse-card">
+    <div class="pc-val">$4,205</div>
+    <div class="pc-lbl">Donations this month</div>
+    <div class="pc-trend up"><div class="pc-dot" style="background:var(--sage)"></div> ↑ 34.8% vs last month</div>
+  </a>
+  <a href="projects.html" class="pulse-card">
+    <div class="pc-val">4</div>
+    <div class="pc-lbl">Active projects</div>
+    <div class="pc-trend new"><div class="pc-dot" style="background:var(--terra)"></div> 1 new joined this week</div>
+  </a>
+  <a href="network.html" class="pulse-card">
+    <div class="pc-val">18</div>
+    <div class="pc-lbl">Sister parishes</div>
+    <div class="pc-trend up"><div class="pc-dot" style="background:var(--sage)"></div> ↑ 2 new this month</div>
+  </a>
+</div>
+
+<!-- TODAY'S HIGHLIGHTS -->
+<!-- <?php echo $parish->highlights_html ?> -->
+<div class="highlights">
+  <a href="analytics.html" class="hl-card green">
+    <div class="hl-icon">📈</div>
+    <div class="hl-val">Best week ever</div>
+    <div class="hl-label">142 people visited your website this month — up 28% from February</div>
+    <div class="hl-time">Updated today</div>
+    <div class="hl-action">View full analytics →</div>
+  </a>
+  <a href="messages.html" class="hl-card terra">
+    <div class="hl-icon">🇬🇭</div>
+    <div class="hl-val">Holy Spirit, Accra</div>
+    <div class="hl-label">Wants to discuss a joint youth programme — 3 messages waiting</div>
+    <div class="hl-time">2 hours ago</div>
+    <div class="hl-action">Reply now →</div>
+  </a>
+  <a href="network.html" class="hl-card purple">
+    <div class="hl-icon">🌍</div>
+    <div class="hl-val">847 profile views</div>
+    <div class="hl-label">Parishes from 12 countries viewed your profile this month — your best month yet</div>
+    <div class="hl-time">This month</div>
+    <div class="hl-action">See who's looking →</div>
+  </a>
+</div>
+
+<!-- MAIN GRID -->
+<div class="home-grid">
+
+  <!-- LEFT COLUMN -->
+  <div>
+
+    <!-- DONATIONS CHART -->
+    <!-- <?php echo $parish->donations_chart_html ?> -->
+    <div class="chart-card">
+      <div class="chart-hd">
+        <div>
+          <div class="chart-title">Donations — last 6 months</div>
+          <div class="chart-range">October 2025 — March 2026</div>
+        </div>
+        <div style="text-align:right">
+          <div class="chart-total">$10,165 <span>/ 6 months</span></div>
+          <div style="font-size:11px;color:var(--sage);font-weight:600;margin-top:2px">↑ 18.2% vs prior period</div>
+        </div>
+      </div>
+      <div class="bar-chart">
+        <div class="bar-col"><div class="bar-amt">$1k</div><div class="bar-fill" style="height:30%"></div><div class="bar-lbl">Oct</div></div>
+        <div class="bar-col"><div class="bar-amt">$2k</div><div class="bar-fill" style="height:40%"></div><div class="bar-lbl">Nov</div></div>
+        <div class="bar-col"><div class="bar-amt">$2k</div><div class="bar-fill" style="height:50%"></div><div class="bar-lbl">Dec</div></div>
+        <div class="bar-col"><div class="bar-amt">$3k</div><div class="bar-fill" style="height:65%"></div><div class="bar-lbl">Jan</div></div>
+        <div class="bar-col"><div class="bar-amt">$3k</div><div class="bar-fill" style="height:75%"></div><div class="bar-lbl">Feb</div></div>
+        <div class="bar-col"><div class="bar-amt">$4k</div><div class="bar-fill current" style="height:100%"></div><div class="bar-lbl">Mar</div></div>
+      </div>
     </div>
 
-    <!-- SETUP BANNER -->
-    <!-- <?php if ($parish->setup_incomplete): ?> -->
-    <div class="setup-banner">
-      <div class="setup-text">
-        <div class="setup-title">Finish setting up your parish</div>
-        <div class="setup-sub">3 of 5 steps complete — you're almost there</div>
-        <div class="setup-bar"><div class="setup-fill"></div></div>
+    <!-- WEBSITE TRAFFIC -->
+    <!-- <?php echo $analytics->website_traffic_mini_html ?> -->
+    <div class="chart-card">
+      <div class="chart-hd">
+        <div>
+          <div class="chart-title">Website traffic — last 30 days</div>
+          <div class="chart-range">communio.io/stmarysnyc</div>
+        </div>
+        <div style="text-align:right">
+          <div class="chart-total">142 <span>visitors</span></div>
+          <div style="font-size:11px;color:#534AB7;font-weight:600;margin-top:2px">↑ 28% — best month yet</div>
+        </div>
       </div>
-      <a href="settings.html" class="btn btn-primary btn-sm">Continue setup →</a>
+      <div class="mini-bars">
+        <div class="mini-bar" style="height:40%"></div>
+        <div class="mini-bar" style="height:55%"></div>
+        <div class="mini-bar" style="height:35%"></div>
+        <div class="mini-bar" style="height:60%"></div>
+        <div class="mini-bar" style="height:45%"></div>
+        <div class="mini-bar" style="height:50%"></div>
+        <div class="mini-bar" style="height:40%"></div>
+        <div class="mini-bar" style="height:65%"></div>
+        <div class="mini-bar" style="height:70%"></div>
+        <div class="mini-bar" style="height:55%"></div>
+        <div class="mini-bar" style="height:60%"></div>
+        <div class="mini-bar" style="height:75%"></div>
+        <div class="mini-bar" style="height:68%"></div>
+        <div class="mini-bar" style="height:80%"></div>
+        <div class="mini-bar" style="height:72%"></div>
+        <div class="mini-bar" style="height:85%"></div>
+        <div class="mini-bar" style="height:90%"></div>
+        <div class="mini-bar" style="height:78%"></div>
+        <div class="mini-bar" style="height:82%"></div>
+        <div class="mini-bar" style="height:88%"></div>
+        <div class="mini-bar" style="height:92%"></div>
+        <div class="mini-bar" style="height:85%"></div>
+        <div class="mini-bar" style="height:76%"></div>
+        <div class="mini-bar" style="height:88%"></div>
+        <div class="mini-bar" style="height:95%"></div>
+        <div class="mini-bar" style="height:82%"></div>
+        <div class="mini-bar peak" style="height:100%"></div>
+        <div class="mini-bar" style="height:72%"></div>
+        <div class="mini-bar" style="height:68%"></div>
+        <div class="mini-bar" style="height:74%"></div>
+      </div>
+      <div style="display:flex;justify-content:space-between;margin-top:6px;font-size:10px;color:var(--light)">
+        <span>1 Mar</span><span>Peak: 47 visitors (27 Mar)</span><span>Today</span>
+      </div>
+      <div style="display:flex;gap:16px;margin-top:12px;padding-top:12px;border-top:1px solid var(--cream-dark)">
+        <div style="flex:1;text-align:center"><div style="font-size:16px;font-weight:800;color:var(--ink)">48%</div><div style="font-size:10px;color:var(--light)">From Communio</div></div>
+        <div style="flex:1;text-align:center"><div style="font-size:16px;font-weight:800;color:var(--ink)">13%</div><div style="font-size:10px;color:var(--light)">From Google</div></div>
+        <div style="flex:1;text-align:center"><div style="font-size:16px;font-weight:800;color:var(--ink)">2m 34s</div><div style="font-size:10px;color:var(--light)">Avg. time</div></div>
+        <div style="flex:1;text-align:center"><a href="analytics.html" style="font-size:12px;font-weight:700;color:var(--terra);text-decoration:none">Full analytics →</a></div>
+      </div>
     </div>
-    <!-- <?php endif ?> -->
 
-    <!-- STAT CARDS -->
-    <!-- <?php echo $parish->stats_cards_html ?> -->
-    <div class="stat-row">
-      <div class="sc sc-terra">
-        <div class="sc-val">$4,205</div>
-        <div class="sc-lbl">Donations this month</div>
-        <div class="sc-delta up">↑ 34.8% vs last month</div>
+    <!-- ACTIVITY FEED -->
+    <!-- <?php foreach ($activity->items as $item): echo $item->render() endforeach ?> -->
+    <div class="chart-card">
+      <div class="feed-hd">Recent activity</div>
+      <div class="act-item">
+        <div class="act-av" style="background:#2a8a4a">HS</div>
+        <div class="act-body">
+          <div class="act-title"><span class="act-flag">🇬🇭</span>Holy Spirit Parish, Accra sent a message</div>
+          <div class="act-sub">"We'd love to discuss a joint youth programme — perhaps an online exchange?"</div>
+          <div class="act-time">2 hours ago</div>
+          <div class="act-action" onclick="window.location='messages.html'">Reply →</div>
+        </div>
       </div>
-      <div class="sc sc-sage">
-        <div class="sc-val">47</div>
-        <div class="sc-lbl">Donors this month</div>
-        <div class="sc-delta up">↑ 12 new donors</div>
+      <div class="act-item">
+        <div class="act-av" style="background:#c27a12">💚</div>
+        <div class="act-body">
+          <div class="act-title">$120 donation received</div>
+          <div class="act-sub">Anonymous donor via your Communio profile — 47 donors this month</div>
+          <div class="act-time">4 hours ago</div>
+          <div class="act-action" onclick="window.location='donations.html'">View donations →</div>
+        </div>
       </div>
-      <div class="sc sc-amber">
-        <div class="sc-val">4</div>
-        <div class="sc-lbl">Active projects</div>
-        <div class="sc-delta new">1 new this week</div>
+      <div class="act-item">
+        <div class="act-av" style="background:#534AB7">AI</div>
+        <div class="act-body">
+          <div class="act-title">Ethical AI in Catholic Education — now 247 parishes</div>
+          <div class="act-sub">Your co-signature is making a difference — this statement is growing fast</div>
+          <div class="act-time">Yesterday</div>
+          <div class="act-action" onclick="window.location='projects.html'">View project →</div>
+        </div>
       </div>
-      <div class="sc sc-ink">
-        <div class="sc-val">6</div>
-        <div class="sc-lbl">Sister parishes</div>
-        <div class="sc-delta up">↑ 2 this month</div>
+      <div class="act-item">
+        <div class="act-av" style="background:#185FA5">SS</div>
+        <div class="act-body">
+          <div class="act-title"><span class="act-flag">🇵🇱</span>St. Stanislaw, Warsaw confirmed as sister parish</div>
+          <div class="act-sub">Connection accepted — now 18 sister parishes across 14 countries</div>
+          <div class="act-time">2 days ago</div>
+          <div class="act-action" onclick="window.location='network.html'">View network →</div>
+        </div>
+      </div>
+      <div class="act-item">
+        <div class="act-av" style="background:var(--terra)">📈</div>
+        <div class="act-body">
+          <div class="act-title">27 people visited your website yesterday — best day this month</div>
+          <div class="act-sub">Mass times page was your most viewed section · 62% on mobile</div>
+          <div class="act-time">3 days ago</div>
+          <div class="act-action" onclick="window.location='analytics.html'">See full analytics →</div>
+        </div>
       </div>
     </div>
 
-    <!-- 2-COL MAIN GRID -->
-    <div class="home-grid">
+  </div><!-- /left -->
 
-      <!-- LEFT: chart + activity -->
-      <div>
+  <!-- RIGHT COLUMN -->
+  <div>
 
-        <!-- DONATIONS CHART -->
-        <!-- <?php echo $parish->donations_chart_html ?> -->
-        <div class="chart-card">
-          <div class="chart-hd">
-            <div>
-              <div class="chart-title">Donations — last 6 months</div>
-              <div class="chart-range">October 2025 — March 2026</div>
-            </div>
-            <div style="text-align:right">
-              <div class="chart-total">$10,165 <span>/ 6 months</span></div>
-              <div style="font-size:11px;color:var(--sage);font-weight:600;margin-top:2px">↑ 18.2% vs prior period</div>
-            </div>
-          </div>
-          <div class="bar-chart">
-            <div class="bar-col">
-              <div class="bar-amt">$1k</div>
-              <div class="bar-fill" style="height:30%"></div>
-              <div class="bar-lbl">Oct</div>
-            </div>
-            <div class="bar-col">
-              <div class="bar-amt">$2k</div>
-              <div class="bar-fill" style="height:40%"></div>
-              <div class="bar-lbl">Nov</div>
-            </div>
-            <div class="bar-col">
-              <div class="bar-amt">$2k</div>
-              <div class="bar-fill" style="height:50%"></div>
-              <div class="bar-lbl">Dec</div>
-            </div>
-            <div class="bar-col">
-              <div class="bar-amt">$3k</div>
-              <div class="bar-fill" style="height:65%"></div>
-              <div class="bar-lbl">Jan</div>
-            </div>
-            <div class="bar-col">
-              <div class="bar-amt">$3k</div>
-              <div class="bar-fill" style="height:75%"></div>
-              <div class="bar-lbl">Feb</div>
-            </div>
-            <div class="bar-col">
-              <div class="bar-amt">$4k</div>
-              <div class="bar-fill current" style="height:100%"></div>
-              <div class="bar-lbl">Mar</div>
-            </div>
-          </div>
+    <!-- NETWORK CONNECTIONS -->
+    <!-- <?php echo $network->online_now_html ?> -->
+    <div class="rc-card">
+      <div class="rc-title">Network — active now</div>
+      <div class="conn-item">
+        <div class="conn-av" style="background:#2a8a4a">HS</div>
+        <div style="flex:1">
+          <div class="conn-name">🇬🇭 Holy Spirit, Accra</div>
+          <div class="conn-loc">Youth ministry · Digital Sovereignty Study</div>
         </div>
-
-        <!-- RECENT ACTIVITY -->
-        <div class="section-title">Recent activity</div>
-        <!-- <?php foreach ($activity->items as $item): echo $item->render() endforeach ?> -->
-        <div class="act-wrap">
-          <div class="act-item">
-            <div class="act-dot">💚</div>
-            <div class="act-body">
-              <div class="act-title">$120 donation received</div>
-              <div class="act-sub">Anonymous donor · via Communio profile</div>
-              <div class="act-time">2 hours ago</div>
-            </div>
-          </div>
-          <div class="act-item">
-            <div class="act-dot">💬</div>
-            <div class="act-body">
-              <div class="act-title">Message from Holy Spirit Parish, Accra</div>
-              <div class="act-sub">"We'd love to discuss a joint youth programme..."</div>
-              <div class="act-time">4 hours ago</div>
-            </div>
-          </div>
-          <div class="act-item">
-            <div class="act-dot">🌿</div>
-            <div class="act-body">
-              <div class="act-title">Joined "Ethical AI in Catholic Education"</div>
-              <div class="act-sub">Now co-signed by 247 parishes</div>
-              <div class="act-time">Yesterday</div>
-            </div>
-          </div>
-          <div class="act-item">
-            <div class="act-dot">⛪</div>
-            <div class="act-body">
-              <div class="act-title">New sister parish — St. Stanislaw, Warsaw</div>
-              <div class="act-sub">Connection accepted · Poland</div>
-              <div class="act-time">2 days ago</div>
-            </div>
-          </div>
-          <div class="act-item">
-            <div class="act-dot">📊</div>
-            <div class="act-body">
-              <div class="act-title">Website visited 142 times this month</div>
-              <div class="act-sub">stmarysnyc.communio.org · up 28% from February</div>
-              <div class="act-time">3 days ago</div>
-            </div>
-          </div>
+        <span class="conn-status conn-online">Online</span>
+      </div>
+      <div class="conn-item">
+        <div class="conn-av" style="background:#534AB7">SB</div>
+        <div style="flex:1">
+          <div class="conn-name">🇭🇺 St. Benedek, Budapest</div>
+          <div class="conn-loc">Ethical AI · Research</div>
         </div>
-
-      </div><!-- /left -->
-
-      <!-- RIGHT SIDEBAR CARDS -->
-      <div>
-
-        <!-- PUBLIC PROFILE CARD -->
-        <!-- <?php echo $parish->profile_preview_card_html ?> -->
-        <div class="sb-card">
-          <div class="sb-card-title">Your public profile</div>
-          <div class="profile-preview">
-            <div class="pp-av">SM</div>
-            <div>
-              <div class="pp-name">St. Mary's Parish</div>
-              <div class="pp-url">stmarysnyc.communio.org</div>
-            </div>
-          </div>
-          <div class="pp-tags">
-            <span class="tag tag-terra">Peace &amp; reconciliation</span>
-            <span class="tag tag-ink">Ethical technology</span>
-          </div>
-          <div class="pp-meta">6 sister parishes · 4 active projects · ✓ Verified by DCF</div>
-          <a href="../parish/profile.html" class="btn btn-secondary btn-sm" style="display:block;text-align:center">View my public profile →</a>
+        <span class="conn-status conn-online">Online</span>
+      </div>
+      <div class="conn-item">
+        <div class="conn-av" style="background:#185FA5">SS</div>
+        <div style="flex:1">
+          <div class="conn-name">🇵🇱 St. Stanislaw, Warsaw</div>
+          <div class="conn-loc">New sister parish</div>
         </div>
-
-        <!-- MESSAGES -->
-        <!-- <?php echo $messages->preview_card_html ?> -->
-        <div class="sb-card">
-          <div class="sb-card-title">3 unread messages</div>
-          <div class="notif-item">
-            <div class="ni-av" style="background:var(--sage)">HS</div>
-            <div>
-              <div class="ni-text">Holy Spirit Parish (Accra) sent a message</div>
-              <div class="ni-time">2 hours ago</div>
-            </div>
-          </div>
-          <div class="notif-item">
-            <div class="ni-av" style="background:#5a7ab8">SS</div>
-            <div>
-              <div class="ni-text">St. Stanislaw, Warsaw — Sister parish confirmed!</div>
-              <div class="ni-time">Yesterday</div>
-            </div>
-          </div>
-          <a href="messages.html" class="btn btn-primary btn-sm" style="display:block;text-align:center;margin-top:12px">Open messages →</a>
+        <span class="conn-status conn-recent">1h ago</span>
+      </div>
+      <div class="conn-item">
+        <div class="conn-av" style="background:#BA7517">SJ</div>
+        <div style="flex:1">
+          <div class="conn-name">🇵🇭 San José, Manila</div>
+          <div class="conn-loc">Just joined your project</div>
         </div>
+        <span class="conn-status conn-recent">3h ago</span>
+      </div>
+      <a href="network.html" style="display:block;text-align:center;font-size:12px;font-weight:700;color:var(--terra);text-decoration:none;margin-top:10px;padding-top:10px;border-top:1px solid var(--cream-dark)">View all 18 sister parishes →</a>
+    </div>
 
-        <!-- NEW PROJECT -->
-        <!-- <?php echo $projects->suggestion_card_html ?> -->
-        <div class="cta-strip">
-          <div class="cta-strip-title">New project to join</div>
-          <div class="cta-strip-sub">Global Youth Formation Network now has 89 parishes — looking for US parishes</div>
-          <a href="projects.html" class="btn btn-primary btn-sm" style="display:block;text-align:center">View projects →</a>
+    <!-- UPCOMING EVENTS -->
+    <!-- <?php echo $events->upcoming_html ?> -->
+    <div class="rc-card">
+      <div class="rc-title">Upcoming events</div>
+      <div class="ev-item">
+        <div class="ev-date"><div class="ev-mon">Apr</div><div class="ev-day">19</div></div>
+        <div class="ev-info">
+          <div class="ev-name">Easter Vigil</div>
+          <div class="ev-meta">8:00pm · Main Church</div>
         </div>
-
-        <!-- WEBSITE -->
-        <!-- <?php echo $parish->website_card_html ?> -->
-        <div class="sb-card">
-          <div class="sb-card-title">Your website is live</div>
-          <div style="font-size:13px;color:var(--ink);font-weight:600;margin-bottom:2px">stmarysnyc.communio.org</div>
-          <div style="font-family:'Lora',serif;font-size:12px;color:var(--light);font-style:italic;margin-bottom:12px">142 visitors this month</div>
-          <a href="website.html" class="btn btn-secondary btn-sm" style="display:block;text-align:center">Edit website →</a>
+      </div>
+      <div class="ev-item">
+        <div class="ev-date"><div class="ev-mon">Apr</div><div class="ev-day">22</div></div>
+        <div class="ev-info">
+          <div class="ev-name">Youth Group Meeting</div>
+          <div class="ev-meta">6:30pm · Parish Hall</div>
         </div>
+      </div>
+      <div class="ev-item">
+        <div class="ev-date"><div class="ev-mon">May</div><div class="ev-day">4</div></div>
+        <div class="ev-info">
+          <div class="ev-name">Community Dinner</div>
+          <div class="ev-meta">6:00pm · Parish Hall · Open to all</div>
+        </div>
+      </div>
+      <a href="events.html" style="display:block;text-align:center;font-size:12px;font-weight:700;color:var(--terra);text-decoration:none;margin-top:10px;padding-top:10px;border-top:1px solid var(--cream-dark)">Manage events →</a>
+    </div>
 
-      </div><!-- /right -->
-    </div><!-- /home-grid -->
-  </div><!-- /page-inner -->
+    <!-- PROFILE SNAPSHOT -->
+    <!-- <?php echo $parish->profile_snapshot_html ?> -->
+    <div class="rc-card">
+      <div class="rc-title">Your public profile</div>
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
+        <div style="width:42px;height:42px;background:var(--terra);border-radius:10px;font-size:14px;font-weight:800;color:white;display:flex;align-items:center;justify-content:center;flex-shrink:0">SM</div>
+        <div>
+          <div style="font-size:14px;font-weight:700;color:var(--ink)">St. Mary's Parish</div>
+          <div style="font-size:11px;color:var(--light)">communio.io/stmarysnyc</div>
+        </div>
+      </div>
+      <div class="rc-stat-row"><span class="rc-stat-lbl">Profile views this month</span><span class="rc-stat-val" style="color:#534AB7">847 ↑</span></div>
+      <div class="rc-stat-row"><span class="rc-stat-lbl">Sister parishes</span><span class="rc-stat-val">18</span></div>
+      <div class="rc-stat-row"><span class="rc-stat-lbl">Active projects</span><span class="rc-stat-val">4</span></div>
+      <div class="rc-stat-row"><span class="rc-stat-lbl">Network health score</span><span class="rc-stat-val" style="color:var(--sage)">92 / 100</span></div>
+      <a href="../parish/profile.html" style="display:block;text-align:center;font-size:12px;font-weight:700;color:var(--terra);text-decoration:none;margin-top:10px;padding-top:10px;border-top:1px solid var(--cream-dark)">View public profile →</a>
+    </div>
+
+  </div><!-- /right -->
+</div><!-- /home-grid -->
+
+<!-- QUICK ACTIONS -->
+<!-- <?php echo $quick_actions_html ?> -->
+<div class="qa-bar">
+  <a href="events.html" class="qa-btn">
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="2" y="3" width="12" height="11" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M5 1v4M11 1v4M2 7h12" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+    + Add event
+  </a>
+  <a href="messages.html" class="qa-btn">
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 3h12a1 1 0 011 1v7a1 1 0 01-1 1H5l-3 2V4a1 1 0 011-1z" stroke="currentColor" stroke-width="1.3"/></svg>
+    Send message
+  </a>
+  <a href="website.html" class="qa-btn">
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1.5" y="3" width="13" height="10" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M1.5 6h13" stroke="currentColor" stroke-width="1.3"/></svg>
+    Update website
+  </a>
+</div>
+
+</div><!-- /page-inner -->
 </div><!-- /page-shell -->
 
 <script>
