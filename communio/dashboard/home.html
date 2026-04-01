@@ -77,10 +77,10 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
 .stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:22px}
 .sc{background:var(--white);border:1px solid var(--border-light);border-radius:var(--r-lg);padding:18px 20px;box-shadow:var(--sh-sm);position:relative;overflow:hidden}
 .sc::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;border-radius:3px 0 0 3px}
-.sc-terra::before{background:var(--terra)}
-.sc-sage::before{background:var(--sage)}
-.sc-amber::before{background:var(--amber)}
-.sc-ink::before{background:var(--ink)}
+.sc-terra::before{background:var(--border-light)}
+.sc-sage::before{background:var(--border-light)}
+.sc-amber::before{background:var(--border-light)}
+.sc-ink::before{background:var(--border-light)}
 .sc-val{font-size:26px;font-weight:800;color:var(--ink);letter-spacing:-.035em;line-height:1}
 .sc-lbl{font-family:'Lora',serif;font-size:12px;color:var(--light);margin-top:3px;font-style:italic}
 .sc-delta{font-size:11px;font-weight:600;margin-top:8px;display:inline-flex;align-items:center;gap:3px}
@@ -249,9 +249,9 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
 .hd-greet-name{font-size:22px;font-weight:800;color:var(--ink);letter-spacing:-.03em}
 .hd-greet-name em{color:var(--terra);font-style:normal}
 .hd-greet-sub{font-family:'Lora',serif;font-size:13px;color:var(--light);font-style:italic;margin-top:3px}
-.hd-highlight{background:var(--sage-pale);border:1px solid #bbf7d0;border-radius:var(--r-md);padding:10px 16px;max-width:340px;text-align:right}
-.hd-highlight-val{font-size:18px;font-weight:800;color:#15803d;letter-spacing:-.02em}
-.hd-highlight-lbl{font-size:11px;color:#166534;margin-top:1px;font-family:'Lora',serif;font-style:italic}
+.hd-highlight{background:var(--cream);border:1px solid var(--border-light);border-radius:var(--r-md);padding:10px 16px;max-width:340px;text-align:right}
+.hd-highlight-val{font-size:18px;font-weight:800;color:var(--ink);letter-spacing:-.02em}
+.hd-highlight-lbl{font-size:11px;color:var(--light);margin-top:1px;font-family:'Lora',serif;font-style:italic}
 
 /* ── PULSE STRIP ── */
 .pulse-strip{display:grid;grid-template-columns:repeat(6,1fr);gap:0;border-bottom:1px solid var(--border-light);background:var(--white)}
@@ -262,20 +262,20 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
 .pc-lbl{font-size:11px;color:var(--light);margin-top:3px;font-family:'Lora',serif;font-style:italic}
 .pc-trend{font-size:11px;font-weight:700;margin-top:4px;display:flex;align-items:center;gap:3px}
 .pc-trend.up{color:var(--sage)}
-.pc-trend.hot{color:#7c3aed}
+.pc-trend.hot{color:var(--sage)}
 .pc-trend.new{color:var(--terra)}
 .pc-trend.flat{color:var(--light)}
 .pc-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;animation:pulse-dot 2s infinite}
-@keyframes pulse-dot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.7)}}
+.pc-dot{background:var(--terra)}@keyframes pulse-dot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.7)}}
 
 /* ── HIGHLIGHT CARDS ── */
 .highlights{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;padding:20px 28px 0}
 .hl-card{background:var(--white);border:1px solid var(--border-light);border-radius:var(--r-lg);padding:16px 18px;box-shadow:var(--sh-sm);cursor:pointer;transition:all .18s;text-decoration:none;display:block}
-.hl-card:hover{box-shadow:0 4px 20px rgba(14,10,6,.1);transform:translateY(-1px)}
-.hl-card.green{border-left:3px solid var(--sage)}
-.hl-card.terra{border-left:3px solid var(--terra)}
-.hl-card.purple{border-left:3px solid #7c3aed}
-.hl-card.blue{border-left:3px solid #185FA5}
+.hl-card:hover{box-shadow:0 4px 16px rgba(14,10,6,.08);transform:translateY(-1px)}
+.hl-card.green{border-left:3px solid var(--border-light)}
+.hl-card.terra{border-left:3px solid var(--border-light)}
+.hl-card.purple{border-left:3px solid var(--border-light)}
+.hl-card.blue{border-left:3px solid var(--border-light)}
 .hl-icon{font-size:20px;margin-bottom:8px}
 .hl-val{font-size:20px;font-weight:800;color:var(--ink);letter-spacing:-.03em;line-height:1.1}
 .hl-label{font-size:12px;color:var(--text-mid);margin-top:3px}
@@ -301,9 +301,9 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
 
 /* Traffic mini chart */
 .mini-bars{display:flex;align-items:flex-end;gap:3px;height:40px;margin-top:8px}
-.mini-bar{flex:1;background:rgba(83,74,183,.15);border-radius:2px 2px 0 0;transition:background .15s}
-.mini-bar:hover{background:rgba(83,74,183,.4)}
-.mini-bar.peak{background:#534AB7}
+.mini-bar{flex:1;background:var(--terra-pale);border-radius:2px 2px 0 0;transition:background .15s}
+.mini-bar:hover{background:rgba(216,80,32,.3)}
+.mini-bar.peak{background:var(--terra)}
 
 /* Activity feed */
 .feed-hd{font-size:12px;font-weight:700;color:var(--ink);text-transform:uppercase;letter-spacing:.07em;margin-bottom:12px}
@@ -390,32 +390,32 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
   <a href="analytics.html" class="pulse-card">
     <div class="pc-val">142</div>
     <div class="pc-lbl">Website visitors this month</div>
-    <div class="pc-trend up"><div class="pc-dot" style="background:var(--sage)"></div> ↑ 28% vs last month</div>
+    <div class="pc-trend up"><div class="pc-dot"></div> ↑ 28% vs last month</div>
   </a>
   <a href="analytics.html" class="pulse-card">
     <div class="pc-val">847</div>
     <div class="pc-lbl">Profile views this month</div>
-    <div class="pc-trend hot"><div class="pc-dot" style="background:#7c3aed"></div> ↑ 34% — best month yet</div>
+    <div class="pc-trend hot"><div class="pc-dot" style="background:#5c6672"></div> ↑ 34% — best month yet</div>
   </a>
   <a href="messages.html" class="pulse-card">
     <div class="pc-val" style="color:var(--terra)">3</div>
     <div class="pc-lbl">Unread messages</div>
-    <div class="pc-trend new"><div class="pc-dot" style="background:var(--terra)"></div> 2 new since yesterday</div>
+    <div class="pc-trend new"><div class="pc-dot"></div> 2 new since yesterday</div>
   </a>
   <a href="donations.html" class="pulse-card">
     <div class="pc-val">$4,205</div>
     <div class="pc-lbl">Donations this month</div>
-    <div class="pc-trend up"><div class="pc-dot" style="background:var(--sage)"></div> ↑ 34.8% vs last month</div>
+    <div class="pc-trend up"><div class="pc-dot"></div> ↑ 34.8% vs last month</div>
   </a>
   <a href="projects.html" class="pulse-card">
     <div class="pc-val">4</div>
     <div class="pc-lbl">Active projects</div>
-    <div class="pc-trend new"><div class="pc-dot" style="background:var(--terra)"></div> 1 new joined this week</div>
+    <div class="pc-trend new"><div class="pc-dot"></div> 1 new joined this week</div>
   </a>
   <a href="network.html" class="pulse-card">
     <div class="pc-val">18</div>
     <div class="pc-lbl">Sister parishes</div>
-    <div class="pc-trend up"><div class="pc-dot" style="background:var(--sage)"></div> ↑ 2 new this month</div>
+    <div class="pc-trend up"><div class="pc-dot"></div> ↑ 2 new this month</div>
   </a>
 </div>
 
@@ -484,7 +484,7 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
         </div>
         <div style="text-align:right">
           <div class="chart-total">142 <span>visitors</span></div>
-          <div style="font-size:11px;color:#534AB7;font-weight:600;margin-top:2px">↑ 28% — best month yet</div>
+          <div style="font-size:11px;color:var(--terra);font-weight:600;margin-top:2px">↑ 28% — best month yet</div>
         </div>
       </div>
       <div class="mini-bars">
@@ -535,7 +535,7 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
     <div class="chart-card">
       <div class="feed-hd">Recent activity</div>
       <div class="act-item">
-        <div class="act-av" style="background:#2a8a4a">HS</div>
+        <div class="act-av" style="background:#5c6672">HS</div>
         <div class="act-body">
           <div class="act-title"><span class="act-flag">🇬🇭</span>Holy Spirit Parish, Accra sent a message</div>
           <div class="act-sub">"We'd love to discuss a joint youth programme — perhaps an online exchange?"</div>
@@ -544,7 +544,7 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
         </div>
       </div>
       <div class="act-item">
-        <div class="act-av" style="background:#c27a12">💚</div>
+        <div class="act-av" style="background:#5c6672">💚</div>
         <div class="act-body">
           <div class="act-title">$120 donation received</div>
           <div class="act-sub">Anonymous donor via your Communio profile — 47 donors this month</div>
@@ -553,7 +553,7 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
         </div>
       </div>
       <div class="act-item">
-        <div class="act-av" style="background:#534AB7">AI</div>
+        <div class="act-av" style="background:var(--terra)">AI</div>
         <div class="act-body">
           <div class="act-title">Ethical AI in Catholic Education — now 247 parishes</div>
           <div class="act-sub">Your co-signature is making a difference — this statement is growing fast</div>
@@ -562,7 +562,7 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
         </div>
       </div>
       <div class="act-item">
-        <div class="act-av" style="background:#185FA5">SS</div>
+        <div class="act-av" style="background:#5c6672">SS</div>
         <div class="act-body">
           <div class="act-title"><span class="act-flag">🇵🇱</span>St. Stanislaw, Warsaw confirmed as sister parish</div>
           <div class="act-sub">Connection accepted — now 18 sister parishes across 14 countries</div>
@@ -591,7 +591,7 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
     <div class="rc-card">
       <div class="rc-title">Network — active now</div>
       <div class="conn-item">
-        <div class="conn-av" style="background:#2a8a4a">HS</div>
+        <div class="conn-av" style="background:#5c6672">HS</div>
         <div style="flex:1">
           <div class="conn-name">🇬🇭 Holy Spirit, Accra</div>
           <div class="conn-loc">Youth ministry · Digital Sovereignty Study</div>
@@ -599,7 +599,7 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
         <span class="conn-status conn-online">Online</span>
       </div>
       <div class="conn-item">
-        <div class="conn-av" style="background:#534AB7">SB</div>
+        <div class="conn-av" style="background:var(--terra)">SB</div>
         <div style="flex:1">
           <div class="conn-name">🇭🇺 St. Benedek, Budapest</div>
           <div class="conn-loc">Ethical AI · Research</div>
@@ -607,7 +607,7 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
         <span class="conn-status conn-online">Online</span>
       </div>
       <div class="conn-item">
-        <div class="conn-av" style="background:#185FA5">SS</div>
+        <div class="conn-av" style="background:#5c6672">SS</div>
         <div style="flex:1">
           <div class="conn-name">🇵🇱 St. Stanislaw, Warsaw</div>
           <div class="conn-loc">New sister parish</div>
@@ -615,7 +615,7 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
         <span class="conn-status conn-recent">1h ago</span>
       </div>
       <div class="conn-item">
-        <div class="conn-av" style="background:#BA7517">SJ</div>
+        <div class="conn-av" style="background:#5c6672">SJ</div>
         <div style="flex:1">
           <div class="conn-name">🇵🇭 San José, Manila</div>
           <div class="conn-loc">Just joined your project</div>
@@ -664,7 +664,7 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
           <div style="font-size:11px;color:var(--light)">communio.io/stmarysnyc</div>
         </div>
       </div>
-      <div class="rc-stat-row"><span class="rc-stat-lbl">Profile views this month</span><span class="rc-stat-val" style="color:#534AB7">847 ↑</span></div>
+      <div class="rc-stat-row"><span class="rc-stat-lbl">Profile views this month</span><span class="rc-stat-val" style="color:var(--sage)">847 ↑</span></div>
       <div class="rc-stat-row"><span class="rc-stat-lbl">Sister parishes</span><span class="rc-stat-val">18</span></div>
       <div class="rc-stat-row"><span class="rc-stat-lbl">Active projects</span><span class="rc-stat-val">4</span></div>
       <div class="rc-stat-row"><span class="rc-stat-lbl">Network health score</span><span class="rc-stat-val" style="color:var(--sage)">92 / 100</span></div>
