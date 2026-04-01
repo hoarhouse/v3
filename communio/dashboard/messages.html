@@ -72,7 +72,7 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
 .msg-thread-item.active::before{content:'';position:absolute;left:0;top:6px;bottom:6px;width:3px;background:var(--terra);border-radius:0 3px 3px 0}
 .msg-tav{width:42px;height:42px;border-radius:11px;font-size:12px;font-weight:800;color:white;display:flex;align-items:center;justify-content:center;flex-shrink:0;position:relative}
 .msg-tav-dot{position:absolute;bottom:-1px;right:-1px;width:11px;height:11px;border-radius:50%;border:2px solid var(--white)}
-.msg-tav-dot.online{background:#22c55e}
+.msg-tav-dot.online{background:#5c6672}
 .msg-tav-dot.away{background:#f59e0b}
 .msg-tav-dot.offline{background:var(--border-light)}
 .msg-tbody{flex:1;min-width:0}
@@ -90,8 +90,8 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
 /* RIGHT PANEL */
 .msg-conv{display:flex;flex-direction:column;overflow:hidden}
 .msg-conv-hd{padding:14px 20px;border-bottom:1px solid var(--border-light);background:var(--white);display:flex;align-items:center;gap:13px;flex-shrink:0}
-.msg-conv-av{width:46px;height:46px;border-radius:12px;font-size:13px;font-weight:800;color:white;display:flex;align-items:center;justify-content:center;flex-shrink:0;position:relative;background:#2a8a4a}
-.msg-conv-av-dot{position:absolute;bottom:-1px;right:-1px;width:13px;height:13px;border-radius:50%;border:2.5px solid var(--white);background:#22c55e}
+.msg-conv-av{width:46px;height:46px;border-radius:12px;font-size:13px;font-weight:800;color:white;display:flex;align-items:center;justify-content:center;flex-shrink:0;position:relative;background:#5c6672}
+.msg-conv-av-dot{position:absolute;bottom:-1px;right:-1px;width:13px;height:13px;border-radius:50%;border:2.5px solid var(--white);background:#5c6672}
 .msg-conv-info{flex:1}
 .msg-conv-name{font-size:16px;font-weight:800;color:var(--ink);letter-spacing:-.02em;margin-bottom:2px}
 .msg-conv-status{font-size:12px;font-weight:600;color:#22c55e;display:flex;align-items:center;gap:5px}
@@ -127,7 +127,7 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
 
 /* TYPING */
 .msg-typing-row{display:flex;align-items:center;gap:10px;padding:4px 20px 10px;flex-shrink:0}
-.msg-typing-av{width:26px;height:26px;border-radius:7px;background:#2a8a4a;font-size:9px;font-weight:800;color:white;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.msg-typing-av{width:26px;height:26px;border-radius:7px;background:#5c6672;font-size:9px;font-weight:800;color:white;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .msg-typing-bubble{background:var(--white);border:1px solid var(--border-light);border-radius:12px;padding:9px 14px;display:flex;gap:4px;align-items:center}
 .msg-typing-dot{width:6px;height:6px;border-radius:50%;background:var(--border-light)}
 .msg-typing-dot:nth-child(1){animation:typing-bounce 1.2s infinite .0s}
@@ -244,7 +244,7 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
         <div class="msg-threads-list">
           <div class="msg-section-lbl">Direct messages</div>
           <div class="msg-thread-item active" data-filter="direct">
-            <div class="msg-tav" style="background:#2a8a4a">HS<div class="msg-tav-dot online"></div></div>
+            <div class="msg-tav" style="background:#5c6672">HS<div class="msg-tav-dot online"></div></div>
             <div class="msg-tbody">
               <div class="msg-tname">Holy Spirit Parish, Accra</div>
               <div class="msg-tprev">We'd love to discuss a joint youth…</div>
@@ -255,7 +255,7 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
             </div>
           </div>
           <div class="msg-thread-item" data-filter="direct">
-            <div class="msg-tav" style="background:#185FA5">SS</div>
+            <div class="msg-tav" style="background:#5c6672">SS</div>
             <div class="msg-tbody">
               <div class="msg-tname">St. Stanislaw, Warsaw</div>
               <div class="msg-tprev">Sister parish confirmed! Excited…</div>
@@ -266,7 +266,7 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
             </div>
           </div>
           <div class="msg-thread-item" data-filter="direct">
-            <div class="msg-tav" style="background:#BA7517">SJ</div>
+            <div class="msg-tav" style="background:#5c6672">SJ</div>
             <div class="msg-tbody">
               <div class="msg-tname">San José Parish, Manila</div>
               <div class="msg-tprev">Thank you for co-signing the AI…</div>
@@ -274,7 +274,7 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
             <div class="msg-tright"><div class="msg-ttime">3d</div></div>
           </div>
           <div class="msg-thread-item" data-filter="direct">
-            <div class="msg-tav" style="background:#534AB7">SB</div>
+            <div class="msg-tav" style="background:#5c6672">SB</div>
             <div class="msg-tbody">
               <div class="msg-tname">St. Benedek, Budapest</div>
               <div class="msg-tprev">Would love to share resources…</div>
@@ -291,7 +291,7 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
             <div style="font-size:10px;color:var(--light);flex-shrink:0">5h</div>
           </div>
           <div class="msg-channel-item" data-filter="projects">
-            <div class="msg-cicon" style="background:#3B6D11">#</div>
+            <div class="msg-cicon" style="background:#5c6672">#</div>
             <div style="flex:1;min-width:0">
               <div class="msg-cname">Global Youth Formation</div>
               <div class="msg-cprev">Sr. Ana: Curriculum uploaded…</div>
@@ -299,7 +299,7 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
             <div style="font-size:10px;color:var(--light);flex-shrink:0">1d</div>
           </div>
           <div class="msg-channel-item" data-filter="projects">
-            <div class="msg-cicon" style="background:#185FA5">#</div>
+            <div class="msg-cicon" style="background:#5c6672">#</div>
             <div style="flex:1;min-width:0">
               <div class="msg-cname">Digital Sovereignty Study</div>
               <div class="msg-cprev">28 parishes · survey open</div>
@@ -315,7 +315,7 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
           <div class="msg-conv-info">
             <div class="msg-conv-name">Holy Spirit Parish, Accra</div>
             <div class="msg-conv-status">
-              <svg width="8" height="8" viewBox="0 0 8 8"><circle cx="4" cy="4" r="3.5" fill="#22c55e"/></svg>
+              <svg width="8" height="8" viewBox="0 0 8 8"><circle cx="4" cy="4" r="3.5" fill="#5c6672"/></svg>
               Active now
             </div>
             <div class="msg-conv-meta">🇬🇭 Accra, Ghana · Youth ministry &amp; Education · Sister parish since Mar 2025</div>
@@ -338,7 +338,7 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
           <div class="msg-date-divider"><span>Monday 24 Mar</span></div>
 
           <div class="msg-row them">
-            <div class="msg-row-av" style="background:#2a8a4a">HS</div>
+            <div class="msg-row-av" style="background:#5c6672">HS</div>
             <div class="msg-bubble-wrap">
               <div class="msg-bubble">Hello! We've been following Communio's work on ethical technology advocacy and it resonates deeply with our community here in Accra.</div>
               <div class="msg-meta-row"><span class="msg-time">9:15 am</span></div>
@@ -357,7 +357,7 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
           </div>
 
           <div class="msg-row them">
-            <div class="msg-row-av" style="background:#2a8a4a">HS</div>
+            <div class="msg-row-av" style="background:#5c6672">HS</div>
             <div class="msg-bubble-wrap">
               <div class="msg-bubble">Perfect. We'd also love to discuss a joint youth programme — we have about 200 young people very engaged with questions around faith and technology.</div>
               <div class="msg-meta-row"><span class="msg-time">2:45 pm</span></div>
@@ -377,7 +377,7 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
           <div class="msg-date-divider"><span>Today</span></div>
 
           <div class="msg-row them">
-            <div class="msg-row-av" style="background:#2a8a4a">HS</div>
+            <div class="msg-row-av" style="background:#5c6672">HS</div>
             <div class="msg-bubble-wrap">
               <div class="msg-bubble">We'd love to discuss a joint youth programme — perhaps an online exchange where young people from both communities can meet and collaborate?</div>
               <div class="msg-meta-row"><span class="msg-time">8:30 am</span></div>
