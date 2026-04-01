@@ -7,7 +7,7 @@ var CSS = `
 @keyframes cm-panel-in{from{opacity:0;transform:translateY(10px) scale(.97)}to{opacity:1;transform:translateY(0) scale(1)}}
 #cm-chat-root *{box-sizing:border-box;margin:0;padding:0;font-family:'Outfit',sans-serif}
 #cm-chat-root{position:fixed;bottom:24px;right:24px;z-index:9999;display:flex;flex-direction:column;align-items:flex-end;gap:8px}
-.cm-context-strip{background:#f0fdf4;border:1px solid #bbf7d0;border-radius:20px;padding:5px 12px;font-size:11px;font-weight:700;color:#15803d;display:none;align-items:center;gap:5px;cursor:pointer;white-space:nowrap}
+.cm-context-strip{background:#f0fdf4;border:1px solid #bbf7d0;border-radius:20px;padding:7px 14px;font-size:12px;font-weight:700;color:#15803d;display:none;align-items:center;gap:5px;cursor:pointer;white-space:nowrap}
 .cm-context-strip.show{display:flex}
 .cm-context-dot{width:6px;height:6px;border-radius:50%;background:#22c55e;animation:cm-pulse 2s infinite;flex-shrink:0}
 .cm-btn{width:52px;height:52px;border-radius:50%;background:#d85020;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;position:relative;transition:background .15s;flex-shrink:0}
@@ -21,9 +21,9 @@ var CSS = `
 .cm-toast-name{font-size:12px;font-weight:700;color:#0e0a06}
 .cm-toast-msg{font-size:11px;color:#6b5c4e;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-style:italic}
 .cm-toast-time{font-size:10px;color:#a89880;flex-shrink:0}
-.cm-panel{width:320px;background:white;border:1px solid #e8e2d6;border-radius:14px;overflow:hidden;box-shadow:0 8px 32px rgba(14,10,6,.15);display:none;animation:cm-panel-in .18s ease;margin-bottom:4px}
+.cm-panel{width:360px;background:white;border:1px solid #e8e2d6;border-radius:14px;overflow:hidden;box-shadow:0 8px 32px rgba(14,10,6,.15);display:none;animation:cm-panel-in .18s ease;margin-bottom:4px}
 .cm-panel.show{display:block}
-.cm-hd{background:#d85020;padding:11px 14px;display:flex;align-items:center;gap:8px}
+.cm-hd{background:#d85020;padding:13px 16px;display:flex;align-items:center;gap:8px}
 .cm-hd-icon{flex-shrink:0}
 .cm-hd-title{font-size:14px;font-weight:800;color:white;flex:1}
 .cm-hd-count{font-size:10px;font-weight:700;background:rgba(255,255,255,.25);color:white;padding:1px 6px;border-radius:10px}
@@ -37,25 +37,25 @@ var CSS = `
 .cm-hd-status{font-size:10px;color:rgba(255,255,255,.8);display:flex;align-items:center;gap:4px}
 .cm-online-dot{width:5px;height:5px;border-radius:50%;background:#22c55e}
 .cm-tabs{display:flex;border-bottom:1px solid #f0ebe0}
-.cm-tab{flex:1;font-size:11px;font-weight:700;color:#a89880;background:none;border:none;border-bottom:2px solid transparent;padding:9px 0;cursor:pointer;font-family:'Outfit',sans-serif;margin-bottom:-1px;transition:color .15s}
+.cm-tab{flex:1;font-size:12px;font-weight:700;color:#a89880;background:none;border:none;border-bottom:2px solid transparent;padding:10px 0;cursor:pointer;font-family:'Outfit',sans-serif;margin-bottom:-1px;transition:color .15s}
 .cm-tab:hover{color:#0e0a06}
 .cm-tab.on{color:#d85020;border-bottom-color:#d85020}
-.cm-threads{max-height:230px;overflow-y:auto}
-.cm-thread{display:flex;align-items:center;gap:10px;padding:10px 14px;cursor:pointer;border-bottom:1px solid #f8f5f0;transition:background .12s}
+.cm-threads{max-height:260px;overflow-y:auto}
+.cm-thread{display:flex;align-items:center;gap:12px;padding:13px 16px;cursor:pointer;border-bottom:1px solid #f8f5f0;transition:background .12s}
 .cm-thread:hover{background:#fdf4f0}
-.cm-thread-av{width:36px;height:36px;border-radius:10px;font-size:11px;font-weight:800;color:white;display:flex;align-items:center;justify-content:center;flex-shrink:0;position:relative}
+.cm-thread-av{width:40px;height:40px;border-radius:10px;font-size:12px;font-weight:800;color:white;display:flex;align-items:center;justify-content:center;flex-shrink:0;position:relative}
 .cm-thread-dot{position:absolute;bottom:-1px;right:-1px;width:9px;height:9px;border-radius:50%;border:1.5px solid white}
 .cm-thread-body{flex:1;min-width:0}
-.cm-thread-name{font-size:12px;font-weight:700;color:#0e0a06;margin-bottom:1px}
-.cm-thread-prev{font-size:11px;color:#a89880;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-style:italic}
+.cm-thread-name{font-size:13px;font-weight:700;color:#0e0a06;margin-bottom:3px}
+.cm-thread-prev{font-size:12px;color:#a89880;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-style:italic}
 .cm-thread-right{text-align:right;flex-shrink:0}
 .cm-thread-time{font-size:10px;color:#a89880}
 .cm-thread-unread{font-size:9px;font-weight:800;background:#d85020;color:white;padding:1px 5px;border-radius:10px;margin-top:3px;display:inline-block}
-.cm-msgs{padding:12px 14px;max-height:190px;overflow-y:auto;display:flex;flex-direction:column;gap:8px;background:#faf8f4}
+.cm-msgs{padding:14px 16px;max-height:210px;overflow-y:auto;display:flex;flex-direction:column;gap:8px;background:#faf8f4}
 .cm-msg{max-width:82%}
 .cm-msg.them{align-self:flex-start}
 .cm-msg.me{align-self:flex-end}
-.cm-bubble{padding:8px 11px;border-radius:10px;font-size:12px;line-height:1.5;font-style:italic}
+.cm-bubble{padding:10px 13px;border-radius:10px;font-size:13px;line-height:1.6;font-style:italic}
 .cm-msg.them .cm-bubble{background:white;color:#0e0a06;border:1px solid #e8e2d6;border-radius:10px 10px 10px 2px}
 .cm-msg.me .cm-bubble{background:#d85020;color:white;border-radius:10px 10px 2px 10px;font-style:normal}
 .cm-msg-time{font-size:10px;color:#a89880;margin-top:3px;padding:0 2px;font-style:normal}
@@ -65,8 +65,8 @@ var CSS = `
 .cm-typing-dot{width:5px;height:5px;border-radius:50%;background:#c8bfb2;animation:cm-pulse 1.2s infinite}
 .cm-typing-dot:nth-child(2){animation-delay:.2s}
 .cm-typing-dot:nth-child(3){animation-delay:.4s}
-.cm-compose{display:flex;align-items:center;gap:7px;padding:9px 12px;border-top:1px solid #f0ebe0;background:white}
-.cm-compose-in{flex:1;border:1.5px solid #e8e2d6;border-radius:8px;padding:7px 10px;font-size:12px;font-family:'Outfit',sans-serif;color:#0e0a06;background:#faf8f4;outline:none;transition:border-color .2s}
+.cm-compose{display:flex;align-items:center;gap:8px;padding:11px 14px;border-top:1px solid #f0ebe0;background:white}
+.cm-compose-in{flex:1;border:1.5px solid #e8e2d6;border-radius:8px;padding:9px 12px;font-size:13px;font-family:'Outfit',sans-serif;color:#0e0a06;background:#faf8f4;outline:none;transition:border-color .2s}
 .cm-compose-in:focus{border-color:#d85020;background:white}
 .cm-attach{width:28px;height:28px;border-radius:6px;border:1.5px solid #e8e2d6;background:none;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .cm-send{width:30px;height:30px;border-radius:7px;background:#d85020;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .15s}
@@ -131,10 +131,10 @@ function inject() {
     document.getElementById('cm-ctx').classList.add('show');
   }
 
-  // Simulate incoming toast after 4 seconds
+  // Simulate incoming toast after 5 seconds — just notifies, click to open
   setTimeout(function(){
     if(!state.open) showToast(THREADS[0]);
-  }, 4000);
+  }, 5000);
 }
 
 function buildRoot() {
@@ -234,7 +234,7 @@ function showToast(t) {
     '<div class="cm-toast-body"><div class="cm-toast-name">'+t.name+'</div>'+
     '<div class="cm-toast-msg">'+t.preview+'</div></div>'+
     '<div class="cm-toast-time">now</div>';
-  toast.onclick = function(){ container.removeChild(toast); cmOpenThread(t.id,'direct'); cmOpen(); };
+  toast.onclick = function(){ container.removeChild(toast); cmOpen(); };
   container.appendChild(toast);
   setTimeout(function(){ if(toast.parentNode) container.removeChild(toast); }, 5000);
 }
