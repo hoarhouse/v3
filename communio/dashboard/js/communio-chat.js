@@ -78,7 +78,7 @@ var CSS = `
 `;
 
 var THREADS = [
-  {id:'hs', name:'Holy Spirit, Accra', av:'HS', color:'#2a8a4a', online:true, time:'2m', unread:2,
+  {id:'hs', name:'Holy Spirit, Accra', av:'HS', color:'#5c6672', online:true, time:'2m', unread:2,
    preview:'We agree with your survey approach…',
    messages:[
     {from:'them',text:'We suggest a shared form with anonymised parish IDs — this worked well for our diocesan survey.',time:'2 days ago'},
@@ -86,18 +86,18 @@ var THREADS = [
     {from:'them',text:'Yes! I\'ll upload our template now.',time:'1 day ago'},
     {from:'them',text:'We agree with your survey approach for the methodology section.',time:'2 min ago'}
    ]},
-  {id:'sb', name:'St. Benedek, Budapest', av:'SB', color:'#534AB7', online:true, time:'1h', unread:1,
+  {id:'sb', name:'St. Benedek, Budapest', av:'SB', color:'#5c6672', online:true, time:'1h', unread:1,
    preview:'Uploaded the survey template…',
    messages:[
     {from:'them',text:'Uploaded Survey Template v1.xlsx to the Resources tab.',time:'2 hours ago'},
     {from:'me',text:'Perfect, thank you!',time:'1 hour ago'}
    ]},
-  {id:'ss', name:'St. Stanislaw, Warsaw', av:'SS', color:'#185FA5', online:false, time:'3h', unread:0,
+  {id:'ss', name:'St. Stanislaw, Warsaw', av:'SS', color:'#5c6672', online:false, time:'3h', unread:0,
    preview:'Can we include cloud provider data?',
    messages:[
     {from:'them',text:'Can we include a question about which cloud providers parishes currently use?',time:'3 hours ago'}
    ]},
-  {id:'sj', name:'San José, Manila', av:'SJ', color:'#BA7517', online:false, time:'1d', unread:0,
+  {id:'sj', name:'San José, Manila', av:'SJ', color:'#5c6672', online:false, time:'1d', unread:0,
    preview:'Just joined the project!',
    messages:[
     {from:'them',text:'Just joined the Digital Sovereignty project. Looking forward to collaborating!',time:'Yesterday'}
@@ -105,7 +105,7 @@ var THREADS = [
 ];
 
 var PROJECT_THREADS = [
-  {id:'proj1', name:'Digital Sovereignty Study', av:'DS', color:'#185FA5', online:false, time:'12m', unread:3,
+  {id:'proj1', name:'Digital Sovereignty Study', av:'DS', color:'#5c6672', online:false, time:'12m', unread:3,
    preview:'Survey methodology discussion…'},
   {id:'proj2', name:'Ethical AI Statement', av:'AI', color:'#D85A30', online:false, time:'1h', unread:0,
    preview:'247 parishes have now signed'},
