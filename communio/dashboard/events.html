@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Home — Communio</title>
+<title>Events — Communio</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Lora:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
@@ -183,7 +183,7 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
   </div>
   <nav class="sb-nav">
     <div class="sb-sec">Parish</div>
-    <a href="home.html" class="sb-item active">
+    <a href="home.html" class="sb-item">
       <svg viewBox="0 0 16 16" fill="none"><path d="M2 7l6-5 6 5v7H10V9H6v5H2V7z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>
       <span class="sb-item-lbl">Home</span>
     </a>
@@ -210,7 +210,7 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
       <svg viewBox="0 0 16 16" fill="none" width="16" height="16"><rect x="2" y="8" width="3" height="6" rx="1" stroke="currentColor" stroke-width="1.3"/><rect x="6.5" y="5" width="3" height="9" rx="1" stroke="currentColor" stroke-width="1.3"/><rect x="11" y="2" width="3" height="12" rx="1" stroke="currentColor" stroke-width="1.3"/></svg>
       <span class="sb-item-lbl">Analytics</span>
     </a>
-    <a href="events.html" class="sb-item">
+    <a href="events.html" class="sb-item active">
       <svg viewBox="0 0 16 16" fill="none" width="16" height="16"><rect x="2" y="3" width="12" height="11" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M5 1v4M11 1v4M2 7h12" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
       <span class="sb-item-lbl">Events</span>
     </a>
@@ -241,217 +241,176 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
 <!-- PAGE CONTENT -->
 <div class="page-shell">
   <div class="page-inner">
+<style>
+.ev-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px;flex-wrap:wrap;gap:12px}
+.ev-layout{display:grid;grid-template-columns:1fr 340px;gap:20px}
+.ev-list{display:flex;flex-direction:column;gap:10px}
+.ev-item{background:var(--white);border:1px solid var(--border-light);border-radius:var(--r-lg);padding:16px 18px;display:flex;align-items:center;gap:16px;box-shadow:var(--sh-sm);transition:box-shadow .15s}
+.ev-item:hover{box-shadow:0 4px 16px rgba(14,10,6,.08)}
+.ev-date-block{width:52px;text-align:center;flex-shrink:0;background:var(--terra-pale);border-radius:var(--r-md);padding:8px 0}
+.ev-mon{font-size:11px;font-weight:700;color:var(--terra);text-transform:uppercase;letter-spacing:.06em}
+.ev-day{font-size:24px;font-weight:800;color:var(--ink);line-height:1;letter-spacing:-.03em}
+.ev-info{flex:1;min-width:0}
+.ev-title{font-size:14px;font-weight:700;color:var(--ink);margin-bottom:3px}
+.ev-meta{font-size:12px;color:var(--light);margin-bottom:4px;font-family:'Lora',serif;font-style:italic}
+.ev-tags{display:flex;gap:6px;flex-wrap:wrap}
+.ev-tag{font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px}
+.ev-tag-web{background:var(--terra-pale);color:var(--terra)}
+.ev-tag-net{background:#e6f4eb;color:#1a6b2a}
+.ev-tag-open{background:#E6F1FB;color:#185FA5}
+.ev-acts{display:flex;gap:6px;flex-shrink:0}
+.add-ev-form{background:var(--white);border:1.5px solid var(--terra);border-radius:var(--r-lg);padding:22px;margin-bottom:16px;box-shadow:0 0 0 3px rgba(216,80,32,.06);display:none}
+.add-ev-form.visible{display:block}
+.fg-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.card{background:var(--white);border:1px solid var(--border-light);border-radius:var(--r-lg);padding:18px;margin-bottom:14px;box-shadow:var(--sh-sm)}
+.card-title{font-size:12px;font-weight:700;color:var(--ink);text-transform:uppercase;letter-spacing:.07em;margin-bottom:4px}
+.card-sub{font-family:'Lora',serif;font-size:12px;color:var(--light);font-style:italic;margin-bottom:14px}
+.toggle-row{display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border-light)}
+.toggle-row:last-child{border-bottom:none}
+.tr-lbl{font-size:13px;font-weight:600;color:var(--ink)}
+.tr-sub{font-size:11px;color:var(--light);margin-top:2px;font-family:'Lora',serif;font-style:italic}
+</style>
 
-    <!-- PAGE HEADER -->
-    <!-- <?php echo $greeting, $parish->name, $current_date ?> -->
-    <div class="pg-hd">
-      <div class="pg-greeting">Good morning, <em>Fr. James</em> 👋</div>
-      <div class="pg-sub">Friday, 27 March 2026 · St. Mary's Parish</div>
+<div class="ev-hd">
+  <div>
+    <div class="pg-title">Events</div>
+    <div style="font-family:'Lora',serif;font-size:13px;color:var(--light);font-style:italic;margin-top:2px">Manage your parish calendar — syncs to your website and network profile</div>
+  </div>
+  <button class="btn btn-primary btn-sm" id="add-ev-btn">+ Add event</button>
+</div>
+
+<div class="add-ev-form" id="add-ev-form">
+  <div style="font-size:15px;font-weight:700;color:var(--ink);margin-bottom:16px">New event</div>
+  <div class="fg-row" style="margin-bottom:14px">
+    <div class="fg"><label class="fl">Event title</label><input class="fi" type="text" placeholder="e.g. Easter Vigil Mass" id="ev-title"></div>
+    <div class="fg"><label class="fl">Location</label><input class="fi" type="text" placeholder="e.g. Main Church" id="ev-location"></div>
+  </div>
+  <div class="fg-row" style="margin-bottom:14px">
+    <div class="fg"><label class="fl">Date</label><input class="fi" type="date" id="ev-date"></div>
+    <div class="fg"><label class="fl">Time</label><input class="fi" type="time" value="10:00" id="ev-time"></div>
+  </div>
+  <div class="fg" style="margin-bottom:14px"><label class="fl">Description <span style="color:var(--light);font-weight:400">(optional)</span></label><textarea class="fta" rows="2" placeholder="Brief details about this event…" id="ev-desc"></textarea></div>
+  <div style="display:flex;align-items:center;gap:16px;margin-bottom:16px;flex-wrap:wrap">
+    <label style="display:flex;align-items:center;gap:7px;cursor:pointer;font-size:13px;font-weight:600;color:var(--ink)"><input type="checkbox" id="ev-show-web" checked style="width:15px;height:15px"> Show on website</label>
+    <label style="display:flex;align-items:center;gap:7px;cursor:pointer;font-size:13px;font-weight:600;color:var(--ink)"><input type="checkbox" id="ev-show-net" checked style="width:15px;height:15px"> Post to network feed</label>
+    <label style="display:flex;align-items:center;gap:7px;cursor:pointer;font-size:13px;font-weight:600;color:var(--ink)"><input type="checkbox" id="ev-open-all" style="width:15px;height:15px"> Open to all</label>
+  </div>
+  <div style="display:flex;gap:8px;justify-content:flex-end">
+    <button class="btn btn-secondary btn-sm" id="cancel-ev-btn">Cancel</button>
+    <button class="btn btn-primary btn-sm" id="save-ev-btn">Save event →</button>
+  </div>
+</div>
+
+<div class="ev-layout">
+  <div>
+    <div style="font-size:11px;font-weight:700;color:var(--light);text-transform:uppercase;letter-spacing:.07em;margin-bottom:10px">Upcoming</div>
+    <div class="ev-list" id="ev-list">
+      <div class="ev-item">
+        <div class="ev-date-block"><div class="ev-mon">Apr</div><div class="ev-day">19</div></div>
+        <div class="ev-info">
+          <div class="ev-title">Easter Vigil</div>
+          <div class="ev-meta">8:00pm · Main Church</div>
+          <div class="ev-tags"><span class="ev-tag ev-tag-web">Website</span><span class="ev-tag ev-tag-net">Network feed</span></div>
+        </div>
+        <div class="ev-acts"><button class="btn btn-secondary btn-sm">Edit</button><button class="btn btn-secondary btn-sm" style="color:var(--terra)">Remove</button></div>
+      </div>
+      <div class="ev-item">
+        <div class="ev-date-block"><div class="ev-mon">Apr</div><div class="ev-day">22</div></div>
+        <div class="ev-info">
+          <div class="ev-title">Youth Group Meeting</div>
+          <div class="ev-meta">6:30pm · Parish Hall</div>
+          <div class="ev-tags"><span class="ev-tag ev-tag-web">Website</span><span class="ev-tag ev-tag-net">Network feed</span></div>
+        </div>
+        <div class="ev-acts"><button class="btn btn-secondary btn-sm">Edit</button><button class="btn btn-secondary btn-sm" style="color:var(--terra)">Remove</button></div>
+      </div>
+      <div class="ev-item">
+        <div class="ev-date-block"><div class="ev-mon">May</div><div class="ev-day">4</div></div>
+        <div class="ev-info">
+          <div class="ev-title">Community Dinner</div>
+          <div class="ev-meta">6:00pm · Parish Hall</div>
+          <div class="ev-tags"><span class="ev-tag ev-tag-web">Website</span><span class="ev-tag ev-tag-net">Network feed</span><span class="ev-tag ev-tag-open">Open to all</span></div>
+        </div>
+        <div class="ev-acts"><button class="btn btn-secondary btn-sm">Edit</button><button class="btn btn-secondary btn-sm" style="color:var(--terra)">Remove</button></div>
+      </div>
+      <div class="ev-item">
+        <div class="ev-date-block"><div class="ev-mon">May</div><div class="ev-day">18</div></div>
+        <div class="ev-info">
+          <div class="ev-title">Parish Pilgrimage to Washington DC</div>
+          <div class="ev-meta">All day · Departs 7:00am</div>
+          <div class="ev-tags"><span class="ev-tag ev-tag-net">Network feed</span><span class="ev-tag ev-tag-open">Open to all</span></div>
+        </div>
+        <div class="ev-acts"><button class="btn btn-secondary btn-sm">Edit</button><button class="btn btn-secondary btn-sm" style="color:var(--terra)">Remove</button></div>
+      </div>
     </div>
+  </div>
 
-    <!-- SETUP BANNER -->
-    <!-- <?php if ($parish->setup_incomplete): ?> -->
-    <div class="setup-banner">
-      <div class="setup-text">
-        <div class="setup-title">Finish setting up your parish</div>
-        <div class="setup-sub">3 of 5 steps complete — you're almost there</div>
-        <div class="setup-bar"><div class="setup-fill"></div></div>
+  <div>
+    <div class="card">
+      <div class="card-title">Sync settings</div>
+      <div class="card-sub">Control where your events appear automatically</div>
+      <div class="toggle-row">
+        <div><div class="tr-lbl">Show on parish website</div><div class="tr-sub">Displays next 3 events on communio.io/stmarysnyc</div></div>
+        <button class="toggle on" onclick="this.classList.toggle('on')"></button>
       </div>
-      <a href="settings.html" class="btn btn-primary btn-sm">Continue setup →</a>
-    </div>
-    <!-- <?php endif ?> -->
-
-    <!-- STAT CARDS -->
-    <!-- <?php echo $parish->stats_cards_html ?> -->
-    <div class="stat-row">
-      <div class="sc sc-terra">
-        <div class="sc-val">$4,205</div>
-        <div class="sc-lbl">Donations this month</div>
-        <div class="sc-delta up">↑ 34.8% vs last month</div>
+      <div class="toggle-row">
+        <div><div class="tr-lbl">Post to network feed</div><div class="tr-sub">New events appear on your Communio profile</div></div>
+        <button class="toggle on" onclick="this.classList.toggle('on')"></button>
       </div>
-      <div class="sc sc-sage">
-        <div class="sc-val">47</div>
-        <div class="sc-lbl">Donors this month</div>
-        <div class="sc-delta up">↑ 12 new donors</div>
-      </div>
-      <div class="sc sc-amber">
-        <div class="sc-val">4</div>
-        <div class="sc-lbl">Active projects</div>
-        <div class="sc-delta new">1 new this week</div>
-      </div>
-      <div class="sc sc-ink">
-        <div class="sc-val">6</div>
-        <div class="sc-lbl">Sister parishes</div>
-        <div class="sc-delta up">↑ 2 this month</div>
+      <div class="toggle-row">
+        <div><div class="tr-lbl">Notify sister parishes</div><div class="tr-sub">Open events notified to your 18 connections</div></div>
+        <button class="toggle" onclick="this.classList.toggle('on')"></button>
       </div>
     </div>
+    <div class="card" style="background:var(--sage-pale);border-color:var(--sage-pale)">
+      <div class="card-title" style="color:var(--sage)">One place, everywhere</div>
+      <div style="font-size:13px;color:var(--ink);line-height:1.6">Events you add here automatically appear on your <strong>public website</strong> and your <strong>Communio network profile</strong> — no duplication needed.</div>
+    </div>
+  </div>
+</div>
 
-    <!-- 2-COL MAIN GRID -->
-    <div class="home-grid">
+<script>
+document.getElementById('add-ev-btn').addEventListener('click', function(){
+  document.getElementById('add-ev-form').classList.add('visible');
+  this.style.display = 'none';
+});
+document.getElementById('cancel-ev-btn').addEventListener('click', function(){
+  document.getElementById('add-ev-form').classList.remove('visible');
+  document.getElementById('add-ev-btn').style.display = '';
+});
+document.getElementById('save-ev-btn').addEventListener('click', function(){
+  var title = document.getElementById('ev-title').value.trim();
+  if(!title){ document.getElementById('ev-title').focus(); return; }
+  var dateVal = document.getElementById('ev-date').value;
+  var timeVal = document.getElementById('ev-time').value;
+  var loc = document.getElementById('ev-location').value.trim();
+  var showWeb = document.getElementById('ev-show-web').checked;
+  var showNet = document.getElementById('ev-show-net').checked;
+  var openAll = document.getElementById('ev-open-all').checked;
+  var tags = '';
+  if(showWeb) tags += '<span class="ev-tag ev-tag-web">Website</span>';
+  if(showNet) tags += '<span class="ev-tag ev-tag-net">Network feed</span>';
+  if(openAll) tags += '<span class="ev-tag ev-tag-open">Open to all</span>';
+  var d = dateVal ? new Date(dateVal + 'T12:00:00') : null;
+  var mon = d ? d.toLocaleString('en',{month:'short'}) : '---';
+  var day = d ? d.getDate() : '--';
+  var meta = (timeVal || '') + (loc ? ' · ' + loc : '');
+  var item = document.createElement('div');
+  item.className = 'ev-item';
+  item.innerHTML = '<div class="ev-date-block"><div class="ev-mon">' + mon + '</div><div class="ev-day">' + day + '</div></div>' +
+    '<div class="ev-info"><div class="ev-title">' + title + '</div><div class="ev-meta">' + meta + '</div><div class="ev-tags">' + tags + '</div></div>' +
+    '<div class="ev-acts"><button class="btn btn-secondary btn-sm">Edit</button><button class="btn btn-secondary btn-sm" style="color:var(--terra)" onclick="this.closest('.ev-item').remove()">Remove</button></div>';
+  document.getElementById('ev-list').prepend(item);
+  document.getElementById('add-ev-form').classList.remove('visible');
+  document.getElementById('add-ev-btn').style.display = '';
+  document.getElementById('ev-title').value = '';
+  document.getElementById('ev-location').value = '';
+  document.getElementById('ev-date').value = '';
+  document.getElementById('ev-desc').value = '';
+});
+</script>
 
-      <!-- LEFT: chart + activity -->
-      <div>
-
-        <!-- DONATIONS CHART -->
-        <!-- <?php echo $parish->donations_chart_html ?> -->
-        <div class="chart-card">
-          <div class="chart-hd">
-            <div>
-              <div class="chart-title">Donations — last 6 months</div>
-              <div class="chart-range">October 2025 — March 2026</div>
-            </div>
-            <div style="text-align:right">
-              <div class="chart-total">$10,165 <span>/ 6 months</span></div>
-              <div style="font-size:11px;color:var(--sage);font-weight:600;margin-top:2px">↑ 18.2% vs prior period</div>
-            </div>
-          </div>
-          <div class="bar-chart">
-            <div class="bar-col">
-              <div class="bar-amt">$1k</div>
-              <div class="bar-fill" style="height:30%"></div>
-              <div class="bar-lbl">Oct</div>
-            </div>
-            <div class="bar-col">
-              <div class="bar-amt">$2k</div>
-              <div class="bar-fill" style="height:40%"></div>
-              <div class="bar-lbl">Nov</div>
-            </div>
-            <div class="bar-col">
-              <div class="bar-amt">$2k</div>
-              <div class="bar-fill" style="height:50%"></div>
-              <div class="bar-lbl">Dec</div>
-            </div>
-            <div class="bar-col">
-              <div class="bar-amt">$3k</div>
-              <div class="bar-fill" style="height:65%"></div>
-              <div class="bar-lbl">Jan</div>
-            </div>
-            <div class="bar-col">
-              <div class="bar-amt">$3k</div>
-              <div class="bar-fill" style="height:75%"></div>
-              <div class="bar-lbl">Feb</div>
-            </div>
-            <div class="bar-col">
-              <div class="bar-amt">$4k</div>
-              <div class="bar-fill current" style="height:100%"></div>
-              <div class="bar-lbl">Mar</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- RECENT ACTIVITY -->
-        <div class="section-title">Recent activity</div>
-        <!-- <?php foreach ($activity->items as $item): echo $item->render() endforeach ?> -->
-        <div class="act-wrap">
-          <div class="act-item">
-            <div class="act-dot">💚</div>
-            <div class="act-body">
-              <div class="act-title">$120 donation received</div>
-              <div class="act-sub">Anonymous donor · via Communio profile</div>
-              <div class="act-time">2 hours ago</div>
-            </div>
-          </div>
-          <div class="act-item">
-            <div class="act-dot">💬</div>
-            <div class="act-body">
-              <div class="act-title">Message from Holy Spirit Parish, Accra</div>
-              <div class="act-sub">"We'd love to discuss a joint youth programme..."</div>
-              <div class="act-time">4 hours ago</div>
-            </div>
-          </div>
-          <div class="act-item">
-            <div class="act-dot">🌿</div>
-            <div class="act-body">
-              <div class="act-title">Joined "Ethical AI in Catholic Education"</div>
-              <div class="act-sub">Now co-signed by 247 parishes</div>
-              <div class="act-time">Yesterday</div>
-            </div>
-          </div>
-          <div class="act-item">
-            <div class="act-dot">⛪</div>
-            <div class="act-body">
-              <div class="act-title">New sister parish — St. Stanislaw, Warsaw</div>
-              <div class="act-sub">Connection accepted · Poland</div>
-              <div class="act-time">2 days ago</div>
-            </div>
-          </div>
-          <div class="act-item">
-            <div class="act-dot">📊</div>
-            <div class="act-body">
-              <div class="act-title">Website visited 142 times this month</div>
-              <div class="act-sub">stmarysnyc.communio.org · up 28% from February</div>
-              <div class="act-time">3 days ago</div>
-            </div>
-          </div>
-        </div>
-
-      </div><!-- /left -->
-
-      <!-- RIGHT SIDEBAR CARDS -->
-      <div>
-
-        <!-- PUBLIC PROFILE CARD -->
-        <!-- <?php echo $parish->profile_preview_card_html ?> -->
-        <div class="sb-card">
-          <div class="sb-card-title">Your public profile</div>
-          <div class="profile-preview">
-            <div class="pp-av">SM</div>
-            <div>
-              <div class="pp-name">St. Mary's Parish</div>
-              <div class="pp-url">stmarysnyc.communio.org</div>
-            </div>
-          </div>
-          <div class="pp-tags">
-            <span class="tag tag-terra">Peace &amp; reconciliation</span>
-            <span class="tag tag-ink">Ethical technology</span>
-          </div>
-          <div class="pp-meta">6 sister parishes · 4 active projects · ✓ Verified by DCF</div>
-          <a href="../parish/profile.html" class="btn btn-secondary btn-sm" style="display:block;text-align:center">View my public profile →</a>
-        </div>
-
-        <!-- MESSAGES -->
-        <!-- <?php echo $messages->preview_card_html ?> -->
-        <div class="sb-card">
-          <div class="sb-card-title">3 unread messages</div>
-          <div class="notif-item">
-            <div class="ni-av" style="background:var(--sage)">HS</div>
-            <div>
-              <div class="ni-text">Holy Spirit Parish (Accra) sent a message</div>
-              <div class="ni-time">2 hours ago</div>
-            </div>
-          </div>
-          <div class="notif-item">
-            <div class="ni-av" style="background:#5a7ab8">SS</div>
-            <div>
-              <div class="ni-text">St. Stanislaw, Warsaw — Sister parish confirmed!</div>
-              <div class="ni-time">Yesterday</div>
-            </div>
-          </div>
-          <a href="messages.html" class="btn btn-primary btn-sm" style="display:block;text-align:center;margin-top:12px">Open messages →</a>
-        </div>
-
-        <!-- NEW PROJECT -->
-        <!-- <?php echo $projects->suggestion_card_html ?> -->
-        <div class="cta-strip">
-          <div class="cta-strip-title">New project to join</div>
-          <div class="cta-strip-sub">Global Youth Formation Network now has 89 parishes — looking for US parishes</div>
-          <a href="projects.html" class="btn btn-primary btn-sm" style="display:block;text-align:center">View projects →</a>
-        </div>
-
-        <!-- WEBSITE -->
-        <!-- <?php echo $parish->website_card_html ?> -->
-        <div class="sb-card">
-          <div class="sb-card-title">Your website is live</div>
-          <div style="font-size:13px;color:var(--ink);font-weight:600;margin-bottom:2px">stmarysnyc.communio.org</div>
-          <div style="font-family:'Lora',serif;font-size:12px;color:var(--light);font-style:italic;margin-bottom:12px">142 visitors this month</div>
-          <a href="website.html" class="btn btn-secondary btn-sm" style="display:block;text-align:center">Edit website →</a>
-        </div>
-
-      </div><!-- /right -->
-    </div><!-- /home-grid -->
-  </div><!-- /page-inner -->
-</div><!-- /page-shell -->
-
+</div>
+</div>
 <script>
 (function(){
   var b=document.getElementById('burger');
@@ -463,6 +422,5 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
   });
 })();
 </script>
-<script src="js/communio-chat.js?v=2"></script>
 </body>
 </html>
