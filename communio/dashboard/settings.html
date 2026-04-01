@@ -6,35 +6,331 @@
     <a href="events.html" class="sb-item">
       <svg viewBox="0 0 16 16" fill="none" width="16" height="16"><rect x="2" y="3" width="12" height="11" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M5 1v4M11 1v4M2 7h12" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
       <span class="sb-item-lbl">Events</span>
-    </a><div class="sb-sec">Manage</div><a href="website.html" class="sb-item"><svg viewBox="0 0 16 16" fill="none" width="15" height="15"><rect x="1.5" y="3" width="13" height="10" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M1.5 6h13" stroke="currentColor" stroke-width="1.3"/></svg><span class="sb-item-lbl">Website</span><span class="sb-badge sb-badge-sage" style="font-size:9px;padding:1px 5px">Live</span></a><a href="donations.html" class="sb-item"><svg viewBox="0 0 16 16" fill="none" width="15" height="15"><path d="M8 13.5C4 11 1.5 8.5 1.5 5.5a3 3 0 015-2.2A3 3 0 018 4a3 3 0 015 2.5c0 1-.4 2-1 2.8" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><path d="M8 9v5M6 12h4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg><span class="sb-item-lbl">Donations</span></a><a href="settings.html" class="sb-item active"><svg viewBox="0 0 16 16" fill="none" width="15" height="15"><circle cx="8" cy="8" r="2" stroke="currentColor" stroke-width="1.3"/><path d="M8 1v2M8 13v2M1 8h2M13 8h2M3.1 3.1l1.4 1.4M11.5 11.5l1.4 1.4M3.1 12.9l1.4-1.4M11.5 4.5l1.4-1.4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg><span class="sb-item-lbl">Settings</span></a></nav><div class="sb-foot"><a href="settings.html"><svg viewBox="0 0 16 16" fill="none" width="13" height="13"><circle cx="8" cy="8" r="2" stroke="currentColor" stroke-width="1.3"/><path d="M8 1v2M8 13v2M1 8h2M13 8h2" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg> Settings →</a></div></aside><div class="page-shell"><div class="page-inner"><!-- <?php echo $settings->all_html ?> --><div class="pg-hd"><div><div class="pg-title">Settings</div></div></div><div class="settings-layout"><div class="settings-nav"><div class="sn-item sn-active" data-tab="who-we-are">Who we are</div><div class="sn-item" data-tab="find-us">Find us</div><div class="sn-item" data-tab="mass-sacraments">Mass & sacraments</div><div class="sn-item" data-tab="our-team">Our team</div><div class="sn-item" data-tab="stay-connected">Stay connected</div><div class="sn-item" data-tab="account">Account</div></div><div class="settings-panel"><div id="who-we-are" class="tab-panel"><div class="sp-title">Who we are</div><div class="sp-sub">This information appears on your public Communio profile</div><div style="display:grid;grid-template-columns:120px 1fr;gap:20px;margin-bottom:24px;padding-bottom:24px;border-bottom:1px solid var(--border-light)"><div><div style="font-size:12px;font-weight:700;color:var(--mid);margin-bottom:8px;letter-spacing:.01em">PARISH LOGO</div><div id="logo-upload-area" style="width:80px;height:80px;border-radius:12px;border:2px dashed var(--border-light);display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;overflow:hidden;position:relative;transition:border-color .2s" onmouseover="this.style.borderColor='var(--terra)'" onmouseout="this.style.borderColor='var(--border-light)'"><input type="file" id="logo-input" accept="image/*" style="position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%"><div id="logo-placeholder" style="text-align:center"><div style="font-size:20px">🏛️</div><div style="font-size:9px;color:var(--light);margin-top:2px">Upload</div></div><img id="logo-preview" src="" alt="" style="display:none;width:100%;height:100%;object-fit:cover"></div><div style="font-size:10px;color:var(--light);margin-top:6px;line-height:1.3">Square · PNG or JPG</div></div><div><div style="font-size:12px;font-weight:700;color:var(--mid);margin-bottom:8px;letter-spacing:.01em">COVER PHOTO</div><div id="cover-upload-area" style="height:80px;border-radius:12px;border:2px dashed var(--border-light);display:flex;align-items:center;justify-content:center;cursor:pointer;overflow:hidden;position:relative;transition:border-color .2s;background:var(--cream)" onmouseover="this.style.borderColor='var(--terra)'" onmouseout="this.style.borderColor='var(--border-light)'"><input type="file" id="cover-input" accept="image/*" style="position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%"><div id="cover-placeholder" style="text-align:center"><div style="font-size:18px">🖼️</div><div style="font-size:11px;color:var(--light);margin-top:2px">Upload cover photo · 1200×400px recommended</div></div><img id="cover-preview" src="" alt="" style="display:none;width:100%;height:100%;object-fit:cover"></div></div></div><div class="form-group"><label class="form-label">Parish name</label><input class="form-input" type="text" id="pd_name" value="St. Mary's Parish"><span class="field-hint">Your full official parish name</span></div><div class="form-group"><label class="form-label">Short name</label><input class="form-input" type="text" id="pd_shortName" value="St. Mary's"><span class="field-hint">e.g. St. Mary's — used in notifications</span></div><div class="form-group"><label class="form-label">Tagline</label><textarea class="form-textarea" id="pd_tagline" style="min-height:60px">Serving Lower East Side families since 1887</textarea><span class="field-hint">One sentence — shown on your Communio profile</span></div><div class="form-row"><div class="form-group"><label class="form-label">Year founded</label><input class="form-input" type="text" id="pd_founded" value="1887"></div><div class="form-group"><label class="form-label">Diocese</label><input class="form-input" type="text" id="pd_diocese" value="Archdiocese of New York"></div></div><div class="form-group"><label class="form-label">Country</label><select class="form-select" id="pd_country"><option>United States</option><option>Hungary</option><option>Ghana</option></select></div><div class="form-group"><label class="form-label">About your parish</label><textarea class="form-textarea" id="pd_description">St. Mary's Parish has been serving the Lower East Side community since 1887. We are a vibrant, multicultural congregation of over 1,200 families, committed to social justice, youth ministry, and ethical technology advocacy.</textarea></div><div class="form-group"><label class="form-label">Focus areas<!-- SOURCE: $parish->tags → profile p-tags, website --></label><div class="focus-tags"><div class="focus-tag on">Peace & reconciliation</div><div class="focus-tag on">Ethical technology</div><div class="focus-tag on">Social justice</div><div class="focus-tag on">Youth ministry</div><div class="focus-tag">Digital sovereignty</div><div class="focus-tag">Research</div><div class="focus-tag">+ Add</div></div></div><div class="form-footer"><button class="btn btn-secondary btn-sm">Cancel</button><button class="btn btn-primary btn-sm" id="saveWhoWeAre" onclick="saveForm()">Save changes →</button></div></div><div id="find-us" class="tab-panel" style="display:none"><div class="sp-title">Find us</div><div class="sp-sub">Location and contact information</div><div class="form-group"><label class="form-label">Street address</label><input class="form-input" type="text" id="pd_address" value="15 Mott Street"></div><div class="form-row"><div class="form-group"><label class="form-label">City</label><input class="form-input" type="text" id="pd_city" value="New York"></div><div class="form-group"><label class="form-label">State / Region</label><input class="form-input" type="text" id="pd_state" value="NY"></div></div><div class="form-row"><div class="form-group"><label class="form-label">Postal code</label><input class="form-input" type="text" id="pd_zip" value="10013"></div><div class="form-group"><label class="form-label">Phone</label><input class="form-input" type="tel" id="pd_phone" value="+1 (212) 555-0182"></div></div><div class="form-group"><label class="form-label">Public email</label><input class="form-input" type="email" id="pd_email" value="info@stmarysnyc.org"></div><div class="form-group"><label class="form-label">Google Maps link</label><input class="form-input" type="url" id="pd_mapsUrl" placeholder="https://maps.google.com/..."><span class="field-hint">Paste a Google Maps URL for your address</span></div><div style="margin-top:24px;margin-bottom:16px;font-size:14px;font-weight:700;color:var(--ink)">Office hours</div><div class="form-group"><label class="form-label">Weekdays</label><input class="form-input" type="text" id="pd_officeWeekday" placeholder="Mon–Fri 9 AM – 5 PM"></div><div class="form-row"><div class="form-group"><label class="form-label">Saturday</label><input class="form-input" type="text" id="pd_officeSaturday" placeholder="10 AM – 2 PM"></div><div class="form-group"><label class="form-label">Sunday</label><input class="form-input" type="text" id="pd_officeSunday" placeholder="After 11 AM Mass"></div></div><div class="form-footer"><button class="btn btn-secondary btn-sm">Cancel</button><button class="btn btn-primary btn-sm" id="saveFindUs" onclick="saveForm()">Save changes →</button></div></div><div id="mass-sacraments" class="tab-panel" style="display:none"><div class="sp-title">Mass & sacraments</div><div class="sp-sub">Schedule information for your parish</div><div style="font-size:11px;font-weight:700;color:var(--light);text-transform:uppercase;letter-spacing:.07em;margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--border-light)">Weekday Masses</div>
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px">
-  <div class="form-group" style="margin:0"><label class="form-label">Monday</label><input class="form-input" type="text" id="pd_massMon" placeholder="e.g. 9:00 AM — or leave blank"></div>
-  <div class="form-group" style="margin:0"><label class="form-label">Tuesday</label><input class="form-input" type="text" id="pd_massTue" placeholder="e.g. 9:00 AM · 6:45 PM"></div>
-  <div class="form-group" style="margin:0"><label class="form-label">Wednesday</label><input class="form-input" type="text" id="pd_massWed" placeholder="e.g. 9:00 AM — or leave blank"></div>
-  <div class="form-group" style="margin:0"><label class="form-label">Thursday</label><input class="form-input" type="text" id="pd_massThu" placeholder="e.g. 9:00 AM · 6:45 PM"></div>
-  <div class="form-group" style="margin:0"><label class="form-label">Friday</label><input class="form-input" type="text" id="pd_massFri" placeholder="e.g. 9:00 AM — or leave blank"></div>
+    </a><div class="sb-sec">Manage</div><a href="website.html" class="sb-item"><svg viewBox="0 0 16 16" fill="none" width="15" height="15"><rect x="1.5" y="3" width="13" height="10" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M1.5 6h13" stroke="currentColor" stroke-width="1.3"/></svg><span class="sb-item-lbl">Website</span><span class="sb-badge sb-badge-sage" style="font-size:9px;padding:1px 5px">Live</span></a><a href="donations.html" class="sb-item"><svg viewBox="0 0 16 16" fill="none" width="15" height="15"><path d="M8 13.5C4 11 1.5 8.5 1.5 5.5a3 3 0 015-2.2A3 3 0 018 4a3 3 0 015 2.5c0 1-.4 2-1 2.8" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><path d="M8 9v5M6 12h4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg><span class="sb-item-lbl">Donations</span></a><a href="settings.html" class="sb-item active"><svg viewBox="0 0 16 16" fill="none" width="15" height="15"><circle cx="8" cy="8" r="2" stroke="currentColor" stroke-width="1.3"/><path d="M8 1v2M8 13v2M1 8h2M13 8h2M3.1 3.1l1.4 1.4M11.5 11.5l1.4 1.4M3.1 12.9l1.4-1.4M11.5 4.5l1.4-1.4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg><span class="sb-item-lbl">Settings</span></a></nav><div class="sb-foot"><a href="settings.html"><svg viewBox="0 0 16 16" fill="none" width="13" height="13"><circle cx="8" cy="8" r="2" stroke="currentColor" stroke-width="1.3"/><path d="M8 1v2M8 13v2M1 8h2M13 8h2" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg> Settings →</a></div></aside><div class="page-shell"><div class="page-inner"><!-- <?php echo $settings->all_html ?> --><div class="pg-hd"><div><div class="pg-title">Settings</div></div></div><div class="settings-layout"><div class="settings-nav"><div class="sn-item sn-active" data-tab="who-we-are">Who we are</div><div class="sn-item" data-tab="find-us">Find us</div><div class="sn-item" data-tab="mass-sacraments">Mass & sacraments</div><div class="sn-item" data-tab="our-team">Our team</div><div class="sn-item" data-tab="stay-connected">Stay connected</div><div class="sn-item" data-tab="account">Account</div></div><div class="settings-panel"><div id="who-we-are" class="tab-panel"><div class="sp-title">Who we are</div><div class="sp-sub">This information appears on your public Communio profile</div><div style="display:grid;grid-template-columns:120px 1fr;gap:20px;margin-bottom:24px;padding-bottom:24px;border-bottom:1px solid var(--border-light)"><div><div style="font-size:12px;font-weight:700;color:var(--mid);margin-bottom:8px;letter-spacing:.01em">PARISH LOGO</div><div id="logo-upload-area" style="width:80px;height:80px;border-radius:12px;border:2px dashed var(--border-light);display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;overflow:hidden;position:relative;transition:border-color .2s" onmouseover="this.style.borderColor='var(--terra)'" onmouseout="this.style.borderColor='var(--border-light)'"><input type="file" id="logo-input" accept="image/*" style="position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%"><div id="logo-placeholder" style="text-align:center"><div style="font-size:20px">🏛️</div><div style="font-size:9px;color:var(--light);margin-top:2px">Upload</div></div><img id="logo-preview" src="" alt="" style="display:none;width:100%;height:100%;object-fit:cover"></div><div style="font-size:10px;color:var(--light);margin-top:6px;line-height:1.3">Square · PNG or JPG</div></div><div><div style="font-size:12px;font-weight:700;color:var(--mid);margin-bottom:8px;letter-spacing:.01em">COVER PHOTO</div><div id="cover-upload-area" style="height:80px;border-radius:12px;border:2px dashed var(--border-light);display:flex;align-items:center;justify-content:center;cursor:pointer;overflow:hidden;position:relative;transition:border-color .2s;background:var(--cream)" onmouseover="this.style.borderColor='var(--terra)'" onmouseout="this.style.borderColor='var(--border-light)'"><input type="file" id="cover-input" accept="image/*" style="position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%"><div id="cover-placeholder" style="text-align:center"><div style="font-size:18px">🖼️</div><div style="font-size:11px;color:var(--light);margin-top:2px">Upload cover photo · 1200×400px recommended</div></div><img id="cover-preview" src="" alt="" style="display:none;width:100%;height:100%;object-fit:cover"></div></div></div><div class="form-group"><label class="form-label">Parish name</label><input class="form-input" type="text" id="pd_name" value="St. Mary's Parish"><span class="field-hint">Your full official parish name</span></div><div class="form-group"><label class="form-label">Short name</label><input class="form-input" type="text" id="pd_shortName" value="St. Mary's"><span class="field-hint">e.g. St. Mary's — used in notifications</span></div><div class="form-group"><label class="form-label">Tagline</label><textarea class="form-textarea" id="pd_tagline" style="min-height:60px">Serving Lower East Side families since 1887</textarea><span class="field-hint">One sentence — shown on your Communio profile</span></div><div class="form-row"><div class="form-group"><label class="form-label">Year founded</label><input class="form-input" type="text" id="pd_founded" value="1887"></div><div class="form-group"><label class="form-label">Diocese</label><input class="form-input" type="text" id="pd_diocese" value="Archdiocese of New York"></div></div><div class="form-group"><label class="form-label">Country</label><select class="form-select" id="pd_country"><option>United States</option><option>Hungary</option><option>Ghana</option></select></div><div class="form-group"><label class="form-label">About your parish</label><textarea class="form-textarea" id="pd_description">St. Mary's Parish has been serving the Lower East Side community since 1887. We are a vibrant, multicultural congregation of over 1,200 families, committed to social justice, youth ministry, and ethical technology advocacy.</textarea></div><div class="form-group"><label class="form-label">Focus areas<!-- SOURCE: $parish->tags → profile p-tags, website --></label><div class="focus-tags"><div class="focus-tag on">Peace & reconciliation</div><div class="focus-tag on">Ethical technology</div><div class="focus-tag on">Social justice</div><div class="focus-tag on">Youth ministry</div><div class="focus-tag">Digital sovereignty</div><div class="focus-tag">Research</div><div class="focus-tag">+ Add</div></div></div><div class="form-footer"><button class="btn btn-secondary btn-sm">Cancel</button><button class="btn btn-primary btn-sm" id="saveWhoWeAre" onclick="saveForm()">Save changes →</button></div></div><div id="find-us" class="tab-panel" style="display:none"><div class="sp-title">Find us</div><div class="sp-sub">Location and contact information</div><div class="form-group"><label class="form-label">Street address</label><input class="form-input" type="text" id="pd_address" value="15 Mott Street"></div><div class="form-row"><div class="form-group"><label class="form-label">City</label><input class="form-input" type="text" id="pd_city" value="New York"></div><div class="form-group"><label class="form-label">State / Region</label><input class="form-input" type="text" id="pd_state" value="NY"></div></div><div class="form-row"><div class="form-group"><label class="form-label">Postal code</label><input class="form-input" type="text" id="pd_zip" value="10013"></div><div class="form-group"><label class="form-label">Phone</label><input class="form-input" type="tel" id="pd_phone" value="+1 (212) 555-0182"></div></div><div class="form-group"><label class="form-label">Public email</label><input class="form-input" type="email" id="pd_email" value="info@stmarysnyc.org"></div><div class="form-group"><label class="form-label">Google Maps link</label><input class="form-input" type="url" id="pd_mapsUrl" placeholder="https://maps.google.com/..."><span class="field-hint">Paste a Google Maps URL for your address</span></div><div style="margin-top:24px;margin-bottom:16px;font-size:14px;font-weight:700;color:var(--ink)">Office hours</div><div class="form-group"><label class="form-label">Weekdays</label><input class="form-input" type="text" id="pd_officeWeekday" placeholder="Mon–Fri 9 AM – 5 PM"></div><div class="form-row"><div class="form-group"><label class="form-label">Saturday</label><input class="form-input" type="text" id="pd_officeSaturday" placeholder="10 AM – 2 PM"></div><div class="form-group"><label class="form-label">Sunday</label><input class="form-input" type="text" id="pd_officeSunday" placeholder="After 11 AM Mass"></div></div><div class="form-footer"><button class="btn btn-secondary btn-sm">Cancel</button><button class="btn btn-primary btn-sm" id="saveFindUs" onclick="saveForm()">Save changes →</button></div></div><div id="mass-sacraments" class="tab-panel" style="display:none"><div class="sp-title">Mass & sacraments</div><div class="sp-sub">Schedule information for your parish</div><style>
+.mt-block{background:var(--white);border:1px solid var(--border-light);border-radius:var(--r-lg);overflow:hidden;margin-bottom:16px}
+.mt-sec-hd{font-size:10px;font-weight:700;color:var(--light);text-transform:uppercase;letter-spacing:.07em;padding:10px 14px 8px;border-bottom:1px solid var(--cream-dark);background:var(--cream)}
+.mt-row{display:flex;align-items:flex-start;gap:10px;padding:10px 14px;border-bottom:1px solid var(--cream-dark)}
+.mt-row:last-child{border-bottom:none}
+.mt-day{width:100px;flex-shrink:0;padding-top:4px}
+.mt-day-lbl{font-size:13px;font-weight:700;color:var(--ink)}
+.mt-day-sub{font-size:10px;color:var(--light);margin-top:1px}
+.mt-slots{flex:1;display:flex;flex-wrap:wrap;gap:6px;align-items:center;min-height:30px}
+.mt-chip{display:inline-flex;align-items:center;gap:5px;background:var(--white);border:1.5px solid var(--border-light);border-radius:20px;padding:4px 10px;font-size:12px;font-weight:600;color:var(--ink)}
+.mt-chip.vigil{border-color:var(--terra);color:var(--terra)}
+.mt-chip-x{background:none;border:none;cursor:pointer;color:var(--light);font-size:13px;line-height:1;padding:0 0 0 2px;font-family:inherit}
+.mt-chip-x:hover{color:var(--terra)}
+.mt-add{display:inline-flex;align-items:center;gap:4px;background:none;border:1.5px dashed var(--border-light);border-radius:20px;padding:4px 10px;font-size:12px;font-weight:600;color:var(--light);cursor:pointer;font-family:inherit;transition:all .15s}
+.mt-add:hover{border-color:var(--terra);color:var(--terra)}
+.mt-no-mass{font-size:12px;color:var(--light);font-style:italic;padding-top:4px}
+.mt-no-toggle{display:flex;align-items:center;gap:5px;margin-top:5px;cursor:pointer;font-size:11px;color:var(--light);user-select:none}
+.mt-no-toggle input{cursor:pointer}
+.mt-copy{background:none;border:none;font-size:11px;font-weight:600;color:#185FA5;cursor:pointer;padding:0;margin-top:5px;display:block;font-family:inherit}
+.mt-copy:hover{text-decoration:underline}
+.mt-picker{position:absolute;top:calc(100% + 4px);left:0;background:var(--white);border:1.5px solid var(--border-light);border-radius:10px;box-shadow:0 8px 24px rgba(14,10,6,.12);z-index:200;width:220px;display:none}
+.mt-picker.open{display:block}
+.mt-picker-hd{font-size:10px;font-weight:700;color:var(--light);text-transform:uppercase;letter-spacing:.06em;padding:8px 12px 4px}
+.mt-picker-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:2px;padding:2px 8px 8px}
+.mt-picker-t{font-size:12px;padding:5px 4px;border-radius:5px;cursor:pointer;text-align:center;border:none;background:none;font-family:inherit;color:var(--ink);transition:background .1s;width:100%}
+.mt-picker-t:hover{background:var(--terra-pale);color:var(--terra);font-weight:600}
+.mt-picker-div{height:1px;background:var(--cream-dark);margin:3px 8px}
+.mt-picker-lang{padding:2px 8px 8px;display:flex;flex-direction:column;gap:1px}
+.mt-picker-li{font-size:12px;padding:5px 8px;border-radius:5px;cursor:pointer;border:none;background:none;font-family:inherit;color:var(--ink);text-align:left;width:100%}
+.mt-picker-li:hover{background:var(--terra-pale);color:var(--terra)}
+.mt-wrap{position:relative;display:inline-block}
+</style>
+
+<div class="mt-block">
+  <div class="mt-sec-hd">Weekday Masses</div>
+  <div class="mt-row" id="mt-monday">
+    <div class="mt-day">
+      <div class="mt-day-lbl">Monday</div>
+      <button class="mt-copy" onclick="mtCopyToAll('monday')">Copy to all weekdays →</button>
+    </div>
+    <div>
+      <div class="mt-slots" id="slots-monday"></div>
+      <div style="display:flex;align-items:center;gap:10px;margin-top:6px">
+        <div class="mt-wrap"><button class="mt-add" onclick="mtOpenPicker(this,'monday')">+ Add time</button><div class="mt-picker" id="picker-monday"></div></div>
+        <label class="mt-no-toggle"><input type="checkbox" id="noMass-monday" onchange="mtToggleNoMass('monday',this.checked)"> No Mass</label>
+      </div>
+    </div>
+  </div>
+  <div class="mt-row" id="mt-tuesday">
+    <div class="mt-day"><div class="mt-day-lbl">Tuesday</div></div>
+    <div>
+      <div class="mt-slots" id="slots-tuesday"></div>
+      <div style="display:flex;align-items:center;gap:10px;margin-top:6px">
+        <div class="mt-wrap"><button class="mt-add" onclick="mtOpenPicker(this,'tuesday')">+ Add time</button><div class="mt-picker" id="picker-tuesday"></div></div>
+        <label class="mt-no-toggle"><input type="checkbox" id="noMass-tuesday" onchange="mtToggleNoMass('tuesday',this.checked)"> No Mass</label>
+      </div>
+    </div>
+  </div>
+  <div class="mt-row" id="mt-wednesday">
+    <div class="mt-day"><div class="mt-day-lbl">Wednesday</div></div>
+    <div>
+      <div class="mt-slots" id="slots-wednesday"></div>
+      <div style="display:flex;align-items:center;gap:10px;margin-top:6px">
+        <div class="mt-wrap"><button class="mt-add" onclick="mtOpenPicker(this,'wednesday')">+ Add time</button><div class="mt-picker" id="picker-wednesday"></div></div>
+        <label class="mt-no-toggle"><input type="checkbox" id="noMass-wednesday" onchange="mtToggleNoMass('wednesday',this.checked)"> No Mass</label>
+      </div>
+    </div>
+  </div>
+  <div class="mt-row" id="mt-thursday">
+    <div class="mt-day"><div class="mt-day-lbl">Thursday</div></div>
+    <div>
+      <div class="mt-slots" id="slots-thursday"></div>
+      <div style="display:flex;align-items:center;gap:10px;margin-top:6px">
+        <div class="mt-wrap"><button class="mt-add" onclick="mtOpenPicker(this,'thursday')">+ Add time</button><div class="mt-picker" id="picker-thursday"></div></div>
+        <label class="mt-no-toggle"><input type="checkbox" id="noMass-thursday" onchange="mtToggleNoMass('thursday',this.checked)"> No Mass</label>
+      </div>
+    </div>
+  </div>
+  <div class="mt-row" id="mt-friday">
+    <div class="mt-day"><div class="mt-day-lbl">Friday</div></div>
+    <div>
+      <div class="mt-slots" id="slots-friday"></div>
+      <div style="display:flex;align-items:center;gap:10px;margin-top:6px">
+        <div class="mt-wrap"><button class="mt-add" onclick="mtOpenPicker(this,'friday')">+ Add time</button><div class="mt-picker" id="picker-friday"></div></div>
+        <label class="mt-no-toggle"><input type="checkbox" id="noMass-friday" onchange="mtToggleNoMass('friday',this.checked)"> No Mass</label>
+      </div>
+    </div>
+  </div>
 </div>
-<div style="font-size:11px;font-weight:700;color:var(--light);text-transform:uppercase;letter-spacing:.07em;margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--border-light)">Saturday</div>
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px">
-  <div class="form-group" style="margin:0"><label class="form-label">Saturday Morning Mass <span style="font-weight:400;color:var(--light)">(optional)</span></label><input class="form-input" type="text" id="pd_massSatMorning" placeholder="e.g. 9:00 AM — or leave blank"></div>
-  <div class="form-group" style="margin:0"><label class="form-label">Saturday Vigil Mass</label><input class="form-input" type="text" id="pd_massSatVigil" placeholder="e.g. 5:00 PM"></div>
+
+<div class="mt-block">
+  <div class="mt-sec-hd">Saturday</div>
+  <div class="mt-row" id="mt-satmorning">
+    <div class="mt-day"><div class="mt-day-lbl">Morning</div><div class="mt-day-sub">optional</div></div>
+    <div>
+      <div class="mt-slots" id="slots-satmorning"></div>
+      <div style="display:flex;align-items:center;gap:10px;margin-top:6px">
+        <div class="mt-wrap"><button class="mt-add" onclick="mtOpenPicker(this,'satmorning')">+ Add time</button><div class="mt-picker" id="picker-satmorning"></div></div>
+        <label class="mt-no-toggle"><input type="checkbox" id="noMass-satmorning" onchange="mtToggleNoMass('satmorning',this.checked)"> No Mass</label>
+      </div>
+    </div>
+  </div>
+  <div class="mt-row" id="mt-satvigil" style="background:var(--terra-pale)">
+    <div class="mt-day"><div class="mt-day-lbl" style="color:var(--terra)">Vigil Mass</div></div>
+    <div>
+      <div class="mt-slots" id="slots-satvigil"></div>
+      <div style="display:flex;align-items:center;gap:10px;margin-top:6px">
+        <div class="mt-wrap"><button class="mt-add" style="border-color:var(--terra);color:var(--terra)" onclick="mtOpenPicker(this,'satvigil')">+ Add time</button><div class="mt-picker" id="picker-satvigil"></div></div>
+      </div>
+    </div>
+  </div>
 </div>
-<div style="font-size:11px;font-weight:700;color:var(--light);text-transform:uppercase;letter-spacing:.07em;margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--border-light)">Sunday Masses</div>
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px">
-  <div class="form-group" style="margin:0"><label class="form-label">1st Mass</label><input class="form-input" type="text" id="pd_massSun1" placeholder="e.g. 7:00 AM"></div>
-  <div class="form-group" style="margin:0"><label class="form-label">2nd Mass</label><input class="form-input" type="text" id="pd_massSun2" placeholder="e.g. 9:00 AM"></div>
-  <div class="form-group" style="margin:0"><label class="form-label">3rd Mass</label><input class="form-input" type="text" id="pd_massSun3" placeholder="e.g. 11:00 AM"></div>
-  <div class="form-group" style="margin:0"><label class="form-label">4th Mass <span style="font-weight:400;color:var(--light)">(optional)</span></label><input class="form-input" type="text" id="pd_massSun4" placeholder="e.g. 1:00 PM (Español)"></div>
-  <div class="form-group" style="margin:0"><label class="form-label">5th Mass <span style="font-weight:400;color:var(--light)">(optional)</span></label><input class="form-input" type="text" id="pd_massSun5" placeholder="e.g. 6:00 PM — or leave blank"></div>
+
+<div class="mt-block">
+  <div class="mt-sec-hd">Sunday Masses</div>
+  <div class="mt-row" id="mt-sunday">
+    <div class="mt-day"><div class="mt-day-lbl">Sunday</div></div>
+    <div>
+      <div class="mt-slots" id="slots-sunday"></div>
+      <div style="margin-top:6px">
+        <div class="mt-wrap"><button class="mt-add" onclick="mtOpenPicker(this,'sunday')">+ Add time</button><div class="mt-picker" id="picker-sunday"></div></div>
+      </div>
+    </div>
+  </div>
 </div>
-<div style="font-size:11px;font-weight:700;color:var(--light);text-transform:uppercase;letter-spacing:.07em;margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--border-light)">Sacraments</div>
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:4px">
-  <div class="form-group" style="margin:0"><label class="form-label">Confession / Reconciliation</label><input class="form-input" type="text" id="pd_confession" placeholder="e.g. Sat 3:30–4:30 PM · By appt"></div>
-  <div class="form-group" style="margin:0"><label class="form-label">Adoration <span style="font-weight:400;color:var(--light)">(optional)</span></label><input class="form-input" type="text" id="pd_adoration" placeholder="e.g. Fri 7:00–8:00 PM — or leave blank"></div>
-  <div class="form-group" style="margin:0"><label class="form-label">Baptism enquiries</label><input class="form-input" type="text" id="pd_baptism" placeholder="e.g. Contact parish office"></div>
-  <div class="form-group" style="margin:0"><label class="form-label">Marriage enquiries</label><input class="form-input" type="text" id="pd_marriage" placeholder="e.g. Contact parish office — 6 months notice"></div>
+
+<div class="mt-block">
+  <div class="mt-sec-hd">Confession &amp; Sacraments</div>
+  <div class="mt-row" id="mt-confession">
+    <div class="mt-day"><div class="mt-day-lbl">Confession</div></div>
+    <div>
+      <div class="mt-slots" id="slots-confession"></div>
+      <div style="margin-top:6px">
+        <div class="mt-wrap"><button class="mt-add" onclick="mtOpenPicker(this,'confession')">+ Add slot</button><div class="mt-picker" id="picker-confession"></div></div>
+      </div>
+    </div>
+  </div>
+  <div class="mt-row" id="mt-adoration">
+    <div class="mt-day"><div class="mt-day-lbl">Adoration</div><div class="mt-day-sub">optional</div></div>
+    <div>
+      <div class="mt-slots" id="slots-adoration"></div>
+      <div style="display:flex;align-items:center;gap:10px;margin-top:6px">
+        <div class="mt-wrap"><button class="mt-add" onclick="mtOpenPicker(this,'adoration')">+ Add time</button><div class="mt-picker" id="picker-adoration"></div></div>
+        <label class="mt-no-toggle"><input type="checkbox" id="noMass-adoration" onchange="mtToggleNoMass('adoration',this.checked)"> Not offered</label>
+      </div>
+    </div>
+  </div>
+  <div class="mt-row">
+    <div class="mt-day"><div class="mt-day-lbl">Baptism</div></div>
+    <div style="flex:1"><input class="form-input" type="text" id="pd_baptism" placeholder="e.g. Contact parish office · 6 weeks notice" style="width:100%"></div>
+  </div>
+  <div class="mt-row">
+    <div class="mt-day"><div class="mt-day-lbl">Marriage</div></div>
+    <div style="flex:1"><input class="form-input" type="text" id="pd_marriage" placeholder="e.g. Contact parish office · 6 months notice" style="width:100%"></div>
+  </div>
 </div>
-<div style="font-size:11px;color:var(--light);font-style:italic;font-family:'Lora',serif;margin-top:8px;margin-bottom:12px">Leave any field blank and it won't appear on your public site.</div><div class="form-footer"><button class="btn btn-secondary btn-sm">Cancel</button><button class="btn btn-primary btn-sm" id="saveMassSacraments" onclick="saveForm()">Save changes →</button></div></div><div id="our-team" class="tab-panel" style="display:none"><div class="sp-title">Our team</div><div class="sp-sub">Primary contact and leadership information</div><div class="form-group"><label class="form-label">Pastor / Contact name</label><input class="form-input" type="text" id="pd_pastorName" value="Fr. James O'Brien"></div><div class="form-group"><label class="form-label">Role</label><select class="form-select" id="pd_pastorRole"><option>Pastor</option><option>Parish Priest</option><option>Administrator</option><option>Deacon</option></select></div><div class="form-group"><label class="form-label">Pastor's email</label><input class="form-input" type="email" id="pd_pastorEmail" placeholder="pastor@stmarysnyc.org"></div><div class="form-group"><label class="form-label">In this role since</label><input class="form-input" type="text" id="pd_pastorSince" placeholder="e.g. 2015"></div><div style="margin-top:16px;font-size:12px;color:var(--light);font-style:italic">To manage your full staff directory, go to Website → Content tab</div><div class="form-footer"><button class="btn btn-secondary btn-sm">Cancel</button><button class="btn btn-primary btn-sm" id="saveOurTeam" onclick="saveForm()">Save changes →</button></div></div><div id="stay-connected" class="tab-panel" style="display:none"><div class="sp-title">Stay connected</div><div class="sp-sub">Social media and giving information</div><div style="margin-bottom:16px;font-size:14px;font-weight:700;color:var(--ink)">Social media</div><div class="form-row"><div class="form-group"><label class="form-label">Facebook</label><input class="form-input" type="url" id="pd_socialFacebook" placeholder="https://facebook.com/yourparish"></div><div class="form-group"><label class="form-label">Instagram</label><input class="form-input" type="url" id="pd_socialInstagram" placeholder="https://instagram.com/yourparish"></div></div><div class="form-row"><div class="form-group"><label class="form-label">YouTube</label><input class="form-input" type="url" id="pd_socialYoutube" placeholder="https://youtube.com/@yourparish"></div><div class="form-group"><label class="form-label">Spotify</label><input class="form-input" type="url" id="pd_socialSpotify" placeholder="https://open.spotify.com/show/..."></div></div><div style="margin-top:24px;margin-bottom:16px;font-size:14px;font-weight:700;color:var(--ink)">Giving</div><div class="form-group"><label class="form-label">Giving page URL</label><input class="form-input" type="url" id="pd_givingUrl" placeholder="https://your-giving-platform.com"><span class="field-hint">Shown on your Communio profile donate button</span></div><div class="form-footer"><button class="btn btn-secondary btn-sm">Cancel</button><button class="btn btn-primary btn-sm" id="saveStayConnected" onclick="saveForm()">Save changes →</button></div></div><div id="account" class="tab-panel" style="display:none"><div class="sp-title">Account</div><div class="sp-sub">Manage your parish account settings</div><div class="danger-zone"><div class="dz-title">Danger zone</div><div class="dz-sub">Deactivating your account will remove your parish from the Communio network. This cannot be undone.</div><button class="btn btn-sm" style="background:var(--terra);color:white">Deactivate parish account</button></div></div></div></div><span id="saveStatus" style="position:fixed;top:70px;right:20px;font-size:13px;color:#2a8a4a;font-weight:600;background:white;padding:8px 16px;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,.1);display:none"></span><script>(function(){document.querySelectorAll('.toggle').forEach(function(t){t.addEventListener('click',function(){t.classList.toggle('on')})});document.querySelectorAll('.focus-tag').forEach(function(t){if(t.textContent!=='+ Add')t.addEventListener('click',function(){t.classList.toggle('on')})});document.querySelectorAll('.sn-item').forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();document.querySelectorAll('.sn-item').forEach(function(x){x.classList.remove('sn-active')});a.classList.add('sn-active');document.querySelectorAll('.tab-panel').forEach(function(p){p.style.display='none'});var tab=a.getAttribute('data-tab');if(tab){var panel=document.getElementById(tab);if(panel)panel.style.display='block'}})})}());</script></div></div><script>(function(){var b=document.getElementById('burger');var m=document.getElementById('navMobile');if(!b||!m)return;b.addEventListener('click',function(){m.classList.toggle('open');});document.addEventListener('click',function(e){if(!b.contains(e.target)&&!m.contains(e.target))m.classList.remove('open');});})();</script><script>(function(){var FIELDS=['name','shortName','tagline','founded','diocese','country','description','address','city','state','zip','phone','email','mapsUrl','officeWeekday','officeSaturday','officeSunday','massMon','massTue','massWed','massThu','massFri','massSatMorning','massSatVigil','massSun1','massSun2','massSun3','massSun4','massSun5','confession','adoration','baptism','marriage','pastorName','pastorRole','pastorEmail','pastorSince','socialFacebook','socialInstagram','socialYoutube','socialSpotify','givingUrl'];function loadForm(){try{var stored=localStorage.getItem('parish_data');if(!stored)return;var data=JSON.parse(stored);FIELDS.forEach(function(key){var el=document.getElementById('pd_'+key);if(el&&data[key]!==undefined)el.value=data[key]})}catch(e){}}function saveForm(){var data={};FIELDS.forEach(function(key){var el=document.getElementById('pd_'+key);if(el)data[key]=el.value.trim()});localStorage.setItem('parish_data',JSON.stringify(data));var s=document.getElementById('saveStatus');if(s){s.textContent='✓ Saved — profile updated';s.style.display='block';setTimeout(function(){s.style.display='none'},3000)}}window.saveForm=saveForm;document.addEventListener('DOMContentLoaded',function(){loadForm()})})();</script><script>
+
+<script>
+(function(){
+var MT_DAYS = ['monday','tuesday','wednesday','thursday','friday','satmorning','satvigil','sunday','confession','adoration'];
+var MT_TIMES_AM = ['6:00 AM','6:30 AM','7:00 AM','7:30 AM','8:00 AM','8:30 AM','9:00 AM','9:30 AM','10:00 AM','10:30 AM','11:00 AM','11:30 AM','12:00 PM'];
+var MT_TIMES_PM = ['1:00 PM','2:00 PM','3:00 PM','3:30 PM','4:00 PM','5:00 PM','5:30 PM','6:00 PM','6:30 PM','7:00 PM','7:30 PM','8:00 PM'];
+var MT_CONF = ['Sat 3:00–4:00 PM','Sat 3:30–4:30 PM','Sat 4:00–5:00 PM','Sun after 9:00 AM','Sun after 11:00 AM','By appointment'];
+var MT_LANGS = ['(Spanish)','(Polish)','(Portuguese)','(French)','(Italian)','(Filipino)','(Vietnamese)','(Korean)'];
+var mtData = {};
+
+function buildPicker(day) {
+  var p = document.getElementById('picker-' + day);
+  if(!p) return;
+  var isConf = (day === 'confession');
+  var isAdoration = (day === 'adoration');
+  var html = '';
+  if(isConf) {
+    html += '<div class="mt-picker-hd">Common slots</div><div class="mt-picker-lang">';
+    MT_CONF.forEach(function(t){ html += '<button class="mt-picker-li" onclick="mtAddChip(''+day+'',''+t+'')">' + t + '</button>'; });
+    html += '</div>';
+  } else {
+    html += '<div class="mt-picker-hd">Morning</div><div class="mt-picker-grid">';
+    MT_TIMES_AM.forEach(function(t){ html += '<button class="mt-picker-t" onclick="mtAddChip(''+day+'',''+t+'')">' + t.replace(' AM','').replace(' PM','') + '<br><span style="font-size:9px;color:var(--light)">' + (t.includes('AM')?'AM':'PM') + '</span></button>'; });
+    html += '</div><div class="mt-picker-div"></div><div class="mt-picker-hd">Afternoon / Evening</div><div class="mt-picker-grid">';
+    MT_TIMES_PM.forEach(function(t){ html += '<button class="mt-picker-t" onclick="mtAddChip(''+day+'',''+t+'')">' + t.replace(' AM','').replace(' PM','') + '<br><span style="font-size:9px;color:var(--light)">PM</span></button>'; });
+    html += '</div><div class="mt-picker-div"></div><div class="mt-picker-hd">Add language</div><div class="mt-picker-lang">';
+    MT_LANGS.forEach(function(l){
+      html += '<button class="mt-picker-li" onclick="mtAddLang(''+day+'',''+l+'')">+ Mass ' + l + '</button>';
+    });
+    html += '</div>';
+  }
+  p.innerHTML = html;
+}
+
+function mtOpenPicker(btn, day) {
+  document.querySelectorAll('.mt-picker').forEach(function(p){ p.classList.remove('open'); });
+  buildPicker(day);
+  document.getElementById('picker-' + day).classList.add('open');
+}
+
+function mtAddChip(day, time, isVigil) {
+  if(!mtData[day]) mtData[day] = [];
+  if(mtData[day].indexOf(time) === -1) mtData[day].push(time);
+  renderSlots(day);
+  document.getElementById('picker-' + day).classList.remove('open');
+  mtSave();
+}
+
+function mtAddLang(day, lang) {
+  var slots = document.getElementById('slots-' + day);
+  var chips = slots.querySelectorAll('.mt-chip');
+  if(chips.length === 0) return;
+  var last = chips[chips.length-1];
+  var cur = last.dataset.time;
+  if(!mtData[day]) return;
+  var idx = mtData[day].indexOf(cur);
+  if(idx > -1) { mtData[day][idx] = cur + ' ' + lang; }
+  renderSlots(day);
+  document.getElementById('picker-' + day).classList.remove('open');
+  mtSave();
+}
+
+window.mtAddChip = mtAddChip;
+window.mtOpenPicker = mtOpenPicker;
+
+function mtRemoveChip(day, time) {
+  if(!mtData[day]) return;
+  mtData[day] = mtData[day].filter(function(t){ return t !== time; });
+  renderSlots(day);
+  mtSave();
+}
+
+function renderSlots(day) {
+  var slots = document.getElementById('slots-' + day);
+  if(!slots) return;
+  var times = mtData[day] || [];
+  var noMassEl = document.getElementById('noMass-' + day);
+  if(noMassEl && noMassEl.checked) {
+    slots.innerHTML = '<span style="font-size:12px;color:var(--light);font-style:italic">No Mass</span>';
+    return;
+  }
+  if(times.length === 0) {
+    slots.innerHTML = '';
+    return;
+  }
+  slots.innerHTML = times.map(function(t){
+    var isVigil = (day === 'satvigil');
+    return '<span class="mt-chip' + (isVigil?' vigil':'') + '" data-time="' + t + '">' + t +
+      '<button class="mt-chip-x" onclick="mtRemoveChip('' + day + '','' + t + '')">✕</button></span>';
+  }).join('');
+}
+
+window.mtToggleNoMass = function(day, checked) {
+  var addBtn = document.querySelector('#mt-' + day + ' .mt-add');
+  if(addBtn) addBtn.style.display = checked ? 'none' : '';
+  renderSlots(day);
+  mtSave();
+};
+
+window.mtCopyToAll = function(fromDay) {
+  ['tuesday','wednesday','thursday','friday'].forEach(function(d){
+    mtData[d] = (mtData[fromDay]||[]).slice();
+    var noMassEl = document.getElementById('noMass-' + d);
+    if(noMassEl) noMassEl.checked = false;
+    renderSlots(d);
+  });
+  mtSave();
+};
+
+function mtSave() {
+  try {
+    var pd = JSON.parse(localStorage.getItem('parish_data')||'{}');
+    MT_DAYS.forEach(function(d){
+      var noEl = document.getElementById('noMass-' + d);
+      if(noEl && noEl.checked) { pd['mt_'+d] = 'none'; }
+      else { pd['mt_'+d] = (mtData[d]||[]).join(', '); }
+    });
+    localStorage.setItem('parish_data', JSON.stringify(pd));
+  } catch(e){}
+}
+
+function mtLoad() {
+  try {
+    var pd = JSON.parse(localStorage.getItem('parish_data')||'{}');
+    MT_DAYS.forEach(function(d){
+      var val = pd['mt_'+d] || '';
+      if(val === 'none') {
+        var noEl = document.getElementById('noMass-' + d);
+        if(noEl) { noEl.checked = true; mtToggleNoMass(d, true); }
+      } else if(val) {
+        mtData[d] = val.split(', ').filter(Boolean);
+        renderSlots(d);
+      }
+    });
+    // Also load baptism/marriage
+    ['baptism','marriage'].forEach(function(k){
+      var el = document.getElementById('pd_'+k);
+      if(el && pd[k]) el.value = pd[k];
+    });
+  } catch(e){}
+}
+
+// Close picker when clicking outside
+document.addEventListener('click', function(e){
+  if(!e.target.closest('.mt-wrap')) {
+    document.querySelectorAll('.mt-picker').forEach(function(p){ p.classList.remove('open'); });
+  }
+});
+
+// Wire baptism/marriage save
+['baptism','marriage'].forEach(function(k){
+  var el = document.getElementById('pd_'+k);
+  if(el) el.addEventListener('change', function(){
+    try {
+      var pd = JSON.parse(localStorage.getItem('parish_data')||'{}');
+      pd[k] = el.value;
+      localStorage.setItem('parish_data', JSON.stringify(pd));
+    } catch(e){}
+  });
+});
+
+// Load on init
+if(document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', mtLoad);
+} else {
+  mtLoad();
+}
+})();
+</script><div class="form-footer"><button class="btn btn-secondary btn-sm">Cancel</button><button class="btn btn-primary btn-sm" id="saveMassSacraments" onclick="saveForm()">Save changes →</button></div></div><div id="our-team" class="tab-panel" style="display:none"><div class="sp-title">Our team</div><div class="sp-sub">Primary contact and leadership information</div><div class="form-group"><label class="form-label">Pastor / Contact name</label><input class="form-input" type="text" id="pd_pastorName" value="Fr. James O'Brien"></div><div class="form-group"><label class="form-label">Role</label><select class="form-select" id="pd_pastorRole"><option>Pastor</option><option>Parish Priest</option><option>Administrator</option><option>Deacon</option></select></div><div class="form-group"><label class="form-label">Pastor's email</label><input class="form-input" type="email" id="pd_pastorEmail" placeholder="pastor@stmarysnyc.org"></div><div class="form-group"><label class="form-label">In this role since</label><input class="form-input" type="text" id="pd_pastorSince" placeholder="e.g. 2015"></div><div style="margin-top:16px;font-size:12px;color:var(--light);font-style:italic">To manage your full staff directory, go to Website → Content tab</div><div class="form-footer"><button class="btn btn-secondary btn-sm">Cancel</button><button class="btn btn-primary btn-sm" id="saveOurTeam" onclick="saveForm()">Save changes →</button></div></div><div id="stay-connected" class="tab-panel" style="display:none"><div class="sp-title">Stay connected</div><div class="sp-sub">Social media and giving information</div><div style="margin-bottom:16px;font-size:14px;font-weight:700;color:var(--ink)">Social media</div><div class="form-row"><div class="form-group"><label class="form-label">Facebook</label><input class="form-input" type="url" id="pd_socialFacebook" placeholder="https://facebook.com/yourparish"></div><div class="form-group"><label class="form-label">Instagram</label><input class="form-input" type="url" id="pd_socialInstagram" placeholder="https://instagram.com/yourparish"></div></div><div class="form-row"><div class="form-group"><label class="form-label">YouTube</label><input class="form-input" type="url" id="pd_socialYoutube" placeholder="https://youtube.com/@yourparish"></div><div class="form-group"><label class="form-label">Spotify</label><input class="form-input" type="url" id="pd_socialSpotify" placeholder="https://open.spotify.com/show/..."></div></div><div style="margin-top:24px;margin-bottom:16px;font-size:14px;font-weight:700;color:var(--ink)">Giving</div><div class="form-group"><label class="form-label">Giving page URL</label><input class="form-input" type="url" id="pd_givingUrl" placeholder="https://your-giving-platform.com"><span class="field-hint">Shown on your Communio profile donate button</span></div><div class="form-footer"><button class="btn btn-secondary btn-sm">Cancel</button><button class="btn btn-primary btn-sm" id="saveStayConnected" onclick="saveForm()">Save changes →</button></div></div><div id="account" class="tab-panel" style="display:none"><div class="sp-title">Account</div><div class="sp-sub">Manage your parish account settings</div><div class="danger-zone"><div class="dz-title">Danger zone</div><div class="dz-sub">Deactivating your account will remove your parish from the Communio network. This cannot be undone.</div><button class="btn btn-sm" style="background:var(--terra);color:white">Deactivate parish account</button></div></div></div></div><span id="saveStatus" style="position:fixed;top:70px;right:20px;font-size:13px;color:#2a8a4a;font-weight:600;background:white;padding:8px 16px;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,.1);display:none"></span><script>(function(){document.querySelectorAll('.toggle').forEach(function(t){t.addEventListener('click',function(){t.classList.toggle('on')})});document.querySelectorAll('.focus-tag').forEach(function(t){if(t.textContent!=='+ Add')t.addEventListener('click',function(){t.classList.toggle('on')})});document.querySelectorAll('.sn-item').forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();document.querySelectorAll('.sn-item').forEach(function(x){x.classList.remove('sn-active')});a.classList.add('sn-active');document.querySelectorAll('.tab-panel').forEach(function(p){p.style.display='none'});var tab=a.getAttribute('data-tab');if(tab){var panel=document.getElementById(tab);if(panel)panel.style.display='block'}})})}());</script></div></div><script>(function(){var b=document.getElementById('burger');var m=document.getElementById('navMobile');if(!b||!m)return;b.addEventListener('click',function(){m.classList.toggle('open');});document.addEventListener('click',function(e){if(!b.contains(e.target)&&!m.contains(e.target))m.classList.remove('open');});})();</script><script>(function(){var FIELDS=['name','shortName','tagline','founded','diocese','country','description','address','city','state','zip','phone','email','mapsUrl','officeWeekday','officeSaturday','officeSunday','confession','adoration','baptism','marriage','pastorName','pastorRole','pastorEmail','pastorSince','socialFacebook','socialInstagram','socialYoutube','socialSpotify','givingUrl'];function loadForm(){try{var stored=localStorage.getItem('parish_data');if(!stored)return;var data=JSON.parse(stored);FIELDS.forEach(function(key){var el=document.getElementById('pd_'+key);if(el&&data[key]!==undefined)el.value=data[key]})}catch(e){}}function saveForm(){var data={};FIELDS.forEach(function(key){var el=document.getElementById('pd_'+key);if(el)data[key]=el.value.trim()});localStorage.setItem('parish_data',JSON.stringify(data));var s=document.getElementById('saveStatus');if(s){s.textContent='✓ Saved — profile updated';s.style.display='block';setTimeout(function(){s.style.display='none'},3000)}}window.saveForm=saveForm;document.addEventListener('DOMContentLoaded',function(){loadForm()})})();</script><script>
 (function(){
   function wireUpload(inputId, previewId, placeholderId, areaId) {
     var input = document.getElementById(inputId);
