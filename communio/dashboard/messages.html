@@ -300,57 +300,128 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
           </div>
         </div>
       </div>
-      <div class="msg-thread">
-        <div class="mt-head">
-          <div class="mt-av">HS</div>
-          <div><div class="mt-name">Holy Spirit Parish, Accra</div><div class="mt-sub">🇬🇭 Accra, Ghana · Focus: Youth ministry, Education</div></div>
-          <div class="mt-badge">Sister parish</div>
-        </div>
-        <div class="msg-body">
-          <div class="msg-day">Mon 24 Mar</div>
-          <div class="bubble-wrap">
-            <div class="bub-av" style="background:var(--sage)">HS</div>
-            <div><div class="bubble">Hello! We've been following Communio's work on ethical technology advocacy and it resonates deeply with our community here in Accra.</div><div class="bub-time">9:15am</div></div>
+      <div class="msg-conv" id="msg-conv">
+
+        <div class="msg-conv-hd">
+          <div class="msg-conv-av">HS<div class="msg-conv-av-dot"></div></div>
+          <div class="msg-conv-info">
+            <div class="msg-conv-name">Holy Spirit Parish, Accra</div>
+            <div class="msg-conv-status">
+              <svg width="8" height="8" viewBox="0 0 8 8"><circle cx="4" cy="4" r="3.5" fill="#22c55e"/></svg>
+              Active now
+            </div>
+            <div class="msg-conv-meta">🇬🇭 Accra, Ghana · Youth ministry &amp; Education · Sister parish since Mar 2025</div>
           </div>
-          <div class="bubble-wrap mine">
-            <div class="bub-av" style="background:var(--terra)">SM</div>
-            <div><div class="bubble mine">That's wonderful to hear! We've been very active on the AI statement. Would love to connect further — we have a strong technology ethics group in our parish.</div><div class="bub-time">11:30am</div></div>
-          </div>
-          <div class="bubble-wrap">
-            <div class="bub-av" style="background:var(--sage)">HS</div>
-            <div><div class="bubble">Perfect. We'd also love to discuss a joint youth programme — we have about 200 young people very engaged with questions around faith and technology.</div><div class="bub-time">2:45pm</div></div>
-          </div>
-          <div class="msg-day">Tue 25 Mar</div>
-          <div class="bubble-wrap mine">
-            <div class="bub-av" style="background:var(--terra)">SM</div>
-            <div><div class="bubble mine">This is exactly what Communio was built for. Let's set up a call — our youth minister, Sr. Catherine, would be the right person to connect you with.</div><div class="bub-time">9:00am</div></div>
-          </div>
-          <div class="msg-day">Today</div>
-          <div class="bubble-wrap">
-            <div class="bub-av" style="background:var(--sage)">HS</div>
-            <div><div class="bubble">We'd love to discuss a joint youth programme — perhaps an online exchange where young people from both communities can meet and collaborate?</div><div class="bub-time">8:30am</div></div>
+          <div class="msg-conv-acts">
+            <button class="msg-conv-act" onclick="window.location.href='project-workspace.html'">Shared projects (2)</button>
+            <button class="msg-conv-act" title="More options">
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="3" r="1.3" fill="currentColor"/><circle cx="8" cy="8" r="1.3" fill="currentColor"/><circle cx="8" cy="13" r="1.3" fill="currentColor"/></svg>
+            </button>
           </div>
         </div>
-        <div class="attach-preview" id="attach-preview">
-          <div id="attach-thumb-wrap"></div>
-          <div class="attach-info">
-            <div class="attach-name" id="attach-name"></div>
-            <div class="attach-size" id="attach-size"></div>
-          </div>
-          <button class="attach-remove" id="attach-remove" title="Remove">✕</button>
+
+        <div class="msg-ctx-strip">
+          <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><rect x="2" y="2" width="5" height="5" rx="1" stroke="#15803d" stroke-width="1.3"/><rect x="9" y="2" width="5" height="5" rx="1" stroke="#15803d" stroke-width="1.3"/><rect x="2" y="9" width="5" height="5" rx="1" stroke="#15803d" stroke-width="1.3"/><rect x="9" y="9" width="5" height="5" rx="1" stroke="#15803d" stroke-width="1.3"/></svg>
+          Both in: <strong style="margin:0 3px">Digital Sovereignty Study</strong> and <strong style="margin:0 3px">Ethical AI Statement</strong>
+          · <a onclick="window.location.href='project-workspace.html'">View workspaces →</a>
         </div>
+
+        <div class="msg-body" id="msg-body">
+          <div class="msg-date-divider"><span>Monday 24 Mar</span></div>
+
+          <div class="msg-row them">
+            <div class="msg-row-av" style="background:#2a8a4a">HS</div>
+            <div class="msg-bubble-wrap">
+              <div class="msg-bubble">Hello! We've been following Communio's work on ethical technology advocacy and it resonates deeply with our community here in Accra.</div>
+              <div class="msg-meta-row"><span class="msg-time">9:15 am</span></div>
+            </div>
+          </div>
+
+          <div class="msg-row me">
+            <div class="msg-row-av" style="background:var(--terra)">SM</div>
+            <div class="msg-bubble-wrap">
+              <div class="msg-bubble">That's wonderful to hear! We've been very active on the AI statement. Would love to connect further — we have a strong technology ethics group in our parish.</div>
+              <div class="msg-reactions">
+                <div class="msg-react">🙏 2</div>
+              </div>
+              <div class="msg-meta-row"><span class="msg-time">11:30 am</span><span class="msg-tick read">✓✓</span></div>
+            </div>
+          </div>
+
+          <div class="msg-row them">
+            <div class="msg-row-av" style="background:#2a8a4a">HS</div>
+            <div class="msg-bubble-wrap">
+              <div class="msg-bubble">Perfect. We'd also love to discuss a joint youth programme — we have about 200 young people very engaged with questions around faith and technology.</div>
+              <div class="msg-meta-row"><span class="msg-time">2:45 pm</span></div>
+            </div>
+          </div>
+
+          <div class="msg-date-divider"><span>Tuesday 25 Mar</span></div>
+
+          <div class="msg-row me">
+            <div class="msg-row-av" style="background:var(--terra)">SM</div>
+            <div class="msg-bubble-wrap">
+              <div class="msg-bubble">This is exactly what Communio was built for. Let's set up a call — our youth minister, Sr. Catherine, would be the right person to connect you with.</div>
+              <div class="msg-meta-row"><span class="msg-time">9:00 am</span><span class="msg-tick read">✓✓</span></div>
+            </div>
+          </div>
+
+          <div class="msg-date-divider"><span>Today</span></div>
+
+          <div class="msg-row them">
+            <div class="msg-row-av" style="background:#2a8a4a">HS</div>
+            <div class="msg-bubble-wrap">
+              <div class="msg-bubble">We'd love to discuss a joint youth programme — perhaps an online exchange where young people from both communities can meet and collaborate?</div>
+              <div class="msg-meta-row"><span class="msg-time">8:30 am</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="msg-typing-row" id="msg-typing">
+          <div class="msg-typing-av">HS</div>
+          <div class="msg-typing-bubble">
+            <div class="msg-typing-dot"></div>
+            <div class="msg-typing-dot"></div>
+            <div class="msg-typing-dot"></div>
+          </div>
+          <span class="msg-typing-lbl">Holy Spirit is typing…</span>
+        </div>
+
         <div class="msg-compose">
           <input type="file" id="attach-input" accept="image/*,.pdf,.doc,.docx" style="display:none">
-          <button class="compose-attach" id="attach-btn" title="Attach file or photo">📎</button>
-          <input class="compose-in" type="text" placeholder="Message Holy Spirit Parish…">
-          <button class="compose-send">
-            <svg viewBox="0 0 16 16" fill="none" width="14" height="14"><path d="M14 2L2 7l5 2 2 5 5-12z" fill="white"/></svg>
-          </button>
+          <div class="msg-attach-preview" id="attach-preview">
+            <div id="attach-thumb-wrap"></div>
+            <div class="attach-info">
+              <div class="attach-name" id="attach-name"></div>
+              <div class="attach-size" id="attach-size"></div>
+            </div>
+            <button class="attach-remove" id="attach-remove" title="Remove attachment">✕</button>
+          </div>
+          <div class="msg-compose-box">
+            <textarea class="msg-compose-input" id="msg-input" placeholder="Message Holy Spirit Parish…" rows="1"></textarea>
+            <div class="msg-compose-toolbar">
+              <button class="msg-tool" id="attach-btn" title="Attach file">
+                <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M13.5 7.5l-6 6a4 4 0 01-5.7-5.6l6-6a2.5 2.5 0 013.5 3.5l-6 6a1 1 0 01-1.4-1.4l5-5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+              </button>
+              <button class="msg-tool" id="emoji-btn" title="Emoji">
+                <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.3"/><circle cx="5.5" cy="6.5" r="1" fill="currentColor"/><circle cx="10.5" cy="6.5" r="1" fill="currentColor"/><path d="M5.5 10c.5 1 5 1 5 0" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+              </button>
+              <button class="msg-tool" title="Mention parish">
+                <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="3" stroke="currentColor" stroke-width="1.3"/><path d="M11 8c0 3 4 3 4 0a7 7 0 10-4 6.3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+              </button>
+              <button class="msg-send" id="msg-send">
+                <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M14 2L2 7l5 2 2 5 5-12z" fill="white"/></svg>
+                Send
+              </button>
+            </div>
+          </div>
         </div>
+
       </div>
     </div>
   </div>
 </div>
+
 <script>
 (function(){
   var b=document.getElementById('burger');
@@ -362,52 +433,129 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
   });
 })();
 
-  // Message attachment
-  var attachBtn = document.getElementById('attach-btn');
-  var attachInput = document.getElementById('attach-input');
-  var attachPreview = document.getElementById('attach-preview');
-  var attachName = document.getElementById('attach-name');
-  var attachSize = document.getElementById('attach-size');
-  var attachThumbWrap = document.getElementById('attach-thumb-wrap');
-  var attachRemove = document.getElementById('attach-remove');
+// Filter tabs
+document.querySelectorAll('.msg-ftab').forEach(function(tab){
+  tab.addEventListener('click', function(){
+    document.querySelectorAll('.msg-ftab').forEach(function(t){ t.classList.remove('on'); });
+    tab.classList.add('on');
+    var filter = tab.dataset.filter;
+    document.querySelectorAll('.msg-thread-item,.msg-channel-item,.msg-section-lbl').forEach(function(el){
+      if(filter === 'all'){
+        el.style.display = '';
+      } else if(el.classList.contains('msg-section-lbl')){
+        el.style.display = '';
+      } else {
+        el.style.display = (el.dataset.filter === filter) ? '' : 'none';
+      }
+    });
+  });
+});
 
-  function formatBytes(bytes) {
-    if(bytes < 1024) return bytes + ' B';
-    if(bytes < 1048576) return (bytes/1024).toFixed(1) + ' KB';
-    return (bytes/1048576).toFixed(1) + ' MB';
+// Thread click — highlight active
+document.querySelectorAll('.msg-thread-item').forEach(function(item){
+  item.addEventListener('click', function(){
+    document.querySelectorAll('.msg-thread-item').forEach(function(i){ i.classList.remove('active'); });
+    item.classList.add('active');
+    var badge = item.querySelector('.msg-tunread');
+    if(badge) badge.remove();
+  });
+});
+
+// Search filter
+document.getElementById('msg-search-in').addEventListener('input', function(){
+  var q = this.value.toLowerCase().trim();
+  document.querySelectorAll('.msg-thread-item,.msg-channel-item').forEach(function(item){
+    var name = item.querySelector('.msg-tname,.msg-cname');
+    var prev = item.querySelector('.msg-tprev,.msg-cprev');
+    var text = ((name ? name.textContent : '') + ' ' + (prev ? prev.textContent : '')).toLowerCase();
+    item.style.display = (!q || text.includes(q)) ? '' : 'none';
+  });
+});
+
+// Compose — send message
+var msgInput = document.getElementById('msg-input');
+var msgBody = document.getElementById('msg-body');
+var msgTyping = document.getElementById('msg-typing');
+
+function sendMessage(){
+  var text = msgInput.value.trim();
+  if(!text) return;
+  var row = document.createElement('div');
+  row.className = 'msg-row me';
+  row.innerHTML =
+    '<div class="msg-row-av" style="background:var(--terra)">SM</div>' +
+    '<div class="msg-bubble-wrap">' +
+    '<div class="msg-bubble">' + text.replace(/&/g,'&amp;').replace(/</g,'&lt;') + '</div>' +
+    '<div class="msg-meta-row"><span class="msg-time">Just now</span><span class="msg-tick">✓</span></div>' +
+    '</div>';
+  msgBody.appendChild(row);
+  msgInput.value = '';
+  msgInput.style.height = 'auto';
+  msgBody.scrollTop = msgBody.scrollHeight;
+  // Simulate read receipt after 1s
+  setTimeout(function(){
+    var tick = row.querySelector('.msg-tick');
+    if(tick){ tick.classList.add('read'); tick.textContent = '✓✓'; }
+  }, 1000);
+  // Show typing indicator briefly
+  msgTyping.style.display = 'flex';
+  setTimeout(function(){ msgTyping.style.display = 'none'; }, 3000);
+}
+
+document.getElementById('msg-send').addEventListener('click', sendMessage);
+msgInput.addEventListener('keydown', function(e){
+  if(e.key === 'Enter' && !e.shiftKey){ e.preventDefault(); sendMessage(); }
+});
+msgInput.addEventListener('input', function(){
+  this.style.height = 'auto';
+  this.style.height = Math.min(this.scrollHeight, 120) + 'px';
+});
+
+// Attachment
+var attachBtn = document.getElementById('attach-btn');
+var attachInput = document.getElementById('attach-input');
+var attachPreview = document.getElementById('attach-preview');
+var attachName = document.getElementById('attach-name');
+var attachSize = document.getElementById('attach-size');
+var attachThumbWrap = document.getElementById('attach-thumb-wrap');
+var attachRemove = document.getElementById('attach-remove');
+
+function formatBytes(b){
+  if(b<1024) return b+' B';
+  if(b<1048576) return (b/1024).toFixed(1)+' KB';
+  return (b/1048576).toFixed(1)+' MB';
+}
+
+attachBtn.addEventListener('click', function(){ attachInput.click(); });
+attachInput.addEventListener('change', function(){
+  var file = this.files[0];
+  if(!file) return;
+  attachName.textContent = file.name;
+  attachSize.textContent = formatBytes(file.size);
+  attachThumbWrap.innerHTML = '';
+  if(file.type.startsWith('image/')){
+    var img = document.createElement('img');
+    img.className = 'attach-thumb';
+    var reader = new FileReader();
+    reader.onload = function(e){ img.src = e.target.result; };
+    reader.readAsDataURL(file);
+    attachThumbWrap.appendChild(img);
+  } else {
+    var icon = document.createElement('div');
+    icon.className = 'attach-file-icon';
+    icon.textContent = file.name.endsWith('.pdf') ? '📄' : '📝';
+    attachThumbWrap.appendChild(icon);
   }
+  attachPreview.classList.add('visible');
+});
+attachRemove.addEventListener('click', function(){
+  attachInput.value = '';
+  attachPreview.classList.remove('visible');
+  attachThumbWrap.innerHTML = '';
+});
 
-  attachBtn.addEventListener('click', function(){ attachInput.click(); });
-
-  attachInput.addEventListener('change', function(){
-    var file = this.files[0];
-    if(!file) return;
-    attachName.textContent = file.name;
-    attachSize.textContent = formatBytes(file.size);
-    attachThumbWrap.innerHTML = '';
-    if(file.type.startsWith('image/')){
-      var img = document.createElement('img');
-      img.className = 'attach-thumb';
-      var reader = new FileReader();
-      reader.onload = function(e){ img.src = e.target.result; };
-      reader.readAsDataURL(file);
-      attachThumbWrap.appendChild(img);
-    } else {
-      var icon = document.createElement('div');
-      icon.className = 'attach-file-icon';
-      icon.textContent = file.name.endsWith('.pdf') ? '📄' : '📝';
-      attachThumbWrap.appendChild(icon);
-    }
-    attachPreview.classList.add('visible');
-    attachBtn.classList.add('has-file');
-  });
-
-  attachRemove.addEventListener('click', function(){
-    attachInput.value = '';
-    attachPreview.classList.remove('visible');
-    attachBtn.classList.remove('has-file');
-    attachThumbWrap.innerHTML = '';
-  });
+// Scroll to bottom on load
+msgBody.scrollTop = msgBody.scrollHeight;
 </script>
 </body>
 </html>
