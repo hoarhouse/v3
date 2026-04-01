@@ -47,7 +47,7 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
 .live-dot{width:7px;height:7px;border-radius:50%;background:var(--sage);display:inline-block}
 .pg-url{font-family:'Lora',serif;font-size:12px;color:var(--light);font-style:italic;margin-top:2px}
 /* Tab bar */
-.tab-bar{display:flex;gap:0;border-bottom:2px solid var(--border-light);margin:16px 0 24px}
+.tab-bar{display:flex;gap:0}
 .tab-btn{font-family:'Outfit',sans-serif;font-size:13px;font-weight:600;color:var(--light);background:none;border:none;padding:10px 20px 12px;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;transition:all .2s;white-space:nowrap}
 .tab-btn:hover{color:var(--ink)}
 .tab-btn.on{color:var(--terra);border-bottom-color:var(--terra)}
@@ -328,18 +328,24 @@ input:checked+.mtoggle-slider:before{transform:translateX(16px)}
   </div>
 </aside>
 <div class="page-shell">
-  <div class="page-inner">
+  <div class="page-inner" style="padding:0;max-width:none">
     <!-- <?php echo $parish->website_status_html ?> -->
-    <div class="pg-hd">
-      <div>
-        <div class="pg-title-row"><span class="pg-title">Parish Website</span><span class="live-pill"><span class="live-dot"></span> Live</span></div>
-        <div class="pg-url">communio.io/stmarysnyc · 1,284 visitors this month</div>
+    <div style="background:var(--white);padding:20px 28px 0;border-bottom:2px solid var(--border-light)">
+  <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:16px;gap:16px">
+    <div>
+      <div style="display:flex;align-items:center;gap:10px">
+        <div style="font-size:22px;font-weight:800;color:var(--ink);letter-spacing:-.03em">Website</div>
+        <span class="live-pill"><span class="live-dot"></span> Live</span>
       </div>
-      <div style="display:flex;gap:8px">
+      <div style="font-family:'Lora',serif;font-size:13px;color:var(--light);font-style:italic;margin-top:3px">communio.io/stmarysnyc · 1,284 visitors this month</div>
+    </div>
+    <div style="display:flex;gap:8px">
         <a href="../parish/site/index.html" target="_blank" class="btn btn-secondary btn-sm">Preview full site ↗</a>
         <button class="btn btn-primary btn-sm" id="pub-btn">Publish changes →</button>
       </div>
-    </div>
+  </div>
+  
+</div>
     <!-- TAB BAR -->
     <div class="tab-bar">
       <button class="tab-btn on" data-tab="edit">Pages</button>
@@ -348,7 +354,7 @@ input:checked+.mtoggle-slider:before{transform:translateX(16px)}
       <button class="tab-btn" data-tab="settings">Settings</button>
     </div>
     <!-- TAB CONTENT -->
-    <div class="tab-content on" id="tab-edit">
+    <div style="padding:24px 28px 28px"><div class="tab-content on" id="tab-edit">
   <div style="background:var(--cream);border:1px solid var(--border-light);border-radius:var(--r-md);padding:10px 16px;margin-bottom:16px;display:flex;align-items:center;gap:10px;font-size:12px;color:var(--mid)">
     <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="var(--mid)" stroke-width="1.3"/><path d="M8 5v3.5M8 11v.5" stroke="var(--mid)" stroke-width="1.3" stroke-linecap="round"/></svg>
     <span><strong>Single source of truth:</strong> Data shown below is pulled live from your Settings. Update it once there and it reflects everywhere — website, profile and network feed.</span>
@@ -1352,7 +1358,7 @@ input:checked+.mtoggle-slider:before{transform:translateX(16px)}
       var pd={};
       try{ pd=JSON.parse(localStorage.getItem('parish_data')||'{}'); }catch(e){}
       var row = function(lbl,val){ return '<div style="display:flex;gap:10px;font-size:13px;padding:5px 0;border-bottom:1px solid var(--cream-dark)"><span style=\"color:var(--light);width:120px;flex-shrink:0\">'+lbl+'</span><span>'+(val||'<em style=\"color:var(--light)\">Not set in Settings</em>')+'</span></div>'; };
-      var info = function(rows){ return '<div style=\"background:var(--cream);border-radius:var(--r-md);padding:14px 16px;margin-bottom:14px;border:1px solid var(--border-light)\"><div style=\"font-size:11px;font-weight:700;color:var(--mid);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px\">From your Settings</div>'+rows+'</div><div style=\"background:var(--cream);border:1px solid var(--border-light);border-radius:var(--r-md);padding:11px 16px;display:flex;align-items:center;justify-content:space-between;margin-bottom:14px\"><span style=\"font-size:13px;color:var(--mid)\">Edit this data in Settings — updates everywhere instantly.</span><a href=\"settings.html\" class=\"btn btn-secondary btn-sm\">Edit in Settings →</a></div>'; };
+      var info = function(rows){ return '<div style=\"background:var(--cream);border-radius:var(--r-md);padding:14px 16px;margin-bottom:14px;border:1px solid var(--border-light)\"><div style=\"font-size:11px;font-weight:700;color:var(--mid);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px\">From your Settings</div>'+rows+'</div><div style=\"background:var(--cream);border:1px solid var(--border-light);border-radius:var(--r-md);padding:11px 16px;display:flex;align-items:center;justify-content:space-between;margin-bottom:14px\"><span style=\"font-size:13px;color:var(--mid)\">Edit this data in Settings — updates everywhere instantly.</span><a href=\"settings.html\" class=\"btn btn-secondary btn-sm\">Edit in Settings →</a></div></div>'; };
       return info(row('Public email', pd.email) + row('Phone', pd.phone) + row('Address', pd.address) + row('City', pd.city + (pd.state ? ', '+pd.state : '') + (pd.zip ? ' '+pd.zip : '')) + row('Maps URL', pd.mapsUrl ? '<a href=\"'+pd.mapsUrl+'\" target=\"_blank\">View map →</a>' : ''));
     })(),
       save: function(){}
