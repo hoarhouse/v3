@@ -123,8 +123,8 @@ h1,h2,h3,h4,h5,h6{font-family:'Lora',serif;line-height:1.2;}
 .modal-success-icon{width:56px;height:56px;background:rgba(42,138,74,0.12);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1.25rem;color:var(--sage);}
 .modal-success h3{font-family:'Lora',serif;font-weight:700;font-size:1.375rem;color:var(--ink);margin-bottom:.5rem;}
 .modal-success p{font-size:.9rem;color:var(--text-muted);line-height:1.6;}
-a[data-contact].nav-link{display:inline;border-bottom:none;font-size:.8rem;font-weight:500;color:var(--text-body);padding:.5rem .75rem;border-radius:6px;} a[data-contact]{display:inline-flex;align-items:center;gap:.4rem;color:var(--terra);font-weight:600;font-size:.95rem;text-decoration:none;border-bottom:1.5px solid rgba(216,80,32,0.3);padding-bottom:.1rem;transition:all .2s ease;}
-a[data-contact]:hover{color:var(--terra-dark);}
+a[data-contact-old].nav-link{display:inline;border-bottom:none;font-size:.8rem;font-weight:500;color:var(--text-body);padding:.5rem .75rem;border-radius:6px;} a[data-contact-old]{display:inline-flex;align-items:center;gap:.4rem;color:var(--terra);font-weight:600;font-size:.95rem;text-decoration:none;border-bottom:1.5px solid rgba(216,80,32,0.3);padding-bottom:.1rem;transition:all .2s ease;}
+a[data-contact-old]:hover{color:var(--terra-dark);}
 @media(max-width:968px){.featured-inner{grid-template-columns:1fr;}.events-grid{grid-template-columns:repeat(2,1fr);}}
 @media(max-width:568px){.events-grid{grid-template-columns:1fr;}.newsletter-form{flex-direction:column;}.modal-form-row{grid-template-columns:1fr;}}
 
@@ -668,7 +668,7 @@ select:focus-visible, textarea:focus-visible{
         </div>
       </div>
       <a href="rcia.html" class="nav-link">Becoming Catholic</a>
-      <a href="#" class="nav-link" data-contact data-from="general">Contact</a>
+      <a href="#" class="nav-link" data-contact-old data-from="general">Contact</a>
     </div>
     <a href="index.html#giving" class="nav-cta">Give Now</a>
     <button class="nav-hamburger" id="navHamburger"><span></span><span></span><span></span></button>
@@ -684,7 +684,7 @@ select:focus-visible, textarea:focus-visible{
     <div class="nav-mobile-section">Sacraments</div>
     <a href="sacraments.html">All Sacraments</a>
     <a href="rcia.html">Becoming Catholic</a>
-    <a href="#" data-contact data-from="general">Contact</a>
+    <a href="#" data-contact-old data-from="general">Contact</a>
     <a href="index.html#giving" style="margin-top:.5rem;background:var(--terra);padding:.625rem 2rem;border-radius:8px;">Give Now</a>
   </div>
 </nav>
@@ -735,7 +735,7 @@ select:focus-visible, textarea:focus-visible{
             St. Mary's Parish, 123 Rivington Street
           </div>
         </div>
-        <a href="#" class="btn-primary" data-contact data-from="events">
+        <a href="#" class="btn-primary" data-contact-old data-from="events">
           <svg width="18" height="18" viewBox="0 0 20 20" fill="none"><rect x="2" y="4" width="16" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M2 8h16M6 2v4M14 2v4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
           Register for this event
         </a>
@@ -765,7 +765,7 @@ select:focus-visible, textarea:focus-visible{
               <svg width="13" height="13" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M10 7v4l2.5 2.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
               12:00 PM · Parish Grounds
             </div>
-            <a href="#" class="event-link" data-contact data-from="events">Register →</a>
+            <a href="#" class="event-link" data-contact-old data-from="events">Register →</a>
           </div>
         </div>
       </div>
@@ -786,7 +786,7 @@ select:focus-visible, textarea:focus-visible{
               <svg width="13" height="13" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M10 7v4l2.5 2.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
               Overnight · Retreat Centre
             </div>
-            <a href="#" class="event-link" data-contact data-from="events">Register →</a>
+            <a href="#" class="event-link" data-contact-old data-from="events">Register →</a>
           </div>
         </div>
       </div>
@@ -807,7 +807,7 @@ select:focus-visible, textarea:focus-visible{
               <svg width="13" height="13" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M10 7v4l2.5 2.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
               7:00 PM · Parish Hall
             </div>
-            <a href="#" class="event-link" data-contact data-from="events">Register →</a>
+            <a href="#" class="event-link" data-contact-old data-from="events">Register →</a>
           </div>
         </div>
       </div>
@@ -828,7 +828,7 @@ select:focus-visible, textarea:focus-visible{
               <svg width="13" height="13" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M10 7v4l2.5 2.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
               9:00 AM · Parish Centre
             </div>
-            <a href="#" class="event-link" data-contact data-from="events">Register →</a>
+            <a href="#" class="event-link" data-contact-old data-from="events">Register →</a>
           </div>
         </div>
       </div>
@@ -849,7 +849,7 @@ select:focus-visible, textarea:focus-visible{
               <svg width="13" height="13" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M10 7v4l2.5 2.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
               11:00 AM · Main Church
             </div>
-            <a href="#" class="event-link" data-contact data-from="events">Learn more →</a>
+            <a href="#" class="event-link" data-contact-old data-from="events">Learn more →</a>
           </div>
         </div>
       </div>
@@ -870,7 +870,7 @@ select:focus-visible, textarea:focus-visible{
               <svg width="13" height="13" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M10 7v4l2.5 2.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
               After 11 AM Mass · Parish Hall
             </div>
-            <a href="#" class="event-link" data-contact data-from="events">Register →</a>
+            <a href="#" class="event-link" data-contact-old data-from="events">Register →</a>
           </div>
         </div>
       </div>
@@ -952,7 +952,7 @@ function filterEvents(cat, btn){
   closeBtn.addEventListener('click',closeModal);
   document.addEventListener('keydown',function(e){ if(e.key==='Escape') closeModal(); });
   document.addEventListener('click',function(e){
-    var el = e.target.closest('[data-contact]');
+    var el = e.target.closest('[data-contact-old]');
     if(el){ e.preventDefault(); openModal(el.getAttribute('data-from')||''); }
   });
   if(submitBtn){
@@ -982,7 +982,7 @@ function filterEvents(cat, btn){
         </div>
         <div class="footer-detail">
           <svg width="14" height="14" viewBox="0 0 20 20" fill="none"><rect x="2" y="4" width="16" height="13" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M2 7l8 5 8-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-          <a href="#" data-contact data-from="general">info@stmarysnyc.org</a>
+          <a href="#" data-contact-old data-from="general">info@stmarysnyc.org</a>
         </div>
         <div class="footer-detail">
           <svg width="14" height="14" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M10 7v4l2.5 2.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
@@ -1016,7 +1016,7 @@ function filterEvents(cat, btn){
           <a href="rcia.html">Becoming Catholic</a>
           <a href="involved.html">Get Involved</a>
           <a href="index.html#giving">Give Online</a>
-          <a href="#" data-contact data-from="general">Contact Us</a>
+          <a href="#" data-contact-old data-from="general">Contact Us</a>
         </nav>
       </div>
 

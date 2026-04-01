@@ -592,7 +592,7 @@ select:focus-visible, textarea:focus-visible{
         </div>
       </div>
       <a href="rcia.html" class="nav-link">Becoming Catholic</a>
-      <a href="#" class="nav-link" data-contact data-from="general">Contact</a>
+      <a href="#" class="nav-link" data-contact-old data-from="general">Contact</a>
     </div>
     <a href="index.html#giving" class="nav-cta">Give Now</a>
     <button class="nav-hamburger" id="navHamburger"><span></span><span></span><span></span></button>
@@ -608,7 +608,7 @@ select:focus-visible, textarea:focus-visible{
     <div class="nav-mobile-section">Sacraments</div>
     <a href="sacraments.html">All Sacraments</a>
     <a href="rcia.html">Becoming Catholic</a>
-    <a href="#" data-contact data-from="general">Contact</a>
+    <a href="#" data-contact-old data-from="general">Contact</a>
     <a href="index.html#giving" style="margin-top:.5rem;background:var(--terra);padding:.625rem 2rem;border-radius:8px;">Give Now</a>
   </div>
 </nav>
@@ -645,13 +645,13 @@ select:focus-visible, textarea:focus-visible{
     <h2>Cookies</h2>
     <p>Our website uses minimal cookies necessary for basic functionality. We do not use tracking or advertising cookies. You may disable cookies in your browser settings without affecting your ability to use our site.</p>
     <h2>Your rights</h2>
-    <p>You have the right to access, correct, or delete any personal information we hold about you. To make a request, please contact us at <a href="#" data-contact data-from="general">info@stmarysnyc.org</a> or call (212) 555-0123.</p>
+    <p>You have the right to access, correct, or delete any personal information we hold about you. To make a request, please contact us at <a href="#" data-contact-old data-from="general">info@stmarysnyc.org</a> or call (212) 555-0123.</p>
     <h2>Third-party services</h2>
     <p>Our website is hosted on GitHub Pages and uses Google Fonts and Google Maps. These services may collect anonymised usage data in accordance with their own privacy policies.</p>
     <h2>Changes to this policy</h2>
     <p>We may update this privacy policy from time to time. Any changes will be posted on this page with an updated date.</p>
     <h2>Contact us</h2>
-    <p>If you have any questions about this privacy policy, please <a href="#" data-contact data-from="general">get in touch</a> or write to us at 123 Rivington Street, New York, NY 10002.</p>
+    <p>If you have any questions about this privacy policy, please <a href="#" data-contact-old data-from="general">get in touch</a> or write to us at 123 Rivington Street, New York, NY 10002.</p>
   </div>
 </div>
 
@@ -668,7 +668,7 @@ if(_nh){_nh.addEventListener('click',()=>_nm.classList.toggle('open'));_nm.addEv
   overlay.addEventListener('click',function(e){if(e.target===overlay)closeModal();});
   if(closeBtn)closeBtn.addEventListener('click',closeModal);
   document.addEventListener('keydown',function(e){if(e.key==='Escape')closeModal();});
-  document.addEventListener('click',function(e){var el=e.target.closest('[data-contact]');if(el){e.preventDefault();openModal(el.getAttribute('data-from')||'');}});
+  document.addEventListener('click',function(e){var el=e.target.closest('[data-contact-old]');if(el){e.preventDefault();openModal(el.getAttribute('data-from')||'');}});
 })();
 </script>
 <footer class="site-footer">
@@ -689,7 +689,7 @@ if(_nh){_nh.addEventListener('click',()=>_nm.classList.toggle('open'));_nm.addEv
         </div>
         <div class="footer-detail">
           <svg width="14" height="14" viewBox="0 0 20 20" fill="none"><rect x="2" y="4" width="16" height="13" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M2 7l8 5 8-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-          <a href="#" data-contact data-from="general">info@stmarysnyc.org</a>
+          <a href="#" data-contact-old data-from="general">info@stmarysnyc.org</a>
         </div>
         <div class="footer-detail">
           <svg width="14" height="14" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M10 7v4l2.5 2.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
@@ -723,7 +723,7 @@ if(_nh){_nh.addEventListener('click',()=>_nm.classList.toggle('open'));_nm.addEv
           <a href="rcia.html">Becoming Catholic</a>
           <a href="involved.html">Get Involved</a>
           <a href="index.html#giving">Give Online</a>
-          <a href="#" data-contact data-from="general">Contact Us</a>
+          <a href="#" data-contact-old data-from="general">Contact Us</a>
         </nav>
       </div>
 

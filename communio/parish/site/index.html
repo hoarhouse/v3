@@ -1280,7 +1280,7 @@ z-index:2;}
 
 
 /* GET IN TOUCH LINKS */
-a[data-contact].nav-link{display:inline;border-bottom:none;font-size:.8rem;font-weight:500;color:var(--text-body);padding:.5rem .75rem;border-radius:6px;} a[data-contact]{
+a[data-contact-old].nav-link{display:inline;border-bottom:none;font-size:.8rem;font-weight:500;color:var(--text-body);padding:.5rem .75rem;border-radius:6px;} a[data-contact-old]{
   display:inline-flex;
   align-items:center;
   gap:.4rem;
@@ -1292,7 +1292,7 @@ a[data-contact].nav-link{display:inline;border-bottom:none;font-size:.8rem;font-
   padding-bottom:.1rem;
   transition:all .2s ease;
 }
-a[data-contact]:hover{
+a[data-contact-old]:hover{
   color:var(--terra-dark);
   border-bottom-color:var(--terra-dark);
   gap:.6rem;
@@ -1840,7 +1840,7 @@ select:focus-visible, textarea:focus-visible{
         </div>
       </div>
       <a href="index.html#giving" class="nav-link">Give</a>
-      <a href="#" data-contact data-from="general" class="nav-link">Contact</a>
+      <a href="#" data-contact-old data-from="general" class="nav-link">Contact</a>
     </div>
     <a href="index.html#giving" class="nav-cta">Give Now</a>
     <button class="nav-hamburger" id="navHamburger">
@@ -1852,7 +1852,7 @@ select:focus-visible, textarea:focus-visible{
       <div class="nav-mobile-header">Navigation</div>
       <a href="index.html#mass-times">Mass Times</a>
       <a href="index.html#giving">Give</a>
-      <a href="#" data-contact data-from="general" class="">Contact</a>
+      <a href="#" data-contact-old data-from="general" class="">Contact</a>
     </div>
     <div class="nav-mobile-section">
       <div class="nav-mobile-header">Parish Life</div>
@@ -2037,7 +2037,7 @@ select:focus-visible, textarea:focus-visible{
           <h3 class="event-title">Easter Vigil Mass</h3>
           <p class="event-desc">Join us for the most sacred celebration of the liturgical year as we welcome new members into the Church and celebrate Christ's resurrection.</p>
           <div class="event-meta">9:00 PM • Main Church</div>
-          <a href="#" class="event-link" data-contact data-from="events">Register →</a>
+          <a href="#" class="event-link" data-contact-old data-from="events">Register →</a>
         </div>
       </div>
       <div class="event-card">
@@ -2049,7 +2049,7 @@ select:focus-visible, textarea:focus-visible{
           <h3 class="event-title">Parish Spring Picnic</h3>
           <p class="event-desc">Bring your family for food, games, and fellowship in our parish grounds. All ages welcome for this beloved annual tradition.</p>
           <div class="event-meta">12:00 PM • Parish Grounds</div>
-          <a href="#" class="event-link" data-contact data-from="events">Register →</a>
+          <a href="#" class="event-link" data-contact-old data-from="events">Register →</a>
         </div>
       </div>
       <div class="event-card">
@@ -2061,7 +2061,7 @@ select:focus-visible, textarea:focus-visible{
           <h3 class="event-title">Youth Ministry Retreat</h3>
           <p class="event-desc">High school students are invited to a weekend retreat focused on faith, friendship, and discovering God's call in their lives.</p>
           <div class="event-meta">Overnight • Retreat Center</div>
-          <a href="#" class="event-link" data-contact data-from="events">Register →</a>
+          <a href="#" class="event-link" data-contact-old data-from="events">Register →</a>
         </div>
       </div>
     </div>
@@ -2208,7 +2208,7 @@ select:focus-visible, textarea:focus-visible{
           <div class="staff-title">Pastor</div>
           <div class="staff-name">Fr. Michael O&#39;Brien</div>
           <p class="staff-bio">Father O&#39;Brien has served St. Mary&#39;s since 2015. Ordained in 1998, he holds a doctorate in Sacred Theology from the Gregorian University in Rome and is passionate about building authentic community in the heart of New York City.</p>
-          <a href="#" data-contact data-from="general" class="staff-email" style="margin-bottom:1rem;">
+          <a href="#" data-contact-old data-from="general" class="staff-email" style="margin-bottom:1rem;">
             <svg width="14" height="14" viewBox="0 0 20 20" fill="none"><rect x="2" y="4" width="16" height="13" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M2 7l8 5 8-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
             <span class="parish-email">info@stmarysnyc.org</span>
           </a>
@@ -2471,7 +2471,7 @@ if(_nav){ window.addEventListener('scroll',()=>{ _nav.style.boxShadow = window.s
 
   // Wire up all contact trigger links
   document.addEventListener('click', function(e){
-    var el = e.target.closest('[data-contact]');
+    var el = e.target.closest('[data-contact-old]');
     if(el){
       e.preventDefault();
       openModal(el.getAttribute('data-from') || '');
@@ -2512,7 +2512,7 @@ if(_nav){ window.addEventListener('scroll',()=>{ _nav.style.boxShadow = window.s
         </div>
         <div class="footer-detail">
           <svg width="14" height="14" viewBox="0 0 20 20" fill="none"><rect x="2" y="4" width="16" height="13" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M2 7l8 5 8-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-          <a href="#" data-contact data-from="general"><span class="parish-email">info@stmarysnyc.org</span></a>
+          <a href="#" data-contact-old data-from="general"><span class="parish-email">info@stmarysnyc.org</span></a>
         </div>
         <div class="footer-detail">
           <svg width="14" height="14" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M10 7v4l2.5 2.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
@@ -2548,7 +2548,7 @@ if(_nav){ window.addEventListener('scroll',()=>{ _nav.style.boxShadow = window.s
           <a href="rcia.html">Becoming Catholic</a>
           <a href="involved.html">Get Involved</a>
           <a href="#giving">Give Online</a>
-          <a href="#" data-contact data-from="general">Contact Us</a>
+          <a href="#" data-contact-old data-from="general">Contact Us</a>
         </nav>
       </div>
 

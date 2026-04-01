@@ -130,8 +130,8 @@ h1,h2,h3,h4,h5,h6{font-family:'Lora',serif;line-height:1.2;}
 .modal-success p{font-size:.9rem;color:var(--text-muted);line-height:1.6;}
 
 /* CONTACT LINKS */
-a[data-contact].nav-link{display:inline;border-bottom:none;font-size:.8rem;font-weight:500;color:var(--text-body);padding:.5rem .75rem;border-radius:6px;} a[data-contact]{display:inline-flex;align-items:center;gap:.4rem;color:var(--terra);font-weight:600;font-size:.95rem;text-decoration:none;border-bottom:1.5px solid rgba(216,80,32,0.3);padding-bottom:.1rem;transition:all .2s ease;}
-a[data-contact]:hover{color:var(--terra-dark);border-bottom-color:var(--terra-dark);gap:.6rem;}
+a[data-contact-old].nav-link{display:inline;border-bottom:none;font-size:.8rem;font-weight:500;color:var(--text-body);padding:.5rem .75rem;border-radius:6px;} a[data-contact-old]{display:inline-flex;align-items:center;gap:.4rem;color:var(--terra);font-weight:600;font-size:.95rem;text-decoration:none;border-bottom:1.5px solid rgba(216,80,32,0.3);padding-bottom:.1rem;transition:all .2s ease;}
+a[data-contact-old]:hover{color:var(--terra-dark);border-bottom-color:var(--terra-dark);gap:.6rem;}
 
 /* FOOTER */
 .page-footer{background:var(--ink);color:rgba(255,253,245,0.6);padding:2.5rem 2rem;text-align:center;font-size:.85rem;}
@@ -777,7 +777,7 @@ select:focus-visible, textarea:focus-visible{
         </div>
       </div>
       <a href="rcia.html" class="nav-link">Becoming Catholic</a>
-      <a href="#" class="nav-link" data-contact data-from="general">Contact</a>
+      <a href="#" class="nav-link" data-contact-old data-from="general">Contact</a>
     </div>
     <a href="index.html#giving" class="nav-cta">Give Now</a>
     <button class="nav-hamburger" id="navHamburger">
@@ -795,7 +795,7 @@ select:focus-visible, textarea:focus-visible{
     <div class="nav-mobile-section">Sacraments</div>
     <a href="sacraments.html">All Sacraments</a>
     <a href="rcia.html">Becoming Catholic</a>
-    <a href="#" data-contact data-from="general">Contact</a>
+    <a href="#" data-contact-old data-from="general">Contact</a>
     <a href="index.html#giving" style="margin-top:.5rem;background:var(--terra);padding:.625rem 2rem;border-radius:8px;">Give Now</a>
   </div>
 </nav>
@@ -853,7 +853,7 @@ select:focus-visible, textarea:focus-visible{
               <div class="role-title">Welcome Team</div>
               <div class="role-meta">Sunday mornings · 1–2 hrs/week</div>
             </div>
-            <button class="role-apply" data-contact data-from="volunteer:welcome-team">Apply →</button>
+            <button class="role-apply" data-contact-old data-from="volunteer:welcome-team">Apply →</button>
           </div>
           <div class="role-card-expand">
             <p class="role-expand-about">Be the first face visitors see at St. Mary's. Greeters welcome parishioners at the church doors before Mass, distribute the weekly bulletin, help newcomers find a seat, and answer basic questions about the parish. Training and a team leader are provided.</p>
@@ -867,7 +867,7 @@ select:focus-visible, textarea:focus-visible{
               <div class="role-title">Food Pantry Helper</div>
               <div class="role-meta">Saturday mornings · 3 hrs/week</div>
             </div>
-            <button class="role-apply" data-contact data-from="volunteer:food-pantry">Apply →</button>
+            <button class="role-apply" data-contact-old data-from="volunteer:food-pantry">Apply →</button>
           </div>
           <div class="role-card-expand">
             <p class="role-expand-about">Help pack and distribute food to families in need across the Lower East Side. Volunteers sort donations, prepare food parcels, and assist clients at our weekly Saturday distribution. One of our most impactful community ministries.</p>
@@ -881,7 +881,7 @@ select:focus-visible, textarea:focus-visible{
               <div class="role-title">Parish Office Assistant</div>
               <div class="role-meta">Weekday hours · flexible</div>
             </div>
-            <button class="role-apply" data-contact data-from="volunteer:office-assistant">Apply →</button>
+            <button class="role-apply" data-contact-old data-from="volunteer:office-assistant">Apply →</button>
           </div>
           <div class="role-card-expand">
             <p class="role-expand-about">Support the parish office team with administrative tasks including answering phones, helping with data entry, preparing mailings, and welcoming visitors to the office. Great for someone who wants to be at the heart of parish life.</p>
@@ -895,7 +895,7 @@ select:focus-visible, textarea:focus-visible{
               <div class="role-title">Event Setup & Cleanup</div>
               <div class="role-meta">As needed · occasional weekends</div>
             </div>
-            <button class="role-apply" data-contact data-from="volunteer:events">Apply →</button>
+            <button class="role-apply" data-contact-old data-from="volunteer:events">Apply →</button>
           </div>
           <div class="role-card-expand">
             <p class="role-expand-about">Help set up and clean up at parish events including the annual picnic, fundraising dinners, and seasonal celebrations. A vital behind-the-scenes role that makes every parish event possible.</p>
@@ -905,7 +905,7 @@ select:focus-visible, textarea:focus-visible{
         </div>
         </div>
         <div class="ministry-section-contact"><strong>Contact:</strong> Parish Office — Maria Santos</div>
-        <a href="#" class="ministry-section-link" data-contact data-from="volunteer">Express your interest below →</a>
+        <a href="#" class="ministry-section-link" data-contact-old data-from="volunteer">Express your interest below →</a>
       </div>
     </div>
   </div>
@@ -929,7 +929,7 @@ select:focus-visible, textarea:focus-visible{
         <div class="role-title">Bible Study</div>
         <div class="role-meta">Sunday mornings after 9 AM Mass</div>
       </div>
-      <button class="role-apply" data-contact data-from="small-groups:bible-study">Join →</button>
+      <button class="role-apply" data-contact-old data-from="small-groups:bible-study">Join →</button>
     </div>
     <p class="group-desc">A friendly, discussion-based exploration of Sunday's Scripture readings. No prior biblical knowledge required — just an open mind and a willingness to share. Led by Sofia Morales, this group welcomes everyone from lifelong Catholics to those just beginning to explore the faith.</p>
   </div>
@@ -939,7 +939,7 @@ select:focus-visible, textarea:focus-visible{
         <div class="role-title">Men's Faith Group</div>
         <div class="role-meta">First Saturday of each month · 8:00 AM</div>
       </div>
-      <button class="role-apply" data-contact data-from="small-groups:mens-group">Join →</button>
+      <button class="role-apply" data-contact-old data-from="small-groups:mens-group">Join →</button>
     </div>
     <p class="group-desc">A relaxed gathering of men of all ages over coffee and conversation. Each month focuses on a different theme — fatherhood, work, prayer, service — grounded in Catholic teaching. A great way to build brotherhood and accountability in faith.</p>
   </div>
@@ -949,7 +949,7 @@ select:focus-visible, textarea:focus-visible{
         <div class="role-title">Women's Prayer Circle</div>
         <div class="role-meta">Wednesday evenings · 7:00 PM</div>
       </div>
-      <button class="role-apply" data-contact data-from="small-groups:womens-group">Join →</button>
+      <button class="role-apply" data-contact-old data-from="small-groups:womens-group">Join →</button>
     </div>
     <p class="group-desc">A warm, supportive group of women who gather weekly for shared prayer, reflection, and friendship. The group rotates through the Rosary, Lectio Divina, and guided meditation. New members are always warmly welcomed.</p>
   </div>
@@ -959,13 +959,13 @@ select:focus-visible, textarea:focus-visible{
         <div class="role-title">Lenten Reflection Group</div>
         <div class="role-meta">Weekly during Lent · Tuesday evenings</div>
       </div>
-      <button class="role-apply" data-contact data-from="small-groups:lenten-group">Join →</button>
+      <button class="role-apply" data-contact-old data-from="small-groups:lenten-group">Join →</button>
     </div>
     <p class="group-desc">A seasonal group running through the six weeks of Lent. Each week follows a structured reflection on the Sunday Gospel, paired with practical suggestions for fasting, prayer, and almsgiving. Perfect for those who want to make Lent more intentional.</p>
   </div>
 </div></div></div>
         <div class="ministry-section-contact"><strong>Contact:</strong> Sofia Morales, Faith Formation</div>
-        <a href="#" class="ministry-section-link" data-contact data-from="formation">Get in touch to join a group →</a>
+        <a href="#" class="ministry-section-link" data-contact-old data-from="formation">Get in touch to join a group →</a>
       </div>
     </div>
   </div>
@@ -988,7 +988,7 @@ select:focus-visible, textarea:focus-visible{
               <div class="role-title">Altar Server</div>
               <div class="role-meta">Sunday Mass · training provided</div>
             </div>
-            <button class="role-apply" data-contact data-from="liturgical:altar-server">Apply →</button>
+            <button class="role-apply" data-contact-old data-from="liturgical:altar-server">Apply →</button>
           </div>
           <div class="role-card-expand">
             <p class="role-expand-about">Assist the priest at Mass by carrying the cross and candles, preparing the altar, and helping with the sacred vessels. Altar servers are a visible and honoured part of our liturgical life. Full training is provided.</p>
@@ -1002,7 +1002,7 @@ select:focus-visible, textarea:focus-visible{
               <div class="role-title">Lector</div>
               <div class="role-meta">Proclaim Scripture at Mass</div>
             </div>
-            <button class="role-apply" data-contact data-from="liturgical:lector">Apply →</button>
+            <button class="role-apply" data-contact-old data-from="liturgical:lector">Apply →</button>
           </div>
           <div class="role-card-expand">
             <p class="role-expand-about">Proclaim the Word of God at Mass by reading the First and Second Readings from the Ambo. Lectors are trained in proclamation technique, pronunciation, and the theology of the Liturgy of the Word.</p>
@@ -1016,7 +1016,7 @@ select:focus-visible, textarea:focus-visible{
               <div class="role-title">Eucharistic Minister</div>
               <div class="role-meta">Must be confirmed Catholic</div>
             </div>
-            <button class="role-apply" data-contact data-from="liturgical:eucharistic-minister">Apply →</button>
+            <button class="role-apply" data-contact-old data-from="liturgical:eucharistic-minister">Apply →</button>
           </div>
           <div class="role-card-expand">
             <p class="role-expand-about">Assist in the distribution of Holy Communion at Mass. Extraordinary Ministers also bring Communion to the sick and homebound. One of the most sacred and trusted roles in parish ministry.</p>
@@ -1030,7 +1030,7 @@ select:focus-visible, textarea:focus-visible{
               <div class="role-title">Usher / Greeter</div>
               <div class="role-meta">Sunday mornings · welcoming role</div>
             </div>
-            <button class="role-apply" data-contact data-from="liturgical:usher">Apply →</button>
+            <button class="role-apply" data-contact-old data-from="liturgical:usher">Apply →</button>
           </div>
           <div class="role-card-expand">
             <p class="role-expand-about">Ushers serve at Mass by welcoming parishioners, directing seating, taking up the collection, and maintaining order and safety in the church. Often the first or last person a visitor interacts with.</p>
@@ -1040,7 +1040,7 @@ select:focus-visible, textarea:focus-visible{
         </div>
         </div>
         <div class="ministry-section-contact"><strong>Contact:</strong> Parish Office</div>
-        <a href="#" class="ministry-section-link" data-contact data-from="volunteer">Express your interest below →</a>
+        <a href="#" class="ministry-section-link" data-contact-old data-from="volunteer">Express your interest below →</a>
       </div>
     </div>
   </div>
@@ -1063,7 +1063,7 @@ select:focus-visible, textarea:focus-visible{
               <div class="role-title">Choir Singer — Soprano/Alto</div>
               <div class="role-meta">Thursday rehearsals 7 PM + Sunday</div>
             </div>
-            <button class="role-apply" data-contact data-from="music:choir-sa">Apply →</button>
+            <button class="role-apply" data-contact-old data-from="music:choir-sa">Apply →</button>
           </div>
           <div class="role-card-expand">
             <p class="role-expand-about">Join our soprano or alto section in the parish choir. The choir sings at the Sunday 11 AM Mass and for special liturgies throughout the year including Christmas, Holy Week, and the Easter Vigil.</p>
@@ -1077,7 +1077,7 @@ select:focus-visible, textarea:focus-visible{
               <div class="role-title">Choir Singer — Tenor/Bass</div>
               <div class="role-meta">Thursday rehearsals 7 PM + Sunday</div>
             </div>
-            <button class="role-apply" data-contact data-from="music:choir-tb">Apply →</button>
+            <button class="role-apply" data-contact-old data-from="music:choir-tb">Apply →</button>
           </div>
           <div class="role-card-expand">
             <p class="role-expand-about">Join our tenor or bass section in the parish choir. We are especially in need of male voices. The choir sings at the Sunday 11 AM Mass and for special liturgies.</p>
@@ -1091,7 +1091,7 @@ select:focus-visible, textarea:focus-visible{
               <div class="role-title">Instrumentalist</div>
               <div class="role-meta">Guitar, piano, violin, brass welcome</div>
             </div>
-            <button class="role-apply" data-contact data-from="music:instrumentalist">Apply →</button>
+            <button class="role-apply" data-contact-old data-from="music:instrumentalist">Apply →</button>
           </div>
           <div class="role-card-expand">
             <p class="role-expand-about">Share your musical gifts in service of the liturgy. We welcome guitarists, pianists, violinists, brass players, and other instrumentalists to play at weekend Masses and special celebrations.</p>
@@ -1105,7 +1105,7 @@ select:focus-visible, textarea:focus-visible{
               <div class="role-title">Cantor / Soloist</div>
               <div class="role-meta">Lead congregational singing at Mass</div>
             </div>
-            <button class="role-apply" data-contact data-from="music:cantor">Apply →</button>
+            <button class="role-apply" data-contact-old data-from="music:cantor">Apply →</button>
           </div>
           <div class="role-card-expand">
             <p class="role-expand-about">Lead the congregation in sung prayer as a cantor at Mass. Cantors sing the Psalm, lead the assembly in the hymns and acclamations, and help create an atmosphere of prayerful worship.</p>
@@ -1115,7 +1115,7 @@ select:focus-visible, textarea:focus-visible{
         </div>
         </div>
         <div class="ministry-section-contact"><strong>Contact:</strong> David Chen, Director of Music</div>
-        <a href="#" class="ministry-section-link" data-contact data-from="volunteer">Get in touch →</a>
+        <a href="#" class="ministry-section-link" data-contact-old data-from="volunteer">Get in touch →</a>
       </div>
     </div>
   </div>
@@ -1138,7 +1138,7 @@ select:focus-visible, textarea:focus-visible{
               <div class="role-title">Teen Group Leader</div>
               <div class="role-meta">Sunday evenings · 18+ required</div>
             </div>
-            <button class="role-apply" data-contact data-from="youth:teen-leader">Apply →</button>
+            <button class="role-apply" data-contact-old data-from="youth:teen-leader">Apply →</button>
           </div>
           <div class="role-card-expand">
             <p class="role-expand-about">Accompany and lead our high school youth group in weekly gatherings, service projects, and seasonal events. Teen Group Leaders are mentors and role models who help young people grow in faith and friendship.</p>
@@ -1152,7 +1152,7 @@ select:focus-visible, textarea:focus-visible{
               <div class="role-title">Retreat Chaperone</div>
               <div class="role-meta">Occasional weekends · background check</div>
             </div>
-            <button class="role-apply" data-contact data-from="youth:retreat-chaperone">Apply →</button>
+            <button class="role-apply" data-contact-old data-from="youth:retreat-chaperone">Apply →</button>
           </div>
           <div class="role-card-expand">
             <p class="role-expand-about">Accompany youth on overnight retreat weekends as a chaperone and companion. Retreats are some of the most transformative experiences in a young person's faith journey — your presence makes them possible.</p>
@@ -1166,7 +1166,7 @@ select:focus-visible, textarea:focus-visible{
               <div class="role-title">Sunday School Helper</div>
               <div class="role-meta">Sunday mornings during 9 AM Mass</div>
             </div>
-            <button class="role-apply" data-contact data-from="youth:sunday-school">Apply →</button>
+            <button class="role-apply" data-contact-old data-from="youth:sunday-school">Apply →</button>
           </div>
           <div class="role-card-expand">
             <p class="role-expand-about">Help our religious education teachers during the Sunday 9 AM Mass hour. Sunday School Helpers assist with classroom activities, accompany children, and support the lead teacher.</p>
@@ -1180,7 +1180,7 @@ select:focus-visible, textarea:focus-visible{
               <div class="role-title">Youth Events Coordinator</div>
               <div class="role-meta">Plan & run youth social events</div>
             </div>
-            <button class="role-apply" data-contact data-from="youth:events">Apply →</button>
+            <button class="role-apply" data-contact-old data-from="youth:events">Apply →</button>
           </div>
           <div class="role-card-expand">
             <p class="role-expand-about">Plan and organise youth social events including game nights, service days, and seasonal gatherings. Work alongside the Youth Coordinator to create memorable experiences that build community.</p>
@@ -1190,7 +1190,7 @@ select:focus-visible, textarea:focus-visible{
         </div>
         </div>
         <div class="ministry-section-contact"><strong>Contact:</strong> Michael Rivera, Youth Coordinator</div>
-        <a href="#" class="ministry-section-link" data-contact data-from="volunteer">Get in touch →</a>
+        <a href="#" class="ministry-section-link" data-contact-old data-from="volunteer">Get in touch →</a>
       </div>
     </div>
   </div>
@@ -1213,7 +1213,7 @@ select:focus-visible, textarea:focus-visible{
               <div class="role-title">Food Pantry Volunteer</div>
               <div class="role-meta">Saturday 9 AM–12 PM · weekly</div>
             </div>
-            <button class="role-apply" data-contact data-from="outreach:food-pantry">Apply →</button>
+            <button class="role-apply" data-contact-old data-from="outreach:food-pantry">Apply →</button>
           </div>
           <div class="role-card-expand">
             <p class="role-expand-about">Our food pantry serves hundreds of families each week. Volunteers help sort and pack donations, manage inventory, and assist clients with dignity and care.</p>
@@ -1227,7 +1227,7 @@ select:focus-visible, textarea:focus-visible{
               <div class="role-title">Homebound Visitor</div>
               <div class="role-meta">Visit elderly & sick parishioners</div>
             </div>
-            <button class="role-apply" data-contact data-from="outreach:homebound">Apply →</button>
+            <button class="role-apply" data-contact-old data-from="outreach:homebound">Apply →</button>
           </div>
           <div class="role-card-expand">
             <p class="role-expand-about">Visit elderly and housebound parishioners who cannot attend Mass. Bring them Communion, spend time in conversation, and let them know they are still part of our parish family.</p>
@@ -1241,7 +1241,7 @@ select:focus-visible, textarea:focus-visible{
               <div class="role-title">Refugee Support</div>
               <div class="role-meta">English tutoring & resettlement help</div>
             </div>
-            <button class="role-apply" data-contact data-from="outreach:refugee">Apply →</button>
+            <button class="role-apply" data-contact-old data-from="outreach:refugee">Apply →</button>
           </div>
           <div class="role-card-expand">
             <p class="role-expand-about">Support newly arrived refugee and immigrant families in our community. Volunteers assist with English tutoring, navigating city services, and practical resettlement tasks.</p>
@@ -1255,7 +1255,7 @@ select:focus-visible, textarea:focus-visible{
               <div class="role-title">Fundraising & Awareness</div>
               <div class="role-meta">Organise charity drives & campaigns</div>
             </div>
-            <button class="role-apply" data-contact data-from="outreach:fundraising">Apply →</button>
+            <button class="role-apply" data-contact-old data-from="outreach:fundraising">Apply →</button>
           </div>
           <div class="role-card-expand">
             <p class="role-expand-about">Help organise fundraising drives, awareness campaigns, and donor communication for our outreach programmes.</p>
@@ -1265,7 +1265,7 @@ select:focus-visible, textarea:focus-visible{
         </div>
         </div>
         <div class="ministry-section-contact"><strong>Contact:</strong> Deacon Robert Chen</div>
-        <a href="#" class="ministry-section-link" data-contact data-from="volunteer">Get in touch →</a>
+        <a href="#" class="ministry-section-link" data-contact-old data-from="volunteer">Get in touch →</a>
       </div>
     </div>
   </div>
@@ -1288,7 +1288,7 @@ select:focus-visible, textarea:focus-visible{
               <div class="role-title">Children's RE Teacher</div>
               <div class="role-meta">Sunday mornings · Sept–May</div>
             </div>
-            <button class="role-apply" data-contact data-from="formation:re-teacher">Apply →</button>
+            <button class="role-apply" data-contact-old data-from="formation:re-teacher">Apply →</button>
           </div>
           <div class="role-card-expand">
             <p class="role-expand-about">Teach religious education to children from Kindergarten through Grade 8 on Sunday mornings during the school year. Full curriculum and resources are provided.</p>
@@ -1302,7 +1302,7 @@ select:focus-visible, textarea:focus-visible{
               <div class="role-title">RCIA Sponsor</div>
               <div class="role-meta">Walk with a candidate through initiation</div>
             </div>
-            <button class="role-apply" data-contact data-from="formation:rcia-sponsor">Apply →</button>
+            <button class="role-apply" data-contact-old data-from="formation:rcia-sponsor">Apply →</button>
           </div>
           <div class="role-card-expand">
             <p class="role-expand-about">Walk alongside an RCIA candidate through their journey of initiation into the Catholic Church. A sponsor attends weekly sessions, answers questions, and shares their own faith story.</p>
@@ -1316,7 +1316,7 @@ select:focus-visible, textarea:focus-visible{
               <div class="role-title">Adult Study Group Leader</div>
               <div class="role-meta">Lead weekly faith discussions</div>
             </div>
-            <button class="role-apply" data-contact data-from="formation:adult-study">Apply →</button>
+            <button class="role-apply" data-contact-old data-from="formation:adult-study">Apply →</button>
           </div>
           <div class="role-card-expand">
             <p class="role-expand-about">Facilitate weekly adult faith formation discussions using provided materials. Groups cover topics from Scripture to Catholic social teaching. Leaders do not need to be experts — just good listeners.</p>
@@ -1330,7 +1330,7 @@ select:focus-visible, textarea:focus-visible{
               <div class="role-title">Confirmation Mentor</div>
               <div class="role-meta">Guide a teen through Confirmation prep</div>
             </div>
-            <button class="role-apply" data-contact data-from="formation:confirmation-mentor">Apply →</button>
+            <button class="role-apply" data-contact-old data-from="formation:confirmation-mentor">Apply →</button>
           </div>
           <div class="role-card-expand">
             <p class="role-expand-about">Be paired with a teenage Confirmation candidate as their personal mentor through the two-year preparation programme. Meet monthly and offer support as they prepare to receive the Holy Spirit.</p>
@@ -1340,7 +1340,7 @@ select:focus-visible, textarea:focus-visible{
         </div>
         </div>
         <div class="ministry-section-contact"><strong>Contact:</strong> Sofia Morales, Director of Faith Formation</div>
-        <a href="#" class="ministry-section-link" data-contact data-from="formation">Get in touch →</a>
+        <a href="#" class="ministry-section-link" data-contact-old data-from="formation">Get in touch →</a>
       </div>
     </div>
   </div>
@@ -1363,7 +1363,7 @@ select:focus-visible, textarea:focus-visible{
               <div class="role-title">Sunday Coffee Hour Host</div>
               <div class="role-meta">After 11 AM Mass · occasional</div>
             </div>
-            <button class="role-apply" data-contact data-from="hospitality:coffee-hour">Apply →</button>
+            <button class="role-apply" data-contact-old data-from="hospitality:coffee-hour">Apply →</button>
           </div>
           <div class="role-card-expand">
             <p class="role-expand-about">Host the after-Mass coffee and refreshments gathering in the parish hall. Set up tables, brew coffee, lay out food, and help welcome parishioners — especially newcomers.</p>
@@ -1377,7 +1377,7 @@ select:focus-visible, textarea:focus-visible{
               <div class="role-title">Event Planning Committee</div>
               <div class="role-meta">Help plan parish socials & fundraisers</div>
             </div>
-            <button class="role-apply" data-contact data-from="hospitality:event-planning">Apply →</button>
+            <button class="role-apply" data-contact-old data-from="hospitality:event-planning">Apply →</button>
           </div>
           <div class="role-card-expand">
             <p class="role-expand-about">Join the parish events committee to help plan and execute our social calendar including the annual spring picnic, Christmas social, and fundraising dinners.</p>
@@ -1391,7 +1391,7 @@ select:focus-visible, textarea:focus-visible{
               <div class="role-title">New Parishioner Welcome Team</div>
               <div class="role-meta">Meet & greet newcomers after Mass</div>
             </div>
-            <button class="role-apply" data-contact data-from="hospitality:new-parishioner">Apply →</button>
+            <button class="role-apply" data-contact-old data-from="hospitality:new-parishioner">Apply →</button>
           </div>
           <div class="role-card-expand">
             <p class="role-expand-about">Be part of the team that welcomes new parishioners to St. Mary's. Introduce yourself to visitors, share information about the parish, and help newcomers feel genuinely at home.</p>
@@ -1405,7 +1405,7 @@ select:focus-visible, textarea:focus-visible{
               <div class="role-title">Parish Decorating Team</div>
               <div class="role-meta">Liturgical seasons & special events</div>
             </div>
-            <button class="role-apply" data-contact data-from="hospitality:decorating">Apply →</button>
+            <button class="role-apply" data-contact-old data-from="hospitality:decorating">Apply →</button>
           </div>
           <div class="role-card-expand">
             <p class="role-expand-about">Transform our church for the major liturgical seasons — Advent, Christmas, Lent, and Easter — as well as special celebrations. Work with the liturgy committee to ensure our sacred space is beautiful.</p>
@@ -1415,7 +1415,7 @@ select:focus-visible, textarea:focus-visible{
         </div>
         </div>
         <div class="ministry-section-contact"><strong>Contact:</strong> Parish Manager — Maria Santos</div>
-        <a href="#" class="ministry-section-link" data-contact data-from="volunteer">Express your interest below →</a>
+        <a href="#" class="ministry-section-link" data-contact-old data-from="volunteer">Express your interest below →</a>
       </div>
     </div>
   </div>
@@ -1517,7 +1517,7 @@ select:focus-visible, textarea:focus-visible{
   if(closeBtn)closeBtn.addEventListener('click',closeModal);
   document.addEventListener('keydown',function(e){if(e.key==='Escape')closeModal();});
   document.addEventListener('click',function(e){
-    var el=e.target.closest('[data-contact]');
+    var el=e.target.closest('[data-contact-old]');
     if(el){e.preventDefault();openModal(el.getAttribute('data-from')||'');}
   });
   if(submitBtn){
@@ -1549,7 +1549,7 @@ select:focus-visible, textarea:focus-visible{
       <div class="need-urgency-dot"></div>
       Urgent need
     </div>
-    <button class="need-btn" data-contact data-from="need:food-donations">Donate goods →</button>
+    <button class="need-btn" data-contact-old data-from="need:food-donations">Donate goods →</button>
   </div><div class="need-card urgency-high">
     <span class="need-category need-cat-goods">Goods</span>
     <div class="need-title">Children's Winter Clothing</div>
@@ -1558,7 +1558,7 @@ select:focus-visible, textarea:focus-visible{
       <div class="need-urgency-dot"></div>
       Needed this month
     </div>
-    <button class="need-btn" data-contact data-from="need:childrens-clothing">Donate clothing →</button>
+    <button class="need-btn" data-contact-old data-from="need:childrens-clothing">Donate clothing →</button>
   </div><div class="need-card urgency-med">
     <span class="need-category need-cat-skills">Skills</span>
     <div class="need-title">Accountant or Bookkeeper</div>
@@ -1567,7 +1567,7 @@ select:focus-visible, textarea:focus-visible{
       <div class="need-urgency-dot"></div>
       Ongoing need
     </div>
-    <button class="need-btn" data-contact data-from="need:accountant">Offer this skill →</button>
+    <button class="need-btn" data-contact-old data-from="need:accountant">Offer this skill →</button>
   </div><div class="need-card urgency-med">
     <span class="need-category need-cat-goods">Goods</span>
     <div class="need-title">Laptop or Desktop Computer</div>
@@ -1576,7 +1576,7 @@ select:focus-visible, textarea:focus-visible{
       <div class="need-urgency-dot"></div>
       Needed soon
     </div>
-    <button class="need-btn" data-contact data-from="need:computer">Donate equipment →</button>
+    <button class="need-btn" data-contact-old data-from="need:computer">Donate equipment →</button>
   </div><div class="need-card urgency-med">
     <span class="need-category need-cat-skills">Skills</span>
     <div class="need-title">Web &amp; Social Media Help</div>
@@ -1585,7 +1585,7 @@ select:focus-visible, textarea:focus-visible{
       <div class="need-urgency-dot"></div>
       Ongoing need
     </div>
-    <button class="need-btn" data-contact data-from="need:social-media">Offer this skill →</button>
+    <button class="need-btn" data-contact-old data-from="need:social-media">Offer this skill →</button>
   </div><div class="need-card urgency-low">
     <span class="need-category need-cat-services">Services</span>
     <div class="need-title">Plumber — One-off Job</div>
@@ -1594,12 +1594,12 @@ select:focus-visible, textarea:focus-visible{
       <div class="need-urgency-dot"></div>
       Needed soon
     </div>
-    <button class="need-btn" data-contact data-from="need:plumber">Offer this service →</button>
+    <button class="need-btn" data-contact-old data-from="need:plumber">Offer this service →</button>
   </div>
     </div>
     <div class="needs-cta">
       <p>Have something else to offer? We are always grateful.</p>
-      <a href="#" data-contact data-from="need:other">Get in touch with us →</a>
+      <a href="#" data-contact-old data-from="need:other">Get in touch with us →</a>
     </div>
   </div>
 </section>
@@ -1632,7 +1632,7 @@ document.querySelectorAll('.role-card').forEach(function(card){
         </div>
         <div class="footer-detail">
           <svg width="14" height="14" viewBox="0 0 20 20" fill="none"><rect x="2" y="4" width="16" height="13" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M2 7l8 5 8-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-          <a href="#" data-contact data-from="general">info@stmarysnyc.org</a>
+          <a href="#" data-contact-old data-from="general">info@stmarysnyc.org</a>
         </div>
         <div class="footer-detail">
           <svg width="14" height="14" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M10 7v4l2.5 2.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
@@ -1666,7 +1666,7 @@ document.querySelectorAll('.role-card').forEach(function(card){
           <a href="rcia.html">Becoming Catholic</a>
           <a href="involved.html">Get Involved</a>
           <a href="index.html#giving">Give Online</a>
-          <a href="#" data-contact data-from="general">Contact Us</a>
+          <a href="#" data-contact-old data-from="general">Contact Us</a>
         </nav>
       </div>
 
