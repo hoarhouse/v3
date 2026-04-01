@@ -94,7 +94,6 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
 <a href="home.html">Home</a>
 <a href="messages.html">Messages</a>
 <a href="network.html">Network</a>
-<a href="../parish/profile.html">My Profile</a>
 <a href="projects.html">Projects</a>
 <a href="website.html">Website</a>
 <a href="donations.html">Donations</a>
@@ -189,7 +188,7 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
 .health-ring{position:relative;flex-shrink:0}
 .health-ring svg{transform:rotate(-90deg)}
 .health-ring-val{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
-.viewer-item{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--cream-dark)}
+.viewer-item{display:flex;align-items:center;gap:10px;padding:11px 0;border-bottom:1px solid var(--cream-dark)}
 .viewer-item:last-child{border-bottom:none}
 .viewer-av{width:34px;height:34px;border-radius:8px;flex-shrink:0;font-size:10px;font-weight:800;color:white;display:flex;align-items:center;justify-content:center}
 .viewer-info{flex:1}
@@ -199,9 +198,12 @@ body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);-w
 </style>
 
 <div class="net-hd">
-  <div>
-    <div class="net-hd-title">Network</div>
-    <div class="net-hd-sub">Connected to 18 parishes across 14 countries · reaching 22,000+ families worldwide</div>
+  <div class="net-hd-top">
+    <div>
+      <div class="net-hd-title">Network</div>
+      <div class="net-hd-sub">Connected to 18 parishes across 14 countries · reaching 22,000+ families worldwide</div>
+    </div>
+    <button class="btn btn-primary btn-sm" onclick="document.querySelectorAll('.net-tab')[1].click()">+ Find parishes</button>
   </div>
   <div class="net-stats-strip">
     <div class="net-stat"><div class="net-stat-val">18</div><div class="net-stat-lbl">Sister parishes</div></div>
