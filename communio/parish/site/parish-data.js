@@ -8,15 +8,15 @@ const PARISH = {
   name:           "St. Mary's Parish",
   shortName:      "St. Mary's",
   tagline:        "A vibrant Catholic community in the heart of New York's Lower East Side, serving our neighbours since 1887.",
-  founded:        "1887",
+  founded:        "1889",
   diocese:        "Archdiocese of New York",
 
   // ── Contact ────────────────────────────────────────────────
-  address:        "123 Rivington Street",
+  address:        "15 Mott Street",
   city:           "New York",
   state:          "NY",
   zip:            "10002",
-  phone:          "(212) 555-0123",
+  phone:          "(212) 555-0182",
   email:          "info@stmarysnyc.org",
   mapsUrl:        "https://maps.google.com/?q=123+Rivington+Street+New+York+NY+10002",
 
