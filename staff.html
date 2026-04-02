@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Team — St. Mary's Parish</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site.css">
+<style>
+/* STAFF */
+.staff-section{padding:5rem 2rem;background:var(--cream);}
+.staff-card .staff-body{padding:1.25rem;}
+.staff-pastor .staff-name{font-size:1.5rem;margin-bottom:1rem;}
+</style>
+  <script src="parish-data.js"></script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <div class="nav-crest">SM</div>
+      St. Mary's Parish
+    </a>
+    <div class="nav-links">
+      <a href="index.html#mass-times" class="nav-link">Mass Times</a>
+      <div class="nav-dropdown">
+        <button class="nav-dropdown-btn">
+          Parish Life
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M3 4.5l3 3 3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </button>
+        <div class="nav-dropdown-menu">
+          <a href="about.html" class="nav-dropdown-item">About Us</a>
+          <a href="events.html" class="nav-dropdown-item">Events</a>
+          <a href="staff.html" class="nav-dropdown-item">Our Team</a>
+          <a href="bulletin.html" class="nav-dropdown-item">Parish Bulletin</a>
+          <a href="involved.html" class="nav-dropdown-item">Get Involved</a>
+        </div>
+      </div>
+      <div class="nav-dropdown">
+        <button class="nav-dropdown-btn">
+          Sacraments
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M3 4.5l3 3 3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </button>
+        <div class="nav-dropdown-menu">
+          <a href="sacraments.html#baptism" class="nav-dropdown-item">Baptism</a>
+          <a href="sacraments.html#wedding" class="nav-dropdown-item">Wedding</a>
+          <a href="sacraments.html#funeral" class="nav-dropdown-item">Funeral Mass</a>
+          <a href="sacraments.html#confirmation" class="nav-dropdown-item">Confirmation</a>
+          <a href="sacraments.html#firstcommunion" class="nav-dropdown-item">First Communion</a>
+        </div>
+      </div>
+      <a href="rcia.html" class="nav-link">Becoming Catholic</a>
+      <a href="contact.html" class="nav-link">Contact</a>
+    </div>
+    <a href="index.html#giving" class="nav-cta">Give Now</a>
+    <button class="nav-hamburger" id="navHamburger">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="nav-mobile" id="navMobile">
+    <a href="index.html#mass-times">Mass Times</a>
+    <div class="nav-mobile-section">Parish Life</div>
+    <a href="about.html">About Us</a>
+    <a href="events.html">Events</a>
+    <a href="staff.html">Our Team</a>
+    <a href="bulletin.html">Parish Bulletin</a>
+    <a href="involved.html">Get Involved</a>
+    <div class="nav-mobile-section">Sacraments</div>
+    <a href="sacraments.html">All Sacraments</a>
+    <a href="rcia.html">Becoming Catholic</a>
+    <a href="contact.html">Contact</a>
+    <a href="index.html#giving" style="margin-top:.5rem;background:var(--terra);padding:.625rem 2rem;border-radius:8px;">Give Now</a>
+  </div>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="container">
+    <div class="page-hero-overline">
+      <svg width="6" height="6" viewBox="0 0 6 6" fill="none"><circle cx="3" cy="3" r="3" fill="currentColor"/></svg>
+      Meet the Team
+    </div>
+    <h1>Our Parish Staff</h1>
+    <p class="page-hero-sub">The dedicated team serving St. Mary's Parish community with faith, compassion, and excellence.</p>
+  </div>
+</div>
+
+<!-- STAFF -->
+<section class="staff-section">
+  <div class="container">
+    
+    <!-- PASTOR (FEATURED) -->
+    <div class="staff-pastor">
+      <div class="staff-photo">
+        <div class="staff-photo-placeholder"><svg width="56" height="56" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="1.5"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+      </div>
+      <div class="staff-body">
+        <div class="staff-title">Pastor</div>
+        <div class="staff-name">Fr. Michael O'Brien</div>
+        <p class="staff-bio">Father O'Brien has served St. Mary's since 2015. Ordained in 1998, he holds a doctorate in Sacred Theology from the Gregorian University in Rome and is passionate about building authentic community in the heart of New York City. When not celebrating Mass or in the confessional, he enjoys reading philosophy, visiting parishioners in need, and cheering on the Yankees.</p>
+        <a href="contact.html" class="staff-email">
+          <svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M2 4h16v12H2V4z" stroke="currentColor" stroke-width="1.5"/><path d="M2 4l8 6 8-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          pastor@stmarysnyc.org
+        </a>
+      </div>
+    </div>
+
+    <!-- OTHER STAFF -->
+    <div class="staff-grid">
+      
+      <div class="staff-card">
+        <div class="staff-photo">
+          <div class="staff-photo-placeholder"><svg width="56" height="56" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="1.5"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+        </div>
+        <div class="staff-body">
+          <div class="staff-title">Associate Pastor</div>
+          <div class="staff-name">Fr. David Martinez</div>
+          <p class="staff-bio">Father Martinez joined St. Mary's in 2019. He oversees youth ministry, coordinates our Spanish-language Masses, and leads our outreach to the local Hispanic community.</p>
+          <a href="contact.html" class="staff-email">
+            <svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M2 4h16v12H2V4z" stroke="currentColor" stroke-width="1.5"/><path d="M2 4l8 6 8-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            associate@stmarysnyc.org
+          </a>
+        </div>
+      </div>
+
+      <div class="staff-card">
+        <div class="staff-photo">
+          <div class="staff-photo-placeholder"><svg width="56" height="56" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="1.5"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+        </div>
+        <div class="staff-body">
+          <div class="staff-title">Deacon</div>
+          <div class="staff-name">Deacon Robert Chen</div>
+          <p class="staff-bio">Deacon Chen was ordained in 2021 and serves our community with particular focus on marriage preparation, hospital visits, and assisting with baptisms and funerals.</p>
+          <a href="contact.html" class="staff-email">
+            <svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M2 4h16v12H2V4z" stroke="currentColor" stroke-width="1.5"/><path d="M2 4l8 6 8-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            deacon@stmarysnyc.org
+          </a>
+        </div>
+      </div>
+
+      <div class="staff-card">
+        <div class="staff-photo">
+          <div class="staff-photo-placeholder"><svg width="56" height="56" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="1.5"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+        </div>
+        <div class="staff-body">
+          <div class="staff-title">Parish Manager</div>
+          <div class="staff-name">Maria Santos</div>
+          <p class="staff-bio">Maria coordinates the day-to-day operations of our parish, manages our volunteers, and ensures everything runs smoothly. She has been with St. Mary's for over twelve years.</p>
+          <a href="contact.html" class="staff-email">
+            <svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M2 4h16v12H2V4z" stroke="currentColor" stroke-width="1.5"/><path d="M2 4l8 6 8-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            manager@stmarysnyc.org
+          </a>
+        </div>
+      </div>
+
+      <div class="staff-card">
+        <div class="staff-photo">
+          <div class="staff-photo-placeholder"><svg width="56" height="56" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="1.5"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+        </div>
+        <div class="staff-body">
+          <div class="staff-title">Music Director</div>
+          <div class="staff-name">James Thompson</div>
+          <p class="staff-bio">James leads our parish choir and coordinates music for all liturgical celebrations. He holds a Master's in Sacred Music and has been serving Catholic communities for fifteen years.</p>
+          <a href="contact.html" class="staff-email">
+            <svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M2 4h16v12H2V4z" stroke="currentColor" stroke-width="1.5"/><path d="M2 4l8 6 8-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            music@stmarysnyc.org
+          </a>
+        </div>
+      </div>
+
+      <div class="staff-card">
+        <div class="staff-photo">
+          <div class="staff-photo-placeholder"><svg width="56" height="56" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="1.5"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+        </div>
+        <div class="staff-body">
+          <div class="staff-title">Faith Formation Director</div>
+          <div class="staff-name">Sofia Morales</div>
+          <p class="staff-bio">Sofia coordinates all religious education programs, including First Communion and Confirmation preparation, adult faith formation, and our RCIA program for adults entering the Church.</p>
+          <a href="contact.html" class="staff-email">
+            <svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M2 4h16v12H2V4z" stroke="currentColor" stroke-width="1.5"/><path d="M2 4l8 6 8-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            formation@stmarysnyc.org
+          </a>
+        </div>
+      </div>
+
+      <div class="staff-card">
+        <div class="staff-photo">
+          <div class="staff-photo-placeholder"><svg width="56" height="56" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="1.5"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+        </div>
+        <div class="staff-body">
+          <div class="staff-title">Youth Ministry Coordinator</div>
+          <div class="staff-name">Michael Rivera</div>
+          <p class="staff-bio">Michael works with teenagers and young adults, organizing retreats, service projects, and social events. He is passionate about helping young people grow in their faith and community.</p>
+          <a href="contact.html" class="staff-email">
+            <svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M2 4h16v12H2V4z" stroke="currentColor" stroke-width="1.5"/><path d="M2 4l8 6 8-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            youth@stmarysnyc.org
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+
+
+<script>
+const _nh = document.getElementById('navHamburger');
+const _nm = document.getElementById('navMobile');
+if(_nh){ _nh.addEventListener('click',()=>_nm.classList.toggle('open')); _nm.addEventListener('click',(e)=>{if(e.target.tagName==='A')_nm.classList.remove('open');}); }
+</script>
+
+<!-- CONTACT MODAL -->
+<div class="modal-overlay" id="contactModal">
+  <div class="modal-box">
+    <div class="modal-header">
+      <div>
+        <div class="modal-title">Send us a message</div>
+        <div class="modal-sub">We typically respond within one business day.</div>
+      </div>
+      <button class="modal-close" id="modalClose" aria-label="Close">&#x2715;</button>
+    </div>
+    <div class="modal-body" id="modalBody">
+      <div class="modal-form-row">
+        <div class="modal-field"><label>First Name</label><input type="text" id="mFirstName" placeholder="Maria"></div>
+        <div class="modal-field"><label>Last Name</label><input type="text" id="mLastName" placeholder="Santos"></div>
+      </div>
+      <div class="modal-field"><label>Email Address</label><input type="email" id="mEmail" placeholder="maria@example.com"></div>
+      <div class="modal-field"><label>Phone (optional)</label><input type="tel" id="mPhone" placeholder="(212) 555-0000"></div>
+      <div class="modal-field">
+        <label>Subject</label>
+        <select id="mSubject">
+          <option value="">Select a topic...</option>
+          <option value="general">General Inquiry</option>
+          <option value="baptism">Sacraments — Baptism</option>
+          <option value="wedding">Sacraments — Wedding</option>
+          <option value="funeral">Sacraments — Funeral Mass</option>
+          <option value="confirmation">Sacraments — Confirmation</option>
+          <option value="firstcommunion">Sacraments — First Communion</option>
+          <option value="formation">Faith Formation / RCIA</option>
+          <option value="rcia">Becoming Catholic (RCIA)</option>
+          <option value="volunteer">Volunteering</option>
+          <option value="facility">Facility Rental</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+      <div class="modal-field"><label>Message</label><textarea id="mMessage" placeholder="How can we help you?"></textarea></div>
+      <button class="modal-submit" id="modalSubmit" type="button">Send Message</button>
+      <p class="modal-note">St. Mary&#39;s Parish · 123 Rivington Street, New York, NY 10002</p>
+    </div>
+  </div>
+</div>
+
+
+<script>
+(function(){
+  var overlay = document.getElementById('contactModal');
+  var closeBtn = document.getElementById('modalClose');
+  var submitBtn = document.getElementById('modalSubmit');
+  var subjectSel = document.getElementById('mSubject');
+
+  function openModal(from){
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    if(from && subjectSel){
+      var opt = Array.from(subjectSel.options).find(function(o){ return o.value === from; });
+      if(opt) subjectSel.value = from;
+    }
+  }
+
+  function closeModal(){
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  // Close on overlay click
+  overlay.addEventListener('click', function(e){ if(e.target === overlay) closeModal(); });
+  closeBtn.addEventListener('click', closeModal);
+
+  // Close on Escape
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeModal(); });
+
+  // Wire up all contact trigger links
+  document.addEventListener('click', function(e){
+    var el = e.target.closest('[data-contact-old]');
+    if(el){
+      e.preventDefault();
+      openModal(el.getAttribute('data-from') || '');
+    }
+  });
+
+  // Submit — show success state
+  if(submitBtn){
+    submitBtn.addEventListener('click', function(){
+      var email = document.getElementById('mEmail').value.trim();
+      if(!email){ document.getElementById('mEmail').focus(); return; }
+      document.getElementById('modalBody').innerHTML = '<div class="modal-success"><div class="modal-success-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><h3>Message sent!</h3><p>Thank you for reaching out. Someone from St. Mary\'s will be in touch within one business day.</p></div>';
+    });
+  }
+
+  // Also handle old ?from= URL params on index page
+  var params = new URLSearchParams(window.location.search);
+  var fromParam = params.get('from');
+  if(fromParam) openModal(fromParam);
+})();
+</script>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+
+      <!-- Col 1: Parish Info -->
+      <div>
+        <div class="footer-brand">St. Mary's Parish</div>
+        <p class="footer-tagline">A vibrant Catholic community in the heart of New York's Lower East Side, serving our neighbours since 1887.</p>
+        <div class="footer-detail">
+          <svg width="14" height="14" viewBox="0 0 20 20" fill="none"><path d="M10 2C7.2 2 5 4.2 5 7c0 4 5 11 5 11s5-7 5-11c0-2.8-2.2-5-5-5z" stroke="currentColor" stroke-width="1.5"/></svg>
+          123 Rivington Street, New York, NY 10002
+        </div>
+        <div class="footer-detail">
+          <svg width="14" height="14" viewBox="0 0 20 20" fill="none"><path d="M3 4h4l2 4-2 2c1 2 3 4 5 5l2-2 4 2v4c0 1-1 2-2 2C7 19 1 13 1 6c0-1 1-2 2-2z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+          <a href="tel:+12125550123">(212) 555-0123</a>
+        </div>
+        <div class="footer-detail">
+          <svg width="14" height="14" viewBox="0 0 20 20" fill="none"><rect x="2" y="4" width="16" height="13" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M2 7l8 5 8-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          <a href="mailto:info@stmarysnyc.org">info@stmarysnyc.org</a>
+        </div>
+        <div class="footer-detail">
+          <svg width="14" height="14" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M10 7v4l2.5 2.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          Office: Mon–Fri 9 AM–5 PM · Sat 10 AM–2 PM
+        </div>
+        <div class="footer-detail">
+          <svg width="14" height="14" viewBox="0 0 20 20" fill="none"><path d="M10 2C7.2 2 5 4.2 5 7c0 4 5 11 5 11s5-7 5-11c0-2.8-2.2-5-5-5z" stroke="currentColor" stroke-width="1.5"/></svg>
+          <a href="https://maps.google.com/?q=123+Rivington+Street+New+York+NY+10002" target="_blank">Get directions →</a>
+        </div>
+      </div>
+
+      <!-- Col 2: Mass Times -->
+      <div>
+        <div class="footer-col-title">Mass Times</div>
+        <div class="footer-mass-item"><strong>Weekdays</strong>Mon–Fri 9:00 AM · Tue &amp; Thu 6:45 PM</div>
+        <div class="footer-mass-item"><strong>Saturday</strong>10:00 AM · Vigil 5:00 PM</div>
+        <div class="footer-mass-item"><strong>Sunday</strong>7:00 · 9:00 · 11:00 AM<br>1:00 PM (Español) · 6:00 PM</div>
+        <div class="footer-mass-item" style="margin-top:.75rem;font-size:.78rem;color:rgba(255,253,245,0.4);">Confession: Saturday 3:30–4:30 PM</div>
+        <a href="index.html#mass-times" style="display:inline-block;margin-top:.875rem;font-size:.8rem;font-weight:600;color:var(--terra);text-decoration:none;">Full schedule →</a>
+      </div>
+
+      <!-- Col 3: Navigate -->
+      <div>
+        <div class="footer-col-title">Navigate</div>
+        <nav class="footer-nav">
+          <a href="about.html">About Us</a>
+          <a href="staff.html">Our Team</a>
+          <a href="events.html">Events</a>
+          <a href="bulletin.html">Parish Bulletin</a>
+          <a href="sacraments.html">Sacraments</a>
+          <a href="rcia.html">Becoming Catholic</a>
+          <a href="involved.html">Get Involved</a>
+          <a href="index.html#giving">Give Online</a>
+          <a href="contact.html">Contact Us</a>
+        </nav>
+      </div>
+
+      <!-- Col 4: Connect -->
+      <div>
+        <div class="footer-col-title">Stay Connected</div>
+        <div class="footer-social">
+          <a href="https://facebook.com" target="_blank" aria-label="Facebook">f</a>
+          <a href="https://instagram.com" target="_blank" aria-label="Instagram">in</a>
+          <a href="https://youtube.com" target="_blank" aria-label="YouTube">yt</a>
+          <a href="https://spotify.com" target="_blank" aria-label="Spotify">sp</a>
+        </div>
+        <div class="footer-newsletter-label">Get our weekly bulletin by email</div>
+        <div class="footer-newsletter-form">
+          <input type="email" placeholder="Your email">
+          <button type="button">Subscribe</button>
+        </div>
+      </div>
+
+    </div>
+    <div class="footer-bottom">
+      <div>&copy; 2024 St. Mary's Parish, New York</div>
+      <div class="footer-bottom-links">
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html">Terms of Use</a>
+        <a href="sitemap.html">Sitemap</a>
+        <span>Powered by <span class="communio-credit">Communio</span></span>
+      </div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

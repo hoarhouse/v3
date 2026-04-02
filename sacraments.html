@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sacraments — St. Mary's Parish</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site.css">
+<style>
+.nav-back{display:inline-flex;align-items:center;gap:.5rem;font-size:.875rem;font-weight:500;color:var(--text-muted);text-decoration:none;transition:color .2s ease;}
+.nav-back:hover{color:var(--terra);}
+/* SACRAMENT TABS */
+.sacrament-nav{background:#fff;border-bottom:1px solid rgba(14,10,6,0.08);position:sticky;top:64px;z-index:100;}
+.sac-tab:hover{color:var(--terra);}
+.sac-tab.active{color:var(--terra);border-bottom-color:var(--terra);}
+/* SACRAMENT SECTIONS */
+.sacrament-section{padding:5rem 2rem;display:none;}
+.sacrament-section.active{display:block;}
+.sacrament-section:nth-child(odd){background:var(--warm-white);}
+.sacrament-section:nth-child(even){background:var(--cream);}
+.sac-title{font-family:'Lora',serif;font-weight:700;font-size:clamp(1.75rem,3vw,2.25rem);color:var(--ink);margin-bottom:1rem;}
+.sac-intro{font-size:.95rem;color:var(--text-body);line-height:1.75;margin-bottom:1.5rem;}
+.sac-steps{display:flex;flex-direction:column;gap:1rem;margin-bottom:2rem;}
+.sac-step-text{font-size:.875rem;color:var(--text-body);line-height:1.6;}
+.sac-step-text strong{color:var(--ink);display:block;margin-bottom:.15rem;}
+.sac-contact-box strong{color:var(--ink);display:block;margin-bottom:.25rem;}
+/* BOOKING FORM */
+.booking-form{background:#fff;border-radius:12px;padding:2.5rem;box-shadow:0 4px 30px rgba(14,10,6,0.07);border:1px solid rgba(14,10,6,0.06);}
+.booking-form-title{font-family:'Lora',serif;font-weight:700;font-size:1.25rem;color:var(--ink);margin-bottom:.4rem;}
+.booking-form-sub{font-size:.85rem;color:var(--text-muted);margin-bottom:1.75rem;line-height:1.6;}
+.form-field input,.form-field select,.form-field textarea{background:var(--warm-white);border:1.5px solid rgba(14,10,6,0.12);border-radius:7px;padding:.65rem .9rem;font-size:.875rem;color:var(--ink);font-family:inherit;transition:border-color .2s ease;}
+.form-field input:focus,.form-field select:focus,.form-field textarea:focus{outline:none;border-color:var(--terra);}
+.form-note{font-size:.75rem;color:var(--text-muted);text-align:center;margin-top:.75rem;line-height:1.6;}
+</style>
+  <script src="parish-data.js"></script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <div class="nav-crest">SM</div>
+      St. Mary's Parish
+    </a>
+    <div class="nav-links">
+      <a href="index.html#mass-times" class="nav-link">Mass Times</a>
+      <div class="nav-dropdown">
+        <a href="#" class="nav-link nav-dropdown-trigger">Parish Life <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M3 4.5l3 3 3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <div class="nav-dropdown-menu">
+          <a href="about.html">About Us</a>
+          <a href="events.html">Events</a>
+          <a href="staff.html">Our Team</a>
+          <a href="bulletin.html">Parish Bulletin</a>
+          <a href="involved.html">Get Involved</a>
+        </div>
+      </div>
+      <div class="nav-dropdown">
+        <a href="sacraments.html" class="nav-link nav-dropdown-trigger">Sacraments <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M3 4.5l3 3 3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <div class="nav-dropdown-menu">
+          <a href="sacraments.html#baptism">Baptism</a>
+          <a href="sacraments.html#firstcommunion">First Communion</a>
+          <a href="sacraments.html#confirmation">Confirmation</a>
+          <a href="sacraments.html#wedding">Wedding</a>
+          <a href="sacraments.html#funeral">Funeral Mass</a>
+          <a href="rcia.html">Becoming Catholic</a>
+        </div>
+      </div>
+      <a href="index.html#giving" class="nav-link">Give</a>
+      <a href="contact.html" class="nav-link">Contact</a>
+    </div>
+    <a href="index.html#giving" class="nav-cta">Give Now</a>
+    <button class="nav-hamburger" id="navHamburger">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="nav-mobile" id="navMobile">
+    <div class="nav-mobile-section">
+      <div class="nav-mobile-header">Navigation</div>
+      <a href="index.html#mass-times">Mass Times</a>
+      <a href="index.html#giving">Give</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <div class="nav-mobile-section">
+      <div class="nav-mobile-header">Parish Life</div>
+      <a href="about.html">About Us</a>
+      <a href="events.html">Events</a>
+      <a href="staff.html">Our Team</a>
+      <a href="bulletin.html">Parish Bulletin</a>
+      <a href="involved.html">Get Involved</a>
+    </div>
+    <div class="nav-mobile-section">
+      <div class="nav-mobile-header">Sacraments</div>
+      <a href="sacraments.html#baptism">Baptism</a>
+      <a href="sacraments.html#firstcommunion">First Communion</a>
+      <a href="sacraments.html#confirmation">Confirmation</a>
+      <a href="sacraments.html#wedding">Wedding</a>
+      <a href="sacraments.html#funeral">Funeral Mass</a>
+      <a href="rcia.html">Becoming Catholic</a>
+    </div>
+    <a href="index.html#giving" class="nav-mobile-cta">Give Now</a>
+  </div>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="container">
+    <div class="page-hero-overline">
+      <svg width="6" height="6" viewBox="0 0 6 6" fill="none"><circle cx="3" cy="3" r="3" fill="currentColor"/></svg>
+      Sacramental Ministry
+    </div>
+    <h1>The Sacraments of<br><em>St. Mary's Parish</em></h1>
+    <p class="page-hero-sub">From Baptism to Marriage, we walk with you through every sacred milestone of life.</p>
+  </div>
+</div>
+
+<!-- SACRAMENT TABS -->
+<div class="sacrament-nav">
+  <div class="sacrament-nav-inner">
+    <button class="sac-tab active" onclick="showSac('baptism')">
+      <svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M10 3v14M3 10h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      Baptism
+    </button>
+    <button class="sac-tab" onclick="showSac('wedding')">
+      <svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M10 17s-7-4.5-7-9a4 4 0 018 0 4 4 0 018 0c0 4.5-7 9-7 9z" stroke="currentColor" stroke-width="1.5"/></svg>
+      Wedding
+    </button>
+    <button class="sac-tab" onclick="showSac('funeral')">
+      <svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M4 4h6v14H4a2 2 0 01-2-2V6a2 2 0 012-2z" stroke="currentColor" stroke-width="1.5"/><path d="M10 4h6a2 2 0 012 2v10a2 2 0 01-2 2h-6V4z" stroke="currentColor" stroke-width="1.5"/></svg>
+      Funeral Mass
+    </button>
+    <button class="sac-tab" onclick="showSac('confirmation')">
+      <svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M10 2l2.4 5 5.6.8-4 3.9.9 5.5L10 14.5l-4.9 2.7.9-5.5L2 7.8l5.6-.8L10 2z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+      Confirmation
+    </button>
+    <button class="sac-tab" onclick="showSac('firstcommunion')">
+      <svg width="16" height="16" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="7" stroke="currentColor" stroke-width="1.5"/><circle cx="10" cy="10" r="3" stroke="currentColor" stroke-width="1.5"/></svg>
+      First Communion
+    </button>
+  </div>
+</div>
+
+<!-- BAPTISM -->
+<section class="sacrament-section active" id="sac-baptism">
+  <div class="container">
+    <div class="sac-grid">
+      <div>
+        <div class="sac-overline">Sacrament of Initiation</div>
+        <h2 class="sac-title">Baptism</h2>
+        <p class="sac-intro">Baptism is the first and most fundamental sacrament, the gateway to life in the Spirit and to the other sacraments. We celebrate Baptisms for infants and children throughout the year, and for adults through the RCIA process.</p>
+        <div class="sac-steps">
+          <div class="sac-step"><div class="sac-step-num">1</div><div class="sac-step-text"><strong>Submit this request form</strong>We will contact you within 2 business days to discuss next steps.</div></div>
+          <div class="sac-step"><div class="sac-step-num">2</div><div class="sac-step-text"><strong>Attend a Baptism preparation session</strong>Required for parents and godparents of infants. Sessions run monthly.</div></div>
+          <div class="sac-step"><div class="sac-step-num">3</div><div class="sac-step-text"><strong>Schedule the date</strong>Baptisms are typically celebrated on Sunday afternoons after the 11:00 AM Mass.</div></div>
+        </div>
+        <div class="sac-contact-box">
+          <strong>Questions?</strong>
+          Contact the parish office at <a href="tel:+12125550123" style="color:var(--terra);">(212) 555-0123</a> <a href="#" data-contact-old data-from="baptism" class="">Get in touch →</a>
+        </div>
+      </div>
+      <div class="booking-form">
+        <div class="booking-form-title">Request a Baptism</div>
+        <div class="booking-form-sub">Fill in the form below and our team will be in touch within 2 business days.</div>
+        <div class="form-row">
+          <div class="form-field"><label>Parent / Guardian First Name</label><input type="text" placeholder="Maria"></div>
+          <div class="form-field"><label>Parent / Guardian Last Name</label><input type="text" placeholder="Santos"></div>
+        </div>
+        <div class="form-field"><label>Email Address</label><input type="email" placeholder="maria@example.com"></div>
+        <div class="form-field"><label>Phone Number</label><input type="tel" placeholder="(212) 555-0000"></div>
+        <div class="form-field"><label>Child's Full Name</label><input type="text" placeholder="Full name"></div>
+        <div class="form-row">
+          <div class="form-field"><label>Child's Date of Birth</label><input type="date"></div>
+          <div class="form-field"><label>Preferred Month for Baptism</label><input type="text" placeholder="e.g. June 2025"></div>
+        </div>
+        <div class="form-field"><label>Are godparents confirmed Catholics?</label><select><option value="">Please select...</option><option>Yes, both godparents are confirmed Catholics</option><option>One godparent is a confirmed Catholic</option><option>Not sure — I have a question about this</option></select></div>
+        <div class="form-field"><label>Additional notes</label><textarea placeholder="Anything else we should know?"></textarea></div>
+        <button class="btn-submit" type="button">Submit Baptism Request</button>
+        <p class="form-note">This form is a request only — your Baptism is not confirmed until you hear from us.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WEDDING -->
+<section class="sacrament-section" id="sac-wedding">
+  <div class="container">
+    <div class="sac-grid">
+      <div>
+        <div class="sac-overline">Sacrament of Matrimony</div>
+        <h2 class="sac-title">Wedding at St. Mary's</h2>
+        <p class="sac-intro">Marriage is a sacred covenant between a man and a woman, witnessed by the Church. St. Mary's is a beautiful setting for your wedding, and our team will accompany you every step of the way. Please contact us <strong>at least six months in advance.</strong></p>
+        <div class="sac-steps">
+          <div class="sac-step"><div class="sac-step-num">1</div><div class="sac-step-text"><strong>Submit your enquiry</strong>At least 6 months before your preferred date. We will check availability and reach out.</div></div>
+          <div class="sac-step"><div class="sac-step-num">2</div><div class="sac-step-text"><strong>Meet with Fr. O'Brien</strong>An initial meeting to discuss your faith background and marriage preparation requirements.</div></div>
+          <div class="sac-step"><div class="sac-step-num">3</div><div class="sac-step-text"><strong>Complete Pre-Cana</strong>Marriage preparation programme — required by the Archdiocese of New York.</div></div>
+          <div class="sac-step"><div class="sac-step-num">4</div><div class="sac-step-text"><strong>Confirm your date and plan the liturgy</strong>Work with our music director and liturgy coordinator to plan your ceremony.</div></div>
+        </div>
+        <div class="sac-contact-box">
+          <strong>Note on availability</strong>
+          Saturdays book quickly. We recommend reaching out as early as possible. Contact <a href="#" data-contact-old data-from="wedding" class="">Get in touch →</a>
+        </div>
+      </div>
+      <div class="booking-form">
+        <div class="booking-form-title">Wedding Enquiry</div>
+        <div class="booking-form-sub">Tell us about your plans and we'll check availability and get in touch.</div>
+        <div class="form-row">
+          <div class="form-field"><label>Partner 1 — Full Name</label><input type="text" placeholder="Full name"></div>
+          <div class="form-field"><label>Partner 2 — Full Name</label><input type="text" placeholder="Full name"></div>
+        </div>
+        <div class="form-field"><label>Email Address</label><input type="email" placeholder="your@email.com"></div>
+        <div class="form-field"><label>Phone Number</label><input type="tel" placeholder="(212) 555-0000"></div>
+        <div class="form-row">
+          <div class="form-field"><label>Preferred Wedding Date</label><input type="date"></div>
+          <div class="form-field"><label>Alternative Date (if any)</label><input type="date"></div>
+        </div>
+        <div class="form-field"><label>Are both partners Catholic?</label><select><option value="">Please select...</option><option>Yes, both are Catholic</option><option>One partner is Catholic</option><option>Neither partner is Catholic</option></select></div>
+        <div class="form-field"><label>Expected number of guests</label><select><option value="">Approximate number...</option><option>Under 50</option><option>50–100</option><option>100–200</option><option>Over 200</option></select></div>
+        <div class="form-field"><label>Any questions or special circumstances?</label><textarea placeholder="Let us know anything relevant..."></textarea></div>
+        <button class="btn-submit" type="button">Submit Wedding Enquiry</button>
+        <p class="form-note">Submitting this form does not reserve your date. We will confirm availability when we contact you.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FUNERAL -->
+<section class="sacrament-section" id="sac-funeral">
+  <div class="container">
+    <div class="sac-grid">
+      <div>
+        <div class="sac-overline">Christian Burial</div>
+        <h2 class="sac-title">Funeral Mass</h2>
+        <p class="sac-intro">In the face of loss, the Church accompanies you with prayer, compassion, and the hope of the Resurrection. Our team is available to help you arrange a Funeral Mass and burial rites with care and dignity.</p>
+        <div class="sac-steps">
+          <div class="sac-step"><div class="sac-step-num">1</div><div class="sac-step-text"><strong>Call us first</strong>For urgent arrangements, please call the parish office directly at (212) 555-0123.</div></div>
+          <div class="sac-step"><div class="sac-step-num">2</div><div class="sac-step-text"><strong>Or submit the form</strong>For non-urgent planning, submit this form and we will contact you within one business day.</div></div>
+          <div class="sac-step"><div class="sac-step-num">3</div><div class="sac-step-text"><strong>Meet with our team</strong>We will help you plan the Mass readings, music, and any special intentions.</div></div>
+        </div>
+        <div class="sac-contact-box">
+          <strong>Urgent? Please call us directly.</strong>
+          Parish Office: <a href="tel:+12125550123" style="color:var(--terra);">(212) 555-0123</a><br>
+          Available Monday–Friday 9 AM–5 PM and Saturday 10 AM–2 PM.
+        </div>
+      </div>
+      <div class="booking-form">
+        <div class="booking-form-title">Funeral Mass Request</div>
+        <div class="booking-form-sub">For urgent arrangements please call us directly. For advance planning, use this form.</div>
+        <div class="form-field"><label>Your Full Name (contact person)</label><input type="text" placeholder="Full name"></div>
+        <div class="form-row">
+          <div class="form-field"><label>Email Address</label><input type="email" placeholder="your@email.com"></div>
+          <div class="form-field"><label>Phone Number</label><input type="tel" placeholder="(212) 555-0000"></div>
+        </div>
+        <div class="form-field"><label>Name of the Deceased</label><input type="text" placeholder="Full name"></div>
+        <div class="form-row">
+          <div class="form-field"><label>Date of Passing</label><input type="date"></div>
+          <div class="form-field"><label>Preferred Mass Date (if known)</label><input type="date"></div>
+        </div>
+        <div class="form-field"><label>Was the deceased a parishioner of St. Mary's?</label><select><option value="">Please select...</option><option>Yes</option><option>No, but was Catholic</option><option>Not sure</option></select></div>
+        <div class="form-field"><label>Additional information</label><textarea placeholder="Please share anything that would help us prepare..."></textarea></div>
+        <button class="btn-submit" type="button">Submit Funeral Request</button>
+        <p class="form-note">We will contact you as soon as possible. For urgent matters please call the office.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONFIRMATION -->
+<section class="sacrament-section" id="sac-confirmation">
+  <div class="container">
+    <div class="sac-grid">
+      <div>
+        <div class="sac-overline">Sacrament of Initiation</div>
+        <h2 class="sac-title">Confirmation</h2>
+        <p class="sac-intro">Confirmation completes the grace of Baptism and seals the recipient with the Gift of the Holy Spirit. Our Confirmation programme runs annually for young people in Year 10 and above, and adults who were not confirmed at the time of their First Communion.</p>
+        <div class="sac-steps">
+          <div class="sac-step"><div class="sac-step-num">1</div><div class="sac-step-text"><strong>Register in September</strong>Our Confirmation programme begins each September. Early registration is encouraged.</div></div>
+          <div class="sac-step"><div class="sac-step-num">2</div><div class="sac-step-text"><strong>Two-year preparation</strong>Candidates attend formation sessions, retreats, and service requirements over two years.</div></div>
+          <div class="sac-step"><div class="sac-step-num">3</div><div class="sac-step-text"><strong>Receive the Sacrament</strong>Confirmation is typically celebrated in Spring with the Archbishop or his delegate.</div></div>
+        </div>
+        <div class="sac-contact-box">
+          <strong>Questions about Confirmation?</strong>
+          Contact Sofia Morales, Director of Faith Formation: <a href="#" data-contact-old data-from="formation" class="">Get in touch →</a>
+        </div>
+      </div>
+      <div class="booking-form">
+        <div class="booking-form-title">Confirmation Registration</div>
+        <div class="booking-form-sub">Register your interest and our Faith Formation team will be in touch with programme details.</div>
+        <div class="form-row">
+          <div class="form-field"><label>Candidate First Name</label><input type="text" placeholder="First name"></div>
+          <div class="form-field"><label>Candidate Last Name</label><input type="text" placeholder="Last name"></div>
+        </div>
+        <div class="form-row">
+          <div class="form-field"><label>Date of Birth</label><input type="date"></div>
+          <div class="form-field"><label>School Year / Grade</label><input type="text" placeholder="e.g. Year 10 / Grade 10"></div>
+        </div>
+        <div class="form-field"><label>Parent / Guardian Name</label><input type="text" placeholder="Full name"></div>
+        <div class="form-row">
+          <div class="form-field"><label>Email</label><input type="email" placeholder="your@email.com"></div>
+          <div class="form-field"><label>Phone</label><input type="tel" placeholder="(212) 555-0000"></div>
+        </div>
+        <div class="form-field"><label>Has the candidate been Baptised Catholic?</label><select><option value="">Please select...</option><option>Yes, and received First Communion</option><option>Yes, but has not yet received First Communion</option><option>Not sure</option></select></div>
+        <div class="form-field"><label>Any questions or notes?</label><textarea placeholder="Anything you'd like us to know..."></textarea></div>
+        <button class="btn-submit" type="button">Submit Registration</button>
+        <p class="form-note">Registration opens each September. We'll confirm receipt and send programme details.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FIRST COMMUNION -->
+<section class="sacrament-section" id="sac-firstcommunion">
+  <div class="container">
+    <div class="sac-grid">
+      <div>
+        <div class="sac-overline">Sacrament of the Eucharist</div>
+        <h2 class="sac-title">First Holy Communion</h2>
+        <p class="sac-intro">First Holy Communion is one of the most joyful milestones in a Catholic child's life. Our preparation programme ensures children and their families are well supported as they receive the Body of Christ for the first time.</p>
+        <div class="sac-steps">
+          <div class="sac-step"><div class="sac-step-num">1</div><div class="sac-step-text"><strong>Register in September</strong>Children are typically in Year 2 (age 7–8). Registration opens each September.</div></div>
+          <div class="sac-step"><div class="sac-step-num">2</div><div class="sac-step-text"><strong>Weekly faith formation classes</strong>Children attend classes on Sunday mornings through the school year.</div></div>
+          <div class="sac-step"><div class="sac-step-num">3</div><div class="sac-step-text"><strong>First Reconciliation</strong>Received in February, preparing the child spiritually for the Eucharist.</div></div>
+          <div class="sac-step"><div class="sac-step-num">4</div><div class="sac-step-text"><strong>First Communion Mass</strong>Celebrated in May with family and the parish community.</div></div>
+        </div>
+        <div class="sac-contact-box">
+          <strong>Questions?</strong>
+          Contact Sofia Morales: <a href="#" data-contact-old data-from="formation" class="">Get in touch →</a>
+        </div>
+      </div>
+      <div class="booking-form">
+        <div class="booking-form-title">First Communion Registration</div>
+        <div class="booking-form-sub">Register your child and our Faith Formation team will be in touch.</div>
+        <div class="form-row">
+          <div class="form-field"><label>Child's First Name</label><input type="text" placeholder="First name"></div>
+          <div class="form-field"><label>Child's Last Name</label><input type="text" placeholder="Last name"></div>
+        </div>
+        <div class="form-row">
+          <div class="form-field"><label>Date of Birth</label><input type="date"></div>
+          <div class="form-field"><label>School / Grade</label><input type="text" placeholder="e.g. St. Mary's School, Grade 2"></div>
+        </div>
+        <div class="form-field"><label>Parent / Guardian Name</label><input type="text" placeholder="Full name"></div>
+        <div class="form-row">
+          <div class="form-field"><label>Email</label><input type="email" placeholder="your@email.com"></div>
+          <div class="form-field"><label>Phone</label><input type="tel" placeholder="(212) 555-0000"></div>
+        </div>
+        <div class="form-field"><label>Has your child been Baptised Catholic?</label><select><option value="">Please select...</option><option>Yes, at St. Mary's Parish</option><option>Yes, at another parish</option><option>Not yet Baptised</option></select></div>
+        <div class="form-field"><label>Any questions or notes?</label><textarea placeholder="Anything you'd like us to know..."></textarea></div>
+        <button class="btn-submit" type="button">Submit Registration</button>
+        <p class="form-note">Registration opens each September. We'll confirm receipt and send programme details.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+
+
+<script>
+function showSac(id) {
+  document.querySelectorAll('.sacrament-section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.sac-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('sac-' + id).classList.add('active');
+  event.currentTarget.classList.add('active');
+}
+</script>
+
+\n<script>
+const _nh = document.getElementById('navHamburger');
+const _nm = document.getElementById('navMobile');
+if(_nh){ _nh.addEventListener('click',()=>_nm.classList.toggle('open')); _nm.addEventListener('click',(e)=>{if(e.target.tagName==='A')_nm.classList.remove('open');}); }
+const _nav = document.getElementById('nav');
+if(_nav){ window.addEventListener('scroll',()=>{ _nav.style.boxShadow = window.scrollY > 20 ? '0 2px 20px rgba(14,10,6,0.1)' : '0 2px 20px rgba(14,10,6,0.08)'; }); }
+</script>
+
+<script>
+// Navigation scroll effect and mobile menu
+(function(){
+  const nav = document.getElementById('nav');
+  const hamburger = document.getElementById('navHamburger');
+  const mobileMenu = document.getElementById('navMobile');
+  
+  if(nav){
+    window.addEventListener('scroll', () => {
+      if(window.scrollY > 20){
+        nav.classList.add('scrolled');
+      } else {
+        nav.classList.remove('scrolled');
+      }
+    });
+  }
+  
+  if(hamburger && mobileMenu){
+    hamburger.addEventListener('click', () => {
+      mobileMenu.classList.toggle('open');
+    });
+    
+    mobileMenu.addEventListener('click', (e) => {
+      if(e.target.tagName === 'A'){
+        mobileMenu.classList.remove('open');
+      }
+    });
+  }
+})();
+</script>
+
+
+<!-- CONTACT MODAL -->
+<div class="modal-overlay" id="contactModal">
+  <div class="modal-box">
+    <div class="modal-header">
+      <div>
+        <div class="modal-title">Send us a message</div>
+        <div class="modal-sub">We typically respond within one business day.</div>
+      </div>
+      <button class="modal-close" id="modalClose" aria-label="Close">&#x2715;</button>
+    </div>
+    <div class="modal-body" id="modalBody">
+      <div class="modal-form-row">
+        <div class="modal-field"><label>First Name</label><input type="text" id="mFirstName" placeholder="Maria"></div>
+        <div class="modal-field"><label>Last Name</label><input type="text" id="mLastName" placeholder="Santos"></div>
+      </div>
+      <div class="modal-field"><label>Email Address</label><input type="email" id="mEmail" placeholder="maria@example.com"></div>
+      <div class="modal-field"><label>Phone (optional)</label><input type="tel" id="mPhone" placeholder="(212) 555-0000"></div>
+      <div class="modal-field">
+        <label>Subject</label>
+        <select id="mSubject">
+          <option value="">Select a topic...</option>
+          <option value="general">General Inquiry</option>
+          <option value="baptism">Sacraments — Baptism</option>
+          <option value="wedding">Sacraments — Wedding</option>
+          <option value="funeral">Sacraments — Funeral Mass</option>
+          <option value="confirmation">Sacraments — Confirmation</option>
+          <option value="firstcommunion">Sacraments — First Communion</option>
+          <option value="formation">Faith Formation / RCIA</option>
+          <option value="rcia">Becoming Catholic (RCIA)</option>
+          <option value="volunteer">Volunteering</option>
+          <option value="facility">Facility Rental</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+      <div class="modal-field"><label>Message</label><textarea id="mMessage" placeholder="How can we help you?"></textarea></div>
+      <button class="modal-submit" id="modalSubmit" type="button">Send Message</button>
+      <p class="modal-note">St. Mary&#39;s Parish · 123 Rivington Street, New York, NY 10002</p>
+    </div>
+  </div>
+</div>
+
+
+<script>
+(function(){
+  var overlay = document.getElementById('contactModal');
+  var closeBtn = document.getElementById('modalClose');
+  var submitBtn = document.getElementById('modalSubmit');
+  var subjectSel = document.getElementById('mSubject');
+
+  function openModal(from){
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    if(from && subjectSel){
+      var opt = Array.from(subjectSel.options).find(function(o){ return o.value === from; });
+      if(opt) subjectSel.value = from;
+    }
+  }
+
+  function closeModal(){
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  // Close on overlay click
+  overlay.addEventListener('click', function(e){ if(e.target === overlay) closeModal(); });
+  closeBtn.addEventListener('click', closeModal);
+
+  // Close on Escape
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeModal(); });
+
+  // Wire up all contact trigger links
+  document.addEventListener('click', function(e){
+    var el = e.target.closest('[data-contact-old]');
+    if(el){
+      e.preventDefault();
+      openModal(el.getAttribute('data-from') || '');
+    }
+  });
+
+  // Submit — show success state
+  if(submitBtn){
+    submitBtn.addEventListener('click', function(){
+      var email = document.getElementById('mEmail').value.trim();
+      if(!email){ document.getElementById('mEmail').focus(); return; }
+      document.getElementById('modalBody').innerHTML = '<div class="modal-success"><div class="modal-success-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><h3>Message sent!</h3><p>Thank you for reaching out. Someone from St. Mary\'s will be in touch within one business day.</p></div>';
+    });
+  }
+
+  // Also handle old ?from= URL params on index page
+  var params = new URLSearchParams(window.location.search);
+  var fromParam = params.get('from');
+  if(fromParam) openModal(fromParam);
+})();
+</script>
+
+<script>
+function showSacFromHash(){
+  var hash = window.location.hash.replace('#','');
+  var valid = ['baptism','wedding','funeral','confirmation','firstcommunion'];
+  if(!hash || !valid.includes(hash)) return;
+  document.querySelectorAll('.sacrament-section').forEach(function(s){ s.classList.remove('active'); });
+  document.querySelectorAll('.sac-tab').forEach(function(t){ t.classList.remove('active'); });
+  var section = document.getElementById('sac-' + hash);
+  if(section) section.classList.add('active');
+  var idx = valid.indexOf(hash);
+  var tabs = document.querySelectorAll('.sac-tab');
+  if(tabs[idx]) tabs[idx].classList.add('active');
+}
+showSacFromHash();
+window.addEventListener('hashchange', showSacFromHash);
+</script>
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+
+      <!-- Col 1: Parish Info -->
+      <div>
+        <div class="footer-brand">St. Mary's Parish</div>
+        <p class="footer-tagline">A vibrant Catholic community in the heart of New York's Lower East Side, serving our neighbours since 1887.</p>
+        <div class="footer-detail">
+          <svg width="14" height="14" viewBox="0 0 20 20" fill="none"><path d="M10 2C7.2 2 5 4.2 5 7c0 4 5 11 5 11s5-7 5-11c0-2.8-2.2-5-5-5z" stroke="currentColor" stroke-width="1.5"/></svg>
+          123 Rivington Street, New York, NY 10002
+        </div>
+        <div class="footer-detail">
+          <svg width="14" height="14" viewBox="0 0 20 20" fill="none"><path d="M3 4h4l2 4-2 2c1 2 3 4 5 5l2-2 4 2v4c0 1-1 2-2 2C7 19 1 13 1 6c0-1 1-2 2-2z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+          <a href="tel:+12125550123">(212) 555-0123</a>
+        </div>
+        <div class="footer-detail">
+          <svg width="14" height="14" viewBox="0 0 20 20" fill="none"><rect x="2" y="4" width="16" height="13" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M2 7l8 5 8-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          <a href="mailto:info@stmarysnyc.org">info@stmarysnyc.org</a>
+        </div>
+        <div class="footer-detail">
+          <svg width="14" height="14" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M10 7v4l2.5 2.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          Office: Mon–Fri 9 AM–5 PM · Sat 10 AM–2 PM
+        </div>
+        <div class="footer-detail">
+          <svg width="14" height="14" viewBox="0 0 20 20" fill="none"><path d="M10 2C7.2 2 5 4.2 5 7c0 4 5 11 5 11s5-7 5-11c0-2.8-2.2-5-5-5z" stroke="currentColor" stroke-width="1.5"/></svg>
+          <a href="https://maps.google.com/?q=123+Rivington+Street+New+York+NY+10002" target="_blank">Get directions →</a>
+        </div>
+      </div>
+
+      <!-- Col 2: Mass Times -->
+      <div>
+        <div class="footer-col-title">Mass Times</div>
+        <div class="footer-mass-item"><strong>Weekdays</strong>Mon–Fri 9:00 AM · Tue &amp; Thu 6:45 PM</div>
+        <div class="footer-mass-item"><strong>Saturday</strong>10:00 AM · Vigil 5:00 PM</div>
+        <div class="footer-mass-item"><strong>Sunday</strong>7:00 · 9:00 · 11:00 AM<br>1:00 PM (Español) · 6:00 PM</div>
+        <div class="footer-mass-item" style="margin-top:.75rem;font-size:.78rem;color:rgba(255,253,245,0.4);">Confession: Saturday 3:30–4:30 PM</div>
+        <a href="index.html#mass-times" style="display:inline-block;margin-top:.875rem;font-size:.8rem;font-weight:600;color:var(--terra);text-decoration:none;">Full schedule →</a>
+      </div>
+
+      <!-- Col 3: Navigate -->
+      <div>
+        <div class="footer-col-title">Navigate</div>
+        <nav class="footer-nav">
+          <a href="about.html">About Us</a>
+          <a href="staff.html">Our Team</a>
+          <a href="events.html">Events</a>
+          <a href="bulletin.html">Parish Bulletin</a>
+          <a href="sacraments.html">Sacraments</a>
+          <a href="rcia.html">Becoming Catholic</a>
+          <a href="involved.html">Get Involved</a>
+          <a href="index.html#giving">Give Online</a>
+          <a href="contact.html">Contact Us</a>
+        </nav>
+      </div>
+
+      <!-- Col 4: Connect -->
+      <div>
+        <div class="footer-col-title">Stay Connected</div>
+        <div class="footer-social">
+          <a href="https://facebook.com" target="_blank" aria-label="Facebook">f</a>
+          <a href="https://instagram.com" target="_blank" aria-label="Instagram">in</a>
+          <a href="https://youtube.com" target="_blank" aria-label="YouTube">yt</a>
+          <a href="https://spotify.com" target="_blank" aria-label="Spotify">sp</a>
+        </div>
+        <div class="footer-newsletter-label">Get our weekly bulletin by email</div>
+        <div class="footer-newsletter-form">
+          <input type="email" placeholder="Your email">
+          <button type="button">Subscribe</button>
+        </div>
+      </div>
+
+    </div>
+    <div class="footer-bottom">
+      <div>&copy; 2024 St. Mary's Parish, New York</div>
+      <div class="footer-bottom-links">
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html">Terms of Use</a>
+        <a href="sitemap.html">Sitemap</a>
+        <span>Powered by <span class="communio-credit">Communio</span></span>
+      </div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

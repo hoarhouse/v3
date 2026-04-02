@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Becoming Catholic — St. Mary's Parish</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site.css">
+<style>
+.nav-back{display:inline-flex;align-items:center;gap:.5rem;font-size:.875rem;font-weight:500;color:var(--text-muted);text-decoration:none;transition:color .2s;}
+.nav-back:hover{color:var(--terra);}
+.hero-cta:hover{background:var(--terra-dark);transform:translateY(-1px);}
+.rcia-intro-label{font-size:.65rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--terra);margin-bottom:.75rem;}
+.rcia-intro h2{font-family:'Lora',serif;font-weight:700;font-size:clamp(1.75rem,3vw,2.25rem);color:var(--ink);margin-bottom:1rem;}
+.rcia-intro p{font-size:.95rem;color:var(--text-body);line-height:1.75;margin-bottom:1rem;}
+.rcia-who-card{background:var(--cream);border-radius:8px;padding:1.25rem;border-left:3px solid var(--terra);}
+.rcia-who-card h4{font-family:'Lora',serif;font-size:.95rem;font-weight:700;color:var(--ink);margin-bottom:.4rem;}
+.rcia-who-card p{font-size:.8rem;color:var(--text-muted);line-height:1.6;}
+.rcia-journey h2{font-family:'Lora',serif;font-weight:700;font-size:clamp(1.75rem,3vw,2.25rem);color:var(--ink);text-align:center;margin-bottom:.5rem;}
+.rcia-journey-sub{text-align:center;font-size:.95rem;color:var(--text-muted);margin-bottom:3rem;}
+.journey-step h3{font-family:'Lora',serif;font-weight:700;font-size:1rem;color:var(--ink);margin-bottom:.5rem;}
+.journey-step p{font-size:.8rem;color:var(--text-muted);line-height:1.6;}
+.journey-step-season{font-size:.7rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--terra);margin-bottom:.4rem;}
+.rcia-faq h2{font-family:'Lora',serif;font-weight:700;font-size:clamp(1.5rem,3vw,2rem);color:var(--ink);text-align:center;margin-bottom:3rem;}
+.faq-item{background:var(--cream);border-radius:8px;padding:1.5rem;}
+.faq-q{font-family:'Lora',serif;font-weight:700;font-size:.95rem;color:var(--ink);margin-bottom:.6rem;}
+.faq-a{font-size:.85rem;color:var(--text-muted);line-height:1.7;}
+.rcia-register-inner{max-width:720px;margin:0 auto;}
+.rcia-register-label{font-size:.65rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-bottom:.75rem;}
+.rcia-register h2{font-family:'Lora',serif;font-weight:700;font-size:clamp(1.75rem,3vw,2.25rem);color:#fff;margin-bottom:.75rem;}
+.rcia-register-sub{font-size:.95rem;color:rgba(255,255,255,0.65);margin-bottom:2.5rem;line-height:1.7;}
+.form-field input,.form-field select,.form-field textarea{background:rgba(255,255,255,0.08);border:1.5px solid rgba(255,255,255,0.15);border-radius:7px;padding:.65rem .9rem;font-size:.875rem;color:#fff;font-family:inherit;transition:border-color .2s;}
+.form-field input::placeholder,.form-field textarea::placeholder{color:rgba(255,255,255,0.35);}
+.form-field input:focus,.form-field select:focus,.form-field textarea:focus{outline:none;border-color:var(--terra);}
+.form-field select option{background:var(--ink);color:#fff;}
+.form-note{font-size:.75rem;color:rgba(255,255,255,0.4);text-align:center;margin-top:.75rem;line-height:1.6;}
+</style>
+  <script src="parish-data.js"></script>
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <div class="nav-crest">SM</div>
+      St. Mary's Parish
+    </a>
+    <div class="nav-links">
+      <a href="index.html#mass-times" class="nav-link">Mass Times</a>
+      <div class="nav-dropdown">
+        <a href="#" class="nav-link nav-dropdown-trigger">Parish Life <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M3 4.5l3 3 3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <div class="nav-dropdown-menu">
+          <a href="about.html">About Us</a>
+          <a href="events.html">Events</a>
+          <a href="staff.html">Our Team</a>
+          <a href="bulletin.html">Parish Bulletin</a>
+          <a href="involved.html">Get Involved</a>
+        </div>
+      </div>
+      <div class="nav-dropdown">
+        <a href="sacraments.html" class="nav-link nav-dropdown-trigger">Sacraments <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M3 4.5l3 3 3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <div class="nav-dropdown-menu">
+          <a href="sacraments.html#baptism">Baptism</a>
+          <a href="sacraments.html#firstcommunion">First Communion</a>
+          <a href="sacraments.html#confirmation">Confirmation</a>
+          <a href="sacraments.html#wedding">Wedding</a>
+          <a href="sacraments.html#funeral">Funeral Mass</a>
+          <a href="rcia.html">Becoming Catholic</a>
+        </div>
+      </div>
+      <a href="index.html#giving" class="nav-link">Give</a>
+      <a href="contact.html" class="nav-link">Contact</a>
+    </div>
+    <a href="index.html#giving" class="nav-cta">Give Now</a>
+    <button class="nav-hamburger" id="navHamburger">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="nav-mobile" id="navMobile">
+    <div class="nav-mobile-section">
+      <div class="nav-mobile-header">Navigation</div>
+      <a href="index.html#mass-times">Mass Times</a>
+      <a href="index.html#giving">Give</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <div class="nav-mobile-section">
+      <div class="nav-mobile-header">Parish Life</div>
+      <a href="about.html">About Us</a>
+      <a href="events.html">Events</a>
+      <a href="staff.html">Our Team</a>
+      <a href="bulletin.html">Parish Bulletin</a>
+      <a href="involved.html">Get Involved</a>
+    </div>
+    <div class="nav-mobile-section">
+      <div class="nav-mobile-header">Sacraments</div>
+      <a href="sacraments.html#baptism">Baptism</a>
+      <a href="sacraments.html#firstcommunion">First Communion</a>
+      <a href="sacraments.html#confirmation">Confirmation</a>
+      <a href="sacraments.html#wedding">Wedding</a>
+      <a href="sacraments.html#funeral">Funeral Mass</a>
+      <a href="rcia.html">Becoming Catholic</a>
+    </div>
+    <a href="index.html#giving" class="nav-mobile-cta">Give Now</a>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <div class="container">
+    <div class="page-hero-overline">
+      <svg width="6" height="6" viewBox="0 0 6 6" fill="none"><circle cx="3" cy="3" r="3" fill="currentColor"/></svg>
+      RCIA — Rite of Christian Initiation of Adults
+    </div>
+    <h1>Thinking about<br><em>becoming Catholic?</em></h1>
+    <p class="page-hero-sub">Whether you are curious, exploring, or ready to take the next step — you are welcome here. No question is too small. No journey is too late.</p>
+    <a href="#rcia-register" class="hero-cta">
+      Register your interest
+      <svg width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="M5 10h10M11 6l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+  </div>
+</div>
+
+<!-- WHAT IS RCIA -->
+<section class="rcia-intro">
+  <div class="container">
+    <div class="rcia-intro-grid">
+      <div>
+        <div class="rcia-intro-label">What is RCIA?</div>
+        <h2>A journey of faith, not a class to pass.</h2>
+        <p>The Rite of Christian Initiation of Adults (RCIA) is the process through which adults enter the Catholic Church. It is a gradual journey of prayer, learning, and community that prepares you to receive the Sacraments of Initiation — Baptism, Confirmation, and the Eucharist.</p>
+        <p>At St. Mary's, our RCIA programme runs from September through Easter. Sessions are held weekly, in a welcoming, small-group setting. There is no pressure, no test, and no deadline — only an open invitation.</p>
+      </div>
+      <div>
+        <div class="rcia-intro-label" style="margin-bottom:1rem;">Who is RCIA for?</div>
+        <div class="rcia-who-grid">
+          <div class="rcia-who-card">
+            <h4>Non-Christians</h4>
+            <p>Those who have never been baptised and are drawn to explore the Christian faith for the first time.</p>
+          </div>
+          <div class="rcia-who-card">
+            <h4>Baptised non-Catholics</h4>
+            <p>Christians from other traditions who feel called to enter full communion with the Catholic Church.</p>
+          </div>
+          <div class="rcia-who-card">
+            <h4>Uncatechised Catholics</h4>
+            <p>Baptised Catholics who never received First Communion or Confirmation and wish to complete their initiation.</p>
+          </div>
+          <div class="rcia-who-card">
+            <h4>Returning Catholics</h4>
+            <p>Those who were away from the Church for a time and are seeking to reconnect with their faith.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- THE JOURNEY -->
+<section class="rcia-journey">
+  <div class="container">
+    <h2>The Journey</h2>
+    <p class="rcia-journey-sub">Four stages, each with its own graces and milestones.</p>
+    <div class="journey-steps">
+      <div class="journey-step">
+        <div class="journey-num">1</div>
+        <div class="journey-step-season">Sep — Nov</div>
+        <h3>Inquiry</h3>
+        <p>Informal exploration. Ask any question. No commitment required. Just come and listen.</p>
+      </div>
+      <div class="journey-step">
+        <div class="journey-num">2</div>
+        <div class="journey-step-season">Nov — Feb</div>
+        <h3>Catechumenate</h3>
+        <p>Weekly formation in Scripture, the Creed, prayer, and Catholic life. The heart of the journey.</p>
+      </div>
+      <div class="journey-step">
+        <div class="journey-num">3</div>
+        <div class="journey-step-season">Feb — Apr</div>
+        <h3>Purification</h3>
+        <p>A period of deeper prayer and preparation during Lent, culminating in the Easter Vigil.</p>
+      </div>
+      <div class="journey-step">
+        <div class="journey-num">4</div>
+        <div class="journey-step-season">Easter Vigil</div>
+        <h3>Initiation</h3>
+        <p>Reception of the Sacraments — Baptism, Confirmation, and First Eucharist — at the Easter Vigil Mass.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="rcia-faq">
+  <div class="container">
+    <h2>Common Questions</h2>
+    <div class="faq-grid">
+      <div class="faq-item">
+        <div class="faq-q">Do I have to become Catholic at the end?</div>
+        <div class="faq-a">No. RCIA is a journey of discernment. Many people attend for months before deciding whether to continue. There is no pressure and no obligation.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">What if I was baptised in another church?</div>
+        <div class="faq-a">Your Baptism is recognised by the Catholic Church. You would enter through a slightly different path called reception into full communion, rather than Baptism.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Can I bring my spouse or a friend?</div>
+        <div class="faq-a">Absolutely. Spouses, family members, and friends are warmly welcome to attend sessions as sponsors or companions on your journey.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">When does it start and how long does it take?</div>
+        <div class="faq-a">Our programme begins each September and concludes at the Easter Vigil in April. Sessions are held on Sunday mornings after the 9:00 AM Mass.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Is there a cost?</div>
+        <div class="faq-a">There is no charge for RCIA at St. Mary's. All materials are provided. We want nothing to stand in the way of your journey.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">What if I miss a session?</div>
+        <div class="faq-a">Life happens. Missing a session is not a problem — we will make sure you are caught up. The journey is yours to walk at your own pace.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REGISTER -->
+<section class="rcia-register" id="rcia-register">
+  <div class="container">
+    <div class="rcia-register-inner">
+      <div class="rcia-register-label">Take the first step</div>
+      <h2>Register your interest</h2>
+      <p class="rcia-register-sub">Fill in the form below and Sofia Morales, our Director of Faith Formation, will be in touch personally. There is no commitment — just a conversation.</p>
+      <div class="register-form">
+        <div class="form-row">
+          <div class="form-field"><label>First Name</label><input type="text" placeholder="Your first name"></div>
+          <div class="form-field"><label>Last Name</label><input type="text" placeholder="Your last name"></div>
+        </div>
+        <div class="form-row">
+          <div class="form-field"><label>Email Address</label><input type="email" placeholder="your@email.com"></div>
+          <div class="form-field"><label>Phone (optional)</label><input type="tel" placeholder="(212) 555-0000"></div>
+        </div>
+        <div class="form-field">
+          <label>Which best describes you?</label>
+          <select>
+            <option value="">Please select...</option>
+            <option>I have never been baptised</option>
+            <option>I was baptised in another Christian tradition</option>
+            <option>I was baptised Catholic but never confirmed or received Communion</option>
+            <option>I am a returning Catholic</option>
+            <option>I'm just curious — not sure yet</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label>How did you hear about us?</label>
+          <select>
+            <option value="">Please select...</option>
+            <option>A friend or family member</option>
+            <option>Attended Mass at St. Mary's</option>
+            <option>Google search</option>
+            <option>Social media</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-field"><label>Anything you'd like to share or ask?</label><textarea placeholder="No question is too small. We're here to listen."></textarea></div>
+        <button class="btn-submit" type="button">Send My Registration</button>
+        <p class="form-note">We will respond within 2 business days. Your enquiry is completely confidential.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+\n<script>
+const _nh = document.getElementById('navHamburger');
+const _nm = document.getElementById('navMobile');
+if(_nh){ _nh.addEventListener('click',()=>_nm.classList.toggle('open')); _nm.addEventListener('click',(e)=>{if(e.target.tagName==='A')_nm.classList.remove('open');}); }
+const _nav = document.getElementById('nav');
+if(_nav){ window.addEventListener('scroll',()=>{ _nav.style.boxShadow = window.scrollY > 20 ? '0 2px 20px rgba(14,10,6,0.1)' : '0 2px 20px rgba(14,10,6,0.08)'; }); }
+</script>
+
+<script>
+// Navigation scroll effect and mobile menu
+(function(){
+  const nav = document.getElementById('nav');
+  const hamburger = document.getElementById('navHamburger');
+  const mobileMenu = document.getElementById('navMobile');
+  
+  if(nav){
+    window.addEventListener('scroll', () => {
+      if(window.scrollY > 20){
+        nav.classList.add('scrolled');
+      } else {
+        nav.classList.remove('scrolled');
+      }
+    });
+  }
+  
+  if(hamburger && mobileMenu){
+    hamburger.addEventListener('click', () => {
+      mobileMenu.classList.toggle('open');
+    });
+    
+    mobileMenu.addEventListener('click', (e) => {
+      if(e.target.tagName === 'A'){
+        mobileMenu.classList.remove('open');
+      }
+    });
+  }
+})();
+</script>
+
+<!-- CONTACT MODAL -->
+<div class="modal-overlay" id="contactModal">
+  <div class="modal-box">
+    <div class="modal-header">
+      <div>
+        <div class="modal-title">Send us a message</div>
+        <div class="modal-sub">We typically respond within one business day.</div>
+      </div>
+      <button class="modal-close" id="modalClose" aria-label="Close">&#x2715;</button>
+    </div>
+    <div class="modal-body" id="modalBody">
+      <div class="modal-form-row">
+        <div class="modal-field"><label>First Name</label><input type="text" id="mFirstName" placeholder="Maria"></div>
+        <div class="modal-field"><label>Last Name</label><input type="text" id="mLastName" placeholder="Santos"></div>
+      </div>
+      <div class="modal-field"><label>Email Address</label><input type="email" id="mEmail" placeholder="maria@example.com"></div>
+      <div class="modal-field"><label>Phone (optional)</label><input type="tel" id="mPhone" placeholder="(212) 555-0000"></div>
+      <div class="modal-field">
+        <label>Subject</label>
+        <select id="mSubject">
+          <option value="">Select a topic...</option>
+          <option value="general">General Inquiry</option>
+          <option value="baptism">Sacraments — Baptism</option>
+          <option value="wedding">Sacraments — Wedding</option>
+          <option value="funeral">Sacraments — Funeral Mass</option>
+          <option value="confirmation">Sacraments — Confirmation</option>
+          <option value="firstcommunion">Sacraments — First Communion</option>
+          <option value="formation">Faith Formation / RCIA</option>
+          <option value="rcia">Becoming Catholic (RCIA)</option>
+          <option value="volunteer">Volunteering</option>
+          <option value="facility">Facility Rental</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+      <div class="modal-field"><label>Message</label><textarea id="mMessage" placeholder="How can we help you?"></textarea></div>
+      <button class="modal-submit" id="modalSubmit" type="button">Send Message</button>
+      <p class="modal-note">St. Mary&#39;s Parish · 123 Rivington Street, New York, NY 10002</p>
+    </div>
+  </div>
+</div>
+
+
+<script>
+(function(){
+  var overlay = document.getElementById('contactModal');
+  var closeBtn = document.getElementById('modalClose');
+  var submitBtn = document.getElementById('modalSubmit');
+  var subjectSel = document.getElementById('mSubject');
+
+  function openModal(from){
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    if(from && subjectSel){
+      var opt = Array.from(subjectSel.options).find(function(o){ return o.value === from; });
+      if(opt) subjectSel.value = from;
+    }
+  }
+
+  function closeModal(){
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  // Close on overlay click
+  overlay.addEventListener('click', function(e){ if(e.target === overlay) closeModal(); });
+  closeBtn.addEventListener('click', closeModal);
+
+  // Close on Escape
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeModal(); });
+
+  // Wire up all contact trigger links
+  document.addEventListener('click', function(e){
+    var el = e.target.closest('[data-contact-old]');
+    if(el){
+      e.preventDefault();
+      openModal(el.getAttribute('data-from') || '');
+    }
+  });
+
+  // Submit — show success state
+  if(submitBtn){
+    submitBtn.addEventListener('click', function(){
+      var email = document.getElementById('mEmail').value.trim();
+      if(!email){ document.getElementById('mEmail').focus(); return; }
+      document.getElementById('modalBody').innerHTML = '<div class="modal-success"><div class="modal-success-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><h3>Message sent!</h3><p>Thank you for reaching out. Someone from St. Mary\'s will be in touch within one business day.</p></div>';
+    });
+  }
+
+  // Also handle old ?from= URL params on index page
+  var params = new URLSearchParams(window.location.search);
+  var fromParam = params.get('from');
+  if(fromParam) openModal(fromParam);
+})();
+</script>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+
+      <!-- Col 1: Parish Info -->
+      <div>
+        <div class="footer-brand">St. Mary's Parish</div>
+        <p class="footer-tagline">A vibrant Catholic community in the heart of New York's Lower East Side, serving our neighbours since 1887.</p>
+        <div class="footer-detail">
+          <svg width="14" height="14" viewBox="0 0 20 20" fill="none"><path d="M10 2C7.2 2 5 4.2 5 7c0 4 5 11 5 11s5-7 5-11c0-2.8-2.2-5-5-5z" stroke="currentColor" stroke-width="1.5"/></svg>
+          123 Rivington Street, New York, NY 10002
+        </div>
+        <div class="footer-detail">
+          <svg width="14" height="14" viewBox="0 0 20 20" fill="none"><path d="M3 4h4l2 4-2 2c1 2 3 4 5 5l2-2 4 2v4c0 1-1 2-2 2C7 19 1 13 1 6c0-1 1-2 2-2z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+          <a href="tel:+12125550123">(212) 555-0123</a>
+        </div>
+        <div class="footer-detail">
+          <svg width="14" height="14" viewBox="0 0 20 20" fill="none"><rect x="2" y="4" width="16" height="13" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M2 7l8 5 8-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          <a href="mailto:info@stmarysnyc.org">info@stmarysnyc.org</a>
+        </div>
+        <div class="footer-detail">
+          <svg width="14" height="14" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M10 7v4l2.5 2.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          Office: Mon–Fri 9 AM–5 PM · Sat 10 AM–2 PM
+        </div>
+        <div class="footer-detail">
+          <svg width="14" height="14" viewBox="0 0 20 20" fill="none"><path d="M10 2C7.2 2 5 4.2 5 7c0 4 5 11 5 11s5-7 5-11c0-2.8-2.2-5-5-5z" stroke="currentColor" stroke-width="1.5"/></svg>
+          <a href="https://maps.google.com/?q=123+Rivington+Street+New+York+NY+10002" target="_blank">Get directions →</a>
+        </div>
+      </div>
+
+      <!-- Col 2: Mass Times -->
+      <div>
+        <div class="footer-col-title">Mass Times</div>
+        <div class="footer-mass-item"><strong>Weekdays</strong>Mon–Fri 9:00 AM · Tue &amp; Thu 6:45 PM</div>
+        <div class="footer-mass-item"><strong>Saturday</strong>10:00 AM · Vigil 5:00 PM</div>
+        <div class="footer-mass-item"><strong>Sunday</strong>7:00 · 9:00 · 11:00 AM<br>1:00 PM (Español) · 6:00 PM</div>
+        <div class="footer-mass-item" style="margin-top:.75rem;font-size:.78rem;color:rgba(255,253,245,0.4);">Confession: Saturday 3:30–4:30 PM</div>
+        <a href="index.html#mass-times" style="display:inline-block;margin-top:.875rem;font-size:.8rem;font-weight:600;color:var(--terra);text-decoration:none;">Full schedule →</a>
+      </div>
+
+      <!-- Col 3: Navigate -->
+      <div>
+        <div class="footer-col-title">Navigate</div>
+        <nav class="footer-nav">
+          <a href="about.html">About Us</a>
+          <a href="staff.html">Our Team</a>
+          <a href="events.html">Events</a>
+          <a href="bulletin.html">Parish Bulletin</a>
+          <a href="sacraments.html">Sacraments</a>
+          <a href="rcia.html">Becoming Catholic</a>
+          <a href="involved.html">Get Involved</a>
+          <a href="index.html#giving">Give Online</a>
+          <a href="contact.html">Contact Us</a>
+        </nav>
+      </div>
+
+      <!-- Col 4: Connect -->
+      <div>
+        <div class="footer-col-title">Stay Connected</div>
+        <div class="footer-social">
+          <a href="https://facebook.com" target="_blank" aria-label="Facebook">f</a>
+          <a href="https://instagram.com" target="_blank" aria-label="Instagram">in</a>
+          <a href="https://youtube.com" target="_blank" aria-label="YouTube">yt</a>
+          <a href="https://spotify.com" target="_blank" aria-label="Spotify">sp</a>
+        </div>
+        <div class="footer-newsletter-label">Get our weekly bulletin by email</div>
+        <div class="footer-newsletter-form">
+          <input type="email" placeholder="Your email">
+          <button type="button">Subscribe</button>
+        </div>
+      </div>
+
+    </div>
+    <div class="footer-bottom">
+      <div>&copy; 2024 St. Mary's Parish, New York</div>
+      <div class="footer-bottom-links">
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html">Terms of Use</a>
+        <a href="sitemap.html">Sitemap</a>
+        <span>Powered by <span class="communio-credit">Communio</span></span>
+      </div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
