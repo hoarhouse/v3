@@ -944,6 +944,83 @@ footer {
 }
 
 /* ── ANIMATIONS ── */
+/* ── MOBILE RESPONSIVE ── */
+@media (max-width: 768px) {
+
+  /* Hide custom cursor on touch */
+  .cursor, .cursor-ring { display: none; }
+  body { cursor: auto; }
+
+  /* Nav */
+  nav {
+    padding: 20px 24px;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .nav-links { display: none; }
+  .nav-cta { font-size: 10px; padding: 8px 16px; }
+
+  /* Hero */
+  .hero {
+    padding: 0 24px 60px;
+    min-height: 100svh;
+  }
+  .hero-data { display: none; }
+  .hero-headline { letter-spacing: -1.5px; }
+  .hero-sub { font-size: 16px; }
+  .hero-actions { flex-direction: column; align-items: flex-start; gap: 16px; }
+  .scroll-indicator { display: none; }
+
+  /* Stats */
+  .stats {
+    grid-template-columns: 1fr 1fr;
+    padding: 0;
+  }
+  .stat { padding: 32px 24px; }
+  .stat-num { font-size: 40px; }
+
+  /* Sections */
+  section { padding: 72px 24px; }
+
+  /* About */
+  .about { grid-template-columns: 1fr; gap: 48px; }
+
+  /* Build grid */
+  .build-grid { grid-template-columns: 1fr; }
+  .build-card { padding: 36px 28px; }
+
+  /* Sectors */
+  .sectors-grid { grid-template-columns: 1fr 1fr; }
+  .sector:last-child { grid-column: span 2; }
+
+  /* Mission */
+  .mission { padding: 80px 24px; }
+
+  /* Contact */
+  .contact-inner { grid-template-columns: 1fr; gap: 48px; }
+
+  /* Footer */
+  footer {
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+    padding: 40px 24px;
+  }
+  .footer-right { text-align: center; }
+
+  /* Ticker */
+  .ticker-item { padding: 0 24px; gap: 24px; }
+}
+
+@media (max-width: 480px) {
+  .stats { grid-template-columns: 1fr; }
+  .sectors-grid { grid-template-columns: 1fr 1fr; }
+  nav { padding: 16px 20px; }
+  section { padding: 60px 20px; }
+  .hero { padding: 0 20px 60px; }
+  .about-visual { padding: 28px 24px; }
+}
+
 @keyframes fadeInUp {
   from { opacity: 0; transform: translateY(24px); }
   to   { opacity: 1; transform: translateY(0); }
