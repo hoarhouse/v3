@@ -1,0 +1,1124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rise Build Journal — The Story of Building Rise</title>
+<style>
+  :root {
+    --black: #0D0D0D;
+    --dark: #141414;
+    --mid: #1E1E1E;
+    --card: #242424;
+    --border: #2E2E2E;
+    --subtle: #3A3A3A;
+    --light: #666;
+    --lighter: #999;
+    --text: #C8C8C8;
+    --white: #F0F0F0;
+    --accent: #D4FF00;
+    --accent2: #00D4FF;
+    --red: #FF4444;
+    --green: #44FF88;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--black);
+    color: var(--text);
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  /* ── TOP BAR ── */
+  .topbar {
+    background: var(--accent);
+    height: 4px;
+    width: 100%;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: var(--dark);
+    border-bottom: 1px solid var(--border);
+    padding: 80px 60px 60px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -200px; right: -200px;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(212,255,0,0.04) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-eyebrow {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 20px;
+  }
+
+  .hero-title {
+    font-size: 64px;
+    font-weight: 800;
+    color: var(--white);
+    line-height: 1.05;
+    margin-bottom: 12px;
+    letter-spacing: -2px;
+  }
+
+  .hero-title span { color: var(--accent); }
+
+  .hero-subtitle {
+    font-size: 20px;
+    color: var(--lighter);
+    font-weight: 300;
+    margin-bottom: 40px;
+    max-width: 600px;
+    line-height: 1.5;
+  }
+
+  .hero-meta {
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+
+  .hero-meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .hero-meta-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--light);
+  }
+
+  .hero-meta-value {
+    font-size: 14px;
+    color: var(--white);
+    font-weight: 500;
+  }
+
+  /* ── LAYOUT ── */
+  .layout {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    min-height: calc(100vh - 400px);
+  }
+
+  /* ── SIDEBAR ── */
+  .sidebar {
+    background: var(--dark);
+    border-right: 1px solid var(--border);
+    padding: 40px 24px;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+  }
+
+  .sidebar-section {
+    margin-bottom: 36px;
+  }
+
+  .sidebar-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--light);
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .sidebar-entry {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 10px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.2s;
+    text-decoration: none;
+    margin-bottom: 4px;
+  }
+
+  .sidebar-entry:hover { background: var(--mid); }
+  .sidebar-entry.active { background: var(--subtle); }
+
+  .sidebar-entry-num {
+    font-size: 10px;
+    color: var(--accent);
+    font-weight: 700;
+    letter-spacing: 1px;
+  }
+
+  .sidebar-entry-title {
+    font-size: 13px;
+    color: var(--white);
+    font-weight: 500;
+  }
+
+  .sidebar-entry-date {
+    font-size: 11px;
+    color: var(--lighter);
+  }
+
+  .status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 20px;
+    margin-top: 4px;
+  }
+
+  .status-badge.active {
+    background: rgba(212,255,0,0.12);
+    color: var(--accent);
+    border: 1px solid rgba(212,255,0,0.25);
+  }
+
+  .status-badge.upcoming {
+    background: rgba(255,255,255,0.05);
+    color: var(--lighter);
+    border: 1px solid var(--border);
+  }
+
+  .status-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: currentColor;
+  }
+
+  /* ── MAIN CONTENT ── */
+  .main {
+    padding: 60px;
+    max-width: 900px;
+  }
+
+  /* ── ENTRY ── */
+  .entry {
+    margin-bottom: 80px;
+    scroll-margin-top: 40px;
+  }
+
+  .entry-header {
+    margin-bottom: 32px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .entry-chapter {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 10px;
+  }
+
+  .entry-title {
+    font-size: 36px;
+    font-weight: 800;
+    color: var(--white);
+    line-height: 1.15;
+    letter-spacing: -1px;
+    margin-bottom: 12px;
+  }
+
+  .entry-meta {
+    display: flex;
+    gap: 24px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .entry-date {
+    font-size: 13px;
+    color: var(--lighter);
+  }
+
+  .entry-phase {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 20px;
+    background: rgba(212,255,0,0.1);
+    color: var(--accent);
+    border: 1px solid rgba(212,255,0,0.2);
+  }
+
+  /* ── CONTENT BLOCKS ── */
+  .entry p {
+    color: var(--text);
+    margin-bottom: 20px;
+    line-height: 1.8;
+    font-size: 15px;
+  }
+
+  .entry h3 {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--white);
+    margin: 36px 0 14px;
+    letter-spacing: -0.3px;
+  }
+
+  .entry h4 {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 28px 0 10px;
+  }
+
+  /* ── CALLOUT ── */
+  .callout {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: 8px;
+    padding: 20px 24px;
+    margin: 28px 0;
+  }
+
+  .callout-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+
+  .callout p {
+    margin: 0;
+    color: var(--white);
+    font-size: 15px;
+    font-style: italic;
+  }
+
+  /* ── INSIGHT BOX ── */
+  .insight {
+    background: rgba(212,255,0,0.05);
+    border: 1px solid rgba(212,255,0,0.15);
+    border-radius: 10px;
+    padding: 24px 28px;
+    margin: 28px 0;
+  }
+
+  .insight-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .insight-label::before {
+    content: '→';
+    font-size: 14px;
+  }
+
+  .insight p { margin: 0; color: var(--white); }
+
+  /* ── PROBLEM BOX ── */
+  .problem {
+    background: rgba(255,68,68,0.05);
+    border: 1px solid rgba(255,68,68,0.2);
+    border-radius: 10px;
+    padding: 24px 28px;
+    margin: 28px 0;
+  }
+
+  .problem-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 10px;
+  }
+
+  .problem p { margin: 0; color: var(--text); }
+
+  /* ── EVIDENCE GRID ── */
+  .evidence-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 28px 0;
+  }
+
+  .evidence-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px;
+  }
+
+  .evidence-card-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--lighter);
+    margin-bottom: 8px;
+  }
+
+  .evidence-card-value {
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--white);
+    margin-bottom: 4px;
+    letter-spacing: -0.5px;
+  }
+
+  .evidence-card-value.red { color: var(--red); }
+  .evidence-card-value.green { color: var(--green); }
+  .evidence-card-value.accent { color: var(--accent); }
+
+  .evidence-card-desc {
+    font-size: 12px;
+    color: var(--lighter);
+    line-height: 1.5;
+  }
+
+  /* ── SCREENSHOT PLACEHOLDER ── */
+  .screenshot-zone {
+    background: var(--card);
+    border: 2px dashed var(--subtle);
+    border-radius: 12px;
+    padding: 48px 32px;
+    text-align: center;
+    margin: 28px 0;
+  }
+
+  .screenshot-zone.has-image {
+    border-style: solid;
+    border-color: var(--border);
+    padding: 0;
+    overflow: hidden;
+  }
+
+  .screenshot-zone.has-image img {
+    width: 100%;
+    display: block;
+    border-radius: 10px;
+  }
+
+  .screenshot-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--light);
+    margin-bottom: 8px;
+  }
+
+  .screenshot-desc {
+    font-size: 13px;
+    color: var(--lighter);
+    margin-bottom: 16px;
+  }
+
+  .screenshot-placeholder-icon {
+    font-size: 40px;
+    margin-bottom: 12px;
+    opacity: 0.4;
+  }
+
+  .screenshot-tag {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin-top: 8px;
+  }
+
+  .screenshot-tag.before {
+    background: rgba(255,68,68,0.12);
+    color: var(--red);
+    border: 1px solid rgba(255,68,68,0.25);
+  }
+
+  .screenshot-tag.after {
+    background: rgba(68,255,136,0.12);
+    color: var(--green);
+    border: 1px solid rgba(68,255,136,0.25);
+  }
+
+  .screenshot-tag.placeholder {
+    background: rgba(255,255,255,0.05);
+    color: var(--lighter);
+    border: 1px solid var(--border);
+  }
+
+  /* ── SIDE BY SIDE ── */
+  .side-by-side {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 28px 0;
+  }
+
+  .sbs-panel {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .sbs-header {
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .sbs-title {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--white);
+  }
+
+  .sbs-content {
+    padding: 20px;
+    min-height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .sbs-placeholder {
+    font-size: 13px;
+    color: var(--lighter);
+  }
+
+  /* ── DECISION TABLE ── */
+  .decision-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 28px 0;
+    font-size: 13px;
+  }
+
+  .decision-table th {
+    background: var(--mid);
+    color: var(--accent);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .decision-table td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text);
+    vertical-align: top;
+  }
+
+  .decision-table tr:nth-child(even) td {
+    background: var(--card);
+  }
+
+  .decision-table td:first-child {
+    color: var(--white);
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  /* ── TIMELINE ── */
+  .timeline {
+    margin: 28px 0;
+    position: relative;
+    padding-left: 32px;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 8px;
+    top: 8px;
+    bottom: 8px;
+    width: 1px;
+    background: var(--border);
+  }
+
+  .timeline-item {
+    position: relative;
+    margin-bottom: 28px;
+  }
+
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -28px;
+    top: 6px;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+    border: 2px solid var(--black);
+    box-shadow: 0 0 0 2px var(--accent);
+  }
+
+  .timeline-item-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 4px;
+  }
+
+  .timeline-item-desc {
+    font-size: 13px;
+    color: var(--lighter);
+    line-height: 1.6;
+  }
+
+  /* ── QUOTE ── */
+  .pull-quote {
+    border-left: 3px solid var(--accent);
+    padding: 16px 24px;
+    margin: 32px 0;
+  }
+
+  .pull-quote-text {
+    font-size: 20px;
+    font-weight: 300;
+    color: var(--white);
+    line-height: 1.5;
+    font-style: italic;
+    margin-bottom: 8px;
+  }
+
+  .pull-quote-attr {
+    font-size: 12px;
+    color: var(--lighter);
+    font-style: normal;
+  }
+
+  /* ── UPCOMING ENTRIES ── */
+  .upcoming-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin: 28px 0;
+  }
+
+  .upcoming-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px;
+    opacity: 0.6;
+  }
+
+  .upcoming-card-num {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 6px;
+  }
+
+  .upcoming-card-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 6px;
+  }
+
+  .upcoming-card-desc {
+    font-size: 12px;
+    color: var(--lighter);
+    line-height: 1.5;
+  }
+
+  /* ── DIVIDER ── */
+  .divider {
+    height: 1px;
+    background: var(--border);
+    margin: 60px 0;
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    background: var(--dark);
+    border-top: 1px solid var(--border);
+    padding: 32px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    color: var(--light);
+  }
+
+  .footer-brand {
+    font-weight: 700;
+    color: var(--accent);
+    font-size: 14px;
+  }
+
+  /* ── AUDIT FINDINGS ── */
+  .findings-list {
+    list-style: none;
+    margin: 20px 0;
+  }
+
+  .findings-list li {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 14px;
+    color: var(--text);
+  }
+
+  .findings-list li:last-child { border-bottom: none; }
+
+  .finding-icon {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .finding-icon.bad { background: rgba(255,68,68,0.15); color: var(--red); }
+  .finding-icon.good { background: rgba(68,255,136,0.15); color: var(--green); }
+  .finding-icon.neutral { background: rgba(255,255,255,0.08); color: var(--lighter); }
+
+  /* ── SCOPE SUMMARY ── */
+  .scope-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin: 20px 0;
+  }
+
+  .scope-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+  }
+
+  .scope-card-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 6px;
+  }
+
+  .scope-card-value {
+    font-size: 13px;
+    color: var(--white);
+    line-height: 1.5;
+  }
+
+  @media print {
+    .sidebar { display: none; }
+    .layout { grid-template-columns: 1fr; }
+    body { background: white; color: black; }
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar"></div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">Konvergence × eGroup · A Product Is Born</div>
+  <div class="hero-title">The <span>Rise</span><br>Build Journal</div>
+  <div class="hero-subtitle">A real-time record of building an autonomous content intelligence platform from zero — every decision, every challenge, every breakthrough.</div>
+  <div class="hero-meta">
+    <div class="hero-meta-item">
+      <span class="hero-meta-label">Started</span>
+      <span class="hero-meta-value">April 2026</span>
+    </div>
+    <div class="hero-meta-item">
+      <span class="hero-meta-label">Pilot Client</span>
+      <span class="hero-meta-value">eGroup — Budapest, Hungary</span>
+    </div>
+    <div class="hero-meta-item">
+      <span class="hero-meta-label">Built By</span>
+      <span class="hero-meta-value">Konvergence</span>
+    </div>
+    <div class="hero-meta-item">
+      <span class="hero-meta-label">Product Name</span>
+      <span class="hero-meta-value">Rise (Working Title)</span>
+    </div>
+    <div class="hero-meta-item">
+      <span class="hero-meta-label">Journal Status</span>
+      <span class="hero-meta-value">🟢 Live &amp; Active</span>
+    </div>
+  </div>
+</div>
+
+<!-- LAYOUT -->
+<div class="layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-section">
+      <div class="sidebar-label">Journal Entries</div>
+
+      <a href="#entry-01" class="sidebar-entry active">
+        <span class="sidebar-entry-num">ENTRY 01</span>
+        <span class="sidebar-entry-title">The Starting Point</span>
+        <span class="sidebar-entry-date">April 2026</span>
+        <span class="status-badge active"><span class="status-dot"></span>Published</span>
+      </a>
+
+      <a href="#entry-02" class="sidebar-entry">
+        <span class="sidebar-entry-num">ENTRY 02</span>
+        <span class="sidebar-entry-title">Defining the Product</span>
+        <span class="sidebar-entry-date">Coming Soon</span>
+        <span class="status-badge upcoming"><span class="status-dot"></span>Upcoming</span>
+      </a>
+
+      <a href="#entry-03" class="sidebar-entry">
+        <span class="sidebar-entry-num">ENTRY 03</span>
+        <span class="sidebar-entry-title">The New Website Begins</span>
+        <span class="sidebar-entry-date">Coming Soon</span>
+        <span class="status-badge upcoming"><span class="status-dot"></span>Upcoming</span>
+      </a>
+
+      <a href="#entry-04" class="sidebar-entry">
+        <span class="sidebar-entry-num">ENTRY 04</span>
+        <span class="sidebar-entry-title">First Submission Goes Live</span>
+        <span class="sidebar-entry-date">Coming Soon</span>
+        <span class="status-badge upcoming"><span class="status-dot"></span>Upcoming</span>
+      </a>
+
+      <a href="#entry-05" class="sidebar-entry">
+        <span class="sidebar-entry-num">ENTRY 05</span>
+        <span class="sidebar-entry-title">The Agent Wakes Up</span>
+        <span class="sidebar-entry-date">Coming Soon</span>
+        <span class="status-badge upcoming"><span class="status-dot"></span>Upcoming</span>
+      </a>
+
+      <a href="#entry-06" class="sidebar-entry">
+        <span class="sidebar-entry-num">ENTRY 06</span>
+        <span class="sidebar-entry-title">30 Days of Autonomous Content</span>
+        <span class="sidebar-entry-date">Coming Soon</span>
+        <span class="status-badge upcoming"><span class="status-dot"></span>Upcoming</span>
+      </a>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-label">Key Metrics</div>
+      <div style="padding: 0 4px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; padding: 8px 0; border-bottom: 1px solid var(--border); font-size:13px;">
+          <span style="color:var(--lighter)">Days in build</span>
+          <span style="color:var(--accent); font-weight:700;">Day 1</span>
+        </div>
+        <div style="display:flex; justify-content:space-between; align-items:center; padding: 8px 0; border-bottom: 1px solid var(--border); font-size:13px;">
+          <span style="color:var(--lighter)">Posts published</span>
+          <span style="color:var(--white); font-weight:700;">0</span>
+        </div>
+        <div style="display:flex; justify-content:space-between; align-items:center; padding: 8px 0; border-bottom: 1px solid var(--border); font-size:13px;">
+          <span style="color:var(--lighter)">eGroup website age</span>
+          <span style="color:var(--red); font-weight:700;">3+ yrs stale</span>
+        </div>
+        <div style="display:flex; justify-content:space-between; align-items:center; padding: 8px 0; font-size:13px;">
+          <span style="color:var(--lighter)">Target users</span>
+          <span style="color:var(--white); font-weight:700;">110 staff</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-label">About This Journal</div>
+      <p style="font-size:12px; color:var(--lighter); line-height:1.6; padding: 0 4px;">
+        This is a real-time record of building Rise — an autonomous content intelligence platform. Every entry documents actual decisions made, challenges faced, and results achieved. Nothing is retrospective. Nothing is polished after the fact.
+      </p>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main">
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- ENTRY 01 -->
+    <!-- ═══════════════════════════════════════════ -->
+    <div class="entry" id="entry-01">
+
+      <div class="entry-header">
+        <div class="entry-chapter">Entry 01 · April 2026</div>
+        <div class="entry-title">The Starting Point:<br>A Company Doing Big Things Nobody Knows About</div>
+        <div class="entry-meta">
+          <span class="entry-date">April 3, 2026</span>
+          <span class="entry-phase">Phase 0 — Discovery</span>
+        </div>
+      </div>
+
+      <p>Every great product starts with a real problem. Not a problem someone invented in a boardroom, but a problem that is sitting right in front of you, obvious and painful, that nobody has properly solved yet.</p>
+
+      <p>This is the story of how Rise started — and why we're documenting every step of building it in public.</p>
+
+      <div class="pull-quote">
+        <div class="pull-quote-text">"Nobody has time to create content. But everybody creates content every day. They just don't call it that."</div>
+        <div class="pull-quote-attr">— The insight that started everything</div>
+      </div>
+
+      <h3>The Brief</h3>
+
+      <p>Konvergence was approached to solve a specific problem for eGroup — a Budapest-based technology company founded in 1993 that works at the cutting edge of FinTech, HealthTech, GovTech, SpaceTech and EnergyTech. 110 staff. Serious clients. Serious work. An MoU signed in September 2025 to build a Sovereign AI Ecosystem with an Indian technology partner. EU cloud infrastructure projects. Medical AI research winning competition after competition.</p>
+
+      <p>And a website that still had a 2022 conference registration as its most prominent piece of content.</p>
+
+      <div class="problem">
+        <div class="problem-label">⚠ The Problem Statement</div>
+        <p>eGroup asked staff to create content. Staff didn't create content. The website stayed stale. The LinkedIn page had modest activity. The gap between what eGroup actually does and what the world could see kept growing — quietly, invisibly, expensively.</p>
+      </div>
+
+      <p>The ask wasn't just "fix our content strategy." The ask was: build something that makes this problem structurally impossible. Not a policy. Not a process. A product.</p>
+
+      <h3>The Audit — What We Found</h3>
+
+      <p>Before building anything, we looked at exactly where eGroup stood on Day 1. Here's what the audit revealed:</p>
+
+      <h4>The Website</h4>
+
+      <!-- SCREENSHOT PLACEHOLDER: eGroup homepage -->
+      <div class="screenshot-zone">
+        <div class="screenshot-placeholder-icon">🖥</div>
+        <div class="screenshot-label">eGroup Website — Day 1 Screenshot</div>
+        <div class="screenshot-desc">www.egroup.hu — captured April 2026</div>
+        <div><span class="screenshot-tag before">BEFORE</span></div>
+        <div style="margin-top:16px; font-size:12px; color:var(--subtle);">[ Screenshot to be inserted — egroup.hu homepage ]</div>
+      </div>
+
+      <ul class="findings-list">
+        <li>
+          <div class="finding-icon bad">✕</div>
+          <div><strong style="color:var(--white)">Homepage hero still promoting a February 2022 expo.</strong> "Register NOW" for an event that happened over three years ago. The most prominent piece of dynamic content on the site is three years out of date.</div>
+        </li>
+        <li>
+          <div class="finding-icon bad">✕</div>
+          <div><strong style="color:var(--white)">Built on WordPress — standard template.</strong> Nothing custom, nothing distinctive. Any visitor who has seen a corporate WordPress site has essentially already seen this one.</div>
+        </li>
+        <li>
+          <div class="finding-icon bad">✕</div>
+          <div><strong style="color:var(--white)">Generic corporate messaging.</strong> "We shape the future of FinTech, HealthTech, GovTech, EnergyTech and SpaceTech innovation with excellence in TRUST, XCHANGE and DATA." This could describe a hundred companies. It describes none of them compellingly.</div>
+        </li>
+        <li>
+          <div class="finding-icon bad">✕</div>
+          <div><strong style="color:var(--white)">No human presence.</strong> No faces, no voices, no stories. A company of 110 people doing genuinely interesting work — and none of them exist on the website.</div>
+        </li>
+        <li>
+          <div class="finding-icon bad">✕</div>
+          <div><strong style="color:var(--white)">Blog exists but is effectively abandoned.</strong> The News &amp; Blog section has content but nothing that signals an active, publishing organisation.</div>
+        </li>
+        <li>
+          <div class="finding-icon good">✓</div>
+          <div><strong style="color:var(--white)">The underlying company is genuinely impressive.</strong> EU DOME project participation. Medical AI research wins. Sovereign AI ecosystem MoU with Kellton (September 2025). Hungary's national digital identity infrastructure. Post-quantum encryption work. The story is there — it's just not being told.</div>
+        </li>
+        <li>
+          <div class="finding-icon good">✓</div>
+          <div><strong style="color:var(--white)">LinkedIn shows they can communicate.</strong> 1,161 followers, some genuine activity. Proof that the capability to tell the story exists within the organisation — it just isn't being captured systematically.</div>
+        </li>
+      </ul>
+
+      <div class="evidence-grid">
+        <div class="evidence-card">
+          <div class="evidence-card-label">Last meaningful website update</div>
+          <div class="evidence-card-value red">2022</div>
+          <div class="evidence-card-desc">The site has been essentially static for over 3 years while the company kept doing remarkable things</div>
+        </div>
+        <div class="evidence-card">
+          <div class="evidence-card-label">LinkedIn followers</div>
+          <div class="evidence-card-value accent">1,161</div>
+          <div class="evidence-card-desc">Modest but real — proof that when eGroup does communicate, people listen</div>
+        </div>
+        <div class="evidence-card">
+          <div class="evidence-card-label">Staff who could be creating content</div>
+          <div class="evidence-card-value accent">110</div>
+          <div class="evidence-card-desc">Every one of them is doing something worth documenting every single day</div>
+        </div>
+        <div class="evidence-card">
+          <div class="evidence-card-label">Content being created today</div>
+          <div class="evidence-card-value red">~0</div>
+          <div class="evidence-card-desc">Not because people don't have things to say — because the friction is too high</div>
+        </div>
+      </div>
+
+      <h3>The Core Insight</h3>
+
+      <p>The problem isn't that eGroup staff don't create content. They do. Every day. They take photos at conferences. They have conversations about breakthrough research. They attend events, win awards, sign partnerships, present at panels. They just don't call any of it "content" — and nobody is capturing it.</p>
+
+      <div class="insight">
+        <div class="insight-label">The Insight That Became Rise</div>
+        <p>The friction in content creation isn't writing — it's the gap between <em>doing something</em> and <em>telling people you did it</em>. If you close that gap to 1-2 taps on a phone, content creation becomes effortless. And if AI does everything after that, the problem is solved structurally — not behaviourally.</p>
+      </div>
+
+      <p>This is the insight that became Rise. Not "how do we make it easier to write blog posts" but "how do we make it so nobody ever has to write a blog post again, while still getting better content than they'd ever produce manually."</p>
+
+      <h3>The Decision: Build a Product, Not a Fix</h3>
+
+      <p>At this point, the conventional approach would be to hire a content manager, build an editorial calendar, run a training session, and hope for the best. We didn't take that approach.</p>
+
+      <p>Instead, Konvergence proposed building a product. An autonomous content intelligence platform that would:</p>
+
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-item-title">Accept any form of raw input</div>
+          <div class="timeline-item-desc">Photos, video clips, a single sentence, a link — whatever someone is already doing, they can submit with 1-2 taps</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-item-title">Generate platform-specific content automatically</div>
+          <div class="timeline-item-desc">Blog posts, LinkedIn articles, X/Twitter threads, Instagram captions, YouTube descriptions — Rise builds all of it</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-item-title">Publish across all platforms</div>
+          <div class="timeline-item-desc">Website, LinkedIn, X, Instagram, YouTube — with human review initially, transitioning to autonomous publishing over time</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-item-title">Learn and improve continuously</div>
+          <div class="timeline-item-desc">Every approval, rejection, and edit trains the AI agent to better match the organisation's voice, standards and preferences</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-item-title">Eventually run itself</div>
+          <div class="timeline-item-desc">The Rise Agent manages the entire pipeline — monitoring, publishing, evolving the website, responding to trends — with human oversight only when desired</div>
+        </div>
+      </div>
+
+      <p>And critically: eGroup's current website would be completely replaced. Not patched. Not updated. Replaced — with a new site built headless and API-first, designed from day one to be owned and operated by Rise. Rise doesn't post to the website. Rise IS the website's brain.</p>
+
+      <h3>The Strategic Context</h3>
+
+      <p>Here's the part that makes this more than just a client project: Rise is being built for eGroup, but it is being architected as a product from day one. Every decision — multi-tenancy readiness, plugin-based platform expansion, configurable brand engines, sovereign deployment — is being made with one eye on what Rise needs to be to sell to other enterprises.</p>
+
+      <p>eGroup is not just a client. eGroup is the pilot. The live case study. The before-and-after that will be the centrepiece of Rise's go-to-market story. Which is exactly why we're documenting this journey in a journal that anyone — including potential future customers — can read.</p>
+
+      <div class="callout">
+        <div class="callout-label">Why We're Documenting This</div>
+        <p>The most powerful sales tool for an enterprise product isn't a features list or a pricing page. It's proof. Real results, in a real organisation, documented in real time. This journal is that proof — being built entry by entry as Rise is built build by build.</p>
+      </div>
+
+      <h3>What Happens Next</h3>
+
+      <p>With the problem defined and the product scope agreed, the build begins. The next entry in this journal will document the full product definition — the complete architecture of Rise, every feature, every decision, and the reasoning behind each one.</p>
+
+      <p>After that, the new eGroup website starts to take shape. And after that, the first submission goes live — and we'll document exactly what Rise does with it.</p>
+
+      <h4>Scope at a Glance — Day 1</h4>
+
+      <div class="scope-grid">
+        <div class="scope-card">
+          <div class="scope-card-label">Pilot Organisation</div>
+          <div class="scope-card-value">eGroup ICT Software Zrt, Budapest — CEO: Antal Kuthy</div>
+        </div>
+        <div class="scope-card">
+          <div class="scope-card-label">Built By</div>
+          <div class="scope-card-value">Konvergence — Chris (Project Lead)</div>
+        </div>
+        <div class="scope-card">
+          <div class="scope-card-label">Target Users</div>
+          <div class="scope-card-value">Up to 110 staff submitters + Admin/Super Admin roles</div>
+        </div>
+        <div class="scope-card">
+          <div class="scope-card-label">Target Platforms</div>
+          <div class="scope-card-value">Website, LinkedIn, X/Twitter, Instagram, YouTube (Facebook + TikTok later)</div>
+        </div>
+        <div class="scope-card">
+          <div class="scope-card-label">Authentication</div>
+          <div class="scope-card-value">Microsoft Teams / Azure AD SSO</div>
+        </div>
+        <div class="scope-card">
+          <div class="scope-card-label">AI Infrastructure</div>
+          <div class="scope-card-value">Open source LLM — self-hosted on eGroup sovereign infrastructure</div>
+        </div>
+        <div class="scope-card">
+          <div class="scope-card-label">Website Approach</div>
+          <div class="scope-card-value">Full replacement — headless, API-first, built for Rise control from day one</div>
+        </div>
+        <div class="scope-card">
+          <div class="scope-card-label">Long-Term Vision</div>
+          <div class="scope-card-value">Rise as a standalone enterprise SaaS product</div>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <h4>Coming Up</h4>
+
+      <div class="upcoming-grid">
+        <div class="upcoming-card">
+          <div class="upcoming-card-num">Entry 02</div>
+          <div class="upcoming-card-title">Defining the Product</div>
+          <div class="upcoming-card-desc">The complete Rise architecture — all three layers, every feature, every decision and the reasoning behind it</div>
+        </div>
+        <div class="upcoming-card">
+          <div class="upcoming-card-num">Entry 03</div>
+          <div class="upcoming-card-title">The New Website Begins</div>
+          <div class="upcoming-card-desc">First look at the new eGroup website — design direction, structure, and the brand voice we're building from scratch</div>
+        </div>
+        <div class="upcoming-card">
+          <div class="upcoming-card-num">Entry 04</div>
+          <div class="upcoming-card-title">First Submission Goes Live</div>
+          <div class="upcoming-card-desc">The moment everything changes — a staff member submits for the first time, and Rise produces its first piece of real content</div>
+        </div>
+      </div>
+
+    </div>
+    <!-- END ENTRY 01 -->
+
+  </main>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div>
+    <div class="footer-brand">RISE Build Journal</div>
+    <div style="margin-top:4px;">A Konvergence × eGroup Production · Confidential · April 2026</div>
+  </div>
+  <div style="text-align:right;">
+    <div>Entry 01 of an ongoing series</div>
+    <div style="margin-top:4px; color:var(--accent);">The journey is just beginning.</div>
+  </div>
+</div>
+
+</body>
+</html>
