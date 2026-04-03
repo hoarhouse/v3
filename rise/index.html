@@ -1,0 +1,1311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>E-Group — Intelligence Infrastructure</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --black:   #080808;
+  --ink:     #0F0F0F;
+  --dark:    #161616;
+  --panel:   #1C1C1C;
+  --border:  #252525;
+  --muted:   #333;
+  --dim:     #555;
+  --mid:     #777;
+  --text:    #B0B0B0;
+  --light:   #D0D0D0;
+  --white:   #EFEFEF;
+  --pure:    #FFFFFF;
+  --gold:    #C8A96E;
+  --gold2:   #E8C98E;
+  --teal:    #4ECDC4;
+  --red:     #E85D4A;
+}
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--black);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* ── CUSTOM CURSOR ── */
+.cursor {
+  position: fixed;
+  width: 8px; height: 8px;
+  background: var(--gold);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: transform 0.1s, background 0.2s;
+  mix-blend-mode: difference;
+}
+
+.cursor-ring {
+  position: fixed;
+  width: 32px; height: 32px;
+  border: 1px solid rgba(200,169,110,0.4);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  transition: all 0.15s ease;
+}
+
+body:has(a:hover) .cursor-ring,
+body:has(button:hover) .cursor-ring {
+  width: 48px; height: 48px;
+  border-color: var(--gold);
+}
+
+/* ── GRAIN OVERLAY ── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+  opacity: 0.025;
+  pointer-events: none;
+  z-index: 1000;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 28px 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(to bottom, rgba(8,8,8,0.95), transparent);
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-decoration: none;
+}
+
+.nav-logo-mark {
+  width: 36px; height: 36px;
+  position: relative;
+}
+
+.logo-e {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 26px;
+  color: var(--gold);
+  line-height: 1;
+  letter-spacing: -1px;
+}
+
+.nav-logo-text {
+  font-family: 'Syne', sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--white);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: 'DM Mono', monospace;
+  font-size: 12px;
+  color: var(--mid);
+  text-decoration: none;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  transition: color 0.2s;
+  position: relative;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -3px; left: 0; right: 0;
+  height: 1px;
+  background: var(--gold);
+  transform: scaleX(0);
+  transition: transform 0.2s;
+}
+
+.nav-links a:hover { color: var(--white); }
+.nav-links a:hover::after { transform: scaleX(1); }
+
+.nav-cta {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gold);
+  border: 1px solid rgba(200,169,110,0.35);
+  padding: 10px 22px;
+  text-decoration: none;
+  transition: all 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+
+.nav-cta::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--gold);
+  transform: translateX(-100%);
+  transition: transform 0.25s ease;
+  z-index: -1;
+}
+
+.nav-cta:hover {
+  color: var(--black);
+}
+
+.nav-cta:hover::before { transform: translateX(0); }
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 0 60px 80px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Grid background */
+.hero-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(200,169,110,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(200,169,110,0.04) 1px, transparent 1px);
+  background-size: 80px 80px;
+  mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
+}
+
+/* Radial glow */
+.hero-glow {
+  position: absolute;
+  top: -20%; left: 50%;
+  transform: translateX(-50%);
+  width: 900px; height: 600px;
+  background: radial-gradient(ellipse, rgba(200,169,110,0.06) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+.hero-glow-2 {
+  position: absolute;
+  bottom: 0; right: -10%;
+  width: 600px; height: 600px;
+  background: radial-gradient(ellipse, rgba(78,205,196,0.04) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+/* Floating data lines */
+.hero-data {
+  position: absolute;
+  top: 140px; right: 60px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  opacity: 0;
+  animation: fadeInRight 1.2s ease 1.4s forwards;
+}
+
+.data-line {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: var(--muted);
+  letter-spacing: 1px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.data-line::before {
+  content: '';
+  display: inline-block;
+  width: 20px;
+  height: 1px;
+  background: var(--gold);
+  opacity: 0.4;
+}
+
+.data-line .val {
+  color: var(--gold);
+  opacity: 0.7;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 900px;
+}
+
+.hero-eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 28px;
+  opacity: 0;
+  animation: fadeInUp 0.8s ease 0.3s forwards;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.hero-eyebrow::before {
+  content: '';
+  display: inline-block;
+  width: 32px;
+  height: 1px;
+  background: var(--gold);
+}
+
+.hero-headline {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: clamp(52px, 7vw, 96px);
+  line-height: 0.95;
+  letter-spacing: -3px;
+  color: var(--white);
+  margin-bottom: 32px;
+  opacity: 0;
+  animation: fadeInUp 0.8s ease 0.5s forwards;
+}
+
+.hero-headline em {
+  font-style: normal;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(200,169,110,0.5);
+}
+
+.hero-headline .gold { color: var(--gold); -webkit-text-stroke: 0; }
+
+.hero-sub {
+  font-size: 18px;
+  font-weight: 300;
+  color: var(--mid);
+  max-width: 560px;
+  line-height: 1.7;
+  margin-bottom: 48px;
+  opacity: 0;
+  animation: fadeInUp 0.8s ease 0.7s forwards;
+}
+
+.hero-sub strong { color: var(--light); font-weight: 400; }
+
+.hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  opacity: 0;
+  animation: fadeInUp 0.8s ease 0.9s forwards;
+}
+
+.btn-primary {
+  font-family: 'DM Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--black);
+  background: var(--gold);
+  padding: 16px 36px;
+  text-decoration: none;
+  transition: all 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary::after {
+  content: '→';
+  margin-left: 10px;
+  transition: transform 0.2s;
+  display: inline-block;
+}
+
+.btn-primary:hover {
+  background: var(--gold2);
+}
+
+.btn-primary:hover::after { transform: translateX(4px); }
+
+.btn-secondary {
+  font-family: 'DM Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--mid);
+  text-decoration: none;
+  transition: color 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-secondary:hover { color: var(--white); }
+
+/* Scroll indicator */
+.scroll-indicator {
+  position: absolute;
+  bottom: 40px;
+  right: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  opacity: 0;
+  animation: fadeIn 1s ease 1.8s forwards;
+}
+
+.scroll-line {
+  width: 1px;
+  height: 60px;
+  background: linear-gradient(to bottom, transparent, var(--gold));
+  animation: scrollPulse 2s ease-in-out infinite;
+}
+
+.scroll-text {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--dim);
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+}
+
+/* ── TICKER ── */
+.ticker-wrap {
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  background: var(--ink);
+  padding: 14px 0;
+  overflow: hidden;
+  position: relative;
+}
+
+.ticker-wrap::before,
+.ticker-wrap::after {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0;
+  width: 80px;
+  z-index: 2;
+}
+
+.ticker-wrap::before {
+  left: 0;
+  background: linear-gradient(to right, var(--ink), transparent);
+}
+
+.ticker-wrap::after {
+  right: 0;
+  background: linear-gradient(to left, var(--ink), transparent);
+}
+
+.ticker {
+  display: flex;
+  gap: 0;
+  animation: ticker 40s linear infinite;
+  white-space: nowrap;
+}
+
+.ticker-item {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--dim);
+  padding: 0 40px;
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  flex-shrink: 0;
+}
+
+.ticker-item span {
+  color: var(--gold);
+  opacity: 0.5;
+}
+
+/* ── STATS ── */
+.stats {
+  padding: 100px 60px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.stat {
+  background: var(--ink);
+  padding: 50px 40px;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.3s;
+}
+
+.stat::before {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--gold);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s ease;
+}
+
+.stat:hover { background: var(--dark); }
+.stat:hover::before { transform: scaleX(1); }
+
+.stat-num {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 56px;
+  color: var(--white);
+  letter-spacing: -2px;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.stat-num .unit {
+  font-size: 28px;
+  color: var(--gold);
+}
+
+.stat-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--dim);
+  line-height: 1.5;
+}
+
+/* ── SECTION TEMPLATE ── */
+section {
+  padding: 120px 60px;
+}
+
+.section-eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.section-eyebrow::before {
+  content: '';
+  display: inline-block;
+  width: 24px;
+  height: 1px;
+  background: var(--gold);
+}
+
+.section-title {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: clamp(36px, 4vw, 56px);
+  color: var(--white);
+  letter-spacing: -1.5px;
+  line-height: 1.05;
+  margin-bottom: 24px;
+}
+
+.section-body {
+  font-size: 17px;
+  font-weight: 300;
+  color: var(--mid);
+  line-height: 1.8;
+  max-width: 580px;
+}
+
+/* ── ABOUT ── */
+.about {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 120px;
+  align-items: center;
+}
+
+.about-left { }
+
+.about-right {
+  position: relative;
+}
+
+.about-visual {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  padding: 48px;
+  position: relative;
+}
+
+.about-visual::before {
+  content: '';
+  position: absolute;
+  top: -1px; left: 40px;
+  right: 40px;
+  height: 2px;
+  background: linear-gradient(to right, transparent, var(--gold), transparent);
+}
+
+.about-quote {
+  font-family: 'Syne', sans-serif;
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--white);
+  line-height: 1.4;
+  margin-bottom: 24px;
+  letter-spacing: -0.5px;
+}
+
+.about-quote em {
+  color: var(--gold);
+  font-style: normal;
+}
+
+.about-attr {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--dim);
+}
+
+.about-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 36px;
+}
+
+.tag {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--dim);
+  border: 1px solid var(--border);
+  padding: 6px 14px;
+  transition: all 0.2s;
+}
+
+.tag:hover {
+  color: var(--gold);
+  border-color: rgba(200,169,110,0.35);
+}
+
+/* ── WHAT WE BUILD ── */
+.build-section {
+  background: var(--ink);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.build-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--border);
+  margin-top: 60px;
+}
+
+.build-card {
+  background: var(--dark);
+  padding: 48px 40px;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.3s;
+}
+
+.build-card::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: radial-gradient(circle at 0% 100%, rgba(200,169,110,0.05), transparent 60%);
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+
+.build-card:hover { background: var(--panel); }
+.build-card:hover::after { opacity: 1; }
+
+.build-num {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: var(--gold);
+  opacity: 0.6;
+  margin-bottom: 24px;
+}
+
+.build-icon {
+  font-size: 28px;
+  margin-bottom: 20px;
+  filter: grayscale(1) brightness(1.5);
+}
+
+.build-title {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 22px;
+  color: var(--white);
+  letter-spacing: -0.5px;
+  margin-bottom: 14px;
+  line-height: 1.2;
+}
+
+.build-desc {
+  font-size: 14px;
+  color: var(--dim);
+  line-height: 1.7;
+}
+
+/* ── SECTORS ── */
+.sectors-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1px;
+  background: var(--border);
+  margin-top: 60px;
+}
+
+.sector {
+  background: var(--ink);
+  padding: 40px 28px;
+  text-align: center;
+  transition: background 0.3s;
+  cursor: default;
+  position: relative;
+  overflow: hidden;
+}
+
+.sector::before {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--gold);
+  transform: scaleX(0);
+  transition: transform 0.3s;
+}
+
+.sector:hover { background: var(--dark); }
+.sector:hover::before { transform: scaleX(1); }
+
+.sector-icon {
+  font-size: 32px;
+  margin-bottom: 16px;
+  display: block;
+  transition: transform 0.3s;
+  filter: grayscale(0.8);
+}
+
+.sector:hover .sector-icon { transform: scale(1.1) translateY(-2px); filter: grayscale(0); }
+
+.sector-name {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--light);
+  letter-spacing: 0.5px;
+}
+
+/* ── MISSION ── */
+.mission {
+  background: var(--black);
+  text-align: center;
+  padding: 140px 60px;
+  position: relative;
+  overflow: hidden;
+}
+
+.mission::before {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 800px; height: 400px;
+  background: radial-gradient(ellipse, rgba(200,169,110,0.05) 0%, transparent 65%);
+}
+
+.mission-text {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: clamp(32px, 4vw, 52px);
+  color: var(--white);
+  letter-spacing: -1.5px;
+  line-height: 1.15;
+  max-width: 820px;
+  margin: 0 auto 24px;
+  position: relative;
+}
+
+.mission-text em {
+  font-style: normal;
+  color: var(--gold);
+}
+
+.mission-sub {
+  font-size: 16px;
+  font-weight: 300;
+  color: var(--dim);
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+/* ── CONTACT ── */
+.contact {
+  background: var(--ink);
+  border-top: 1px solid var(--border);
+}
+
+.contact-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 100px;
+  align-items: start;
+}
+
+.contact-info {
+  padding-top: 8px;
+}
+
+.contact-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.contact-detail:first-child { border-top: 1px solid var(--border); }
+
+.contact-detail-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--dim);
+}
+
+.contact-detail-value {
+  font-size: 15px;
+  color: var(--light);
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--dim);
+}
+
+.form-input, .form-select, .form-textarea {
+  background: var(--dark);
+  border: 1px solid var(--border);
+  color: var(--white);
+  padding: 14px 16px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s;
+  width: 100%;
+  appearance: none;
+}
+
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+  border-color: rgba(200,169,110,0.4);
+}
+
+.form-textarea { resize: vertical; min-height: 100px; }
+
+.form-select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23555' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  cursor: pointer;
+}
+
+.form-select option { background: var(--dark); }
+
+.form-submit {
+  font-family: 'DM Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--black);
+  background: var(--gold);
+  border: none;
+  padding: 16px 36px;
+  cursor: pointer;
+  transition: background 0.2s;
+  align-self: flex-start;
+}
+
+.form-submit:hover { background: var(--gold2); }
+
+/* ── FOOTER ── */
+footer {
+  background: var(--black);
+  border-top: 1px solid var(--border);
+  padding: 48px 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer-left {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.footer-logo {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 16px;
+  color: var(--white);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+.footer-logo span { color: var(--gold); }
+
+.footer-tagline {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--dim);
+}
+
+.footer-right {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  color: var(--dim);
+  text-align: right;
+  line-height: 1.8;
+}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInRight {
+  from { opacity: 0; transform: translateX(24px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes ticker {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+@keyframes scrollPulse {
+  0%, 100% { opacity: 0.3; transform: scaleY(1); }
+  50%       { opacity: 0.8; transform: scaleY(1.1); }
+}
+
+/* Scroll reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+.reveal-delay-5 { transition-delay: 0.5s; }
+</style>
+</head>
+<body>
+
+<!-- Custom Cursor -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <div class="logo-e">E</div>
+    <span class="nav-logo-text">E-Group</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#build">What We Build</a></li>
+    <li><a href="#sectors">Sectors</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Work With Us</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-glow-2"></div>
+
+  <div class="hero-data">
+    <div class="data-line">Est. <span class="val">1993</span></div>
+    <div class="data-line">Budapest, <span class="val">HU</span></div>
+    <div class="data-line">Staff <span class="val">110+</span></div>
+    <div class="data-line">EU Projects <span class="val">Active</span></div>
+    <div class="data-line">AI Infra <span class="val">Sovereign</span></div>
+  </div>
+
+  <div class="hero-content">
+    <div class="hero-eyebrow">Intelligence Infrastructure</div>
+    <h1 class="hero-headline">
+      Thirty years<br>
+      building what<br>
+      <span class="gold">AI runs on.</span>
+    </h1>
+    <p class="hero-sub">
+      E-Group builds the <strong>deep infrastructure of trust, data and intelligence</strong> that enterprises need to make AI actually work. Not the hype. The foundation.
+    </p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">Start a Conversation</a>
+      <a href="#about" class="btn-secondary">Our Story</a>
+    </div>
+  </div>
+
+  <div class="scroll-indicator">
+    <div class="scroll-line"></div>
+    <span class="scroll-text">Scroll</span>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker">
+    <div class="ticker-item">Digital Trust <span>—</span> Sovereign AI <span>—</span> Data Infrastructure <span>—</span> Identity Systems <span>—</span> FinTech <span>—</span> HealthTech <span>—</span> GovTech <span>—</span> SpaceTech <span>—</span> Post-Quantum Security <span>—</span> EnergyTech <span>—</span> Smart Data <span>—</span> Applied AI <span>—</span></div>
+    <div class="ticker-item">Digital Trust <span>—</span> Sovereign AI <span>—</span> Data Infrastructure <span>—</span> Identity Systems <span>—</span> FinTech <span>—</span> HealthTech <span>—</span> GovTech <span>—</span> SpaceTech <span>—</span> Post-Quantum Security <span>—</span> EnergyTech <span>—</span> Smart Data <span>—</span> Applied AI <span>—</span></div>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat reveal">
+    <div class="stat-num">30<span class="unit">+</span></div>
+    <div class="stat-label">Years building<br>deep tech IP</div>
+  </div>
+  <div class="stat reveal reveal-delay-1">
+    <div class="stat-num">110<span class="unit">+</span></div>
+    <div class="stat-label">Engineers,<br>scientists & builders</div>
+  </div>
+  <div class="stat reveal reveal-delay-2">
+    <div class="stat-num">5</div>
+    <div class="stat-label">Critical sectors<br>served globally</div>
+  </div>
+  <div class="stat reveal reveal-delay-3">
+    <div class="stat-num">EU</div>
+    <div class="stat-label">Sovereign infrastructure<br>partner</div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about">
+    <div class="about-left reveal">
+      <div class="section-eyebrow">Who We Are</div>
+      <h2 class="section-title">The infrastructure<br>beneath the intelligence.</h2>
+      <p class="section-body">
+        Founded in Budapest in 1993, E-Group has spent thirty years solving the hard problems that make AI, data and digital trust actually work at scale. We are not a consultancy. We are not a startup. We are a technology group with deep IP, a world-class engineering team, and a singular focus: building the infrastructure that enterprises need to operate in an AI-driven world.
+      </p>
+      <p class="section-body" style="margin-top: 16px;">
+        We have built national digital identity systems, sovereign data platforms, post-quantum encryption infrastructure, and AI tools that are used at the highest levels of European government. Now we are packaging that expertise into products that any enterprise can deploy.
+      </p>
+      <div class="about-tags" style="margin-top: 32px;">
+        <span class="tag">Digital Identity</span>
+        <span class="tag">Data Sovereignty</span>
+        <span class="tag">Applied AI</span>
+        <span class="tag">Post-Quantum</span>
+        <span class="tag">Smart Data</span>
+        <span class="tag">Trust Platforms</span>
+        <span class="tag">Banking Tech</span>
+        <span class="tag">Health AI</span>
+      </div>
+    </div>
+    <div class="about-right reveal reveal-delay-2">
+      <div class="about-visual">
+        <div class="about-quote">
+          "We have been building the infrastructure others will need for decades. <em>The world has finally caught up.</em>"
+        </div>
+        <div class="about-attr">Antal Kuthy — Founder & CEO, E-Group</div>
+        <div style="margin-top: 32px; padding-top: 32px; border-top: 1px solid var(--border);">
+          <div style="font-family: 'DM Mono', monospace; font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--dim); margin-bottom:16px;">Recent Milestones</div>
+          <div style="display:flex;flex-direction:column;gap:10px;">
+            <div style="display:flex;gap:12px;align-items:flex-start;">
+              <span style="color:var(--gold);font-family:'DM Mono',monospace;font-size:10px;flex-shrink:0;padding-top:2px;">2025</span>
+              <span style="font-size:13px;color:var(--text);">Sovereign AI Ecosystem MoU — Kellton partnership announced</span>
+            </div>
+            <div style="display:flex;gap:12px;align-items:flex-start;">
+              <span style="color:var(--gold);font-family:'DM Mono',monospace;font-size:10px;flex-shrink:0;padding-top:2px;">2024</span>
+              <span style="font-size:13px;color:var(--text);">EU DOME cloud infrastructure — selected as Hungarian representative</span>
+            </div>
+            <div style="display:flex;gap:12px;align-items:flex-start;">
+              <span style="color:var(--gold);font-family:'DM Mono',monospace;font-size:10px;flex-shrink:0;padding-top:2px;">2024</span>
+              <span style="font-size:13px;color:var(--text);">Medical AI — back-to-back first-place wins at international research events</span>
+            </div>
+            <div style="display:flex;gap:12px;align-items:flex-start;">
+              <span style="color:var(--gold);font-family:'DM Mono',monospace;font-size:10px;flex-shrink:0;padding-top:2px;">EST.</span>
+              <span style="font-size:13px;color:var(--text);">Hungary's KAÜ national digital identity infrastructure — designed & built by E-Group</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT WE BUILD -->
+<section id="build" class="build-section">
+  <div class="section-eyebrow reveal">What We Build</div>
+  <h2 class="section-title reveal">Tools that make AI<br>work for enterprises.</h2>
+  <p class="section-body reveal">We are translating thirty years of deep tech IP into enterprise products. The core of what we build sits at the intersection of three capabilities no competitor has combined the way we have.</p>
+
+  <div class="build-grid">
+    <div class="build-card reveal">
+      <div class="build-num">01</div>
+      <div class="build-icon">🔐</div>
+      <div class="build-title">Trust &amp; Identity</div>
+      <div class="build-desc">Digital identity systems, verifiable credentials, and trust frameworks that let organisations share data securely across boundaries. Built on cryptographic foundations we have been developing since 1993.</div>
+    </div>
+    <div class="build-card reveal reveal-delay-1">
+      <div class="build-num">02</div>
+      <div class="build-icon">⚡</div>
+      <div class="build-title">Smart Data &amp; AI</div>
+      <div class="build-desc">Data lakes, applied AI, and intelligence platforms that turn organisational data into competitive advantage. Not off-the-shelf tools — purpose-built for the specific demands of regulated industries.</div>
+    </div>
+    <div class="build-card reveal reveal-delay-2">
+      <div class="build-num">03</div>
+      <div class="build-icon">🔄</div>
+      <div class="build-title">Transactional Infrastructure</div>
+      <div class="build-desc">Clearing, settlement, payment gateways and communication platforms for financial institutions and enterprise networks. Proven in production at national scale.</div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTORS -->
+<section id="sectors">
+  <div class="section-eyebrow reveal">Sectors</div>
+  <h2 class="section-title reveal">Where our work<br>has the most impact.</h2>
+  <p class="section-body reveal">We operate across five sectors where the combination of AI, data sovereignty and digital trust creates the most significant opportunity — and the highest barrier to entry for less experienced competitors.</p>
+
+  <div class="sectors-grid">
+    <div class="sector reveal">
+      <span class="sector-icon">🏦</span>
+      <div class="sector-name">FinTech</div>
+    </div>
+    <div class="sector reveal reveal-delay-1">
+      <span class="sector-icon">🏥</span>
+      <div class="sector-name">HealthTech</div>
+    </div>
+    <div class="sector reveal reveal-delay-2">
+      <span class="sector-icon">🏛</span>
+      <div class="sector-name">GovTech</div>
+    </div>
+    <div class="sector reveal reveal-delay-3">
+      <span class="sector-icon">🚀</span>
+      <div class="sector-name">SpaceTech</div>
+    </div>
+    <div class="sector reveal reveal-delay-4">
+      <span class="sector-icon">⚡</span>
+      <div class="sector-name">EnergyTech</div>
+    </div>
+  </div>
+</section>
+
+<!-- MISSION -->
+<div class="mission">
+  <div class="mission-text reveal">
+    AI without <em>trustworthy infrastructure</em> is just<br>expensive noise. We build the infrastructure.
+  </div>
+  <p class="mission-sub reveal reveal-delay-2">Three decades of IP. A world-class team. A clear direction. We are ready to build with the enterprises that are serious about what comes next.</p>
+</div>
+
+<!-- CONTACT -->
+<section id="contact" class="contact">
+  <div class="contact-inner">
+    <div class="contact-left">
+      <div class="section-eyebrow reveal">Work With Us</div>
+      <h2 class="section-title reveal">Let's build<br>something serious.</h2>
+      <p class="section-body reveal">We are selectively taking on enterprise partners who want to work at the frontier of AI infrastructure. If you are building something that matters, we want to hear about it.</p>
+
+      <div class="contact-info" style="margin-top:48px;">
+        <div class="contact-detail reveal">
+          <span class="contact-detail-label">Headquarters</span>
+          <span class="contact-detail-value">Budapest, Hungary</span>
+        </div>
+        <div class="contact-detail reveal reveal-delay-1">
+          <span class="contact-detail-label">Operating Since</span>
+          <span class="contact-detail-value">1993 — 30+ years</span>
+        </div>
+        <div class="contact-detail reveal reveal-delay-2">
+          <span class="contact-detail-label">Focus</span>
+          <span class="contact-detail-value">Enterprise AI Infrastructure</span>
+        </div>
+        <div class="contact-detail reveal reveal-delay-3">
+          <span class="contact-detail-label">LinkedIn</span>
+          <span class="contact-detail-value">E-Group ICT Group</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="contact-right reveal reveal-delay-2">
+      <div class="contact-form">
+        <div class="form-group">
+          <label class="form-label">Your Name</label>
+          <input type="text" class="form-input" placeholder="Name">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Organisation</label>
+          <input type="text" class="form-input" placeholder="Company or institution">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email</label>
+          <input type="email" class="form-input" placeholder="your@email.com">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Area of Interest</label>
+          <select class="form-select">
+            <option value="" disabled selected>Select one</option>
+            <option>Trust &amp; Digital Identity</option>
+            <option>Smart Data &amp; Applied AI</option>
+            <option>Transactional Infrastructure</option>
+            <option>FinTech</option>
+            <option>HealthTech</option>
+            <option>GovTech</option>
+            <option>Partnership / Investment</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">What Are You Building?</label>
+          <textarea class="form-textarea" placeholder="Tell us briefly what you're working on and what you need..."></textarea>
+        </div>
+        <button class="form-submit">Send Message →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-left">
+    <div class="footer-logo"><span>E</span>-Group</div>
+    <div class="footer-tagline">Intelligence Infrastructure · Est. 1993</div>
+  </div>
+  <div class="footer-right">
+    Budapest, Hungary<br>
+    © 2026 E-Group ICT Software Zrt.<br>
+    All rights reserved.
+  </div>
+</footer>
+
+<script>
+// Custom cursor
+const cursor = document.getElementById('cursor');
+const ring = document.getElementById('cursorRing');
+let mouseX = 0, mouseY = 0;
+let ringX = 0, ringY = 0;
+
+document.addEventListener('mousemove', e => {
+  mouseX = e.clientX; mouseY = e.clientY;
+  cursor.style.left = mouseX + 'px';
+  cursor.style.top = mouseY + 'px';
+});
+
+function animateRing() {
+  ringX += (mouseX - ringX) * 0.12;
+  ringY += (mouseY - ringY) * 0.12;
+  ring.style.left = ringX + 'px';
+  ring.style.top = ringY + 'px';
+  requestAnimationFrame(animateRing);
+}
+animateRing();
+
+// Scroll reveal
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.12 });
+
+reveals.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
