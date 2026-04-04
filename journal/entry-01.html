@@ -161,14 +161,15 @@
   /* ── LAYOUT ── */
   .layout {
     display: grid;
-    grid-template-columns: 260px 1fr;
+    grid-template-columns: 1fr 260px;
     min-height: calc(100vh - 400px);
   }
 
   /* ── SIDEBAR ── */
   .sidebar {
     background: var(--dark);
-    border-right: 1px solid var(--border);
+    border-left: 1px solid var(--border);
+    border-right: none;
     padding: 40px 24px;
     position: sticky;
     top: 0;
@@ -851,84 +852,6 @@
 <!-- LAYOUT -->
 <div class="layout">
 
-  <!-- SIDEBAR -->
-  <aside class="sidebar">
-    <div class="sidebar-section">
-      <div class="sidebar-label">Journal Entries</div>
-
-      <a href="#entry-01" class="sidebar-entry active">
-        <span class="sidebar-entry-num">ENTRY 01</span>
-        <span class="sidebar-entry-title">The Starting Point</span>
-        <span class="sidebar-entry-date">April 2026</span>
-        <span class="status-badge active"><span class="status-dot"></span>Published</span>
-      </a>
-
-      <a href="#entry-02" class="sidebar-entry">
-        <span class="sidebar-entry-num">ENTRY 02</span>
-        <span class="sidebar-entry-title">The Company, The Brand & The First Page</span>
-        <span class="sidebar-entry-date">April 2026</span>
-        <span class="status-badge active"><span class="status-dot"></span>Published</span>
-      </a>
-
-      <a href="#entry-03" class="sidebar-entry">
-        <span class="sidebar-entry-num">ENTRY 03</span>
-        <span class="sidebar-entry-title">The New Website Begins</span>
-        <span class="sidebar-entry-date">Coming Soon</span>
-        <span class="status-badge upcoming"><span class="status-dot"></span>Upcoming</span>
-      </a>
-
-      <a href="#entry-04" class="sidebar-entry">
-        <span class="sidebar-entry-num">ENTRY 04</span>
-        <span class="sidebar-entry-title">First Submission Goes Live</span>
-        <span class="sidebar-entry-date">Coming Soon</span>
-        <span class="status-badge upcoming"><span class="status-dot"></span>Upcoming</span>
-      </a>
-
-      <a href="#entry-05" class="sidebar-entry">
-        <span class="sidebar-entry-num">ENTRY 05</span>
-        <span class="sidebar-entry-title">The Agent Wakes Up</span>
-        <span class="sidebar-entry-date">Coming Soon</span>
-        <span class="status-badge upcoming"><span class="status-dot"></span>Upcoming</span>
-      </a>
-
-      <a href="#entry-06" class="sidebar-entry">
-        <span class="sidebar-entry-num">ENTRY 06</span>
-        <span class="sidebar-entry-title">30 Days of Autonomous Content</span>
-        <span class="sidebar-entry-date">Coming Soon</span>
-        <span class="status-badge upcoming"><span class="status-dot"></span>Upcoming</span>
-      </a>
-    </div>
-
-    <div class="sidebar-section">
-      <div class="sidebar-label">Key Metrics</div>
-      <div style="padding: 0 4px;">
-        <div style="display:flex; justify-content:space-between; align-items:center; padding: 8px 0; border-bottom: 1px solid var(--border); font-size:13px;">
-          <span style="color:var(--lighter)">Days in build</span>
-          <span style="color:var(--accent); font-weight:700;">Day 2</span>
-        </div>
-        <div style="display:flex; justify-content:space-between; align-items:center; padding: 8px 0; border-bottom: 1px solid var(--border); font-size:13px;">
-          <span style="color:var(--lighter)">Posts published</span>
-          <span style="color:var(--white); font-weight:700;">0</span>
-        </div>
-        <div style="display:flex; justify-content:space-between; align-items:center; padding: 8px 0; border-bottom: 1px solid var(--border); font-size:13px;">
-          <span style="color:var(--lighter)">New website</span>
-          <span style="color:var(--green); font-weight:700;">Live v1 ✓</span>
-        </div>
-        <div style="display:flex; justify-content:space-between; align-items:center; padding: 8px 0; font-size:13px;">
-          <span style="color:var(--lighter)">Antal feedback</span>
-          <span style="color:var(--accent); font-weight:700;">Pending</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="sidebar-section">
-      <div class="sidebar-label">About This Journal</div>
-      <p style="font-size:12px; color:var(--lighter); line-height:1.6; padding: 0 4px;">
-        This is a real-time record of building Rise — an autonomous content intelligence platform. Every entry documents actual decisions made, challenges faced, and results achieved. Nothing is retrospective. Nothing is polished after the fact.
-      </p>
-    </div>
-  </aside>
-
   <!-- MAIN -->
   <main class="main">
 
@@ -1232,6 +1155,85 @@
     <!-- END ENTRY 01 -->
 
   </main>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-section">
+      <div class="sidebar-label">Journal Entries</div>
+
+      <a href="#entry-01" class="sidebar-entry active">
+        <span class="sidebar-entry-num">ENTRY 01</span>
+        <span class="sidebar-entry-title">The Starting Point</span>
+        <span class="sidebar-entry-date">April 2026</span>
+        <span class="status-badge active"><span class="status-dot"></span>Published</span>
+      </a>
+
+      <a href="#entry-02" class="sidebar-entry">
+        <span class="sidebar-entry-num">ENTRY 02</span>
+        <span class="sidebar-entry-title">The Company, The Brand & The First Page</span>
+        <span class="sidebar-entry-date">April 2026</span>
+        <span class="status-badge active"><span class="status-dot"></span>Published</span>
+      </a>
+
+      <a href="#entry-03" class="sidebar-entry">
+        <span class="sidebar-entry-num">ENTRY 03</span>
+        <span class="sidebar-entry-title">The New Website Begins</span>
+        <span class="sidebar-entry-date">Coming Soon</span>
+        <span class="status-badge upcoming"><span class="status-dot"></span>Upcoming</span>
+      </a>
+
+      <a href="#entry-04" class="sidebar-entry">
+        <span class="sidebar-entry-num">ENTRY 04</span>
+        <span class="sidebar-entry-title">First Submission Goes Live</span>
+        <span class="sidebar-entry-date">Coming Soon</span>
+        <span class="status-badge upcoming"><span class="status-dot"></span>Upcoming</span>
+      </a>
+
+      <a href="#entry-05" class="sidebar-entry">
+        <span class="sidebar-entry-num">ENTRY 05</span>
+        <span class="sidebar-entry-title">The Agent Wakes Up</span>
+        <span class="sidebar-entry-date">Coming Soon</span>
+        <span class="status-badge upcoming"><span class="status-dot"></span>Upcoming</span>
+      </a>
+
+      <a href="#entry-06" class="sidebar-entry">
+        <span class="sidebar-entry-num">ENTRY 06</span>
+        <span class="sidebar-entry-title">30 Days of Autonomous Content</span>
+        <span class="sidebar-entry-date">Coming Soon</span>
+        <span class="status-badge upcoming"><span class="status-dot"></span>Upcoming</span>
+      </a>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-label">Key Metrics</div>
+      <div style="padding: 0 4px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; padding: 8px 0; border-bottom: 1px solid var(--border); font-size:13px;">
+          <span style="color:var(--lighter)">Days in build</span>
+          <span style="color:var(--accent); font-weight:700;">Day 2</span>
+        </div>
+        <div style="display:flex; justify-content:space-between; align-items:center; padding: 8px 0; border-bottom: 1px solid var(--border); font-size:13px;">
+          <span style="color:var(--lighter)">Posts published</span>
+          <span style="color:var(--white); font-weight:700;">0</span>
+        </div>
+        <div style="display:flex; justify-content:space-between; align-items:center; padding: 8px 0; border-bottom: 1px solid var(--border); font-size:13px;">
+          <span style="color:var(--lighter)">New website</span>
+          <span style="color:var(--green); font-weight:700;">Live v1 ✓</span>
+        </div>
+        <div style="display:flex; justify-content:space-between; align-items:center; padding: 8px 0; font-size:13px;">
+          <span style="color:var(--lighter)">Antal feedback</span>
+          <span style="color:var(--accent); font-weight:700;">Pending</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-label">About This Journal</div>
+      <p style="font-size:12px; color:var(--lighter); line-height:1.6; padding: 0 4px;">
+        This is a real-time record of building Rise — an autonomous content intelligence platform. Every entry documents actual decisions made, challenges faced, and results achieved. Nothing is retrospective. Nothing is polished after the fact.
+      </p>
+    </div>
+  </aside>
+
 </div>
 
 <!-- FOOTER -->
