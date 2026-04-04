@@ -32,8 +32,54 @@
     line-height: 1.7;
   }
 
-  /* ── TOP BAR ── */
-  .topbar {
+  .entry-nav {
+    background: var(--dark);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 11px;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+  }
+
+  .entry-nav-back {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--lighter);
+    text-decoration: none;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    transition: color .2s;
+  }
+
+  .entry-nav-back:hover { color: var(--accent); }
+
+  .entry-nav-center {
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .entry-nav-next {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--lighter);
+    text-decoration: none;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    transition: color .2s;
+  }
+
+  .entry-nav-next:hover { color: var(--accent); }
+  .entry-nav-next.disabled { opacity: .3; pointer-events: none; }
     background: var(--accent);
     height: 4px;
     width: 100%;
@@ -765,6 +811,13 @@
 <body>
 
 <div class="topbar"></div>
+
+<!-- ENTRY NAV -->
+<div class="entry-nav" id="entry-nav-e02">
+  <a href="index.html" class="entry-nav-back">← All Entries</a>
+  <span class="entry-nav-center">Entry 01 of 02</span>
+  <a href="entry-02.html" class="entry-nav-next">Entry 02 →</a>
+</div>
 
 <!-- HERO -->
 <div class="hero">
