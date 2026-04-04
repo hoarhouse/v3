@@ -3,860 +3,154 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Rise Build Journal — The Story of Building Rise</title>
+<title>Entry 01 — Rise Build Journal</title>
 <style>
-  :root {
-    --black: #0D0D0D;
-    --dark: #141414;
-    --mid: #1E1E1E;
-    --card: #242424;
-    --border: #2E2E2E;
-    --subtle: #3A3A3A;
-    --light: #666;
-    --lighter: #999;
-    --text: #C8C8C8;
-    --white: #F0F0F0;
-    --accent: #D4FF00;
-    --accent2: #00D4FF;
-    --red: #FF4444;
-    --green: #44FF88;
-  }
-
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  body {
-    background: var(--black);
-    color: var(--text);
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    font-size: 15px;
-    line-height: 1.7;
-  }
-
-  .entry-nav {
-    background: var(--dark);
-    border-bottom: 1px solid var(--border);
-    padding: 14px 40px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    font-size: 11px;
-    position: sticky;
-    top: 0;
-    z-index: 50;
-  }
-
-  .entry-nav-back {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    color: var(--lighter);
-    text-decoration: none;
-    font-weight: 600;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    transition: color .2s;
-  }
-
-  .entry-nav-back:hover { color: var(--accent); }
-
-  .entry-nav-center {
-    font-weight: 700;
-    color: var(--accent);
-    letter-spacing: 2px;
-    text-transform: uppercase;
-  }
-
-  .entry-nav-next {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    color: var(--lighter);
-    text-decoration: none;
-    font-weight: 600;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    transition: color .2s;
-  }
-
-  .entry-nav-next:hover { color: var(--accent); }
-  .entry-nav-next.disabled { opacity: .3; pointer-events: none; }
-    background: var(--accent);
-    height: 4px;
-    width: 100%;
-  }
-
-  /* ── HERO ── */
-  .hero {
-    background: var(--dark);
-    border-bottom: 1px solid var(--border);
-    padding: 48px 40px 40px;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .hero::before {
-    content: '';
-    position: absolute;
-    top: -200px; right: -200px;
-    width: 600px; height: 600px;
-    background: radial-gradient(circle, rgba(212,255,0,0.04) 0%, transparent 70%);
-    pointer-events: none;
-  }
-
-  .hero-eyebrow {
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 20px;
-  }
-
-  .hero-title {
-    font-size: 64px;
-    font-weight: 800;
-    color: var(--white);
-    line-height: 1.05;
-    margin-bottom: 12px;
-    letter-spacing: -2px;
-  }
-
-  .hero-title span { color: var(--accent); }
-
-  .hero-subtitle {
-    font-size: 20px;
-    color: var(--lighter);
-    font-weight: 300;
-    margin-bottom: 40px;
-    max-width: 600px;
-    line-height: 1.5;
-  }
-
-  .hero-meta {
-    display: flex;
-    gap: 40px;
-    flex-wrap: wrap;
-  }
-
-  .hero-meta-item {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-  }
-
-  .hero-meta-label {
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--light);
-  }
-
-  .hero-meta-value {
-    font-size: 14px;
-    color: var(--white);
-    font-weight: 500;
-  }
-
-  /* ── LAYOUT ── */
-  .layout {
-    display: grid;
-    grid-template-columns: 1fr 240px;
-    min-height: calc(100vh - 400px);
-  }
-
-  /* ── SIDEBAR ── */
-  .sidebar {
-    background: var(--dark);
-    border-left: 1px solid var(--border);
-    border-right: none;
-    padding: 40px 24px;
-    position: sticky;
-    top: 0;
-    height: 100vh;
-    overflow-y: auto;
-  }
-
-  .sidebar-section {
-    margin-bottom: 36px;
-  }
-
-  .sidebar-label {
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 2.5px;
-    text-transform: uppercase;
-    color: var(--light);
-    margin-bottom: 12px;
-    padding-bottom: 8px;
-    border-bottom: 1px solid var(--border);
-  }
-
-  .sidebar-entry {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-    padding: 10px 12px;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background 0.2s;
-    text-decoration: none;
-    margin-bottom: 4px;
-  }
-
-  .sidebar-entry:hover { background: var(--mid); }
-  .sidebar-entry.active { background: var(--subtle); }
-
-  .sidebar-entry-num {
-    font-size: 10px;
-    color: var(--accent);
-    font-weight: 700;
-    letter-spacing: 1px;
-  }
-
-  .sidebar-entry-title {
-    font-size: 13px;
-    color: var(--white);
-    font-weight: 500;
-  }
-
-  .sidebar-entry-date {
-    font-size: 11px;
-    color: var(--lighter);
-  }
-
-  .status-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 11px;
-    font-weight: 600;
-    padding: 4px 10px;
-    border-radius: 20px;
-    margin-top: 4px;
-  }
-
-  .status-badge.active {
-    background: rgba(212,255,0,0.12);
-    color: var(--accent);
-    border: 1px solid rgba(212,255,0,0.25);
-  }
-
-  .status-badge.upcoming {
-    background: rgba(255,255,255,0.05);
-    color: var(--lighter);
-    border: 1px solid var(--border);
-  }
-
-  .status-dot {
-    width: 6px; height: 6px;
-    border-radius: 50%;
-    background: currentColor;
-  }
-
-  /* ── MAIN CONTENT ── */
-  .main {
-    padding: 40px 24px 40px 40px;
-    min-width: 0;
-    overflow-x: hidden;
-  }
-
-  /* ── ENTRY ── */
-  .entry {
-    margin-bottom: 80px;
-    scroll-margin-top: 40px;
-  }
-
-  .entry-header {
-    margin-bottom: 32px;
-    padding-bottom: 24px;
-    border-bottom: 1px solid var(--border);
-  }
-
-  .entry-chapter {
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 10px;
-  }
-
-  .entry-title {
-    font-size: 36px;
-    font-weight: 800;
-    color: var(--white);
-    line-height: 1.15;
-    letter-spacing: -1px;
-    margin-bottom: 12px;
-  }
-
-  .entry-meta {
-    display: flex;
-    gap: 24px;
-    align-items: center;
-    flex-wrap: wrap;
-  }
-
-  .entry-date {
-    font-size: 13px;
-    color: var(--lighter);
-  }
-
-  .entry-phase {
-    font-size: 11px;
-    font-weight: 600;
-    padding: 3px 10px;
-    border-radius: 20px;
-    background: rgba(212,255,0,0.1);
-    color: var(--accent);
-    border: 1px solid rgba(212,255,0,0.2);
-  }
-
-  /* ── CONTENT BLOCKS ── */
-  .entry p {
-    color: var(--text);
-    margin-bottom: 20px;
-    line-height: 1.8;
-    font-size: 15px;
-  }
-
-  .entry h3 {
-    font-size: 18px;
-    font-weight: 700;
-    color: var(--white);
-    margin: 36px 0 14px;
-    letter-spacing: -0.3px;
-  }
-
-  .entry h4 {
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin: 28px 0 10px;
-  }
-
-  /* ── CALLOUT ── */
-  .callout {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-left: 3px solid var(--accent);
-    border-radius: 8px;
-    padding: 20px 24px;
-    margin: 28px 0;
-  }
-
-  .callout-label {
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 8px;
-  }
-
-  .callout p {
-    margin: 0;
-    color: var(--white);
-    font-size: 15px;
-    font-style: italic;
-  }
-
-  /* ── INSIGHT BOX ── */
-  .insight {
-    background: rgba(212,255,0,0.05);
-    border: 1px solid rgba(212,255,0,0.15);
-    border-radius: 10px;
-    padding: 24px 28px;
-    margin: 28px 0;
-  }
-
-  .insight-label {
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 10px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .insight-label::before {
-    content: '→';
-    font-size: 14px;
-  }
-
-  .insight p { margin: 0; color: var(--white); }
-
-  /* ── PROBLEM BOX ── */
-  .problem {
-    background: rgba(255,68,68,0.05);
-    border: 1px solid rgba(255,68,68,0.2);
-    border-radius: 10px;
-    padding: 24px 28px;
-    margin: 28px 0;
-  }
-
-  .problem-label {
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--red);
-    margin-bottom: 10px;
-  }
-
-  .problem p { margin: 0; color: var(--text); }
-
-  /* ── EVIDENCE GRID ── */
-  .evidence-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-    margin: 28px 0;
-  }
-
-  .evidence-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 20px;
-  }
-
-  .evidence-card-label {
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--lighter);
-    margin-bottom: 8px;
-  }
-
-  .evidence-card-value {
-    font-size: 24px;
-    font-weight: 800;
-    color: var(--white);
-    margin-bottom: 4px;
-    letter-spacing: -0.5px;
-  }
-
-  .evidence-card-value.red { color: var(--red); }
-  .evidence-card-value.green { color: var(--green); }
-  .evidence-card-value.accent { color: var(--accent); }
-
-  .evidence-card-desc {
-    font-size: 12px;
-    color: var(--lighter);
-    line-height: 1.5;
-  }
-
-  /* ── SCREENSHOT PLACEHOLDER ── */
-  .screenshot-zone {
-    background: var(--card);
-    border: 2px dashed var(--subtle);
-    border-radius: 12px;
-    padding: 48px 32px;
-    text-align: center;
-    margin: 28px 0;
-  }
-
-  .screenshot-zone.has-image {
-    border-style: solid;
-    border-color: var(--border);
-    padding: 0;
-    overflow: hidden;
-  }
-
-  .screenshot-zone.has-image img {
-    width: 100%;
-    display: block;
-    border-radius: 10px;
-  }
-
-  .screenshot-label {
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--light);
-    margin-bottom: 8px;
-  }
-
-  .screenshot-desc {
-    font-size: 13px;
-    color: var(--lighter);
-    margin-bottom: 16px;
-  }
-
-  .screenshot-placeholder-icon {
-    font-size: 40px;
-    margin-bottom: 12px;
-    opacity: 0.4;
-  }
-
-  .screenshot-tag {
-    display: inline-block;
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    padding: 4px 12px;
-    border-radius: 20px;
-    margin-top: 8px;
-  }
-
-  .screenshot-tag.before {
-    background: rgba(255,68,68,0.12);
-    color: var(--red);
-    border: 1px solid rgba(255,68,68,0.25);
-  }
-
-  .screenshot-tag.after {
-    background: rgba(68,255,136,0.12);
-    color: var(--green);
-    border: 1px solid rgba(68,255,136,0.25);
-  }
-
-  .screenshot-tag.placeholder {
-    background: rgba(255,255,255,0.05);
-    color: var(--lighter);
-    border: 1px solid var(--border);
-  }
-
-  /* ── SIDE BY SIDE ── */
-  .side-by-side {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-    margin: 28px 0;
-  }
-
-  .sbs-panel {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    overflow: hidden;
-  }
-
-  .sbs-header {
-    padding: 12px 16px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-bottom: 1px solid var(--border);
-  }
-
-  .sbs-title {
-    font-size: 12px;
-    font-weight: 700;
-    color: var(--white);
-  }
-
-  .sbs-content {
-    padding: 20px;
-    min-height: 200px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-  }
-
-  .sbs-placeholder {
-    font-size: 13px;
-    color: var(--lighter);
-  }
-
-  /* ── DECISION TABLE ── */
-  .decision-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 28px 0;
-    font-size: 13px;
-  }
-
-  .decision-table th {
-    background: var(--mid);
-    color: var(--accent);
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    padding: 12px 16px;
-    text-align: left;
-    border-bottom: 1px solid var(--border);
-  }
-
-  .decision-table td {
-    padding: 12px 16px;
-    border-bottom: 1px solid var(--border);
-    color: var(--text);
-    vertical-align: top;
-  }
-
-  .decision-table tr:nth-child(even) td {
-    background: var(--card);
-  }
-
-  .decision-table td:first-child {
-    color: var(--white);
-    font-weight: 600;
-    white-space: nowrap;
-  }
-
-  /* ── TIMELINE ── */
-  .timeline {
-    margin: 28px 0;
-    position: relative;
-    padding-left: 32px;
-  }
-
-  .timeline::before {
-    content: '';
-    position: absolute;
-    left: 8px;
-    top: 8px;
-    bottom: 8px;
-    width: 1px;
-    background: var(--border);
-  }
-
-  .timeline-item {
-    position: relative;
-    margin-bottom: 28px;
-  }
-
-  .timeline-item::before {
-    content: '';
-    position: absolute;
-    left: -28px;
-    top: 6px;
-    width: 8px; height: 8px;
-    border-radius: 50%;
-    background: var(--accent);
-    border: 2px solid var(--black);
-    box-shadow: 0 0 0 2px var(--accent);
-  }
-
-  .timeline-item-title {
-    font-size: 14px;
-    font-weight: 700;
-    color: var(--white);
-    margin-bottom: 4px;
-  }
-
-  .timeline-item-desc {
-    font-size: 13px;
-    color: var(--lighter);
-    line-height: 1.6;
-  }
-
-  /* ── QUOTE ── */
-  .pull-quote {
-    border-left: 3px solid var(--accent);
-    padding: 16px 24px;
-    margin: 32px 0;
-  }
-
-  .pull-quote-text {
-    font-size: 20px;
-    font-weight: 300;
-    color: var(--white);
-    line-height: 1.5;
-    font-style: italic;
-    margin-bottom: 8px;
-  }
-
-  .pull-quote-attr {
-    font-size: 12px;
-    color: var(--lighter);
-    font-style: normal;
-  }
-
-  /* ── UPCOMING ENTRIES ── */
-  .upcoming-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
-    margin: 28px 0;
-  }
-
-  .upcoming-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 20px;
-    opacity: 0.6;
-  }
-
-  .upcoming-card-num {
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 6px;
-  }
-
-  .upcoming-card-title {
-    font-size: 14px;
-    font-weight: 700;
-    color: var(--white);
-    margin-bottom: 6px;
-  }
-
-  .upcoming-card-desc {
-    font-size: 12px;
-    color: var(--lighter);
-    line-height: 1.5;
-  }
-
-  /* ── DIVIDER ── */
-  .divider {
-    height: 1px;
-    background: var(--border);
-    margin: 60px 0;
-  }
-
-  /* ── FOOTER ── */
-  .footer {
-    background: var(--dark);
-    border-top: 1px solid var(--border);
-    padding: 32px 60px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 12px;
-    color: var(--light);
-  }
-
-  .footer-brand {
-    font-weight: 700;
-    color: var(--accent);
-    font-size: 14px;
-  }
-
-  /* ── AUDIT FINDINGS ── */
-  .findings-list {
-    list-style: none;
-    margin: 20px 0;
-  }
-
-  .findings-list li {
-    display: flex;
-    gap: 12px;
-    align-items: flex-start;
-    padding: 12px 0;
-    border-bottom: 1px solid var(--border);
-    font-size: 14px;
-    color: var(--text);
-  }
-
-  .findings-list li:last-child { border-bottom: none; }
-
-  .finding-icon {
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 11px;
-    flex-shrink: 0;
-    margin-top: 2px;
-  }
-
-  .finding-icon.bad { background: rgba(255,68,68,0.15); color: var(--red); }
-  .finding-icon.good { background: rgba(68,255,136,0.15); color: var(--green); }
-  .finding-icon.neutral { background: rgba(255,255,255,0.08); color: var(--lighter); }
-
-  /* ── SCOPE SUMMARY ── */
-  .scope-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-    margin: 20px 0;
-  }
-
-  .scope-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 16px;
-  }
-
-  .scope-card-label {
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 6px;
-  }
-
-  .scope-card-value {
-    font-size: 13px;
-    color: var(--white);
-    line-height: 1.5;
-  }
-
-  @media print {
-    .sidebar { display: none; }
-    .layout { grid-template-columns: 1fr; }
-    body { background: white; color: black; }
-  }
+:root{--black:#0D0D0D;--dark:#141414;--mid:#1E1E1E;--card:#242424;--border:#2E2E2E;--dim:#555;--light:#777;--text:#B0B0B0;--white:#E8E8E8;--accent:#D4FF00;--green:#44FF88;--red:#FF4444;}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--black);color:var(--text);font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:15px;line-height:1.7;min-height:100vh;}
+.topbar{height:3px;background:var(--accent);width:100%;}
+
+/* NAV */
+.entry-nav{background:var(--dark);border-bottom:1px solid var(--border);padding:16px 60px;display:flex;align-items:center;justify-content:space-between;font-size:11px;position:sticky;top:0;z-index:50;}
+.entry-nav a{color:var(--light);text-decoration:none;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;transition:color .2s;}
+.entry-nav a:hover{color:var(--accent);}
+.entry-nav-center{font-weight:700;color:var(--accent);letter-spacing:2px;text-transform:uppercase;}
+.entry-nav .disabled{opacity:.3;pointer-events:none;}
+
+/* HERO */
+.hero{padding:80px 60px 60px;border-bottom:1px solid var(--border);position:relative;overflow:hidden;background:var(--dark);}
+.hero-eyebrow{font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:20px;}
+.hero-title{font-size:clamp(36px,4vw,56px);font-weight:800;color:var(--white);letter-spacing:-1.5px;line-height:1.05;margin-bottom:12px;}
+.hero-title span{color:var(--accent);}
+.hero-meta{display:flex;gap:32px;flex-wrap:wrap;margin-top:24px;}
+.meta-item{display:flex;flex-direction:column;gap:4px;}
+.meta-label{font-size:9px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--dim);}
+.meta-value{font-size:13px;color:var(--white);font-weight:500;}
+
+/* LAYOUT — identical to index page */
+.layout{display:grid;grid-template-columns:1fr 280px;min-height:calc(100vh - 300px);}
+.main{padding:60px;border-right:1px solid var(--border);min-width:0;}
+.sidebar{padding:48px 32px;background:var(--dark);}
+.sidebar-section{margin-bottom:36px;}
+.sidebar-label{font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--dim);margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--border);}
+.sidebar-entry{display:flex;flex-direction:column;gap:3px;padding:10px 12px;border-radius:6px;text-decoration:none;margin-bottom:4px;transition:background .2s;}
+.sidebar-entry:hover{background:var(--mid);}
+.sidebar-entry.active{background:var(--mid);}
+.sidebar-entry-num{font-size:9px;color:var(--accent);font-weight:700;letter-spacing:1px;}
+.sidebar-entry-title{font-size:12px;color:var(--white);font-weight:500;}
+.sidebar-entry-date{font-size:10px;color:var(--dim);}
+.status-badge{display:inline-flex;align-items:center;gap:5px;font-size:9px;font-weight:600;padding:3px 8px;border-radius:20px;margin-top:3px;}
+.status-badge.active{background:rgba(212,255,0,.1);color:var(--accent);border:1px solid rgba(212,255,0,.2);}
+.status-badge.upcoming{background:rgba(255,255,255,.04);color:var(--dim);border:1px solid var(--border);}
+.status-dot{width:5px;height:5px;border-radius:50%;background:currentColor;}
+.metric{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid var(--border);font-size:12px;}
+.metric:last-child{border-bottom:none;}
+.metric-label{color:var(--light);}
+.metric-value{font-weight:700;color:var(--white);}
+.metric-value.accent{color:var(--accent);}
+.metric-value.green{color:var(--green);}
+
+/* ENTRY CONTENT */
+.entry{margin-bottom:72px;}
+.entry-header{margin-bottom:28px;padding-bottom:20px;border-bottom:1px solid var(--border);}
+.entry-chapter{font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:10px;}
+.entry-title{font-size:clamp(28px,3vw,42px);font-weight:800;color:var(--white);letter-spacing:-1px;line-height:1.15;margin-bottom:12px;}
+.entry-meta{display:flex;gap:20px;align-items:center;flex-wrap:wrap;}
+.entry-date{font-size:12px;color:var(--dim);}
+.entry-phase{font-size:10px;font-weight:600;padding:3px 10px;border-radius:20px;background:rgba(212,255,0,.1);color:var(--accent);border:1px solid rgba(212,255,0,.2);}
+.entry p{color:var(--text);margin-bottom:18px;line-height:1.8;font-size:15px;}
+.entry h3{font-size:20px;font-weight:700;color:var(--white);margin:32px 0 12px;letter-spacing:-.3px;}
+.entry h4{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin:28px 0 10px;}
+.callout{background:var(--card);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:8px;padding:18px 22px;margin:24px 0;}
+.callout-label{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:8px;}
+.callout p{margin:0;color:var(--white);font-size:14px;font-style:italic;}
+.insight{background:rgba(212,255,0,.04);border:1px solid rgba(212,255,0,.15);border-radius:10px;padding:22px 26px;margin:24px 0;}
+.insight-label{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+.insight-label::before{content:'→';font-size:13px;}
+.insight p{margin:0;color:var(--white);}
+.problem{background:rgba(255,68,68,.05);border:1px solid rgba(255,68,68,.2);border-radius:10px;padding:22px 26px;margin:24px 0;}
+.problem-label{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--red);margin-bottom:10px;}
+.problem p{margin:0;color:var(--text);}
+.pull-quote{border-left:3px solid var(--accent);padding:14px 22px;margin:28px 0;}
+.pull-quote-text{font-size:18px;font-weight:300;color:var(--white);line-height:1.5;font-style:italic;margin-bottom:8px;}
+.pull-quote-attr{font-size:11px;color:var(--dim);}
+.findings-list{list-style:none;margin:18px 0;}
+.findings-list li{display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--border);font-size:14px;color:var(--text);}
+.findings-list li:last-child{border-bottom:none;}
+.finding-icon{width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0;margin-top:2px;}
+.finding-icon.bad{background:rgba(255,68,68,.15);color:var(--red);}
+.finding-icon.good{background:rgba(68,255,136,.15);color:var(--green);}
+.evidence-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:24px 0;}
+.evidence-card{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:18px;}
+.evidence-card-label{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-bottom:6px;}
+.evidence-card-value{font-size:22px;font-weight:800;color:var(--white);margin-bottom:4px;letter-spacing:-.5px;}
+.evidence-card-value.red{color:var(--red);}
+.evidence-card-value.green{color:var(--green);}
+.evidence-card-value.accent{color:var(--accent);}
+.evidence-card-desc{font-size:11px;color:var(--dim);line-height:1.5;}
+.timeline{margin:24px 0;position:relative;padding-left:28px;}
+.timeline::before{content:'';position:absolute;left:6px;top:8px;bottom:8px;width:1px;background:var(--border);}
+.timeline-item{position:relative;margin-bottom:24px;}
+.timeline-item::before{content:'';position:absolute;left:-24px;top:5px;width:8px;height:8px;border-radius:50%;background:var(--accent);border:2px solid var(--black);}
+.timeline-item-title{font-size:14px;font-weight:700;color:var(--white);margin-bottom:4px;}
+.timeline-item-desc{font-size:13px;color:var(--dim);line-height:1.6;}
+.scope-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:18px 0;}
+.scope-card{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:14px;}
+.scope-card-label{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:5px;}
+.scope-card-value{font-size:13px;color:var(--white);line-height:1.5;}
+.upcoming-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:24px 0;}
+.upcoming-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:18px;opacity:.6;}
+.upcoming-card-num{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:5px;}
+.upcoming-card-title{font-size:13px;font-weight:700;color:var(--white);margin-bottom:5px;}
+.upcoming-card-desc{font-size:11px;color:var(--dim);line-height:1.5;}
+.divider{height:1px;background:var(--border);margin:48px 0;}
+.screenshot-zone{background:var(--card);border:2px dashed var(--border);border-radius:10px;padding:40px 28px;text-align:center;margin:24px 0;}
+.screenshot-zone.has-image{border-style:solid;border-color:var(--border);padding:0;overflow:hidden;}
+.screenshot-zone.has-image img{width:100%;display:block;border-radius:8px;}
+.screenshot-label{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--light);margin-bottom:6px;}
+.screenshot-tag{display:inline-block;font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:3px 10px;border-radius:20px;margin-top:6px;}
+.screenshot-tag.before{background:rgba(255,68,68,.12);color:var(--red);border:1px solid rgba(255,68,68,.25);}
+.screenshot-tag.after{background:rgba(68,255,136,.12);color:var(--green);border:1px solid rgba(68,255,136,.25);}
+.screenshot-tag.placeholder{background:rgba(255,255,255,.05);color:var(--dim);border:1px solid var(--border);}
+.side-by-side{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:24px 0;}
+.sbs-panel{background:var(--card);border:1px solid var(--border);border-radius:10px;overflow:hidden;}
+.sbs-header{padding:10px 14px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);}
+.sbs-title{font-size:11px;font-weight:700;color:var(--white);}
+footer{background:var(--dark);border-top:1px solid var(--border);padding:28px 60px;display:flex;justify-content:space-between;align-items:center;font-size:11px;color:var(--dim);}
+.footer-brand{font-weight:700;color:var(--accent);font-size:13px;letter-spacing:2px;text-transform:uppercase;}
+@media(max-width:900px){
+  .entry-nav{padding:12px 20px;}
+  .hero{padding:48px 20px 40px;}
+  .layout{grid-template-columns:1fr;}
+  .main{padding:32px 20px;border-right:none;}
+  .sidebar{padding:32px 20px;border-top:1px solid var(--border);}
+  .evidence-grid,.scope-grid,.side-by-side{grid-template-columns:1fr;}
+  .upcoming-grid{grid-template-columns:1fr;}
+  footer{flex-direction:column;gap:12px;text-align:center;padding:24px 20px;}
+}
 </style>
 </head>
 <body>
-
 <div class="topbar"></div>
-
-<!-- ENTRY NAV -->
-<div class="entry-nav" id="entry-nav-e01">
-  <a href="index.html" class="entry-nav-back">← All Entries</a>
-  <span class="entry-nav-center">Entry 01 of 02</span>
-  <a href="entry-02.html" class="entry-nav-next">Entry 02 →</a>
+<div class="entry-nav">
+  <a href="index.html">&larr; All Entries</a>
+  <span class="entry-nav-center">ENTRY 01 OF 02</span>
+  <a href="entry-02.html">Entry 02 &rarr;</a>
 </div>
-
-<!-- HERO -->
 <div class="hero">
-  <div class="hero-eyebrow">Rise Build Journal · A Product Is Born</div>
-  <div class="hero-title">The <span>Rise</span><br>Build Journal</div>
-  <div class="hero-subtitle">A real-time record of building an autonomous content intelligence platform from zero — every decision, every challenge, every breakthrough.</div>
+  <div class="hero-eyebrow">Entry 01 &middot; April 2026 &middot; Phase 0 &mdash; Discovery</div>
+  <div class="hero-title">The Starting Point: <span>A Company Doing Big Things Nobody Knows About</span></div>
   <div class="hero-meta">
-    <div class="hero-meta-item">
-      <span class="hero-meta-label">Started</span>
-      <span class="hero-meta-value">April 2026</span>
-    </div>
-    <div class="hero-meta-item">
-      <span class="hero-meta-label">Pilot Client</span>
-      <span class="hero-meta-value">eGroup — Budapest, Hungary</span>
-    </div>
-    <div class="hero-meta-item">
-      <span class="hero-meta-label">Built By</span>
-      <span class="hero-meta-value">Chris Hoar</span>
-    </div>
-    <div class="hero-meta-item">
-      <span class="hero-meta-label">Product Name</span>
-      <span class="hero-meta-value">Rise (Working Title)</span>
-    </div>
-    <div class="hero-meta-item">
-      <span class="hero-meta-label">Journal Status</span>
-      <span class="hero-meta-value">🟢 Live &amp; Active</span>
-    </div>
-  </div>
+<div class="meta-item"><span class="meta-label">Started</span><span class="meta-value">April 2026</span></div>
+<div class="meta-item"><span class="meta-label">Pilot Client</span><span class="meta-value">eGroup &mdash; Budapest</span></div>
+<div class="meta-item"><span class="meta-label">Project Lead</span><span class="meta-value">Chris Hoar</span></div>
+<div class="meta-item"><span class="meta-label">Status</span><span class="meta-value" style="color:var(--accent);">&bull; Active</span></div>
 </div>
-
-<!-- LAYOUT -->
+</div>
 <div class="layout">
-
-  <!-- MAIN -->
-  <main class="main">
-
-    <!-- ═══════════════════════════════════════════ -->
+  <div class="main">
+<!-- ═══════════════════════════════════════════ -->
     <!-- ENTRY 01 -->
     <!-- ═══════════════════════════════════════════ -->
     <div class="entry" id="entry-01">
@@ -1154,101 +448,57 @@
 
     </div>
     <!-- END ENTRY 01 -->
-
-  </main>
-
-  <!-- SIDEBAR -->
+  </div>
   <aside class="sidebar">
-    <div class="sidebar-section">
-      <div class="sidebar-label">Journal Entries</div>
 
-      <a href="#entry-01" class="sidebar-entry active">
-        <span class="sidebar-entry-num">ENTRY 01</span>
-        <span class="sidebar-entry-title">The Starting Point</span>
-        <span class="sidebar-entry-date">April 2026</span>
-        <span class="status-badge active"><span class="status-dot"></span>Published</span>
-      </a>
-
-      <a href="#entry-02" class="sidebar-entry">
-        <span class="sidebar-entry-num">ENTRY 02</span>
-        <span class="sidebar-entry-title">The Company, The Brand & The First Page</span>
-        <span class="sidebar-entry-date">April 2026</span>
-        <span class="status-badge active"><span class="status-dot"></span>Published</span>
-      </a>
-
-      <a href="#entry-03" class="sidebar-entry">
-        <span class="sidebar-entry-num">ENTRY 03</span>
-        <span class="sidebar-entry-title">The New Website Begins</span>
-        <span class="sidebar-entry-date">Coming Soon</span>
-        <span class="status-badge upcoming"><span class="status-dot"></span>Upcoming</span>
-      </a>
-
-      <a href="#entry-04" class="sidebar-entry">
-        <span class="sidebar-entry-num">ENTRY 04</span>
-        <span class="sidebar-entry-title">First Submission Goes Live</span>
-        <span class="sidebar-entry-date">Coming Soon</span>
-        <span class="status-badge upcoming"><span class="status-dot"></span>Upcoming</span>
-      </a>
-
-      <a href="#entry-05" class="sidebar-entry">
-        <span class="sidebar-entry-num">ENTRY 05</span>
-        <span class="sidebar-entry-title">The Agent Wakes Up</span>
-        <span class="sidebar-entry-date">Coming Soon</span>
-        <span class="status-badge upcoming"><span class="status-dot"></span>Upcoming</span>
-      </a>
-
-      <a href="#entry-06" class="sidebar-entry">
-        <span class="sidebar-entry-num">ENTRY 06</span>
-        <span class="sidebar-entry-title">30 Days of Autonomous Content</span>
-        <span class="sidebar-entry-date">Coming Soon</span>
-        <span class="status-badge upcoming"><span class="status-dot"></span>Upcoming</span>
-      </a>
-    </div>
-
-    <div class="sidebar-section">
-      <div class="sidebar-label">Key Metrics</div>
-      <div style="padding: 0 4px;">
-        <div style="display:flex; justify-content:space-between; align-items:center; padding: 8px 0; border-bottom: 1px solid var(--border); font-size:13px;">
-          <span style="color:var(--lighter)">Days in build</span>
-          <span style="color:var(--accent); font-weight:700;">Day 2</span>
-        </div>
-        <div style="display:flex; justify-content:space-between; align-items:center; padding: 8px 0; border-bottom: 1px solid var(--border); font-size:13px;">
-          <span style="color:var(--lighter)">Posts published</span>
-          <span style="color:var(--white); font-weight:700;">0</span>
-        </div>
-        <div style="display:flex; justify-content:space-between; align-items:center; padding: 8px 0; border-bottom: 1px solid var(--border); font-size:13px;">
-          <span style="color:var(--lighter)">New website</span>
-          <span style="color:var(--green); font-weight:700;">Live v1 ✓</span>
-        </div>
-        <div style="display:flex; justify-content:space-between; align-items:center; padding: 8px 0; font-size:13px;">
-          <span style="color:var(--lighter)">Antal feedback</span>
-          <span style="color:var(--accent); font-weight:700;">Pending</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="sidebar-section">
-      <div class="sidebar-label">About This Journal</div>
-      <p style="font-size:12px; color:var(--lighter); line-height:1.6; padding: 0 4px;">
-        This is a real-time record of building Rise — an autonomous content intelligence platform. Every entry documents actual decisions made, challenges faced, and results achieved. Nothing is retrospective. Nothing is polished after the fact.
-      </p>
-    </div>
-  </aside>
-
-
+<div class="sidebar-section">
+  <div class="sidebar-label">Journal Entries</div>
+  <a href="entry-01.html" class="sidebar-entry active">
+    <span class="sidebar-entry-num">ENTRY 01</span>
+    <span class="sidebar-entry-title">The Starting Point</span>
+    <span class="sidebar-entry-date">April 2026</span>
+    <span class="status-badge active"><span class="status-dot"></span>Published</span>
+  </a>
+  <a href="entry-02.html" class="sidebar-entry">
+    <span class="sidebar-entry-num">ENTRY 02</span>
+    <span class="sidebar-entry-title">The Company, The Brand &amp; The First Page</span>
+    <span class="sidebar-entry-date">April 2026</span>
+    <span class="status-badge active"><span class="status-dot"></span>Published</span>
+  </a>
+  <div class="sidebar-entry" style="opacity:.4;pointer-events:none;">
+    <span class="sidebar-entry-num">ENTRY 03</span>
+    <span class="sidebar-entry-title">Antal Responds</span>
+    <span class="sidebar-entry-date">Coming Soon</span>
+    <span class="status-badge upcoming"><span class="status-dot"></span>Upcoming</span>
+  </div>
+  <div class="sidebar-entry" style="opacity:.4;pointer-events:none;">
+    <span class="sidebar-entry-num">ENTRY 04</span>
+    <span class="sidebar-entry-title">The Full Site Takes Shape</span>
+    <span class="sidebar-entry-date">Coming Soon</span>
+    <span class="status-badge upcoming"><span class="status-dot"></span>Upcoming</span>
+  </div>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-label">Live Metrics</div>
+  <div class="metric"><span class="metric-label">Build started</span><span class="metric-value accent">April 2026</span></div>
+  <div class="metric"><span class="metric-label">Entries published</span><span class="metric-value accent">2</span></div>
+  <div class="metric"><span class="metric-label">New website</span><span class="metric-value green">Live ✓</span></div>
+  <div class="metric"><span class="metric-label">Antal feedback</span><span class="metric-value accent">Positive</span></div>
+  <div class="metric"><span class="metric-label">Posts by Rise</span><span class="metric-value">0</span></div>
+</div>
+<div class="sidebar-section">
+  <div class="sidebar-label">About</div>
+  <div style="font-size:12px;color:var(--dim);line-height:1.7;">A real-time record of building Rise. Every entry is written as milestones happen. Nothing retrospective.</div>
 </div>
 
-<!-- FOOTER -->
-<div class="footer">
+  </aside>
+</div>
+<footer>
   <div>
-    <div class="footer-brand">RISE Build Journal</div>
+    <div class="footer-brand">Rise Build Journal</div>
     <div style="margin-top:4px;">A Rise Project &middot; Confidential &middot; April 2026</div>
   </div>
-  <div style="text-align:right;">
-    <div>Entry 01 of an ongoing series</div>
-    <div style="margin-top:4px; color:var(--accent);"><a href="entry-02.html" style="color:var(--accent);text-decoration:none;">Continue to Entry 02 &rarr;</a></div>
-  </div>
-</div>
-
+  <div><a href="entry-02.html" style="color:var(--accent);text-decoration:none;">Continue to Entry 02 &rarr;</a></div>
+</footer>
 </body>
 </html>
