@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Entry 03 — From Content Tool to Intelligence Engine | Rise Build Journal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --black: #080808;
+  --dark: #111111;
+  --panel: #181818;
+  --card: #1E1E1E;
+  --border: #2A2A2A;
+  --dim: #555555;
+  --mid: #777777;
+  --text: #AAAAAA;
+  --light: #CCCCCC;
+  --white: #EEEEEE;
+  --accent: #D4FF00;
+  --gold: #C8A96E;
+  --green: #44FF88;
+  --blue: #4EC9FF;
+  --orange: #FF9444;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--black);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+/* ── NAV ── */
+.nav {
+  background: var(--dark);
+  border-bottom: 1px solid var(--border);
+  padding: 16px 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+}
+
+.nav-mark {
+  width: 32px; height: 32px;
+  background: var(--accent);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Syne', sans-serif;
+  font-weight: 800; font-size: 16px; color: var(--black);
+}
+
+.nav-name {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800; font-size: 17px;
+  color: var(--white); letter-spacing: -.3px;
+}
+
+.nav-section {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--dim);
+}
+
+.nav-links {
+  display: flex;
+  gap: 28px;
+}
+
+.nav-link {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px; letter-spacing: 1.5px;
+  text-transform: uppercase; color: var(--dim);
+  text-decoration: none; transition: color .2s;
+}
+
+.nav-link:hover { color: var(--accent); }
+
+/* ── HERO ── */
+.hero {
+  background: var(--dark);
+  border-bottom: 1px solid var(--border);
+  padding: 80px 48px 64px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(212,255,0,.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(212,255,0,.025) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+.hero-inner {
+  position: relative; z-index: 1;
+  max-width: 820px;
+}
+
+.entry-meta {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.entry-num {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--accent);
+  background: rgba(212,255,0,.08);
+  border: 1px solid rgba(212,255,0,.2);
+  padding: 4px 12px; border-radius: 20px;
+}
+
+.entry-date {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px; color: var(--dim);
+  letter-spacing: 1px;
+}
+
+.entry-status {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px; letter-spacing: 1.5px;
+  text-transform: uppercase;
+  background: rgba(68,255,136,.08);
+  border: 1px solid rgba(68,255,136,.2);
+  color: var(--green); padding: 4px 12px; border-radius: 20px;
+}
+
+.hero h1 {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800; font-size: 52px;
+  color: var(--white); letter-spacing: -2px;
+  line-height: 1.0; margin-bottom: 12px;
+}
+
+.hero h1 span { color: var(--accent); }
+
+.hero-sub {
+  font-size: 19px; font-weight: 300;
+  color: var(--mid); line-height: 1.6;
+  max-width: 680px; margin-bottom: 32px;
+}
+
+.hero-stats {
+  display: flex;
+  gap: 32px;
+  padding-top: 32px;
+  border-top: 1px solid var(--border);
+  flex-wrap: wrap;
+}
+
+.stat {
+  display: flex; flex-direction: column; gap: 4px;
+}
+
+.stat-val {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800; font-size: 28px;
+  color: var(--accent); letter-spacing: -1px;
+}
+
+.stat-lbl {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--dim);
+}
+
+/* ── CONTENT ── */
+.content {
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 64px 48px;
+}
+
+.section {
+  margin-bottom: 64px;
+}
+
+.section-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--accent);
+  margin-bottom: 16px;
+  display: flex; align-items: center; gap: 12px;
+}
+
+.section-label::after {
+  content: '';
+  flex: 1; height: 1px;
+  background: var(--border);
+}
+
+h2 {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800; font-size: 32px;
+  color: var(--white); letter-spacing: -1px;
+  line-height: 1.15; margin-bottom: 20px;
+}
+
+h3 {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700; font-size: 20px;
+  color: var(--white); margin-bottom: 12px;
+  margin-top: 32px;
+}
+
+p {
+  font-size: 16px;
+  color: var(--text);
+  line-height: 1.8;
+  margin-bottom: 18px;
+}
+
+p strong { color: var(--white); font-weight: 500; }
+
+.pullquote {
+  border-left: 3px solid var(--accent);
+  padding: 16px 24px;
+  margin: 32px 0;
+  background: rgba(212,255,0,.03);
+  border-radius: 0 8px 8px 0;
+}
+
+.pullquote p {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 19px; font-weight: 300;
+  color: var(--white); line-height: 1.6;
+  margin: 0; font-style: italic;
+}
+
+/* ── SCREENSHOTS ── */
+.screenshot-block {
+  margin: 36px 0;
+}
+
+.screenshot-wrap {
+  background: var(--dark);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.screenshot-bar {
+  background: var(--panel);
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-bottom: 1px solid var(--border);
+}
+
+.sbar-dot {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+}
+
+.sbar-url {
+  flex: 1;
+  background: var(--card);
+  border-radius: 4px;
+  padding: 4px 12px;
+  font-family: 'DM Mono', monospace;
+  font-size: 11px; color: var(--dim);
+  text-align: center;
+}
+
+.screenshot-wrap img {
+  width: 100%;
+  display: block;
+}
+
+.screenshot-caption {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px; letter-spacing: 1px;
+  color: var(--dim); text-align: center;
+}
+
+/* ── PIPELINE DIAGRAM ── */
+.pipeline {
+  background: var(--dark);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 28px;
+  margin: 32px 0;
+}
+
+.pipeline-title {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--accent);
+  margin-bottom: 20px;
+}
+
+.pipeline-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.pipe-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+
+.pipe-step:last-child { border-bottom: none; }
+
+.pipe-num {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'DM Mono', monospace;
+  font-size: 11px; font-weight: 500;
+  flex-shrink: 0;
+}
+
+.pipe-num.accent { background: rgba(212,255,0,.1); color: var(--accent); border: 1px solid rgba(212,255,0,.3); }
+.pipe-num.blue { background: rgba(78,201,255,.1); color: var(--blue); border: 1px solid rgba(78,201,255,.3); }
+.pipe-num.green { background: rgba(68,255,136,.1); color: var(--green); border: 1px solid rgba(68,255,136,.3); }
+.pipe-num.orange { background: rgba(255,148,68,.1); color: var(--orange); border: 1px solid rgba(255,148,68,.3); }
+
+.pipe-body { flex: 1; }
+.pipe-name {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700; font-size: 14px;
+  color: var(--white); margin-bottom: 2px;
+}
+
+.pipe-desc {
+  font-size: 13px; color: var(--dim); line-height: 1.5;
+}
+
+.pipe-new {
+  font-family: 'DM Mono', monospace;
+  font-size: 8px; letter-spacing: 1.5px;
+  text-transform: uppercase; color: var(--accent);
+  background: rgba(212,255,0,.08);
+  border: 1px solid rgba(212,255,0,.15);
+  padding: 2px 7px; border-radius: 20px;
+  margin-left: 8px; vertical-align: middle;
+}
+
+/* ── DECISION BOX ── */
+.decision-box {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--gold);
+  border-radius: 0 8px 8px 0;
+  padding: 20px 24px;
+  margin: 32px 0;
+}
+
+.decision-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--gold);
+  margin-bottom: 8px;
+}
+
+.decision-box p {
+  margin: 0; font-size: 15px;
+  color: var(--light); line-height: 1.7;
+}
+
+/* ── KEY MOMENTS ── */
+.moments {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 24px 0;
+}
+
+.moment {
+  background: var(--dark);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px 20px;
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.moment-icon { font-size: 20px; flex-shrink: 0; margin-top: 2px; }
+.moment-body { flex: 1; }
+.moment-title {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700; font-size: 14px;
+  color: var(--white); margin-bottom: 4px;
+}
+.moment-desc { font-size: 13px; color: var(--text); line-height: 1.6; }
+
+/* ── WHAT'S NEXT ── */
+.next-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin: 24px 0;
+}
+
+.next-item {
+  background: var(--dark);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.next-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px; letter-spacing: 1.5px;
+  text-transform: uppercase; color: var(--dim);
+  margin-bottom: 6px;
+}
+
+.next-text {
+  font-size: 13px; color: var(--light);
+  line-height: 1.6;
+}
+
+/* ── FOOTER ── */
+.entry-footer {
+  border-top: 1px solid var(--border);
+  padding: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.footer-nav {
+  display: flex;
+  gap: 20px;
+}
+
+.footer-link {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px; letter-spacing: 1.5px;
+  text-transform: uppercase; color: var(--dim);
+  text-decoration: none; transition: color .2s;
+}
+
+.footer-link:hover { color: var(--accent); }
+
+.footer-credit {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px; color: var(--dim);
+  letter-spacing: 1px;
+}
+
+@media (max-width: 768px) {
+  .hero { padding: 48px 24px 40px; }
+  .hero h1 { font-size: 36px; }
+  .content { padding: 40px 24px; }
+  .nav { padding: 14px 24px; }
+  .nav-links { display: none; }
+  .next-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <a href="index.html" class="nav-logo">
+    <div class="nav-mark">R</div>
+    <div>
+      <div class="nav-name">Rise</div>
+      <div class="nav-section">Build Journal</div>
+    </div>
+  </a>
+  <div class="nav-links">
+    <a href="entry-01.html" class="nav-link">Entry 01</a>
+    <a href="entry-02.html" class="nav-link">Entry 02</a>
+    <a href="entry-03.html" class="nav-link" style="color:var(--accent);">Entry 03</a>
+    <a href="../rise/index.html" class="nav-link">eGroup Site</a>
+    <a href="../rise/demos/autodemo.html" class="nav-link">Live Demo</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="entry-meta">
+      <span class="entry-num">Entry 03</span>
+      <span class="entry-date">April 2026</span>
+      <span class="entry-status">✓ Published</span>
+    </div>
+    <h1>From Content Tool<br>to <span>Intelligence Engine</span></h1>
+    <p class="hero-sub">
+      The session where Rise stopped being a platform that generates content and became 
+      a platform that reads the world first. Research. Verification. Reasoning. Then writing.
+    </p>
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-val">2</div>
+        <div class="stat-lbl">Working Demos Live</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">6</div>
+        <div class="stat-lbl">Pipeline Steps</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">V3</div>
+        <div class="stat-lbl">Scope Document</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val">Live</div>
+        <div class="stat-lbl">Web Research</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<div class="content">
+
+  <!-- THE SHIFT -->
+  <div class="section">
+    <div class="section-label">The Fundamental Shift</div>
+    <h2>We asked the wrong question first</h2>
+
+    <p>
+      For the first sessions, Rise was built around a simple premise: something happens, a human submits it, 
+      AI generates content. That's a useful tool. It saves time. It removes friction. But it's not 
+      what makes content worth reading.
+    </p>
+
+    <p>
+      The question we should have started with — and the one that changed everything in this session — is:
+    </p>
+
+    <div class="pullquote">
+      <p>"Why would a smart, busy person stop scrolling, read this, and then share it with their network?"</p>
+    </div>
+
+    <p>
+      The answer is never "because a company announced something." The answer is always "because it told me 
+      something I didn't know, connected to something I already care about, and sharing it makes me look informed."
+    </p>
+
+    <p>
+      That realisation rewrote the entire Rise architecture. The platform doesn't write content about eGroup. 
+      <strong>It reads the world, finds where eGroup belongs in an existing conversation, and writes 
+      content that earns its place in someone's feed.</strong>
+    </p>
+  </div>
+
+  <!-- THE PROBLEM WITH GENERIC AI CONTENT -->
+  <div class="section">
+    <div class="section-label">What We Were Getting Wrong</div>
+    <h2>The press release problem</h2>
+
+    <p>
+      Early outputs from Rise looked like this: <em>"eGroup CEO Antal Kuthy has been confirmed as a speaker 
+      at the AI Sovereignty Summit..."</em> Professional. Accurate. Completely forgettable. Nobody shares 
+      content that reads like a filing cabinet.
+    </p>
+
+    <p>
+      The root cause was that the AI was generating content in a vacuum. It knew the trigger — someone 
+      registered for a conference — but it didn't know what was happening in FinTech this week, what 
+      the actual conversation at Money 20/20 was about, or what specific angle would make an industry 
+      insider stop and think <em>"yes, exactly that."</em>
+    </p>
+
+    <div class="decision-box">
+      <div class="decision-label">The Decision</div>
+      <p>
+        Every Piece of Content (POC) must begin with live research — what the world is talking about 
+        right now in this domain, verified across multiple sources. No exceptions. The AI writes last, 
+        not first.
+      </p>
+    </div>
+
+    <p>
+      This added complexity. It added time — 30 to 60 seconds per trigger instead of 8 to 10. But it 
+      fundamentally changed the quality ceiling. Rise went from generating plausible content to 
+      generating content that has a reason to exist.
+    </p>
+  </div>
+
+  <!-- THE DEMOS -->
+  <div class="section">
+    <div class="section-label">What We Built</div>
+    <h2>Two working demos. One complete pipeline.</h2>
+
+    <p>
+      This session produced two fully working demonstrations, running on real AI with live web research. 
+      Both accessible at <code style="font-family:'DM Mono',monospace;font-size:13px;color:var(--accent);">localhost:3000</code> via a local proxy that handles the API connection.
+    </p>
+
+    <!-- DEMO 01 SCREENSHOT -->
+    <div class="screenshot-block">
+      <div class="screenshot-wrap">
+        <div class="screenshot-bar">
+          <div class="sbar-dot" style="background:#FF5F57;"></div>
+          <div class="sbar-dot" style="background:#FFBD2E;"></div>
+          <div class="sbar-dot" style="background:#28CA41;"></div>
+          <div class="sbar-url">localhost:3000/risedemo.html</div>
+        </div>
+        <img src="s7.png" alt="Rise Manual Trigger Demo — Demo 01">
+      </div>
+      <div class="screenshot-caption">Demo 01 — Manual Trigger. Staff selects a trigger type, adds context, chooses platforms. Rise generates real platform-specific content via the AI engine.</div>
+    </div>
+
+    <h3>Demo 01 — Manual Trigger</h3>
+    <p>
+      The submission experience. A staff member selects a content trigger type — Conference, Milestone, 
+      Partnership, Research, New Hire, or Submission — adds a brief context, selects target platforms, 
+      and hits Generate. Rise produces platform-specific content for LinkedIn, X, Website, and Instagram 
+      in real time, displayed in pixel-accurate platform mockups.
+    </p>
+
+    <p>
+      The X mockup reflects the current X interface — dark background, correct icon set, verified badge, 
+      the full action bar with reply, repost, like, views, and bookmark. LinkedIn shows the full post 
+      UI with reactions and engagement bar. The website mockup shows an eGroup-branded news post preview 
+      with the actual site design.
+    </p>
+
+    <!-- DEMO 02 SCREENSHOT — LANDING -->
+    <div class="screenshot-block">
+      <div class="screenshot-wrap">
+        <div class="screenshot-bar">
+          <div class="sbar-dot" style="background:#FF5F57;"></div>
+          <div class="sbar-dot" style="background:#FFBD2E;"></div>
+          <div class="sbar-dot" style="background:#28CA41;"></div>
+          <div class="sbar-url">localhost:3000/autodemo.html</div>
+        </div>
+        <img src="s8.png" alt="Rise Auto Trigger Demo — Demo 02 landing state">
+      </div>
+      <div class="screenshot-caption">Demo 02 — Auto Trigger landing state. Left: Brand Voice Editor (editable by admins) and connected business systems showing live events. Right: pipeline ready to run.</div>
+    </div>
+
+    <h3>Demo 02 — Auto Trigger Intelligence Engine</h3>
+    <p>
+      The flagship demo. This is Rise as it will work in production. Connected systems — MS Teams Calendar, 
+      HR, and CRM — show live events that Rise has detected automatically. No human submitted anything. 
+      The system watched existing business operations and identified content opportunities.
+    </p>
+
+    <p>
+      Clicking any event launches the full intelligence pipeline. This is what makes Demo 02 different 
+      from any other content tool demo you'll see.
+    </p>
+
+    <!-- DEMO 02 SCREENSHOT — PIPELINE RUNNING -->
+    <div class="screenshot-block">
+      <div class="screenshot-wrap">
+        <div class="screenshot-bar">
+          <div class="sbar-dot" style="background:#FF5F57;"></div>
+          <div class="sbar-dot" style="background:#FFBD2E;"></div>
+          <div class="sbar-dot" style="background:#28CA41;"></div>
+          <div class="sbar-url">localhost:3000/autodemo.html</div>
+        </div>
+        <img src="s9.png" alt="Rise Intelligence Pipeline running — live timer and discovery feed">
+      </div>
+      <div class="screenshot-caption">The intelligence pipeline running in real time. Live timer (12.4s shown), three API call indicators, and the discovery feed showing each search query and source Rise is working through.</div>
+    </div>
+  </div>
+
+  <!-- THE PIPELINE -->
+  <div class="section">
+    <div class="section-label">The Architecture</div>
+    <h2>Six steps. Zero human input.</h2>
+
+    <div class="pipeline">
+      <div class="pipeline-title">Rise Intelligence Pipeline — V3</div>
+      <div class="pipeline-steps">
+        <div class="pipe-step">
+          <div class="pipe-num accent">01</div>
+          <div class="pipe-body">
+            <div class="pipe-name">Event Detected</div>
+            <div class="pipe-desc">Integration Layer detects the trigger from a connected business system — calendar, HR, CRM, or project management. Zero human action required.</div>
+          </div>
+        </div>
+        <div class="pipe-step">
+          <div class="pipe-num blue">02</div>
+          <div class="pipe-body">
+            <div class="pipe-name">Live Trend Intelligence <span class="pipe-new">New in V3</span></div>
+            <div class="pipe-desc">Rise searches the web for what the world is talking about RIGHT NOW in this domain — current debates, shifts, controversies. Not last month. This week.</div>
+          </div>
+        </div>
+        <div class="pipe-step">
+          <div class="pipe-num blue">03</div>
+          <div class="pipe-body">
+            <div class="pipe-name">Deep Event Research + Verification <span class="pipe-new">New in V3</span></div>
+            <div class="pipe-desc">Multiple targeted searches on the specific trigger. Sources are cross-referenced. Every fact is tagged as confirmed, single-source, or flagged before it enters a POC.</div>
+          </div>
+        </div>
+        <div class="pipe-step">
+          <div class="pipe-num orange">04</div>
+          <div class="pipe-body">
+            <div class="pipe-name">Rise is Thinking <span class="pipe-new">New in V3</span></div>
+            <div class="pipe-desc">Before writing a single word, Rise answers five mandatory questions: What conversation is already happening? What does eGroup uniquely know? What's the most surprising angle? Why would someone share this? What's the scroll-stopping first sentence?</div>
+          </div>
+        </div>
+        <div class="pipe-step">
+          <div class="pipe-num accent">05</div>
+          <div class="pipe-body">
+            <div class="pipe-name">Content Generation</div>
+            <div class="pipe-desc">Platform-specific content written using verified research, the chosen angle, mandatory engagement structures, and brand voice rules. Designed to stop the scroll. Not to fill a feed.</div>
+          </div>
+        </div>
+        <div class="pipe-step">
+          <div class="pipe-num green">06</div>
+          <div class="pipe-body">
+            <div class="pipe-name">Brand Check + Review Queue</div>
+            <div class="pipe-desc">Scored against brand voice rules. Queued for admin review with full context: what Rise found, why it made the choices it did, verification status of every fact.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- THE KEY DECISIONS -->
+  <div class="section">
+    <div class="section-label">Key Decisions This Session</div>
+    <h2>The moments that changed the product</h2>
+
+    <div class="moments">
+      <div class="moment">
+        <div class="moment-icon">📖</div>
+        <div class="moment-body">
+          <div class="moment-title">Rise reads the world before it writes</div>
+          <div class="moment-desc">Every POC starts with live web research — not static context. This was the fundamental shift that changed the quality ceiling from "plausible" to "shareable." The timer and discovery feed make this visible.</div>
+        </div>
+      </div>
+      <div class="moment">
+        <div class="moment-icon">✅</div>
+        <div class="moment-body">
+          <div class="moment-title">Facts are verified before they enter a POC</div>
+          <div class="moment-desc">eGroup's credibility cannot be compromised by an inaccurate claim. A verification protocol now runs on every fact — confirmed across sources, or flagged before an admin sees it.</div>
+        </div>
+      </div>
+      <div class="moment">
+        <div class="moment-icon">🎨</div>
+        <div class="moment-body">
+          <div class="moment-title">Brand Voice Editor — admins own the rules</div>
+          <div class="moment-desc">The rules Rise writes by are no longer buried in code. Admins see them, edit them, and save them. Voice, what to never write, what to always write, company context. The AI follows the admin — not the other way round.</div>
+        </div>
+      </div>
+      <div class="moment">
+        <div class="moment-icon">🧠</div>
+        <div class="moment-body">
+          <div class="moment-title">The Learning Loop — Rise gets smarter per organisation</div>
+          <div class="moment-desc">Every approval, edit, rejection, and engagement signal feeds a model that adjusts Rise's structure over time. What works for eGroup's audience becomes Rise's default. What doesn't gets deprioritised. The moat builds itself.</div>
+        </div>
+      </div>
+      <div class="moment">
+        <div class="moment-icon">📷</div>
+        <div class="moment-body">
+          <div class="moment-title">Visuals are first-class content</div>
+          <div class="moment-desc">Every POC now includes an image recommendation — sourced from eGroup's asset library, the event's official imagery, or AI-generated to brief. In the demo, Unsplash provides real photographs per trigger type. In production, Rise will source from eGroup's own library first.</div>
+        </div>
+      </div>
+      <div class="moment">
+        <div class="moment-icon">📐</div>
+        <div class="moment-body">
+          <div class="moment-title">Mandatory content structures — engineered for engagement</div>
+          <div class="moment-desc">Each platform now has a mandatory structure. LinkedIn opens with a world-context hook, builds to eGroup's angle, ends with a genuine question. X threads have a strict 3-tweet structure — hook, substance, angle — with hashtags on the final tweet only. Website titles are capped at 7 words and must create curiosity, not summarise.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCOPE V3 -->
+  <div class="section">
+    <div class="section-label">The Scope Document</div>
+    <h2>Rise V3 — fully documented</h2>
+
+    <p>
+      Everything built and decided in this session — and the full engineering specification required 
+      to build it — is captured in Rise Scope V3. Fourteen sections. The complete specification for 
+      the 50 engineers at eGroup who will build the production system.
+    </p>
+
+    <p>
+      V3 supersedes V1 and V2. The key additions: the Intelligence Engine specification, the Fact 
+      Verification Protocol, the Visual Layer, the mandatory Content Structure Standards, the full 
+      Learning Loop architecture, and the Engagement Architecture — why engagement is the only metric 
+      that matters and how every POC is built to earn it.
+    </p>
+
+    <div class="decision-box">
+      <div class="decision-label">The Core Principle — V3</div>
+      <p>
+        "Rise does not create content about your company. It reads the world, finds where your company 
+        belongs in the conversation, and writes content that earns engagement — every single time."
+      </p>
+    </div>
+  </div>
+
+  <!-- WHAT'S NEXT -->
+  <div class="section">
+    <div class="section-label">What's Next</div>
+    <h2>The call with Antal</h2>
+
+    <p>
+      The demos are ready. The scope is documented. The next significant moment is the detailed 
+      feedback call with Antal Kuthy — eGroup's CEO and co-founder. That conversation will determine:
+    </p>
+
+    <div class="next-grid">
+      <div class="next-item">
+        <div class="next-label">Product Positioning</div>
+        <div class="next-text">Whether "Intelligence Infrastructure" is the right frame for eGroup — or whether the positioning needs to shift based on what Antal sees in the market.</div>
+      </div>
+      <div class="next-item">
+        <div class="next-label">Website Structure</div>
+        <div class="next-text">What the full eGroup website looks like — inner pages, product sections, how Rise is presented commercially vs internally.</div>
+      </div>
+      <div class="next-item">
+        <div class="next-label">Product Suite</div>
+        <div class="next-text">What eGroup's commercial product suite actually looks like — and how Rise is packaged and positioned within it for enterprise buyers.</div>
+      </div>
+      <div class="next-item">
+        <div class="next-label">Build Priority</div>
+        <div class="next-text">Which parts of the V3 spec eGroup's engineers build first — and what the Phase 1 deliverable looks like for internal use.</div>
+      </div>
+    </div>
+
+    <p style="margin-top: 28px;">
+      Entry 04 will follow that call. Until then — the demos are live, the scope is locked at V3, 
+      and Rise has a clear answer to the question that matters:
+      <strong>why would someone share this?</strong>
+    </p>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="entry-footer">
+  <div class="footer-nav">
+    <a href="index.html" class="footer-link">← Journal</a>
+    <a href="entry-02.html" class="footer-link">← Entry 02</a>
+    <a href="../rise/demos/autodemo.html" class="footer-link">Live Demo →</a>
+  </div>
+  <div class="footer-credit">Rise Build Journal · hoarhouse.github.io/v3/journal/</div>
+</div>
+
+</body>
+</html>
