@@ -1118,6 +1118,8 @@ header {
 </div>
 
 <script>
+// ── PROXY URL — replace with your Cloudflare Worker URL after deployment
+const PROXY_URL = "https://rise-proxy.YOUR-SUBDOMAIN.workers.dev";
 // ── STATE ──────────────────────────────────────────────────
 let selectedTrigger = 'conference';
 let selectedPlatforms = new Set(['LinkedIn', 'X / Twitter', 'Website']);
@@ -1273,7 +1275,7 @@ Platform guidelines:
 Write content that sounds genuinely human and specific to eGroup — not generic corporate speak. Reference eGroup's actual expertise where relevant. Make it feel like it was written by someone who knows the company deeply.`;
 
   try {
-    const response = await fetch("https://api.anthropic.com/v1/messages", {
+    const response = await fetch("http://localhost:3000/api", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

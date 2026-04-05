@@ -593,6 +593,8 @@ body {
 </div>
 
 <script>
+// ── PROXY URL — replace with your Cloudflare Worker URL after deployment
+const PROXY_URL = "https://rise-proxy.YOUR-SUBDOMAIN.workers.dev";
 // ── EVENT DEFINITIONS ──────────────────────────────────────
 const events = {
   ev1: {
@@ -762,7 +764,7 @@ Generate content for LinkedIn, X/Twitter, and Website Blog. Return ONLY valid JS
   }
 }`;
 
-  const response = await fetch("https://api.anthropic.com/v1/messages", {
+  const response = await fetch("http://localhost:3000/api", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
