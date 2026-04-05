@@ -596,13 +596,17 @@ WRITE content that ENTERS the existing conversation — don't start a boring new
 
 RULES:
 - LinkedIn (180-240 words): Open with something happening RIGHT NOW in the industry or world — NOT "We are pleased". Build to eGroup's position. End with genuine question for debate.
-- X/Twitter (3 tweets NO numbering, each under 280 chars): Each standalone. Opinionated. Makes people think or feel. Last tweet has 2-3 hashtags.
+- X/Twitter — 3-tweet thread, NO numbering, strict rules:
+  Tweet 1 (Hook): Bold claim or surprising fact. Under 200 chars. NO hashtags. No external links. Must work as a standalone post.
+  Tweet 2 (Substance): The specific insight or detail that earns credibility. Under 240 chars. NO hashtags. NO links.
+  Tweet 3 (CTA): eGroup's angle + a question or forward statement. End with MAXIMUM 2 hashtags embedded naturally mid-sentence or at end — NOT starting the tweet. Example: "We've been building #SovereignAI infrastructure since before the term existed. What's your take?" Under 280 chars total.
+  CRITICAL: Hashtags ONLY on tweet 3. MAXIMUM 2. Never start any tweet with a hashtag. Hashtags must feel natural — not bolted on at the end as a list.
 - Website (TITLE: max 7 words creating curiosity NOT summary, BODY: 80-100 words opening with world context): Journalism not PR.
 
 NEVER open with "eGroup", a person's name+title, or any form of announcement language.
 
 Return ONLY valid JSON (no markdown):
-{"platforms":[{"platform":"LinkedIn","type":"Company Post","content":"full post text","hashtags":["tag1","tag2","tag3"],"confidence":95,"angle":"one line: the specific angle used and why it works"},{"platform":"X / Twitter","type":"Thread","content":"tweet one\n\ntweet two\n\ntweet three","hashtags":["tag1","tag2"],"confidence":92,"angle":"angle used"},{"platform":"Website","type":"News Post","content":"TITLE: title\n\nBODY: body text","hashtags":[],"confidence":94,"angle":"angle used"}],"contextSummary":{"trigger":"brief trigger description","worldContext":"the specific current trend or conversation this taps into","brandScore":95,"verificationNote":"what was verified and from how many sources"}}`;
+{"platforms":[{"platform":"LinkedIn","type":"Company Post","content":"full post text","hashtags":["tag1","tag2","tag3"],"confidence":95,"angle":"one line: the specific angle used and why it works"},{"platform":"X / Twitter","type":"Thread","content":"tweet one\n\ntweet two\n\ntweet three","hashtags":[],"confidence":92,"angle":"angle used"},{"platform":"Website","type":"News Post","content":"TITLE: title\n\nBODY: body text","hashtags":[],"confidence":94,"angle":"angle used"}],"contextSummary":{"trigger":"brief trigger description","worldContext":"the specific current trend or conversation this taps into","brandScore":95,"verificationNote":"what was verified and from how many sources"}}`;
 
   const r=await fetch('http://localhost:3000',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1500,messages:[{role:'user',content:prompt}]})});
   const d=await r.json();
