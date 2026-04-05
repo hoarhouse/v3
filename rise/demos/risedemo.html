@@ -1237,7 +1237,7 @@ function buildPlatformCard(p, i) {
 function buildTweetMockup(text, tags, i) {
   const isThread = /^1[\/\.]/.test(text.trim()) || text.includes('\n1/') || text.includes('\n1.');
   const tweets = isThread 
-    ? text.split(/\n\n(?=\d+[\/\.])/).filter(t => t.trim()) 
+    ? text.split(/\n\n(?=\d+[\/\.])/).filter(t => t.trim()).map(t => t.replace(/^\d+[\/\.]\s*/, '').trim()) 
     : [text];
 
   const tweetCards = tweets.map((t, ti) => `
@@ -1418,7 +1418,7 @@ function buildWebsiteMockup(text, i) {
       </div>
       <div style="padding:28px;">
         <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#D4FF00;margin-bottom:10px;">News &amp; Insights</div>
-        <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:24px;color:#EEEEEE;letter-spacing:-0.5px;line-height:1.2;margin-bottom:16px;" id="web-${i}">${escHtml(text.split('\n')[0] || text.substring(0,80))}</div>
+        <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:24px;color:#EEEEEE;letter-spacing:-0.5px;line-height:1.2;margin-bottom:16px;" id="web-${i}">${escHtml(text.split(' ').slice(0,8).join(' ') + (text.split(' ').length > 8 ? '...' : ''))}</div>
         <div style="width:40px;height:2px;background:#D4FF00;margin-bottom:16px;"></div>
         <div style="font-size:15px;line-height:1.75;color:#AAAAAA;">${escHtml(text)}</div>
         <div style="margin-top:20px;display:flex;align-items:center;gap:16px;">
