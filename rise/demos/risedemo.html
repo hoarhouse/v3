@@ -47,7 +47,7 @@ header {
   align-items: center;
   justify-content: space-between;
   position: sticky;
-  top: 0;
+  top: 52px;
   z-index: 100;
 }
 
@@ -811,9 +811,98 @@ header {
   .hero-strip { padding: 24px 20px; }
   .input-panel, .output-panel { padding: 20px; }
 }
+
+/* ── DEMO NAV ── */
+.demo-nav {
+  background: #0A0A0A;
+  border-bottom: 1px solid #1E1E1E;
+  padding: 0 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 52px;
+  position: sticky;
+  top: 0;
+  z-index: 200;
+}
+.demo-nav-left { display:flex; align-items:center; }
+.demo-nav-logo { display:flex; align-items:center; gap:10px; }
+.demo-nav-mark {
+  width:28px; height:28px;
+  background: #D4FF00;
+  display:flex; align-items:center; justify-content:center;
+  font-family:'Syne',sans-serif; font-weight:800; font-size:14px; color:#080808;
+}
+.demo-nav-name {
+  font-family:'Syne',sans-serif; font-weight:800; font-size:16px; color:#EEEEEE; letter-spacing:-.3px;
+}
+.demo-nav-tag {
+  font-family:'DM Mono',monospace; font-size:9px; letter-spacing:2px; text-transform:uppercase;
+  color:#555; border:1px solid #222; padding:2px 8px; border-radius:20px;
+}
+.demo-nav-center { display:flex; align-items:center; gap:4px; }
+.demo-nav-item {
+  display:flex; align-items:center; gap:8px;
+  padding:8px 16px; border-radius:6px;
+  text-decoration:none; transition:background .2s;
+  border:1px solid transparent;
+}
+.demo-nav-item:hover { background:#161616; border-color:#2A2A2A; }
+.demo-nav-item.active { background:#161616; border-color:rgba(212,255,0,0.2); }
+.demo-nav-num {
+  font-family:'DM Mono',monospace; font-size:9px; font-weight:500;
+  letter-spacing:1px; color:#D4FF00; opacity:.7;
+}
+.demo-nav-label {
+  font-family:'DM Mono',monospace; font-size:10px; font-weight:500;
+  letter-spacing:1.5px; text-transform:uppercase; color:#777;
+  transition:color .2s;
+}
+.demo-nav-item:hover .demo-nav-label,
+.demo-nav-item.active .demo-nav-label { color:#EEEEEE; }
+.demo-nav-divider { width:1px; height:20px; background:#1E1E1E; margin:0 4px; }
+.demo-nav-right { display:flex; align-items:center; gap:20px; }
+.demo-nav-link {
+  font-family:'DM Mono',monospace; font-size:10px; letter-spacing:1.5px;
+  text-transform:uppercase; color:#444; text-decoration:none; transition:color .2s;
+}
+.demo-nav-link:hover { color:#AAAAAA; }
+@media(max-width:768px) {
+  .demo-nav { padding:0 16px; }
+  .demo-nav-tag { display:none; }
+  .demo-nav-right { display:none; }
+  .demo-nav-label { display:none; }
+}
+
 </style>
 </head>
 <body>
+
+<div class="demo-nav">
+  <div class="demo-nav-left">
+    <div class="demo-nav-logo">
+      <div class="demo-nav-mark">R</div>
+      <span class="demo-nav-name">Rise</span>
+      <span class="demo-nav-tag">Demo Suite</span>
+    </div>
+  </div>
+  <div class="demo-nav-center">
+    <a href="risedemo.html" class="demo-nav-item active" id="nav-manual">
+      <span class="demo-nav-num">01</span>
+      <span class="demo-nav-label">Manual Trigger</span>
+    </a>
+    <div class="demo-nav-divider"></div>
+    <a href="autodemo.html" class="demo-nav-item" id="nav-auto">
+      <span class="demo-nav-num">02</span>
+      <span class="demo-nav-label">Auto Trigger</span>
+    </a>
+  </div>
+  <div class="demo-nav-right">
+    <a href="../index.html" class="demo-nav-link">eGroup Site</a>
+    <a href="../documents/Rise_Scope_V2.pdf" target="_blank" class="demo-nav-link">Scope V2</a>
+    <a href="../../journal/" class="demo-nav-link">Journal</a>
+  </div>
+</div>
 
 <!-- HEADER -->
 <header>
