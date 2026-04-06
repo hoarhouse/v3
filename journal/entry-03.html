@@ -479,26 +479,23 @@ p strong { color: var(--white); font-weight: 500; }
   .next-grid { grid-template-columns: 1fr; }
 }
 </style>
+<script src="nav.js"></script>
+<script>
+  // Remove old hardcoded nav if present, then inject shared nav
+  document.addEventListener('DOMContentLoaded', function() {
+    // Remove any old nav elements
+    ['#rise-nav', '.nav', 'nav'].forEach(sel => {
+      const el = document.querySelector(sel);
+      if (el && el.id !== 'rise-nav') el.remove();
+    });
+    injectNav('journal', 'entry-03.html');
+  });
+</script>
 </head>
 <body>
 
 <!-- NAV -->
-<nav class="nav">
-  <a href="index.html" class="nav-logo">
-    <div class="nav-mark">R</div>
-    <div>
-      <div class="nav-name">Rise</div>
-      <div class="nav-section">Build Journal</div>
-    </div>
-  </a>
-  <div class="nav-links">
-    <a href="entry-01.html" class="nav-link">Entry 01</a>
-    <a href="entry-02.html" class="nav-link">Entry 02</a>
-    <a href="entry-03.html" class="nav-link" style="color:var(--accent);">Entry 03</a>
-    <a href="../rise/index.html" class="nav-link">eGroup Site</a>
-    <a href="../rise/demos/autodemo.html" class="nav-link">Live Demo</a>
-  </div>
-</nav>
+
 
 <!-- HERO -->
 <div class="hero">

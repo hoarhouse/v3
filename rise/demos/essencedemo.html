@@ -208,7 +208,7 @@ body{background:var(--black);color:var(--text);font-family:'DM Sans',sans-serif;
 .modal-cancel{background:none;border:1px solid var(--border);color:var(--text);padding:8px 16px;border-radius:6px;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:13px;}
 .modal-save{background:var(--purple);border:none;color:#fff;padding:8px 20px;border-radius:6px;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;}
 
-/* ── SHARED NAV ── */
+
 .snav {
   height: 48px;
   background: #0A0A0A;
@@ -285,13 +285,16 @@ body{background:var(--black);color:var(--text);font-family:'DM Sans',sans-serif;
 .snav-link.docs:hover { opacity: 1; }
 
 </style>
+<script src="nav.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    injectNav('demo', 'essencedemo.html');
+  });
+</script>
 </head>
 <body>
 
 <!-- TOP BAR -->
-<div class="snav">
-  <a href="../index.html" class="snav-logo">
-    <div class="snav-mark">R</div>
     <span class="snav-name">Rise</span>
   </a>
   <div class="snav-sep"></div>

@@ -233,7 +233,7 @@ body{background:var(--black);color:var(--text);font-family:'DM Sans',sans-serif;
 
 @media(max-width:900px){.app{grid-template-columns:1fr;}.left{border-right:none;border-bottom:1px solid var(--border);}.nav-tag,.nav-right,.ni-lbl{display:none;}.hero{padding:22px 20px;}.right{padding:18px;}}
 
-/* ── SHARED NAV ── */
+
 .snav {
   height: 48px;
   background: #0A0A0A;
@@ -310,12 +310,15 @@ body{background:var(--black);color:var(--text);font-family:'DM Sans',sans-serif;
 .snav-link.docs:hover { opacity: 1; }
 
 </style>
+<script src="nav.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    injectNav('demo', 'autodemo.html');
+  });
+</script>
 </head>
 <body>
 
-<div class="snav">
-  <a href="../index.html" class="snav-logo">
-    <div class="snav-mark">R</div>
     <span class="snav-name">Rise</span>
   </a>
   <div class="snav-sep"></div>

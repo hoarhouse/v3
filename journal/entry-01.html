@@ -130,6 +130,18 @@ footer{background:var(--dark);border-top:1px solid var(--border);padding:28px 60
   footer{flex-direction:column;gap:12px;text-align:center;padding:24px 20px;}
 }
 </style>
+<script src="nav.js"></script>
+<script>
+  // Remove old hardcoded nav if present, then inject shared nav
+  document.addEventListener('DOMContentLoaded', function() {
+    // Remove any old nav elements
+    ['#rise-nav', '.nav', 'nav'].forEach(sel => {
+      const el = document.querySelector(sel);
+      if (el && el.id !== 'rise-nav') el.remove();
+    });
+    injectNav('journal', 'entry-01.html');
+  });
+</script>
 </head>
 <body>
 <div class="topbar"></div>

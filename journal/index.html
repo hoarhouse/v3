@@ -4,222 +4,259 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Rise Build Journal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<script src="nav.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    injectNav('journal', 'index.html');
+  });
+</script>
 <style>
-:root{--black:#0D0D0D;--dark:#141414;--mid:#1E1E1E;--card:#242424;--border:#2E2E2E;--dim:#555;--light:#777;--text:#B0B0B0;--white:#E8E8E8;--accent:#D4FF00;--green:#44FF88;}
+:root {
+  --black:#080808;--dark:#111;--panel:#181818;--card:#1E1E1E;
+  --border:#2A2A2A;--dim:#555;--mid:#777;--text:#AAAAAA;
+  --light:#CCCCCC;--white:#EEEEEE;--accent:#D4FF00;--gold:#C8A96E;
+  --green:#44FF88;--blue:#4EC9FF;--orange:#FF9444;--purple:#B088FF;
+}
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
-body{background:var(--black);color:var(--text);font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:15px;line-height:1.6;min-height:100vh;}
-.topbar{height:3px;background:var(--accent);width:100%;}
-nav{background:var(--dark);border-bottom:1px solid var(--border);padding:20px 60px;display:flex;align-items:center;justify-content:space-between;}
-.nav-brand{display:flex;flex-direction:column;gap:2px;}
-.nav-title{font-size:13px;font-weight:700;color:var(--accent);letter-spacing:3px;text-transform:uppercase;}
-.nav-sub{font-size:10px;color:var(--dim);letter-spacing:1.5px;text-transform:uppercase;}
-.nav-links{display:flex;gap:32px;list-style:none;}
-.nav-links a{font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--light);text-decoration:none;transition:color .2s;}
-.nav-links a:hover{color:var(--white);}
-.nav-status{display:flex;align-items:center;gap:8px;font-size:11px;color:var(--light);}
-.status-dot{width:7px;height:7px;border-radius:50%;background:var(--accent);animation:pulse 2s ease-in-out infinite;}
-@keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.5;transform:scale(.8);}}
-.hero{padding:80px 60px 60px;border-bottom:1px solid var(--border);position:relative;overflow:hidden;}
-.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(212,255,0,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(212,255,0,.025) 1px,transparent 1px);background-size:60px 60px;mask-image:radial-gradient(ellipse 100% 100% at 100% 0%,black 20%,transparent 70%);}
-.hero-eyebrow{font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:20px;display:flex;align-items:center;gap:12px;}
-.hero-eyebrow::before{content:'';display:inline-block;width:24px;height:1px;background:var(--accent);}
-.hero-title{font-size:clamp(42px,5vw,68px);font-weight:800;color:var(--white);letter-spacing:-2px;line-height:1.0;margin-bottom:20px;}
-.hero-title span{color:var(--accent);}
-.hero-desc{font-size:17px;font-weight:300;color:var(--light);max-width:580px;line-height:1.7;margin-bottom:40px;}
-.hero-desc strong{color:var(--text);font-weight:400;}
-.hero-meta{display:flex;gap:40px;flex-wrap:wrap;}
-.meta-item{display:flex;flex-direction:column;gap:4px;}
-.meta-label{font-size:9px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--dim);}
-.meta-value{font-size:13px;color:var(--white);font-weight:500;}
-.meta-value.live{color:var(--accent);}
-.layout{display:grid;grid-template-columns:1fr 320px;min-height:calc(100vh - 300px);}
-.entries{padding:60px;border-right:1px solid var(--border);}
-.entries-header{font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--dim);margin-bottom:32px;padding-bottom:16px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;}
-.entries-count{font-size:11px;color:var(--accent);font-weight:700;}
-.entry-card{display:grid;grid-template-columns:80px 1fr;margin-bottom:2px;text-decoration:none;border:1px solid var(--border);background:var(--dark);position:relative;overflow:hidden;transition:background .2s;}
-.entry-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--accent);transform:scaleY(0);transition:transform .25s ease;}
-.entry-card:hover{background:var(--mid);}
-.entry-card:hover::before{transform:scaleY(1);}
-.entry-card.upcoming{opacity:.4;pointer-events:none;}
-.entry-num{background:var(--mid);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:28px 16px;border-right:1px solid var(--border);gap:6px;}
-.entry-num-text{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--accent);}
-.entry-num-digit{font-size:28px;font-weight:800;color:var(--white);line-height:1;letter-spacing:-1px;}
-.entry-body{padding:24px 28px;display:flex;flex-direction:column;gap:8px;}
-.entry-top{display:flex;align-items:center;justify-content:space-between;gap:12px;}
-.entry-phase{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--dim);}
-.entry-badge{font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:3px 10px;border-radius:20px;flex-shrink:0;}
-.entry-badge.published{background:rgba(212,255,0,.1);color:var(--accent);border:1px solid rgba(212,255,0,.2);}
-.entry-badge.upcoming{background:rgba(255,255,255,.04);color:var(--dim);border:1px solid var(--border);}
-.entry-title{font-size:18px;font-weight:700;color:var(--white);letter-spacing:-.3px;line-height:1.2;}
-.entry-card.upcoming .entry-title{color:var(--light);}
-.entry-desc{font-size:13px;color:var(--dim);line-height:1.6;}
-.entry-footer{display:flex;align-items:center;justify-content:space-between;margin-top:4px;}
-.entry-date{font-size:10px;color:var(--dim);letter-spacing:1px;}
-.entry-arrow{font-size:14px;color:var(--accent);opacity:0;transform:translateX(-4px);transition:all .2s;}
-.entry-card:hover .entry-arrow{opacity:1;transform:translateX(0);}
-.sidebar{padding:60px 40px;background:var(--dark);}
-.sidebar-section{margin-bottom:40px;}
-.sidebar-label{font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--dim);margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid var(--border);}
-.metric{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--border);font-size:12px;}
-.metric:last-child{border-bottom:none;}
-.metric-label{color:var(--light);}
-.metric-value{font-weight:700;color:var(--white);}
-.metric-value.accent{color:var(--accent);}
-.metric-value.green{color:var(--green);}
-.link-item{display:flex;flex-direction:column;gap:3px;padding:12px 0;border-bottom:1px solid var(--border);text-decoration:none;transition:all .2s;}
-.link-item:last-child{border-bottom:none;}
-.link-item:hover .link-title{color:var(--accent);}
-.link-label{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--dim);}
-.link-title{font-size:12px;color:var(--text);transition:color .2s;}
-.link-url{font-size:10px;color:var(--dim);font-family:monospace;}
-.about-box{background:var(--card);border:1px solid var(--border);border-left:2px solid var(--accent);padding:16px 18px;}
-.about-box p{font-size:12px;color:var(--light);line-height:1.7;}
-footer{background:var(--dark);border-top:1px solid var(--border);padding:28px 60px;display:flex;justify-content:space-between;align-items:center;font-size:11px;color:var(--dim);}
-.footer-brand{font-weight:700;color:var(--accent);font-size:13px;letter-spacing:2px;text-transform:uppercase;}
-@media(max-width:900px){nav{padding:16px 24px;}.nav-links{display:none;}.hero{padding:48px 24px 40px;}.layout{grid-template-columns:1fr;}.entries{padding:40px 24px;border-right:none;}.sidebar{padding:40px 24px;border-top:1px solid var(--border);}footer{flex-direction:column;gap:12px;text-align:center;padding:24px;}}
+body{background:var(--black);color:var(--text);font-family:'DM Sans',sans-serif;font-size:15px;line-height:1.7;}
+
+.hero{background:var(--dark);border-bottom:1px solid var(--border);padding:60px 48px 48px;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(212,255,0,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(212,255,0,.025) 1px,transparent 1px);background-size:48px 48px;}
+.hero-inner{position:relative;z-index:1;max-width:860px;}
+.hero-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:14px;display:flex;align-items:center;gap:10px;}
+.hero-label::before{content:'';display:inline-block;width:20px;height:1px;background:var(--accent);}
+.hero h1{font-family:'Syne',sans-serif;font-weight:800;font-size:48px;color:var(--white);letter-spacing:-2px;line-height:1.0;margin-bottom:12px;}
+.hero h1 span{color:var(--accent);}
+.hero-sub{font-size:17px;font-weight:300;color:var(--mid);line-height:1.6;max-width:600px;margin-bottom:32px;}
+.hero-meta{display:flex;gap:32px;padding-top:28px;border-top:1px solid var(--border);flex-wrap:wrap;}
+.meta-item{display:flex;flex-direction:column;gap:3px;}
+.meta-val{font-family:'Syne',sans-serif;font-weight:800;font-size:22px;color:var(--white);letter-spacing:-0.5px;}
+.meta-lbl{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);}
+.live-dot{width:5px;height:5px;border-radius:50%;background:var(--green);display:inline-block;margin-right:5px;animation:pulse 2s ease-in-out infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.3;}}
+
+.main{max-width:860px;margin:0 auto;padding:48px;}
+
+.section-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--dim);margin-bottom:16px;display:flex;align-items:center;gap:12px;}
+.section-label::after{content:'';flex:1;height:1px;background:var(--border);}
+
+.entries{display:flex;flex-direction:column;gap:12px;margin-bottom:48px;}
+
+.entry-card{
+  background:var(--dark);border:1px solid var(--border);border-radius:10px;
+  padding:20px 24px;display:flex;align-items:flex-start;gap:20px;
+  text-decoration:none;transition:all .2s;
+}
+.entry-card:hover{border-color:var(--mid);background:var(--panel);}
+.entry-card.published:hover{border-color:rgba(212,255,0,.3);}
+.entry-card.upcoming{opacity:.55;cursor:default;pointer-events:none;}
+
+.entry-num{
+  font-family:'DM Mono',monospace;font-size:11px;letter-spacing:2px;
+  color:var(--accent);background:rgba(212,255,0,.08);border:1px solid rgba(212,255,0,.2);
+  padding:4px 10px;border-radius:4px;white-space:nowrap;flex-shrink:0;margin-top:2px;
+}
+.entry-card.upcoming .entry-num{color:var(--dim);background:var(--card);border-color:var(--border);}
+
+.entry-body{flex:1;min-width:0;}
+.entry-phase{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-bottom:5px;}
+.entry-title{font-family:'Syne',sans-serif;font-weight:700;font-size:17px;color:var(--white);line-height:1.3;margin-bottom:5px;}
+.entry-card.upcoming .entry-title{color:var(--text);}
+.entry-desc{font-size:13px;color:var(--dim);line-height:1.5;}
+.entry-meta-row{display:flex;align-items:center;gap:12px;margin-top:10px;flex-wrap:wrap;}
+.entry-date{font-family:'DM Mono',monospace;font-size:10px;color:var(--dim);}
+.entry-status{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1px;text-transform:uppercase;padding:2px 9px;border-radius:20px;}
+.entry-status.published{background:rgba(68,255,136,.08);color:var(--green);border:1px solid rgba(68,255,136,.2);}
+.entry-status.upcoming{background:var(--card);color:var(--dim);border:1px solid var(--border);}
+
+.entry-arrow{color:var(--dim);font-size:18px;flex-shrink:0;margin-top:4px;transition:color .2s;}
+.entry-card.published:hover .entry-arrow{color:var(--accent);}
+
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:48px;}
+.info-card{background:var(--dark);border:1px solid var(--border);border-radius:8px;padding:16px 18px;}
+.info-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-bottom:8px;}
+.info-val{font-size:13px;color:var(--text);line-height:1.6;}
+.info-val strong{color:var(--white);font-weight:500;}
+.info-val a{color:var(--blue);text-decoration:none;}
+.info-val a:hover{text-decoration:underline;}
+
+footer{border-top:1px solid var(--border);padding:32px 48px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;}
+.footer-text{font-family:'DM Mono',monospace;font-size:9px;color:var(--dim);letter-spacing:1px;}
+
+@media(max-width:768px){
+  .hero{padding:40px 24px 32px;}
+  .hero h1{font-size:34px;}
+  .main{padding:32px 24px;}
+  .info-grid{grid-template-columns:1fr;}
+  footer{padding:24px;}
+}
 </style>
 </head>
 <body>
-<div class="topbar"></div>
-<nav>
-  <div class="nav-brand">
-    <div class="nav-title">Rise Build Journal</div>
-    <div class="nav-sub">A Real-Time Build Record &middot; eGroup &times; Rise</div>
-  </div>
-  <ul class="nav-links">
-    <li><a href="../rise/index.html">eGroup Site</a></li>
-    <li><a href="../rise/documents/Rise_Scope_Document.pdf" target="_blank">Scope Doc</a></li>
-  </ul>
-  <div class="nav-status">
-    <div class="status-dot"></div>
-    <span>Live &amp; Active</span>
-  </div>
-</nav>
+
 <div class="hero">
-  <div class="hero-grid"></div>
-  <div class="hero-eyebrow">Build Journal &middot; April 2026 &mdash; Ongoing</div>
-  <h1 class="hero-title">Building <span>Rise</span><br>in public.</h1>
-  <p class="hero-desc">A real-time record of building an autonomous content intelligence platform from zero &mdash; <strong>every decision, every challenge, every result.</strong> Nothing retrospective. Nothing polished after the fact.</p>
-  <div class="hero-meta">
-    <div class="meta-item"><span class="meta-label">Pilot Client</span><span class="meta-value">eGroup &mdash; Budapest, Hungary</span></div>
-    <div class="meta-item"><span class="meta-label">Project Lead</span><span class="meta-value">Chris Hoar</span></div>
-    <div class="meta-item"><span class="meta-label">Started</span><span class="meta-value">April 2026</span></div>
-    <div class="meta-item"><span class="meta-label">Status</span><span class="meta-value live">&bull; Active Build</span></div>
-    <div class="meta-item"><span class="meta-label">Entries Published</span><span class="meta-value live">2 of 6+</span></div>
+  <div class="hero-inner">
+    <div class="hero-label">Rise Build Journal</div>
+    <h1>Building <span>Rise</span><br>in public.</h1>
+    <p class="hero-sub">A real-time record of building an autonomous content intelligence platform from zero — every decision, every challenge, every result. Nothing retrospective.</p>
+    <div class="hero-meta">
+      <div class="meta-item">
+        <div class="meta-val">4</div>
+        <div class="meta-lbl">Entries published</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-val">4</div>
+        <div class="meta-lbl">Working demos</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-val">3</div>
+        <div class="meta-lbl">Spec documents</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-val" style="color:var(--green);"><span class="live-dot"></span>Active</div>
+        <div class="meta-lbl">Build status</div>
+      </div>
+    </div>
   </div>
 </div>
-<div class="layout">
+
+<div class="main">
+
+  <div class="section-label">All Journal Entries</div>
+
   <div class="entries">
-    <div class="entries-header">
-      <span>All Journal Entries</span>
-      <span class="entries-count">2 Published &middot; 4+ Upcoming</span>
-    </div>
-    <a href="entry-01.html" class="entry-card">
-      <div class="entry-num"><span class="entry-num-text">Entry</span><span class="entry-num-digit">01</span></div>
+
+    <a href="entry-01.html" class="entry-card published">
+      <div class="entry-num">01</div>
       <div class="entry-body">
-        <div class="entry-top"><span class="entry-phase">Phase 0 &mdash; Discovery</span><span class="entry-badge published">Published</span></div>
-        <div class="entry-title">The Starting Point: A Company Doing Big Things Nobody Knows About</div>
-        <div class="entry-desc">The eGroup audit &mdash; what the website says vs what the company actually is. The insight that became Rise. Why we are building a product instead of a fix.</div>
-        <div class="entry-footer"><span class="entry-date">April 3, 2026</span><span class="entry-arrow">&rarr;</span></div>
+        <div class="entry-phase">Phase 0 — Discovery</div>
+        <div class="entry-title">The Starting Point</div>
+        <div class="entry-desc">A company doing big things nobody knows about. The eGroup audit — what the website said vs. what the company actually is. The insight that became Rise.</div>
+        <div class="entry-meta-row">
+          <div class="entry-date">April 3, 2026</div>
+          <div class="entry-status published">Published</div>
+        </div>
       </div>
+      <div class="entry-arrow">→</div>
     </a>
-    <a href="entry-02.html" class="entry-card">
-      <div class="entry-num"><span class="entry-num-text">Entry</span><span class="entry-num-digit">02</span></div>
+
+    <a href="entry-02.html" class="entry-card published">
+      <div class="entry-num">02</div>
       <div class="entry-body">
-        <div class="entry-top"><span class="entry-phase">Phase 1 &mdash; Foundation</span><span class="entry-badge published">Published</span></div>
-        <div class="entry-title">The Company, The Brand &amp; The First Page</div>
-        <div class="entry-desc">Deep dive on what eGroup actually is. The positioning decision &mdash; Thirty years building what AI runs on. Design direction and the homepage built in one session.</div>
-        <div class="entry-footer"><span class="entry-date">April 3, 2026</span><span class="entry-arrow">&rarr;</span></div>
+        <div class="entry-phase">Phase 1 — Foundation</div>
+        <div class="entry-title">The Company, The Brand & The First Page</div>
+        <div class="entry-desc">Deep dive on what eGroup actually is. The positioning decision — "Thirty years building what AI runs on." Design direction and the homepage built in one session.</div>
+        <div class="entry-meta-row">
+          <div class="entry-date">April 3, 2026</div>
+          <div class="entry-status published">Published</div>
+        </div>
       </div>
+      <div class="entry-arrow">→</div>
     </a>
-    <div class="entry-card upcoming">
-      <div class="entry-num"><span class="entry-num-text">Entry</span><span class="entry-num-digit">03</span></div>
+
+    <a href="entry-03.html" class="entry-card published">
+      <div class="entry-num">03</div>
       <div class="entry-body">
-        <div class="entry-top"><span class="entry-phase">Phase 1 &mdash; Foundation</span><span class="entry-badge upcoming">Upcoming</span></div>
-        <div class="entry-title">Antal Responds &mdash; Positioning Confirmed</div>
-        <div class="entry-desc">Detailed CEO feedback on the homepage direction. What stays, what changes, and what it means for the full site build.</div>
-        <div class="entry-footer"><span class="entry-date">Coming Soon</span></div>
+        <div class="entry-phase">Phase 2 — Intelligence</div>
+        <div class="entry-title">From Content Tool to Intelligence Engine</div>
+        <div class="entry-desc">Rise stops writing about eGroup. It starts reading the world first — live research, fact verification, the thinking framework, and content designed to earn engagement rather than fill a feed.</div>
+        <div class="entry-meta-row">
+          <div class="entry-date">April 5, 2026</div>
+          <div class="entry-status published">Published</div>
+        </div>
+      </div>
+      <div class="entry-arrow">→</div>
+    </a>
+
+    <a href="entry-04.html" class="entry-card published">
+      <div class="entry-num">04</div>
+      <div class="entry-body">
+        <div class="entry-phase">Phase 3 — Architecture</div>
+        <div class="entry-title">The Architecture Session</div>
+        <div class="entry-desc">Rise gets a brain (Layer 0 knowledge graph), a second consciousness (Essence), a conversational interface, and a complete three-document engineering specification. Everything changed.</div>
+        <div class="entry-meta-row">
+          <div class="entry-date">April 6, 2026</div>
+          <div class="entry-status published">Published</div>
+        </div>
+      </div>
+      <div class="entry-arrow">→</div>
+    </a>
+
+    <div class="entry-card upcoming">
+      <div class="entry-num">05</div>
+      <div class="entry-body">
+        <div class="entry-phase">Phase 3 — Architecture</div>
+        <div class="entry-title">Antal Reviews the Full Architecture</div>
+        <div class="entry-desc">The detailed product feedback call. What the dual consciousness model means for eGroup commercially. Build priorities confirmed.</div>
+        <div class="entry-meta-row">
+          <div class="entry-status upcoming">Coming soon</div>
+        </div>
       </div>
     </div>
+
     <div class="entry-card upcoming">
-      <div class="entry-num"><span class="entry-num-text">Entry</span><span class="entry-num-digit">04</span></div>
+      <div class="entry-num">06</div>
       <div class="entry-body">
-        <div class="entry-top"><span class="entry-phase">Phase 1 &mdash; Foundation</span><span class="entry-badge upcoming">Upcoming</span></div>
-        <div class="entry-title">The Full eGroup Site Takes Shape</div>
-        <div class="entry-desc">Beyond the homepage &mdash; building out the complete site structure, inner pages, and the content architecture Rise will eventually manage autonomously.</div>
-        <div class="entry-footer"><span class="entry-date">Coming Soon</span></div>
+        <div class="entry-phase">Phase 4 — Build</div>
+        <div class="entry-title">The Engineering Handover</div>
+        <div class="entry-desc">The specification handed to eGroup's 50 AI engineers. Phase 1 build begins. The first connector goes live.</div>
+        <div class="entry-meta-row">
+          <div class="entry-status upcoming">Coming soon</div>
+        </div>
       </div>
     </div>
-    <div class="entry-card upcoming">
-      <div class="entry-num"><span class="entry-num-text">Entry</span><span class="entry-num-digit">05</span></div>
-      <div class="entry-body">
-        <div class="entry-top"><span class="entry-phase">Phase 2 &mdash; Intelligence</span><span class="entry-badge upcoming">Upcoming</span></div>
-        <div class="entry-title">The Rise Submission App Begins</div>
-        <div class="entry-desc">Building Layer 1 &mdash; the 1-2 tap capture experience. Mobile native, desktop web, Teams SSO. The moment staff can submit for the first time.</div>
-        <div class="entry-footer"><span class="entry-date">Coming Soon</span></div>
+
+  </div>
+
+  <div class="section-label">Project</div>
+
+  <div class="info-grid">
+    <div class="info-card">
+      <div class="info-label">Pilot client</div>
+      <div class="info-val"><strong>eGroup ICT Software Zrt</strong><br>Budapest, Hungary · Est. 1993<br>110 staff · 50 AI engineers · CEO: Antal Kuthy</div>
+    </div>
+    <div class="info-card">
+      <div class="info-label">Project lead</div>
+      <div class="info-val"><strong>Chris Hoar</strong><br>Defines Rise, builds demos, presents to eGroup.<br>eGroup engineers build from the specification.</div>
+    </div>
+    <div class="info-card">
+      <div class="info-label">What Rise is</div>
+      <div class="info-val"><strong>Dual-consciousness intelligence platform</strong><br>Rise (outward) + Essence (inward) + The Brain (Layer 0 knowledge graph)</div>
+    </div>
+    <div class="info-card">
+      <div class="info-label">Current state</div>
+      <div class="info-val">
+        <strong>4 working demos</strong> — Manual, Auto, Brain, Essence<br>
+        <strong>3 spec documents</strong> — Product Scope V6, Technical Architecture V1, Prompt Architecture V1<br>
+        <strong>20 prompt templates</strong> specified
       </div>
     </div>
-    <div class="entry-card upcoming">
-      <div class="entry-num"><span class="entry-num-text">Entry</span><span class="entry-num-digit">06</span></div>
-      <div class="entry-body">
-        <div class="entry-top"><span class="entry-phase">Phase 2 &mdash; Intelligence</span><span class="entry-badge upcoming">Upcoming</span></div>
-        <div class="entry-title">First Submission Goes Live</div>
-        <div class="entry-desc">A staff member submits for the first time. Rise processes it, generates content, and queues for review. The moment everything becomes real.</div>
-        <div class="entry-footer"><span class="entry-date">Coming Soon</span></div>
+    <div class="info-card">
+      <div class="info-label">Live demos</div>
+      <div class="info-val">
+        <a href="../rise/demos/braindemo.html">Demo 03 — The Brain</a><br>
+        <a href="../rise/demos/essencedemo.html">Demo 04 — Essence Chat</a>
+      </div>
+    </div>
+    <div class="info-card">
+      <div class="info-label">Documents</div>
+      <div class="info-val">
+        <a href="../rise/documents/Rise_Scope_V5.pdf" target="_blank">Rise Scope V5</a><br>
+        <a href="../rise/documents/Rise_Product_Scope_V6.pdf" target="_blank">Product Scope V6</a><br>
+        <a href="../rise/documents/Rise_Technical_Architecture_V1.pdf" target="_blank">Technical Architecture V1</a><br>
+        <a href="../rise/documents/Rise_Prompt_Architecture_V1.pdf" target="_blank">Prompt Architecture V1</a>
       </div>
     </div>
   </div>
-  <aside class="sidebar">
-    <div class="sidebar-section">
-      <div class="sidebar-label">Live Metrics</div>
-      <div class="metric"><span class="metric-label">Build started</span><span class="metric-value accent">April 2026</span></div>
-      <div class="metric"><span class="metric-label">Entries published</span><span class="metric-value accent">2</span></div>
-      <div class="metric"><span class="metric-label">New eGroup website</span><span class="metric-value green">Live &#10003;</span></div>
-      <div class="metric"><span class="metric-label">Antal's feedback</span><span class="metric-value accent">Positive &mdash; details pending</span></div>
-      <div class="metric"><span class="metric-label">Posts published by Rise</span><span class="metric-value">0</span></div>
-      <div class="metric"><span class="metric-label">Staff submitters active</span><span class="metric-value">0 of 110</span></div>
-      <div class="metric"><span class="metric-label">Agent autonomy</span><span class="metric-value">Not yet active</span></div>
-    </div>
-    <div class="sidebar-section">
-      <div class="sidebar-label">Project Links</div>
-      <a href="../rise/index.html" class="link-item">
-        <span class="link-label">eGroup Website</span>
-        <span class="link-title">New homepage &mdash; live</span>
-        <span class="link-url">hoarhouse.github.io/v3/rise/</span>
-      </a>
-      <a href="../rise/documents/Rise_Scope_Document.pdf" class="link-item" target="_blank">
-        <span class="link-label">Scope Document</span>
-        <span class="link-title">Full Rise product scope &mdash; PDF</span>
-        <span class="link-url">/rise/documents/</span>
-      </a>
-      <a href="https://www.egroup.hu" class="link-item" target="_blank">
-        <span class="link-label">Old eGroup Site</span>
-        <span class="link-title">The before &mdash; still live</span>
-        <span class="link-url">egroup.hu</span>
-      </a>
-    </div>
-    <div class="sidebar-section">
-      <div class="sidebar-label">Build Phases</div>
-      <div class="metric"><span class="metric-label">Phase 0 &mdash; Discovery</span><span class="metric-value green">&#10003; Done</span></div>
-      <div class="metric"><span class="metric-label">Phase 1 &mdash; Foundation</span><span class="metric-value accent">&bull; Active</span></div>
-      <div class="metric"><span class="metric-label">Phase 2 &mdash; Intelligence</span><span class="metric-value">Upcoming</span></div>
-      <div class="metric"><span class="metric-label">Phase 3 &mdash; Autonomy</span><span class="metric-value">Upcoming</span></div>
-      <div class="metric"><span class="metric-label">Phase 4 &mdash; Product</span><span class="metric-value">Upcoming</span></div>
-    </div>
-    <div class="sidebar-section">
-      <div class="sidebar-label">About This Journal</div>
-      <div class="about-box">
-        <p>A real-time record of building Rise. Every entry is written as milestones happen. Updated minimum once per session. Nothing is retrospective or polished after the fact.</p>
-      </div>
-    </div>
-  </aside>
+
 </div>
+
 <footer>
-  <div>
-    <div class="footer-brand">Rise Build Journal</div>
-    <div style="margin-top:4px;">A Rise Project &middot; Confidential &middot; April 2026</div>
-  </div>
-  <div>Updated each session &middot; 2 entries published</div>
+  <div class="footer-text">Rise Build Journal · hoarhouse.github.io/v3/journal/ · Updated each session</div>
+  <div class="footer-text">A Rise Project · Confidential · April 2026</div>
 </footer>
+
 </body>
 </html>

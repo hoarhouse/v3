@@ -875,7 +875,7 @@ header {
 }
 
 
-/* ── SHARED NAV ── */
+
 .snav {
   height: 48px;
   background: #0A0A0A;
@@ -952,12 +952,15 @@ header {
 .snav-link.docs:hover { opacity: 1; }
 
 </style>
+<script src="nav.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    injectNav('demo', 'risedemo.html');
+  });
+</script>
 </head>
 <body>
 
-<div class="snav">
-  <a href="../index.html" class="snav-logo">
-    <div class="snav-mark">R</div>
     <span class="snav-name">Rise</span>
   </a>
   <div class="snav-sep"></div>
