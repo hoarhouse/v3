@@ -141,29 +141,108 @@ body{background:var(--black);color:var(--text);font-family:'DM Sans',sans-serif;
   .hero{padding:24px 20px;}
   .main{padding:20px;}
 }
+
+/* ── SHARED NAV ── */
+.snav {
+  height: 48px;
+  background: #0A0A0A;
+  border-bottom: 1px solid #1E1E1E;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  flex-shrink: 0;
+}
+.snav-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+.snav-mark {
+  width: 26px; height: 26px;
+  background: #D4FF00;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Syne', sans-serif;
+  font-weight: 800; font-size: 13px; color: #080808;
+}
+.snav-name {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800; font-size: 15px; color: #EEEEEE;
+}
+.snav-sep {
+  width: 1px; height: 16px;
+  background: #252525; margin: 0 4px;
+}
+.snav-demos {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+.snav-demo {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px; letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  border-radius: 5px;
+  border: 1px solid transparent;
+  color: #555;
+  text-decoration: none;
+  transition: all .15s;
+  white-space: nowrap;
+}
+.snav-demo:hover { color: #AAAAAA; background: #161616; border-color: #252525; }
+.snav-demo.active { color: #EEEEEE; background: #1A1A1A; border-color: #333; }
+.snav-links {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.snav-link {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px; letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 4px;
+  border: 1px solid #1E1E1E;
+  color: #444;
+  text-decoration: none;
+  transition: all .15s;
+  white-space: nowrap;
+}
+.snav-link:hover { color: #AAAAAA; border-color: #333; }
+.snav-link.docs { border-color: rgba(78,201,255,.15); color: #4EC9FF; opacity: .7; }
+.snav-link.docs:hover { opacity: 1; }
+
 </style>
 </head>
 <body>
 
-<div class="nav">
-  <div class="nav-logo">
-    <div class="nav-mark">R</div>
-    <span class="nav-name">Rise</span>
-    <span class="nav-tag">Demo Suite</span>
+<div class="snav">
+  <a href="../index.html" class="snav-logo">
+    <div class="snav-mark">R</div>
+    <span class="snav-name">Rise</span>
+  </a>
+  <div class="snav-sep"></div>
+  <div class="snav-demos">
+    <a href="risedemo.html" class="snav-demo"><span style="opacity:.5;margin-right:4px;">01</span>Manual</a>
+    <a href="autodemo.html" class="snav-demo"><span style="opacity:.5;margin-right:4px;">02</span>Auto</a>
+    <a href="braindemo.html" class="snav-demo active"><span style="opacity:.5;margin-right:4px;">03</span>Brain</a>
+    <a href="essencedemo.html" class="snav-demo"><span style="opacity:.5;margin-right:4px;">04</span>Essence</a>
   </div>
-  <div class="nav-center">
-    <a href="risedemo.html" class="ni"><span class="ni-num">01</span><span class="ni-lbl">Manual</span></a>
-    <div class="ni-div"></div>
-    <a href="autodemo.html" class="ni"><span class="ni-num">02</span><span class="ni-lbl">Auto Trigger</span></a>
-    <div class="ni-div"></div>
-    <a href="braindemo.html" class="ni active"><span class="ni-num">03</span><span class="ni-lbl">The Brain</span></a>
-  </div>
-  <div class="nav-right">
-    <a href="../index.html" class="nl">eGroup Site</a>
-    <a href="../documents/Rise_Scope_V5.pdf" target="_blank" class="nl">Scope V5</a>
-    <a href="../../journal/" class="nl">Journal</a>
+  <div class="snav-links">
+    <a href="../index.html" class="snav-link">eGroup</a>
+    <a href="../../journal/" class="snav-link">Journal</a>
+    <a href="../documents/Rise_Scope_V5.pdf" target="_blank" class="snav-link docs">Scope V5</a>
+    <a href="../documents/Rise_Technical_Architecture_V1.pdf" target="_blank" class="snav-link docs">Tech Arch</a>
+    <a href="../documents/Rise_Prompt_Architecture_V1.pdf" target="_blank" class="snav-link docs">Prompts</a>
   </div>
 </div>
+
 
 <div class="hero">
   <div class="hero-inner">
