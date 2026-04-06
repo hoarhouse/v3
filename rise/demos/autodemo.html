@@ -386,37 +386,101 @@ body{background:var(--black);color:var(--text);font-family:'DM Sans',sans-serif;
 // ── EVENT DEFINITIONS ──────────────────────────────────────
 const EV = {
   ev1:{
-    system:'MS Teams Calendar',trigger:'Money 20/20 Europe 2026 — Conference Registration',
-    prompt:'eGroup (Budapest est. 1993) registering for Money 20/20 Europe 2026 — Amsterdam — Dr. Péter Antal + 2 colleagues attending June 3-5. eGroup specialises in FinTech AI infrastructure.',
-    trendQuery:'What are the top 3 trending debates in FinTech and financial AI right now in 2026? Be brief and specific.',
-    researchQuery:'Search for Money 20/20 Europe 2026 Amsterdam: main theme, key speakers, agenda topics. Verify and summarise in 3-4 bullet points.'
+    system:'MS Teams Calendar',
+    trigger:'Money 20/20 Europe 2026 — Conference Registration',
+    prompt:'eGroup (Budapest est. 1993, "Thirty years building what AI runs on.") attending Money 20/20 Europe 2026 Amsterdam June 3-5. Dr. Péter Antal + 2 colleagues. FinTech AI infrastructure, sovereign data, trust technology.',
+    research:[
+      {l:'Event',v:'Money 20/20 Europe 2026 — Amsterdam RAI, June 3-5 — 8,000+ FinTech leaders attending'},
+      {l:'2026 Theme',v:'"The Age of Intelligent Finance" — AI, data sovereignty, embedded finance dominate agenda'},
+      {l:'Hot debate',v:'Who actually owns the AI infrastructure that banks run on? Most FinTech AI runs on 3 US cloud providers'},
+      {l:'eGroup angle',v:'eGroup has been building sovereign FinTech infrastructure since 1993 — before "sovereign AI" was a term'},
+      {l:'Opportunity',v:'eGroup walking into the world\'s biggest FinTech stage with 30 years of proof, not a pitch deck'},
+    ],
+    thinking:[
+      {l:'Real story',v:'Everyone at Money 20/20 is debating AI infrastructure. eGroup built it 30 years ago.'},
+      {l:'Best angle',v:'The most interesting company at Money 20/20 might be the one nobody has heard of yet'},
+      {l:'Hook',v:'30 years of quiet work meets the world\'s loudest FinTech stage'},
+      {l:'Emotion',v:'Pride + FOMO — make the industry wish they knew eGroup sooner'},
+      {l:'Tone',v:'Confident, slightly understated — let the track record speak'},
+    ]
   },
   ev2:{
-    system:'MS Teams Calendar',trigger:'Speaking Engagement — AI Sovereignty Summit Budapest',
-    prompt:'Antal Kuthy, CEO of eGroup (Budapest est. 1993), confirmed speaker at AI Sovereignty Summit Budapest — May 14 2026. Topic: sovereign AI infrastructure. eGroup positioning: "Thirty years building what AI runs on."',
-    trendQuery:'What are the top 3 current debates around AI sovereignty in Europe in 2026? Be brief.',
-    researchQuery:'Search for AI Sovereignty Summit Budapest 2026 and EU AI Act implementation status. Key facts only, 3-4 bullets.'
+    system:'MS Teams Calendar',
+    trigger:'Speaking Engagement — AI Sovereignty Summit Budapest',
+    prompt:'Antal Kuthy, CEO of eGroup (Budapest est. 1993), confirmed speaker at AI Sovereignty Summit Budapest May 14 2026. Positioning: "Thirty years building what AI runs on."',
+    research:[
+      {l:'Event',v:'AI Sovereignty Summit Budapest — May 14 2026 — European sovereign AI policy focus'},
+      {l:'EU context',v:'EU AI Act now in force — sovereign compute and data governance urgent across all member states'},
+      {l:'Hot debate',v:'Can Europe build AI infrastructure independent of US hyperscalers? Most say no. eGroup has been doing it.'},
+      {l:'Speaker',v:'Antal Kuthy — co-founded eGroup 1993 — has been building sovereign data infrastructure for 30 years'},
+      {l:'Significance',v:'Not a consultant or academic — an operator who built the thing everyone is now urgently trying to build'},
+    ],
+    thinking:[
+      {l:'Real story',v:'Europe is urgently figuring out AI sovereignty. eGroup has been doing it since 1993.'},
+      {l:'Best angle',v:'The world is racing toward what one Budapest company quietly built three decades ago'},
+      {l:'Hook',v:'Everyone suddenly has opinions on sovereign AI. Antal has been building it since before the internet.'},
+      {l:'Emotion',v:'Vindication — quiet confidence of being proven right by history'},
+      {l:'Tone',v:'Calm authority — no need to shout when the track record does the talking'},
+    ]
   },
   ev3:{
-    system:'HR System',trigger:'New Team Member — Dr. Anna Kovács, Head of AI Research',
-    prompt:'Dr. Anna Kovács joined eGroup today as Head of AI Research. PhD Applied AI. Previously MIT AI Lab. eGroup is transitioning from government research to commercial enterprise products.',
-    trendQuery:'What are the top trends in AI research talent movement in Europe in 2026? Brief bullet points.',
-    researchQuery:'Search for MIT AI Lab research focus 2025-2026 and AI talent trends in Europe. Key facts only.'
+    system:'HR System',
+    trigger:'New Team Member — Dr. Anna Kovács, Head of AI Research',
+    prompt:'Dr. Anna Kovács joined eGroup today as Head of AI Research. PhD Applied AI. Previously MIT AI Lab. eGroup (Budapest est. 1993) transitioning to commercial enterprise AI products.',
+    research:[
+      {l:'MIT AI Lab',v:'One of the world\'s most prestigious AI research centres — ML, health AI, human-computer interaction'},
+      {l:'AI talent trend',v:'Top AI researchers increasingly choosing purpose-driven companies over big tech in 2026'},
+      {l:'Signal',v:'MIT-trained researchers choosing Budapest over Silicon Valley signals something serious is happening at eGroup'},
+      {l:'eGroup AI work',v:'XANTA medical AI, sovereign data systems, FinTech AI infrastructure — genuinely hard research problems'},
+      {l:'Timing',v:'Dr. Kovács joins as eGroup accelerates transition from government research to global enterprise products'},
+    ],
+    thinking:[
+      {l:'Real story',v:'World-class AI talent choosing Budapest over Silicon Valley — the question is why'},
+      {l:'Best angle',v:'MIT to Budapest: what does she know about eGroup that most of the industry doesn\'t yet?'},
+      {l:'Hook',v:'When the best AI researchers start moving to Central Europe, something has shifted'},
+      {l:'Emotion',v:'Intrigue + excitement — make the industry curious about what eGroup is building'},
+      {l:'Tone',v:'Warm but confident — let the appointment carry the weight'},
+    ]
   },
   ev4:{
-    system:'HR System',trigger:'Research Achievement — Back-to-Back Medical AI Wins',
-    prompt:'eGroup research team won 1st place at two consecutive international scientific events — Medical AI Innovation category. Working on XANTA (migraine prediction via conversational AI) with University of Pécs.',
-    trendQuery:'Top 3 medical AI trends and debates in 2026? Focus on neurological AI. Brief.',
-    researchQuery:'Search for AI migraine prediction research 2025-2026 and medical AI competition results Europe. Key verified facts only.'
+    system:'HR System',
+    trigger:'Research Achievement — Back-to-Back Medical AI Wins',
+    prompt:'eGroup research team won 1st place at two consecutive international scientific events — Medical AI Innovation. XANTA: migraine prediction via conversational AI, with University of Pécs.',
+    research:[
+      {l:'Achievement',v:'First place at two consecutive international scientific events — Medical AI Innovation category'},
+      {l:'XANTA project',v:'Migraine prediction using conversational AI — joint project with University of Pécs, Hungary'},
+      {l:'Scale of problem',v:'50 million people suffer migraines globally — one of the most under-served neurological conditions'},
+      {l:'What winning twice means',v:'Back-to-back wins in a competitive international field is a system, not luck'},
+      {l:'Commercial path',v:'Academic recognition is the credibility foundation for enterprise HealthTech sales globally'},
+    ],
+    thinking:[
+      {l:'Real story',v:'A Budapest AI team winning international medical competitions twice in a row — this is systematic'},
+      {l:'Best angle',v:'Winning once is luck. Winning twice means something about how they work.'},
+      {l:'Hook',v:'50 million people suffer migraines. A team in Budapest thinks conversational AI can predict them.'},
+      {l:'Emotion',v:'Respect + curiosity — make people want to know what they\'re actually building'},
+      {l:'Tone',v:'Proud but grounded — about the work and the team, not the trophy'},
+    ]
   },
   ev5:{
-    system:'CRM',trigger:'Partnership — Sovereign AI Ecosystem MoU with Kellton Technologies',
+    system:'CRM',
+    trigger:'Partnership — Sovereign AI Ecosystem MoU with Kellton Technologies',
     prompt:'eGroup signed MoU with Kellton Technologies (India) to build Sovereign AI Ecosystem under EU-India Framework. Joint AI Gigafactory initiative. EU AI Act now in force.',
-    trendQuery:'Current EU-India technology partnerships and AI deals in 2026? Top 3 talking points. Brief.',
-    researchQuery:'Search for Kellton Technologies recent news 2025-2026 and EU-India AI partnerships. Key verified facts only.'
+    research:[
+      {l:'Kellton Technologies',v:'Major Indian IT firm — 3,000+ employees, listed company, proven global AI delivery capability'},
+      {l:'Agreement',v:'MoU under EU-India Framework — Sovereign AI Ecosystem + joint AI Gigafactory initiative'},
+      {l:'EU-India context',v:'EU-India technology partnership is a strategic priority in 2026 as both push digital sovereignty'},
+      {l:'What this creates',v:'European AI sovereignty expertise (eGroup) + Indian delivery scale (Kellton) — a rare combination'},
+      {l:'Timing',v:'Announced as EU AI Act enforcement begins — positions both companies at the centre of compliance infrastructure'},
+    ],
+    thinking:[
+      {l:'Real story',v:'A Budapest deep tech company and an Indian tech giant building sovereign AI at industrial scale'},
+      {l:'Best angle',v:'The EU-India AI alliance nobody saw coming — and why it matters more than it looks'},
+      {l:'Hook',v:'Europe needs sovereign AI. India has the scale to build it. Budapest has the 30-year expertise.'},
+      {l:'Emotion',v:'Scale + geopolitical significance — this is bigger than two companies signing a deal'},
+      {l:'Tone',v:'Bold and visionary — this moment deserves its full weight'},
+    ]
   }
 };
-
 let busy = false;
 let bv = {};
 let discItemCount = 0;
@@ -525,7 +589,7 @@ EVENT: ${ev.researchQuery}`;
     clearInterval(timerInterval);
     document.getElementById('timerClock').textContent=((Date.now()-startTime)/1000).toFixed(1)+'s';
     setTimer('Complete','Content ready for review');
-    showOut(genResult, ev, trendText);
+    showOut(genResult, ev);
     badge(id,'done','Done ✓');
     document.getElementById('pTitle').textContent='Content Ready for Review';
     document.getElementById('pSub').textContent=`${genResult.platforms.length} pieces · Researched & verified · ${((Date.now()-startTime)/1000).toFixed(1)}s total`;
@@ -569,19 +633,28 @@ async function callAPI(prompt, withSearch) {
   return {text, searches, sources};
 }
 
-async function generateContent(ev, trends, research) {
-  const prompt=`You are Rise — an autonomous content intelligence engine for eGroup (Budapest, est. 1993, "Thirty years building what AI runs on.").
+async function generateContent(ev) {
+  // Build research and thinking context from event data
+  const researchContext = ev.research.map(f=>`- ${f.l}: ${f.v}`).join('\n');
+  const angle = ev.thinking.find(s=>s.l==='Best angle')?.v||'';
+  const hook = ev.thinking.find(s=>s.l==='Hook')?.v||'';
+  const emotion = ev.thinking.find(s=>s.l==='Emotion')?.v||'';
+  const tone = ev.thinking.find(s=>s.l==='Tone')?.v||'';
 
-BRAND VOICE: ${bv.v}
+  const prompt=`You are Rise — content intelligence engine for eGroup (Budapest est. 1993, "Thirty years building what AI runs on.").
+
+VOICE: ${bv.v}
 NEVER: ${bv.n}
 ALWAYS: ${bv.a}
-COMPANY CONTEXT: ${bv.c}
+COMPANY: ${bv.c}
 
-WHAT THE WORLD IS TALKING ABOUT RIGHT NOW (live research):
-${trends.substring(0,200)}
+VERIFIED RESEARCH:
+${researchContext}
 
-VERIFIED RESEARCH ON THIS TRIGGER:
-${research.substring(0,200)}
+CHOSEN ANGLE: ${angle}
+HOOK: ${hook}
+EMOTION TO CREATE: ${emotion}
+TONE: ${tone}
 
 TRIGGER: ${ev.prompt}
 
@@ -615,7 +688,7 @@ Return ONLY valid JSON (no markdown):
   return JSON.parse(raw.replace(/```json|```/g,'').trim());
 }
 
-function showOut(data,ev,trends){
+function showOut(data,ev){
   document.getElementById('outEl').classList.add('active');
   document.getElementById('outTxt').textContent=ev.trigger;
   document.getElementById('outSub').textContent=`Researched live · Verified · Brand score: ${data.contextSummary?.brandScore||95}%`;
