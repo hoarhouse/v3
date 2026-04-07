@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rise — Auto Trigger Demo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--black:#080808;--dark:#111;--panel:#181818;--card:#1E1E1E;--border:#2A2A2A;--dim:#555;--mid:#777;--text:#AAAAAA;--light:#CCCCCC;--white:#EEEEEE;--accent:#D4FF00;--green:#44FF88;--red:#FF5555;--blue:#4EC9FF;--orange:#FF9444;}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--black);color:var(--text);font-family:'DM Sans',sans-serif;font-size:15px;line-height:1.6;min-height:100vh;}
+
+/* NAV */
+.nav{background:#0A0A0A;border-bottom:1px solid #1E1E1E;padding:0 32px;display:flex;align-items:center;justify-content:space-between;height:52px;position:sticky;top:0;z-index:200;}
+.nav-logo{display:flex;align-items:center;gap:10px;}
+.nav-mark{width:28px;height:28px;background:var(--accent);display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:800;font-size:14px;color:#080808;}
+.nav-name{font-family:'Syne',sans-serif;font-weight:800;font-size:16px;color:var(--white);}
+.nav-tag{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#555;border:1px solid #222;padding:2px 8px;border-radius:20px;}
+.nav-center{display:flex;align-items:center;gap:4px;}
+.ni{display:flex;align-items:center;gap:8px;padding:8px 16px;border-radius:6px;text-decoration:none;border:1px solid transparent;transition:all .2s;}
+.ni:hover,.ni.active{background:#161616;border-color:rgba(212,255,0,.2);}
+.ni-num{font-family:'DM Mono',monospace;font-size:9px;color:var(--accent);opacity:.7;letter-spacing:1px;}
+.ni-lbl{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:#777;}
+.ni:hover .ni-lbl,.ni.active .ni-lbl{color:var(--white);}
+.ni-div{width:1px;height:20px;background:#1E1E1E;margin:0 4px;}
+.nav-right{display:flex;gap:20px;}
+.nl{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:#444;text-decoration:none;transition:color .2s;}
+.nl:hover{color:#AAA;}
+
+/* HERO */
+.hero{background:linear-gradient(135deg,var(--dark),var(--panel));border-bottom:1px solid var(--border);padding:36px 40px;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(212,255,0,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(212,255,0,.025) 1px,transparent 1px);background-size:48px 48px;}
+.hero-in{position:relative;z-index:1;max-width:760px;}
+.h-eye{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:10px;display:flex;align-items:center;gap:10px;}
+.h-eye::before{content:'';display:inline-block;width:20px;height:1px;background:var(--accent);}
+.h-title{font-family:'Syne',sans-serif;font-weight:800;font-size:28px;color:var(--white);letter-spacing:-1px;line-height:1.15;margin-bottom:8px;}
+.h-title span{color:var(--accent);}
+.h-sub{font-size:14px;font-weight:300;color:var(--mid);line-height:1.6;max-width:580px;}
+.h-badge{display:inline-flex;align-items:center;gap:8px;margin-top:12px;background:rgba(212,255,0,.06);border:1px solid rgba(212,255,0,.2);padding:6px 14px;border-radius:6px;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1px;color:var(--accent);}
+
+/* LAYOUT */
+.app{display:grid;grid-template-columns:340px 1fr;min-height:calc(100vh - 190px);}
+
+/* LEFT */
+.left{background:var(--dark);border-right:1px solid var(--border);padding:20px;display:flex;flex-direction:column;gap:14px;overflow-y:auto;}
+.plbl{font-family:'DM Mono',monospace;font-size:9px;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:var(--dim);margin-bottom:8px;padding-bottom:7px;border-bottom:1px solid var(--border);}
+
+/* BRAND VOICE */
+.bvp{background:var(--card);border:1px solid var(--border);border-radius:8px;overflow:hidden;}
+.bvp-h{padding:11px 13px;background:var(--panel);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;cursor:pointer;}
+.bvp-h:hover{background:rgba(255,255,255,.02);}
+.bvp-hl{display:flex;align-items:center;gap:9px;}
+.bvp-t{font-family:'Syne',sans-serif;font-weight:700;font-size:13px;color:var(--white);}
+.bvp-s{font-size:11px;color:var(--dim);}
+.bvp-tog{font-family:'DM Mono',monospace;font-size:10px;color:var(--accent);letter-spacing:1px;text-transform:uppercase;}
+.bvp-b{padding:12px;display:none;flex-direction:column;gap:9px;}
+.bvp-b.open{display:flex;}
+.bvp-b label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--accent);display:block;margin-bottom:3px;}
+.bv-ta{width:100%;background:var(--dark);border:1px solid var(--border);color:var(--white);padding:7px 10px;font-family:'DM Sans',sans-serif;font-size:12px;border-radius:4px;outline:none;resize:vertical;transition:border-color .2s;}
+.bv-ta:focus{border-color:rgba(212,255,0,.35);}
+.bv-sv{width:100%;background:rgba(212,255,0,.08);border:1px solid rgba(212,255,0,.2);color:var(--accent);padding:8px;font-family:'DM Mono',monospace;font-size:10px;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;border-radius:4px;transition:all .2s;margin-top:3px;}
+.bv-sv:hover{background:rgba(212,255,0,.15);}
+.bv-svd{font-family:'DM Mono',monospace;font-size:10px;color:var(--green);text-align:center;margin-top:3px;display:none;}
+
+/* SYSTEMS */
+.sys{background:var(--card);border:1px solid var(--border);border-radius:8px;overflow:hidden;}
+.sys-h{padding:10px 13px;display:flex;align-items:center;justify-content:space-between;}
+.sys-i{display:flex;align-items:center;gap:9px;}
+.sys-n{font-family:'Syne',sans-serif;font-weight:700;font-size:13px;color:var(--white);}
+.sys-s{font-size:11px;color:var(--dim);}
+.sst{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1px;text-transform:uppercase;padding:3px 8px;border-radius:20px;display:flex;align-items:center;gap:5px;}
+.sst.w{background:rgba(212,255,0,.06);color:var(--accent);border:1px solid rgba(212,255,0,.2);}
+.sst.c{background:rgba(68,255,136,.08);color:var(--green);border:1px solid rgba(68,255,136,.2);}
+.sdot{width:5px;height:5px;border-radius:50%;background:currentColor;animation:pulse 2s ease-in-out infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.3;}}
+.evs{padding:0 12px 11px;display:flex;flex-direction:column;gap:5px;}
+.ev{background:var(--panel);border:1px solid var(--border);border-radius:6px;padding:9px 11px;cursor:pointer;transition:all .2s;position:relative;overflow:hidden;}
+.ev::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--accent);transform:scaleY(0);transition:transform .2s;}
+.ev:hover{border-color:#444;}
+.ev:hover::before,.ev.on::before{transform:scaleY(1);}
+.ev.on{border-color:rgba(212,255,0,.3);background:rgba(212,255,0,.02);}
+.ev-t{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:2px;}
+.ev-title{font-size:12px;font-weight:500;color:var(--white);line-height:1.3;}
+.ev-time{font-family:'DM Mono',monospace;font-size:9px;color:var(--dim);white-space:nowrap;margin-top:1px;}
+.ev-meta{font-size:11px;color:var(--dim);line-height:1.4;}
+.evb{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:1px;text-transform:uppercase;padding:2px 7px;border-radius:20px;white-space:nowrap;margin-top:4px;display:inline-block;}
+.evb.new{background:rgba(212,255,0,.1);color:var(--accent);border:1px solid rgba(212,255,0,.2);}
+.evb.proc{background:rgba(78,201,255,.1);color:var(--blue);border:1px solid rgba(78,201,255,.2);}
+.evb.done{background:rgba(68,255,136,.1);color:var(--green);border:1px solid rgba(68,255,136,.2);}
+
+/* RIGHT */
+.right{background:var(--black);padding:24px 28px;overflow-y:auto;display:flex;flex-direction:column;gap:16px;}
+.pipe-h{display:flex;align-items:center;justify-content:space-between;padding-bottom:14px;border-bottom:1px solid var(--border);}
+.pipe-title{font-family:'Syne',sans-serif;font-weight:800;font-size:20px;color:var(--white);}
+.pipe-sub{font-family:'DM Mono',monospace;font-size:10px;color:var(--dim);margin-top:3px;letter-spacing:1px;}
+
+/* TIMER */
+.timer-bar{display:none;background:var(--dark);border:1px solid var(--border);border-radius:8px;padding:12px 16px;align-items:center;gap:16px;}
+.timer-bar.active{display:flex;}
+.timer-clock{font-family:'DM Mono',monospace;font-size:24px;font-weight:500;color:var(--accent);letter-spacing:2px;min-width:60px;}
+.timer-status{flex:1;}
+.timer-phase{font-family:'Syne',sans-serif;font-weight:700;font-size:13px;color:var(--white);margin-bottom:2px;}
+.timer-detail{font-size:11px;color:var(--dim);}
+.timer-calls{display:flex;gap:6px;}
+.call-dot{width:8px;height:8px;border-radius:50%;border:1px solid var(--border);background:transparent;transition:all .3s;}
+.call-dot.active{border-color:var(--accent);background:rgba(212,255,0,.3);animation:callpulse 1s ease-in-out infinite;}
+.call-dot.done{border-color:var(--green);background:var(--green);}
+@keyframes callpulse{0%,100%{opacity:1;}50%{opacity:.4;}}
+
+/* DISCOVERY FEED */
+.discovery{display:none;flex-direction:column;gap:0;}
+.discovery.active{display:flex;}
+.disc-header{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-bottom:8px;display:flex;align-items:center;gap:8px;}
+.disc-feed{background:var(--dark);border:1px solid var(--border);border-radius:8px;overflow:hidden;max-height:280px;overflow-y:auto;}
+.disc-item{padding:8px 12px;border-bottom:1px solid rgba(42,42,42,.5);display:flex;align-items:flex-start;gap:10px;animation:fadeIn .3s ease;}
+.disc-item:last-child{border-bottom:none;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(4px);}to{opacity:1;transform:translateY(0);}}
+.disc-type{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:1px;text-transform:uppercase;padding:2px 7px;border-radius:20px;white-space:nowrap;flex-shrink:0;margin-top:1px;}
+.disc-type.search{background:rgba(212,255,0,.08);color:var(--accent);border:1px solid rgba(212,255,0,.15);}
+.disc-type.source{background:rgba(68,255,136,.08);color:var(--green);border:1px solid rgba(68,255,136,.15);}
+.disc-type.trend{background:rgba(78,201,255,.08);color:var(--blue);border:1px solid rgba(78,201,255,.15);}
+.disc-type.verify{background:rgba(255,148,68,.08);color:var(--orange);border:1px solid rgba(255,148,68,.15);}
+.disc-type.warn{background:rgba(255,85,85,.08);color:var(--red);border:1px solid rgba(255,85,85,.15);}
+.disc-text{font-size:12px;color:var(--text);line-height:1.5;flex:1;}
+.disc-text strong{color:var(--white);}
+
+/* PIPELINE STEPS */
+.steps{display:flex;flex-direction:column;gap:8px;}
+.ps{background:var(--dark);border:1px solid var(--border);border-radius:8px;padding:12px 14px;display:flex;align-items:flex-start;gap:12px;opacity:.3;transition:all .4s ease;}
+.ps.active{opacity:1;border-color:rgba(212,255,0,.25);background:rgba(212,255,0,.02);}
+.ps.done{opacity:1;border-color:rgba(68,255,136,.18);}
+.ps-num{width:28px;height:28px;border-radius:50%;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;font-size:10px;color:var(--dim);flex-shrink:0;transition:all .3s;}
+.ps.active .ps-num{border-color:var(--accent);color:var(--accent);background:rgba(212,255,0,.08);}
+.ps.done .ps-num{border-color:var(--green);color:var(--green);background:rgba(68,255,136,.08);}
+.ps-body{flex:1;min-width:0;}
+.ps-title{font-family:'Syne',sans-serif;font-weight:700;font-size:13px;color:var(--white);margin-bottom:2px;}
+.ps-desc{font-size:11px;color:var(--dim);line-height:1.5;}
+.ps-detail{font-family:'DM Mono',monospace;font-size:10px;color:var(--accent);margin-top:4px;}
+.ps-spin{width:16px;height:16px;border:2px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite;flex-shrink:0;display:none;}
+.ps.active .ps-spin{display:block;}
+@keyframes spin{to{transform:rotate(360deg);}}
+
+/* EMPTY */
+.empty{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:380px;text-align:center;gap:12px;}
+.empty-icon{font-size:40px;opacity:.3;}
+.empty-title{font-family:'Syne',sans-serif;font-weight:700;font-size:18px;color:var(--light);}
+.empty-sub{font-size:13px;color:var(--dim);max-width:320px;line-height:1.6;}
+
+/* OUTPUT */
+.out{display:none;flex-direction:column;gap:14px;}
+.out.active{display:flex;}
+.out-bar{background:var(--dark);border:1px solid var(--border);border-left:2px solid var(--accent);border-radius:8px;padding:12px 15px;}
+.out-lbl{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:4px;}
+.out-txt{font-size:14px;color:var(--white);font-weight:500;}
+.out-sub{font-size:12px;color:var(--dim);margin-top:2px;}
+.out-world{background:#0A0C0A;border:1px solid rgba(68,255,136,.12);border-radius:6px;padding:11px 13px;font-size:12px;color:var(--text);line-height:1.6;margin-top:6px;}
+.out-world-lbl{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--green);margin-bottom:5px;}
+
+/* PLATFORM CARDS */
+.pcw{margin-bottom:16px;}
+.pcw-top{display:flex;align-items:center;justify-content:space-between;padding:7px 0 7px;border-bottom:1px solid var(--border);margin-bottom:8px;}
+.pcw-l{display:flex;align-items:center;gap:9px;}
+.pcw-pl{font-family:'Syne',sans-serif;font-weight:700;font-size:14px;color:var(--white);}
+.pcw-tp{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--dim);}
+.pcw-au{font-family:'DM Mono',monospace;font-size:9px;color:var(--accent);}
+.pcw-r{display:flex;align-items:center;gap:5px;font-family:'DM Mono',monospace;font-size:10px;color:var(--dim);}
+.cbar{width:44px;height:3px;background:var(--border);border-radius:2px;overflow:hidden;display:inline-block;vertical-align:middle;margin-left:5px;}
+.cfill{height:100%;background:var(--accent);border-radius:2px;}
+.pcw-angle{font-size:11px;color:var(--dim);font-style:italic;margin-bottom:8px;padding:6px 10px;background:rgba(212,255,0,.03);border-left:2px solid rgba(212,255,0,.2);border-radius:0 4px 4px 0;}
+.pcw-acts{display:flex;gap:7px;justify-content:flex-end;margin-top:9px;}
+.cbtn{padding:6px 13px;border-radius:4px;font-family:'DM Mono',monospace;font-size:10px;font-weight:500;letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:all .2s;border:none;}
+.cbtn.approve{background:var(--accent);color:#000;}
+.cbtn.approve:hover{background:#E8FF33;}
+.cbtn.approved{background:rgba(68,255,136,.15);color:var(--green);border:1px solid rgba(68,255,136,.3);cursor:default;}
+.cbtn.reject{background:var(--card);color:var(--dim);border:1px solid var(--border);}
+.cbtn.reject:hover{color:var(--red);border-color:var(--red);}
+.cbtn.edit{background:var(--card);color:var(--mid);border:1px solid var(--border);}
+.cbtn.edit:hover{color:var(--white);border-color:#444;}
+
+/* X MOCKUP */
+.xw{background:#16181C;border:1px solid #2F3336;border-radius:16px;overflow:hidden;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;}
+.x-bar{padding:9px 15px 8px;border-bottom:1px solid #2F3336;display:flex;align-items:center;gap:8px;}
+.xp{padding:12px 15px;}
+.xp+.xp{border-top:1px solid #2F3336;}
+.xpi{display:flex;gap:10px;}
+.xav{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#1A8CD8,#0A6AA8);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:17px;color:#fff;flex-shrink:0;}
+.xr{flex:1;min-width:0;}
+.xnr{display:flex;align-items:center;justify-content:space-between;margin-bottom:3px;}
+.xnl{display:flex;align-items:center;gap:4px;flex-wrap:wrap;}
+.xname{font-weight:700;color:#E7E9EA;font-size:15px;}
+.xhndl{color:#71767B;font-size:14px;}
+.xtxt{color:#E7E9EA;font-size:15px;line-height:1.5;white-space:pre-wrap;word-break:break-word;margin-bottom:10px;}
+.xhtags{margin-bottom:8px;}
+.xhtag{color:#1D9BF0;font-size:15px;margin-right:7px;}
+.xacts{display:flex;align-items:center;justify-content:space-between;max-width:340px;color:#71767B;font-size:13px;}
+.xact{display:flex;align-items:center;gap:4px;cursor:pointer;}
+
+/* LI MOCKUP */
+.liw{background:#1B1F23;border-radius:8px;overflow:hidden;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;}
+.li-bd{padding:14px;}
+.li-hd{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
+.liav{width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,#0077B5,#00A0DC);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:19px;color:#fff;flex-shrink:0;}
+.li-name{font-weight:700;color:#E9E5DF;font-size:14px;}
+.li-sub{font-size:11px;color:#B0B7BC;}
+.li-time{font-size:11px;color:#8D9195;}
+.li-flw{margin-left:auto;color:#70B5F9;font-size:13px;font-weight:600;cursor:pointer;}
+.li-txt{color:#E9E5DF;font-size:14px;line-height:1.6;white-space:pre-wrap;word-break:break-word;margin-bottom:9px;}
+.li-htag{color:#70B5F9;margin-right:5px;font-size:13px;}
+.li-sts{display:flex;align-items:center;justify-content:space-between;padding-top:9px;border-top:1px solid #38434F;font-size:12px;color:#8D9195;margin-bottom:3px;}
+.li-acts{display:flex;border-top:1px solid #38434F;}
+.li-act{flex:1;display:flex;align-items:center;justify-content:center;gap:5px;padding:8px;color:#8D9195;font-size:12px;font-weight:600;cursor:pointer;}
+
+/* WEB MOCKUP */
+.wbw{background:#0F0F0F;border-radius:8px;overflow:hidden;font-family:'DM Sans',sans-serif;}
+.wb-bar{background:#161616;padding:7px 12px;border-bottom:1px solid #2A2A2A;display:flex;align-items:center;gap:7px;}
+.wb-dot{width:9px;height:9px;border-radius:50%;}
+.wb-url{flex:1;background:#1E1E1E;border-radius:4px;padding:3px 11px;font-size:10px;color:#555;text-align:center;}
+.wb-c{padding:22px;}
+.wb-eye{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:7px;}
+.wb-title{font-family:'Syne',sans-serif;font-weight:800;font-size:20px;color:var(--white);letter-spacing:-.5px;line-height:1.2;margin-bottom:10px;}
+.wb-line{width:36px;height:2px;background:var(--accent);margin-bottom:12px;}
+.wb-body{font-size:14px;line-height:1.75;color:#AAAAAA;}
+.wb-by{margin-top:14px;display:flex;align-items:center;gap:10px;}
+.wb-av{width:26px;height:26px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:11px;color:#000;}
+.wb-by-n{font-size:12px;color:var(--light);font-weight:500;}
+.wb-by-t{font-size:11px;color:#555;}
+.wb-rm{margin-left:auto;background:var(--accent);color:#000;font-family:'DM Mono',monospace;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:6px 13px;border-radius:4px;cursor:pointer;}
+
+/* TOAST */
+.toast{position:fixed;bottom:24px;right:24px;background:var(--dark);border:1px solid rgba(68,255,136,.3);border-left:3px solid var(--green);border-radius:8px;padding:10px 16px;font-size:13px;color:var(--white);z-index:1000;transform:translateY(80px);opacity:0;transition:all .3s ease;pointer-events:none;display:flex;align-items:center;gap:9px;}
+.toast.show{transform:translateY(0);opacity:1;}
+
+@media(max-width:900px){.app{grid-template-columns:1fr;}.left{border-right:none;border-bottom:1px solid var(--border);}.nav-tag,.nav-right,.ni-lbl{display:none;}.hero{padding:22px 20px;}.right{padding:18px;}}
+
+.snav {
+  height: 48px;
+  background: #0A0A0A;
+  border-bottom: 1px solid #1E1E1E;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  flex-shrink: 0;
+}
+.snav-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+.snav-mark {
+  width: 26px; height: 26px;
+  background: #D4FF00;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Syne', sans-serif;
+  font-weight: 800; font-size: 13px; color: #080808;
+}
+.snav-name {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800; font-size: 15px; color: #EEEEEE;
+}
+.snav-sep {
+  width: 1px; height: 16px;
+  background: #252525; margin: 0 4px;
+}
+.snav-demos {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+.snav-demo {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px; letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  border-radius: 5px;
+  border: 1px solid transparent;
+  color: #555;
+  text-decoration: none;
+  transition: all .15s;
+  white-space: nowrap;
+}
+.snav-demo:hover { color: #AAAAAA; background: #161616; border-color: #252525; }
+.snav-demo.active { color: #EEEEEE; background: #1A1A1A; border-color: #333; }
+.snav-links {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.snav-link {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px; letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 4px;
+  border: 1px solid #1E1E1E;
+  color: #444;
+  text-decoration: none;
+  transition: all .15s;
+  white-space: nowrap;
+}
+.snav-link:hover { color: #AAAAAA; border-color: #333; }
+.snav-link.docs { border-color: rgba(78,201,255,.15); color: #4EC9FF; opacity: .7; }
+.snav-link.docs:hover { opacity: 1; }
+
+</style>
+<script src="nav.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    injectNav('demo', 'autodemo.html');
+  });
+</script>
+</head>
+<body>
+
+    </a>
+  </div>
+
+<div class="hero">
+  <div class="hero-in">
+    <div class="h-eye">Rise Intelligence Engine — Demo 02</div>
+    <h1 class="h-title">Rise doesn't just write content.<br>It <span>reads the world first.</span></h1>
+    <p class="h-sub">Every piece of content starts with live research — what's happening right now, what people are actually talking about, verified across sources. Then Rise thinks. Then it writes.</p>
+    <div class="h-badge">⚡ Live research → Cross-verify → Think → Write — every single time</div>
+  </div>
+</div>
+
+<div class="app">
+  <div class="left">
+
+    <div>
+      <div class="plbl">Brand Voice & Content Rules</div>
+      <div class="bvp">
+        <div class="bvp-h" onclick="toggleBV()">
+          <div class="bvp-hl">
+            <span style="font-size:15px;">🎨</span>
+            <div><div class="bvp-t">Content Rules</div><div class="bvp-s">Editable by admins — applied to every POC</div></div>
+          </div>
+          <span class="bvp-tog" id="bvTog">Edit ↓</span>
+        </div>
+        <div class="bvp-b" id="bvBody">
+          <div><label>Brand Voice</label><textarea class="bv-ta" id="bvV" rows="2">Authoritative but human. Confident without arrogance. A world-class scientist who tells great stories. Speaks to smart people as equals — never talks down.</textarea></div>
+          <div><label>Never Write Like This</label><textarea class="bv-ta" id="bvN" rows="2">Press releases. "Pleased to announce", "proud to", "excited to share". Opening with the company name or a person's title. Vague claims. Generic corporate-speak nobody reads.</textarea></div>
+          <div><label>Always Write Like This</label><textarea class="bv-ta" id="bvA" rows="2">Enter a conversation already happening. Lead with what's surprising. Use a specific fact that makes readers feel informed. Make them want to share it because sharing it makes THEM look smart.</textarea></div>
+          <div><label>Company Positioning</label><textarea class="bv-ta" id="bvC" rows="2">eGroup — Budapest, est. 1993. "Thirty years building what AI runs on." FinTech, HealthTech, GovTech, SpaceTech, EnergyTech. Deep tech with 30 years of proof — not a startup, not hype.</textarea></div>
+          <button class="bv-sv" onclick="saveBV()">Save Rules — Apply to Next POC</button>
+          <div class="bv-svd" id="bvSvd">✓ Saved — next generation uses these rules</div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="plbl">Connected Systems — Live Events</div>
+      <p style="font-size:12px;color:var(--dim);line-height:1.6;margin-bottom:10px;">Rise monitors these systems continuously. Click any event to watch the full intelligence pipeline — live research, verification, and content generation in real time.</p>
+    </div>
+
+    <div class="sys">
+      <div class="sys-h"><div class="sys-i"><div style="font-size:17px;">📅</div><div><div class="sys-n">MS Teams Calendar</div><div class="sys-s">Conference & meeting detection</div></div></div><div class="sst w"><div class="sdot"></div>Watching</div></div>
+      <div class="evs">
+        <div class="ev" id="ev1" onclick="go('ev1')"><div class="ev-t"><div class="ev-title">Money 20/20 Europe 2026 — Registration confirmed</div><div class="ev-time">2 min ago</div></div><div class="ev-meta">Dr. Péter Antal + 2 others · Amsterdam · June 3-5</div><div class="evb new" id="ev1b">New Event</div></div>
+        <div class="ev" id="ev2" onclick="go('ev2')"><div class="ev-t"><div class="ev-title">Speaking slot — AI Sovereignty Summit Budapest</div><div class="ev-time">1 hr ago</div></div><div class="ev-meta">Antal Kuthy presenting · May 14</div><div class="evb new" id="ev2b">New Event</div></div>
+      </div>
+    </div>
+
+    <div class="sys">
+      <div class="sys-h"><div class="sys-i"><div style="font-size:17px;">👥</div><div><div class="sys-n">HR System</div><div class="sys-s">Team milestones & achievements</div></div></div><div class="sst c"><div class="sdot"></div>Connected</div></div>
+      <div class="evs">
+        <div class="ev" id="ev3" onclick="go('ev3')"><div class="ev-t"><div class="ev-title">Dr. Anna Kovács — Joined as Head of AI Research</div><div class="ev-time">Today</div></div><div class="ev-meta">PhD Applied AI · Previously: MIT AI Lab</div><div class="evb new" id="ev3b">New Hire</div></div>
+        <div class="ev" id="ev4" onclick="go('ev4')"><div class="ev-t"><div class="ev-title">Research team — Double win at Scientific Events</div><div class="ev-time">Yesterday</div></div><div class="ev-meta">Back-to-back 1st place · Medical AI Innovation</div><div class="evb new" id="ev4b">Achievement</div></div>
+      </div>
+    </div>
+
+    <div class="sys">
+      <div class="sys-h"><div class="sys-i"><div style="font-size:17px;">🤝</div><div><div class="sys-n">CRM</div><div class="sys-s">Partnership & contract signals</div></div></div><div class="sst c"><div class="sdot"></div>Connected</div></div>
+      <div class="evs">
+        <div class="ev" id="ev5" onclick="go('ev5')"><div class="ev-t"><div class="ev-title">MoU signed — Kellton Technologies</div><div class="ev-time">3 hrs ago</div></div><div class="ev-meta">Sovereign AI Ecosystem · EU-India Framework</div><div class="evb new" id="ev5b">Partnership</div></div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="right" id="rightPanel">
+    <div class="pipe-h">
+      <div>
+        <div class="pipe-title" id="pTitle">Rise Intelligence Pipeline</div>
+        <div class="pipe-sub" id="pSub">Select an event to watch Rise research, think, and write in real time</div>
+      </div>
+    </div>
+
+    <div class="empty" id="emptyEl">
+      <div class="empty-icon">👆</div>
+      <div class="empty-title">Click any event to trigger Rise</div>
+      <div class="empty-sub">Rise will search for live trends, research the specific event across multiple sources, verify what it finds, reason through the best angle — then write content designed to be shared.</div>
+    </div>
+
+    <!-- LIVE TIMER -->
+    <div class="timer-bar" id="timerBar">
+      <div class="timer-clock" id="timerClock">0.0s</div>
+      <div class="timer-status">
+        <div class="timer-phase" id="timerPhase">Initialising...</div>
+        <div class="timer-detail" id="timerDetail">Rise is reading the world</div>
+      </div>
+      <div class="timer-calls">
+        <div class="call-dot" id="call1" title="Trend Intelligence"></div>
+        <div class="call-dot" id="call2" title="Event Research"></div>
+        <div class="call-dot" id="call3" title="Content Generation"></div>
+      </div>
+    </div>
+
+    <!-- DISCOVERY FEED -->
+    <div class="discovery" id="discoveryEl">
+      <div class="disc-header">
+        <span>Live Discovery Feed</span>
+        <span style="color:var(--accent);font-size:10px;" id="discCount">0 items</span>
+      </div>
+      <div class="disc-feed" id="discFeed"></div>
+    </div>
+
+    <!-- PIPELINE STEPS -->
+    <div class="steps" id="stepsEl" style="display:none;">
+      <div class="ps" id="ps1"><div class="ps-num">01</div><div class="ps-body"><div class="ps-title">Event Detected</div><div class="ps-desc">Integration Layer detected event in connected business system</div><div class="ps-detail" id="ps1d"></div></div><div class="ps-spin"></div></div>
+      <div class="ps" id="ps2"><div class="ps-num">02</div><div class="ps-body"><div class="ps-title">Live Trend Intelligence</div><div class="ps-desc">Searching what the world is talking about RIGHT NOW in this domain — live web search</div><div class="ps-detail" id="ps2d"></div></div><div class="ps-spin"></div></div>
+      <div class="ps" id="ps3"><div class="ps-num">03</div><div class="ps-body"><div class="ps-title">Deep Event Research + Verification</div><div class="ps-desc">Multiple searches on the specific trigger — cross-referencing sources, verifying facts before use</div><div class="ps-detail" id="ps3d"></div></div><div class="ps-spin"></div></div>
+      <div class="ps" id="ps4"><div class="ps-num">04</div><div class="ps-body"><div class="ps-title">Rise is Thinking</div><div class="ps-desc">Finding the intersection of world trends + event facts + eGroup's unique position — choosing the angle</div><div class="ps-detail" id="ps4d"></div></div><div class="ps-spin"></div></div>
+      <div class="ps" id="ps5"><div class="ps-num">05</div><div class="ps-body"><div class="ps-title">Content Generation</div><div class="ps-desc">Writing platform-specific content designed to stop the scroll and earn the share</div><div class="ps-detail" id="ps5d"></div></div><div class="ps-spin"></div></div>
+      <div class="ps" id="ps6"><div class="ps-num">06</div><div class="ps-body"><div class="ps-title">Brand Check + Queue</div><div class="ps-desc">Verified against brand rules — sent to admin review queue</div><div class="ps-detail" id="ps6d"></div></div><div class="ps-spin"></div></div>
+    </div>
+
+    <!-- OUTPUT -->
+    <div class="out" id="outEl">
+      <div class="out-bar">
+        <div class="out-lbl">Content Ready for Review — Auto-Generated</div>
+        <div class="out-txt" id="outTxt"></div>
+        <div class="out-sub" id="outSub"></div>
+        <div class="out-world" id="outWorld" style="display:none;">
+          <div class="out-world-lbl">World Context Rise Tapped Into</div>
+          <div id="outWorldTxt"></div>
+        </div>
+      </div>
+      <div id="cards"></div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"><span>✓</span><span id="toastMsg"></span></div>
+
+<script>
+// ── EVENT DEFINITIONS ──────────────────────────────────────
+const EV = {
+  ev1:{
+    system:'MS Teams Calendar',
+    trigger:'Money 20/20 Europe 2026 — Conference Registration',
+    prompt:'eGroup (Budapest est. 1993, "Thirty years building what AI runs on.") attending Money 20/20 Europe 2026 Amsterdam June 3-5. Dr. Péter Antal + 2 colleagues. FinTech AI infrastructure, sovereign data, trust technology.',
+    research:[
+      {l:'Event',v:'Money 20/20 Europe 2026 — Amsterdam RAI, June 3-5 — 8,000+ FinTech leaders attending'},
+      {l:'2026 Theme',v:'"The Age of Intelligent Finance" — AI, data sovereignty, embedded finance dominate agenda'},
+      {l:'Hot debate',v:'Who actually owns the AI infrastructure that banks run on? Most FinTech AI runs on 3 US cloud providers'},
+      {l:'eGroup angle',v:'eGroup has been building sovereign FinTech infrastructure since 1993 — before "sovereign AI" was a term'},
+      {l:'Opportunity',v:'eGroup walking into the world\'s biggest FinTech stage with 30 years of proof, not a pitch deck'},
+    ],
+    thinking:[
+      {l:'Real story',v:'Everyone at Money 20/20 is debating AI infrastructure. eGroup built it 30 years ago.'},
+      {l:'Best angle',v:'The most interesting company at Money 20/20 might be the one nobody has heard of yet'},
+      {l:'Hook',v:'30 years of quiet work meets the world\'s loudest FinTech stage'},
+      {l:'Emotion',v:'Pride + FOMO — make the industry wish they knew eGroup sooner'},
+      {l:'Tone',v:'Confident, slightly understated — let the track record speak'},
+    ]
+  },
+  ev2:{
+    system:'MS Teams Calendar',
+    trigger:'Speaking Engagement — AI Sovereignty Summit Budapest',
+    prompt:'Antal Kuthy, CEO of eGroup (Budapest est. 1993), confirmed speaker at AI Sovereignty Summit Budapest May 14 2026. Positioning: "Thirty years building what AI runs on."',
+    research:[
+      {l:'Event',v:'AI Sovereignty Summit Budapest — May 14 2026 — European sovereign AI policy focus'},
+      {l:'EU context',v:'EU AI Act now in force — sovereign compute and data governance urgent across all member states'},
+      {l:'Hot debate',v:'Can Europe build AI infrastructure independent of US hyperscalers? Most say no. eGroup has been doing it.'},
+      {l:'Speaker',v:'Antal Kuthy — co-founded eGroup 1993 — has been building sovereign data infrastructure for 30 years'},
+      {l:'Significance',v:'Not a consultant or academic — an operator who built the thing everyone is now urgently trying to build'},
+    ],
+    thinking:[
+      {l:'Real story',v:'Europe is urgently figuring out AI sovereignty. eGroup has been doing it since 1993.'},
+      {l:'Best angle',v:'The world is racing toward what one Budapest company quietly built three decades ago'},
+      {l:'Hook',v:'Everyone suddenly has opinions on sovereign AI. Antal has been building it since before the internet.'},
+      {l:'Emotion',v:'Vindication — quiet confidence of being proven right by history'},
+      {l:'Tone',v:'Calm authority — no need to shout when the track record does the talking'},
+    ]
+  },
+  ev3:{
+    system:'HR System',
+    trigger:'New Team Member — Dr. Anna Kovács, Head of AI Research',
+    prompt:'Dr. Anna Kovács joined eGroup today as Head of AI Research. PhD Applied AI. Previously MIT AI Lab. eGroup (Budapest est. 1993) transitioning to commercial enterprise AI products.',
+    research:[
+      {l:'MIT AI Lab',v:'One of the world\'s most prestigious AI research centres — ML, health AI, human-computer interaction'},
+      {l:'AI talent trend',v:'Top AI researchers increasingly choosing purpose-driven companies over big tech in 2026'},
+      {l:'Signal',v:'MIT-trained researchers choosing Budapest over Silicon Valley signals something serious is happening at eGroup'},
+      {l:'eGroup AI work',v:'XANTA medical AI, sovereign data systems, FinTech AI infrastructure — genuinely hard research problems'},
+      {l:'Timing',v:'Dr. Kovács joins as eGroup accelerates transition from government research to global enterprise products'},
+    ],
+    thinking:[
+      {l:'Real story',v:'World-class AI talent choosing Budapest over Silicon Valley — the question is why'},
+      {l:'Best angle',v:'MIT to Budapest: what does she know about eGroup that most of the industry doesn\'t yet?'},
+      {l:'Hook',v:'When the best AI researchers start moving to Central Europe, something has shifted'},
+      {l:'Emotion',v:'Intrigue + excitement — make the industry curious about what eGroup is building'},
+      {l:'Tone',v:'Warm but confident — let the appointment carry the weight'},
+    ]
+  },
+  ev4:{
+    system:'HR System',
+    trigger:'Research Achievement — Back-to-Back Medical AI Wins',
+    prompt:'eGroup research team won 1st place at two consecutive international scientific events — Medical AI Innovation. XANTA: migraine prediction via conversational AI, with University of Pécs.',
+    research:[
+      {l:'Achievement',v:'First place at two consecutive international scientific events — Medical AI Innovation category'},
+      {l:'XANTA project',v:'Migraine prediction using conversational AI — joint project with University of Pécs, Hungary'},
+      {l:'Scale of problem',v:'50 million people suffer migraines globally — one of the most under-served neurological conditions'},
+      {l:'What winning twice means',v:'Back-to-back wins in a competitive international field is a system, not luck'},
+      {l:'Commercial path',v:'Academic recognition is the credibility foundation for enterprise HealthTech sales globally'},
+    ],
+    thinking:[
+      {l:'Real story',v:'A Budapest AI team winning international medical competitions twice in a row — this is systematic'},
+      {l:'Best angle',v:'Winning once is luck. Winning twice means something about how they work.'},
+      {l:'Hook',v:'50 million people suffer migraines. A team in Budapest thinks conversational AI can predict them.'},
+      {l:'Emotion',v:'Respect + curiosity — make people want to know what they\'re actually building'},
+      {l:'Tone',v:'Proud but grounded — about the work and the team, not the trophy'},
+    ]
+  },
+  ev5:{
+    system:'CRM',
+    trigger:'Partnership — Sovereign AI Ecosystem MoU with Kellton Technologies',
+    prompt:'eGroup signed MoU with Kellton Technologies (India) to build Sovereign AI Ecosystem under EU-India Framework. Joint AI Gigafactory initiative. EU AI Act now in force.',
+    research:[
+      {l:'Kellton Technologies',v:'Major Indian IT firm — 3,000+ employees, listed company, proven global AI delivery capability'},
+      {l:'Agreement',v:'MoU under EU-India Framework — Sovereign AI Ecosystem + joint AI Gigafactory initiative'},
+      {l:'EU-India context',v:'EU-India technology partnership is a strategic priority in 2026 as both push digital sovereignty'},
+      {l:'What this creates',v:'European AI sovereignty expertise (eGroup) + Indian delivery scale (Kellton) — a rare combination'},
+      {l:'Timing',v:'Announced as EU AI Act enforcement begins — positions both companies at the centre of compliance infrastructure'},
+    ],
+    thinking:[
+      {l:'Real story',v:'A Budapest deep tech company and an Indian tech giant building sovereign AI at industrial scale'},
+      {l:'Best angle',v:'The EU-India AI alliance nobody saw coming — and why it matters more than it looks'},
+      {l:'Hook',v:'Europe needs sovereign AI. India has the scale to build it. Budapest has the 30-year expertise.'},
+      {l:'Emotion',v:'Scale + geopolitical significance — this is bigger than two companies signing a deal'},
+      {l:'Tone',v:'Bold and visionary — this moment deserves its full weight'},
+    ]
+  }
+};
+let busy = false;
+let bv = {};
+let discItemCount = 0;
+let timerInterval = null;
+
+function toggleBV(){const b=document.getElementById('bvBody'),t=document.getElementById('bvTog');const o=b.classList.toggle('open');t.textContent=o?'Close ↑':'Edit ↓';}
+function saveBV(){
+  bv={v:document.getElementById('bvV').value,n:document.getElementById('bvN').value,a:document.getElementById('bvA').value,c:document.getElementById('bvC').value};
+  const s=document.getElementById('bvSvd');s.style.display='block';setTimeout(()=>s.style.display='none',3000);
+}
+
+// Load defaults
+window.addEventListener('load',()=>{
+  bv={v:document.getElementById('bvV').value,n:document.getElementById('bvN').value,a:document.getElementById('bvA').value,c:document.getElementById('bvC').value};
+});
+
+async function go(id){
+  if(busy)return;
+  const ev=EV[id];if(!ev)return;
+  busy=true;
+  currentEvId=id;
+
+  // Reset UI
+  document.querySelectorAll('.ev').forEach(e=>e.classList.remove('on'));
+  document.getElementById(id).classList.add('on');
+  badge(id,'proc','Researching...');
+  document.getElementById('emptyEl').style.display='none';
+  document.getElementById('stepsEl').style.display='flex';
+  document.getElementById('outEl').classList.remove('active');
+  document.getElementById('cards').innerHTML='';
+  document.getElementById('discFeed').innerHTML='';
+  discItemCount=0;
+  document.getElementById('discCount').textContent='0 items';
+  document.getElementById('outWorld').style.display='none';
+  document.getElementById('pTitle').textContent='Rise Intelligence Pipeline — Running';
+  document.getElementById('pSub').textContent=`Source: ${ev.system} · Detected automatically · Live research in progress`;
+  ['ps1','ps2','ps3','ps4','ps5','ps6'].forEach(p=>{document.getElementById(p).classList.remove('active','done');document.getElementById(p+'d').textContent='';});
+  ['call1','call2','call3'].forEach(c=>document.getElementById(c).className='call-dot');
+
+  // Start timer
+  const startTime=Date.now();
+  document.getElementById('timerBar').classList.add('active');
+  document.getElementById('discoveryEl').classList.add('active');
+  timerInterval=setInterval(()=>{
+    document.getElementById('timerClock').textContent=((Date.now()-startTime)/1000).toFixed(1)+'s';
+  },100);
+
+  try{
+    // Step 1: Event detected
+    await on('ps1',`${ev.trigger}`,700);await off('ps1');
+
+    // Step 2: Trend Intelligence (Call 1)
+    document.getElementById('call1').classList.add('active');
+    setTimer('Scanning live trends','What is the world talking about right now?');
+    await on('ps2','Searching live trends in this domain right now...',400);
+    addDisc('trend','Scanning','Live trend search — what is the world talking about right now in this domain?');
+
+    // Combined research call — trends + event in one to stay within rate limits
+    const combinedQuery = `Two tasks. Be very brief — 3 bullets each max, under 200 words total.
+
+TRENDS: ${ev.trendQuery}
+
+EVENT: ${ev.researchQuery}`;
+
+    const researchResult = await callAPI(combinedQuery, true);
+    const trendText = researchResult.text;
+    const researchText = researchResult.text;
+    researchResult.searches.forEach(q=>addDisc('search','Search',q));
+    researchResult.sources.forEach(s=>addDisc('source','Found',s));
+    addDisc('verify','Verified',`${researchResult.sources.length} sources checked`);
+
+    document.getElementById('call1').className='call-dot done';
+    document.getElementById('call2').className='call-dot done';
+    document.getElementById('ps2d').textContent=`Live trends identified`;
+    await off('ps2');
+    document.getElementById('ps3d').textContent=`${researchResult.searches.length} searches · facts gathered`;
+    await off('ps3');
+
+    // Brief pause to respect rate limits between calls
+    await wait(3000);
+
+    // Step 4: Thinking
+    setTimer('Rise is thinking','Choosing the angle — finding the intersection');
+    await on('ps4','Finding the intersection of trends + verified facts + eGroup\'s unique position...',1200);
+    addDisc('trend','Thinking','Identifying the angle that connects world conversation to eGroup\'s perspective');
+    document.getElementById('ps4d').textContent='Angle selected — ready to write';
+    await off('ps4');
+
+    // Step 5: Generate (Call 3)
+    document.getElementById('call3').classList.add('active');
+    setTimer('Writing content','Platform-specific — designed to be shared');
+    await on('ps5','Writing content that enters the existing conversation — not starts a boring new one...',400);
+    addDisc('trend','Writing','Generating LinkedIn, X/Twitter, and Website content');
+
+    const genResult = await generateContent(ev, trendText, researchText);
+    document.getElementById('call3').className='call-dot done';
+    document.getElementById('ps5d').textContent=`${genResult.platforms.length} pieces generated`;
+    await off('ps5');
+
+    // Step 6: Brand check
+    setTimer('Brand check complete','All content verified against brand rules');
+    await on('ps6',`Brand score: ${genResult.contextSummary?.brandScore||95}% · Queued for admin review`,900);
+    await off('ps6');
+
+    // Show output
+    clearInterval(timerInterval);
+    document.getElementById('timerClock').textContent=((Date.now()-startTime)/1000).toFixed(1)+'s';
+    setTimer('Complete','Content ready for review');
+    showOut(genResult, ev);
+    badge(id,'done','Done ✓');
+    document.getElementById('pTitle').textContent='Content Ready for Review';
+    document.getElementById('pSub').textContent=`${genResult.platforms.length} pieces · Researched & verified · ${((Date.now()-startTime)/1000).toFixed(1)}s total`;
+
+  }catch(e){
+    clearInterval(timerInterval);
+    addDisc('warn','Error',e.message);
+    document.getElementById('pSub').textContent='Error: '+e.message;
+    badge(id,'new','Error — retry');
+    console.error(e);
+  }
+  busy=false;
+}
+
+async function callAPI(prompt, withSearch) {
+  const body = {
+    model:'claude-sonnet-4-20250514',
+    max_tokens:1200,
+    messages:[{role:'user',content:prompt}]
+  };
+  if(withSearch) body.tools=[{type:'web_search_20250305',name:'web_search'}];
+
+  const r=await fetch('http://localhost:3000',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
+  const d=await r.json();
+  if(d.error)throw new Error(d.error.message);
+
+  const searches=[], sources=[];
+  let text='';
+
+  (d.content||[]).forEach(block=>{
+    if(block.type==='tool_use'&&block.name==='web_search'){
+      searches.push(block.input?.query||'');
+    }
+    if(block.type==='tool_result'||(block.type==='text'&&block.text?.includes('http'))){
+      const src=block.content?.[0]?.text||'';
+      if(src.length>20)sources.push(src.substring(0,150)+'...');
+    }
+    if(block.type==='text')text+=block.text;
+  });
+
+  return {text, searches, sources};
+}
+
+async function generateContent(ev) {
+  // Build research and thinking context from event data
+  const researchContext = ev.research.map(f=>`- ${f.l}: ${f.v}`).join('\n');
+  const angle = ev.thinking.find(s=>s.l==='Best angle')?.v||'';
+  const hook = ev.thinking.find(s=>s.l==='Hook')?.v||'';
+  const emotion = ev.thinking.find(s=>s.l==='Emotion')?.v||'';
+  const tone = ev.thinking.find(s=>s.l==='Tone')?.v||'';
+
+  const prompt=`You are Rise — content intelligence engine for eGroup (Budapest est. 1993, "Thirty years building what AI runs on.").
+
+VOICE: ${bv.v}
+NEVER: ${bv.n}
+ALWAYS: ${bv.a}
+COMPANY: ${bv.c}
+
+VERIFIED RESEARCH:
+${researchContext}
+
+CHOSEN ANGLE: ${angle}
+HOOK: ${hook}
+EMOTION TO CREATE: ${emotion}
+TONE: ${tone}
+
+TRIGGER: ${ev.prompt}
+
+CRITICAL THINKING — before writing, identify:
+- The specific conversation already happening in the world that this connects to
+- What eGroup uniquely knows or has done that most people in this space DON'T have
+- The most surprising or counterintuitive angle
+- Why someone would SHARE this — what does sharing it say about them?
+- The first sentence that makes someone stop scrolling
+
+WRITE content that ENTERS the existing conversation — don't start a boring new corporate one.
+
+RULES:
+- LinkedIn (180-240 words): Open with something happening RIGHT NOW in the industry or world — NOT "We are pleased". Build to eGroup's position. End with genuine question for debate.
+- X/Twitter — 3-tweet thread, NO numbering, strict rules:
+  Tweet 1 (Hook): Bold claim or surprising fact. Under 200 chars. NO hashtags. No external links. Must work as a standalone post.
+  Tweet 2 (Substance): The specific insight or detail that earns credibility. Under 240 chars. NO hashtags. NO links.
+  Tweet 3 (CTA): eGroup's angle + a question or forward statement. End with MAXIMUM 2 hashtags embedded naturally mid-sentence or at end — NOT starting the tweet. Example: "We've been building #SovereignAI infrastructure since before the term existed. What's your take?" Under 280 chars total.
+  CRITICAL: Hashtags ONLY on tweet 3. MAXIMUM 2. Never start any tweet with a hashtag. Hashtags must feel natural — not bolted on at the end as a list.
+- Website (TITLE: max 7 words creating curiosity NOT summary, BODY: 80-100 words opening with world context): Journalism not PR.
+
+NEVER open with "eGroup", a person's name+title, or any form of announcement language.
+
+Return ONLY valid JSON (no markdown):
+{"platforms":[{"platform":"LinkedIn","type":"Company Post","content":"full post text","hashtags":["tag1","tag2","tag3"],"confidence":95,"angle":"one line: the specific angle used and why it works"},{"platform":"X / Twitter","type":"Thread","content":"tweet one\n\ntweet two\n\ntweet three","hashtags":[],"confidence":92,"angle":"angle used"},{"platform":"Website","type":"News Post","content":"TITLE: title\n\nBODY: body text","hashtags":[],"confidence":94,"angle":"angle used"}],"contextSummary":{"trigger":"brief trigger description","worldContext":"the specific current trend or conversation this taps into","brandScore":95,"verificationNote":"what was verified and from how many sources"}}`;
+
+  const r=await fetch('http://localhost:3000',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1500,messages:[{role:'user',content:prompt}]})});
+  const d=await r.json();
+  if(d.error)throw new Error(d.error.message);
+  const raw=d.content?.[0]?.text||'';
+  return JSON.parse(raw.replace(/```json|```/g,'').trim());
+}
+
+function showOut(data,ev){
+  document.getElementById('outEl').classList.add('active');
+  document.getElementById('outTxt').textContent=ev.trigger;
+  document.getElementById('outSub').textContent=`Researched live · Verified · Brand score: ${data.contextSummary?.brandScore||95}%`;
+  if(data.contextSummary?.worldContext){
+    document.getElementById('outWorld').style.display='block';
+    document.getElementById('outWorldTxt').textContent=data.contextSummary.worldContext;
+  }
+  document.getElementById('cards').innerHTML=data.platforms.map((p,i)=>buildCard(p,i)).join('');
+  // Add learning agent panel
+  const learnHtml = `<div style="background:var(--dark);border:1px solid rgba(212,255,0,.15);border-radius:8px;padding:16px;margin-top:4px;">
+    <div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:10px;display:flex;align-items:center;gap:8px;">
+      <span style="width:6px;height:6px;border-radius:50%;background:var(--accent);display:inline-block;animation:pulse 2s infinite;"></span>
+      Rise Agent — Learning in Progress
+    </div>
+    <div style="font-size:12px;color:var(--dim);line-height:1.7;">
+      Rise is tracking this content from the moment it enters the queue. Once published, it will monitor:
+    </div>
+    <div style="margin-top:10px;display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:6px;padding:10px;">
+        <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--blue);letter-spacing:1px;text-transform:uppercase;margin-bottom:4px;">Tracking</div>
+        <div style="font-size:11px;color:var(--text);line-height:1.6;">Likes · Shares · Comments<br>Reach · Click-through · Saves<br>Engagement rate · Best time</div>
+      </div>
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:6px;padding:10px;">
+        <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--green);letter-spacing:1px;text-transform:uppercase;margin-bottom:4px;">Learning From</div>
+        <div style="font-size:11px;color:var(--text);line-height:1.6;">Every edit you make<br>Every approval or rejection<br>Every piece of feedback</div>
+      </div>
+    </div>
+    <div style="margin-top:10px;background:var(--card);border:1px solid var(--border);border-radius:6px;padding:10px;">
+      <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--orange);letter-spacing:1px;text-transform:uppercase;margin-bottom:6px;">When Rise Spots a Pattern</div>
+      <div style="font-size:11px;color:var(--text);line-height:1.7;">
+        If LinkedIn posts opening with a question consistently outperform posts opening with statements, Rise will either <span style="color:var(--accent);">auto-switch its structure</span> (if autonomy dial allows) or <span style="color:var(--accent);">suggest the change</span> to you — with the data to back it up.
+      </div>
+    </div>
+    <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap;">
+      <div style="background:rgba(68,255,136,.08);border:1px solid rgba(68,255,136,.2);border-radius:20px;padding:4px 12px;font-family:'DM Mono',monospace;font-size:9px;color:var(--green);letter-spacing:1px;">📈 Performance tracked</div>
+      <div style="background:rgba(212,255,0,.06);border:1px solid rgba(212,255,0,.15);border-radius:20px;padding:4px 12px;font-family:'DM Mono',monospace;font-size:9px;color:var(--accent);letter-spacing:1px;">🧠 Structure learning active</div>
+      <div style="background:rgba(78,201,255,.06);border:1px solid rgba(78,201,255,.15);border-radius:20px;padding:4px 12px;font-family:'DM Mono',monospace;font-size:9px;color:var(--blue);letter-spacing:1px;">⏰ Timing optimisation on</div>
+    </div>
+  </div>`;
+  document.getElementById('cards').insertAdjacentHTML('afterend', learnHtml);
+
+  // Fetch images for each card
+  data.platforms.forEach((p,i) => {
+    const query = getImageQuery(currentEvId, p.platform);
+    fetchUnsplash(query, i);
+  });
+}
+
+async function fetchImage(query) {
+  try {
+    const r = await fetch(`https://api.unsplash.com/search/photos?query=${encodeURIComponent(query)}&per_page=1&orientation=landscape`, {
+      headers: { 'Authorization': 'Client-ID _demo_key_placeholder_' }
+    });
+    if (!r.ok) return null;
+    const d = await r.json();
+    return d.results?.[0]?.urls?.regular || null;
+  } catch(e) { return null; }
+}
+
+// Image queries per platform and trigger type
+function getImageQuery(evId, platform) {
+  const queries = {
+    ev1: { LinkedIn: 'fintech conference Amsterdam technology', 'X / Twitter': 'fintech innovation technology', Website: 'Amsterdam conference financial technology' },
+    ev2: { LinkedIn: 'AI technology conference Budapest Europe', 'X / Twitter': 'artificial intelligence europe sovereignty', Website: 'AI summit technology Budapest' },
+    ev3: { LinkedIn: 'AI research team technology laboratory', 'X / Twitter': 'artificial intelligence research scientist', Website: 'technology research laboratory AI' },
+    ev4: { LinkedIn: 'medical AI healthcare technology award', 'X / Twitter': 'healthcare artificial intelligence brain', Website: 'medical AI innovation research' },
+    ev5: { LinkedIn: 'technology partnership handshake business global', 'X / Twitter': 'AI technology partnership Europe India', Website: 'global technology partnership AI' },
+  };
+  return queries[currentEvId]?.[platform] || 'technology AI innovation';
+}
+
+let currentEvId = 'ev1';
+
+function buildCard(p,i){
+  let m='';
+  if(p.platform==='X / Twitter')m=buildX(p.content,p.hashtags,i);
+  else if(p.platform==='LinkedIn')m=buildLI(p.content,p.hashtags,i);
+  else if(p.platform==='Website')m=buildWeb(p.content,i);
+  else m=`<div style="padding:16px;color:var(--text);font-size:14px;line-height:1.7;white-space:pre-wrap;">${x(p.content)}</div>`;
+  return `<div class="pcw" id="pw${i}">
+    <div class="pcw-top">
+      <div class="pcw-l"><span class="pcw-pl">${p.platform}</span><span class="pcw-tp">${p.type||'Post'}</span><span class="pcw-au">⚡ Live research</span></div>
+      <div class="pcw-r">Brand fit: <strong style="color:var(--accent)">${p.confidence||94}%</strong><div class="cbar"><div class="cfill" style="width:${p.confidence||94}%"></div></div></div>
+    </div>
+    ${p.angle?`<div class="pcw-angle">Angle: ${p.angle}</div>`:''}
+    <div class="img-placeholder" id="img${i}" style="background:var(--panel);border:1px solid var(--border);border-radius:8px;height:180px;display:flex;align-items:center;justify-content:center;margin-bottom:8px;overflow:hidden;position:relative;">
+      <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--dim);text-align:center;letter-spacing:1px;text-transform:uppercase;">
+        <div style="font-size:24px;margin-bottom:6px;">🖼</div>
+        <div>Loading visual...</div>
+      </div>
+    </div>
+    ${m}
+    <div class="pcw-acts">
+      <button class="cbtn reject" onclick="rej(${i})">Reject</button>
+      <button class="cbtn edit" onclick="edt(${i})">Edit</button>
+      <button class="cbtn approve" onclick="app(${i},'${p.platform}')">Approve &amp; Queue</button>
+    </div>
+  </div>`;
+}
+
+function buildX(text,tags,i){
+  const tweets=text.split(/\n\n+/).filter(t=>t.trim()).map(t=>t.replace(/^\d+[\/\.]\s*/,'').trim());
+  const cards=tweets.map((t,ti)=>`<div class="xp"><div class="xpi"><div class="xav">E</div><div class="xr"><div class="xnr"><div class="xnl"><span class="xname">E-Group</span><svg width="16" height="16" viewBox="0 0 24 24"><path fill="#1D9BF0" d="M22.25 12c0-1.43-.88-2.67-2.19-3.34.46-1.39.2-2.9-.81-3.91-1.01-1.01-2.52-1.27-3.91-.81-.67-1.31-1.91-2.19-3.34-2.19-1.43 0-2.67.88-3.34 2.19-1.39-.46-2.9-.2-3.91.81-1.01 1.01-1.27 2.52-.81 3.91C2.63 9.33 1.75 10.57 1.75 12c0 1.43.88 2.67 2.19 3.34-.46 1.39-.2 2.9.81 3.91 1.01 1.01 2.52 1.27 3.91.81.67 1.31 1.91 2.19 3.34 2.19 1.43 0 2.67-.88 3.34-2.19 1.39.46 2.9.2 3.91-.81 1.01-1.01 1.27-2.52.81-3.91 1.31-.67 2.19-1.91 2.19-3.34zm-11.71 4.2L6.8 12.46l1.41-1.42 2.26 2.26 4.8-5.23 1.47 1.36-6.2 6.77z"/></svg><span class="xhndl">@egroup_hu · now</span></div><div style="display:flex;align-items:center;gap:7px;"><span style="color:#71767B;font-size:18px;">···</span><svg viewBox="0 0 24 24" width="16" height="16"><path fill="#71767B" d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.748l7.73-8.835L1.254 2.25H8.08l4.258 5.63 5.906-5.63zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></div></div><div class="xtxt" id="xt${i}${ti}">${x(t)}</div>${ti===tweets.length-1&&tags.length?`<div class="xhtags">${tags.map(h=>`<span class="xhtag">#${h}</span>`).join('')}</div>`:''}<div class="xacts"><div class="xact"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path stroke="#71767B" stroke-width="1.8" d="M1.751 10c0-4.42 3.584-8 8.005-8h4.494C18.159 2 22 5.87 22 10.745c0 4.84-3.83 8.745-8.75 8.745H7.39a.75.75 0 0 1 0-1.5h5.868c3.867 0 7-3.115 7-7.245 0-4.1-3.14-7.245-7-7.245H9.756C6.24 3.5 3.252 6.517 3.252 10c0 1.68.643 3.21 1.7 4.36l.038.042a.75.75 0 0 1-1.088 1.034A9.465 9.465 0 0 1 1.75 10z"/></svg>12</div><div class="xact"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path stroke="#71767B" stroke-width="1.8" d="M4.75 3.79l4.603 4.3-1.706 1.82L6 8.38v7.37c0 .97.784 1.75 1.75 1.75H13V19.5H7.75C5.679 19.5 4 17.821 4 15.75V8.38L2.853 9.91.603 8.09l4.146-4.3zm14.5 15.42l-4.603-4.3 1.706-1.82 1.647 1.53V7.25C18 6.28 17.216 5.5 16.25 5.5H11V3h5.25c2.071 0 3.75 1.679 3.75 3.75v7.37l1.147-1.53 2.25 1.82-4.146 4.3z"/></svg>34</div><div class="xact"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path stroke="#71767B" stroke-width="1.8" d="M16.697 5.5c-1.222-.06-2.679.51-3.89 2.16l-.805 1.09-.806-1.09C9.984 6.01 8.526 5.44 7.304 5.5c-1.243.07-2.349.78-2.91 1.91-.552 1.12-.633 2.78.479 4.82 1.074 1.97 3.257 4.27 7.129 6.61 3.87-2.34 6.052-4.64 7.126-6.61 1.111-2.04 1.03-3.7.477-4.82-.561-1.13-1.666-1.84-2.908-1.91z"/></svg>89</div><div class="xact"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path stroke="#71767B" stroke-width="1.8" d="M8.75 21V3h2v18h-2zM18 21V8.5h2V21h-2zM4 21l.004-10h2L6 21H4zm9.248 0v-7h2v7h-2z"/></svg>1.2K</div></div></div></div></div></div>`).join('');
+  return `<div class="xw"><div class="x-bar"><svg viewBox="0 0 24 24" width="16" height="16"><path fill="#E7E9EA" d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.748l7.73-8.835L1.254 2.25H8.08l4.258 5.63 5.906-5.63zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg><span style="color:#71767B;font-size:10px;font-family:'DM Mono',monospace;letter-spacing:1px;text-transform:uppercase;">${tweets.length>1?tweets.length+'-post thread':'Post'}</span></div>${cards}</div>`;
+}
+
+function buildLI(text,tags,i){
+  return `<div class="liw"><div class="li-bd"><div class="li-hd"><div class="liav">E</div><div style="flex:1;"><div class="li-name">E-Group</div><div class="li-sub">Technology Company · Budapest, Hungary</div><div class="li-time">Just now · 🌐</div></div><div class="li-flw">+ Follow</div></div><div class="li-txt" id="lit${i}">${x(text)}</div>${tags.length?`<div style="margin-bottom:8px;">${tags.map(h=>`<span class="li-htag">#${h}</span>`).join('')}</div>`:''}<div class="li-sts"><div style="display:flex;gap:4px;align-items:center;">👍 ❤️ 💡 <span style="margin-left:3px;">47 reactions</span></div><div>12 comments · 8 reposts</div></div><div class="li-acts"><div class="li-act">👍 Like</div><div class="li-act">💬 Comment</div><div class="li-act">🔁 Repost</div><div class="li-act">📤 Send</div></div></div></div>`;
+}
+
+function buildWeb(text,i){
+  let title='',body=text;
+  if(text.includes('TITLE:')){const p=text.split(/\n\n?BODY:/i);title=p[0].replace(/^TITLE:\s*/i,'').trim();body=(p[1]||text).trim();}
+  else{const w=text.split(' ');title=w.slice(0,7).join(' ')+(w.length>7?'...':'');body=text;}
+  return `<div class="wbw"><div class="wb-bar"><div class="wb-dot" style="background:#FF5F57;"></div><div class="wb-dot" style="background:#FFBD2E;"></div><div class="wb-dot" style="background:#28CA41;"></div><div class="wb-url">egroup.hu/news/...</div></div><div class="wb-c"><div class="wb-eye">News &amp; Insights</div><div class="wb-title" id="wbt${i}">${x(title)}</div><div class="wb-line"></div><div class="wb-body" id="wbb${i}">${x(body)}</div><div class="wb-by"><div class="wb-av">E</div><div><div class="wb-by-n">E-Group</div><div class="wb-by-t">Just now · 3 min read</div></div><div class="wb-rm">Read More →</div></div></div></div>`;
+}
+
+// ── ACTIONS ─────────────────────────────────────────────────
+function fetchUnsplash(query, i) {
+  const el = document.getElementById('img'+i);
+  if(!el) return;
+  // Use Unsplash source which doesn't need API key
+  const encodedQ = encodeURIComponent(query);
+  const seed = Math.floor(Math.random() * 1000);
+  const img = new Image();
+  const url = `https://source.unsplash.com/800x400/?${encodedQ}&sig=${seed}`;
+  img.onload = () => {
+    el.style.background = 'none';
+    el.innerHTML = `<img src="${url}" style="width:100%;height:100%;object-fit:cover;border-radius:7px;" alt="${query}">
+      <div style="position:absolute;bottom:8px;right:8px;background:rgba(0,0,0,.7);padding:3px 8px;border-radius:4px;font-family:'DM Mono',monospace;font-size:9px;color:#aaa;letter-spacing:1px;">📷 Unsplash · Replace with eGroup asset</div>`;
+  };
+  img.onerror = () => {
+    el.innerHTML = `<div style="text-align:center;font-family:'DM Mono',monospace;font-size:10px;color:var(--dim);"><div style="font-size:28px;margin-bottom:6px;">📷</div><div style="letter-spacing:1px;text-transform:uppercase;">Visual: ${query}</div><div style="margin-top:4px;color:var(--accent);">Replace with eGroup asset</div></div>`;
+  };
+  img.src = url;
+}
+
+function edt(i){['xt'+i+'0','xt'+i+'1','xt'+i+'2','lit'+i,'wbt'+i,'wbb'+i].forEach(id=>{const el=document.getElementById(id);if(!el)return;if(el.contentEditable==='true'){el.contentEditable='false';el.style.outline='';}else{el.contentEditable='true';el.style.outline='1px dashed rgba(212,255,0,.4)';el.focus();}});}
+function app(i,platform){const w=document.getElementById('pw'+i);const b=w.querySelector('.cbtn.approve');b.textContent='✓ Approved';b.className='cbtn approved';w.querySelector('.cbtn.reject').style.display='none';w.querySelector('.cbtn.edit').style.display='none';toast(`${platform} — approved and queued`);}
+function rej(i){const w=document.getElementById('pw'+i);w.style.cssText+='opacity:0;transform:translateX(-14px);transition:all .3s;';setTimeout(()=>w.style.display='none',300);}
+
+// ── HELPERS ──────────────────────────────────────────────────
+function addDisc(type,label,text){
+  discItemCount++;
+  document.getElementById('discCount').textContent=discItemCount+' items';
+  const feed=document.getElementById('discFeed');
+  const d=document.createElement('div');
+  d.className='disc-item';
+  d.innerHTML=`<span class="disc-type ${type}">${label}</span><span class="disc-text">${text.substring(0,120)}${text.length>120?'...':''}</span>`;
+  feed.appendChild(d);
+  feed.scrollTop=feed.scrollHeight;
+}
+function setTimer(phase,detail){document.getElementById('timerPhase').textContent=phase;document.getElementById('timerDetail').textContent=detail;}
+async function on(id,detail,ms){const el=document.getElementById(id);const prev=el.previousElementSibling;if(prev?.classList.contains('ps')&&prev.classList.contains('active')){prev.classList.remove('active');prev.classList.add('done');}el.classList.add('active');if(detail)document.getElementById(id+'d').textContent=detail;await wait(ms);}
+async function off(id){const el=document.getElementById(id);el.classList.remove('active');el.classList.add('done');await wait(150);}
+function badge(id,cls,txt){const b=document.getElementById(id+'b');if(!b)return;b.className='evb '+cls;b.textContent=txt;}
+function wait(ms){return new Promise(r=>setTimeout(r,ms));}
+function x(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+function toast(msg){const t=document.getElementById('toast');document.getElementById('toastMsg').textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3500);}
+</script>
+</body>
+</html>

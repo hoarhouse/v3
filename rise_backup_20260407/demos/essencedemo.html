@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rise — Essence</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --black:#080808;--dark:#111;--panel:#181818;--card:#1E1E1E;
+  --border:#252525;--dim:#4A4A4A;--mid:#666;--text:#A0A0A0;
+  --light:#C8C8C8;--white:#EEEEEE;--accent:#D4FF00;--gold:#C8A96E;
+  --green:#44FF88;--blue:#4EC9FF;--orange:#FF9444;--purple:#B088FF;
+  --red:#FF5555;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html,body{height:100%;overflow:hidden;}
+body{background:var(--black);color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px;line-height:1.6;display:flex;flex-direction:column;}
+
+/* ── TOP BAR ── */
+.topbar{
+  height:48px;background:var(--dark);border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 16px;flex-shrink:0;z-index:100;
+}
+.tb-left{display:flex;align-items:center;gap:12px;}
+.tb-mark{width:26px;height:26px;background:var(--accent);display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:800;font-size:13px;color:#080808;flex-shrink:0;}
+.tb-name{font-family:'Syne',sans-serif;font-weight:800;font-size:15px;color:var(--white);}
+.tb-sep{width:1px;height:18px;background:var(--border);}
+.tb-product{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--purple);}
+.tb-right{display:flex;align-items:center;gap:12px;}
+.tb-demos{display:flex;gap:2px;}
+.tb-demo{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1px;text-transform:uppercase;padding:4px 10px;border-radius:4px;border:1px solid var(--border);color:var(--dim);text-decoration:none;transition:all .2s;}
+.tb-demo:hover,.tb-demo.active{background:var(--card);color:var(--white);border-color:var(--mid);}
+.tb-demo.active{border-color:rgba(180,136,255,.4);color:var(--purple);}
+.tb-avatar{width:28px;height:28px;border-radius:50%;background:var(--card);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;font-size:10px;color:var(--gold);}
+
+/* ── MAIN LAYOUT ── */
+.layout{display:flex;flex:1;overflow:hidden;}
+
+/* ── LEFT SIDEBAR ── */
+.sidebar{
+  width:220px;flex-shrink:0;background:var(--dark);border-right:1px solid var(--border);
+  display:flex;flex-direction:column;overflow:hidden;
+}
+.sb-section{padding:12px 10px 4px;}
+.sb-label{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);padding:0 6px;margin-bottom:4px;}
+.sb-item{
+  display:flex;align-items:center;gap:8px;padding:7px 8px;border-radius:6px;
+  cursor:pointer;transition:all .15s;border:1px solid transparent;
+  font-size:13px;color:var(--text);
+}
+.sb-item:hover{background:var(--card);color:var(--light);}
+.sb-item.active{background:rgba(180,136,255,.08);border-color:rgba(180,136,255,.2);color:var(--white);}
+.sb-icon{font-size:14px;flex-shrink:0;width:18px;text-align:center;}
+.sb-badge{margin-left:auto;background:var(--purple);color:#080808;font-family:'DM Mono',monospace;font-size:8px;font-weight:600;padding:1px 6px;border-radius:10px;min-width:16px;text-align:center;}
+.sb-badge.green{background:var(--green);}
+.sb-badge.orange{background:var(--orange);}
+.sb-divider{height:1px;background:var(--border);margin:8px 10px;}
+
+.sb-signal{padding:8px 10px;margin:0 6px 4px;border-radius:6px;background:rgba(212,255,0,.04);border:1px solid rgba(212,255,0,.12);cursor:pointer;}
+.sb-signal-title{font-size:11px;color:var(--white);line-height:1.4;margin-bottom:2px;}
+.sb-signal-time{font-family:'DM Mono',monospace;font-size:9px;color:var(--dim);}
+
+.sb-state{padding:8px 10px;}
+.sb-state-row{display:flex;align-items:center;justify-content:space-between;padding:3px 0;}
+.sb-state-lbl{font-family:'DM Mono',monospace;font-size:9px;color:var(--dim);letter-spacing:1px;text-transform:uppercase;}
+.sb-state-bar{flex:1;height:3px;background:var(--border);border-radius:2px;margin:0 8px;overflow:hidden;}
+.sb-state-fill{height:100%;border-radius:2px;transition:width 1s ease;}
+
+/* ── CHAT MAIN ── */
+.chat-main{flex:1;display:flex;flex-direction:column;overflow:hidden;background:var(--black);}
+
+.chat-header{
+  padding:14px 24px 12px;border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;flex-shrink:0;
+}
+.chat-title{font-family:'Syne',sans-serif;font-weight:700;font-size:16px;color:var(--white);}
+.chat-sub{font-size:12px;color:var(--dim);margin-top:2px;}
+.chat-status{display:flex;align-items:center;gap:6px;font-family:'DM Mono',monospace;font-size:10px;color:var(--green);}
+.live-dot{width:5px;height:5px;border-radius:50%;background:var(--green);animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.3;}}
+
+/* ── MESSAGES ── */
+.messages{flex:1;overflow-y:auto;padding:20px 24px;display:flex;flex-direction:column;gap:16px;}
+.messages::-webkit-scrollbar{width:4px;}
+.messages::-webkit-scrollbar-track{background:transparent;}
+.messages::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px;}
+
+/* System/pushed messages */
+.msg-system{
+  background:var(--dark);border:1px solid var(--border);border-radius:10px;
+  padding:14px 16px;border-left:3px solid var(--purple);
+}
+.msg-system.signal{border-left-color:var(--accent);}
+.msg-system.briefing{border-left-color:var(--blue);}
+.msg-system.subscription{border-left-color:var(--green);}
+
+.msg-type{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:var(--purple);margin-bottom:6px;display:flex;align-items:center;gap:8px;}
+.msg-type.signal{color:var(--accent);}
+.msg-type.briefing{color:var(--blue);}
+.msg-type.subscription{color:var(--green);}
+.msg-type-dot{width:5px;height:5px;border-radius:50%;background:currentColor;flex-shrink:0;}
+
+.msg-title{font-family:'Syne',sans-serif;font-weight:700;font-size:14px;color:var(--white);margin-bottom:6px;line-height:1.4;}
+.msg-body{font-size:13px;color:var(--text);line-height:1.7;}
+.msg-body strong{color:var(--white);font-weight:500;}
+
+.msg-sources{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px;}
+.msg-source{font-family:'DM Mono',monospace;font-size:9px;padding:2px 8px;border-radius:20px;background:var(--card);color:var(--dim);border:1px solid var(--border);}
+
+.msg-cards{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px;}
+.msg-card{background:var(--card);border:1px solid var(--border);border-radius:6px;padding:10px 12px;}
+.msg-card-label{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:1px;text-transform:uppercase;color:var(--dim);margin-bottom:4px;}
+.msg-card-val{font-family:'Syne',sans-serif;font-weight:700;font-size:16px;color:var(--white);}
+.msg-card-sub{font-size:11px;color:var(--text);margin-top:2px;}
+
+.msg-actions{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap;}
+.msg-action{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.5px;padding:5px 12px;border-radius:4px;cursor:pointer;transition:all .2s;border:1px solid var(--border);background:var(--card);color:var(--text);}
+.msg-action:hover{background:var(--panel);color:var(--white);border-color:var(--mid);}
+.msg-action.primary{background:rgba(212,255,0,.08);border-color:rgba(212,255,0,.25);color:var(--accent);}
+.msg-action.primary:hover{background:rgba(212,255,0,.14);}
+
+/* User messages */
+.msg-user{display:flex;justify-content:flex-end;}
+.msg-user-bubble{
+  background:rgba(180,136,255,.1);border:1px solid rgba(180,136,255,.2);
+  border-radius:10px 10px 2px 10px;padding:10px 14px;
+  max-width:70%;font-size:13px;color:var(--white);line-height:1.6;
+}
+
+/* Brain response */
+.msg-brain{display:flex;gap:10px;align-items:flex-start;}
+.brain-avatar{width:28px;height:28px;border-radius:50%;background:rgba(180,136,255,.15);border:1px solid rgba(180,136,255,.3);display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;font-size:10px;color:var(--purple);flex-shrink:0;margin-top:2px;}
+.brain-bubble{flex:1;}
+.brain-name{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--purple);margin-bottom:6px;}
+.brain-content{background:var(--dark);border:1px solid var(--border);border-radius:2px 10px 10px 10px;padding:12px 14px;font-size:13px;color:var(--text);line-height:1.7;}
+.brain-content strong{color:var(--white);font-weight:500;}
+.brain-content .highlight{color:var(--accent);}
+
+/* Typing indicator */
+.typing{display:flex;gap:4px;align-items:center;padding:8px 0;}
+.typing-dot{width:5px;height:5px;border-radius:50%;background:var(--purple);opacity:.4;}
+.typing-dot:nth-child(1){animation:blink 1.2s .0s infinite;}
+.typing-dot:nth-child(2){animation:blink 1.2s .2s infinite;}
+.typing-dot:nth-child(3){animation:blink 1.2s .4s infinite;}
+@keyframes blink{0%,80%,100%{opacity:.15;}40%{opacity:.9;}}
+
+/* ── INPUT BAR ── */
+.input-bar{
+  padding:14px 24px;border-top:1px solid var(--border);
+  background:var(--dark);flex-shrink:0;
+}
+.input-wrap{
+  display:flex;align-items:center;gap:10px;
+  background:var(--card);border:1px solid var(--border);border-radius:10px;
+  padding:8px 12px;transition:border-color .2s;
+}
+.input-wrap:focus-within{border-color:rgba(180,136,255,.4);}
+.input-field{
+  flex:1;background:none;border:none;outline:none;font-family:'DM Sans',sans-serif;
+  font-size:14px;color:var(--white);resize:none;line-height:1.5;max-height:100px;
+}
+.input-field::placeholder{color:var(--dim);}
+.input-send{
+  width:32px;height:32px;border-radius:6px;background:rgba(180,136,255,.15);
+  border:1px solid rgba(180,136,255,.3);display:flex;align-items:center;
+  justify-content:center;cursor:pointer;transition:all .2s;flex-shrink:0;
+  font-size:14px;
+}
+.input-send:hover{background:rgba(180,136,255,.3);}
+.input-send.ready{background:var(--purple);border-color:var(--purple);}
+
+.input-suggestions{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap;}
+.suggestion{
+  font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.5px;
+  padding:4px 10px;border-radius:20px;background:var(--card);color:var(--dim);
+  border:1px solid var(--border);cursor:pointer;transition:all .2s;
+}
+.suggestion:hover{color:var(--white);border-color:var(--mid);}
+
+/* ── PROJECT TABLE ── */
+.proj-table{width:100%;border-collapse:collapse;margin-top:10px;font-size:12px;}
+.proj-table th{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:1.5px;text-transform:uppercase;color:var(--dim);padding:6px 10px;text-align:left;border-bottom:1px solid var(--border);}
+.proj-table td{padding:8px 10px;border-bottom:1px solid rgba(37,37,37,.6);color:var(--text);vertical-align:top;}
+.proj-table tr:last-child td{border-bottom:none;}
+.proj-table tr:hover td{background:rgba(255,255,255,.02);}
+.proj-status{display:inline-block;width:6px;height:6px;border-radius:50%;margin-right:5px;}
+.status-active{background:var(--green);}
+.status-slow{background:var(--orange);}
+.status-paused{background:var(--dim);}
+
+/* ── SUBSCRIPTION MODAL ── */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:500;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .2s;}
+.modal-overlay.show{opacity:1;pointer-events:all;}
+.modal{background:var(--dark);border:1px solid var(--border);border-radius:12px;width:480px;max-width:90vw;padding:24px;}
+.modal-title{font-family:'Syne',sans-serif;font-weight:700;font-size:16px;color:var(--white);margin-bottom:4px;}
+.modal-sub{font-size:12px;color:var(--dim);margin-bottom:20px;}
+.modal-field{margin-bottom:14px;}
+.modal-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--dim);margin-bottom:6px;}
+.modal-input{width:100%;background:var(--card);border:1px solid var(--border);border-radius:6px;padding:9px 12px;font-family:'DM Sans',sans-serif;font-size:13px;color:var(--white);outline:none;transition:border-color .2s;}
+.modal-input:focus{border-color:rgba(180,136,255,.4);}
+.modal-input::placeholder{color:var(--dim);}
+.modal-row{display:flex;gap:10px;}
+.modal-select{flex:1;background:var(--card);border:1px solid var(--border);border-radius:6px;padding:9px 12px;font-family:'DM Sans',sans-serif;font-size:13px;color:var(--white);outline:none;appearance:none;}
+.modal-actions{display:flex;gap:8px;justify-content:flex-end;margin-top:20px;}
+.modal-cancel{background:none;border:1px solid var(--border);color:var(--text);padding:8px 16px;border-radius:6px;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:13px;}
+.modal-save{background:var(--purple);border:none;color:#fff;padding:8px 20px;border-radius:6px;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;}
+
+.snav {
+  height: 48px;
+  background: #0A0A0A;
+  border-bottom: 1px solid #1E1E1E;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  flex-shrink: 0;
+}
+.snav-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+.snav-mark {
+  width: 26px; height: 26px;
+  background: #D4FF00;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Syne', sans-serif;
+  font-weight: 800; font-size: 13px; color: #080808;
+}
+.snav-name {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800; font-size: 15px; color: #EEEEEE;
+}
+.snav-sep {
+  width: 1px; height: 16px;
+  background: #252525; margin: 0 4px;
+}
+.snav-demos {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+.snav-demo {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px; letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  border-radius: 5px;
+  border: 1px solid transparent;
+  color: #555;
+  text-decoration: none;
+  transition: all .15s;
+  white-space: nowrap;
+}
+.snav-demo:hover { color: #AAAAAA; background: #161616; border-color: #252525; }
+.snav-demo.active { color: #EEEEEE; background: #1A1A1A; border-color: #333; }
+.snav-links {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.snav-link {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px; letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 4px;
+  border: 1px solid #1E1E1E;
+  color: #444;
+  text-decoration: none;
+  transition: all .15s;
+  white-space: nowrap;
+}
+.snav-link:hover { color: #AAAAAA; border-color: #333; }
+.snav-link.docs { border-color: rgba(78,201,255,.15); color: #4EC9FF; opacity: .7; }
+.snav-link.docs:hover { opacity: 1; }
+
+</style>
+<script src="nav.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    injectNav('demo', 'essencedemo.html');
+  });
+</script>
+</head>
+<body>
+
+<!-- TOP BAR -->
+    </a>
+  </div>
+
+<!-- MAIN LAYOUT -->
+<div class="layout">
+
+  <!-- LEFT SIDEBAR -->
+  <div class="sidebar">
+
+    <div class="sb-section">
+      <div class="sb-label">Intelligence</div>
+      <div class="sb-item active" onclick="loadContext('chat')">
+        <span class="sb-icon">💬</span> Ask the Brain
+      </div>
+      <div class="sb-item" onclick="loadContext('today')">
+        <span class="sb-icon">☀️</span> Today's Briefing
+        <span class="sb-badge blue" style="background:var(--blue);color:#080808;">New</span>
+      </div>
+      <div class="sb-item" onclick="loadContext('signals')">
+        <span class="sb-icon">⚡</span> Signals
+        <span class="sb-badge">2</span>
+      </div>
+      <div class="sb-item" onclick="loadContext('projects')">
+        <span class="sb-icon">🗂</span> All Projects
+      </div>
+    </div>
+
+    <div class="sb-divider"></div>
+
+    <div class="sb-section">
+      <div class="sb-label">Live Signals</div>
+      <div class="sb-signal" onclick="injectSignal('eu')">
+        <div class="sb-signal-title">EU AI Act — eGroup has 18 months of relevant build</div>
+        <div class="sb-signal-time">2 min ago · Critical</div>
+      </div>
+      <div class="sb-signal" onclick="injectSignal('teams')">
+        <div class="sb-signal-title">3 teams solving the same problem independently</div>
+        <div class="sb-signal-time">18 min ago · High</div>
+      </div>
+    </div>
+
+    <div class="sb-divider"></div>
+
+    <div class="sb-section">
+      <div class="sb-label">Org State</div>
+      <div class="sb-state">
+        <div class="sb-state-row">
+          <div class="sb-state-lbl">Mindset</div>
+          <div class="sb-state-bar"><div class="sb-state-fill" style="width:78%;background:var(--purple);"></div></div>
+          <div style="font-size:10px;color:var(--mid);">High</div>
+        </div>
+        <div class="sb-state-row">
+          <div class="sb-state-lbl">Momentum</div>
+          <div class="sb-state-bar"><div class="sb-state-fill" style="width:62%;background:var(--green);"></div></div>
+          <div style="font-size:10px;color:var(--mid);">Good</div>
+        </div>
+        <div class="sb-state-row">
+          <div class="sb-state-lbl">Energy</div>
+          <div class="sb-state-bar"><div class="sb-state-fill" style="width:85%;background:var(--accent);"></div></div>
+          <div style="font-size:10px;color:var(--mid);">Strong</div>
+        </div>
+        <div class="sb-state-row">
+          <div class="sb-state-lbl">Alignment</div>
+          <div class="sb-state-bar"><div class="sb-state-fill" style="width:45%;background:var(--orange);"></div></div>
+          <div style="font-size:10px;color:var(--mid);">Watch</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sb-divider"></div>
+
+    <div class="sb-section">
+      <div class="sb-label">My Subscriptions</div>
+      <div class="sb-item" onclick="loadContext('sub1')">
+        <span class="sb-icon">📊</span> Weekly Projects
+        <span class="sb-badge green">Mon</span>
+      </div>
+      <div class="sb-item" onclick="loadContext('sub2')">
+        <span class="sb-icon">💰</span> Spend Alerts
+        <span class="sb-badge orange">Live</span>
+      </div>
+      <div class="sb-item" onclick="showModal()">
+        <span class="sb-icon">＋</span> New subscription
+      </div>
+    </div>
+
+  </div>
+
+  <!-- CHAT MAIN -->
+  <div class="chat-main">
+
+    <div class="chat-header">
+      <div>
+        <div class="chat-title">Essence — Ask anything about eGroup</div>
+        <div class="chat-sub">Connected to the Brain · 47,284 knowledge objects · all systems live</div>
+      </div>
+      <div class="chat-status">
+        <div class="live-dot"></div>
+        Brain live
+      </div>
+    </div>
+
+    <div class="messages" id="messages">
+
+      <!-- Morning briefing pushed automatically -->
+      <div class="msg-system briefing">
+        <div class="msg-type briefing"><div class="msg-type-dot"></div>Morning briefing · Pushed automatically · 08:00</div>
+        <div class="msg-title">Good morning, Antal. Here's what eGroup is working on today.</div>
+        <div class="msg-body">
+          <strong>14 active projects</strong> across 5 teams. Research team is at peak activity — 3 members submitted updates overnight on XANTA. Sales team has 2 proposals due this week. FinTech pipeline is quiet — 12 days without new CRM activity, which is unusual.
+          <br><br>
+          <strong>One thing to know:</strong> The EU AI Act enforcement announcement this morning directly intersects with 7 active eGroup projects. This is a content and commercial moment.
+        </div>
+        <div class="msg-cards">
+          <div class="msg-card">
+            <div class="msg-card-label">Active projects</div>
+            <div class="msg-card-val">14</div>
+            <div class="msg-card-sub">across 5 teams</div>
+          </div>
+          <div class="msg-card">
+            <div class="msg-card-label">Signals today</div>
+            <div class="msg-card-val">2</div>
+            <div class="msg-card-sub">1 critical · 1 high</div>
+          </div>
+          <div class="msg-card">
+            <div class="msg-card-label">Proposals due</div>
+            <div class="msg-card-val">2</div>
+            <div class="msg-card-sub">this week</div>
+          </div>
+          <div class="msg-card">
+            <div class="msg-card-label">Pipeline alert</div>
+            <div class="msg-card-val" style="color:var(--orange);">12d</div>
+            <div class="msg-card-sub">FinTech quiet</div>
+          </div>
+        </div>
+        <div class="msg-actions">
+          <div class="msg-action primary" onclick="askQuestion('Show me all 14 active projects with their status and spend')">Show all projects →</div>
+          <div class="msg-action" onclick="askQuestion('Tell me more about the EU AI Act intersection with our projects')">EU AI Act signal →</div>
+          <div class="msg-action" onclick="askQuestion('Why is the FinTech pipeline quiet and what should we do?')">FinTech pipeline →</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- INPUT BAR -->
+    <div class="input-bar">
+      <div class="input-wrap">
+        <textarea
+          class="input-field"
+          id="input"
+          rows="1"
+          placeholder="Ask anything about eGroup — projects, spend, teams, signals..."
+          oninput="autoResize(this);updateSend()"
+          onkeydown="handleKey(event)"
+        ></textarea>
+        <div class="input-send" id="send-btn" onclick="sendMessage()">↑</div>
+      </div>
+      <div class="input-suggestions">
+        <div class="suggestion" onclick="askQuestion('What is every team working on right now?')">What is every team working on?</div>
+        <div class="suggestion" onclick="askQuestion('Show me all projects over €50k spend with who authorised them')">Projects by spend</div>
+        <div class="suggestion" onclick="askQuestion('Which projects have gone quiet in the last 2 weeks?')">Quiet projects</div>
+        <div class="suggestion" onclick="askQuestion('What is the XANTA project status and total spend to date?')">XANTA status</div>
+        <div class="suggestion" onclick="askQuestion('Who in eGroup knows the most about post-quantum security?')">Who knows what</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- SUBSCRIPTION MODAL -->
+<div class="modal-overlay" id="modal">
+  <div class="modal">
+    <div class="modal-title">New Intelligence Subscription</div>
+    <div class="modal-sub">Describe what you want to track — Rise will deliver it automatically.</div>
+    <div class="modal-field">
+      <div class="modal-label">What do you want to track?</div>
+      <input class="modal-input" id="sub-what" placeholder="e.g. all projects over €10k spend, new partnerships, research publications..." />
+    </div>
+    <div class="modal-field">
+      <div class="modal-label">Delivery cadence</div>
+      <div class="modal-row">
+        <select class="modal-select" id="sub-cadence">
+          <option>As it happens</option>
+          <option>Daily digest</option>
+          <option selected>Weekly summary</option>
+          <option>Monthly report</option>
+        </select>
+        <select class="modal-select" id="sub-format">
+          <option>Chat message</option>
+          <option>Email</option>
+          <option>Both</option>
+        </select>
+      </div>
+    </div>
+    <div class="modal-field">
+      <div class="modal-label">Alert threshold (optional)</div>
+      <input class="modal-input" id="sub-threshold" placeholder="e.g. only if spend exceeds €50k, only if 3+ days without activity..." />
+    </div>
+    <div class="modal-actions">
+      <button class="modal-cancel" onclick="hideModal()">Cancel</button>
+      <button class="modal-save" onclick="saveSubscription()">Create subscription</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── BRAIN RESPONSES ──────────────────────────────────────────────────
+const RESPONSES = {
+  default: (q) => ({
+    thinking: 1400,
+    content: `I searched the Brain across ${Math.floor(Math.random()*8+4)} connected systems for <strong>"${q}"</strong>. Here's what I found:`,
+    body: `The Brain currently holds <strong>47,284 knowledge objects</strong> across eGroup's internal and external graph. Your query intersects with activity from the HR system, project management data, and several recent submissions from team leads. Based on available signals, the most relevant information has been surfaced below. If you'd like to drill deeper into any specific area, just ask.`,
+    sources: ['Brain query', 'HR system', 'CRM', 'Project management', 'SharePoint']
+  }),
+
+  projects: {
+    thinking: 1800,
+    content: 'Here are all 14 active projects across eGroup — with status, team, authorisation, and spend to date.',
+    table: true,
+    sources: ['Project management', 'CRM', 'HR system', 'Finance connector']
+  },
+
+  eu: {
+    thinking: 1200,
+    content: 'The EU AI Act enforcement began today. Here is what this means specifically for eGroup.',
+    body: `The Brain cross-referenced the EU AI Act enforcement announcement with eGroup's internal knowledge graph. It found <strong>7 active projects</strong> directly relevant to AI compliance infrastructure, <strong>3 client proposals</strong> that reference compliance requirements, and <strong>14 internal documents</strong> covering sovereign AI and data governance — areas the regulation now makes urgently relevant.\n\nThe critical angle: <span class="highlight">eGroup has been building sovereign AI infrastructure since 1993 — 30 years before the regulation required it.</span> This is not a company scrambling to comply. This is a company that built the solution before the problem had a name. That is the content and commercial moment.\n\nRecommended action: Rise has pre-built 3 POCs for LinkedIn, X, and the website — ready for review in the content queue.`,
+    sources: ['EU regulatory feed', 'Brain intersection engine', '7 project nodes', '14 document nodes']
+  },
+
+  xanta: {
+    thinking: 1600,
+    content: 'XANTA project — full status and spend summary.',
+    body: `<strong>XANTA</strong> is eGroup's migraine prediction AI — a joint project with the University of Pécs using conversational AI to predict neurological events. It has won <strong>first place at two consecutive international scientific events</strong> in the Medical AI Innovation category.\n\n<strong>Current status:</strong> Active — research team at peak activity this week, 3 submissions overnight.\n<strong>Total spend to date:</strong> €284,000\n<strong>Authorised by:</strong> Antal Kuthy (CEO) — March 2024\n<strong>Team:</strong> Dr. Anna Kovács (lead), 4 research engineers, 2 University of Pécs partners\n<strong>Next milestone:</strong> Clinical validation paper submission — due June 2026\n<strong>External relevance:</strong> 50 million people globally suffer migraines. Academic recognition is now sufficient to begin enterprise HealthTech conversations.`,
+    sources: ['Project management', 'HR system', 'Finance connector', 'Academic DB — 2 papers']
+  },
+
+  fintech: {
+    thinking: 1500,
+    content: 'FinTech pipeline analysis — 12 days of silence is statistically unusual.',
+    body: `The Brain detected that eGroup's FinTech CRM pipeline has been quiet for <strong>12 days</strong> — no new activity, no updates, no contact logged. Historical pattern shows new FinTech pipeline activity every <strong>4-6 days</strong> on average across the last 18 months. This is a <strong>2.1 standard deviation</strong> deviation from the norm.\n\nNo obvious external cause detected: FinTech market signals are normal, no major competitor announcements, no regulatory disruption that would pause buying.\n\n<strong>Three possibilities the Brain flags:</strong>\n1. Sales team capacity is currently concentrated on the 2 proposals due this week\n2. The last 3 FinTech conversations closed without a follow-up plan\n3. The sector contact list may need refreshing — average contact age is 8 months\n\nRecommended action: Direct question to Sales lead. This warrants a conversation, not another report.`,
+    sources: ['CRM', 'Historical brain pattern', 'External market signals']
+  },
+
+  teams: {
+    thinking: 1300,
+    content: 'Three teams are working on the same problem without knowing it.',
+    body: `The Brain detected semantic overlap across <strong>23 documents</strong> and <strong>4 active projects</strong> involving three separate eGroup teams — none of whom appear to be aware of the others' work.\n\n<strong>Research team (XANTA):</strong> Working on private data processing for medical AI — developing a pattern for local inference that preserves patient data sovereignty.\n\n<strong>FinTech product team:</strong> Working on a client-side data vault for banking AI — solving for regulatory data residency requirements.\n\n<strong>GovTech team:</strong> Working on a sovereign compute layer for government AI workloads — same underlying challenge, different sector framing.\n\nAll three teams are independently solving variants of the same problem: <span class="highlight">how do you run AI inference on sensitive data without that data leaving the client environment?</span>\n\nOne conversation between these three leads could eliminate months of duplicated work — and might produce a unified solution applicable across all three sectors.`,
+    sources: ['Brain semantic clustering', '23 document nodes', '3 team activity graphs']
+  },
+
+  spend: {
+    thinking: 1700,
+    content: 'All projects over €50k spend — with authorisation chain.',
+    table: true,
+    tableType: 'spend',
+    sources: ['Finance connector', 'Project management', 'HR system — authorisation records']
+  }
+};
+
+// Project table data
+const PROJECTS = [
+  {name:'XANTA — Medical AI',team:'Research',status:'active',lead:'Dr. Kovács',auth:'Antal Kuthy',spend:'€284,000',phase:'Clinical validation'},
+  {name:'Kellton EU-India Ecosystem',team:'Partnerships',status:'active',lead:'Péter Antal',auth:'Antal Kuthy',spend:'€127,000',phase:'MoU implementation'},
+  {name:'FinTech AI Infrastructure V2',team:'FinTech Product',status:'slow',lead:'Gábor Mészáros',auth:'Zoltán Nagy',spend:'€198,000',phase:'Architecture review'},
+  {name:'GovTech Sovereign Compute',team:'GovTech',status:'active',lead:'Katalin Varga',auth:'Antal Kuthy',spend:'€312,000',phase:'Pilot deployment'},
+  {name:'InnoHealth Data Lake',team:'HealthTech',status:'active',lead:'Dr. Kovács',auth:'Antal Kuthy',spend:'€89,000',phase:'Infrastructure build'},
+  {name:'EU AI Act Compliance Framework',team:'Research',status:'active',lead:'András Kiss',auth:'Antal Kuthy',spend:'€44,000',phase:'Documentation'},
+  {name:'Client Portal — Banking AI',team:'FinTech Product',status:'active',lead:'Réka Fodor',auth:'Zoltán Nagy',spend:'€156,000',phase:'Beta testing'},
+  {name:'SpaceTech Data Pipeline',team:'Research',status:'paused',lead:'Bence Szabó',auth:'Antal Kuthy',spend:'€67,000',phase:'Paused — Q3 resume'},
+];
+
+const SPEND_PROJECTS = PROJECTS.filter(p => {
+  const n = parseInt(p.spend.replace(/[€,]/g,''));
+  return n >= 50000;
+});
+
+function buildTable(projects) {
+  return `<table class="proj-table">
+    <thead><tr>
+      <th>Project</th><th>Team</th><th>Lead</th><th>Authorised by</th><th>Spend</th><th>Phase</th>
+    </tr></thead>
+    <tbody>${projects.map(p=>`<tr>
+      <td><span class="proj-status status-${p.status}"></span>${p.name}</td>
+      <td>${p.team}</td><td>${p.lead}</td><td>${p.auth}</td>
+      <td style="color:${parseInt(p.spend.replace(/[€,]/g,''))>200000?'var(--orange)':'var(--white)'};font-weight:500;">${p.spend}</td>
+      <td>${p.phase}</td>
+    </tr>`).join('')}</tbody>
+  </table>`;
+}
+
+// ── MATCH QUERY TO RESPONSE ─────────────────────────────────────────
+function matchQuery(q) {
+  const ql = q.toLowerCase();
+  if (ql.includes('project') && (ql.includes('all') || ql.includes('14') || ql.includes('status') || ql.includes('spend') || ql.includes('work'))) return 'projects';
+  if (ql.includes('eu ai act') || ql.includes('regulation') || ql.includes('intersection')) return 'eu';
+  if (ql.includes('xanta')) return 'xanta';
+  if (ql.includes('fintech') || ql.includes('pipeline') || ql.includes('quiet')) return 'fintech';
+  if (ql.includes('team') && ql.includes('same problem')) return 'teams';
+  if (ql.includes('spend') || ql.includes('€50k') || ql.includes('50k') || ql.includes('cost')) return 'spend';
+  return 'default';
+}
+
+// ── RENDER MESSAGE ──────────────────────────────────────────────────
+function addMessage(html) {
+  const el = document.createElement('div');
+  el.innerHTML = html;
+  document.getElementById('messages').appendChild(el.firstElementChild || el);
+  scrollBottom();
+}
+
+function scrollBottom() {
+  const m = document.getElementById('messages');
+  m.scrollTop = m.scrollHeight;
+}
+
+function showTyping() {
+  const id = 'typing-' + Date.now();
+  const html = `<div id="${id}" class="msg-brain">
+    <div class="brain-avatar">B</div>
+    <div class="brain-bubble">
+      <div class="brain-name">Brain</div>
+      <div class="brain-content"><div class="typing">
+        <div class="typing-dot"></div>
+        <div class="typing-dot"></div>
+        <div class="typing-dot"></div>
+      </div></div>
+    </div>
+  </div>`;
+  addMessage(html);
+  return id;
+}
+
+function removeEl(id) {
+  const el = document.getElementById(id);
+  if (el) el.remove();
+}
+
+// ── SEND MESSAGE ────────────────────────────────────────────────────
+function sendMessage() {
+  const input = document.getElementById('input');
+  const q = input.value.trim();
+  if (!q) return;
+  askQuestion(q);
+  input.value = '';
+  input.style.height = '';
+  updateSend();
+}
+
+function askQuestion(q) {
+  // Add user message
+  addMessage(`<div class="msg-user"><div class="msg-user-bubble">${escHtml(q)}</div></div>`);
+
+  const key = matchQuery(q);
+  const resp = key === 'default' ? RESPONSES.default(q) : RESPONSES[key];
+
+  // Show typing
+  const typingId = showTyping();
+
+  setTimeout(() => {
+    removeEl(typingId);
+
+    let tableHtml = '';
+    if (resp.table) {
+      const data = resp.tableType === 'spend' ? SPEND_PROJECTS : PROJECTS;
+      tableHtml = buildTable(data);
+    }
+
+    const bodyHtml = resp.body
+      ? `<div style="margin-top:8px;white-space:pre-line;">${resp.body}</div>`
+      : '';
+
+    const sourcesHtml = resp.sources
+      ? `<div class="msg-sources">${resp.sources.map(s=>`<div class="msg-source">${s}</div>`).join('')}</div>`
+      : '';
+
+    addMessage(`<div class="msg-brain">
+      <div class="brain-avatar">B</div>
+      <div class="brain-bubble">
+        <div class="brain-name">Brain · ${resp.sources ? resp.sources.length : 0} sources</div>
+        <div class="brain-content">
+          <strong>${resp.content}</strong>
+          ${bodyHtml}
+          ${tableHtml}
+          ${sourcesHtml}
+          <div class="msg-actions" style="margin-top:10px;">
+            <div class="msg-action" onclick="askQuestion('Tell me more about this')">Go deeper</div>
+            <div class="msg-action" onclick="askQuestion('Create a summary I can share with the team')">Create summary</div>
+            <div class="msg-action primary" onclick="showModal()">Subscribe to this →</div>
+          </div>
+        </div>
+      </div>
+    </div>`);
+
+  }, resp.thinking || 1200);
+}
+
+function injectSignal(type) {
+  if (type === 'eu') askQuestion('Tell me more about the EU AI Act intersection with our projects');
+  if (type === 'teams') askQuestion('Tell me more about the three teams solving the same problem');
+}
+
+function loadContext(ctx) {
+  document.querySelectorAll('.sb-item').forEach(i => i.classList.remove('active'));
+  event.currentTarget.classList.add('active');
+  if (ctx === 'today') askQuestion('Show me everything happening at eGroup today across all teams');
+  if (ctx === 'signals') askQuestion('What are the most important signals the Brain is detecting right now?');
+  if (ctx === 'projects') askQuestion('Show me all active projects with their status, spend, and who authorised them');
+  if (ctx === 'sub1') askQuestion('Show me this week\'s project summary across all teams');
+  if (ctx === 'sub2') askQuestion('Show me all projects that are over their expected spend threshold');
+}
+
+// ── MODAL ───────────────────────────────────────────────────────────
+function showModal() {
+  document.getElementById('modal').classList.add('show');
+}
+function hideModal() {
+  document.getElementById('modal').classList.remove('show');
+}
+function saveSubscription() {
+  const what = document.getElementById('sub-what').value.trim();
+  const cadence = document.getElementById('sub-cadence').value;
+  if (!what) { document.getElementById('sub-what').focus(); return; }
+  hideModal();
+  addMessage(`<div class="msg-system subscription">
+    <div class="msg-type subscription"><div class="msg-type-dot"></div>Subscription created</div>
+    <div class="msg-title">Rise will now track: "${escHtml(what)}"</div>
+    <div class="msg-body">Delivery: <strong>${cadence}</strong>. The Brain will monitor all connected systems for this and deliver results automatically. You can pause or delete this subscription from the sidebar at any time.</div>
+  </div>`);
+}
+
+// ── UTILS ────────────────────────────────────────────────────────────
+function autoResize(el) {
+  el.style.height = '';
+  el.style.height = Math.min(el.scrollHeight, 100) + 'px';
+}
+
+function updateSend() {
+  const val = document.getElementById('input').value.trim();
+  const btn = document.getElementById('send-btn');
+  btn.classList.toggle('ready', val.length > 0);
+}
+
+function handleKey(e) {
+  if (e.key === 'Enter' && !e.shiftKey) {
+    e.preventDefault();
+    sendMessage();
+  }
+}
+
+function escHtml(s) {
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// Close modal on overlay click
+document.getElementById('modal').addEventListener('click', function(e) {
+  if (e.target === this) hideModal();
+});
+</script>
+</body>
+</html>

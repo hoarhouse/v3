@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>E-Group — Intelligence Infrastructure</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+:root {
+  --black: #080808;
+  --ink: #0F0F0F;
+  --dark: #161616;
+  --panel: #1C1C1C;
+  --border: #252525;
+  --muted: #333;
+  --dim: #555;
+  --mid: #777;
+  --text: #B0B0B0;
+  --light: #D0D0D0;
+  --white: #EFEFEF;
+  --pure: #FFFFFF;
+  --gold: #C8A96E;
+  --gold2: #E8C98E;
+  --teal: #4ECDC4;
+  --red: #E85D4A;
+  --accent: #D4FF00;
+}
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--black);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* ── CUSTOM CURSOR ── */
+.cursor { position:fixed; width:8px; height:8px; background:var(--gold); border-radius:50%; pointer-events:none; z-index:9999; transform:translate(-50%,-50%); transition:transform 0.1s,background 0.2s; mix-blend-mode:difference; }
+.cursor-ring { position:fixed; width:32px; height:32px; border:1px solid rgba(200,169,110,0.4); border-radius:50%; pointer-events:none; z-index:9998; transform:translate(-50%,-50%); transition:all 0.15s ease; }
+body:has(a:hover) .cursor-ring, body:has(button:hover) .cursor-ring { width:48px; height:48px; border-color:var(--gold); }
+
+/* ── GRAIN OVERLAY ── */
+body::before { content:''; position:fixed; inset:0; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E"); opacity:0.025; pointer-events:none; z-index:1000; }
+
+/* ── NAV ── */
+nav { position:fixed; top:0; left:0; right:0; z-index:100; padding:28px 60px; display:flex; align-items:center; justify-content:space-between; background:linear-gradient(to bottom,rgba(8,8,8,0.97),rgba(8,8,8,0.6) 70%,transparent); backdrop-filter:blur(8px); }
+.nav-logo { display:flex; align-items:center; gap:14px; text-decoration:none; }
+.logo-e { font-family:'Syne',sans-serif; font-weight:800; font-size:26px; color:var(--gold); line-height:1; letter-spacing:-1px; }
+.nav-logo-text { font-family:'Syne',sans-serif; font-weight:600; font-size:15px; color:var(--white); letter-spacing:3px; text-transform:uppercase; }
+.nav-links { display:flex; align-items:center; gap:40px; list-style:none; }
+.nav-links a { font-family:'DM Mono',monospace; font-size:12px; color:var(--mid); text-decoration:none; letter-spacing:1.5px; text-transform:uppercase; transition:color 0.2s; position:relative; }
+.nav-links a::after { content:''; position:absolute; bottom:-3px; left:0; right:0; height:1px; background:var(--gold); transform:scaleX(0); transition:transform 0.2s; }
+.nav-links a:hover, .nav-links a.active { color:var(--white); }
+.nav-links a.active::after, .nav-links a:hover::after { transform:scaleX(1); }
+.nav-cta { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--gold); border:1px solid rgba(200,169,110,0.35); padding:10px 22px; text-decoration:none; transition:all 0.2s; position:relative; overflow:hidden; }
+.nav-cta::before { content:''; position:absolute; inset:0; background:var(--gold); transform:translateX(-100%); transition:transform 0.25s ease; z-index:-1; }
+.nav-cta:hover { color:var(--black); }
+.nav-cta:hover::before { transform:translateX(0); }
+/* ── DROPDOWN ── */
+.nav-dropdown { position:relative; }
+.nav-drop-menu { display:none; position:absolute; top:calc(100% + 16px); right:0; min-width:240px; background:#0F0F0F; border:1px solid #252525; border-top:2px solid var(--gold); z-index:500; }
+.nav-dropdown:hover .nav-drop-menu { display:block; }
+.nav-drop-label { display:block; padding:8px 18px 4px; font-family:'DM Mono',monospace; font-size:8px; letter-spacing:2.5px; text-transform:uppercase; color:#444; border-bottom:1px solid #1a1a1a; }
+.nav-drop-item { display:block; padding:10px 18px; font-family:'DM Mono',monospace; font-size:10px; letter-spacing:1.5px; text-transform:uppercase; color:#666; text-decoration:none; border-bottom:1px solid #1a1a1a; white-space:nowrap; transition:color 0.15s, padding-left 0.15s; }
+.nav-drop-item:last-child { border-bottom:none; }
+.nav-drop-item:hover { color:var(--gold); padding-left:24px; }
+.nav-drop-item::after { display:none !important; }
+/* ── HAMBURGER ── */
+.nav-hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; padding:4px; background:none; border:none; z-index:200; }
+.nav-hamburger span { display:block; width:22px; height:1.5px; background:var(--gold); transition:all 0.3s ease; transform-origin:center; }
+.nav-hamburger.open span:nth-child(1) { transform:translateY(6.5px) rotate(45deg); }
+.nav-hamburger.open span:nth-child(2) { opacity:0; transform:scaleX(0); }
+.nav-hamburger.open span:nth-child(3) { transform:translateY(-6.5px) rotate(-45deg); }
+/* ── MOBILE MENU ── */
+.nav-mobile-menu { display:none; position:fixed; inset:0; background:rgba(8,8,8,0.98); z-index:150; flex-direction:column; align-items:center; justify-content:flex-start; overflow-y:auto; padding:80px 0 40px; backdrop-filter:blur(20px); }
+.nav-mobile-menu.open { display:flex; }
+.nav-mobile-menu a { text-decoration:none; border-bottom:none; }
+.nav-mobile-menu a::after { display:none; }
+.mob-main { font-family:'Syne',sans-serif !important; font-weight:800 !important; font-size:clamp(26px,7vw,40px) !important; color:var(--white) !important; letter-spacing:-0.5px !important; padding:9px 0 !important; width:80%; text-align:center; transition:color 0.2s; display:block; }
+.mob-main:hover { color:var(--gold) !important; }
+.mob-divider { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:3px; text-transform:uppercase; color:var(--dim); padding:20px 0 6px; width:80%; border-bottom:1px solid var(--border); text-align:center; margin-bottom:4px; }
+.mob-record { font-family:'DM Mono',monospace !important; font-size:11px !important; letter-spacing:1.5px !important; text-transform:uppercase !important; color:var(--mid) !important; padding:7px 0 !important; width:80%; text-align:center; transition:color 0.2s; display:block; }
+.mob-record:hover, .mob-record.active { color:var(--gold) !important; }
+.mob-cta { font-family:'DM Mono',monospace !important; font-size:12px !important; letter-spacing:2px !important; text-transform:uppercase !important; color:var(--black) !important; background:var(--gold) !important; padding:14px 36px !important; margin-top:20px !important; display:block; }
+@media (max-width:1023px) { nav { padding:20px 36px; } .nav-links { gap:24px; } }
+@media (max-width:767px) { .nav-links, .nav-cta { display:none; } .nav-hamburger { display:flex; } nav { padding:16px 20px; } }
+
+/* ── HERO ── */
+.hero { min-height:100vh; display:flex; flex-direction:column; justify-content:flex-end; padding:0 60px 80px; position:relative; overflow:hidden; }
+.hero-grid { position:absolute; inset:0; background-image:linear-gradient(rgba(200,169,110,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(200,169,110,0.04) 1px,transparent 1px); background-size:80px 80px; mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 30%,transparent 100%); }
+.hero-glow { position:absolute; top:-20%; left:50%; transform:translateX(-50%); width:900px; height:600px; background:radial-gradient(ellipse,rgba(200,169,110,0.06) 0%,transparent 65%); pointer-events:none; }
+.hero-glow-2 { position:absolute; bottom:0; right:-10%; width:600px; height:600px; background:radial-gradient(ellipse,rgba(78,205,196,0.04) 0%,transparent 65%); pointer-events:none; }
+.hero-data { position:absolute; top:140px; right:60px; display:flex; flex-direction:column; gap:8px; opacity:0; animation:fadeInRight 1.2s ease 1.4s forwards; }
+.data-line { font-family:'DM Mono',monospace; font-size:11px; color:var(--muted); letter-spacing:1px; display:flex; align-items:center; gap:10px; }
+.data-line::before { content:''; display:inline-block; width:20px; height:1px; background:var(--gold); opacity:0.4; }
+.data-line .val { color:var(--gold); opacity:0.7; }
+.hero-content { position:relative; z-index:2; max-width:900px; }
+.hero-eyebrow { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:3px; text-transform:uppercase; color:var(--gold); margin-bottom:28px; opacity:0; animation:fadeInUp 0.8s ease 0.3s forwards; display:flex; align-items:center; gap:14px; }
+.hero-eyebrow::before { content:''; display:inline-block; width:32px; height:1px; background:var(--gold); }
+.hero-headline { font-family:'Syne',sans-serif; font-weight:800; font-size:clamp(52px,7vw,96px); line-height:0.95; letter-spacing:-3px; color:var(--white); margin-bottom:32px; opacity:0; animation:fadeInUp 0.8s ease 0.5s forwards; }
+.hero-headline .gold { color:var(--gold); -webkit-text-stroke:0; }
+.hero-sub { font-size:18px; font-weight:300; color:var(--mid); max-width:560px; line-height:1.7; margin-bottom:48px; opacity:0; animation:fadeInUp 0.8s ease 0.7s forwards; }
+.hero-sub strong { color:var(--light); font-weight:400; }
+.hero-actions { display:flex; align-items:center; gap:28px; opacity:0; animation:fadeInUp 0.8s ease 0.9s forwards; }
+.btn-primary { font-family:'DM Mono',monospace; font-size:12px; letter-spacing:2px; text-transform:uppercase; color:var(--black); background:var(--gold); padding:16px 36px; text-decoration:none; transition:all 0.2s; position:relative; overflow:hidden; display:inline-flex; align-items:center; gap:10px; }
+.btn-primary:hover { background:var(--gold2); }
+.btn-primary .arr { transition:transform 0.2s; }
+.btn-primary:hover .arr { transform:translateX(4px); }
+.btn-secondary { font-family:'DM Mono',monospace; font-size:12px; letter-spacing:2px; text-transform:uppercase; color:var(--mid); text-decoration:none; transition:color 0.2s; display:flex; align-items:center; gap:8px; }
+.btn-secondary:hover { color:var(--white); }
+.scroll-indicator { position:absolute; bottom:40px; right:60px; display:flex; flex-direction:column; align-items:center; gap:8px; opacity:0; animation:fadeIn 1s ease 1.8s forwards; }
+.scroll-line { width:1px; height:60px; background:linear-gradient(to bottom,transparent,var(--gold)); animation:scrollPulse 2s ease-in-out infinite; }
+.scroll-text { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:2px; text-transform:uppercase; color:var(--dim); writing-mode:vertical-rl; }
+
+/* ── TICKER ── */
+.ticker-wrap { border-top:1px solid var(--border); border-bottom:1px solid var(--border); background:var(--ink); padding:14px 0; overflow:hidden; position:relative; }
+.ticker-wrap::before,.ticker-wrap::after { content:''; position:absolute; top:0; bottom:0; width:80px; z-index:2; }
+.ticker-wrap::before { left:0; background:linear-gradient(to right,var(--ink),transparent); }
+.ticker-wrap::after { right:0; background:linear-gradient(to left,var(--ink),transparent); }
+.ticker { display:flex; animation:ticker 40s linear infinite; white-space:nowrap; }
+.ticker-item { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--dim); padding:0 40px; display:flex; align-items:center; gap:40px; flex-shrink:0; }
+.ticker-item span { color:var(--gold); opacity:0.5; }
+
+/* ── STATS ── */
+.stats { display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--border); border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
+.stat { background:var(--ink); padding:50px 40px; position:relative; overflow:hidden; transition:background 0.3s; }
+.stat::before { content:''; position:absolute; bottom:0; left:0; width:100%; height:2px; background:var(--gold); transform:scaleX(0); transform-origin:left; transition:transform 0.4s ease; }
+.stat:hover { background:var(--dark); }
+.stat:hover::before { transform:scaleX(1); }
+.stat-num { font-family:'Syne',sans-serif; font-weight:800; font-size:56px; color:var(--white); letter-spacing:-2px; line-height:1; margin-bottom:8px; }
+.stat-num .unit { font-size:28px; color:var(--gold); }
+.stat-label { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--dim); line-height:1.5; }
+
+/* ── SECTION TEMPLATE ── */
+section { padding:120px 60px; }
+.section-eyebrow { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:3px; text-transform:uppercase; color:var(--gold); margin-bottom:20px; display:flex; align-items:center; gap:14px; }
+.section-eyebrow::before { content:''; display:inline-block; width:24px; height:1px; background:var(--gold); }
+.section-title { font-family:'Syne',sans-serif; font-weight:800; font-size:clamp(36px,4vw,56px); color:var(--white); letter-spacing:-1.5px; line-height:1.05; margin-bottom:24px; }
+.section-body { font-size:17px; font-weight:300; color:var(--mid); line-height:1.8; max-width:580px; }
+
+/* ── ACT 1: THESIS ── */
+.thesis { padding:120px 60px; background:var(--ink); border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
+.thesis-statement { font-family:'Syne',sans-serif; font-weight:800; font-size:clamp(28px,3.5vw,48px); color:var(--white); letter-spacing:-1.5px; line-height:1.1; max-width:820px; margin-bottom:20px; }
+.thesis-statement em { font-style:normal; color:var(--gold); }
+.thesis-sub { font-size:17px; font-weight:300; color:var(--mid); max-width:600px; line-height:1.8; margin-bottom:72px; }
+.thesis-cards { display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--border); }
+.thesis-card { background:var(--dark); padding:56px 48px; position:relative; overflow:hidden; text-decoration:none; display:block; transition:background 0.3s; }
+.thesis-card::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; transition:opacity 0.3s; opacity:0; }
+.thesis-card.card-rise::before { background:linear-gradient(to right,var(--gold),var(--gold2)); }
+.thesis-card.card-intel::before { background:linear-gradient(to right,var(--teal),rgba(78,205,196,0.3)); }
+.thesis-card:hover { background:var(--panel); }
+.thesis-card:hover::before { opacity:1; }
+.card-status { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2px; text-transform:uppercase; padding:5px 12px; border:1px solid; display:inline-flex; align-items:center; gap:6px; margin-bottom:32px; }
+.card-status.status-pilot { color:var(--gold); border-color:rgba(200,169,110,0.3); }
+.card-status.status-new { color:var(--teal); border-color:rgba(78,205,196,0.3); }
+.card-status .dot { width:5px; height:5px; border-radius:50%; background:currentColor; animation:pulse 2s ease-in-out infinite; }
+.card-title { font-family:'Syne',sans-serif; font-weight:800; font-size:clamp(28px,2.5vw,40px); color:var(--white); letter-spacing:-1px; line-height:1; margin-bottom:16px; }
+.card-desc { font-size:15px; color:var(--mid); line-height:1.7; max-width:380px; margin-bottom:36px; }
+.card-link { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:2px; text-transform:uppercase; display:inline-flex; align-items:center; gap:8px; transition:gap 0.2s; }
+.thesis-card.card-rise .card-link { color:var(--gold); }
+.thesis-card.card-intel .card-link { color:var(--teal); }
+.thesis-card:hover .card-link { gap:14px; }
+
+/* ── ACT 2: PROOF ── */
+.proof { padding:120px 60px; background:var(--black); }
+.proof-inner { display:grid; grid-template-columns:1fr 1fr; gap:100px; align-items:start; }
+.proof-left { }
+.proof-right { }
+.proof-timeline { display:flex; flex-direction:column; gap:0; margin-top:48px; }
+.proof-item { display:grid; grid-template-columns:80px 1fr; gap:24px; padding:28px 0; border-bottom:1px solid var(--border); position:relative; transition:background 0.2s; }
+.proof-item:first-child { border-top:1px solid var(--border); }
+.proof-year { font-family:'DM Mono',monospace; font-size:12px; color:var(--gold); opacity:0.7; letter-spacing:1px; padding-top:2px; }
+.proof-content { }
+.proof-headline { font-family:'Syne',sans-serif; font-weight:700; font-size:16px; color:var(--white); letter-spacing:-0.3px; margin-bottom:6px; }
+.proof-detail { font-size:13px; color:var(--dim); line-height:1.6; }
+.proof-visual { background:var(--panel); border:1px solid var(--border); padding:48px; position:relative; }
+.proof-visual::before { content:''; position:absolute; top:-1px; left:40px; right:40px; height:2px; background:linear-gradient(to right,transparent,var(--gold),transparent); }
+.proof-quote { font-family:'Syne',sans-serif; font-size:22px; font-weight:600; color:var(--white); line-height:1.4; margin-bottom:24px; letter-spacing:-0.5px; }
+.proof-quote em { color:var(--gold); font-style:normal; }
+.proof-attr { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--dim); }
+.about-tags { display:flex; flex-wrap:wrap; gap:8px; margin-top:36px; }
+.tag { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:1.5px; text-transform:uppercase; color:var(--dim); border:1px solid var(--border); padding:6px 14px; transition:all 0.2s; }
+.tag:hover { color:var(--gold); border-color:rgba(200,169,110,0.35); }
+
+/* ── ACT 3: PULSE ── */
+.pulse-section { background:var(--ink); border-top:1px solid var(--border); border-bottom:1px solid var(--border); padding:100px 60px; }
+.pulse-header { display:flex; align-items:flex-end; justify-content:space-between; margin-bottom:56px; }
+.pulse-header-left { }
+.pulse-eyebrow { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:3px; text-transform:uppercase; color:var(--gold); margin-bottom:16px; display:flex; align-items:center; gap:10px; }
+.pulse-dot { width:6px; height:6px; border-radius:50%; background:var(--gold); animation:pulse 1.5s ease-in-out infinite; }
+.pulse-title { font-family:'Syne',sans-serif; font-weight:800; font-size:clamp(28px,3vw,42px); color:var(--white); letter-spacing:-1px; line-height:1.05; }
+.pulse-link { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--gold); text-decoration:none; display:flex; align-items:center; gap:8px; opacity:0.7; transition:opacity 0.2s; border-bottom:1px solid rgba(200,169,110,0.2); padding-bottom:2px; }
+.pulse-link:hover { opacity:1; }
+.pulse-feed { display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:1px; background:var(--border); }
+.pulse-card { background:var(--dark); padding:36px 32px; position:relative; overflow:hidden; text-decoration:none; display:block; transition:background 0.3s; }
+.pulse-card:hover { background:var(--panel); }
+.pulse-card.card-large { grid-row:span 2; padding:48px 40px; }
+.content-type { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:2.5px; text-transform:uppercase; padding:4px 10px; margin-bottom:20px; display:inline-block; }
+.type-deep { color:#9B8FFF; background:rgba(155,143,255,0.08); border:1px solid rgba(155,143,255,0.15); }
+.type-signal { color:var(--gold); background:rgba(200,169,110,0.08); border:1px solid rgba(200,169,110,0.15); }
+.type-room { color:var(--teal); background:rgba(78,205,196,0.08); border:1px solid rgba(78,205,196,0.15); }
+.pulse-card-title { font-family:'Syne',sans-serif; font-weight:700; color:var(--white); letter-spacing:-0.3px; line-height:1.2; margin-bottom:10px; }
+.card-large .pulse-card-title { font-size:22px; margin-bottom:14px; }
+.pulse-card:not(.card-large) .pulse-card-title { font-size:16px; }
+.pulse-card-excerpt { font-size:13px; color:var(--dim); line-height:1.6; }
+.card-large .pulse-card-excerpt { font-size:15px; color:var(--mid); }
+.pulse-card-meta { display:flex; align-items:center; justify-content:space-between; margin-top:24px; }
+.card-large .pulse-card-meta { margin-top:32px; }
+.pulse-meta-author { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:1px; color:var(--dim); }
+.pulse-meta-date { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:1px; color:var(--gold); opacity:0.6; }
+.sector-tag { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:1.5px; text-transform:uppercase; color:var(--dim); margin-top:8px; }
+.pulse-subscribe { margin-top:48px; display:flex; align-items:center; gap:0; max-width:440px; }
+.pulse-subscribe input { flex:1; background:var(--dark); border:1px solid var(--border); border-right:none; color:var(--white); padding:13px 18px; font-family:'DM Sans',sans-serif; font-size:14px; outline:none; transition:border-color 0.2s; }
+.pulse-subscribe input:focus { border-color:rgba(200,169,110,0.3); }
+.pulse-subscribe button { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--black); background:var(--gold); border:none; padding:13px 24px; cursor:pointer; white-space:nowrap; transition:background 0.2s; }
+.pulse-subscribe button:hover { background:var(--gold2); }
+.pulse-subscribe-label { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--dim); margin-bottom:12px; }
+
+/* ── ABOUT ── */
+.about { display:grid; grid-template-columns:1fr 1fr; gap:120px; align-items:center; }
+.about-visual { background:var(--panel); border:1px solid var(--border); padding:48px; position:relative; }
+.about-visual::before { content:''; position:absolute; top:-1px; left:40px; right:40px; height:2px; background:linear-gradient(to right,transparent,var(--gold),transparent); }
+.about-quote { font-family:'Syne',sans-serif; font-size:22px; font-weight:600; color:var(--white); line-height:1.4; margin-bottom:24px; letter-spacing:-0.5px; }
+.about-quote em { color:var(--gold); font-style:normal; }
+.about-attr { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--dim); }
+
+/* ── WHAT WE BUILD ── */
+.build-section { background:var(--ink); border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
+.build-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--border); margin-top:60px; }
+.build-card { background:var(--dark); padding:48px 40px; position:relative; overflow:hidden; transition:background 0.3s; }
+.build-card::after { content:''; position:absolute; top:0; left:0; width:100%; height:100%; background:radial-gradient(circle at 0% 100%,rgba(200,169,110,0.05),transparent 60%); opacity:0; transition:opacity 0.4s; }
+.build-card:hover { background:var(--panel); }
+.build-card:hover::after { opacity:1; }
+.build-num { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:2px; color:var(--gold); opacity:0.6; margin-bottom:24px; }
+.build-icon { font-size:28px; margin-bottom:20px; }
+.build-title { font-family:'Syne',sans-serif; font-weight:700; font-size:22px; color:var(--white); letter-spacing:-0.5px; margin-bottom:14px; line-height:1.2; }
+.build-desc { font-size:14px; color:var(--dim); line-height:1.7; }
+
+/* ── SECTORS ── */
+.sectors-grid { display:grid; grid-template-columns:repeat(5,1fr); gap:1px; background:var(--border); margin-top:60px; }
+.sector { background:var(--ink); padding:40px 28px; text-align:center; transition:background 0.3s; cursor:default; position:relative; overflow:hidden; }
+.sector::before { content:''; position:absolute; bottom:0; left:0; right:0; height:2px; background:var(--gold); transform:scaleX(0); transition:transform 0.3s; }
+.sector:hover { background:var(--dark); }
+.sector:hover::before { transform:scaleX(1); }
+.sector-icon { font-size:32px; margin-bottom:16px; display:block; transition:transform 0.3s; }
+.sector:hover .sector-icon { transform:scale(1.1) translateY(-2px); }
+.sector-name { font-family:'Syne',sans-serif; font-weight:700; font-size:13px; color:var(--light); letter-spacing:0.5px; }
+
+/* ── MISSION ── */
+.mission { background:var(--black); text-align:center; padding:140px 60px; position:relative; overflow:hidden; }
+.mission::before { content:''; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:800px; height:400px; background:radial-gradient(ellipse,rgba(200,169,110,0.05) 0%,transparent 65%); }
+.mission-text { font-family:'Syne',sans-serif; font-weight:800; font-size:clamp(32px,4vw,52px); color:var(--white); letter-spacing:-1.5px; line-height:1.15; max-width:820px; margin:0 auto 24px; position:relative; }
+.mission-text em { font-style:normal; color:var(--gold); }
+.mission-sub { font-size:16px; font-weight:300; color:var(--dim); max-width:500px; margin:0 auto; }
+
+/* ── CONTACT ── */
+.contact { background:var(--ink); border-top:1px solid var(--border); }
+.contact-inner { display:grid; grid-template-columns:1fr 1fr; gap:100px; align-items:start; }
+.contact-info { padding-top:8px; }
+.contact-detail { display:flex; flex-direction:column; gap:4px; padding:20px 0; border-bottom:1px solid var(--border); }
+.contact-detail:first-child { border-top:1px solid var(--border); }
+.contact-detail-label { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--dim); }
+.contact-detail-value { font-size:15px; color:var(--light); }
+.contact-form { display:flex; flex-direction:column; gap:16px; }
+.form-group { display:flex; flex-direction:column; gap:6px; }
+.form-label { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--dim); }
+.form-input,.form-select,.form-textarea { background:var(--dark); border:1px solid var(--border); color:var(--white); padding:14px 16px; font-family:'DM Sans',sans-serif; font-size:14px; outline:none; transition:border-color 0.2s; width:100%; appearance:none; }
+.form-input:focus,.form-select:focus,.form-textarea:focus { border-color:rgba(200,169,110,0.4); }
+.form-textarea { resize:vertical; min-height:100px; }
+.form-select { background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23555' stroke-width='1.5' fill='none'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right 16px center; cursor:pointer; }
+.form-select option { background:var(--dark); }
+.form-submit { font-family:'DM Mono',monospace; font-size:12px; letter-spacing:2px; text-transform:uppercase; color:var(--black); background:var(--gold); border:none; padding:16px 36px; cursor:pointer; transition:background 0.2s; align-self:flex-start; }
+.form-submit:hover { background:var(--gold2); }
+
+/* ── FOOTER ── */
+footer { background:var(--black); border-top:1px solid var(--border); padding:48px 60px; display:flex; justify-content:space-between; align-items:center; }
+.footer-left { display:flex; flex-direction:column; gap:6px; }
+.footer-logo { font-family:'Syne',sans-serif; font-weight:800; font-size:16px; color:var(--white); letter-spacing:3px; text-transform:uppercase; }
+.footer-logo span { color:var(--gold); }
+.footer-tagline { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--dim); }
+.footer-statement { font-family:'Syne',sans-serif; font-size:14px; color:var(--mid); max-width:420px; text-align:center; line-height:1.6; }
+.footer-statement em { color:var(--gold); font-style:normal; }
+.footer-right { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:1.5px; color:var(--dim); text-align:right; line-height:1.8; }
+
+/* ── ANIMATIONS ── */
+@keyframes fadeInUp { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:translateY(0); } }
+@keyframes fadeInRight { from { opacity:0; transform:translateX(24px); } to { opacity:1; transform:translateX(0); } }
+@keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+@keyframes ticker { from { transform:translateX(0); } to { transform:translateX(-50%); } }
+@keyframes scrollPulse { 0%,100% { opacity:0.3; transform:scaleY(1); } 50% { opacity:0.8; transform:scaleY(1.1); } }
+@keyframes pulse { 0%,100% { opacity:0.4; transform:scale(1); } 50% { opacity:1; transform:scale(1.3); } }
+.reveal { opacity:0; transform:translateY(30px); transition:opacity 0.7s ease,transform 0.7s ease; }
+.reveal.visible { opacity:1; transform:translateY(0); }
+.reveal-delay-1 { transition-delay:0.1s; }
+.reveal-delay-2 { transition-delay:0.2s; }
+.reveal-delay-3 { transition-delay:0.3s; }
+.reveal-delay-4 { transition-delay:0.4s; }
+.reveal-delay-5 { transition-delay:0.5s; }
+
+/* ── MOBILE ── */
+@media (max-width:768px) {
+  .cursor,.cursor-ring { display:none; }
+  body { cursor:auto; }
+  nav { padding:20px 24px; flex-wrap:wrap; gap:16px; }
+  .nav-links { display:none; }
+  .nav-cta { font-size:10px; padding:8px 16px; }
+  .hero { padding:0 24px 60px; min-height:100svh; }
+  .hero-data { display:none; }
+  .hero-headline { letter-spacing:-1.5px; }
+  .hero-sub { font-size:16px; }
+  .hero-actions { flex-direction:column; align-items:flex-start; gap:16px; }
+  .scroll-indicator { display:none; }
+  .stats { grid-template-columns:1fr 1fr; }
+  .stat { padding:32px 24px; }
+  .stat-num { font-size:40px; }
+  section { padding:72px 24px; }
+  .thesis { padding:72px 24px; }
+  .thesis-cards { grid-template-columns:1fr; }
+  .proof { padding:72px 24px; }
+  .proof-inner { grid-template-columns:1fr; gap:48px; }
+  .pulse-section { padding:72px 24px; }
+  .pulse-header { flex-direction:column; align-items:flex-start; gap:20px; }
+  .pulse-feed { grid-template-columns:1fr; }
+  .pulse-card.card-large { grid-row:span 1; }
+  .about { grid-template-columns:1fr; gap:48px; }
+  .build-grid { grid-template-columns:1fr; }
+  .build-card { padding:36px 28px; }
+  .sectors-grid { grid-template-columns:1fr 1fr; }
+  .sector:last-child { grid-column:span 2; }
+  .mission { padding:80px 24px; }
+  .contact-inner { grid-template-columns:1fr; gap:48px; }
+  footer { flex-direction:column; gap:20px; text-align:center; padding:40px 24px; }
+  .footer-right { text-align:center; }
+  .footer-statement { text-align:center; }
+  .ticker-item { padding:0 24px; gap:24px; }
+}
+@media (max-width:480px) {
+  .stats { grid-template-columns:1fr; }
+  nav { padding:16px 20px; }
+  section { padding:60px 20px; }
+  .thesis,.proof,.pulse-section { padding:60px 20px; }
+  .hero { padding:0 20px 60px; }
+  .about-visual { padding:28px 24px; }
+  .pulse-subscribe { flex-direction:column; }
+  .pulse-subscribe input { border-right:1px solid var(--border); border-bottom:none; }
+}
+</style>
+</head>
+<body>
+
+<!-- Custom Cursor -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <div class="logo-e">E</div>
+    <span class="nav-logo-text">E-Group</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="intelligence.html">Intelligence</a></li>
+    <li><a href="rise.html">Rise</a></li>
+    <li><a href="thinking.html">Thinking</a></li>
+    <li><a href="about.html">About</a></li>
+    <li class="nav-dropdown">
+      <a href="record/index.html">Record</a>
+      <div class="nav-drop-menu">
+        <span class="nav-drop-label">Projects &amp; Credentials</span>
+        <a href="record/ipcei-cis.html" class="nav-drop-item">IPCEI-CIS — FedEU.ai</a>
+        <a href="record/kau.html" class="nav-drop-item">KAÜ — National Identity</a>
+        <a href="record/helix.html" class="nav-drop-item">HeliX + FedX</a>
+        <a href="record/eidas.html" class="nav-drop-item">eIDAS 2.0 — MyD Wallet</a>
+        <a href="record/medical-ai.html" class="nav-drop-item">Medical AI — GRaDPaLM</a>
+        <a href="record/peter-antal.html" class="nav-drop-item">Dr. Péter Antal</a>
+        <span class="nav-drop-label">Media</span>
+        <a href="record/press.html" class="nav-drop-item">Press Kit</a>
+      </div>
+    </li>
+  </ul>
+  <a href="#contact" class="nav-cta">Work With Us</a>
+  <button class="nav-hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+<div class="nav-mobile-menu" id="mobileMenu">
+  <a href="index.html" class="mob-main">Home</a>
+  <a href="intelligence.html" class="mob-main">Intelligence</a>
+  <a href="rise.html" class="mob-main">Rise</a>
+  <a href="thinking.html" class="mob-main">Thinking</a>
+  <a href="about.html" class="mob-main">About</a>
+  <div class="mob-divider">The Record</div>
+  <a href="record/index.html" class="mob-record">Record Home</a>
+  <a href="record/ipcei-cis.html" class="mob-record">IPCEI-CIS — FedEU.ai</a>
+  <a href="record/kau.html" class="mob-record">KAÜ — National Identity</a>
+  <a href="record/helix.html" class="mob-record">HeliX + FedX</a>
+  <a href="record/eidas.html" class="mob-record">eIDAS 2.0 — MyD Wallet</a>
+  <a href="record/medical-ai.html" class="mob-record">Medical AI — GRaDPaLM</a>
+  <a href="record/peter-antal.html" class="mob-record">Dr. Péter Antal</a>
+  <a href="record/press.html" class="mob-record">Press Kit</a>
+  <a href="#contact" class="mob-cta">Work With Us</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-glow-2"></div>
+  <div class="hero-data">
+    <div class="data-line">Est. <span class="val">1993</span></div>
+    <div class="data-line">Budapest, <span class="val">HU</span></div>
+    <div class="data-line">Staff <span class="val">110+</span></div>
+    <div class="data-line">EU Projects <span class="val">Active</span></div>
+    <div class="data-line">AI Infra <span class="val">Sovereign</span></div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Intelligence Infrastructure</div>
+    <h1 class="hero-headline">
+      Thirty years<br>
+      building what<br>
+      <span class="gold">AI runs on.</span>
+    </h1>
+    <p class="hero-sub">
+      E-Group builds the <strong>deep infrastructure of trust, data and intelligence</strong> that enterprises need to make AI actually work. Not the hype. The foundation.
+    </p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">Start a Conversation <span class="arr">→</span></a>
+      <a href="#about" class="btn-secondary">Our Story</a>
+    </div>
+  </div>
+  <div class="scroll-indicator">
+    <div class="scroll-line"></div>
+    <span class="scroll-text">Scroll</span>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker">
+    <div class="ticker-item">Digital Trust <span>—</span> Sovereign AI <span>—</span> Data Infrastructure <span>—</span> Identity Systems <span>—</span> FinTech <span>—</span> HealthTech <span>—</span> GovTech <span>—</span> SpaceTech <span>—</span> Post-Quantum Security <span>—</span> EnergyTech <span>—</span> Smart Data <span>—</span> Applied AI <span>—</span></div>
+    <div class="ticker-item">Digital Trust <span>—</span> Sovereign AI <span>—</span> Data Infrastructure <span>—</span> Identity Systems <span>—</span> FinTech <span>—</span> HealthTech <span>—</span> GovTech <span>—</span> SpaceTech <span>—</span> Post-Quantum Security <span>—</span> EnergyTech <span>—</span> Smart Data <span>—</span> Applied AI <span>—</span></div>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat reveal">
+    <div class="stat-num">30<span class="unit">+</span></div>
+    <div class="stat-label">Years building<br>deep tech IP</div>
+  </div>
+  <div class="stat reveal reveal-delay-1">
+    <div class="stat-num">110<span class="unit">+</span></div>
+    <div class="stat-label">Engineers,<br>scientists &amp; builders</div>
+  </div>
+  <div class="stat reveal reveal-delay-2">
+    <div class="stat-num">5</div>
+    <div class="stat-label">Critical sectors<br>served globally</div>
+  </div>
+  <div class="stat reveal reveal-delay-3">
+    <div class="stat-num">EU</div>
+    <div class="stat-label">Sovereign infrastructure<br>partner</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     ACT 1 — THE THESIS
+     Two product tracks. One company thesis.
+════════════════════════════════════════════ -->
+<div class="thesis reveal">
+  <div class="section-eyebrow">What We Are Building</div>
+  <h2 class="thesis-statement">
+    Thirty years of trust infrastructure.<br>
+    Now <em>packaged for your industry.</em>
+  </h2>
+  <p class="thesis-sub">
+    We have been building the invisible layer that AI runs on since before anyone called it that.
+    Now we are making that expertise deployable — as a platform, and as sector-specific intelligence products built for the way your industry actually works.
+  </p>
+  <div class="thesis-cards">
+
+    <!-- Card: Rise -->
+    <a href="rise.html" class="thesis-card card-rise">
+      <div class="card-status status-pilot">
+        <span class="dot"></span>In Pilot
+      </div>
+      <div class="card-title">Rise</div>
+      <p class="card-desc">
+        Our dual-consciousness AI platform. Rise reads the world so your organisation can act on it.
+        Essence reads your organisation so leadership can finally see what's actually happening inside it.
+      </p>
+      <span class="card-link">Explore Rise →</span>
+    </a>
+
+    <!-- Card: Intelligence Products -->
+    <a href="intelligence.html" class="thesis-card card-intel">
+      <div class="card-status status-new">
+        <span class="dot"></span>In Development
+      </div>
+      <div class="card-title">Intelligence<br>Products</div>
+      <p class="card-desc">
+        Sector-specific AI intelligence, pre-trained on thirty years of domain knowledge, ready to deploy for your industry.
+        FinTech, HealthTech, GovTech, Manufacturing — and beyond.
+      </p>
+      <span class="card-link">See The Sectors →</span>
+    </a>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     ACT 2 — THE PROOF
+     30 years. Not a claim. A record.
+════════════════════════════════════════════ -->
+<div class="proof">
+  <div class="proof-inner">
+    <div class="proof-left">
+      <div class="section-eyebrow reveal">The Record</div>
+      <h2 class="section-title reveal">Not a claim.<br>A thirty-year<br>track record.</h2>
+      <p class="section-body reveal">
+        We do not talk about building trust infrastructure — we have been doing it, at national scale, for three decades. These are not press releases. They are the evidence.
+      </p>
+      <div class="proof-timeline">
+        <div class="proof-item reveal">
+          <div class="proof-year">2025</div>
+          <div class="proof-content">
+            <div class="proof-headline">Sovereign AI Ecosystem</div>
+            <div class="proof-detail">Kellton partnership MoU — building the sovereign AI stack for European enterprise.</div>
+          </div>
+        </div>
+        <div class="proof-item reveal reveal-delay-1">
+          <div class="proof-year">2024</div>
+          <div class="proof-content">
+            <div class="proof-headline">EU DOME Cloud Infrastructure</div>
+            <div class="proof-detail">Selected as Hungary's representative for the EU federated cloud initiative.</div>
+          </div>
+        </div>
+        <div class="proof-item reveal reveal-delay-2">
+          <div class="proof-year">2024</div>
+          <div class="proof-content">
+            <div class="proof-headline">Medical AI — Double First Place</div>
+            <div class="proof-detail">Back-to-back victories at international AI research events. Our HealthTech team leads Europe.</div>
+          </div>
+        </div>
+        <div class="proof-item reveal reveal-delay-3">
+          <div class="proof-year">2023</div>
+          <div class="proof-content">
+            <div class="proof-headline">KAÜ National Digital Identity</div>
+            <div class="proof-detail">Hungary's national digital identity infrastructure — designed, built, and operated by E-Group.</div>
+          </div>
+        </div>
+        <div class="proof-item reveal reveal-delay-4">
+          <div class="proof-year">1993</div>
+          <div class="proof-content">
+            <div class="proof-headline">Founded in Budapest</div>
+            <div class="proof-detail">Started building financial trust infrastructure before anyone called it fintech.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="proof-right reveal reveal-delay-2" id="about">
+      <div class="about-visual">
+        <div class="about-quote">
+          "We have been building the infrastructure others will need for decades.
+          <em>The world has finally caught up.</em>"
+        </div>
+        <div class="about-attr">Antal Kuthy — Founder &amp; CEO, E-Group</div>
+        <div class="about-tags" style="margin-top:32px; padding-top:32px; border-top:1px solid var(--border);">
+          <span class="tag">Digital Identity</span>
+          <span class="tag">Data Sovereignty</span>
+          <span class="tag">Applied AI</span>
+          <span class="tag">Post-Quantum</span>
+          <span class="tag">Smart Data</span>
+          <span class="tag">Trust Platforms</span>
+          <span class="tag">Banking Tech</span>
+          <span class="tag">Health AI</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     ACT 3 — THE PULSE
+     The living company. Always thinking.
+════════════════════════════════════════════ -->
+<div class="pulse-section" data-rise-slot="homepage-pulse">
+  <div class="pulse-header">
+    <div class="pulse-header-left">
+      <div class="pulse-eyebrow">
+        <span class="pulse-dot"></span>
+        The Thinking — Updated Continuously
+      </div>
+      <h2 class="pulse-title reveal">What we are<br>thinking about <em style="color:var(--gold);font-style:normal;">right now.</em></h2>
+    </div>
+    <a href="thinking.html" class="pulse-link reveal">All Thinking →</a>
+  </div>
+
+  <div class="pulse-feed reveal">
+
+    <!-- Large card: Deep Read -->
+    <a href="thinking.html#why-sector-intelligence" class="pulse-card card-large">
+      <div class="content-type type-deep">Deep Read</div>
+      <div class="pulse-card-title">Why generic AI is the wrong bet for regulated industries</div>
+      <p class="pulse-card-excerpt">
+        Every major AI vendor is selling horizontal platforms. That is the wrong frame for a hospital, a bank, or a government agency. The intelligence that matters in regulated industries is built from thirty years of domain knowledge — not six months of fine-tuning. We explain why we believe sector-specific is not a niche strategy. It is the only defensible one.
+      </p>
+      <div class="sector-tag">FinTech · HealthTech · GovTech</div>
+      <div class="pulse-card-meta">
+        <span class="pulse-meta-author">Antal Kuthy</span>
+        <span class="pulse-meta-date">2 days ago</span>
+      </div>
+    </a>
+
+    <!-- Signal -->
+    <a href="thinking.html#nordic-signal" class="pulse-card">
+      <div class="content-type type-signal">Signal</div>
+      <div class="pulse-card-title">Nordic banks are asking the wrong question about AI</div>
+      <p class="pulse-card-excerpt">Three conversations this week with Nordic FinTech teams. Every one asked "which LLM should we use?" — before defining what intelligence they actually need.</p>
+      <div class="pulse-card-meta">
+        <span class="pulse-meta-author">Gábor M.</span>
+        <span class="pulse-meta-date">3 days ago</span>
+      </div>
+    </a>
+
+    <!-- In The Room -->
+    <a href="thinking.html#packaging-debate" class="pulse-card">
+      <div class="content-type type-room">In The Room</div>
+      <div class="pulse-card-title">We argued for two hours about whether to go vertical or horizontal. Here is where we landed.</div>
+      <p class="pulse-card-excerpt">The Intelligence Products team had a real fight on Tuesday. Vertical products (sector-specific) vs horizontal platform. This is what we decided and why.</p>
+      <div class="pulse-card-meta">
+        <span class="pulse-meta-author">Chris H.</span>
+        <span class="pulse-meta-date">5 days ago</span>
+      </div>
+    </a>
+
+    <!-- Signal 2 -->
+    <a href="thinking.html#medical-ai" class="pulse-card">
+      <div class="content-type type-signal">Signal</div>
+      <div class="pulse-card-title">Our HealthTech team just took first place again</div>
+      <p class="pulse-card-excerpt">Back-to-back wins at international medical AI events. Dr. Anna Kovács leads research that is getting attention we did not expect this quickly.</p>
+      <div class="pulse-card-meta">
+        <span class="pulse-meta-author">Dr. Anna K.</span>
+        <span class="pulse-meta-date">1 week ago</span>
+      </div>
+    </a>
+
+  </div>
+
+  <div style="margin-top:48px;">
+    <div class="pulse-subscribe-label">Get the Thinking feed in your inbox</div>
+    <div class="pulse-subscribe">
+      <input type="email" placeholder="your@email.com">
+      <button>Subscribe →</button>
+    </div>
+  </div>
+</div>
+
+<!-- WHAT WE BUILD -->
+<section id="build" class="build-section">
+  <div class="section-eyebrow reveal">What We Build</div>
+  <h2 class="section-title reveal">Tools that make AI<br>work for enterprises.</h2>
+  <p class="section-body reveal">We are translating thirty years of deep tech IP into enterprise products. The core of what we build sits at the intersection of three capabilities no competitor has combined the way we have.</p>
+  <div class="build-grid">
+    <div class="build-card reveal">
+      <div class="build-num">01</div>
+      <div class="build-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="display:inline-block;vertical-align:middle;flex-shrink:0;"><path d="M14 2L4 6.5V14c0 5.5 4.5 10 10 12 5.5-2 10-6.5 10-12V6.5L14 2Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" fill="none"/><rect x="10.5" y="12" width="7" height="6" rx="1" stroke="currentColor" stroke-width="1.5" fill="none"/><path d="M11.5 12V10a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none"/><circle cx="14" cy="15" r="1" fill="currentColor"/></svg></div>
+      <div class="build-title">Trust &amp; Identity</div>
+      <div class="build-desc">Digital identity systems, verifiable credentials, and trust frameworks that let organisations share data securely across boundaries. Built on cryptographic foundations we have been developing since 1993.</div>
+    </div>
+    <div class="build-card reveal reveal-delay-1">
+      <div class="build-num">02</div>
+      <div class="build-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="display:inline-block;vertical-align:middle;flex-shrink:0;"><path d="M16 3L6 16H14L12 25L22 12H14L16 3Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" fill="none"/></svg></div>
+      <div class="build-title">Smart Data &amp; AI</div>
+      <div class="build-desc">Data lakes, applied AI, and intelligence platforms that turn organisational data into competitive advantage. Not off-the-shelf tools — purpose-built for the specific demands of regulated industries.</div>
+    </div>
+    <div class="build-card reveal reveal-delay-2">
+      <div class="build-num">03</div>
+      <div class="build-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="display:inline-block;vertical-align:middle;flex-shrink:0;"><path d="M20 8.5A8 8 0 1 0 22 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none"/><polyline points="18,5 22,8.5 18.5,12" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" fill="none"/></svg></div>
+      <div class="build-title">Transactional Infrastructure</div>
+      <div class="build-desc">Clearing, settlement, payment gateways and communication platforms for financial institutions and enterprise networks. Proven in production at national scale.</div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTORS -->
+<section id="sectors">
+  <div class="section-eyebrow reveal">Sectors</div>
+  <h2 class="section-title reveal">Where our work<br>has the most impact.</h2>
+  <p class="section-body reveal">We operate across five sectors where the combination of AI, data sovereignty and digital trust creates the most significant opportunity — and the highest barrier to entry for less experienced competitors.</p>
+  <div class="sectors-grid">
+    <div class="sector reveal"><span class="sector-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="display:inline-block;vertical-align:middle;flex-shrink:0;"><rect x="3" y="13" width="22" height="12" stroke="currentColor" stroke-width="1.5" fill="none"/><path d="M1 13L14 4L27 13" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" fill="none"/><line x1="7" y1="13" x2="7" y2="25" stroke="currentColor" stroke-width="1.5"/><line x1="11" y1="13" x2="11" y2="25" stroke="currentColor" stroke-width="1.5"/><line x1="17" y1="13" x2="17" y2="25" stroke="currentColor" stroke-width="1.5"/><line x1="21" y1="13" x2="21" y2="25" stroke="currentColor" stroke-width="1.5"/><line x1="3" y1="25" x2="25" y2="25" stroke="currentColor" stroke-width="1.5"/></svg></span><div class="sector-name">FinTech</div></div>
+    <div class="sector reveal reveal-delay-1"><span class="sector-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="display:inline-block;vertical-align:middle;flex-shrink:0;"><circle cx="14" cy="14" r="11" stroke="currentColor" stroke-width="1.5" fill="none"/><line x1="14" y1="8" x2="14" y2="20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="8" y1="14" x2="20" y2="14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span><div class="sector-name">HealthTech</div></div>
+    <div class="sector reveal reveal-delay-2"><span class="sector-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="display:inline-block;vertical-align:middle;flex-shrink:0;"><rect x="3" y="12" width="22" height="13" stroke="currentColor" stroke-width="1.5" fill="none"/><path d="M1 12L14 3L27 12" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" fill="none"/><rect x="11" y="17" width="6" height="8" stroke="currentColor" stroke-width="1.5" fill="none"/><line x1="3" y1="25" x2="25" y2="25" stroke="currentColor" stroke-width="2"/></svg></span><div class="sector-name">GovTech</div></div>
+    <div class="sector reveal reveal-delay-3"><span class="sector-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="display:inline-block;vertical-align:middle;flex-shrink:0;"><path d="M14 3C14 3 20 8 20 16L14 25L8 16C8 8 14 3 14 3Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" fill="none"/><circle cx="14" cy="14" r="2.5" stroke="currentColor" stroke-width="1.5" fill="none"/><path d="M8 16L4 18L6 22L8 20" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" fill="none"/><path d="M20 16L24 18L22 22L20 20" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" fill="none"/></svg></span><div class="sector-name">SpaceTech</div></div>
+    <div class="sector reveal reveal-delay-4"><span class="sector-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="display:inline-block;vertical-align:middle;flex-shrink:0;"><path d="M16 3L6 16H14L12 25L22 12H14L16 3Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" fill="none"/></svg></span><div class="sector-name">EnergyTech</div></div>
+  </div>
+</section>
+
+<!-- MISSION -->
+<div class="mission">
+  <div class="mission-text reveal">
+    AI without <em>trustworthy infrastructure</em> is just<br>expensive noise. We build the infrastructure.
+  </div>
+  <p class="mission-sub reveal reveal-delay-2">Three decades of IP. A world-class team. A clear direction. We are ready to build with the enterprises that are serious about what comes next.</p>
+</div>
+
+<!-- CONTACT -->
+<section id="contact" class="contact">
+  <div class="contact-inner">
+    <div class="contact-left">
+      <div class="section-eyebrow reveal">Work With Us</div>
+      <h2 class="section-title reveal">Let's build<br>something serious.</h2>
+      <p class="section-body reveal">We are selectively taking on enterprise partners who want to work at the frontier of AI infrastructure. If you are building something that matters, we want to hear about it.</p>
+      <div class="contact-info" style="margin-top:48px;">
+        <div class="contact-detail reveal"><span class="contact-detail-label">Headquarters</span><span class="contact-detail-value">Budapest, Hungary</span></div>
+        <div class="contact-detail reveal reveal-delay-1"><span class="contact-detail-label">Operating Since</span><span class="contact-detail-value">1993 — 30+ years</span></div>
+        <div class="contact-detail reveal reveal-delay-2"><span class="contact-detail-label">Focus</span><span class="contact-detail-value">Enterprise AI Infrastructure</span></div>
+        <div class="contact-detail reveal reveal-delay-3"><span class="contact-detail-label">LinkedIn</span><span class="contact-detail-value">E-Group ICT Group</span></div>
+      </div>
+    </div>
+    <div class="contact-right reveal reveal-delay-2">
+      <div class="contact-form">
+        <div class="form-group"><label class="form-label">Your Name</label><input type="text" class="form-input" placeholder="Name"></div>
+        <div class="form-group"><label class="form-label">Organisation</label><input type="text" class="form-input" placeholder="Company or institution"></div>
+        <div class="form-group"><label class="form-label">Email</label><input type="email" class="form-input" placeholder="your@email.com"></div>
+        <div class="form-group">
+          <label class="form-label">Area of Interest</label>
+          <select class="form-select">
+            <option value="" disabled selected>Select one</option>
+            <option>Trust &amp; Digital Identity</option>
+            <option>Smart Data &amp; Applied AI</option>
+            <option>Transactional Infrastructure</option>
+            <option>Intelligence Products</option>
+            <option>Rise Platform</option>
+            <option>FinTech</option>
+            <option>HealthTech</option>
+            <option>GovTech</option>
+            <option>Partnership / Investment</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-group"><label class="form-label">What Are You Building?</label><textarea class="form-textarea" placeholder="Tell us briefly what you're working on and what you need..."></textarea></div>
+        <button class="form-submit">Send Message →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-left">
+    <div class="footer-logo"><span>E</span>-Group</div>
+    <div class="footer-tagline">Intelligence Infrastructure · Est. 1993</div>
+  </div>
+  <div class="footer-statement">
+    We are building the <em>intelligence layer</em> for the next thirty years.<br>
+    Come help us think about it.
+  </div>
+  <div class="footer-right">
+    Budapest, Hungary<br>
+    © 2026 E-Group ICT Software Zrt.<br>
+    All rights reserved.
+  </div>
+</footer>
+
+<script>
+// Custom cursor
+const cursor = document.getElementById('cursor');
+const ring = document.getElementById('cursorRing');
+let mouseX = 0, mouseY = 0, ringX = 0, ringY = 0;
+document.addEventListener('mousemove', e => {
+  mouseX = e.clientX; mouseY = e.clientY;
+  cursor.style.left = mouseX + 'px';
+  cursor.style.top = mouseY + 'px';
+});
+function animateRing() {
+  ringX += (mouseX - ringX) * 0.12;
+  ringY += (mouseY - ringY) * 0.12;
+  ring.style.left = ringX + 'px';
+  ring.style.top = ringY + 'px';
+  requestAnimationFrame(animateRing);
+}
+animateRing();
+
+// Scroll reveal
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+reveals.forEach(el => observer.observe(el));
+
+// Hamburger menu
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+if (hamburger && mobileMenu) {
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    mobileMenu.classList.toggle('open');
+    document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+  });
+  mobileMenu.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      hamburger.classList.remove('open');
+      mobileMenu.classList.remove('open');
+      document.body.style.overflow = '';
+    });
+  });
+}
+</script>
+</body>
+</html>

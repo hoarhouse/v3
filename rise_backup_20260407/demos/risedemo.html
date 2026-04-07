@@ -1,0 +1,1837 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rise — Live Demo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --black: #080808;
+  --dark: #111111;
+  --panel: #181818;
+  --card: #1E1E1E;
+  --border: #2A2A2A;
+  --muted: #333;
+  --dim: #555;
+  --mid: #777;
+  --text: #AAAAAA;
+  --light: #CCCCCC;
+  --white: #EEEEEE;
+  --accent: #D4FF00;
+  --gold: #C8A96E;
+  --green: #44FF88;
+  --red: #FF5555;
+  --blue: #4EC9FF;
+}
+
+*,*::before,*::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--black);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* ── HEADER ── */
+header {
+  background: var(--dark);
+  border-bottom: 1px solid var(--border);
+  padding: 16px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 52px;
+  z-index: 100;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo-mark {
+  width: 32px; height: 32px;
+  background: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 16px;
+  color: var(--black);
+}
+
+.logo-text {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 18px;
+  color: var(--white);
+  letter-spacing: -0.5px;
+}
+
+.logo-badge {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: rgba(212,255,0,0.08);
+  border: 1px solid rgba(212,255,0,0.2);
+  padding: 3px 10px;
+  border-radius: 20px;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--dim);
+}
+
+.header-status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--green);
+}
+
+.pulse {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--green);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%,100% { opacity:1; transform:scale(1); }
+  50% { opacity:0.4; transform:scale(0.8); }
+}
+
+/* ── HERO STRIP ── */
+.hero-strip {
+  background: linear-gradient(135deg, var(--dark) 0%, var(--panel) 100%);
+  border-bottom: 1px solid var(--border);
+  padding: 40px 40px 32px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-strip::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-image:
+    linear-gradient(rgba(212,255,0,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(212,255,0,0.03) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+.hero-strip-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 720px;
+}
+
+.hero-eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.hero-eyebrow::before {
+  content: '';
+  display: inline-block;
+  width: 20px; height: 1px;
+  background: var(--accent);
+}
+
+.hero-title {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 32px;
+  color: var(--white);
+  letter-spacing: -1px;
+  line-height: 1.1;
+  margin-bottom: 10px;
+}
+
+.hero-title span { color: var(--accent); }
+
+.hero-sub {
+  font-size: 15px;
+  font-weight: 300;
+  color: var(--mid);
+  line-height: 1.6;
+}
+
+/* ── MAIN LAYOUT ── */
+.app {
+  display: grid;
+  grid-template-columns: 420px 1fr;
+  min-height: calc(100vh - 160px);
+}
+
+/* ── LEFT PANEL — INPUT ── */
+.input-panel {
+  background: var(--dark);
+  border-right: 1px solid var(--border);
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  overflow-y: auto;
+}
+
+.panel-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--dim);
+  margin-bottom: 12px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+}
+
+/* ── STEP INDICATORS ── */
+.steps {
+  display: flex;
+  gap: 0;
+  margin-bottom: 4px;
+}
+
+.step {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  position: relative;
+}
+
+.step::after {
+  content: '';
+  position: absolute;
+  top: 14px;
+  left: 50%;
+  right: -50%;
+  height: 1px;
+  background: var(--border);
+}
+
+.step:last-child::after { display: none; }
+
+.step-num {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--dim);
+  background: var(--dark);
+  position: relative;
+  z-index: 1;
+  transition: all 0.3s;
+}
+
+.step.active .step-num {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: rgba(212,255,0,0.08);
+}
+
+.step.done .step-num {
+  border-color: var(--green);
+  color: var(--green);
+  background: rgba(68,255,136,0.08);
+}
+
+.step-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 8px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--dim);
+  text-align: center;
+}
+
+.step.active .step-label { color: var(--accent); }
+.step.done .step-label { color: var(--green); }
+
+/* ── TRIGGER TYPE ── */
+.trigger-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.trigger-btn {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.trigger-btn:hover {
+  border-color: var(--muted);
+  background: var(--panel);
+}
+
+.trigger-btn.selected {
+  border-color: var(--accent);
+  background: rgba(212,255,0,0.05);
+}
+
+.trigger-icon { font-size: 20px; }
+
+.trigger-name {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 12px;
+  color: var(--white);
+}
+
+.trigger-desc {
+  font-size: 11px;
+  color: var(--dim);
+  line-height: 1.4;
+}
+
+/* ── INPUT SECTION ── */
+.input-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.field-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--dim);
+  margin-bottom: 6px;
+  display: block;
+}
+
+.field-input {
+  width: 100%;
+  background: var(--card);
+  border: 1px solid var(--border);
+  color: var(--white);
+  padding: 12px 14px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  outline: none;
+  border-radius: 6px;
+  transition: border-color 0.2s;
+  resize: vertical;
+}
+
+.field-input:focus { border-color: rgba(212,255,0,0.4); }
+.field-input::placeholder { color: var(--dim); }
+
+/* ── PLATFORM SELECTOR ── */
+.platform-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.platform-chip {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 14px;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  cursor: pointer;
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--dim);
+  background: var(--card);
+  transition: all 0.2s;
+  user-select: none;
+}
+
+.platform-chip:hover { border-color: var(--muted); color: var(--light); }
+
+.platform-chip.selected {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: rgba(212,255,0,0.06);
+}
+
+.platform-chip .dot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+/* ── GENERATE BUTTON ── */
+.generate-btn {
+  width: 100%;
+  background: var(--accent);
+  color: var(--black);
+  border: none;
+  padding: 16px;
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 14px;
+  letter-spacing: 1px;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  position: relative;
+  overflow: hidden;
+}
+
+.generate-btn:hover { background: #E8FF33; transform: translateY(-1px); }
+.generate-btn:active { transform: translateY(0); }
+.generate-btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+
+.generate-btn .arrow { transition: transform 0.2s; }
+.generate-btn:hover .arrow { transform: translateX(4px); }
+
+/* ── RIGHT PANEL — OUTPUT ── */
+.output-panel {
+  background: var(--black);
+  padding: 32px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* ── EMPTY STATE ── */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  min-height: 400px;
+  text-align: center;
+  gap: 16px;
+}
+
+.empty-icon {
+  width: 80px; height: 80px;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  color: var(--muted);
+}
+
+.empty-title {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  color: var(--light);
+}
+
+.empty-sub {
+  font-size: 14px;
+  color: var(--dim);
+  max-width: 320px;
+  line-height: 1.6;
+}
+
+/* ── PROCESSING STATE ── */
+.processing {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  gap: 24px;
+  text-align: center;
+}
+
+.processing.active { display: flex; }
+
+.process-ring {
+  width: 64px; height: 64px;
+  border: 2px solid var(--border);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.process-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 280px;
+}
+
+.process-step {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--dark);
+  font-size: 13px;
+  color: var(--dim);
+  transition: all 0.3s;
+}
+
+.process-step.active {
+  border-color: rgba(212,255,0,0.3);
+  color: var(--accent);
+  background: rgba(212,255,0,0.04);
+}
+
+.process-step.done {
+  border-color: rgba(68,255,136,0.3);
+  color: var(--green);
+  background: rgba(68,255,136,0.04);
+}
+
+.process-step-icon { font-size: 14px; flex-shrink: 0; }
+
+/* ── RESULTS ── */
+.results { display: none; flex-direction: column; gap: 20px; }
+.results.active { display: flex; }
+
+.results-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+.results-title {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 20px;
+  color: var(--white);
+}
+
+.results-meta {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: var(--dim);
+  letter-spacing: 1px;
+}
+
+.context-bar {
+  background: var(--dark);
+  border: 1px solid var(--border);
+  border-left: 2px solid var(--gold);
+  border-radius: 6px;
+  padding: 14px 16px;
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.context-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.context-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--dim);
+}
+
+.context-value {
+  font-size: 13px;
+  color: var(--light);
+  font-weight: 500;
+}
+
+/* ── CONTENT CARD ── */
+.content-card {
+  background: var(--dark);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+
+.content-card:hover { border-color: var(--muted); }
+
+.card-header {
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--panel);
+}
+
+.card-platform {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.platform-icon {
+  width: 28px; height: 28px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+.platform-icon.linkedin { background: rgba(0,119,181,0.2); }
+.platform-icon.twitter { background: rgba(29,161,242,0.15); }
+.platform-icon.website { background: rgba(212,255,0,0.1); }
+.platform-icon.instagram { background: rgba(225,48,108,0.15); }
+
+.card-platform-name {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--white);
+}
+
+.card-platform-sub {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  color: var(--dim);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-top: 1px;
+}
+
+.card-actions {
+  display: flex;
+  gap: 6px;
+}
+
+.card-btn {
+  padding: 6px 14px;
+  border-radius: 4px;
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: none;
+}
+
+.card-btn.edit {
+  background: var(--card);
+  color: var(--mid);
+  border: 1px solid var(--border);
+}
+
+.card-btn.edit:hover { color: var(--white); border-color: var(--muted); }
+
+.card-btn.approve {
+  background: var(--accent);
+  color: var(--black);
+}
+
+.card-btn.approve:hover { background: #E8FF33; }
+
+.card-btn.approved {
+  background: rgba(68,255,136,0.15);
+  color: var(--green);
+  border: 1px solid rgba(68,255,136,0.3);
+  cursor: default;
+}
+
+.card-btn.reject {
+  background: var(--card);
+  color: var(--dim);
+  border: 1px solid var(--border);
+}
+.card-btn.reject:hover { color: var(--red); border-color: var(--red); }
+
+.card-content {
+  padding: 18px;
+}
+
+.content-text {
+  font-size: 14px;
+  line-height: 1.75;
+  color: var(--light);
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.content-text[contenteditable="true"] {
+  outline: none;
+  border: 1px dashed rgba(212,255,0,0.3);
+  border-radius: 4px;
+  padding: 10px;
+  background: rgba(212,255,0,0.02);
+}
+
+.card-footer {
+  padding: 10px 18px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.card-stats {
+  display: flex;
+  gap: 16px;
+}
+
+.card-stat {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: var(--dim);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.card-stat .val { color: var(--accent); font-weight: 500; }
+
+.card-confidence {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: var(--dim);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.confidence-bar {
+  width: 60px; height: 3px;
+  background: var(--border);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.confidence-fill {
+  height: 100%;
+  background: var(--accent);
+  border-radius: 2px;
+  transition: width 1s ease;
+}
+
+/* ── APPROVED TOAST ── */
+.toast {
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  background: var(--dark);
+  border: 1px solid rgba(68,255,136,0.4);
+  border-left: 3px solid var(--green);
+  border-radius: 8px;
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 13px;
+  color: var(--white);
+  z-index: 1000;
+  transform: translateY(100px);
+  opacity: 0;
+  transition: all 0.3s ease;
+  pointer-events: none;
+}
+
+.toast.show { transform: translateY(0); opacity: 1; }
+.toast-icon { font-size: 16px; }
+
+/* ── RESET BTN ── */
+.reset-btn {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--dim);
+  padding: 8px 18px;
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+
+.reset-btn:hover { color: var(--white); border-color: var(--muted); }
+
+/* ── MOBILE ── */
+@media (max-width: 900px) {
+  .app { grid-template-columns: 1fr; }
+  .input-panel { border-right: none; border-bottom: 1px solid var(--border); }
+  header { padding: 14px 20px; }
+  .hero-strip { padding: 24px 20px; }
+  .input-panel, .output-panel { padding: 20px; }
+}
+
+/* ── DEMO NAV ── */
+.demo-nav {
+  background: #0A0A0A;
+  border-bottom: 1px solid #1E1E1E;
+  padding: 0 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 52px;
+  position: sticky;
+  top: 0;
+  z-index: 200;
+}
+.demo-nav-left { display:flex; align-items:center; }
+.demo-nav-logo { display:flex; align-items:center; gap:10px; }
+.demo-nav-mark {
+  width:28px; height:28px;
+  background: #D4FF00;
+  display:flex; align-items:center; justify-content:center;
+  font-family:'Syne',sans-serif; font-weight:800; font-size:14px; color:#080808;
+}
+.demo-nav-name {
+  font-family:'Syne',sans-serif; font-weight:800; font-size:16px; color:#EEEEEE; letter-spacing:-.3px;
+}
+.demo-nav-tag {
+  font-family:'DM Mono',monospace; font-size:9px; letter-spacing:2px; text-transform:uppercase;
+  color:#555; border:1px solid #222; padding:2px 8px; border-radius:20px;
+}
+.demo-nav-center { display:flex; align-items:center; gap:4px; }
+.demo-nav-item {
+  display:flex; align-items:center; gap:8px;
+  padding:8px 16px; border-radius:6px;
+  text-decoration:none; transition:background .2s;
+  border:1px solid transparent;
+}
+.demo-nav-item:hover { background:#161616; border-color:#2A2A2A; }
+.demo-nav-item.active { background:#161616; border-color:rgba(212,255,0,0.2); }
+.demo-nav-num {
+  font-family:'DM Mono',monospace; font-size:9px; font-weight:500;
+  letter-spacing:1px; color:#D4FF00; opacity:.7;
+}
+.demo-nav-label {
+  font-family:'DM Mono',monospace; font-size:10px; font-weight:500;
+  letter-spacing:1.5px; text-transform:uppercase; color:#777;
+  transition:color .2s;
+}
+.demo-nav-item:hover .demo-nav-label,
+.demo-nav-item.active .demo-nav-label { color:#EEEEEE; }
+.demo-nav-divider { width:1px; height:20px; background:#1E1E1E; margin:0 4px; }
+.demo-nav-right { display:flex; align-items:center; gap:20px; }
+.demo-nav-link {
+  font-family:'DM Mono',monospace; font-size:10px; letter-spacing:1.5px;
+  text-transform:uppercase; color:#444; text-decoration:none; transition:color .2s;
+}
+.demo-nav-link:hover { color:#AAAAAA; }
+@media(max-width:768px) {
+  .demo-nav { padding:0 16px; }
+  .demo-nav-tag { display:none; }
+  .demo-nav-right { display:none; }
+  .demo-nav-label { display:none; }
+}
+
+.snav {
+  height: 48px;
+  background: #0A0A0A;
+  border-bottom: 1px solid #1E1E1E;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  flex-shrink: 0;
+}
+.snav-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+.snav-mark {
+  width: 26px; height: 26px;
+  background: #D4FF00;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Syne', sans-serif;
+  font-weight: 800; font-size: 13px; color: #080808;
+}
+.snav-name {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800; font-size: 15px; color: #EEEEEE;
+}
+.snav-sep {
+  width: 1px; height: 16px;
+  background: #252525; margin: 0 4px;
+}
+.snav-demos {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+.snav-demo {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px; letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  border-radius: 5px;
+  border: 1px solid transparent;
+  color: #555;
+  text-decoration: none;
+  transition: all .15s;
+  white-space: nowrap;
+}
+.snav-demo:hover { color: #AAAAAA; background: #161616; border-color: #252525; }
+.snav-demo.active { color: #EEEEEE; background: #1A1A1A; border-color: #333; }
+.snav-links {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.snav-link {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px; letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 4px;
+  border: 1px solid #1E1E1E;
+  color: #444;
+  text-decoration: none;
+  transition: all .15s;
+  white-space: nowrap;
+}
+.snav-link:hover { color: #AAAAAA; border-color: #333; }
+.snav-link.docs { border-color: rgba(78,201,255,.15); color: #4EC9FF; opacity: .7; }
+.snav-link.docs:hover { opacity: 1; }
+
+</style>
+<script src="nav.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    injectNav('demo', 'risedemo.html');
+  });
+</script>
+</head>
+<body>
+
+    </a>
+  </div>
+
+<!-- HERO STRIP -->
+<div class="hero-strip">
+  <div class="hero-strip-inner">
+    <div class="hero-eyebrow">Rise Content Engine — Working Demo</div>
+    <h1 class="hero-title">From input to <span>published content</span><br>in seconds.</h1>
+    <p class="hero-sub">Select a trigger, add context, choose your platforms. Rise does the rest.</p>
+  </div>
+</div>
+
+<!-- APP -->
+<div class="app">
+
+  <!-- LEFT — INPUT PANEL -->
+  <div class="input-panel">
+
+    <!-- STEPS -->
+    <div>
+      <div class="panel-label">Progress</div>
+      <div class="steps">
+        <div class="step active" id="step1">
+          <div class="step-num">1</div>
+          <div class="step-label">Trigger</div>
+        </div>
+        <div class="step" id="step2">
+          <div class="step-num">2</div>
+          <div class="step-label">Context</div>
+        </div>
+        <div class="step" id="step3">
+          <div class="step-num">3</div>
+          <div class="step-label">Platforms</div>
+        </div>
+        <div class="step" id="step4">
+          <div class="step-num">4</div>
+          <div class="step-label">Generate</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 1: TRIGGER TYPE -->
+    <div>
+      <div class="panel-label">Step 1 — Content Trigger</div>
+      <div class="trigger-grid">
+        <div class="trigger-btn selected" onclick="selectTrigger(this, 'conference')" data-type="conference">
+          <div class="trigger-icon">🎪</div>
+          <div class="trigger-name">Conference</div>
+          <div class="trigger-desc">Staff registers for an event or trade show</div>
+        </div>
+        <div class="trigger-btn" onclick="selectTrigger(this, 'milestone')" data-type="milestone">
+          <div class="trigger-icon">🏆</div>
+          <div class="trigger-name">Milestone</div>
+          <div class="trigger-desc">Project completion, award, or achievement</div>
+        </div>
+        <div class="trigger-btn" onclick="selectTrigger(this, 'partnership')" data-type="partnership">
+          <div class="trigger-icon">🤝</div>
+          <div class="trigger-name">Partnership</div>
+          <div class="trigger-desc">New client, partner, or signed agreement</div>
+        </div>
+        <div class="trigger-btn" onclick="selectTrigger(this, 'research')" data-type="research">
+          <div class="trigger-icon">🔬</div>
+          <div class="trigger-name">Research</div>
+          <div class="trigger-desc">Publication, patent, or research result</div>
+        </div>
+        <div class="trigger-btn" onclick="selectTrigger(this, 'newhire')" data-type="newhire">
+          <div class="trigger-icon">👋</div>
+          <div class="trigger-name">New Hire</div>
+          <div class="trigger-desc">Team member joins eGroup</div>
+        </div>
+        <div class="trigger-btn" onclick="selectTrigger(this, 'submission')" data-type="submission">
+          <div class="trigger-icon">📸</div>
+          <div class="trigger-name">Submission</div>
+          <div class="trigger-desc">Staff submits a photo, video, or note</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 2: CONTEXT -->
+    <div class="input-section">
+      <div class="panel-label">Step 2 — Context</div>
+
+      <div>
+        <label class="field-label" id="context-label-1">Event / Topic Name</label>
+        <input type="text" class="field-input" id="context1"
+          placeholder="e.g. Money 20/20 Europe 2026"
+          style="margin-bottom:10px;">
+
+        <label class="field-label" id="context-label-2">Additional Detail (optional)</label>
+        <textarea class="field-input" id="context2" rows="3"
+          placeholder="e.g. Dr. Péter Antal will be presenting our AI health data research on Day 2"></textarea>
+      </div>
+
+      <div>
+        <label class="field-label">Location / City</label>
+        <input type="text" class="field-input" id="location"
+          placeholder="e.g. Amsterdam, Netherlands">
+      </div>
+
+      <div>
+        <label class="field-label">Brand Voice</label>
+        <select class="field-input" id="voice" style="cursor:pointer;">
+          <option value="authoritative">Authoritative & Expert</option>
+          <option value="warm">Warm & Human</option>
+          <option value="bold">Bold & Confident</option>
+          <option value="technical">Technical & Precise</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- STEP 3: PLATFORMS -->
+    <div>
+      <div class="panel-label">Step 3 — Target Platforms</div>
+      <div class="platform-row">
+        <div class="platform-chip selected" onclick="togglePlatform(this)" data-platform="LinkedIn">
+          <div class="dot"></div> LinkedIn
+        </div>
+        <div class="platform-chip selected" onclick="togglePlatform(this)" data-platform="X / Twitter">
+          <div class="dot"></div> X / Twitter
+        </div>
+        <div class="platform-chip selected" onclick="togglePlatform(this)" data-platform="Website">
+          <div class="dot"></div> Website
+        </div>
+        <div class="platform-chip" onclick="togglePlatform(this)" data-platform="Instagram">
+          <div class="dot"></div> Instagram
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 4: GENERATE -->
+    <div>
+      <div class="panel-label">Step 4 — Generate</div>
+      <button class="generate-btn" id="generateBtn" onclick="generate()">
+        <span>Generate Content</span>
+        <span class="arrow">→</span>
+      </button>
+    </div>
+
+  </div>
+
+  <!-- RIGHT — OUTPUT PANEL -->
+  <div class="output-panel" id="outputPanel">
+
+    <!-- EMPTY STATE -->
+    <div class="empty-state" id="emptyState">
+      <div class="empty-icon">⚡</div>
+      <div class="empty-title">Ready to generate</div>
+      <div class="empty-sub">Select a content trigger, add context, choose your platforms, and hit Generate. Rise will create platform-specific content in seconds.</div>
+    </div>
+
+    <!-- PROCESSING -->
+    <div class="processing" id="processingState">
+      <div class="process-ring"></div>
+      <div style="font-family:'Syne',sans-serif; font-weight:700; font-size:18px; color:var(--white);">Rise is working...</div>
+      <div class="process-steps" id="processSteps">
+        <div class="process-step" id="ps1">
+          <span class="process-step-icon">🔍</span>
+          <span>Assembling context from trigger data</span>
+        </div>
+        <div class="process-step" id="ps2">
+          <span class="process-step-icon">🧠</span>
+          <span>Enriching with external intelligence</span>
+        </div>
+        <div class="process-step" id="ps3">
+          <span class="process-step-icon">✍️</span>
+          <span>Generating platform-specific content</span>
+        </div>
+        <div class="process-step" id="ps4">
+          <span class="process-step-icon">✅</span>
+          <span>Brand compliance check complete</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- RESULTS -->
+    <div class="results" id="resultsState">
+      <div class="results-header">
+        <div>
+          <div class="results-title">Content Ready for Review</div>
+          <div class="results-meta" id="resultsMeta">Generated in 0.0s · 0 platforms · Brand score: 0%</div>
+        </div>
+        <button class="reset-btn" onclick="reset()">← New Content</button>
+      </div>
+
+      <!-- CONTEXT BAR -->
+      <div class="context-bar" id="contextBar"></div>
+
+      <!-- CONTENT CARDS -->
+      <div id="contentCards"></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast">
+  <span class="toast-icon">✓</span>
+  <span id="toastMsg">Content approved and queued for publishing</span>
+</div>
+
+<script>
+// ── PROXY URL — replace with your Cloudflare Worker URL after deployment
+const PROXY_URL = "https://rise-proxy.YOUR-SUBDOMAIN.workers.dev";
+// ── STATE ──────────────────────────────────────────────────
+let selectedTrigger = 'conference';
+let selectedPlatforms = new Set(['LinkedIn', 'X / Twitter', 'Website']);
+let generationStart = 0;
+
+// ── TRIGGER SELECTION ──────────────────────────────────────
+function selectTrigger(el, type) {
+  document.querySelectorAll('.trigger-btn').forEach(b => b.classList.remove('selected'));
+  el.classList.add('selected');
+  selectedTrigger = type;
+
+  const labels = {
+    conference: ['Event / Conference Name', 'Who is attending / presenting (optional)'],
+    milestone:  ['Milestone or Achievement', 'More detail about the achievement (optional)'],
+    partnership:['Partner or Client Name', 'What was agreed or signed (optional)'],
+    research:   ['Research Topic or Publication Title', 'Key finding or result (optional)'],
+    newhire:    ['New Team Member Name & Role', 'What they will be working on (optional)'],
+    submission: ['What is this about?', 'Any additional context (optional)'],
+  };
+  const placeholders = {
+    conference: ['e.g. Money 20/20 Europe 2026', 'e.g. Dr. Péter Antal will present our AI health research'],
+    milestone:  ['e.g. eGroup wins AI Innovation Award', 'e.g. First European company to achieve this certification'],
+    partnership:['e.g. Kellton Technologies', 'e.g. MoU signed to build Sovereign AI Ecosystem together'],
+    research:   ['e.g. Migraine Prediction Using Conversational AI', 'e.g. 94% accuracy in early detection trials'],
+    newhire:    ['e.g. Dr. Anna Kovács — Head of AI Research', 'e.g. Leading our new HealthTech AI division'],
+    submission: ['e.g. Team photo from client visit', 'e.g. Visiting OTP Bank HQ in Budapest'],
+  };
+  document.getElementById('context-label-1').textContent = labels[type][0];
+  document.getElementById('context-label-2').textContent = labels[type][1];
+  document.getElementById('context1').placeholder = placeholders[type][0];
+  document.getElementById('context2').placeholder = placeholders[type][1];
+
+  updateSteps(1);
+}
+
+// ── PLATFORM TOGGLE ─────────────────────────────────────────
+function togglePlatform(el) {
+  const platform = el.dataset.platform;
+  if (selectedPlatforms.has(platform)) {
+    if (selectedPlatforms.size > 1) {
+      selectedPlatforms.delete(platform);
+      el.classList.remove('selected');
+    }
+  } else {
+    selectedPlatforms.add(platform);
+    el.classList.add('selected');
+  }
+}
+
+// ── STEP MANAGEMENT ─────────────────────────────────────────
+function updateSteps(activeStep) {
+  for (let i = 1; i <= 4; i++) {
+    const s = document.getElementById(`step${i}`);
+    s.classList.remove('active', 'done');
+    if (i < activeStep) s.classList.add('done');
+    else if (i === activeStep) s.classList.add('active');
+  }
+}
+
+// ── ANIMATE PROCESSING ──────────────────────────────────────
+async function animateProcessing() {
+  const steps = ['ps1','ps2','ps3','ps4'];
+  for (let i = 0; i < steps.length; i++) {
+    await delay(700 + Math.random() * 400);
+    document.getElementById(steps[i]).classList.add('active');
+    if (i > 0) document.getElementById(steps[i-1]).classList.add('done');
+  }
+  await delay(500);
+  document.getElementById('ps4').classList.add('done');
+}
+
+function delay(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+// ── PLATFORM CARD BUILDERS ─────────────────────────────────
+function buildPlatformCard(p, i) {
+  const wrapCard = (mockup) => `
+    <div class="platform-card-wrap" id="pwrap-${i}" style="margin-bottom:20px;">
+      <div class="platform-card-meta">
+        <div class="pcm-left">
+          <span class="pcm-platform">${p.platform}</span>
+          <span class="pcm-type">${p.type || 'Post'}</span>
+          <span class="pcm-auto">⚡ Auto-generated</span>
+        </div>
+        <div class="pcm-right">
+          <span class="pcm-conf">Brand fit: <strong style="color:var(--accent)">${p.confidence||92}%</strong></span>
+          <div class="confidence-bar" style="width:48px;height:3px;background:var(--border);border-radius:2px;overflow:hidden;display:inline-block;vertical-align:middle;margin-left:6px;">
+            <div style="height:100%;width:${p.confidence||92}%;background:var(--accent);border-radius:2px;"></div>
+          </div>
+        </div>
+      </div>
+      <div class="platform-mockup">
+        ${mockup}
+      </div>
+      <div class="platform-card-actions">
+        <button class="card-btn reject" onclick="rejectPCard(${i})">Reject</button>
+        <button class="card-btn edit" onclick="editPCard(${i})">Edit</button>
+        <button class="card-btn approve" onclick="approvePCard(${i}, '${p.platform}')">Approve &amp; Queue</button>
+      </div>
+      ${p.notes ? `<div class="card-note" style="padding:8px 0 0;font-size:11px;color:var(--dim);font-style:italic;">Rise: ${p.notes}</div>` : ''}
+    </div>
+  `;
+
+  const platform = p.platform;
+  const text = escHtml(p.content);
+  const rawText = p.content;
+  const tags = p.hashtags || [];
+
+  if (platform === 'X / Twitter') return wrapCard(buildTweetMockup(rawText, tags, i));
+  if (platform === 'LinkedIn')    return wrapCard(buildLinkedInMockup(rawText, tags, i));
+  if (platform === 'Website')     return wrapCard(buildWebsiteMockup(rawText, i));
+  if (platform === 'Instagram')   return wrapCard(buildInstagramMockup(rawText, tags, i));
+  return wrapCard(`<div style="padding:20px;color:var(--text);">${text}</div>`);
+}
+
+function buildTweetMockup(text, tags, i) {
+  const isThread = /^1[\/\.]/.test(text.trim()) || text.includes('\n1/') || text.includes('\n1.');
+  const tweets = isThread 
+    ? text.split(/\n\n(?=\d+[\/\.])/).filter(t => t.trim()).map(t => t.replace(/^\d+[\/\.]\s*/, '').trim()) 
+    : [text];
+
+  const tweetCards = tweets.map((t, ti) => `
+    <div style="
+      padding:12px 16px;
+      border-bottom:1px solid #2F3336;
+      background:#16181C;
+      ${ti === 0 ? 'border-radius:0;' : ''}
+      position:relative;
+    ">
+      <!-- Top row: avatar + name + X icon -->
+      <div style="display:flex;gap:10px;align-items:flex-start;">
+        <!-- Avatar -->
+        <div style="flex-shrink:0;">
+          <div style="
+            width:40px;height:40px;border-radius:50%;
+            background:linear-gradient(135deg,#1A8CD8,#0A6AA8);
+            display:flex;align-items:center;justify-content:center;
+            font-weight:800;font-size:17px;color:#fff;
+            font-family:-apple-system,sans-serif;
+          ">E</div>
+          ${tweets.length > 1 && ti < tweets.length - 1 ? '<div style="width:2px;background:#333;margin:4px auto 0;height:calc(100% + 12px);"></div>' : ''}
+        </div>
+        <!-- Right side -->
+        <div style="flex:1;min-width:0;">
+          <!-- Name row -->
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:2px;">
+            <div style="display:flex;align-items:center;gap:4px;flex-wrap:wrap;">
+              <span style="
+                font-weight:700;color:#E7E9EA;font-size:15px;
+                font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+              ">E-Group</span>
+              <!-- Blue checkmark SVG -->
+              <svg width="18" height="18" viewBox="0 0 24 24" style="flex-shrink:0;margin-top:1px;">
+                <path fill="#1D9BF0" d="M22.25 12c0-1.43-.88-2.67-2.19-3.34.46-1.39.2-2.9-.81-3.91-1.01-1.01-2.52-1.27-3.91-.81-.67-1.31-1.91-2.19-3.34-2.19-1.43 0-2.67.88-3.34 2.19-1.39-.46-2.9-.2-3.91.81-1.01 1.01-1.27 2.52-.81 3.91C2.63 9.33 1.75 10.57 1.75 12c0 1.43.88 2.67 2.19 3.34-.46 1.39-.2 2.9.81 3.91 1.01 1.01 2.52 1.27 3.91.81.67 1.31 1.91 2.19 3.34 2.19 1.43 0 2.67-.88 3.34-2.19 1.39.46 2.9.2 3.91-.81 1.01-1.01 1.27-2.52.81-3.91 1.31-.67 2.19-1.91 2.19-3.34zm-11.71 4.2L6.8 12.46l1.41-1.42 2.26 2.26 4.8-5.23 1.47 1.36-6.2 6.77z"/>
+              </svg>
+              <span style="color:#71767B;font-size:15px;font-family:-apple-system,sans-serif;">@egroup_hu · ${ti === 0 ? 'now' : ''}</span>
+            </div>
+            <!-- Three dots + X logo -->
+            <div style="display:flex;align-items:center;gap:10px;flex-shrink:0;">
+              <span style="color:#71767B;font-size:20px;line-height:1;cursor:pointer;">···</span>
+              <svg viewBox="0 0 24 24" width="18" height="18" style="flex-shrink:0;">
+                <path fill="#71767B" d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.748l7.73-8.835L1.254 2.25H8.08l4.258 5.63 5.906-5.63zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+              </svg>
+            </div>
+          </div>
+          <!-- Post text -->
+          <div style="
+            color:#E7E9EA;font-size:15px;line-height:1.5;
+            font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+            white-space:pre-wrap;word-break:break-word;
+            margin-bottom:12px;
+          " id="tw-${i}-${ti}">${escHtml(t)}</div>
+          <!-- Hashtags -->
+          ${ti === tweets.length - 1 && tags.length ? `<div style="margin-bottom:12px;">${tags.map(h => `<span style="color:#1D9BF0;font-size:15px;margin-right:8px;font-family:-apple-system,sans-serif;">#${h}</span>`).join('')}</div>` : ''}
+          <!-- Action bar -->
+          <div style="
+            display:flex;align-items:center;
+            justify-content:space-between;
+            max-width:420px;
+            color:#71767B;
+            font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+            font-size:13px;
+          ">
+            <!-- Reply -->
+            <div style="display:flex;align-items:center;gap:6px;cursor:pointer;padding:4px 8px 4px 0;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                <path stroke="#71767B" stroke-width="1.8" d="M1.751 10c0-4.42 3.584-8 8.005-8h4.494C18.159 2 22 5.87 22 10.745c0 4.84-3.83 8.745-8.75 8.745H7.39a.75.75 0 0 1 0-1.5h5.868c3.867 0 7-3.115 7-7.245 0-4.1-3.14-7.245-7-7.245H9.756C6.24 3.5 3.252 6.517 3.252 10c0 1.68.643 3.21 1.7 4.36l.038.042a.75.75 0 0 1-1.088 1.034A9.465 9.465 0 0 1 1.75 10z"/>
+              </svg>
+              <span>12</span>
+            </div>
+            <!-- Repost -->
+            <div style="display:flex;align-items:center;gap:6px;cursor:pointer;padding:4px 8px;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                <path stroke="#71767B" stroke-width="1.8" d="M4.75 3.79l4.603 4.3-1.706 1.82L6 8.38v7.37c0 .97.784 1.75 1.75 1.75H13V19.5H7.75C5.679 19.5 4 17.821 4 15.75V8.38L2.853 9.91.603 8.09l4.146-4.3zm14.5 15.42l-4.603-4.3 1.706-1.82 1.647 1.53V7.25C18 6.28 17.216 5.5 16.25 5.5H11V3h5.25c2.071 0 3.75 1.679 3.75 3.75v7.37l1.147-1.53 2.25 1.82-4.146 4.3z"/>
+              </svg>
+              <span>34</span>
+            </div>
+            <!-- Like -->
+            <div style="display:flex;align-items:center;gap:6px;cursor:pointer;padding:4px 8px;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                <path stroke="#71767B" stroke-width="1.8" d="M16.697 5.5c-1.222-.06-2.679.51-3.89 2.16l-.805 1.09-.806-1.09C9.984 6.01 8.526 5.44 7.304 5.5c-1.243.07-2.349.78-2.91 1.91-.552 1.12-.633 2.78.479 4.82 1.074 1.97 3.257 4.27 7.129 6.61 3.87-2.34 6.052-4.64 7.126-6.61 1.111-2.04 1.03-3.7.477-4.82-.561-1.13-1.666-1.84-2.908-1.91zm4.187 7.69c-1.351 2.48-4.001 5.12-8.379 7.67l-.503.3-.504-.3c-4.379-2.55-7.029-5.19-8.382-7.67-1.36-2.5-1.41-4.86-.514-6.67.887-1.79 2.647-2.91 4.601-3.01 1.651-.09 3.368.56 4.798 2.01 1.429-1.45 3.146-2.1 4.796-2.01 1.954.1 3.714 1.22 4.601 3.01.896 1.81.846 4.17-.514 6.67z"/>
+              </svg>
+              <span>89</span>
+            </div>
+            <!-- Views -->
+            <div style="display:flex;align-items:center;gap:6px;cursor:pointer;padding:4px 8px;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                <path stroke="#71767B" stroke-width="1.8" d="M8.75 21V3h2v18h-2zM18 21V8.5h2V21h-2zM4 21l.004-10h2L6 21H4zm9.248 0v-7h2v7h-2z"/>
+              </svg>
+              <span>1.2K</span>
+            </div>
+            <!-- Bookmark + Share -->
+            <div style="display:flex;align-items:center;gap:12px;padding:4px 0 4px 8px;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" style="cursor:pointer;">
+                <path stroke="#71767B" stroke-width="1.8" d="M4 4.5C4 3.12 5.119 2 6.5 2h11C18.881 2 20 3.12 20 4.5v18.44l-8-5.71-8 5.71V4.5z"/>
+              </svg>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" style="cursor:pointer;">
+                <path stroke="#71767B" stroke-width="1.8" d="M12 2.59l5.7 5.7-1.41 1.42L13 6.41V16h-2V6.41l-3.3 3.3-1.41-1.42L12 2.59zM3 15l.01 3c0 1.1.9 2 2 2H19a2 2 0 002-2v-3h-2v3H5.01L5 15H3z"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  `).join('');
+
+  return `
+    <div style="
+      background:#16181C;
+      border:1px solid #2F3336;
+      border-radius:16px;
+      overflow:hidden;
+      font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+    ">
+      <!-- X header bar -->
+      <div style="
+        padding:12px 16px 8px;
+        border-bottom:1px solid #2F3336;
+        display:flex;align-items:center;gap:8px;
+      ">
+        <svg viewBox="0 0 24 24" width="20" height="20">
+          <path fill="#E7E9EA" d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.748l7.73-8.835L1.254 2.25H8.08l4.258 5.63 5.906-5.63zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+        </svg>
+        <span style="color:#71767B;font-size:12px;font-family:'DM Mono',monospace;letter-spacing:1px;text-transform:uppercase;">
+          ${tweets.length > 1 ? tweets.length + '-post thread' : 'Post'}
+        </span>
+      </div>
+      ${tweetCards}
+    </div>
+  `;
+}
+
+function buildLinkedInMockup(text, tags, i) {
+  const preview = text.length > 200 ? text.substring(0, 200) + '...' : text;
+  return `
+    <div style="background:#1B1F23;border-radius:8px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;overflow:hidden;">
+      <div style="padding:16px;">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
+          <div style="width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,#0077B5,#00A0DC);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:20px;color:#fff;flex-shrink:0;">E</div>
+          <div>
+            <div style="font-weight:700;color:#E9E5DF;font-size:15px;">E-Group</div>
+            <div style="font-size:12px;color:#B0B7BC;">Technology Company · Budapest, Hungary</div>
+            <div style="font-size:11px;color:#8D9195;display:flex;align-items:center;gap:4px;">Just now · 🌐</div>
+          </div>
+          <div style="margin-left:auto;">
+            <span style="color:#70B5F9;font-size:13px;font-weight:600;">+ Follow</span>
+          </div>
+        </div>
+        <div style="color:#E9E5DF;font-size:15px;line-height:1.6;white-space:pre-wrap;" id="li-${i}">${escHtml(text)}</div>
+        ${tags.length ? `<div style="margin-top:10px;">${tags.map(h => `<span style="color:#70B5F9;margin-right:6px;font-size:14px;">#${h}</span>`).join('')}</div>` : ''}
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-top:14px;padding-top:10px;border-top:1px solid #38434F;font-size:13px;color:#8D9195;">
+          <div style="display:flex;gap:4px;align-items:center;">
+            <span>👍</span><span>❤️</span><span>💡</span>
+            <span style="margin-left:4px;">47 reactions</span>
+          </div>
+          <div>12 comments · 8 reposts</div>
+        </div>
+      </div>
+      <div style="display:flex;border-top:1px solid #38434F;padding:4px 16px;">
+        <div style="flex:1;display:flex;align-items:center;justify-content:center;gap:6px;padding:10px;color:#8D9195;font-size:13px;font-weight:600;cursor:pointer;">👍 Like</div>
+        <div style="flex:1;display:flex;align-items:center;justify-content:center;gap:6px;padding:10px;color:#8D9195;font-size:13px;font-weight:600;cursor:pointer;">💬 Comment</div>
+        <div style="flex:1;display:flex;align-items:center;justify-content:center;gap:6px;padding:10px;color:#8D9195;font-size:13px;font-weight:600;cursor:pointer;">🔁 Repost</div>
+        <div style="flex:1;display:flex;align-items:center;justify-content:center;gap:6px;padding:10px;color:#8D9195;font-size:13px;font-weight:600;cursor:pointer;">📤 Send</div>
+      </div>
+    </div>
+  `;
+}
+
+function buildWebsiteMockup(text, i) {
+  return `
+    <div style="background:#0F0F0F;border-radius:8px;font-family:'DM Sans',sans-serif;overflow:hidden;">
+      <div style="background:#161616;padding:10px 16px;border-bottom:1px solid #2A2A2A;display:flex;align-items:center;gap:8px;">
+        <div style="width:10px;height:10px;border-radius:50%;background:#FF5F57;"></div>
+        <div style="width:10px;height:10px;border-radius:50%;background:#FFBD2E;"></div>
+        <div style="width:10px;height:10px;border-radius:50%;background:#28CA41;"></div>
+        <div style="flex:1;background:#1E1E1E;border-radius:4px;padding:4px 12px;font-size:11px;color:#555;text-align:center;">egroup.hu/news/...</div>
+      </div>
+      <div style="padding:28px;">
+        <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#D4FF00;margin-bottom:10px;">News &amp; Insights</div>
+        <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:24px;color:#EEEEEE;letter-spacing:-0.5px;line-height:1.2;margin-bottom:16px;" id="web-${i}">${escHtml(text.split(' ').slice(0,8).join(' ') + (text.split(' ').length > 8 ? '...' : ''))}</div>
+        <div style="width:40px;height:2px;background:#D4FF00;margin-bottom:16px;"></div>
+        <div style="font-size:15px;line-height:1.75;color:#AAAAAA;">${escHtml(text)}</div>
+        <div style="margin-top:20px;display:flex;align-items:center;gap:16px;">
+          <div style="display:flex;align-items:center;gap:8px;">
+            <div style="width:28px;height:28px;border-radius:50%;background:#D4FF00;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:12px;color:#000;">E</div>
+            <div>
+              <div style="font-size:12px;color:#CCCCCC;font-weight:500;">E-Group</div>
+              <div style="font-size:11px;color:#555;">Just now · 4 min read</div>
+            </div>
+          </div>
+          <div style="margin-left:auto;background:#D4FF00;color:#000;font-family:'DM Mono',monospace;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:7px 16px;border-radius:4px;">Read More →</div>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function buildInstagramMockup(text, tags, i) {
+  return `
+    <div style="background:#000;border-radius:8px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;max-width:480px;margin:0 auto;">
+      <div style="display:flex;align-items:center;gap:10px;padding:12px 14px;border-bottom:1px solid #262626;">
+        <div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);padding:2px;">
+          <div style="width:100%;height:100%;border-radius:50%;background:#000;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;color:#fff;">E</div>
+        </div>
+        <div>
+          <div style="font-weight:700;color:#FAFAFA;font-size:14px;">egroup_official</div>
+          <div style="font-size:11px;color:#8E8E8E;">Budapest, Hungary</div>
+        </div>
+        <div style="margin-left:auto;color:#0095F6;font-size:14px;font-weight:600;">Following</div>
+        <div style="color:#FAFAFA;font-size:20px;">···</div>
+      </div>
+      <div style="background:#1A1A1A;aspect-ratio:1;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px;">
+        <div style="font-size:48px;">🚀</div>
+        <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:18px;color:#EEEEEE;text-align:center;padding:0 20px;">E-Group</div>
+        <div style="font-size:11px;color:#AAAAAA;font-family:'DM Mono',monospace;letter-spacing:2px;text-transform:uppercase;">Intelligence Infrastructure</div>
+      </div>
+      <div style="padding:10px 14px 4px;">
+        <div style="display:flex;gap:16px;color:#FAFAFA;font-size:22px;margin-bottom:10px;">
+          <span>🤍</span><span>💬</span><span>📤</span>
+          <span style="margin-left:auto;">🔖</span>
+        </div>
+        <div style="font-size:13px;color:#FAFAFA;font-weight:600;margin-bottom:4px;">47 likes</div>
+        <div style="font-size:14px;color:#FAFAFA;line-height:1.5;" id="ig-${i}">
+          <span style="font-weight:700;">egroup_official</span> ${escHtml(text)}
+        </div>
+        ${tags.length ? `<div style="margin-top:6px;">${tags.map(h => `<span style="color:#0095F6;font-size:14px;margin-right:4px;">#${h}</span>`).join('')}</div>` : ''}
+        <div style="font-size:12px;color:#8E8E8E;margin-top:6px;">View all 12 comments</div>
+        <div style="font-size:10px;color:#8E8E8E;text-transform:uppercase;letter-spacing:0.5px;margin-top:4px;margin-bottom:8px;">Just now</div>
+      </div>
+    </div>
+  `;
+}
+
+function editPCard(i) {
+  // Find all editable elements in this card
+  const targets = ['tw-' + i + '-0', 'li-' + i, 'web-' + i, 'ig-' + i];
+  targets.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) {
+      if (el.contentEditable === 'true') {
+        el.contentEditable = 'false';
+      } else {
+        el.contentEditable = 'true';
+        el.style.outline = '1px dashed rgba(212,255,0,0.4)';
+        el.focus();
+      }
+    }
+  });
+}
+
+function approvePCard(i, platform) {
+  const wrap = document.getElementById('pwrap-' + i);
+  const approveBtn = wrap.querySelector('.card-btn.approve');
+  approveBtn.textContent = '✓ Approved';
+  approveBtn.className = 'card-btn approved';
+  wrap.querySelector('.card-btn.reject').style.display = 'none';
+  wrap.querySelector('.card-btn.edit').style.display = 'none';
+  showToast(platform + ' — approved and queued for publishing');
+}
+
+function rejectPCard(i) {
+  const wrap = document.getElementById('pwrap-' + i);
+  wrap.style.opacity = '0';
+  wrap.style.transform = 'translateX(-16px)';
+  wrap.style.transition = 'all .3s';
+  setTimeout(() => wrap.style.display = 'none', 300);
+}
+
+// ── GENERATE ────────────────────────────────────────────────
+async function generate() {
+  const context1 = document.getElementById('context1').value.trim();
+  const context2 = document.getElementById('context2').value.trim();
+  const location = document.getElementById('location').value.trim();
+  const voice = document.getElementById('voice').value;
+
+  if (!context1) {
+    document.getElementById('context1').focus();
+    document.getElementById('context1').style.borderColor = 'var(--red)';
+    setTimeout(() => document.getElementById('context1').style.borderColor = '', 2000);
+    return;
+  }
+
+  // UI state
+  document.getElementById('generateBtn').disabled = true;
+  document.getElementById('emptyState').style.display = 'none';
+  document.getElementById('processingState').classList.add('active');
+  document.getElementById('resultsState').classList.remove('active');
+  updateSteps(4);
+  generationStart = Date.now();
+
+  // Animate processing steps in parallel with API call
+  animateProcessing();
+
+  // Build prompt
+  const platformList = [...selectedPlatforms].join(', ');
+  const triggerLabels = {
+    conference: 'conference/trade show registration',
+    milestone: 'achievement or milestone',
+    partnership: 'new partnership or client',
+    research: 'research publication or result',
+    newhire: 'new team member',
+    submission: 'staff content submission'
+  };
+  const voiceGuide = {
+    authoritative: 'authoritative, expert, confident — like a world-class technology company speaking to enterprise decision makers',
+    warm: 'warm, human, approachable — celebrating people and moments',
+    bold: 'bold, punchy, impactful — short sentences, strong statements',
+    technical: 'precise, technical, data-driven — specific and credible'
+  };
+
+  const prompt = `You are Rise, an autonomous content intelligence platform for eGroup — a deep tech company based in Budapest, Hungary, founded in 1993, specialising in FinTech, HealthTech, GovTech, SpaceTech and EnergyTech. eGroup's positioning: "Thirty years building what AI runs on."
+
+A content trigger has been detected:
+- Trigger type: ${triggerLabels[selectedTrigger]}
+- Main context: ${context1}
+- Additional detail: ${context2 || 'None provided'}
+- Location: ${location || 'Budapest, Hungary (default)'}
+- Brand voice: ${voiceGuide[voice]}
+- Target platforms: ${platformList}
+
+Generate platform-specific content for each platform listed. For each platform return ONLY a JSON object (no markdown, no backticks, no explanation) with this exact structure:
+
+{
+  "platforms": [
+    {
+      "platform": "Platform Name",
+      "type": "Post type e.g. LinkedIn Article / Tweet Thread / Blog Post",
+      "content": "The full content text ready to publish",
+      "charCount": 280,
+      "hashtags": ["tag1", "tag2"],
+      "confidence": 94,
+      "notes": "One sentence explaining why this content works for this platform"
+    }
+  ],
+  "contextSummary": {
+    "trigger": "Brief description of what triggered this",
+    "enriched": "What Rise inferred or added beyond the raw input",
+    "brandScore": 96
+  }
+}
+
+CRITICAL CONTENT RULES — READ CAREFULLY:
+
+NEVER write like a press release. NEVER start with the company name or a person's full name and title.
+NEVER use phrases like: "is pleased to announce", "has been confirmed", "is proud to", "we are excited to", "we are delighted".
+NEVER write passive, sterile, corporate-speak that nobody would actually read or share.
+
+ALWAYS write like a smart, confident human who finds this genuinely interesting.
+ALWAYS lead with the most interesting angle — not the most obvious fact.
+ALWAYS make the reader feel something: curiosity, excitement, pride, FOMO, inspiration.
+ALWAYS be specific — a specific detail is 10x more compelling than a general statement.
+
+PLATFORM-SPECIFIC STYLE:
+
+LinkedIn (150-250 words MAX):
+- Open with a hook — a bold statement, a surprising fact, a question, or a short story
+- NEVER open with the company name or a person's name
+- Make it feel personal and human, not corporate
+- Good example opening: "30 years ago, two students founded a company on one idea: that data and trust are inseparable. This June, that idea lands in Amsterdam."
+- Bad example opening: "E-Group is pleased to announce that CEO Antal Kuthy will be attending..."
+- End with a specific call to action or thought-provoking question
+
+X / Twitter (thread of 3 tweets, each under 280 chars, NO numbering):
+- Each tweet must be able to stand alone
+- Short. Punchy. Direct. One idea per tweet.
+- Use tension, contrast, or surprise
+- Good example: "We've been building AI infrastructure since 1993. The world just caught up." 
+- Bad example: "E-Group will be attending Money 20/20 Europe 2026 in Amsterdam in June."
+
+Website (blog post intro):
+- TITLE: Maximum 8 words. Must create curiosity, not summarise. 
+- Good title: "Why Budapest's Oldest AI Company Is Heading to Amsterdam"
+- Bad title: "E-Group CEO Confirmed as Speaker at AI Sovereignty Summit"
+- Body: 80-120 words. Opens with a scene, a question, or a provocative statement. Never a fact dump.
+
+Remember: The goal is content people actually want to read, share, and engage with. Write for humans, not for filing cabinets.
+
+Platform format rules:
+- LinkedIn: 150-250 words, 3-5 hashtags, human voice, storytelling
+- X / Twitter: 3 separate tweets divided by double newlines, NO numbering, each under 280 chars, 2-3 hashtags at end of last tweet only
+- Website: Short punchy title (max 8 words) + 80-120 word body, no hashtags
+- Instagram: 80-120 words, 5-8 hashtags, emoji-friendly, visual-first
+
+Write content that sounds genuinely human and specific to eGroup — not generic corporate speak. Reference eGroup's actual expertise where relevant. Make it feel like it was written by someone who knows the company deeply.`;
+
+  try {
+    const response = await fetch("http://localhost:3000", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        model: "claude-sonnet-4-20250514",
+        max_tokens: 1000,
+        messages: [{ role: "user", content: prompt }]
+      })
+    });
+
+    const data = await response.json();
+    const raw = data.content?.[0]?.text || '';
+
+    let parsed;
+    try {
+      const clean = raw.replace(/```json|```/g, '').trim();
+      parsed = JSON.parse(clean);
+    } catch(e) {
+      throw new Error('Failed to parse AI response');
+    }
+
+    const elapsed = ((Date.now() - generationStart) / 1000).toFixed(1);
+    await delay(Math.max(0, 3000 - (Date.now() - generationStart)));
+
+    showResults(parsed, elapsed, context1, location, voice);
+
+  } catch(err) {
+    await delay(1000);
+    document.getElementById('processingState').classList.remove('active');
+    document.getElementById('emptyState').style.display = 'flex';
+    document.getElementById('emptyState').innerHTML = `
+      <div class="empty-icon">⚠️</div>
+      <div class="empty-title">Generation failed</div>
+      <div class="empty-sub">${err.message || 'Something went wrong. Please try again.'}</div>
+    `;
+    document.getElementById('generateBtn').disabled = false;
+    updateSteps(1);
+  }
+}
+
+// ── SHOW RESULTS ────────────────────────────────────────────
+function showResults(data, elapsed, context1, location, voice) {
+  document.getElementById('processingState').classList.remove('active');
+  document.getElementById('resultsState').classList.add('active');
+
+  const platforms = data.platforms || [];
+  const ctx = data.contextSummary || {};
+
+  // Meta
+  document.getElementById('resultsMeta').textContent =
+    `Generated in ${elapsed}s · ${platforms.length} platform${platforms.length !== 1 ? 's' : ''} · Brand score: ${ctx.brandScore || 94}%`;
+
+  // Context bar
+  document.getElementById('contextBar').innerHTML = `
+    <div class="context-item">
+      <span class="context-label">Trigger</span>
+      <span class="context-value">${ctx.trigger || context1}</span>
+    </div>
+    ${location ? `<div class="context-item">
+      <span class="context-label">Location</span>
+      <span class="context-value">${location}</span>
+    </div>` : ''}
+    <div class="context-item">
+      <span class="context-label">Rise Enriched</span>
+      <span class="context-value">${ctx.enriched || 'Context assembled from trigger data'}</span>
+    </div>
+    <div class="context-item">
+      <span class="context-label">Brand Score</span>
+      <span class="context-value" style="color:var(--green);">${ctx.brandScore || 94}%</span>
+    </div>
+  `;
+
+  // Platform icons
+  const icons = {
+    'LinkedIn': { icon: '💼', cls: 'linkedin' },
+    'X / Twitter': { icon: '𝕏', cls: 'twitter' },
+    'Website': { icon: '🌐', cls: 'website' },
+    'Instagram': { icon: '📸', cls: 'instagram' },
+  };
+
+  // Content cards
+  const cardsHtml = platforms.map((p, i) => buildPlatformCard(p, i)).join('');
+
+  document.getElementById('contentCards').innerHTML = cardsHtml;
+  document.getElementById('generateBtn').disabled = false;
+  updateSteps(4);
+  document.querySelector('#step4').classList.add('done');
+}
+
+// ── CARD ACTIONS ────────────────────────────────────────────
+function editCard_old(i) {
+  const el = document.getElementById(`text-${i}`);
+  if (el.contentEditable === 'true') {
+    el.contentEditable = 'false';
+    el.style.outline = '';
+  } else {
+    el.contentEditable = 'true';
+    el.focus();
+    const btn = el.closest('.content-card').querySelector('.card-btn.edit');
+    if (btn) btn.textContent = 'Done';
+  }
+}
+
+function approveCard_old(i, platform) {
+  const btn = document.getElementById(`approve-${i}`);
+  btn.textContent = '✓ Approved';
+  btn.className = 'card-btn approved';
+  const editBtn = btn.parentElement.querySelector('.card-btn.edit');
+  if (editBtn) editBtn.style.display = 'none';
+  const rejectBtn = btn.parentElement.querySelector('.card-btn.reject');
+  if (rejectBtn) rejectBtn.style.display = 'none';
+
+  // End editing if active
+  const textEl = document.getElementById(`text-${i}`);
+  if (textEl) textEl.contentEditable = 'false';
+
+  showToast(`${platform} content approved — queued for publishing`);
+}
+
+function rejectCard_old(i) {
+  const card = document.getElementById(`card-${i}`);
+  card.style.opacity = '0';
+  card.style.transform = 'translateX(-20px)';
+  card.style.transition = 'all 0.3s ease';
+  setTimeout(() => { card.style.display = 'none'; }, 300);
+}
+
+// ── TOAST ────────────────────────────────────────────────────
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  document.getElementById('toastMsg').textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3500);
+}
+
+// ── RESET ────────────────────────────────────────────────────
+function reset() {
+  document.getElementById('emptyState').style.display = 'flex';
+  document.getElementById('emptyState').innerHTML = `
+    <div class="empty-icon">⚡</div>
+    <div class="empty-title">Ready to generate</div>
+    <div class="empty-sub">Select a content trigger, add context, choose your platforms, and hit Generate. Rise will create platform-specific content in seconds.</div>
+  `;
+  document.getElementById('processingState').classList.remove('active');
+  document.getElementById('resultsState').classList.remove('active');
+  document.getElementById('context1').value = '';
+  document.getElementById('context2').value = '';
+  document.getElementById('location').value = '';
+  document.getElementById('generateBtn').disabled = false;
+  updateSteps(1);
+
+  // Reset process steps
+  ['ps1','ps2','ps3','ps4'].forEach(id => {
+    document.getElementById(id).classList.remove('active','done');
+  });
+}
+
+// ── UTILS ───────────────────────────────────────────────────
+function escHtml(str) {
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="What E-Group is thinking about right now. Deep reads, signals, and in-the-room conversations about AI infrastructure and sector intelligence.">
+  <meta property="og:title" content="Thinking — E-Group">
+  <meta property="og:description" content="What E-Group is thinking about right now.">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23080808'/%3E%3Ctext x='5' y='25' font-family='Georgia,serif' font-weight='900' font-size='26' fill='%23C8A96E'%3EE%3C/text%3E%3C/svg%3E">
+<title>Thinking \u2014 E-Group</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>/* ── NAV ── */
+nav { position:fixed; top:0; left:0; right:0; z-index:100; padding:28px 60px; display:flex; align-items:center; justify-content:space-between; background:rgba(8,8,8,0.97); border-bottom:1px solid var(--border); backdrop-filter:blur(12px); }
+.nav-logo { display:flex; align-items:center; gap:14px; text-decoration:none; }
+.logo-e { font-family:'Syne',sans-serif; font-weight:800; font-size:26px; color:var(--gold); line-height:1; letter-spacing:-1px; }
+.nav-logo-text { font-family:'Syne',sans-serif; font-weight:600; font-size:15px; color:var(--white); letter-spacing:3px; text-transform:uppercase; }
+.nav-links { display:flex; align-items:center; gap:40px; list-style:none; }
+.nav-links a { font-family:'DM Mono',monospace; font-size:12px; color:var(--mid); text-decoration:none; letter-spacing:1.5px; text-transform:uppercase; transition:color 0.2s; position:relative; }
+.nav-links a::after { content:''; position:absolute; bottom:-3px; left:0; right:0; height:1px; background:var(--gold); transform:scaleX(0); transition:transform 0.2s; }
+.nav-links a:hover, .nav-links a.active { color:var(--white); }
+.nav-links a.active::after, .nav-links a:hover::after { transform:scaleX(1); }
+.nav-cta { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--gold); border:1px solid rgba(200,169,110,0.35); padding:10px 22px; text-decoration:none; transition:all 0.2s; position:relative; overflow:hidden; }
+.nav-cta::before { content:''; position:absolute; inset:0; background:var(--gold); transform:translateX(-100%); transition:transform 0.25s ease; z-index:-1; }
+.nav-cta:hover { color:var(--black); }
+.nav-cta:hover::before { transform:translateX(0); }
+.nav-dropdown { position:relative; }
+.nav-drop-menu { display:none; position:absolute; top:calc(100% + 16px); right:0; min-width:240px; background:#0F0F0F; border:1px solid #252525; border-top:2px solid var(--gold); z-index:500; }
+.nav-dropdown:hover .nav-drop-menu { display:block; }
+.nav-drop-label { display:block; padding:8px 18px 4px; font-family:'DM Mono',monospace; font-size:8px; letter-spacing:2.5px; text-transform:uppercase; color:#444; border-bottom:1px solid #1a1a1a; }
+.nav-drop-item { display:block; padding:10px 18px; font-family:'DM Mono',monospace; font-size:10px; letter-spacing:1.5px; text-transform:uppercase; color:#666; text-decoration:none; border-bottom:1px solid #1a1a1a; white-space:nowrap; transition:color 0.15s, padding-left 0.15s; }
+.nav-drop-item:last-child { border-bottom:none; }
+.nav-drop-item:hover { color:var(--gold); padding-left:24px; }
+.nav-drop-item::after { display:none !important; }
+.nav-hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; padding:4px; background:none; border:none; z-index:200; }
+.nav-hamburger span { display:block; width:22px; height:1.5px; background:var(--gold); transition:all 0.3s ease; transform-origin:center; }
+.nav-hamburger.open span:nth-child(1) { transform:translateY(6.5px) rotate(45deg); }
+.nav-hamburger.open span:nth-child(2) { opacity:0; transform:scaleX(0); }
+.nav-hamburger.open span:nth-child(3) { transform:translateY(-6.5px) rotate(-45deg); }
+.nav-mobile-menu { display:none; position:fixed; inset:0; background:rgba(8,8,8,0.98); z-index:150; flex-direction:column; align-items:center; justify-content:flex-start; overflow-y:auto; padding:80px 0 40px; backdrop-filter:blur(20px); }
+.nav-mobile-menu.open { display:flex; }
+.nav-mobile-menu a { text-decoration:none; border-bottom:none; }
+.nav-mobile-menu a::after { display:none; }
+.mob-main { font-family:'Syne',sans-serif !important; font-weight:800 !important; font-size:clamp(26px,7vw,40px) !important; color:var(--white) !important; letter-spacing:-0.5px !important; padding:9px 0 !important; width:80%; text-align:center; transition:color 0.2s; display:block; }
+.mob-main:hover { color:var(--gold) !important; }
+.mob-divider { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:3px; text-transform:uppercase; color:var(--dim); padding:20px 0 6px; width:80%; border-bottom:1px solid var(--border); text-align:center; margin-bottom:4px; }
+.mob-record { font-family:'DM Mono',monospace !important; font-size:11px !important; letter-spacing:1.5px !important; text-transform:uppercase !important; color:var(--mid) !important; padding:7px 0 !important; width:80%; text-align:center; transition:color 0.2s; display:block; }
+.mob-record:hover, .mob-record.active { color:var(--gold) !important; }
+.mob-cta { font-family:'DM Mono',monospace !important; font-size:12px !important; letter-spacing:2px !important; text-transform:uppercase !important; color:var(--black) !important; background:var(--gold) !important; padding:14px 36px !important; margin-top:20px !important; display:block; }
+@media (max-width:1023px) { nav { padding:20px 36px; } .nav-links { gap:24px; } }
+@media (max-width:767px) { .nav-links, .nav-cta { display:none; } .nav-hamburger { display:flex; } nav { padding:16px 20px; } }
+
+
+:root {
+  --black: #080808;
+  --ink: #0F0F0F;
+  --dark: #161616;
+  --panel: #1C1C1C;
+  --border: #252525;
+  --muted: #333;
+  --dim: #555;
+  --mid: #777;
+  --text: #B0B0B0;
+  --light: #D0D0D0;
+  --white: #EFEFEF;
+  --gold: #C8A96E;
+  --gold2: #E8C98E;
+  --teal: #4ECDC4;
+  --purple: #9B8FFF;
+}
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+body { background:var(--black); color:var(--text); font-family:'DM Sans',sans-serif; font-size:16px; line-height:1.6; overflow-x:hidden; cursor:none; }
+
+/* \u2500\u2500 CURSOR \u2500\u2500 */
+.cursor { position:fixed; width:8px; height:8px; background:var(--gold); border-radius:50%; pointer-events:none; z-index:9999; transform:translate(-50%,-50%); mix-blend-mode:difference; }
+.cursor-ring { position:fixed; width:32px; height:32px; border:1px solid rgba(200,169,110,0.4); border-radius:50%; pointer-events:none; z-index:9998; transform:translate(-50%,-50%); transition:all 0.15s ease; }
+body:has(a:hover) .cursor-ring, body:has(button:hover) .cursor-ring { width:48px; height:48px; border-color:var(--gold); }
+body::before { content:''; position:fixed; inset:0; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E"); opacity:0.025; pointer-events:none; z-index:1000; }
+
+/* \u2500\u2500 NAV \u2500\u2500 */
+nav { position:fixed; top:0; left:0; right:0; z-index:100; padding:28px 60px; display:flex; align-items:center; justify-content:space-between; background:rgba(8,8,8,0.97); border-bottom:1px solid var(--border); backdrop-filter:blur(12px); }
+.nav-logo { display:flex; align-items:center; gap:14px; text-decoration:none; }
+.logo-e { font-family:'Syne',sans-serif; font-weight:800; font-size:26px; color:var(--gold); line-height:1; letter-spacing:-1px; }
+.nav-logo-text { font-family:'Syne',sans-serif; font-weight:600; font-size:15px; color:var(--white); letter-spacing:3px; text-transform:uppercase; }
+.nav-links { display:flex; align-items:center; gap:40px; list-style:none; }
+.nav-links a { font-family:'DM Mono',monospace; font-size:12px; color:var(--mid); text-decoration:none; letter-spacing:1.5px; text-transform:uppercase; transition:color 0.2s; position:relative; }
+.nav-links a::after { content:''; position:absolute; bottom:-3px; left:0; right:0; height:1px; background:var(--gold); transform:scaleX(0); transition:transform 0.2s; }
+.nav-links a:hover, .nav-links a.active { color:var(--white); }
+.nav-links a.active::after, .nav-links a:hover::after { transform:scaleX(1); }
+.nav-cta { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--gold); border:1px solid rgba(200,169,110,0.35); padding:10px 22px; text-decoration:none; transition:all 0.2s; position:relative; overflow:hidden; }
+.nav-cta::before { content:''; position:absolute; inset:0; background:var(--gold); transform:translateX(-100%); transition:transform 0.25s ease; z-index:-1; }
+.nav-cta:hover { color:var(--black); }
+.nav-cta:hover::before { transform:translateX(0); }
+
+/* \u2500\u2500 PAGE HEADER \u2500\u2500 */
+.page-header { padding:160px 60px 80px; position:relative; overflow:hidden; border-bottom:1px solid var(--border); }
+.page-header-glow { position:absolute; top:-100px; right:-100px; width:700px; height:500px; background:radial-gradient(ellipse,rgba(200,169,110,0.05) 0%,transparent 65%); pointer-events:none; }
+.header-eyebrow { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:3px; text-transform:uppercase; color:var(--gold); margin-bottom:20px; display:flex; align-items:center; gap:10px; }
+.live-dot { width:6px; height:6px; border-radius:50%; background:var(--gold); animation:pulse 1.5s ease-in-out infinite; }
+.page-header h1 { font-family:'Syne',sans-serif; font-weight:800; font-size:clamp(48px,6vw,80px); color:var(--white); letter-spacing:-2.5px; line-height:0.95; margin-bottom:24px; }
+.page-header h1 em { font-style:normal; color:var(--gold); }
+.header-sub { font-size:17px; font-weight:300; color:var(--mid); max-width:560px; line-height:1.8; margin-bottom:48px; }
+.header-meta { display:flex; align-items:center; gap:32px; }
+.header-stat { display:flex; flex-direction:column; gap:3px; }
+.header-stat-num { font-family:'Syne',sans-serif; font-weight:800; font-size:28px; color:var(--white); letter-spacing:-1px; }
+.header-stat-label { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--dim); }
+.header-divider { width:1px; height:40px; background:var(--border); }
+
+/* \u2500\u2500 LEADERBOARD RAIL \u2500\u2500 */
+.leaderboard { background:var(--ink); border-bottom:1px solid var(--border); padding:0 60px; }
+.leaderboard-inner { display:flex; align-items:stretch; gap:0; }
+.leaderboard-label { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2.5px; text-transform:uppercase; color:var(--gold); display:flex; align-items:center; gap:10px; padding:20px 32px 20px 0; border-right:1px solid var(--border); white-space:nowrap; flex-shrink:0; }
+.leaderboard-label svg { width:14px; height:14px; fill:var(--gold); opacity:0.7; }
+.leaderboard-entries { display:flex; align-items:stretch; flex:1; overflow:hidden; }
+.lb-entry { display:flex; align-items:center; gap:14px; padding:16px 28px; border-right:1px solid var(--border); flex:1; text-decoration:none; transition:background 0.2s; position:relative; }
+.lb-entry:hover { background:var(--dark); }
+.lb-rank { font-family:'DM Mono',monospace; font-size:18px; font-weight:500; color:var(--border); letter-spacing:-1px; flex-shrink:0; }
+.lb-entry:nth-child(1) .lb-rank { color:var(--gold); }
+.lb-entry:nth-child(2) .lb-rank { color:var(--mid); }
+.lb-entry:nth-child(3) .lb-rank { color:var(--muted); }
+.lb-info { display:flex; flex-direction:column; gap:2px; overflow:hidden; }
+.lb-author { font-family:'Syne',sans-serif; font-weight:700; font-size:13px; color:var(--white); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.lb-title { font-family:'DM Mono',monospace; font-size:10px; color:var(--dim); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; letter-spacing:0.5px; }
+.lb-time { font-family:'DM Mono',monospace; font-size:10px; color:var(--gold); opacity:0.7; white-space:nowrap; margin-left:auto; flex-shrink:0; padding-left:12px; }
+.leaderboard-reset { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:2px; text-transform:uppercase; color:var(--dim); padding:16px 0 16px 28px; white-space:nowrap; flex-shrink:0; align-self:center; }
+
+/* \u2500\u2500 FILTER BAR \u2500\u2500 */
+.filter-bar { padding:0 60px; background:var(--black); border-bottom:1px solid var(--border); position:sticky; top:85px; z-index:90; backdrop-filter:blur(12px); }
+.filter-inner { display:flex; align-items:stretch; justify-content:space-between; }
+.filter-types { display:flex; align-items:stretch; gap:0; }
+.filter-btn { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--dim); background:none; border:none; border-bottom:2px solid transparent; padding:18px 24px; cursor:pointer; transition:all 0.2s; white-space:nowrap; }
+.filter-btn:hover { color:var(--light); }
+.filter-btn.active { color:var(--white); border-bottom-color:var(--gold); }
+.filter-btn.active.type-signal { border-bottom-color:var(--gold); color:var(--gold); }
+.filter-btn.active.type-deep { border-bottom-color:var(--purple); color:var(--purple); }
+.filter-btn.active.type-room { border-bottom-color:var(--teal); color:var(--teal); }
+.filter-sectors { display:flex; align-items:center; gap:0; border-left:1px solid var(--border); }
+.sector-pill { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:1.5px; text-transform:uppercase; color:var(--dim); background:none; border:none; padding:18px 18px; cursor:pointer; transition:color 0.2s; white-space:nowrap; }
+.sector-pill:hover { color:var(--light); }
+.sector-pill.active { color:var(--gold); }
+
+/* \u2500\u2500 FEED \u2500\u2500 */
+.feed-wrap { padding:60px; }
+.feed-grid { display:grid; grid-template-columns:repeat(12,1fr); gap:1px; background:var(--border); }
+
+/* Card base */
+.card { background:var(--dark); text-decoration:none; display:flex; flex-direction:column; padding:40px 36px; position:relative; overflow:hidden; transition:background 0.25s; }
+.card:hover { background:var(--panel); }
+.card::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; transform:scaleX(0); transform-origin:left; transition:transform 0.3s ease; }
+.card-deep::before { background:linear-gradient(to right,var(--purple),rgba(155,143,255,0.3)); }
+.card-signal::before { background:linear-gradient(to right,var(--gold),rgba(200,169,110,0.3)); }
+.card-room::before { background:linear-gradient(to right,var(--teal),rgba(78,205,196,0.3)); }
+.card:hover::before { transform:scaleX(1); }
+
+/* Grid spans */
+.span-8 { grid-column:span 8; }
+.span-4 { grid-column:span 4; }
+.span-6 { grid-column:span 6; }
+.span-4-col { grid-column:span 4; }
+.span-12 { grid-column:span 12; }
+
+/* Content type badge */
+.type-badge { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:2.5px; text-transform:uppercase; padding:4px 10px; display:inline-block; margin-bottom:24px; }
+.badge-deep { color:var(--purple); background:rgba(155,143,255,0.08); border:1px solid rgba(155,143,255,0.15); }
+.badge-signal { color:var(--gold); background:rgba(200,169,110,0.08); border:1px solid rgba(200,169,110,0.15); }
+.badge-room { color:var(--teal); background:rgba(78,205,196,0.08); border:1px solid rgba(78,205,196,0.15); }
+
+.card-title { font-family:'Syne',sans-serif; font-weight:700; color:var(--white); letter-spacing:-0.3px; line-height:1.15; margin-bottom:12px; }
+.card-excerpt { font-size:14px; color:var(--dim); line-height:1.7; flex:1; }
+.card-footer { display:flex; align-items:flex-end; justify-content:space-between; margin-top:28px; gap:12px; }
+.card-author { display:flex; flex-direction:column; gap:3px; }
+.author-name { font-family:'DM Mono',monospace; font-size:11px; color:var(--light); letter-spacing:0.5px; }
+.author-role { font-family:'DM Mono',monospace; font-size:9px; color:var(--dim); letter-spacing:1px; text-transform:uppercase; }
+.card-right { display:flex; flex-direction:column; align-items:flex-end; gap:4px; }
+.card-date { font-family:'DM Mono',monospace; font-size:10px; color:var(--gold); opacity:0.7; }
+.card-sector { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:1.5px; text-transform:uppercase; color:var(--dim); }
+.card-read-time { font-family:'DM Mono',monospace; font-size:9px; color:var(--dim); letter-spacing:1px; }
+
+/* Voice of badge */
+.voice-badge { font-family:'DM Mono',monospace; font-size:8px; letter-spacing:2px; text-transform:uppercase; color:var(--gold); border:1px solid rgba(200,169,110,0.25); padding:3px 8px; display:inline-block; margin-top:4px; }
+
+/* Large card specifics */
+.card-large .card-title { font-size:clamp(20px,2vw,28px); margin-bottom:16px; }
+.card-large .card-excerpt { font-size:15px; color:var(--mid); }
+.card-large .card-footer { margin-top:36px; }
+
+/* Medium card */
+.card-medium .card-title { font-size:18px; }
+
+/* Small card */
+.card-small .card-title { font-size:15px; margin-bottom:8px; }
+.card-small .card-excerpt { font-size:13px; }
+.card-small { padding:28px 28px; }
+.card-small .card-footer { margin-top:20px; }
+
+/* Horizontal card */
+.card-horizontal { flex-direction:row; align-items:flex-start; gap:32px; grid-column:span 12; }
+.card-horizontal .card-body { flex:1; }
+.card-horizontal .card-aside { width:200px; flex-shrink:0; display:flex; flex-direction:column; align-items:flex-end; justify-content:space-between; }
+
+/* Subscribe strip */
+.subscribe-strip { grid-column:span 4; background:var(--ink); border:1px solid var(--border); padding:40px 36px; display:flex; flex-direction:column; justify-content:space-between; }
+.subscribe-strip-title { font-family:'Syne',sans-serif; font-weight:700; font-size:18px; color:var(--white); letter-spacing:-0.3px; margin-bottom:10px; }
+.subscribe-strip-sub { font-size:13px; color:var(--dim); line-height:1.6; margin-bottom:28px; }
+.subscribe-input-row { display:flex; flex-direction:column; gap:8px; }
+.subscribe-input-row input { background:var(--dark); border:1px solid var(--border); color:var(--white); padding:12px 14px; font-family:'DM Sans',sans-serif; font-size:13px; outline:none; transition:border-color 0.2s; width:100%; }
+.subscribe-input-row input:focus { border-color:rgba(200,169,110,0.3); }
+.subscribe-input-row button { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--black); background:var(--gold); border:none; padding:12px; cursor:pointer; transition:background 0.2s; }
+.subscribe-input-row button:hover { background:var(--gold2); }
+
+/* Load more */
+.load-more-row { grid-column:span 12; background:var(--ink); border-top:1px solid var(--border); display:flex; align-items:center; justify-content:center; padding:32px; }
+.load-more-btn { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--dim); background:none; border:1px solid var(--border); padding:14px 36px; cursor:pointer; transition:all 0.2s; }
+.load-more-btn:hover { color:var(--white); border-color:var(--mid); }
+
+/* \u2500\u2500 FOOTER \u2500\u2500 */
+footer { background:var(--black); border-top:1px solid var(--border); padding:48px 60px; display:flex; justify-content:space-between; align-items:center; }
+.footer-left { display:flex; flex-direction:column; gap:6px; }
+.footer-logo { font-family:'Syne',sans-serif; font-weight:800; font-size:16px; color:var(--white); letter-spacing:3px; text-transform:uppercase; }
+.footer-logo span { color:var(--gold); }
+.footer-tagline { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--dim); }
+.footer-statement { font-family:'Syne',sans-serif; font-size:14px; color:var(--mid); max-width:420px; text-align:center; line-height:1.6; }
+.footer-statement em { color:var(--gold); font-style:normal; }
+.footer-right { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:1.5px; color:var(--dim); text-align:right; line-height:1.8; }
+
+/* \u2500\u2500 ANIMATIONS \u2500\u2500 */
+@keyframes pulse { 0%,100% { opacity:0.4; transform:scale(1); } 50% { opacity:1; transform:scale(1.3); } }
+@keyframes fadeInUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+.reveal { opacity:0; transform:translateY(24px); transition:opacity 0.6s ease,transform 0.6s ease; }
+.reveal.visible { opacity:1; transform:translateY(0); }
+
+/* \u2500\u2500 MOBILE \u2500\u2500 */
+@media (max-width:900px) {
+  .cursor,.cursor-ring { display:none; } body { cursor:auto; }
+  nav { padding:18px 24px; }
+  .nav-links { display:none; }
+  .nav-cta { display:none; }
+  .nav-hamburger { display:flex; }
+  .page-header { padding:120px 24px 60px; }
+  .leaderboard { padding:0 24px; }
+  .leaderboard-inner { flex-direction:column; }
+  .leaderboard-label { border-right:none; border-bottom:1px solid var(--border); padding:14px 0; }
+  .leaderboard-entries { flex-direction:column; }
+  .lb-entry { border-right:none; border-bottom:1px solid var(--border); }
+  .filter-bar { padding:0; top:72px; }
+  .filter-inner { flex-direction:column; overflow-x:visible; }
+  .filter-types { display:flex; overflow-x:auto; -webkit-overflow-scrolling:touch; scrollbar-width:none; padding:0 20px; border-bottom:1px solid var(--border); }
+  .filter-types::-webkit-scrollbar { display:none; }
+  .filter-sectors { display:flex; overflow-x:auto; -webkit-overflow-scrolling:touch; scrollbar-width:none; padding:0 20px; border-left:none; border-top:none; }
+  .filter-sectors::-webkit-scrollbar { display:none; }
+  .filter-btn { padding:14px 16px; font-size:10px; white-space:nowrap; flex-shrink:0; }
+  .sector-pill { padding:14px 14px; font-size:9px; white-space:nowrap; flex-shrink:0; }
+  .feed-wrap { padding:24px; }
+  .feed-wrap { max-width:100%; overflow-x:hidden; }
+  .feed-grid { grid-template-columns:1fr !important; width:100%; }
+  .span-8,.span-4,.span-6,.span-4-col,.span-12 { grid-column:span 1 !important; }
+  .card-horizontal { flex-direction:column; }
+  .card-horizontal .card-aside { width:100%; flex-direction:row; align-items:center; }
+  .subscribe-strip { grid-column:span 1; }
+  footer { flex-direction:column; gap:20px; text-align:center; padding:40px 24px; }
+  .footer-statement { text-align:center; }
+  .footer-right { text-align:center; }
+  .header-meta { flex-wrap:wrap; gap:16px; }
+  .leaderboard-reset { padding:14px 0 14px 0; }
+}
+
+/* ── MOBILE FEED GRID FIX ── */
+@media screen and (max-width:900px) {
+  .feed-wrap { overflow-x:hidden !important; max-width:100vw !important; }
+  .feed-grid {
+    display:flex !important;
+    flex-direction:column !important;
+    gap:1px !important;
+    width:100% !important;
+    max-width:100% !important;
+    overflow:hidden !important;
+  }
+  .feed-grid > * {
+    width:100% !important;
+    max-width:100% !important;
+    min-width:0 !important;
+    grid-column:unset !important;
+    flex:none !important;
+  }
+  .span-8, .span-4, .span-6, .span-4-col, .span-12,
+  .card, .subscribe-strip, .load-more-row {
+    width:100% !important;
+    max-width:100% !important;
+    min-width:0 !important;
+    grid-column:unset !important;
+  }
+  .card-horizontal {
+    flex-direction:column !important;
+  }
+  .card-horizontal .card-aside {
+    width:100% !important;
+    flex-direction:row !important;
+    align-items:center !important;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">
+    <div class="logo-e">E</div>
+    <span class="nav-logo-text">E-Group</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="intelligence.html">Intelligence</a></li>
+    <li><a href="rise.html">Rise</a></li>
+    <li><a href="thinking.html" class="active">Thinking</a></li>
+    <li><a href="about.html">About</a></li>
+    <li class="nav-dropdown">
+      <a href="record/index.html">Record</a>
+      <div class="nav-drop-menu">
+        <span class="nav-drop-label">Projects &amp; Credentials</span>
+        <a href="record/ipcei-cis.html" class="nav-drop-item">IPCEI-CIS — FedEU.ai</a>
+        <a href="record/kau.html" class="nav-drop-item">KAÜ — National Identity</a>
+        <a href="record/helix.html" class="nav-drop-item">HeliX + FedX</a>
+        <a href="record/eidas.html" class="nav-drop-item">eIDAS 2.0 — MyD Wallet</a>
+        <a href="record/medical-ai.html" class="nav-drop-item">Medical AI — GRaDPaLM</a>
+        <a href="record/peter-antal.html" class="nav-drop-item">Dr. Péter Antal</a>
+        <span class="nav-drop-label">Media</span>
+        <a href="record/press.html" class="nav-drop-item">Press Kit</a>
+      </div>
+    </li>
+  </ul>
+  <a href="index.html#contact" class="nav-cta">Work With Us</a>
+
+  <button class="nav-hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+<div class="nav-mobile-menu" id="mobileMenu">
+  <a href="index.html" class="mob-main">Home</a>
+  <a href="intelligence.html" class="mob-main">Intelligence</a>
+  <a href="rise.html" class="mob-main">Rise</a>
+  <a href="thinking.html" class="mob-main">Thinking</a>
+  <a href="about.html" class="mob-main">About</a>
+  <div class="mob-divider">The Record</div>
+  <a href="record/index.html" class="mob-record">Record Home</a>
+  <a href="record/ipcei-cis.html" class="mob-record">IPCEI-CIS — FedEU.ai</a>
+  <a href="record/kau.html" class="mob-record">KAÜ — National Identity</a>
+  <a href="record/helix.html" class="mob-record">HeliX + FedX</a>
+  <a href="record/eidas.html" class="mob-record">eIDAS 2.0 — MyD Wallet</a>
+  <a href="record/medical-ai.html" class="mob-record">Medical AI — GRaDPaLM</a>
+  <a href="record/peter-antal.html" class="mob-record">Dr. Péter Antal</a>
+  <a href="record/press.html" class="mob-record">Press Kit</a>
+  <a href="index.html#contact" class="mob-cta">Work With Us</a>
+</div>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="page-header-glow"></div>
+  <div class="header-eyebrow">
+    <span class="live-dot"></span>
+    Updated Continuously
+  </div>
+  <h1>What we are<br>thinking <em>right now.</em></h1>
+  <p class="header-sub">
+    Three formats. One feed. Deep reads when the thinking is ready.
+    Signals when something is worth noting. In The Room when the conversation is too good not to share.
+  </p>
+  <div class="header-meta">
+    <div class="header-stat">
+      <div class="header-stat-num" id="totalPieces">12</div>
+      <div class="header-stat-label">Pieces Published</div>
+    </div>
+    <div class="header-divider"></div>
+    <div class="header-stat">
+      <div class="header-stat-num">6</div>
+      <div class="header-stat-label">Authors</div>
+    </div>
+    <div class="header-divider"></div>
+    <div class="header-stat">
+      <div class="header-stat-num" style="color:var(--gold)">2d</div>
+      <div class="header-stat-label">Last Published</div>
+    </div>
+    <div class="header-divider"></div>
+    <div class="header-stat">
+      <div class="header-stat-num">5</div>
+      <div class="header-stat-label">Sectors Covered</div>
+    </div>
+  </div>
+</div>
+
+<!-- LEADERBOARD RAIL -->
+<div class="leaderboard">
+  <div class="leaderboard-inner">
+    <div class="leaderboard-label">
+      <svg viewBox="0 0 16 16"><path d="M8 1l1.9 3.8 4.2.6-3 3 .7 4.2L8 10.4l-3.8 2.2.7-4.2-3-3 4.2-.6z"/></svg>
+      Most Read This Month
+    </div>
+    <div class="leaderboard-entries">
+      <a href="#why-sector-intelligence" class="lb-entry">
+        <div class="lb-rank">01</div>
+        <div class="lb-info">
+          <div class="lb-author">Antal Kuthy</div>
+          <div class="lb-title">Why generic AI is the wrong bet for regulated industries</div>
+        </div>
+        <div class="lb-time">14 min read</div>
+      </a>
+      <a href="#nordic-signal" class="lb-entry">
+        <div class="lb-rank">02</div>
+        <div class="lb-info">
+          <div class="lb-author">G\u00e1bor M\u00e9sz\u00e1ros</div>
+          <div class="lb-title">Nordic banks are asking the wrong question about AI</div>
+        </div>
+        <div class="lb-time">3 min read</div>
+      </a>
+      <a href="#medical-ai" class="lb-entry">
+        <div class="lb-rank">03</div>
+        <div class="lb-info">
+          <div class="lb-author">Dr. Anna Kov\u00e1cs</div>
+          <div class="lb-title">What winning back-to-back actually taught us</div>
+        </div>
+        <div class="lb-time">8 min read</div>
+      </a>
+    </div>
+    <div class="leaderboard-reset">Resets May 1</div>
+  </div>
+</div>
+
+<!-- FILTER BAR -->
+<div class="filter-bar">
+  <div class="filter-inner">
+    <div class="filter-types">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn type-deep" data-filter="deep">Deep Reads</button>
+      <button class="filter-btn type-signal" data-filter="signal">Signals</button>
+      <button class="filter-btn type-room" data-filter="room">In The Room</button>
+    </div>
+    <div class="filter-sectors">
+      <button class="sector-pill active" data-sector="all">All Sectors</button>
+      <button class="sector-pill" data-sector="fintech">FinTech</button>
+      <button class="sector-pill" data-sector="healthtech">HealthTech</button>
+      <button class="sector-pill" data-sector="govtech">GovTech</button>
+      <button class="sector-pill" data-sector="ai">AI</button>
+    </div>
+  </div>
+</div>
+
+<!-- FEED -->
+<div class="feed-wrap">
+  <div class="feed-grid" id="feedGrid">
+
+    <!-- ROW 1: Large Deep Read + small Signal + small Room -->
+    <a href="#why-sector-intelligence" class="card card-deep card-large span-8 reveal" data-type="deep" data-sector="fintech healthtech govtech ai" id="why-sector-intelligence">
+      <div class="type-badge badge-deep">Deep Read</div>
+      <div class="card-title">Why generic AI is the wrong bet for regulated industries</div>
+      <p class="card-excerpt">Every major AI vendor is selling horizontal platforms. That is the wrong frame for a hospital, a bank, or a government agency. The intelligence that matters in regulated industries is built from thirty years of domain knowledge \u2014 not six months of fine-tuning. We explain why sector-specific is not a niche strategy. It is the only defensible one.</p>
+      <div class="card-footer">
+        <div class="card-author">
+          <div class="author-name">Antal Kuthy</div>
+          <div class="author-role">Founder &amp; CEO</div>
+          <div class="voice-badge">Voice of Strategy</div>
+        </div>
+        <div class="card-right">
+          <div class="card-date">2 days ago</div>
+          <div class="card-sector">FinTech \u00b7 HealthTech \u00b7 GovTech</div>
+          <div class="card-read-time">14 min read</div>
+        </div>
+      </div>
+    </a>
+
+    <div class="span-4" style="display:flex;flex-direction:column;gap:1px;background:var(--border);">
+      <a href="#nordic-signal" class="card card-signal card-small reveal" data-type="signal" data-sector="fintech" id="nordic-signal" style="flex:1;">
+        <div class="type-badge badge-signal">Signal</div>
+        <div class="card-title">Nordic banks are asking the wrong question about AI</div>
+        <p class="card-excerpt">Three conversations this week with Nordic FinTech teams. Every one asked "which LLM should we use?" \u2014 before defining what intelligence they actually need.</p>
+        <div class="card-footer">
+          <div class="card-author">
+            <div class="author-name">G\u00e1bor M\u00e9sz\u00e1ros</div>
+            <div class="voice-badge">Voice of FinTech</div>
+          </div>
+          <div class="card-right">
+            <div class="card-date">3 days ago</div>
+            <div class="card-sector">FinTech</div>
+          </div>
+        </div>
+      </a>
+      <a href="#packaging-debate" class="card card-room card-small reveal" data-type="room" data-sector="ai" id="packaging-debate" style="flex:1;">
+        <div class="type-badge badge-room">In The Room</div>
+        <div class="card-title">We argued for two hours about vertical vs horizontal. Here is where we landed.</div>
+        <p class="card-excerpt">The Intelligence Products team had a real fight on Tuesday. This is what we decided and why.</p>
+        <div class="card-footer">
+          <div class="card-author">
+            <div class="author-name">Chris Hoar</div>
+            <div class="author-role">Product Strategy</div>
+          </div>
+          <div class="card-right">
+            <div class="card-date">5 days ago</div>
+            <div class="card-sector">AI \u00b7 Product</div>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <!-- ROW 2: Three equal cards -->
+    <a href="#medical-ai" class="card card-deep card-medium span-4-col reveal" data-type="deep" data-sector="healthtech" id="medical-ai">
+      <div class="type-badge badge-deep">Deep Read</div>
+      <div class="card-title">What winning back-to-back international AI events actually taught us</div>
+      <p class="card-excerpt">Dr. Anna Kov\u00e1cs leads the HealthTech AI research team. Back-to-back first places at international events. We asked her what the wins actually revealed \u2014 about the field, and about where we are going next.</p>
+      <div class="card-footer">
+        <div class="card-author">
+          <div class="author-name">Dr. Anna Kov\u00e1cs</div>
+          <div class="author-role">AI Research Lead</div>
+          <div class="voice-badge">Voice of HealthTech</div>
+        </div>
+        <div class="card-right">
+          <div class="card-date">1 week ago</div>
+          <div class="card-sector">HealthTech</div>
+          <div class="card-read-time">8 min read</div>
+        </div>
+      </div>
+    </a>
+
+    <a href="#govtech-pilot" class="card card-signal card-medium span-4-col reveal" data-type="signal" data-sector="govtech" id="govtech-pilot">
+      <div class="type-badge badge-signal">Signal</div>
+      <div class="card-title">Our first government client pilot went live. Here is what surprised us.</div>
+      <p class="card-excerpt">GovTech is a different beast. The procurement cycle, the compliance layer, the stakeholder map \u2014 all of it operates differently. Katalin Varga is on-site. Three things caught us off guard.</p>
+      <div class="card-footer">
+        <div class="card-author">
+          <div class="author-name">Katalin Varga</div>
+          <div class="author-role">GovTech Lead</div>
+          <div class="voice-badge">Voice of GovTech</div>
+        </div>
+        <div class="card-right">
+          <div class="card-date">1 week ago</div>
+          <div class="card-sector">GovTech</div>
+        </div>
+      </div>
+    </a>
+
+    <!-- Subscribe strip in grid -->
+    <div class="subscribe-strip reveal" data-type="meta">
+      <div>
+        <div class="subscribe-strip-title">Get this feed<br>in your inbox.</div>
+        <p class="subscribe-strip-sub">No digest cadence. No algorithm. Just what we publish, when we publish it. Unsubscribe any time.</p>
+      </div>
+      <div class="subscribe-input-row">
+        <input type="email" placeholder="your@email.com">
+        <button>Subscribe \u2192</button>
+      </div>
+    </div>
+
+    <!-- ROW 3: Horizontal room card -->
+    <a href="#dome-selection" class="card card-room span-12 reveal" data-type="room" data-sector="govtech ai" id="dome-selection" style="flex-direction:row;align-items:flex-start;gap:48px;">
+      <div style="flex:1;">
+        <div class="type-badge badge-room">In The Room</div>
+        <div class="card-title" style="font-size:clamp(18px,1.8vw,24px);">What it actually felt like to be selected as Hungary's EU DOME representative</div>
+        <p class="card-excerpt" style="font-size:15px;color:var(--mid);margin-top:8px;">We do not normally write about wins like this. But the EU DOME selection was different \u2014 it was the moment where thirty years of sovereign infrastructure work was formally recognised at a European level. This is the room where we heard the news, and what we talked about for the next three hours.</p>
+      </div>
+      <div style="width:220px;flex-shrink:0;display:flex;flex-direction:column;align-items:flex-end;justify-content:space-between;min-height:140px;">
+        <div class="card-right" style="align-items:flex-end;">
+          <div class="card-date">2 weeks ago</div>
+          <div class="card-sector">GovTech \u00b7 EU</div>
+        </div>
+        <div class="card-author" style="text-align:right;">
+          <div class="author-name">Antal Kuthy</div>
+          <div class="author-role">Founder &amp; CEO</div>
+        </div>
+      </div>
+    </a>
+
+    <!-- ROW 4: Two medium cards -->
+    <a href="#kellton-mou" class="card card-signal card-medium span-6 reveal" data-type="signal" data-sector="ai" id="kellton-mou">
+      <div class="type-badge badge-signal">Signal</div>
+      <div class="card-title">The Kellton partnership MoU \u2014 what it means for sovereign AI in Europe</div>
+      <p class="card-excerpt">Signed in 2025. The goal is a sovereign AI ecosystem that does not depend on US hyperscalers. We explain the structure of the partnership and what we are building together.</p>
+      <div class="card-footer">
+        <div class="card-author">
+          <div class="author-name">Antal Kuthy</div>
+          <div class="author-role">Founder &amp; CEO</div>
+        </div>
+        <div class="card-right">
+          <div class="card-date">3 weeks ago</div>
+          <div class="card-sector">AI \u00b7 Sovereign Infra</div>
+        </div>
+      </div>
+    </a>
+
+    <a href="#post-quantum" class="card card-deep card-medium span-6 reveal" data-type="deep" data-sector="fintech govtech" id="post-quantum">
+      <div class="type-badge badge-deep">Deep Read</div>
+      <div class="card-title">Post-quantum cryptography is not a future problem. It is a now problem.</div>
+      <p class="card-excerpt">Most enterprises are treating post-quantum security as a 2030 issue. Our cryptography team has been working on this since 2019. We explain why the timeline is shorter than anyone is admitting, and what the migration actually involves.</p>
+      <div class="card-footer">
+        <div class="card-author">
+          <div class="author-name">Zolt\u00e1n Farkas</div>
+          <div class="author-role">Cryptography Lead</div>
+          <div class="voice-badge">Voice of Security</div>
+        </div>
+        <div class="card-right">
+          <div class="card-date">3 weeks ago</div>
+          <div class="card-sector">FinTech \u00b7 GovTech</div>
+          <div class="card-read-time">11 min read</div>
+        </div>
+      </div>
+    </a>
+
+    <!-- Load more -->
+    <div class="load-more-row">
+      <button class="load-more-btn" id="loadMore">Load More \u2192</button>
+    </div>
+
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-left">
+    <div class="footer-logo"><span>E</span>-Group</div>
+    <div class="footer-tagline">Intelligence Infrastructure \u00b7 Est. 1993</div>
+  </div>
+  <div class="footer-statement">
+    We are building the <em>intelligence layer</em> for the next thirty years.<br>
+    Come help us think about it.
+  </div>
+  <div class="footer-right">
+    Budapest, Hungary<br>
+    \u00a9 2026 E-Group ICT Software Zrt.<br>
+    All rights reserved.
+  </div>
+</footer>
+
+<script>
+// Cursor
+const cursor = document.getElementById('cursor');
+const ring = document.getElementById('cursorRing');
+let mouseX=0,mouseY=0,ringX=0,ringY=0;
+document.addEventListener('mousemove',e=>{
+  mouseX=e.clientX;mouseY=e.clientY;
+  cursor.style.left=mouseX+'px';cursor.style.top=mouseY+'px';
+});
+(function animateRing(){
+  ringX+=(mouseX-ringX)*0.12;ringY+=(mouseY-ringY)*0.12;
+  ring.style.left=ringX+'px';ring.style.top=ringY+'px';
+  requestAnimationFrame(animateRing);
+})();
+
+// Scroll reveal
+const reveals=document.querySelectorAll('.reveal');
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});
+},{threshold:0.08});
+reveals.forEach(el=>obs.observe(el));
+
+// Filter logic
+const filterBtns = document.querySelectorAll('.filter-btn');
+const sectorPills = document.querySelectorAll('.sector-pill');
+const cards = document.querySelectorAll('#feedGrid .card[data-type]');
+let activeType = 'all';
+let activeSector = 'all';
+
+function applyFilters() {
+  cards.forEach(card => {
+    const type = card.dataset.type;
+    const sectors = card.dataset.sector || '';
+    const typeMatch = activeType === 'all' || type === activeType;
+    const sectorMatch = activeSector === 'all' || sectors.includes(activeSector);
+    card.style.display = (typeMatch && sectorMatch) ? '' : 'none';
+  });
+}
+
+filterBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    filterBtns.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    activeType = btn.dataset.filter;
+    applyFilters();
+  });
+});
+
+sectorPills.forEach(pill => {
+  pill.addEventListener('click', () => {
+    sectorPills.forEach(p => p.classList.remove('active'));
+    pill.classList.add('active');
+    activeSector = pill.dataset.sector;
+    applyFilters();
+  });
+});
+
+// Load more (placeholder)
+document.getElementById('loadMore').addEventListener('click', function() {
+  this.textContent = 'No more yet \u2014 check back soon.';
+  this.style.color = 'var(--dim)';
+  this.style.cursor = 'default';
+});
+
+// Hamburger menu
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+if (hamburger && mobileMenu) {
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    mobileMenu.classList.toggle('open');
+    document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+  });
+  mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    hamburger.classList.remove('open');
+    mobileMenu.classList.remove('open');
+    document.body.style.overflow = '';
+  }));
+}
+</script>
+</body>
+</html>

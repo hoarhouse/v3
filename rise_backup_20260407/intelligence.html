@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23080808'/%3E%3Ctext x='5' y='25' font-family='Georgia,serif' font-weight='900' font-size='26' fill='%23C8A96E'%3EE%3C/text%3E%3C/svg%3E">
+  <meta property="og:title" content="Intelligence Products — E-Group">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Intelligence Products — E-Group</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+:root {
+  --black: #080808; --ink: #0F0F0F; --dark: #161616; --panel: #1C1C1C;
+  --border: #252525; --muted: #333; --dim: #555; --mid: #777;
+  --text: #B0B0B0; --light: #D0D0D0; --white: #EFEFEF;
+  --gold: #C8A96E; --gold2: #E8C98E; --teal: #4ECDC4;
+}
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body { background:var(--black); color:var(--text); font-family:'DM Sans',sans-serif; font-size:16px; line-height:1.6; overflow-x:hidden; cursor:none; }
+
+/* \u2500\u2500 CURSOR \u2500\u2500 */
+.cursor { position:fixed; width:8px; height:8px; background:var(--gold); border-radius:50%; pointer-events:none; z-index:9999; transform:translate(-50%,-50%); mix-blend-mode:difference; }
+.cursor-ring { position:fixed; width:32px; height:32px; border:1px solid rgba(200,169,110,0.4); border-radius:50%; pointer-events:none; z-index:9998; transform:translate(-50%,-50%); transition:all 0.15s ease; }
+body:has(a:hover) .cursor-ring, body:has(button:hover) .cursor-ring { width:48px; height:48px; border-color:var(--gold); }
+body::before { content:''; position:fixed; inset:0; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E"); opacity:0.025; pointer-events:none; z-index:1000; }
+
+/* \u2500\u2500 NAV \u2500\u2500 */
+nav { position:fixed; top:0; left:0; right:0; z-index:100; padding:28px 60px; display:flex; align-items:center; justify-content:space-between; background:rgba(8,8,8,0.97); border-bottom:1px solid var(--border); backdrop-filter:blur(12px); }
+.nav-logo { display:flex; align-items:center; gap:14px; text-decoration:none; }
+.logo-e { font-family:'Syne',sans-serif; font-weight:800; font-size:26px; color:var(--gold); line-height:1; letter-spacing:-1px; }
+.nav-logo-text { font-family:'Syne',sans-serif; font-weight:600; font-size:15px; color:var(--white); letter-spacing:3px; text-transform:uppercase; }
+.nav-links { display:flex; align-items:center; gap:40px; list-style:none; }
+.nav-links a { font-family:'DM Mono',monospace; font-size:12px; color:var(--mid); text-decoration:none; letter-spacing:1.5px; text-transform:uppercase; transition:color 0.2s; position:relative; }
+.nav-links a::after { content:''; position:absolute; bottom:-3px; left:0; right:0; height:1px; background:var(--gold); transform:scaleX(0); transition:transform 0.2s; }
+.nav-links a:hover, .nav-links a.active { color:var(--white); }
+.nav-links a.active::after, .nav-links a:hover::after { transform:scaleX(1); }
+.nav-cta { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--gold); border:1px solid rgba(200,169,110,0.35); padding:10px 22px; text-decoration:none; transition:all 0.2s; position:relative; overflow:hidden; }
+.nav-cta::before { content:''; position:absolute; inset:0; background:var(--gold); transform:translateX(-100%); transition:transform 0.25s ease; z-index:-1; }
+.nav-cta:hover { color:var(--black); }
+.nav-cta:hover::before { transform:translateX(0); }
+
+/* \u2500\u2500 HAMBURGER \u2500\u2500 */
+.nav-hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; padding:4px; background:none; border:none; z-index:200; }
+.nav-hamburger span { display:block; width:22px; height:1.5px; background:var(--gold); transition:all 0.3s ease; transform-origin:center; }
+.nav-hamburger.open span:nth-child(1) { transform:translateY(6.5px) rotate(45deg); }
+.nav-hamburger.open span:nth-child(2) { opacity:0; transform:scaleX(0); }
+.nav-hamburger.open span:nth-child(3) { transform:translateY(-6.5px) rotate(-45deg); }
+.nav-mobile-menu { display:none; position:fixed; inset:0; background:rgba(8,8,8,0.98); z-index:150; flex-direction:column; align-items:center; justify-content:center; backdrop-filter:blur(20px); }
+.nav-mobile-menu.open { display:flex; }
+.nav-mobile-menu a { font-family:'Syne',sans-serif; font-weight:800; font-size:clamp(32px,8vw,48px); color:var(--white); text-decoration:none; letter-spacing:-1px; padding:16px 0; border-bottom:1px solid var(--border); width:100%; text-align:center; transition:color 0.2s; }
+.nav-mobile-menu a:hover { color:var(--gold); }
+.nav-mobile-menu a:last-child { border-bottom:none; }
+.nav-mobile-cta { font-family:'DM Mono',monospace !important; font-size:12px !important; letter-spacing:2px !important; text-transform:uppercase !important; color:var(--black) !important; background:var(--gold) !important; padding:14px 36px !important; font-weight:400 !important; margin-top:24px !important; border-bottom:none !important; }
+
+/* \u2500\u2500 PAGE HERO \u2500\u2500 */
+.page-hero { padding:160px 60px 100px; position:relative; overflow:hidden; border-bottom:1px solid var(--border); }
+.hero-glow { position:absolute; top:-100px; right:-100px; width:800px; height:600px; background:radial-gradient(ellipse,rgba(78,205,196,0.05) 0%,transparent 65%); pointer-events:none; }
+.hero-glow-2 { position:absolute; bottom:-50px; left:-50px; width:500px; height:400px; background:radial-gradient(ellipse,rgba(200,169,110,0.04) 0%,transparent 65%); pointer-events:none; }
+.page-eyebrow { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:3px; text-transform:uppercase; color:var(--teal); margin-bottom:20px; display:flex; align-items:center; gap:12px; }
+.page-eyebrow::before { content:''; display:inline-block; width:24px; height:1px; background:var(--teal); }
+.page-hero h1 { font-family:'Syne',sans-serif; font-weight:800; font-size:clamp(40px,5.5vw,76px); color:var(--white); letter-spacing:-2.5px; line-height:0.95; margin-bottom:28px; max-width:900px; }
+.page-hero h1 em { font-style:normal; color:var(--teal); }
+.hero-body { display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:start; margin-top:60px; }
+.hero-left p { font-size:18px; font-weight:300; color:var(--mid); line-height:1.8; margin-bottom:20px; }
+.hero-left p strong { color:var(--light); font-weight:400; }
+.hero-right { display:flex; flex-direction:column; gap:0; border:1px solid var(--border); }
+.hero-fact { padding:20px 28px; border-bottom:1px solid var(--border); display:flex; align-items:center; gap:20px; }
+.hero-fact:last-child { border-bottom:none; }
+.fact-num { font-family:'Syne',sans-serif; font-weight:800; font-size:32px; color:var(--white); letter-spacing:-1px; flex-shrink:0; width:60px; }
+.fact-label { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--dim); line-height:1.5; }
+
+/* \u2500\u2500 WHAT IT IS \u2500\u2500 */
+.explainer { padding:100px 60px; background:var(--ink); border-bottom:1px solid var(--border); }
+.explainer-inner { display:grid; grid-template-columns:1fr 1fr; gap:100px; align-items:center; }
+.explainer-left .section-eyebrow { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:3px; text-transform:uppercase; color:var(--gold); margin-bottom:20px; display:flex; align-items:center; gap:12px; }
+.explainer-left .section-eyebrow::before { content:''; display:inline-block; width:24px; height:1px; background:var(--gold); }
+.explainer-left h2 { font-family:'Syne',sans-serif; font-weight:800; font-size:clamp(32px,3.5vw,48px); color:var(--white); letter-spacing:-1.5px; line-height:1.05; margin-bottom:24px; }
+.explainer-left p { font-size:16px; font-weight:300; color:var(--mid); line-height:1.8; margin-bottom:16px; }
+.explainer-right { display:flex; flex-direction:column; gap:1px; background:var(--border); }
+.explainer-step { background:var(--dark); padding:28px 32px; display:flex; gap:20px; align-items:flex-start; transition:background 0.2s; }
+.explainer-step:hover { background:var(--panel); }
+.step-num { font-family:'DM Mono',monospace; font-size:11px; color:var(--gold); opacity:0.6; letter-spacing:1px; flex-shrink:0; padding-top:2px; }
+.step-content h4 { font-family:'Syne',sans-serif; font-weight:700; font-size:16px; color:var(--white); letter-spacing:-0.3px; margin-bottom:6px; }
+.step-content p { font-size:13px; color:var(--dim); line-height:1.6; }
+
+/* \u2500\u2500 SECTOR GRID \u2500\u2500 */
+.sectors-section { padding:100px 60px; }
+.sectors-header { display:flex; align-items:flex-end; justify-content:space-between; margin-bottom:60px; }
+.sectors-header-left .section-eyebrow { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:3px; text-transform:uppercase; color:var(--gold); margin-bottom:16px; display:flex; align-items:center; gap:12px; }
+.sectors-header-left .section-eyebrow::before { content:''; display:inline-block; width:24px; height:1px; background:var(--gold); }
+.sectors-header-left h2 { font-family:'Syne',sans-serif; font-weight:800; font-size:clamp(32px,3.5vw,48px); color:var(--white); letter-spacing:-1.5px; line-height:1.05; }
+.status-legend { display:flex; flex-direction:column; gap:8px; }
+.legend-item { display:flex; align-items:center; gap:8px; font-family:'DM Mono',monospace; font-size:9px; letter-spacing:1.5px; text-transform:uppercase; color:var(--dim); }
+.legend-dot { width:6px; height:6px; border-radius:50%; flex-shrink:0; }
+.dot-live   { background:var(--teal); }
+.dot-dev    { background:var(--gold); }
+.dot-convo  { background:#9B8FFF; }
+.dot-soon   { background:var(--muted); }
+
+/* Sector tiles */
+.sector-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--border); }
+.sector-tile { background:var(--dark); padding:48px 40px; position:relative; overflow:hidden; text-decoration:none; display:block; transition:background 0.25s; }
+.sector-tile:hover { background:var(--panel); }
+.sector-tile::after { content:''; position:absolute; top:0; left:0; right:0; height:3px; transition:opacity 0.3s; opacity:0; }
+.sector-tile.s-live::after   { background:var(--teal); }
+.sector-tile.s-dev::after    { background:var(--gold); }
+.sector-tile.s-convo::after  { background:#9B8FFF; }
+.sector-tile.s-soon::after   { background:var(--muted); }
+.sector-tile:hover::after    { opacity:1; }
+
+.tile-status { display:inline-flex; align-items:center; gap:6px; font-family:'DM Mono',monospace; font-size:9px; letter-spacing:2px; text-transform:uppercase; padding:4px 10px; border:1px solid; margin-bottom:28px; }
+.status-live   { color:var(--teal);    border-color:rgba(78,205,196,0.3); }
+.status-dev    { color:var(--gold);    border-color:rgba(200,169,110,0.3); }
+.status-convo  { color:#9B8FFF;        border-color:rgba(155,143,255,0.3); }
+.status-soon   { color:var(--dim);     border-color:var(--border); }
+.status-dot    { width:5px; height:5px; border-radius:50%; background:currentColor; }
+.status-live .status-dot { animation:pulse 1.5s ease-in-out infinite; }
+
+.tile-icon { font-size:36px; margin-bottom:16px; display:block; filter:grayscale(0.3); transition:transform 0.3s; }
+.sector-tile:hover .tile-icon { transform:scale(1.05) translateY(-2px); filter:grayscale(0); }
+.tile-name { font-family:'Syne',sans-serif; font-weight:800; font-size:clamp(22px,2vw,28px); color:var(--white); letter-spacing:-0.5px; margin-bottom:12px; line-height:1; }
+.tile-desc { font-size:13px; color:var(--dim); line-height:1.7; margin-bottom:28px; }
+.tile-tags { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:24px; }
+.tile-tag { font-family:'DM Mono',monospace; font-size:8px; letter-spacing:1.5px; text-transform:uppercase; color:var(--dim); border:1px solid var(--border); padding:3px 8px; }
+.tile-cta { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2px; text-transform:uppercase; display:flex; align-items:center; gap:6px; transition:gap 0.2s; }
+.sector-tile.s-live .tile-cta   { color:var(--teal); }
+.sector-tile.s-dev .tile-cta    { color:var(--gold); }
+.sector-tile.s-convo .tile-cta  { color:#9B8FFF; }
+.sector-tile.s-soon .tile-cta   { color:var(--dim); }
+.sector-tile:hover .tile-cta    { gap:12px; }
+
+/* \u2500\u2500 CONVERSATION CTA \u2500\u2500 */
+.convo-section { background:var(--ink); border-top:1px solid var(--border); border-bottom:1px solid var(--border); padding:100px 60px; }
+.convo-inner { display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center; }
+.convo-left h2 { font-family:'Syne',sans-serif; font-weight:800; font-size:clamp(28px,3vw,44px); color:var(--white); letter-spacing:-1.5px; line-height:1.05; margin-bottom:20px; }
+.convo-left h2 em { font-style:normal; color:var(--gold); }
+.convo-left p { font-size:16px; font-weight:300; color:var(--mid); line-height:1.8; }
+.convo-form { display:flex; flex-direction:column; gap:14px; }
+.form-row { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+.form-group { display:flex; flex-direction:column; gap:6px; }
+.form-label { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:2px; text-transform:uppercase; color:var(--dim); }
+.form-input, .form-select, .form-textarea { background:var(--dark); border:1px solid var(--border); color:var(--white); padding:13px 16px; font-family:'DM Sans',sans-serif; font-size:16px; outline:none; transition:border-color 0.2s; width:100%; appearance:none; }
+.form-input:focus, .form-select:focus, .form-textarea:focus { border-color:rgba(200,169,110,0.4); }
+.form-textarea { resize:vertical; min-height:90px; font-size:16px; }
+.form-select { background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23555' stroke-width='1.5' fill='none'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right 16px center; cursor:pointer; }
+.form-select option { background:var(--dark); }
+.form-submit { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--black); background:var(--gold); border:none; padding:16px 32px; cursor:pointer; transition:background 0.2s; align-self:flex-start; }
+.form-submit:hover { background:var(--gold2); }
+.form-note { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:1px; color:var(--dim); line-height:1.6; }
+
+/* \u2500\u2500 FOOTER \u2500\u2500 */
+footer { background:var(--black); border-top:1px solid var(--border); padding:48px 60px; display:flex; justify-content:space-between; align-items:center; }
+.footer-left { display:flex; flex-direction:column; gap:6px; }
+.footer-logo { font-family:'Syne',sans-serif; font-weight:800; font-size:16px; color:var(--white); letter-spacing:3px; text-transform:uppercase; }
+.footer-logo span { color:var(--gold); }
+.footer-tagline { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--dim); }
+.footer-statement { font-family:'Syne',sans-serif; font-size:14px; color:var(--mid); max-width:420px; text-align:center; line-height:1.6; }
+.footer-statement em { color:var(--gold); font-style:normal; }
+.footer-right { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:1.5px; color:var(--dim); text-align:right; line-height:1.8; }
+
+/* \u2500\u2500 ANIMATIONS \u2500\u2500 */
+@keyframes pulse { 0%,100% { opacity:0.4; transform:scale(1); } 50% { opacity:1; transform:scale(1.3); } }
+.reveal { opacity:0; transform:translateY(24px); transition:opacity 0.6s ease,transform 0.6s ease; }
+.reveal.visible { opacity:1; transform:translateY(0); }
+.reveal-delay-1 { transition-delay:0.1s; }
+.reveal-delay-2 { transition-delay:0.2s; }
+.reveal-delay-3 { transition-delay:0.3s; }
+.reveal-delay-4 { transition-delay:0.4s; }
+.reveal-delay-5 { transition-delay:0.5s; }
+
+/* \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550
+   TABLET  768px – 1023px
+\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550 */
+@media (max-width:1023px) {
+  nav { padding:20px 36px; }
+  .nav-links { gap:24px; }
+  .page-hero { padding:140px 36px 72px; }
+  .hero-body { grid-template-columns:1fr; gap:48px; }
+  .explainer { padding:72px 36px; }
+  .explainer-inner { grid-template-columns:1fr; gap:48px; }
+  .sectors-section { padding:72px 36px; }
+  .sectors-header { flex-direction:column; align-items:flex-start; gap:32px; }
+  .sector-grid { grid-template-columns:1fr 1fr; }
+  .convo-section { padding:72px 36px; }
+  .convo-inner { grid-template-columns:1fr; gap:48px; }
+  footer { padding:40px 36px; }
+}
+
+/* \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550
+   PHONE  max 767px
+\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550 */
+@media (max-width:767px) {
+  .cursor,.cursor-ring { display:none; }
+  body { cursor:auto; }
+
+  nav { padding:16px 20px; }
+  .nav-links { display:none; }
+  .nav-cta { display:none; }
+  .nav-hamburger { display:flex; }
+
+  .page-hero { padding:100px 20px 48px; }
+  .page-hero h1 { font-size:clamp(32px,8vw,48px); letter-spacing:-1.5px; }
+  .hero-body { grid-template-columns:1fr; gap:36px; margin-top:36px; }
+  .hero-left p { font-size:16px; }
+  .hero-fact { padding:16px 20px; gap:14px; }
+  .fact-num { font-size:24px; width:44px; }
+
+  .explainer { padding:60px 20px; }
+  .explainer-inner { grid-template-columns:1fr; gap:40px; }
+  .explainer-step { padding:20px 24px; gap:16px; }
+
+  .sectors-section { padding:60px 20px; }
+  .sectors-header { flex-direction:column; align-items:flex-start; gap:24px; margin-bottom:32px; }
+  .status-legend { flex-direction:row; flex-wrap:wrap; gap:12px; }
+  .sector-grid { grid-template-columns:1fr; }
+  .sector-tile { padding:32px 24px; }
+  .tile-name { font-size:22px; }
+
+  .convo-section { padding:60px 20px; }
+  .convo-inner { grid-template-columns:1fr; gap:40px; }
+  .form-row { grid-template-columns:1fr; }
+  .form-input, .form-select, .form-textarea { font-size:16px; }
+
+  footer { flex-direction:column; gap:20px; text-align:center; padding:36px 20px; }
+  .footer-statement { font-size:13px; }
+  .footer-right { text-align:center; }
+}
+
+@media (max-width:380px) {
+  .page-hero h1 { font-size:30px; }
+  .sector-tile { padding:24px 18px; }
+}
+
+.nav-dropdown { position:relative; }
+.nav-drop-menu { display:none; position:absolute; top:calc(100% + 16px); right:0; min-width:240px; background:#0F0F0F; border:1px solid #252525; border-top:2px solid var(--gold); z-index:500; }
+.nav-dropdown:hover .nav-drop-menu { display:block; }
+.nav-drop-label { display:block; padding:8px 18px 4px; font-family:'DM Mono',monospace; font-size:8px; letter-spacing:2.5px; text-transform:uppercase; color:#444; border-bottom:1px solid #1a1a1a; }
+.nav-drop-item { display:block; padding:10px 18px; font-family:'DM Mono',monospace; font-size:10px; letter-spacing:1.5px; text-transform:uppercase; color:#666; text-decoration:none; border-bottom:1px solid #1a1a1a; white-space:nowrap; transition:color 0.15s, padding-left 0.15s; }
+.nav-drop-item:last-child { border-bottom:none; }
+.nav-drop-item:hover { color:var(--gold); padding-left:24px; }
+.nav-drop-item::after { display:none !important; }
+.nav-mobile-menu a { text-decoration:none; border-bottom:none; }
+.nav-mobile-menu a::after { display:none; }
+.mob-main { font-family:'Syne',sans-serif !important; font-weight:800 !important; font-size:clamp(26px,7vw,40px) !important; color:var(--white) !important; letter-spacing:-0.5px !important; padding:9px 0 !important; width:80%; text-align:center; transition:color 0.2s; display:block; }
+.mob-main:hover { color:var(--gold) !important; }
+.mob-divider { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:3px; text-transform:uppercase; color:var(--dim); padding:20px 0 6px; width:80%; border-bottom:1px solid var(--border); text-align:center; margin-bottom:4px; }
+.mob-record { font-family:'DM Mono',monospace !important; font-size:11px !important; letter-spacing:1.5px !important; text-transform:uppercase !important; color:var(--mid) !important; padding:7px 0 !important; width:80%; text-align:center; transition:color 0.2s; display:block; }
+.mob-record:hover { color:var(--gold) !important; }
+.mob-cta { font-family:'DM Mono',monospace !important; font-size:12px !important; letter-spacing:2px !important; text-transform:uppercase !important; color:var(--black) !important; background:var(--gold) !important; padding:14px 36px !important; margin-top:20px !important; display:block; }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">
+    <div class="logo-e">E</div>
+    <span class="nav-logo-text">E-Group</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="intelligence.html" class="active">Intelligence</a></li>
+    <li><a href="rise.html">Rise</a></li>
+    <li><a href="thinking.html">Thinking</a></li>
+    <li><a href="about.html">About</a></li>
+    <li class="nav-dropdown">
+      <a href="record/index.html">Record</a>
+      <div class="nav-drop-menu">
+        <span class="nav-drop-label">Projects &amp; Credentials</span>
+        <a href="record/ipcei-cis.html" class="nav-drop-item">IPCEI-CIS — FedEU.ai</a>
+        <a href="record/kau.html" class="nav-drop-item">KÄÜ — National Identity</a>
+        <a href="record/helix.html" class="nav-drop-item">HeliX + FedX</a>
+        <a href="record/eidas.html" class="nav-drop-item">eIDAS 2.0 — MyD Wallet</a>
+        <a href="record/medical-ai.html" class="nav-drop-item">Medical AI — GraDPaLM</a>
+        <a href="record/peter-antal.html" class="nav-drop-item">Dr. Péter Antal</a>
+        <span class="nav-drop-label">Media</span>
+        <a href="record/press.html" class="nav-drop-item">Press Kit</a>
+      </div>
+    </li>
+  </ul>
+  <a href="#join-conversation" class="nav-cta">Join The Conversation</a>
+  <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="nav-mobile-menu" id="mobileMenu">
+  <a href="index.html" class="mob-main">Home</a>
+  <a href="intelligence.html" class="mob-main">Intelligence</a>
+  <a href="rise.html" class="mob-main">Rise</a>
+  <a href="thinking.html" class="mob-main">Thinking</a>
+  <a href="about.html" class="mob-main">About</a>
+  <div class="mob-divider">The Record</div>
+  <a href="record/index.html" class="mob-record">Record Home</a>
+  <a href="record/ipcei-cis.html" class="mob-record">IPCEI-CIS — FedEU.ai</a>
+  <a href="record/kau.html" class="mob-record">KÄÜ — National Identity</a>
+  <a href="record/helix.html" class="mob-record">HeliX + FedX</a>
+  <a href="record/eidas.html" class="mob-record">eIDAS 2.0 — MyD Wallet</a>
+  <a href="record/medical-ai.html" class="mob-record">Medical AI — GraDPaLM</a>
+  <a href="record/peter-antal.html" class="mob-record">Dr. Péter Antal</a>
+  <a href="record/press.html" class="mob-record">Press Kit</a>
+  <a href="index.html#contact" class="mob-cta">Work With Us</a>
+</div>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="hero-glow"></div>
+  <div class="hero-glow-2"></div>
+  <div class="page-eyebrow">Intelligence Products</div>
+  <h1>Every industry runs on intelligence.<br>Most of it is <em>generic.</em><br>We are changing that.</h1>
+
+  <div class="hero-body">
+    <div class="hero-left reveal">
+      <p>For thirty years, E-Group has built the infrastructure that regulated industries run on — identity systems, data platforms, trust frameworks, transactional infrastructure. We have done this for FinTech, HealthTech, GovTech, SpaceTech and EnergyTech.</p>
+      <p>Now we are <strong>packaging that thirty-year knowledge base into deployable intelligence products</strong> — pre-trained on the specific language, regulation, workflow and risk profile of each sector. Not a generic AI you configure. An intelligence layer that already understands your world.</p>
+      <p>We are building these products in active conversation with partners from each sector. Some are live. Some are in development. Some are conversations we have just started. All of them are on this page.</p>
+    </div>
+    <div class="hero-right reveal reveal-delay-2">
+      <div class="hero-fact">
+        <div class="fact-num">30<span style="font-size:18px;color:var(--gold)">+</span></div>
+        <div class="fact-label">Years of sector-specific knowledge<br>embedded in every product</div>
+      </div>
+      <div class="hero-fact">
+        <div class="fact-num">5</div>
+        <div class="fact-label">Core sectors with active<br>product development</div>
+      </div>
+      <div class="hero-fact">
+        <div class="fact-num" style="color:var(--teal)">∞</div>
+        <div class="fact-label">Sectors we are open to<br>exploring with the right partner</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- WHAT IT IS -->
+<div class="explainer">
+  <div class="explainer-inner">
+    <div class="explainer-left reveal">
+      <div class="section-eyebrow">What This Actually Is</div>
+      <h2>Intelligence in a box.<br>Built for the way your<br>industry actually works.</h2>
+      <p>Most AI products are built horizontally — they try to work for everyone, which means they work perfectly for no one in a regulated, complex, domain-specific industry.</p>
+      <p>E-Group Intelligence Products are different. Each one is built vertically — pre-loaded with the terminology, regulation, workflow patterns, risk structures and data models that are specific to your sector. You are not buying a tool and then training it. You are buying thirty years of institutional knowledge, already embedded.</p>
+    </div>
+    <div class="explainer-right reveal reveal-delay-2">
+      <div class="explainer-step">
+        <div class="step-num">01</div>
+        <div class="step-content">
+          <h4>Sector-Specific Knowledge Base</h4>
+          <p>Pre-trained on the language, regulation, and workflow of your industry. A FinTech product understands clearing and settlement. A HealthTech product understands clinical pathways and GDPR. From day one.</p>
+        </div>
+      </div>
+      <div class="explainer-step">
+        <div class="step-num">02</div>
+        <div class="step-content">
+          <h4>Ready To Deploy</h4>
+          <p>Not a platform you spend six months configuring. A packaged product with defined inputs, defined outputs, and a clear integration surface. Built to connect to your existing infrastructure.</p>
+        </div>
+      </div>
+      <div class="explainer-step">
+        <div class="step-num">03</div>
+        <div class="step-content">
+          <h4>Rise-Powered</h4>
+          <p>Each Intelligence Product is powered by Rise — E-Group's dual-consciousness AI platform. Rise reads the world so your product stays current. Essence reads your organisation so leadership always knows what is happening.</p>
+        </div>
+      </div>
+      <div class="explainer-step">
+        <div class="step-num">04</div>
+        <div class="step-content">
+          <h4>Sovereign By Design</h4>
+          <p>Built on E-Group's thirty years of trust infrastructure. Your data does not leave your jurisdiction. No US hyperscaler dependency. Fully compliant with EU AI Act, GDPR, and sector-specific regulatory requirements.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTOR GRID -->
+<div class="sectors-section">
+  <div class="sectors-header reveal">
+    <div class="sectors-header-left">
+      <div class="section-eyebrow">The Sectors</div>
+      <h2>Where we are building.<br>What we are thinking about.</h2>
+    </div>
+    <div class="status-legend">
+      <div class="legend-item"><div class="legend-dot dot-live"></div>Live / In Pilot</div>
+      <div class="legend-item"><div class="legend-dot dot-dev"></div>In Development</div>
+      <div class="legend-item"><div class="legend-dot dot-convo"></div>In Conversation</div>
+      <div class="legend-item"><div class="legend-dot dot-soon"></div>Coming Soon</div>
+    </div>
+  </div>
+
+  <div class="sector-grid">
+
+    <a href="#join-conversation" class="sector-tile s-dev reveal">
+      <div class="tile-status status-dev"><span class="status-dot"></span>In Development</div>
+      <span class="tile-icon">\ud83c\udfe6</span>
+      <div class="tile-name">FinTech</div>
+      <p class="tile-desc">Intelligence for financial institutions, payment networks, and regulatory compliance teams. Built on COIOS — our flagship FinTech AI OS — currently in active development with banking partners across Europe.</p>
+      <div class="tile-tags">
+        <span class="tile-tag">Clearing &amp; Settlement</span>
+        <span class="tile-tag">RegTech</span>
+        <span class="tile-tag">Risk Intelligence</span>
+        <span class="tile-tag">PSD2 / DORA</span>
+      </div>
+      <span class="tile-cta">Join the conversation →</span>
+    </a>
+
+    <a href="#join-conversation" class="sector-tile s-live reveal reveal-delay-1">
+      <div class="tile-status status-live"><span class="status-dot"></span>In Pilot</div>
+      <span class="tile-icon">\ud83c\udfe5</span>
+      <div class="tile-name">HealthTech</div>
+      <p class="tile-desc">Medical AI intelligence for clinical research, diagnostic support, and health data sovereignty. Our HealthTech team has taken back-to-back first place at international AI research events. The product is in early pilot.</p>
+      <div class="tile-tags">
+        <span class="tile-tag">Clinical AI</span>
+        <span class="tile-tag">Health Data</span>
+        <span class="tile-tag">GDPR / EHDS</span>
+        <span class="tile-tag">Diagnostics</span>
+      </div>
+      <span class="tile-cta">Talk to our HealthTech team →</span>
+    </a>
+
+    <a href="#join-conversation" class="sector-tile s-live reveal reveal-delay-2">
+      <div class="tile-status status-live"><span class="status-dot"></span>In Pilot</div>
+      <span class="tile-icon">\ud83c\udfdb</span>
+      <div class="tile-name">GovTech</div>
+      <p class="tile-desc">Government intelligence for digital identity, public service automation, and sovereign data infrastructure. First government client pilot is live. E-Group built Hungary's national digital identity infrastructure — we understand what government actually needs from AI.</p>
+      <div class="tile-tags">
+        <span class="tile-tag">Digital Identity</span>
+        <span class="tile-tag">Public Services</span>
+        <span class="tile-tag">EU Compliance</span>
+        <span class="tile-tag">Sovereign AI</span>
+      </div>
+      <span class="tile-cta">Talk to our GovTech team →</span>
+    </a>
+
+    <a href="#join-conversation" class="sector-tile s-dev reveal reveal-delay-1">
+      <div class="tile-status status-dev"><span class="status-dot"></span>In Development</div>
+      <span class="tile-icon">\ud83d\ude80</span>
+      <div class="tile-name">SpaceTech</div>
+      <p class="tile-desc">Intelligence for space data, satellite operations, and defence-adjacent applications. E-Group has been active in the European space sector. We are developing intelligence products for organisations operating in this uniquely complex domain.</p>
+      <div class="tile-tags">
+        <span class="tile-tag">Satellite Data</span>
+        <span class="tile-tag">Space Analytics</span>
+        <span class="tile-tag">ESA Frameworks</span>
+      </div>
+      <span class="tile-cta">Join the conversation →</span>
+    </a>
+
+    <a href="#join-conversation" class="sector-tile s-dev reveal reveal-delay-2">
+      <div class="tile-status status-dev"><span class="status-dot"></span>In Development</div>
+      <span class="tile-icon">\u26a1</span>
+      <div class="tile-name">EnergyTech</div>
+      <p class="tile-desc">Intelligence for energy networks, grid management, and the data infrastructure of the energy transition. Smart grids generate extraordinary data volume. We are building the intelligence layer that makes that data actionable for operators and regulators.</p>
+      <div class="tile-tags">
+        <span class="tile-tag">Grid Intelligence</span>
+        <span class="tile-tag">Energy Data</span>
+        <span class="tile-tag">Net Zero Analytics</span>
+      </div>
+      <span class="tile-cta">Join the conversation →</span>
+    </a>
+
+    <a href="#join-conversation" class="sector-tile s-convo reveal reveal-delay-3">
+      <div class="tile-status status-convo"><span class="status-dot"></span>In Conversation</div>
+      <span class="tile-icon">\ud83c\udfed</span>
+      <div class="tile-name">Manufacturing</div>
+      <p class="tile-desc">Intelligence for industrial operations, supply chain, and production quality. We are in early conversations with manufacturing partners about what domain-specific AI intelligence would mean for their operational reality. If you are in this sector — we want to talk.</p>
+      <div class="tile-tags">
+        <span class="tile-tag">Operations AI</span>
+        <span class="tile-tag">Supply Chain</span>
+        <span class="tile-tag">Quality Intelligence</span>
+      </div>
+      <span class="tile-cta">Start a conversation →</span>
+    </a>
+
+  </div>
+</div>
+
+<!-- CONVERSATION CTA -->
+<div class="convo-section" id="join-conversation">
+  <div class="convo-inner">
+    <div class="convo-left reveal">
+      <div class="section-eyebrow" style="font-family:'DM Mono',monospace;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:20px;display:flex;align-items:center;gap:12px;">
+        <span style="display:inline-block;width:24px;height:1px;background:var(--gold);"></span>
+        Your Sector
+      </div>
+      <h2>Is your industry on this list?<br>Tell us. Is it <em>not</em> on this list?<br>Tell us that too.</h2>
+      <p>We are actively shaping these products in conversation with partners from each sector. We are not looking for customers. We are looking for people who understand their industry deeply enough to help us build something genuinely useful for it.</p>
+      <p style="margin-top:16px;">If that sounds like you — fill in the form. We will respond within one working day.</p>
+    </div>
+    <div class="convo-right reveal reveal-delay-2">
+      <div class="convo-form">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Your Name</label>
+            <input type="text" class="form-input" placeholder="Name">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Organisation</label>
+            <input type="text" class="form-input" placeholder="Company">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email</label>
+          <input type="email" class="form-input" placeholder="your@email.com">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Your Sector</label>
+          <select class="form-select">
+            <option value="" disabled selected>Select your sector</option>
+            <option>FinTech / Financial Services</option>
+            <option>HealthTech / Healthcare</option>
+            <option>GovTech / Public Sector</option>
+            <option>SpaceTech</option>
+            <option>EnergyTech / Utilities</option>
+            <option>Manufacturing / Industrial</option>
+            <option>Hospitality / Retail</option>
+            <option>Other — I'll describe below</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">What intelligence does your sector need?</label>
+          <textarea class="form-textarea" placeholder="Tell us what you're trying to solve. What decisions are hard to make? What data do you have that you're not using? What does your industry know that generic AI doesn't?"></textarea>
+        </div>
+        <button class="form-submit">Start The Conversation →</button>
+        <p class="form-note">We read every submission. If what you describe is interesting — and most things are — we will get back to you personally.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-left">
+    <div class="footer-logo"><span>E</span>-Group</div>
+    <div class="footer-tagline">Intelligence Infrastructure · Est. 1993</div>
+  </div>
+  <div class="footer-statement">We are building the <em>intelligence layer</em> for the next thirty years.<br>Come help us think about it.</div>
+  <div class="footer-right">Budapest, Hungary<br>\u00a9 2026 E-Group ICT Software Zrt.<br>All rights reserved.</div>
+</footer>
+
+<script>
+// Cursor
+const cursor = document.getElementById('cursor');
+const ring   = document.getElementById('cursorRing');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{ mx=e.clientX; my=e.clientY; cursor.style.left=mx+'px'; cursor.style.top=my+'px'; });
+(function loop(){ rx+=(mx-rx)*0.12; ry+=(my-ry)*0.12; ring.style.left=rx+'px'; ring.style.top=ry+'px'; requestAnimationFrame(loop); })();
+
+// Scroll reveal
+const obs = new IntersectionObserver(entries => entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); }), {threshold:0.08});
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+// Hamburger
+const hamburger  = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+hamburger.addEventListener('click', () => {
+  hamburger.classList.toggle('open');
+  mobileMenu.classList.toggle('open');
+  document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+});
+mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+  hamburger.classList.remove('open');
+  mobileMenu.classList.remove('open');
+  document.body.style.overflow = '';
+}));
+</script>
+</body>
+</html>
