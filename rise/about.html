@@ -3,18 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Founded in Budapest in 1993. 110+ engineers, scientists and builders. The company that built Hungary's national digital identity infrastructure is now building the intelligence layer for enterprise AI.">
-  <meta name="robots" content="index, follow">
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="About E-Group — Thirty Years of AI Infrastructure">
-  <meta property="og:description" content="Founded in Budapest in 1993. 110+ engineers, scientists and builders. The company that built Hungary's national digital identity infrastructure is now building the intelligence layer for enterprise AI.">
-  <meta property="og:url" content="https://hoarhouse.github.io/v3/rise/about.html">
-  <meta property="og:site_name" content="E-Group">
-  <meta property="og:image" content="https://hoarhouse.github.io/v3/rise/og-image.png">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="About E-Group — Thirty Years of AI Infrastructure">
-  <meta name="twitter:description" content="Founded in Budapest in 1993. 110+ engineers, scientists and builders. The company that built Hungary's national digital identity infrastructure is now building the intelligence layer for enterprise AI.">
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23080808'/%3E%3Ctext x='5' y='25' font-family='Georgia,serif' font-weight='900' font-size='26' fill='%23C8A96E'%3EE%3C/text%3E%3C/svg%3E">
 <title>About — E-Group</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -52,7 +40,7 @@ nav { position:fixed; top:0; left:0; right:0; z-index:100; padding:28px 60px; di
 .nav-cta:hover::before { transform:translateX(0); }
 
 /* ── HAMBURGER ── */
-.nav-hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; padding:4px; background:none; border:none; z-index:200; }
+.nav-hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; padding:4px; background:none; border:none; z-index:200; position:relative; }
 .nav-hamburger span { display:block; width:22px; height:1.5px; background:var(--gold); transition:all 0.3s ease; transform-origin:center; }
 .nav-hamburger.open span:nth-child(1) { transform:translateY(6.5px) rotate(45deg); }
 .nav-hamburger.open span:nth-child(2) { opacity:0; transform:scaleX(0); }
@@ -266,15 +254,21 @@ footer { background:var(--black); border-top:1px solid var(--border); padding:48
 }
 
 .nav-dropdown { position:relative; }
-.nav-dropdown > a::after { content:''; position:absolute; bottom:-3px; left:0; right:0; height:1px; background:var(--gold); transform:scaleX(0); transition:transform 0.2s; }
-.nav-dropdown:hover > a, .nav-dropdown > a.active { color:var(--white); }
-.nav-dropdown:hover > a::after, .nav-dropdown > a.active::after { transform:scaleX(1); }
-.nav-drop-menu { display:none; position:absolute; top:calc(100% + 20px); right:0; background:rgba(12,12,12,0.98); border:1px solid var(--border); border-top:2px solid var(--gold); min-width:240px; z-index:200; backdrop-filter:blur(16px); }
+.nav-drop-menu { display:none; position:absolute; top:calc(100% + 16px); right:0; min-width:240px; background:#0F0F0F; border:1px solid #252525; border-top:2px solid var(--gold); z-index:500; }
 .nav-dropdown:hover .nav-drop-menu { display:block; }
-.nav-drop-item { display:block; padding:11px 20px; font-family:'DM Mono',monospace; font-size:10px; letter-spacing:1.5px; text-transform:uppercase; color:var(--dim); text-decoration:none; transition:all 0.15s; border-bottom:1px solid var(--border); white-space:nowrap; }
+.nav-drop-label { display:block; padding:8px 18px 4px; font-family:'DM Mono',monospace; font-size:8px; letter-spacing:2.5px; text-transform:uppercase; color:#444; border-bottom:1px solid #1a1a1a; }
+.nav-drop-item { display:block; padding:10px 18px; font-family:'DM Mono',monospace; font-size:10px; letter-spacing:1.5px; text-transform:uppercase; color:#666; text-decoration:none; border-bottom:1px solid #1a1a1a; white-space:nowrap; transition:color 0.15s, padding-left 0.15s; }
 .nav-drop-item:last-child { border-bottom:none; }
-.nav-drop-item:hover { color:var(--gold); background:rgba(200,169,110,0.05); padding-left:26px; }
-.nav-drop-label { display:block; padding:8px 20px 4px; font-family:'DM Mono',monospace; font-size:8px; letter-spacing:2px; text-transform:uppercase; color:var(--muted); border-bottom:1px solid var(--border); }
+.nav-drop-item:hover { color:var(--gold); padding-left:24px; }
+.nav-drop-item::after { display:none !important; }
+.nav-mobile-menu a { text-decoration:none; border-bottom:none; }
+.nav-mobile-menu a::after { display:none; }
+.mob-main { font-family:'Syne',sans-serif !important; font-weight:800 !important; font-size:clamp(26px,7vw,40px) !important; color:var(--white) !important; letter-spacing:-0.5px !important; padding:9px 0 !important; width:80%; text-align:center; transition:color 0.2s; display:block; }
+.mob-main:hover { color:var(--gold) !important; }
+.mob-divider { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:3px; text-transform:uppercase; color:var(--dim); padding:20px 0 6px; width:80%; border-bottom:1px solid var(--border); text-align:center; margin-bottom:4px; }
+.mob-record { font-family:'DM Mono',monospace !important; font-size:11px !important; letter-spacing:1.5px !important; text-transform:uppercase !important; color:var(--mid) !important; padding:7px 0 !important; width:80%; text-align:center; transition:color 0.2s; display:block; }
+.mob-record:hover { color:var(--gold) !important; }
+.mob-cta { font-family:'DM Mono',monospace !important; font-size:12px !important; letter-spacing:2px !important; text-transform:uppercase !important; color:var(--black) !important; background:var(--gold) !important; padding:14px 36px !important; margin-top:20px !important; display:block; }
 </style>
 </head>
 <body>
@@ -298,10 +292,10 @@ footer { background:var(--black); border-top:1px solid var(--border); padding:48
       <div class="nav-drop-menu">
         <span class="nav-drop-label">Projects &amp; Credentials</span>
         <a href="record/ipcei-cis.html" class="nav-drop-item">IPCEI-CIS — FedEU.ai</a>
-        <a href="record/kau.html" class="nav-drop-item">KAÜ — National Identity</a>
+        <a href="record/kau.html" class="nav-drop-item">KÄÜ — National Identity</a>
         <a href="record/helix.html" class="nav-drop-item">HeliX + FedX</a>
         <a href="record/eidas.html" class="nav-drop-item">eIDAS 2.0 — MyD Wallet</a>
-        <a href="record/medical-ai.html" class="nav-drop-item">Medical AI — GRaDPaLM</a>
+        <a href="record/medical-ai.html" class="nav-drop-item">Medical AI — GraDPaLM</a>
         <a href="record/peter-antal.html" class="nav-drop-item">Dr. Péter Antal</a>
         <span class="nav-drop-label">Media</span>
         <a href="record/press.html" class="nav-drop-item">Press Kit</a>
@@ -324,10 +318,10 @@ footer { background:var(--black); border-top:1px solid var(--border); padding:48
   <div class="mob-divider">The Record</div>
   <a href="record/index.html" class="mob-record">Record Home</a>
   <a href="record/ipcei-cis.html" class="mob-record">IPCEI-CIS — FedEU.ai</a>
-  <a href="record/kau.html" class="mob-record">KAÜ — National Identity</a>
+  <a href="record/kau.html" class="mob-record">KÄÜ — National Identity</a>
   <a href="record/helix.html" class="mob-record">HeliX + FedX</a>
   <a href="record/eidas.html" class="mob-record">eIDAS 2.0 — MyD Wallet</a>
-  <a href="record/medical-ai.html" class="mob-record">Medical AI — GRaDPaLM</a>
+  <a href="record/medical-ai.html" class="mob-record">Medical AI — GraDPaLM</a>
   <a href="record/peter-antal.html" class="mob-record">Dr. Péter Antal</a>
   <a href="record/press.html" class="mob-record">Press Kit</a>
   <a href="index.html#contact" class="mob-cta">Work With Us</a>
@@ -347,13 +341,13 @@ footer { background:var(--black); border-top:1px solid var(--border); padding:48
     <div class="founding-left reveal">
       <div class="founding-eyebrow">Who We Are</div>
       <h2>Not a consultancy. Not a startup. A technology group with thirty years of deep IP.</h2>
-      <p>E-Group was founded in Budapest in 1993 by two fresh graduates from the Budapest University of Technology — Antal Kuthy and András Nagy. Their shared conviction from day one: that the most important problems in digital systems are problems of trust, identity, and data integrity. Everything else is built on top of those foundations.</p>
+      <p>E-Group was founded in Budapest in 1993 with a single conviction: that the most important problems in digital systems are problems of trust, identity, and data integrity. Everything else — the features, the interfaces, the applications — is built on top of those foundations.</p>
       <p>For thirty years we have been building those foundations. National digital identity infrastructure. Sovereign data platforms. Post-quantum cryptography. Payment clearing systems. Financial messaging networks. AI research that wins international competitions.</p>
       <p>We are 110 engineers, scientists, and builders. We work across FinTech, HealthTech, GovTech, SpaceTech, and EnergyTech. We have active EU project partnerships. And now we are packaging thirty years of domain knowledge into intelligence products that any enterprise can deploy.</p>
     </div>
     <div class="founding-right reveal reveal-delay-2">
       <div class="quote-block">
-        <p class="quote-text">"We have been building the infrastructure others will need for decades. <em>The world has finally caught up.</em> The question now is not whether AI needs trust infrastructure — it is who has spent the time building it properly. That is what #DoersParadise has always meant."</p>
+        <p class="quote-text">"We have been building the infrastructure others will need for decades. <em>The world has finally caught up.</em> The question now is not whether AI needs trust infrastructure — it is who has spent the time building it properly."</p>
         <div class="quote-attr"><strong>Antal Kuthy</strong> — Founder &amp; CEO, E-Group · Est. 1993</div>
       </div>
     </div>
@@ -388,8 +382,8 @@ footer { background:var(--black); border-top:1px solid var(--border); padding:48
     <div class="tl-item tl-major reveal">
       <div class="tl-year">2010s</div>
       <div class="tl-content">
-        <div class="tl-title">KAÜ National Digital Identity</div>
-        <p class="tl-desc">Co-founder &amp; CTO András Nagy personally designed and implemented KAÜ — Hungary's national digital authorisation service. The system authenticates millions of Hungarian citizens across all government services. The largest trust infrastructure project in Hungary's digital history.</p>
+        <div class="tl-title">National Digital Identity — KAÜ</div>
+        <p class="tl-desc">Designed and built Hungary's KAÜ national digital identity infrastructure. The system that authenticates millions of Hungarian citizens across government services. The most significant trust infrastructure project in the country's digital history.</p>
         <div class="tl-badge">Landmark</div>
       </div>
     </div>
@@ -403,43 +397,27 @@ footer { background:var(--black); border-top:1px solid var(--border); padding:48
     </div>
 
     <div class="tl-item reveal">
-      <div class="tl-year">2019</div>
+      <div class="tl-year">2022</div>
       <div class="tl-content">
-        <div class="tl-title">AI Research Group — BME Partnership</div>
-        <p class="tl-desc">Dr. Péter Antal takes over as Head of AI Research Group at BME's Department of Artificial Intelligence and Systems Design. E-Group's formal academic AI partnership deepens. Dr. Antal joins E-Group directly as part-time lead researcher in December 2024.</p>
-      </div>
-    </div>
-
-    <div class="tl-item reveal">
-      <div class="tl-year">2024</div>
-      <div class="tl-content">
-        <div class="tl-title">eIDAS 2.0 — MyD Wallet Passes All Testbed Scenarios</div>
-        <p class="tl-desc">As an active member of the European Digital Identity Wallet Consortium (EWC), E-Group's MyD Wallet successfully passes all eIDAS 2 testbed scenarios — maintaining backward compatibility with Hungary's existing KAÜ infrastructure while enabling full EU interoperability.</p>
+        <div class="tl-title">AI Research Programme Established</div>
+        <p class="tl-desc">Formal AI research group established under Dr. Péter Antal, Associate Professor and Head of AI Research. The programme combines academic rigour with enterprise application — research that wins competitions and ships products.</p>
       </div>
     </div>
 
     <div class="tl-item tl-major reveal">
       <div class="tl-year">2024</div>
       <div class="tl-content">
-        <div class="tl-title">IPCEI-CIS — FedEU.ai Project</div>
-        <p class="tl-desc">European Commission approved E-Group's FedEU.ai as one of 19 IPCEI-CIS projects across 7 EU member states. €1.2bn total EU funding. E-Group co-leads Workstream 3 (advanced data processing) and leads the AI Cluster. Approved December 2023.</p>
+        <div class="tl-title">EU DOME Cloud Infrastructure</div>
+        <p class="tl-desc">Selected as Hungary's representative for the EU DOME federated cloud initiative — the EU's sovereign cloud infrastructure project. Formal recognition at European level of E-Group's position as a trusted infrastructure partner.</p>
         <div class="tl-badge">EU Recognition</div>
       </div>
     </div>
 
-    <div class="tl-item reveal">
-      <div class="tl-year">2025</div>
-      <div class="tl-content">
-        <div class="tl-title">HeliX Health Data Space — FedX Platform Live</div>
-        <p class="tl-desc">E-Group's FedX federated learning platform is operationally validated across 8 biobanks and the 50+ partner HeliX Health Data Space — one of Europe's largest sovereign health data ecosystems. HeliX second General Assembly held at E-Group Budapest HQ, March 2026.</p>
-      </div>
-    </div>
-
     <div class="tl-item tl-major reveal">
-      <div class="tl-year">2025</div>
+      <div class="tl-year">2024</div>
       <div class="tl-content">
-        <div class="tl-title">Medical AI — Double International First Place</div>
-        <p class="tl-desc">Team Benedek Ágota, Csaba Potyók and Tamás Mészáros PhD win Best Scientific Article at Neumann Colloquium (Nov 14, 2025) and first place at BME TDK (Nov 19, 2025). Their paper — the GRaDPaLM system — combines knowledge graphs with diagnostic AI to reduce hallucinations in clinical settings.</p>
+        <div class="tl-title">Medical AI — Back-to-Back International First Place</div>
+        <p class="tl-desc">E-Group's HealthTech AI research team takes first place at two consecutive international medical AI research events. Dr. Anna Kovács leads a team that is producing research that the global academic community is taking seriously.</p>
         <div class="tl-badge">Research Win</div>
       </div>
     </div>
@@ -495,17 +473,10 @@ footer { background:var(--black); border-top:1px solid var(--border); padding:48
     </div>
 
     <div class="person-card reveal reveal-delay-2">
-      <div class="person-initials" style="color:var(--teal);border-color:rgba(78,205,196,0.3);">AB</div>
-      <div class="person-name">Benedek Ágota</div>
-      <div class="person-role">AI Researcher · HealthTech &amp; Medical AI</div>
-      <p class="person-belief">The gap between a paper that wins an award and a system that a clinician will actually trust is enormous. Closing that gap is the only work worth doing. GRaDPaLM is our first serious attempt at doing it properly.</p>
-    </div>
-
-    <div class="person-card reveal">
-      <div class="person-initials">AN</div>
-      <div class="person-name">András Nagy</div>
-      <div class="person-role">Co-founder &amp; CTO · Chief of Technology</div>
-      <p class="person-belief">The hardest problems in technology are not hardware problems or software problems. They are trust problems. Every system we have built since 1993 — from cryptographic infrastructure to national identity systems — is an answer to the same question: how do you make people trust a digital system enough to depend on it?</p>
+      <div class="person-initials">AK</div>
+      <div class="person-name">Dr. Anna Kovács</div>
+      <div class="person-role">AI Research Lead · HealthTech &amp; AI Research</div>
+      <p class="person-belief">Healthcare AI is not a technology problem. It is a trust problem. The data is sensitive, the stakes are high, the regulation is dense. Get the trust layer right and everything else becomes possible.</p>
     </div>
 
     <div class="person-card reveal">
@@ -548,8 +519,8 @@ footer { background:var(--black); border-top:1px solid var(--border); padding:48
             <line x1="3" y1="18" x2="25" y2="18" stroke="currentColor" stroke-width="1.5"/>
           </svg>
           <div class="cred-text">
-            <div class="cred-title">IPCEI-CIS — FedEU.ai (Dec 2023)</div>
-            <div class="cred-detail">One of 19 EU-approved IPCEI-CIS projects. E-Group co-leads Workstream 3 and the AI Cluster across 7 member states. €1.2bn total EU programme funding.</div>
+            <div class="cred-title">EU DOME Cloud Infrastructure</div>
+            <div class="cred-detail">Selected as Hungary's representative for the EU federated cloud initiative — the sovereign cloud for European enterprise.</div>
             <div class="cred-year">2024</div>
           </div>
         </div>
@@ -559,8 +530,8 @@ footer { background:var(--black); border-top:1px solid var(--border); padding:48
             <polyline points="9,14 12,17 19,10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
           </svg>
           <div class="cred-text">
-            <div class="cred-title">eIDAS 2.0 / EWC — MyD Wallet</div>
-            <div class="cred-detail">Active European Digital Identity Wallet Consortium member. MyD Wallet passed all eIDAS 2 testbed scenarios — backward compatible with KAÜ, forward compatible with the EU-wide rollout.</div>
+            <div class="cred-title">Kellton Sovereign AI MoU</div>
+            <div class="cred-detail">Partnership to build the sovereign AI ecosystem for European enterprise — independent of US hyperscaler dependency.</div>
             <div class="cred-year">2025</div>
           </div>
         </div>
@@ -590,8 +561,8 @@ footer { background:var(--black); border-top:1px solid var(--border); padding:48
             <line x1="4" y1="21" x2="12" y2="21" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
           </svg>
           <div class="cred-text">
-            <div class="cred-title">Medical AI — Double First Place (Nov 2025)</div>
-            <div class="cred-detail">Team Benedek Ágota, Csaba Potyók &amp; Tamás Mészáros PhD. GRaDPaLM system wins Neumann Colloquium and BME TDK back-to-back.</div>
+            <div class="cred-title">Medical AI — Double International First Place</div>
+            <div class="cred-detail">Back-to-back first place victories at international medical AI research events. The HealthTech team is producing globally competitive research.</div>
             <div class="cred-year">2024</div>
           </div>
         </div>
@@ -616,8 +587,8 @@ footer { background:var(--black); border-top:1px solid var(--border); padding:48
             <line x1="20" y1="11" x2="20" y2="17" stroke="currentColor" stroke-width="1.5"/>
           </svg>
           <div class="cred-text">
-            <div class="cred-title">BME Department of AI &amp; Systems Design</div>
-            <div class="cred-detail">Dr. Péter Antal (Associate Professor, Head of AI Research Group and Bioinformatics Laboratory at BME) joins E-Group as part-time lead researcher, December 2024. Research across federated learning, bioinformatics, and sovereign AI.</div>
+            <div class="cred-title">Budapest Technical University Partnership</div>
+            <div class="cred-detail">Active academic partnership with the Department of Artificial Intelligence and Systems Design. Research that connects the lab to the enterprise.</div>
             <div class="cred-year">Ongoing</div>
           </div>
         </div>
