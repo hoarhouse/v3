@@ -242,6 +242,17 @@ footer { background:var(--black); border-top:1px solid var(--border); padding:48
   .page-hero h1 { font-size:30px; }
   .sector-tile { padding:24px 18px; }
 }
+
+.nav-dropdown { position:relative; }
+.nav-dropdown > a::after { content:''; position:absolute; bottom:-3px; left:0; right:0; height:1px; background:var(--gold); transform:scaleX(0); transition:transform 0.2s; }
+.nav-dropdown:hover > a, .nav-dropdown > a.active { color:var(--white); }
+.nav-dropdown:hover > a::after, .nav-dropdown > a.active::after { transform:scaleX(1); }
+.nav-drop-menu { display:none; position:absolute; top:calc(100% + 20px); right:0; background:rgba(12,12,12,0.98); border:1px solid var(--border); border-top:2px solid var(--gold); min-width:240px; z-index:200; backdrop-filter:blur(16px); }
+.nav-dropdown:hover .nav-drop-menu { display:block; }
+.nav-drop-item { display:block; padding:11px 20px; font-family:'DM Mono',monospace; font-size:10px; letter-spacing:1.5px; text-transform:uppercase; color:var(--dim); text-decoration:none; transition:all 0.15s; border-bottom:1px solid var(--border); white-space:nowrap; }
+.nav-drop-item:last-child { border-bottom:none; }
+.nav-drop-item:hover { color:var(--gold); background:rgba(200,169,110,0.05); padding-left:26px; }
+.nav-drop-label { display:block; padding:8px 20px 4px; font-family:'DM Mono',monospace; font-size:8px; letter-spacing:2px; text-transform:uppercase; color:var(--muted); border-bottom:1px solid var(--border); }
 </style>
 </head>
 <body>
@@ -260,6 +271,20 @@ footer { background:var(--black); border-top:1px solid var(--border); padding:48
     <li><a href="rise.html">Rise</a></li>
     <li><a href="thinking.html">Thinking</a></li>
     <li><a href="about.html">About</a></li>
+    <li class="nav-dropdown">
+      <a href="record/index.html">Record</a>
+      <div class="nav-drop-menu">
+        <span class="nav-drop-label">Projects &amp; Credentials</span>
+        <a href="record/ipcei-cis.html" class="nav-drop-item">IPCEI-CIS — FedEU.ai</a>
+        <a href="record/kau.html" class="nav-drop-item">KAÜ — National Identity</a>
+        <a href="record/helix.html" class="nav-drop-item">HeliX + FedX</a>
+        <a href="record/eidas.html" class="nav-drop-item">eIDAS 2.0 — MyD Wallet</a>
+        <a href="record/medical-ai.html" class="nav-drop-item">Medical AI — GRaDPaLM</a>
+        <a href="record/peter-antal.html" class="nav-drop-item">Dr. Péter Antal</a>
+        <span class="nav-drop-label">Media</span>
+        <a href="record/press.html" class="nav-drop-item">Press Kit</a>
+      </div>
+    </li>
   </ul>
   <a href="#join-conversation" class="nav-cta">Join The Conversation</a>
   <button class="nav-hamburger" id="hamburger" aria-label="Menu">
@@ -269,11 +294,21 @@ footer { background:var(--black); border-top:1px solid var(--border); padding:48
 
 <!-- Mobile Menu -->
 <div class="nav-mobile-menu" id="mobileMenu">
-  <a href="intelligence.html">Intelligence</a>
-  <a href="rise.html">Rise</a>
-  <a href="thinking.html">Thinking</a>
-  <a href="about.html">About</a>
-  <a href="#join-conversation" class="nav-mobile-cta">Join The Conversation</a>
+  <a href="index.html" class="mob-main">Home</a>
+  <a href="intelligence.html" class="mob-main">Intelligence</a>
+  <a href="rise.html" class="mob-main">Rise</a>
+  <a href="thinking.html" class="mob-main">Thinking</a>
+  <a href="about.html" class="mob-main">About</a>
+  <div class="mob-divider">The Record</div>
+  <a href="record/index.html" class="mob-record">Record Home</a>
+  <a href="record/ipcei-cis.html" class="mob-record">IPCEI-CIS — FedEU.ai</a>
+  <a href="record/kau.html" class="mob-record">KAÜ — National Identity</a>
+  <a href="record/helix.html" class="mob-record">HeliX + FedX</a>
+  <a href="record/eidas.html" class="mob-record">eIDAS 2.0 — MyD Wallet</a>
+  <a href="record/medical-ai.html" class="mob-record">Medical AI — GRaDPaLM</a>
+  <a href="record/peter-antal.html" class="mob-record">Dr. Péter Antal</a>
+  <a href="record/press.html" class="mob-record">Press Kit</a>
+  <a href="index.html#contact" class="mob-cta">Work With Us</a>
 </div>
 
 <!-- PAGE HERO -->

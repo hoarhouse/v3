@@ -57,12 +57,14 @@ nav { position:fixed; top:0; left:0; right:0; z-index:100; padding:28px 60px; di
 .nav-hamburger.open span:nth-child(1) { transform:translateY(6.5px) rotate(45deg); }
 .nav-hamburger.open span:nth-child(2) { opacity:0; transform:scaleX(0); }
 .nav-hamburger.open span:nth-child(3) { transform:translateY(-6.5px) rotate(-45deg); }
-.nav-mobile-menu { display:none; position:fixed; inset:0; background:rgba(8,8,8,0.98); z-index:150; flex-direction:column; align-items:center; justify-content:center; gap:0; backdrop-filter:blur(20px); }
+.nav-mobile-menu { display:none; position:fixed; inset:0; background:rgba(8,8,8,0.98); z-index:150; flex-direction:column; align-items:center; justify-content:flex-start; overflow-y:auto; padding:80px 0 40px; backdrop-filter:blur(20px); }
 .nav-mobile-menu.open { display:flex; }
-.nav-mobile-menu a { font-family:'Syne',sans-serif; font-weight:800; font-size:clamp(32px,8vw,48px); color:var(--white); text-decoration:none; letter-spacing:-1px; padding:16px 0; border-bottom:1px solid var(--border); width:100%; text-align:center; transition:color 0.2s; }
-.nav-mobile-menu a:hover { color:var(--gold); }
-.nav-mobile-menu a:last-child { border-bottom:none; }
-.nav-mobile-cta { font-family:'DM Mono',monospace !important; font-size:12px !important; letter-spacing:2px !important; text-transform:uppercase !important; color:var(--black) !important; background:var(--gold) !important; padding:14px 36px !important; font-weight:400 !important; margin-top:24px !important; border-bottom:none !important; }
+.mob-main { font-family:'Syne',sans-serif; font-weight:800; font-size:clamp(26px,7vw,40px); color:var(--white); text-decoration:none; letter-spacing:-0.5px; padding:9px 0; width:80%; text-align:center; transition:color 0.2s; border-bottom:none; }
+.mob-main:hover { color:var(--gold); }
+.mob-divider { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:3px; text-transform:uppercase; color:var(--dim); padding:20px 0 6px; width:80%; border-bottom:1px solid var(--border); text-align:center; margin-bottom:4px; }
+.mob-record { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:1.5px; text-transform:uppercase; color:var(--mid); text-decoration:none; padding:7px 0; width:80%; text-align:center; transition:color 0.2s; border-bottom:none; }
+.mob-record:hover, .mob-record.active { color:var(--gold); }
+.mob-cta { font-family:'DM Mono',monospace; font-size:12px; letter-spacing:2px; text-transform:uppercase; color:var(--black); background:var(--gold); padding:14px 36px; font-weight:400; margin-top:20px; border-bottom:none; text-decoration:none; }
 
 /* ── PAGE HEADER ── */
 .page-header { padding:160px 60px 80px; position:relative; overflow:hidden; border-bottom:1px solid var(--border); }
@@ -326,6 +328,17 @@ footer { background:var(--black); border-top:1px solid var(--border); padding:48
   .card { padding:20px 16px; }
   .filter-btn { padding:12px 12px; font-size:9px; }
 }
+
+.nav-dropdown { position:relative; }
+.nav-dropdown > a::after { content:''; position:absolute; bottom:-3px; left:0; right:0; height:1px; background:var(--gold); transform:scaleX(0); transition:transform 0.2s; }
+.nav-dropdown:hover > a, .nav-dropdown > a.active { color:var(--white); }
+.nav-dropdown:hover > a::after, .nav-dropdown > a.active::after { transform:scaleX(1); }
+.nav-drop-menu { display:none; position:absolute; top:calc(100% + 20px); right:0; background:rgba(12,12,12,0.98); border:1px solid var(--border); border-top:2px solid var(--gold); min-width:240px; z-index:200; backdrop-filter:blur(16px); }
+.nav-dropdown:hover .nav-drop-menu { display:block; }
+.nav-drop-item { display:block; padding:11px 20px; font-family:'DM Mono',monospace; font-size:10px; letter-spacing:1.5px; text-transform:uppercase; color:var(--dim); text-decoration:none; transition:all 0.15s; border-bottom:1px solid var(--border); white-space:nowrap; }
+.nav-drop-item:last-child { border-bottom:none; }
+.nav-drop-item:hover { color:var(--gold); background:rgba(200,169,110,0.05); padding-left:26px; }
+.nav-drop-label { display:block; padding:8px 20px 4px; font-family:'DM Mono',monospace; font-size:8px; letter-spacing:2px; text-transform:uppercase; color:var(--muted); border-bottom:1px solid var(--border); }
 </style>
 </head>
 <body>
@@ -344,6 +357,20 @@ footer { background:var(--black); border-top:1px solid var(--border); padding:48
     <li><a href="rise.html">Rise</a></li>
     <li><a href="thinking.html" class="active">Thinking</a></li>
     <li><a href="about.html">About</a></li>
+    <li class="nav-dropdown">
+      <a href="record/index.html">Record</a>
+      <div class="nav-drop-menu">
+        <span class="nav-drop-label">Projects &amp; Credentials</span>
+        <a href="record/ipcei-cis.html" class="nav-drop-item">IPCEI-CIS — FedEU.ai</a>
+        <a href="record/kau.html" class="nav-drop-item">KAÜ — National Identity</a>
+        <a href="record/helix.html" class="nav-drop-item">HeliX + FedX</a>
+        <a href="record/eidas.html" class="nav-drop-item">eIDAS 2.0 — MyD Wallet</a>
+        <a href="record/medical-ai.html" class="nav-drop-item">Medical AI — GRaDPaLM</a>
+        <a href="record/peter-antal.html" class="nav-drop-item">Dr. Péter Antal</a>
+        <span class="nav-drop-label">Media</span>
+        <a href="record/press.html" class="nav-drop-item">Press Kit</a>
+      </div>
+    </li>
   </ul>
   <a href="index.html#contact" class="nav-cta">Work With Us</a>
   <button class="nav-hamburger" id="hamburger" aria-label="Menu">
@@ -353,11 +380,21 @@ footer { background:var(--black); border-top:1px solid var(--border); padding:48
 
 <!-- Mobile Menu -->
 <div class="nav-mobile-menu" id="mobileMenu">
-  <a href="intelligence.html">Intelligence</a>
-  <a href="rise.html">Rise</a>
-  <a href="thinking.html">Thinking</a>
-  <a href="about.html">About</a>
-  <a href="index.html#contact" class="nav-mobile-cta">Work With Us</a>
+  <a href="index.html" class="mob-main">Home</a>
+  <a href="intelligence.html" class="mob-main">Intelligence</a>
+  <a href="rise.html" class="mob-main">Rise</a>
+  <a href="thinking.html" class="mob-main">Thinking</a>
+  <a href="about.html" class="mob-main">About</a>
+  <div class="mob-divider">The Record</div>
+  <a href="record/index.html" class="mob-record">Record Home</a>
+  <a href="record/ipcei-cis.html" class="mob-record">IPCEI-CIS — FedEU.ai</a>
+  <a href="record/kau.html" class="mob-record">KAÜ — National Identity</a>
+  <a href="record/helix.html" class="mob-record">HeliX + FedX</a>
+  <a href="record/eidas.html" class="mob-record">eIDAS 2.0 — MyD Wallet</a>
+  <a href="record/medical-ai.html" class="mob-record">Medical AI — GRaDPaLM</a>
+  <a href="record/peter-antal.html" class="mob-record">Dr. Péter Antal</a>
+  <a href="record/press.html" class="mob-record">Press Kit</a>
+  <a href="index.html#contact" class="mob-cta">Work With Us</a>
 </div>
 
 <!-- PAGE HEADER -->
