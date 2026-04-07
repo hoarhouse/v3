@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rise — E-Group</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+:root {
+  --black: #080808; --ink: #0F0F0F; --dark: #161616; --panel: #1C1C1C;
+  --border: #252525; --muted: #333; --dim: #555; --mid: #777;
+  --text: #B0B0B0; --light: #D0D0D0; --white: #EFEFEF;
+  --gold: #C8A96E; --gold2: #E8C98E; --teal: #4ECDC4; --accent: #D4FF00;
+}
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body { background:var(--black); color:var(--text); font-family:'DM Sans',sans-serif; font-size:16px; line-height:1.6; overflow-x:hidden; cursor:none; }
+
+/* ── CURSOR ── */
+.cursor { position:fixed; width:8px; height:8px; background:var(--accent); border-radius:50%; pointer-events:none; z-index:9999; transform:translate(-50%,-50%); mix-blend-mode:difference; }
+.cursor-ring { position:fixed; width:32px; height:32px; border:1px solid rgba(212,255,0,0.4); border-radius:50%; pointer-events:none; z-index:9998; transform:translate(-50%,-50%); transition:all 0.15s ease; }
+body:has(a:hover) .cursor-ring, body:has(button:hover) .cursor-ring { width:48px; height:48px; border-color:var(--accent); }
+body::before { content:''; position:fixed; inset:0; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E"); opacity:0.025; pointer-events:none; z-index:1000; }
+
+/* ── NAV ── */
+nav { position:fixed; top:0; left:0; right:0; z-index:100; padding:28px 60px; display:flex; align-items:center; justify-content:space-between; background:rgba(8,8,8,0.97); border-bottom:1px solid var(--border); backdrop-filter:blur(12px); }
+.nav-logo { display:flex; align-items:center; gap:14px; text-decoration:none; }
+.logo-e { font-family:'Syne',sans-serif; font-weight:800; font-size:26px; color:var(--gold); line-height:1; letter-spacing:-1px; }
+.nav-logo-text { font-family:'Syne',sans-serif; font-weight:600; font-size:15px; color:var(--white); letter-spacing:3px; text-transform:uppercase; }
+.nav-links { display:flex; align-items:center; gap:40px; list-style:none; }
+.nav-links a { font-family:'DM Mono',monospace; font-size:12px; color:var(--mid); text-decoration:none; letter-spacing:1.5px; text-transform:uppercase; transition:color 0.2s; position:relative; }
+.nav-links a::after { content:''; position:absolute; bottom:-3px; left:0; right:0; height:1px; background:var(--accent); transform:scaleX(0); transition:transform 0.2s; }
+.nav-links a:hover, .nav-links a.active { color:var(--white); }
+.nav-links a.active::after, .nav-links a:hover::after { transform:scaleX(1); }
+.nav-cta { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--accent); border:1px solid rgba(212,255,0,0.35); padding:10px 22px; text-decoration:none; transition:all 0.2s; position:relative; overflow:hidden; }
+.nav-cta::before { content:''; position:absolute; inset:0; background:var(--accent); transform:translateX(-100%); transition:transform 0.25s ease; z-index:-1; }
+.nav-cta:hover { color:var(--black); }
+.nav-cta:hover::before { transform:translateX(0); }
+
+/* ── HAMBURGER ── */
+.nav-hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; padding:4px; background:none; border:none; z-index:200; }
+.nav-hamburger span { display:block; width:22px; height:1.5px; background:var(--accent); transition:all 0.3s ease; transform-origin:center; }
+.nav-hamburger.open span:nth-child(1) { transform:translateY(6.5px) rotate(45deg); }
+.nav-hamburger.open span:nth-child(2) { opacity:0; transform:scaleX(0); }
+.nav-hamburger.open span:nth-child(3) { transform:translateY(-6.5px) rotate(-45deg); }
+.nav-mobile-menu { display:none; position:fixed; inset:0; background:rgba(8,8,8,0.98); z-index:150; flex-direction:column; align-items:center; justify-content:center; backdrop-filter:blur(20px); }
+.nav-mobile-menu.open { display:flex; }
+.nav-mobile-menu a { font-family:'Syne',sans-serif; font-weight:800; font-size:clamp(32px,8vw,48px); color:var(--white); text-decoration:none; letter-spacing:-1px; padding:16px 0; border-bottom:1px solid var(--border); width:100%; text-align:center; transition:color 0.2s; }
+.nav-mobile-menu a:hover { color:var(--accent); }
+.nav-mobile-menu a:last-child { border-bottom:none; }
+.nav-mobile-cta { font-family:'DM Mono',monospace !important; font-size:12px !important; letter-spacing:2px !important; text-transform:uppercase !important; color:var(--black) !important; background:var(--accent) !important; padding:14px 36px !important; font-weight:400 !important; margin-top:24px !important; border-bottom:none !important; }
+
+/* ── HERO ── */
+.page-hero { min-height:100vh; display:flex; flex-direction:column; justify-content:flex-end; padding:0 60px 80px; position:relative; overflow:hidden; }
+.hero-grid { position:absolute; inset:0; background-image:linear-gradient(rgba(212,255,0,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(212,255,0,0.03) 1px,transparent 1px); background-size:80px 80px; mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 30%,transparent 100%); }
+.hero-glow { position:absolute; top:-20%; left:50%; transform:translateX(-50%); width:900px; height:600px; background:radial-gradient(ellipse,rgba(212,255,0,0.05) 0%,transparent 65%); pointer-events:none; }
+.hero-glow-2 { position:absolute; bottom:0; right:-10%; width:600px; height:600px; background:radial-gradient(ellipse,rgba(78,205,196,0.04) 0%,transparent 65%); pointer-events:none; }
+.hero-status { position:absolute; top:140px; right:60px; display:flex; flex-direction:column; gap:8px; opacity:0; animation:fadeInRight 1.2s ease 1.2s forwards; }
+.status-line { font-family:'DM Mono',monospace; font-size:11px; color:var(--muted); letter-spacing:1px; display:flex; align-items:center; gap:10px; }
+.status-line::before { content:''; display:inline-block; width:20px; height:1px; background:var(--accent); opacity:0.4; }
+.status-line .val { color:var(--accent); opacity:0.8; }
+.hero-content { position:relative; z-index:2; max-width:860px; }
+.hero-eyebrow { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:3px; text-transform:uppercase; color:var(--accent); margin-bottom:28px; opacity:0; animation:fadeInUp 0.8s ease 0.3s forwards; display:flex; align-items:center; gap:14px; }
+.hero-eyebrow::before { content:''; display:inline-block; width:32px; height:1px; background:var(--accent); }
+.hero-eyebrow .pilot-badge { background:rgba(212,255,0,0.1); border:1px solid rgba(212,255,0,0.25); padding:3px 10px; font-size:9px; letter-spacing:2px; display:inline-flex; align-items:center; gap:6px; }
+.pilot-dot { width:5px; height:5px; border-radius:50%; background:var(--accent); animation:pulse 1.5s ease-in-out infinite; }
+.hero-headline { font-family:'Syne',sans-serif; font-weight:800; font-size:clamp(48px,6.5vw,92px); line-height:0.95; letter-spacing:-3px; color:var(--white); margin-bottom:0; opacity:0; animation:fadeInUp 0.8s ease 0.5s forwards; }
+.hero-headline .accent { color:var(--accent); }
+.hero-divider { width:60px; height:2px; background:linear-gradient(to right,var(--accent),transparent); margin:32px 0; opacity:0; animation:fadeInUp 0.8s ease 0.65s forwards; }
+.hero-dual { display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--border); margin-bottom:40px; opacity:0; animation:fadeInUp 0.8s ease 0.7s forwards; }
+.dual-panel { background:var(--dark); padding:28px 32px; position:relative; overflow:hidden; }
+.dual-panel::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; }
+.dual-rise::before { background:var(--accent); }
+.dual-essence::before { background:var(--teal); }
+.dual-label { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:3px; text-transform:uppercase; margin-bottom:10px; }
+.dual-rise .dual-label { color:var(--accent); }
+.dual-essence .dual-label { color:var(--teal); }
+.dual-title { font-family:'Syne',sans-serif; font-weight:800; font-size:20px; color:var(--white); letter-spacing:-0.5px; margin-bottom:8px; }
+.dual-desc { font-size:13px; color:var(--dim); line-height:1.6; }
+.hero-sub { font-size:17px; font-weight:300; color:var(--mid); max-width:560px; line-height:1.8; margin-bottom:40px; opacity:0; animation:fadeInUp 0.8s ease 0.85s forwards; }
+.hero-actions { display:flex; align-items:center; gap:20px; flex-wrap:wrap; opacity:0; animation:fadeInUp 0.8s ease 1s forwards; }
+.btn-accent { font-family:'DM Mono',monospace; font-size:12px; letter-spacing:2px; text-transform:uppercase; color:var(--black); background:var(--accent); padding:15px 32px; text-decoration:none; transition:all 0.2s; display:inline-flex; align-items:center; gap:10px; }
+.btn-accent:hover { background:#EEFF33; }
+.btn-outline { font-family:'DM Mono',monospace; font-size:12px; letter-spacing:2px; text-transform:uppercase; color:var(--mid); border:1px solid var(--border); padding:15px 32px; text-decoration:none; transition:all 0.2s; }
+.btn-outline:hover { color:var(--white); border-color:var(--mid); }
+
+/* ── HOW IT WORKS ── */
+.how-section { padding:120px 60px; background:var(--ink); border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
+.how-header { text-align:center; max-width:680px; margin:0 auto 80px; }
+.section-eyebrow { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:3px; text-transform:uppercase; color:var(--accent); margin-bottom:16px; display:flex; align-items:center; justify-content:center; gap:12px; }
+.section-eyebrow::before, .section-eyebrow::after { content:''; display:inline-block; width:24px; height:1px; background:var(--accent); }
+.how-header h2 { font-family:'Syne',sans-serif; font-weight:800; font-size:clamp(32px,3.5vw,48px); color:var(--white); letter-spacing:-1.5px; line-height:1.05; }
+.how-grid { display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--border); }
+.how-panel { background:var(--dark); padding:60px 48px; position:relative; overflow:hidden; }
+.how-panel::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; }
+.how-rise::before { background:linear-gradient(to right,var(--accent),rgba(212,255,0,0.2)); }
+.how-essence::before { background:linear-gradient(to right,var(--teal),rgba(78,205,196,0.2)); }
+.how-panel-label { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:3px; text-transform:uppercase; margin-bottom:24px; display:flex; align-items:center; gap:10px; }
+.how-rise .how-panel-label { color:var(--accent); }
+.how-essence .how-panel-label { color:var(--teal); }
+.how-panel-label::before { content:''; display:inline-block; width:20px; height:1px; background:currentColor; }
+.how-panel h3 { font-family:'Syne',sans-serif; font-weight:800; font-size:clamp(24px,2.5vw,34px); color:var(--white); letter-spacing:-1px; line-height:1.1; margin-bottom:20px; }
+.how-panel-sub { font-size:15px; color:var(--mid); line-height:1.7; margin-bottom:36px; }
+.how-capabilities { display:flex; flex-direction:column; gap:1px; background:var(--border); }
+.cap-item { background:var(--panel); padding:16px 20px; display:flex; align-items:flex-start; gap:14px; }
+.cap-icon { font-size:16px; flex-shrink:0; margin-top:1px; }
+.cap-text { display:flex; flex-direction:column; gap:2px; }
+.cap-title { font-family:'Syne',sans-serif; font-weight:700; font-size:13px; color:var(--white); letter-spacing:-0.2px; }
+.cap-desc { font-size:12px; color:var(--dim); line-height:1.5; }
+
+/* ── LAYER ZERO ── */
+.layer-section { padding:120px 60px; }
+.layer-inner { display:grid; grid-template-columns:1fr 1fr; gap:100px; align-items:center; }
+.layer-left .section-eyebrow { justify-content:flex-start; }
+.layer-left .section-eyebrow::after { display:none; }
+.layer-left .section-eyebrow { color:var(--gold); }
+.layer-left .section-eyebrow::before { background:var(--gold); }
+.layer-left h2 { font-family:'Syne',sans-serif; font-weight:800; font-size:clamp(28px,3vw,44px); color:var(--white); letter-spacing:-1.5px; line-height:1.05; margin-bottom:20px; }
+.layer-left p { font-size:15px; font-weight:300; color:var(--mid); line-height:1.8; margin-bottom:16px; }
+.layer-right { display:flex; flex-direction:column; gap:1px; background:var(--border); }
+.connector { background:var(--dark); padding:20px 24px; display:flex; align-items:center; gap:16px; transition:background 0.2s; }
+.connector:hover { background:var(--panel); }
+.conn-num { font-family:'DM Mono',monospace; font-size:10px; color:var(--gold); opacity:0.5; letter-spacing:1px; flex-shrink:0; width:28px; }
+.conn-name { font-family:'Syne',sans-serif; font-weight:600; font-size:14px; color:var(--white); flex:1; }
+.conn-type { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:1.5px; text-transform:uppercase; color:var(--dim); }
+
+/* ── DEMOS ── */
+.demos-section { padding:120px 60px; background:var(--ink); border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
+.demos-header { margin-bottom:60px; }
+.demos-header h2 { font-family:'Syne',sans-serif; font-weight:800; font-size:clamp(28px,3vw,44px); color:var(--white); letter-spacing:-1.5px; line-height:1.05; margin-bottom:12px; }
+.demos-header p { font-size:15px; color:var(--dim); max-width:580px; }
+.demos-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--border); }
+.demo-card { background:var(--dark); padding:36px 32px; text-decoration:none; display:block; transition:background 0.25s; position:relative; overflow:hidden; }
+.demo-card:hover { background:var(--panel); }
+.demo-card::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:var(--accent); transform:scaleX(0); transform-origin:left; transition:transform 0.3s; }
+.demo-card:hover::before { transform:scaleX(1); }
+.demo-num { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2px; color:var(--accent); opacity:0.5; margin-bottom:16px; }
+.demo-title { font-family:'Syne',sans-serif; font-weight:700; font-size:17px; color:var(--white); letter-spacing:-0.3px; margin-bottom:10px; line-height:1.2; }
+.demo-desc { font-size:13px; color:var(--dim); line-height:1.6; margin-bottom:20px; }
+.demo-status { display:inline-flex; align-items:center; gap:6px; font-family:'DM Mono',monospace; font-size:9px; letter-spacing:1.5px; text-transform:uppercase; }
+.demo-live { color:var(--accent); }
+.demo-proxy { color:var(--mid); }
+.demo-dot { width:5px; height:5px; border-radius:50%; background:currentColor; }
+.demo-live .demo-dot { animation:pulse 1.5s ease-in-out infinite; }
+.demo-launch { margin-top:20px; font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--accent); display:flex; align-items:center; gap:6px; transition:gap 0.2s; opacity:0; transition:opacity 0.2s, gap 0.2s; }
+.demo-card:hover .demo-launch { opacity:1; gap:12px; }
+
+/* ── JOURNAL ── */
+.journal-section { padding:100px 60px; }
+.journal-inner { display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center; }
+.journal-left .section-eyebrow { justify-content:flex-start; color:var(--gold); }
+.journal-left .section-eyebrow::before { background:var(--gold); }
+.journal-left .section-eyebrow::after { display:none; }
+.journal-left h2 { font-family:'Syne',sans-serif; font-weight:800; font-size:clamp(26px,2.8vw,40px); color:var(--white); letter-spacing:-1px; line-height:1.1; margin-bottom:16px; }
+.journal-left p { font-size:15px; color:var(--mid); line-height:1.8; margin-bottom:28px; }
+.journal-link { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--accent); text-decoration:none; display:inline-flex; align-items:center; gap:8px; border-bottom:1px solid rgba(212,255,0,0.2); padding-bottom:2px; transition:gap 0.2s; }
+.journal-link:hover { gap:14px; }
+.journal-entries { display:flex; flex-direction:column; gap:1px; background:var(--border); }
+.journal-entry { background:var(--dark); padding:20px 24px; text-decoration:none; display:flex; align-items:center; gap:20px; transition:background 0.2s; }
+.journal-entry:hover { background:var(--panel); }
+.entry-num { font-family:'DM Mono',monospace; font-size:10px; color:var(--accent); opacity:0.5; flex-shrink:0; }
+.entry-title { font-family:'Syne',sans-serif; font-weight:600; font-size:14px; color:var(--light); flex:1; }
+.entry-arr { font-family:'DM Mono',monospace; font-size:12px; color:var(--dim); flex-shrink:0; transition:transform 0.2s; }
+.journal-entry:hover .entry-arr { transform:translateX(4px); color:var(--accent); }
+
+/* ── ROADMAP ── */
+.roadmap-section { padding:100px 60px; background:var(--ink); border-top:1px solid var(--border); }
+.roadmap-inner { max-width:820px; }
+.roadmap-inner .section-eyebrow { justify-content:flex-start; color:var(--gold); }
+.roadmap-inner .section-eyebrow::before { background:var(--gold); }
+.roadmap-inner .section-eyebrow::after { display:none; }
+.roadmap-inner h2 { font-family:'Syne',sans-serif; font-weight:800; font-size:clamp(28px,3vw,42px); color:var(--white); letter-spacing:-1.5px; line-height:1.05; margin-bottom:48px; }
+.roadmap-phases { display:flex; flex-direction:column; gap:1px; background:var(--border); }
+.phase { background:var(--dark); padding:28px 32px; display:flex; gap:28px; align-items:flex-start; }
+.phase-marker { display:flex; flex-direction:column; align-items:center; gap:0; flex-shrink:0; }
+.phase-dot { width:10px; height:10px; border-radius:50%; flex-shrink:0; }
+.phase-done .phase-dot   { background:var(--accent); }
+.phase-now .phase-dot    { background:var(--accent); animation:pulse 1.5s ease-in-out infinite; }
+.phase-next .phase-dot   { background:var(--border); border:1px solid var(--muted); }
+.phase-future .phase-dot { background:var(--border); border:1px solid var(--border); }
+.phase-content { flex:1; }
+.phase-label { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:2px; text-transform:uppercase; color:var(--dim); margin-bottom:6px; }
+.phase-done   .phase-label { color:var(--accent); opacity:0.6; }
+.phase-now    .phase-label { color:var(--accent); }
+.phase-title { font-family:'Syne',sans-serif; font-weight:700; font-size:17px; color:var(--white); letter-spacing:-0.3px; margin-bottom:6px; }
+.phase-next   .phase-title { color:var(--light); }
+.phase-future .phase-title { color:var(--dim); }
+.phase-desc { font-size:13px; color:var(--dim); line-height:1.6; }
+
+/* ── FOOTER ── */
+footer { background:var(--black); border-top:1px solid var(--border); padding:48px 60px; display:flex; justify-content:space-between; align-items:center; }
+.footer-left { display:flex; flex-direction:column; gap:6px; }
+.footer-logo { font-family:'Syne',sans-serif; font-weight:800; font-size:16px; color:var(--white); letter-spacing:3px; text-transform:uppercase; }
+.footer-logo span { color:var(--gold); }
+.footer-tagline { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--dim); }
+.footer-statement { font-family:'Syne',sans-serif; font-size:14px; color:var(--mid); max-width:420px; text-align:center; line-height:1.6; }
+.footer-statement em { color:var(--accent); font-style:normal; }
+.footer-right { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:1.5px; color:var(--dim); text-align:right; line-height:1.8; }
+
+/* ── ANIMATIONS ── */
+@keyframes fadeInUp { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:translateY(0); } }
+@keyframes fadeInRight { from { opacity:0; transform:translateX(24px); } to { opacity:1; transform:translateX(0); } }
+@keyframes pulse { 0%,100% { opacity:0.4; transform:scale(1); } 50% { opacity:1; transform:scale(1.3); } }
+.reveal { opacity:0; transform:translateY(24px); transition:opacity 0.6s ease,transform 0.6s ease; }
+.reveal.visible { opacity:1; transform:translateY(0); }
+.reveal-delay-1 { transition-delay:0.1s; }
+.reveal-delay-2 { transition-delay:0.2s; }
+.reveal-delay-3 { transition-delay:0.3s; }
+
+/* ════════════════════════════════════
+   TABLET  768px – 1023px
+════════════════════════════════════ */
+@media (max-width:1023px) {
+  nav { padding:20px 36px; }
+  .nav-links { gap:24px; }
+  .page-hero { padding:0 36px 64px; }
+  .hero-status { right:36px; }
+  .hero-dual { grid-template-columns:1fr; }
+  .how-section { padding:80px 36px; }
+  .how-grid { grid-template-columns:1fr; }
+  .layer-section { padding:80px 36px; }
+  .layer-inner { grid-template-columns:1fr; gap:48px; }
+  .demos-section { padding:80px 36px; }
+  .demos-grid { grid-template-columns:1fr 1fr; }
+  .journal-section { padding:80px 36px; }
+  .journal-inner { grid-template-columns:1fr; gap:48px; }
+  .roadmap-section { padding:80px 36px; }
+  footer { padding:40px 36px; }
+}
+
+/* ════════════════════════════════════
+   PHONE  max 767px
+════════════════════════════════════ */
+@media (max-width:767px) {
+  .cursor,.cursor-ring { display:none; }
+  body { cursor:auto; }
+  nav { padding:16px 20px; }
+  .nav-links { display:none; }
+  .nav-cta { display:none; }
+  .nav-hamburger { display:flex; }
+
+  .page-hero { padding:0 20px 56px; min-height:100svh; }
+  .hero-status { display:none; }
+  .hero-eyebrow { font-size:10px; margin-bottom:16px; }
+  .hero-headline { font-size:clamp(38px,9vw,56px); letter-spacing:-2px; }
+  .hero-divider { margin:20px 0; }
+  .hero-dual { grid-template-columns:1fr; margin-bottom:24px; }
+  .dual-panel { padding:20px 24px; }
+  .dual-title { font-size:17px; }
+  .hero-sub { font-size:15px; margin-bottom:28px; }
+  .hero-actions { flex-direction:column; align-items:flex-start; gap:12px; }
+  .btn-accent, .btn-outline { font-size:11px; padding:14px 28px; }
+
+  .how-section { padding:60px 20px; }
+  .how-header { margin-bottom:40px; }
+  .how-grid { grid-template-columns:1fr; }
+  .how-panel { padding:36px 24px; }
+  .how-panel h3 { font-size:22px; }
+
+  .layer-section { padding:60px 20px; }
+  .layer-inner { grid-template-columns:1fr; gap:36px; }
+  .connector { padding:16px 20px; }
+
+  .demos-section { padding:60px 20px; }
+  .demos-grid { grid-template-columns:1fr; }
+  .demo-card { padding:28px 24px; }
+  .demo-launch { opacity:1; }
+
+  .journal-section { padding:60px 20px; }
+  .journal-inner { grid-template-columns:1fr; gap:36px; }
+
+  .roadmap-section { padding:60px 20px; }
+  .phase { padding:20px 24px; gap:20px; }
+
+  footer { flex-direction:column; gap:20px; text-align:center; padding:36px 20px; }
+  .footer-statement { font-size:13px; }
+  .footer-right { text-align:center; }
+}
+
+@media (max-width:380px) {
+  .hero-headline { font-size:34px; }
+  .demo-card { padding:24px 18px; }
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">
+    <div class="logo-e">E</div>
+    <span class="nav-logo-text">E-Group</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="intelligence.html">Intelligence</a></li>
+    <li><a href="rise.html" class="active">Rise</a></li>
+    <li><a href="thinking.html">Thinking</a></li>
+    <li><a href="index.html#about">About</a></li>
+  </ul>
+  <a href="#demos" class="nav-cta">See The Demos</a>
+  <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="nav-mobile-menu" id="mobileMenu">
+  <a href="intelligence.html">Intelligence</a>
+  <a href="rise.html">Rise</a>
+  <a href="thinking.html">Thinking</a>
+  <a href="index.html#about">About</a>
+  <a href="#demos" class="nav-mobile-cta">See The Demos</a>
+</div>
+
+<!-- HERO -->
+<div class="page-hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-glow-2"></div>
+  <div class="hero-status">
+    <div class="status-line">Status <span class="val">In Pilot</span></div>
+    <div class="status-line">Platform <span class="val">eGroup</span></div>
+    <div class="status-line">Engineers <span class="val">50</span></div>
+    <div class="status-line">Layer 0 <span class="val">Active</span></div>
+    <div class="status-line">Journal <span class="val">Live</span></div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">
+      E-Group Rise
+      <span class="pilot-badge"><span class="pilot-dot"></span>In Pilot</span>
+    </div>
+    <h1 class="hero-headline">
+      Dual consciousness.<br>
+      One <span class="accent">intelligence</span><br>
+      platform.
+    </h1>
+    <div class="hero-divider"></div>
+    <div class="hero-dual">
+      <div class="dual-panel dual-rise">
+        <div class="dual-label">Rise — Outward Consciousness</div>
+        <div class="dual-title">Reads the world</div>
+        <p class="dual-desc">Rise monitors the external landscape — market signals, sector news, competitive shifts, regulatory changes — and surfaces the intelligence your organisation needs to act on it. Continuously. Automatically.</p>
+      </div>
+      <div class="dual-panel dual-essence">
+        <div class="dual-label">Essence — Inward Consciousness</div>
+        <div class="dual-title">Reads your organisation</div>
+        <p class="dual-desc">Essence reads the signals inside your organisation — activity patterns, team dynamics, project health, anomalies — and surfaces what leadership needs to see. Before problems become crises.</p>
+      </div>
+    </div>
+    <p class="hero-sub">Rise is E-Group's AI platform, currently in pilot. Built by 50 engineers. Powered by a knowledge graph, 17 live connectors, and thirty years of infrastructure thinking.</p>
+    <div class="hero-actions">
+      <a href="#demos" class="btn-accent">See Live Demos <span>→</span></a>
+      <a href="https://hoarhouse.github.io/v3/journal/" target="_blank" class="btn-outline">Read The Journal</a>
+    </div>
+  </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<div class="how-section">
+  <div class="how-header reveal">
+    <div class="section-eyebrow">The Two Consciousnesses</div>
+    <h2>One platform. Two directions.<br>Both powered by The Brain.</h2>
+  </div>
+  <div class="how-grid">
+    <div class="how-panel how-rise reveal">
+      <div class="how-panel-label">Rise — Outward</div>
+      <h3>What is happening<br>in the world that<br>you need to act on?</h3>
+      <p class="how-panel-sub">Rise reads external signals continuously and converts them into structured intelligence your teams can use. Not summaries. Actionable intelligence, framed for your sector and your organisation.</p>
+      <div class="how-capabilities">
+        <div class="cap-item">
+          <div class="cap-icon">⚡</div>
+          <div class="cap-text">
+            <div class="cap-title">Automated Trigger Detection</div>
+            <div class="cap-desc">Market events, regulatory changes, competitive moves — Rise detects and responds in real time</div>
+          </div>
+        </div>
+        <div class="cap-item">
+          <div class="cap-icon">📡</div>
+          <div class="cap-text">
+            <div class="cap-title">17 Live Connectors</div>
+            <div class="cap-desc">Connected to news feeds, market data, regulatory sources, industry signals across all sectors</div>
+          </div>
+        </div>
+        <div class="cap-item">
+          <div class="cap-icon">📤</div>
+          <div class="cap-text">
+            <div class="cap-title">Subscription Delivery</div>
+            <div class="cap-desc">Intelligence delivered to email, Teams, or SMS — on the schedule and format each team needs</div>
+          </div>
+        </div>
+        <div class="cap-item">
+          <div class="cap-icon">🌐</div>
+          <div class="cap-text">
+            <div class="cap-title">Sector Intelligence</div>
+            <div class="cap-desc">Context-aware for FinTech, HealthTech, GovTech, SpaceTech and EnergyTech — not generic</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="how-panel how-essence reveal reveal-delay-2">
+      <div class="how-panel-label">Essence — Inward</div>
+      <h3>What is happening<br>inside your organisation<br>that leadership can't see?</h3>
+      <p class="how-panel-sub">Essence reads the internal signals your organisation generates — activity, behaviour, project health, team dynamics — and surfaces the patterns leadership needs to act on. The COO view of the real company.</p>
+      <div class="how-capabilities">
+        <div class="cap-item">
+          <div class="cap-icon">🧠</div>
+          <div class="cap-text">
+            <div class="cap-title">Organisational Intelligence</div>
+            <div class="cap-desc">Real-time view across teams, projects, and people — surfacing what is off-track before it becomes a problem</div>
+          </div>
+        </div>
+        <div class="cap-item">
+          <div class="cap-icon">📊</div>
+          <div class="cap-text">
+            <div class="cap-title">Anomaly Detection</div>
+            <div class="cap-desc">Statistical deviation tracking across 47+ people and 14+ projects — Gábor's 2.1σ silence, flagged</div>
+          </div>
+        </div>
+        <div class="cap-item">
+          <div class="cap-icon">🔍</div>
+          <div class="cap-text">
+            <div class="cap-title">The Brain — Knowledge Graph</div>
+            <div class="cap-desc">Neo4j + pgvector + Kafka — a living knowledge graph of your organisation, its relationships, and its history</div>
+          </div>
+        </div>
+        <div class="cap-item">
+          <div class="cap-icon">💬</div>
+          <div class="cap-text">
+            <div class="cap-title">Natural Language Query</div>
+            <div class="cap-desc">Ask Essence anything about the organisation in plain language. It knows where to look.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- LAYER ZERO: THE BRAIN -->
+<div class="layer-section">
+  <div class="layer-inner">
+    <div class="layer-left reveal">
+      <div class="section-eyebrow">Layer 0</div>
+      <h2>The Brain — the knowledge graph everything runs on.</h2>
+      <p>At the foundation of Rise is Layer 0 — a real-time knowledge graph that connects people, projects, data sources, and external signals into a single queryable intelligence layer.</p>
+      <p>Built on Neo4j for graph relationships, pgvector for semantic search, and Kafka for real-time event streaming. 17 connectors. Always live. Always updating.</p>
+      <p>The Brain is what makes Rise different from a dashboard. It does not just display data. It understands the relationships between data — and it surfaces what those relationships mean.</p>
+    </div>
+    <div class="layer-right reveal reveal-delay-2">
+      <div class="connector"><div class="conn-num">01</div><div class="conn-name">CRM Systems</div><div class="conn-type">Sales · Pipeline</div></div>
+      <div class="connector"><div class="conn-num">02</div><div class="conn-name">Project Management</div><div class="conn-type">Jira · Linear · Asana</div></div>
+      <div class="connector"><div class="conn-num">03</div><div class="conn-name">Financial Data</div><div class="conn-type">ERP · Accounting</div></div>
+      <div class="connector"><div class="conn-num">04</div><div class="conn-name">Communication</div><div class="conn-type">Email · Slack · Teams</div></div>
+      <div class="connector"><div class="conn-num">05</div><div class="conn-name">Market Intelligence</div><div class="conn-type">News · Feeds · APIs</div></div>
+      <div class="connector"><div class="conn-num">06</div><div class="conn-name">Regulatory Sources</div><div class="conn-type">EU · Sector · Legal</div></div>
+      <div class="connector"><div class="conn-num">07</div><div class="conn-name">HR & People Data</div><div class="conn-type">Activity · Patterns</div></div>
+      <div class="connector"><div class="conn-num">08–17</div><div class="conn-name">+ 10 Sector-Specific Connectors</div><div class="conn-type">FinTech · Health · Gov</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- DEMOS -->
+<div class="demos-section" id="demos">
+  <div class="demos-header reveal">
+    <div class="section-eyebrow" style="justify-content:flex-start;">
+      <span style="display:inline-block;width:24px;height:1px;background:var(--accent);"></span>
+      Live Demos
+    </div>
+    <h2>Five working demos.<br>Two live now. Three require local proxy.</h2>
+    <p>These are not mockups. They are working implementations of Rise and Essence, built by the eGroup team. Some require a local proxy to access the Anthropic API — instructions in the Journal.</p>
+  </div>
+  <div class="demos-grid">
+
+    <a href="demos/risedemo.html" class="demo-card reveal">
+      <div class="demo-num">Demo 01</div>
+      <div class="demo-title">Manual Intelligence Trigger</div>
+      <p class="demo-desc">Manually trigger Rise to generate sector intelligence on demand. Select a topic, set the parameters, watch Rise construct a structured intelligence brief in real time.</p>
+      <div class="demo-status demo-proxy"><span class="demo-dot"></span>Requires Local Proxy</div>
+      <div class="demo-launch">Launch Demo →</div>
+    </a>
+
+    <a href="demos/autodemo.html" class="demo-card reveal reveal-delay-1">
+      <div class="demo-num">Demo 02</div>
+      <div class="demo-title">Automated Intelligence Trigger</div>
+      <p class="demo-desc">Rise monitors configured triggers and fires automatically when conditions are met. This demo shows the automated pipeline — trigger detection, intelligence generation, delivery routing.</p>
+      <div class="demo-status demo-proxy"><span class="demo-dot"></span>Requires Local Proxy</div>
+      <div class="demo-launch">Launch Demo →</div>
+    </a>
+
+    <a href="demos/braindemo.html" class="demo-card reveal reveal-delay-2">
+      <div class="demo-num">Demo 03</div>
+      <div class="demo-title">The Brain — Knowledge Graph</div>
+      <p class="demo-desc">A live, interactive visualisation of Layer 0. Explore the knowledge graph — nodes, relationships, real-time updates. This is the intelligence layer that Rise and Essence are built on.</p>
+      <div class="demo-status demo-live"><span class="demo-dot"></span>Live on GitHub</div>
+      <div class="demo-launch">Launch Demo →</div>
+    </a>
+
+    <a href="demos/essencedemo.html" class="demo-card reveal">
+      <div class="demo-num">Demo 04</div>
+      <div class="demo-title">Essence Chat — Organisational Intelligence</div>
+      <p class="demo-desc">Converse with Essence in natural language. Ask about your organisation — who is active, what is blocked, where the anomalies are. Essence knows. This demo uses live COIOS mock data.</p>
+      <div class="demo-status demo-live"><span class="demo-dot"></span>Live on GitHub</div>
+      <div class="demo-launch">Launch Demo →</div>
+    </a>
+
+    <a href="demos/coodemo.html" class="demo-card reveal reveal-delay-1">
+      <div class="demo-num">Demo 05</div>
+      <div class="demo-title">COO View — Executive Intelligence Layer</div>
+      <p class="demo-desc">The full executive dashboard. 6 teams, 47 people, 14 projects. Real-time anomaly detection. Gábor Mészáros: 12 days no activity, 2.1σ. The Nordic FinTech architecture review: blocked 18 days. This is Essence in production mode.</p>
+      <div class="demo-status demo-live"><span class="demo-dot"></span>Live on GitHub</div>
+      <div class="demo-launch">Launch Demo →</div>
+    </a>
+
+    <a href="https://hoarhouse.github.io/v3/journal/" target="_blank" class="demo-card reveal reveal-delay-2">
+      <div class="demo-num">Journal</div>
+      <div class="demo-title">The Rise Build Journal</div>
+      <p class="demo-desc">We document the building of Rise publicly. Every architecture decision, every design choice, every mistake. Four entries live. Updated as we build. The most transparent AI build journal in European enterprise software.</p>
+      <div class="demo-status demo-live"><span class="demo-dot"></span>Live — 4 Entries</div>
+      <div class="demo-launch">Read The Journal →</div>
+    </a>
+
+  </div>
+</div>
+
+<!-- JOURNAL -->
+<div class="journal-section">
+  <div class="journal-inner">
+    <div class="journal-left reveal">
+      <div class="section-eyebrow">The Build Journal</div>
+      <h2>We build this in public.<br>Every decision documented.</h2>
+      <p>The Rise Journal is a live record of how we are building Rise — the architecture choices, the mistakes, the debates, the demos. Four entries are live. More come with every sprint.</p>
+      <p>This is not a marketing blog. It is a technical and strategic diary of building something genuinely new in European AI infrastructure.</p>
+      <a href="https://hoarhouse.github.io/v3/journal/" target="_blank" class="journal-link">Read The Journal →</a>
+    </div>
+    <div class="journal-right reveal reveal-delay-2">
+      <div class="journal-entries">
+        <a href="https://hoarhouse.github.io/v3/journal/entry01.html" target="_blank" class="journal-entry">
+          <div class="entry-num">01</div>
+          <div class="entry-title">The Dual Consciousness Architecture — Rise &amp; Essence Defined</div>
+          <div class="entry-arr">→</div>
+        </a>
+        <a href="https://hoarhouse.github.io/v3/journal/entry02.html" target="_blank" class="journal-entry">
+          <div class="entry-num">02</div>
+          <div class="entry-title">Building The eGroup Website — Design System &amp; First Pages</div>
+          <div class="entry-arr">→</div>
+        </a>
+        <a href="https://hoarhouse.github.io/v3/journal/entry03.html" target="_blank" class="journal-entry">
+          <div class="entry-num">03</div>
+          <div class="entry-title">Layer 0 — The Brain, Knowledge Graph &amp; 17 Connectors</div>
+          <div class="entry-arr">→</div>
+        </a>
+        <a href="https://hoarhouse.github.io/v3/journal/entry04.html" target="_blank" class="journal-entry">
+          <div class="entry-num">04</div>
+          <div class="entry-title">The COO View — Essence in Executive Mode</div>
+          <div class="entry-arr">→</div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ROADMAP -->
+<div class="roadmap-section">
+  <div class="roadmap-inner">
+    <div class="section-eyebrow reveal">Where Rise Is Going</div>
+    <h2 class="reveal">Honest about where we are.<br>Clear about where we are headed.</h2>
+    <div class="roadmap-phases reveal">
+      <div class="phase phase-done">
+        <div class="phase-marker"><div class="phase-dot"></div></div>
+        <div class="phase-content">
+          <div class="phase-label">Complete</div>
+          <div class="phase-title">Dual Consciousness Architecture</div>
+          <p class="phase-desc">Rise and Essence defined. Layer 0 architecture locked. 5 working demos built and deployed. Journal entries 01–04 live. Design system established.</p>
+        </div>
+      </div>
+      <div class="phase phase-now">
+        <div class="phase-marker"><div class="phase-dot"></div></div>
+        <div class="phase-content">
+          <div class="phase-label">Now — In Build</div>
+          <div class="phase-title">eGroup Site + Intelligence Products</div>
+          <p class="phase-desc">Building the full eGroup website with Rise integration hooks. Defining the Intelligence Products sector roadmap. 50 engineers building to spec from the Scope V5 document.</p>
+        </div>
+      </div>
+      <div class="phase phase-next">
+        <div class="phase-marker"><div class="phase-dot"></div></div>
+        <div class="phase-content">
+          <div class="phase-label">Next</div>
+          <div class="phase-title">Rise Feeds The Website</div>
+          <p class="phase-desc">Every dynamic region of this site has a data-rise-slot attribute and a REST endpoint. Rise begins generating Signals and feeding the Thinking page automatically. Humans review before publish.</p>
+        </div>
+      </div>
+      <div class="phase phase-future">
+        <div class="phase-marker"><div class="phase-dot"></div></div>
+        <div class="phase-content">
+          <div class="phase-label">Future</div>
+          <div class="phase-title">Rise Runs The Website</div>
+          <p class="phase-desc">Rise becomes the primary author of the Thinking feed. The homepage pulse updates autonomously. The people who wrote the first 100 Signals are permanently credited as the Founding Voices.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-left">
+    <div class="footer-logo"><span>E</span>-Group</div>
+    <div class="footer-tagline">Intelligence Infrastructure · Est. 1993</div>
+  </div>
+  <div class="footer-statement">We are building the <em>intelligence layer</em> for the next thirty years.<br>Come help us think about it.</div>
+  <div class="footer-right">Budapest, Hungary<br>© 2026 E-Group ICT Software Zrt.<br>All rights reserved.</div>
+</footer>
+
+<script>
+const cursor = document.getElementById('cursor');
+const ring   = document.getElementById('cursorRing');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{ mx=e.clientX; my=e.clientY; cursor.style.left=mx+'px'; cursor.style.top=my+'px'; });
+(function loop(){ rx+=(mx-rx)*0.12; ry+=(my-ry)*0.12; ring.style.left=rx+'px'; ring.style.top=ry+'px'; requestAnimationFrame(loop); })();
+
+const obs = new IntersectionObserver(entries => entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); }), {threshold:0.08});
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+const hamburger  = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+hamburger.addEventListener('click', () => {
+  hamburger.classList.toggle('open');
+  mobileMenu.classList.toggle('open');
+  document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+});
+mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+  hamburger.classList.remove('open');
+  mobileMenu.classList.remove('open');
+  document.body.style.overflow = '';
+}));
+</script>
+</body>
+</html>
