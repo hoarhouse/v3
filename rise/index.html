@@ -303,7 +303,7 @@ footer { background:var(--black); border-top:1px solid var(--border); padding:48
   .stats { padding:60px 36px; }
   .about { gap:60px; }
   .proof-inner { gap:60px; }
-  .pulse-feed { grid-template-columns:1fr 1fr; }
+  .pulse-feed { grid-template-columns:1fr 1fr; display:grid; }
   .pulse-card.card-large { grid-column:span 2; }
   .build-grid { grid-template-columns:1fr 1fr; }
   .sectors-grid { grid-template-columns:repeat(3,1fr); }
@@ -375,9 +375,9 @@ footer { background:var(--black); border-top:1px solid var(--border); padding:48
   .pulse-section { padding:60px 20px; }
   .pulse-header { flex-direction:column; align-items:flex-start; gap:16px; margin-bottom:32px; }
   .pulse-title { font-size:clamp(24px,6vw,32px); }
-  .pulse-feed { grid-template-columns:1fr; }
+  .pulse-feed { grid-template-columns:1fr; display:flex; flex-direction:column; background:none; gap:1px; }
+  .pulse-card { padding:28px 24px; width:100%; }
   .pulse-card.card-large { grid-row:span 1; padding:32px 24px; }
-  .pulse-card { padding:28px 24px; }
   .pulse-card-title { font-size:16px !important; }
   .pulse-card-excerpt { font-size:13px !important; }
   .pulse-subscribe { flex-direction:column; max-width:100%; }
