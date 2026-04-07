@@ -3,18 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="E-Group builds the deep infrastructure of trust, data and intelligence that enterprises need to make AI actually work. Thirty years of sovereign AI infrastructure, now packaged for your industry.">
-  <meta name="robots" content="index, follow">
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="E-Group — Intelligence Infrastructure">
-  <meta property="og:description" content="E-Group builds the deep infrastructure of trust, data and intelligence that enterprises need to make AI actually work. Thirty years of sovereign AI infrastructure, now packaged for your industry.">
-  <meta property="og:url" content="https://hoarhouse.github.io/v3/rise/index.html">
-  <meta property="og:site_name" content="E-Group">
-  <meta property="og:image" content="https://hoarhouse.github.io/v3/rise/og-image.png">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="E-Group — Intelligence Infrastructure">
-  <meta name="twitter:description" content="E-Group builds the deep infrastructure of trust, data and intelligence that enterprises need to make AI actually work. Thirty years of sovereign AI infrastructure, now packaged for your industry.">
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23080808'/%3E%3Ctext x='5' y='25' font-family='Georgia,serif' font-weight='900' font-size='26' fill='%23C8A96E'%3EE%3C/text%3E%3C/svg%3E">
 <title>E-Group — Intelligence Infrastructure</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -81,7 +69,6 @@ nav { position:fixed; top:0; left:0; right:0; z-index:100; padding:28px 60px; di
 .nav-drop-item { display:block; padding:10px 18px; font-family:'DM Mono',monospace; font-size:10px; letter-spacing:1.5px; text-transform:uppercase; color:#666; text-decoration:none; border-bottom:1px solid #1a1a1a; white-space:nowrap; transition:color 0.15s, padding-left 0.15s; }
 .nav-drop-item:last-child { border-bottom:none; }
 .nav-drop-item:hover { color:var(--gold); padding-left:24px; }
-/* override nav-links a rule for dropdown items */
 .nav-drop-item::after { display:none !important; }
 /* ── HAMBURGER ── */
 .nav-hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; padding:4px; background:none; border:none; z-index:200; }
@@ -92,22 +79,214 @@ nav { position:fixed; top:0; left:0; right:0; z-index:100; padding:28px 60px; di
 /* ── MOBILE MENU ── */
 .nav-mobile-menu { display:none; position:fixed; inset:0; background:rgba(8,8,8,0.98); z-index:150; flex-direction:column; align-items:center; justify-content:flex-start; overflow-y:auto; padding:80px 0 40px; backdrop-filter:blur(20px); }
 .nav-mobile-menu.open { display:flex; }
-/* CRITICAL: reset the catch-all a rule so sub-classes can style independently */
 .nav-mobile-menu a { text-decoration:none; border-bottom:none; }
 .nav-mobile-menu a::after { display:none; }
-/* Main site links — large Syne */
 .mob-main { font-family:'Syne',sans-serif !important; font-weight:800 !important; font-size:clamp(26px,7vw,40px) !important; color:var(--white) !important; letter-spacing:-0.5px !important; padding:9px 0 !important; width:80%; text-align:center; transition:color 0.2s; display:block; }
 .mob-main:hover { color:var(--gold) !important; }
-/* Section divider */
 .mob-divider { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:3px; text-transform:uppercase; color:var(--dim); padding:20px 0 6px; width:80%; border-bottom:1px solid var(--border); text-align:center; margin-bottom:4px; }
-/* Record sub-links — small DM Mono */
 .mob-record { font-family:'DM Mono',monospace !important; font-size:11px !important; letter-spacing:1.5px !important; text-transform:uppercase !important; color:var(--mid) !important; padding:7px 0 !important; width:80%; text-align:center; transition:color 0.2s; display:block; }
 .mob-record:hover, .mob-record.active { color:var(--gold) !important; }
-/* CTA button */
 .mob-cta { font-family:'DM Mono',monospace !important; font-size:12px !important; letter-spacing:2px !important; text-transform:uppercase !important; color:var(--black) !important; background:var(--gold) !important; padding:14px 36px !important; margin-top:20px !important; display:block; }
-/* ── RESPONSIVE ── */
 @media (max-width:1023px) { nav { padding:20px 36px; } .nav-links { gap:24px; } }
 @media (max-width:767px) { .nav-links, .nav-cta { display:none; } .nav-hamburger { display:flex; } nav { padding:16px 20px; } }
+
+/* ── HERO ── */
+.hero { min-height:100vh; display:flex; flex-direction:column; justify-content:flex-end; padding:0 60px 80px; position:relative; overflow:hidden; }
+.hero-grid { position:absolute; inset:0; background-image:linear-gradient(rgba(200,169,110,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(200,169,110,0.04) 1px,transparent 1px); background-size:80px 80px; mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 30%,transparent 100%); }
+.hero-glow { position:absolute; top:-20%; left:50%; transform:translateX(-50%); width:900px; height:600px; background:radial-gradient(ellipse,rgba(200,169,110,0.06) 0%,transparent 65%); pointer-events:none; }
+.hero-glow-2 { position:absolute; bottom:0; right:-10%; width:600px; height:600px; background:radial-gradient(ellipse,rgba(78,205,196,0.04) 0%,transparent 65%); pointer-events:none; }
+.hero-data { position:absolute; top:140px; right:60px; display:flex; flex-direction:column; gap:8px; opacity:0; animation:fadeInRight 1.2s ease 1.4s forwards; }
+.data-line { font-family:'DM Mono',monospace; font-size:11px; color:var(--muted); letter-spacing:1px; display:flex; align-items:center; gap:10px; }
+.data-line::before { content:''; display:inline-block; width:20px; height:1px; background:var(--gold); opacity:0.4; }
+.data-line .val { color:var(--gold); opacity:0.7; }
+.hero-content { position:relative; z-index:2; max-width:900px; }
+.hero-eyebrow { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:3px; text-transform:uppercase; color:var(--gold); margin-bottom:28px; opacity:0; animation:fadeInUp 0.8s ease 0.3s forwards; display:flex; align-items:center; gap:14px; }
+.hero-eyebrow::before { content:''; display:inline-block; width:32px; height:1px; background:var(--gold); }
+.hero-headline { font-family:'Syne',sans-serif; font-weight:800; font-size:clamp(52px,7vw,96px); line-height:0.95; letter-spacing:-3px; color:var(--white); margin-bottom:32px; opacity:0; animation:fadeInUp 0.8s ease 0.5s forwards; }
+.hero-headline .gold { color:var(--gold); -webkit-text-stroke:0; }
+.hero-sub { font-size:18px; font-weight:300; color:var(--mid); max-width:560px; line-height:1.7; margin-bottom:48px; opacity:0; animation:fadeInUp 0.8s ease 0.7s forwards; }
+.hero-sub strong { color:var(--light); font-weight:400; }
+.hero-actions { display:flex; align-items:center; gap:28px; opacity:0; animation:fadeInUp 0.8s ease 0.9s forwards; }
+.btn-primary { font-family:'DM Mono',monospace; font-size:12px; letter-spacing:2px; text-transform:uppercase; color:var(--black); background:var(--gold); padding:16px 36px; text-decoration:none; transition:all 0.2s; position:relative; overflow:hidden; display:inline-flex; align-items:center; gap:10px; }
+.btn-primary:hover { background:var(--gold2); }
+.btn-primary .arr { transition:transform 0.2s; }
+.btn-primary:hover .arr { transform:translateX(4px); }
+.btn-secondary { font-family:'DM Mono',monospace; font-size:12px; letter-spacing:2px; text-transform:uppercase; color:var(--mid); text-decoration:none; transition:color 0.2s; display:flex; align-items:center; gap:8px; }
+.btn-secondary:hover { color:var(--white); }
+.scroll-indicator { position:absolute; bottom:40px; right:60px; display:flex; flex-direction:column; align-items:center; gap:8px; opacity:0; animation:fadeIn 1s ease 1.8s forwards; }
+.scroll-line { width:1px; height:60px; background:linear-gradient(to bottom,transparent,var(--gold)); animation:scrollPulse 2s ease-in-out infinite; }
+.scroll-text { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:2px; text-transform:uppercase; color:var(--dim); writing-mode:vertical-rl; }
+
+/* ── TICKER ── */
+.ticker-wrap { border-top:1px solid var(--border); border-bottom:1px solid var(--border); background:var(--ink); padding:14px 0; overflow:hidden; position:relative; }
+.ticker-wrap::before,.ticker-wrap::after { content:''; position:absolute; top:0; bottom:0; width:80px; z-index:2; }
+.ticker-wrap::before { left:0; background:linear-gradient(to right,var(--ink),transparent); }
+.ticker-wrap::after { right:0; background:linear-gradient(to left,var(--ink),transparent); }
+.ticker { display:flex; animation:ticker 40s linear infinite; white-space:nowrap; }
+.ticker-item { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--dim); padding:0 40px; display:flex; align-items:center; gap:40px; flex-shrink:0; }
+.ticker-item span { color:var(--gold); opacity:0.5; }
+
+/* ── STATS ── */
+.stats { display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--border); border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
+.stat { background:var(--ink); padding:50px 40px; position:relative; overflow:hidden; transition:background 0.3s; }
+.stat::before { content:''; position:absolute; bottom:0; left:0; width:100%; height:2px; background:var(--gold); transform:scaleX(0); transform-origin:left; transition:transform 0.4s ease; }
+.stat:hover { background:var(--dark); }
+.stat:hover::before { transform:scaleX(1); }
+.stat-num { font-family:'Syne',sans-serif; font-weight:800; font-size:56px; color:var(--white); letter-spacing:-2px; line-height:1; margin-bottom:8px; }
+.stat-num .unit { font-size:28px; color:var(--gold); }
+.stat-label { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--dim); line-height:1.5; }
+
+/* ── SECTION TEMPLATE ── */
+section { padding:120px 60px; }
+.section-eyebrow { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:3px; text-transform:uppercase; color:var(--gold); margin-bottom:20px; display:flex; align-items:center; gap:14px; }
+.section-eyebrow::before { content:''; display:inline-block; width:24px; height:1px; background:var(--gold); }
+.section-title { font-family:'Syne',sans-serif; font-weight:800; font-size:clamp(36px,4vw,56px); color:var(--white); letter-spacing:-1.5px; line-height:1.05; margin-bottom:24px; }
+.section-body { font-size:17px; font-weight:300; color:var(--mid); line-height:1.8; max-width:580px; }
+
+/* ── ACT 1: THESIS ── */
+.thesis { padding:120px 60px; background:var(--ink); border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
+.thesis-statement { font-family:'Syne',sans-serif; font-weight:800; font-size:clamp(28px,3.5vw,48px); color:var(--white); letter-spacing:-1.5px; line-height:1.1; max-width:820px; margin-bottom:20px; }
+.thesis-statement em { font-style:normal; color:var(--gold); }
+.thesis-sub { font-size:17px; font-weight:300; color:var(--mid); max-width:600px; line-height:1.8; margin-bottom:72px; }
+.thesis-cards { display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--border); }
+.thesis-card { background:var(--dark); padding:56px 48px; position:relative; overflow:hidden; text-decoration:none; display:block; transition:background 0.3s; }
+.thesis-card::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; transition:opacity 0.3s; opacity:0; }
+.thesis-card.card-rise::before { background:linear-gradient(to right,var(--gold),var(--gold2)); }
+.thesis-card.card-intel::before { background:linear-gradient(to right,var(--teal),rgba(78,205,196,0.3)); }
+.thesis-card:hover { background:var(--panel); }
+.thesis-card:hover::before { opacity:1; }
+.card-status { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2px; text-transform:uppercase; padding:5px 12px; border:1px solid; display:inline-flex; align-items:center; gap:6px; margin-bottom:32px; }
+.card-status.status-pilot { color:var(--gold); border-color:rgba(200,169,110,0.3); }
+.card-status.status-new { color:var(--teal); border-color:rgba(78,205,196,0.3); }
+.card-status .dot { width:5px; height:5px; border-radius:50%; background:currentColor; animation:pulse 2s ease-in-out infinite; }
+.card-title { font-family:'Syne',sans-serif; font-weight:800; font-size:clamp(28px,2.5vw,40px); color:var(--white); letter-spacing:-1px; line-height:1; margin-bottom:16px; }
+.card-desc { font-size:15px; color:var(--mid); line-height:1.7; max-width:380px; margin-bottom:36px; }
+.card-link { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:2px; text-transform:uppercase; display:inline-flex; align-items:center; gap:8px; transition:gap 0.2s; }
+.thesis-card.card-rise .card-link { color:var(--gold); }
+.thesis-card.card-intel .card-link { color:var(--teal); }
+.thesis-card:hover .card-link { gap:14px; }
+
+/* ── ACT 2: PROOF ── */
+.proof { padding:120px 60px; background:var(--black); }
+.proof-inner { display:grid; grid-template-columns:1fr 1fr; gap:100px; align-items:start; }
+.proof-left { }
+.proof-right { }
+.proof-timeline { display:flex; flex-direction:column; gap:0; margin-top:48px; }
+.proof-item { display:grid; grid-template-columns:80px 1fr; gap:24px; padding:28px 0; border-bottom:1px solid var(--border); position:relative; transition:background 0.2s; }
+.proof-item:first-child { border-top:1px solid var(--border); }
+.proof-year { font-family:'DM Mono',monospace; font-size:12px; color:var(--gold); opacity:0.7; letter-spacing:1px; padding-top:2px; }
+.proof-content { }
+.proof-headline { font-family:'Syne',sans-serif; font-weight:700; font-size:16px; color:var(--white); letter-spacing:-0.3px; margin-bottom:6px; }
+.proof-detail { font-size:13px; color:var(--dim); line-height:1.6; }
+.proof-visual { background:var(--panel); border:1px solid var(--border); padding:48px; position:relative; }
+.proof-visual::before { content:''; position:absolute; top:-1px; left:40px; right:40px; height:2px; background:linear-gradient(to right,transparent,var(--gold),transparent); }
+.proof-quote { font-family:'Syne',sans-serif; font-size:22px; font-weight:600; color:var(--white); line-height:1.4; margin-bottom:24px; letter-spacing:-0.5px; }
+.proof-quote em { color:var(--gold); font-style:normal; }
+.proof-attr { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--dim); }
+.about-tags { display:flex; flex-wrap:wrap; gap:8px; margin-top:36px; }
+.tag { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:1.5px; text-transform:uppercase; color:var(--dim); border:1px solid var(--border); padding:6px 14px; transition:all 0.2s; }
+.tag:hover { color:var(--gold); border-color:rgba(200,169,110,0.35); }
+
+/* ── ACT 3: PULSE ── */
+.pulse-section { background:var(--ink); border-top:1px solid var(--border); border-bottom:1px solid var(--border); padding:100px 60px; }
+.pulse-header { display:flex; align-items:flex-end; justify-content:space-between; margin-bottom:56px; }
+.pulse-header-left { }
+.pulse-eyebrow { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:3px; text-transform:uppercase; color:var(--gold); margin-bottom:16px; display:flex; align-items:center; gap:10px; }
+.pulse-dot { width:6px; height:6px; border-radius:50%; background:var(--gold); animation:pulse 1.5s ease-in-out infinite; }
+.pulse-title { font-family:'Syne',sans-serif; font-weight:800; font-size:clamp(28px,3vw,42px); color:var(--white); letter-spacing:-1px; line-height:1.05; }
+.pulse-link { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--gold); text-decoration:none; display:flex; align-items:center; gap:8px; opacity:0.7; transition:opacity 0.2s; border-bottom:1px solid rgba(200,169,110,0.2); padding-bottom:2px; }
+.pulse-link:hover { opacity:1; }
+.pulse-feed { display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:1px; background:var(--border); }
+.pulse-card { background:var(--dark); padding:36px 32px; position:relative; overflow:hidden; text-decoration:none; display:block; transition:background 0.3s; }
+.pulse-card:hover { background:var(--panel); }
+.pulse-card.card-large { grid-row:span 2; padding:48px 40px; }
+.content-type { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:2.5px; text-transform:uppercase; padding:4px 10px; margin-bottom:20px; display:inline-block; }
+.type-deep { color:#9B8FFF; background:rgba(155,143,255,0.08); border:1px solid rgba(155,143,255,0.15); }
+.type-signal { color:var(--gold); background:rgba(200,169,110,0.08); border:1px solid rgba(200,169,110,0.15); }
+.type-room { color:var(--teal); background:rgba(78,205,196,0.08); border:1px solid rgba(78,205,196,0.15); }
+.pulse-card-title { font-family:'Syne',sans-serif; font-weight:700; color:var(--white); letter-spacing:-0.3px; line-height:1.2; margin-bottom:10px; }
+.card-large .pulse-card-title { font-size:22px; margin-bottom:14px; }
+.pulse-card:not(.card-large) .pulse-card-title { font-size:16px; }
+.pulse-card-excerpt { font-size:13px; color:var(--dim); line-height:1.6; }
+.card-large .pulse-card-excerpt { font-size:15px; color:var(--mid); }
+.pulse-card-meta { display:flex; align-items:center; justify-content:space-between; margin-top:24px; }
+.card-large .pulse-card-meta { margin-top:32px; }
+.pulse-meta-author { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:1px; color:var(--dim); }
+.pulse-meta-date { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:1px; color:var(--gold); opacity:0.6; }
+.sector-tag { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:1.5px; text-transform:uppercase; color:var(--dim); margin-top:8px; }
+.pulse-subscribe { margin-top:48px; display:flex; align-items:center; gap:0; max-width:440px; }
+.pulse-subscribe input { flex:1; background:var(--dark); border:1px solid var(--border); border-right:none; color:var(--white); padding:13px 18px; font-family:'DM Sans',sans-serif; font-size:14px; outline:none; transition:border-color 0.2s; }
+.pulse-subscribe input:focus { border-color:rgba(200,169,110,0.3); }
+.pulse-subscribe button { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--black); background:var(--gold); border:none; padding:13px 24px; cursor:pointer; white-space:nowrap; transition:background 0.2s; }
+.pulse-subscribe button:hover { background:var(--gold2); }
+.pulse-subscribe-label { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--dim); margin-bottom:12px; }
+
+/* ── ABOUT ── */
+.about { display:grid; grid-template-columns:1fr 1fr; gap:120px; align-items:center; }
+.about-visual { background:var(--panel); border:1px solid var(--border); padding:48px; position:relative; }
+.about-visual::before { content:''; position:absolute; top:-1px; left:40px; right:40px; height:2px; background:linear-gradient(to right,transparent,var(--gold),transparent); }
+.about-quote { font-family:'Syne',sans-serif; font-size:22px; font-weight:600; color:var(--white); line-height:1.4; margin-bottom:24px; letter-spacing:-0.5px; }
+.about-quote em { color:var(--gold); font-style:normal; }
+.about-attr { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--dim); }
+
+/* ── WHAT WE BUILD ── */
+.build-section { background:var(--ink); border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
+.build-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--border); margin-top:60px; }
+.build-card { background:var(--dark); padding:48px 40px; position:relative; overflow:hidden; transition:background 0.3s; }
+.build-card::after { content:''; position:absolute; top:0; left:0; width:100%; height:100%; background:radial-gradient(circle at 0% 100%,rgba(200,169,110,0.05),transparent 60%); opacity:0; transition:opacity 0.4s; }
+.build-card:hover { background:var(--panel); }
+.build-card:hover::after { opacity:1; }
+.build-num { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:2px; color:var(--gold); opacity:0.6; margin-bottom:24px; }
+.build-icon { font-size:28px; margin-bottom:20px; }
+.build-title { font-family:'Syne',sans-serif; font-weight:700; font-size:22px; color:var(--white); letter-spacing:-0.5px; margin-bottom:14px; line-height:1.2; }
+.build-desc { font-size:14px; color:var(--dim); line-height:1.7; }
+
+/* ── SECTORS ── */
+.sectors-grid { display:grid; grid-template-columns:repeat(5,1fr); gap:1px; background:var(--border); margin-top:60px; }
+.sector { background:var(--ink); padding:40px 28px; text-align:center; transition:background 0.3s; cursor:default; position:relative; overflow:hidden; }
+.sector::before { content:''; position:absolute; bottom:0; left:0; right:0; height:2px; background:var(--gold); transform:scaleX(0); transition:transform 0.3s; }
+.sector:hover { background:var(--dark); }
+.sector:hover::before { transform:scaleX(1); }
+.sector-icon { font-size:32px; margin-bottom:16px; display:block; transition:transform 0.3s; }
+.sector:hover .sector-icon { transform:scale(1.1) translateY(-2px); }
+.sector-name { font-family:'Syne',sans-serif; font-weight:700; font-size:13px; color:var(--light); letter-spacing:0.5px; }
+
+/* ── MISSION ── */
+.mission { background:var(--black); text-align:center; padding:140px 60px; position:relative; overflow:hidden; }
+.mission::before { content:''; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:800px; height:400px; background:radial-gradient(ellipse,rgba(200,169,110,0.05) 0%,transparent 65%); }
+.mission-text { font-family:'Syne',sans-serif; font-weight:800; font-size:clamp(32px,4vw,52px); color:var(--white); letter-spacing:-1.5px; line-height:1.15; max-width:820px; margin:0 auto 24px; position:relative; }
+.mission-text em { font-style:normal; color:var(--gold); }
+.mission-sub { font-size:16px; font-weight:300; color:var(--dim); max-width:500px; margin:0 auto; }
+
+/* ── CONTACT ── */
+.contact { background:var(--ink); border-top:1px solid var(--border); }
+.contact-inner { display:grid; grid-template-columns:1fr 1fr; gap:100px; align-items:start; }
+.contact-info { padding-top:8px; }
+.contact-detail { display:flex; flex-direction:column; gap:4px; padding:20px 0; border-bottom:1px solid var(--border); }
+.contact-detail:first-child { border-top:1px solid var(--border); }
+.contact-detail-label { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--dim); }
+.contact-detail-value { font-size:15px; color:var(--light); }
+.contact-form { display:flex; flex-direction:column; gap:16px; }
+.form-group { display:flex; flex-direction:column; gap:6px; }
+.form-label { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--dim); }
+.form-input,.form-select,.form-textarea { background:var(--dark); border:1px solid var(--border); color:var(--white); padding:14px 16px; font-family:'DM Sans',sans-serif; font-size:14px; outline:none; transition:border-color 0.2s; width:100%; appearance:none; }
+.form-input:focus,.form-select:focus,.form-textarea:focus { border-color:rgba(200,169,110,0.4); }
+.form-textarea { resize:vertical; min-height:100px; }
+.form-select { background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23555' stroke-width='1.5' fill='none'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right 16px center; cursor:pointer; }
+.form-select option { background:var(--dark); }
+.form-submit { font-family:'DM Mono',monospace; font-size:12px; letter-spacing:2px; text-transform:uppercase; color:var(--black); background:var(--gold); border:none; padding:16px 36px; cursor:pointer; transition:background 0.2s; align-self:flex-start; }
+.form-submit:hover { background:var(--gold2); }
+
+/* ── FOOTER ── */
+footer { background:var(--black); border-top:1px solid var(--border); padding:48px 60px; display:flex; justify-content:space-between; align-items:center; }
+.footer-left { display:flex; flex-direction:column; gap:6px; }
+.footer-logo { font-family:'Syne',sans-serif; font-weight:800; font-size:16px; color:var(--white); letter-spacing:3px; text-transform:uppercase; }
+.footer-logo span { color:var(--gold); }
+.footer-tagline { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--dim); }
+.footer-statement { font-family:'Syne',sans-serif; font-size:14px; color:var(--mid); max-width:420px; text-align:center; line-height:1.6; }
+.footer-statement em { color:var(--gold); font-style:normal; }
+.footer-right { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:1.5px; color:var(--dim); text-align:right; line-height:1.8; }
+
 /* ── ANIMATIONS ── */
 @keyframes fadeInUp { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:translateY(0); } }
 @keyframes fadeInRight { from { opacity:0; transform:translateX(24px); } to { opacity:1; transform:translateX(0); } }
@@ -123,167 +302,53 @@ nav { position:fixed; top:0; left:0; right:0; z-index:100; padding:28px 60px; di
 .reveal-delay-4 { transition-delay:0.4s; }
 .reveal-delay-5 { transition-delay:0.5s; }
 
-/* ── HAMBURGER MENU ── */
-.nav-hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; padding:4px; background:none; border:none; z-index:200; }
-.nav-hamburger span { display:block; width:22px; height:1.5px; background:var(--gold); transition:all 0.3s ease; transform-origin:center; }
-.nav-hamburger.open span:nth-child(1) { transform:translateY(6.5px) rotate(45deg); }
-.nav-hamburger.open span:nth-child(2) { opacity:0; transform:scaleX(0); }
-.nav-hamburger.open span:nth-child(3) { transform:translateY(-6.5px) rotate(-45deg); }
-
-.nav-mobile-menu { display:none; position:fixed; inset:0; background:rgba(8,8,8,0.98); z-index:150; flex-direction:column; align-items:center; justify-content:center; gap:0; backdrop-filter:blur(20px); }
-.nav-mobile-menu.open { display:flex; }
-
-.nav-mobile-menu a:hover { color:var(--gold); }
-.nav-mobile-menu a:last-child { border-bottom:none; }
-.nav-mobile-cta { margin-top:32px; font-family:'DM Mono',monospace !important; font-size:12px !important; letter-spacing:2px !important; text-transform:uppercase !important; color:var(--black) !important; background:var(--gold) !important; padding:14px 36px !important; font-weight:400 !important; }
-.nav-mobile-cta:hover { background:var(--gold2) !important; color:var(--black) !important; }
-
-/* ── TABLET: 768px – 1023px ── */
-@media (max-width:1023px) {
-  nav { padding:20px 36px; }
-  .nav-links { gap:24px; }
-  .hero { padding:100px 36px 60px; min-height:auto; justify-content:flex-start; }
-  .hero-data { right:36px; }
-  section { padding:80px 36px; }
-  .thesis { padding:80px 36px; }
-  .proof { padding:80px 36px; }
-  .pulse-section { padding:80px 36px; }
-  .stats { padding:60px 36px; }
-  .about { gap:60px; }
-  .proof-inner { gap:60px; }
-  .pulse-feed { grid-template-columns:1fr 1fr; display:grid; }
-  .pulse-card.card-large { grid-column:span 2; }
-  .build-grid { grid-template-columns:1fr 1fr; }
-  .sectors-grid { grid-template-columns:repeat(3,1fr); }
-  .sector:nth-child(4), .sector:nth-child(5) { }
-  .contact-inner { gap:60px; }
-  footer { padding:40px 36px; }
-  .feed-wrap { padding:36px; }
-}
-
-/* ── PHONE: max 767px ── */
-@media (max-width:767px) {
-  /* Cursor off */
+/* ── MOBILE ── */
+@media (max-width:768px) {
   .cursor,.cursor-ring { display:none; }
   body { cursor:auto; }
-
-  /* Nav: hamburger */
-  nav { padding:18px 20px; position:fixed; }
+  nav { padding:20px 24px; flex-wrap:wrap; gap:16px; }
   .nav-links { display:none; }
-  .nav-cta { display:none; }
-  .nav-hamburger { display:flex; }
-
-  /* Hero */
-  .hero { padding:100px 20px 56px; min-height:auto; justify-content:flex-start; }
+  .nav-cta { font-size:10px; padding:8px 16px; }
+  .hero { padding:0 24px 60px; min-height:100svh; }
   .hero-data { display:none; }
-  .hero-eyebrow { font-size:10px; margin-bottom:20px; }
-  .hero-headline { font-size:clamp(40px,10vw,56px); letter-spacing:-2px; line-height:1; margin-bottom:16px; }
-  .hero-subtitle { font-size:16px; margin-bottom:16px; }
-  .hero-sub { font-size:15px; max-width:100%; margin-bottom:32px; }
-  .hero-actions { flex-direction:column; align-items:flex-start; gap:14px; }
-  .btn-primary { font-size:11px; padding:14px 28px; }
+  .hero-headline { letter-spacing:-1.5px; }
+  .hero-sub { font-size:16px; }
+  .hero-actions { flex-direction:column; align-items:flex-start; gap:16px; }
   .scroll-indicator { display:none; }
-
-  /* Ticker */
-  .ticker-item { padding:0 20px; gap:20px; font-size:10px; }
-
-  /* Stats */
   .stats { grid-template-columns:1fr 1fr; }
-  .stat { padding:28px 20px; }
-  .stat-num { font-size:36px; }
-  .stat-num .unit { font-size:20px; }
-  .stat-label { font-size:10px; }
-
-  /* Sections */
-  section { padding:60px 20px; }
-  .section-title { font-size:clamp(28px,7vw,40px); letter-spacing:-1px; }
-  .section-body { font-size:15px; }
-
-  /* Thesis */
-  .thesis { padding:60px 20px; }
-  .thesis-statement { font-size:clamp(24px,6vw,32px); letter-spacing:-1px; }
-  .thesis-sub { font-size:15px; margin-bottom:40px; }
+  .stat { padding:32px 24px; }
+  .stat-num { font-size:40px; }
+  section { padding:72px 24px; }
+  .thesis { padding:72px 24px; }
   .thesis-cards { grid-template-columns:1fr; }
-  .thesis-card { padding:36px 28px; }
-  .card-title { font-size:clamp(24px,6vw,32px) !important; }
-
-  /* Proof */
-  .proof { padding:60px 20px; }
-  .proof-inner { grid-template-columns:1fr; gap:40px; }
-  .proof-item { grid-template-columns:56px 1fr; gap:16px; padding:20px 0; }
-  .proof-year { font-size:11px; }
-  .proof-headline { font-size:14px; }
-  .proof-detail { font-size:12px; }
-  .about-visual { padding:28px 20px; }
-  .about-quote { font-size:18px; }
-  .about-tags { gap:6px; }
-  .tag { font-size:9px; padding:5px 10px; }
-
-  /* Pulse */
-  .pulse-section { padding:60px 20px; }
-  .pulse-header { flex-direction:column; align-items:flex-start; gap:16px; margin-bottom:32px; }
-  .pulse-title { font-size:clamp(24px,6vw,32px); }
-  .pulse-feed { grid-template-columns:1fr; display:flex; flex-direction:column; background:none; gap:1px; }
-  .pulse-card { padding:28px 24px; width:100%; }
-  .pulse-card.card-large { grid-row:span 1; padding:32px 24px; }
-  .pulse-card-title { font-size:16px !important; }
-  .pulse-card-excerpt { font-size:13px !important; }
-  .pulse-subscribe { flex-direction:column; max-width:100%; }
-  .pulse-subscribe input { border-right:1px solid var(--border); border-bottom:none; }
-  .pulse-subscribe-label { font-size:9px; }
-
-  /* About */
-  .about { grid-template-columns:1fr; gap:40px; }
-
-  /* Build */
-  .build-section { padding:60px 20px; }
+  .proof { padding:72px 24px; }
+  .proof-inner { grid-template-columns:1fr; gap:48px; }
+  .pulse-section { padding:72px 24px; }
+  .pulse-header { flex-direction:column; align-items:flex-start; gap:20px; }
+  .pulse-feed { grid-template-columns:1fr; }
+  .pulse-card.card-large { grid-row:span 1; }
+  .about { grid-template-columns:1fr; gap:48px; }
   .build-grid { grid-template-columns:1fr; }
-  .build-card { padding:32px 24px; }
-  .build-title { font-size:18px; }
-  .build-desc { font-size:13px; }
-
-  /* Sectors */
+  .build-card { padding:36px 28px; }
   .sectors-grid { grid-template-columns:1fr 1fr; }
-  .sector { padding:28px 16px; }
-  .sector-icon { font-size:24px; margin-bottom:10px; }
-  .sector-name { font-size:11px; }
-
-  /* Mission */
-  .mission { padding:72px 20px; }
-  .mission-text { font-size:clamp(24px,6vw,36px); letter-spacing:-1px; }
-  .mission-sub { font-size:14px; }
-
-  /* Contact */
-  .contact { padding:60px 20px; }
-  .contact-inner { grid-template-columns:1fr; gap:40px; }
-  .form-input,.form-select,.form-textarea { font-size:16px; } /* prevent iOS zoom */
-
-  /* Footer */
-  footer { flex-direction:column; gap:24px; text-align:center; padding:36px 20px; }
-  .footer-statement { font-size:13px; }
+  .sector:last-child { grid-column:span 2; }
+  .mission { padding:80px 24px; }
+  .contact-inner { grid-template-columns:1fr; gap:48px; }
+  footer { flex-direction:column; gap:20px; text-align:center; padding:40px 24px; }
   .footer-right { text-align:center; }
-  .footer-logo { font-size:14px; }
+  .footer-statement { text-align:center; }
+  .ticker-item { padding:0 24px; gap:24px; }
 }
-
-/* ── SMALL PHONE: max 380px ── */
-@media (max-width:380px) {
+@media (max-width:480px) {
   .stats { grid-template-columns:1fr; }
-  .hero-headline { font-size:36px; }
-  .sectors-grid { grid-template-columns:1fr 1fr; }
-  nav { padding:16px 16px; }
-  .thesis-card { padding:28px 20px; }
+  nav { padding:16px 20px; }
+  section { padding:60px 20px; }
+  .thesis,.proof,.pulse-section { padding:60px 20px; }
+  .hero { padding:0 20px 60px; }
+  .about-visual { padding:28px 24px; }
+  .pulse-subscribe { flex-direction:column; }
+  .pulse-subscribe input { border-right:1px solid var(--border); border-bottom:none; }
 }
-
-.nav-dropdown { position:relative; }
-.nav-dropdown > a::after { content:''; position:absolute; bottom:-3px; left:0; right:0; height:1px; background:var(--gold); transform:scaleX(0); transition:transform 0.2s; }
-.nav-dropdown:hover > a, .nav-dropdown > a.active { color:var(--white); }
-.nav-dropdown:hover > a::after, .nav-dropdown > a.active::after { transform:scaleX(1); }
-.nav-drop-menu { display:none; position:absolute; top:calc(100% + 20px); right:0; background:rgba(12,12,12,0.98); border:1px solid var(--border); border-top:2px solid var(--gold); min-width:240px; z-index:200; backdrop-filter:blur(16px); }
-.nav-dropdown:hover .nav-drop-menu { display:block; }
-.nav-drop-item { display:block; padding:11px 20px; font-family:'DM Mono',monospace; font-size:10px; letter-spacing:1.5px; text-transform:uppercase; color:var(--dim); text-decoration:none; transition:all 0.15s; border-bottom:1px solid var(--border); white-space:nowrap; }
-.nav-drop-item:last-child { border-bottom:none; }
-.nav-drop-item:hover { color:var(--gold); background:rgba(200,169,110,0.05); padding-left:26px; }
-.nav-drop-label { display:block; padding:8px 20px 4px; font-family:'DM Mono',monospace; font-size:8px; letter-spacing:2px; text-transform:uppercase; color:var(--muted); border-bottom:1px solid var(--border); }
 </style>
 </head>
 <body>
@@ -303,8 +368,7 @@ nav { position:fixed; top:0; left:0; right:0; z-index:100; padding:28px 60px; di
     <li><a href="rise.html">Rise</a></li>
     <li><a href="thinking.html">Thinking</a></li>
     <li><a href="about.html">About</a></li>
-    
-<li class="nav-dropdown">
+    <li class="nav-dropdown">
       <a href="record/index.html">Record</a>
       <div class="nav-drop-menu">
         <span class="nav-drop-label">Projects &amp; Credentials</span>
@@ -320,12 +384,8 @@ nav { position:fixed; top:0; left:0; right:0; z-index:100; padding:28px 60px; di
     </li>
   </ul>
   <a href="#contact" class="nav-cta">Work With Us</a>
-  <button class="nav-hamburger" id="hamburger" aria-label="Menu">
-    <span></span><span></span><span></span>
-  </button>
+  <button class="nav-hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
 </nav>
-
-<!-- Mobile Menu Overlay -->
 <div class="nav-mobile-menu" id="mobileMenu">
   <a href="index.html" class="mob-main">Home</a>
   <a href="intelligence.html" class="mob-main">Intelligence</a>
@@ -341,8 +401,10 @@ nav { position:fixed; top:0; left:0; right:0; z-index:100; padding:28px 60px; di
   <a href="record/medical-ai.html" class="mob-record">Medical AI — GRaDPaLM</a>
   <a href="record/peter-antal.html" class="mob-record">Dr. Péter Antal</a>
   <a href="record/press.html" class="mob-record">Press Kit</a>
-  <a href="index.html#contact" class="mob-cta">Work With Us</a>
-</div><!-- HERO -->
+  <a href="#contact" class="mob-cta">Work With Us</a>
+</div>
+
+<!-- HERO -->
 <section class="hero">
   <div class="hero-grid"></div>
   <div class="hero-glow"></div>
@@ -361,7 +423,6 @@ nav { position:fixed; top:0; left:0; right:0; z-index:100; padding:28px 60px; di
       building what<br>
       <span class="gold">AI runs on.</span>
     </h1>
-    <p class="hero-subtitle">Now packaging that intelligence for your industry.</p>
     <p class="hero-sub">
       E-Group builds the <strong>deep infrastructure of trust, data and intelligence</strong> that enterprises need to make AI actually work. Not the hype. The foundation.
     </p>
@@ -472,22 +533,22 @@ nav { position:fixed; top:0; left:0; right:0; z-index:100; padding:28px 60px; di
         <div class="proof-item reveal reveal-delay-1">
           <div class="proof-year">2024</div>
           <div class="proof-content">
-            <div class="proof-headline">IPCEI-CIS — FedEU.ai Project</div>
-            <div class="proof-detail">European Commission approved E-Group's FedEU.ai (Dec 2023) — one of 19 projects across 7 EU states. E-Group co-leads Workstream 3 and the AI Cluster.</div>
+            <div class="proof-headline">EU DOME Cloud Infrastructure</div>
+            <div class="proof-detail">Selected as Hungary's representative for the EU federated cloud initiative.</div>
           </div>
         </div>
         <div class="proof-item reveal reveal-delay-2">
           <div class="proof-year">2024</div>
           <div class="proof-content">
-            <div class="proof-headline">Medical AI — Double International First Place</div>
-            <div class="proof-detail">Team Benedek Ágota, Csaba Potyók &amp; Tamás Mészáros PhD — GRaDPaLM system. Neumann Colloquium &amp; BME TDK, Nov 2025.</div>
+            <div class="proof-headline">Medical AI — Double First Place</div>
+            <div class="proof-detail">Back-to-back victories at international AI research events. Our HealthTech team leads Europe.</div>
           </div>
         </div>
         <div class="proof-item reveal reveal-delay-3">
-          <div class="proof-year">2010s</div>
+          <div class="proof-year">2023</div>
           <div class="proof-content">
             <div class="proof-headline">KAÜ National Digital Identity</div>
-            <div class="proof-detail">Designed &amp; implemented personally by Co-founder András Nagy. Hungary's national digital authorisation service — authenticates millions of citizens.</div>
+            <div class="proof-detail">Hungary's national digital identity infrastructure — designed, built, and operated by E-Group.</div>
           </div>
         </div>
         <div class="proof-item reveal reveal-delay-4">
@@ -503,7 +564,7 @@ nav { position:fixed; top:0; left:0; right:0; z-index:100; padding:28px 60px; di
       <div class="about-visual">
         <div class="about-quote">
           "We have been building the infrastructure others will need for decades.
-          <em>The world has finally caught up.</em> That is what #DoersParadise has always meant."
+          <em>The world has finally caught up.</em>"
         </div>
         <div class="about-attr">Antal Kuthy — Founder &amp; CEO, E-Group</div>
         <div class="about-tags" style="margin-top:32px; padding-top:32px; border-top:1px solid var(--border);">
@@ -578,10 +639,10 @@ nav { position:fixed; top:0; left:0; right:0; z-index:100; padding:28px 60px; di
     <!-- Signal 2 -->
     <a href="thinking.html#medical-ai" class="pulse-card">
       <div class="content-type type-signal">Signal</div>
-      <div class="pulse-card-title">Medical AI double victory — GRaDPaLM system wins two international events</div>
-      <p class="pulse-card-excerpt">Back-to-back wins at Neumann Colloquium and BME TDK. Team: Benedek Ágota, Csaba Potyók &amp; Tamás Mészáros PhD — the GRaDPaLM system.</p>
+      <div class="pulse-card-title">Our HealthTech team just took first place again</div>
+      <p class="pulse-card-excerpt">Back-to-back wins at international medical AI events. Dr. Anna Kovács leads research that is getting attention we did not expect this quickly.</p>
       <div class="pulse-card-meta">
-        <span class="pulse-meta-author">Benedek Á.</span>
+        <span class="pulse-meta-author">Dr. Anna K.</span>
         <span class="pulse-meta-date">1 week ago</span>
       </div>
     </a>
@@ -605,19 +666,19 @@ nav { position:fixed; top:0; left:0; right:0; z-index:100; padding:28px 60px; di
   <div class="build-grid">
     <div class="build-card reveal">
       <div class="build-num">01</div>
-      <div class="build-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="display:inline-block;vertical-align:middle;flex-shrink:0;" ><path d="M14 2L4 6.5V14c0 5.5 4.5 10 10 12 5.5-2 10-6.5 10-12V6.5L14 2Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" fill="none"/><rect x="10.5" y="12" width="7" height="6" rx="1" stroke="currentColor" stroke-width="1.5" fill="none"/><path d="M11.5 12V10a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none"/><circle cx="14" cy="15" r="1" fill="currentColor"/></svg></div>
+      <div class="build-icon">\\ud83d\\udd10</div>
       <div class="build-title">Trust &amp; Identity</div>
       <div class="build-desc">Digital identity systems, verifiable credentials, and trust frameworks that let organisations share data securely across boundaries. Built on cryptographic foundations we have been developing since 1993.</div>
     </div>
     <div class="build-card reveal reveal-delay-1">
       <div class="build-num">02</div>
-      <div class="build-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="display:inline-block;vertical-align:middle;flex-shrink:0;" ><path d="M16 3L6 16H14L12 25L22 12H14L16 3Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" fill="none"/></svg></div>
+      <div class="build-icon">⚡</div>
       <div class="build-title">Smart Data &amp; AI</div>
       <div class="build-desc">Data lakes, applied AI, and intelligence platforms that turn organisational data into competitive advantage. Not off-the-shelf tools — purpose-built for the specific demands of regulated industries.</div>
     </div>
     <div class="build-card reveal reveal-delay-2">
       <div class="build-num">03</div>
-      <div class="build-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="display:inline-block;vertical-align:middle;flex-shrink:0;" ><path d="M20 8.5A8 8 0 1 0 22 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none"/><polyline points="18,5 22,8.5 18.5,12" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" fill="none"/></svg></div>
+      <div class="build-icon">\\ud83d\\udd04</div>
       <div class="build-title">Transactional Infrastructure</div>
       <div class="build-desc">Clearing, settlement, payment gateways and communication platforms for financial institutions and enterprise networks. Proven in production at national scale.</div>
     </div>
@@ -630,11 +691,11 @@ nav { position:fixed; top:0; left:0; right:0; z-index:100; padding:28px 60px; di
   <h2 class="section-title reveal">Where our work<br>has the most impact.</h2>
   <p class="section-body reveal">We operate across five sectors where the combination of AI, data sovereignty and digital trust creates the most significant opportunity — and the highest barrier to entry for less experienced competitors.</p>
   <div class="sectors-grid">
-    <div class="sector reveal"><span class="sector-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="display:inline-block;vertical-align:middle;flex-shrink:0;" ><rect x="3" y="13" width="22" height="12" stroke="currentColor" stroke-width="1.5" fill="none"/><path d="M1 13L14 4L27 13" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" fill="none"/><line x1="7" y1="13" x2="7" y2="25" stroke="currentColor" stroke-width="1.5"/><line x1="11" y1="13" x2="11" y2="25" stroke="currentColor" stroke-width="1.5"/><line x1="17" y1="13" x2="17" y2="25" stroke="currentColor" stroke-width="1.5"/><line x1="21" y1="13" x2="21" y2="25" stroke="currentColor" stroke-width="1.5"/><line x1="3" y1="25" x2="25" y2="25" stroke="currentColor" stroke-width="1.5"/></svg></span><div class="sector-name">FinTech</div></div>
-    <div class="sector reveal reveal-delay-1"><span class="sector-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="display:inline-block;vertical-align:middle;flex-shrink:0;" ><circle cx="14" cy="14" r="11" stroke="currentColor" stroke-width="1.5" fill="none"/><line x1="14" y1="8" x2="14" y2="20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="8" y1="14" x2="20" y2="14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span><div class="sector-name">HealthTech</div></div>
-    <div class="sector reveal reveal-delay-2"><span class="sector-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="display:inline-block;vertical-align:middle;flex-shrink:0;" ><rect x="3" y="12" width="22" height="13" stroke="currentColor" stroke-width="1.5" fill="none"/><path d="M1 12L14 3L27 12" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" fill="none"/><rect x="11" y="17" width="6" height="8" stroke="currentColor" stroke-width="1.5" fill="none"/><line x1="3" y1="25" x2="25" y2="25" stroke="currentColor" stroke-width="2"/></svg></span><div class="sector-name">GovTech</div></div>
-    <div class="sector reveal reveal-delay-3"><span class="sector-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="display:inline-block;vertical-align:middle;flex-shrink:0;" ><path d="M14 3C14 3 20 8 20 16L14 25L8 16C8 8 14 3 14 3Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" fill="none"/><circle cx="14" cy="14" r="2.5" stroke="currentColor" stroke-width="1.5" fill="none"/><path d="M8 16L4 18L6 22L8 20" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" fill="none"/><path d="M20 16L24 18L22 22L20 20" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" fill="none"/></svg></span><div class="sector-name">SpaceTech</div></div>
-    <div class="sector reveal reveal-delay-4"><span class="sector-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="display:inline-block;vertical-align:middle;flex-shrink:0;" ><path d="M16 3L6 16H14L12 25L22 12H14L16 3Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" fill="none"/></svg></span><div class="sector-name">EnergyTech</div></div>
+    <div class="sector reveal"><span class="sector-icon">\\ud83c\\udfe6</span><div class="sector-name">FinTech</div></div>
+    <div class="sector reveal reveal-delay-1"><span class="sector-icon">\\ud83c\\udfe5</span><div class="sector-name">HealthTech</div></div>
+    <div class="sector reveal reveal-delay-2"><span class="sector-icon">\\ud83c\\udfdb</span><div class="sector-name">GovTech</div></div>
+    <div class="sector reveal reveal-delay-3"><span class="sector-icon">\\ud83d\\ude80</span><div class="sector-name">SpaceTech</div></div>
+    <div class="sector reveal reveal-delay-4"><span class="sector-icon">⚡</span><div class="sector-name">EnergyTech</div></div>
   </div>
 </section>
 
@@ -657,11 +718,11 @@ nav { position:fixed; top:0; left:0; right:0; z-index:100; padding:28px 60px; di
         <div class="contact-detail reveal"><span class="contact-detail-label">Headquarters</span><span class="contact-detail-value">Budapest, Hungary</span></div>
         <div class="contact-detail reveal reveal-delay-1"><span class="contact-detail-label">Operating Since</span><span class="contact-detail-value">1993 — 30+ years</span></div>
         <div class="contact-detail reveal reveal-delay-2"><span class="contact-detail-label">Focus</span><span class="contact-detail-value">Enterprise AI Infrastructure</span></div>
-        <div class="contact-detail reveal reveal-delay-3"><span class="contact-detail-label">LinkedIn</span><span class="contact-detail-value"><a href="https://www.linkedin.com/company/e-group-ict-software/" target="_blank" style="color:var(--light);text-decoration:none;border-bottom:1px solid var(--border);" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--light)'">E-Group ICT Group →</a></span></div>
+        <div class="contact-detail reveal reveal-delay-3"><span class="contact-detail-label">LinkedIn</span><span class="contact-detail-value">E-Group ICT Group</span></div>
       </div>
     </div>
     <div class="contact-right reveal reveal-delay-2">
-      <div class="contact-form" id="contactForm">
+      <div class="contact-form">
         <div class="form-group"><label class="form-label">Your Name</label><input type="text" class="form-input" placeholder="Name"></div>
         <div class="form-group"><label class="form-label">Organisation</label><input type="text" class="form-input" placeholder="Company or institution"></div>
         <div class="form-group"><label class="form-label">Email</label><input type="email" class="form-input" placeholder="your@email.com"></div>
@@ -682,8 +743,7 @@ nav { position:fixed; top:0; left:0; right:0; z-index:100; padding:28px 60px; di
           </select>
         </div>
         <div class="form-group"><label class="form-label">What Are You Building?</label><textarea class="form-textarea" placeholder="Tell us briefly what you're working on and what you need..."></textarea></div>
-        <button class="form-submit" id="formSubmit" type="button" onclick="submitForm()">Send Message →</button>
-        <div id="formMsg" style="display:none;margin-top:12px;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:1px;"></div>
+        <button class="form-submit">Send Message →</button>
       </div>
     </div>
   </div>
@@ -731,42 +791,6 @@ const observer = new IntersectionObserver(entries => {
   entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
 }, { threshold: 0.1 });
 reveals.forEach(el => observer.observe(el));
-
-// Form submission
-function submitForm() {
-  const name = document.querySelector('.form-input[placeholder="Name"]').value;
-  const email = document.querySelector('.form-input[placeholder="your@email.com"]').value;
-  const msg = document.getElementById('formMsg');
-  const btn = document.getElementById('formSubmit');
-  if (!name || !email) {
-    msg.style.display='block'; msg.style.color='var(--gold)';
-    msg.textContent='Please fill in your name and email.'; return;
-  }
-  // Collect all form data
-  const org = document.querySelectorAll('.form-input')[1].value;
-  const interest = document.querySelector('.form-select').value;
-  const building = document.querySelector('.form-textarea').value;
-  btn.textContent='Sending...'; btn.disabled=true;
-  fetch('https://formspree.io/f/REPLACE_WITH_YOUR_FORM_ID', {
-    method:'POST',
-    headers:{'Content-Type':'application/json','Accept':'application/json'},
-    body:JSON.stringify({name,email,organisation:org,interest,building})
-  }).then(r=>{
-    if(r.ok){
-      msg.style.display='block'; msg.style.color='var(--teal)';
-      msg.textContent='Message sent. We will respond within one working day.';
-      btn.textContent='Sent ✓';
-    } else {
-      msg.style.display='block'; msg.style.color='var(--gold)';
-      msg.textContent='Something went wrong. Please email us directly.';
-      btn.textContent='Send Message →'; btn.disabled=false;
-    }
-  }).catch(()=>{
-    msg.style.display='block'; msg.style.color='var(--gold)';
-    msg.textContent='Could not send. Please email us at hello@egroup.hu';
-    btn.textContent='Send Message →'; btn.disabled=false;
-  });
-}
 
 // Hamburger menu
 const hamburger = document.getElementById('hamburger');
