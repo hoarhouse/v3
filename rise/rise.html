@@ -53,7 +53,7 @@ nav { position:fixed; top:0; left:0; right:0; z-index:100; padding:28px 60px; di
 .nav-mobile-cta { font-family:'DM Mono',monospace !important; font-size:12px !important; letter-spacing:2px !important; text-transform:uppercase !important; color:var(--black) !important; background:var(--accent) !important; padding:14px 36px !important; font-weight:400 !important; margin-top:24px !important; border-bottom:none !important; }
 
 /* ── HERO ── */
-.page-hero { min-height:100vh; display:flex; flex-direction:column; justify-content:flex-end; padding:0 60px 80px; position:relative; overflow:hidden; }
+.page-hero { min-height:100vh; display:flex; flex-direction:column; justify-content:flex-end; padding:88px 60px 80px; position:relative; overflow:hidden; }
 .hero-grid { position:absolute; inset:0; background-image:linear-gradient(rgba(212,255,0,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(212,255,0,0.03) 1px,transparent 1px); background-size:80px 80px; mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 30%,transparent 100%); }
 .hero-glow { position:absolute; top:-20%; left:50%; transform:translateX(-50%); width:900px; height:600px; background:radial-gradient(ellipse,rgba(212,255,0,0.05) 0%,transparent 65%); pointer-events:none; }
 .hero-glow-2 { position:absolute; bottom:0; right:-10%; width:600px; height:600px; background:radial-gradient(ellipse,rgba(78,205,196,0.04) 0%,transparent 65%); pointer-events:none; }
@@ -215,7 +215,7 @@ footer { background:var(--black); border-top:1px solid var(--border); padding:48
 @media (max-width:1023px) {
   nav { padding:20px 36px; }
   .nav-links { gap:24px; }
-  .page-hero { padding:0 36px 64px; }
+  .page-hero { padding:88px 36px 64px; }
   .hero-status { right:36px; }
   .hero-dual { grid-template-columns:1fr; }
   .how-section { padding:80px 36px; }
@@ -241,7 +241,7 @@ footer { background:var(--black); border-top:1px solid var(--border); padding:48
   .nav-cta { display:none; }
   .nav-hamburger { display:flex; }
 
-  .page-hero { padding:0 20px 56px; min-height:100svh; }
+  .page-hero { padding:80px 20px 56px; min-height:100svh; }
   .hero-status { display:none; }
   .hero-eyebrow { font-size:10px; margin-bottom:16px; }
   .hero-headline { font-size:clamp(38px,9vw,56px); letter-spacing:-2px; }
