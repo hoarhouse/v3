@@ -253,8 +253,9 @@ footer { background:var(--black); border-top:1px solid var(--border); padding:48
   .filter-btn { padding:14px 16px; font-size:10px; white-space:nowrap; flex-shrink:0; }
   .sector-pill { padding:14px 14px; font-size:9px; white-space:nowrap; flex-shrink:0; }
   .feed-wrap { padding:24px; }
-  .feed-grid { grid-template-columns:1fr; }
-  .span-8,.span-4,.span-6,.span-4-col,.span-12 { grid-column:span 1; }
+  .feed-wrap { max-width:100%; overflow-x:hidden; }
+  .feed-grid { grid-template-columns:1fr !important; width:100%; }
+  .span-8,.span-4,.span-6,.span-4-col,.span-12 { grid-column:span 1 !important; }
   .card-horizontal { flex-direction:column; }
   .card-horizontal .card-aside { width:100%; flex-direction:row; align-items:center; }
   .subscribe-strip { grid-column:span 1; }
