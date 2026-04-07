@@ -3,6 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="What E-Group is thinking about right now. Deep reads, signals, and in-the-room conversations about AI infrastructure, sector intelligence, and the future of enterprise AI.">
+  <meta name="robots" content="index, follow">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Thinking — E-Group">
+  <meta property="og:description" content="What E-Group is thinking about right now. Deep reads, signals, and in-the-room conversations about AI infrastructure, sector intelligence, and the future of enterprise AI.">
+  <meta property="og:url" content="https://hoarhouse.github.io/v3/rise/thinking.html">
+  <meta property="og:site_name" content="E-Group">
+  <meta property="og:image" content="https://hoarhouse.github.io/v3/rise/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Thinking — E-Group">
+  <meta name="twitter:description" content="What E-Group is thinking about right now. Deep reads, signals, and in-the-room conversations about AI infrastructure, sector intelligence, and the future of enterprise AI.">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23080808'/%3E%3Ctext x='5' y='25' font-family='Georgia,serif' font-weight='900' font-size='26' fill='%23C8A96E'%3EE%3C/text%3E%3C/svg%3E">
 <title>Thinking — E-Group</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -385,7 +397,7 @@ footer { background:var(--black); border-top:1px solid var(--border); padding:48
       </a>
       <a href="#medical-ai" class="lb-entry">
         <div class="lb-rank">03</div>
-        <div class="lb-info"><div class="lb-author">Dr. Anna Kovács</div><div class="lb-title">What winning back-to-back actually taught us</div></div>
+        <div class="lb-info"><div class="lb-author">Benedek Ágota</div><div class="lb-title">What winning back-to-back actually taught us</div></div>
         <div class="lb-time">8 min</div>
       </a>
     </div>
@@ -473,11 +485,11 @@ footer { background:var(--black); border-top:1px solid var(--border); padding:48
     <a href="#medical-ai" class="card card-deep card-medium col-4c reveal" data-type="deep" data-sector="healthtech" id="medical-ai">
       <div class="type-badge badge-deep">Deep Read</div>
       <div class="card-title">What winning back-to-back international AI events actually taught us</div>
-      <p class="card-excerpt">Dr. Anna Kovács leads the HealthTech AI research team. Back-to-back first places at international events. We asked her what the wins actually revealed — about the field, and about where we are going next.</p>
+      <p class="card-excerpt">Team Benedek Ágota, Csaba Potyók and Tamás Mészáros PhD won back-to-back at Neumann Colloquium and BME TDK with the GRaDPaLM system. We asked Ágota what the wins actually revealed — about clinical AI, and about where they are going next.</p>
       <div class="card-footer">
         <div class="card-author">
-          <div class="author-name">Dr. Anna Kovács</div>
-          <div class="author-role">AI Research Lead</div>
+          <div class="author-name">Benedek Ágota</div>
+          <div class="author-role">AI Researcher — GRaDPaLM</div>
           <div class="voice-badge">Voice of HealthTech</div>
         </div>
         <div class="card-right">
@@ -520,8 +532,8 @@ footer { background:var(--black); border-top:1px solid var(--border); padding:48
     <a href="#dome-selection" class="card card-room card-horizontal col-12 reveal" data-type="room" data-sector="govtech ai" id="dome-selection">
       <div class="card-h-body">
         <div class="type-badge badge-room">In The Room</div>
-        <div class="card-title" style="font-size:clamp(16px,1.8vw,22px);">What it actually felt like to be selected as Hungary's EU DOME representative</div>
-        <p class="card-excerpt" style="font-size:15px;color:var(--mid);margin-top:8px;">We do not normally write about wins like this. But the EU DOME selection was different — it was the moment where thirty years of sovereign infrastructure work was formally recognised at a European level. This is the room where we heard the news, and what we talked about for the next three hours.</p>
+        <div class="card-title" style="font-size:clamp(16px,1.8vw,22px);">What it actually felt like to receive EU IPCEI-CIS approval for FedEU.ai</div>
+        <p class="card-excerpt" style="font-size:15px;color:var(--mid);margin-top:8px;">We do not normally write about wins like this. But the IPCEI-CIS / FedEU.ai approval was different — it was the moment where thirty years of sovereign infrastructure work was formally recognised at a European level. This is the room where we heard the news, and what we talked about for the next three hours.</p>
       </div>
       <div class="card-h-aside">
         <div class="card-right">
@@ -631,6 +643,25 @@ document.getElementById('loadMore').addEventListener('click', function() {
   this.style.color = 'var(--dim)';
   this.style.cursor = 'default';
 });
+
+// Subscribe
+function submitSubscribe() {
+  const input = document.querySelector('.pulse-subscribe input');
+  const msg = document.getElementById('subMsg');
+  const btn = document.getElementById('subBtn');
+  if (!input.value || !input.value.includes('@')) {
+    msg.style.display='block'; msg.style.color='var(--gold)'; msg.textContent='Please enter a valid email.'; return;
+  }
+  btn.textContent='...'; btn.disabled=true;
+  fetch('https://formspree.io/f/REPLACE_WITH_YOUR_FORM_ID', {
+    method:'POST',
+    headers:{'Content-Type':'application/json','Accept':'application/json'},
+    body:JSON.stringify({email:input.value,type:'subscribe'})
+  }).then(r=>{
+    if(r.ok){msg.style.display='block';msg.style.color='var(--teal)';msg.textContent='Subscribed. You'll hear from us when we publish.';btn.textContent='Done ✓';}
+    else{msg.style.display='block';msg.style.color='var(--gold)';msg.textContent='Something went wrong. Try again.';btn.textContent='Subscribe →';btn.disabled=false;}
+  }).catch(()=>{msg.style.display='block';msg.style.color='var(--gold)';msg.textContent='Could not subscribe. Try refreshing.';btn.textContent='Subscribe →';btn.disabled=false;});
+}
 
 // Hamburger
 const hamburger  = document.getElementById('hamburger');
