@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="E-Group is an active member of the European Digital Identity Wallet Consortium (EWC). E-Group's MyD Wallet has successfully passed all eIDAS 2 testbed scenarios — backward compatible with KAÜ, forward compatible with the EU-wide 2026 rollout.">
+<meta property="og:title" content="eIDAS 2.0 — MyD Wallet — E-Group Record">
+<meta property="og:description" content="E-Group is an active member of the European Digital Identity Wallet Consortium (EWC). E-Group's MyD Wallet has successfully passed all eIDAS 2 testbed scenarios — backward compatible with KAÜ, forward compatible with the EU-wide 2026 rollout.">
+<meta property="og:url" content="https://hoarhouse.github.io/v3/rise/record/eidas.html">
+<meta property="og:image" content="https://hoarhouse.github.io/v3/rise/og-image.png">
+<meta name="robots" content="index, follow">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23080808'/%3E%3Ctext x='5' y='25' font-family='Georgia,serif' font-weight='900' font-size='26' fill='%23C8A96E'%3EE%3C/text%3E%3C/svg%3E">
+<title>eIDAS 2.0 — MyD Wallet — E-Group Record</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<script type="application/ld+json">{
+  "@context":"https://schema.org",
+  "@type":"SoftwareApplication",
+  "name":"MyD Wallet",
+  "description":"E-Group EU digital identity wallet. Passed all eIDAS 2 testbed scenarios. Member of European Digital Identity Wallet Consortium (EWC). Compatible with KAÜ (eIDAS 1.0) and EU EUDI Wallet (eIDAS 2.0).",
+  "applicationCategory":"IdentityManagement",
+  "creator":{"@type":"Organization","name":"E-Group ICT Software Zrt.","url":"https://www.egroup.hu"},
+  "featureList":["eIDAS 1.0 compatible","eIDAS 2.0 testbed passed","OID4VCI","OID4VP","KAÜ backward compatible"]
+}</script>
+<style>
+:root {
+  --black:#080808;--ink:#0F0F0F;--dark:#161616;--panel:#1C1C1C;
+  --border:#252525;--muted:#333;--dim:#555;--mid:#777;
+  --text:#B0B0B0;--light:#D0D0D0;--white:#EFEFEF;
+  --gold:#C8A96E;--gold2:#E8C98E;--teal:#4ECDC4;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--black);color:var(--text);font-family:'DM Sans',sans-serif;font-size:16px;line-height:1.6;overflow-x:hidden;cursor:none;}
+.cursor{position:fixed;width:8px;height:8px;background:var(--gold);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);mix-blend-mode:difference;}
+.cursor-ring{position:fixed;width:32px;height:32px;border:1px solid rgba(200,169,110,0.4);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:all 0.15s ease;}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");opacity:0.025;pointer-events:none;z-index:1000;}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:28px 60px;display:flex;align-items:center;justify-content:space-between;background:rgba(8,8,8,0.97);border-bottom:1px solid var(--border);backdrop-filter:blur(12px);}
+.nav-logo{display:flex;align-items:center;gap:14px;text-decoration:none;}
+.logo-e{font-family:'Syne',sans-serif;font-weight:800;font-size:26px;color:var(--gold);line-height:1;letter-spacing:-1px;}
+.nav-logo-text{font-family:'Syne',sans-serif;font-weight:600;font-size:15px;color:var(--white);letter-spacing:3px;text-transform:uppercase;}
+.nav-links{display:flex;align-items:center;gap:40px;list-style:none;}
+.nav-links a{font-family:'DM Mono',monospace;font-size:12px;color:var(--mid);text-decoration:none;letter-spacing:1.5px;text-transform:uppercase;transition:color 0.2s;position:relative;}
+.nav-links a::after{content:'';position:absolute;bottom:-3px;left:0;right:0;height:1px;background:var(--gold);transform:scaleX(0);transition:transform 0.2s;}
+.nav-links a:hover,.nav-links a.active{color:var(--white);}
+.nav-links a.active::after,.nav-links a:hover::after{transform:scaleX(1);}
+.nav-cta{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);border:1px solid rgba(200,169,110,0.35);padding:10px 22px;text-decoration:none;transition:all 0.2s;position:relative;overflow:hidden;}
+.nav-cta::before{content:'';position:absolute;inset:0;background:var(--gold);transform:translateX(-100%);transition:transform 0.25s ease;z-index:-1;}
+.nav-cta:hover{color:var(--black);}
+.nav-cta:hover::before{transform:translateX(0);}
+.nav-hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none;z-index:200;}
+.nav-hamburger span{display:block;width:22px;height:1.5px;background:var(--gold);transition:all 0.3s ease;transform-origin:center;}
+.nav-hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
+.nav-hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0);}
+.nav-hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
+.nav-mobile-menu{display:none;position:fixed;inset:0;background:rgba(8,8,8,0.98);z-index:150;flex-direction:column;align-items:center;justify-content:center;backdrop-filter:blur(20px);}
+.nav-mobile-menu.open{display:flex;}
+.nav-mobile-menu a{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(28px,7vw,44px);color:var(--white);text-decoration:none;letter-spacing:-1px;padding:14px 0;border-bottom:1px solid var(--border);width:100%;text-align:center;transition:color 0.2s;}
+.nav-mobile-menu a:hover{color:var(--gold);}
+.nav-mobile-menu a:last-child{border-bottom:none;}
+.nav-mobile-cta{font-family:'DM Mono',monospace!important;font-size:12px!important;letter-spacing:2px!important;text-transform:uppercase!important;color:var(--black)!important;background:var(--gold)!important;padding:14px 36px!important;font-weight:400!important;margin-top:24px!important;border-bottom:none!important;}
+footer{background:var(--black);border-top:1px solid var(--border);padding:48px 60px;display:flex;justify-content:space-between;align-items:center;}
+.footer-left{display:flex;flex-direction:column;gap:6px;}
+.footer-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:16px;color:var(--white);letter-spacing:3px;text-transform:uppercase;}
+.footer-logo span{color:var(--gold);}
+.footer-tagline{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);}
+.footer-mid{font-family:'Syne',sans-serif;font-size:14px;color:var(--mid);max-width:420px;text-align:center;line-height:1.6;}
+.footer-mid em{color:var(--gold);font-style:normal;}
+.footer-right{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1.5px;color:var(--dim);text-align:right;line-height:1.8;}
+@keyframes pulse{0%,100%{opacity:0.4;transform:scale(1);}50%{opacity:1;transform:scale(1.3);}}
+@keyframes fadeInUp{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity 0.6s ease,transform 0.6s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+.rd1{transition-delay:0.1s;}.rd2{transition-delay:0.2s;}.rd3{transition-delay:0.3s;}
+@media(max-width:1023px){nav{padding:20px 36px;}footer{padding:40px 36px;flex-direction:column;gap:20px;text-align:center;}.footer-right{text-align:center;}}
+@media(max-width:767px){.cursor,.cursor-ring{display:none;}body{cursor:auto;}nav{padding:16px 20px;}.nav-links,.nav-cta{display:none;}.nav-hamburger{display:flex;}footer{padding:32px 20px;}}
+
+.page-hero{padding:160px 60px 80px;border-bottom:1px solid var(--border);position:relative;overflow:hidden;}
+.hero-glow{position:absolute;top:-100px;right:-100px;width:700px;height:500px;background:radial-gradient(ellipse,rgba(200,169,110,0.05) 0%,transparent 65%);pointer-events:none;}
+.breadcrumb{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-bottom:20px;display:flex;align-items:center;gap:10px;}
+.breadcrumb a{color:var(--dim);text-decoration:none;transition:color 0.2s;}
+.breadcrumb a:hover{color:var(--gold);}
+.breadcrumb span{color:var(--gold);}
+.page-hero h1{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(32px,4.5vw,62px);color:var(--white);letter-spacing:-2px;line-height:1;margin-bottom:20px;max-width:820px;}
+.page-hero h1 em{font-style:normal;color:var(--gold);}
+.hero-meta{display:flex;flex-wrap:wrap;gap:16px;margin-top:20px;}
+.hero-badge{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;padding:6px 14px;border:1px solid;}
+.badge-eu{color:var(--gold);border-color:rgba(200,169,110,0.3);}
+.badge-live{color:var(--teal);border-color:rgba(78,205,196,0.3);display:flex;align-items:center;gap:6px;}
+.live-dot{width:5px;height:5px;border-radius:50%;background:var(--teal);animation:pulse 1.5s ease-in-out infinite;}
+.badge-default{color:var(--dim);border-color:var(--border);}
+.content-body{max-width:1200px;margin:0 auto;padding:80px 60px;}
+.two-col{display:grid;grid-template-columns:2fr 1fr;gap:80px;align-items:flex-start;}
+.prose h2{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(22px,2.5vw,32px);color:var(--white);letter-spacing:-0.8px;line-height:1.05;margin:48px 0 16px;}
+.prose h2:first-child{margin-top:0;}
+.prose p{font-size:16px;font-weight:300;color:var(--mid);line-height:1.9;margin-bottom:16px;}
+.prose p strong{color:var(--light);font-weight:500;}
+.prose ul{margin:16px 0 20px 0;display:flex;flex-direction:column;gap:10px;}
+.prose ul li{font-size:15px;color:var(--mid);line-height:1.7;padding-left:20px;position:relative;}
+.prose ul li::before{content:'—';position:absolute;left:0;color:var(--gold);opacity:0.6;}
+.sidebar{position:sticky;top:100px;}
+.sidebar-card{background:var(--dark);border:1px solid var(--border);padding:28px 24px;margin-bottom:1px;}
+.sidebar-card:first-child{border-top:2px solid var(--gold);}
+.sc-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:var(--dim);margin-bottom:12px;}
+.sc-rows{display:flex;flex-direction:column;gap:0;}
+.sc-row{display:flex;justify-content:space-between;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--border);gap:12px;}
+.sc-row:last-child{border-bottom:none;}
+.sc-key{font-family:'DM Mono',monospace;font-size:10px;color:var(--dim);letter-spacing:0.5px;flex-shrink:0;}
+.sc-val{font-size:13px;color:var(--light);text-align:right;line-height:1.4;}
+.sc-val a{color:var(--gold);text-decoration:none;}
+.source-list{display:flex;flex-direction:column;gap:0;}
+.source-item{padding:12px 0;border-bottom:1px solid var(--border);display:flex;gap:12px;align-items:flex-start;}
+.source-item:last-child{border-bottom:none;}
+.src-num{font-family:'DM Mono',monospace;font-size:9px;color:var(--gold);opacity:0.5;flex-shrink:0;margin-top:2px;}
+.src-text{font-size:12px;color:var(--dim);line-height:1.5;}
+.src-text a{color:var(--mid);text-decoration:none;border-bottom:1px solid var(--border);}
+.src-text a:hover{color:var(--gold);}
+.related-section{padding:0 60px 80px;border-top:1px solid var(--border);padding-top:60px;}
+.related-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);margin-top:32px;}
+.related-card{background:var(--dark);padding:28px 24px;text-decoration:none;display:block;transition:background 0.2s;}
+.related-card:hover{background:var(--panel);}
+.rc-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);opacity:0.6;margin-bottom:8px;}
+.rc-title-sm{font-family:'Syne',sans-serif;font-weight:700;font-size:15px;color:var(--white);letter-spacing:-0.2px;line-height:1.2;}
+@media(max-width:1023px){.content-body{padding:60px 36px;}.two-col{grid-template-columns:1fr;gap:48px;}.sidebar{position:static;}.related-section{padding:0 36px 60px;padding-top:48px;}.related-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:767px){.page-hero{padding:100px 20px 48px;}.content-body{padding:48px 20px;}.related-section{padding:0 20px 48px;padding-top:40px;}.related-grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+<nav>
+  <a href="../index.html" class="nav-logo"><div class="logo-e">E</div><span class="nav-logo-text">E-Group</span></a>
+  <ul class="nav-links">
+    <li><a href="../intelligence.html">Intelligence</a></li>
+    <li><a href="../rise.html">Rise</a></li>
+    <li><a href="../thinking.html">Thinking</a></li>
+    <li><a href="../about.html">About</a></li>
+    <li><a href="index.html" class="active">Record</a></li>
+  </ul>
+  <a href="../index.html#contact" class="nav-cta">Work With Us</a>
+  <button class="nav-hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+<div class="nav-mobile-menu" id="mobileMenu">
+  <a href="../index.html">Home</a>
+  <a href="../intelligence.html">Intelligence</a>
+  <a href="../rise.html">Rise</a>
+  <a href="../thinking.html">Thinking</a>
+  <a href="../about.html">About</a>
+  <a href="index.html">Record</a>
+  <a href="../index.html#contact" class="nav-mobile-cta">Work With Us</a>
+</div>
+
+<div class="page-hero">
+  <div class="hero-glow"></div>
+  <div class="breadcrumb"><a href="index.html">Record</a> / <span>eIDAS 2.0 — MyD Wallet</span></div>
+  <h1>eIDAS 2.0 —<br><em>MyD Wallet</em></h1>
+  <div class="hero-meta"><span class="hero-badge badge-live"><span class="live-dot"></span>Testbed Passed</span><span class="hero-badge badge-eu">EWC Member</span><span class="hero-badge badge-default">eIDAS 1.0 + 2.0</span><span class="hero-badge badge-default">KAÜ Compatible</span><span class="hero-badge badge-default">2024—2026</span></div>
+</div>
+
+<div class="content-body">
+  <div class="two-col">
+    <div class="prose reveal">
+<h2>What It Is</h2>
+<p>The European Digital Identity Wallet (EUDI Wallet) is mandated by the EU's eIDAS 2.0 regulation — by December 2026, every EU member state must provide citizens with a digital identity wallet. E-Group is building Hungary's contribution to this rollout through the <strong>MyD Wallet</strong> — a microservice-based micro wallet-workflow framework developed for the Hungarian market.</p>
+<p>E-Group is an active participant in the <strong>European Digital Identity Wallet Consortium (EWC)</strong> — the large-scale EU pilot programme testing real-world wallet implementation across member states.</p>
+
+<h2>The Milestone</h2>
+<p>E-Group's MyD Wallet has <strong>successfully passed all test scenarios of the eIDAS 2 testbed</strong> in the EWC large-scale pilot. This is the formal certification that the MyD implementation meets the EU's technical standards for digital identity wallets.</p>
+<p>Critically, MyD maintains backward compatibility with eIDAS 1 infrastructure — including Hungary's existing KAÜ citizen gateway and Ügyfélkapu+ system. This means MyD bridges thirty years of Hungarian digital identity work directly into the EU's next-generation identity framework.</p>
+
+<h2>Technical Architecture</h2>
+<p>MyD is built on OpenID-based specifications for OID4VCI (OpenID for Verifiable Credential Issuance) and OID4VP (OpenID for Verifiable Presentations) — the EU standard protocols for digital credential exchange. The framework supports:</p>
+<ul>
+  <li>Government and market-based applications</li>
+  <li>Integration with the Hungarian Digital Citizen Program (DÁP)</li>
+  <li>Full eIDAS 1.0 and 2.0 dual compliance</li>
+  <li>Cross-border EU interoperability</li>
+  <li>Support for companies implementing, integrating, and deploying wallet solutions</li>
+</ul>
+
+<h2>EWC General Assembly — Madrid</h2>
+<p>E-Group participated in the EWC General Assembly in Madrid on <strong>October 30, 2024</strong> — one of the consortium's primary alignment events. The EWC has completed Phase 1 (covering travel and payment scenarios) and continues work on the Large Scale Pilot through the consortium's three-year project timeline.</p>
+
+<h2>Why This Matters</h2>
+<p>eIDAS 2.0 is one of the most significant digital infrastructure programmes in European history. By 2026, every EU citizen will have access to a government-recognised digital identity wallet. E-Group is not observing this from the outside — they are one of the architects building it, with a direct line of expertise from KAÜ (eIDAS 1.0, built in the 2010s) to MyD (eIDAS 2.0, testbed-passed 2024).</p>
+</div>
+    <div class="sidebar reveal rd1">
+      <div class="sidebar-card"><div class="sc-label">Project Details</div><div class="sc-rows"><div class="sc-row"><span class="sc-key">Product</span><span class="sc-val">MyD Wallet</span></div><div class="sc-row"><span class="sc-key">Consortium</span><span class="sc-val">European Digital Identity Wallet (EWC)</span></div><div class="sc-row"><span class="sc-key">Testbed Status</span><span class="sc-val">All scenarios passed</span></div><div class="sc-row"><span class="sc-key">Compatibility</span><span class="sc-val">eIDAS 1.0 + 2.0</span></div><div class="sc-row"><span class="sc-key">KAÜ Link</span><span class="sc-val">Backward compatible</span></div><div class="sc-row"><span class="sc-key">EU Deadline</span><span class="sc-val">December 2026</span></div><div class="sc-row"><span class="sc-key">EWC Assembly</span><span class="sc-val">Madrid, Oct 30 2024</span></div></div></div><div class="sidebar-card"><div class="sc-label">Standards</div><div class="sc-rows"><div class="sc-row"><span class="sc-key">Protocol</span><span class="sc-val">OID4VCI</span></div><div class="sc-row"><span class="sc-key">Protocol</span><span class="sc-val">OID4VP</span></div><div class="sc-row"><span class="sc-key">Framework</span><span class="sc-val">ARF (Architecture Reference Framework)</span></div><div class="sc-row"><span class="sc-key">Regulation</span><span class="sc-val">eIDAS 2.0 — Reg. EU 2024/1183</span></div><div class="sc-row"><span class="sc-key">Programme</span><span class="sc-val">DÁP — Hungarian Digital Citizen</span></div></div></div>
+      <div class="sidebar-card">
+        <div class="sc-label">Sources</div>
+        <div class="source-list"><div class="source-item"><div class="src-num">1</div><div class="src-text"><a href="https://www.egroup.hu/important-myd-milestone-achived/" target="_blank">E-Group: Important MyD Milestone Achieved (eIDAS 2 testbed)</a></div></div><div class="source-item"><div class="src-num">2</div><div class="src-text"><a href="https://www.egroup.hu/ewc-held-its-general-assembly-in-madrid/" target="_blank">E-Group: EWC General Assembly Madrid, Oct 2024</a></div></div><div class="source-item"><div class="src-num">3</div><div class="src-text"><a href="https://www.egroup.hu/eu-digital-identity-wallet/" target="_blank">E-Group: EU Digital Identity Wallet (MyD overview)</a></div></div><div class="source-item"><div class="src-num">4</div><div class="src-text"><a href="https://eudiwalletconsortium.org/" target="_blank">European Digital Identity Wallet Consortium (EWC)</a></div></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="related-section">
+  <div class="rg-eyebrow" style="font-family:'DM Mono',monospace;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:12px;display:flex;align-items:center;gap:12px;"><span style="display:inline-block;width:24px;height:1px;background:var(--gold);"></span>Related Records</div>
+  <div class="related-grid"><a href="kau.html" class="related-card"><div class="rc-label">GovTech</div><div class="rc-title-sm">KAÜ National Digital Identity</div></a><a href="ipcei-cis.html" class="related-card"><div class="rc-label">EU Project</div><div class="rc-title-sm">IPCEI-CIS — FedEU.ai</div></a><a href="peter-antal.html" class="related-card"><div class="rc-label">AI Research</div><div class="rc-title-sm">Dr. Péter Antal — Knight's Cross</div></a></div>
+</div>
+
+
+<footer>
+  <div class="footer-left">
+    <div class="footer-logo"><span>E</span>-Group</div>
+    <div class="footer-tagline">Intelligence Infrastructure · Est. 1993</div>
+  </div>
+  <div class="footer-mid">The public record of E-Group ICT Software Zrt.<br>Budapest, Hungary · Founded 1993</div>
+  <div class="footer-right">© 2026 E-Group ICT Software Zrt.<br>All rights reserved.<br>Reg: 01 10 045390 HUN</div>
+</footer>
+
+<script>
+const cursor=document.getElementById('cursor'),ring=document.getElementById('cursorRing');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cursor.style.left=mx+'px';cursor.style.top=my+'px';});
+(function loop(){rx+=(mx-rx)*0.12;ry+=(my-ry)*0.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(loop);})();
+const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');}),{threshold:0.08});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+const hamburger=document.getElementById('hamburger'),mobileMenu=document.getElementById('mobileMenu');
+hamburger.addEventListener('click',()=>{hamburger.classList.toggle('open');mobileMenu.classList.toggle('open');document.body.style.overflow=mobileMenu.classList.contains('open')?'hidden':'';});
+mobileMenu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{hamburger.classList.remove('open');mobileMenu.classList.remove('open');document.body.style.overflow='';}));
+</script>
+</body>
+</html>
