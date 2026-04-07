@@ -12,6 +12,7 @@ const RISE_NAV = {
     { num: '02', label: 'Auto',    href: 'autodemo.html' },
     { num: '03', label: 'Brain',   href: 'braindemo.html' },
     { num: '04', label: 'Essence', href: 'essencedemo.html' },
+    { num: '05', label: 'COO',     href: 'coodemo.html' },
   ],
 
   JOURNAL_ENTRIES: [

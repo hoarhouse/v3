@@ -5,994 +5,1060 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Rise Essence — COO View</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Mono:wght@300;400;500&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
 <script src="nav.js"></script>
 <script>document.addEventListener('DOMContentLoaded',()=>injectNav('demo','coodemo.html'));</script>
 <style>
 :root{
-  --black:#080808;--dark:#111;--panel:#181818;--card:#1E1E1E;
-  --border:#252525;--dim:#4A4A4A;--mid:#666;--text:#A0A0A0;
-  --light:#C8C8C8;--white:#EEEEEE;--accent:#D4FF00;--gold:#C8A96E;
-  --green:#44FF88;--blue:#4EC9FF;--orange:#FF9444;--purple:#B088FF;
+  --bg:#0f0f0f; --s1:#1a1a1a; --s2:#222; --s3:#2a2a2a;
+  --b1:#2a2a2a; --b2:#333; --b3:#444;
+  --t0:#efefef; --t1:#c8c8c8; --t2:#a0a0a0; --t3:#666; --t4:#444;
+  --accent:#D4FF00; --green:#44FF88; --blue:#4EC9FF;
+  --orange:#FF9444; --purple:#B088FF; --red:#FF5555;
 }
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
 html,body{height:100%;overflow:hidden;}
-body{background:var(--black);color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px;line-height:1.6;display:flex;flex-direction:column;}
+body{background:var(--bg);color:var(--t2);font-family:'DM Sans',sans-serif;font-size:15px;line-height:1.6;display:flex;flex-direction:column;}
 
-/* ── LAYOUT ── */
-.layout{display:flex;flex:1;overflow:hidden;}
+/* ── APP LAYOUT ── */
+.app{display:flex;flex:1;overflow:hidden;}
 
-/* ── SIDEBAR ── */
-.sidebar{
-  width:240px;flex-shrink:0;background:var(--dark);border-right:1px solid var(--border);
-  display:flex;flex-direction:column;overflow-y:auto;overflow-x:hidden;
+/* ═══════════════════════════════════════════
+   SIDEBAR
+═══════════════════════════════════════════ */
+.sb{
+  width:252px;flex-shrink:0;
+  background:#111;border-right:1px solid var(--b1);
+  display:flex;flex-direction:column;overflow:hidden;
 }
-.sidebar::-webkit-scrollbar{width:3px;}
-.sidebar::-webkit-scrollbar-thumb{background:var(--border);}
+.sb-top{
+  padding:14px 16px 12px;border-bottom:1px solid var(--b1);
+  display:flex;align-items:center;gap:10px;
+}
+.sb-live{width:7px;height:7px;border-radius:50%;background:var(--green);flex-shrink:0;animation:pulse 2s ease-in-out infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.3;}}
+.sb-brand{flex:1;}
+.sb-brand-name{font-family:'Syne',sans-serif;font-weight:800;font-size:13px;color:var(--t0);}
+.sb-brand-sub{font-family:'DM Mono',monospace;font-size:9px;color:var(--purple);letter-spacing:1px;text-transform:uppercase;margin-top:1px;}
 
-.sb-head{
-  padding:14px 14px 10px;border-bottom:1px solid var(--border);
-  display:flex;align-items:center;justify-content:space-between;
-}
-.sb-head-title{font-family:'Syne',sans-serif;font-weight:700;font-size:13px;color:var(--white);}
-.sb-head-sub{font-family:'DM Mono',monospace;font-size:9px;color:var(--purple);letter-spacing:1px;text-transform:uppercase;}
+.sb-body{flex:1;overflow-y:auto;overflow-x:hidden;}
+.sb-body::-webkit-scrollbar{width:3px;}
+.sb-body::-webkit-scrollbar-thumb{background:var(--b1);}
 
-.sb-section{padding:10px 10px 4px;}
-.sb-label{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);padding:0 4px;margin-bottom:6px;}
-.sb-divider{height:1px;background:var(--border);margin:8px 10px;}
+.sb-sec{padding:10px 10px 4px;}
+.sb-sec-lbl{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:var(--t4);padding:0 4px;margin-bottom:5px;}
+.sb-div{height:1px;background:var(--b1);margin:7px 10px;}
 
-/* Team items */
-.team-item{
-  display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:6px;
-  cursor:pointer;transition:all .15s;border:1px solid transparent;margin-bottom:3px;
+/* Team/nav rows */
+.sb-row{
+  display:flex;align-items:center;gap:8px;
+  padding:8px 8px;border-radius:7px;cursor:pointer;
+  transition:background .1s;margin-bottom:2px;
+  border:1px solid transparent;
 }
-.team-item:hover{background:var(--card);border-color:var(--border);}
-.team-item.active{background:rgba(212,255,0,.06);border-color:rgba(212,255,0,.2);}
-.team-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
-.team-dot.high{background:var(--green);}
-.team-dot.medium{background:var(--accent);}
-.team-dot.low{background:var(--orange);}
-.team-dot.quiet{background:var(--dim);}
-.team-info{flex:1;min-width:0;}
-.team-name{font-size:13px;color:var(--white);font-weight:500;}
-.team-count{font-family:'DM Mono',monospace;font-size:9px;color:var(--dim);margin-top:1px;}
-.team-activity{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:.5px;text-transform:uppercase;
-  padding:2px 7px;border-radius:20px;flex-shrink:0;}
-.team-activity.high{background:rgba(68,255,136,.1);color:var(--green);}
-.team-activity.medium{background:rgba(212,255,0,.08);color:var(--accent);}
-.team-activity.low{background:rgba(255,148,68,.1);color:var(--orange);}
-.team-activity.quiet{background:var(--card);color:var(--dim);}
+.sb-row:hover{background:var(--s1);}
+.sb-row.on{background:rgba(212,255,0,.05);border-color:rgba(212,255,0,.15);}
+.sb-row-ico{font-size:14px;width:18px;text-align:center;flex-shrink:0;}
+.sb-row-body{flex:1;min-width:0;}
+.sb-row-name{font-size:13px;color:var(--t1);font-weight:500;}
+.sb-row.on .sb-row-name{color:var(--t0);}
+.sb-row-sub{font-family:'DM Mono',monospace;font-size:9px;color:var(--t4);margin-top:1px;}
+.badge{font-family:'DM Mono',monospace;font-size:8px;padding:2px 7px;border-radius:20px;flex-shrink:0;white-space:nowrap;}
+.bg{background:rgba(68,255,136,.1);color:var(--green);}
+.ba{background:rgba(212,255,0,.08);color:var(--accent);}
+.bo{background:rgba(255,148,68,.12);color:var(--orange);border:1px solid rgba(255,148,68,.2);}
+.bb{background:rgba(78,201,255,.08);color:var(--blue);}
+.bd{background:var(--s2);color:var(--t4);}
 
-/* Subscription items */
-.sub-item{
-  display:flex;align-items:center;gap:8px;padding:7px 10px;border-radius:6px;
-  cursor:pointer;transition:all .15s;margin-bottom:2px;
-}
-.sub-item:hover{background:var(--card);}
-.sub-icon{font-size:13px;flex-shrink:0;width:16px;text-align:center;}
-.sub-info{flex:1;min-width:0;}
-.sub-name{font-size:12px;color:var(--light);}
-.sub-cadence{font-family:'DM Mono',monospace;font-size:9px;color:var(--dim);margin-top:1px;}
-.sub-badge{font-family:'DM Mono',monospace;font-size:8px;padding:2px 7px;border-radius:20px;flex-shrink:0;}
-.sub-badge.live{background:rgba(68,255,136,.1);color:var(--green);}
-.sub-badge.day{background:rgba(212,255,0,.08);color:var(--accent);}
-.sub-badge.week{background:rgba(78,201,255,.08);color:var(--blue);}
-
-/* ── SUBSCRIPTION CREATOR ── */
-.sub-creator{
-  margin:8px 10px;background:var(--card);border:1px solid var(--border);
-  border-radius:8px;padding:12px;
-}
-.sub-creator-label{
-  font-family:'DM Mono',monospace;font-size:8px;letter-spacing:2px;
-  text-transform:uppercase;color:var(--accent);margin-bottom:8px;
-  display:flex;align-items:center;gap:6px;
-}
-.sub-creator-label::before{content:'';display:inline-block;width:5px;height:5px;
-  border-radius:50%;background:var(--accent);}
-.sub-input{
-  width:100%;background:var(--dark);border:1px solid var(--border);border-radius:5px;
-  padding:7px 10px;font-family:'DM Sans',sans-serif;font-size:12px;color:var(--white);
-  outline:none;resize:none;line-height:1.4;
-  transition:border-color .2s;
-}
-.sub-input:focus{border-color:rgba(212,255,0,.3);}
-.sub-input::placeholder{color:var(--dim);}
+/* Subscription creator */
+.sub-box{margin:6px 10px 10px;background:var(--s2);border:1px solid var(--b1);border-radius:9px;padding:12px;}
+.sub-box-hd{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:9px;display:flex;align-items:center;gap:5px;}
+.sub-box-hd::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--accent);display:inline-block;}
+.sub-ta{width:100%;background:var(--s1);border:1px solid var(--b1);border-radius:6px;padding:7px 10px;font-family:'DM Sans',sans-serif;font-size:12px;color:var(--t0);outline:none;resize:none;line-height:1.4;transition:border-color .2s;}
+.sub-ta:focus{border-color:rgba(212,255,0,.3);}
+.sub-ta::placeholder{color:var(--t4);}
 .sub-row{display:flex;gap:6px;margin-top:6px;}
-.sub-select{
-  flex:1;background:var(--dark);border:1px solid var(--border);border-radius:5px;
-  padding:6px 8px;font-family:'DM Mono',monospace;font-size:9px;color:var(--text);
-  outline:none;appearance:none;cursor:pointer;
-}
-.sub-btn{
-  background:var(--accent);color:var(--black);border:none;border-radius:5px;
-  padding:6px 12px;font-family:'DM Mono',monospace;font-size:9px;font-weight:600;
-  letter-spacing:.5px;cursor:pointer;transition:all .2s;white-space:nowrap;
-}
-.sub-btn:hover{background:#E8FF33;}
-.sub-examples{margin-top:8px;}
-.sub-example-label{font-family:'DM Mono',monospace;font-size:8px;color:var(--dim);
-  text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;}
-.sub-chip{
-  display:inline-block;font-size:10px;color:var(--dim);border:1px solid var(--border);
-  border-radius:20px;padding:2px 8px;margin:2px 2px 0 0;cursor:pointer;
-  transition:all .15s;background:var(--dark);
-}
-.sub-chip:hover{color:var(--white);border-color:var(--mid);}
+.sub-sel{flex:1;background:var(--s1);border:1px solid var(--b1);border-radius:6px;padding:6px 8px;font-family:'DM Mono',monospace;font-size:9px;color:var(--t2);outline:none;}
+.sub-go{background:var(--accent);color:#080808;border:none;border-radius:6px;padding:6px 14px;font-family:'DM Mono',monospace;font-size:9px;font-weight:600;cursor:pointer;white-space:nowrap;}
+.sub-go:hover{opacity:.85;}
+.sub-chips{margin-top:8px;}
+.sub-chips-lbl{font-family:'DM Mono',monospace;font-size:8px;color:var(--t4);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;}
+.sc{display:inline-block;font-size:10px;color:var(--t3);border:1px solid var(--b1);border-radius:20px;padding:2px 8px;margin:2px 2px 0 0;cursor:pointer;transition:all .12s;background:var(--s1);}
+.sc:hover{color:var(--t0);border-color:var(--b3);}
 
 /* Org state */
-.state-row{display:flex;align-items:center;padding:4px 10px;gap:8px;}
-.state-lbl{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:1px;
-  text-transform:uppercase;color:var(--dim);width:60px;flex-shrink:0;}
-.state-bar{flex:1;height:3px;background:var(--border);border-radius:2px;overflow:hidden;}
-.state-fill{height:100%;border-radius:2px;transition:width 1s ease;}
-.state-val{font-size:10px;color:var(--mid);width:36px;text-align:right;flex-shrink:0;}
+.state-rows{padding:4px 10px 12px;}
+.st-row{display:flex;align-items:center;gap:8px;padding:3px 4px;}
+.st-lbl{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:1px;text-transform:uppercase;color:var(--t4);width:58px;flex-shrink:0;}
+.st-bar{flex:1;height:3px;background:var(--b1);border-radius:2px;overflow:hidden;}
+.st-fill{height:100%;border-radius:2px;transition:width 1.2s ease;}
+.st-val{font-size:10px;color:var(--t3);width:36px;text-align:right;flex-shrink:0;}
 
-/* ── CHAT ── */
-.chat-main{flex:1;display:flex;flex-direction:column;overflow:hidden;}
-.chat-header{
-  padding:12px 24px 10px;border-bottom:1px solid var(--border);
-  display:flex;align-items:center;justify-content:space-between;flex-shrink:0;
+/* ═══════════════════════════════════════════
+   MAIN CHAT — Claude/ChatGPT style
+   Full-width rows, content centred at 720px
+═══════════════════════════════════════════ */
+.chat{flex:1;display:flex;flex-direction:column;overflow:hidden;background:var(--bg);}
+
+.msgs{flex:1;overflow-y:auto;padding:28px 0 12px;}
+.msgs::-webkit-scrollbar{width:4px;}
+.msgs::-webkit-scrollbar-thumb{background:var(--b1);border-radius:2px;}
+
+/* Full-width message row */
+.mrow{width:100%;padding:8px 0;}
+.mrow:hover{background:rgba(255,255,255,.012);}
+
+/* Inner content — centred, max 720px */
+.min{max-width:720px;margin:0 auto;padding:0 28px;display:flex;gap:14px;align-items:flex-start;}
+
+/* Avatars */
+.av{width:32px;height:32px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;font-size:11px;font-weight:500;margin-top:2px;}
+.av-e{background:rgba(212,255,0,.12);border:1px solid rgba(212,255,0,.25);color:var(--accent);}
+.av-u{background:rgba(180,136,255,.15);border:1px solid rgba(180,136,255,.3);color:var(--purple);}
+
+.mcol{flex:1;min-width:0;}
+.mwho{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1.2px;text-transform:uppercase;margin-bottom:7px;}
+.mwho-e{color:var(--accent);}
+.mwho-u{color:var(--purple);}
+
+/* Message body text — this is the main content area */
+.mbody{font-size:15px;color:var(--t1);line-height:1.75;}
+.mbody strong{color:var(--t0);font-weight:500;}
+.mbody em{color:var(--t2);font-style:italic;}
+.mbody .hi{color:var(--accent);}
+.mbody .warn{color:var(--orange);}
+.mbody .ok{color:var(--green);}
+.mbody .info{color:var(--blue);}
+.mbody br{display:block;margin-bottom:6px;}
+
+/* ── TEAM OVERVIEW GRID ── */
+.team-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px;}
+.tc{background:var(--s1);border:1px solid var(--b1);border-radius:10px;padding:14px;cursor:pointer;transition:all .15s;}
+.tc:hover{border-color:var(--b2);background:var(--s2);}
+.tc-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:8px;gap:8px;}
+.tc-name{font-family:'Syne',sans-serif;font-weight:700;font-size:14px;color:var(--t0);}
+.tc-focus{font-size:12px;color:var(--t2);line-height:1.5;margin-bottom:10px;}
+.tc-ft{display:flex;align-items:center;justify-content:space-between;}
+.tc-people{display:flex;gap:4px;flex-wrap:wrap;}
+.tc-chip{font-family:'DM Mono',monospace;font-size:8px;color:var(--t3);background:var(--s2);border:1px solid var(--b1);border-radius:20px;padding:2px 7px;}
+.tc-n{font-family:'DM Mono',monospace;font-size:9px;color:var(--t4);}
+
+/* ── TEAM DETAIL (shows when you click a team) ── */
+.td{margin-top:16px;}
+.td-hd{display:flex;align-items:center;gap:12px;padding-bottom:14px;margin-bottom:16px;border-bottom:1px solid var(--b1);}
+.td-name{font-family:'Syne',sans-serif;font-weight:800;font-size:20px;color:var(--t0);flex:1;}
+.td-stat{text-align:center;}
+.td-stat-v{font-family:'Syne',sans-serif;font-weight:800;font-size:18px;color:var(--accent);}
+.td-stat-l{font-family:'DM Mono',monospace;font-size:8px;color:var(--t4);text-transform:uppercase;letter-spacing:1px;margin-top:1px;}
+.td-sum{font-size:14px;color:var(--t2);line-height:1.7;margin-bottom:16px;}
+
+.sec-lbl{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--t4);margin-bottom:10px;}
+
+/* People cards */
+.ppl{display:flex;flex-direction:column;gap:10px;margin-bottom:18px;}
+.pc{background:var(--s1);border:1px solid var(--b1);border-radius:9px;padding:12px 14px;display:flex;gap:12px;align-items:flex-start;}
+.pav{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;font-size:11px;font-weight:500;flex-shrink:0;}
+.pi{flex:1;min-width:0;}
+.pname{font-size:14px;color:var(--t0);font-weight:500;}
+.prole{font-size:11px;color:var(--t3);margin-top:1px;margin-bottom:6px;}
+.pfocus{font-size:12px;color:var(--t2);line-height:1.5;margin-top:5px;}
+.ptags{display:flex;gap:4px;flex-wrap:wrap;}
+.ptag{font-family:'DM Mono',monospace;font-size:8px;padding:2px 7px;border-radius:20px;}
+.pstatus{font-family:'DM Mono',monospace;font-size:8px;padding:3px 9px;border-radius:20px;flex-shrink:0;margin-top:2px;}
+
+/* Project cards */
+.prjs{display:flex;flex-direction:column;gap:10px;margin-bottom:16px;}
+.prc{background:var(--s1);border:1px solid var(--b1);border-radius:9px;padding:13px 15px;}
+.prc-top{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:7px;}
+.prc-name{font-size:14px;color:var(--t0);font-weight:500;line-height:1.3;}
+.prc-status{font-family:'DM Mono',monospace;font-size:8px;padding:3px 9px;border-radius:20px;flex-shrink:0;white-space:nowrap;}
+.prc-meta{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:7px;}
+.prc-mi{font-size:11px;color:var(--t4);}
+.prc-mi span{color:var(--t2);}
+.prc-desc{font-size:12px;color:var(--t2);line-height:1.6;}
+.prc-alert{margin-top:9px;padding:7px 10px;background:rgba(255,148,68,.05);border:1px solid rgba(255,148,68,.15);border-radius:6px;font-size:11px;color:var(--orange);}
+
+/* Person deep-dive card */
+.person-deep{background:var(--s1);border:1px solid var(--b1);border-radius:10px;padding:14px 16px;margin-top:14px;}
+.pd-top{display:flex;align-items:center;gap:12px;margin-bottom:12px;}
+.pd-projects{display:flex;flex-direction:column;gap:7px;}
+.pd-proj{display:flex;align-items:flex-start;gap:10px;padding:8px 10px;background:var(--s2);border-radius:6px;border:1px solid var(--b1);}
+.pd-proj-body{flex:1;}
+.pd-proj-name{font-size:13px;color:var(--t0);font-weight:500;}
+.pd-proj-detail{font-size:11px;color:var(--t2);margin-top:2px;line-height:1.4;}
+.pd-proj-status{font-family:'DM Mono',monospace;font-size:8px;padding:3px 9px;border-radius:20px;flex-shrink:0;margin-top:1px;}
+
+/* All projects table */
+.proj-tbl{width:100%;border-collapse:collapse;margin-top:14px;font-size:12px;}
+.proj-tbl th{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:1px;text-transform:uppercase;color:var(--t4);padding:6px 10px;text-align:left;border-bottom:1px solid var(--b1);}
+.proj-tbl td{padding:7px 10px;border-bottom:1px solid rgba(42,42,42,.5);color:var(--t2);vertical-align:top;}
+.proj-tbl tr:last-child td{border-bottom:none;}
+.proj-tbl tr:hover td{background:rgba(255,255,255,.015);}
+
+/* Sources */
+.srcs{display:flex;gap:5px;flex-wrap:wrap;margin-top:12px;}
+.src{font-family:'DM Mono',monospace;font-size:8px;padding:2px 8px;border-radius:20px;background:var(--s2);color:var(--t4);border:1px solid var(--b1);}
+
+/* Action chips after response */
+.acts{display:flex;gap:7px;margin-top:14px;flex-wrap:wrap;}
+.act{font-family:'DM Mono',monospace;font-size:9px;padding:5px 12px;border-radius:6px;cursor:pointer;border:1px solid var(--b1);background:var(--s1);color:var(--t2);transition:all .12s;}
+.act:hover{border-color:var(--b2);color:var(--t0);}
+.act.prime{border-color:rgba(212,255,0,.2);color:var(--accent);background:rgba(212,255,0,.04);}
+.act.prime:hover{background:rgba(212,255,0,.08);}
+
+/* Typing dots */
+.typing{display:flex;gap:4px;align-items:center;padding:4px 0;}
+.tdot{width:5px;height:5px;border-radius:50%;background:var(--accent);opacity:.2;}
+.tdot:nth-child(1){animation:tb 1.2s .0s infinite;}
+.tdot:nth-child(2){animation:tb 1.2s .2s infinite;}
+.tdot:nth-child(3){animation:tb 1.2s .4s infinite;}
+@keyframes tb{0%,80%,100%{opacity:.15;}40%{opacity:.9;}}
+
+/* ── INPUT AREA — ChatGPT style ── */
+.input-area{padding:14px 28px 20px;background:var(--bg);flex-shrink:0;}
+.input-outer{max-width:720px;margin:0 auto;}
+.input-box{
+  background:var(--s1);border:1px solid var(--b2);border-radius:14px;
+  padding:12px 14px;display:flex;align-items:flex-end;gap:10px;
+  transition:border-color .2s;box-shadow:0 0 0 0 transparent;
 }
-.chat-title{font-family:'Syne',sans-serif;font-weight:700;font-size:15px;color:var(--white);}
-.chat-sub{font-size:11px;color:var(--dim);margin-top:2px;}
-.chat-badge{display:flex;align-items:center;gap:6px;font-family:'DM Mono',monospace;
-  font-size:9px;color:var(--purple);background:rgba(180,136,255,.08);
-  border:1px solid rgba(180,136,255,.2);padding:3px 10px;border-radius:20px;}
-.live-dot{width:5px;height:5px;border-radius:50%;background:var(--green);
-  animation:pulse 2s infinite;}
-@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.3;}}
-
-/* ── MESSAGES ── */
-.messages{flex:1;overflow-y:auto;padding:18px 24px;display:flex;flex-direction:column;gap:14px;}
-.messages::-webkit-scrollbar{width:3px;}
-.messages::-webkit-scrollbar-thumb{background:var(--border);}
-
-.msg-system{
-  background:var(--dark);border:1px solid var(--border);border-radius:10px;
-  padding:14px 16px;
+.input-box:focus-within{border-color:rgba(212,255,0,.4);box-shadow:0 0 0 3px rgba(212,255,0,.06);}
+.input-ta{flex:1;background:none;border:none;outline:none;font-family:'DM Sans',sans-serif;font-size:15px;color:var(--t0);resize:none;line-height:1.5;max-height:120px;min-height:24px;}
+.input-ta::placeholder{color:var(--t4);}
+.send-btn{
+  width:34px;height:34px;border-radius:9px;
+  background:var(--s2);border:1px solid var(--b1);
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;transition:all .15s;flex-shrink:0;color:var(--t4);font-size:16px;
 }
-.msg-system.teams{border-left:3px solid var(--accent);}
-.msg-system.person{border-left:3px solid var(--purple);}
-.msg-system.signal{border-left:3px solid var(--orange);}
-.msg-system.sub-confirm{border-left:3px solid var(--green);}
-
-.msg-type{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:2px;
-  text-transform:uppercase;margin-bottom:6px;display:flex;align-items:center;gap:6px;}
-.msg-type.teams{color:var(--accent);}
-.msg-type.person{color:var(--purple);}
-.msg-type.signal{color:var(--orange);}
-.msg-type.sub-confirm{color:var(--green);}
-.msg-type-dot{width:4px;height:4px;border-radius:50%;background:currentColor;}
-
-.msg-title{font-family:'Syne',sans-serif;font-weight:700;font-size:14px;
-  color:var(--white);margin-bottom:6px;line-height:1.4;}
-.msg-body{font-size:13px;color:var(--text);line-height:1.7;}
-.msg-body strong{color:var(--white);font-weight:500;}
-.msg-body .hi{color:var(--accent);}
-.msg-body .warn{color:var(--orange);}
-
-/* Team grid */
-.team-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px;}
-.tcard{background:var(--card);border:1px solid var(--border);border-radius:6px;
-  padding:10px 12px;cursor:pointer;transition:border-color .15s;}
-.tcard:hover{border-color:var(--mid);}
-.tcard-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;}
-.tcard-name{font-family:'Syne',sans-serif;font-weight:700;font-size:12px;color:var(--white);}
-.tcard-activity{font-family:'DM Mono',monospace;font-size:8px;padding:1px 6px;
-  border-radius:20px;text-transform:uppercase;}
-.tcard-activity.high{background:rgba(68,255,136,.1);color:var(--green);}
-.tcard-activity.medium{background:rgba(212,255,0,.08);color:var(--accent);}
-.tcard-activity.low{background:rgba(255,148,68,.1);color:var(--orange);}
-.tcard-activity.quiet{background:var(--card);color:var(--dim);border:1px solid var(--border);}
-.tcard-focus{font-size:11px;color:var(--dim);line-height:1.4;margin-bottom:6px;}
-.tcard-people{display:flex;gap:4px;flex-wrap:wrap;}
-.tcard-person{font-family:'DM Mono',monospace;font-size:8px;color:var(--mid);
-  background:var(--panel);border:1px solid var(--border);border-radius:20px;
-  padding:1px 7px;}
-
-/* Person card */
-.person-card{background:var(--card);border:1px solid var(--border);border-radius:8px;
-  padding:14px 16px;margin-top:10px;}
-.person-top{display:flex;align-items:center;gap:12px;margin-bottom:10px;}
-.person-avatar{width:36px;height:36px;border-radius:50%;
-  background:rgba(180,136,255,.15);border:1px solid rgba(180,136,255,.3);
-  display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;
-  font-size:11px;color:var(--purple);font-weight:500;flex-shrink:0;}
-.person-name{font-family:'Syne',sans-serif;font-weight:700;font-size:14px;color:var(--white);}
-.person-role{font-size:11px;color:var(--dim);margin-top:1px;}
-.person-projects{display:flex;flex-direction:column;gap:6px;}
-.person-proj{display:flex;align-items:flex-start;gap:10px;padding:8px 10px;
-  background:var(--panel);border-radius:5px;border:1px solid var(--border);}
-.person-proj-name{font-size:12px;color:var(--white);font-weight:500;}
-.person-proj-detail{font-size:11px;color:var(--dim);margin-top:1px;}
-.person-proj-status{font-family:'DM Mono',monospace;font-size:8px;padding:2px 7px;
-  border-radius:20px;flex-shrink:0;margin-top:1px;}
-.status-active{background:rgba(68,255,136,.1);color:var(--green);}
-.status-review{background:rgba(212,255,0,.08);color:var(--accent);}
-.status-blocked{background:rgba(255,148,68,.1);color:var(--orange);}
-
-.msg-actions{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap;}
-.msg-action{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.5px;
-  padding:5px 11px;border-radius:4px;cursor:pointer;transition:all .2s;
-  border:1px solid var(--border);background:var(--card);color:var(--text);}
-.msg-action:hover{background:var(--panel);color:var(--white);border-color:var(--mid);}
-.msg-action.primary{background:rgba(212,255,0,.08);border-color:rgba(212,255,0,.25);color:var(--accent);}
-.msg-action.primary:hover{background:rgba(212,255,0,.14);}
-
-/* User + brain messages */
-.msg-user{display:flex;justify-content:flex-end;}
-.msg-user-bubble{
-  background:rgba(180,136,255,.1);border:1px solid rgba(180,136,255,.2);
-  border-radius:10px 10px 2px 10px;padding:9px 13px;max-width:72%;
-  font-size:13px;color:var(--white);line-height:1.6;
-}
-.msg-brain{display:flex;gap:8px;align-items:flex-start;}
-.brain-av{width:26px;height:26px;border-radius:50%;background:rgba(180,136,255,.15);
-  border:1px solid rgba(180,136,255,.3);display:flex;align-items:center;
-  justify-content:center;font-family:'DM Mono',monospace;font-size:9px;
-  color:var(--purple);flex-shrink:0;margin-top:2px;}
-.brain-bubble{flex:1;}
-.brain-name{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:1.5px;
-  text-transform:uppercase;color:var(--purple);margin-bottom:5px;}
-.brain-content{background:var(--dark);border:1px solid var(--border);
-  border-radius:2px 10px 10px 10px;padding:12px 14px;font-size:13px;
-  color:var(--text);line-height:1.7;}
-.brain-content strong{color:var(--white);font-weight:500;}
-.brain-sources{display:flex;gap:5px;flex-wrap:wrap;margin-top:8px;}
-.brain-src{font-family:'DM Mono',monospace;font-size:8px;padding:2px 7px;
-  border-radius:20px;background:var(--card);color:var(--dim);border:1px solid var(--border);}
-
-/* Typing */
-.typing{display:flex;gap:4px;align-items:center;padding:6px 0;}
-.typing-dot{width:5px;height:5px;border-radius:50%;background:var(--purple);opacity:.3;}
-.typing-dot:nth-child(1){animation:blink 1.2s .0s infinite;}
-.typing-dot:nth-child(2){animation:blink 1.2s .2s infinite;}
-.typing-dot:nth-child(3){animation:blink 1.2s .4s infinite;}
-@keyframes blink{0%,80%,100%{opacity:.15;}40%{opacity:.9;}}
-
-/* ── INPUT ── */
-.input-bar{padding:12px 24px;border-top:1px solid var(--border);background:var(--dark);flex-shrink:0;}
-.input-wrap{display:flex;align-items:center;gap:8px;background:var(--card);
-  border:1px solid var(--border);border-radius:8px;padding:7px 10px;
-  transition:border-color .2s;}
-.input-wrap:focus-within{border-color:rgba(180,136,255,.4);}
-.input-field{flex:1;background:none;border:none;outline:none;
-  font-family:'DM Sans',sans-serif;font-size:14px;color:var(--white);
-  resize:none;line-height:1.5;max-height:80px;}
-.input-field::placeholder{color:var(--dim);}
-.input-send{width:30px;height:30px;border-radius:5px;background:rgba(180,136,255,.15);
-  border:1px solid rgba(180,136,255,.3);display:flex;align-items:center;
-  justify-content:center;cursor:pointer;transition:all .2s;flex-shrink:0;font-size:13px;}
-.input-send:hover,.input-send.ready{background:var(--purple);border-color:var(--purple);}
-.input-chips{display:flex;gap:5px;margin-top:7px;flex-wrap:wrap;}
-.chip{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.3px;
-  padding:3px 9px;border-radius:20px;background:var(--card);color:var(--dim);
-  border:1px solid var(--border);cursor:pointer;transition:all .15s;}
-.chip:hover{color:var(--white);border-color:var(--mid);}
+.send-btn.on{background:var(--accent);border-color:var(--accent);color:#080808;}
+.ichips{display:flex;gap:6px;margin-top:9px;flex-wrap:wrap;}
+.ich{font-family:'DM Mono',monospace;font-size:9px;padding:4px 11px;border-radius:20px;background:var(--s1);color:var(--t4);border:1px solid var(--b1);cursor:pointer;transition:all .12s;}
+.ich:hover{color:var(--t0);border-color:var(--b3);}
 
 /* Toast */
-.toast{position:fixed;bottom:20px;right:20px;background:var(--dark);
-  border:1px solid rgba(68,255,136,.3);border-left:3px solid var(--green);
-  border-radius:8px;padding:10px 16px;font-size:13px;color:var(--white);
-  z-index:1000;transform:translateY(60px);opacity:0;transition:all .3s;
-  pointer-events:none;display:flex;align-items:center;gap:8px;}
+.toast{position:fixed;bottom:20px;right:20px;background:var(--s1);border:1px solid rgba(68,255,136,.25);border-left:3px solid var(--green);border-radius:8px;padding:10px 16px;font-size:13px;color:var(--t0);z-index:1000;transform:translateY(50px);opacity:0;transition:all .25s;pointer-events:none;display:flex;align-items:center;gap:8px;}
 .toast.show{transform:translateY(0);opacity:1;}
 </style>
 </head>
 <body>
+<div class="app">
 
-<div class="layout">
+<!-- ══════════════════ SIDEBAR ══════════════════ -->
+<div class="sb">
+  <div class="sb-top">
+    <div class="sb-live"></div>
+    <div class="sb-brand">
+      <div class="sb-brand-name">Essence</div>
+      <div class="sb-brand-sub">COO · Team Intelligence</div>
+    </div>
+  </div>
 
-  <!-- ── LEFT SIDEBAR ── -->
-  <div class="sidebar">
+  <div class="sb-body">
+    <div class="sb-sec">
+      <div class="sb-sec-lbl">Teams</div>
 
-    <div class="sb-head">
-      <div>
-        <div class="sb-head-title">Essence</div>
-        <div class="sb-head-sub">COO · Team Intelligence</div>
+      <div class="sb-row on" id="team-btn-all" onclick="teamClick(this,'all')">
+        <div class="sb-row-ico">⬡</div>
+        <div class="sb-row-body"><div class="sb-row-name">All Teams</div><div class="sb-row-sub">6 teams · 47 people</div></div>
+        <div class="badge bg">Live</div>
       </div>
-      <div style="width:8px;height:8px;border-radius:50%;background:var(--green);flex-shrink:0;"></div>
+
+      <div class="sb-row" id="team-btn-research" onclick="teamClick(this,'research')">
+        <div class="sb-row-ico">🧬</div>
+        <div class="sb-row-body"><div class="sb-row-name">AI Research</div><div class="sb-row-sub">8 people · 4 projects</div></div>
+        <div class="badge bg">Active</div>
+      </div>
+
+      <div class="sb-row" id="team-btn-fintech" onclick="teamClick(this,'fintech')">
+        <div class="sb-row-ico">🏦</div>
+        <div class="sb-row-body"><div class="sb-row-name">FinTech Product</div><div class="sb-row-sub">9 people · COIOS</div></div>
+        <div class="badge bo">⚠ Quiet</div>
+      </div>
+
+      <div class="sb-row" id="team-btn-govtech" onclick="teamClick(this,'govtech')">
+        <div class="sb-row-ico">🏛</div>
+        <div class="sb-row-body"><div class="sb-row-name">GovTech</div><div class="sb-row-sub">7 people · 2 projects</div></div>
+        <div class="badge ba">Normal</div>
+      </div>
+
+      <div class="sb-row" id="team-btn-healthtech" onclick="teamClick(this,'healthtech')">
+        <div class="sb-row-ico">🏥</div>
+        <div class="sb-row-body"><div class="sb-row-name">HealthTech</div><div class="sb-row-sub">6 people · XANTA</div></div>
+        <div class="badge bg">Active</div>
+      </div>
+
+      <div class="sb-row" id="team-btn-partnerships" onclick="teamClick(this,'partnerships')">
+        <div class="sb-row-ico">🤝</div>
+        <div class="sb-row-body"><div class="sb-row-name">Partnerships</div><div class="sb-row-sub">5 people · 3 deals</div></div>
+        <div class="badge ba">Normal</div>
+      </div>
+
+      <div class="sb-row" id="team-btn-infra" onclick="teamClick(this,'infra')">
+        <div class="sb-row-ico">⚙️</div>
+        <div class="sb-row-body"><div class="sb-row-name">Infrastructure</div><div class="sb-row-sub">12 people</div></div>
+        <div class="badge ba">Normal</div>
+      </div>
     </div>
 
-    <!-- TEAMS -->
-    <div class="sb-section">
-      <div class="sb-label">Product Teams</div>
+    <div class="sb-div"></div>
 
-      <div class="team-item active" onclick="loadTeam('all')">
-        <div class="team-dot high"></div>
-        <div class="team-info">
-          <div class="team-name">All Teams Overview</div>
-          <div class="team-count">6 teams · 47 people</div>
-        </div>
-        <div class="team-activity high">Live</div>
+    <div class="sb-sec">
+      <div class="sb-sec-lbl">My Subscriptions</div>
+      <div class="sb-row" onclick="runSub('digest')">
+        <div class="sb-row-ico">📋</div>
+        <div class="sb-row-body"><div class="sb-row-name">Weekly team digest</div><div class="sb-row-sub">Every Monday · All teams</div></div>
+        <div class="badge bb">Mon</div>
       </div>
-
-      <div class="team-item" onclick="loadTeam('research')">
-        <div class="team-dot high"></div>
-        <div class="team-info">
-          <div class="team-name">AI Research</div>
-          <div class="team-count">8 people</div>
-        </div>
-        <div class="team-activity high">Active</div>
+      <div class="sb-row" onclick="runSub('quiet')">
+        <div class="sb-row-ico">🔕</div>
+        <div class="sb-row-body"><div class="sb-row-name">Quiet team alert</div><div class="sb-row-sub">Live · 3+ days silence</div></div>
+        <div class="badge bg">Live</div>
       </div>
-
-      <div class="team-item" onclick="loadTeam('fintech')">
-        <div class="team-dot low"></div>
-        <div class="team-info">
-          <div class="team-name">FinTech Product</div>
-          <div class="team-count">9 people</div>
-        </div>
-        <div class="team-activity low">Quiet</div>
+      <div class="sb-row" onclick="runSub('blocked')">
+        <div class="sb-row-ico">🚧</div>
+        <div class="sb-row-body"><div class="sb-row-name">Blocked projects</div><div class="sb-row-sub">Live · Any team</div></div>
+        <div class="badge bg">Live</div>
       </div>
-
-      <div class="team-item" onclick="loadTeam('govtech')">
-        <div class="team-dot medium"></div>
-        <div class="team-info">
-          <div class="team-name">GovTech</div>
-          <div class="team-count">7 people</div>
-        </div>
-        <div class="team-activity medium">Normal</div>
+      <div class="sb-row" id="sub-anchor" onclick="runSub('changes')">
+        <div class="sb-row-ico">👥</div>
+        <div class="sb-row-body"><div class="sb-row-name">Team changes</div><div class="sb-row-sub">Daily · Joins, moves, exits</div></div>
+        <div class="badge ba">Daily</div>
       </div>
-
-      <div class="team-item" onclick="loadTeam('healthtech')">
-        <div class="team-dot high"></div>
-        <div class="team-info">
-          <div class="team-name">HealthTech</div>
-          <div class="team-count">6 people</div>
-        </div>
-        <div class="team-activity high">Active</div>
-      </div>
-
-      <div class="team-item" onclick="loadTeam('partnerships')">
-        <div class="team-dot medium"></div>
-        <div class="team-info">
-          <div class="team-name">Partnerships</div>
-          <div class="team-count">5 people</div>
-        </div>
-        <div class="team-activity medium">Normal</div>
-      </div>
-
-      <div class="team-item" onclick="loadTeam('infra')">
-        <div class="team-dot medium"></div>
-        <div class="team-info">
-          <div class="team-name">Infrastructure</div>
-          <div class="team-count">12 people</div>
-        </div>
-        <div class="team-activity medium">Normal</div>
-      </div>
-
-    </div>
-
-    <div class="sb-divider"></div>
-
-    <!-- SUBSCRIPTIONS -->
-    <div class="sb-section">
-      <div class="sb-label">My Subscriptions</div>
-
-      <div class="sub-item" onclick="loadSub('digest')">
-        <div class="sub-icon">📋</div>
-        <div class="sub-info">
-          <div class="sub-name">Weekly team digest</div>
-          <div class="sub-cadence">Every Monday · All teams</div>
-        </div>
-        <div class="sub-badge week">Mon</div>
-      </div>
-
-      <div class="sub-item" onclick="loadSub('quiet')">
-        <div class="sub-icon">🔕</div>
-        <div class="sub-info">
-          <div class="sub-name">Quiet team alert</div>
-          <div class="sub-cadence">Live · No activity 3+ days</div>
-        </div>
-        <div class="sub-badge live">Live</div>
-      </div>
-
-      <div class="sub-item" onclick="loadSub('projects')">
-        <div class="sub-icon">🚀</div>
-        <div class="sub-info">
-          <div class="sub-name">New project starts</div>
-          <div class="sub-cadence">Live · Any team</div>
-        </div>
-        <div class="sub-badge live">Live</div>
-      </div>
-
-      <div class="sub-item" onclick="loadSub('people')">
-        <div class="sub-icon">👥</div>
-        <div class="sub-info">
-          <div class="sub-name">Team changes</div>
-          <div class="sub-cadence">Daily · Joins, moves, exits</div>
-        </div>
-        <div class="sub-badge day">Daily</div>
-      </div>
-
     </div>
 
     <!-- SUBSCRIPTION CREATOR — always visible -->
-    <div class="sub-creator">
-      <div class="sub-creator-label">Create subscription</div>
-      <textarea class="sub-input" id="sub-input" rows="2"
-        placeholder="What do you want to track? e.g. alert me if FinTech team has no updates for 2 days..."></textarea>
+    <div class="sub-box">
+      <div class="sub-box-hd">Create subscription</div>
+      <textarea class="sub-ta" id="sub-input" rows="2" placeholder="What do you want to track? e.g. alert me if FinTech has no updates for 2 days..."></textarea>
       <div class="sub-row">
-        <select class="sub-select" id="sub-cadence">
+        <select class="sub-sel" id="sub-cadence">
           <option value="live">As it happens</option>
           <option value="daily">Daily digest</option>
-          <option value="weekly" selected>Weekly summary</option>
-          <option value="monthly">Monthly report</option>
+          <option value="weekly" selected>Weekly</option>
+          <option value="monthly">Monthly</option>
         </select>
-        <button class="sub-btn" onclick="createSub()">Create</button>
+        <button class="sub-go" onclick="createSub()">Create</button>
       </div>
-      <div class="sub-examples">
-        <div class="sub-example-label">Quick add</div>
-        <span class="sub-chip" onclick="fillSub('Alert me if any team has no activity for 3+ days')">Team silence alert</span>
-        <span class="sub-chip" onclick="fillSub('Daily summary of what each team completed yesterday')">Daily completions</span>
-        <span class="sub-chip" onclick="fillSub('Any new projects started across all teams')">New projects</span>
-        <span class="sub-chip" onclick="fillSub('Weekly: who joined or left each team')">Team changes</span>
-        <span class="sub-chip" onclick="fillSub('Show me all blocked or stalled projects every Monday')">Blocked projects</span>
-      </div>
-    </div>
-
-    <div class="sb-divider"></div>
-
-    <!-- ORG STATE -->
-    <div class="sb-section" style="padding-bottom:12px;">
-      <div class="sb-label">Org State</div>
-      <div class="state-row">
-        <div class="state-lbl">Momentum</div>
-        <div class="state-bar"><div class="state-fill" style="width:62%;background:var(--green);"></div></div>
-        <div class="state-val">Good</div>
-      </div>
-      <div class="state-row">
-        <div class="state-lbl">Alignment</div>
-        <div class="state-bar"><div class="state-fill" style="width:44%;background:var(--orange);"></div></div>
-        <div class="state-val">Watch</div>
-      </div>
-      <div class="state-row">
-        <div class="state-lbl">Energy</div>
-        <div class="state-bar"><div class="state-fill" style="width:78%;background:var(--accent);"></div></div>
-        <div class="state-val">Strong</div>
+      <div class="sub-chips">
+        <div class="sub-chips-lbl">Quick add</div>
+        <span class="sc" onclick="fillSub('Alert me if any team has no activity for 3+ days')">Silence alert</span>
+        <span class="sc" onclick="fillSub('Daily: what each team completed yesterday')">Daily completions</span>
+        <span class="sc" onclick="fillSub('Any new projects started across all teams')">New projects</span>
+        <span class="sc" onclick="fillSub('Weekly: who joined or left each team')">Team changes</span>
+        <span class="sc" onclick="fillSub('Any project blocked for more than 5 days')">Blocked projects</span>
       </div>
     </div>
 
-  </div>
+    <div class="sb-div"></div>
 
-  <!-- ── CHAT MAIN ── -->
-  <div class="chat-main">
-
-    <div class="chat-header">
-      <div>
-        <div class="chat-title">Team Intelligence — Ask anything about your teams</div>
-        <div class="chat-sub">Connected to the Brain · 47 people · 14 active projects · all systems live</div>
-      </div>
-      <div class="chat-badge">
-        <div class="live-dot"></div>
-        Brain live
-      </div>
-    </div>
-
-    <div class="messages" id="messages">
-
-      <!-- Default opening — Team overview -->
-      <div class="msg-system teams">
-        <div class="msg-type teams"><div class="msg-type-dot"></div>Team Intelligence · Updated now</div>
-        <div class="msg-title">Here is what every product team is working on right now.</div>
-        <div class="msg-body">
-          <strong>6 teams · 47 people · 14 active projects.</strong> Activity levels vary — the AI Research and HealthTech teams are highly active this week. <span class="warn">FinTech Product has been quiet for 12 days</span> — unusual for this team and worth attention.
-        </div>
-        <div class="team-grid">
-          <div class="tcard" onclick="askQuestion('Show me everything the AI Research team is working on right now')">
-            <div class="tcard-top">
-              <div class="tcard-name">AI Research</div>
-              <div class="tcard-activity high">Active</div>
-            </div>
-            <div class="tcard-focus">XANTA medical AI, sovereign data architecture, EU AI Act compliance framework</div>
-            <div class="tcard-people">
-              <span class="tcard-person">Dr. Kovács</span>
-              <span class="tcard-person">B. Szabó</span>
-              <span class="tcard-person">+6</span>
-            </div>
-          </div>
-          <div class="tcard" onclick="askQuestion('What is the FinTech Product team working on and why have they gone quiet?')">
-            <div class="tcard-top">
-              <div class="tcard-name">FinTech Product</div>
-              <div class="tcard-activity quiet">⚠ Quiet</div>
-            </div>
-            <div class="tcard-focus">Client portal for banking AI, data vault architecture — 12 days without updates</div>
-            <div class="tcard-people">
-              <span class="tcard-person">G. Mészáros</span>
-              <span class="tcard-person">R. Fodor</span>
-              <span class="tcard-person">+7</span>
-            </div>
-          </div>
-          <div class="tcard" onclick="askQuestion('What is the GovTech team working on this week?')">
-            <div class="tcard-top">
-              <div class="tcard-name">GovTech</div>
-              <div class="tcard-activity medium">Normal</div>
-            </div>
-            <div class="tcard-focus">Sovereign compute layer, government AI workloads — pilot deployment phase</div>
-            <div class="tcard-people">
-              <span class="tcard-person">K. Varga</span>
-              <span class="tcard-person">+6</span>
-            </div>
-          </div>
-          <div class="tcard" onclick="askQuestion('Show me the HealthTech team — who is on it and what are they building?')">
-            <div class="tcard-top">
-              <div class="tcard-name">HealthTech</div>
-              <div class="tcard-activity high">Active</div>
-            </div>
-            <div class="tcard-focus">InnoHealth Data Lake, XANTA medical validation, clinical data pipeline</div>
-            <div class="tcard-people">
-              <span class="tcard-person">Dr. Kovács</span>
-              <span class="tcard-person">+5</span>
-            </div>
-          </div>
-          <div class="tcard" onclick="askQuestion('What is the Partnerships team doing right now?')">
-            <div class="tcard-top">
-              <div class="tcard-name">Partnerships</div>
-              <div class="tcard-activity medium">Normal</div>
-            </div>
-            <div class="tcard-focus">Kellton EU-India MoU implementation, 2 new partnership proposals in progress</div>
-            <div class="tcard-people">
-              <span class="tcard-person">P. Antal</span>
-              <span class="tcard-person">+4</span>
-            </div>
-          </div>
-          <div class="tcard" onclick="askQuestion('What is the Infrastructure team working on?')">
-            <div class="tcard-top">
-              <div class="tcard-name">Infrastructure</div>
-              <div class="tcard-activity medium">Normal</div>
-            </div>
-            <div class="tcard-focus">Sovereign cloud infrastructure, Brain Layer 0 preparation, network security</div>
-            <div class="tcard-people">
-              <span class="tcard-person">+12</span>
-            </div>
-          </div>
-        </div>
-        <div class="msg-actions">
-          <div class="msg-action primary" onclick="askQuestion('Which teams have overlapping work that they might not know about?')">Find overlaps →</div>
-          <div class="msg-action" onclick="askQuestion('Why has the FinTech team gone quiet for 12 days?')">FinTech alert</div>
-          <div class="msg-action" onclick="askQuestion('Show me all 14 active projects with status and who is leading them')">All projects</div>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- ── INPUT ── -->
-    <div class="input-bar">
-      <div class="input-wrap">
-        <textarea class="input-field" id="chat-input" rows="1"
-          placeholder="Ask anything about your teams, projects, or people..."
-          oninput="autoResize(this);updateSend()"
-          onkeydown="handleKey(event)"></textarea>
-        <div class="input-send" id="send-btn" onclick="sendMessage()">↑</div>
-      </div>
-      <div class="input-chips">
-        <div class="chip" onclick="askQuestion('Show me Dr. Kovács — every project she is across right now')">Who is Dr. Kovács working on?</div>
-        <div class="chip" onclick="askQuestion('Which projects have been stuck or blocked for more than a week?')">Blocked projects</div>
-        <div class="chip" onclick="askQuestion('Which teams are working on overlapping problems without knowing it?')">Team overlaps</div>
-        <div class="chip" onclick="askQuestion('Show me everyone on the AI Research team and what each person is focused on')">AI Research team</div>
-        <div class="chip" onclick="askQuestion('What has changed across all teams in the last 7 days?')">Last 7 days</div>
-      </div>
+    <div class="sb-sec"><div class="sb-sec-lbl">Org State</div></div>
+    <div class="state-rows">
+      <div class="st-row"><div class="st-lbl">Momentum</div><div class="st-bar"><div class="st-fill" style="width:62%;background:var(--green);"></div></div><div class="st-val">Good</div></div>
+      <div class="st-row"><div class="st-lbl">Alignment</div><div class="st-bar"><div class="st-fill" style="width:44%;background:var(--orange);"></div></div><div class="st-val">Watch</div></div>
+      <div class="st-row"><div class="st-lbl">Energy</div><div class="st-bar"><div class="st-fill" style="width:78%;background:var(--accent);"></div></div><div class="st-val">Strong</div></div>
+      <div class="st-row"><div class="st-lbl">Focus</div><div class="st-bar"><div class="st-fill" style="width:71%;background:var(--blue);"></div></div><div class="st-val">High</div></div>
     </div>
 
   </div>
 </div>
 
-<div class="toast" id="toast"><span>✓</span><span id="toast-msg"></span></div>
+<!-- ══════════════════ MAIN CHAT ══════════════════ -->
+<div class="chat">
+  <div class="msgs" id="msgs">
+
+    <!-- Opening message — Essence speaks first, no user prompt -->
+    <div class="mrow">
+      <div class="min">
+        <div class="av av-e">E</div>
+        <div class="mcol">
+          <div class="mwho mwho-e">Essence · Team Intelligence</div>
+          <div class="mbody">
+            Good morning. <strong>6 teams, 47 people, 14 active projects.</strong> One item needs your attention today.
+            <br><br>
+            <span class="warn">⚠ FinTech Product has had no recorded activity for 12 days</span> — a 2.1σ deviation from normal. The COIOS architecture review is the likely cause and it is now blocking two other significant workstreams.
+            <br><br>
+            Everything else is operating within expected ranges. Click any team below for a full breakdown of people and projects.
+          </div>
+
+          <div class="team-grid" style="margin-top:16px;">
+
+            <div class="tc" onclick="teamClick(document.getElementById('team-btn-research'),'research')">
+              <div class="tc-top"><div class="tc-name">AI Research</div><div class="badge bg">● Active</div></div>
+              <div class="tc-focus">XANTA medical AI in clinical validation. EU AI Act compliance framework 70% complete. High activity — 3 late overnight submissions this week.</div>
+              <div class="tc-ft"><div class="tc-people"><span class="tc-chip">Dr. Kovács</span><span class="tc-chip">B. Szabó</span><span class="tc-chip">+6</span></div><div class="tc-n">8 people</div></div>
+            </div>
+
+            <div class="tc" onclick="teamClick(document.getElementById('team-btn-fintech'),'fintech')">
+              <div class="tc-top"><div class="tc-name">FinTech Product</div><div class="badge bo">⚠ Quiet 12d</div></div>
+              <div class="tc-focus">COIOS — client-side AI OS for banking. Architecture review blocking build phase and two downstream workstreams. No updates for 12 days.</div>
+              <div class="tc-ft"><div class="tc-people"><span class="tc-chip">G. Mészáros</span><span class="tc-chip">R. Fodor</span><span class="tc-chip">+7</span></div><div class="tc-n">9 people</div></div>
+            </div>
+
+            <div class="tc" onclick="teamClick(document.getElementById('team-btn-govtech'),'govtech')">
+              <div class="tc-top"><div class="tc-name">GovTech</div><div class="badge ba">● Normal</div></div>
+              <div class="tc-focus">Sovereign compute layer now in live pilot with first government client. Katalin Varga on-site this week. Steady progress.</div>
+              <div class="tc-ft"><div class="tc-people"><span class="tc-chip">K. Varga</span><span class="tc-chip">+6</span></div><div class="tc-n">7 people</div></div>
+            </div>
+
+            <div class="tc" onclick="teamClick(document.getElementById('team-btn-healthtech'),'healthtech')">
+              <div class="tc-top"><div class="tc-name">HealthTech</div><div class="badge bg">● Active</div></div>
+              <div class="tc-focus">InnoHealth Data Lake build phase started this week. XANTA clinical validation running in parallel. Dr. Kovács leads both this team and AI Research.</div>
+              <div class="tc-ft"><div class="tc-people"><span class="tc-chip">Dr. Kovács</span><span class="tc-chip">+5</span></div><div class="tc-n">6 people</div></div>
+            </div>
+
+            <div class="tc" onclick="teamClick(document.getElementById('team-btn-partnerships'),'partnerships')">
+              <div class="tc-top"><div class="tc-name">Partnerships</div><div class="badge ba">● Normal</div></div>
+              <div class="tc-focus">Kellton EU-India MoU in implementation. Money 20/20 Amsterdam June 3–5 confirmed. Nordic FinTech proposal blocked pending COIOS sign-off.</div>
+              <div class="tc-ft"><div class="tc-people"><span class="tc-chip">Dr. P. Antal</span><span class="tc-chip">+4</span></div><div class="tc-n">5 people</div></div>
+            </div>
+
+            <div class="tc" onclick="teamClick(document.getElementById('team-btn-infra'),'infra')">
+              <div class="tc-top"><div class="tc-name">Infrastructure</div><div class="badge ba">● Normal</div></div>
+              <div class="tc-focus">Sovereign cloud sprint completed. Brain Layer 0 prep started this week. Network security hardening Q2 cycle ongoing. Steady, no flags.</div>
+              <div class="tc-ft"><div class="tc-people"><span class="tc-chip">M. Horváth</span><span class="tc-chip">+11</span></div><div class="tc-n">12 people</div></div>
+            </div>
+
+          </div>
+
+          <div class="acts">
+            <div class="act prime" onclick="ask('Why has the FinTech team gone quiet for 12 days and what should I do?')">⚠ Investigate FinTech →</div>
+            <div class="act" onclick="ask('Which teams are working on overlapping problems without knowing it?')">Find overlaps</div>
+            <div class="act" onclick="ask('Show me all 14 active projects with spend and who authorised them')">All projects + spend</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- INPUT — ChatGPT style -->
+  <div class="input-area">
+    <div class="input-outer">
+      <div class="input-box">
+        <textarea class="input-ta" id="chat-input" rows="1"
+          placeholder="Ask anything about your teams, projects, or people..."
+          oninput="rez(this);upd()" onkeydown="onk(event)"></textarea>
+        <div class="send-btn" id="send-btn" onclick="send()">↑</div>
+      </div>
+      <div class="ichips">
+        <div class="ich" onclick="ask('Show me Dr. Kovács — every project she is across and her current focus')">Dr. Kovács full picture</div>
+        <div class="ich" onclick="ask('Show me the COIOS product — what it is, who is building it, what is blocking it')">COIOS product</div>
+        <div class="ich" onclick="ask('Which teams are working on overlapping problems without knowing it?')">Team overlaps</div>
+        <div class="ich" onclick="ask('Which projects have been blocked or stalled for more than a week?')">Blocked projects</div>
+        <div class="ich" onclick="ask('What has changed across all teams in the last 7 days?')">Last 7 days</div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<div class="toast" id="toast">✓ <span id="toast-msg"></span></div>
 
 <script>
-// ── TEAM DATA ──────────────────────────────────────────────────────
+// ════════════════════════════════════════════
+//  RICH MOCK DATA
+// ════════════════════════════════════════════
+
 const TEAMS = {
-  research: {
-    name: 'AI Research',
-    people: [
-      {initials:'AK', name:'Dr. Anna Kovács', role:'Head of AI Research',
-       projects:['XANTA — lead researcher','EU AI Act compliance framework','Sovereign data architecture R&D'],
-       status:'active', note:'Joined from MIT AI Lab. Currently leading XANTA clinical validation push.'},
-      {initials:'BS', name:'Bence Szabó', role:'Senior AI Engineer',
-       projects:['SpaceTech data pipeline (paused Q3)','XANTA — conversational AI module'],
-       status:'active', note:'Paused SpaceTech project by Antal — currently supporting XANTA full time.'},
-      {initials:'AK2', name:'András Kiss', role:'Research Engineer',
-       projects:['EU AI Act compliance documentation','Sovereign AI architecture paper'],
-       status:'active', note:''},
+  research:{
+    name:'AI Research', n:8, nproj:4,
+    badge:'<div class="badge bg">● Active</div>',
+    summary:'eGroup\'s highest-activity team this week. Led by Dr. Anna Kovács (ex-MIT AI Lab). Primary focus is XANTA clinical validation — paper due June 2026. Parallel work on EU AI Act compliance and sovereign data architecture R&D.',
+    people:[
+      {ini:'AK',name:'Dr. Anna Kovács',role:'Head of AI Research',c:'rgba(180,136,255,.2)',tc:'var(--purple)',
+       focus:'Leading XANTA clinical validation. Submitted 3 overnight updates this week. Also spans HealthTech team — the only person leading two teams simultaneously.',
+       tags:['XANTA','HealthTech lead','MIT AI Lab alumni'],status:'Active',sc:'bg'},
+      {ini:'BS',name:'Bence Szabó',role:'Senior AI Engineer',c:'rgba(78,201,255,.2)',tc:'var(--blue)',
+       focus:'Fully allocated to XANTA conversational AI module. SpaceTech project paused by Antal (March 2026) — resources reallocated here.',
+       tags:['XANTA','ex-SpaceTech'],status:'Active',sc:'bg'},
+      {ini:'AK2',name:'András Kiss',role:'Research Engineer',c:'rgba(68,255,136,.2)',tc:'var(--green)',
+       focus:'Primary author on EU AI Act compliance documentation. Section 4 (data governance) completed this week.',
+       tags:['EU AI Act','Compliance'],status:'Active',sc:'bg'},
+      {ini:'MN',name:'Márk Nagy',role:'ML Engineer',c:'rgba(212,255,0,.15)',tc:'var(--accent)',
+       focus:'XANTA model training and evaluation pipeline. Running validation experiments with University of Pécs dataset.',
+       tags:['XANTA','Model training'],status:'Active',sc:'bg'},
     ],
-    focus: 'XANTA medical AI is the primary focus — clinical validation paper due June 2026. Parallel work on EU AI Act compliance. High activity this week.',
-    projects: ['XANTA — Migraine Prediction AI','EU AI Act Compliance Framework','Sovereign Data Architecture R&D'],
-    alert: null,
+    projects:[
+      {name:'XANTA — Migraine Prediction AI',lead:'Dr. Anna Kovács',spend:'€284,000',auth:'Antal Kuthy',
+       status:'On track',sc:'bg',phase:'Clinical validation · paper due June 2026',
+       desc:'Conversational AI predicting migraine episodes using behavioural and physiological signals. Joint project with University of Pécs. Won first place at two consecutive international Medical AI Innovation competitions. Clinical validation paper due June 2026 — submission is the next critical milestone.',
+       alert:null},
+      {name:'EU AI Act Compliance Framework',lead:'András Kiss',spend:'€44,000',auth:'Antal Kuthy',
+       status:'70% complete',sc:'ba',phase:'Documentation',
+       desc:'Compliance framework covering all eGroup AI products under the EU AI Act now in force. Section 4 (data governance) completed this week. Remaining: sections 5 (human oversight) and 6 (technical documentation).',
+       alert:null},
+      {name:'Sovereign Data Architecture R&D',lead:'Dr. Anna Kovács',spend:'€18,000',auth:'Antal Kuthy',
+       status:'Background',sc:'bd',phase:'Research phase',
+       desc:'Exploratory R&D into sovereign data processing patterns. Not on critical path — feeding future product decisions. Low time allocation this quarter.',
+       alert:null},
+      {name:'SpaceTech Data Pipeline',lead:'Bence Szabó',spend:'€67,000',auth:'Antal Kuthy',
+       status:'Paused',sc:'bo',phase:'Paused — Q3 2026',
+       desc:'Data pipeline for SpaceTech sector client. Paused March 2026 pending Q3 budget review. Bence Szabó fully reallocated to XANTA.',
+       alert:'⚠ Paused by decision (Antal, March 2026). Q3 budget review required before restart.'},
+    ]
   },
-  fintech: {
-    name: 'FinTech Product',
-    people: [
-      {initials:'GM', name:'Gábor Mészáros', role:'FinTech Product Lead',
-       projects:['FinTech AI Infrastructure V2 — lead','Client Portal Banking AI'],
-       status:'quiet', note:'Last update 12 days ago. Team lead has not submitted updates.'},
-      {initials:'RF', name:'Réka Fodor', role:'Frontend Engineer',
-       projects:['Client Portal Banking AI — frontend build'],
-       status:'quiet', note:'In beta testing phase. No new commits in 8 days.'},
+
+  fintech:{
+    name:'FinTech Product', n:9, nproj:3,
+    badge:'<div class="badge bo">⚠ Quiet — 12 days</div>',
+    summary:'FinTech is eGroup\'s most commercially significant product team — building COIOS, a client-side AI operating system for banking institutions. No recorded activity for 12 days (2.1σ anomaly). Both active projects are in phases that produce less visible output, but the absence of any communication from team lead Gábor Mészáros is the specific concern. The COIOS architecture review is the critical path blocker — it is now delaying two other significant workstreams.',
+    people:[
+      {ini:'GM',name:'Gábor Mészáros',role:'FinTech Product Lead',c:'rgba(255,148,68,.2)',tc:'var(--orange)',
+       focus:'Leading COIOS architecture review. No updates, check-ins, or comments submitted in 12 days. This is the primary communication gap flagged by the Brain.',
+       tags:['COIOS lead','Architecture review'],status:'No updates 12d',sc:'bo'},
+      {ini:'RF',name:'Réka Fodor',role:'Senior Frontend Engineer',c:'rgba(78,201,255,.2)',tc:'var(--blue)',
+       focus:'COIOS Client Portal — currently in beta testing with first client. Waiting on structured feedback from client IT team. Last commit 8 days ago.',
+       tags:['COIOS Portal','Beta testing'],status:'Beta — waiting',sc:'ba'},
+      {ini:'TK',name:'Tamás Kis',role:'Backend Engineer',c:'rgba(180,136,255,.2)',tc:'var(--purple)',
+       focus:'COIOS data vault backend. Architecture review phase — design documents submitted, awaiting sign-off.',
+       tags:['COIOS','Data vault'],status:'In review',sc:'ba'},
+      {ini:'EV',name:'Eszter Vásárhelyi',role:'FinTech Domain Specialist',c:'rgba(68,255,136,.2)',tc:'var(--green)',
+       focus:'Regulatory compliance mapping for COIOS. Mapping EU AI Act financial services requirements to product architecture.',
+       tags:['COIOS','Regulatory','EU AI Act'],status:'Active',sc:'bg'},
     ],
-    focus: 'FinTech AI Infrastructure V2 in architecture review. Client portal in beta testing. No team activity for 12 days — unusual pattern.',
-    projects: ['FinTech AI Infrastructure V2','Client Portal — Banking AI'],
-    alert: '⚠ 12 days without activity — 2.1σ deviation from normal pattern',
+    projects:[
+      {name:'COIOS — Client-Side AI Operating System',lead:'Gábor Mészáros',spend:'€312,000',auth:'Antal Kuthy',
+       status:'⚠ Review blocked 18d',sc:'bo',phase:'Architecture review — decision pending',
+       desc:'COIOS is eGroup\'s flagship FinTech product. It allows banking institutions to run AI inference on sensitive financial data entirely within their own network — no customer data, transaction history, or financial models ever leave the bank\'s environment. This directly addresses the EU AI Act\'s data residency requirement for financial services, which currently has no clean solution elsewhere in the market. The architecture review has been in progress for 18 days without a decision — this is the critical path blocker.',
+       alert:'⚠ Architecture review: 18 days without decision. Blocking COIOS build phase, FinTech AI Infrastructure V2, and the Nordic FinTech Consortium proposal. Decision needed this week.'},
+      {name:'COIOS — Client Portal',lead:'Réka Fodor',spend:'€156,000',auth:'Zoltán Nagy',
+       status:'Beta testing',sc:'ba',phase:'Beta — awaiting client feedback',
+       desc:'Web portal for banking clients to manage and monitor their COIOS deployment. In beta with first client. Client feedback expected this week — no timeline pressure but unblocking it enables the next build cycle.',
+       alert:null},
+      {name:'FinTech AI Infrastructure V2',lead:'Gábor Mészáros',spend:'€198,000',auth:'Zoltán Nagy',
+       status:'Blocked by COIOS',sc:'bo',phase:'Paused pending COIOS direction',
+       desc:'Next-generation FinTech infrastructure layer. Progress directly depends on COIOS architectural decisions. Cannot proceed until COIOS architecture is signed off. Estimated 3 further weeks of delay for every week the COIOS review remains open.',
+       alert:'⚠ Directly blocked by COIOS architecture review. Cascading delay risk.'},
+    ]
   },
-  govtech: {
-    name: 'GovTech',
-    people: [
-      {initials:'KV', name:'Katalin Varga', role:'GovTech Lead',
-       projects:['Sovereign Compute Layer — pilot deployment','EU compliance infrastructure'],
-       status:'active', note:'Pilot deployment phase — working with first government client.'},
+
+  govtech:{
+    name:'GovTech', n:7, nproj:2,
+    badge:'<div class="badge ba">● Normal</div>',
+    summary:'GovTech is executing eGroup\'s most advanced live deployment. The sovereign compute layer for government AI workloads is now in live pilot with the first government client. Katalin Varga is on-site this week. The team is operating normally — focused, steady, no flags.',
+    people:[
+      {ini:'KV',name:'Katalin Varga',role:'GovTech Lead',c:'rgba(212,255,0,.15)',tc:'var(--accent)',
+       focus:'On-site at pilot government client this week — running the live deployment. First live government client in eGroup\'s history.',
+       tags:['Sovereign compute','Live pilot','On-site'],status:'On-site',sc:'bg'},
+      {ini:'PB',name:'Péter Balogh',role:'Infrastructure Engineer',c:'rgba(78,201,255,.2)',tc:'var(--blue)',
+       focus:'Sovereign compute technical configuration. Supporting Katalin remotely during on-site deployment.',
+       tags:['Sovereign compute','Infrastructure'],status:'Active',sc:'bg'},
+      {ini:'NF',name:'Nóra Fehér',role:'Compliance Specialist',c:'rgba(68,255,136,.2)',tc:'var(--green)',
+       focus:'EU regulatory compliance framework for government sector. Coordinating with AI Research EU AI Act team.',
+       tags:['Compliance','EU AI Act','GovTech'],status:'Active',sc:'bg'},
     ],
-    focus: 'Sovereign compute layer for government AI workloads entering pilot deployment. Working with first government client directly.',
-    projects: ['GovTech Sovereign Compute','EU Compliance Infrastructure'],
-    alert: null,
+    projects:[
+      {name:'GovTech Sovereign Compute Layer',lead:'Katalin Varga',spend:'€312,000',auth:'Antal Kuthy',
+       status:'Pilot live',sc:'bg',phase:'Live pilot — government client',
+       desc:'A sovereign compute layer enabling government agencies to run AI workloads with complete data residency — no data ever leaves the agency\'s secure environment. First live pilot with a central government agency. Katalin Varga managing the deployment on-site. This is the first live deployment of eGroup\'s sovereign compute technology.',
+       alert:null},
+      {name:'EU Compliance Infrastructure',lead:'Nóra Fehér',spend:'€55,000',auth:'Antal Kuthy',
+       status:'On track',sc:'bg',phase:'Framework development',
+       desc:'Compliance infrastructure framework for all eGroup government sector products. Aligned with EU AI Act public sector requirements. Coordinating with AI Research team on the overarching compliance framework.',
+       alert:null},
+    ]
   },
-  healthtech: {
-    name: 'HealthTech',
-    people: [
-      {initials:'AK', name:'Dr. Anna Kovács', role:'Also leads HealthTech AI',
-       projects:['InnoHealth Data Lake','XANTA clinical validation'],
-       status:'active', note:'Cross-team lead — spans Research and HealthTech.'},
+
+  healthtech:{
+    name:'HealthTech', n:6, nproj:2,
+    badge:'<div class="badge bg">● Active</div>',
+    summary:'HealthTech is building the data infrastructure underpinning eGroup\'s medical AI products. The InnoHealth Data Lake build phase started this week — design was approved last week. Dr. Anna Kovács leads this team in addition to AI Research, making her the single most cross-functional senior person at eGroup.',
+    people:[
+      {ini:'AK',name:'Dr. Anna Kovács',role:'HealthTech AI Lead (also leads AI Research)',c:'rgba(180,136,255,.2)',tc:'var(--purple)',
+       focus:'Leading both HealthTech and AI Research simultaneously. InnoHealth Data Lake design approved — build phase started this week. Note: single point of failure across two strategic programmes.',
+       tags:['InnoHealth','XANTA','Dual team lead'],status:'Active',sc:'bg'},
+      {ini:'DL',name:'Dávid László',role:'Data Engineer',c:'rgba(68,255,136,.2)',tc:'var(--green)',
+       focus:'Primary engineer on InnoHealth Data Lake ingestion pipeline. Build phase started Monday — first sprint running.',
+       tags:['InnoHealth','Data pipeline'],status:'Active',sc:'bg'},
+      {ini:'ZS',name:'Zsófia Simon',role:'Clinical Data Specialist',c:'rgba(78,201,255,.2)',tc:'var(--blue)',
+       focus:'Clinical dataset standards and data governance for InnoHealth. Also coordinating with University of Pécs on XANTA clinical data.',
+       tags:['InnoHealth','XANTA data','Clinical governance'],status:'Active',sc:'bg'},
     ],
-    focus: 'InnoHealth Data Lake infrastructure build plus XANTA medical AI clinical validation. Active this week.',
-    projects: ['InnoHealth Data Lake','XANTA — Clinical Validation'],
-    alert: null,
+    projects:[
+      {name:'InnoHealth Data Lake',lead:'Dr. Anna Kovács',spend:'€89,000',auth:'Antal Kuthy',
+       status:'Build started',sc:'bg',phase:'Build — week 1',
+       desc:'A sovereign clinical data lake for health institutions — secure storage, indexing, and analysis of patient data with full GDPR and clinical regulatory compliance. Design approved last week. Build phase started Monday. Dávid László is the primary build engineer. First sprint running.',
+       alert:null},
+      {name:'XANTA — HealthTech Clinical Validation',lead:'Dr. Anna Kovács',spend:'Shared with AI Research',auth:'Antal Kuthy',
+       status:'Active',sc:'bg',phase:'Clinical validation support',
+       desc:'HealthTech supports the XANTA clinical validation process — contributing clinical data governance protocols and patient interaction standards. AI Research team leads core AI development. The two teams share Dr. Kovács as lead.',
+       alert:null},
+    ]
   },
-  partnerships: {
-    name: 'Partnerships',
-    people: [
-      {initials:'PA', name:'Dr. Péter Antal', role:'Partnerships Director',
-       projects:['Kellton EU-India MoU implementation','Money 20/20 Europe prep'],
-       status:'active', note:'Attending Money 20/20 Amsterdam June 3-5.'},
+
+  partnerships:{
+    name:'Partnerships', n:5, nproj:3,
+    badge:'<div class="badge ba">● Normal</div>',
+    summary:'Managing eGroup\'s most strategically significant external relationship — the Kellton EU-India Sovereign AI Ecosystem MoU. Money 20/20 Amsterdam prep active. Two new partnership proposals under review, one of which is currently blocked waiting on the COIOS architecture decision.',
+    people:[
+      {ini:'PA',name:'Dr. Péter Antal',role:'Partnerships Director',c:'rgba(212,255,0,.15)',tc:'var(--accent)',
+       focus:'Kellton MoU implementation plan signed off last week. Leading Money 20/20 Amsterdam preparation — attending June 3–5.',
+       tags:['Kellton','Money 20/20','EU-India'],status:'Active',sc:'bg'},
+      {ini:'HN',name:'Hanna Novák',role:'Partnership Development Manager',c:'rgba(78,201,255,.2)',tc:'var(--blue)',
+       focus:'Managing Nordic FinTech Consortium proposal (4 member banks — COIOS opportunity) and Dutch HealthData partnership. Nordic proposal currently blocked by COIOS architecture review.',
+       tags:['Nordic FinTech','COIOS pipeline','Dutch health'],status:'Active',sc:'bg'},
     ],
-    focus: 'Kellton EU-India MoU now in implementation phase. 2 new partnership proposals under review. Money 20/20 prep active.',
-    projects: ['Kellton EU-India Ecosystem','Money 20/20 Europe 2026'],
-    alert: null,
+    projects:[
+      {name:'Kellton EU-India Sovereign AI Ecosystem',lead:'Dr. Péter Antal',spend:'€127,000',auth:'Antal Kuthy',
+       status:'Implementation',sc:'bg',phase:'MoU implementation — month 2',
+       desc:'Under the EU-India Framework Agreement, eGroup and Kellton Technologies (India, 3,000+ staff) are jointly building a Sovereign AI Ecosystem and AI Gigafactory. Implementation plan signed off last week. Joint working group convenes monthly. This is eGroup\'s largest strategic partnership.',
+       alert:null},
+      {name:'Money 20/20 Europe 2026',lead:'Dr. Péter Antal',spend:'€12,000',auth:'Antal Kuthy',
+       status:'Confirmed',sc:'bg',phase:'Preparation — event June 3–5',
+       desc:'Dr. Péter Antal + 2 colleagues attending Money 20/20 Europe in Amsterdam, June 3–5. 8,000+ FinTech leaders. eGroup positioning: 30 years of sovereign FinTech infrastructure, COIOS launch readiness. Rise content strategy in preparation.',
+       alert:null},
+      {name:'Nordic FinTech Consortium',lead:'Hanna Novák',spend:'€0',auth:'Pending approval',
+       status:'⚠ Blocked',sc:'bo',phase:'Proposal stage — blocked',
+       desc:'Partnership proposal with a Nordic FinTech consortium — 4 member banks, combined AUM €240bn. Potential COIOS deployment across all 4 banks. This would be eGroup\'s largest single contract. Hanna Novák leading the proposal.',
+       alert:'⚠ Cannot progress until COIOS architecture is signed off. This proposal represents significant commercial value — the COIOS review delay has direct revenue implications.'},
+    ]
   },
-  infra: {
-    name: 'Infrastructure',
-    people: [],
-    focus: 'Sovereign cloud infrastructure, Brain Layer 0 preparation, network security hardening. 12 engineers, steady activity.',
-    projects: ['Sovereign Cloud Infrastructure','Brain Layer 0 Preparation','Network Security'],
-    alert: null,
-  },
+
+  infra:{
+    name:'Infrastructure', n:12, nproj:3,
+    badge:'<div class="badge ba">● Normal</div>',
+    summary:'The largest team at 12 engineers. Completed a sovereign cloud infrastructure sprint ahead of schedule last week. Brain Layer 0 preparation work started — this is the foundational infrastructure for the Rise intelligence platform. Network security Q2 hardening cycle ongoing. Steady, reliable team — no flags.',
+    people:[
+      {ini:'MH',name:'Márton Horváth',role:'Infrastructure Lead',c:'rgba(78,201,255,.2)',tc:'var(--blue)',
+       focus:'Leading Brain Layer 0 preparation. Sovereign cloud sprint completed last week ahead of schedule.',
+       tags:['Brain Layer 0','Sovereign cloud','Lead'],status:'Active',sc:'bg'},
+      {ini:'AL',name:'Anna Lakatos',role:'Security Engineer',c:'rgba(212,255,0,.15)',tc:'var(--accent)',
+       focus:'Network security hardening — Q2 cycle. Q2 pen test scheduled for May. Zero findings in last external audit.',
+       tags:['Security','Q2 hardening','Pen test'],status:'Active',sc:'bg'},
+      {ini:'GF',name:'Gergő Fekete',role:'Cloud Architect',c:'rgba(68,255,136,.2)',tc:'var(--green)',
+       focus:'Sovereign cloud architecture. Multi-node deployment across 3 data centres now fully operational.',
+       tags:['Cloud architecture','Multi-DC'],status:'Active',sc:'bg'},
+    ],
+    projects:[
+      {name:'Sovereign Cloud Infrastructure',lead:'Márton Horváth',spend:'€178,000',auth:'Antal Kuthy',
+       status:'Sprint complete',sc:'bg',phase:'Multi-DC live — operational',
+       desc:'eGroup\'s sovereign cloud — multi-node, multi-data-centre, no hyperscaler dependency. Sprint completed last week ahead of schedule. Now in steady operational phase. Supports all eGroup product teams. Audit trail and compliance logging active.',
+       alert:null},
+      {name:'Brain Layer 0 Preparation',lead:'Márton Horváth',spend:'€22,000',auth:'Antal Kuthy',
+       status:'Started',sc:'bg',phase:'Infrastructure preparation',
+       desc:'Infrastructure preparation for Rise\'s Layer 0 Knowledge Graph — graph database provisioning, vector index, Kafka event bus. Started this week. Required before Rise can begin connecting to eGroup\'s systems and building the knowledge graph.',
+       alert:null},
+      {name:'Network Security Hardening',lead:'Anna Lakatos',spend:'€34,000',auth:'Zoltán Nagy',
+       status:'Q2 cycle',sc:'bg',phase:'Q2 hardening',
+       desc:'Q2 security hardening. Zero findings in last external audit. Q2 pen test scheduled May. Covers all eGroup sovereign infrastructure. Anna Lakatos coordinating with external security firm.',
+       alert:null},
+    ]
+  }
 };
 
-// ── BRAIN RESPONSES ────────────────────────────────────────────────
-function matchQuery(q) {
-  const ql = q.toLowerCase();
-  if (ql.includes('dr. kov') || ql.includes('kovács') || ql.includes('anna')) return 'kovacs';
-  if (ql.includes('overlap') || ql.includes('same problem') || ql.includes('overlap')) return 'overlaps';
-  if (ql.includes('fintech') && (ql.includes('quiet') || ql.includes('why'))) return 'fintech_quiet';
-  if (ql.includes('all') && ql.includes('project')) return 'all_projects';
-  if (ql.includes('research') && (ql.includes('team') || ql.includes('everyone'))) return 'research_team';
-  if (ql.includes('blocked') || ql.includes('stuck') || ql.includes('stalled')) return 'blocked';
-  if (ql.includes('last 7') || ql.includes('7 days') || ql.includes('changed')) return 'last7';
-  if (ql.includes('fintech') || ql.includes('gábor') || ql.includes('gabor')) return 'fintech_team';
-  if (ql.includes('govtech') || ql.includes('katalin') || ql.includes('varga')) return 'govtech_team';
-  if (ql.includes('healthtech') || ql.includes('health')) return 'healthtech_team';
-  if (ql.includes('partnerships') || ql.includes('péter') || ql.includes('peter')) return 'partnerships_team';
-  if (ql.includes('infra')) return 'infra_team';
-  return 'default';
-}
+const ALL_PROJECTS = [
+  {name:'XANTA — Migraine Prediction AI',team:'Research + HealthTech',lead:'Dr. Kovács',spend:'€284k',auth:'Antal Kuthy',s:'bg',sl:'On track'},
+  {name:'COIOS — Client-Side AI OS',team:'FinTech',lead:'G. Mészáros',spend:'€312k',auth:'Antal Kuthy',s:'bo',sl:'⚠ Review blocked 18d'},
+  {name:'Kellton EU-India Ecosystem',team:'Partnerships',lead:'Dr. P. Antal',spend:'€127k',auth:'Antal Kuthy',s:'bg',sl:'Implementation'},
+  {name:'GovTech Sovereign Compute',team:'GovTech',lead:'K. Varga',spend:'€312k',auth:'Antal Kuthy',s:'bg',sl:'Pilot live'},
+  {name:'InnoHealth Data Lake',team:'HealthTech',lead:'Dr. Kovács',spend:'€89k',auth:'Antal Kuthy',s:'bg',sl:'Build started'},
+  {name:'EU AI Act Compliance',team:'Research',lead:'A. Kiss',spend:'€44k',auth:'Antal Kuthy',s:'ba',sl:'70% complete'},
+  {name:'COIOS — Client Portal',team:'FinTech',lead:'R. Fodor',spend:'€156k',auth:'Z. Nagy',s:'ba',sl:'Beta testing'},
+  {name:'Sovereign Cloud Infrastructure',team:'Infrastructure',lead:'M. Horváth',spend:'€178k',auth:'Antal Kuthy',s:'bg',sl:'Multi-DC live'},
+  {name:'Brain Layer 0 Prep',team:'Infrastructure',lead:'M. Horváth',spend:'€22k',auth:'Antal Kuthy',s:'bg',sl:'Started'},
+  {name:'Network Security Hardening',team:'Infrastructure',lead:'A. Lakatos',spend:'€34k',auth:'Z. Nagy',s:'bg',sl:'Q2 cycle'},
+  {name:'Nordic FinTech Consortium',team:'Partnerships',lead:'H. Novák',spend:'€0',auth:'Pending',s:'bo',sl:'⚠ Blocked by COIOS'},
+  {name:'FinTech AI Infrastructure V2',team:'FinTech',lead:'G. Mészáros',spend:'€198k',auth:'Z. Nagy',s:'bo',sl:'⚠ Blocked by COIOS'},
+  {name:'Sovereign Data Architecture R&D',team:'Research',lead:'Dr. Kovács',spend:'€18k',auth:'Antal Kuthy',s:'bd',sl:'Background'},
+  {name:'SpaceTech Data Pipeline',team:'Research',lead:'B. Szabó',spend:'€67k',auth:'Antal Kuthy',s:'bo',sl:'Paused Q3'},
+];
 
-function getResponse(key, q) {
-  const responses = {
-    kovacs: {
-      thinking: 1600,
-      title: 'Dr. Anna Kovács — full picture across all projects',
-      body: `Dr. Kovács is eGroup's most cross-functional team member — she leads both the AI Research team and the HealthTech AI programme simultaneously.\n\n<strong>Current projects:</strong>`,
-      person: {
-        initials:'AK', name:'Dr. Anna Kovács', role:'Head of AI Research · HealthTech AI Lead',
-        projects:[
-          {name:'XANTA — Migraine Prediction AI',detail:'Lead researcher. Clinical validation paper due June 2026. High activity this week — 3 overnight updates.',status:'active'},
-          {name:'InnoHealth Data Lake',detail:'HealthTech infrastructure build. Designing the data ingestion pipeline for clinical datasets.',status:'active'},
-          {name:'EU AI Act Compliance Framework',detail:'Contributing architectural guidance. András Kiss is primary author.',status:'review'},
-          {name:'Sovereign Data Architecture',detail:'Background research contribution. Not primary focus this month.',status:'review'},
-        ]
-      },
-      sources:['HR system','Project management','Brain activity graph'],
-      actions:[
-        {label:'XANTA project detail',q:'Tell me everything about the XANTA project — status, spend, team, timeline'},
-        {label:'Who else is on her teams?',q:'Show me everyone on the AI Research team and what each person is focused on'},
-      ]
-    },
+// ════════════════════════════════════════════
+//  RESPONSE CONTENT
+// ════════════════════════════════════════════
 
-    overlaps: {
-      thinking: 1800,
-      title: 'Three teams are working on the same problem — they do not know it',
-      body: `The Brain detected semantic overlap across <strong>23 documents</strong> and <strong>4 active projects</strong> from three separate teams. None of them appear to be aware of the others' work.\n\n<strong>The shared problem:</strong> How do you run AI inference on sensitive data without that data leaving the client environment?\n\n<span class="hi">AI Research (XANTA)</span> — building local inference for patient data\n<span class="hi">FinTech Product</span> — building a client-side data vault for banking AI\n<span class="hi">GovTech</span> — building a sovereign compute layer for government workloads\n\nAll three are solving the same architectural challenge from different sector angles. A single two-hour conversation between the three leads could eliminate months of duplicated work — and might produce a single unified solution applicable across all three sectors.`,
-      sources:['Brain semantic clustering','23 document nodes','Project management'],
-      actions:[
-        {label:'Who are the three leads?',q:'Who leads AI Research, FinTech Product, and GovTech — show me their details'},
-        {label:'Set up alignment alert',q:'Create a subscription to alert me whenever two or more teams appear to be solving overlapping problems'},
-      ]
-    },
-
-    fintech_quiet: {
-      thinking: 1400,
-      title: 'FinTech Product — 12 days of silence explained',
-      body: `The Brain shows the FinTech pipeline has had <strong>no activity for 12 days</strong> — a 2.1 standard deviation anomaly vs. the team's 18-month baseline of activity every 4-6 days.\n\n<strong>What the Brain found:</strong>\n\nThe team has <strong>2 major workstreams</strong> both in phases that typically produce less visible activity: FinTech AI Infrastructure V2 is in architecture review (design work, not commits), and the Client Portal is in beta testing (waiting on client feedback, not shipping new code).\n\nHowever, <strong>no update has been submitted</strong> by team lead Gábor Mészáros in this period either — which is unusual regardless of project phase.\n\n<strong>Brain assessment:</strong> This is likely a combination of a naturally quieter project phase and a communication gap rather than a problem. However it warrants a direct conversation with Gábor.`,
-      sources:['CRM','Project management','HR activity graph','Historical baseline — 18 months'],
-      actions:[
-        {label:'Show me FinTech team detail',q:'Show me the full FinTech Product team — who is on it and what each person is doing'},
-        {label:'Subscribe to FinTech alerts',q:'Create a subscription to alert me if the FinTech team has no activity for more than 5 days'},
-      ]
-    },
-
-    all_projects: {
-      thinking: 1700,
-      title: 'All 14 active projects — status, lead, team',
-      body: `<strong>14 active projects</strong> across 6 teams. 11 are progressing normally, 2 are in natural low-activity phases, 1 is paused by decision.`,
-      table: [
-        {name:'XANTA — Medical AI',team:'Research + HealthTech',lead:'Dr. Kovács',status:'active',phase:'Clinical validation'},
-        {name:'Kellton EU-India Ecosystem',team:'Partnerships',lead:'Dr. P. Antal',status:'active',phase:'MoU implementation'},
-        {name:'FinTech AI Infrastructure V2',team:'FinTech',lead:'G. Mészáros',status:'quiet',phase:'Architecture review'},
-        {name:'GovTech Sovereign Compute',team:'GovTech',lead:'K. Varga',status:'active',phase:'Pilot deployment'},
-        {name:'InnoHealth Data Lake',team:'HealthTech',lead:'Dr. Kovács',status:'active',phase:'Infrastructure build'},
-        {name:'EU AI Act Compliance',team:'Research',lead:'A. Kiss',status:'active',phase:'Documentation'},
-        {name:'Client Portal — Banking AI',team:'FinTech',lead:'R. Fodor',status:'quiet',phase:'Beta testing'},
-        {name:'Sovereign Cloud Infrastructure',team:'Infrastructure',lead:'TBC',status:'active',phase:'Build'},
-        {name:'SpaceTech Data Pipeline',team:'Research',lead:'B. Szabó',status:'paused',phase:'Paused — Q3 resume'},
-      ],
-      sources:['Project management','HR system','CRM','Brain activity graph'],
-      actions:[
-        {label:'Show me blocked projects',q:'Which projects have been stuck or blocked for more than a week?'},
-        {label:'Projects by spend',q:'Show me all active projects ranked by spend to date'},
-      ]
-    },
-
-    research_team: {
-      thinking: 1500,
-      title: 'AI Research Team — 8 people, 4 active projects',
-      body: `The AI Research team is eGroup's highest-activity team this week. <strong>Dr. Anna Kovács</strong> leads the team, joined from MIT AI Lab. The team spans two major initiatives: XANTA medical AI and the EU AI Act compliance framework.`,
-      person: null,
-      teamDetail: 'research',
-      sources:['HR system','Project management','Brain activity graph'],
-      actions:[
-        {label:'Deep dive on XANTA',q:'Tell me everything about the XANTA project'},
-        {label:'Dr. Kovács full profile',q:'Show me Dr. Kovács — every project she is across right now'},
-      ]
-    },
-
-    blocked: {
-      thinking: 1300,
-      title: 'Blocked and stalled projects — 2 flagged',
-      body: `The Brain identified <strong>2 projects</strong> showing stall patterns based on activity signals and last update timestamps.\n\n<strong>1. FinTech AI Infrastructure V2</strong> — 12 days without updates. Architecture review phase but no design documents submitted. Team lead has not checked in.\n\n<strong>2. SpaceTech Data Pipeline</strong> — Paused by decision (Antal, March 2026) pending Q3 budget review. Not a stall — a planned pause. Resume scheduled Q3.\n\nAll other 12 projects are showing normal activity patterns for their current phase.`,
-      sources:['Project management','Brain activity graph','Historical baseline'],
-      actions:[
-        {label:'FinTech team detail',q:'Show me the FinTech Product team — who is on it and what are they doing'},
-        {label:'Subscribe to stall alerts',q:'Create a subscription to alert me whenever a project has no updates for 7+ days'},
-      ]
-    },
-
-    last7: {
-      thinking: 1400,
-      title: 'What changed across all teams — last 7 days',
-      body: `<strong>AI Research:</strong> XANTA clinical validation paper draft completed. Dr. Kovács submitted 3 overnight updates. EU AI Act compliance framework section 4 completed.\n\n<strong>GovTech:</strong> First government client pilot deployment kicked off. K. Varga leading on-site. 2 new technical documents submitted.\n\n<strong>Partnerships:</strong> Kellton MoU implementation plan signed off. Money 20/20 Amsterdam registration confirmed for 3 team members.\n\n<strong>HealthTech:</strong> InnoHealth Data Lake ingestion pipeline design approved. Build phase started.\n\n<strong>FinTech:</strong> No new activity. 12 days now.\n\n<strong>Infrastructure:</strong> Sovereign cloud infrastructure sprint completed. Brain Layer 0 preparation work started.`,
-      sources:['All connected systems','Brain activity graph — 7 day window'],
-      actions:[
-        {label:'Subscribe to weekly digest',q:'Create a weekly subscription: every Monday, show me what changed across all teams in the previous week'},
-      ]
-    },
-
-    default: (q) => ({
-      thinking: 1200,
-      title: `Searching the Brain for: "${q}"`,
-      body: `I searched the Brain across all connected systems — HR, project management, activity signals, and communications. Here is what I found relevant to your question. If you want more detail on any specific team or person, just ask directly.`,
-      sources:['Brain query','All connected systems'],
-      actions:[
-        {label:'Show all teams',q:'Show me what every product team is working on right now'},
-        {label:'Show all projects',q:'Show me all 14 active projects with status and who is leading them'},
-      ]
-    }),
-  };
-  const r = responses[key];
-  return typeof r === 'function' ? r(q) : (r || responses.default(q));
-}
-
-// ── RENDER ──────────────────────────────────────────────────────────
-function addMsg(html) {
-  const wrap = document.createElement('div');
-  wrap.innerHTML = html;
-  const el = wrap.firstElementChild;
-  document.getElementById('messages').appendChild(el);
-  el.scrollIntoView({behavior:'smooth',block:'end'});
-}
-
-function showTyping() {
-  const id = 'ty' + Date.now();
-  addMsg(`<div id="${id}" class="msg-brain">
-    <div class="brain-av">B</div>
-    <div class="brain-bubble">
-      <div class="brain-name">Brain</div>
-      <div class="brain-content"><div class="typing">
-        <div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div>
-      </div></div>
-    </div>
-  </div>`);
-  return id;
-}
-
-function buildPersonCard(p) {
-  if (!p) return '';
-  const projs = p.projects.map(pr => `
-    <div class="person-proj">
-      <div style="flex:1">
-        <div class="person-proj-name">${pr.name}</div>
-        <div class="person-proj-detail">${pr.detail}</div>
+function mkTeamDetail(key) {
+  const t = TEAMS[key];
+  const pplHtml = t.people.map(p=>`
+    <div class="pc">
+      <div class="pav" style="background:${p.c};border:1px solid ${p.tc};color:${p.tc};">${p.ini}</div>
+      <div class="pi">
+        <div class="pname">${p.name}</div>
+        <div class="prole">${p.role}</div>
+        <div class="ptags">${p.tags.map(tg=>`<span class="ptag bd">${tg}</span>`).join('')}</div>
+        <div class="pfocus">${p.focus}</div>
       </div>
-      <div class="person-proj-status status-${pr.status}">${pr.status}</div>
+      <div class="pstatus ${p.sc}">${p.status}</div>
     </div>`).join('');
-  return `<div class="person-card">
-    <div class="person-top">
-      <div class="person-avatar">${p.initials}</div>
-      <div><div class="person-name">${p.name}</div><div class="person-role">${p.role}</div></div>
+
+  const prjHtml = t.projects.map(pr=>`
+    <div class="prc">
+      <div class="prc-top">
+        <div class="prc-name">${pr.name}</div>
+        <div class="prc-status ${pr.sc}">${pr.status}</div>
+      </div>
+      <div class="prc-meta">
+        <div class="prc-mi">Lead: <span>${pr.lead}</span></div>
+        <div class="prc-mi">Spend: <span>${pr.spend}</span></div>
+        <div class="prc-mi">Auth: <span>${pr.auth}</span></div>
+        <div class="prc-mi">Phase: <span>${pr.phase}</span></div>
+      </div>
+      <div class="prc-desc">${pr.desc}</div>
+      ${pr.alert?`<div class="prc-alert">${pr.alert}</div>`:''}
+    </div>`).join('');
+
+  return `<div class="td">
+    <div class="td-hd">
+      <div class="td-name">${t.name}</div>
+      <div class="td-stat"><div class="td-stat-v">${t.n}</div><div class="td-stat-l">People</div></div>
+      <div class="td-stat"><div class="td-stat-v">${t.nproj}</div><div class="td-stat-l">Projects</div></div>
+      ${t.badge}
     </div>
-    <div class="person-projects">${projs}</div>
+    <div class="td-sum">${t.summary}</div>
+    <div class="sec-lbl" style="margin-bottom:10px;">People</div>
+    <div class="ppl">${pplHtml}</div>
+    <div class="sec-lbl" style="margin-bottom:10px;">Projects</div>
+    <div class="prjs">${prjHtml}</div>
   </div>`;
 }
 
-function buildTable(rows) {
-  return `<table style="width:100%;border-collapse:collapse;margin-top:10px;font-size:11px;">
-    <thead><tr style="border-bottom:1px solid var(--border);">
-      <th style="text-align:left;padding:5px 8px;font-family:'DM Mono',monospace;font-size:8px;letter-spacing:1px;text-transform:uppercase;color:var(--dim);">Project</th>
-      <th style="text-align:left;padding:5px 8px;font-family:'DM Mono',monospace;font-size:8px;letter-spacing:1px;text-transform:uppercase;color:var(--dim);">Team</th>
-      <th style="text-align:left;padding:5px 8px;font-family:'DM Mono',monospace;font-size:8px;letter-spacing:1px;text-transform:uppercase;color:var(--dim);">Lead</th>
-      <th style="text-align:left;padding:5px 8px;font-family:'DM Mono',monospace;font-size:8px;letter-spacing:1px;text-transform:uppercase;color:var(--dim);">Phase</th>
-    </tr></thead>
-    <tbody>${rows.map((r,i) => `<tr style="background:${i%2===0?'var(--dark)':'var(--card)'};">
-      <td style="padding:6px 8px;color:var(--white);font-weight:500;">${r.name}</td>
-      <td style="padding:6px 8px;color:var(--text);">${r.team}</td>
-      <td style="padding:6px 8px;color:var(--text);">${r.lead}</td>
-      <td style="padding:6px 8px;">
-        <span style="font-family:'DM Mono',monospace;font-size:8px;padding:2px 6px;border-radius:20px;
-          background:${r.status==='active'?'rgba(68,255,136,.1)':r.status==='quiet'?'rgba(255,148,68,.1)':'var(--card)'};
-          color:${r.status==='active'?'var(--green)':r.status==='quiet'?'var(--orange)':'var(--dim)'};">
-          ${r.phase}
-        </span>
-      </td>
-    </tr>`).join('')}</tbody>
-  </table>`;
+function mkProjectTable() {
+  return `<div style="overflow-x:auto;margin-top:14px;">
+  <table class="proj-tbl">
+    <thead><tr>${['Project','Team','Lead','Spend','Authorised by','Status'].map(h=>`<th>${h}</th>`).join('')}</tr></thead>
+    <tbody>${ALL_PROJECTS.map((r,i)=>`
+      <tr style="background:${i%2===0?'var(--s1)':'var(--s2)'};">
+        <td style="color:var(--t0);font-weight:500;">${r.name}</td>
+        <td>${r.team}</td>
+        <td>${r.lead}</td>
+        <td style="font-family:'DM Mono',monospace;font-size:11px;">${r.spend}</td>
+        <td>${r.auth}</td>
+        <td><span class="badge ${r.s}" style="font-size:8px;">${r.sl}</span></td>
+      </tr>`).join('')}
+    </tbody>
+  </table></div>`;
 }
 
-function buildActions(actions) {
-  if (!actions || !actions.length) return '';
-  return `<div class="msg-actions">${actions.map(a =>
-    `<div class="msg-action" onclick="askQuestion('${a.q.replace(/'/g,"\\'")}')">
-      ${a.label} →
-    </div>`
-  ).join('')}</div>`;
+function mkPersonCard(p) {
+  const projs = p.projects.map(pr=>`
+    <div class="pd-proj">
+      <div class="pd-proj-body">
+        <div class="pd-proj-name">${pr.name}</div>
+        <div class="pd-proj-detail">${pr.detail}</div>
+      </div>
+      <div class="pd-proj-status ${pr.sc}">${pr.sl}</div>
+    </div>`).join('');
+  return `<div class="person-deep">
+    <div class="pd-top">
+      <div class="pav" style="background:${p.c};border:1px solid ${p.tc};color:${p.tc};width:40px;height:40px;font-size:12px;">${p.ini}</div>
+      <div><div class="pname" style="font-size:15px;">${p.name}</div><div class="prole">${p.role}</div></div>
+    </div>
+    <div class="pd-projects">${projs}</div>
+  </div>`;
 }
 
-function renderResponse(resp) {
-  const personHtml = resp.person ? buildPersonCard(resp.person) : '';
-  const tableHtml = resp.table ? buildTable(resp.table) : '';
-  const srcHtml = resp.sources ? resp.sources.map(s=>`<div class="brain-src">${s}</div>`).join('') : '';
-  const actHtml = buildActions(resp.actions);
-  const bodyText = (resp.body || '').replace(/\n/g,'<br>');
+const kovacs = {
+  ini:'AK',name:'Dr. Anna Kovács',role:'Head of AI Research · HealthTech AI Lead',
+  c:'rgba(180,136,255,.2)',tc:'var(--purple)',
+  projects:[
+    {name:'XANTA — Clinical Validation',detail:'Lead researcher. Paper due June 2026. Submitted 3 overnight updates this week. At capacity on this project.',sc:'bg',sl:'Active'},
+    {name:'InnoHealth Data Lake',detail:'Lead. Build phase started this week. Dávid László is primary build engineer — she is directing.',sc:'bg',sl:'Active'},
+    {name:'Sovereign Data Architecture R&D',detail:'Background contribution — not primary focus this month.',sc:'bd',sl:'Background'},
+    {name:'EU AI Act Compliance',detail:'Contributing architectural guidance. András Kiss is primary author.',sc:'bd',sl:'Supporting'},
+  ]
+};
 
-  addMsg(`<div class="msg-brain">
-    <div class="brain-av">B</div>
-    <div class="brain-bubble">
-      <div class="brain-name">Brain · ${resp.sources ? resp.sources.length : 0} sources</div>
-      <div class="brain-content">
-        <strong>${resp.title}</strong>
-        <div style="margin-top:8px;">${bodyText}</div>
-        ${personHtml}
-        ${tableHtml}
-        ${srcHtml ? `<div class="brain-sources" style="margin-top:10px;">${srcHtml}</div>` : ''}
-        ${actHtml}
+// ════════════════════════════════════════════
+//  ROUTING
+// ════════════════════════════════════════════
+
+function route(q) {
+  const l = q.toLowerCase();
+  if(l.includes('coios')) return 'coios';
+  if(l.includes('kov') || l.includes('anna k') || l.includes('dr. anna')) return 'kovacs';
+  if(l.includes('overlap')) return 'overlaps';
+  if(l.includes('fintech')&&(l.includes('quiet')||l.includes('why')||l.includes('12')||l.includes('situation'))) return 'fintech_quiet';
+  if((l.includes('all')||l.includes('14'))&&l.includes('project')) return 'all_projects';
+  if(l.includes('blocked')||l.includes('stalled')||l.includes('stuck')) return 'blocked';
+  if(l.includes('7 day')||l.includes('last 7')||l.includes('changed')||l.includes('this week')) return 'last7';
+  if(l.includes('digest')) return 'digest';
+  for(const key of Object.keys(TEAMS)){
+    if(l.includes(key)||l.includes(TEAMS[key].name.toLowerCase())) return 'team:'+key;
+  }
+  return 'default';
+}
+
+// ════════════════════════════════════════════
+//  RENDER
+// ════════════════════════════════════════════
+
+function addRow(html) {
+  const d = document.createElement('div');
+  d.innerHTML = html;
+  document.getElementById('msgs').appendChild(d.firstElementChild);
+  document.getElementById('msgs').lastElementChild.scrollIntoView({behavior:'smooth',block:'end'});
+}
+
+function brainRow(content, sources) {
+  const t = new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
+  const srcHtml = sources ? `<div class="srcs">${sources.map(s=>`<div class="src">${s}</div>`).join('')}</div>` : '';
+  return `<div class="mrow">
+    <div class="min">
+      <div class="av av-e">E</div>
+      <div class="mcol">
+        <div class="mwho mwho-e">Essence · ${t}</div>
+        <div class="mbody">${content}</div>
+        ${srcHtml}
+      </div>
+    </div>
+  </div>`;
+}
+
+function actRow(acts) {
+  return `<div class="mrow" style="padding-top:2px;padding-bottom:10px;">
+    <div class="min" style="padding-left:${28+32+14}px;">
+      <div class="acts">${acts.map(a=>`<div class="act${a.prime?' prime':''}" onclick="ask(${JSON.stringify(a.q)})">${a.label} →</div>`).join('')}</div>
+    </div>
+  </div>`;
+}
+
+function renderResponse(key, q) {
+  const t = new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
+
+  if(key.startsWith('team:')) {
+    const tk = key.split(':')[1];
+    addRow(brainRow(mkTeamDetail(tk), ['HR system','Project management','Brain activity graph']));
+    addRow(actRow([
+      {label:'Find overlaps', q:'Which teams are working on overlapping problems without knowing it?'},
+      {label:'All projects + spend', q:'Show me all 14 active projects with spend and who authorised them'},
+      ...(tk==='fintech'?[{label:'COIOS detail', q:'Show me the COIOS product in full detail', prime:true}]:[])
+    ]));
+    return;
+  }
+
+  const responses = {
+    coios: {
+      body:`<strong>COIOS — Client-Side AI Operating System</strong> is eGroup's flagship FinTech product and currently its most commercially significant build.<br><br>
+<strong>What it does:</strong> COIOS allows banking institutions to run AI inference on sensitive financial data entirely within their own environment. No customer data, transaction history, or financial models ever leave the bank's network. This directly addresses the EU AI Act's data residency requirement for financial services — a requirement that currently has no clean solution elsewhere in the market.<br><br>
+<strong class="warn">Current status — Architecture review blocked for 18 days.</strong> Until the architecture is signed off, the build phase cannot restart. This is now blocking:<br>
+&nbsp;&nbsp;1. FinTech AI Infrastructure V2 — cascading delay risk<br>
+&nbsp;&nbsp;2. Nordic FinTech Consortium proposal — 4 member banks, combined AUM €240bn, potential COIOS deployment<br><br>
+<strong>Commercial significance:</strong> The Nordic proposal alone represents significant contract value. Hanna Novák in Partnerships cannot advance it until COIOS architecture is decided.<br><br>
+<strong>Team lead:</strong> Gábor Mészáros &nbsp;·&nbsp; <strong>Budget:</strong> €312,000 to date &nbsp;·&nbsp; <strong>Authorised by:</strong> Antal Kuthy`,
+      acts:[
+        {label:'Full FinTech team', q:'Show me the full FinTech Product team — all 9 people and what each person is doing', prime:true},
+        {label:'Nordic proposal context', q:'Tell me about the Nordic FinTech Consortium proposal and why it is blocked'},
+      ],
+      srcs:['Project management','CRM — Nordic proposal','Brain — COIOS knowledge nodes']
+    },
+
+    kovacs: {
+      body:`Dr. Anna Kovács is eGroup's most cross-functional senior person — the only individual leading two teams simultaneously.<br><br>
+<strong>Why this matters operationally:</strong> She is the single point of failure for both XANTA clinical validation and the InnoHealth Data Lake. If her capacity becomes constrained, both programmes slow down. Currently she is at high activity on both — sustainable in the short term but worth monitoring.`,
+      card: kovacs,
+      trailing:`<br><strong>Brain note:</strong> At current load, adding a third significant initiative to Dr. Kovács would put her existing commitments at risk.`,
+      acts:[
+        {label:'AI Research full detail', q:'Show me the AI Research team — all people and all projects'},
+        {label:'HealthTech detail', q:'Show me the HealthTech team — all people and all projects'},
+      ],
+      srcs:['HR system','Project management — 4 project nodes','Brain activity graph']
+    },
+
+    overlaps: {
+      body:`The Brain detected semantic overlap across <strong>23 documents and 4 active projects</strong> from three separate teams. None of them appear to know about the others' work.<br><br>
+<strong>The shared problem:</strong> How do you run AI inference on sensitive data without that data leaving the client environment?<br><br>
+<span class="hi">AI Research (XANTA)</span> — building local inference for patient data that never leaves the hospital<br>
+<span class="hi">FinTech Product (COIOS)</span> — building client-side AI for banking data that never leaves the bank<br>
+<span class="hi">GovTech</span> — building sovereign compute for government AI that never leaves the agency<br><br>
+All three teams are solving identical architectural problems from different sector angles. A single two-hour conversation between Dr. Kovács, Gábor Mészáros, and Katalin Varga could eliminate months of duplicated work — and might produce a single unified solution applicable across all three sectors, dramatically accelerating eGroup's time to market.`,
+      acts:[
+        {label:'COIOS detail', q:'Show me the COIOS product in full detail', prime:true},
+        {label:'FinTech team', q:'Show me the full FinTech Product team — all 9 people and what each person is doing'},
+        {label:'Set overlap alert', q:'Create a subscription: alert me whenever two or more teams appear to be solving overlapping problems'},
+      ],
+      srcs:['Brain semantic clustering','23 document nodes','AI Research + FinTech + GovTech']
+    },
+
+    fintech_quiet: {
+      body:`<strong>12 days without activity.</strong> The Brain flagged this as a 2.1σ anomaly vs. FinTech's 18-month baseline of activity every 4–6 days.<br><br>
+<strong>What the Brain found:</strong><br>Both COIOS workstreams are in phases that produce less visible output — architecture review and beta testing. However, team lead Gábor Mészáros has not submitted a single update, check-in, or comment in this period. That is the unusual part.<br><br>
+<strong>The downstream problem is more serious:</strong> The COIOS architecture review has now been open for <span class="warn">18 days without a decision</span>. This is directly blocking FinTech AI Infrastructure V2 — and is preventing Hanna Novák from advancing the Nordic FinTech Consortium proposal, which is a high commercial value opportunity (4 banks, combined AUM €240bn).<br><br>
+<strong>Brain recommendation:</strong> A direct conversation with Gábor Mészáros this week. The question is not whether the team has a problem — it is whether the architecture review has a decision-maker assigned and a clear deadline.`,
+      acts:[
+        {label:'Show FinTech team in full', q:'Show me the full FinTech Product team — all 9 people and what each person is doing', prime:true},
+        {label:'COIOS detail', q:'Show me the COIOS product in full detail'},
+        {label:'Subscribe to FinTech alerts', q:'Create a subscription: alert me immediately if FinTech team has no updates for more than 5 days'},
+      ],
+      srcs:['CRM','Project management','Brain activity graph — 18 month baseline','Partnerships — Nordic proposal node']
+    },
+
+    all_projects: {
+      body:`<strong>14 active projects</strong> across 6 teams. Total spend to date: <strong>€1.87M.</strong><br><br>10 projects are progressing normally. 2 are blocked by the COIOS architecture decision. 1 is in a natural low-activity phase. 1 is paused by decision.`,
+      table: true,
+      acts:[
+        {label:'COIOS — fix the blocker', q:'Show me the COIOS product — what it is and what is blocking it', prime:true},
+        {label:'Blocked projects detail', q:'Which projects are blocked or stalled right now?'},
+      ],
+      srcs:['Project management','Finance connector','HR system — authorisation records']
+    },
+
+    blocked: {
+      body:`<strong>2 projects with active blockers. 1 paused by decision.</strong><br><br>
+<span class="warn">1. COIOS Architecture Review</span> — 18 days without a decision. Blocking the build phase restart, FinTech AI Infrastructure V2, and the Nordic FinTech Consortium proposal. <em>Decision needed this week.</em><br><br>
+<span class="warn">2. Nordic FinTech Consortium Proposal</span> — Hanna Novák in Partnerships is ready to advance this (4 banks, AUM €240bn, potential COIOS deployment). Blocked until COIOS architecture is signed off. High commercial cost of delay.<br><br>
+<span class="ok">3. SpaceTech Data Pipeline</span> — Paused by Antal (March 2026). Planned pause, not a problem. Q3 2026 reactivation scheduled.<br><br>
+All other 11 projects are progressing within normal parameters.`,
+      acts:[
+        {label:'COIOS full detail', q:'Show me the COIOS product — what it is and what is blocking it', prime:true},
+        {label:'FinTech team', q:'Show me the full FinTech Product team — all 9 people and what each person is doing'},
+      ],
+      srcs:['Project management','Brain activity graph','Partnerships — Nordic proposal']
+    },
+
+    last7: {
+      body:`<strong>What changed across all teams — last 7 days:</strong><br><br>
+<span class="ok">AI Research</span> — XANTA clinical paper draft complete. EU AI Act section 4 done. 3 overnight submissions from Dr. Kovács.<br><br>
+<span class="ok">GovTech</span> — First government client pilot deployment live. Katalin Varga on-site. 2 new technical documents submitted.<br><br>
+<span class="ok">Partnerships</span> — Kellton MoU implementation plan signed. Money 20/20 Amsterdam confirmed for 3 people.<br><br>
+<span class="ok">HealthTech</span> — InnoHealth Data Lake design approved. Build phase started. First sprint running.<br><br>
+<span class="ok">Infrastructure</span> — Sovereign cloud sprint completed ahead of schedule. Brain Layer 0 prep started.<br><br>
+<span class="warn">FinTech</span> — No activity. 12 days now. COIOS architecture review still pending. Nordic proposal cannot progress.<br><br>
+<strong>Net:</strong> Strong week for 5 of 6 teams. FinTech is the single concern requiring direct attention this week.`,
+      acts:[
+        {label:'Investigate FinTech', q:'Why has the FinTech team gone quiet for 12 days and what should I do?', prime:true},
+        {label:'Subscribe to weekly digest', q:'Create a subscription: every Monday morning, show me what changed across all teams in the previous week'},
+      ],
+      srcs:['All connected systems','Brain activity graph — 7 day window']
+    },
+
+    digest: {
+      body:`<strong>Weekly Team Digest — week of April 7, 2026</strong><br>
+This is what your Monday morning delivery looks like with the Weekly Team Digest subscription active.<br><br>
+<span class="ok">AI Research</span> — XANTA clinical paper in final review. EU AI Act section 4 complete. High activity.<br>
+<span class="warn">FinTech Product</span> — Quiet, 12 days. COIOS architecture review pending. Recommend direct contact with Gábor Mészáros.<br>
+<span class="ok">GovTech</span> — Pilot live. K. Varga on-site. Steady.<br>
+<span class="ok">HealthTech</span> — InnoHealth Data Lake build started. Strong week.<br>
+<span class="ok">Partnerships</span> — Kellton MoU plan signed. Money 20/20 confirmed. Nordic proposal waiting on COIOS.<br>
+<span class="ok">Infrastructure</span> — Cloud sprint done. Brain Layer 0 started.`,
+      acts:[{label:'Create this subscription', q:'Create a subscription: every Monday morning, weekly team digest across all teams', prime:true}],
+      srcs:['All teams','All connected systems']
+    },
+
+    default: {
+      body:`I searched the Brain across all connected systems — HR, project management, activity signals, and communications. Based on your question, here is what is most relevant.<br><br>If you want more detail on any specific team, project, or person, click their name in the sidebar or ask me directly.`,
+      acts:[
+        {label:'All teams', q:'Show me what every product team is working on right now'},
+        {label:'All projects', q:'Show me all 14 active projects with spend and who authorised them'},
+      ],
+      srcs:['Brain query','All connected systems']
+    }
+  };
+
+  const r = responses[key] || responses.default;
+  let body = r.body || '';
+  if(r.card) body += mkPersonCard(r.card) + (r.trailing||'');
+  if(r.table) body += mkProjectTable();
+
+  addRow(brainRow(body, r.srcs));
+  if(r.acts) addRow(actRow(r.acts));
+}
+
+// ════════════════════════════════════════════
+//  INTERACTION
+// ════════════════════════════════════════════
+
+function ask(q) {
+  const t = new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
+  addRow(`<div class="mrow">
+    <div class="min">
+      <div class="av av-u">You</div>
+      <div class="mcol">
+        <div class="mwho mwho-u">You · ${t}</div>
+        <div class="mbody">${esc(q)}</div>
       </div>
     </div>
   </div>`);
+
+  const key = route(q);
+  const tid = 'ty'+Date.now();
+  addRow(`<div class="mrow" id="${tid}">
+    <div class="min">
+      <div class="av av-e">E</div>
+      <div class="mcol">
+        <div class="mwho mwho-e">Essence</div>
+        <div class="mbody"><div class="typing"><div class="tdot"></div><div class="tdot"></div><div class="tdot"></div></div></div>
+      </div>
+    </div>
+  </div>`);
+
+  const delay = key.startsWith('team:') ? 1500 : 1100;
+  setTimeout(()=>{ document.getElementById(tid)?.remove(); renderResponse(key,q); }, delay);
 }
 
-// ── INTERACTION ─────────────────────────────────────────────────────
-function sendMessage() {
-  const input = document.getElementById('chat-input');
-  const q = input.value.trim();
-  if (!q) return;
-  askQuestion(q);
-  input.value = '';
-  input.style.height = '';
-  updateSend();
-}
-
-function askQuestion(q) {
-  addMsg(`<div class="msg-user"><div class="msg-user-bubble">${esc(q)}</div></div>`);
-  const key = matchQuery(q);
-  const resp = getResponse(key, q);
-  const tid = showTyping();
-  setTimeout(() => {
-    document.getElementById(tid)?.remove();
-    renderResponse(resp);
-  }, resp.thinking || 1200);
-}
-
-function loadTeam(team) {
-  // Update active state
-  document.querySelectorAll('.team-item').forEach(t => t.classList.remove('active'));
-  event.currentTarget.classList.add('active');
-  if (team === 'all') {
-    askQuestion('Show me what every product team is working on right now');
+function teamClick(el, key) {
+  document.querySelectorAll('.sb-row').forEach(r=>r.classList.remove('on'));
+  if(el) el.classList.add('on');
+  if(key==='all'){
+    ask('Show me the current state of all teams');
   } else {
-    const t = TEAMS[team];
-    if (t) askQuestion(`Show me the ${t.name} team — who is on it and what are they working on?`);
+    const t = TEAMS[key];
+    if(t) ask(`Show me the ${t.name} team — all people, all projects, full detail`);
   }
 }
 
-function loadSub(type) {
-  const msgs = {
-    digest: 'Show me this week\'s team digest — what each team completed and what they are working on',
-    quiet: 'Which teams or projects have been quiet for more than 3 days?',
-    projects: 'Show me all new projects started in the last 2 weeks',
-    people: 'What team composition changes happened this week — new joins, role changes, exits?',
+function runSub(type) {
+  const m = {
+    digest:'Show me this week\'s team digest',
+    quiet:'Which teams have been quiet for more than 3 days?',
+    blocked:'Which projects are blocked or stalled right now?',
+    changes:'What team composition changes happened this week?'
   };
-  if (msgs[type]) askQuestion(msgs[type]);
+  if(m[type]) ask(m[type]);
 }
 
-// ── SUBSCRIPTION CREATOR ──────────────────────────────────────────
 function fillSub(text) {
-  document.getElementById('sub-input').value = text;
-  document.getElementById('sub-input').focus();
+  const ta = document.getElementById('sub-input');
+  ta.value = text; ta.focus(); rez(ta);
 }
 
 function createSub() {
   const what = document.getElementById('sub-input').value.trim();
-  const cadence = document.getElementById('sub-cadence');
-  const cadenceLabel = cadence.options[cadence.selectedIndex].text;
-  if (!what) { document.getElementById('sub-input').focus(); return; }
+  const sel = document.getElementById('sub-cadence');
+  const cl = sel.options[sel.selectedIndex].text;
+  if(!what){ document.getElementById('sub-input').focus(); return; }
 
-  // Add to sidebar
-  const section = document.querySelector('.sub-item:last-of-type').parentElement;
-  const badgeMap = {live:'live',daily:'day',weekly:'week',monthly:'week'};
-  const newSub = document.createElement('div');
-  newSub.className = 'sub-item';
-  newSub.innerHTML = `
-    <div class="sub-icon">🔔</div>
-    <div class="sub-info">
-      <div class="sub-name">${what.substring(0,35)}${what.length>35?'…':''}</div>
-      <div class="sub-cadence">${cadenceLabel}</div>
+  const bm = {live:'bg',daily:'ba',weekly:'bb',monthly:'bd'};
+  const el = document.createElement('div');
+  el.className = 'sb-row';
+  el.innerHTML = `<div class="sb-row-ico">🔔</div>
+    <div class="sb-row-body">
+      <div class="sb-row-name">${what.substring(0,30)}${what.length>30?'…':''}</div>
+      <div class="sb-row-sub">${cl}</div>
     </div>
-    <div class="sub-badge ${badgeMap[cadence.value]||'week'}">${cadenceLabel.split(' ')[0]}</div>`;
-  section.appendChild(newSub);
+    <div class="badge ${bm[sel.value]||'ba'}">${cl.split(' ')[0]}</div>`;
+  el.onclick = ()=>ask(`Latest results for: ${what}`);
+  document.getElementById('sub-anchor').insertAdjacentElement('afterend', el);
 
-  // Confirm in chat
-  addMsg(`<div class="msg-system sub-confirm">
-    <div class="msg-type sub-confirm"><div class="msg-type-dot"></div>Subscription created</div>
-    <div class="msg-title">Now tracking: "${esc(what)}"</div>
-    <div class="msg-body">Delivery: <strong>${cadenceLabel}</strong>. The Brain will monitor all connected systems and deliver results automatically. You can manage this subscription in the sidebar at any time.</div>
+  const t = new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
+  addRow(`<div class="mrow">
+    <div class="min">
+      <div class="av av-e">E</div>
+      <div class="mcol">
+        <div class="mwho mwho-e">Essence · ${t}</div>
+        <div class="mbody">
+          <strong>Subscription created.</strong> Now tracking: <em>"${esc(what)}"</em><br><br>
+          Delivery: <strong>${cl}</strong>. The Brain will monitor all connected systems and deliver automatically. This subscription now appears in your sidebar.
+        </div>
+      </div>
+    </div>
   </div>`);
-  document.getElementById('messages').lastElementChild.scrollIntoView({behavior:'smooth'});
 
   document.getElementById('sub-input').value = '';
+  document.getElementById('sub-input').style.height = '';
   showToast('Subscription created');
 }
 
-// ── UTILS ───────────────────────────────────────────────────────────
-function showToast(msg) {
-  const t = document.getElementById('toast');
-  document.getElementById('toast-msg').textContent = msg;
-  t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 3000);
+function send() {
+  const ta = document.getElementById('chat-input');
+  const q = ta.value.trim();
+  if(!q) return;
+  ask(q); ta.value=''; ta.style.height=''; upd();
 }
-
-function autoResize(el) {
-  el.style.height = '';
-  el.style.height = Math.min(el.scrollHeight, 80) + 'px';
-}
-
-function updateSend() {
-  const v = document.getElementById('chat-input').value.trim();
-  document.getElementById('send-btn').classList.toggle('ready', v.length > 0);
-}
-
-function handleKey(e) {
-  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }
-}
-
-function esc(s) {
-  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-}
+function onk(e){ if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();send();} }
+function rez(el){ el.style.height=''; el.style.height=Math.min(el.scrollHeight,120)+'px'; }
+function upd(){ document.getElementById('send-btn').classList.toggle('on', !!document.getElementById('chat-input').value.trim()); }
+function showToast(m){ const t=document.getElementById('toast'); document.getElementById('toast-msg').textContent=m; t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),3000); }
+function esc(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 </script>
 </body>
 </html>
