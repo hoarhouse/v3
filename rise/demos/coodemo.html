@@ -17,11 +17,12 @@
   --orange:#FF9444; --purple:#B088FF; --red:#FF5555;
 }
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
-html,body{height:100%;overflow:hidden;}
-body{background:var(--bg);color:var(--t2);font-family:'DM Sans',sans-serif;font-size:15px;line-height:1.6;display:flex;flex-direction:column;}
+html{height:100%;}
+body{height:100%;background:var(--bg);color:var(--t2);font-family:'DM Sans',sans-serif;font-size:15px;line-height:1.6;display:flex;flex-direction:column;overflow:hidden;}
+.app{flex:1;min-height:0;}
 
 /* ── APP LAYOUT ── */
-.app{display:flex;flex:1;overflow:hidden;}
+.app{display:flex;flex:1;overflow:hidden;min-height:0;}
 
 /* ═══════════════════════════════════════════
    SIDEBAR
@@ -255,9 +256,12 @@ body{background:var(--bg);color:var(--t2);font-family:'DM Sans',sans-serif;font-
   </div>
 
   <div class="sb-body">
-    <div class="sb-sec">
-      <div class="sb-sec-lbl">Teams</div>
-
+    <div class="sb-sec" id="teams-section">
+      <div onclick="toggleTeams()" style="cursor:pointer;display:flex;align-items:center;justify-content:space-between;padding:6px 10px;border-radius:6px;margin-bottom:4px;transition:background .12s;" onmouseover="this.style.background='var(--s1)'" onmouseout="this.style.background=''">
+        <span style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--t3);">Teams</span>
+        <span id="teams-arrow" style="font-size:9px;color:var(--t4);transition:transform .2s;">▼</span>
+      </div>
+      <div id="teams-list" style="display:none;">
       <div class="sb-row on" id="team-btn-all" onclick="teamClick(this,'all')">
         <div class="sb-row-ico">⬡</div>
         <div class="sb-row-body"><div class="sb-row-name">All Teams</div><div class="sb-row-sub">6 teams · 47 people</div></div>
@@ -300,6 +304,9 @@ body{background:var(--bg);color:var(--t2);font-family:'DM Sans',sans-serif;font-
         <div class="badge ba">Normal</div>
       </div>
     </div>
+
+      </div><!-- /teams-list -->
+    </div><!-- /teams-section -->
 
     <div class="sb-div"></div>
 
@@ -361,7 +368,6 @@ body{background:var(--bg);color:var(--t2);font-family:'DM Sans',sans-serif;font-
     </div>
 
   </div>
-</div>
 
 <!-- ══════════════════ MAIN CHAT ══════════════════ -->
 <div class="chat">
@@ -768,13 +774,15 @@ function route(q) {
   if(l.includes('kov') || l.includes('anna k') || l.includes('dr. anna')) return 'kovacs';
   if(l.includes('overlap')) return 'overlaps';
   if(l.includes('fintech')&&(l.includes('quiet')||l.includes('why')||l.includes('12')||l.includes('situation'))) return 'fintech_quiet';
-  if((l.includes('all')||l.includes('14'))&&l.includes('project')) return 'all_projects';
   if(l.includes('blocked')||l.includes('stalled')||l.includes('stuck')) return 'blocked';
   if(l.includes('7 day')||l.includes('last 7')||l.includes('changed')||l.includes('this week')) return 'last7';
   if(l.includes('digest')) return 'digest';
+  // Team check BEFORE all_projects — team queries contain "all people, all projects"
   for(const key of Object.keys(TEAMS)){
     if(l.includes(key)||l.includes(TEAMS[key].name.toLowerCase())) return 'team:'+key;
   }
+  // All projects — must be explicit request for the full list
+  if((l.includes('14')||l.includes('all project')||l.includes('every project'))&&(l.includes('project')||l.includes('spend'))) return 'all_projects';
   return 'default';
 }
 
@@ -804,12 +812,31 @@ function brainRow(content, sources) {
   </div>`;
 }
 
-function actRow(acts) {
+function actRow(acts, showSubBtn, origQ) {
+  const subBtn = showSubBtn && origQ
+    ? `<div class="act" style="margin-left:auto;border-color:rgba(212,255,0,.15);color:var(--accent);" onclick="quickCreateSub(${JSON.stringify(origQ)})">＋ Save as subscription</div>`
+    : '';
   return `<div class="mrow" style="padding-top:2px;padding-bottom:10px;">
     <div class="min" style="padding-left:${28+32+14}px;">
-      <div class="acts">${acts.map(a=>`<div class="act${a.prime?' prime':''}" onclick="ask(${JSON.stringify(a.q)})">${a.label} →</div>`).join('')}</div>
+      <div class="acts">${acts.map(a=>`<div class="act${a.prime?' prime':''}" onclick="ask(${JSON.stringify(a.q)})">${a.label} →</div>`).join('')}${subBtn}</div>
     </div>
   </div>`;
+}
+
+function quickCreateSub(q) {
+  // Pre-fill the subscription creator with this query
+  const ta = document.getElementById('sub-input');
+  ta.value = q;
+  rez(ta);
+  // Scroll sidebar to show creator
+  ta.scrollIntoView({behavior:'smooth',block:'center'});
+  ta.focus();
+  // Flash the creator box to draw attention
+  const box = document.querySelector('.sub-box');
+  box.style.borderColor = 'rgba(212,255,0,.5)';
+  box.style.background = 'rgba(212,255,0,.04)';
+  setTimeout(()=>{ box.style.borderColor=''; box.style.background=''; }, 1500);
+  showToast('Query copied — choose cadence and hit Create');
 }
 
 function renderResponse(key, q) {
@@ -822,7 +849,7 @@ function renderResponse(key, q) {
       {label:'Find overlaps', q:'Which teams are working on overlapping problems without knowing it?'},
       {label:'All projects + spend', q:'Show me all 14 active projects with spend and who authorised them'},
       ...(tk==='fintech'?[{label:'COIOS detail', q:'Show me the COIOS product in full detail', prime:true}]:[])
-    ]));
+    ], true, `Show me the ${TEAMS[tk]?.name} team weekly`));
     return;
   }
 
@@ -950,7 +977,7 @@ This is what your Monday morning delivery looks like with the Weekly Team Digest
   if(r.table) body += mkProjectTable();
 
   addRow(brainRow(body, r.srcs));
-  if(r.acts) addRow(actRow(r.acts));
+  if(r.acts) addRow(actRow(r.acts, true, q));
 }
 
 // ════════════════════════════════════════════
@@ -985,7 +1012,22 @@ function ask(q) {
   setTimeout(()=>{ document.getElementById(tid)?.remove(); renderResponse(key,q); }, delay);
 }
 
+function toggleTeams() {
+  const list = document.getElementById('teams-list');
+  const arrow = document.getElementById('teams-arrow');
+  const open = list.style.display !== 'none';
+  list.style.display = open ? 'none' : 'block';
+  arrow.style.transform = open ? '' : 'rotate(180deg)';
+}
+
 function teamClick(el, key) {
+  // Auto-open teams section when a team is clicked from chat
+  const list = document.getElementById('teams-list');
+  const arrow = document.getElementById('teams-arrow');
+  if(list.style.display === 'none') {
+    list.style.display = 'block';
+    arrow.style.transform = 'rotate(180deg)';
+  }
   document.querySelectorAll('.sb-row').forEach(r=>r.classList.remove('on'));
   if(el) el.classList.add('on');
   if(key==='all'){
