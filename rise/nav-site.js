@@ -16,7 +16,7 @@
       <li><a href="intelligence.html" data-nav="intelligence">Intelligence</a></li>
       <li><a href="rise.html" data-nav="rise">Rise</a></li>
       <li><a href="thinking.html" data-nav="thinking">Thinking</a></li>
-      <li><a href="index.html#about" data-nav="about">About</a></li>
+      <li><a href="about.html" data-nav="about">About</a></li>
     </ul>
     <a href="index.html#contact" class="nav-cta">Work With Us</a>
   `;
