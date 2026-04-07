@@ -125,6 +125,14 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:48px 6
 .rc-title-sm{font-family:'Syne',sans-serif;font-weight:700;font-size:15px;color:var(--white);letter-spacing:-0.2px;line-height:1.2;}
 @media(max-width:1023px){.content-body{padding:60px 36px;}.two-col{grid-template-columns:1fr;gap:48px;}.sidebar{position:static;}.related-section{padding:0 36px 60px;padding-top:48px;}.related-grid{grid-template-columns:1fr 1fr;}}
 @media(max-width:767px){.page-hero{padding:100px 20px 48px;}.content-body{padding:48px 20px;}.related-section{padding:0 20px 48px;padding-top:40px;}.related-grid{grid-template-columns:1fr;}}
+.nav-mobile-menu a { text-decoration:none; border-bottom:none; }
+.nav-mobile-menu a::after { display:none; }
+.mob-main { font-family:'Syne',sans-serif !important; font-weight:800 !important; font-size:clamp(26px,7vw,40px) !important; color:var(--white) !important; letter-spacing:-0.5px !important; padding:9px 0 !important; width:80%; text-align:center; transition:color 0.2s; display:block; }
+.mob-main:hover { color:var(--gold) !important; }
+.mob-divider { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:3px; text-transform:uppercase; color:var(--dim); padding:20px 0 6px; width:80%; border-bottom:1px solid var(--border); text-align:center; margin-bottom:4px; }
+.mob-record { font-family:'DM Mono',monospace !important; font-size:11px !important; letter-spacing:1.5px !important; text-transform:uppercase !important; color:var(--mid) !important; padding:7px 0 !important; width:80%; text-align:center; transition:color 0.2s; display:block; }
+.mob-record:hover { color:var(--gold) !important; }
+.mob-cta { font-family:'DM Mono',monospace !important; font-size:12px !important; letter-spacing:2px !important; text-transform:uppercase !important; color:var(--black) !important; background:var(--gold) !important; padding:14px 36px !important; margin-top:20px !important; display:block; }
 </style>
 </head>
 <body>
@@ -144,19 +152,18 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:48px 6
   <button class="nav-hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
 </nav>
 <div class="nav-mobile-menu" id="mobileMenu">
-  <div class="mob-section">Main Site</div>
   <a href="../index.html" class="mob-main">Home</a>
   <a href="../intelligence.html" class="mob-main">Intelligence</a>
   <a href="../rise.html" class="mob-main">Rise</a>
   <a href="../thinking.html" class="mob-main">Thinking</a>
   <a href="../about.html" class="mob-main">About</a>
-  <div class="mob-section">The Record</div>
+  <div class="mob-divider">The Record</div>
   <a href="index.html" class="mob-record">Record Home</a>
   <a href="ipcei-cis.html" class="mob-record">IPCEI-CIS — FedEU.ai</a>
-  <a href="kau.html" class="mob-recordactive">KAÜ — National Identity</a>
+  <a href="kau.html" class="mob-record">KAÜ — National Identity</a>
   <a href="helix.html" class="mob-record">HeliX + FedX</a>
   <a href="eidas.html" class="mob-record">eIDAS 2.0 — MyD Wallet</a>
-  <a href="medical-ai.html" class="mob-record">Medical AI — GRaDPaLM</a>
+  <a href="medical-ai.html" class="mob-record">Medical AI — GraDPaLM</a>
   <a href="peter-antal.html" class="mob-record">Dr. Péter Antal</a>
   <a href="press.html" class="mob-record">Press Kit</a>
   <a href="../index.html#contact" class="mob-cta">Work With Us</a>
