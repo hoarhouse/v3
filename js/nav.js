@@ -4,15 +4,7 @@
 const menuItems = [
   { text: 'About', href: '/v3/about.html', page: 'about' },
   { text: 'Initiatives', href: '/v3/initiatives.html', page: 'initiatives' },
-  {
-    text: 'Events',
-    href: '/v3/events/index.html',
-    page: 'events',
-    dropdown: [
-      { text: 'April 26 — Education, Youth & Technology', href: '/v3/events/april-26-education-youth-technology.html' },
-      { text: 'May 24 — AI, Human Dignity & Communities', href: '/v3/events/may-24-ai-human-dignity-communities.html' }
-    ]
-  },
+  { text: 'Events', href: '/v3/events/index.html', page: 'events' },
   { text: 'Insights', href: '/v3/insights.html', page: 'insights' },
   { text: 'Library', href: '/v3/library.html', page: 'library' },
   { text: 'Budapest Appeal', href: '/v3/budapest-appeal.html', page: 'budapest-appeal' },
