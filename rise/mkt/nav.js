@@ -29,4 +29,7 @@
   `;
 
   document.body.insertBefore(nav, document.body.firstChild);
+  // Hide any legacy header elements from old page versions
+  const legacyHeader = document.querySelector('.header');
+  if (legacyHeader) legacyHeader.style.display = 'none';
 })();
