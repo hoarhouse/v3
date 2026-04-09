@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vigil — Pipeline</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;background:#080808;color:#EEE;min-height:100vh}
+.topbar{background:#0A0A0A;border-bottom:1px solid #1A1A1A;padding:0 32px;display:flex;align-items:center;justify-content:space-between;height:52px;position:sticky;top:0;z-index:100}
+.topbar-left{display:flex;align-items:center;gap:24px}
+.logo{font-size:18px;font-weight:900;color:#C8A96E;letter-spacing:-0.5px}
+.vigil-name{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#444}
+.nav-links{display:flex;gap:4px}
+.nav-link{padding:6px 12px;font-size:12px;letter-spacing:1px;text-transform:uppercase;color:#555;text-decoration:none;border-radius:4px;transition:color 0.2s}
+.nav-link:hover{color:#999}
+.nav-link.active{color:#C8A96E}
+.container{max-width:1000px;margin:0 auto;padding:32px}
+.page-title{font-size:24px;font-weight:700;color:#EEE;margin-bottom:4px}
+.page-sub{font-size:13px;color:#555;margin-bottom:28px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:28px}
+.stat{background:#111;border:1px solid #1A1A1A;border-radius:8px;padding:14px 16px}
+.sn{font-size:24px;font-weight:700;color:#C8A96E}
+.sl{font-size:10px;color:#555;margin-top:3px;letter-spacing:1px;text-transform:uppercase}
+.add-btn{padding:10px 20px;background:#C8A96E;color:#000;font-size:13px;font-weight:700;border:none;border-radius:6px;cursor:pointer;margin-bottom:24px}
+.add-btn:hover{background:#D4B87E}
+.filter-row{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap}
+.fb{font-size:11px;padding:5px 12px;border:1px solid #2A2A2A;border-radius:4px;background:transparent;cursor:pointer;color:#666;letter-spacing:1px;text-transform:uppercase}
+.fb.on{border-color:#C8A96E;color:#C8A96E}
+.thread-card{background:#111;border:1px solid #1A1A1A;border-radius:8px;margin-bottom:10px;overflow:hidden}
+.thread-head{padding:16px 20px;display:flex;align-items:flex-start;justify-content:space-between;gap:12px;cursor:pointer}
+.thread-head:hover{background:#141414}
+.thread-name{font-size:15px;font-weight:600;color:#EEE;margin-bottom:3px}
+.thread-meta{font-size:12px;color:#555}
+.thread-body{display:none;padding:0 20px 20px;border-top:1px solid #141414}
+.thread-body.open{display:block}
+.stage-row{display:flex;gap:6px;margin:16px 0;flex-wrap:wrap}
+.stage-btn{padding:5px 12px;font-size:11px;border:1px solid #2A2A2A;border-radius:4px;background:transparent;cursor:pointer;color:#555;transition:all 0.15s}
+.stage-btn.active{background:#C8A96E;border-color:#C8A96E;color:#000;font-weight:700}
+.stage-btn:hover:not(.active){border-color:#555;color:#999}
+.log-list{margin-top:16px}
+.log-item{font-size:12px;color:#888;padding:8px 0;border-bottom:1px solid #0F0F0F;line-height:1.5}
+.log-item:last-child{border-bottom:none}
+.log-date{color:#444;margin-right:8px}
+.add-log-row{display:flex;gap:8px;margin-top:12px}
+.log-input{flex:1;padding:8px 12px;background:#0D0D0D;border:1px solid #2A2A2A;border-radius:4px;color:#EEE;font-size:13px;font-family:inherit}
+.log-input:focus{outline:none;border-color:#C8A96E}
+.save-log-btn{padding:8px 16px;background:transparent;border:1px solid #2A2A2A;border-radius:4px;color:#888;cursor:pointer;font-size:12px}
+.save-log-btn:hover{border-color:#C8A96E;color:#C8A96E}
+.del-btn{padding:4px 10px;font-size:11px;border:1px solid #2A2A2A;border-radius:4px;background:transparent;cursor:pointer;color:#555}
+.del-btn:hover{border-color:#E24B4A;color:#E24B4A}
+.badge{font-size:10px;padding:3px 8px;border-radius:4px;letter-spacing:1px;text-transform:uppercase;white-space:nowrap;flex-shrink:0}
+.b-draft{background:#1A1A1A;color:#555}
+.b-sent{background:#0D1A2E;color:#60A5FA}
+.b-responded{background:#0D2E1E;color:#4ADE80}
+.b-meeting{background:#2E1E0D;color:#C8A96E}
+.b-proposal{background:#1E1A2E;color:#C084FC}
+.b-closed_won{background:#0D2E1E;color:#4ADE80;font-weight:700}
+.b-closed_lost{background:#2E0D0D;color:#F87171}
+.b-paused{background:#1A1A1A;color:#444}
+.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:300;align-items:center;justify-content:center}
+.modal.open{display:flex}
+.modal-box{background:#0D0D0D;border:1px solid #2A2A2A;border-radius:10px;padding:24px;width:520px;max-width:90vw;max-height:90vh;overflow-y:auto}
+.modal-box h3{font-size:16px;color:#EEE;margin-bottom:16px}
+.field{margin-bottom:14px}
+.field label{display:block;font-size:11px;color:#555;letter-spacing:1px;text-transform:uppercase;margin-bottom:6px}
+.field input,.field textarea,.field select{width:100%;padding:8px 12px;background:#111;border:1px solid #2A2A2A;border-radius:4px;color:#EEE;font-size:13px;font-family:inherit}
+.field textarea{min-height:80px;resize:vertical}
+.field input:focus,.field textarea:focus,.field select:focus{outline:none;border-color:#C8A96E}
+.modal-actions{display:flex;gap:8px;justify-content:flex-end;margin-top:16px}
+.btn-cancel{padding:8px 16px;background:transparent;border:1px solid #2A2A2A;border-radius:4px;color:#666;cursor:pointer;font-size:13px}
+.btn-save{padding:8px 20px;background:#C8A96E;border:none;border-radius:4px;color:#000;font-weight:700;cursor:pointer;font-size:13px}
+.empty{text-align:center;padding:60px;color:#333;font-size:14px}
+.section-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#444;margin:24px 0 12px;padding-bottom:6px;border-bottom:1px solid #1A1A1A}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-left">
+    <div>
+      <div class="logo">VIGIL</div>
+      <div class="vigil-name">E-Group Intelligence</div>
+    </div>
+    <nav class="nav-links">
+      <a href="briefing.html" class="nav-link">Briefing</a>
+      <a href="network.html" class="nav-link">Network</a>
+      <a href="intelligence.html" class="nav-link">Intelligence</a>
+      <a href="pipeline.html" class="nav-link active">Pipeline</a>
+    </nav>
+  </div>
+</div>
+
+<div class="container">
+  <div class="page-title">Pipeline</div>
+  <div class="page-sub">Every active outreach thread. Log what happened. Vigil learns from it.</div>
+
+  <div class="stats">
+    <div class="stat"><div class="sn" id="s-active">0</div><div class="sl">Active threads</div></div>
+    <div class="stat"><div class="sn" id="s-responded">0</div><div class="sl">Responded</div></div>
+    <div class="stat"><div class="sn" id="s-meetings">0</div><div class="sl">Meetings set</div></div>
+    <div class="stat"><div class="sn" id="s-won">0</div><div class="sl">Closed won</div></div>
+  </div>
+
+  <button class="add-btn" onclick="openAddModal()">+ Add outreach thread</button>
+
+  <div class="filter-row">
+    <button class="fb on" data-f="all" onclick="setFilter(this)">All</button>
+    <button class="fb" data-f="draft" onclick="setFilter(this)">Draft</button>
+    <button class="fb" data-f="sent" onclick="setFilter(this)">Sent</button>
+    <button class="fb" data-f="responded" onclick="setFilter(this)">Responded</button>
+    <button class="fb" data-f="meeting" onclick="setFilter(this)">Meeting</button>
+    <button class="fb" data-f="proposal" onclick="setFilter(this)">Proposal</button>
+    <button class="fb" data-f="closed_won" onclick="setFilter(this)">Won</button>
+    <button class="fb" data-f="closed_lost" onclick="setFilter(this)">Lost</button>
+  </div>
+
+  <div id="thread-list"></div>
+</div>
+
+<div class="modal" id="add-modal">
+  <div class="modal-box">
+    <h3 id="modal-title">New outreach thread</h3>
+    <div class="field"><label>Company / Person</label><input id="f-target" type="text" placeholder="e.g. Reply Group — Tatiana Rizzante"/></div>
+    <div class="field"><label>Goal</label><input id="f-goal" type="text" placeholder="e.g. Explore joint EU AI delivery partnership"/></div>
+    <div class="field"><label>Owner</label><input id="f-owner" type="text" placeholder="e.g. Antal Kuthy"/></div>
+    <div class="field"><label>Source (how this came about)</label><input id="f-source" type="text" placeholder="e.g. IPCEI-CIS WS3 Budapest workshop connection"/></div>
+    <div class="field"><label>Initial message / approach</label><textarea id="f-message" placeholder="What was sent or planned to be sent..."></textarea></div>
+    <div class="field"><label>Status</label>
+      <select id="f-status">
+        <option value="draft">Draft — not sent yet</option>
+        <option value="sent">Sent — awaiting response</option>
+        <option value="responded">Responded — conversation active</option>
+        <option value="meeting">Meeting set</option>
+        <option value="proposal">Proposal sent</option>
+        <option value="closed_won">Closed — won</option>
+        <option value="closed_lost">Closed — lost</option>
+        <option value="paused">Paused</option>
+      </select>
+    </div>
+    <div class="modal-actions">
+      <button class="btn-cancel" onclick="closeModal()">Cancel</button>
+      <button class="btn-save" onclick="saveThread()">Save thread</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const PIPE_KEY = 'vigil-pipeline-v1';
+const MEMORY_KEY = 'vigil-memory-v1';
+let threads = [];
+let activeFilter = 'all';
+let editingId = null;
+
+const STAGES = ['draft','sent','responded','meeting','proposal','closed_won','closed_lost','paused'];
+const STAGE_LABELS = {draft:'Draft',sent:'Sent',responded:'Responded',meeting:'Meeting',proposal:'Proposal',closed_won:'Won',closed_lost:'Lost',paused:'Paused'};
+const STATUS_BADGE = {draft:'b-draft',sent:'b-sent',responded:'b-responded',meeting:'b-meeting',proposal:'b-proposal',closed_won:'b-closed_won',closed_lost:'b-closed_lost',paused:'b-paused'};
+
+function load() {
+  try {
+    const r = localStorage.getItem(PIPE_KEY);
+    if (r) threads = JSON.parse(r);
+  } catch(e) {}
+  render();
+}
+
+function save() {
+  localStorage.setItem(PIPE_KEY, JSON.stringify(threads));
+  syncToMemory();
+}
+
+function syncToMemory() {
+  try {
+    const r = localStorage.getItem(MEMORY_KEY);
+    const memory = r ? JSON.parse(r) : { sessions:[], insights:[], feedback:[], patterns:[], created: new Date().toISOString() };
+    memory.pipeline = threads.map(t => ({
+      target: t.target, goal: t.goal, status: t.status,
+      source: t.source, lastActivity: t.logs?.[t.logs.length-1]?.date || t.created,
+      logCount: t.logs?.length || 0
+    }));
+    localStorage.setItem(MEMORY_KEY, JSON.stringify(memory));
+  } catch(e) {}
+}
+
+function render() {
+  const active = threads.filter(t => !['closed_won','closed_lost'].includes(t.status)).length;
+  const responded = threads.filter(t => t.status === 'responded').length;
+  const meetings = threads.filter(t => t.status === 'meeting').length;
+  const won = threads.filter(t => t.status === 'closed_won').length;
+  document.getElementById('s-active').textContent = active;
+  document.getElementById('s-responded').textContent = responded;
+  document.getElementById('s-meetings').textContent = meetings;
+  document.getElementById('s-won').textContent = won;
+
+  const list = document.getElementById('thread-list');
+  let items = threads.filter(t => activeFilter === 'all' || t.status === activeFilter);
+  items = items.sort((a,b) => new Date(b.updated||b.created) - new Date(a.updated||a.created));
+
+  if (!items.length) {
+    list.innerHTML = '<div class="empty">No threads yet. Add your first outreach.</div>';
+    return;
+  }
+
+  const priority = items.filter(t => ['responded','meeting','proposal'].includes(t.status));
+  const active2 = items.filter(t => ['draft','sent'].includes(t.status));
+  const closed = items.filter(t => ['closed_won','closed_lost','paused'].includes(t.status));
+
+  let html = '';
+  if (priority.length && activeFilter === 'all') html += '<div class="section-label">Needs attention</div>';
+  html += priority.map(t => renderThread(t)).join('');
+  if (active2.length && activeFilter === 'all') html += '<div class="section-label">Active</div>';
+  html += active2.map(t => renderThread(t)).join('');
+  if (closed.length && activeFilter === 'all') html += '<div class="section-label">Closed / paused</div>';
+  html += closed.map(t => renderThread(t)).join('');
+
+  list.innerHTML = html;
+}
+
+function renderThread(t) {
+  const lastLog = t.logs?.[t.logs.length-1];
+  const daysSince = lastLog ? Math.floor((Date.now() - new Date(lastLog.date)) / 86400000) : null;
+  const stale = daysSince !== null && daysSince > 14 && !['closed_won','closed_lost'].includes(t.status);
+  const logsHtml = (t.logs||[]).map(l => `
+    <div class="log-item">
+      <span class="log-date">${new Date(l.date).toLocaleDateString('en-GB',{day:'numeric',month:'short'})}</span>
+      ${l.text}
+    </div>`).join('');
+
+  return `<div class="thread-card" id="tc-${t.id}" style="${stale?'border-left:3px solid #E24B4A':''}">
+    <div class="thread-head" onclick="toggleThread('${t.id}')">
+      <div style="flex:1">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+          <div class="thread-name">${t.target}</div>
+          ${stale ? '<span style="font-size:10px;color:#F87171;background:#2E0D0D;padding:2px 6px;border-radius:3px;letter-spacing:1px">STALE '+daysSince+'d</span>' : ''}
+        </div>
+        <div class="thread-meta">${t.goal} · Owner: ${t.owner} · Source: ${t.source}</div>
+      </div>
+      <span class="badge ${STATUS_BADGE[t.status]||'b-draft'}">${STAGE_LABELS[t.status]||t.status}</span>
+    </div>
+    <div class="thread-body" id="tb-${t.id}">
+      ${t.message ? `<div style="font-size:13px;color:#888;line-height:1.7;margin:16px 0;padding:12px 14px;background:#0D0D0D;border-radius:4px;font-style:italic">${t.message}</div>` : ''}
+      <div class="stage-row">
+        ${STAGES.map(s => `<button class="stage-btn${t.status===s?' active':''}" onclick="updateStatus('${t.id}','${s}')">${STAGE_LABELS[s]}</button>`).join('')}
+      </div>
+      <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#444;margin:16px 0 8px">Activity log</div>
+      <div class="log-list" id="logs-${t.id}">${logsHtml || '<div style="font-size:12px;color:#333;padding:8px 0">No activity logged yet</div>'}</div>
+      <div class="add-log-row">
+        <input class="log-input" id="li-${t.id}" type="text" placeholder="Log what happened, what was said, what changed..." onkeydown="if(event.key==='Enter')addLog('${t.id}')"/>
+        <button class="save-log-btn" onclick="addLog('${t.id}')">Log</button>
+      </div>
+      <div style="display:flex;gap:8px;margin-top:12px">
+        <button class="del-btn" onclick="editThread('${t.id}')">Edit</button>
+        <button class="del-btn" onclick="deleteThread('${t.id}')">Delete</button>
+      </div>
+    </div>
+  </div>`;
+}
+
+function toggleThread(id) {
+  const body = document.getElementById('tb-' + id);
+  body.classList.toggle('open');
+}
+
+function updateStatus(id, status) {
+  const t = threads.find(x => x.id === id);
+  if (!t) return;
+  const old = t.status;
+  t.status = status;
+  t.updated = new Date().toISOString();
+  t.logs = t.logs || [];
+  t.logs.push({ date: new Date().toISOString(), text: `Status changed: ${STAGE_LABELS[old]} → ${STAGE_LABELS[status]}` });
+  save(); render();
+}
+
+function addLog(id) {
+  const input = document.getElementById('li-' + id);
+  const text = input?.value?.trim();
+  if (!text) return;
+  const t = threads.find(x => x.id === id);
+  if (!t) return;
+  t.logs = t.logs || [];
+  t.logs.push({ date: new Date().toISOString(), text });
+  t.updated = new Date().toISOString();
+  input.value = '';
+  save(); render();
+  setTimeout(() => {
+    const body = document.getElementById('tb-' + id);
+    if (body) body.classList.add('open');
+  }, 50);
+}
+
+function deleteThread(id) {
+  if (!confirm('Delete this thread? This cannot be undone.')) return;
+  threads = threads.filter(t => t.id !== id);
+  save(); render();
+}
+
+function editThread(id) {
+  const t = threads.find(x => x.id === id);
+  if (!t) return;
+  editingId = id;
+  document.getElementById('modal-title').textContent = 'Edit thread';
+  document.getElementById('f-target').value = t.target;
+  document.getElementById('f-goal').value = t.goal;
+  document.getElementById('f-owner').value = t.owner;
+  document.getElementById('f-source').value = t.source;
+  document.getElementById('f-message').value = t.message || '';
+  document.getElementById('f-status').value = t.status;
+  document.getElementById('add-modal').classList.add('open');
+}
+
+function openAddModal() {
+  editingId = null;
+  document.getElementById('modal-title').textContent = 'New outreach thread';
+  document.getElementById('f-target').value = '';
+  document.getElementById('f-goal').value = '';
+  document.getElementById('f-owner').value = '';
+  document.getElementById('f-source').value = '';
+  document.getElementById('f-message').value = '';
+  document.getElementById('f-status').value = 'draft';
+  document.getElementById('add-modal').classList.add('open');
+}
+
+function closeModal() {
+  document.getElementById('add-modal').classList.remove('open');
+  editingId = null;
+}
+
+function saveThread() {
+  const target = document.getElementById('f-target').value.trim();
+  if (!target) { alert('Company / person is required'); return; }
+  if (editingId) {
+    const t = threads.find(x => x.id === editingId);
+    if (t) {
+      t.target = target;
+      t.goal = document.getElementById('f-goal').value.trim();
+      t.owner = document.getElementById('f-owner').value.trim();
+      t.source = document.getElementById('f-source').value.trim();
+      t.message = document.getElementById('f-message').value.trim();
+      t.status = document.getElementById('f-status').value;
+      t.updated = new Date().toISOString();
+    }
+  } else {
+    threads.push({
+      id: 'th-' + Date.now(),
+      target,
+      goal: document.getElementById('f-goal').value.trim(),
+      owner: document.getElementById('f-owner').value.trim(),
+      source: document.getElementById('f-source').value.trim(),
+      message: document.getElementById('f-message').value.trim(),
+      status: document.getElementById('f-status').value,
+      created: new Date().toISOString(),
+      updated: new Date().toISOString(),
+      logs: []
+    });
+  }
+  save(); render(); closeModal();
+}
+
+function setFilter(btn) {
+  document.querySelectorAll('.fb').forEach(b => b.classList.remove('on'));
+  btn.classList.add('on');
+  activeFilter = btn.dataset.f;
+  render();
+}
+
+document.addEventListener('click', e => {
+  const modal = document.getElementById('add-modal');
+  if (modal.classList.contains('open') && e.target === modal) closeModal();
+});
+
+load();
+</script>
+</body>
+</html>
