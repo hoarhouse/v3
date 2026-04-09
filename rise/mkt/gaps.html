@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Website Gaps — Vigil</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#080808;color:#EEE;font-family:'DM Sans',sans-serif;min-height:100vh}
+.container{max-width:900px;margin:0 auto;padding:32px 24px}
+.page-title{font-size:22px;font-weight:700;color:#EEE;margin-bottom:4px}
+.page-sub{font-size:13px;color:#666;margin-bottom:32px}
+.stats-row{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:32px}
+.stat{background:#0D0D0D;border:1px solid #1a1a1a;border-radius:4px;padding:14px;text-align:center}
+.stat-n{font-size:24px;font-weight:700;color:#EEE}
+.stat-l{font-size:10px;color:#666;letter-spacing:1px;text-transform:uppercase;margin-top:4px}
+.section-title{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#666;margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid #1a1a1a}
+.gap-card{background:#0D0D0D;border:1px solid #222;border-radius:4px;padding:16px;margin-bottom:10px}
+.gap-meta{display:flex;align-items:center;gap:10px;margin-bottom:8px;flex-wrap:wrap}
+.pill{font-size:10px;padding:2px 8px;border-radius:2px;letter-spacing:1px;text-transform:uppercase}
+.pill-critical{background:#E24B4A22;color:#E24B4A}
+.pill-high{background:#C8A96E22;color:#C8A96E}
+.pill-medium{background:#88888822;color:#888}
+.pill-approved{background:#4ADE8022;color:#4ADE80}
+.pill-implemented{background:#22c55e22;color:#22c55e}
+.pill-snoozed{background:#88888822;color:#888}
+.pill-declined{background:#33333322;color:#555}
+.pill-pending{background:#C8A96E22;color:#C8A96E}
+.page-tag{font-size:12px;color:#C8A96E}
+.loc-tag{font-size:12px;color:#666}
+.gap-title{font-size:14px;color:#EEE;font-weight:600;margin-bottom:4px}
+.gap-rationale{font-size:12px;color:#666;line-height:1.6;margin-bottom:10px}
+.gap-dates{font-size:11px;color:#444}
+.cc-block{background:#050505;border:1px solid #1a3a1a;border-radius:3px;padding:10px;margin-top:10px}
+.cc-label{font-size:10px;color:#4ADE80;letter-spacing:1px;text-transform:uppercase;margin-bottom:6px}
+.cc-text{width:100%;height:100px;background:transparent;border:none;color:#4ADE80;font-family:monospace;font-size:11px;resize:vertical;outline:none}
+.copy-btn{font-size:11px;padding:4px 12px;background:#0D1A0D;border:1px solid #2a4a2a;color:#4ADE80;border-radius:3px;cursor:pointer;margin-top:6px}
+.mark-btn{font-size:11px;padding:4px 12px;background:#111;border:1px solid #333;color:#888;border-radius:3px;cursor:pointer;margin-top:6px;margin-left:8px}
+.reopen-btn{font-size:11px;padding:4px 12px;background:#111;border:1px solid #333;color:#888;border-radius:3px;cursor:pointer}
+.empty{text-align:center;padding:40px;color:#444;font-size:14px;border:1px solid #1a1a1a;border-radius:4px;margin-bottom:20px}
+</style>
+</head>
+<body>
+<script src="nav.js"></script>
+<div class="container">
+  <div class="page-title">Website Gaps</div>
+  <div class="page-sub">All gaps Vigil has identified, tracked by status. Approved items have CC prompts ready to copy.</div>
+  <div class="stats-row" id="stats-row"></div>
+
+  <div class="section-title">Approved — awaiting implementation</div>
+  <div id="approved-list"></div>
+
+  <div class="section-title" style="margin-top:24px">Pending — no decision yet</div>
+  <div id="pending-list"></div>
+
+  <div class="section-title" style="margin-top:24px">Snoozed</div>
+  <div id="snoozed-list"></div>
+
+  <div class="section-title" style="margin-top:24px">Implemented ✓</div>
+  <div id="implemented-list"></div>
+
+  <div class="section-title" style="margin-top:24px">Declined</div>
+  <div id="declined-list"></div>
+</div>
+
+<script>
+function getGaps(){try{return JSON.parse(localStorage.getItem('vigil_gaps')||'[]');}catch(e){return[];}}
+function saveGaps(g){localStorage.setItem('vigil_gaps',JSON.stringify(g));}
+
+function markImplemented(key){
+  var gaps=getGaps();
+  var idx=gaps.findIndex(function(g){return g.key===key;});
+  if(idx>-1){gaps[idx].status='implemented';gaps[idx].implementedDate=new Date().toISOString().split('T')[0];}
+  saveGaps(gaps);render();
+}
+
+function reopen(key){
+  var gaps=getGaps();
+  var idx=gaps.findIndex(function(g){return g.key===key;});
+  if(idx>-1){gaps[idx].status='pending';gaps[idx].actionedDate=null;}
+  saveGaps(gaps);render();
+}
+
+function copyCC(key){
+  var gaps=getGaps();
+  var g=gaps.find(function(x){return x.key===key;});
+  if(g&&g.ccPrompt){
+    navigator.clipboard.writeText(g.ccPrompt).then(function(){
+      var safeKey=key.replace(/[^a-zA-Z0-9]/g,'');
+      var btn=document.querySelector('[data-copy="'+safeKey+'"]');
+      if(btn){btn.textContent='✓ Copied';setTimeout(function(){btn.textContent='Copy CC Prompt';},2000);}
+    });
+  }
+}
+
+function priorityColor(p){
+  return p==='critical'?'#E24B4A':p==='high'?'#C8A96E':'#888';
+}
+
+function card(g){
+  var safeKey=g.key?g.key.replace(/[^a-zA-Z0-9]/g,''):'';
+  var escapedKey=g.key?g.key.replace(/'/g,"\\'"):'';
+  var snoozeMsg=g.status==='snoozed'&&g.snoozeUntil?'Resurfaces '+new Date(g.snoozeUntil).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'}):'';
+  var html='<div class="gap-card" style="border-left:3px solid '+priorityColor(g.priority)+'">';
+  html+='<div class="gap-meta">';
+  html+='<span class="pill pill-'+g.priority+'">'+g.priority+'</span>';
+  html+='<span class="pill pill-'+g.status+'">'+g.status+'</span>';
+  html+='<span class="page-tag">📄 '+g.page+'</span>';
+  html+='<span class="loc-tag">📍 '+g.location+'</span>';
+  html+='</div>';
+  html+='<div class="gap-title">'+g.gap+'</div>';
+  html+='<div class="gap-rationale">'+(g.rationale||'')+'</div>';
+  html+='<div class="gap-dates">Found: '+g.foundDate+(g.actionedDate?' · Actioned: '+g.actionedDate:'')+(g.implementedDate?' · Implemented: '+g.implementedDate:'')+(snoozeMsg?' · '+snoozeMsg:'')+'</div>';
+  if(g.status==='approved'&&g.ccPrompt){
+    html+='<div class="cc-block"><div class="cc-label">CC Prompt ready</div>';
+    html+='<textarea class="cc-text" readonly>'+g.ccPrompt+'</textarea>';
+    html+='<button class="copy-btn" data-copy="'+safeKey+'" onclick="copyCC(\''+escapedKey+'\')">Copy CC Prompt</button>';
+    html+='<button class="mark-btn" onclick="markImplemented(\''+escapedKey+'\')">Mark as Implemented</button>';
+    html+='</div>';
+  }
+  if(g.status==='declined'||g.status==='snoozed'){
+    html+='<div style="margin-top:8px"><button class="reopen-btn" onclick="reopen(\''+escapedKey+'\')">Reopen as Pending</button></div>';
+  }
+  html+='</div>';
+  return html;
+}
+
+function render(){
+  var gaps=getGaps();
+  var byStatus={approved:[],pending:[],snoozed:[],implemented:[],declined:[]};
+  gaps.forEach(function(g){if(byStatus[g.status])byStatus[g.status].push(g);});
+
+  document.getElementById('stats-row').innerHTML=
+    '<div class="stat"><div class="stat-n" style="color:#4ADE80">'+byStatus.approved.length+'</div><div class="stat-l">Approved</div></div>'+
+    '<div class="stat"><div class="stat-n" style="color:#C8A96E">'+byStatus.pending.length+'</div><div class="stat-l">Pending</div></div>'+
+    '<div class="stat"><div class="stat-n">'+byStatus.snoozed.length+'</div><div class="stat-l">Snoozed</div></div>'+
+    '<div class="stat"><div class="stat-n" style="color:#22c55e">'+byStatus.implemented.length+'</div><div class="stat-l">Implemented</div></div>'+
+    '<div class="stat"><div class="stat-n" style="color:#444">'+byStatus.declined.length+'</div><div class="stat-l">Declined</div></div>';
+
+  ['approved','pending','snoozed','implemented','declined'].forEach(function(status){
+    var el=document.getElementById(status+'-list');
+    if(byStatus[status].length===0){
+      el.innerHTML='<div class="empty">No '+status+' gaps</div>';
+    } else {
+      el.innerHTML=byStatus[status].map(card).join('');
+    }
+  });
+}
+
+render();
+</script>
+</body>
+</html>
