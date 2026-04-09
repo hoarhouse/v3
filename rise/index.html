@@ -87,6 +87,13 @@ nav { position:fixed; top:0; left:0; right:0; z-index:100; padding:28px 60px; di
 .mob-record { font-family:'DM Mono',monospace !important; font-size:11px !important; letter-spacing:1.5px !important; text-transform:uppercase !important; color:var(--mid) !important; padding:7px 0 !important; width:80%; text-align:center; transition:color 0.2s; display:block; }
 .mob-record:hover, .mob-record.active { color:var(--gold) !important; }
 .mob-cta { font-family:'DM Mono',monospace !important; font-size:12px !important; letter-spacing:2px !important; text-transform:uppercase !important; color:var(--black) !important; background:var(--gold) !important; padding:14px 36px !important; margin-top:20px !important; display:block; }
+.nav-has-dropdown { position: relative; }
+.nav-has-dropdown .nav-dropdown { display: none; position: absolute; top: calc(100% + 8px); left: 50%; transform: translateX(-50%); background: #0A0A0A; border: 1px solid #1E1E1E; border-radius: 6px; min-width: 220px; padding: 6px 0; z-index: 500; box-shadow: 0 8px 32px rgba(0,0,0,0.5); list-style: none; }
+.nav-has-dropdown:hover .nav-dropdown { display: block; }
+.nav-has-dropdown .nav-dropdown li a { display: block; padding: 9px 18px; font-size: 12px; color: #888; text-decoration: none; white-space: nowrap; letter-spacing: 0.04em; transition: color 0.15s, background 0.15s; }
+.nav-has-dropdown .nav-dropdown li a:hover { color: #EEE; background: #141414; }
+.nav-has-dropdown .nav-dropdown li:first-child a { color: #C8A96E; }
+.nav-has-dropdown .nav-dropdown li:first-child { border-bottom: 1px solid #1E1E1E; margin-bottom: 4px; }
 @media (max-width:1023px) { nav { padding:20px 36px; } .nav-links { gap:24px; } }
 @media (max-width:767px) { .nav-links, .nav-cta { display:none; } .nav-hamburger { display:flex; } nav { padding:16px 20px; } }
 
@@ -368,19 +375,18 @@ footer { background:var(--black); border-top:1px solid var(--border); padding:48
     <li><a href="rise.html">Rise</a></li>
     <li><a href="thinking.html">Thinking</a></li>
     <li><a href="about.html">About</a></li>
-    <li class="nav-dropdown">
-      <a href="record/index.html">Record</a>
-      <div class="nav-drop-menu">
-        <span class="nav-drop-label">Projects &amp; Credentials</span>
-        <a href="record/ipcei-cis.html" class="nav-drop-item">IPCEI-CIS — FedEU.ai</a>
-        <a href="record/kau.html" class="nav-drop-item">KAÜ — National Identity</a>
-        <a href="record/helix.html" class="nav-drop-item">HeliX + FedX</a>
-        <a href="record/eidas.html" class="nav-drop-item">eIDAS 2.0 — MyD Wallet</a>
-        <a href="record/medical-ai.html" class="nav-drop-item">Medical AI — GRaDPaLM</a>
-        <a href="record/peter-antal.html" class="nav-drop-item">Dr. Péter Antal</a>
-        <span class="nav-drop-label">Media</span>
-        <a href="record/press.html" class="nav-drop-item">Press Kit</a>
-      </div>
+    <li class="nav-has-dropdown">
+      <a href="record/index.html">Record ▾</a>
+      <ul class="nav-dropdown">
+        <li><a href="record/index.html">Overview</a></li>
+        <li><a href="record/ipcei-cis.html">IPCEI-CIS — FedEU.ai</a></li>
+        <li><a href="record/kau.html">KAÜ — National Identity</a></li>
+        <li><a href="record/helix.html">HeliX + FedX</a></li>
+        <li><a href="record/eidas.html">eIDAS 2.0 — MyD Wallet</a></li>
+        <li><a href="record/medical-ai.html">Medical AI — GRaDPaLM</a></li>
+        <li><a href="record/peter-antal.html">Dr. Péter Antal</a></li>
+        <li><a href="record/press.html">Press Kit</a></li>
+      </ul>
     </li>
   </ul>
   <a href="#contact" class="nav-cta">Work With Us</a>
