@@ -135,6 +135,13 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:48px 6
 .mob-record { font-family:'DM Mono',monospace !important; font-size:11px !important; letter-spacing:1.5px !important; text-transform:uppercase !important; color:var(--mid) !important; padding:7px 0 !important; width:80%; text-align:center; transition:color 0.2s; display:block; }
 .mob-record:hover { color:var(--gold) !important; }
 .mob-cta { font-family:'DM Mono',monospace !important; font-size:12px !important; letter-spacing:2px !important; text-transform:uppercase !important; color:var(--black) !important; background:var(--gold) !important; padding:14px 36px !important; margin-top:20px !important; display:block; }
+.nav-has-dropdown { position: relative; }
+.nav-has-dropdown .nav-dropdown { display: none; position: absolute; top: calc(100% + 8px); left: 50%; transform: translateX(-50%); background: #0A0A0A; border: 1px solid #1E1E1E; border-radius: 6px; min-width: 220px; padding: 6px 0; z-index: 500; box-shadow: 0 8px 32px rgba(0,0,0,0.5); list-style: none; }
+.nav-has-dropdown:hover .nav-dropdown { display: block; }
+.nav-has-dropdown .nav-dropdown li a { display: block; padding: 9px 18px; font-size: 12px; color: #888; text-decoration: none; white-space: nowrap; letter-spacing: 0.04em; transition: color 0.15s, background 0.15s; }
+.nav-has-dropdown .nav-dropdown li a:hover { color: #EEE; background: #141414; }
+.nav-has-dropdown .nav-dropdown li:first-child a { color: #C8A96E; }
+.nav-has-dropdown .nav-dropdown li:first-child { border-bottom: 1px solid #1E1E1E; margin-bottom: 4px; }
 </style>
 </head>
 <body>
@@ -148,7 +155,19 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:48px 6
     <li><a href="../rise.html">Rise</a></li>
     <li><a href="../thinking.html">Thinking</a></li>
     <li><a href="../about.html">About</a></li>
-    <li><a href="index.html" class="active">Record</a></li>
+    <li class="nav-has-dropdown">
+      <a href="index.html" class="active">Record ▾</a>
+      <ul class="nav-dropdown">
+        <li><a href="index.html">Overview</a></li>
+        <li><a href="ipcei-cis.html">IPCEI-CIS — FedEU.ai</a></li>
+        <li><a href="kau.html">KAÜ — National Identity</a></li>
+        <li><a href="helix.html">HeliX + FedX</a></li>
+        <li><a href="eidas.html">eIDAS 2.0 — MyD Wallet</a></li>
+        <li><a href="medical-ai.html">Medical AI — GraDPaLM</a></li>
+        <li><a href="peter-antal.html">Dr. Péter Antal</a></li>
+        <li><a href="press.html">Press Kit</a></li>
+      </ul>
+    </li>
   </ul>
   <a href="../index.html#contact" class="nav-cta">Work With Us</a>
   <button class="nav-hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
