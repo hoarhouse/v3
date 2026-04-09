@@ -25,17 +25,16 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;ba
 .cost-log-item:last-child{border-bottom:none}
 .cost-log-amt{color:#C8A96E;font-weight:600;flex-shrink:0;margin-left:12px}
 .container{max-width:1000px;margin:0 auto;padding:32px}
-.vigil-header{margin-bottom:28px}
 .vigil-title{font-size:28px;font-weight:700;color:#EEE;margin-bottom:4px}
-.vigil-sub{font-size:13px;color:#555}
-.btn-row{display:flex;gap:10px;align-items:center;margin-bottom:20px}
+.vigil-sub{font-size:13px;color:#555;margin-bottom:28px}
+.btn-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+.sync-status{font-size:12px;color:#555}
 .run-btn{padding:10px 24px;background:#C8A96E;color:#000;font-size:13px;font-weight:700;border:none;border-radius:6px;cursor:pointer;letter-spacing:0.5px}
 .run-btn:hover{background:#D4B87E}
 .run-btn:disabled{opacity:0.5;cursor:not-allowed}
-.research-btn{padding:10px 24px;background:transparent;color:#C8A96E;font-size:13px;font-weight:700;border:1px solid #C8A96E;border-radius:6px;cursor:pointer;letter-spacing:0.5px}
+.research-btn{padding:10px 24px;background:transparent;color:#C8A96E;font-size:13px;font-weight:700;border:1px solid #C8A96E;border-radius:6px;cursor:pointer;letter-spacing:0.5px;margin-right:8px}
 .research-btn:hover{background:#1A1408}
 .research-btn:disabled{opacity:0.5;cursor:not-allowed}
-.sync-status{font-size:12px;color:#555}
 .thinking-box{background:#0D0D0D;border:1px solid #1A1A1A;border-radius:8px;padding:20px;margin-bottom:24px;display:none}
 .thinking-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#444;margin-bottom:8px}
 .thinking-text{font-size:12px;color:#555;line-height:1.6;font-style:italic}
@@ -47,6 +46,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;ba
 .act-btn{padding:7px 14px;font-size:12px;border:1px solid #2A2A2A;border-radius:4px;background:transparent;cursor:pointer;color:#888}
 .act-btn:hover{border-color:#C8A96E;color:#C8A96E}
 .act-btn.primary{background:#C8A96E;border-color:#C8A96E;color:#000;font-weight:600}
+.act-btn.primary:hover{background:#D4B87E}
 .act-btn.danger{border-color:#E24B4A;color:#E24B4A}
 .act-btn.approved{background:#4ADE80;border-color:#4ADE80;color:#000;font-weight:600}
 .log-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:300;align-items:center;justify-content:center}
@@ -61,6 +61,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;ba
 .memory-stat{display:flex;justify-content:space-between;font-size:12px;color:#666;padding:4px 0;border-bottom:1px solid #0F0F0F}
 .memory-stat:last-child{border-bottom:none}
 .memory-val{color:#888}
+.section-lbl{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#444;margin:28px 0 10px;padding-bottom:6px;border-bottom:1px solid #1A1A1A}
 </style>
 </head>
 <body>
@@ -92,14 +93,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;ba
 </div>
 
 <div class="container">
-  <div class="vigil-header">
-    <div class="vigil-title">Good morning, Chris.</div>
-    <div class="vigil-sub" id="vigil-date"></div>
-  </div>
+  <div class="vigil-title">Good morning, Chris.</div>
+  <div class="vigil-sub" id="vigil-date"></div>
 
-  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px">
+  <div class="btn-row">
     <div class="sync-status" id="sync-status">Ready</div>
-    <div class="btn-row">
+    <div>
       <button class="research-btn" id="research-btn" onclick="runResearchAgent()">Research Agent</button>
       <button class="run-btn" id="run-btn" onclick="runBriefing()">Run Vigil Briefing</button>
     </div>
@@ -141,17 +140,16 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;ba
 <script>
 var PROXY = 'http://localhost:3000';
 var DATA_URL = 'https://hoarhouse.github.io/v3/rise/mkt/data.json';
+var WEBSITE_URL = 'https://hoarhouse.github.io/v3/rise/mkt/website.json';
 var COST_KEY = 'vigil-cost-v1';
 var MEMORY_KEY = 'vigil-memory-v1';
 var DATA_CACHE_KEY = 'vigil-data-cache-v1';
-var WEBSITE_URL = 'https://hoarhouse.github.io/v3/rise/mkt/website.json';
 var WEBSITE_CACHE_KEY = 'vigil-website-cache-v1';
 var INPUT_PRICE = 3.00 / 1000000;
 var OUTPUT_PRICE = 15.00 / 1000000;
 
 var costs = { session: 0, month: 0, total: 0, log: [] };
 var memory = { sessions: [], insights: [], feedback: [], patterns: [], created: new Date().toISOString() };
-var knowledgeData = null;
 var logTarget = null;
 var researchPlan = null;
 var approvedTasks = [];
@@ -163,9 +161,7 @@ function init() {
   renderCosts();
   renderMemoryStats();
   document.addEventListener('click', function(e) {
-    if (!e.target.closest('.cost-bar') && !e.target.closest('.cost-panel')) {
-      document.getElementById('cost-panel').classList.remove('open');
-    }
+    if (!e.target.closest('.cost-bar') && !e.target.closest('.cost-panel')) document.getElementById('cost-panel').classList.remove('open');
     var modal = document.getElementById('log-modal');
     if (modal.classList.contains('open') && e.target === modal) closeLogModal();
   });
@@ -175,25 +171,22 @@ function loadCosts() {
   try {
     var r = localStorage.getItem(COST_KEY);
     if (r) {
-      var saved = JSON.parse(r);
-      costs.total = saved.total || 0;
-      costs.log = saved.log || [];
-      var thisMonth = new Date().toISOString().slice(0,7);
-      costs.month = costs.log.filter(function(l){ return l.ts && l.ts.startsWith(thisMonth); }).reduce(function(s,l){ return s + l.cost; }, 0);
+      var s = JSON.parse(r);
+      costs.total = s.total || 0;
+      costs.log = s.log || [];
+      var m = new Date().toISOString().slice(0,7);
+      costs.month = costs.log.filter(function(l){ return l.ts && l.ts.startsWith(m); }).reduce(function(a,l){ return a+l.cost; }, 0);
     }
   } catch(e) {}
 }
 
-function saveCosts() {
-  localStorage.setItem(COST_KEY, JSON.stringify({ total: costs.total, log: costs.log.slice(-500) }));
-}
+function saveCosts() { localStorage.setItem(COST_KEY, JSON.stringify({ total: costs.total, log: costs.log.slice(-500) })); }
 
 function trackCost(label, inp, out) {
   var cost = (inp * INPUT_PRICE) + (out * OUTPUT_PRICE);
   costs.session += cost; costs.month += cost; costs.total += cost;
   costs.log.push({ ts: new Date().toISOString(), label: label, inp: inp, out: out, cost: cost });
   saveCosts(); renderCosts();
-  return cost;
 }
 
 function fmt(n) { return '$' + n.toFixed(4); }
@@ -204,88 +197,77 @@ function renderCosts() {
   document.getElementById('cost-total').textContent = fmt(costs.total);
   var recent = costs.log.slice(-15).reverse();
   document.getElementById('cost-log').innerHTML = recent.length
-    ? recent.map(function(l){ return '<div class="cost-log-item"><div><div style="color:#CCC;font-size:12px">' + l.label + '</div><div style="color:#444;font-size:11px">' + new Date(l.ts).toLocaleTimeString() + ' - ' + l.inp + 'in / ' + l.out + 'out</div></div><div class="cost-log-amt">' + fmt(l.cost) + '</div></div>'; }).join('')
+    ? recent.map(function(l){ return '<div class="cost-log-item"><div><div style="color:#CCC;font-size:12px">'+l.label+'</div><div style="color:#444;font-size:11px">'+new Date(l.ts).toLocaleTimeString()+' - '+l.inp+'in/'+l.out+'out</div></div><div class="cost-log-amt">'+fmt(l.cost)+'</div></div>'; }).join('')
     : '<div style="font-size:12px;color:#444;padding:8px 0">No calls yet</div>';
 }
 
 function toggleCostPanel() { document.getElementById('cost-panel').classList.toggle('open'); }
 
 function loadMemory() {
-  try {
-    var r = localStorage.getItem(MEMORY_KEY);
-    if (r) memory = JSON.parse(r);
-  } catch(e) {}
+  try { var r = localStorage.getItem(MEMORY_KEY); if (r) memory = JSON.parse(r); } catch(e) {}
 }
 
 function saveMemory() { localStorage.setItem(MEMORY_KEY, JSON.stringify(memory)); }
 
 function renderMemoryStats() {
-  var stats = document.getElementById('memory-stats');
   var actedOn = memory.feedback.filter(function(f){ return f.outcome && f.outcome.startsWith('acted'); }).length;
   var dismissed = memory.feedback.filter(function(f){ return f.outcome && f.outcome.startsWith('dismissed'); }).length;
-  var lastSession = memory.sessions[memory.sessions.length - 1];
-  stats.innerHTML = [
-    ['Total Vigil sessions', memory.sessions.length || 0],
-    ['Insights logged', memory.insights.length || 0],
-    ['Feedback entries', memory.feedback.length || 0],
-    ['Actions taken', actedOn || 0],
-    ['Insights dismissed', dismissed || 0],
-    ['Last session', lastSession ? new Date(lastSession.date).toLocaleDateString('en-GB', {day:'numeric',month:'short',year:'numeric'}) : 'First session today']
-  ].map(function(pair){ return '<div class="memory-stat"><span>' + pair[0] + '</span><span class="memory-val">' + pair[1] + '</span></div>'; }).join('');
+  var last = memory.sessions[memory.sessions.length-1];
+  document.getElementById('memory-stats').innerHTML = [
+    ['Total Vigil sessions', memory.sessions.length||0],
+    ['Insights logged', memory.insights.length||0],
+    ['Feedback entries', memory.feedback.length||0],
+    ['Actions taken', actedOn||0],
+    ['Insights dismissed', dismissed||0],
+    ['Last session', last ? new Date(last.date).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'}) : 'First session today']
+  ].map(function(p){ return '<div class="memory-stat"><span>'+p[0]+'</span><span class="memory-val">'+p[1]+'</span></div>'; }).join('');
 }
 
 function buildMemoryContext() {
   if (!memory.sessions.length) return 'This is the first Vigil session. No prior memory exists.';
-  var recentFeedback = memory.feedback.slice(-20);
-  var patterns = memory.patterns.slice(-10);
-  var recentSessions = memory.sessions.slice(-5);
-  var ctx = 'VIGIL MEMORY - ' + memory.sessions.length + ' prior sessions.\n\n';
-  if (recentFeedback.length) {
-    ctx += 'FEEDBACK ON PAST INSIGHTS:\n';
-    recentFeedback.forEach(function(f){ ctx += '- [' + f.outcome + '] "' + f.insightTitle + '" - ' + (f.notes || 'no notes') + '\n'; });
-    ctx += '\n';
-  }
-  if (patterns.length) {
-    ctx += 'PATTERNS NOTICED:\n';
-    patterns.forEach(function(p){ ctx += '- ' + p + '\n'; });
-    ctx += '\n';
-  }
-  if (recentSessions.length) {
-    ctx += 'RECENT SESSIONS:\n';
-    recentSessions.forEach(function(s){ ctx += '- ' + new Date(s.date).toLocaleDateString() + ': ' + s.summary + '\n'; });
-  }
+  var ctx = 'VIGIL MEMORY - '+memory.sessions.length+' prior sessions.\n\n';
+  var rf = memory.feedback.slice(-20);
+  if (rf.length) { ctx += 'FEEDBACK ON PAST INSIGHTS:\n'; rf.forEach(function(f){ ctx += '- ['+f.outcome+'] "'+f.insightTitle+'" - '+(f.notes||'no notes')+'\n'; }); ctx += '\n'; }
+  var rp = memory.patterns.slice(-10);
+  if (rp.length) { ctx += 'PATTERNS NOTICED:\n'; rp.forEach(function(p){ ctx += '- '+p+'\n'; }); ctx += '\n'; }
+  var rs = memory.sessions.slice(-5);
+  if (rs.length) { ctx += 'RECENT SESSIONS:\n'; rs.forEach(function(s){ ctx += '- '+new Date(s.date).toLocaleDateString()+': '+s.summary+'\n'; }); }
   return ctx;
 }
 
-function loadKnowledgeData() {
+function fetchJSON(url, cacheKey, ttl) {
   return new Promise(function(resolve) {
     try {
-      var cached = localStorage.getItem(DATA_CACHE_KEY);
-      if (cached) {
-        var parsed = JSON.parse(cached);
-        if (Date.now() - parsed.ts < 3600000) { resolve(parsed.data); return; }
-      }
+      var c = localStorage.getItem(cacheKey);
+      if (c) { var p = JSON.parse(c); if (Date.now()-p.ts < ttl) { resolve(p.data); return; } }
     } catch(e) {}
-    fetch(DATA_URL + '?v=' + Date.now())
-      .then(function(r){ return r.json(); })
-      .then(function(data){
-        localStorage.setItem(DATA_CACHE_KEY, JSON.stringify({ ts: Date.now(), data: data }));
-        resolve(data);
-      })
-      .catch(function(){ resolve(null); });
+    fetch(url+'?v='+Date.now()).then(function(r){ return r.json(); }).then(function(d){
+      try { localStorage.setItem(cacheKey, JSON.stringify({ts:Date.now(), data:d})); } catch(e) {}
+      resolve(d);
+    }).catch(function(){ resolve(null); });
   });
 }
 
-function loadWebsiteData(){return new Promise(function(resolve){try{var c=localStorage.getItem(WEBSITE_CACHE_KEY);if(c){var p=JSON.parse(c);if(Date.now()-p.ts<3600000){resolve(p.data);return;}}}catch(e){}fetch(WEBSITE_URL+'?v='+Date.now()).then(function(r){return r.json();}).then(function(d){localStorage.setItem(WEBSITE_CACHE_KEY,JSON.stringify({ts:Date.now(),data:d}));resolve(d);}).catch(function(){resolve(null);});});}
-function buildWebsiteContext(w){if(!w)return 'Website audit not available.';var ctx='WEBSITE AUDIT ('+w.lastAudited+')\nGLOBAL GAPS:\n';(w.globalGaps||[]).forEach(function(g){ctx+='- '+g+'\n';});ctx+='\nPRIORITY UPDATES:\n';(w.priorityUpdates||[]).forEach(function(u){ctx+='['+u.priority.toUpperCase()+'] '+u.page+': '+u.action+'\n';});(w.pages||[]).forEach(function(p){ctx+='\n['+p.title+'] Missing: '+(p.missing||[]).join('; ')+'\n';});return ctx;}
 function buildDataContext(d) {
-  var companies = (d.companies || []).map(function(c){ return '[' + c.id + '] ' + c.name + ' (' + c.type + ', ' + c.country + ') - Connection: ' + c.connection + ' - Opportunity: ' + c.opportunity; }).join('\n');
-  var people = (d.people || []).map(function(p){ return '[' + p.id + '] ' + p.name + ', ' + p.title + ' at ' + p.company + ' (warmth: ' + p.warmth + ') - ' + p.connection + ' - Action: ' + p.action; }).join('\n');
-  var consortiums = (d.consortiums || []).map(function(c){ return '[' + c.id + '] ' + c.name + ' - Role: ' + c.role + ' - ' + c.notes; }).join('\n');
-  var events = (d.events || []).sort(function(a,b){ return new Date(b.date) - new Date(a.date); }).map(function(e){ return '[' + e.date + '] [' + e.type.toUpperCase() + '] ' + e.description + ' (Source: ' + e.source + ')'; }).join('\n');
-  var actions = (d.actions || []).filter(function(a){ return a.status === 'pending'; }).map(function(a){ return '[' + a.priority.toUpperCase() + '] ' + a.task + ' - Owner: ' + a.owner; }).join('\n');
-  var competitors = (d.competitors || []).map(function(c){ return '[' + c.id + '] ' + c.name + ' (' + c.country + ', ' + c.sector + ', threat: ' + c.threat + ') - ' + c.description + ' - Differentiator: ' + c.differentiator; }).join('\n');
-  return 'COMPANIES:\n' + companies + '\n\nPEOPLE:\n' + people + '\n\nCONSORTIUMS:\n' + consortiums + '\n\nEVENTS:\n' + events + '\n\nACTIONS:\n' + actions + '\n\nCOMPETITORS:\n' + competitors;
+  var companies = (d.companies||[]).map(function(c){ return '['+c.id+'] '+c.name+' ('+c.type+', '+c.country+') - Connection: '+c.connection+' - Opportunity: '+c.opportunity; }).join('\n');
+  var people = (d.people||[]).map(function(p){ return '['+p.id+'] '+p.name+', '+p.title+' at '+p.company+' (warmth: '+p.warmth+') - '+p.connection+' - Action: '+p.action; }).join('\n');
+  var consortiums = (d.consortiums||[]).map(function(c){ return '['+c.id+'] '+c.name+' - Role: '+c.role+' - '+c.notes; }).join('\n');
+  var products = (d.products||[]).map(function(p){ return '['+p.id+'] '+p.name+' ('+p.status+') - '+p.tagline+' - Clients: '+(p.clients||[]).join(', ')+' - Key facts: '+(p.keyFacts||[]).join(', '); }).join('\n');
+  var events = (d.events||[]).sort(function(a,b){ return new Date(b.date)-new Date(a.date); }).map(function(e){ return '['+e.date+'] ['+e.type.toUpperCase()+'] '+e.description+' (Source: '+e.source+')'; }).join('\n');
+  var actions = (d.actions||[]).filter(function(a){ return a.status==='pending'; }).map(function(a){ return '['+a.priority.toUpperCase()+'] '+a.task+' - Owner: '+a.owner; }).join('\n');
+  var competitors = (d.competitors||[]).map(function(c){ return '['+c.id+'] '+c.name+' ('+c.country+', threat: '+c.threat+') - '+c.description; }).join('\n');
+  return 'COMPANIES:\n'+companies+'\n\nPRODUCTS:\n'+products+'\n\nPEOPLE:\n'+people+'\n\nCONSORTIUMS:\n'+consortiums+'\n\nCOMPETITORS:\n'+competitors+'\n\nEVENTS (recent first):\n'+events+'\n\nPENDING ACTIONS:\n'+actions;
+}
+
+function buildWebsiteContext(w) {
+  if (!w) return 'Website audit data not available.';
+  var ctx = 'WEBSITE AUDIT (last checked: '+w.lastAudited+') URL: '+w.url+'\n\nGLOBAL GAPS ACROSS ENTIRE SITE:\n';
+  (w.globalGaps||[]).forEach(function(g){ ctx += '- '+g+'\n'; });
+  ctx += '\nPRIORITY UPDATES ALREADY IDENTIFIED:\n';
+  (w.priorityUpdates||[]).forEach(function(u){ ctx += '['+u.priority.toUpperCase()+'] '+u.page+': '+u.action+' (Rationale: '+u.rationale+')\n'; });
+  ctx += '\nPAGE BY PAGE MISSING CONTENT:\n';
+  (w.pages||[]).forEach(function(p){ ctx += '\n['+p.title+'] ('+p.url+')\nCurrently shows: '+(p.currentContent||[]).join('; ')+'\nMissing: '+(p.missing||[]).join('; ')+'\n'; });
+  return ctx;
 }
 
 function setThinking(text) { document.getElementById('thinking-text').textContent = text; }
@@ -297,67 +279,69 @@ function runBriefing() {
   btn.disabled = true; btn.textContent = 'Running...';
   thinkingBox.style.display = 'block';
   output.innerHTML = '';
-  setThinking('Loading knowledge graph...');
+  setThinking('Loading knowledge graph and website audit...');
 
-  loadKnowledgeData().then(function(data) {
+  Promise.all([
+    fetchJSON(DATA_URL, DATA_CACHE_KEY, 3600000),
+    fetchJSON(WEBSITE_URL, WEBSITE_CACHE_KEY, 3600000)
+  ]).then(function(results) {
+    var data = results[0];
+    var websiteData = results[1];
+
     if (!data) {
-      output.innerHTML = '<div style="color:#E24B4A;padding:20px">Failed to load data.json</div>';
+      output.innerHTML = '<div style="color:#E24B4A;padding:20px">Failed to load data.json — check proxy is running on port 3000.</div>';
       btn.disabled = false; btn.textContent = 'Run Vigil Briefing';
       thinkingBox.style.display = 'none';
       return;
     }
-    knowledgeData = data;
-    setThinking('Building briefing prompt...');
+
+    setThinking('Vigil is reasoning about E-Group situation, market and website...');
     var memCtx = buildMemoryContext();
     var dataCtx = buildDataContext(data);
-    var today = new Date().toLocaleDateString('en-GB', { weekday:'long', day:'numeric', month:'long', year:'numeric' });
+    var websiteCtx = buildWebsiteContext(websiteData);
+    var today = new Date().toLocaleDateString('en-GB', {weekday:'long',day:'numeric',month:'long',year:'numeric'});
 
-    var prompt = 'You are Vigil, Deputy Chief Marketing Officer for E-Group ICT Software Zrt. You report to Chris Hoar who leads E-Group marketing strategy.\n\n' +
-      'Chris job: build pipeline of new enterprise clients across EU/USA/China, manage ~20 existing clients, execute marketing strategy, oversee Vigil platform and E-Group website, work with Antal Kuthy (CEO) and Feri (COO).\n\n' +
-      'E-Group: Budapest-based AI infrastructure company, est.1993, 110+ staff, 50 AI engineers. Products: Rise AI platform (in pilot), Essence organisational intelligence, MyD Wallet (Hungarys national EUDI Wallet), KAU national digital identity, GraDPaLM medical AI. Key clients: ESA (photo verification), Hungarian Government (KAU + neonatal tracking). Consortium positions: Co-leads IPCEI-CIS WS3 + AI Cluster, DOME member, HeliX spearhead, eIDAS MyD implementer. Partner: Kellton (MoU signed).\n\n' +
-      'Today: ' + today + '\n\n' +
-      'KNOWLEDGE BASE:\n' + dataCtx + '\n\n' +
-      'THE E-GROUP WEBSITE (current content + gaps):\n' + websiteCtx + '\n\n' +
-      'MEMORY:\n' + memCtx + '\n\n' +
-      'Produce a structured morning briefing. Be direct, honest, specific. Re-evaluate everything fresh - do not assume prior signals are still valid.\n\n' +
-      'Respond ONLY with valid JSON:\n' +
-      '{"stateOfPlay":{"summary":"2-3 sentence honest macro assessment","confidence":"high|medium|low","confidenceReason":"why"},' +
-      '"acquisitions":[{"target":"name","goal":"what we want","status":"not_started|in_progress|responded|meeting_set|proposal_sent|stalled|won|lost","daysSinceActivity":0,"lastActivity":"what happened","vigil_assessment":"Vigils honest read","nextAction":"specific action who does what by when","urgency":"high|medium|low|drop","facts":[{"text":"fact","source":"where","confidence":"verified|assumed|stale"}],"wouldChangeIf":["what would change this"]}],' +
-      '"marketIntelligence":[{"title":"thing Chris needs to know","why_it_matters":"direct relevance to E-Group","source":"where","date":"when","action":"optional action"}],' +
-      '"projects":[{"name":"project name","status":"on_track|needs_attention|blocked|completed","oneLineSummary":"one sentence","blockingIssue":"null or blocker"}],' +
-      '"decisionsNeeded":[{"decision":"specific decision","context":"why","deadline":"by when"}],' +
-      '"vigilConcern":{"title":"overlooked thing","detail":"2-3 sentences","basis":"evidence"},"websiteGaps":[{"priority":"critical|high|medium","page":"page url","gap":"what is missing","suggestedCopy":"draft the actual copy","rationale":"why this matters"}],' +
-      '"memoryUpdate":"what to remember for next session"}';
+    var prompt = 'You are Vigil, Deputy Chief Marketing Officer for E-Group ICT Software Zrt. You report to Chris Hoar who leads E-Group marketing strategy.\n\n'
+      + 'Chris job: build pipeline of new enterprise clients across EU/USA/China, manage existing clients, execute marketing strategy including website, oversee Vigil platform. Works with Antal Kuthy (CEO) and Feri (COO).\n\n'
+      + 'E-Group: Budapest-based AI infrastructure company, est.1993, ~90 professionals + 50+ associates, R&D in Budapest/Pecs/Miskolc. Pioneer in Sovereign AI and Federated AI. Products span FinTech, HealthTech, GovTech, EnergyTech, SpaceTech. Antal Kuthy sits on EU Industry Steering Board of IPCEI-CIS and leads the AI Cluster.\n\n'
+      + 'Today: '+today+'\n\n'
+      + 'YOUR KNOWLEDGE BASE:\n'+dataCtx+'\n\n'
+      + 'THE E-GROUP WEBSITE (current content and gaps):\n'+websiteCtx+'\n\n'
+      + 'YOUR MEMORY:\n'+memCtx+'\n\n'
+      + 'Produce a structured morning briefing. Be direct, honest, specific. Re-evaluate everything fresh. Do not assume prior signals are still valid.\n\n'
+      + 'For website gaps: propose specific additions with draft copy. Remember - Vigil PROPOSES, Chris APPROVES. Never assume a website change has been made.\n\n'
+      + 'Respond ONLY with valid JSON:\n'
+      + '{"stateOfPlay":{"summary":"2-3 sentence honest macro assessment","confidence":"high|medium|low","confidenceReason":"why"},'
+      + '"acquisitions":[{"target":"name","goal":"what we want","status":"not_started|in_progress|responded|meeting_set|proposal_sent|stalled|won|lost","daysSinceActivity":0,"lastActivity":"what happened or No contact made yet","vigil_assessment":"Vigils honest read","nextAction":"specific action who does what by when","urgency":"high|medium|low|drop","facts":[{"text":"fact","source":"where","confidence":"verified|assumed|stale"}],"wouldChangeIf":["what would change this"]}],'
+      + '"marketIntelligence":[{"title":"thing Chris needs to know","why_it_matters":"direct relevance to E-Group","source":"where","date":"when","action":"optional action"}],'
+      + '"projects":[{"name":"project name","status":"on_track|needs_attention|blocked|completed","oneLineSummary":"one sentence","blockingIssue":"null or blocker"}],'
+      + '"decisionsNeeded":[{"decision":"specific decision","context":"why","deadline":"by when"}],'
+      + '"websiteGaps":[{"priority":"critical|high|medium","page":"which page filename","gap":"what specific content is missing","suggestedCopy":"draft the actual text that should appear - be specific and complete","rationale":"why this gap hurts E-Group marketing right now - be direct"}],'
+      + '"vigilConcern":{"title":"overlooked thing","detail":"2-3 sentences","basis":"evidence"},'
+      + '"memoryUpdate":"what to remember for next session"}';
 
-    setThinking('Vigil is reasoning about E-Group situation...');
-
-    fetch(PROXY + '/api/messages', {
+    fetch(PROXY+'/api/messages', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ model: 'claude-sonnet-4-20250514', max_tokens: 4000, messages: [{ role: 'user', content: prompt }] })
-    })
-    .then(function(r){ return r.json(); })
-    .then(function(resp) {
+      body: JSON.stringify({ model: 'claude-sonnet-4-20250514', max_tokens: 5000, messages: [{ role: 'user', content: prompt }] })
+    }).then(function(r){ return r.json(); }).then(function(resp) {
       if (resp.error) throw new Error(resp.error.message);
-      var text = (resp.content || []).map(function(b){ return b.text || ''; }).join('');
+      var text = (resp.content||[]).map(function(b){ return b.text||''; }).join('');
       trackCost('Vigil Morning Briefing', resp.usage.input_tokens, resp.usage.output_tokens);
       var parsed;
-      try { parsed = JSON.parse(text.replace(/```json|```/g, '').trim()); }
+      try { parsed = JSON.parse(text.replace(/```json|```/g,'').trim()); }
       catch(e) {
-        output.innerHTML = '<div style="background:#111;border:1px solid #1A1A1A;border-radius:8px;padding:20px;font-size:13px;color:#999;line-height:1.8;white-space:pre-wrap">' + text + '</div>';
-        thinkingBox.style.display = 'none'; btn.disabled = false; btn.textContent = 'Run Again';
-        return;
+        output.innerHTML = '<div style="background:#111;border:1px solid #1A1A1A;border-radius:8px;padding:20px;font-size:13px;color:#999;line-height:1.8;white-space:pre-wrap">'+text+'</div>';
+        thinkingBox.style.display='none'; btn.disabled=false; btn.textContent='Run Again'; return;
       }
       renderBriefing(parsed);
       saveSession(parsed);
-      thinkingBox.style.display = 'none'; btn.disabled = false; btn.textContent = 'Run Again';
+      thinkingBox.style.display='none'; btn.disabled=false; btn.textContent='Run Again';
       renderMemoryStats();
-    })
-    .catch(function(e) {
-      output.innerHTML = '<div style="color:#E24B4A;padding:20px">Error: ' + e.message + '<br><br>Make sure your proxy is running on port 3000.</div>';
-      thinkingBox.style.display = 'none'; btn.disabled = false; btn.textContent = 'Run Vigil Briefing';
+    }).catch(function(e) {
+      output.innerHTML = '<div style="color:#E24B4A;padding:20px">Error: '+e.message+'<br><br>Make sure your proxy is running on port 3000.</div>';
+      thinkingBox.style.display='none'; btn.disabled=false; btn.textContent='Run Vigil Briefing';
     });
-    }); // close wdPromise
   });
 }
 
@@ -369,98 +353,95 @@ function renderBriefing(data) {
 
   html += '<div style="background:#111;border:1px solid #1A1A1A;border-left:3px solid #C8A96E;border-radius:8px;padding:18px 22px;margin-bottom:20px">';
   html += '<div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#444;margin-bottom:8px">State of play</div>';
-  html += '<div style="font-size:15px;color:#CCC;line-height:1.75;margin-bottom:10px">' + (sop.summary || 'No data') + '</div>';
-  html += '<div style="font-size:11px;color:#555">Confidence: <span style="color:' + (cfc[sop.confidence] || '#888') + '">' + ((sop.confidence || '').toUpperCase()) + '</span> - ' + (sop.confidenceReason || '') + '</div>';
+  html += '<div style="font-size:15px;color:#CCC;line-height:1.75;margin-bottom:10px">'+(sop.summary||'No data')+'</div>';
+  html += '<div style="font-size:11px;color:#555">Confidence: <span style="color:'+(cfc[sop.confidence]||'#888')+'">'+((sop.confidence||'').toUpperCase())+'</span> - '+(sop.confidenceReason||'')+'</div>';
   html += '</div>';
 
   if (data.acquisitions && data.acquisitions.length) {
-    var sc = { not_started:'#555', in_progress:'#60A5FA', responded:'#C8A96E', meeting_set:'#4ADE80', proposal_sent:'#C084FC', stalled:'#F87171', won:'#4ADE80', lost:'#555' };
-    html += '<div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#444;margin:24px 0 10px;padding-bottom:6px;border-bottom:1px solid #1A1A1A">Active acquisitions</div>';
-    data.acquisitions.forEach(function(a, i) {
-      var isDrop = a.urgency === 'drop';
-      var bid = 'acq' + i;
-      html += '<div class="insight-card" id="' + bid + '">';
-      html += '<div class="insight-head" onclick="toggleInsight(\'' + bid + '\')">';
+    var sc = {not_started:'#555',in_progress:'#60A5FA',responded:'#C8A96E',meeting_set:'#4ADE80',proposal_sent:'#C084FC',stalled:'#F87171',won:'#4ADE80',lost:'#555'};
+    html += '<div class="section-lbl">Active acquisitions</div>';
+    data.acquisitions.forEach(function(a,i) {
+      var isDrop = a.urgency==='drop';
+      var bid = 'acq'+i;
+      html += '<div class="insight-card" id="'+bid+'">';
+      html += '<div class="insight-head" onclick="toggleInsight(\''+bid+'\')">';
       html += '<div style="flex:1">';
-      html += '<div style="font-size:15px;font-weight:600;color:' + (isDrop ? '#555' : '#EEE') + ';margin-bottom:3px">' + (a.target || '') + '</div>';
-      html += '<div style="font-size:12px;color:#555;margin-bottom:4px">' + (a.goal || '') + '</div>';
-      html += '<div style="font-size:10px;color:' + (sc[a.status] || '#555') + ';text-transform:uppercase;letter-spacing:1px">' + ((a.status || '').replace(/_/g,' ')) + (a.daysSinceActivity > 30 ? ' - ' + a.daysSinceActivity + 'd stale' : '') + '</div>';
-      html += '</div><span style="font-size:14px;color:#444" id="chev' + bid + '">v</span></div>';
-      html += '<div class="insight-body" id="body' + bid + '">';
+      html += '<div style="font-size:15px;font-weight:600;color:'+(isDrop?'#555':'#EEE')+';margin-bottom:3px">'+(a.target||'')+'</div>';
+      html += '<div style="font-size:12px;color:#555;margin-bottom:4px">'+(a.goal||'')+'</div>';
+      html += '<div style="font-size:10px;color:'+(sc[a.status]||'#555')+';text-transform:uppercase;letter-spacing:1px">';
+      html += (a.status||'').replace(/_/g,' ')+(a.daysSinceActivity>30&&a.status!=='won'&&a.status!=='lost'?' - '+a.daysSinceActivity+'d stale':'');
+      html += '</div></div><span style="font-size:14px;color:#444" id="chev'+bid+'">v</span></div>';
+      html += '<div class="insight-body" id="body'+bid+'">';
       html += '<div style="margin-top:14px;font-size:13px;color:#888;line-height:1.6">';
-      html += '<div style="margin-bottom:8px"><strong style="color:#AAA">Last activity:</strong> ' + (a.lastActivity || 'None recorded') + '</div>';
-      html += '<div style="margin-bottom:8px"><strong style="color:#AAA">Vigil read:</strong> ' + (a.vigil_assessment || '-') + '</div>';
-      if (a.nextAction) html += '<div style="margin-bottom:8px;padding:10px 14px;background:#0D1A0D;border-left:2px solid #4ADE80;border-radius:0 4px 4px 0"><strong style="color:#4ADE80">Next action:</strong> ' + a.nextAction + '</div>';
+      html += '<div style="margin-bottom:8px"><strong style="color:#AAA">Last activity:</strong> '+(a.lastActivity||'None recorded')+'</div>';
+      html += '<div style="margin-bottom:8px"><strong style="color:#AAA">Vigil read:</strong> '+(a.vigil_assessment||'-')+'</div>';
+      if (a.nextAction) html += '<div style="margin-bottom:8px;padding:10px 14px;background:#0D1A0D;border-left:2px solid #4ADE80;border-radius:0 4px 4px 0"><strong style="color:#4ADE80">Next action:</strong> '+a.nextAction+'</div>';
       html += '</div>';
-      if (a.facts && a.facts.length) {
+      if (a.facts&&a.facts.length) {
         html += '<div style="margin-top:12px"><div style="font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:#444;margin-bottom:6px">Evidence used</div>';
-        a.facts.forEach(function(f){
-          var fc = f.confidence === 'verified' ? '#4ADE80' : f.confidence === 'stale' ? '#F87171' : '#C8A96E';
-          var fi = f.confidence === 'verified' ? 'v' : f.confidence === 'stale' ? '!' : '~';
-          html += '<div style="display:flex;gap:8px;font-size:12px;color:#888;padding:4px 0;border-bottom:1px solid #0F0F0F;line-height:1.5"><span style="color:' + fc + ';flex-shrink:0">' + fi + '</span><span>' + f.text + ' <span style="color:#444;font-size:11px">- ' + f.source + '</span></span></div>';
-        });
+        a.facts.forEach(function(f){ var fc=f.confidence==='verified'?'#4ADE80':f.confidence==='stale'?'#F87171':'#C8A96E'; var fi=f.confidence==='verified'?'v':f.confidence==='stale'?'!':'~'; html += '<div style="display:flex;gap:8px;font-size:12px;color:#888;padding:4px 0;border-bottom:1px solid #0F0F0F;line-height:1.5"><span style="color:'+fc+';flex-shrink:0">'+fi+'</span><span>'+f.text+' <span style="color:#444;font-size:11px">- '+f.source+'</span></span></div>'; });
         html += '</div>';
       }
-      if (a.wouldChangeIf && a.wouldChangeIf.length) {
-        html += '<div style="margin-top:10px;padding:10px 14px;background:#0D0D0D;border-left:2px solid #333;border-radius:0 4px 4px 0;font-size:12px;color:#666;line-height:1.6"><strong style="color:#555">Would change if:</strong><br>' + a.wouldChangeIf.map(function(c){ return '> ' + c; }).join('<br>') + '</div>';
-      }
-      var tgt = (a.target || '').replace(/[^a-zA-Z0-9 ]/g, '');
-      html += '<div style="display:flex;gap:8px;margin-top:14px">';
-      html += '<button class="act-btn primary" onclick="openLogModal(\'' + bid + '\',\'' + tgt + '\')">Log outcome</button>';
-      html += '<button class="act-btn danger" onclick="openLogModal(\'' + bid + '\',\'' + tgt + '\',\'dismissed_wrong\')">Drop</button>';
-      html += '</div></div></div>';
+      if (a.wouldChangeIf&&a.wouldChangeIf.length) html += '<div style="margin-top:10px;padding:10px 14px;background:#0D0D0D;border-left:2px solid #333;border-radius:0 4px 4px 0;font-size:12px;color:#666;line-height:1.6"><strong style="color:#555">Would change if:</strong><br>'+a.wouldChangeIf.map(function(c){ return '> '+c; }).join('<br>')+'</div>';
+      var tgt = (a.target||'').replace(/[^a-zA-Z0-9 ]/g,'');
+      html += '<div style="display:flex;gap:8px;margin-top:14px"><button class="act-btn primary" onclick="openLogModal(\''+bid+'\',\''+tgt+'\')">Log outcome</button><button class="act-btn danger" onclick="openLogModal(\''+bid+'\',\''+tgt+'\',\'dismissed_wrong\')">Drop</button></div>';
+      html += '</div></div>';
     });
   }
 
-  if (data.marketIntelligence && data.marketIntelligence.length) {
-    html += '<div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#444;margin:28px 0 10px;padding-bottom:6px;border-bottom:1px solid #1A1A1A">Market intelligence</div>';
+  if (data.marketIntelligence&&data.marketIntelligence.length) {
+    html += '<div class="section-lbl">Market intelligence</div>';
     data.marketIntelligence.forEach(function(m) {
       html += '<div style="background:#111;border:1px solid #1A1A1A;border-radius:8px;padding:14px 18px;margin-bottom:8px">';
-      html += '<div style="font-size:14px;font-weight:600;color:#EEE;margin-bottom:5px">' + (m.title || '') + '</div>';
-      html += '<div style="font-size:13px;color:#888;line-height:1.6;margin-bottom:6px">' + (m.why_it_matters || '') + '</div>';
-      html += '<div style="font-size:11px;color:#444">' + (m.source || '') + (m.date ? ' - ' + m.date : '') + '</div>';
-      if (m.action) html += '<div style="margin-top:8px;font-size:12px;color:#C8A96E">Action: ' + m.action + '</div>';
+      html += '<div style="font-size:14px;font-weight:600;color:#EEE;margin-bottom:5px">'+(m.title||'')+'</div>';
+      html += '<div style="font-size:13px;color:#888;line-height:1.6;margin-bottom:6px">'+(m.why_it_matters||'')+'</div>';
+      html += '<div style="font-size:11px;color:#444">'+(m.source||'')+(m.date?' - '+m.date:'')+'</div>';
+      if (m.action) html += '<div style="margin-top:8px;font-size:12px;color:#C8A96E">Action: '+m.action+'</div>';
       html += '</div>';
     });
   }
 
-  if (data.projects && data.projects.length) {
-    var pc = { on_track:'#4ADE80', needs_attention:'#C8A96E', blocked:'#F87171', completed:'#555' };
-    html += '<div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#444;margin:28px 0 10px;padding-bottom:6px;border-bottom:1px solid #1A1A1A">Active projects</div>';
+  if (data.projects&&data.projects.length) {
+    var pc={on_track:'#4ADE80',needs_attention:'#C8A96E',blocked:'#F87171',completed:'#555'};
+    html += '<div class="section-lbl">Active projects</div>';
     html += '<div style="background:#111;border:1px solid #1A1A1A;border-radius:8px;overflow:hidden;margin-bottom:20px">';
-    data.projects.forEach(function(p, i) {
-      html += '<div style="display:flex;align-items:flex-start;gap:14px;padding:12px 18px;' + (i > 0 ? 'border-top:1px solid #141414' : '') + '">';
-      html += '<div style="width:8px;height:8px;border-radius:50%;background:' + (pc[p.status] || '#555') + ';flex-shrink:0;margin-top:5px"></div>';
-      html += '<div style="flex:1"><div style="font-size:13px;font-weight:600;color:#DDD;margin-bottom:2px">' + (p.name || '') + '</div>';
-      html += '<div style="font-size:12px;color:#888">' + (p.oneLineSummary || '') + '</div>';
-      if (p.blockingIssue) html += '<div style="font-size:12px;color:#F87171;margin-top:4px">Blocked: ' + p.blockingIssue + '</div>';
-      html += '</div><span style="font-size:10px;color:' + (pc[p.status] || '#555') + ';letter-spacing:1px;text-transform:uppercase;white-space:nowrap">' + ((p.status || '').replace(/_/g,' ')) + '</span></div>';
+    data.projects.forEach(function(p,i) {
+      html += '<div style="display:flex;align-items:flex-start;gap:14px;padding:12px 18px;'+(i>0?'border-top:1px solid #141414':'')+'"><div style="width:8px;height:8px;border-radius:50%;background:'+(pc[p.status]||'#555')+';flex-shrink:0;margin-top:5px"></div><div style="flex:1"><div style="font-size:13px;font-weight:600;color:#DDD;margin-bottom:2px">'+(p.name||'')+'</div><div style="font-size:12px;color:#888">'+(p.oneLineSummary||'')+'</div>'+(p.blockingIssue?'<div style="font-size:12px;color:#F87171;margin-top:4px">Blocked: '+p.blockingIssue+'</div>':'')+'</div><span style="font-size:10px;color:'+(pc[p.status]||'#555')+';letter-spacing:1px;text-transform:uppercase;white-space:nowrap">'+((p.status||'').replace(/_/g,' '))+'</span></div>';
     });
     html += '</div>';
   }
 
-  if (data.decisionsNeeded && data.decisionsNeeded.length) {
-    html += '<div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#444;margin:28px 0 10px;padding-bottom:6px;border-bottom:1px solid #1A1A1A">Decisions needed from you</div>';
+  if (data.decisionsNeeded&&data.decisionsNeeded.length) {
+    html += '<div class="section-lbl">Decisions needed from you</div>';
     html += '<div style="background:#111;border:1px solid #1A1A1A;border-radius:8px;overflow:hidden;margin-bottom:20px">';
-    data.decisionsNeeded.forEach(function(d, i) {
-      html += '<div style="padding:14px 18px;' + (i > 0 ? 'border-top:1px solid #141414' : '') + '">';
-      html += '<div style="display:flex;gap:12px"><div style="font-size:13px;font-weight:700;color:#C8A96E;flex-shrink:0">' + (i + 1) + '.</div>';
-      html += '<div><div style="font-size:14px;font-weight:600;color:#EEE;margin-bottom:3px">' + (d.decision || '') + '</div>';
-      html += '<div style="font-size:12px;color:#888;margin-bottom:4px">' + (d.context || '') + '</div>';
-      if (d.deadline) html += '<div style="font-size:11px;color:#C8A96E">By: ' + d.deadline + '</div>';
-      html += '</div></div></div>';
+    data.decisionsNeeded.forEach(function(d,i) {
+      html += '<div style="padding:14px 18px;'+(i>0?'border-top:1px solid #141414':'')+'"><div style="display:flex;gap:12px"><div style="font-size:13px;font-weight:700;color:#C8A96E;flex-shrink:0">'+(i+1)+'.</div><div><div style="font-size:14px;font-weight:600;color:#EEE;margin-bottom:3px">'+(d.decision||'')+'</div><div style="font-size:12px;color:#888;margin-bottom:4px">'+(d.context||'')+'</div>'+(d.deadline?'<div style="font-size:11px;color:#C8A96E">By: '+d.deadline+'</div>':'')+'</div></div></div>';
     });
     html += '</div>';
   }
 
-  if(data.websiteGaps&&data.websiteGaps.length){var wgpc={'critical':'#F87171','high':'#C8A96E','medium':'#60A5FA'};html+='<div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#444;margin:28px 0 10px;padding-bottom:6px;border-bottom:1px solid #1A1A1A">Website gaps Vigil found</div><div style="background:#111;border:1px solid #1A1A1A;border-radius:8px;overflow:hidden;margin-bottom:20px">';data.websiteGaps.forEach(function(g,i){html+='<div style="padding:14px 18px;'+(i>0?'border-top:1px solid #141414':'')+'"><div style="display:flex;gap:10px;align-items:flex-start"><span style="font-size:10px;padding:2px 8px;border-radius:3px;background:#1A1A1A;color:'+(wgpc[g.priority]||'#555')+';letter-spacing:1px;text-transform:uppercase;white-space:nowrap;flex-shrink:0">'+(g.priority||'')+'</span><div style="flex:1"><div style="font-size:13px;font-weight:600;color:#EEE;margin-bottom:3px">'+(g.gap||'')+'</div><div style="font-size:11px;color:#555;margin-bottom:5px">Page: '+(g.page||'')+'</div>'+(g.suggestedCopy?'<div style="background:#0D0D0D;border-left:2px solid #C8A96E;padding:8px 12px;border-radius:0 4px 4px 0;font-size:12px;color:#888;line-height:1.6;margin-bottom:5px;font-style:italic">'+g.suggestedCopy+'</div>':'')+'<div style="font-size:11px;color:#444">'+(g.rationale||'')+'</div></div></div></div>';});html+='</div>';}
+  if (data.websiteGaps&&data.websiteGaps.length) {
+    var wgpc = {critical:'#F87171',high:'#C8A96E',medium:'#60A5FA'};
+    html += '<div class="section-lbl">Website gaps Vigil is proposing - approve before any changes are made</div>';
+    html += '<div style="background:#111;border:1px solid #1A1A1A;border-radius:8px;overflow:hidden;margin-bottom:20px">';
+    data.websiteGaps.forEach(function(g,i) {
+      html += '<div style="padding:16px 18px;'+(i>0?'border-top:1px solid #141414':'')+'"><div style="display:flex;gap:10px;align-items:flex-start">';
+      html += '<span style="font-size:10px;padding:2px 8px;border-radius:3px;background:#1A1A1A;color:'+(wgpc[g.priority]||'#555')+';letter-spacing:1px;text-transform:uppercase;white-space:nowrap;flex-shrink:0;margin-top:2px">'+(g.priority||'')+'</span>';
+      html += '<div style="flex:1"><div style="font-size:13px;font-weight:600;color:#EEE;margin-bottom:3px">'+(g.gap||'')+'</div>';
+      html += '<div style="font-size:11px;color:#555;margin-bottom:6px">Page: '+(g.page||'')+'</div>';
+      if (g.suggestedCopy) html += '<div style="background:#0D0D0D;border-left:2px solid #C8A96E;padding:10px 14px;border-radius:0 4px 4px 0;font-size:12px;color:#888;line-height:1.7;margin-bottom:6px;font-style:italic">'+(g.suggestedCopy||'')+'</div>';
+      html += '<div style="font-size:11px;color:#444">'+(g.rationale||'')+'</div></div></div></div>';
+    });
+    html += '</div>';
+  }
+
   if (data.vigilConcern) {
     var vc = data.vigilConcern;
     html += '<div style="background:#0D0D0D;border:1px solid #2A2A2A;border-left:3px solid #F87171;border-radius:8px;padding:16px 20px;margin-bottom:24px">';
     html += '<div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#F87171;margin-bottom:8px">Vigil concern</div>';
-    html += '<div style="font-size:15px;font-weight:600;color:#EEE;margin-bottom:8px">' + (vc.title || '') + '</div>';
-    html += '<div style="font-size:13px;color:#888;line-height:1.7;margin-bottom:8px">' + (vc.detail || '') + '</div>';
-    html += '<div style="font-size:11px;color:#555;font-style:italic">Based on: ' + (vc.basis || '') + '</div>';
+    html += '<div style="font-size:15px;font-weight:600;color:#EEE;margin-bottom:8px">'+(vc.title||'')+'</div>';
+    html += '<div style="font-size:13px;color:#888;line-height:1.7;margin-bottom:8px">'+(vc.detail||'')+'</div>';
+    html += '<div style="font-size:11px;color:#555;font-style:italic">Based on: '+(vc.basis||'')+'</div>';
     html += '</div>';
   }
 
@@ -468,23 +449,23 @@ function renderBriefing(data) {
 }
 
 function toggleInsight(id) {
-  var body = document.getElementById('body' + id);
-  var chev = document.getElementById('chev' + id);
+  var body = document.getElementById('body'+id);
+  var chev = document.getElementById('chev'+id);
   if (body) body.classList.toggle('open');
-  if (chev) chev.textContent = body && body.classList.contains('open') ? '^' : 'v';
+  if (chev) chev.textContent = body&&body.classList.contains('open')?'^':'v';
 }
 
 function saveSession(data) {
-  var session = { date: new Date().toISOString(), summary: data.stateOfPlay ? data.stateOfPlay.summary : '', insightCount: (data.acquisitions || []).length };
-  memory.sessions.push(session);
-  if (data.memoryUpdate) { memory.patterns.push(data.memoryUpdate); if (memory.patterns.length > 50) memory.patterns = memory.patterns.slice(-50); }
-  if (memory.sessions.length > 100) memory.sessions = memory.sessions.slice(-100);
+  var s = { date: new Date().toISOString(), summary: data.stateOfPlay?data.stateOfPlay.summary:'', insightCount: (data.acquisitions||[]).length };
+  memory.sessions.push(s);
+  if (data.memoryUpdate) { memory.patterns.push(data.memoryUpdate); if (memory.patterns.length>50) memory.patterns=memory.patterns.slice(-50); }
+  if (memory.sessions.length>100) memory.sessions=memory.sessions.slice(-100);
   saveMemory();
 }
 
 function openLogModal(id, title, presetOutcome) {
   logTarget = { id: id, title: title };
-  document.getElementById('log-title').textContent = 'Log: ' + title.substring(0, 50);
+  document.getElementById('log-title').textContent = 'Log: '+title.substring(0,50);
   document.getElementById('log-notes').value = '';
   if (presetOutcome) document.getElementById('log-outcome').value = presetOutcome;
   document.getElementById('log-modal').classList.add('open');
@@ -494,13 +475,9 @@ function closeLogModal() { document.getElementById('log-modal').classList.remove
 
 function saveLog() {
   if (!logTarget) return;
-  var outcome = document.getElementById('log-outcome').value;
-  var notes = document.getElementById('log-notes').value.trim();
-  memory.feedback.push({ date: new Date().toISOString(), insightId: logTarget.id, insightTitle: logTarget.title, outcome: outcome, notes: notes });
-  if (memory.feedback.length > 200) memory.feedback = memory.feedback.slice(-200);
+  memory.feedback.push({ date: new Date().toISOString(), insightId: logTarget.id, insightTitle: logTarget.title, outcome: document.getElementById('log-outcome').value, notes: document.getElementById('log-notes').value.trim() });
+  if (memory.feedback.length>200) memory.feedback=memory.feedback.slice(-200);
   saveMemory(); closeLogModal(); renderMemoryStats();
-  var card = document.getElementById(logTarget ? logTarget.id : '');
-  if (card) { card.style.opacity = '0.5'; }
   alert('Logged to Vigil memory.');
 }
 
@@ -508,58 +485,44 @@ function runResearchAgent() {
   var btn = document.getElementById('research-btn');
   var thinkingBox = document.getElementById('thinking-box');
   var output = document.getElementById('research-output');
-  btn.disabled = true; btn.textContent = 'Thinking...';
-  thinkingBox.style.display = 'block';
-  output.innerHTML = '';
+  btn.disabled=true; btn.textContent='Thinking...';
+  thinkingBox.style.display='block';
+  output.innerHTML='';
   setThinking('Vigil is auditing its own knowledge gaps...');
 
-  loadKnowledgeData().then(function(data) {
-    if (!data) {
-      output.innerHTML = '<div style="color:#E24B4A;padding:20px">Failed to load data.json</div>';
-      btn.disabled = false; btn.textContent = 'Research Agent';
-      thinkingBox.style.display = 'none'; return;
-    }
+  Promise.all([
+    fetchJSON(DATA_URL, DATA_CACHE_KEY, 3600000),
+    fetchJSON(WEBSITE_URL, WEBSITE_CACHE_KEY, 3600000)
+  ]).then(function(results) {
+    var data = results[0];
+    var websiteData = results[1];
+    if (!data) { output.innerHTML='<div style="color:#E24B4A;padding:20px">Failed to load data.json</div>'; btn.disabled=false; btn.textContent='Research Agent'; thinkingBox.style.display='none'; return; }
+
     var memCtx = buildMemoryContext();
     var dataCtx = buildDataContext(data);
-    var today = new Date().toLocaleDateString('en-GB', { weekday:'long', day:'numeric', month:'long', year:'numeric' });
+    var websiteCtx = buildWebsiteContext(websiteData);
+    var today = new Date().toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
 
     setThinking('Vigil is generating its research plan...');
 
-    var prompt = 'You are Vigil, Deputy CMO for E-Group ICT Software Zrt. Do a self-audit of your knowledge gaps and generate a proactive research plan.\n\n' +
-      'Today: ' + today + '\n\n' +
-      'YOUR CURRENT KNOWLEDGE:\n' + dataCtx + '\n\n' +
-      'YOUR MEMORY:\n' + memCtx + '\n\n' +
-      'Audit everything you know. Be brutally honest about what is missing, stale, or assumed. Think about:\n' +
-      '1. DATA GAPS - critical missing information that would change your reasoning\n' +
-      '2. STALE DATA - information old enough to be inaccurate\n' +
-      '3. MARKET INTEL - news about target companies, EU policy, competitor moves you should know about\n' +
-      '4. ACQUISITION ACTIONS - research that would unblock the next step in each relationship\n' +
-      '5. PROACTIVE IDEAS - things nobody asked you to do but that would genuinely help E-Group marketing\n\n' +
-      'For each task, be specific about what you will search for and what you expect to find.\n\n' +
-      'Respond ONLY with valid JSON:\n' +
-      '{"selfAssessment":"2-3 sentences honest assessment of Vigils current knowledge quality, what is solid, what is weak, what is dangerous to assume",' +
-      '"tasks":[{"id":"unique_id","category":"data_gap|stale_data|market_intel|acquisition_action|proactive_idea","priority":"critical|high|medium|low","title":"specific task title","rationale":"why this matters right now","searchQuery":"exact search query to use","expectedFindings":"what Vigil expects to find","wouldUnblock":"what this research enables","estimatedCost":"$0.02"}],' +
-      '"vigilNote":"one thing Vigil wants Chris to know not covered by the tasks"}';
+    var prompt = 'You are Vigil, Deputy CMO for E-Group ICT Software Zrt. Do a self-audit of your knowledge gaps and generate a proactive research plan.\n\nToday: '+today+'\n\nYOUR CURRENT KNOWLEDGE:\n'+dataCtx+'\n\nTHE E-GROUP WEBSITE:\n'+websiteCtx+'\n\nYOUR MEMORY:\n'+memCtx+'\n\nAudit everything. Be brutally honest about gaps. Think about:\n1. DATA GAPS - critical missing information\n2. STALE DATA - information old enough to be inaccurate\n3. MARKET INTEL - news about target companies, EU policy, competitor moves\n4. ACQUISITION ACTIONS - research that would unblock the next step\n5. WEBSITE GAPS - content that should exist but does not\n6. PROACTIVE IDEAS - things nobody asked but that would genuinely help\n\nRespond ONLY with valid JSON:\n{"selfAssessment":"2-3 sentences honest assessment of knowledge quality","tasks":[{"id":"unique_id","category":"data_gap|stale_data|market_intel|acquisition_action|website_gap|proactive_idea","priority":"critical|high|medium|low","title":"specific task title","rationale":"why this matters right now","searchQuery":"exact search query to use","expectedFindings":"what Vigil expects to find","wouldUnblock":"what this research enables","estimatedCost":"$0.02"}],"vigilNote":"one thing Vigil wants Chris to know not covered by the tasks"}';
 
-    fetch(PROXY + '/api/messages', {
+    fetch(PROXY+'/api/messages', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ model: 'claude-sonnet-4-20250514', max_tokens: 4000, messages: [{ role: 'user', content: prompt }] })
-    })
-    .then(function(r){ return r.json(); })
-    .then(function(resp) {
+    }).then(function(r){ return r.json(); }).then(function(resp) {
       if (resp.error) throw new Error(resp.error.message);
-      var text = (resp.content || []).map(function(b){ return b.text || ''; }).join('');
+      var text = (resp.content||[]).map(function(b){ return b.text||''; }).join('');
       trackCost('Vigil Research Plan', resp.usage.input_tokens, resp.usage.output_tokens);
       var plan;
-      try { plan = JSON.parse(text.replace(/```json|```/g, '').trim()); }
-      catch(e) { output.innerHTML = '<div style="color:#E24B4A;padding:20px">Parse error: ' + text.substring(0,300) + '</div>'; thinkingBox.style.display='none'; btn.disabled=false; btn.textContent='Research Agent'; return; }
+      try { plan = JSON.parse(text.replace(/```json|```/g,'').trim()); }
+      catch(e) { output.innerHTML='<div style="color:#E24B4A;padding:20px">Parse error: '+text.substring(0,300)+'</div>'; thinkingBox.style.display='none'; btn.disabled=false; btn.textContent='Research Agent'; return; }
       renderResearchPlan(plan);
-      thinkingBox.style.display = 'none'; btn.disabled = false; btn.textContent = 'Research Agent';
-    })
-    .catch(function(e) {
-      output.innerHTML = '<div style="color:#E24B4A;padding:20px">Error: ' + e.message + '</div>';
-      thinkingBox.style.display = 'none'; btn.disabled = false; btn.textContent = 'Research Agent';
+      thinkingBox.style.display='none'; btn.disabled=false; btn.textContent='Research Agent';
+    }).catch(function(e) {
+      output.innerHTML='<div style="color:#E24B4A;padding:20px">Error: '+e.message+'</div>';
+      thinkingBox.style.display='none'; btn.disabled=false; btn.textContent='Research Agent';
     });
   });
 }
@@ -568,158 +531,112 @@ function renderResearchPlan(plan) {
   researchPlan = plan;
   approvedTasks = [];
   var output = document.getElementById('research-output');
-  var catMap = {
-    data_gap: { bg:'#2E0D0D', col:'#F87171', label:'Data gap' },
-    stale_data: { bg:'#2E1A0D', col:'#FB923C', label:'Stale data' },
-    market_intel: { bg:'#0D1A2E', col:'#60A5FA', label:'Market intel' },
-    acquisition_action: { bg:'#0D2E1E', col:'#4ADE80', label:'Acquisition action' },
-    proactive_idea: { bg:'#1E1A2E', col:'#C084FC', label:'Proactive idea' }
-  };
-  var priCol = { critical:'#F87171', high:'#C8A96E', medium:'#60A5FA', low:'#555' };
+  var catMap = {data_gap:{bg:'#2E0D0D',col:'#F87171',label:'Data gap'},stale_data:{bg:'#2E1A0D',col:'#FB923C',label:'Stale data'},market_intel:{bg:'#0D1A2E',col:'#60A5FA',label:'Market intel'},acquisition_action:{bg:'#0D2E1E',col:'#4ADE80',label:'Acquisition action'},website_gap:{bg:'#1A0D2E',col:'#C084FC',label:'Website gap'},proactive_idea:{bg:'#1E1A2E',col:'#C084FC',label:'Proactive idea'}};
+  var priCol = {critical:'#F87171',high:'#C8A96E',medium:'#60A5FA',low:'#555'};
 
   var html = '<div style="background:#111;border:1px solid #1A1A1A;border-left:3px solid #C8A96E;border-radius:8px;padding:18px 22px;margin-bottom:20px;margin-top:24px">';
   html += '<div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#444;margin-bottom:8px">Vigil self-assessment</div>';
-  html += '<div style="font-size:14px;color:#CCC;line-height:1.75">' + (plan.selfAssessment || '') + '</div>';
-  html += '</div>';
+  html += '<div style="font-size:14px;color:#CCC;line-height:1.75">'+(plan.selfAssessment||'')+'</div></div>';
+  html += '<div class="section-lbl">Proposed tasks - approve what you want Vigil to run</div>';
 
-  html += '<div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#444;margin:0 0 12px;padding-bottom:6px;border-bottom:1px solid #1A1A1A">Proposed tasks - approve what you want Vigil to run</div>';
+  var tasks = plan.tasks||[];
+  var sorted = tasks.filter(function(t){return t.priority==='critical';}).concat(tasks.filter(function(t){return t.priority==='high';})).concat(tasks.filter(function(t){return t.priority!=='critical'&&t.priority!=='high';}));
 
-  var tasks = plan.tasks || [];
-  var critical = tasks.filter(function(t){ return t.priority === 'critical'; });
-  var high = tasks.filter(function(t){ return t.priority === 'high'; });
-  var rest = tasks.filter(function(t){ return t.priority !== 'critical' && t.priority !== 'high'; });
-  var sorted = critical.concat(high).concat(rest);
-
-  sorted.forEach(function(task, i) {
-    var cc = catMap[task.category] || catMap.proactive_idea;
-    var tid = 'rtask' + i;
-    html += '<div class="insight-card" id="' + tid + '" style="margin-bottom:10px">';
-    html += '<div style="padding:16px 20px">';
-    html += '<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;flex-wrap:wrap">';
-    html += '<span style="font-size:10px;padding:2px 8px;border-radius:3px;background:' + cc.bg + ';color:' + cc.col + ';letter-spacing:1px;text-transform:uppercase">' + cc.label + '</span>';
-    html += '<span style="font-size:10px;padding:2px 8px;border-radius:3px;background:#1A1A1A;color:' + (priCol[task.priority] || '#555') + ';letter-spacing:1px;text-transform:uppercase">' + (task.priority || '') + '</span>';
-    html += '<span style="font-size:11px;color:#444;margin-left:auto">' + (task.estimatedCost || '') + '</span>';
-    html += '</div>';
-    html += '<div style="font-size:15px;font-weight:600;color:#EEE;margin-bottom:5px">' + (task.title || '') + '</div>';
-    html += '<div style="font-size:13px;color:#888;line-height:1.6;margin-bottom:8px">' + (task.rationale || '') + '</div>';
-    html += '<div style="background:#0D0D0D;border-radius:4px;padding:8px 12px;margin-bottom:8px"><div style="font-size:10px;color:#444;letter-spacing:1px;text-transform:uppercase;margin-bottom:3px">Search query</div><div style="font-size:12px;color:#C8A96E;font-family:monospace">' + (task.searchQuery || '') + '</div></div>';
-    html += '<div style="font-size:12px;color:#666;margin-bottom:4px"><strong style="color:#555">Expects:</strong> ' + (task.expectedFindings || '') + '</div>';
-    html += '<div style="font-size:12px;color:#666;margin-bottom:12px"><strong style="color:#555">Unlocks:</strong> ' + (task.wouldUnblock || '') + '</div>';
-    html += '<div style="display:flex;gap:8px">';
-    html += '<button class="act-btn" id="approve' + i + '" onclick="toggleApprove(' + i + ')">Approve</button>';
-    html += '<button class="act-btn" onclick="skipTask(\'' + tid + '\')">Skip</button>';
-    html += '</div></div></div>';
+  sorted.forEach(function(task,i) {
+    var cc = catMap[task.category]||catMap.proactive_idea;
+    var tid = 'rtask'+i;
+    html += '<div class="insight-card" id="'+tid+'" style="margin-bottom:10px"><div style="padding:16px 20px">';
+    html += '<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;flex-wrap:wrap"><span style="font-size:10px;padding:2px 8px;border-radius:3px;background:'+cc.bg+';color:'+cc.col+';letter-spacing:1px;text-transform:uppercase">'+cc.label+'</span><span style="font-size:10px;padding:2px 8px;border-radius:3px;background:#1A1A1A;color:'+(priCol[task.priority]||'#555')+';letter-spacing:1px;text-transform:uppercase">'+(task.priority||'')+'</span><span style="font-size:11px;color:#444;margin-left:auto">'+(task.estimatedCost||'')+'</span></div>';
+    html += '<div style="font-size:15px;font-weight:600;color:#EEE;margin-bottom:5px">'+(task.title||'')+'</div>';
+    html += '<div style="font-size:13px;color:#888;line-height:1.6;margin-bottom:8px">'+(task.rationale||'')+'</div>';
+    html += '<div style="background:#0D0D0D;border-radius:4px;padding:8px 12px;margin-bottom:8px"><div style="font-size:10px;color:#444;letter-spacing:1px;text-transform:uppercase;margin-bottom:3px">Search query</div><div style="font-size:12px;color:#C8A96E;font-family:monospace">'+(task.searchQuery||'')+'</div></div>';
+    html += '<div style="font-size:12px;color:#666;margin-bottom:4px"><strong style="color:#555">Expects:</strong> '+(task.expectedFindings||'')+'</div>';
+    html += '<div style="font-size:12px;color:#666;margin-bottom:12px"><strong style="color:#555">Unlocks:</strong> '+(task.wouldUnblock||'')+'</div>';
+    html += '<div style="display:flex;gap:8px"><button class="act-btn" id="approve'+i+'" onclick="toggleApprove('+i+')">Approve</button><button class="act-btn" onclick="skipTask(\''+tid+'\')">Skip</button></div>';
+    html += '</div></div>';
   });
 
   if (plan.vigilNote) {
-    html += '<div style="background:#0D0D0D;border:1px solid #2A2A2A;border-left:3px solid #C084FC;border-radius:8px;padding:14px 18px;margin-bottom:16px">';
-    html += '<div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#C084FC;margin-bottom:6px">Vigil also wants you to know</div>';
-    html += '<div style="font-size:13px;color:#888;line-height:1.6">' + plan.vigilNote + '</div>';
-    html += '</div>';
+    html += '<div style="background:#0D0D0D;border:1px solid #2A2A2A;border-left:3px solid #C084FC;border-radius:8px;padding:14px 18px;margin-bottom:16px"><div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#C084FC;margin-bottom:6px">Vigil also wants you to know</div><div style="font-size:13px;color:#888;line-height:1.6">'+plan.vigilNote+'</div></div>';
   }
 
-  html += '<div style="display:flex;gap:10px;margin-top:8px">';
-  html += '<button class="run-btn" id="execute-btn" onclick="executeApproved()" style="display:none">Run approved tasks</button>';
-  html += '<button class="act-btn" onclick="approveAll()">Approve all</button>';
-  html += '</div>';
-
+  html += '<div style="display:flex;gap:10px;margin-top:8px"><button class="run-btn" id="execute-btn" onclick="executeApproved()" style="display:none">Run approved tasks</button><button class="act-btn" onclick="approveAll()">Approve all</button></div>';
   output.innerHTML = html;
 }
 
 function toggleApprove(idx) {
-  var task = (researchPlan.tasks || [])[idx];
+  var task = (researchPlan.tasks||[])[idx];
   if (!task) return;
-  var tid = task.id || 't' + idx;
-  var btn = document.getElementById('approve' + idx);
-  var card = document.getElementById('rtask' + idx);
-  var already = approvedTasks.indexOf(tid) >= 0;
+  var tid = task.id||'t'+idx;
+  var btn = document.getElementById('approve'+idx);
+  var card = document.getElementById('rtask'+idx);
+  var already = approvedTasks.indexOf(tid)>=0;
   if (already) {
-    approvedTasks.splice(approvedTasks.indexOf(tid), 1);
-    btn.textContent = 'Approve'; btn.classList.remove('approved');
-    if (card) card.style.borderLeft = '';
+    approvedTasks.splice(approvedTasks.indexOf(tid),1);
+    btn.textContent='Approve'; btn.classList.remove('approved');
+    if (card) card.style.borderLeft='';
   } else {
     approvedTasks.push(tid);
-    btn.textContent = 'Approved'; btn.classList.add('approved');
-    if (card) card.style.borderLeft = '3px solid #4ADE80';
+    btn.textContent='Approved'; btn.classList.add('approved');
+    if (card) card.style.borderLeft='3px solid #4ADE80';
   }
-  document.getElementById('execute-btn').style.display = approvedTasks.length > 0 ? 'inline-block' : 'none';
+  document.getElementById('execute-btn').style.display = approvedTasks.length>0?'inline-block':'none';
 }
 
-function skipTask(tid) {
-  var card = document.getElementById(tid);
-  if (card) { card.style.opacity = '0.3'; card.style.pointerEvents = 'none'; }
-}
+function skipTask(tid) { var c=document.getElementById(tid); if(c){c.style.opacity='0.3';c.style.pointerEvents='none';} }
 
-function approveAll() {
-  (researchPlan.tasks || []).forEach(function(task, i) {
-    var tid = task.id || 't' + i;
-    if (approvedTasks.indexOf(tid) < 0) toggleApprove(i);
-  });
-}
+function approveAll() { (researchPlan.tasks||[]).forEach(function(t,i){ var tid=t.id||'t'+i; if(approvedTasks.indexOf(tid)<0) toggleApprove(i); }); }
 
 function executeApproved() {
   var execBtn = document.getElementById('execute-btn');
-  execBtn.disabled = true; execBtn.textContent = 'Running...';
+  execBtn.disabled=true; execBtn.textContent='Running...';
   var output = document.getElementById('research-output');
   var resultsDiv = document.createElement('div');
-  resultsDiv.style.marginTop = '24px';
-  resultsDiv.innerHTML = '<div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#444;margin-bottom:12px;padding-bottom:6px;border-bottom:1px solid #1A1A1A">Research results</div>';
+  resultsDiv.style.marginTop='24px';
+  resultsDiv.innerHTML='<div class="section-lbl">Research results</div>';
   output.appendChild(resultsDiv);
 
-  var tasksToRun = (researchPlan.tasks || []).filter(function(t, i) {
-    return approvedTasks.indexOf(t.id || 't' + i) >= 0;
-  });
+  var tasksToRun = (researchPlan.tasks||[]).filter(function(t,i){ return approvedTasks.indexOf(t.id||'t'+i)>=0; });
 
   function runNext(idx) {
-    if (idx >= tasksToRun.length) {
-      resultsDiv.innerHTML += '<div style="margin-top:16px;padding:14px 18px;background:#0D0D0D;border:1px solid #2A2A2A;border-radius:8px;font-size:13px;color:#888">Research complete. Review findings above. Vigil has saved key findings to memory for the next briefing.</div>';
-      execBtn.disabled = false; execBtn.textContent = 'Run approved tasks';
-      return;
+    if (idx>=tasksToRun.length) {
+      resultsDiv.innerHTML+='<div style="margin-top:16px;padding:14px 18px;background:#0D0D0D;border:1px solid #2A2A2A;border-radius:8px;font-size:13px;color:#888">Research complete. Review findings above. Vigil has saved key findings to memory for the next briefing.</div>';
+      execBtn.disabled=false; execBtn.textContent='Run approved tasks'; return;
     }
     var task = tasksToRun[idx];
     var taskDiv = document.createElement('div');
-    taskDiv.style.cssText = 'background:#111;border:1px solid #1A1A1A;border-radius:8px;padding:14px 18px;margin-bottom:10px';
-    taskDiv.innerHTML = '<div style="font-size:13px;font-weight:600;color:#EEE;margin-bottom:6px">' + task.title + '</div><div style="font-size:12px;color:#555">Researching...</div>';
+    taskDiv.style.cssText='background:#111;border:1px solid #1A1A1A;border-radius:8px;padding:14px 18px;margin-bottom:10px';
+    taskDiv.innerHTML='<div style="font-size:13px;font-weight:600;color:#EEE;margin-bottom:6px">'+task.title+'</div><div style="font-size:12px;color:#555">Researching...</div>';
     resultsDiv.appendChild(taskDiv);
 
-    var searchPrompt = 'Search for: ' + task.searchQuery + '\n\nContext: ' + task.rationale + '\n\nReturn JSON only: {"findings":"2-3 paragraph summary","keyFacts":["fact1","fact2","fact3"],"dataJsonUpdate":"what should be added to knowledge base","urgency":"high|medium|low","confidence":"high|medium|low"}';
-
-    fetch(PROXY + '/api/messages', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ model: 'claude-sonnet-4-20250514', max_tokens: 1500, messages: [{ role: 'user', content: searchPrompt }] })
-    })
-    .then(function(r){ return r.json(); })
-    .then(function(resp) {
-      trackCost('Research: ' + task.title, resp.usage ? resp.usage.input_tokens : 0, resp.usage ? resp.usage.output_tokens : 0);
-      var text = (resp.content || []).map(function(b){ return b.text || ''; }).join('');
+    fetch(PROXY+'/api/messages', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1500,messages:[{role:'user',content:'You are Vigil, E-Group marketing intelligence. Research this query and return findings as JSON only.\n\nSearch for: '+task.searchQuery+'\n\nContext: '+task.rationale+'\n\nReturn JSON only (no markdown): {"findings":"2-3 paragraph summary of what you found","keyFacts":["fact1","fact2","fact3"],"dataJsonUpdate":"one sentence describing what should be added to data.json","urgency":"high|medium|low","confidence":"high|medium|low"}'}]})
+    }).then(function(r){return r.json();}).then(function(resp){
+      if (resp.error&&resp.error.type==='overloaded_error') {
+        taskDiv.innerHTML='<div style="font-size:13px;color:#EEE;margin-bottom:4px">'+task.title+'</div><div style="font-size:12px;color:#C8A96E">Rate limited - retrying in 30 seconds...</div>';
+        setTimeout(function(){ runNext(idx); }, 30000); return;
+      }
+      trackCost('Research: '+task.title, resp.usage?resp.usage.input_tokens:0, resp.usage?resp.usage.output_tokens:0);
+      var text = (resp.content||[]).map(function(b){return b.text||'';}).join('');
       var result;
-      try { result = JSON.parse(text.replace(/```json|```/g,'').trim()); }
-      catch(e) { result = { findings: text, keyFacts: [], dataJsonUpdate: '', urgency: 'medium', confidence: 'low' }; }
-
-      var rhtml = '<div style="font-size:13px;font-weight:600;color:#EEE;margin-bottom:8px">' + task.title + '</div>';
-      rhtml += '<div style="font-size:13px;color:#888;line-height:1.6;margin-bottom:8px">' + (result.findings || '') + '</div>';
-      if (result.keyFacts && result.keyFacts.length) {
-        rhtml += '<div style="margin-bottom:8px">' + result.keyFacts.map(function(f){ return '<div style="font-size:12px;color:#AAA;padding:3px 0;border-bottom:1px solid #141414">- ' + f + '</div>'; }).join('') + '</div>';
-      }
-      if (result.dataJsonUpdate) {
-        rhtml += '<div style="background:#0D1A0D;border-left:2px solid #4ADE80;padding:8px 12px;border-radius:0 4px 4px 0;font-size:12px;color:#4ADE80;margin-top:8px">Update needed: ' + result.dataJsonUpdate + '</div>';
-      }
+      try { result=JSON.parse(text.replace(/```json|```/g,'').trim()); } catch(e) { result={findings:text,keyFacts:[],dataJsonUpdate:'',urgency:'medium',confidence:'low'}; }
+      var rhtml = '<div style="font-size:13px;font-weight:600;color:#EEE;margin-bottom:8px">'+task.title+'</div>';
+      rhtml += '<div style="font-size:13px;color:#888;line-height:1.6;margin-bottom:8px">'+(result.findings||'')+'</div>';
+      if (result.keyFacts&&result.keyFacts.length) rhtml += '<div style="margin-bottom:8px">'+result.keyFacts.map(function(f){return '<div style="font-size:12px;color:#AAA;padding:3px 0;border-bottom:1px solid #141414">- '+f+'</div>';}).join('')+'</div>';
+      if (result.dataJsonUpdate) rhtml += '<div style="background:#0D1A0D;border-left:2px solid #4ADE80;padding:8px 12px;border-radius:0 4px 4px 0;font-size:12px;color:#4ADE80;margin-top:8px">Update needed: '+result.dataJsonUpdate+'</div>';
       taskDiv.innerHTML = rhtml;
-
-      memory.patterns = memory.patterns || [];
-      memory.patterns.push('[Research ' + new Date().toLocaleDateString() + '] ' + task.title + ': ' + (result.dataJsonUpdate || (result.findings || '').substring(0, 100)));
-      if (memory.patterns.length > 50) memory.patterns = memory.patterns.slice(-50);
+      memory.patterns = memory.patterns||[];
+      memory.patterns.push('[Research '+new Date().toLocaleDateString()+'] '+task.title+': '+(result.dataJsonUpdate||(result.findings||'').substring(0,100)));
+      if (memory.patterns.length>50) memory.patterns=memory.patterns.slice(-50);
       saveMemory();
-
-      setTimeout(function(){ runNext(idx + 1); }, 2000);
-    })
-    .catch(function(e) {
-      taskDiv.innerHTML = '<div style="font-size:13px;color:#EEE;margin-bottom:4px">' + task.title + '</div><div style="font-size:12px;color:#E24B4A">Error: ' + e.message + '</div>';
-      setTimeout(function(){ runNext(idx + 1); }, 1000);
+      setTimeout(function(){ runNext(idx+1); }, 8000);
+    }).catch(function(e){
+      taskDiv.innerHTML='<div style="font-size:13px;color:#EEE;margin-bottom:4px">'+task.title+'</div><div style="font-size:12px;color:#E24B4A">Error: '+e.message+'</div>';
+      setTimeout(function(){ runNext(idx+1); }, 8000);
     });
   }
-
   runNext(0);
 }
 
