@@ -133,12 +133,20 @@ const FALLBACK = {
     { id:'c18', name:'Telefónica España', type:'target', sector:'Telecom / Cloud', country:'Spain', connection:'Fellow direct IPCEI-CIS participant', opportunity:'Spanish and LatAm enterprise AI market entry', notes:'One of Europe\'s largest telecoms. Long-term strategic target.' },
   ],
   people: [
-    { id:'p1', name:'Antal Kuthy', initials:'AK', company:'E-Group', title:'Founder & CEO', warmth:'internal', notes:'Primary strategic voice. Hosted IPCEI-CIS WS3 workshop at Budapest HQ. Met László Blénessy (4iG) at Ministry reception Dec 2023.', actions:'Build personal thought leadership programme. Target 8–12 speaking slots 2026.' },
-    { id:'p2', name:'Feri', initials:'F', company:'E-Group', title:'COO', warmth:'internal', notes:'Marketing plan owner. Driving farming/hunting strategy and pilot programmes.', actions:'Provide full client list with billing context and decision-maker names.' },
-    { id:'p3', name:'Mark Mariosi', initials:'MM', company:'E-Group', title:'AI Research', warmth:'internal', notes:'AI research lead. Key voice for HealthTech credibility.', actions:'Author medical AI thought leadership piece Q2 2026.' },
-    { id:'p4', name:'Dr. Péter Antal', initials:'PA', company:'E-Group', title:'Chief Scientist / Medical AI', warmth:'internal', notes:'Led GraDPaLM to back-to-back international first place.', actions:'Publish thought leadership on medical AI. Secure conference speaking slots.' },
-    { id:'p5', name:'László Blénessy', initials:'LB', company:'4iG Nyrt.', title:'Deputy Group CEO', warmth:'hot', notes:'Met Antal Kuthy at Hungarian Ministry reception December 2023 when both companies received IPCEI-CIS certification together. Very warm personal connection at CEO level.', actions:'Priority: Antal to reach out directly for strategic conversation about collaboration.' },
-    { id:'p6', name:'Gergely Fábián', initials:'GF', company:'Hungarian Government', title:'Secretary of State — Industrial Policy & Technology', warmth:'warm', notes:'Received both Antal Kuthy and László Blénessy at the Ministry when IPCEI-CIS was approved. Government champion for E-Group.', actions:'Maintain relationship. Invite to E-Group events. Potential advocate for expanding government contracts.' },
+    { id:'p-lb', name:'László Blénessy', initials:'LB', warmth:'hot', company:'4iG Nyrt.', title:'Deputy Group CEO', country:'Hungary', connection:'Met Antal Kuthy in person at Hungarian Ministry reception, December 2023 — both received IPCEI-CIS certification together. Named, documented, personal CEO-level relationship.', whyTarget:'4iG is Hungary\'s largest ICT group. Shared government clients. Could co-sell into the same institutions.', action:'PRIORITY — Antal to reach out directly. Reference the Ministry meeting. Propose exploring collaboration on shared government AI opportunities.', linkedIn:'Search: László Blénessy 4iG' },
+    { id:'p-gf', name:'Gergely Fábián', initials:'GF', warmth:'hot', company:'Hungarian Government', title:'Secretary of State — Industrial Policy & Technology', country:'Hungary', connection:'Personally received both Antal Kuthy and László Blénessy at the Ministry when IPCEI-CIS was approved. Government champion for E-Group.', whyTarget:'Direct line into Hungarian government digital policy and procurement.', action:'Maintain warm relationship. Invite to E-Group events. Brief on Rise platform as a national AI capability story.', linkedIn:'Search: Gergely Fábián Secretary of State Hungary' },
+    { id:'p-gfr', name:'Giovanni Frattini', initials:'GF2', warmth:'hot', company:'Engineering Ingegneria Informatica', title:'Chief Technology Officer', country:'Italy', connection:'CTO of DOME consortium coordinator + IPCEI-CIS WS3 participant + Budapest workshop attendee. Triple connection. Quoted as DOME project leader on launch.', whyTarget:'Engineering has ~12,000 staff. A relationship opens the door to joint EU bids and potential reseller arrangement across Italy and EU.', action:'Antal or E-Group CTO to initiate contact via shared DOME + IPCEI-CIS connection. Reference Budapest WS3 workshop specifically.', linkedIn:'Search: Giovanni Frattini Engineering Ingegneria Informatica CTO' },
+    { id:'p-mk', name:'Dr. Maciej Krzyżanowski', initials:'MK', warmth:'warm', company:'CloudFerro', title:'CEO & Co-Founder', country:'Poland', connection:'CloudFerro attended E-Group\'s IPCEI-CIS WS3 Budapest workshop. Both IPCEI-CIS participants and DOME co-members. CloudFerro also has ESA contracts — same client as E-Group.', whyTarget:'Shared ESA relationship is a natural conversation opener. Joint sovereign AI + space data intelligence opportunity.', action:'Reference Budapest WS3 workshop + shared DOME membership. Propose joint sovereign AI offering for ESA and European space sector.', linkedIn:'Search: Maciej Krzyżanowski CloudFerro' },
+    { id:'p-sd', name:'Stanisław Dałek', initials:'SD', warmth:'warm', company:'CloudFerro', title:'CTO', country:'Poland', connection:'CTO of IPCEI-CIS and DOME co-member CloudFerro.', whyTarget:'Technical decision-maker for CloudFerro infrastructure. Key for any integration discussion.', action:'Follow up after CEO outreach. Technical conversation about knowledge graph + federated cloud architecture.', linkedIn:'Search: Stanisław Dałek CloudFerro CTO' },
+    { id:'p-tr', name:'Tatiana Rizzante', initials:'TR', warmth:'warm', company:'Reply Group', title:'CEO', country:'Italy', connection:'CEO of Reply — IPCEI-CIS direct participant and WS3 Budapest workshop attendee. Reply is actively showcasing IPCEI-CIS demos at EU events in 2026.', whyTarget:'Reply has ~15,000 staff across FinTech, HealthTech, GovTech and Industrial. A partnership gives E-Group access to Reply\'s entire EU enterprise client base.', action:'Antal to initiate via IPCEI-CIS co-leadership. Peer CEO conversation about joint EU AI infrastructure opportunities.', linkedIn:'Search: Tatiana Rizzante Reply Group CEO' },
+    { id:'p-fr', name:'Filippo Rizzante', initials:'FR', warmth:'warm', company:'Reply Group', title:'CTO', country:'Italy', connection:'CTO and co-founder of Reply. Technical leader of IPCEI-CIS participant.', whyTarget:'Technical counterpart for joint architecture and Rise platform integration into Reply\'s delivery capability.', action:'E-Group CTO to connect via IPCEI-CIS WS3 channel.', linkedIn:'Search: Filippo Rizzante Reply CTO' },
+    { id:'p-sk', name:'Silvio Kutić', initials:'SK', warmth:'warm', company:'Infobip', title:'CEO & Co-Founder', country:'Croatia', connection:'CEO of Infobip — attended E-Group\'s IPCEI-CIS WS3 Budapest workshop. Croatian unicorn, $1bn+ revenue, 3,700 staff globally.', whyTarget:'Infobip is both a potential infrastructure partner (Rise delivery routing via CPaaS) AND a potential Rise/Essence client. Dual opportunity.', action:'CEO-to-CEO outreach from Antal. Reference shared CEE roots and Budapest workshop. Propose both a partnership and a pilot.', linkedIn:'Search: Silvio Kutić Infobip CEO' },
+    { id:'p-ij', name:'Izabel Jelenić', initials:'IJ', warmth:'warm', company:'Infobip', title:'CTO & Co-Founder', country:'Croatia', connection:'CTO and co-founder of Infobip. WS3 Budapest workshop connection via company.', whyTarget:'Technical decision-maker at Infobip. Key for Rise delivery routing integration into Infobip CPaaS infrastructure.', action:'E-Group CTO to connect following CEO outreach.', linkedIn:'Search: Izabel Jelenić Infobip CTO' },
+    { id:'p-dt', name:'T-Systems AI Leadership', initials:'DT', warmth:'research', company:'Deutsche Telekom / T-Systems', title:'Head of AI / CDO — to identify', country:'Germany', connection:'Deutsche Telekom is a fellow IPCEI-CIS direct participant. T-Systems serves large EU enterprise.', whyTarget:'T-Systems has one of the largest EU enterprise client bases. A reseller or delivery partnership would be transformative for E-Group.', action:'Research: Find CTO/CDO/Head of AI at T-Systems. Look for their IPCEI-CIS representative as warmest entry point.', linkedIn:'Search: T-Systems CTO OR Head of AI 2025' },
+    { id:'p-sap', name:'SAP AI Leadership', initials:'SA', warmth:'research', company:'SAP', title:'Head of AI Infrastructure — to identify', country:'Germany', connection:'SAP is a fellow IPCEI-CIS direct participant.', whyTarget:'E-Group knowledge graph could become an AI intelligence layer inside SAP\'s enterprise ecosystem. Enormous addressable market.', action:'Research: Find SAP\'s IPCEI-CIS representative and Head of AI or CDO.', linkedIn:'Search: SAP IPCEI-CIS OR SAP AI infrastructure lead 2025' },
+    { id:'p-eai', name:'Expert.AI Leadership', initials:'EA', warmth:'research', company:'Expert.AI', title:'CEO / CTO — to identify', country:'Italy', connection:'DOME consortium co-member with E-Group. Focus on enterprise NLP and knowledge graphs — almost identical positioning.', whyTarget:'Potential partner or acquirer. Very high strategic alignment. Could co-develop or white-label E-Group\'s sovereign AI infrastructure.', action:'Research: Find CEO and CTO. Knowledge graph positioning makes this a natural peer conversation.', linkedIn:'Search: Expert.AI CEO OR CTO 2025' },
+    { id:'p-ed', name:'European Dynamics Leadership', initials:'ED', warmth:'research', company:'European Dynamics', title:'CEO / BD Lead — to identify', country:'Greece / EU', connection:'DOME consortium co-member with E-Group. Major EU public sector IT supplier.', whyTarget:'European Dynamics works directly with EU institutions. A partnership gives E-Group a channel into GovTech procurement across EU member states.', action:'Research: Find CEO or Head of Business Development. Public sector AI is the hook.', linkedIn:'Search: European Dynamics CEO OR Business Development 2025' },
+    { id:'p-hcp', name:'HeliX / HCP Leadership', initials:'HC', warmth:'research', company:'Health Cluster Portugal', title:'Project Director — to identify', country:'Portugal', connection:'HeliX consortium coordinator. E-Group spearheads HeliX and hosted 2nd General Assembly in Budapest March 2026.', whyTarget:'HCP coordinates HeliX and connects E-Group to Portuguese and Iberian health market plus EIT Health InnoStars network of 45+ health SMEs.', action:'Research: Find HeliX project director at HCP. Contact is already warm — E-Group hosted them in Budapest.', linkedIn:'Search: Health Cluster Portugal HeliX project director' },
   ],
   consortiums: [
     { id:'con1', name:'IPCEI-CIS / 8ra', fullName:'Important Project of Common European Interest — Cloud Infrastructure & Services', role:'Direct participant — FedEU.ai. Co-lead Workstream 3. Leads the AI Cluster.', status:'Active', membersResearched:true, members:'19 direct participants: Deutsche Telekom, Telefónica España, Atos, Orange, SAP, Reply, TIM, Oktawave, Atende Industries, OpenNebula Systems, Arsys, Leaseweb, 4iG, E-Group, Tiscali, CloudFerro, Siemens, Fincantieri, Engineering Ingegneria Informatica. WS3 Budapest workshop attendees (hottest leads): CloudFerro, ENEA, Engineering, Infobip, Reply, Tiscali, TIM Group, Gdańsk University of Technology.', notes:'E-Group co-leads WS3 and leads the AI Cluster — a position of authority within the consortium. Most powerful warm network available.' },
@@ -204,22 +212,41 @@ function renderCompanies() {
 function renderPeople() {
   const q = (document.getElementById('pe-search')||{}).value||'';
   const list = document.getElementById('people-list');
-  const ext = state.people.filter(p=>p.warmth!=='internal');
-  const int = state.people.filter(p=>p.warmth==='internal');
-  let items = [...ext,...int].filter(p=>!q||p.name.toLowerCase().includes(q.toLowerCase())||(p.company||'').toLowerCase().includes(q.toLowerCase()));
-  const bg={hot:'#2E0D0D',warm:'#2E1E0D',internal:'#0D1E2E'};
-  const co={hot:'#F87171',warm:'#C8A96E',internal:'#60A5FA'};
-  list.innerHTML=items.map(p=>`<div class="card${p.warmth==='hot'?' hot':''}">
-    <div style="display:flex;gap:14px;align-items:flex-start">
-      <div class="avatar" style="background:${bg[p.warmth]||'#1A1A1A'};color:${co[p.warmth]||'#888'}">${p.initials}</div>
-      <div style="flex:1">
-        <div class="card-name">${p.name}</div>
-        <div class="card-sub">${p.title} · ${p.company}</div>
-        ${p.notes?`<div style="font-size:13px;color:#888;margin-top:8px;line-height:1.6">${p.notes}</div>`:''}
-        ${p.actions?`<div style="font-size:12px;color:#555;margin-top:8px;padding-top:8px;border-top:1px solid #1A1A1A"><strong style="color:#777">Next action:</strong> ${p.actions}</div>`:''}
+  const items = state.people.filter(p =>
+    !q || p.name.toLowerCase().includes(q.toLowerCase()) ||
+    (p.company||'').toLowerCase().includes(q.toLowerCase()) ||
+    (p.title||'').toLowerCase().includes(q.toLowerCase())
+  );
+  if (!items.length) { list.innerHTML = '<div class="empty">No people found.</div>'; return; }
+  const hot = items.filter(p => p.warmth === 'hot');
+  const warm = items.filter(p => p.warmth === 'warm');
+  const research = items.filter(p => p.warmth === 'research');
+  const bg = { hot:'#FAECE7', warm:'#FAEEDA', research:'#E6F1FB' };
+  const co = { hot:'#712B13', warm:'#633806', research:'#0C447C' };
+  const pill = { hot:'Known contact', warm:'Named target', research:'To research' };
+  const card = p => `
+    <div class="card${p.warmth === 'hot' ? ' hot' : ''}">
+      <div style="display:flex;gap:14px;align-items:flex-start">
+        <div class="avatar" style="background:${bg[p.warmth]||'#F1EFE8'};color:${co[p.warmth]||'#5F5E5A'}">${p.initials}</div>
+        <div style="flex:1">
+          <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:8px">
+            <div><div class="card-name">${p.name}</div><div class="card-sub">${p.title} · ${p.company} · ${p.country||''}</div></div>
+            <span style="font-size:10px;padding:3px 8px;border-radius:4px;white-space:nowrap;background:${bg[p.warmth]};color:${co[p.warmth]};letter-spacing:0.5px">${pill[p.warmth]||''}</span>
+          </div>
+          <div style="margin-top:10px;font-size:13px;color:#888;line-height:1.6;border-top:1px solid #1A1A1A;padding-top:10px">
+            <div style="margin-bottom:6px"><strong style="color:#AAA">Connection:</strong> ${p.connection||''}</div>
+            <div style="margin-bottom:6px"><strong style="color:#AAA">Why target:</strong> ${p.whyTarget||''}</div>
+            <div style="margin-bottom:6px;padding:8px 10px;background:#0D0D0D;border-radius:4px"><strong style="color:#AAA">Next action:</strong> ${p.action||''}</div>
+            <div style="font-size:11px;color:#444">${p.linkedIn||''}</div>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>`).join('');
+    </div>`;
+  let html = '';
+  if (hot.length) { html += '<div class="section-label">Known contacts — personal connections</div>'; html += hot.map(card).join(''); }
+  if (warm.length) { html += '<div class="section-label">Named targets — identified, ready to approach</div>'; html += warm.map(card).join(''); }
+  if (research.length) { html += '<div class="section-label">To research — company confirmed warm, decision-maker not yet named</div>'; html += research.map(card).join(''); }
+  list.innerHTML = html;
 }
 
 function renderConsortiums() {
