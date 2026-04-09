@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>E-Group — Intelligence</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;background:#080808;color:#EEE;min-height:100vh}
+.topbar{background:#0A0A0A;border-bottom:1px solid #1A1A1A;padding:0 32px;display:flex;align-items:center;justify-content:space-between;height:52px;position:sticky;top:0;z-index:100}
+.topbar-left{display:flex;align-items:center;gap:24px}
+.logo{font-size:18px;font-weight:900;color:#C8A96E;letter-spacing:-0.5px}
+.nav-links{display:flex;gap:4px}
+.nav-link{padding:6px 12px;font-size:12px;letter-spacing:1px;text-transform:uppercase;color:#555;text-decoration:none;border-radius:4px;transition:color 0.2s}
+.nav-link:hover{color:#999}
+.nav-link.active{color:#C8A96E}
+.cost-bar{display:flex;align-items:center;gap:20px;cursor:pointer}
+.cost-item{display:flex;flex-direction:column;align-items:flex-end}
+.cost-val{font-size:13px;font-weight:600;color:#C8A96E}
+.cost-lbl{font-size:9px;color:#444;letter-spacing:1px;text-transform:uppercase;margin-top:1px}
+.cost-panel{display:none;position:absolute;top:52px;right:0;background:#0D0D0D;border:1px solid #1A1A1A;border-radius:8px;width:340px;padding:16px;z-index:200}
+.cost-panel.open{display:block}
+.cost-panel-title{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#555;margin-bottom:12px}
+.cost-log-item{display:flex;justify-content:space-between;font-size:12px;color:#888;padding:6px 0;border-bottom:1px solid #141414}
+.cost-log-item:last-child{border-bottom:none}
+.cost-log-amount{color:#C8A96E;font-weight:600}
+.container{max-width:1100px;margin:0 auto;padding:28px 32px}
+.page-title{font-size:22px;font-weight:700;color:#EEE;margin-bottom:4px}
+.page-sub{font-size:13px;color:#555;margin-bottom:28px}
+.grid{display:grid;grid-template-columns:300px 1fr;gap:20px;align-items:start}
+.company-list{background:#0D0D0D;border:1px solid #1A1A1A;border-radius:8px;overflow:hidden}
+.company-list-head{padding:12px 16px;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#555;border-bottom:1px solid #141414}
+.company-item{padding:12px 16px;border-bottom:1px solid #0F0F0F;cursor:pointer;transition:background 0.15s}
+.company-item:hover{background:#111}
+.company-item.active{background:#141414;border-left:2px solid #C8A96E}
+.company-item-name{font-size:14px;color:#DDD;font-weight:500}
+.company-item-sub{font-size:11px;color:#555;margin-top:2px}
+.company-item-badge{font-size:10px;padding:2px 6px;border-radius:3px;margin-top:4px;display:inline-block;letter-spacing:0.5px}
+.badge-warm{background:#2E1E0D;color:#C8A96E}
+.badge-client{background:#0D2E1E;color:#4ADE80}
+.badge-target{background:#1A1A2E;color:#818CF8}
+.badge-partner{background:#1E1A2E;color:#C084FC}
+.intel-panel{background:#0D0D0D;border:1px solid #1A1A1A;border-radius:8px;padding:24px;min-height:500px}
+.intel-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;height:400px;color:#333;text-align:center}
+.intel-empty-icon{font-size:48px;margin-bottom:16px;opacity:0.3}
+.intel-empty-text{font-size:14px;line-height:1.6}
+.intel-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid #141414}
+.intel-company-name{font-size:18px;font-weight:700;color:#EEE}
+.intel-company-sub{font-size:12px;color:#555;margin-top:3px}
+.intel-actions{display:flex;gap:8px;flex-wrap:wrap}
+.btn{padding:8px 14px;font-size:12px;letter-spacing:0.5px;border:1px solid #2A2A2A;border-radius:5px;background:transparent;cursor:pointer;color:#888;transition:all 0.15s}
+.btn:hover{border-color:#C8A96E;color:#C8A96E}
+.btn.primary{background:#C8A96E;border-color:#C8A96E;color:#000;font-weight:600}
+.btn.primary:hover{background:#D4B87E}
+.btn:disabled{opacity:0.4;cursor:not-allowed}
+.section-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#444;margin:20px 0 10px;padding-bottom:6px;border-bottom:1px solid #141414}
+.intel-card{background:#111;border:1px solid #1A1A1A;border-radius:6px;padding:14px 16px;margin-bottom:10px}
+.intel-card-title{font-size:13px;font-weight:600;color:#C8A96E;margin-bottom:6px}
+.intel-card-body{font-size:13px;color:#999;line-height:1.7}
+.opp-card{background:#111;border:1px solid #1A1A1A;border-left:3px solid #C8A96E;border-radius:6px;padding:14px 16px;margin-bottom:10px}
+.opp-card-title{font-size:13px;font-weight:600;color:#EEE;margin-bottom:4px}
+.opp-card-body{font-size:13px;color:#888;line-height:1.6;margin-bottom:10px}
+.opp-actions{display:flex;gap:8px}
+.loading{display:flex;align-items:center;gap:10px;color:#555;font-size:13px;padding:20px 0}
+.spinner{width:16px;height:16px;border:2px solid #222;border-top-color:#C8A96E;border-radius:50%;animation:spin 0.8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.tabs{display:flex;gap:4px;margin-bottom:20px}
+.tab{padding:6px 14px;font-size:11px;letter-spacing:1px;text-transform:uppercase;border:none;background:transparent;cursor:pointer;color:#555;border-bottom:2px solid transparent}
+.tab.active{color:#C8A96E;border-bottom-color:#C8A96E}
+.draft-box{background:#111;border:1px solid #2A2A2A;border-radius:6px;padding:16px;font-size:13px;color:#CCC;line-height:1.8;white-space:pre-wrap;margin-top:10px}
+.copy-btn{margin-top:8px;padding:6px 12px;font-size:11px;border:1px solid #2A2A2A;border-radius:4px;background:transparent;cursor:pointer;color:#666}
+.copy-btn:hover{color:#C8A96E;border-color:#C8A96E}
+@media(max-width:768px){.grid{grid-template-columns:1fr}.container{padding:16px}}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-left">
+    <div class="logo">E</div>
+    <nav class="nav-links">
+      <a href="network.html" class="nav-link">Network</a>
+      <a href="intelligence.html" class="nav-link active">Intelligence</a>
+      <a href="pipeline.html" class="nav-link">Pipeline</a>
+    </nav>
+  </div>
+  <div style="position:relative">
+    <div class="cost-bar" onclick="toggleCostPanel()">
+      <div class="cost-item">
+        <div class="cost-val" id="cost-session">$0.000</div>
+        <div class="cost-lbl">Session</div>
+      </div>
+      <div class="cost-item">
+        <div class="cost-val" id="cost-month">$0.000</div>
+        <div class="cost-lbl">This month</div>
+      </div>
+      <div class="cost-item">
+        <div class="cost-val" id="cost-total">$0.000</div>
+        <div class="cost-lbl">All time</div>
+      </div>
+    </div>
+    <div class="cost-panel" id="cost-panel">
+      <div class="cost-panel-title">API Cost Log</div>
+      <div id="cost-log-list"></div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="page-title">Market Intelligence</div>
+  <div class="page-sub">Select a company to generate live intelligence, surface opportunities, and draft outreach.</div>
+
+  <div class="grid">
+    <div>
+      <div class="company-list">
+        <div class="company-list-head">Target companies</div>
+        <div id="company-list-items"></div>
+      </div>
+    </div>
+
+    <div class="intel-panel" id="intel-panel">
+      <div class="intel-empty" id="intel-empty">
+        <div class="intel-empty-icon">◎</div>
+        <div class="intel-empty-text">Select a company from the list<br>to generate intelligence</div>
+      </div>
+      <div id="intel-content" style="display:none">
+        <div class="intel-header">
+          <div>
+            <div class="intel-company-name" id="intel-name"></div>
+            <div class="intel-company-sub" id="intel-sub"></div>
+          </div>
+          <div class="intel-actions">
+            <button class="btn primary" id="btn-intel" onclick="runIntelligence()">Run intelligence</button>
+            <button class="btn" id="btn-outreach" onclick="runOutreach()" disabled>Draft outreach</button>
+            <button class="btn" id="btn-pilot" onclick="runPilot()" disabled>Pilot proposal</button>
+          </div>
+        </div>
+
+        <div class="tabs">
+          <button class="tab active" onclick="showTab('overview',this)">Overview</button>
+          <button class="tab" onclick="showTab('opportunities',this)">Opportunities</button>
+          <button class="tab" onclick="showTab('outreach',this)">Outreach</button>
+        </div>
+
+        <div id="tab-overview">
+          <div id="overview-content">
+            <div class="intel-card">
+              <div class="intel-card-title">Connection to E-Group</div>
+              <div class="intel-card-body" id="connection-text"></div>
+            </div>
+            <div class="intel-card">
+              <div class="intel-card-title">Known opportunity</div>
+              <div class="intel-card-body" id="opportunity-text"></div>
+            </div>
+            <div class="intel-card">
+              <div class="intel-card-title">Notes</div>
+              <div class="intel-card-body" id="notes-text"></div>
+            </div>
+            <div id="live-intel-section" style="display:none">
+              <div class="section-label">Live intelligence — generated by AI</div>
+              <div id="live-intel-content"></div>
+            </div>
+          </div>
+        </div>
+
+        <div id="tab-opportunities" style="display:none">
+          <div id="opps-content">
+            <div class="intel-empty" style="height:200px">
+              <div class="intel-empty-text" style="font-size:13px">Run intelligence first to surface opportunities</div>
+            </div>
+          </div>
+        </div>
+
+        <div id="tab-outreach" style="display:none">
+          <div id="outreach-content">
+            <div class="intel-empty" style="height:200px">
+              <div class="intel-empty-text" style="font-size:13px">Run intelligence then click "Draft outreach" to generate a personalised message</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const PROXY = 'http://localhost:3000';
+const COST_KEY = 'egroup-cost-v1';
+const NET_KEY = 'egroup-network-v1';
+const INTEL_KEY = 'egroup-intel-v1';
+const INPUT_PRICE = 3.00 / 1_000_000;
+const OUTPUT_PRICE = 15.00 / 1_000_000;
+
+let costs = { session: 0, month: 0, total: 0, log: [] };
+let companies = [];
+let selectedCompany = null;
+let intelCache = {};
+let sessionStart = new Date().toISOString().slice(0, 7);
+
+async function init() {
+  await loadCosts();
+  await loadCompanies();
+  await loadIntelCache();
+  renderCompanyList();
+  renderCosts();
+}
+
+async function loadCosts() {
+  try {
+    const r = await window.storage.get(COST_KEY);
+    if (r && r.value) {
+      const saved = JSON.parse(r.value);
+      costs.total = saved.total || 0;
+      costs.log = saved.log || [];
+      const thisMonth = new Date().toISOString().slice(0, 7);
+      costs.month = costs.log
+        .filter(l => l.ts && l.ts.startsWith(thisMonth))
+        .reduce((s, l) => s + l.cost, 0);
+    }
+  } catch(e) {}
+}
+
+async function loadCompanies() {
+  try {
+    const r = await window.storage.get(NET_KEY);
+    if (r && r.value) {
+      const data = JSON.parse(r.value);
+      companies = data.companies || [];
+    }
+  } catch(e) {}
+  if (!companies.length) {
+    companies = [
+      {id:'c3',name:'4iG Nyrt.',type:'warm',sector:'ICT / Telecoms / Space',country:'Hungary',connection:'Fellow Hungarian IPCEI-CIS participant. László Blénessy met Antal Kuthy at Ministry reception Dec 2023.',opportunity:'Joint AI infrastructure, data sovereignty, co-selling into shared government clients',notes:'Hungary\'s largest ICT group. Very warm — CEO-level personal connection.'},
+      {id:'c4',name:'CloudFerro',type:'warm',sector:'Cloud / Space Data',country:'Poland',connection:'WS3 workshop partner — attended E-Group Budapest HQ IPCEI-CIS/8ra workshop',opportunity:'Federated cloud + AI data processing collaboration.',notes:'Attended E-Group\'s own Budapest workshop. Also has ESA connection.'},
+      {id:'c5',name:'ENEA',type:'warm',sector:'Research / Energy / HealthTech',country:'Italy',connection:'WS3 workshop partner — attended E-Group Budapest HQ workshop',opportunity:'Joint research initiatives, HealthTech AI, energy sector AI',notes:'Italian national research agency. HealthTech and energy — both E-Group target sectors.'},
+      {id:'c6',name:'Engineering Ingegneria Informatica',type:'warm',sector:'Enterprise IT / AI',country:'Italy',connection:'WS3 workshop partner — attended E-Group Budapest HQ workshop',opportunity:'Enterprise AI, digital transformation, potential reseller relationship',notes:'~12,000 staff. One of Italy\'s largest IT companies.'},
+      {id:'c7',name:'Infobip',type:'warm',sector:'Communications / CPaaS',country:'Croatia (global)',connection:'WS3 workshop partner — attended E-Group Budapest HQ workshop',opportunity:'Communication infrastructure for Rise delivery routing. Also potential AI client.',notes:'Global CPaaS platform. CEE-headquartered. Could partner on Rise delivery AND be a client.'},
+      {id:'c8',name:'Reply',type:'warm',sector:'Enterprise IT / Consulting',country:'Italy (EU-wide)',connection:'WS3 workshop attendee AND direct IPCEI-CIS participant.',opportunity:'Joint delivery of AI infrastructure projects across EU enterprise clients',notes:'~15,000 staff. Double connection — both direct IPCEI participant and Budapest workshop attendee.'},
+      {id:'c12',name:'Deutsche Telekom',type:'target',sector:'Telecom / Cloud / Enterprise',country:'Germany',connection:'Fellow direct IPCEI-CIS participant',opportunity:'Enterprise AI for one of Europe\'s largest enterprise client bases.',notes:'T-Systems subsidiary serves large enterprise — potential reseller/integrator path.'},
+      {id:'c13',name:'SAP',type:'target',sector:'Enterprise Software / Cloud',country:'Germany',connection:'Fellow direct IPCEI-CIS participant',opportunity:'Integration of Rise/Essence with SAP enterprise systems.',notes:'E-Group knowledge graph could plug into SAP ecosystem.'},
+      {id:'c1',name:'European Space Agency (ESA)',type:'client',sector:'SpaceTech / GovTech',country:'International',connection:'Active project — photo verification system',opportunity:'Expand into AI verification, data intelligence, sovereign data services',notes:'Flagship reference. ESA photo verification is the headline story.'},
+      {id:'c2',name:'Hungarian Government',type:'client',sector:'GovTech / HealthTech',country:'Hungary',connection:'KAÜ national digital identity + neonatal baby tracking project',opportunity:'Expand AI services into additional ministries and public health bodies',notes:'Two crown jewel projects. Neonatal tracking is a powerful human story.'},
+    ];
+  }
+}
+
+async function loadIntelCache() {
+  try {
+    const r = await window.storage.get(INTEL_KEY);
+    if (r && r.value) intelCache = JSON.parse(r.value);
+  } catch(e) {}
+}
+
+async function saveIntelCache() {
+  try { await window.storage.set(INTEL_KEY, JSON.stringify(intelCache)); } catch(e) {}
+}
+
+async function saveCosts() {
+  try { await window.storage.set(COST_KEY, JSON.stringify({ total: costs.total, log: costs.log.slice(-200) })); } catch(e) {}
+}
+
+function trackCost(label, inputTokens, outputTokens) {
+  const cost = (inputTokens * INPUT_PRICE) + (outputTokens * OUTPUT_PRICE);
+  costs.session += cost;
+  costs.month += cost;
+  costs.total += cost;
+  costs.log.push({ ts: new Date().toISOString(), label, inputTokens, outputTokens, cost });
+  saveCosts();
+  renderCosts();
+  return cost;
+}
+
+function fmt(n) { return '$' + n.toFixed(4); }
+
+function renderCosts() {
+  document.getElementById('cost-session').textContent = fmt(costs.session);
+  document.getElementById('cost-month').textContent = fmt(costs.month);
+  document.getElementById('cost-total').textContent = fmt(costs.total);
+  const log = document.getElementById('cost-log-list');
+  const recent = costs.log.slice(-10).reverse();
+  if (!recent.length) { log.innerHTML = '<div style="font-size:12px;color:#444;padding:8px 0">No API calls yet this session</div>'; return; }
+  log.innerHTML = recent.map(l => `
+    <div class="cost-log-item">
+      <div>
+        <div style="color:#CCC;font-size:12px">${l.label}</div>
+        <div style="color:#444;font-size:11px">${new Date(l.ts).toLocaleTimeString()} · ${l.inputTokens}in / ${l.outputTokens}out</div>
+      </div>
+      <div class="cost-log-amount">${fmt(l.cost)}</div>
+    </div>`).join('');
+}
+
+function toggleCostPanel() {
+  document.getElementById('cost-panel').classList.toggle('open');
+}
+
+document.addEventListener('click', e => {
+  const panel = document.getElementById('cost-panel');
+  if (panel.classList.contains('open') && !e.target.closest('.cost-bar') && !e.target.closest('.cost-panel')) {
+    panel.classList.remove('open');
+  }
+});
+
+function typeLabel(t) {
+  return {client:'Client',warm:'WS3 warm',target:'IPCEI peer',partner:'Partner'}[t] || t;
+}
+
+function renderCompanyList() {
+  const el = document.getElementById('company-list-items');
+  const warm = companies.filter(c => c.type === 'warm');
+  const rest = companies.filter(c => c.type !== 'warm');
+  const ordered = [...warm, ...rest];
+  el.innerHTML = ordered.map(c => `
+    <div class="company-item${selectedCompany && selectedCompany.id === c.id ? ' active' : ''}" onclick="selectCompany('${c.id}')">
+      <div class="company-item-name">${c.name}</div>
+      <div class="company-item-sub">${c.country}</div>
+      <span class="company-item-badge badge-${c.type}">${typeLabel(c.type)}</span>
+    </div>`).join('');
+}
+
+function selectCompany(id) {
+  selectedCompany = companies.find(c => c.id === id);
+  if (!selectedCompany) return;
+  renderCompanyList();
+  document.getElementById('intel-empty').style.display = 'none';
+  document.getElementById('intel-content').style.display = 'block';
+  document.getElementById('intel-name').textContent = selectedCompany.name;
+  document.getElementById('intel-sub').textContent = selectedCompany.sector + ' · ' + selectedCompany.country;
+  document.getElementById('connection-text').textContent = selectedCompany.connection;
+  document.getElementById('opportunity-text').textContent = selectedCompany.opportunity;
+  document.getElementById('notes-text').textContent = selectedCompany.notes || '—';
+  document.getElementById('btn-outreach').disabled = true;
+  document.getElementById('btn-pilot').disabled = true;
+  showTab('overview', document.querySelector('.tab'));
+  const cached = intelCache[id];
+  if (cached) {
+    renderLiveIntel(cached);
+    document.getElementById('btn-outreach').disabled = false;
+    document.getElementById('btn-pilot').disabled = false;
+  } else {
+    document.getElementById('live-intel-section').style.display = 'none';
+    document.getElementById('opps-content').innerHTML = '<div class="intel-empty" style="height:200px"><div class="intel-empty-text" style="font-size:13px">Run intelligence first to surface opportunities</div></div>';
+    document.getElementById('outreach-content').innerHTML = '<div class="intel-empty" style="height:200px"><div class="intel-empty-text" style="font-size:13px">Run intelligence then click "Draft outreach"</div></div>';
+  }
+}
+
+function showTab(name, btn) {
+  ['overview','opportunities','outreach'].forEach(t => {
+    document.getElementById('tab-' + t).style.display = t === name ? 'block' : 'none';
+  });
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  else document.querySelector('.tab').classList.add('active');
+}
+
+async function callAPI(prompt, label) {
+  const btn = document.getElementById('btn-intel');
+  btn.disabled = true;
+  btn.textContent = 'Running...';
+  try {
+    const res = await fetch(PROXY + '/api/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1500,
+        messages: [{ role: 'user', content: prompt }]
+      })
+    });
+    const data = await res.json();
+    if (data.error) throw new Error(data.error.message);
+    const text = data.content.map(b => b.text || '').join('');
+    trackCost(label, data.usage.input_tokens, data.usage.output_tokens);
+    return text;
+  } catch(e) {
+    alert('API error: ' + e.message + '\n\nMake sure your proxy is running on port 3000.');
+    return null;
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'Run intelligence';
+  }
+}
+
+async function runIntelligence() {
+  if (!selectedCompany) return;
+  const c = selectedCompany;
+  const prompt = `You are a senior enterprise sales intelligence analyst working for E-Group ICT Software Zrt — a Budapest-based AI infrastructure company with 30 years of experience building sovereign digital trust infrastructure, national digital identity systems, medical AI, and cloud intelligence platforms. E-Group is currently in pilot with their Rise AI platform and is expanding into EU enterprise markets.
+
+Analyse the following target company and provide structured intelligence to help E-Group identify sales opportunities and build the relationship.
+
+TARGET COMPANY: ${c.name}
+Sector: ${c.sector}
+Country: ${c.country}
+E-Group connection: ${c.connection}
+Known opportunity: ${c.opportunity}
+
+Provide your response in this exact JSON format, no markdown, no preamble:
+{
+  "companySnapshot": "2-3 sentence description of what this company does and their current strategic direction",
+  "aiAgenda": "What is their likely AI/digital transformation agenda right now? What problems are they trying to solve?",
+  "eGroupFit": "Specifically how does E-Group's capabilities (sovereign AI, digital identity, knowledge graphs, Rise platform, 30yr infrastructure expertise) map to their needs?",
+  "opportunities": [
+    {"title": "opportunity title", "description": "specific opportunity description", "urgency": "high/medium/low", "approach": "how to approach this"},
+    {"title": "opportunity title", "description": "specific opportunity description", "urgency": "high/medium/low", "approach": "how to approach this"}
+  ],
+  "warmthAssessment": "How warm is this relationship really? What is the best entry point given E-Group's existing connection?",
+  "nextBestAction": "Single most important thing E-Group should do with this company in the next 30 days"
+}`;
+
+  const result = await callAPI(prompt, `Intelligence: ${c.name}`);
+  if (!result) return;
+  try {
+    const clean = result.replace(/```json|```/g, '').trim();
+    const parsed = JSON.parse(clean);
+    intelCache[c.id] = parsed;
+    await saveIntelCache();
+    renderLiveIntel(parsed);
+    document.getElementById('btn-outreach').disabled = false;
+    document.getElementById('btn-pilot').disabled = false;
+  } catch(e) {
+    document.getElementById('live-intel-section').style.display = 'block';
+    document.getElementById('live-intel-content').innerHTML = `<div class="intel-card"><div class="intel-card-body">${result}</div></div>`;
+  }
+}
+
+function renderLiveIntel(data) {
+  document.getElementById('live-intel-section').style.display = 'block';
+  document.getElementById('live-intel-content').innerHTML = `
+    <div class="intel-card"><div class="intel-card-title">Company snapshot</div><div class="intel-card-body">${data.companySnapshot}</div></div>
+    <div class="intel-card"><div class="intel-card-title">AI & digital agenda</div><div class="intel-card-body">${data.aiAgenda}</div></div>
+    <div class="intel-card"><div class="intel-card-title">E-Group fit</div><div class="intel-card-body">${data.eGroupFit}</div></div>
+    <div class="intel-card" style="border-left:3px solid #C8A96E"><div class="intel-card-title">Warmth assessment</div><div class="intel-card-body">${data.warmthAssessment}</div></div>
+    <div class="intel-card" style="border-left:3px solid #4ADE80"><div class="intel-card-title">Next best action — 30 days</div><div class="intel-card-body">${data.nextBestAction}</div></div>`;
+  const opps = data.opportunities || [];
+  document.getElementById('opps-content').innerHTML = opps.length ? opps.map(o => `
+    <div class="opp-card">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:4px">
+        <div class="opp-card-title">${o.title}</div>
+        <span style="font-size:10px;padding:2px 8px;border-radius:3px;background:${o.urgency==='high'?'#2E0D0D':o.urgency==='medium'?'#2E1E0D':'#1A1A1A'};color:${o.urgency==='high'?'#F87171':o.urgency==='medium'?'#C8A96E':'#666'};text-transform:uppercase;letter-spacing:1px">${o.urgency}</span>
+      </div>
+      <div class="opp-card-body">${o.description}</div>
+      <div style="font-size:12px;color:#C8A96E"><strong>Approach:</strong> ${o.approach}</div>
+    </div>`).join('') : '<div class="intel-empty" style="height:150px"><div class="intel-empty-text">No opportunities identified</div></div>';
+}
+
+async function runOutreach() {
+  if (!selectedCompany) return;
+  const c = selectedCompany;
+  const cached = intelCache[c.id];
+  const btn = document.getElementById('btn-outreach');
+  btn.disabled = true;
+  btn.textContent = 'Drafting...';
+  showTab('outreach', document.querySelectorAll('.tab')[2]);
+  const context = cached ? `Company AI agenda: ${cached.aiAgenda}\nE-Group fit: ${cached.eGroupFit}\nWarmth: ${cached.warmthAssessment}` : `Known opportunity: ${c.opportunity}`;
+  const prompt = `You are drafting a LinkedIn message on behalf of Antal Kuthy, CEO of E-Group ICT Software Zrt (Budapest). E-Group has 30 years of experience building sovereign digital trust infrastructure, national digital identity systems, medical AI platforms, and the Rise AI intelligence platform. E-Group was recently certified as one of only 19 companies selected for the IPCEI-CIS EU cloud programme and co-leads Workstream 3 (AI Cluster).
+
+Draft a SHORT, warm, non-salesy LinkedIn outreach message to a senior decision-maker at ${c.name}.
+
+Connection context: ${c.connection}
+
+${context}
+
+Requirements:
+- Maximum 120 words
+- Reference the specific shared connection naturally (don't be generic)
+- One clear but soft call to action (a conversation, not a pitch)
+- Tone: peer-to-peer, warm, not corporate
+- Do NOT mention products by name unless essential
+- Sign as: Antal Kuthy, E-Group
+
+Return ONLY the message text, no subject line, no explanation.`;
+
+  const result = await callAPI(prompt, `Outreach draft: ${c.name}`);
+  btn.disabled = false;
+  btn.textContent = 'Draft outreach';
+  if (!result) return;
+  document.getElementById('outreach-content').innerHTML = `
+    <div class="section-label">LinkedIn message — Antal Kuthy to ${c.name} decision-maker</div>
+    <div class="draft-box">${result}</div>
+    <button class="copy-btn" onclick="navigator.clipboard.writeText(document.querySelector('.draft-box').textContent)">Copy to clipboard</button>
+    <div class="section-label" style="margin-top:20px">Generate variations</div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <button class="btn" onclick="runOutreach()">Regenerate</button>
+      <button class="btn" onclick="runPilot()">Generate pilot proposal instead</button>
+    </div>`;
+}
+
+async function runPilot() {
+  if (!selectedCompany) return;
+  const c = selectedCompany;
+  const cached = intelCache[c.id];
+  const btn = document.getElementById('btn-pilot');
+  btn.disabled = true;
+  btn.textContent = 'Generating...';
+  showTab('outreach', document.querySelectorAll('.tab')[2]);
+  const context = cached ? `Their AI agenda: ${cached.aiAgenda}\nBest fit: ${cached.eGroupFit}\nTop opportunity: ${cached.opportunities && cached.opportunities[0] ? cached.opportunities[0].description : c.opportunity}` : `Known opportunity: ${c.opportunity}`;
+  const prompt = `You are creating a brief paid pilot proposal concept for E-Group ICT Software Zrt to present to ${c.name}.
+
+E-Group capabilities: sovereign AI infrastructure, digital identity systems, knowledge graphs, Rise AI intelligence platform (monitors market signals + internal organisation signals), medical AI, 30 years EU enterprise infrastructure experience, IPCEI-CIS AI Cluster lead.
+
+Target: ${c.name} (${c.sector}, ${c.country})
+${context}
+
+Create a concise paid pilot proposal concept (not a full document — a 1-page concept):
+- Pilot name and one-line description
+- The specific problem it solves for ${c.name}
+- What E-Group delivers in the pilot (8-12 weeks)
+- What the pilot proves/validates
+- Suggested price range (EUR 30k–75k)
+- What success looks like and how it converts to a larger engagement
+
+Format as clean prose sections with bold headers. Keep it under 400 words total.`;
+
+  const result = await callAPI(prompt, `Pilot proposal: ${c.name}`);
+  btn.disabled = false;
+  btn.textContent = 'Pilot proposal';
+  if (!result) return;
+  document.getElementById('outreach-content').innerHTML = `
+    <div class="section-label">Paid pilot concept — ${c.name}</div>
+    <div class="draft-box">${result}</div>
+    <button class="copy-btn" onclick="navigator.clipboard.writeText(document.querySelector('.draft-box').textContent)">Copy to clipboard</button>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px">
+      <button class="btn" onclick="runPilot()">Regenerate</button>
+      <button class="btn" onclick="runOutreach()">Switch to outreach message</button>
+    </div>`;
+}
+
+init();
+</script>
+</body>
+</html>
