@@ -29,7 +29,20 @@
   `;
 
   document.body.insertBefore(nav, document.body.firstChild);
-  // Hide any legacy header/topbar elements from old page versions
+
+  // Move cost bar into vigil nav if it exists, then hide legacy elements
+  const costBar = document.querySelector('.cost-bar');
+  const costPanel = document.querySelector('.cost-panel');
+  const navRight = document.getElementById('vigil-nav-right');
+  if (costBar && navRight) {
+    const wrapper = document.createElement('div');
+    wrapper.style.cssText = 'position:relative';
+    wrapper.appendChild(costBar.cloneNode(true));
+    if (costPanel) wrapper.appendChild(costPanel.cloneNode(true));
+    navRight.appendChild(wrapper);
+  }
+
+  // Hide legacy header/topbar elements
   ['header', '.header', '.topbar'].forEach(sel => {
     document.querySelectorAll(sel).forEach(el => {
       if (el.id !== 'vigil-topbar') el.style.display = 'none';
