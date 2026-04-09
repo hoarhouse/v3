@@ -15,7 +15,8 @@
     .nav-dropdown > a::after { content:''; position:absolute; bottom:-3px; left:0; right:0; height:1px; background:var(--gold); transform:scaleX(0); transition:transform 0.2s; }
     .nav-dropdown:hover > a, .nav-dropdown > a.active { color:var(--white); }
     .nav-dropdown:hover > a::after, .nav-dropdown > a.active::after { transform:scaleX(1); }
-    .nav-drop-menu { display:none; position:absolute; top:calc(100% + 20px); right:0; background:rgba(12,12,12,0.98); border:1px solid var(--border); border-top:2px solid var(--gold); min-width:240px; z-index:200; backdrop-filter:blur(16px); }
+    .nav-drop-menu { display:none; position:absolute; top:100%; right:0; background:rgba(12,12,12,0.98); border:1px solid var(--border); border-top:2px solid var(--gold); min-width:240px; z-index:200; backdrop-filter:blur(16px); }
+    .nav-dropdown { padding-bottom:16px; }
     .nav-dropdown:hover .nav-drop-menu { display:block; }
     .nav-drop-item { display:block; padding:11px 20px; font-family:'DM Mono',monospace; font-size:10px; letter-spacing:1.5px; text-transform:uppercase; color:var(--dim); text-decoration:none; transition:all 0.15s; border-bottom:1px solid var(--border); white-space:nowrap; }
     .nav-drop-item:last-child { border-bottom:none; }
