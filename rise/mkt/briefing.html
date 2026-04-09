@@ -99,6 +99,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;ba
   <div class="btn-row">
     <div class="sync-status" id="sync-status">Ready</div>
     <div>
+      <button class="research-btn" id="audit-btn" onclick="runWebsiteAudit()" style="background:#0D0D1A;border-color:#2a2a4a;color:#818CF8">Audit Website</button>
       <button class="research-btn" id="research-btn" onclick="runResearchAgent()">Research Agent</button>
       <button class="run-btn" id="run-btn" onclick="runBriefing()">Run Vigil Briefing</button>
     </div>
@@ -885,6 +886,166 @@ function showNextGaps() {
   var newShown = currentlyShown + nextBatch.length;
   counter.textContent = 'Showing 1–' + newShown + ' of ' + window.allWebsiteGaps.length + ' website gaps';
   if (newShown >= window.allWebsiteGaps.length) btn.style.display = 'none';
+}
+
+function runWebsiteAudit() {
+  var btn = document.getElementById('audit-btn');
+  var thinkingBox = document.getElementById('thinking-box');
+  var output = document.getElementById('research-output');
+  btn.disabled = true; btn.textContent = 'Auditing...';
+  thinkingBox.style.display = 'block';
+  output.innerHTML = '';
+  setThinking('Vigil is loading site and data knowledge...');
+
+  Promise.all([
+    fetchJSON(DATA_URL, DATA_CACHE_KEY, 3600000),
+    fetchJSON(WEBSITE_URL, WEBSITE_CACHE_KEY, 0)
+  ]).then(function(results) {
+    var data = results[0];
+    var websiteData = results[1];
+    if (!data) {
+      output.innerHTML = '<div style="color:#E24B4A;padding:20px">Failed to load data.json</div>';
+      btn.disabled = false; btn.textContent = 'Audit Website';
+      thinkingBox.style.display = 'none'; return;
+    }
+
+    var ageWarning = '';
+    if (websiteData && websiteData.lastAudited) {
+      var daysSince = Math.floor((Date.now() - new Date(websiteData.lastAudited)) / 86400000);
+      if (daysSince > 7) ageWarning = 'NOTE: website.json is ' + daysSince + ' days old — some page content may be stale.\n\n';
+    }
+
+    var memCtx = buildMemoryContext();
+    var dataCtx = buildDataContext(data);
+    var websiteCtx = buildWebsiteContext(websiteData);
+    var today = new Date().toLocaleDateString('en-GB', {weekday:'long',day:'numeric',month:'long',year:'numeric'});
+
+    setThinking('Vigil is cross-referencing every page against current data...');
+
+    var prompt = 'You are Vigil, Deputy CMO for E-Group ICT Software Zrt. Your ONLY task is a comprehensive website gap audit — do not produce a morning briefing or any other output.\n\n' +
+      'Today: ' + today + '\n\n' +
+      ageWarning +
+      'YOUR KNOWLEDGE (data.json):\n' + dataCtx + '\n\n' +
+      'THE CURRENT WEBSITE (every known page):\n' + websiteCtx + '\n\n' +
+      'YOUR MEMORY:\n' + memCtx + '\n\n' +
+      'AUDIT INSTRUCTIONS:\n' +
+      'Go through EVERY page listed in the website data one by one.\n' +
+      'For each page cross-reference its current content against everything in data.json.\n' +
+      'Identify every gap where data.json contains information not reflected on that page.\n' +
+      'Also identify entirely new pages that should exist but do not yet (e.g. a SpaceTech record page, an EnergyTech record page).\n' +
+      'Prioritise: critical = named client or product completely absent, high = partial mention needs expanding, medium = useful addition.\n' +
+      'Return a MINIMUM of 10 gaps. If honest cross-referencing produces more return ALL of them — do not truncate.\n' +
+      'For EVERY gap you MUST specify the exact page filename and exact section or element on that page.\n\n' +
+      'Return JSON only — no markdown, no preamble:\n' +
+      '{"websiteGaps":[{"priority":"critical|high|medium","page":"exact filename e.g. intelligence.html","location":"exact section e.g. SpaceTech sector card","gap":"what is missing","suggestedCopy":"the exact text to add","rationale":"why this matters for E-Group marketing right now"}]}';
+
+    fetch(PROXY + '/api/messages', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({
+        model: 'claude-opus-4-5',
+        max_tokens: 4000,
+        thinking: {type:'enabled', budget_tokens:2000},
+        messages: [{role:'user', content: prompt}]
+      })
+    }).then(function(r){return r.json();}).then(function(resp) {
+      if (resp.error) {
+        output.innerHTML = '<div style="color:#E24B4A;padding:20px">API error: ' + (resp.error.message||JSON.stringify(resp.error)) + '</div>';
+        btn.disabled = false; btn.textContent = 'Audit Website';
+        thinkingBox.style.display = 'none'; return;
+      }
+      trackCost('Website Audit', resp.usage ? resp.usage.input_tokens : 0, resp.usage ? resp.usage.output_tokens : 0);
+      var text = (resp.content||[]).map(function(b){return b.text||'';}).join('');
+      var result;
+      try { result = JSON.parse(text.replace(/```json|```/g,'').trim()); } catch(e) { result = {websiteGaps:[]}; }
+      window.allWebsiteGaps = (result.websiteGaps||[]).filter(function(g){return !isGapSuppressed(g);});
+      thinkingBox.style.display = 'none';
+      btn.disabled = false; btn.textContent = 'Audit Website';
+      renderAuditGaps(output);
+    }).catch(function(e) {
+      output.innerHTML = '<div style="color:#E24B4A;padding:20px">Error: ' + e.message + '</div>';
+      btn.disabled = false; btn.textContent = 'Audit Website';
+      thinkingBox.style.display = 'none';
+    });
+  });
+}
+
+function renderAuditGaps(container) {
+  var gaps = window.allWebsiteGaps || [];
+  if (!gaps.length) {
+    container.innerHTML = '<div style="color:#888;padding:20px">No new gaps found — site is up to date with current data.</div>';
+    return;
+  }
+  var html = '<div style="font-size:11px;color:#666;margin-bottom:16px">Showing 1–' + Math.min(10,gaps.length) + ' of ' + gaps.length + ' website gaps found</div>';
+  gaps.slice(0,10).forEach(function(gap,i) {
+    var existing = getGapStatus(gap);
+    var isDeclined = existing && existing.status === 'declined';
+    var gapEnc = encodeURIComponent(JSON.stringify(gap));
+    var ccId = 'acc-' + i;
+    var priorityColor = gap.priority === 'critical' ? '#E24B4A' : gap.priority === 'high' ? '#C8A96E' : '#888';
+    html += '<div class="gap-card" style="background:#0D0D0D;border:1px solid #222;border-left:3px solid ' + priorityColor + ';border-radius:4px;padding:16px;margin-bottom:12px">';
+    if (isDeclined) html += '<div style="font-size:10px;color:#818CF8;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px">⚠ Previously declined — resurfaced</div>';
+    html += '<div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap">';
+    html += '<span style="font-size:10px;padding:2px 8px;border-radius:2px;background:' + priorityColor + '22;color:' + priorityColor + ';letter-spacing:1px;text-transform:uppercase">' + (gap.priority||'medium') + '</span>';
+    html += '<span style="font-size:12px;color:#C8A96E">📄 ' + gap.page + '</span>';
+    html += '<span style="font-size:12px;color:#888">📍 ' + gap.location + '</span>';
+    html += '</div>';
+    html += '<div style="font-size:14px;color:#EEE;font-weight:600;margin-bottom:6px">' + gap.gap + '</div>';
+    html += '<div style="font-size:12px;color:#888;margin-bottom:10px;line-height:1.6">' + gap.rationale + '</div>';
+    html += '<div style="background:#0A0A0A;border:1px solid #1a1a1a;border-radius:3px;padding:10px;margin-bottom:12px;font-size:12px;color:#AAA;line-height:1.6"><strong style="color:#EEE;display:block;margin-bottom:4px">Suggested copy:</strong>' + gap.suggestedCopy + '</div>';
+    html += '<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">';
+    html += '<button onclick="approveGap(\'' + gapEnc + '\')" style="font-size:12px;padding:6px 14px;background:#0D1A0D;border:1px solid #2a4a2a;color:#4ADE80;border-radius:3px;cursor:pointer">Approve — generate CC prompt</button>';
+    html += '<div style="position:relative;display:inline-block"><button onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display===\'block\'?\'none\':\'block\'" style="font-size:12px;padding:6px 14px;background:#1a1a0a;border:1px solid #3a3a1a;color:#C8A96E;border-radius:3px;cursor:pointer">Snooze ▾</button>';
+    html += '<div style="display:none;position:absolute;top:100%;left:0;background:#111;border:1px solid #333;border-radius:3px;z-index:10;min-width:140px">';
+    html += '<div onclick="snoozeGap(\'' + gapEnc + '\',2)" style="padding:8px 14px;font-size:12px;color:#AAA;cursor:pointer;border-bottom:1px solid #222">2 weeks</div>';
+    html += '<div onclick="snoozeGap(\'' + gapEnc + '\',4)" style="padding:8px 14px;font-size:12px;color:#AAA;cursor:pointer;border-bottom:1px solid #222">1 month</div>';
+    html += '<div onclick="snoozeGap(\'' + gapEnc + '\',12)" style="padding:8px 14px;font-size:12px;color:#AAA;cursor:pointer">3 months</div>';
+    html += '</div></div>';
+    html += '<button onclick="declineGap(\'' + gapEnc + '\')" style="font-size:12px;padding:6px 14px;background:#1a0a0a;border:1px solid #3a1a1a;color:#E24B4A;border-radius:3px;cursor:pointer">Decline</button>';
+    html += '</div>';
+    html += '<div id="' + ccId + '" style="display:none;margin-top:12px">';
+    html += '<textarea style="width:100%;height:120px;background:#050505;border:1px solid #2a4a2a;color:#4ADE80;font-family:monospace;font-size:11px;padding:10px;border-radius:3px;resize:vertical"></textarea>';
+    html += '<div style="display:flex;gap:8px;margin-top:6px">';
+    html += '<button onclick="copyCC(this)" style="font-size:11px;padding:5px 12px;background:#0D1A0D;border:1px solid #2a4a2a;color:#4ADE80;border-radius:3px;cursor:pointer">Copy CC Prompt</button>';
+    html += '<button onclick="markImplemented(\'' + gapEnc + '\',this)" style="font-size:11px;padding:5px 12px;background:#111;border:1px solid #333;color:#888;border-radius:3px;cursor:pointer">Mark as Implemented</button>';
+    html += '</div></div></div>';
+  });
+  if (gaps.length > 10) {
+    html += '<div style="font-size:11px;color:#666;margin-bottom:10px">Showing 1–10 of ' + gaps.length + ' gaps</div>';
+    html += '<button onclick="showNextAuditGaps(this,10)" style="font-size:12px;padding:8px 20px;background:#111;border:1px solid #333;color:#818CF8;border-radius:3px;cursor:pointer;margin-bottom:20px">Next 10 →</button>';
+  }
+  container.innerHTML = html;
+}
+
+function showNextAuditGaps(btn, currentlyShown) {
+  var gaps = window.allWebsiteGaps || [];
+  var nextBatch = gaps.slice(currentlyShown, currentlyShown + 10);
+  var html = '';
+  nextBatch.forEach(function(gap, i) {
+    var gapEnc = encodeURIComponent(JSON.stringify(gap));
+    var priorityColor = gap.priority === 'critical' ? '#E24B4A' : gap.priority === 'high' ? '#C8A96E' : '#888';
+    html += '<div class="gap-card" style="background:#0D0D0D;border:1px solid #222;border-left:3px solid ' + priorityColor + ';border-radius:4px;padding:16px;margin-bottom:12px">';
+    html += '<div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap">';
+    html += '<span style="font-size:10px;padding:2px 8px;border-radius:2px;background:' + priorityColor + '22;color:' + priorityColor + ';letter-spacing:1px;text-transform:uppercase">' + (gap.priority||'medium') + '</span>';
+    html += '<span style="font-size:12px;color:#C8A96E">📄 ' + gap.page + '</span>';
+    html += '<span style="font-size:12px;color:#888">📍 ' + gap.location + '</span>';
+    html += '</div>';
+    html += '<div style="font-size:14px;color:#EEE;font-weight:600;margin-bottom:6px">' + gap.gap + '</div>';
+    html += '<div style="font-size:12px;color:#888;margin-bottom:10px;line-height:1.6">' + gap.rationale + '</div>';
+    html += '<div style="background:#0A0A0A;border:1px solid #1a1a1a;border-radius:3px;padding:10px;margin-bottom:12px;font-size:12px;color:#AAA;line-height:1.6"><strong style="color:#EEE;display:block;margin-bottom:4px">Suggested copy:</strong>' + gap.suggestedCopy + '</div>';
+    html += '<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">';
+    html += '<button onclick="approveGap(\'' + gapEnc + '\')" style="font-size:12px;padding:6px 14px;background:#0D1A0D;border:1px solid #2a4a2a;color:#4ADE80;border-radius:3px;cursor:pointer">Approve — generate CC prompt</button>';
+    html += '<button onclick="declineGap(\'' + gapEnc + '\')" style="font-size:12px;padding:6px 14px;background:#1a0a0a;border:1px solid #3a1a1a;color:#E24B4A;border-radius:3px;cursor:pointer">Decline</button>';
+    html += '</div></div>';
+  });
+  var newShown = currentlyShown + nextBatch.length;
+  btn.insertAdjacentHTML('beforebegin', html);
+  if (newShown >= gaps.length) {
+    btn.style.display = 'none';
+  } else {
+    btn.setAttribute('onclick', 'showNextAuditGaps(this,' + newShown + ')');
+    btn.previousElementSibling.textContent = 'Showing 1–' + newShown + ' of ' + gaps.length + ' gaps';
+  }
 }
 </script>
 <script src="nav.js"></script>
