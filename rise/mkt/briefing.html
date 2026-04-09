@@ -487,97 +487,88 @@ Respond ONLY with valid JSON in exactly this structure:
 
 function renderBriefing(data) {
   const output = document.getElementById('briefing-output');
-  const typeConfig = {
-    act_now: { label: 'Act now', color: '#E24B4A', bg: '#2E0D0D' },
-    investigate: { label: 'Investigate', color: '#C8A96E', bg: '#2E1E0D' },
-    watch: { label: 'Watch', color: '#60A5FA', bg: '#0D1A2E' },
-    drop: { label: 'Drop', color: '#444', bg: '#1A1A1A' },
-    pattern: { label: 'Pattern', color: '#C084FC', bg: '#1E1A2E' }
-  };
-  const urgConfig = { high:'u-high', medium:'u-medium', low:'u-low' };
-  const confIcon = { verified:'✓', assumed:'~', stale:'⚠' };
-  const confColor = { verified:'fact-verified', assumed:'fact-assumed', stale:'fact-stale' };
-
   let html = '';
-
-  // Session summary
-  html += `<div style="background:#111;border:1px solid #1A1A1A;border-left:3px solid #C8A96E;border-radius:8px;padding:16px 20px;margin-bottom:24px">
-    <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#444;margin-bottom:8px">Vigil's Assessment</div>
-    <div style="font-size:14px;color:#CCC;line-height:1.7;margin-bottom:10px">${data.sessionSummary}</div>
-    <div style="font-size:11px;color:#555">Confidence: <span style="color:${data.overallConfidence==='high'?'#4ADE80':data.overallConfidence==='medium'?'#C8A96E':'#F87171'}">${data.overallConfidence?.toUpperCase()}</span> — ${data.confidenceReason}</div>
-  </div>`;
-
-  // Insights
-  if (data.insights?.length) {
-    const actNow = data.insights.filter(i => i.type === 'act_now');
-    const others = data.insights.filter(i => i.type !== 'act_now');
-    const sorted = [...actNow, ...others];
-
-    html += '<div class="section-label">Vigil\'s Briefing</div>';
-    sorted.forEach((ins, idx) => {
-      const tc = typeConfig[ins.type] || typeConfig.watch;
-      const factsHtml = (ins.facts || []).map(f => `
-        <div class="fact-item">
-          <span class="fact-icon ${confColor[f.confidence] || 'fact-assumed'}">${confIcon[f.confidence] || '~'}</span>
-          <div><span style="color:#BBB">${f.text}</span> <span style="color:#444;font-size:11px">— ${f.source}${f.date ? ', '+f.date : ''}</span></div>
-        </div>`).join('');
-      const assumptionsHtml = (ins.assumptions || []).length
-        ? `<div class="assumption-box"><strong style="color:#C8A96E">Assumptions being made:</strong><br>${ins.assumptions.map(a=>`• ${a}`).join('<br>')}</div>` : '';
-      const changeHtml = (ins.wouldChangeIf || []).length
-        ? `<div class="change-box"><strong style="color:#555">This would change if:</strong><br>${ins.wouldChangeIf.map(c=>`→ ${c}`).join('<br>')}</div>` : '';
-      const draftHtml = ins.suggestedDraft
-        ? `<div style="background:#0D0D0D;border:1px solid #2A2A2A;border-radius:5px;padding:12px;font-size:12px;color:#888;line-height:1.7;margin-top:12px;white-space:pre-wrap;font-style:italic">"${ins.suggestedDraft}"</div>` : '';
-
-      html += `<div class="insight-card" id="card-${ins.id}">
-        <div class="insight-head" onclick="toggleInsight('${ins.id}')">
-          <div style="flex:1">
-            <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
-              <span style="font-size:10px;padding:2px 8px;border-radius:3px;background:${tc.bg};color:${tc.color};letter-spacing:1px;text-transform:uppercase">${tc.label}</span>
-              <span class="urgency-badge ${urgConfig[ins.urgency]||'u-low'}">${ins.urgency}</span>
-            </div>
-            <div class="insight-title">${ins.title}</div>
-            <div class="insight-preview">${ins.summary}</div>
-          </div>
-          <span class="chevron" id="chev-${ins.id}">▼</span>
-        </div>
-        <div class="insight-body" id="body-${ins.id}">
-          <div class="reasoning-section">
-            <div class="reasoning-label">Evidence Vigil used</div>
-            ${factsHtml || '<div style="font-size:12px;color:#444;padding:8px 0">No specific facts cited</div>'}
-          </div>
-          ${assumptionsHtml}
-          ${changeHtml}
-          ${ins.recommendedAction ? `<div style="margin-top:14px;padding:12px 14px;background:#0D1A0D;border-left:2px solid #4ADE80;border-radius:0 4px 4px 0;font-size:13px;color:#888"><strong style="color:#4ADE80">Recommended action:</strong> ${ins.recommendedAction}</div>` : ''}
-          ${draftHtml}
-          <div class="action-row">
-            <button class="act-btn primary" onclick="openLogModal('${ins.id}','${ins.title.replace(/'/g,"\\'")}')">Log outcome</button>
-            <button class="act-btn" onclick="copyDraft('${ins.id}')">Copy draft</button>
-            <button class="act-btn danger" onclick="openLogModal('${ins.id}','${ins.title.replace(/'/g,"\\'")}','dismissed_wrong')">Drop this</button>
-          </div>
-        </div>
-      </div>`;
+  const confColor = { high:'#4ADE80', medium:'#C8A96E', low:'#F87171' };
+  html += '<div style="background:#111;border:1px solid #1A1A1A;border-left:3px solid #C8A96E;border-radius:8px;padding:18px 22px;margin-bottom:20px">'
+    + '<div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#444;margin-bottom:8px">State of play</div>'
+    + '<div style="font-size:15px;color:#CCC;line-height:1.75;margin-bottom:10px">' + (data.stateOfPlay && data.stateOfPlay.summary ? data.stateOfPlay.summary : 'No briefing data') + '</div>'
+    + '<div style="font-size:11px;color:#555">Confidence: <span style="color:' + (confColor[data.stateOfPlay && data.stateOfPlay.confidence] || '#888') + '">' + ((data.stateOfPlay && data.stateOfPlay.confidence || '').toUpperCase()) + '</span> — ' + (data.stateOfPlay && data.stateOfPlay.confidenceReason || '') + '</div>'
+    + '</div>';
+  if (data.acquisitions && data.acquisitions.length) {
+    html += '<div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#444;margin:24px 0 10px;padding-bottom:6px;border-bottom:1px solid #1A1A1A">Active acquisitions</div>';
+    const statColor = { not_started:'#555',in_progress:'#60A5FA',responded:'#C8A96E',meeting_set:'#4ADE80',proposal_sent:'#C084FC',stalled:'#F87171',won:'#4ADE80',lost:'#555' };
+    data.acquisitions.forEach(function(a, i) {
+      const isDrop = a.urgency === 'drop';
+      html += '<div class="insight-card" id="acq-' + i + '">'
+        + '<div class="insight-head" onclick="toggleInsight('acq-' + i + '')">'
+        + '<div style="flex:1">'
+        + '<div style="font-size:15px;font-weight:600;color:' + (isDrop ? '#555' : '#EEE') + ';margin-bottom:3px">' + (a.target || '') + '</div>'
+        + '<div style="font-size:12px;color:#555">' + (a.goal || '') + '</div>'
+        + '<div style="font-size:10px;color:' + (statColor[a.status] || '#555') + ';margin-top:4px;text-transform:uppercase;letter-spacing:1px">' + ((a.status || '').replace(/_/g,' ')) + (a.daysSinceActivity > 30 ? ' - ' + a.daysSinceActivity + 'd stale' : '') + '</div>'
+        + '</div>'
+        + '<span style="font-size:14px;color:#444" id="chev-acq-' + i + '">v</span>'
+        + '</div>'
+        + '<div class="insight-body" id="body-acq-' + i + '">'
+        + '<div style="margin-top:14px;font-size:13px;color:#888;line-height:1.6">'
+        + '<div style="margin-bottom:8px"><strong style="color:#AAA">Last activity:</strong> ' + (a.lastActivity || 'None recorded') + '</div>'
+        + '<div style="margin-bottom:8px"><strong style="color:#AAA">Vigil read:</strong> ' + (a.vigil_assessment || '-') + '</div>'
+        + (a.nextAction ? '<div style="margin-bottom:8px;padding:10px 14px;background:#0D1A0D;border-left:2px solid #4ADE80;border-radius:0 4px 4px 0"><strong style="color:#4ADE80">Next action:</strong> ' + a.nextAction + '</div>' : '')
+        + '</div>'
+        + (a.wouldChangeIf && a.wouldChangeIf.length ? '<div style="margin-top:10px;padding:10px 14px;background:#0D0D0D;border-left:2px solid #333;border-radius:0 4px 4px 0;font-size:12px;color:#666;line-height:1.6"><strong style="color:#555">Would change if:</strong><br>' + a.wouldChangeIf.map(function(c){ return '> ' + c; }).join('<br>') + '</div>' : '')
+        + '<div style="display:flex;gap:8px;margin-top:14px">'
+        + '<button class="act-btn primary" onclick="openLogModal('acq-' + i + '','' + (a.target || '').replace(/[^a-zA-Z0-9 ]/g,'') + '')">Log outcome</button>'
+        + '<button class="act-btn danger" onclick="openLogModal('acq-' + i + '','' + (a.target || '').replace(/[^a-zA-Z0-9 ]/g,'') + '','dismissed_wrong')">Drop</button>'
+        + '</div></div></div>';
     });
   }
-
-  // Dropped items
-  if (data.droppedItems?.length) {
-    html += '<div class="section-label">Vigil suggests dropping</div>';
-    data.droppedItems.forEach(d => {
-      html += `<div style="background:#111;border:1px solid #1A1A1A;border-radius:8px;padding:14px 18px;margin-bottom:8px;opacity:0.6">
-        <div style="font-size:14px;color:#666;text-decoration:line-through;margin-bottom:4px">${d.title}</div>
-        <div style="font-size:12px;color:#444">${d.reason}</div>
-      </div>`;
+  if (data.marketIntelligence && data.marketIntelligence.length) {
+    html += '<div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#444;margin:28px 0 10px;padding-bottom:6px;border-bottom:1px solid #1A1A1A">Market intelligence</div>';
+    data.marketIntelligence.forEach(function(m) {
+      html += '<div style="background:#111;border:1px solid #1A1A1A;border-radius:8px;padding:14px 18px;margin-bottom:8px">'
+        + '<div style="font-size:14px;font-weight:600;color:#EEE;margin-bottom:5px">' + (m.title || '') + '</div>'
+        + '<div style="font-size:13px;color:#888;line-height:1.6;margin-bottom:6px">' + (m.why_it_matters || '') + '</div>'
+        + '<div style="font-size:11px;color:#444">' + (m.source || '') + (m.date ? ' - ' + m.date : '') + '</div>'
+        + (m.action ? '<div style="margin-top:8px;font-size:12px;color:#C8A96E">Action: ' + m.action + '</div>' : '')
+        + '</div>';
     });
   }
-
-  // Patterns
-  if (data.patternsNoticed?.length) {
-    html += '<div class="section-label">Patterns Vigil noticed</div>';
-    html += `<div style="background:#111;border:1px solid #1E1A2E;border-radius:8px;padding:16px 20px;margin-bottom:24px">
-      ${data.patternsNoticed.map(p => `<div style="font-size:13px;color:#888;padding:5px 0;border-bottom:1px solid #141414;line-height:1.6">◆ ${p}</div>`).join('')}
-    </div>`;
+  if (data.projects && data.projects.length) {
+    html += '<div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#444;margin:28px 0 10px;padding-bottom:6px;border-bottom:1px solid #1A1A1A">Active projects</div>';
+    const pColor = { on_track:'#4ADE80',needs_attention:'#C8A96E',blocked:'#F87171',completed:'#555' };
+    html += '<div style="background:#111;border:1px solid #1A1A1A;border-radius:8px;overflow:hidden;margin-bottom:20px">';
+    data.projects.forEach(function(p, i) {
+      html += '<div style="display:flex;align-items:flex-start;gap:14px;padding:12px 18px;' + (i > 0 ? 'border-top:1px solid #141414' : '') + '">'
+        + '<div style="width:8px;height:8px;border-radius:50%;background:' + (pColor[p.status] || '#555') + ';flex-shrink:0;margin-top:5px"></div>'
+        + '<div style="flex:1"><div style="font-size:13px;font-weight:600;color:#DDD;margin-bottom:2px">' + (p.name || '') + '</div>'
+        + '<div style="font-size:12px;color:#888">' + (p.oneLineSummary || '') + '</div>'
+        + (p.blockingIssue ? '<div style="font-size:12px;color:#F87171;margin-top:4px">Blocked: ' + p.blockingIssue + '</div>' : '') + '</div>'
+        + '<span style="font-size:10px;color:' + (pColor[p.status] || '#555') + ';letter-spacing:1px;text-transform:uppercase;white-space:nowrap">' + ((p.status || '').replace(/_/g,' ')) + '</span>'
+        + '</div>';
+    });
+    html += '</div>';
   }
-
+  if (data.decisionsNeeded && data.decisionsNeeded.length) {
+    html += '<div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#444;margin:28px 0 10px;padding-bottom:6px;border-bottom:1px solid #1A1A1A">Decisions needed from you</div>';
+    html += '<div style="background:#111;border:1px solid #1A1A1A;border-radius:8px;overflow:hidden;margin-bottom:20px">';
+    data.decisionsNeeded.forEach(function(d, i) {
+      html += '<div style="padding:14px 18px;' + (i > 0 ? 'border-top:1px solid #141414' : '') + '">'
+        + '<div style="display:flex;gap:12px">'
+        + '<div style="font-size:13px;font-weight:700;color:#C8A96E;flex-shrink:0">' + (i + 1) + '.</div>'
+        + '<div><div style="font-size:14px;font-weight:600;color:#EEE;margin-bottom:3px">' + (d.decision || '') + '</div>'
+        + '<div style="font-size:12px;color:#888;margin-bottom:4px">' + (d.context || '') + '</div>'
+        + (d.deadline ? '<div style="font-size:11px;color:#C8A96E">By: ' + d.deadline + '</div>' : '')
+        + '</div></div></div>';
+    });
+    html += '</div>';
+  }
+  if (data.vigilConcern) {
+    html += '<div style="background:#0D0D0D;border:1px solid #2A2A2A;border-left:3px solid #F87171;border-radius:8px;padding:16px 20px;margin-bottom:24px">'
+      + '<div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#F87171;margin-bottom:8px">Vigil concern</div>'
+      + '<div style="font-size:15px;font-weight:600;color:#EEE;margin-bottom:8px">' + (data.vigilConcern.title || '') + '</div>'
+      + '<div style="font-size:13px;color:#888;line-height:1.7;margin-bottom:8px">' + (data.vigilConcern.detail || '') + '</div>'
+      + '<div style="font-size:11px;color:#555;font-style:italic">Based on: ' + (data.vigilConcern.basis || '') + '</div>'
+      + '</div>';
+  }
   output.innerHTML = html;
 }
 
