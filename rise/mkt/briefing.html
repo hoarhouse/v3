@@ -433,8 +433,8 @@ function renderBriefing(data) {
       html += '<span style="font-size:10px;padding:2px 8px;border-radius:3px;background:'+(wgbg[g.priority]||'#1A1A1A')+';color:'+(wgpc[g.priority]||'#555')+';letter-spacing:1px;text-transform:uppercase">Website gap</span>';
       html += '<span style="font-size:10px;padding:2px 8px;border-radius:3px;background:#1A1A1A;color:'+(wgpc[g.priority]||'#555')+';letter-spacing:1px;text-transform:uppercase">'+(g.priority||'')+'</span>';
       html += '</div>';
+      html += '<div style="font-size:12px;color:#AAA;margin-bottom:6px">📄 <strong>Page:</strong> '+(g.page||'')+' &nbsp;|&nbsp; 📍 <strong>Location:</strong> '+(g.location||'')+'</div>';
       html += '<div style="font-size:15px;font-weight:600;color:#EEE;margin-bottom:4px">'+(g.gap||'')+'</div>';
-      html += '<div style="font-size:12px;color:#555">Page: '+(g.page||'')+'</div>';
       html += '</div>';
       html += '<span style="font-size:14px;color:#444" id="chev'+wid+'">v</span>';
       html += '</div>';
