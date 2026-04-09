@@ -540,6 +540,55 @@ function declineWebsiteGap(wid) {
   if (card) { card.style.opacity = '0.3'; card.style.pointerEvents = 'none'; }
 }
 
+function showNextGaps() {
+  window.currentGapPage = (window.currentGapPage || 0) + 1;
+  var pageSize = 10;
+  var startIdx = window.currentGapPage * pageSize;
+  var endIdx = Math.min(startIdx + pageSize, window.allWebsiteGaps.length);
+  var container = document.getElementById('gaps-container');
+  if (!container || !window.allWebsiteGaps) return;
+  
+  var wgpc = {critical:'#F87171',high:'#C8A96E',medium:'#60A5FA'};
+  var wgbg = {critical:'#2E0D0D',high:'#2E1E0D',medium:'#0D1A2E'};
+  var html = '<div style="font-size:11px;color:#666;margin-bottom:10px">Showing '+(startIdx+1)+'–'+endIdx+' of '+window.allWebsiteGaps.length+' website gaps</div>';
+  
+  window.allWebsiteGaps.slice(startIdx, endIdx).forEach(function(g,idx) {
+    var i = startIdx + idx;
+    var wid = 'wg'+i;
+    html += '<div class="insight-card" id="'+wid+'" style="margin-bottom:10px">';
+    html += '<div class="insight-head" onclick="toggleInsight(\''+wid+'\')">';
+    html += '<div style="flex:1">';
+    html += '<div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">';
+    html += '<span style="font-size:10px;padding:2px 8px;border-radius:3px;background:'+(wgbg[g.priority]||'#1A1A1A')+';color:'+(wgpc[g.priority]||'#555')+';letter-spacing:1px;text-transform:uppercase">Website gap</span>';
+    html += '<span style="font-size:10px;padding:2px 8px;border-radius:3px;background:#1A1A1A;color:'+(wgpc[g.priority]||'#555')+';letter-spacing:1px;text-transform:uppercase">'+(g.priority||'')+'</span>';
+    html += '</div>';
+    html += '<div style="font-size:12px;color:#AAA;margin-bottom:6px">📄 <strong>Page:</strong> '+(g.page||'')+' &nbsp;|&nbsp; 📍 <strong>Location:</strong> '+(g.location||'')+'</div>';
+    html += '<div style="font-size:15px;font-weight:600;color:#EEE;margin-bottom:4px">'+(g.gap||'')+'</div>';
+    html += '</div>';
+    html += '<span style="font-size:14px;color:#444" id="chev'+wid+'">v</span>';
+    html += '</div>';
+    html += '<div class="insight-body" id="body'+wid+'">';
+    html += '<div style="margin-top:14px;font-size:13px;color:#888;line-height:1.6;margin-bottom:10px">'+(g.rationale||'')+'</div>';
+    if (g.suggestedCopy) {
+      html += '<div style="margin-bottom:12px">';
+      html += '<div style="font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:#444;margin-bottom:6px">Suggested copy to add</div>';
+      html += '<div style="background:#0D0D0D;border-left:2px solid #C8A96E;padding:12px 16px;border-radius:0 4px 4px 0;font-size:13px;color:#CCC;line-height:1.7;font-style:italic">'+(g.suggestedCopy||'')+'</div>';
+      html += '</div>';
+    }
+    html += '<div style="display:flex;gap:8px;margin-top:14px">';
+    html += '<button class="act-btn primary" onclick="approveWebsiteGap('+i+',\''+wid+'\')">Approve — generate CC prompt</button>';
+    html += '<button class="act-btn danger" onclick="declineWebsiteGap(\''+wid+'\')">Decline</button>';
+    html += '</div>';
+    html += '</div></div>';
+  });
+  
+  if (endIdx < window.allWebsiteGaps.length) {
+    html += '<button style="padding:10px 24px;background:#C8A96E;color:#000;font-size:13px;font-weight:700;border:none;border-radius:6px;cursor:pointer;letter-spacing:0.5px;margin-top:16px" onclick="showNextGaps()">Next 10 →</button>';
+  }
+  
+  container.innerHTML = html;
+}
+
 function runResearchAgent() {
   var btn = document.getElementById('research-btn');
   var thinkingBox = document.getElementById('thinking-box');
