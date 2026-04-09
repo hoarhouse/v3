@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Vigil — E-Group Marketing Intelligence</title>
+<title>Vigil -- E-Group Marketing Intelligence</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;background:#080808;color:#EEE;min-height:100vh}
@@ -146,11 +146,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;ba
   <div class="log-box">
     <h3 id="log-title">Log action</h3>
     <select class="log-select" id="log-outcome">
-      <option value="acted_positive">I acted on this — positive response</option>
-      <option value="acted_neutral">I acted on this — no response yet</option>
-      <option value="acted_negative">I acted on this — negative response</option>
-      <option value="dismissed_valid">Dismissed — not relevant right now</option>
-      <option value="dismissed_wrong">Dismissed — Vigil's reasoning was wrong</option>
+      <option value="acted_positive">I acted on this -- positive response</option>
+      <option value="acted_neutral">I acted on this -- no response yet</option>
+      <option value="acted_negative">I acted on this -- negative response</option>
+      <option value="dismissed_valid">Dismissed -- not relevant right now</option>
+      <option value="dismissed_wrong">Dismissed -- Vigil's reasoning was wrong</option>
       <option value="snoozed">Snooze for 30 days</option>
     </select>
     <textarea class="log-textarea" id="log-notes" placeholder="What happened? What did you do? What was the response? (Optional but helps Vigil learn)"></textarea>
@@ -176,7 +176,7 @@ let knowledgeData = null;
 let currentInsights = [];
 let logTarget = null;
 
-// ── INIT ──────────────────────────────────────────────────────────────────────
+// -- INIT ----------------------------------------------------------------------
 
 async function init() {
   document.getElementById('vigil-date').textContent =
@@ -191,7 +191,7 @@ async function init() {
   });
 }
 
-// ── DATA LOADING ──────────────────────────────────────────────────────────────
+// -- DATA LOADING --------------------------------------------------------------
 
 async function loadKnowledgeData() {
   try {
@@ -207,7 +207,7 @@ async function loadKnowledgeData() {
   } catch(e) { return null; }
 }
 
-// ── COST TRACKING ─────────────────────────────────────────────────────────────
+// -- COST TRACKING -------------------------------------------------------------
 
 async function loadCosts() {
   try {
@@ -247,7 +247,7 @@ function renderCosts() {
 
 function toggleCostPanel() { document.getElementById('cost-panel').classList.toggle('open'); }
 
-// ── MEMORY ────────────────────────────────────────────────────────────────────
+// -- MEMORY --------------------------------------------------------------------
 
 async function loadMemory() {
   try {
@@ -282,11 +282,11 @@ function buildMemoryContext() {
   const recentSessions = memory.sessions.slice(-5);
   const recentFeedback = memory.feedback.slice(-20);
   const patterns = memory.patterns.slice(-10);
-  let ctx = `VIGIL MEMORY — ${memory.sessions.length} prior sessions.\n\n`;
+  let ctx = `VIGIL MEMORY -- ${memory.sessions.length} prior sessions.\n\n`;
   if (recentFeedback.length) {
     ctx += 'FEEDBACK ON PAST INSIGHTS (what worked, what did not):\n';
     recentFeedback.forEach(f => {
-      ctx += `- [${f.outcome}] "${f.insightTitle}" — ${f.notes || 'no notes'} (${new Date(f.date).toLocaleDateString()})\n`;
+      ctx += `- [${f.outcome}] "${f.insightTitle}" -- ${f.notes || 'no notes'} (${new Date(f.date).toLocaleDateString()})\n`;
     });
     ctx += '\n';
   }
@@ -304,7 +304,7 @@ function buildMemoryContext() {
   return ctx;
 }
 
-// ── MAIN BRIEFING ─────────────────────────────────────────────────────────────
+// -- MAIN BRIEFING -------------------------------------------------------------
 
 async function runBriefing() {
   const btn = document.getElementById('run-btn');
@@ -317,7 +317,7 @@ async function runBriefing() {
   setThinking('Loading knowledge graph and memory...');
   knowledgeData = await loadKnowledgeData();
   if (!knowledgeData) {
-    output.innerHTML = '<div style="color:#E24B4A;padding:20px">Failed to load data.json — make sure the file is deployed.</div>';
+    output.innerHTML = '<div style="color:#E24B4A;padding:20px">Failed to load data.json -- make sure the file is deployed.</div>';
     btn.disabled = false; btn.textContent = '▶ Run Vigil Briefing';
     thinkingBox.style.display = 'none';
     return;
@@ -374,15 +374,15 @@ function setThinking(text) {
 
 function buildDataContext(d) {
   const companies = (d.companies || []).map(c =>
-    `[${c.id}] ${c.name} (${c.type}, ${c.country}) — Connection: ${c.connection} — Opportunity: ${c.opportunity} — Notes: ${c.notes}`
+    `[${c.id}] ${c.name} (${c.type}, ${c.country}) -- Connection: ${c.connection} -- Opportunity: ${c.opportunity} -- Notes: ${c.notes}`
   ).join('\n');
 
   const people = (d.people || []).map(p =>
-    `[${p.id}] ${p.name}, ${p.title} at ${p.company} (warmth: ${p.warmth}) — ${p.connection} — Action: ${p.action}`
+    `[${p.id}] ${p.name}, ${p.title} at ${p.company} (warmth: ${p.warmth}) -- ${p.connection} -- Action: ${p.action}`
   ).join('\n');
 
   const consortiums = (d.consortiums || []).map(c =>
-    `[${c.id}] ${c.name} — Role: ${c.role} — ${c.notes}`
+    `[${c.id}] ${c.name} -- Role: ${c.role} -- ${c.notes}`
   ).join('\n');
 
   const events = (d.events || []).sort((a,b) => new Date(b.date) - new Date(a.date)).map(e =>
@@ -390,14 +390,14 @@ function buildDataContext(d) {
   ).join('\n');
 
   const actions = (d.actions || []).filter(a => a.status === 'pending').map(a =>
-    `[${a.priority.toUpperCase()}] ${a.task} — Owner: ${a.owner}`
+    `[${a.priority.toUpperCase()}] ${a.task} -- Owner: ${a.owner}`
   ).join('\n');
 
   return `COMPANIES IN NETWORK:\n${companies}\n\nKEY PEOPLE:\n${people}\n\nCONSORTIUMS:\n${consortiums}\n\nEVENT LOG (most recent first):\n${events}\n\nOPEN ACTIONS:\n${actions}`;
 }
 
 function buildBriefingPrompt(dataContext, memoryContext) {
-  return `You are Vigil — the AI Deputy Chief Marketing Officer for E-Group ICT Software Zrt. You report directly to Chris Hoar, who leads E-Group's marketing strategy.
+  return `You are Vigil -- the AI Deputy Chief Marketing Officer for E-Group ICT Software Zrt. You report directly to Chris Hoar, who leads E-Group's marketing strategy.
 
 Chris's job is to:
 - Build E-Group's pipeline of new enterprise clients across EU, USA and China
@@ -412,7 +412,7 @@ E-Group context:
 - Key clients: European Space Agency (photo verification), Hungarian Government (KAÜ + neonatal tracking)
 - Consortium positions: Co-leads IPCEI-CIS WS3 + AI Cluster, DOME member, HeliX spearhead (leads), eIDAS MyD Wallet implementer
 - Partner: Kellton (MoU signed for sovereign AI stack)
-- The Rise platform is the flagship product being piloted internally — every demo and journal entry builds toward first external client
+- The Rise platform is the flagship product being piloted internally -- every demo and journal entry builds toward first external client
 
 Today's date: ${new Date().toLocaleDateString('en-GB', { weekday:'long', day:'numeric', month:'long', year:'numeric' })}.
 
@@ -425,15 +425,15 @@ ${memoryContext}
 YOUR TASK:
 Produce a structured morning briefing for Chris. Be direct, specific and honest. Do not pad. Do not be vague. If something is uncertain say so. If something has been sitting untouched too long, say so. If Vigil thinks an action should be dropped, say so and why.
 
-Think critically — do not assume signals or opportunities from previous sessions are still valid. Re-evaluate everything fresh.
+Think critically -- do not assume signals or opportunities from previous sessions are still valid. Re-evaluate everything fresh.
 
 Respond ONLY with valid JSON in exactly this structure:
 
 {
   "stateOfPlay": {
-    "summary": "Honest 2-3 sentence macro assessment. Where does E-Group marketing actually stand today? What is the overall momentum — building, stalled, or losing ground?",
+    "summary": "Honest 2-3 sentence macro assessment. Where does E-Group marketing actually stand today? What is the overall momentum -- building, stalled, or losing ground?",
     "confidence": "high|medium|low",
-    "confidenceReason": "why that confidence level — what data is complete vs missing"
+    "confidenceReason": "why that confidence level -- what data is complete vs missing"
   },
   "acquisitions": [
     {
@@ -441,8 +441,8 @@ Respond ONLY with valid JSON in exactly this structure:
       "goal": "What we are trying to achieve with them",
       "status": "not_started|in_progress|responded|meeting_set|proposal_sent|stalled|won|lost",
       "daysSinceActivity": "number or null if never started",
-      "lastActivity": "what actually happened last — or 'No contact made yet'",
-      "vigil_assessment": "Vigil's honest read — is this still worth pursuing? Is the approach right? Is the timing right?",
+      "lastActivity": "what actually happened last -- or 'No contact made yet'",
+      "vigil_assessment": "Vigil's honest read -- is this still worth pursuing? Is the approach right? Is the timing right?",
       "nextAction": "Specific action. Who does what. By when.",
       "urgency": "high|medium|low|drop",
       "facts": [
@@ -454,10 +454,10 @@ Respond ONLY with valid JSON in exactly this structure:
   "marketIntelligence": [
     {
       "title": "Specific thing Chris needs to know",
-      "why_it_matters": "Direct relevance to E-Group — be specific",
+      "why_it_matters": "Direct relevance to E-Group -- be specific",
       "source": "where this comes from",
       "date": "when",
-      "action": "optional — if this requires E-Group to do something"
+      "action": "optional -- if this requires E-Group to do something"
     }
   ],
   "projects": [
@@ -480,11 +480,11 @@ Respond ONLY with valid JSON in exactly this structure:
     "detail": "2-3 sentences. Vigil's honest concern. Not a repeat of the above.",
     "basis": "What evidence or pattern leads to this concern"
   },
-  "memoryUpdate": "What Vigil wants to remember from this session — patterns noticed, things validated, things that should change next time"
+  "memoryUpdate": "What Vigil wants to remember from this session -- patterns noticed, things validated, things that should change next time"
 }`;
 }
 
-// ── RENDER BRIEFING ───────────────────────────────────────────────────────────
+// -- RENDER BRIEFING -----------------------------------------------------------
 
 function renderBriefing(data) {
   const output = document.getElementById('briefing-output');
@@ -494,7 +494,7 @@ function renderBriefing(data) {
   html += '<div style="background:#111;border:1px solid #1A1A1A;border-left:3px solid #C8A96E;border-radius:8px;padding:18px 22px;margin-bottom:20px">'
     + '<div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#444;margin-bottom:8px">State of play</div>'
     + '<div style="font-size:15px;color:#CCC;line-height:1.75;margin-bottom:10px">' + (sop.summary || 'No data') + '</div>'
-    + '<div style="font-size:11px;color:#555">Confidence: <span style="color:' + (cfc[sop.confidence] || '#888') + '">' + ((sop.confidence || '').toUpperCase()) + '</span> — ' + (sop.confidenceReason || '') + '</div>'
+    + '<div style="font-size:11px;color:#555">Confidence: <span style="color:' + (cfc[sop.confidence] || '#888') + '">' + ((sop.confidence || '').toUpperCase()) + '</span> -- ' + (sop.confidenceReason || '') + '</div>'
     + '</div>';
   if (data.acquisitions && data.acquisitions.length) {
     const sc = { not_started:'#555',in_progress:'#60A5FA',responded:'#C8A96E',meeting_set:'#4ADE80',proposal_sent:'#C084FC',stalled:'#F87171',won:'#4ADE80',lost:'#555' };
@@ -591,7 +591,7 @@ function copyDraft(insightId) {
   }
 }
 
-// ── SESSION LOGGING ───────────────────────────────────────────────────────────
+// -- SESSION LOGGING -----------------------------------------------------------
 
 function saveSession(data) {
   const session = {
@@ -622,7 +622,7 @@ function saveSession(data) {
   saveMemory();
 }
 
-// ── LOG MODAL ─────────────────────────────────────────────────────────────────
+// -- LOG MODAL -----------------------------------------------------------------
 
 function openLogModal(insightId, insightTitle, presetOutcome) {
   logTarget = { id: insightId, title: insightTitle };
@@ -661,7 +661,7 @@ function saveLog() {
   alert('Logged to Vigil memory. This will inform future briefings.');
 }
 
-// ── DOCUMENT CLICK OUTSIDE LOG MODAL ─────────────────────────────────────────
+// -- DOCUMENT CLICK OUTSIDE LOG MODAL -----------------------------------------
 
 document.addEventListener('click', e => {
   const modal = document.getElementById('log-modal');
@@ -671,7 +671,7 @@ document.addEventListener('click', e => {
 init();
 
 
-// ── RESEARCH AGENT ────────────────────────────────────────────────────────────
+// -- RESEARCH AGENT ------------------------------------------------------------
 
 async function runResearchAgent() {
   const btn = document.getElementById('research-btn');
@@ -785,7 +785,7 @@ function renderResearchPlan(plan) {
     '<div style="font-size:14px;color:#CCC;line-height:1.75">' + (plan.selfAssessment || '') + '</div>' +
     '</div>';
 
-  html += '<div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#444;margin:0 0 12px;padding-bottom:6px;border-bottom:1px solid #1A1A1A">Proposed research tasks — approve what you want Vigil to run</div>';
+  html += '<div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#444;margin:0 0 12px;padding-bottom:6px;border-bottom:1px solid #1A1A1A">Proposed research tasks -- approve what you want Vigil to run</div>';
 
   const critical = (plan.tasks||[]).filter(t => t.priority === 'critical');
   const high = (plan.tasks||[]).filter(t => t.priority === 'high');
