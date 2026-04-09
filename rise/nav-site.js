@@ -21,6 +21,8 @@
     .nav-drop-item { display:block; padding:11px 20px; font-family:'DM Mono',monospace; font-size:10px; letter-spacing:1.5px; text-transform:uppercase; color:var(--dim); text-decoration:none; transition:all 0.15s; border-bottom:1px solid var(--border); white-space:nowrap; }
     .nav-drop-item:last-child { border-bottom:none; }
     .nav-drop-item:hover { color:var(--gold); background:rgba(200,169,110,0.05); padding-left:26px; }
+    #site-nav { padding:0 60px !important; height:72px !important; }
+    #site-nav .nav-links { gap:40px; }
     .nav-drop-label { display:block; padding:8px 20px 4px; font-family:'DM Mono',monospace; font-size:8px; letter-spacing:2px; text-transform:uppercase; color:var(--muted); border-bottom:1px solid var(--border); }
     .mob-main { font-family:'Syne',sans-serif; font-weight:800; font-size:clamp(26px,7vw,40px); color:var(--white); text-decoration:none; letter-spacing:-0.5px; padding:9px 0; width:80%; text-align:center; transition:color 0.2s; border-bottom:none; display:block; }
     .mob-main:hover { color:var(--gold); }
