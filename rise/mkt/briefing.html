@@ -725,37 +725,44 @@ async function runResearchAgent() {
 }
 
 function buildResearchPlanPrompt(dataCtx, memCtx) {
-  return 'You are Vigil — Deputy CMO for E-Group ICT Software Zrt. You are doing a self-audit of your own knowledge gaps and generating a proactive research plan.' +
-    'Today: ' + new Date().toLocaleDateString('en-GB', {weekday:'long',day:'numeric',month:'long',year:'numeric'}) + '.' +
-    'YOUR CURRENT KNOWLEDGE:' + dataCtx +
-    'YOUR MEMORY:' + memCtx +
-    'YOUR TASK: Audit everything you know. Be brutally honest about what is missing, stale, or assumed. Then generate a prioritised research plan.' +
-    'Think about:' +
-    '1. DATA GAPS — what critical information is completely missing that would change how you reason' +
-    '2. STALE DATA — what information is old enough that it may no longer be accurate' +
-    '3. MARKET INTEL — what is happening right now in target company news, EU policy, competitor moves that you should know about' +
-    '4. ACQUISITION ACTIONS — based on where each relationship stands, what specific research would unblock the next step' +
-    '5. PROACTIVE IDEAS — things nobody asked you to do but that you think would genuinely help E-Group marketing right now' +
-    'For each proposed task, be specific about what you will search for and what you expect to find.' +
-    'Respond ONLY with valid JSON:' +
-    '{' +
-    '"selfAssessment": "2-3 sentences: honest assessment of the current state of Vigils knowledge. What is solid, what is weak, what is dangerous to assume.",' +
-    '"tasks": [' +
-    '{' +
-    '"id": "unique string",' +
-    '"category": "data_gap|stale_data|market_intel|acquisition_action|proactive_idea",' +
-    '"priority": "critical|high|medium|low",' +
-    '"title": "Specific task title",' +
-    '"rationale": "Why this matters right now. Be specific.",' +
-    '"searchQuery": "Exact search query Vigil will use",' +
-    '"expectedFindings": "What Vigil expects to find and how it will change the knowledge base",' +
-    '"wouldUnblock": "What decision or action this research would enable",' +
-    '"estimatedCost": "$0.02"' +
-    '}' +
-    '],' +
-    '"vigilNote": "One thing Vigil wants Chris to know that is not covered by any of the above tasks"' +
-    '}';
+  const today = new Date().toLocaleDateString('en-GB', {weekday:'long',day:'numeric',month:'long',year:'numeric'});
+  return `You are Vigil, Deputy CMO for E-Group ICT Software Zrt. Do a self-audit of your knowledge gaps and generate a proactive research plan.
+
+Today: ${today}
+
+YOUR CURRENT KNOWLEDGE:
+${dataCtx}
+
+YOUR MEMORY:
+${memCtx}
+
+Audit everything you know. Be brutally honest about what is missing, stale, or assumed. Generate a prioritised research plan covering:
+1. DATA GAPS - critical missing information
+2. STALE DATA - information old enough to be inaccurate  
+3. MARKET INTEL - news about target companies, EU policy, competitor moves
+4. ACQUISITION ACTIONS - research that would unblock the next step in each relationship
+5. PROACTIVE IDEAS - things nobody asked you to do but that would genuinely help
+
+Respond ONLY with valid JSON:
+{
+  "selfAssessment": "2-3 sentences honest assessment of Vigils current knowledge quality",
+  "tasks": [
+    {
+      "id": "unique_id",
+      "category": "data_gap|stale_data|market_intel|acquisition_action|proactive_idea",
+      "priority": "critical|high|medium|low",
+      "title": "Specific task title",
+      "rationale": "Why this matters right now",
+      "searchQuery": "Exact search query to use",
+      "expectedFindings": "What Vigil expects to find",
+      "wouldUnblock": "What this research enables",
+      "estimatedCost": "$0.02"
+    }
+  ],
+  "vigilNote": "One thing Vigil wants Chris to know not covered by the tasks"
+}`;
 }
+
 
 let approvedTasks = [];
 let researchPlan = null;
