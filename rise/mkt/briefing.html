@@ -430,48 +430,62 @@ function renderBriefing(data) {
   }
 
   if (data.websiteGaps&&data.websiteGaps.length) {
-    window.allWebsiteGaps = data.websiteGaps;
-    window.currentGapPage = 0;
-    var wgpc = {critical:'#F87171',high:'#C8A96E',medium:'#60A5FA'};
-    var wgbg = {critical:'#2E0D0D',high:'#2E1E0D',medium:'#0D1A2E'};
+    const suppressedCount = (data.websiteGaps || []).filter(g => isGapSuppressed(g)).length;
+    const visibleGaps = (data.websiteGaps || []).filter(g => !isGapSuppressed(g));
+    window.allWebsiteGaps = visibleGaps;
+    
     html += '<div class="section-lbl">Website gaps — Vigil is proposing these changes. Approve each one before anything is touched.</div>';
     html += '<div id="gaps-container">';
-    var pageSize = 10;
-    var startIdx = 0;
-    var endIdx = Math.min(pageSize, data.websiteGaps.length);
-    html += '<div style="font-size:11px;color:#666;margin-bottom:10px">Showing '+(startIdx+1)+'–'+endIdx+' of '+data.websiteGaps.length+' website gaps</div>';
-    data.websiteGaps.slice(startIdx, endIdx).forEach(function(g,idx) {
-      var i = startIdx + idx;
-      var wid = 'wg'+i;
-      html += '<div class="insight-card" id="'+wid+'" style="margin-bottom:10px">';
-      html += '<div class="insight-head" onclick="toggleInsight(\''+wid+'\')">';
-      html += '<div style="flex:1">';
-      html += '<div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">';
-      html += '<span style="font-size:10px;padding:2px 8px;border-radius:3px;background:'+(wgbg[g.priority]||'#1A1A1A')+';color:'+(wgpc[g.priority]||'#555')+';letter-spacing:1px;text-transform:uppercase">Website gap</span>';
-      html += '<span style="font-size:10px;padding:2px 8px;border-radius:3px;background:#1A1A1A;color:'+(wgpc[g.priority]||'#555')+';letter-spacing:1px;text-transform:uppercase">'+(g.priority||'')+'</span>';
+    
+    visibleGaps.slice(0, 10).forEach(function(gap, i) {
+      const existing = getGapStatus(gap);
+      const isDeclined = existing && existing.status === 'declined';
+      const gapEnc = encodeURIComponent(JSON.stringify(gap));
+      const ccId = 'cc-' + btoa(gapKey(gap)).replace(/[^a-zA-Z0-9]/g,'').substring(0,20);
+      const priorityColor = gap.priority === 'critical' ? '#E24B4A' : gap.priority === 'high' ? '#C8A96E' : '#888';
+      html += '<div class="gap-card" style="background:#0D0D0D;border:1px solid #222;border-left:3px solid ' + priorityColor + ';border-radius:4px;padding:16px;margin-bottom:12px' + (isDeclined ? ';border-left-color:#333' : '') + '">';
+      if (isDeclined) html += '<div style="font-size:10px;color:#666;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px">⚠ Previously declined — resurfaced with new data</div>';
+      html += '<div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">';
+      html += '<span style="font-size:10px;padding:2px 8px;border-radius:2px;background:' + priorityColor + '22;color:' + priorityColor + ';letter-spacing:1px;text-transform:uppercase">' + (gap.priority||'medium') + '</span>';
+      html += '<span style="font-size:12px;color:#C8A96E">📄 ' + gap.page + '</span>';
+      html += '<span style="font-size:12px;color:#888">📍 ' + gap.location + '</span>';
       html += '</div>';
-      html += '<div style="font-size:12px;color:#AAA;margin-bottom:6px">📄 <strong>Page:</strong> '+(g.page||'')+' &nbsp;|&nbsp; 📍 <strong>Location:</strong> '+(g.location||'')+'</div>';
-      html += '<div style="font-size:15px;font-weight:600;color:#EEE;margin-bottom:4px">'+(g.gap||'')+'</div>';
-      html += '</div>';
-      html += '<span style="font-size:14px;color:#444" id="chev'+wid+'">v</span>';
-      html += '</div>';
-      html += '<div class="insight-body" id="body'+wid+'">';
-      html += '<div style="margin-top:14px;font-size:13px;color:#888;line-height:1.6;margin-bottom:10px">'+(g.rationale||'')+'</div>';
-      if (g.suggestedCopy) {
-        html += '<div style="margin-bottom:12px">';
-        html += '<div style="font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:#444;margin-bottom:6px">Suggested copy to add</div>';
-        html += '<div style="background:#0D0D0D;border-left:2px solid #C8A96E;padding:12px 16px;border-radius:0 4px 4px 0;font-size:13px;color:#CCC;line-height:1.7;font-style:italic">'+(g.suggestedCopy||'')+'</div>';
-        html += '</div>';
-      }
-      html += '<div style="display:flex;gap:8px;margin-top:14px">';
-      html += '<button class="act-btn primary" onclick="approveWebsiteGap('+i+',\''+wid+'\')">Approve — generate CC prompt</button>';
-      html += '<button class="act-btn danger" onclick="declineWebsiteGap(\''+wid+'\')">Decline</button>';
-      html += '</div>';
+      html += '<div style="font-size:14px;color:#EEE;font-weight:600;margin-bottom:6px">' + gap.gap + '</div>';
+      html += '<div style="font-size:12px;color:#888;margin-bottom:10px;line-height:1.6">' + gap.rationale + '</div>';
+      html += '<div style="background:#0A0A0A;border:1px solid #1a1a1a;border-radius:3px;padding:10px;margin-bottom:12px;font-size:12px;color:#AAA;line-height:1.6"><strong style="color:#EEE;display:block;margin-bottom:4px">Suggested copy:</strong>' + gap.suggestedCopy + '</div>';
+      html += '<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">';
+      html += '<button onclick="approveGap(\'' + gapEnc + '\')" style="font-size:12px;padding:6px 14px;background:#0D1A0D;border:1px solid #2a4a2a;color:#4ADE80;border-radius:3px;cursor:pointer">Approve — generate CC prompt</button>';
+      html += '<div style="position:relative;display:inline-block">';
+      html += '<button onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display===\'block\'?\'none\':\'block\'" style="font-size:12px;padding:6px 14px;background:#1a1a0a;border:1px solid #3a3a1a;color:#C8A96E;border-radius:3px;cursor:pointer">Snooze ▾</button>';
+      html += '<div style="display:none;position:absolute;top:100%;left:0;background:#111;border:1px solid #333;border-radius:3px;z-index:10;min-width:140px">';
+      html += '<div onclick="snoozeGap(\'' + gapEnc + '\',2)" style="padding:8px 14px;font-size:12px;color:#AAA;cursor:pointer;border-bottom:1px solid #222">2 weeks</div>';
+      html += '<div onclick="snoozeGap(\'' + gapEnc + '\',4)" style="padding:8px 14px;font-size:12px;color:#AAA;cursor:pointer;border-bottom:1px solid #222">1 month</div>';
+      html += '<div onclick="snoozeGap(\'' + gapEnc + '\',12)" style="padding:8px 14px;font-size:12px;color:#AAA;cursor:pointer">3 months</div>';
       html += '</div></div>';
+      html += '<button onclick="declineGap(\'' + gapEnc + '\')" style="font-size:12px;padding:6px 14px;background:#1a0a0a;border:1px solid #3a1a1a;color:#E24B4A;border-radius:3px;cursor:pointer">Decline</button>';
+      html += '</div>';
+      html += '<div class="snooze-confirm" style="display:none;font-size:11px;color:#888;margin-top:8px">Snoozed — Vigil will resurface this automatically</div>';
+      html += '<div id="' + ccId + '" style="display:none;margin-top:12px">';
+      html += '<textarea class="cc-text" style="width:100%;height:120px;background:#050505;border:1px solid #2a4a2a;color:#4ADE80;font-family:monospace;font-size:11px;padding:10px;border-radius:3px;resize:vertical"></textarea>';
+      html += '<div style="display:flex;gap:8px;margin-top:6px">';
+      html += '<button onclick="copyCC(this)" style="font-size:11px;padding:5px 12px;background:#0D1A0D;border:1px solid #2a4a2a;color:#4ADE80;border-radius:3px;cursor:pointer">Copy CC Prompt</button>';
+      html += '<button onclick="markImplemented(\'' + gapEnc + '\',this)" style="font-size:11px;padding:5px 12px;background:#111;border:1px solid #333;color:#888;border-radius:3px;cursor:pointer">Mark as Implemented</button>';
+      html += '</div></div>';
+      html += '</div>';
     });
-    if (data.websiteGaps.length > pageSize) {
-      html += '<button style="padding:10px 24px;background:#C8A96E;color:#000;font-size:13px;font-weight:700;border:none;border-radius:6px;cursor:pointer;letter-spacing:0.5px;margin-top:16px" onclick="showNextGaps()">Next 10 →</button>';
+    
+    if (visibleGaps.length > 10) {
+      var shown = 10;
+      html += '<div id="gap-counter" style="font-size:11px;color:#666;margin-bottom:10px">Showing 1–10 of ' + visibleGaps.length + ' website gaps';
+      if (suppressedCount > 0) html += ' (' + suppressedCount + ' suppressed — approved/snoozed)';
+      html += '</div>';
+      html += '<button id="gap-next-btn" onclick="showNextGaps()" style="font-size:12px;padding:8px 20px;background:#111;border:1px solid #333;color:#C8A96E;border-radius:3px;cursor:pointer;margin-bottom:20px">Next 10 →</button>';
+    } else {
+      html += '<div style="font-size:11px;color:#666;margin-bottom:20px">Showing all ' + visibleGaps.length + ' website gaps';
+      if (suppressedCount > 0) html += ' (' + suppressedCount + ' suppressed — approved/snoozed)';
+      html += '</div>';
     }
+    
     html += '</div>';
   }
 
@@ -547,55 +561,6 @@ function approveWebsiteGap(idx, wid) {
 function declineWebsiteGap(wid) {
   var card = document.getElementById(wid);
   if (card) { card.style.opacity = '0.3'; card.style.pointerEvents = 'none'; }
-}
-
-function showNextGaps() {
-  window.currentGapPage = (window.currentGapPage || 0) + 1;
-  var pageSize = 10;
-  var startIdx = window.currentGapPage * pageSize;
-  var endIdx = Math.min(startIdx + pageSize, window.allWebsiteGaps.length);
-  var container = document.getElementById('gaps-container');
-  if (!container || !window.allWebsiteGaps) return;
-  
-  var wgpc = {critical:'#F87171',high:'#C8A96E',medium:'#60A5FA'};
-  var wgbg = {critical:'#2E0D0D',high:'#2E1E0D',medium:'#0D1A2E'};
-  var html = '<div style="font-size:11px;color:#666;margin-bottom:10px">Showing '+(startIdx+1)+'–'+endIdx+' of '+window.allWebsiteGaps.length+' website gaps</div>';
-  
-  window.allWebsiteGaps.slice(startIdx, endIdx).forEach(function(g,idx) {
-    var i = startIdx + idx;
-    var wid = 'wg'+i;
-    html += '<div class="insight-card" id="'+wid+'" style="margin-bottom:10px">';
-    html += '<div class="insight-head" onclick="toggleInsight(\''+wid+'\')">';
-    html += '<div style="flex:1">';
-    html += '<div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">';
-    html += '<span style="font-size:10px;padding:2px 8px;border-radius:3px;background:'+(wgbg[g.priority]||'#1A1A1A')+';color:'+(wgpc[g.priority]||'#555')+';letter-spacing:1px;text-transform:uppercase">Website gap</span>';
-    html += '<span style="font-size:10px;padding:2px 8px;border-radius:3px;background:#1A1A1A;color:'+(wgpc[g.priority]||'#555')+';letter-spacing:1px;text-transform:uppercase">'+(g.priority||'')+'</span>';
-    html += '</div>';
-    html += '<div style="font-size:12px;color:#AAA;margin-bottom:6px">📄 <strong>Page:</strong> '+(g.page||'')+' &nbsp;|&nbsp; 📍 <strong>Location:</strong> '+(g.location||'')+'</div>';
-    html += '<div style="font-size:15px;font-weight:600;color:#EEE;margin-bottom:4px">'+(g.gap||'')+'</div>';
-    html += '</div>';
-    html += '<span style="font-size:14px;color:#444" id="chev'+wid+'">v</span>';
-    html += '</div>';
-    html += '<div class="insight-body" id="body'+wid+'">';
-    html += '<div style="margin-top:14px;font-size:13px;color:#888;line-height:1.6;margin-bottom:10px">'+(g.rationale||'')+'</div>';
-    if (g.suggestedCopy) {
-      html += '<div style="margin-bottom:12px">';
-      html += '<div style="font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:#444;margin-bottom:6px">Suggested copy to add</div>';
-      html += '<div style="background:#0D0D0D;border-left:2px solid #C8A96E;padding:12px 16px;border-radius:0 4px 4px 0;font-size:13px;color:#CCC;line-height:1.7;font-style:italic">'+(g.suggestedCopy||'')+'</div>';
-      html += '</div>';
-    }
-    html += '<div style="display:flex;gap:8px;margin-top:14px">';
-    html += '<button class="act-btn primary" onclick="approveWebsiteGap('+i+',\''+wid+'\')">Approve — generate CC prompt</button>';
-    html += '<button class="act-btn danger" onclick="declineWebsiteGap(\''+wid+'\')">Decline</button>';
-    html += '</div>';
-    html += '</div></div>';
-  });
-  
-  if (endIdx < window.allWebsiteGaps.length) {
-    html += '<button style="padding:10px 24px;background:#C8A96E;color:#000;font-size:13px;font-weight:700;border:none;border-radius:6px;cursor:pointer;letter-spacing:0.5px;margin-top:16px" onclick="showNextGaps()">Next 10 →</button>';
-  }
-  
-  container.innerHTML = html;
 }
 
 function runResearchAgent() {
