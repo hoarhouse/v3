@@ -29,7 +29,10 @@
   `;
 
   document.body.insertBefore(nav, document.body.firstChild);
-  // Hide any legacy header elements from old page versions
-  const legacyHeader = document.querySelector('.header');
-  if (legacyHeader) legacyHeader.style.display = 'none';
+  // Hide any legacy header/topbar elements from old page versions
+  ['header', '.header', '.topbar'].forEach(sel => {
+    document.querySelectorAll(sel).forEach(el => {
+      if (el.id !== 'vigil-topbar') el.style.display = 'none';
+    });
+  });
 })();
