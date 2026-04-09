@@ -134,6 +134,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;ba
   </div>
 
   <div id="briefing-output"></div>
+<div id="research-output"></div>
 
   <div class="memory-section" id="memory-section">
     <div class="memory-title">Vigil Memory</div>
@@ -668,6 +669,265 @@ document.addEventListener('click', e => {
 });
 
 init();
+
+
+// ── RESEARCH AGENT ────────────────────────────────────────────────────────────
+
+async function runResearchAgent() {
+  const btn = document.getElementById('research-btn');
+  const output = document.getElementById('research-output');
+  const thinkingBox = document.getElementById('thinking-box');
+  btn.disabled = true; btn.textContent = '⟳ Thinking...';
+  thinkingBox.style.display = 'block';
+  output.innerHTML = '';
+
+  setThinking('Vigil is auditing its own knowledge gaps...');
+  const data = await loadKnowledgeData();
+  if (!data) { btn.disabled = false; btn.textContent = '▶ Research Agent'; thinkingBox.style.display = 'none'; return; }
+
+  const memCtx = buildMemoryContext();
+  const dataCtx = buildDataContext(data);
+
+  setThinking('Vigil is generating its research plan...');
+
+  const prompt = buildResearchPlanPrompt(dataCtx, memCtx);
+  try {
+    const res = await fetch(PROXY + '/api/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 4000,
+        messages: [{ role: 'user', content: prompt }]
+      })
+    });
+    const resp = await res.json();
+    if (resp.error) throw new Error(resp.error.message);
+    const text = resp.content.map(b => b.text || '').join('');
+    trackCost('Vigil Research Plan', resp.usage.input_tokens, resp.usage.output_tokens);
+
+    let plan;
+    try {
+      plan = JSON.parse(text.replace(/```json|```/g, '').trim());
+    } catch(e) {
+      output.innerHTML = '<div style="color:#E24B4A;padding:20px">Failed to parse research plan. Raw: ' + text.substring(0,200) + '</div>';
+      btn.disabled = false; btn.textContent = '▶ Research Agent';
+      thinkingBox.style.display = 'none';
+      return;
+    }
+
+    renderResearchPlan(plan);
+  } catch(e) {
+    output.innerHTML = '<div style="color:#E24B4A;padding:20px">Error: ' + e.message + '</div>';
+  }
+  thinkingBox.style.display = 'none';
+  btn.disabled = false; btn.textContent = '▶ Research Agent';
+}
+
+function buildResearchPlanPrompt(dataCtx, memCtx) {
+  return 'You are Vigil — Deputy CMO for E-Group ICT Software Zrt. You are doing a self-audit of your own knowledge gaps and generating a proactive research plan.' +
+    'Today: ' + new Date().toLocaleDateString('en-GB', {weekday:'long',day:'numeric',month:'long',year:'numeric'}) + '.' +
+    'YOUR CURRENT KNOWLEDGE:' + dataCtx +
+    'YOUR MEMORY:' + memCtx +
+    'YOUR TASK: Audit everything you know. Be brutally honest about what is missing, stale, or assumed. Then generate a prioritised research plan.' +
+    'Think about:' +
+    '1. DATA GAPS — what critical information is completely missing that would change how you reason' +
+    '2. STALE DATA — what information is old enough that it may no longer be accurate' +
+    '3. MARKET INTEL — what is happening right now in target company news, EU policy, competitor moves that you should know about' +
+    '4. ACQUISITION ACTIONS — based on where each relationship stands, what specific research would unblock the next step' +
+    '5. PROACTIVE IDEAS — things nobody asked you to do but that you think would genuinely help E-Group marketing right now' +
+    'For each proposed task, be specific about what you will search for and what you expect to find.' +
+    'Respond ONLY with valid JSON:' +
+    '{' +
+    '"selfAssessment": "2-3 sentences: honest assessment of the current state of Vigils knowledge. What is solid, what is weak, what is dangerous to assume.",' +
+    '"tasks": [' +
+    '{' +
+    '"id": "unique string",' +
+    '"category": "data_gap|stale_data|market_intel|acquisition_action|proactive_idea",' +
+    '"priority": "critical|high|medium|low",' +
+    '"title": "Specific task title",' +
+    '"rationale": "Why this matters right now. Be specific.",' +
+    '"searchQuery": "Exact search query Vigil will use",' +
+    '"expectedFindings": "What Vigil expects to find and how it will change the knowledge base",' +
+    '"wouldUnblock": "What decision or action this research would enable",' +
+    '"estimatedCost": "$0.02"' +
+    '}' +
+    '],' +
+    '"vigilNote": "One thing Vigil wants Chris to know that is not covered by any of the above tasks"' +
+    '}';
+}
+
+let approvedTasks = [];
+let researchPlan = null;
+
+function renderResearchPlan(plan) {
+  researchPlan = plan;
+  approvedTasks = [];
+  const output = document.getElementById('research-output');
+  const catColor = {
+    data_gap: { bg:'#2E0D0D', col:'#F87171', label:'Data gap' },
+    stale_data: { bg:'#2E1A0D', col:'#FB923C', label:'Stale data' },
+    market_intel: { bg:'#0D1A2E', col:'#60A5FA', label:'Market intel' },
+    acquisition_action: { bg:'#0D2E1E', col:'#4ADE80', label:'Acquisition action' },
+    proactive_idea: { bg:'#1E1A2E', col:'#C084FC', label:'Proactive idea' }
+  };
+  const priColor = { critical:'#F87171', high:'#C8A96E', medium:'#60A5FA', low:'#555' };
+
+  let html = '<div style="background:#111;border:1px solid #1A1A1A;border-left:3px solid #C8A96E;border-radius:8px;padding:18px 22px;margin-bottom:20px;margin-top:24px">' +
+    '<div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#444;margin-bottom:8px">Vigil self-assessment</div>' +
+    '<div style="font-size:14px;color:#CCC;line-height:1.75">' + (plan.selfAssessment || '') + '</div>' +
+    '</div>';
+
+  html += '<div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#444;margin:0 0 12px;padding-bottom:6px;border-bottom:1px solid #1A1A1A">Proposed research tasks — approve what you want Vigil to run</div>';
+
+  const critical = (plan.tasks||[]).filter(t => t.priority === 'critical');
+  const high = (plan.tasks||[]).filter(t => t.priority === 'high');
+  const rest = (plan.tasks||[]).filter(t => !['critical','high'].includes(t.priority));
+  const sorted = [...critical, ...high, ...rest];
+
+  sorted.forEach((task, i) => {
+    const cc = catColor[task.category] || catColor.proactive_idea;
+    html += '<div class="insight-card" id="rtask-' + i + '" style="margin-bottom:10px">' +
+      '<div style="padding:16px 20px">' +
+      '<div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:10px">' +
+      '<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">' +
+      '<span style="font-size:10px;padding:2px 8px;border-radius:3px;background:' + cc.bg + ';color:' + cc.col + ';letter-spacing:1px;text-transform:uppercase">' + cc.label + '</span>' +
+      '<span style="font-size:10px;padding:2px 8px;border-radius:3px;background:#1A1A1A;color:' + (priColor[task.priority]||'#555') + ';letter-spacing:1px;text-transform:uppercase">' + (task.priority||'') + '</span>' +
+      '</div>' +
+      '<span style="font-size:11px;color:#444">' + (task.estimatedCost||'') + '</span>' +
+      '</div>' +
+      '<div style="font-size:15px;font-weight:600;color:#EEE;margin-bottom:5px">' + (task.title||'') + '</div>' +
+      '<div style="font-size:13px;color:#888;line-height:1.6;margin-bottom:8px">' + (task.rationale||'') + '</div>' +
+      '<div style="background:#0D0D0D;border-radius:4px;padding:8px 12px;margin-bottom:8px">' +
+      '<div style="font-size:10px;color:#444;letter-spacing:1px;text-transform:uppercase;margin-bottom:3px">Search query</div>' +
+      '<div style="font-size:12px;color:#C8A96E;font-family:monospace">' + (task.searchQuery||'') + '</div>' +
+      '</div>' +
+      '<div style="font-size:12px;color:#666;margin-bottom:8px"><strong style="color:#555">Expects to find:</strong> ' + (task.expectedFindings||'') + '</div>' +
+      '<div style="font-size:12px;color:#666;margin-bottom:12px"><strong style="color:#555">Would unblock:</strong> ' + (task.wouldUnblock||'') + '</div>' +
+      '<div style="display:flex;gap:8px">' +
+      '<button class="act-btn primary" id="approve-' + i + '" onclick="toggleApprove(' + i + ','' + (task.id||'t'+i) + '',this)">Approve</button>' +
+      '<button class="act-btn" onclick="skipTask(' + i + ')">Skip</button>' +
+      '</div>' +
+      '</div>' +
+      '</div>';
+  });
+
+  if (plan.vigilNote) {
+    html += '<div style="background:#0D0D0D;border:1px solid #2A2A2A;border-left:3px solid #C084FC;border-radius:8px;padding:14px 18px;margin-bottom:20px">' +
+      '<div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#C084FC;margin-bottom:6px">Vigil also wants you to know</div>' +
+      '<div style="font-size:13px;color:#888;line-height:1.6">' + plan.vigilNote + '</div>' +
+      '</div>';
+  }
+
+  html += '<div style="display:flex;gap:10px;margin-top:16px" id="execute-row" style="display:none">' +
+    '<button class="run-btn" id="execute-btn" onclick="executeApproved()" style="display:none">Run approved tasks</button>' +
+    '<button class="act-btn" onclick="approveAll()">Approve all</button>' +
+    '</div>';
+
+  output.innerHTML = html;
+}
+
+function toggleApprove(idx, taskId, btn) {
+  const task = researchPlan.tasks.find((t,i) => (t.id||'t'+i) === taskId || i === idx);
+  const alreadyApproved = approvedTasks.includes(taskId);
+  if (alreadyApproved) {
+    approvedTasks = approvedTasks.filter(id => id !== taskId);
+    btn.textContent = 'Approve';
+    btn.classList.remove('approved');
+    document.getElementById('rtask-' + idx).style.borderColor = '';
+  } else {
+    approvedTasks.push(taskId);
+    btn.textContent = 'Approved ✓';
+    btn.style.background = '#4ADE80';
+    btn.style.borderColor = '#4ADE80';
+    btn.style.color = '#000';
+    document.getElementById('rtask-' + idx).style.borderLeft = '3px solid #4ADE80';
+  }
+  const execBtn = document.getElementById('execute-btn');
+  execBtn.style.display = approvedTasks.length > 0 ? 'block' : 'none';
+}
+
+function skipTask(idx) {
+  const card = document.getElementById('rtask-' + idx);
+  if (card) { card.style.opacity = '0.3'; card.style.pointerEvents = 'none'; }
+}
+
+function approveAll() {
+  (researchPlan.tasks || []).forEach((task, i) => {
+    const id = task.id || 't' + i;
+    if (!approvedTasks.includes(id)) {
+      const btn = document.getElementById('approve-' + i);
+      if (btn) toggleApprove(i, id, btn);
+    }
+  });
+}
+
+async function executeApproved() {
+  const execBtn = document.getElementById('execute-btn');
+  execBtn.disabled = true; execBtn.textContent = 'Running...';
+  const output = document.getElementById('research-output');
+  const resultsDiv = document.createElement('div');
+  resultsDiv.style.marginTop = '24px';
+  resultsDiv.innerHTML = '<div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#444;margin-bottom:12px;padding-bottom:6px;border-bottom:1px solid #1A1A1A">Research results</div>';
+  output.appendChild(resultsDiv);
+
+  const tasksToRun = (researchPlan.tasks || []).filter((t, i) => approvedTasks.includes(t.id || 't' + i));
+
+  for (let i = 0; i < tasksToRun.length; i++) {
+    const task = tasksToRun[i];
+    const taskDiv = document.createElement('div');
+    taskDiv.style.cssText = 'background:#111;border:1px solid #1A1A1A;border-radius:8px;padding:14px 18px;margin-bottom:10px';
+    taskDiv.innerHTML = '<div style="font-size:13px;font-weight:600;color:#EEE;margin-bottom:6px">' + task.title + '</div>' +
+      '<div style="font-size:12px;color:#555">Researching...</div>';
+    resultsDiv.appendChild(taskDiv);
+
+    try {
+      const searchRes = await fetch(PROXY + '/api/messages', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          model: 'claude-sonnet-4-20250514',
+          max_tokens: 1500,
+          tools: [{ type: 'web_search_20250305', name: 'web_search' }],
+          messages: [{
+            role: 'user',
+            content: 'You are Vigil, E-Group marketing intelligence system. Research this specific query and return findings as structured JSON.' +
+              'Search query: ' + task.searchQuery +
+              'Context: ' + task.rationale +
+              'Return JSON: { "findings": "2-3 paragraph summary of what you found", "keyFacts": ["fact1","fact2","fact3"], "dataJsonUpdate": "one sentence describing what should be added to data.json", "urgency": "high|medium|low", "confidence": "high|medium|low" }'
+          }]
+        })
+      });
+      const searchData = await searchRes.json();
+      trackCost('Research: ' + task.title, searchData.usage?.input_tokens || 0, searchData.usage?.output_tokens || 0);
+      const text = (searchData.content || []).map(b => b.text || '').join('');
+      let result;
+      try { result = JSON.parse(text.replace(/```json|```/g, '').trim()); }
+      catch(e) { result = { findings: text, keyFacts: [], dataJsonUpdate: '', urgency: 'medium', confidence: 'low' }; }
+
+      taskDiv.innerHTML = '<div style="font-size:13px;font-weight:600;color:#EEE;margin-bottom:8px">' + task.title + '</div>' +
+        '<div style="font-size:13px;color:#888;line-height:1.6;margin-bottom:8px">' + (result.findings||'') + '</div>' +
+        (result.keyFacts && result.keyFacts.length ? '<div style="margin-bottom:8px">' + result.keyFacts.map(f => '<div style="font-size:12px;color:#AAA;padding:3px 0;border-bottom:1px solid #141414">● ' + f + '</div>').join('') + '</div>' : '') +
+        (result.dataJsonUpdate ? '<div style="background:#0D1A0D;border-left:2px solid #4ADE80;padding:8px 12px;border-radius:0 4px 4px 0;font-size:12px;color:#4ADE80;margin-top:8px">data.json update: ' + result.dataJsonUpdate + '</div>' : '');
+
+      // Save finding to memory
+      memory.patterns = memory.patterns || [];
+      memory.patterns.push('[Research ' + new Date().toLocaleDateString() + '] ' + task.title + ': ' + (result.dataJsonUpdate || result.findings?.substring(0,100)));
+      if (memory.patterns.length > 50) memory.patterns = memory.patterns.slice(-50);
+      saveMemory();
+
+    } catch(e) {
+      taskDiv.innerHTML = '<div style="font-size:13px;color:#EEE;margin-bottom:4px">' + task.title + '</div><div style="font-size:12px;color:#E24B4A">Error: ' + e.message + '</div>';
+    }
+
+    // Small delay between calls
+    if (i < tasksToRun.length - 1) await new Promise(r => setTimeout(r, 2000));
+  }
+
+  resultsDiv.innerHTML += '<div style="margin-top:16px;padding:14px 18px;background:#0D0D0D;border:1px solid #2A2A2A;border-radius:8px;font-size:13px;color:#888">Research complete. Review findings above and update data.json manually for anything Vigil found that should be permanent knowledge. Vigil has saved key findings to memory for the next briefing.</div>';
+  execBtn.disabled = false; execBtn.textContent = 'Run approved tasks';
+}
+
 </script>
 <script src="nav.js"></script>
 </body>
