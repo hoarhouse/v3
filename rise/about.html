@@ -276,9 +276,11 @@ footer { background:var(--black); border-top:1px solid var(--border); padding:48
 .nav-has-dropdown .nav-dropdown li a:hover { color: #EEE; background: #141414; }
 .nav-has-dropdown .nav-dropdown li:first-child a { color: #C8A96E; }
 .nav-has-dropdown .nav-dropdown li:first-child { border-bottom: 1px solid #1E1E1E; margin-bottom: 4px; }
+nav:not(#site-nav) { display: none !important; }
+.nav-mobile-menu:not(#site-nav-mobile) { display: none !important; }
 </style>
 </head>
-<body>
+<body data-page="about">
 
 <div class="cursor" id="cursor"></div>
 <div class="cursor-ring" id="cursorRing"></div>
@@ -691,5 +693,6 @@ mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => 
   document.body.style.overflow = '';
 }));
 </script>
+<script src="nav-site.js"></script>
 </body>
 </html>
