@@ -421,10 +421,18 @@ function renderBriefing(data) {
   }
 
   if (data.websiteGaps&&data.websiteGaps.length) {
+    window.allWebsiteGaps = data.websiteGaps;
+    window.currentGapPage = 0;
     var wgpc = {critical:'#F87171',high:'#C8A96E',medium:'#60A5FA'};
     var wgbg = {critical:'#2E0D0D',high:'#2E1E0D',medium:'#0D1A2E'};
     html += '<div class="section-lbl">Website gaps — Vigil is proposing these changes. Approve each one before anything is touched.</div>';
-    data.websiteGaps.forEach(function(g,i) {
+    html += '<div id="gaps-container">';
+    var pageSize = 10;
+    var startIdx = 0;
+    var endIdx = Math.min(pageSize, data.websiteGaps.length);
+    html += '<div style="font-size:11px;color:#666;margin-bottom:10px">Showing '+(startIdx+1)+'–'+endIdx+' of '+data.websiteGaps.length+' website gaps</div>';
+    data.websiteGaps.slice(startIdx, endIdx).forEach(function(g,idx) {
+      var i = startIdx + idx;
       var wid = 'wg'+i;
       html += '<div class="insight-card" id="'+wid+'" style="margin-bottom:10px">';
       html += '<div class="insight-head" onclick="toggleInsight(\''+wid+'\')">';
@@ -452,6 +460,10 @@ function renderBriefing(data) {
       html += '</div>';
       html += '</div></div>';
     });
+    if (data.websiteGaps.length > pageSize) {
+      html += '<button style="padding:10px 24px;background:#C8A96E;color:#000;font-size:13px;font-weight:700;border:none;border-radius:6px;cursor:pointer;letter-spacing:0.5px;margin-top:16px" onclick="showNextGaps()">Next 10 →</button>';
+    }
+    html += '</div>';
   }
 
   if (data.vigilConcern) {
