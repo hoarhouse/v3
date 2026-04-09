@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 2,
   "lastUpdated": "2026-04-09",
   "companies": [
     {
@@ -221,6 +221,16 @@
       "connection": "MoU signed — sovereign AI stack for European enterprise",
       "opportunity": "Joint go-to-market for EU enterprise AI",
       "notes": "Strategic commercial partner. MoU already signed. Key for international expansion."
+    },
+    {
+      "id": "c-mavir",
+      "name": "MAVIR",
+      "type": "client",
+      "sector": "EnergyTech / Utility",
+      "country": "Hungary",
+      "connection": "Active client — 25+ years ongoing cooperation on mission-critical settlement systems",
+      "opportunity": "Expand into AI-powered grid analytics, anomaly detection, and sovereign data infrastructure",
+      "notes": "Hungarian electricity transmission system operator. E-Group supports, extends and modernises their critical market systems. This is a crown jewel reference client alongside ESA and Hungarian Government."
     }
   ],
   "people": [
@@ -773,6 +783,62 @@
         "c7",
         "p-sk"
       ]
+    },
+    {
+      "id": "ev21",
+      "date": "2026-04-09",
+      "type": "milestone",
+      "description": "Full product portfolio documented by Tibor (COO/CFO). Confirmed product lineup: MyD and CORPEX are live production products. FedX, COIOS, ProofX, SpadaX, GENESIS are IPCEI-CIS products in active development. Electric Utility solution is live with MAVIR client (25+ years). Total portfolio spans FinTech, HealthTech, GovTech, EnergyTech and SpaceTech.",
+      "source": "Tibor Farkas internal product briefing, April 2026",
+      "relatedEntities": [
+        "c1",
+        "c2",
+        "c-mavir"
+      ]
+    },
+    {
+      "id": "ev22",
+      "date": "2026-04-09",
+      "type": "milestone",
+      "description": "Antal Kuthy confirmed as sitting on the EU Industry Steering Board of IPCEI-CIS and leading the AI Cluster. E-Group has R&D offices in Pécs and Miskolc in addition to Budapest HQ. Network spans US, Europe and Asia. ~90 professionals plus 50+ external associates.",
+      "source": "E-Group 2026 company introduction document",
+      "relatedEntities": [
+        "con1"
+      ]
+    },
+    {
+      "id": "ev23",
+      "date": "2026-04-09",
+      "type": "milestone",
+      "description": "FedX confirmed with 8 active biobank clients, 50+ providers in HeliX health data space, and 12K individuals data unified. EHDEN certified (OMOP). This is a significant live deployment that Vigil was not previously aware of.",
+      "source": "FedX product leaflet, Tibor Farkas, April 2026",
+      "relatedEntities": [
+        "prod-fedx",
+        "h1",
+        "h2",
+        "h3"
+      ]
+    },
+    {
+      "id": "ev24",
+      "date": "2026-04-09",
+      "type": "milestone",
+      "description": "MAVIR confirmed as long-standing E-Group client (25+ years). Hungarian electricity transmission system operator. Mission-critical settlement systems, market modelling and regulatory change management. This is E-Group's third major crown jewel reference client alongside ESA and Hungarian Government.",
+      "source": "Electric Utility leaflet, Tibor Farkas, April 2026",
+      "relatedEntities": [
+        "c-mavir"
+      ]
+    },
+    {
+      "id": "ev25",
+      "date": "2026-04-09",
+      "type": "milestone",
+      "description": "ProofX (name not final) confirmed as ESA-partnership product combining Galileo OSNMA cryptographic authentication with C2PA tamper-proof media standard and eIDAS identity. Optimised for Airlot S1 drone. Target sectors: insurance claim submission, media authentication, facility management. Court-admissible evidence chain is the core value proposition.",
+      "source": "ProofX rollup and leaflet, Tibor Farkas, April 2026",
+      "relatedEntities": [
+        "c1",
+        "prod-proofx"
+      ]
     }
   ],
   "actionLog": [],
@@ -856,6 +922,176 @@
       "description": "French enterprise AI company specialising in private, on-premise LLM deployments for regulated industries. Strong in French public sector.",
       "differentiator": "LightOn provides the model. E-Group provides the full sovereign AI stack including knowledge graph, connectors, identity, and sector applications. Different layers of the same stack.",
       "watchFor": "Any CEE expansion or partnership with a CEE systems integrator."
+    }
+  ],
+  "products": [
+    {
+      "id": "prod-myd",
+      "name": "MyD (IDX/SDX)",
+      "status": "production",
+      "tagline": "Modular digital identity and trust orchestration for regulated service environments",
+      "description": "White-labelled mobile application combining trust services with IDX identity and access management and SDX electronic signature capabilities. Hungary's EUDI Wallet implementation (DÁP). Supports B2C, G2C, B2B and G2B scenarios. Includes biometric identification with liveness and AI-detection, eIDAS-compliant services, post-quantum cryptography e-signatures, and electronic registered delivery.",
+      "sectors": [
+        "GovTech",
+        "FinTech"
+      ],
+      "clients": [
+        "Hungarian Government (KAÜ national digital identity)"
+      ],
+      "keyFacts": [
+        "Live national EUDI Wallet for Hungary",
+        "Post-quantum cryptography support",
+        "White-label ready for technology partners",
+        "eIDAS 2.0 compliant"
+      ]
+    },
+    {
+      "id": "prod-corpex",
+      "name": "CORPEX",
+      "status": "production",
+      "tagline": "Proven corporate digital banking front-end for faster fintech partner delivery",
+      "description": "Corporate internet banking solution for financial institutions serving corporate customers from SME to enterprise. Combines payments, accounts, reporting, trade finance, cash and card services, messaging, user administration, and Host-to-Host connectivity. Browser-based, cloud-agnostic.",
+      "sectors": [
+        "FinTech"
+      ],
+      "clients": [
+        "Financial institutions (names not disclosed)"
+      ],
+      "keyFacts": [
+        "Proven deployment history",
+        "Granular authorisation and multi-authentication",
+        "ERP connectivity",
+        "SCA, SSL/TLS, biometrics and PKI support"
+      ]
+    },
+    {
+      "id": "prod-fedx",
+      "name": "FedX",
+      "status": "active-ipcei",
+      "tagline": "Compliant federated AI for sensitive, distributed data — data stays, AI travels",
+      "description": "Sovereign federated AI platform enabling secure collaboration on private data without moving it. Creates compliant environments from day one. Minimal-code migration from open-source prototypes. Containerised cloud-edge deployment across AWS, Azure, Arsys and more. Operationally validated across major national and European health data ecosystems.",
+      "sectors": [
+        "HealthTech",
+        "GovTech",
+        "Research"
+      ],
+      "clients": [
+        "8 active biobanks",
+        "50+ providers in HeliX health data space"
+      ],
+      "keyFacts": [
+        "8 biobanks actively using FedX",
+        "12K individuals data unified",
+        "EHDEN certified (OMOP)",
+        "IPCEI-CIS / FedEU.ai platform",
+        "GDPR and EU AI Act compliant by design"
+      ]
+    },
+    {
+      "id": "prod-coios",
+      "name": "COIOS",
+      "status": "active-ipcei",
+      "tagline": "Cognitive Open Intelligence Operating Sovereign — data stays, AI travels",
+      "description": "Sovereign AI orchestration platform that lets local LLMs, federated learning, and agent-driven workflows run on local data so sensitive information stays under organisational control. Combines sovereign storage, trusted computation, explainable AI (XAI), and open integration layers. White-label ready for embedding and customisation by system integrators.",
+      "sectors": [
+        "FinTech",
+        "HealthTech",
+        "GovTech",
+        "EnergyTech"
+      ],
+      "clients": [
+        "Technology partners (B2B)"
+      ],
+      "keyFacts": [
+        "White-label ready",
+        "Local LLM + federated learning",
+        "Agentic orchestration with graph composer",
+        "GDPR, HIPAA, EU AI Act compliant",
+        "Google, Okta, Auth0, Airbyte integrations"
+      ]
+    },
+    {
+      "id": "prod-proofx",
+      "name": "ProofX",
+      "status": "active-ipcei",
+      "tagline": "Seeing is Believing. Again.",
+      "description": "Tamper-proof photo and video authentication platform. Creates a secure Root of Trust at the exact second of capture using Galileo OSNMA satellite-based cryptographic timestamps and geolocation. End-to-end tamper-proof evidence chain using C2PA standard. Optional eIDAS-compliant KYC creator identity assurance. Optimised for Airlot S1 drone for tamper-proof aerial intelligence. Name not final.",
+      "sectors": [
+        "SpaceTech",
+        "Insurance",
+        "Media",
+        "Facility Management"
+      ],
+      "clients": [
+        "ESA (partnership)"
+      ],
+      "keyFacts": [
+        "Galileo OSNMA cryptographic authentication",
+        "C2PA tamper-proof metadata",
+        "eIDAS + AML creator identity",
+        "EU AI Act compliant real-or-AI transparency",
+        "Optimised for Airlot S1 drone",
+        "Court-admissible evidence chain"
+      ]
+    },
+    {
+      "id": "prod-spadax",
+      "name": "SpadaX",
+      "status": "active-ipcei",
+      "tagline": "Real-time sensor analytics and anomaly detection for space and ground infrastructure",
+      "description": "Real-time sensor analytics, anomaly detection, and predictive maintenance platform. Simulate-then-detect methodology injects anomalies into real Galileo GNSS data to train and validate AI models against ground truth. Includes autonomous medical diagnostics combining COTS point-of-care blood analysis with AI for crew health monitoring. Mission telemetry protection.",
+      "sectors": [
+        "SpaceTech",
+        "HealthTech",
+        "Critical Infrastructure"
+      ],
+      "clients": [
+        "ESA (partnership)"
+      ],
+      "keyFacts": [
+        "Proactive anomaly detection on Galileo ground station data",
+        "Anomaly injection tool for AI training validation",
+        "Autonomous medical diagnostics for space crews",
+        "Mission-ready validation framework"
+      ]
+    },
+    {
+      "id": "prod-genesis",
+      "name": "GENESIS",
+      "status": "active-ipcei",
+      "tagline": "Generative EO Satellite Imagery Simulator",
+      "description": "Proprietary Generative Earth Observation Satellite Imagery Simulator that produces vast, photorealistic synthetic datasets for AI model training. Eliminates the bottleneck of slow, costly real-world data acquisition. Powers predictive and scenario modelling, fills critical archive gaps, and enables rare event detection and future scenario simulation.",
+      "sectors": [
+        "SpaceTech"
+      ],
+      "clients": [
+        "ESA (partnership)"
+      ],
+      "keyFacts": [
+        "Proprietary synthetic satellite imagery generation",
+        "Enables AI training without slow real-world data acquisition",
+        "Rare event detection and predictive tasking",
+        "Part of end-to-end EO AI strategy"
+      ]
+    },
+    {
+      "id": "prod-electric",
+      "name": "Electric Utility Solution",
+      "status": "production",
+      "tagline": "Secure, regulation-ready systems for mission-critical utility markets",
+      "description": "Settlement system support, market modelling, and regulatory change management for transmission system operators and utility market teams. Supports KÁT, METÁR, balancing energy, and tiered pricing. 15-second and 1-minute settlement readiness. Master data registry and customer database integration.",
+      "sectors": [
+        "EnergyTech"
+      ],
+      "clients": [
+        "MAVIR (Hungarian transmission system operator)"
+      ],
+      "keyFacts": [
+        "25+ years of ongoing cooperation with MAVIR",
+        "Mission-critical settlement system support",
+        "Renewable energy market support",
+        "15-second settlement window capability"
+      ]
     }
   ]
 }
