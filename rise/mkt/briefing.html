@@ -313,6 +313,7 @@ function runBriefing() {
       'E-Group: Budapest-based AI infrastructure company, est.1993, 110+ staff, 50 AI engineers. Products: Rise AI platform (in pilot), Essence organisational intelligence, MyD Wallet (Hungarys national EUDI Wallet), KAU national digital identity, GraDPaLM medical AI. Key clients: ESA (photo verification), Hungarian Government (KAU + neonatal tracking). Consortium positions: Co-leads IPCEI-CIS WS3 + AI Cluster, DOME member, HeliX spearhead, eIDAS MyD implementer. Partner: Kellton (MoU signed).\n\n' +
       'Today: ' + today + '\n\n' +
       'KNOWLEDGE BASE:\n' + dataCtx + '\n\n' +
+      'THE E-GROUP WEBSITE (current content + gaps):\n' + websiteCtx + '\n\n' +
       'MEMORY:\n' + memCtx + '\n\n' +
       'Produce a structured morning briefing. Be direct, honest, specific. Re-evaluate everything fresh - do not assume prior signals are still valid.\n\n' +
       'Respond ONLY with valid JSON:\n' +
@@ -352,6 +353,7 @@ function runBriefing() {
       output.innerHTML = '<div style="color:#E24B4A;padding:20px">Error: ' + e.message + '<br><br>Make sure your proxy is running on port 3000.</div>';
       thinkingBox.style.display = 'none'; btn.disabled = false; btn.textContent = 'Run Vigil Briefing';
     });
+    }); // close wdPromise
   });
 }
 
