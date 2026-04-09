@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vigil — E-Group Marketing Intelligence</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;background:#080808;color:#EEE;min-height:100vh}
+.topbar{background:#0A0A0A;border-bottom:1px solid #1A1A1A;padding:0 32px;display:flex;align-items:center;justify-content:space-between;height:52px;position:sticky;top:0;z-index:100}
+.topbar-left{display:flex;align-items:center;gap:24px}
+.logo{font-size:18px;font-weight:900;color:#C8A96E;letter-spacing:-0.5px}
+.vigil-name{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#444}
+.nav-links{display:flex;gap:4px}
+.nav-link{padding:6px 12px;font-size:12px;letter-spacing:1px;text-transform:uppercase;color:#555;text-decoration:none;border-radius:4px;transition:color 0.2s}
+.nav-link:hover{color:#999}
+.nav-link.active{color:#C8A96E}
+.cost-bar{display:flex;align-items:center;gap:20px;cursor:pointer;position:relative}
+.cost-item{display:flex;flex-direction:column;align-items:flex-end}
+.cost-val{font-size:13px;font-weight:600;color:#C8A96E}
+.cost-lbl{font-size:9px;color:#444;letter-spacing:1px;text-transform:uppercase;margin-top:1px}
+.cost-panel{display:none;position:absolute;top:52px;right:0;background:#0D0D0D;border:1px solid #1A1A1A;border-radius:8px;width:360px;padding:16px;z-index:200;max-height:400px;overflow-y:auto}
+.cost-panel.open{display:block}
+.cost-log-item{display:flex;justify-content:space-between;font-size:12px;color:#888;padding:6px 0;border-bottom:1px solid #141414}
+.cost-log-item:last-child{border-bottom:none}
+.cost-log-amt{color:#C8A96E;font-weight:600;flex-shrink:0;margin-left:12px}
+.container{max-width:1000px;margin:0 auto;padding:32px}
+.vigil-header{margin-bottom:32px}
+.vigil-title{font-size:28px;font-weight:700;color:#EEE;margin-bottom:4px}
+.vigil-sub{font-size:13px;color:#555}
+.sync-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px}
+.sync-status{font-size:12px;color:#555}
+.run-btn{padding:10px 24px;background:#C8A96E;color:#000;font-size:13px;font-weight:700;border:none;border-radius:6px;cursor:pointer;letter-spacing:0.5px;transition:background 0.2s}
+.run-btn:hover{background:#D4B87E}
+.run-btn:disabled{opacity:0.5;cursor:not-allowed}
+.spinner{display:inline-block;width:14px;height:14px;border:2px solid #444;border-top-color:#C8A96E;border-radius:50%;animation:spin 0.8s linear infinite;margin-right:8px;vertical-align:middle}
+@keyframes spin{to{transform:rotate(360deg)}}
+.thinking-box{background:#0D0D0D;border:1px solid #1A1A1A;border-radius:8px;padding:20px;margin-bottom:24px;display:none}
+.thinking-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#444;margin-bottom:8px}
+.thinking-text{font-size:12px;color:#555;line-height:1.6;font-style:italic}
+.section-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#444;margin:28px 0 12px;padding-bottom:6px;border-bottom:1px solid #1A1A1A}
+.insight-card{background:#111;border:1px solid #1A1A1A;border-radius:8px;margin-bottom:12px;overflow:hidden}
+.insight-head{padding:16px 20px;display:flex;align-items:flex-start;justify-content:space-between;gap:12px;cursor:pointer}
+.insight-head:hover{background:#141414}
+.insight-title{font-size:15px;font-weight:600;color:#EEE;margin-bottom:4px}
+.insight-preview{font-size:13px;color:#888;line-height:1.5}
+.insight-meta{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.urgency-badge{font-size:10px;padding:3px 8px;border-radius:4px;letter-spacing:1px;text-transform:uppercase;white-space:nowrap}
+.u-high{background:#2E0D0D;color:#F87171}
+.u-medium{background:#2E1E0D;color:#C8A96E}
+.u-low{background:#1A1A1A;color:#666}
+.u-watch{background:#0D1A2E;color:#60A5FA}
+.u-drop{background:#1A1A1A;color:#444;text-decoration:line-through}
+.chevron{font-size:12px;color:#444;margin-left:8px;transition:transform 0.2s;flex-shrink:0}
+.chevron.open{transform:rotate(180deg)}
+.insight-body{display:none;padding:0 20px 20px;border-top:1px solid #141414}
+.insight-body.open{display:block}
+.reasoning-section{margin-top:16px}
+.reasoning-label{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:#444;margin-bottom:8px}
+.fact-item{display:flex;align-items:flex-start;gap:8px;font-size:12px;color:#888;padding:5px 0;border-bottom:1px solid #0F0F0F;line-height:1.5}
+.fact-item:last-child{border-bottom:none}
+.fact-icon{flex-shrink:0;margin-top:1px}
+.fact-verified{color:#4ADE80}
+.fact-assumed{color:#C8A96E}
+.fact-stale{color:#F87171}
+.assumption-box{background:#0D0D0D;border-left:2px solid #C8A96E;padding:10px 14px;margin-top:12px;font-size:12px;color:#888;line-height:1.6;border-radius:0 4px 4px 0}
+.change-box{background:#0D0D0D;border-left:2px solid #333;padding:10px 14px;margin-top:8px;font-size:12px;color:#666;line-height:1.6;border-radius:0 4px 4px 0}
+.action-row{display:flex;gap:8px;margin-top:16px;flex-wrap:wrap}
+.act-btn{padding:7px 14px;font-size:12px;border:1px solid #2A2A2A;border-radius:4px;background:transparent;cursor:pointer;color:#888;transition:all 0.15s}
+.act-btn:hover{border-color:#C8A96E;color:#C8A96E}
+.act-btn.primary{background:#C8A96E;border-color:#C8A96E;color:#000;font-weight:600}
+.act-btn.primary:hover{background:#D4B87E}
+.act-btn.danger{border-color:#E24B4A;color:#E24B4A}
+.act-btn.danger:hover{background:#2E0D0D}
+.log-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:300;align-items:center;justify-content:center}
+.log-modal.open{display:flex}
+.log-box{background:#0D0D0D;border:1px solid #2A2A2A;border-radius:10px;padding:24px;width:500px;max-width:90vw}
+.log-box h3{font-size:16px;color:#EEE;margin-bottom:16px}
+.log-textarea{width:100%;padding:10px 12px;background:#111;border:1px solid #2A2A2A;border-radius:5px;color:#EEE;font-size:13px;line-height:1.6;min-height:100px;resize:vertical;font-family:inherit}
+.log-select{width:100%;padding:8px 12px;background:#111;border:1px solid #2A2A2A;border-radius:5px;color:#EEE;font-size:13px;margin-bottom:10px}
+.log-actions{display:flex;gap:8px;margin-top:12px;justify-content:flex-end}
+.memory-section{background:#0D0D0D;border:1px solid #1A1A1A;border-radius:8px;padding:16px;margin-top:32px}
+.memory-title{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#444;margin-bottom:12px}
+.memory-stat{display:flex;justify-content:space-between;font-size:12px;color:#666;padding:4px 0;border-bottom:1px solid #0F0F0F}
+.memory-stat:last-child{border-bottom:none}
+.memory-val{color:#888}
+.empty-state{text-align:center;padding:60px 20px;color:#333}
+.empty-icon{font-size:48px;margin-bottom:16px;opacity:0.3}
+.empty-text{font-size:15px;line-height:1.6;margin-bottom:24px}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-left">
+    <div>
+      <div class="logo">VIGIL</div>
+      <div class="vigil-name">E-Group Intelligence</div>
+    </div>
+    <nav class="nav-links">
+      <a href="briefing.html" class="nav-link active">Briefing</a>
+      <a href="network.html" class="nav-link">Network</a>
+      <a href="intelligence.html" class="nav-link">Intelligence</a>
+      <a href="pipeline.html" class="nav-link">Pipeline</a>
+    </nav>
+  </div>
+  <div style="position:relative">
+    <div class="cost-bar" onclick="toggleCostPanel()">
+      <div class="cost-item"><div class="cost-val" id="cost-session">$0.0000</div><div class="cost-lbl">Session</div></div>
+      <div class="cost-item"><div class="cost-val" id="cost-month">$0.0000</div><div class="cost-lbl">Month</div></div>
+      <div class="cost-item"><div class="cost-val" id="cost-total">$0.0000</div><div class="cost-lbl">All time</div></div>
+    </div>
+    <div class="cost-panel" id="cost-panel">
+      <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#444;margin-bottom:10px">API Cost Log</div>
+      <div id="cost-log"></div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="vigil-header">
+    <div class="vigil-title">Good morning, Chris.</div>
+    <div class="vigil-sub" id="vigil-date">Loading...</div>
+  </div>
+
+  <div class="sync-row">
+    <div class="sync-status" id="sync-status">Ready to run briefing</div>
+    <button class="run-btn" id="run-btn" onclick="runBriefing()">▶ Run Vigil Briefing</button>
+  </div>
+
+  <div class="thinking-box" id="thinking-box">
+    <div class="thinking-label">Vigil is thinking...</div>
+    <div class="thinking-text" id="thinking-text">Reading knowledge graph...</div>
+  </div>
+
+  <div id="briefing-output"></div>
+
+  <div class="memory-section" id="memory-section">
+    <div class="memory-title">Vigil Memory</div>
+    <div id="memory-stats"></div>
+  </div>
+</div>
+
+<div class="log-modal" id="log-modal">
+  <div class="log-box">
+    <h3 id="log-title">Log action</h3>
+    <select class="log-select" id="log-outcome">
+      <option value="acted_positive">I acted on this — positive response</option>
+      <option value="acted_neutral">I acted on this — no response yet</option>
+      <option value="acted_negative">I acted on this — negative response</option>
+      <option value="dismissed_valid">Dismissed — not relevant right now</option>
+      <option value="dismissed_wrong">Dismissed — Vigil's reasoning was wrong</option>
+      <option value="snoozed">Snooze for 30 days</option>
+    </select>
+    <textarea class="log-textarea" id="log-notes" placeholder="What happened? What did you do? What was the response? (Optional but helps Vigil learn)"></textarea>
+    <div class="log-actions">
+      <button class="act-btn" onclick="closeLogModal()">Cancel</button>
+      <button class="act-btn primary" onclick="saveLog()">Save to Memory</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const PROXY = 'http://localhost:3000';
+const DATA_URL = 'https://hoarhouse.github.io/v3/rise/mkt/data.json';
+const COST_KEY = 'vigil-cost-v1';
+const MEMORY_KEY = 'vigil-memory-v1';
+const DATA_CACHE_KEY = 'vigil-data-cache-v1';
+const INPUT_PRICE = 3.00 / 1_000_000;
+const OUTPUT_PRICE = 15.00 / 1_000_000;
+
+let costs = { session: 0, month: 0, total: 0, log: [] };
+let memory = { sessions: [], insights: [], feedback: [], patterns: [], created: new Date().toISOString() };
+let knowledgeData = null;
+let currentInsights = [];
+let logTarget = null;
+
+// ── INIT ──────────────────────────────────────────────────────────────────────
+
+async function init() {
+  document.getElementById('vigil-date').textContent =
+    new Date().toLocaleDateString('en-GB', { weekday:'long', day:'numeric', month:'long', year:'numeric' });
+  await loadCosts();
+  await loadMemory();
+  renderCosts();
+  renderMemoryStats();
+  document.addEventListener('click', e => {
+    if (!e.target.closest('.cost-bar') && !e.target.closest('.cost-panel'))
+      document.getElementById('cost-panel').classList.remove('open');
+  });
+}
+
+// ── DATA LOADING ──────────────────────────────────────────────────────────────
+
+async function loadKnowledgeData() {
+  try {
+    const cached = localStorage.getItem(DATA_CACHE_KEY);
+    if (cached) {
+      const { ts, data } = JSON.parse(cached);
+      if (Date.now() - ts < 60 * 60 * 1000) return data;
+    }
+    const res = await fetch(DATA_URL + '?v=' + Date.now());
+    const data = await res.json();
+    localStorage.setItem(DATA_CACHE_KEY, JSON.stringify({ ts: Date.now(), data }));
+    return data;
+  } catch(e) { return null; }
+}
+
+// ── COST TRACKING ─────────────────────────────────────────────────────────────
+
+async function loadCosts() {
+  try {
+    const r = localStorage.getItem(COST_KEY);
+    if (r) {
+      const saved = JSON.parse(r);
+      costs.total = saved.total || 0;
+      costs.log = saved.log || [];
+      const thisMonth = new Date().toISOString().slice(0,7);
+      costs.month = costs.log.filter(l => l.ts?.startsWith(thisMonth)).reduce((s,l) => s + l.cost, 0);
+    }
+  } catch(e) {}
+}
+
+function saveCosts() {
+  localStorage.setItem(COST_KEY, JSON.stringify({ total: costs.total, log: costs.log.slice(-500) }));
+}
+
+function trackCost(label, inp, out) {
+  const cost = (inp * INPUT_PRICE) + (out * OUTPUT_PRICE);
+  costs.session += cost; costs.month += cost; costs.total += cost;
+  costs.log.push({ ts: new Date().toISOString(), label, inp, out, cost });
+  saveCosts(); renderCosts(); return cost;
+}
+
+function fmt(n) { return '$' + n.toFixed(4); }
+
+function renderCosts() {
+  document.getElementById('cost-session').textContent = fmt(costs.session);
+  document.getElementById('cost-month').textContent = fmt(costs.month);
+  document.getElementById('cost-total').textContent = fmt(costs.total);
+  const recent = costs.log.slice(-15).reverse();
+  document.getElementById('cost-log').innerHTML = recent.length
+    ? recent.map(l => `<div class="cost-log-item"><div><div style="color:#CCC;font-size:12px">${l.label}</div><div style="color:#444;font-size:11px">${new Date(l.ts).toLocaleTimeString()} · ${l.inp}in / ${l.out}out</div></div><div class="cost-log-amt">${fmt(l.cost)}</div></div>`).join('')
+    : '<div style="font-size:12px;color:#444;padding:8px 0">No calls yet</div>';
+}
+
+function toggleCostPanel() { document.getElementById('cost-panel').classList.toggle('open'); }
+
+// ── MEMORY ────────────────────────────────────────────────────────────────────
+
+async function loadMemory() {
+  try {
+    const r = localStorage.getItem(MEMORY_KEY);
+    if (r) memory = JSON.parse(r);
+  } catch(e) {}
+}
+
+function saveMemory() {
+  localStorage.setItem(MEMORY_KEY, JSON.stringify(memory));
+}
+
+function renderMemoryStats() {
+  const stats = document.getElementById('memory-stats');
+  const totalSessions = memory.sessions.length;
+  const totalFeedback = memory.feedback.length;
+  const actedOn = memory.feedback.filter(f => f.outcome.startsWith('acted')).length;
+  const dismissed = memory.feedback.filter(f => f.outcome.startsWith('dismissed')).length;
+  const lastSession = memory.sessions[memory.sessions.length - 1];
+  stats.innerHTML = [
+    ['Total Vigil sessions', totalSessions || 0],
+    ['Insights logged to memory', memory.insights.length || 0],
+    ['Feedback entries', totalFeedback || 0],
+    ['Actions taken on insights', actedOn || 0],
+    ['Insights dismissed', dismissed || 0],
+    ['Last session', lastSession ? new Date(lastSession.date).toLocaleDateString('en-GB', {day:'numeric',month:'short',year:'numeric'}) : 'First session today'],
+  ].map(([k,v]) => `<div class="memory-stat"><span>${k}</span><span class="memory-val">${v}</span></div>`).join('');
+}
+
+function buildMemoryContext() {
+  if (!memory.sessions.length) return 'This is the first Vigil session. No prior memory exists.';
+  const recentSessions = memory.sessions.slice(-5);
+  const recentFeedback = memory.feedback.slice(-20);
+  const patterns = memory.patterns.slice(-10);
+  let ctx = `VIGIL MEMORY — ${memory.sessions.length} prior sessions.\n\n`;
+  if (recentFeedback.length) {
+    ctx += 'FEEDBACK ON PAST INSIGHTS (what worked, what did not):\n';
+    recentFeedback.forEach(f => {
+      ctx += `- [${f.outcome}] "${f.insightTitle}" — ${f.notes || 'no notes'} (${new Date(f.date).toLocaleDateString()})\n`;
+    });
+    ctx += '\n';
+  }
+  if (patterns.length) {
+    ctx += 'PATTERNS VIGIL HAS NOTICED:\n';
+    patterns.forEach(p => { ctx += `- ${p}\n`; });
+    ctx += '\n';
+  }
+  if (recentSessions.length) {
+    ctx += 'RECENT SESSION SUMMARIES:\n';
+    recentSessions.forEach(s => {
+      ctx += `- ${new Date(s.date).toLocaleDateString()}: ${s.summary}\n`;
+    });
+  }
+  return ctx;
+}
+
+// ── MAIN BRIEFING ─────────────────────────────────────────────────────────────
+
+async function runBriefing() {
+  const btn = document.getElementById('run-btn');
+  const thinkingBox = document.getElementById('thinking-box');
+  const output = document.getElementById('briefing-output');
+  btn.disabled = true; btn.textContent = '⟳ Running...';
+  thinkingBox.style.display = 'block';
+  output.innerHTML = '';
+
+  setThinking('Loading knowledge graph and memory...');
+  knowledgeData = await loadKnowledgeData();
+  if (!knowledgeData) {
+    output.innerHTML = '<div style="color:#E24B4A;padding:20px">Failed to load data.json — make sure the file is deployed.</div>';
+    btn.disabled = false; btn.textContent = '▶ Run Vigil Briefing';
+    thinkingBox.style.display = 'none';
+    return;
+  }
+
+  setThinking('Building context from knowledge graph...');
+  const memoryContext = buildMemoryContext();
+  const dataContext = buildDataContext(knowledgeData);
+
+  setThinking('Vigil is reasoning about your situation...');
+  const prompt = buildBriefingPrompt(dataContext, memoryContext);
+
+  try {
+    const res = await fetch(PROXY + '/api/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 4000,
+        messages: [{ role: 'user', content: prompt }]
+      })
+    });
+    const data = await res.json();
+    if (data.error) throw new Error(data.error.message);
+    const text = data.content.map(b => b.text || '').join('');
+    trackCost('Vigil Morning Briefing', data.usage.input_tokens, data.usage.output_tokens);
+
+    let parsed;
+    try {
+      const clean = text.replace(/```json|```/g, '').trim();
+      parsed = JSON.parse(clean);
+    } catch(e) {
+      output.innerHTML = `<div style="background:#111;border:1px solid #1A1A1A;border-radius:8px;padding:20px;font-size:13px;color:#999;line-height:1.8;white-space:pre-wrap">${text}</div>`;
+      thinkingBox.style.display = 'none';
+      btn.disabled = false; btn.textContent = '▶ Run Again';
+      return;
+    }
+
+    currentInsights = parsed.insights || [];
+    renderBriefing(parsed);
+    saveSession(parsed);
+  } catch(e) {
+    output.innerHTML = `<div style="color:#E24B4A;padding:20px">Error: ${e.message}<br><br>Make sure your proxy is running on port 3000.</div>`;
+  }
+
+  thinkingBox.style.display = 'none';
+  btn.disabled = false; btn.textContent = '▶ Run Again';
+  renderMemoryStats();
+}
+
+function setThinking(text) {
+  document.getElementById('thinking-text').textContent = text;
+}
+
+function buildDataContext(d) {
+  const companies = (d.companies || []).map(c =>
+    `[${c.id}] ${c.name} (${c.type}, ${c.country}) — Connection: ${c.connection} — Opportunity: ${c.opportunity} — Notes: ${c.notes}`
+  ).join('\n');
+
+  const people = (d.people || []).map(p =>
+    `[${p.id}] ${p.name}, ${p.title} at ${p.company} (warmth: ${p.warmth}) — ${p.connection} — Action: ${p.action}`
+  ).join('\n');
+
+  const consortiums = (d.consortiums || []).map(c =>
+    `[${c.id}] ${c.name} — Role: ${c.role} — ${c.notes}`
+  ).join('\n');
+
+  const events = (d.events || []).sort((a,b) => new Date(b.date) - new Date(a.date)).map(e =>
+    `[${e.date}] [${e.type.toUpperCase()}] ${e.description} (Source: ${e.source})`
+  ).join('\n');
+
+  const actions = (d.actions || []).filter(a => a.status === 'pending').map(a =>
+    `[${a.priority.toUpperCase()}] ${a.task} — Owner: ${a.owner}`
+  ).join('\n');
+
+  return `COMPANIES IN NETWORK:\n${companies}\n\nKEY PEOPLE:\n${people}\n\nCONSORTIUMS:\n${consortiums}\n\nEVENT LOG (most recent first):\n${events}\n\nOPEN ACTIONS:\n${actions}`;
+}
+
+function buildBriefingPrompt(dataContext, memoryContext) {
+  return `You are Vigil — the AI intelligence system for E-Group ICT Software Zrt's marketing function. You are Chris Hoar's Deputy Chief Marketing Officer. Chris is in charge of E-Group's marketing strategy.
+
+E-Group is a Budapest-based AI infrastructure company, est. 1993, 110+ staff, 50 AI engineers. They build sovereign AI infrastructure, digital identity systems, knowledge graphs, and the Rise AI platform. They co-lead IPCEI-CIS Workstream 3 and lead the AI Cluster. They spearhead the HeliX health data consortium. They built Hungary's national EUDI Wallet (MyD Wallet). They have ESA as a client. They built Hungary's national digital identity infrastructure (KAÜ). They have a neonatal baby tracking project with the Hungarian government.
+
+Today's date: ${new Date().toLocaleDateString('en-GB', { weekday:'long', day:'numeric', month:'long', year:'numeric' })}.
+
+YOUR KNOWLEDGE BASE:
+${dataContext}
+
+YOUR MEMORY FROM PRIOR SESSIONS:
+${memoryContext}
+
+YOUR TASK:
+Analyse everything above with fresh eyes. Do not assume anything is still valid just because it was noted before. Think critically about:
+1. What is genuinely worth acting on RIGHT NOW based on real evidence
+2. What looks like an opportunity but may be based on stale or weak data
+3. What actions have been pending too long and need to be either escalated or dropped
+4. What connections between data points suggest opportunities nobody has spotted yet
+5. What the memory tells you about what has and hasn't worked before
+
+Generate a briefing with 4-7 insights. Each insight must be one of these types:
+- "act_now" — high confidence, clear evidence, specific action needed immediately
+- "investigate" — interesting signal but needs validation before acting
+- "watch" — low urgency but worth monitoring
+- "drop" — something previously flagged that you now think should be abandoned
+- "pattern" — a connection between multiple data points that reveals something important
+
+For EVERY insight you MUST show your working. No black boxes. Every conclusion must be traceable to specific facts.
+
+Respond ONLY with valid JSON in exactly this structure:
+
+{
+  "sessionSummary": "2-3 sentence summary of the overall picture Vigil sees today",
+  "overallConfidence": "high/medium/low — how confident Vigil is in the quality of its analysis",
+  "confidenceReason": "why that confidence level",
+  "insights": [
+    {
+      "id": "unique string",
+      "type": "act_now|investigate|watch|drop|pattern",
+      "urgency": "high|medium|low",
+      "title": "Clear, specific title — not vague",
+      "summary": "2-3 sentences. What Vigil sees and why it matters.",
+      "facts": [
+        { "text": "specific fact used", "source": "where this came from", "date": "when recorded", "confidence": "verified|assumed|stale" }
+      ],
+      "assumptions": ["list any assumptions being made — be honest about uncertainty"],
+      "wouldChangeIf": ["what new information would change this conclusion"],
+      "recommendedAction": "Specific, concrete action. Who does what by when.",
+      "suggestedDraft": "Optional — if this requires an outreach message, draft it here (max 80 words)",
+      "relatedEntities": ["company/person IDs from the data"]
+    }
+  ],
+  "droppedItems": [
+    { "title": "thing being dropped", "reason": "why Vigil thinks it should be dropped" }
+  ],
+  "patternsNoticed": ["any cross-cutting patterns Vigil has spotted"],
+  "memoryUpdate": "what Vigil wants to remember from this session for next time"
+}`;
+}
+
+// ── RENDER BRIEFING ───────────────────────────────────────────────────────────
+
+function renderBriefing(data) {
+  const output = document.getElementById('briefing-output');
+  const typeConfig = {
+    act_now: { label: 'Act now', color: '#E24B4A', bg: '#2E0D0D' },
+    investigate: { label: 'Investigate', color: '#C8A96E', bg: '#2E1E0D' },
+    watch: { label: 'Watch', color: '#60A5FA', bg: '#0D1A2E' },
+    drop: { label: 'Drop', color: '#444', bg: '#1A1A1A' },
+    pattern: { label: 'Pattern', color: '#C084FC', bg: '#1E1A2E' }
+  };
+  const urgConfig = { high:'u-high', medium:'u-medium', low:'u-low' };
+  const confIcon = { verified:'✓', assumed:'~', stale:'⚠' };
+  const confColor = { verified:'fact-verified', assumed:'fact-assumed', stale:'fact-stale' };
+
+  let html = '';
+
+  // Session summary
+  html += `<div style="background:#111;border:1px solid #1A1A1A;border-left:3px solid #C8A96E;border-radius:8px;padding:16px 20px;margin-bottom:24px">
+    <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#444;margin-bottom:8px">Vigil's Assessment</div>
+    <div style="font-size:14px;color:#CCC;line-height:1.7;margin-bottom:10px">${data.sessionSummary}</div>
+    <div style="font-size:11px;color:#555">Confidence: <span style="color:${data.overallConfidence==='high'?'#4ADE80':data.overallConfidence==='medium'?'#C8A96E':'#F87171'}">${data.overallConfidence?.toUpperCase()}</span> — ${data.confidenceReason}</div>
+  </div>`;
+
+  // Insights
+  if (data.insights?.length) {
+    const actNow = data.insights.filter(i => i.type === 'act_now');
+    const others = data.insights.filter(i => i.type !== 'act_now');
+    const sorted = [...actNow, ...others];
+
+    html += '<div class="section-label">Vigil\'s Briefing</div>';
+    sorted.forEach((ins, idx) => {
+      const tc = typeConfig[ins.type] || typeConfig.watch;
+      const factsHtml = (ins.facts || []).map(f => `
+        <div class="fact-item">
+          <span class="fact-icon ${confColor[f.confidence] || 'fact-assumed'}">${confIcon[f.confidence] || '~'}</span>
+          <div><span style="color:#BBB">${f.text}</span> <span style="color:#444;font-size:11px">— ${f.source}${f.date ? ', '+f.date : ''}</span></div>
+        </div>`).join('');
+      const assumptionsHtml = (ins.assumptions || []).length
+        ? `<div class="assumption-box"><strong style="color:#C8A96E">Assumptions being made:</strong><br>${ins.assumptions.map(a=>`• ${a}`).join('<br>')}</div>` : '';
+      const changeHtml = (ins.wouldChangeIf || []).length
+        ? `<div class="change-box"><strong style="color:#555">This would change if:</strong><br>${ins.wouldChangeIf.map(c=>`→ ${c}`).join('<br>')}</div>` : '';
+      const draftHtml = ins.suggestedDraft
+        ? `<div style="background:#0D0D0D;border:1px solid #2A2A2A;border-radius:5px;padding:12px;font-size:12px;color:#888;line-height:1.7;margin-top:12px;white-space:pre-wrap;font-style:italic">"${ins.suggestedDraft}"</div>` : '';
+
+      html += `<div class="insight-card" id="card-${ins.id}">
+        <div class="insight-head" onclick="toggleInsight('${ins.id}')">
+          <div style="flex:1">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
+              <span style="font-size:10px;padding:2px 8px;border-radius:3px;background:${tc.bg};color:${tc.color};letter-spacing:1px;text-transform:uppercase">${tc.label}</span>
+              <span class="urgency-badge ${urgConfig[ins.urgency]||'u-low'}">${ins.urgency}</span>
+            </div>
+            <div class="insight-title">${ins.title}</div>
+            <div class="insight-preview">${ins.summary}</div>
+          </div>
+          <span class="chevron" id="chev-${ins.id}">▼</span>
+        </div>
+        <div class="insight-body" id="body-${ins.id}">
+          <div class="reasoning-section">
+            <div class="reasoning-label">Evidence Vigil used</div>
+            ${factsHtml || '<div style="font-size:12px;color:#444;padding:8px 0">No specific facts cited</div>'}
+          </div>
+          ${assumptionsHtml}
+          ${changeHtml}
+          ${ins.recommendedAction ? `<div style="margin-top:14px;padding:12px 14px;background:#0D1A0D;border-left:2px solid #4ADE80;border-radius:0 4px 4px 0;font-size:13px;color:#888"><strong style="color:#4ADE80">Recommended action:</strong> ${ins.recommendedAction}</div>` : ''}
+          ${draftHtml}
+          <div class="action-row">
+            <button class="act-btn primary" onclick="openLogModal('${ins.id}','${ins.title.replace(/'/g,"\\'")}')">Log outcome</button>
+            <button class="act-btn" onclick="copyDraft('${ins.id}')">Copy draft</button>
+            <button class="act-btn danger" onclick="openLogModal('${ins.id}','${ins.title.replace(/'/g,"\\'")}','dismissed_wrong')">Drop this</button>
+          </div>
+        </div>
+      </div>`;
+    });
+  }
+
+  // Dropped items
+  if (data.droppedItems?.length) {
+    html += '<div class="section-label">Vigil suggests dropping</div>';
+    data.droppedItems.forEach(d => {
+      html += `<div style="background:#111;border:1px solid #1A1A1A;border-radius:8px;padding:14px 18px;margin-bottom:8px;opacity:0.6">
+        <div style="font-size:14px;color:#666;text-decoration:line-through;margin-bottom:4px">${d.title}</div>
+        <div style="font-size:12px;color:#444">${d.reason}</div>
+      </div>`;
+    });
+  }
+
+  // Patterns
+  if (data.patternsNoticed?.length) {
+    html += '<div class="section-label">Patterns Vigil noticed</div>';
+    html += `<div style="background:#111;border:1px solid #1E1A2E;border-radius:8px;padding:16px 20px;margin-bottom:24px">
+      ${data.patternsNoticed.map(p => `<div style="font-size:13px;color:#888;padding:5px 0;border-bottom:1px solid #141414;line-height:1.6">◆ ${p}</div>`).join('')}
+    </div>`;
+  }
+
+  output.innerHTML = html;
+}
+
+function toggleInsight(id) {
+  const body = document.getElementById('body-' + id);
+  const chev = document.getElementById('chev-' + id);
+  body.classList.toggle('open');
+  chev.classList.toggle('open');
+}
+
+function copyDraft(insightId) {
+  const ins = currentInsights.find(i => i.id === insightId);
+  if (ins?.suggestedDraft) {
+    navigator.clipboard.writeText(ins.suggestedDraft);
+    alert('Draft copied to clipboard');
+  } else {
+    alert('No draft available for this insight');
+  }
+}
+
+// ── SESSION LOGGING ───────────────────────────────────────────────────────────
+
+function saveSession(data) {
+  const session = {
+    date: new Date().toISOString(),
+    summary: data.sessionSummary,
+    insightCount: data.insights?.length || 0,
+    insightIds: (data.insights || []).map(i => i.id)
+  };
+  memory.sessions.push(session);
+
+  // Save insights to memory for feedback tracking
+  (data.insights || []).forEach(ins => {
+    if (!memory.insights.find(i => i.id === ins.id)) {
+      memory.insights.push({ id: ins.id, title: ins.title, type: ins.type, date: new Date().toISOString() });
+    }
+  });
+
+  // Save memory update note
+  if (data.memoryUpdate) {
+    memory.patterns.push(data.memoryUpdate);
+    if (memory.patterns.length > 50) memory.patterns = memory.patterns.slice(-50);
+  }
+
+  // Trim sessions to last 100
+  if (memory.sessions.length > 100) memory.sessions = memory.sessions.slice(-100);
+  if (memory.insights.length > 500) memory.insights = memory.insights.slice(-500);
+
+  saveMemory();
+}
+
+// ── LOG MODAL ─────────────────────────────────────────────────────────────────
+
+function openLogModal(insightId, insightTitle, presetOutcome) {
+  logTarget = { id: insightId, title: insightTitle };
+  document.getElementById('log-title').textContent = `Log: "${insightTitle.substring(0,50)}..."`;
+  document.getElementById('log-notes').value = '';
+  if (presetOutcome) document.getElementById('log-outcome').value = presetOutcome;
+  document.getElementById('log-modal').classList.add('open');
+}
+
+function closeLogModal() {
+  document.getElementById('log-modal').classList.remove('open');
+  logTarget = null;
+}
+
+function saveLog() {
+  if (!logTarget) return;
+  const outcome = document.getElementById('log-outcome').value;
+  const notes = document.getElementById('log-notes').value.trim();
+  memory.feedback.push({
+    date: new Date().toISOString(),
+    insightId: logTarget.id,
+    insightTitle: logTarget.title,
+    outcome,
+    notes
+  });
+  if (memory.feedback.length > 200) memory.feedback = memory.feedback.slice(-200);
+  saveMemory();
+  closeLogModal();
+  renderMemoryStats();
+  // Visual confirmation
+  const card = document.getElementById('card-' + logTarget.id);
+  if (card) {
+    card.style.opacity = '0.5';
+    card.style.borderColor = '#333';
+  }
+  alert('Logged to Vigil memory. This will inform future briefings.');
+}
+
+// ── DOCUMENT CLICK OUTSIDE LOG MODAL ─────────────────────────────────────────
+
+document.addEventListener('click', e => {
+  const modal = document.getElementById('log-modal');
+  if (modal.classList.contains('open') && e.target === modal) closeLogModal();
+});
+
+init();
+</script>
+</body>
+</html>
