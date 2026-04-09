@@ -309,7 +309,7 @@ function runBriefing() {
       + 'THE E-GROUP WEBSITE (current content and gaps):\n'+websiteCtx+'\n\n'
       + 'YOUR MEMORY:\n'+memCtx+'\n\n'
       + 'Produce a structured morning briefing. Be direct, honest, specific. Re-evaluate everything fresh. Do not assume prior signals are still valid.\n\n'
-      + 'For website gaps: propose specific additions with draft copy. Remember - Vigil PROPOSES, Chris APPROVES. Never assume a website change has been made.\n\n'
+      + 'For website gaps: propose specific additions with draft copy. Return a MINIMUM of 10 websiteGaps, prioritised by severity. If more than 10 exist, return ALL of them — do not truncate. Remember - Vigil PROPOSES, Chris APPROVES. Never assume a website change has been made.\n\n'
       + 'Respond ONLY with valid JSON:\n'
       + '{"stateOfPlay":{"summary":"2-3 sentence honest macro assessment","confidence":"high|medium|low","confidenceReason":"why"},'
       + '"acquisitions":[{"target":"name","goal":"what we want","status":"not_started|in_progress|responded|meeting_set|proposal_sent|stalled|won|lost","daysSinceActivity":0,"lastActivity":"what happened or No contact made yet","vigil_assessment":"Vigils honest read","nextAction":"specific action who does what by when","urgency":"high|medium|low|drop","facts":[{"text":"fact","source":"where","confidence":"verified|assumed|stale"}],"wouldChangeIf":["what would change this"]}],'
