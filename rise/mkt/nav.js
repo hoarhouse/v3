@@ -10,6 +10,7 @@
     { href: 'network.html',  label: 'Network' },
     { href: 'intelligence.html', label: 'Intelligence' },
     { href: 'pipeline.html', label: 'Pipeline' },
+    { href: 'gaps.html', label: 'Website Gaps' },
   ];
 
   const navLinks = links.map(l => {
