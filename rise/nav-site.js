@@ -146,18 +146,10 @@
     '</div>' +
   '</footer>';
 
-  // Insert nav at top of body
+  // Insert nav at top of body immediately
   document.body.insertAdjacentHTML('afterbegin', navHtml);
 
-  // Replace or append footer
-  var existingFooter = document.querySelector('footer');
-  if (existingFooter) {
-    existingFooter.outerHTML = footerHtml;
-  } else {
-    document.body.insertAdjacentHTML('beforeend', footerHtml);
-  }
-
-  // Hamburger toggle
+  // Hamburger toggle - wire up immediately since nav is already in DOM
   var btn = document.getElementById('egroup-hamburger');
   var menu = document.getElementById('egroup-mobile-menu');
   if (btn && menu) {
@@ -174,4 +166,14 @@
       });
     });
   }
+
+  // Replace footer after DOM is fully loaded
+  document.addEventListener('DOMContentLoaded', function() {
+    var existingFooter = document.querySelector('footer');
+    if (existingFooter) {
+      existingFooter.outerHTML = footerHtml;
+    } else {
+      document.body.insertAdjacentHTML('beforeend', footerHtml);
+    }
+  });
 })();
