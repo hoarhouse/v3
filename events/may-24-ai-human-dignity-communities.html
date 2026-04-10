@@ -355,17 +355,17 @@
       <div class="countdown-label-text">Event begins in</div>
       <div class="countdown-strip" id="countdown">
         <div class="countdown-unit" id="cd-days-unit">
-          <span class="countdown-number" id="cd-days">00</span>
+          <span class="countdown-number" id="cd-days">--</span>
           <span class="countdown-label">Days</span>
         </div>
         <div class="countdown-sep">:</div>
         <div class="countdown-unit">
-          <span class="countdown-number" id="cd-hours">00</span>
+          <span class="countdown-number" id="cd-hours">--</span>
           <span class="countdown-label">Hours</span>
         </div>
         <div class="countdown-sep">:</div>
         <div class="countdown-unit">
-          <span class="countdown-number" id="cd-mins">00</span>
+          <span class="countdown-number" id="cd-mins">--</span>
           <span class="countdown-label">Minutes</span>
         </div>
       </div>
@@ -422,49 +422,43 @@
   <!-- SPEAKERS -->
   <section class="event-section">
     <div class="wide">
-      <h2>Speakers / Relatori</h2>
+      <h2>Speakers</h2>
       <div class="speakers-grid">
         <div class="speaker-card" onclick="this.classList.toggle('expanded')">
-          <div class="speaker-avatar">MA</div>
-          <div class="speaker-info">
-            <div class="name">Maria Amparo Alonso Escobar</div>
-            <div class="title"><em style="font-style:italic;color:#0071e3;font-size:0.8rem;">AI &amp; ethics in integral human development / IA ed etica nello sviluppo umano</em></div>
-          </div>
-          <span class="speaker-expand-icon">+</span>
-        </div>
+      <div class="speaker-avatar">AE</div>
+      <div class="speaker-info">
+        <div class="name">Antonino Errigo</div>
+        <div class="title">Secretary General of Borgo Laudato Sì<br><em style="font-style:italic;color:#0071e3;font-size:0.8rem;">From sustainability to concrete models of innovation</em></div>
+        <div class="speaker-bio">Antonino Errigo leads operations at Borgo Laudato Sì, an ecological village and formation center near the Vatican dedicated to integral ecology, sustainable living, and the implementation of Laudato Sì.</div>
+      </div>
+      <span class="speaker-expand-icon">+</span>
+    </div>
         <div class="speaker-card" onclick="this.classList.toggle('expanded')">
-          <div class="speaker-avatar">ZP</div>
-          <div class="speaker-info">
-            <div class="name">Zoltan Papp</div>
-            <div class="title">Scientist, Inventor, Venture Capitalist &amp; Entrepreneur<br><em style="font-style:italic;color:#0071e3;font-size:0.8rem;">AI infrastructure &amp; data sovereignty: sustainability, security &amp; community / Infrastrutture dell&rsquo;IA e sovranit&agrave; dei dati</em></div>
-            <div class="speaker-bio">Zoltan Papp is a scientist, inventor, venture capitalist and entrepreneur with deep expertise in AI infrastructure, data sovereignty, and the intersection of technology and human development.</div>
-          </div>
-          <span class="speaker-expand-icon">+</span>
-        </div>
-        <div class="speaker-card" onclick="this.classList.toggle('expanded')">
-          <div class="speaker-avatar">AK</div>
-          <div class="speaker-info">
-            <div class="name">Antal Kuthy</div>
-            <div class="title">Founder &amp; CEO, E-Group<br><em style="font-style:italic;color:#0071e3;font-size:0.8rem;">Who designs intelligence guides humanity: enterprise, technological sovereignty &amp; human dignity / Chi progetta l&rsquo;intelligenza guida l&rsquo;uomo</em></div>
-            <div class="speaker-bio">Antal Kuthy is the founder and CEO of E-Group, with extensive experience in technological sovereignty, enterprise innovation, and the ethical design of digital infrastructure.</div>
-          </div>
-          <span class="speaker-expand-icon">+</span>
-        </div>
+      <div class="speaker-avatar">CF</div>
+      <div class="speaker-info">
+        <div class="name">Caterina Ferrara</div>
+        <div class="title">LinkedIn Top Voice; Director, AURORA International Study Center for Neurosciences, Diversity, Peace &amp; Innovation<br><em style="font-style:italic;color:#0071e3;font-size:0.8rem;">Ethics of AI and responsible design</em></div>
+        <div class="speaker-bio">Caterina Ferrara is a thought leader at the intersection of neuroscience, innovation, and human development, recognised as a LinkedIn Top Voice and Director of AURORA, an international research center focused on diversity, peace, and neuroscience-informed approaches to social change.</div>
+      </div>
+      <span class="speaker-expand-icon">+</span>
+    </div>
       </div>
       <div class="moderator-row">
-        <div class="label">Moderatore / Moderator</div>
-        <div class="speaker-card" style="max-width:400px;" onclick="this.classList.toggle('expanded')">
-          <div class="speaker-avatar">EC</div>
-          <div class="speaker-info">
-            <div class="name">Enzo Cursio</div>
-            <div class="title">Ambasciatore, Fondazione Pontificia Fratelli Tutti<br><em style="font-style:italic;color:#0071e3;font-size:0.8rem;">Human rights &amp; cooperation among communities / Diritti umani e cooperazione tra comunit&agrave;</em></div>
-          </div>
-          <span class="speaker-expand-icon">+</span>
-        </div>
+        <div class="label">Moderator</div>
+        <div class="speaker-card" style="max-width:360px;" onclick="this.classList.toggle('expanded')">
+      <div class="speaker-avatar">AP</div>
+      <div class="speaker-info">
+        <div class="name">Alessio Pecorario</div>
+        <div class="title">Founder and CEO, Domus Communis Foundation<br><em style="font-style:italic;color:#0071e3;font-size:0.8rem;">From formation to data sovereignty: an integrated perspective</em></div>
+        <div class="speaker-bio">Alessio Pecorario is the founder and CEO of the Domus Communis Foundation, with extensive experience at the Holy See in technology governance, integral cybersecurity, and AI ethics.</div>
+      </div>
+      <span class="speaker-expand-icon">+</span>
+    </div>
       </div>
     </div>
   </section>
 
+  <!-- TOPICS -->
   <section class="event-section alt">
     <div class="wide">
       <h2>Topics of Discussion / Temi del Dialogo</h2>
@@ -529,6 +523,7 @@
     }
     
     // Countdown timer
+    document.addEventListener("DOMContentLoaded", function() {
     (function() {
       const eventDate = new Date('2026-05-24T14:00:00Z');
       function updateCountdown() {
@@ -560,6 +555,7 @@
       updateCountdown();
       setInterval(updateCountdown, 60000);
     })();
+    });
     
 function downloadCalendar() {
   const icsContent = [
