@@ -372,17 +372,19 @@ nav:not(#site-nav) { display: none !important; }
 .coming-name { font-family:'Syne',sans-serif; font-size:22px; font-weight:700; color:var(--white); margin-bottom:16px; letter-spacing:-0.3px; }
 .coming-desc { font-size:14px; color:var(--dim); line-height:1.7; }
 @media (max-width:768px) { .coming-cards { grid-template-columns:1fr; } .coming-section { padding:72px 24px; } }
-.proof-strip { background:#050505; border-top:1px solid var(--border); border-bottom:1px solid var(--border); padding:28px 60px; }
-.proof-strip-inner { display:flex; align-items:center; gap:48px; flex-wrap:wrap; }
-.proof-strip-group { display:flex; align-items:center; gap:24px; flex-wrap:wrap; }
-.proof-strip-label { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--mid); white-space:nowrap; }
-.proof-strip-logos { display:flex; align-items:center; gap:16px; flex-wrap:wrap; }
-.proof-logo-placeholder { font-family:'DM Mono',monospace; font-size:11px; color:var(--dim); letter-spacing:1px; padding:6px 14px; border:1px solid var(--border); border-radius:2px; white-space:nowrap; transition:color 0.2s,border-color 0.2s; }
-.proof-logo-placeholder:hover { color:var(--gold); border-color:rgba(200,169,110,0.4); }
-.proof-strip-divider { width:1px; height:40px; background:var(--border); flex-shrink:0; }
-@media (max-width:768px) { .proof-strip { padding:24px; } .proof-strip-inner { gap:24px; } .proof-strip-divider { display:none; } }
-.proof-logo-img { height:28px; width:auto; opacity:0.6; filter:grayscale(100%) brightness(1.5); transition:opacity 0.2s,filter 0.2s; }
+.proof-strip { background:#050505; border-top:1px solid var(--border); border-bottom:1px solid var(--border); padding:56px 60px; }
+.proof-strip-label { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:3px; text-transform:uppercase; color:var(--mid); text-align:center; margin-bottom:40px; }
+.proof-logo-row { display:flex; align-items:center; justify-content:center; gap:0; margin-bottom:40px; }
+.proof-logo-cell { flex:1; display:flex; align-items:center; justify-content:center; padding:24px 32px; border-right:1px solid var(--border); }
+.proof-logo-cell:last-child { border-right:none; }
+.proof-logo-img { height:40px; width:auto; max-width:140px; object-fit:contain; opacity:0.5; filter:grayscale(100%) brightness(1.8); transition:opacity 0.3s,filter 0.3s; }
 .proof-logo-img:hover { opacity:1; filter:grayscale(0%) brightness(1); }
+.proof-logo-placeholder { font-family:'Syne',sans-serif; font-size:13px; font-weight:600; color:var(--dim); letter-spacing:1px; opacity:0.6; transition:opacity 0.3s,color 0.3s; }
+.proof-logo-placeholder:hover { opacity:1; color:var(--gold); }
+.proof-programmes { display:flex; align-items:center; justify-content:center; gap:12px; flex-wrap:wrap; padding-top:32px; border-top:1px solid var(--border); }
+.proof-programme-tag { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--dim); padding:6px 16px; border:1px solid var(--border); border-radius:2px; transition:color 0.2s,border-color 0.2s; }
+.proof-programme-tag:hover { color:var(--gold); border-color:rgba(200,169,110,0.4); }
+@media (max-width:768px) { .proof-strip { padding:40px 24px; } .proof-logo-row { flex-wrap:wrap; } .proof-logo-cell { flex:0 0 50%; border-bottom:1px solid var(--border); } }
 </style>
 </head>
 <body data-page="home">
