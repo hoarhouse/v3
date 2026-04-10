@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GENESIS — E-Group Record</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --black:#080808;--dark:#0A0A0A;--panel:#111;
+  --border:#1A1A1A;--muted:#333;--dim:#555;--mid:#777;
+  --text:#B0B0B0;--light:#D0D0D0;--white:#EFEFEF;
+  --gold:#C8A96E;--gold2:#A07840;--teal:#4ECDC4;--purple:#818CF8;
+}
+html{background:var(--black);color:var(--white);font-family:'DM Sans',sans-serif;}
+body{overflow-x:hidden;}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity 0.6s ease,transform 0.6s ease;}
+.reveal.visible{opacity:1;transform:none;}
+.reveal-delay-1{transition-delay:0.1s;}
+.reveal-delay-2{transition-delay:0.2s;}
+.reveal-delay-3{transition-delay:0.3s;}
+.breadcrumb{padding:100px 60px 0;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);}
+.breadcrumb a{color:var(--dim);text-decoration:none;}
+.breadcrumb a:hover{color:var(--gold);}
+.breadcrumb span{color:var(--mid);margin:0 8px;}
+.record-hero{padding:40px 60px 80px;border-bottom:1px solid var(--border);}
+.record-badges{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:32px;}
+.badge{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;padding:5px 12px;border:1px solid;}
+.badge-dev{color:var(--purple);border-color:rgba(129,140,248,0.3);}
+.badge-esa{color:var(--gold);border-color:rgba(200,169,110,0.3);}
+.badge-default{color:var(--mid);border-color:var(--border);}
+.record-headline{font-family:'Syne',sans-serif;font-size:clamp(36px,5vw,72px);font-weight:800;color:var(--white);letter-spacing:-2px;line-height:1.0;margin-bottom:24px;}
+.record-headline em{color:var(--purple);font-style:normal;}
+.record-sub{font-size:18px;color:var(--text);line-height:1.7;max-width:640px;margin-bottom:48px;}
+.record-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);max-width:800px;}
+.record-stat{background:var(--dark);padding:24px 28px;}
+.record-stat-num{font-family:'Syne',sans-serif;font-size:32px;font-weight:800;color:var(--white);}
+.record-stat-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--mid);margin-top:6px;}
+.record-section{padding:72px 60px;border-bottom:1px solid var(--border);}
+.record-section-dark{background:var(--dark);}
+.section-eyebrow{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--mid);margin-bottom:16px;}
+.section-title{font-family:'Syne',sans-serif;font-size:clamp(24px,3vw,40px);font-weight:700;color:var(--white);letter-spacing:-0.5px;margin-bottom:24px;line-height:1.1;}
+.section-title span{color:var(--purple);}
+.body-text{font-size:16px;color:var(--text);line-height:1.8;margin-bottom:20px;max-width:760px;}
+.body-text strong{color:var(--white);}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;}
+.capability-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);margin-top:40px;}
+.capability-card{background:var(--dark);padding:36px;border-left:3px solid transparent;transition:background 0.2s,border-left-color 0.2s;}
+.capability-card:hover{background:var(--panel);border-left-color:var(--purple);}
+.capability-name{font-family:'Syne',sans-serif;font-size:18px;font-weight:700;color:var(--white);margin-bottom:10px;}
+.capability-desc{font-size:13px;color:var(--text);line-height:1.7;}
+.fact-box{padding:36px;border:1px solid var(--border);border-left:3px solid var(--purple);background:var(--panel);}
+.fact-box-title{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--purple);margin-bottom:16px;}
+.fact-list{list-style:none;display:flex;flex-direction:column;gap:10px;}
+.fact-list li{font-size:14px;color:var(--text);line-height:1.6;padding-left:16px;position:relative;}
+.fact-list li::before{content:'—';position:absolute;left:0;color:var(--purple);}
+.record-cta{padding:72px 60px;display:flex;align-items:center;justify-content:space-between;gap:40px;flex-wrap:wrap;}
+.record-cta-text h2{font-family:'Syne',sans-serif;font-size:clamp(22px,3vw,36px);font-weight:700;color:var(--white);margin-bottom:12px;letter-spacing:-0.5px;}
+.record-cta-text p{font-size:16px;color:var(--text);max-width:500px;line-height:1.6;}
+.record-cta-btn{font-family:'DM Mono',monospace;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:var(--black);background:var(--gold);padding:16px 32px;text-decoration:none;white-space:nowrap;transition:background 0.2s;}
+.record-cta-btn:hover{background:var(--gold2);}
+.record-back{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--mid);text-decoration:none;transition:color 0.2s;}
+.record-back:hover{color:var(--gold);}
+@media(max-width:1023px){.capability-grid{grid-template-columns:1fr 1fr;}.record-stats{grid-template-columns:1fr 1fr;}}
+@media(max-width:768px){
+  .breadcrumb{padding:80px 24px 0;}.record-hero{padding:32px 24px 60px;}.record-section{padding:56px 24px;}
+  .two-col{grid-template-columns:1fr;gap:40px;}.capability-grid{grid-template-columns:1fr;}.record-stats{grid-template-columns:1fr 1fr;}
+  .record-cta{padding:56px 24px;flex-direction:column;align-items:flex-start;}
+}
+</style>
+</head>
+<body data-page="record">
+<script src="../nav-site.js"></script>
+
+<div class="breadcrumb reveal">
+  <a href="../record/index.html">Record</a>
+  <span>/</span>
+  GENESIS — Generative Satellite Imagery
+</div>
+
+<section class="record-hero">
+  <div class="record-badges reveal">
+    <span class="badge badge-dev">● In Development</span>
+    <span class="badge badge-esa">ESA Partnership</span>
+    <span class="badge badge-default">SpaceTech</span>
+    <span class="badge badge-default">Geospatial AI</span>
+  </div>
+  <h1 class="record-headline reveal">GENESIS —<br><em>Synthetic Satellite</em><br>Imagery at Scale</h1>
+  <p class="record-sub reveal">A proprietary Generative Earth Observation Satellite Imagery Simulator. GENESIS produces vast, photorealistic synthetic datasets for AI model training — eliminating the bottleneck of slow, costly real-world satellite data acquisition.</p>
+  <div class="record-stats reveal">
+    <div class="record-stat"><div class="record-stat-num">ESA</div><div class="record-stat-label">Active partnership</div></div>
+    <div class="record-stat"><div class="record-stat-num">EO</div><div class="record-stat-label">Earth observation</div></div>
+    <div class="record-stat"><div class="record-stat-num">AI</div><div class="record-stat-label">Training data</div></div>
+    <div class="record-stat"><div class="record-stat-num">∞</div><div class="record-stat-label">Scenario generation</div></div>
+  </div>
+</section>
+
+<!-- THE PROBLEM -->
+<section class="record-section">
+  <div class="two-col">
+    <div>
+      <div class="section-eyebrow reveal">The Problem</div>
+      <h2 class="section-title reveal">Training AI on satellite data<br><span>is slow, expensive, and incomplete.</span></h2>
+      <p class="body-text reveal">Earth observation AI systems require enormous volumes of labelled satellite imagery to train effectively. The problem: real-world satellite data is expensive to acquire, slow to process, geographically uneven, and critically sparse for rare events — exactly the scenarios where AI systems need to perform most reliably.</p>
+      <p class="body-text reveal">Rare weather events, conflict zones, disaster scenarios, unusual atmospheric conditions — the real world does not produce training data on demand. And waiting for it means AI models that are undertrained on the cases that matter most.</p>
+      <p class="body-text reveal"><strong>GENESIS solves this by generating it.</strong> Photorealistic synthetic satellite imagery, produced at scale, for any scenario, at any location, under any conditions. Training data that reflects the world as it could be — not just as it has been photographed.</p>
+    </div>
+    <div class="reveal">
+      <div class="fact-box">
+        <div class="fact-box-title">What GENESIS Produces</div>
+        <ul class="fact-list">
+          <li>Photorealistic synthetic satellite imagery at multiple resolutions</li>
+          <li>Rare event simulation — floods, fires, conflict damage, extreme weather</li>
+          <li>Gap-filling for underrepresented geographies and seasons</li>
+          <li>Future scenario modelling for predictive applications</li>
+          <li>Labelled training datasets ready for AI model ingestion</li>
+          <li>Part of E-Group's end-to-end Earth Observation AI strategy</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CAPABILITIES -->
+<section class="record-section record-section-dark">
+  <div class="section-eyebrow reveal">Capabilities</div>
+  <h2 class="section-title reveal">What GENESIS delivers.<br><span>On demand.</span></h2>
+
+  <div class="capability-grid">
+    <div class="capability-card reveal">
+      <div class="capability-name">Synthetic Dataset Generation</div>
+      <div class="capability-desc">Produces vast volumes of photorealistic synthetic satellite imagery on demand. Any geography, any resolution, any atmospheric condition. Training datasets that would take years to acquire from real satellites — generated in hours.</div>
+    </div>
+    <div class="capability-card reveal reveal-delay-1">
+      <div class="capability-name">Rare Event Simulation</div>
+      <div class="capability-desc">Generates imagery of scenarios that real satellite archives cannot provide at sufficient volume — natural disasters, conflict damage, extreme weather events. The edge cases where AI performance matters most and real training data is scarcest.</div>
+    </div>
+    <div class="capability-card reveal reveal-delay-2">
+      <div class="capability-name">Archive Gap-Filling</div>
+      <div class="capability-desc">Fills gaps in existing satellite archives — missing time periods, cloud-covered regions, underrepresented geographies. Provides continuity in datasets that real-world acquisition cannot guarantee.</div>
+    </div>
+    <div class="capability-card reveal">
+      <div class="capability-name">Predictive Scenario Modelling</div>
+      <div class="capability-desc">Generates imagery of future scenarios — urban development, deforestation projections, climate change impacts. Training AI systems to detect changes before they are fully visible in real imagery.</div>
+    </div>
+    <div class="capability-card reveal reveal-delay-1">
+      <div class="capability-name">Anomaly Detection Training</div>
+      <div class="capability-desc">Creates synthetic anomalies injected into real imagery for anomaly detection AI training. Enables validation of detection models against ground truth that cannot be reliably sourced from real satellite archives.</div>
+    </div>
+    <div class="capability-card reveal reveal-delay-2">
+      <div class="capability-name">End-to-End EO AI Strategy</div>
+      <div class="capability-desc">GENESIS is part of E-Group's broader Earth Observation AI strategy alongside ProofX and SpadaX — a complete stack from synthetic training data to real-world verification and anomaly detection.</div>
+    </div>
+  </div>
+</section>
+
+<!-- WHO NEEDS THIS -->
+<section class="record-section">
+  <div class="section-eyebrow reveal">Applications</div>
+  <h2 class="section-title reveal">Where synthetic satellite imagery<br><span>changes the equation.</span></h2>
+  <p class="body-text reveal">The organisations that need GENESIS are those building AI systems that depend on satellite imagery — and who cannot wait years for real-world data to accumulate at the scale and diversity their models require.</p>
+  <p class="body-text reveal"><strong>Defence and intelligence</strong> — training reconnaissance AI on scenarios that cannot be safely or legally captured in real imagery. <strong>Climate and environmental</strong> — modelling scenarios that do not yet exist in satellite archives. <strong>Infrastructure and urban planning</strong> — simulating future states of built environments. <strong>Disaster response</strong> — training AI on damage scenarios before disasters occur.</p>
+  <p class="body-text reveal">In each case, the value proposition is the same: AI systems that perform reliably on the scenarios that matter most, trained on data that real-world acquisition cannot provide.</p>
+</section>
+
+<!-- ESA -->
+<section class="record-section record-section-dark">
+  <div class="two-col">
+    <div>
+      <div class="section-eyebrow reveal">The ESA Partnership</div>
+      <h2 class="section-title reveal">Part of a broader<br><span>European space strategy.</span></h2>
+      <p class="body-text reveal">GENESIS is being developed in active partnership with the European Space Agency — the same partnership that underpins ProofX and SpadaX. E-Group's SpaceTech portfolio is not a collection of unrelated products. It is a coherent strategy for AI in the European space sector.</p>
+      <p class="body-text reveal">GENESIS handles the training data problem. ProofX handles the verification problem. SpadaX handles the anomaly detection problem. Together they represent E-Group's end-to-end approach to Earth Observation AI — from synthetic data generation to real-world operation.</p>
+      <p class="body-text reveal">Built in Budapest. Developed with ESA. Part of the same Hungarian tradition of building things that actually work.</p>
+    </div>
+    <div class="reveal">
+      <div class="fact-box">
+        <div class="fact-box-title">Status</div>
+        <ul class="fact-list">
+          <li>In active development — ESA partnership established</li>
+          <li>Part of E-Group's SpaceTech portfolio with ProofX and SpadaX</li>
+          <li>Generative EO Satellite Imagery Simulator</li>
+          <li>Target: AI training data supply chain for EO applications</li>
+          <li>Applications: defence-adjacent, climate, infrastructure, disaster response</li>
+          <li>Developed in Budapest — E-Group HQ</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="record-cta">
+  <div class="record-cta-text">
+    <h2>Building AI systems that depend<br>on satellite imagery?</h2>
+    <p>If your AI models are constrained by the availability and diversity of real satellite training data — GENESIS may be the answer. We are building this in conversation with domain experts. Tell us what you're working on.</p>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:16px;align-items:flex-end;">
+    <a href="../index.html#contact" class="record-cta-btn">Start the conversation →</a>
+    <a href="../record/index.html" class="record-back">← Back to The Record</a>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-brand">E-Group Intelligence Infrastructure · Est. 1993</div>
+  <div class="footer-legal">Budapest, Hungary · © 2026 E-Group ICT Software Zrt.</div>
+</footer>
+
+<script>
+const obs = new IntersectionObserver(entries => entries.forEach(e => {
+  if(e.isIntersecting) e.target.classList.add('visible');
+}),{threshold:0.08});
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
