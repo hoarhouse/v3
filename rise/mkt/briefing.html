@@ -789,7 +789,7 @@ function approveGap(gapJson) {
   const cc = buildCCPrompt(gap);
   saveGapAction(gap, 'approved', null, cc);
   // Show CC prompt
-  const el = document.getElementById('cc-' + btoa(gapKey(gap)).replace(/[^a-zA-Z0-9]/g,'').substring(0,20));
+  const el = document.getElementById('cc-' + btoa(unescape(encodeURIComponent(gapKey(gap)))).replace(/[^a-zA-Z0-9]/g,'').substring(0,20));
   if (el) { el.style.display = 'block'; el.querySelector('.cc-text').value = cc; }
   event.target.textContent = '✓ Approved';
   event.target.disabled = true;
