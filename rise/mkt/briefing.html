@@ -934,15 +934,16 @@ function runWebsiteAudit() {
       'THE CURRENT WEBSITE (every known page):\n' + websiteCtx + '\n\n' +
       'YOUR MEMORY:\n' + memCtx + '\n\n' +
       'AUDIT INSTRUCTIONS:\n' +
-      'Go through EVERY page listed in the website data one by one.\n' +
-      'For each page cross-reference its current content against everything in data.json.\n' +
-      'Identify every gap where data.json contains information not reflected on that page.\n' +
-      'Also identify entirely new pages that should exist but do not yet (e.g. a SpaceTech record page, an EnergyTech record page).\n' +
-      'Prioritise: critical = named client or product completely absent, high = partial mention needs expanding, medium = useful addition.\n' +
-      'Return a MINIMUM of 10 gaps. If honest cross-referencing produces more return ALL of them — do not truncate.\n' +
-      'For EVERY gap you MUST specify the exact page filename and exact section or element on that page.\n\n' +
+      'Go through EVERY page listed above one by one.\n' +
+      'For each page, look at what products and clients are mentioned.\n' +
+      'Cross-reference against ALL products and clients in data.json.\n' +
+      'Any product or client that exists in data.json but is NOT mentioned on that page is a gap.\n' +
+      'Also identify pages that should exist but do not (e.g. a SpaceTech record page for ESA/ProofX, an EnergyTech record page for MAVIR).\n' +
+      'Prioritise: critical = major named client or product completely absent from relevant page, high = partial mention needs expanding, medium = useful addition.\n' +
+      'You MUST return a minimum of 10 gaps — there are definitely more than 10 given the data. Do not return fewer.\n' +
+      'For EVERY gap specify exact page filename and exact section where the change goes.\n\n' +
       'Return JSON only — no markdown, no preamble:\n' +
-      '{"websiteGaps":[{"priority":"critical|high|medium","page":"exact filename e.g. intelligence.html","location":"exact section e.g. SpaceTech sector card","gap":"what is missing","suggestedCopy":"the exact text to add","rationale":"why this matters for E-Group marketing right now"}]}';
+      '{"websiteGaps":[{"priority":"critical|high|medium","page":"exact filename","location":"exact section","gap":"what is missing","suggestedCopy":"exact text to add","rationale":"why this matters now"}]}';
 
     fetch(PROXY + '/api/messages', {
       method: 'POST',
