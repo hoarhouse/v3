@@ -963,7 +963,11 @@ function runWebsiteAudit() {
       trackCost('Website Audit', resp.usage ? resp.usage.input_tokens : 0, resp.usage ? resp.usage.output_tokens : 0);
       var text = (resp.content||[]).map(function(b){return b.text||'';}).join('');
       var result;
-      try { result = JSON.parse(text.replace(/```json|```/g,'').trim()); } catch(e) { result = {websiteGaps:[]}; }
+      try {
+        const cleaned = text.replace(/```json\n?/gi,'').replace(/```\n?/gi,'').trim();
+        const jsonMatch = cleaned.match(/\{[\s\S]*\}/);
+        result = jsonMatch ? JSON.parse(jsonMatch[0]) : {websiteGaps:[]};
+      } catch(e) { result = {websiteGaps:[]}; }
       window.allWebsiteGaps = (result.websiteGaps||[]).filter(function(g){return !isGapSuppressed(g);});
       thinkingBox.style.display = 'none';
       btn.disabled = false; btn.textContent = 'Audit Website';
