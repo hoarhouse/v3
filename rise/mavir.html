@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MAVIR — E-Group Record</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --black:#080808;--dark:#0A0A0A;--panel:#111;
+  --border:#1A1A1A;--muted:#333;--dim:#555;--mid:#777;
+  --text:#B0B0B0;--light:#D0D0D0;--white:#EFEFEF;
+  --gold:#C8A96E;--gold2:#A07840;--teal:#4ECDC4;--green:#4ADE80;
+}
+html{background:var(--black);color:var(--white);font-family:'DM Sans',sans-serif;}
+body{overflow-x:hidden;}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity 0.6s ease,transform 0.6s ease;}
+.reveal.visible{opacity:1;transform:none;}
+.reveal-delay-1{transition-delay:0.1s;}
+.reveal-delay-2{transition-delay:0.2s;}
+.reveal-delay-3{transition-delay:0.3s;}
+
+/* BREADCRUMB */
+.breadcrumb{padding:100px 60px 0;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);}
+.breadcrumb a{color:var(--dim);text-decoration:none;}
+.breadcrumb a:hover{color:var(--gold);}
+.breadcrumb span{color:var(--mid);margin:0 8px;}
+
+/* HERO */
+.record-hero{padding:40px 60px 80px;border-bottom:1px solid var(--border);}
+.record-badges{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:32px;}
+.badge{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;padding:5px 12px;border:1px solid;}
+.badge-live{color:var(--green);border-color:rgba(74,222,128,0.3);}
+.badge-energy{color:var(--gold);border-color:rgba(200,169,110,0.3);}
+.badge-default{color:var(--mid);border-color:var(--border);}
+.record-headline{font-family:'Syne',sans-serif;font-size:clamp(36px,5vw,72px);font-weight:800;color:var(--white);letter-spacing:-2px;line-height:1.0;margin-bottom:24px;}
+.record-headline em{color:var(--gold);font-style:normal;}
+.record-sub{font-size:18px;color:var(--text);line-height:1.7;max-width:640px;margin-bottom:48px;}
+.record-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);max-width:800px;}
+.record-stat{background:var(--dark);padding:24px 28px;}
+.record-stat-num{font-family:'Syne',sans-serif;font-size:32px;font-weight:800;color:var(--white);}
+.record-stat-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--mid);margin-top:6px;}
+
+/* CONTENT SECTIONS */
+.record-section{padding:72px 60px;border-bottom:1px solid var(--border);}
+.record-section-dark{background:var(--dark);}
+.section-eyebrow{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--mid);margin-bottom:16px;}
+.section-title{font-family:'Syne',sans-serif;font-size:clamp(24px,3vw,40px);font-weight:700;color:var(--white);letter-spacing:-0.5px;margin-bottom:24px;line-height:1.1;}
+.section-title span{color:var(--gold);}
+.body-text{font-size:16px;color:var(--text);line-height:1.8;margin-bottom:20px;max-width:760px;}
+.body-text strong{color:var(--white);}
+
+/* TWO COLUMN */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;}
+
+/* CAPABILITY CARDS */
+.capability-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);margin-top:40px;}
+.capability-card{background:var(--dark);padding:36px;border-left:3px solid transparent;transition:background 0.2s,border-left-color 0.2s;}
+.capability-card:hover{background:var(--panel);border-left-color:var(--gold);}
+.capability-name{font-family:'Syne',sans-serif;font-size:18px;font-weight:700;color:var(--white);margin-bottom:10px;letter-spacing:-0.3px;}
+.capability-desc{font-size:13px;color:var(--text);line-height:1.7;}
+
+/* FACT BOX */
+.fact-box{padding:36px;border:1px solid var(--border);border-left:3px solid var(--gold);background:var(--panel);margin-top:32px;}
+.fact-box-title{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:16px;}
+.fact-list{list-style:none;display:flex;flex-direction:column;gap:10px;}
+.fact-list li{font-size:14px;color:var(--text);line-height:1.6;padding-left:16px;position:relative;}
+.fact-list li::before{content:'—';position:absolute;left:0;color:var(--gold);}
+
+/* QUOTE */
+.record-quote{padding:48px;border-left:3px solid var(--gold);background:var(--dark);margin-top:0;}
+.record-quote-text{font-family:'Syne',sans-serif;font-size:22px;font-weight:600;color:var(--white);line-height:1.5;margin-bottom:20px;font-style:italic;}
+.record-quote-attr{font-family:'DM Mono',monospace;font-size:11px;color:var(--gold);letter-spacing:1px;}
+
+/* CTA */
+.record-cta{padding:72px 60px;display:flex;align-items:center;justify-content:space-between;gap:40px;flex-wrap:wrap;}
+.record-cta-text h2{font-family:'Syne',sans-serif;font-size:clamp(22px,3vw,36px);font-weight:700;color:var(--white);margin-bottom:12px;letter-spacing:-0.5px;}
+.record-cta-text p{font-size:16px;color:var(--text);max-width:500px;line-height:1.6;}
+.record-cta-btn{font-family:'DM Mono',monospace;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:var(--black);background:var(--gold);padding:16px 32px;text-decoration:none;white-space:nowrap;transition:background 0.2s;}
+.record-cta-btn:hover{background:var(--gold2);}
+.record-back{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--mid);text-decoration:none;transition:color 0.2s;}
+.record-back:hover{color:var(--gold);}
+
+@media(max-width:1023px){.capability-grid{grid-template-columns:1fr 1fr;}.record-stats{grid-template-columns:1fr 1fr;}}
+@media(max-width:768px){
+  .breadcrumb{padding:80px 24px 0;}
+  .record-hero{padding:32px 24px 60px;}
+  .record-section{padding:56px 24px;}
+  .two-col{grid-template-columns:1fr;gap:40px;}
+  .capability-grid{grid-template-columns:1fr;}
+  .record-stats{grid-template-columns:1fr 1fr;}
+  .record-cta{padding:56px 24px;flex-direction:column;align-items:flex-start;}
+}
+</style>
+</head>
+<body data-page="record">
+<script src="../nav-site.js"></script>
+
+<div class="breadcrumb reveal">
+  <a href="../record/index.html">Record</a>
+  <span>/</span>
+  MAVIR — National Electricity Grid
+</div>
+
+<!-- HERO -->
+<section class="record-hero">
+  <div class="record-badges reveal">
+    <span class="badge badge-live">● Live in Production</span>
+    <span class="badge badge-energy">EnergyTech</span>
+    <span class="badge badge-default">Critical Infrastructure</span>
+    <span class="badge badge-default">25+ Years</span>
+  </div>
+  <h1 class="record-headline reveal">MAVIR —<br>Hungary's National<br><em>Electricity Grid</em></h1>
+  <p class="record-sub reveal">Hungary's electricity transmission system operator. Mission-critical settlement systems, market modelling, and regulatory change management. E-Group has been trusted with this infrastructure for over twenty-five years — and is still the partner of choice today.</p>
+  <div class="record-stats reveal">
+    <div class="record-stat">
+      <div class="record-stat-num">25+</div>
+      <div class="record-stat-label">Years of partnership</div>
+    </div>
+    <div class="record-stat">
+      <div class="record-stat-num">100%</div>
+      <div class="record-stat-label">Mission critical</div>
+    </div>
+    <div class="record-stat">
+      <div class="record-stat-num">15s</div>
+      <div class="record-stat-label">Settlement window</div>
+    </div>
+    <div class="record-stat">
+      <div class="record-stat-num">0</div>
+      <div class="record-stat-label">Tolerance for failure</div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT IT IS -->
+<section class="record-section">
+  <div class="two-col">
+    <div>
+      <div class="section-eyebrow reveal">The Relationship</div>
+      <h2 class="section-title reveal">Twenty-five years.<br><span>Still running.</span></h2>
+      <p class="body-text reveal">MAVIR is Hungary's national electricity transmission system operator — the organisation responsible for the safe, reliable, and efficient operation of Hungary's high-voltage power grid. The stakes are as high as they get: this is the infrastructure that keeps the lights on.</p>
+      <p class="body-text reveal">E-Group has been MAVIR's technology partner for over twenty-five years. Not a vendor. Not a supplier. A partner trusted with systems that cannot fail — and that have not failed.</p>
+      <p class="body-text reveal">This is E-Group's longest active client relationship. It began before most AI companies existed. It is still running today. That fact alone says more about E-Group's reliability than any marketing claim could.</p>
+    </div>
+    <div class="reveal">
+      <div class="record-quote">
+        <div class="record-quote-text">"Twenty-five years is not a contract. It is a track record. MAVIR chose E-Group when the EU energy market was being built from scratch. They are still choosing E-Group today."</div>
+        <div class="record-quote-attr">E-Group · Budapest · Est. 1993</div>
+      </div>
+      <div class="fact-box" style="margin-top:24px;">
+        <div class="fact-box-title">About MAVIR</div>
+        <ul class="fact-list">
+          <li>Hungarian electricity transmission system operator</li>
+          <li>Responsible for Hungary's high-voltage grid</li>
+          <li>Operates in one of Europe's most regulated energy markets</li>
+          <li>Manages cross-border energy flows and grid balancing</li>
+          <li>Subject to EU energy market regulations and ENTSO-E standards</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT WE BUILT -->
+<section class="record-section record-section-dark">
+  <div class="section-eyebrow reveal">What We Built</div>
+  <h2 class="section-title reveal">Settlement systems.<br><span>Market modelling.<br>Regulatory readiness.</span></h2>
+  <p class="body-text reveal">The E-Group systems running at MAVIR cover the full operational lifecycle of electricity market management — from real-time settlement to regulatory compliance to master data governance.</p>
+
+  <div class="capability-grid">
+    <div class="capability-card reveal">
+      <div class="capability-name">Settlement System Support</div>
+      <div class="capability-desc">Mission-critical settlement infrastructure supporting KÁT, METÁR, balancing energy, and tiered pricing structures. 15-second and 1-minute settlement window capability — built for the speed that grid operations demand.</div>
+    </div>
+    <div class="capability-card reveal reveal-delay-1">
+      <div class="capability-name">Market Modelling</div>
+      <div class="capability-desc">Analytical systems for electricity market modelling, forecasting, and scenario analysis. Supporting MAVIR's decision-making on grid balancing, cross-border capacity, and renewable integration.</div>
+    </div>
+    <div class="capability-card reveal reveal-delay-2">
+      <div class="capability-name">Regulatory Change Management</div>
+      <div class="capability-desc">Continuous adaptation to EU energy market regulation changes — ENTSO-E requirements, national regulatory updates, and cross-border harmonisation. Built to evolve with the regulatory landscape.</div>
+    </div>
+    <div class="capability-card reveal">
+      <div class="capability-name">Renewable Energy Market Support</div>
+      <div class="capability-desc">Systems supporting Hungary's renewable energy market mechanisms including KÁT (mandatory off-take) and METÁR (premium support scheme). Built as the market transitioned from fossil to renewable generation.</div>
+    </div>
+    <div class="capability-card reveal reveal-delay-1">
+      <div class="capability-name">Master Data Registry</div>
+      <div class="capability-desc">Central master data management for market participants, metering points, and grid assets. The authoritative record for Hungary's electricity market — built and maintained by E-Group.</div>
+    </div>
+    <div class="capability-card reveal reveal-delay-2">
+      <div class="capability-name">Customer Database Integration</div>
+      <div class="capability-desc">Integration layer connecting MAVIR's operational systems with customer-facing services, billing infrastructure, and cross-border market interfaces.</div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY IT MATTERS -->
+<section class="record-section">
+  <div class="two-col">
+    <div>
+      <div class="section-eyebrow reveal">Why It Matters</div>
+      <h2 class="section-title reveal">Trust infrastructure<br><span>for the energy transition.</span></h2>
+      <p class="body-text reveal">The electricity grid is not a technology problem. It is a trust problem. Every megawatt transferred, every settlement calculated, every market participant paid — all of it depends on systems that are accurate, auditable, and never down.</p>
+      <p class="body-text reveal">E-Group has been the trust layer for Hungary's electricity market for over two decades. As the market transitions from fossil fuels to renewables, as settlement windows shrink from hours to seconds, as cross-border flows become more complex — E-Group has adapted the systems to keep pace.</p>
+      <p class="body-text reveal">This is what thirty years of infrastructure experience looks like in practice. Not a proof of concept. A live system. Running today.</p>
+    </div>
+    <div class="reveal">
+      <div class="fact-box">
+        <div class="fact-box-title">Key Facts</div>
+        <ul class="fact-list">
+          <li>25+ years of continuous operation — no replacement, no migration away</li>
+          <li>15-second settlement window capability for real-time balancing</li>
+          <li>Supports KÁT and METÁR renewable energy market schemes</li>
+          <li>Covers master data registry for all Hungarian market participants</li>
+          <li>Adapted continuously through multiple EU energy market reform cycles</li>
+          <li>Mission-critical — zero tolerance for downtime or data errors</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- THE BIGGER PICTURE -->
+<section class="record-section record-section-dark">
+  <div class="section-eyebrow reveal">The Bigger Picture</div>
+  <h2 class="section-title reveal">What a 25-year partnership<br><span>actually proves.</span></h2>
+  <p class="body-text reveal">Technology vendors get replaced. Partners get retained. The fact that MAVIR has chosen E-Group continuously for over twenty-five years — through multiple EU regulatory cycles, through the renewable energy transition, through the digitisation of the energy market — is not luck. It is evidence.</p>
+  <p class="body-text reveal">It proves that E-Group builds systems that last. That adapt. That earn the right to keep operating by doing the job properly, every day, for decades.</p>
+  <p class="body-text reveal">When E-Group says it builds trust infrastructure — MAVIR is what that looks like in practice.</p>
+</section>
+
+<!-- CTA -->
+<div class="record-cta">
+  <div class="record-cta-text">
+    <h2>Operating in energy, utilities,<br>or critical infrastructure?</h2>
+    <p>Twenty-five years of mission-critical EnergyTech experience. If you are working on a hard problem in regulated energy markets — we have probably solved something like it before. Tell us what you're working on.</p>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:16px;align-items:flex-end;">
+    <a href="../index.html#contact" class="record-cta-btn">Start the conversation →</a>
+    <a href="../record/index.html" class="record-back">← Back to The Record</a>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-brand">E-Group Intelligence Infrastructure · Est. 1993</div>
+  <div class="footer-legal">Budapest, Hungary · © 2026 E-Group ICT Software Zrt.</div>
+</footer>
+
+<script>
+const obs = new IntersectionObserver(entries => entries.forEach(e => {
+  if(e.isIntersecting) e.target.classList.add('visible');
+}), {threshold:0.08});
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>

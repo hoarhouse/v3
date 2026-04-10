@@ -60,6 +60,7 @@
         '<a href="' + base + 'record/index.html" style="font-family:\'DM Mono\',monospace;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;text-decoration:none;color:#777;cursor:pointer;">Record ▾</a>' +
         '<div class="ndrop">' +
           '<a href="' + base + 'record/index.html" style="display:block;padding:10px 18px;font-family:\'DM Mono\',monospace;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:#666;text-decoration:none;">Overview</a>' +
+          '<a href="' + base + 'record/mavir.html" style="display:block;padding:10px 18px;font-family:\'DM Mono\',monospace;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:#666;text-decoration:none;">MAVIR — Electricity Grid</a>' +
           '<a href="' + base + 'record/ipcei-cis.html" style="display:block;padding:10px 18px;font-family:\'DM Mono\',monospace;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:#666;text-decoration:none;">IPCEI-CIS — FedEU.ai</a>' +
           '<a href="' + base + 'record/kau.html" style="display:block;padding:10px 18px;font-family:\'DM Mono\',monospace;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:#666;text-decoration:none;">KAÜ — National Identity</a>' +
           '<a href="' + base + 'record/helix.html" style="display:block;padding:10px 18px;font-family:\'DM Mono\',monospace;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:#666;text-decoration:none;">HeliX + FedX</a>' +
@@ -83,6 +84,7 @@
     '<a href="' + base + 'about.html" class="mob-main">About</a>' +
     '<div class="mob-divider">The Record</div>' +
     '<a href="' + base + 'record/index.html" class="mob-record">Overview</a>' +
+    '<a href="' + base + 'record/mavir.html" class="mob-record">MAVIR — Electricity Grid</a>' +
     '<a href="' + base + 'record/ipcei-cis.html" class="mob-record">IPCEI-CIS — FedEU.ai</a>' +
     '<a href="' + base + 'record/kau.html" class="mob-record">KAÜ — National Identity</a>' +
     '<a href="' + base + 'record/helix.html" class="mob-record">HeliX + FedX</a>' +
@@ -146,10 +148,18 @@
     '</div>' +
   '</footer>';
 
-  // Insert nav at top of body immediately
+  // Insert nav at top of body
   document.body.insertAdjacentHTML('afterbegin', navHtml);
 
-  // Hamburger toggle - wire up immediately since nav is already in DOM
+  // Replace or append footer
+  var existingFooter = document.querySelector('footer');
+  if (existingFooter) {
+    existingFooter.outerHTML = footerHtml;
+  } else {
+    document.body.insertAdjacentHTML('beforeend', footerHtml);
+  }
+
+  // Hamburger toggle
   var btn = document.getElementById('egroup-hamburger');
   var menu = document.getElementById('egroup-mobile-menu');
   if (btn && menu) {
@@ -166,14 +176,4 @@
       });
     });
   }
-
-  // Replace footer after DOM is fully loaded
-  document.addEventListener('DOMContentLoaded', function() {
-    var existingFooter = document.querySelector('footer');
-    if (existingFooter) {
-      existingFooter.outerHTML = footerHtml;
-    } else {
-      document.body.insertAdjacentHTML('beforeend', footerHtml);
-    }
-  });
 })();
