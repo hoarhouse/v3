@@ -372,20 +372,19 @@ nav:not(#site-nav) { display: none !important; }
 .coming-name { font-family:'Syne',sans-serif; font-size:22px; font-weight:700; color:var(--white); margin-bottom:16px; letter-spacing:-0.3px; }
 .coming-desc { font-size:14px; color:var(--dim); line-height:1.7; }
 @media (max-width:768px) { .coming-cards { grid-template-columns:1fr; } .coming-section { padding:72px 24px; } }
-.proof-strip { background:#050505; border-top:1px solid var(--border); border-bottom:1px solid var(--border); padding:48px 60px; }
-.proof-strip-inner { display:flex; flex-direction:column; gap:40px; }
-.proof-strip-row { display:flex; align-items:center; gap:48px; }
-.proof-strip-label { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:3px; text-transform:uppercase; color:var(--mid); min-width:120px; flex-shrink:0; }
-.proof-strip-names { display:flex; align-items:center; gap:0; flex-wrap:wrap; }
-.proof-name { font-family:'Syne',sans-serif; font-size:15px; font-weight:700; color:var(--dim); letter-spacing:0.5px; padding:10px 28px; border-left:1px solid var(--border); transition:color 0.2s; cursor:default; }
-.proof-name:hover { color:var(--gold); }
-.proof-strip-divider { width:100%; height:1px; background:var(--border); }
-@media (max-width:768px) {
-  .proof-strip { padding:36px 24px; }
-  .proof-strip-row { flex-direction:column; align-items:flex-start; gap:20px; }
-  .proof-strip-names { flex-direction:column; gap:0; }
-  .proof-name { border-left:none; border-bottom:1px solid var(--border); padding:12px 0; width:100%; }
-}
+.credentials-section { background:#050505; border-top:1px solid var(--border); }
+.credentials-block { padding:60px; border-bottom:1px solid var(--border); }
+.credentials-block:last-child { border-bottom:none; }
+.credentials-programmes { background:#080808; }
+.credentials-eyebrow { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:3px; text-transform:uppercase; color:var(--mid); margin-bottom:40px; }
+.credentials-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:0; border-top:1px solid var(--border); border-left:1px solid var(--border); }
+.credential-card { padding:36px 32px; border-right:1px solid var(--border); border-bottom:1px solid var(--border); transition:background 0.2s; }
+.credential-card:hover { background:var(--panel); }
+.credential-name { font-family:'Syne',sans-serif; font-size:18px; font-weight:700; color:var(--white); letter-spacing:-0.3px; margin-bottom:12px; }
+.credential-role { font-size:13px; color:var(--text); line-height:1.6; margin-bottom:10px; }
+.credential-stat { font-family:'DM Mono',monospace; font-size:10px; color:var(--gold); letter-spacing:0.5px; opacity:0.8; }
+@media (max-width:1023px) { .credentials-grid { grid-template-columns:repeat(2,1fr); } }
+@media (max-width:768px) { .credentials-block { padding:40px 24px; } .credentials-grid { grid-template-columns:1fr; } .credential-card { padding:28px 0; border-right:none; } }
 </style>
 </head>
 <body data-page="home">
@@ -474,29 +473,71 @@ nav:not(#site-nav) { display: none !important; }
 </section>
 
 <!-- SOCIAL PROOF -->
-<div class="proof-strip">
-  <div class="proof-strip-inner">
-    <div class="proof-strip-row">
-      <div class="proof-strip-label">Clients</div>
-      <div class="proof-strip-names">
-        <div class="proof-name">MAVIR</div>
-        <div class="proof-name">European Space Agency</div>
-        <div class="proof-name">Hungarian Government</div>
-        <div class="proof-name">Kellton</div>
+<section class="credentials-section">
+
+  <div class="credentials-block credentials-clients">
+    <div class="credentials-eyebrow">Trusted by</div>
+    <div class="credentials-grid">
+
+      <div class="credential-card">
+        <div class="credential-name">MAVIR</div>
+        <div class="credential-role">Hungary's national electricity transmission operator</div>
+        <div class="credential-stat">25+ year production partnership</div>
       </div>
-    </div>
-    <div class="proof-strip-divider"></div>
-    <div class="proof-strip-row">
-      <div class="proof-strip-label">EU Programmes</div>
-      <div class="proof-strip-names">
-        <div class="proof-name">IPCEI-CIS</div>
-        <div class="proof-name">HeliX</div>
-        <div class="proof-name">EU DOME</div>
-        <div class="proof-name">EWC / eIDAS 2.0</div>
+
+      <div class="credential-card">
+        <div class="credential-name">European Space Agency</div>
+        <div class="credential-role">Active technology partner — ProofX cryptographic verification</div>
+        <div class="credential-stat">Galileo OSNMA · Court-admissible evidence chains</div>
       </div>
+
+      <div class="credential-card">
+        <div class="credential-name">Hungarian Government</div>
+        <div class="credential-role">National digital identity infrastructure — KAÜ</div>
+        <div class="credential-stat">Millions of citizens authenticated daily</div>
+      </div>
+
+      <div class="credential-card">
+        <div class="credential-name">Kellton</div>
+        <div class="credential-role">Sovereign AI ecosystem partnership</div>
+        <div class="credential-stat">Building European AI independence · MoU 2025</div>
+      </div>
+
     </div>
   </div>
-</div>
+
+  <div class="credentials-block credentials-programmes">
+    <div class="credentials-eyebrow">EU Recognition</div>
+    <div class="credentials-grid">
+
+      <div class="credential-card">
+        <div class="credential-name">IPCEI-CIS</div>
+        <div class="credential-role">Co-leads Workstream 3 and the AI Cluster</div>
+        <div class="credential-stat">7 EU member states · €1.2bn programme · EC approved</div>
+      </div>
+
+      <div class="credential-card">
+        <div class="credential-name">HeliX</div>
+        <div class="credential-role">Federated health data space — FedX platform</div>
+        <div class="credential-stat">8 biobank clients · 50+ partners · EHDEN certified</div>
+      </div>
+
+      <div class="credential-card">
+        <div class="credential-name">EU DOME</div>
+        <div class="credential-role">Hungary's representative for the EU federated cloud</div>
+        <div class="credential-stat">Sovereign cloud infrastructure for European enterprise</div>
+      </div>
+
+      <div class="credential-card">
+        <div class="credential-name">EWC / eIDAS 2.0</div>
+        <div class="credential-role">European Digital Identity Wallet Consortium member</div>
+        <div class="credential-stat">Passed all eIDAS 2 testbed scenarios · 2026 rollout ready</div>
+      </div>
+
+    </div>
+  </div>
+
+</section>
 
 <!-- TICKER -->
 <div class="ticker-wrap">
