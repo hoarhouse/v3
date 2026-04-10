@@ -82,6 +82,7 @@ footer{padding:40px 60px;border-top:1px solid var(--border);display:flex;align-i
 .footer-legal{font-size:12px;color:var(--muted);}
 
 /* RESPONSIVE */
+.fived-rise-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);}
 @media(max-width:768px){
   .hero{padding:120px 24px 60px;}
   .section{padding:60px 24px;}
@@ -89,6 +90,7 @@ footer{padding:40px 60px;border-top:1px solid var(--border);display:flex;align-i
   .dev-card,.vision-card{padding:36px 24px;}
   .cta-section{padding:60px 24px;flex-direction:column;align-items:flex-start;}
   footer{padding:32px 24px;flex-direction:column;}
+  .fived-rise-grid{grid-template-columns:1fr;}
 }
 </style>
 </head>
@@ -178,7 +180,7 @@ footer{padding:40px 60px;border-top:1px solid var(--border);display:flex;align-i
   <h2 class="section-title reveal">Enterprise thinking.<br><span>Startup speed.</span></h2>
   <p class="section-sub reveal">Most companies choose one or the other. E-Group runs both simultaneously.</p>
 
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);">
+  <div class="fived-rise-grid">
 
     <div style="background:var(--dark);padding:48px;border-left:3px solid var(--gold);">
       <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--mid);margin-bottom:20px;">The Team</div>
