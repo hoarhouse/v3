@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CORPEX — E-Group Record</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --black:#080808;--dark:#0A0A0A;--panel:#111;
+  --border:#1A1A1A;--muted:#333;--dim:#555;--mid:#777;
+  --text:#B0B0B0;--light:#D0D0D0;--white:#EFEFEF;
+  --gold:#C8A96E;--gold2:#A07840;--teal:#4ECDC4;--green:#4ADE80;
+}
+html{background:var(--black);color:var(--white);font-family:'DM Sans',sans-serif;}
+body{overflow-x:hidden;}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity 0.6s ease,transform 0.6s ease;}
+.reveal.visible{opacity:1;transform:none;}
+.reveal-delay-1{transition-delay:0.1s;}
+.reveal-delay-2{transition-delay:0.2s;}
+.reveal-delay-3{transition-delay:0.3s;}
+.breadcrumb{padding:100px 60px 0;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);}
+.breadcrumb a{color:var(--dim);text-decoration:none;}
+.breadcrumb a:hover{color:var(--gold);}
+.breadcrumb span{color:var(--mid);margin:0 8px;}
+.record-hero{padding:40px 60px 80px;border-bottom:1px solid var(--border);}
+.record-badges{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:32px;}
+.badge{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;padding:5px 12px;border:1px solid;}
+.badge-live{color:var(--green);border-color:rgba(74,222,128,0.3);}
+.badge-fintech{color:var(--gold);border-color:rgba(200,169,110,0.3);}
+.badge-default{color:var(--mid);border-color:var(--border);}
+.record-headline{font-family:'Syne',sans-serif;font-size:clamp(36px,5vw,72px);font-weight:800;color:var(--white);letter-spacing:-2px;line-height:1.0;margin-bottom:24px;}
+.record-headline em{color:var(--gold);font-style:normal;}
+.record-sub{font-size:18px;color:var(--text);line-height:1.7;max-width:640px;margin-bottom:48px;}
+.record-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);max-width:800px;}
+.record-stat{background:var(--dark);padding:24px 28px;}
+.record-stat-num{font-family:'Syne',sans-serif;font-size:32px;font-weight:800;color:var(--white);}
+.record-stat-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--mid);margin-top:6px;}
+.record-section{padding:72px 60px;border-bottom:1px solid var(--border);}
+.record-section-dark{background:var(--dark);}
+.section-eyebrow{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--mid);margin-bottom:16px;}
+.section-title{font-family:'Syne',sans-serif;font-size:clamp(24px,3vw,40px);font-weight:700;color:var(--white);letter-spacing:-0.5px;margin-bottom:24px;line-height:1.1;}
+.section-title span{color:var(--gold);}
+.body-text{font-size:16px;color:var(--text);line-height:1.8;margin-bottom:20px;max-width:760px;}
+.body-text strong{color:var(--white);}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;}
+.capability-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);margin-top:40px;}
+.capability-card{background:var(--dark);padding:36px;border-left:3px solid transparent;transition:background 0.2s,border-left-color 0.2s;}
+.capability-card:hover{background:var(--panel);border-left-color:var(--gold);}
+.capability-name{font-family:'Syne',sans-serif;font-size:18px;font-weight:700;color:var(--white);margin-bottom:10px;}
+.capability-desc{font-size:13px;color:var(--text);line-height:1.7;}
+.fact-box{padding:36px;border:1px solid var(--border);border-left:3px solid var(--gold);background:var(--panel);}
+.fact-box-title{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:16px;}
+.fact-list{list-style:none;display:flex;flex-direction:column;gap:10px;}
+.fact-list li{font-size:14px;color:var(--text);line-height:1.6;padding-left:16px;position:relative;}
+.fact-list li::before{content:'—';position:absolute;left:0;color:var(--gold);}
+.record-cta{padding:72px 60px;display:flex;align-items:center;justify-content:space-between;gap:40px;flex-wrap:wrap;}
+.record-cta-text h2{font-family:'Syne',sans-serif;font-size:clamp(22px,3vw,36px);font-weight:700;color:var(--white);margin-bottom:12px;letter-spacing:-0.5px;}
+.record-cta-text p{font-size:16px;color:var(--text);max-width:500px;line-height:1.6;}
+.record-cta-btn{font-family:'DM Mono',monospace;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:var(--black);background:var(--gold);padding:16px 32px;text-decoration:none;white-space:nowrap;transition:background 0.2s;}
+.record-cta-btn:hover{background:var(--gold2);}
+.record-back{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--mid);text-decoration:none;transition:color 0.2s;}
+.record-back:hover{color:var(--gold);}
+@media(max-width:1023px){.capability-grid{grid-template-columns:1fr 1fr;}.record-stats{grid-template-columns:1fr 1fr;}}
+@media(max-width:768px){
+  .breadcrumb{padding:80px 24px 0;}.record-hero{padding:32px 24px 60px;}.record-section{padding:56px 24px;}
+  .two-col{grid-template-columns:1fr;gap:40px;}.capability-grid{grid-template-columns:1fr;}.record-stats{grid-template-columns:1fr 1fr;}
+  .record-cta{padding:56px 24px;flex-direction:column;align-items:flex-start;}
+}
+</style>
+</head>
+<body data-page="record">
+<script src="../nav-site.js"></script>
+
+<div class="breadcrumb reveal">
+  <a href="../record/index.html">Record</a>
+  <span>/</span>
+  CORPEX — Corporate Banking Infrastructure
+</div>
+
+<section class="record-hero">
+  <div class="record-badges reveal">
+    <span class="badge badge-live">● Live in Production</span>
+    <span class="badge badge-fintech">FinTech</span>
+    <span class="badge badge-default">Corporate Banking</span>
+    <span class="badge badge-default">20+ Years</span>
+  </div>
+  <h1 class="record-headline reveal">CORPEX —<br><em>Corporate Banking</em><br>Infrastructure</h1>
+  <p class="record-sub reveal">Corporate internet banking front-end and financial infrastructure platform for financial institutions. Built on E-Group's thirty years of FinTech IP — proven in production for over two decades of financial operations across Central Europe.</p>
+  <div class="record-stats reveal">
+    <div class="record-stat"><div class="record-stat-num">20+</div><div class="record-stat-label">Years in production</div></div>
+    <div class="record-stat"><div class="record-stat-num">B2B</div><div class="record-stat-label">Financial institutions</div></div>
+    <div class="record-stat"><div class="record-stat-num">EU</div><div class="record-stat-label">Regulatory compliant</div></div>
+    <div class="record-stat"><div class="record-stat-num">Live</div><div class="record-stat-label">Running today</div></div>
+  </div>
+</section>
+
+<section class="record-section">
+  <div class="two-col">
+    <div>
+      <div class="section-eyebrow reveal">What It Is</div>
+      <h2 class="section-title reveal">Corporate banking.<br><span>Built to last.</span></h2>
+      <p class="body-text reveal">CORPEX is E-Group's corporate internet banking platform — a proven, production-grade front-end and infrastructure layer for financial institutions serving corporate clients. It is not a prototype. Not a pilot. A system that has been running in financial institutions across Central Europe for over twenty years.</p>
+      <p class="body-text reveal">Built on E-Group's thirty years of FinTech expertise — clearing, settlement, payment systems, regulatory compliance — CORPEX brings that depth of institutional knowledge into a deployable, maintainable banking platform.</p>
+      <p class="body-text reveal">Financial institutions do not replace core banking infrastructure lightly. The fact that CORPEX has been in continuous production for two decades is the most credible endorsement there is.</p>
+    </div>
+    <div class="reveal">
+      <div class="fact-box">
+        <div class="fact-box-title">Key Facts</div>
+        <ul class="fact-list">
+          <li>Corporate internet banking front-end for financial institutions</li>
+          <li>20+ years of continuous production deployment</li>
+          <li>Built on E-Group's FinTech infrastructure expertise</li>
+          <li>Deployed across Central European financial institutions</li>
+          <li>EU regulatory compliant — built to evolve with regulation</li>
+          <li>B2B focused — serving financial institutions, not retail customers</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="record-section record-section-dark">
+  <div class="section-eyebrow reveal">Capabilities</div>
+  <h2 class="section-title reveal">What CORPEX delivers.<br><span>In production.</span></h2>
+  <div class="capability-grid">
+    <div class="capability-card reveal">
+      <div class="capability-name">Corporate Internet Banking</div>
+      <div class="capability-desc">Full-featured corporate banking front-end. Account management, payment initiation, transaction history, multi-user corporate access with role-based permissions. Built for the complexity of corporate treasury operations.</div>
+    </div>
+    <div class="capability-card reveal reveal-delay-1">
+      <div class="capability-name">Payment Infrastructure</div>
+      <div class="capability-desc">Payment processing and routing infrastructure built on E-Group's clearing and settlement expertise. Domestic and cross-border payment support with full audit trail and regulatory reporting.</div>
+    </div>
+    <div class="capability-card reveal reveal-delay-2">
+      <div class="capability-name">Regulatory Compliance</div>
+      <div class="capability-desc">Built to comply with EU financial regulation — PSD2, AML, KYC, and reporting requirements. Designed to adapt as regulation evolves, not to be replaced every time it does.</div>
+    </div>
+    <div class="capability-card reveal">
+      <div class="capability-name">Security Architecture</div>
+      <div class="capability-desc">Enterprise-grade security built on E-Group's identity and authentication expertise. Multi-factor authentication, session management, and audit logging — built by the team that built Hungary's national digital identity system.</div>
+    </div>
+    <div class="capability-card reveal reveal-delay-1">
+      <div class="capability-name">Integration Layer</div>
+      <div class="capability-desc">Core banking integration layer connecting CORPEX to existing financial institution infrastructure. Designed for the complex, legacy-heavy environment that real financial institutions actually operate in.</div>
+    </div>
+    <div class="capability-card reveal reveal-delay-2">
+      <div class="capability-name">White-Label Ready</div>
+      <div class="capability-desc">Configurable for the branding and workflow requirements of individual financial institutions. Built as a platform, not a fixed product — adaptable to the specific needs of each deployment.</div>
+    </div>
+  </div>
+</section>
+
+<section class="record-section">
+  <div class="section-eyebrow reveal">Why It Matters</div>
+  <h2 class="section-title reveal">Thirty years of FinTech IP.<br><span>Deployed and running.</span></h2>
+  <p class="body-text reveal">Most companies talking about building FinTech AI today have never built the underlying financial infrastructure. They are building on top of systems they do not fully understand, in a regulatory environment they are still learning.</p>
+  <p class="body-text reveal">E-Group has been building that underlying infrastructure since the 1990s. CORPEX is the evidence. A live, production banking platform that has been running continuously for over twenty years — through multiple EU regulatory cycles, through the digitisation of European banking, through the transition to open banking.</p>
+  <p class="body-text reveal">When E-Group builds COIOS — its AI operating system for financial institutions — it is built on the same foundations as CORPEX. Not theory. Thirty years of practice.</p>
+</section>
+
+<div class="record-cta">
+  <div class="record-cta-text">
+    <h2>Financial institution looking for<br>proven infrastructure?</h2>
+    <p>Twenty years of production banking infrastructure. If you are building or modernising corporate banking systems — we have been doing this longer than most vendors have existed. Tell us what you're working on.</p>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:16px;align-items:flex-end;">
+    <a href="../index.html#contact" class="record-cta-btn">Start the conversation →</a>
+    <a href="../record/index.html" class="record-back">← Back to The Record</a>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-brand">E-Group Intelligence Infrastructure · Est. 1993</div>
+  <div class="footer-legal">Budapest, Hungary · © 2026 E-Group ICT Software Zrt.</div>
+</footer>
+
+<script>
+const obs = new IntersectionObserver(entries => entries.forEach(e => {
+  if(e.isIntersecting) e.target.classList.add('visible');
+}),{threshold:0.08});
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
