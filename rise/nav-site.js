@@ -151,13 +151,15 @@
   // Insert nav at top of body
   document.body.insertAdjacentHTML('afterbegin', navHtml);
 
-  // Replace or append footer
-  var existingFooter = document.querySelector('footer');
-  if (existingFooter) {
-    existingFooter.outerHTML = footerHtml;
-  } else {
-    document.body.insertAdjacentHTML('beforeend', footerHtml);
-  }
+  // Replace footer after page fully loaded
+  window.addEventListener('load', function() {
+    var existingFooter = document.querySelector('footer');
+    if (existingFooter) {
+      existingFooter.outerHTML = footerHtml;
+    } else {
+      document.body.insertAdjacentHTML('beforeend', footerHtml);
+    }
+  });
 
   // Hamburger toggle
   var btn = document.getElementById('egroup-hamburger');
