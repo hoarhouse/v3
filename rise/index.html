@@ -364,6 +364,14 @@ nav:not(#site-nav) { display: none !important; }
 .card-proofx::before { background:linear-gradient(to right,#E24B4A,rgba(226,75,74,0.3)); }
 .card-status.status-live { color:#4ADE80; border-color:rgba(74,222,128,0.3); }
 .card-status.status-coming { color:#888; border-color:rgba(136,136,136,0.3); }
+.coming-section { padding:100px 60px; background:var(--dark); }
+.coming-cards { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--border); margin-top:60px; }
+.coming-card { background:var(--dark); padding:48px 40px; border-top:2px solid var(--border); transition:border-color 0.3s; }
+.coming-card:hover { border-top-color:var(--gold); background:var(--panel); }
+.coming-tag { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--mid); margin-bottom:20px; }
+.coming-name { font-family:'Syne',sans-serif; font-size:22px; font-weight:700; color:var(--white); margin-bottom:16px; letter-spacing:-0.3px; }
+.coming-desc { font-size:14px; color:var(--dim); line-height:1.7; }
+@media (max-width:768px) { .coming-cards { grid-template-columns:1fr; } .coming-section { padding:72px 24px; } }
 </style>
 </head>
 <body data-page="home">
@@ -721,14 +729,34 @@ nav:not(#site-nav) { display: none !important; }
       <span class="card-link">Learn more →</span>
     </a>
 
-    <a href="record/proofx.html" class="thesis-card card-proofx">
-      <div class="card-status status-coming">
-        <span class="dot"></span>Coming Soon
-      </div>
-      <div class="card-title">ProofX — Real or AI?</div>
-      <p class="card-desc">Can you tell a real satellite image from an AI-generated fake? ProofX uses Galileo OSNMA cryptographic authentication and C2PA standards to answer that question with court-admissible certainty.</p>
-      <span class="card-link">Find out →</span>
-    </a>
+  </div>
+</section>
+
+<!-- WHAT'S COMING -->
+<section class="coming-section">
+  <div class="section-eyebrow reveal">What's Coming</div>
+  <h2 class="section-title reveal">The next wave.<br>Built on the same foundations.</h2>
+  <p class="section-sub reveal">Three projects in development. Each one built on thirty years of E-Group infrastructure. Watch this space.</p>
+
+  <div class="coming-cards">
+
+    <div class="coming-card reveal">
+      <div class="coming-tag">In Development</div>
+      <div class="coming-name">ProofX</div>
+      <p class="coming-desc">Can you tell a real satellite image from an AI-generated fake? ProofX uses Galileo OSNMA cryptographic authentication and C2PA standards to answer that question with court-admissible certainty. Built for insurance, media authentication, and defence-adjacent applications.</p>
+    </div>
+
+    <div class="coming-card reveal">
+      <div class="coming-tag">In Development</div>
+      <div class="coming-name">Neonatal Intelligence</div>
+      <p class="coming-desc">AI-powered neonatal tracking and care intelligence. Built on E-Group's HealthTech and federated data foundations — bringing the same rigour that won international medical AI awards to the most critical hours of a new life.</p>
+    </div>
+
+    <div class="coming-card reveal">
+      <div class="coming-tag">Coming Soon</div>
+      <div class="coming-name">Project TBA</div>
+      <p class="coming-desc">A third intelligence product in early development. Details to follow. If you are working on a hard problem in a regulated industry and want to talk — we are listening.</p>
+    </div>
 
   </div>
 </section>
