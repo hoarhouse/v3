@@ -260,15 +260,20 @@ function buildDataContext(d) {
   return 'COMPANIES:\n'+companies+'\n\nPRODUCTS:\n'+products+'\n\nPEOPLE:\n'+people+'\n\nCONSORTIUMS:\n'+consortiums+'\n\nCOMPETITORS:\n'+competitors+'\n\nEVENTS (recent first):\n'+events+'\n\nPENDING ACTIONS:\n'+actions;
 }
 
-function buildWebsiteContext(w) {
-  if (!w) return 'Website audit data not available.';
-  var ctx = 'WEBSITE AUDIT (last checked: '+w.lastAudited+') URL: '+w.url+'\n\nGLOBAL GAPS ACROSS ENTIRE SITE:\n';
-  (w.globalGaps||[]).forEach(function(g){ ctx += '- '+g+'\n'; });
-  ctx += '\nPRIORITY UPDATES ALREADY IDENTIFIED:\n';
-  (w.priorityUpdates||[]).forEach(function(u){ ctx += '['+u.priority.toUpperCase()+'] '+u.page+': '+u.action+' (Rationale: '+u.rationale+')\n'; });
-  ctx += '\nPAGE BY PAGE MISSING CONTENT:\n';
-  (w.pages||[]).forEach(function(p){ ctx += '\n['+p.title+'] ('+p.url+')\nCurrently shows: '+(p.currentContent||[]).join('; ')+'\nMissing: '+(p.missing||[]).join('; ')+'\n'; });
-  return ctx;
+function buildWebsiteContext(websiteData) {
+  if (!websiteData || !websiteData.pages) return 'No website data available.';
+  var out = 'WEBSITE AUDIT DATA (last crawled: ' + (websiteData.lastAudited || 'unknown') + ')\n';
+  out += 'Total pages: ' + websiteData.pages.length + '\n\n';
+  websiteData.pages.forEach(function(p) {
+    out += 'PAGE: ' + p.url + ' — ' + (p.title || '') + '\n';
+    out += 'Products mentioned: ' + (p.productsMentioned || []).join(', ') + '\n';
+    out += 'Clients mentioned: ' + (p.clientsMentioned || []).join(', ') + '\n';
+    if (p.missing && p.missing.length) {
+      out += 'Known gaps: ' + p.missing.join(' | ') + '\n';
+    }
+    out += '\n';
+  });
+  return out;
 }
 
 function setThinking(text) { document.getElementById('thinking-text').textContent = text; }
