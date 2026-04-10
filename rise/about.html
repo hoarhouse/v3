@@ -89,6 +89,15 @@ body{overflow-x:hidden;}
   .recognition-grid{grid-template-columns:1fr;}
   .cta-section{padding:60px 24px;flex-direction:column;align-items:flex-start;}
 }
+
+.hungarian-ticker-wrap{overflow:hidden;position:relative;}
+.hungarian-ticker-wrap::before,.hungarian-ticker-wrap::after{content:'';position:absolute;top:0;bottom:0;width:80px;z-index:2;}
+.hungarian-ticker-wrap::before{left:0;background:linear-gradient(to right,var(--dark),transparent);}
+.hungarian-ticker-wrap::after{right:0;background:linear-gradient(to left,var(--dark),transparent);}
+.hungarian-ticker{display:flex;gap:0;white-space:nowrap;animation:hungarianScroll 40s linear infinite;}
+.hungarian-ticker span{font-family:'Syne',sans-serif;font-size:15px;font-weight:600;color:var(--white);padding:0 32px;border-right:1px solid var(--border);}
+.hungarian-ticker span em{color:var(--gold);font-style:normal;font-weight:400;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:1px;}
+@keyframes hungarianScroll{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
 </style>
 </head>
 <body data-page="about">
@@ -119,6 +128,44 @@ body{overflow-x:hidden;}
     <div class="who-quote">
       <div class="who-quote-text">"The most important problems in AI are not model problems. They are infrastructure problems. We have been solving infrastructure problems for thirty years. The world has finally arrived at the question we have been answering."</div>
       <div class="who-quote-attr">Antal Kuthy — Founder &amp; CEO · E-Group · Est. 1993</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- HUNGARIAN PRIDE -->
+<section style="padding:80px 60px;border-bottom:1px solid var(--border);background:var(--dark);">
+  <div style="max-width:760px;margin-bottom:56px;">
+    <div class="section-eyebrow reveal">Built in Budapest</div>
+    <h2 class="section-title reveal">Hungary is a country of<br><span>10 million people.</span></h2>
+    <p class="who-body reveal">It has produced 13 Nobel laureates. John von Neumann invented the computer architecture that every device on earth still runs on. Katalin Karikó's mRNA research saved millions of lives. Dénes Gábor invented holography. Albert Szent-Györgyi discovered vitamin C. These are not coincidences.</p>
+    <p class="who-body reveal">Hungary has a culture of rigorous, original thinking. Of building things that matter. Of taking hard problems seriously and working on them until they are solved — not until the funding runs out or the press release is written.</p>
+    <p class="who-body reveal" style="color:var(--white);font-weight:500;">E-Group was founded in Budapest in 1993. We are still here. We are still building. We consider ourselves part of that tradition.</p>
+  </div>
+
+  <div style="border-top:1px solid var(--border);padding-top:40px;">
+    <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--mid);margin-bottom:24px;">Hungarian minds that changed the world</div>
+    <div class="hungarian-ticker-wrap">
+      <div class="hungarian-ticker">
+        <span>John von Neumann <em>· Computing</em></span>
+        <span>Katalin Karikó <em>· mRNA Vaccines</em></span>
+        <span>Dénes Gábor <em>· Holography</em></span>
+        <span>Albert Szent-Györgyi <em>· Vitamin C</em></span>
+        <span>Jenő Wigner <em>· Quantum Physics</em></span>
+        <span>Charles Simonyi <em>· Microsoft Office</em></span>
+        <span>László Lovász <em>· Computer Science</em></span>
+        <span>Pál Erdős <em>· Mathematics</em></span>
+        <span>János Bolyai <em>· Non-Euclidean Geometry</em></span>
+        <span>Ferenc Krausz <em>· Attosecond Physics</em></span>
+        <span>György Hevesy <em>· Radioactive Tracers</em></span>
+        <span>Andrew Grove <em>· Intel · Microprocessors</em></span>
+        <span>Rózsa Péter <em>· Recursive Functions</em></span>
+        <span>János Kemény <em>· BASIC Language</em></span>
+        <span>John von Neumann <em>· Computing</em></span>
+        <span>Katalin Karikó <em>· mRNA Vaccines</em></span>
+        <span>Dénes Gábor <em>· Holography</em></span>
+        <span>Albert Szent-Györgyi <em>· Vitamin C</em></span>
+      </div>
     </div>
   </div>
 </section>

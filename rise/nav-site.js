@@ -61,6 +61,7 @@
         '<div class="ndrop">' +
           '<a href="' + base + 'record/index.html" style="display:block;padding:10px 18px;font-family:\'DM Mono\',monospace;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:#666;text-decoration:none;">Overview</a>' +
           '<a href="' + base + 'record/mavir.html" style="display:block;padding:10px 18px;font-family:\'DM Mono\',monospace;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:#666;text-decoration:none;">MAVIR — Electricity Grid</a>' +
+          '<a href="' + base + 'record/corpex.html" style="display:block;padding:10px 18px;font-family:\'DM Mono\',monospace;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:#666;text-decoration:none;">CORPEX — Corporate Banking</a>' +
           '<a href="' + base + 'record/ipcei-cis.html" style="display:block;padding:10px 18px;font-family:\'DM Mono\',monospace;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:#666;text-decoration:none;">IPCEI-CIS — FedEU.ai</a>' +
           '<a href="' + base + 'record/kau.html" style="display:block;padding:10px 18px;font-family:\'DM Mono\',monospace;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:#666;text-decoration:none;">KAÜ — National Identity</a>' +
           '<a href="' + base + 'record/helix.html" style="display:block;padding:10px 18px;font-family:\'DM Mono\',monospace;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:#666;text-decoration:none;">HeliX + FedX</a>' +
@@ -85,6 +86,7 @@
     '<div class="mob-divider">The Record</div>' +
     '<a href="' + base + 'record/index.html" class="mob-record">Overview</a>' +
     '<a href="' + base + 'record/mavir.html" class="mob-record">MAVIR — Electricity Grid</a>' +
+    '<a href="' + base + 'record/corpex.html" class="mob-record">CORPEX — Corporate Banking</a>' +
     '<a href="' + base + 'record/ipcei-cis.html" class="mob-record">IPCEI-CIS — FedEU.ai</a>' +
     '<a href="' + base + 'record/kau.html" class="mob-record">KAÜ — National Identity</a>' +
     '<a href="' + base + 'record/helix.html" class="mob-record">HeliX + FedX</a>' +
