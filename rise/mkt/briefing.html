@@ -904,7 +904,7 @@ function runWebsiteAudit() {
 
   Promise.all([
     fetchJSON(DATA_URL, DATA_CACHE_KEY, 3600000),
-    fetchJSON(WEBSITE_URL, WEBSITE_CACHE_KEY, 0)
+    fetch(WEBSITE_URL + '?nocache=' + Date.now()).then(function(r){ return r.json(); })
   ]).then(function(results) {
     var data = results[0];
     var websiteData = results[1];
