@@ -903,70 +903,35 @@ function runWebsiteAudit() {
   setThinking('Vigil is loading site and data knowledge...');
 
   Promise.all([
-    fetchJSON(DATA_URL, DATA_CACHE_KEY, 3600000),
-    fetch(WEBSITE_URL + '?nocache=' + Date.now()).then(function(r){ return r.json(); })
+    fetch('https://hoarhouse.github.io/v3/rise/mkt/data.json').then(function(r){return r.json();}),
+    fetch('https://hoarhouse.github.io/v3/rise/mkt/website.json?nc=' + Date.now()).then(function(r){return r.json();})
   ]).then(function(results) {
     var data = results[0];
     var websiteData = results[1];
-    if (!data) {
-      output.innerHTML = '<div style="color:#E24B4A;padding:20px">Failed to load data.json</div>';
-      btn.disabled = false; btn.textContent = 'Audit Website';
-      thinkingBox.style.display = 'none'; return;
-    }
-
-    var ageWarning = '';
-    if (websiteData && websiteData.lastAudited) {
-      var daysSince = Math.floor((Date.now() - new Date(websiteData.lastAudited)) / 86400000);
-      if (daysSince > 7) ageWarning = 'NOTE: website.json is ' + daysSince + ' days old — some page content may be stale.\n\n';
-    }
-
-    var memCtx = buildMemoryContext();
     var dataCtx = buildDataContext(data);
     var websiteCtx = buildWebsiteContext(websiteData);
-    var today = new Date().toLocaleDateString('en-GB', {weekday:'long',day:'numeric',month:'long',year:'numeric'});
-
+    var memCtx = buildMemoryContext();
+    var today = new Date().toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
     setThinking('Vigil is cross-referencing every page against current data...');
 
-    var prompt = 'You are Vigil, Deputy CMO for E-Group ICT Software Zrt. Your ONLY task is a comprehensive website gap audit — do not produce a morning briefing or any other output.\n\n' +
-      'Today: ' + today + '\n\n' +
-      ageWarning +
-      'YOUR KNOWLEDGE (data.json):\n' + dataCtx + '\n\n' +
-      'THE CURRENT WEBSITE (every known page):\n' + websiteCtx + '\n\n' +
-      'YOUR MEMORY:\n' + memCtx + '\n\n' +
-      'AUDIT INSTRUCTIONS:\n' +
-      'Go through EVERY page listed above one by one.\n' +
-      'For each page, look at what products and clients are mentioned.\n' +
-      'Cross-reference against ALL products and clients in data.json.\n' +
-      'Any product or client that exists in data.json but is NOT mentioned on that page is a gap.\n' +
-      'Also identify pages that should exist but do not (e.g. a SpaceTech record page for ESA/ProofX, an EnergyTech record page for MAVIR).\n' +
-      'Prioritise: critical = major named client or product completely absent from relevant page, high = partial mention needs expanding, medium = useful addition.\n' +
-      'You MUST return a minimum of 10 gaps — there are definitely more than 10 given the data. Do not return fewer.\n' +
-      'For EVERY gap specify exact page filename and exact section where the change goes.\n\n' +
-      'Return JSON only — no markdown, no preamble:\n' +
-      '{"websiteGaps":[{"priority":"critical|high|medium","page":"exact filename","location":"exact section","gap":"what is missing","suggestedCopy":"exact text to add","rationale":"why this matters now"}]}';
+    var prompt = 'You are Vigil, Deputy CMO for E-Group ICT Software Zrt. Your ONLY task is a comprehensive website gap audit.\n\nToday: ' + today + '\n\nDATA (companies, products, events):\n' + dataCtx.substring(0,8000) + '\n\nWEBSITE PAGES:\n' + websiteCtx + '\n\nMEMORY:\n' + memCtx + '\n\nAUDIT: Go through every page. For each page cross-reference products and clients in data against what is mentioned on that page. Return ALL gaps where known products or clients are missing from relevant pages. Minimum 10 gaps.\n\nReturn JSON only, no markdown backticks, no preamble, just the raw JSON object:\n{"websiteGaps":[{"priority":"critical|high|medium","page":"filename","location":"exact section","gap":"what is missing","suggestedCopy":"exact text to add","rationale":"why this matters"}]}';
 
-    fetch(PROXY + '/api/messages', {
+    fetch('http://localhost:3000/api/messages', {
       method: 'POST',
       headers: {'Content-Type':'application/json'},
       body: JSON.stringify({
-        model: 'claude-opus-4-5',
-        max_tokens: 4000,
-        thinking: {type:'enabled', budget_tokens:2000},
+        model: 'claude-haiku-4-5-20251001',
+        max_tokens: 3000,
         messages: [{role:'user', content: prompt}]
       })
     }).then(function(r){return r.json();}).then(function(resp) {
-      if (resp.error) {
-        output.innerHTML = '<div style="color:#E24B4A;padding:20px">API error: ' + (resp.error.message||JSON.stringify(resp.error)) + '</div>';
-        btn.disabled = false; btn.textContent = 'Audit Website';
-        thinkingBox.style.display = 'none'; return;
-      }
-      trackCost('Website Audit', resp.usage ? resp.usage.input_tokens : 0, resp.usage ? resp.usage.output_tokens : 0);
+      trackCost('Audit', resp.usage ? resp.usage.input_tokens : 0, resp.usage ? resp.usage.output_tokens : 0);
       var text = (resp.content||[]).map(function(b){return b.text||'';}).join('');
       var result;
       try {
-        const cleaned = text.replace(/```json\n?/gi,'').replace(/```\n?/gi,'').trim();
-        const jsonMatch = cleaned.match(/\{[\s\S]*\}/);
-        result = jsonMatch ? JSON.parse(jsonMatch[0]) : {websiteGaps:[]};
+        var cleaned = text.replace(/```json/gi,'').replace(/```/gi,'').trim();
+        var match = cleaned.match(/\{[\s\S]*\}/);
+        result = match ? JSON.parse(match[0]) : {websiteGaps:[]};
       } catch(e) { result = {websiteGaps:[]}; }
       window.allWebsiteGaps = (result.websiteGaps||[]).filter(function(g){return !isGapSuppressed(g);});
       thinkingBox.style.display = 'none';
@@ -977,6 +942,10 @@ function runWebsiteAudit() {
       btn.disabled = false; btn.textContent = 'Audit Website';
       thinkingBox.style.display = 'none';
     });
+  }).catch(function(e) {
+    output.innerHTML = '<div style="color:#E24B4A;padding:20px">Failed to load data: ' + e.message + '</div>';
+    btn.disabled = false; btn.textContent = 'Audit Website';
+    thinkingBox.style.display = 'none';
   });
 }
 
