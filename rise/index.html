@@ -372,6 +372,15 @@ nav:not(#site-nav) { display: none !important; }
 .coming-name { font-family:'Syne',sans-serif; font-size:22px; font-weight:700; color:var(--white); margin-bottom:16px; letter-spacing:-0.3px; }
 .coming-desc { font-size:14px; color:var(--dim); line-height:1.7; }
 @media (max-width:768px) { .coming-cards { grid-template-columns:1fr; } .coming-section { padding:72px 24px; } }
+.proof-strip { background:#050505; border-top:1px solid var(--border); border-bottom:1px solid var(--border); padding:28px 60px; }
+.proof-strip-inner { display:flex; align-items:center; gap:48px; flex-wrap:wrap; }
+.proof-strip-group { display:flex; align-items:center; gap:24px; flex-wrap:wrap; }
+.proof-strip-label { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--mid); white-space:nowrap; }
+.proof-strip-logos { display:flex; align-items:center; gap:16px; flex-wrap:wrap; }
+.proof-logo-placeholder { font-family:'DM Mono',monospace; font-size:11px; color:var(--dim); letter-spacing:1px; padding:6px 14px; border:1px solid var(--border); border-radius:2px; white-space:nowrap; transition:color 0.2s,border-color 0.2s; }
+.proof-logo-placeholder:hover { color:var(--gold); border-color:rgba(200,169,110,0.4); }
+.proof-strip-divider { width:1px; height:40px; background:var(--border); flex-shrink:0; }
+@media (max-width:768px) { .proof-strip { padding:24px; } .proof-strip-inner { gap:24px; } .proof-strip-divider { display:none; } }
 </style>
 </head>
 <body data-page="home">
@@ -458,6 +467,31 @@ nav:not(#site-nav) { display: none !important; }
     <span class="scroll-text">Scroll</span>
   </div>
 </section>
+
+<!-- SOCIAL PROOF -->
+<div class="proof-strip">
+  <div class="proof-strip-inner">
+    <div class="proof-strip-group">
+      <div class="proof-strip-label">Clients</div>
+      <div class="proof-strip-logos">
+        <div class="proof-logo-placeholder">MAVIR</div>
+        <div class="proof-logo-placeholder">European Space Agency</div>
+        <div class="proof-logo-placeholder">Hungarian Government</div>
+        <div class="proof-logo-placeholder">Kellton</div>
+      </div>
+    </div>
+    <div class="proof-strip-divider"></div>
+    <div class="proof-strip-group">
+      <div class="proof-strip-label">EU Programmes</div>
+      <div class="proof-strip-logos">
+        <div class="proof-logo-placeholder">IPCEI-CIS</div>
+        <div class="proof-logo-placeholder">HeliX</div>
+        <div class="proof-logo-placeholder">EU DOME</div>
+        <div class="proof-logo-placeholder">EWC / eIDAS 2.0</div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- TICKER -->
 <div class="ticker-wrap">
@@ -744,8 +778,8 @@ nav:not(#site-nav) { display: none !important; }
   <div class="contact-inner">
     <div class="contact-left">
       <div class="section-eyebrow reveal">Work With Us</div>
-      <h2 class="section-title reveal">Let's build<br>something serious.</h2>
-      <p class="section-body reveal">We are selectively taking on enterprise partners who want to work at the frontier of AI infrastructure. If you are building something that matters, we want to hear about it.</p>
+      <h2 class="section-title reveal">Tell us what<br>you're working on.</h2>
+      <p class="section-body reveal">We work with enterprises, consortiums, and government partners who are serious about what AI infrastructure actually means. Not a pitch — a conversation. Tell us what you're trying to solve.</p>
       <div class="contact-info" style="margin-top:48px;">
         <div class="contact-detail reveal"><span class="contact-detail-label">Headquarters</span><span class="contact-detail-value">Budapest, Hungary</span></div>
         <div class="contact-detail reveal reveal-delay-1"><span class="contact-detail-label">Operating Since</span><span class="contact-detail-value">1993 — 30+ years</span></div>
