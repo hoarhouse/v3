@@ -382,6 +382,18 @@ footer { background:var(--black); border-top:1px solid var(--border); padding:48
 .credential-stat { font-family:'DM Mono',monospace; font-size:10px; color:var(--gold); letter-spacing:0.5px; opacity:0.8; }
 @media (max-width:1023px) { .credentials-grid { grid-template-columns:repeat(2,1fr); } }
 @media (max-width:768px) { .credentials-block { padding:40px 24px; } .credentials-grid { grid-template-columns:1fr; } .credential-card { padding:28px 0; border-right:none; } }
+
+.fived-section { padding:80px 60px; border-top:1px solid var(--border); border-bottom:1px solid var(--border); background:var(--dark); }
+.fived-inner { display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:start; }
+.fived-eyebrow { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:3px; text-transform:uppercase; color:var(--mid); margin-bottom:20px; }
+.fived-title { font-family:'Syne',sans-serif; font-size:clamp(24px,3vw,40px); font-weight:700; color:var(--white); letter-spacing:-0.5px; margin-bottom:24px; line-height:1.1; }
+.fived-desc { font-size:15px; color:var(--text); line-height:1.7; margin-bottom:16px; }
+.fived-product { padding:40px; border:1px solid var(--border); border-left:3px solid var(--gold); background:var(--panel); }
+.fived-product-tag { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--gold); margin-bottom:16px; }
+.fived-product-name { font-family:'Syne',sans-serif; font-size:36px; font-weight:800; color:var(--white); letter-spacing:-1px; margin-bottom:16px; }
+.fived-product-desc { font-size:14px; color:var(--text); line-height:1.7; margin-bottom:20px; }
+.fived-product-stats { font-family:'DM Mono',monospace; font-size:10px; color:var(--dim); letter-spacing:1px; display:flex; gap:8px; flex-wrap:wrap; }
+@media(max-width:768px) { .fived-section { padding:60px 24px; } .fived-inner { grid-template-columns:1fr; gap:40px; } }
 </style>
 </head>
 <body data-page="home">
@@ -790,6 +802,31 @@ footer { background:var(--black); border-top:1px solid var(--border); padding:48
   </div>
   <p class="mission-sub reveal reveal-delay-2">Three decades of IP. A world-class team. A clear direction. We are ready to build with the enterprises that are serious about what comes next.</p>
 </div>
+
+
+<!-- 5D -->
+<section class="fived-section reveal">
+  <div class="fived-inner">
+    <div class="fived-left">
+      <div class="fived-eyebrow">Also Inside E-Group</div>
+      <h2 class="fived-title">We also move fast<br>when we want to.</h2>
+      <p class="fived-desc">5D is a small internal team with one mandate: take a validated idea from zero to working product in under 90 days. No committees. No lengthy approval chains. Five stages — Discover, Design, Develop, Deploy, Distribute — and a clock.</p>
+      <p class="fived-desc">It exists to prove that thirty years of enterprise experience and startup-speed execution are not mutually exclusive. So far, the evidence supports that theory.</p>
+    </div>
+    <div class="fived-right">
+      <div class="fived-product">
+        <div class="fived-product-tag">First Product · 12 weeks from idea to V1</div>
+        <div class="fived-product-name">Kept</div>
+        <div class="fived-product-desc">An AI conversation manager that gives you sovereignty over your own AI history. Syncs across ChatGPT, Claude, Gemini, Grok and Kimi. Local-first. Open source. No cloud dependency. No account required. Free forever.</div>
+        <div class="fived-product-stats">
+          <span>Windows · macOS · Linux</span>
+          <span>·</span>
+          <span>More products in development</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- CONTACT -->
 <section id="contact" class="contact">
