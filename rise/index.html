@@ -38,17 +38,6 @@ body{overflow-x:hidden;}
 .cta-secondary{font-family:'DM Mono',monospace;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:var(--mid);text-decoration:none;border-bottom:1px solid var(--muted);padding-bottom:2px;transition:color 0.2s,border-color 0.2s;}
 .cta-secondary:hover{color:var(--white);border-color:var(--white);}
 
-/* LIVE STRIP */
-.live-strip{background:var(--dark);border-bottom:1px solid var(--border);padding:0 60px;display:flex;align-items:center;overflow:hidden;height:72px;}
-.live-label{font-family:'DM Mono',monospace;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--green);white-space:nowrap;padding-right:32px;border-right:1px solid var(--border);margin-right:32px;display:flex;align-items:center;gap:10px;flex-shrink:0;}
-.live-dot{width:8px;height:8px;border-radius:50%;background:var(--green);animation:pulse 2s infinite;}
-@keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.3;}}
-.live-ticker-wrap{overflow:hidden;flex:1;}
-.live-ticker{display:flex;white-space:nowrap;animation:liveScroll 35s linear infinite;}
-.live-ticker-item{font-family:'DM Mono',monospace;font-size:14px;letter-spacing:0.5px;color:var(--text);padding:0 48px;border-right:1px solid var(--border);}
-.live-ticker-item strong{color:var(--white);font-weight:600;}
-@keyframes liveScroll{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
-
 /* THREE TRUST STATEMENTS */
 .trust-section{padding:80px 60px;border-bottom:1px solid var(--border);}
 .trust-eyebrow{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--mid);margin-bottom:48px;}
@@ -89,7 +78,7 @@ body{overflow-x:hidden;}
 .ticker-wrap::before,.ticker-wrap::after{content:'';position:absolute;top:32px;bottom:0;width:100px;z-index:2;}
 .ticker-wrap::before{left:0;background:linear-gradient(to right,var(--black),transparent);}
 .ticker-wrap::after{right:0;background:linear-gradient(to left,var(--black),transparent);}
-.ticker{display:flex;white-space:nowrap;animation:tickerScroll 40s linear infinite;}
+.ticker{display:flex;white-space:nowrap;animation:tickerScroll 10s linear infinite;}
 .ticker span{font-family:'Syne',sans-serif;font-size:15px;font-weight:600;color:var(--white);padding:0 32px;border-right:1px solid var(--border);}
 .ticker span em{color:var(--gold);font-style:normal;font-weight:400;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:1px;}
 @keyframes tickerScroll{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
@@ -125,6 +114,26 @@ body{overflow-x:hidden;}
   .live-strip{padding:0 24px;height:64px;}
   .live-ticker-item{font-size:13px;padding:0 32px;}
 }
+
+/* GO DEEPER */
+.go-deeper{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border-top:1px solid var(--border);}
+.go-deeper-card{background:var(--dark);padding:48px;text-decoration:none;display:block;transition:background 0.2s;}
+.go-deeper-card:hover{background:var(--panel);}
+.go-deeper-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--mid);margin-bottom:16px;}
+.go-deeper-title{font-family:'Syne',sans-serif;font-size:clamp(22px,2.5vw,32px);font-weight:700;color:var(--white);letter-spacing:-0.5px;margin-bottom:12px;}
+.go-deeper-desc{font-size:14px;color:var(--text);line-height:1.6;margin-bottom:24px;}
+.go-deeper-cta{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);}
+@media(max-width:768px){.go-deeper{grid-template-columns:1fr;}}
+/* NEWS CARDS */
+.news-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);}
+.news-card{background:var(--dark);padding:36px 32px;text-decoration:none;display:block;border-top:3px solid transparent;transition:background 0.2s,border-top-color 0.2s;}
+.news-card:hover{background:var(--panel);border-top-color:var(--gold);}
+.news-card-date{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-bottom:16px;}
+.news-card-title{font-family:'Syne',sans-serif;font-size:18px;font-weight:700;color:var(--white);line-height:1.3;margin-bottom:12px;letter-spacing:-0.3px;}
+.news-card-desc{font-size:13px;color:var(--text);line-height:1.6;margin-bottom:20px;}
+.news-card-link{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);}
+@media(max-width:1023px){.news-cards{grid-template-columns:1fr 1fr;}}
+@media(max-width:768px){.news-cards{grid-template-columns:1fr;}}
 </style>
 </head>
 <body data-page="home">
@@ -148,30 +157,32 @@ body{overflow-x:hidden;}
   </div>
 </section>
 
-<!-- LIVE STRIP -->
-<div class="live-strip">
-  <div class="live-label"><span class="live-dot"></span>Live</div>
-  <div class="live-ticker-wrap">
-    <div class="live-ticker">
-      <span class="live-ticker-item"><strong>HeliX General Assembly</strong> hosted in Budapest — March 2026</span>
-      <span class="live-ticker-item"><strong>Dr. Péter Antal</strong> awarded Hungary's Knight's Cross — August 2025</span>
-      <span class="live-ticker-item"><strong>eIDAS 2.0</strong> — all testbed scenarios passed · 2026 rollout ready</span>
-      <span class="live-ticker-item"><strong>ProofX</strong> — ESA partnership active · Galileo OSNMA integration underway</span>
-      <span class="live-ticker-item"><strong>IPCEI-CIS</strong> — Antal Kuthy chairs AI Cluster · 7 EU member states</span>
-      <span class="live-ticker-item"><strong>MAVIR</strong> — 25+ year partnership · still running · still the only call they make</span>
-      <span class="live-ticker-item"><strong>Medical AI</strong> — back-to-back international first place · Dr. Anna Kovács leads</span>
-      <span class="live-ticker-item"><strong>Kellton MoU</strong> — sovereign AI ecosystem for European enterprise · 2025</span>
-      <!-- duplicate for seamless loop -->
-      <span class="live-ticker-item"><strong>HeliX General Assembly</strong> hosted in Budapest — March 2026</span>
-      <span class="live-ticker-item"><strong>Dr. Péter Antal</strong> awarded Hungary's Knight's Cross — August 2025</span>
-      <span class="live-ticker-item"><strong>eIDAS 2.0</strong> — all testbed scenarios passed · 2026 rollout ready</span>
-      <span class="live-ticker-item"><strong>ProofX</strong> — ESA partnership active · Galileo OSNMA integration underway</span>
-      <span class="live-ticker-item"><strong>IPCEI-CIS</strong> — Antal Kuthy chairs AI Cluster · 7 EU member states</span>
-      <span class="live-ticker-item"><strong>MAVIR</strong> — 25+ year partnership · still running · still the only call they make</span>
-      <span class="live-ticker-item"><strong>Medical AI</strong> — back-to-back international first place · Dr. Anna Kovács leads</span>
-      <span class="live-ticker-item"><strong>Kellton MoU</strong> — sovereign AI ecosystem for European enterprise · 2025</span>
-    </div>
-  </div>
+<!-- NEWS CARDS -->
+<div class="news-cards">
+  <a href="record/peter-antal.html" class="news-card">
+    <div class="news-card-date">August 2025</div>
+    <div class="news-card-title">Knight's Cross 2025</div>
+    <div class="news-card-desc">Dr. Péter Antal awarded Hungary's Knight's Cross of the Order of Merit — the civilian division's highest recognition.</div>
+    <span class="news-card-link">See the record →</span>
+  </a>
+  <a href="record/proofx.html" class="news-card">
+    <div class="news-card-date">Active · ESA Partnership</div>
+    <div class="news-card-title">ProofX — ESA Partnership Active</div>
+    <div class="news-card-desc">Galileo OSNMA cryptographic authentication. Court-admissible evidence chains. AI-generated imagery cannot fake it.</div>
+    <span class="news-card-link">See the record →</span>
+  </a>
+  <a href="record/helix.html" class="news-card">
+    <div class="news-card-date">March 2026 · Budapest</div>
+    <div class="news-card-title">HeliX General Assembly</div>
+    <div class="news-card-desc">Second General Assembly hosted in Budapest. 8 biobanks. 50+ partners. Europe's largest sovereign health data ecosystem.</div>
+    <span class="news-card-link">See the record →</span>
+  </a>
+  <a href="record/medical-ai.html" class="news-card">
+    <div class="news-card-date">2024 · Back-to-Back</div>
+    <div class="news-card-title">Medical AI — International First Place</div>
+    <div class="news-card-desc">Back-to-back first place at international medical AI research events. Dr. Anna Kovács leads a team the world is watching.</div>
+    <span class="news-card-link">See the record →</span>
+  </a>
 </div>
 
 <!-- THREE TRUST STATEMENTS -->
@@ -233,6 +244,23 @@ body{overflow-x:hidden;}
     </div>
   </div>
 </section>
+
+
+<!-- GO DEEPER -->
+<div class="go-deeper">
+  <a href="intelligence.html" class="go-deeper-card reveal">
+    <div class="go-deeper-label">The Work</div>
+    <div class="go-deeper-title">Four products.<br>Live in production.</div>
+    <div class="go-deeper-desc">FedX, KAÜ, CORPEX, Electric Utility — four systems running at national scale. Real clients. Real numbers. No roadmap promises.</div>
+    <span class="go-deeper-cta">See The Work →</span>
+  </a>
+  <a href="rise.html" class="go-deeper-card reveal reveal-delay-1">
+    <div class="go-deeper-label">What's Next</div>
+    <div class="go-deeper-title">Five products.<br>In active development.</div>
+    <div class="go-deeper-desc">ProofX, SpadaX, GENESIS, COIOS, Neonatal Intelligence — five products in development across SpaceTech, FinTech and HealthTech. Built in the open. Partners welcome.</div>
+    <span class="go-deeper-cta">See What's Next →</span>
+  </a>
+</div>
 
 <!-- BUDAPEST -->
 <section class="budapest-section">
