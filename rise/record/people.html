@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The People — E-Group Record</title>
+<meta name="description" content="The team behind E-Group ICT Software Zrt. Founders, leadership, researchers and domain leads. Building things real people depend on since 1993.">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23080808'/%3E%3Ctext x='5' y='25' font-family='Georgia,serif' font-weight='900' font-size='26' fill='%23C8A96E'%3EE%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --black:#080808;--dark:#0A0A0A;--panel:#111;--ink:#0F0F0F;
+  --border:#1A1A1A;--muted:#333;--dim:#555;--mid:#777;
+  --text:#B0B0B0;--light:#D0D0D0;--white:#EFEFEF;
+  --gold:#C8A96E;--gold2:#A07840;--teal:#4ECDC4;--green:#4ADE80;
+}
+html{background:var(--black);color:var(--white);font-family:'DM Sans',sans-serif;}
+body{overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");opacity:0.025;pointer-events:none;z-index:1000;}
+
+/* HERO */
+.page-hero{padding:172px 60px 80px;border-bottom:1px solid var(--border);}
+.page-eyebrow{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--mid);margin-bottom:32px;display:flex;align-items:center;gap:12px;}
+.page-eyebrow::before{content:'';display:inline-block;width:24px;height:1px;background:var(--gold);}
+.page-hero h1{font-family:'Syne',sans-serif;font-size:clamp(36px,5vw,64px);font-weight:800;color:var(--white);letter-spacing:-1px;line-height:1.1;margin-bottom:24px;max-width:800px;}
+.page-hero h1 em{font-style:normal;color:var(--gold);}
+.page-hero p{font-size:18px;color:var(--text);line-height:1.7;max-width:600px;}
+
+/* DEPT SECTION */
+.dept-section{padding:80px 60px;border-bottom:1px solid var(--border);}
+.dept-section.dark{background:var(--dark);}
+.dept-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:40px;display:flex;align-items:center;gap:12px;}
+.dept-label::before{content:'';display:inline-block;width:24px;height:1px;background:var(--gold);}
+
+/* PERSON CARDS */
+.people-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);}
+.person-card{background:var(--dark);padding:40px 40px;display:grid;grid-template-columns:64px 1fr;gap:24px;align-items:flex-start;transition:background 0.2s;}
+.person-card:hover{background:var(--panel);}
+.person-card.tbc{opacity:0.4;}
+.pi-avatar{width:64px;height:64px;border-radius:50%;background:var(--muted);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:800;font-size:16px;color:var(--gold);letter-spacing:1px;flex-shrink:0;}
+.pi-name{font-family:'Syne',sans-serif;font-weight:700;font-size:18px;color:var(--white);margin-bottom:4px;line-height:1.2;}
+.pi-title{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);opacity:0.8;margin-bottom:12px;}
+.pi-bio{font-size:14px;color:var(--text);line-height:1.7;}
+.pi-bio-tbc{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);}
+.pi-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px;}
+.pi-tag{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--dim);border:1px solid var(--border);padding:3px 8px;}
+.pi-tag.gold{color:var(--gold);border-color:rgba(200,169,110,0.25);}
+.pi-link{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--gold);text-decoration:none;margin-top:12px;display:inline-block;border-bottom:1px solid rgba(200,169,110,0.3);padding-bottom:2px;}
+.pi-link:hover{border-color:var(--gold);}
+
+/* FACT BAR */
+.fact-bar{padding:60px 60px;background:var(--ink);border-bottom:1px solid var(--border);display:flex;gap:64px;flex-wrap:wrap;align-items:flex-start;}
+.fact-item{}
+.fact-num{font-family:'Syne',sans-serif;font-size:40px;font-weight:800;color:var(--white);line-height:1;}
+.fact-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--mid);margin-top:6px;}
+
+/* NOTE BOX */
+.note-box{margin:48px 60px 0;background:var(--dark);border:1px solid var(--border);border-left:3px solid var(--gold);padding:24px 32px;max-width:740px;}
+.note-box p{font-size:14px;color:var(--dim);line-height:1.8;}
+.note-box strong{color:var(--text);}
+
+/* CTA */
+.page-cta{padding:80px 60px;display:flex;align-items:center;justify-content:space-between;gap:40px;flex-wrap:wrap;}
+.page-cta h2{font-family:'Syne',sans-serif;font-size:clamp(24px,3vw,36px);font-weight:700;color:var(--white);margin-bottom:12px;}
+.page-cta p{font-size:16px;color:var(--text);max-width:500px;line-height:1.6;}
+.cta-btn{font-family:'DM Mono',monospace;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:var(--black);background:var(--gold);padding:16px 32px;text-decoration:none;white-space:nowrap;transition:background 0.2s;}
+.cta-btn:hover{background:var(--gold2);}
+
+@media(max-width:1023px){
+  .people-grid{grid-template-columns:1fr;}
+  .dept-section{padding:60px 36px;}
+  .page-hero{padding:152px 36px 60px;}
+  .fact-bar{padding:48px 36px;gap:40px;}
+  .note-box{margin:40px 36px 0;}
+  .page-cta{padding:60px 36px;flex-direction:column;align-items:flex-start;}
+}
+@media(max-width:767px){
+  .dept-section{padding:48px 20px;}
+  .page-hero{padding:132px 20px 48px;}
+  .person-card{padding:28px 20px;grid-template-columns:52px 1fr;gap:16px;}
+  .fact-bar{padding:40px 20px;gap:32px;}
+  .note-box{margin:32px 20px 0;}
+  .page-cta{padding:48px 20px;}
+}
+</style>
+</head>
+<body>
+<script src="../nav-site.js"></script>
+<script src="nav-record.js"></script>
+
+<!-- HERO -->
+<div class="page-hero">
+  <div class="page-eyebrow">The Record · The People</div>
+  <h1>The team that builds<br>things <em>real people depend on.</em></h1>
+  <p>Founded in Budapest in 1993. Still led by its founders. Built by engineers, researchers, and domain specialists who have spent careers going deep — not wide.</p>
+</div>
+
+<!-- FACT BAR -->
+<div class="fact-bar">
+  <div class="fact-item">
+    <div class="fact-num">1993</div>
+    <div class="fact-label">Founded Budapest</div>
+  </div>
+  <div class="fact-item">
+    <div class="fact-num">90+</div>
+    <div class="fact-label">Professionals</div>
+  </div>
+  <div class="fact-item">
+    <div class="fact-num">50+</div>
+    <div class="fact-label">External associates</div>
+  </div>
+  <div class="fact-item">
+    <div class="fact-num">4</div>
+    <div class="fact-label">Offices</div>
+  </div>
+  <div class="fact-item">
+    <div class="fact-num">30+</div>
+    <div class="fact-label">Years building</div>
+  </div>
+</div>
+
+<!-- FOUNDERS -->
+<div class="dept-section dark">
+  <div class="dept-label">Founders</div>
+  <div class="people-grid">
+
+    <div class="person-card">
+      <div class="pi-avatar">AK</div>
+      <div>
+        <div class="pi-name">Antal Kuthy</div>
+        <div class="pi-title">Co-founder &amp; CEO</div>
+        <p class="pi-bio">M.Sc. BME. IBM R&D Heidelberg. NTT Tokyo. FCO Chevening Scholar, UCL London. Founded E-Group Asia (Hong Kong) and E-Group Vietnam. Leads strategy, innovation, and business development. Chairs the AI Cluster and sits on the EU Industry Steering Board of IPCEI-CIS. Coined #DoersParadise.</p>
+        <div class="pi-tags">
+          <span class="pi-tag gold">CEO</span>
+          <span class="pi-tag">IPCEI-CIS Steering Board</span>
+          <span class="pi-tag">AI Cluster Chair</span>
+          <span class="pi-tag">BME</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="person-card">
+      <div class="pi-avatar">AN</div>
+      <div>
+        <div class="pi-name">András Nagy</div>
+        <div class="pi-title">Co-founder &amp; CTO</div>
+        <p class="pi-bio">M.Sc. BME. IBM Watson Heidelberg. CISA certified. Personally designed and implemented KAÜ — Hungary's national digital authorisation service. Leads engineering, product technology, and delivery. Runs the delivery office.</p>
+        <div class="pi-tags">
+          <span class="pi-tag gold">CTO</span>
+          <span class="pi-tag">KAÜ Architect</span>
+          <span class="pi-tag">CISA</span>
+          <span class="pi-tag">BME</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- LEADERSHIP -->
+<div class="dept-section">
+  <div class="dept-label">Leadership</div>
+  <div class="people-grid">
+
+    <div class="person-card">
+      <div class="pi-avatar">LB</div>
+      <div>
+        <div class="pi-name">László Blénessy</div>
+        <div class="pi-title">Deputy Group CEO</div>
+        <p class="pi-bio-tbc">Bio coming soon.</p>
+      </div>
+    </div>
+
+    <div class="person-card">
+      <div class="pi-avatar">TF</div>
+      <div>
+        <div class="pi-name">Tibor Farkas</div>
+        <div class="pi-title">COO / CFO</div>
+        <p class="pi-bio-tbc">Bio coming soon.</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- RESEARCH -->
+<div class="dept-section dark">
+  <div class="dept-label">Research</div>
+  <div class="people-grid">
+
+    <div class="person-card">
+      <div class="pi-avatar">MM</div>
+      <div>
+        <div class="pi-name">Mark Marosi</div>
+        <div class="pi-title">Head of Research — Title TBC</div>
+        <p class="pi-bio-tbc">Bio coming soon.</p>
+      </div>
+    </div>
+
+    <div class="person-card">
+      <div class="pi-avatar">PA</div>
+      <div>
+        <div class="pi-name">Dr. Péter Antal</div>
+        <div class="pi-title">Lead Researcher</div>
+        <p class="pi-bio">Associate Professor at BME. Head of AI Research Group since 2019. FedEU.ai lead researcher. Awarded Hungary's Knight's Cross of the Order of Merit on August 19, 2025 — one of the country's highest civilian honours.</p>
+        <div class="pi-tags">
+          <span class="pi-tag gold">Knight's Cross 2025</span>
+          <span class="pi-tag">BME Associate Professor</span>
+          <span class="pi-tag">FedEU.ai</span>
+        </div>
+        <a href="peter-antal.html" class="pi-link">Full profile →</a>
+      </div>
+    </div>
+
+    <div class="person-card">
+      <div class="pi-avatar">AB</div>
+      <div>
+        <div class="pi-name">Ágota Benedek</div>
+        <div class="pi-title">Research Engineer</div>
+        <p class="pi-bio">Lead author of GRaDPaLM. Co-winner of Best Scientific Article at Neumann Colloquium, November 2025. Back-to-back international recognition for medical AI research.</p>
+        <div class="pi-tags">
+          <span class="pi-tag gold">Neumann Colloquium Winner</span>
+          <span class="pi-tag">GRaDPaLM</span>
+          <span class="pi-tag">HealthTech AI</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="person-card">
+      <div class="pi-avatar">TM</div>
+      <div>
+        <div class="pi-name">Tamás Mészáros PhD</div>
+        <div class="pi-title">Senior Researcher · BME Associate Professor</div>
+        <p class="pi-bio">Co-author of GRaDPaLM. First place at BME TDK, November 2025. Associate Professor at BME. Research focus spans medical AI and federated learning systems.</p>
+        <div class="pi-tags">
+          <span class="pi-tag gold">BME TDK First Place</span>
+          <span class="pi-tag">GRaDPaLM</span>
+          <span class="pi-tag">BME</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="person-card">
+      <div class="pi-avatar">AK</div>
+      <div>
+        <div class="pi-name">Dr. Anna Kovács</div>
+        <div class="pi-title">HealthTech AI Research Lead</div>
+        <p class="pi-bio">Back-to-back international first place 2024. Leads HealthTech AI research at E-Group.</p>
+        <div class="pi-tags">
+          <span class="pi-tag gold">International First Place 2024</span>
+          <span class="pi-tag">HealthTech AI</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- DOMAIN LEADS -->
+<div class="dept-section">
+  <div class="dept-label">Domain Leads</div>
+  <div class="people-grid">
+
+    <div class="person-card">
+      <div class="pi-avatar">GM</div>
+      <div>
+        <div class="pi-name">Gábor Mészáros</div>
+        <div class="pi-title">FinTech Lead</div>
+        <p class="pi-bio-tbc">Bio coming soon.</p>
+      </div>
+    </div>
+
+    <div class="person-card">
+      <div class="pi-avatar">KV</div>
+      <div>
+        <div class="pi-name">Katalin Varga</div>
+        <div class="pi-title">GovTech Lead</div>
+        <p class="pi-bio-tbc">Bio coming soon.</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- NOTE -->
+<div class="note-box">
+  <p><strong>This page is a working document.</strong> E-Group has over 90 professionals and 50+ external associates across Budapest, Pécs, Miskolc, and Hong Kong. We are adding team members as information is confirmed. If you are researching E-Group and need specific information about the team, use the contact form below.</p>
+</div>
+
+<!-- CTA -->
+<div class="page-cta" style="margin-top:80px;">
+  <div>
+    <h2>Want to know more<br>about the team?</h2>
+    <p>If you are researching E-Group for partnership, procurement, or press — we are happy to connect you with the right people directly.</p>
+  </div>
+  <a href="../index.html#contact" class="cta-btn">Get in touch →</a>
+</div>
+
+<script>
+const hamburger=document.getElementById('egroup-hamburger'),mobileMenu=document.getElementById('egroup-mobile-menu');
+if(hamburger&&mobileMenu){
+  hamburger.addEventListener('click',()=>{hamburger.classList.toggle('open');mobileMenu.classList.toggle('open');document.body.style.overflow=mobileMenu.classList.contains('open')?'hidden':'';});
+  mobileMenu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{hamburger.classList.remove('open');mobileMenu.classList.remove('open');document.body.style.overflow='';}));
+}
+</script>
+</body>
+</html>
