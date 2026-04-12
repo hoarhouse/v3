@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Recognition — E-Group Record</title>
+<meta name="description" content="Awards, state honours, EU programme approvals and certifications earned by E-Group ICT Software Zrt. External validation of thirty years of work.">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23080808'/%3E%3Ctext x='5' y='25' font-family='Georgia,serif' font-weight='900' font-size='26' fill='%23C8A96E'%3EE%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --black:#080808;--dark:#0A0A0A;--panel:#111;--ink:#0F0F0F;
+  --border:#1A1A1A;--muted:#333;--dim:#555;--mid:#777;
+  --text:#B0B0B0;--light:#D0D0D0;--white:#EFEFEF;
+  --gold:#C8A96E;--gold2:#A07840;--teal:#4ECDC4;--green:#4ADE80;
+}
+html{background:var(--black);color:var(--white);font-family:'DM Sans',sans-serif;}
+body{overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");opacity:0.025;pointer-events:none;z-index:1000;}
+
+.page-hero{padding:172px 60px 80px;border-bottom:1px solid var(--border);}
+.page-eyebrow{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--mid);margin-bottom:32px;display:flex;align-items:center;gap:12px;}
+.page-eyebrow::before{content:'';display:inline-block;width:24px;height:1px;background:var(--gold);}
+.page-hero h1{font-family:'Syne',sans-serif;font-size:clamp(36px,5vw,64px);font-weight:800;color:var(--white);letter-spacing:-1px;line-height:1.1;margin-bottom:24px;max-width:800px;}
+.page-hero h1 em{font-style:normal;color:var(--gold);}
+.page-hero p{font-size:18px;color:var(--text);line-height:1.7;max-width:600px;}
+
+.section{padding:80px 60px;border-bottom:1px solid var(--border);}
+.section.dark{background:var(--dark);}
+.section-eyebrow{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:16px;display:flex;align-items:center;gap:12px;}
+.section-eyebrow::before{content:'';display:inline-block;width:24px;height:1px;background:var(--gold);}
+.section-title{font-family:'Syne',sans-serif;font-size:clamp(24px,3vw,36px);font-weight:700;color:var(--white);letter-spacing:-0.5px;margin-bottom:48px;}
+.section-title em{font-style:normal;color:var(--gold);}
+
+/* RECOGNITION CARDS */
+.rec-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);}
+.rec-card{background:var(--dark);padding:48px;position:relative;transition:background 0.2s,border-left-color 0.2s;border-left:3px solid var(--gold);}
+.rec-card:hover{background:var(--panel);}
+.rec-date{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);opacity:0.7;margin-bottom:16px;}
+.rec-type{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--mid);margin-bottom:12px;}
+.rec-title{font-family:'Syne',sans-serif;font-size:22px;font-weight:700;color:var(--white);letter-spacing:-0.3px;margin-bottom:14px;line-height:1.3;}
+.rec-desc{font-size:14px;color:var(--text);line-height:1.7;margin-bottom:16px;}
+.rec-people{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1px;color:var(--mid);margin-bottom:16px;}
+.rec-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px;}
+.rec-tag{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--dim);border:1px solid var(--border);padding:3px 8px;}
+.rec-tag.gold{color:var(--gold);border-color:rgba(200,169,110,0.25);}
+.rec-tag.teal{color:var(--teal);border-color:rgba(78,205,196,0.25);}
+.rec-link{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--gold);text-decoration:none;border-bottom:1px solid rgba(200,169,110,0.3);padding-bottom:2px;display:inline-block;}
+.rec-link:hover{border-color:var(--gold);}
+
+/* CERT GRID */
+.cert-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);}
+.cert-card{background:var(--dark);padding:36px 32px;transition:background 0.2s;}
+.cert-card:hover{background:var(--panel);}
+.cert-name{font-family:'Syne',sans-serif;font-size:18px;font-weight:700;color:var(--white);margin-bottom:8px;}
+.cert-body{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--gold);opacity:0.7;margin-bottom:12px;}
+.cert-desc{font-size:13px;color:var(--dim);line-height:1.6;}
+
+/* TIMELINE */
+.timeline{display:flex;flex-direction:column;gap:0;}
+.tl-item{display:grid;grid-template-columns:120px 1fr;gap:32px;padding:32px 0;border-bottom:1px solid var(--border);}
+.tl-item:last-child{border-bottom:none;}
+.tl-date{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:1.5px;color:var(--gold);padding-top:4px;}
+.tl-content{}
+.tl-title{font-family:'Syne',sans-serif;font-size:17px;font-weight:700;color:var(--white);margin-bottom:6px;}
+.tl-desc{font-size:13px;color:var(--dim);line-height:1.6;}
+
+/* CTA */
+.page-cta{padding:80px 60px;display:flex;align-items:center;justify-content:space-between;gap:40px;flex-wrap:wrap;}
+.page-cta h2{font-family:'Syne',sans-serif;font-size:clamp(24px,3vw,36px);font-weight:700;color:var(--white);margin-bottom:12px;}
+.page-cta p{font-size:16px;color:var(--text);max-width:500px;line-height:1.6;}
+.cta-btn{font-family:'DM Mono',monospace;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:var(--black);background:var(--gold);padding:16px 32px;text-decoration:none;white-space:nowrap;transition:background 0.2s;}
+.cta-btn:hover{background:var(--gold2);}
+
+@media(max-width:1023px){
+  .rec-grid{grid-template-columns:1fr;}
+  .cert-grid{grid-template-columns:1fr 1fr;}
+  .section{padding:60px 36px;}
+  .page-hero{padding:152px 36px 60px;}
+  .page-cta{padding:60px 36px;flex-direction:column;align-items:flex-start;}
+  .tl-item{grid-template-columns:90px 1fr;gap:20px;}
+}
+@media(max-width:767px){
+  .section{padding:48px 20px;}
+  .page-hero{padding:132px 20px 48px;}
+  .cert-grid{grid-template-columns:1fr;}
+  .rec-card{padding:32px 24px;}
+  .tl-item{grid-template-columns:1fr;gap:8px;}
+  .page-cta{padding:48px 20px;}
+}
+</style>
+</head>
+<body>
+<script src="../nav-site.js"></script>
+<script src="nav-record.js"></script>
+
+<div class="page-hero">
+  <div class="page-eyebrow">The Record · Recognition</div>
+  <h1>What the outside world<br><em>has said about E-Group.</em></h1>
+  <p>State honours. European Commission approvals. International academic firsts. Recognition is not collected — it is earned by doing the work properly for thirty years.</p>
+</div>
+
+<!-- STATE HONOURS & AWARDS -->
+<div class="section dark">
+  <div class="section-eyebrow">State Honours &amp; Awards</div>
+  <div class="section-title">Recognised by those <em>with the authority to judge.</em></div>
+  <div class="rec-grid">
+
+    <div class="rec-card">
+      <div class="rec-date">August 19, 2025</div>
+      <div class="rec-type">State Honour · Hungary</div>
+      <div class="rec-title">Knight's Cross of the Order of Merit of Hungary</div>
+      <div class="rec-desc">Awarded to Dr. Péter Antal on Hungarian State Foundation Day — August 19, 2025. One of Hungary's highest civilian honours, awarded by the President of Hungary for outstanding contributions to AI research and the advancement of Hungarian technology on the international stage.</div>
+      <div class="rec-people">Dr. Péter Antal · Lead Researcher, E-Group</div>
+      <div class="rec-tags">
+        <span class="rec-tag gold">State Award — Hungary</span>
+        <span class="rec-tag">AI Research</span>
+        <span class="rec-tag">BME</span>
+        <span class="rec-tag">FedEU.ai</span>
+      </div>
+      <a href="peter-antal.html" class="rec-link">Full profile →</a>
+    </div>
+
+    <div class="rec-card">
+      <div class="rec-date">November 2025</div>
+      <div class="rec-type">Academic Award · Double Win</div>
+      <div class="rec-title">GRaDPaLM — Best Scientific Article &amp; BME TDK First Place</div>
+      <div class="rec-desc">E-Group's GRaDPaLM medical AI system won Best Scientific Article at the Neumann Colloquium and first place at BME TDK — both in November 2025. Back-to-back independent recognition for the same research output from two separate judging bodies.</div>
+      <div class="rec-people">Ágota Benedek · Csaba Potyók · Tamás Mészáros PhD</div>
+      <div class="rec-tags">
+        <span class="rec-tag gold">Neumann Colloquium — Best Scientific Article</span>
+        <span class="rec-tag gold">BME TDK — First Place</span>
+        <span class="rec-tag">Medical AI</span>
+        <span class="rec-tag">GRaDPaLM</span>
+      </div>
+      <a href="medical-ai.html" class="rec-link">Full record →</a>
+    </div>
+
+    <div class="rec-card">
+      <div class="rec-date">2024 — Back-to-back</div>
+      <div class="rec-type">Academic Award · International</div>
+      <div class="rec-title">HealthTech AI — International First Place</div>
+      <div class="rec-desc">Dr. Anna Kovács and the E-Group HealthTech AI research team secured back-to-back international first place recognition in 2024. Full publication and conference details to be confirmed — this entry will be updated as information is verified.</div>
+      <div class="rec-people">Dr. Anna Kovács · HealthTech AI Research Team</div>
+      <div class="rec-tags">
+        <span class="rec-tag gold">International First Place — 2024</span>
+        <span class="rec-tag">HealthTech AI</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- EU & INSTITUTIONAL -->
+<div class="section">
+  <div class="section-eyebrow">EU &amp; Institutional Recognition</div>
+  <div class="section-title">Selected by Europe's <em>most demanding programmes.</em></div>
+  <div class="rec-grid">
+
+    <div class="rec-card">
+      <div class="rec-date">December 2023 — Active</div>
+      <div class="rec-type">European Commission · IPCEI</div>
+      <div class="rec-title">IPCEI-CIS — Important Project of Common European Interest</div>
+      <div class="rec-desc">E-Group was selected as a key participant in the EU's most significant cloud and AI infrastructure programme — covering 7 EU member states with a total programme value of €1.2bn. E-Group co-leads Workstream 3 and the AI Cluster. Antal Kuthy sits on the EU Industry Steering Board.</div>
+      <div class="rec-people">Antal Kuthy · Dr. Péter Antal · E-Group Research Team</div>
+      <div class="rec-tags">
+        <span class="rec-tag gold">EU Commission Approved</span>
+        <span class="rec-tag teal">Active</span>
+        <span class="rec-tag">7 EU Member States</span>
+        <span class="rec-tag">€1.2bn Programme</span>
+      </div>
+      <a href="ipcei-cis.html" class="rec-link">Full record →</a>
+    </div>
+
+    <div class="rec-card">
+      <div class="rec-date">March 2026</div>
+      <div class="rec-type">EU Health Data Space</div>
+      <div class="rec-title">HeliX General Assembly — FedX Validated</div>
+      <div class="rec-desc">E-Group's FedX federated learning platform was operationally validated across 8 biobanks and 50+ providers at the HeliX General Assembly in March 2026 — confirming HeliX as one of Europe's largest sovereign health data ecosystems.</div>
+      <div class="rec-people">E-Group HealthTech Team · HeliX Consortium</div>
+      <div class="rec-tags">
+        <span class="rec-tag gold">EU Health Data Space</span>
+        <span class="rec-tag teal">Validated</span>
+        <span class="rec-tag">8 Biobanks</span>
+        <span class="rec-tag">50+ Providers</span>
+      </div>
+      <a href="helix.html" class="rec-link">Full record →</a>
+    </div>
+
+    <div class="rec-card">
+      <div class="rec-date">Active</div>
+      <div class="rec-type">EU Digital Identity</div>
+      <div class="rec-title">European Digital Identity Wallet Consortium — EWC Member</div>
+      <div class="rec-desc">E-Group is an active member of the European Digital Identity Wallet Consortium. MyD Wallet has passed all eIDAS 2.0 testbed scenarios — positioned for the EU-wide 2026 rollout. Built by the team that designed Hungary's national identity infrastructure.</div>
+      <div class="rec-tags">
+        <span class="rec-tag gold">EWC Member</span>
+        <span class="rec-tag teal">All Testbeds Passed</span>
+        <span class="rec-tag">eIDAS 2.0</span>
+        <span class="rec-tag">2026 Ready</span>
+      </div>
+      <a href="eidas.html" class="rec-link">Full record →</a>
+    </div>
+
+  </div>
+</div>
+
+<!-- CERTIFICATIONS -->
+<div class="section dark">
+  <div class="section-eyebrow">Certifications &amp; Standards</div>
+  <div class="section-title">Independent verification of <em>how we build.</em></div>
+  <div class="cert-grid">
+
+    <div class="cert-card">
+      <div class="cert-name">EHDEN Certified</div>
+      <div class="cert-body">Health Data Research · Europe</div>
+      <div class="cert-desc">FedX is EHDEN certified and OMOP standardised — the recognised benchmark for federated health data research across European institutions.</div>
+    </div>
+
+    <div class="cert-card">
+      <div class="cert-name">eIDAS 2.0 Compliant</div>
+      <div class="cert-body">EU Digital Identity · EWC</div>
+      <div class="cert-desc">MyD Wallet has passed every eIDAS 2.0 testbed scenario. Post-quantum cryptography support included — ahead of the EU mandate.</div>
+    </div>
+
+    <div class="cert-card">
+      <div class="cert-name">ESA Partnership</div>
+      <div class="cert-body">European Space Agency</div>
+      <div class="cert-desc">Active partnership with ESA for ProofX and GENESIS. Galileo OSNMA integration and satellite imagery generation for AI model training.</div>
+    </div>
+
+    <div class="cert-card">
+      <div class="cert-name">CISA Certified</div>
+      <div class="cert-body">Information Systems Audit</div>
+      <div class="cert-desc">Co-founder and CTO András Nagy holds CISA certification — the globally recognised standard for information systems audit and control.</div>
+    </div>
+
+    <div class="cert-card">
+      <div class="cert-name">OMOP Standardised</div>
+      <div class="cert-body">Observational Health Data</div>
+      <div class="cert-desc">FedX uses the OMOP Common Data Model — enabling interoperability across health data systems globally.</div>
+    </div>
+
+    <div class="cert-card">
+      <div class="cert-name">More coming</div>
+      <div class="cert-body">In progress</div>
+      <div class="cert-desc">This section is being built out as certifications are confirmed. E-Group operates across multiple regulated sectors — each with its own compliance requirements.</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- TIMELINE -->
+<div class="section">
+  <div class="section-eyebrow">Recognition Timeline</div>
+  <div class="section-title">Thirty years of <em>external validation.</em></div>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-date">Aug 2025</div>
+      <div class="tl-content">
+        <div class="tl-title">Knight's Cross — Dr. Péter Antal</div>
+        <div class="tl-desc">Hungary's highest civilian honour for AI research contributions. Awarded on State Foundation Day.</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">Nov 2025</div>
+      <div class="tl-content">
+        <div class="tl-title">GRaDPaLM — Double win</div>
+        <div class="tl-desc">Neumann Colloquium Best Scientific Article + BME TDK First Place. Same team, same month, two independent bodies.</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">Mar 2026</div>
+      <div class="tl-content">
+        <div class="tl-title">HeliX General Assembly — FedX validated</div>
+        <div class="tl-desc">8 biobanks, 50+ providers confirmed. One of Europe's largest sovereign health data ecosystems.</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">2024</div>
+      <div class="tl-content">
+        <div class="tl-title">HealthTech AI — International first place</div>
+        <div class="tl-desc">Dr. Anna Kovács and team. Back-to-back international recognition. Details to be confirmed.</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">Dec 2023</div>
+      <div class="tl-content">
+        <div class="tl-title">IPCEI-CIS — European Commission approval</div>
+        <div class="tl-desc">Selected for Europe's largest cloud and AI infrastructure programme. Co-leads Workstream 3 and the AI Cluster.</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">1993–</div>
+      <div class="tl-content">
+        <div class="tl-title">Thirty years of client trust</div>
+        <div class="tl-desc">MAVIR, Hungarian Government, ESA, financial institutions across Central Europe. The longest recognition is still running.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="page-cta">
+  <div>
+    <h2>Press or procurement<br>enquiry?</h2>
+    <p>All information on this page is verified and citable. If you need supporting documentation for any of these credentials, get in touch directly.</p>
+  </div>
+  <a href="../index.html#contact" class="cta-btn">Get in touch →</a>
+</div>
+
+<script>
+const hamburger=document.getElementById('egroup-hamburger'),mobileMenu=document.getElementById('egroup-mobile-menu');
+if(hamburger&&mobileMenu){
+  hamburger.addEventListener('click',()=>{hamburger.classList.toggle('open');mobileMenu.classList.toggle('open');document.body.style.overflow=mobileMenu.classList.contains('open')?'hidden':'';});
+  mobileMenu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{hamburger.classList.remove('open');mobileMenu.classList.remove('open');document.body.style.overflow='';}));
+}
+</script>
+</body>
+</html>
