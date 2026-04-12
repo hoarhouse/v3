@@ -17,95 +17,78 @@
 }
 html{background:var(--black);color:var(--white);font-family:'DM Sans',sans-serif;}
 body{overflow-x:hidden;}
-.reveal{opacity:0;transform:translateY(20px);transition:opacity 0.6s ease,transform 0.6s ease;}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity 0.7s ease,transform 0.7s ease;}
 .reveal.visible{opacity:1;transform:none;}
-.reveal-delay-1{transition-delay:0.1s;}
-.reveal-delay-2{transition-delay:0.2s;}
-.reveal-delay-3{transition-delay:0.3s;}
-.reveal-delay-4{transition-delay:0.4s;}
+.reveal-delay-1{transition-delay:0.15s;}
+.reveal-delay-2{transition-delay:0.3s;}
+.reveal-delay-3{transition-delay:0.45s;}
 
 /* HERO */
 .hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:140px 60px 80px;border-bottom:1px solid var(--border);position:relative;}
-.hero-eyebrow{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--dim);margin-bottom:40px;display:flex;gap:32px;flex-wrap:wrap;}
+.hero-eyebrow{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--dim);margin-bottom:48px;display:flex;gap:32px;flex-wrap:wrap;}
 .hero-eyebrow span{display:flex;align-items:center;gap:10px;}
 .hero-eyebrow span::before{content:'';display:inline-block;width:20px;height:1px;background:var(--muted);}
-.hero-headline{font-family:'Syne',sans-serif;font-size:clamp(40px,5vw,68px);font-weight:800;color:var(--white);letter-spacing:-2px;line-height:0.95;margin-bottom:32px;max-width:800px;}
+.hero-headline{font-family:'Syne',sans-serif;font-size:clamp(44px,5.5vw,80px);font-weight:800;color:var(--white);letter-spacing:-2.5px;line-height:0.95;margin-bottom:40px;max-width:860px;}
 .hero-headline em{color:var(--gold);font-style:normal;display:block;}
-.hero-sub{font-size:17px;color:var(--text);line-height:1.7;max-width:520px;margin-bottom:48px;}
+.hero-sub{font-size:18px;color:var(--text);line-height:1.7;max-width:500px;margin-bottom:56px;}
 .hero-sub strong{color:var(--white);}
-.hero-ctas{display:flex;align-items:center;gap:24px;flex-wrap:wrap;}
-.cta-primary{font-family:'DM Mono',monospace;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:var(--black);background:var(--gold);padding:16px 32px;text-decoration:none;transition:background 0.2s;}
+.hero-ctas{display:flex;align-items:center;gap:28px;flex-wrap:wrap;}
+.cta-primary{font-family:'DM Mono',monospace;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:var(--black);background:var(--gold);padding:18px 36px;text-decoration:none;transition:background 0.2s;}
 .cta-primary:hover{background:var(--gold2);}
-.cta-secondary{font-family:'DM Mono',monospace;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:var(--mid);text-decoration:none;transition:color 0.2s;}
-.cta-secondary:hover{color:var(--white);}
+.cta-secondary{font-family:'DM Mono',monospace;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:var(--mid);text-decoration:none;border-bottom:1px solid var(--muted);padding-bottom:2px;transition:color 0.2s,border-color 0.2s;}
+.cta-secondary:hover{color:var(--white);border-color:var(--white);}
 
 /* LIVE STRIP */
-.live-strip{background:var(--dark);border-bottom:1px solid var(--border);border-top:1px solid var(--border);padding:0 60px;display:flex;align-items:center;gap:0;overflow:hidden;height:72px;}
-.live-strip-label{font-family:'DM Mono',monospace;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--green);white-space:nowrap;padding-right:32px;border-right:1px solid var(--border);margin-right:32px;display:flex;align-items:center;gap:10px;flex-shrink:0;}
+.live-strip{background:var(--dark);border-bottom:1px solid var(--border);padding:0 60px;display:flex;align-items:center;overflow:hidden;height:72px;}
+.live-label{font-family:'DM Mono',monospace;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--green);white-space:nowrap;padding-right:32px;border-right:1px solid var(--border);margin-right:32px;display:flex;align-items:center;gap:10px;flex-shrink:0;}
 .live-dot{width:8px;height:8px;border-radius:50%;background:var(--green);animation:pulse 2s infinite;}
 @keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.3;}}
 .live-ticker-wrap{overflow:hidden;flex:1;}
-.live-ticker{display:flex;white-space:nowrap;animation:liveScroll 30s linear infinite;}
+.live-ticker{display:flex;white-space:nowrap;animation:liveScroll 35s linear infinite;}
 .live-ticker-item{font-family:'DM Mono',monospace;font-size:14px;letter-spacing:0.5px;color:var(--text);padding:0 48px;border-right:1px solid var(--border);}
 .live-ticker-item strong{color:var(--white);font-weight:600;}
 @keyframes liveScroll{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
 
-/* TRUST */
-.trust-section{padding:64px 60px;border-bottom:1px solid var(--border);}
-.section-eyebrow{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--mid);margin-bottom:32px;}
-.trust-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);}
-.trust-card{background:var(--dark);padding:28px 32px;text-decoration:none;display:block;transition:background 0.2s;border-left:3px solid transparent;transition:background 0.2s,border-left-color 0.2s;}
-.trust-card:hover{background:var(--panel);border-left-color:var(--gold);}
-.trust-card-type{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-bottom:10px;}
-.trust-card-name{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;color:var(--white);margin-bottom:8px;letter-spacing:-0.3px;}
-.trust-card-desc{font-size:12px;color:var(--mid);line-height:1.5;}
+/* THREE TRUST STATEMENTS */
+.trust-section{padding:80px 60px;border-bottom:1px solid var(--border);}
+.trust-eyebrow{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--mid);margin-bottom:48px;}
+.trust-statements{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);}
+.trust-statement{background:var(--dark);padding:48px 40px;text-decoration:none;display:block;border-left:3px solid transparent;transition:background 0.2s,border-left-color 0.2s;}
+.trust-statement:hover{background:var(--panel);border-left-color:var(--gold);}
+.trust-statement-name{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:20px;}
+.trust-statement-claim{font-family:'Syne',sans-serif;font-size:clamp(20px,2.5vw,30px);font-weight:700;color:var(--white);line-height:1.2;margin-bottom:16px;letter-spacing:-0.5px;}
+.trust-statement-fact{font-size:14px;color:var(--text);line-height:1.6;}
+.trust-statement-link{display:inline-block;margin-top:24px;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);}
 
-/* RECORD */
+/* ONE RECORD HIGHLIGHT */
 .record-section{padding:80px 60px;border-bottom:1px solid var(--border);background:var(--dark);}
-.section-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:48px;flex-wrap:wrap;gap:20px;}
-.section-title{font-family:'Syne',sans-serif;font-size:clamp(24px,3vw,40px);font-weight:700;color:var(--white);letter-spacing:-0.5px;line-height:1.1;margin-top:8px;}
-.section-title span{color:var(--gold);}
-.section-link{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);text-decoration:none;border-bottom:1px solid rgba(200,169,110,0.3);padding-bottom:2px;white-space:nowrap;transition:border-color 0.2s;}
-.section-link:hover{border-color:var(--gold);}
-.record-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);}
-.record-card{background:var(--dark);padding:36px;text-decoration:none;display:block;border-left:3px solid transparent;transition:background 0.2s,border-left-color 0.2s;}
-.record-card:hover{background:var(--panel);border-left-color:var(--gold);}
-.rc-year{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-bottom:12px;}
-.rc-title{font-family:'Syne',sans-serif;font-size:17px;font-weight:700;color:var(--white);margin-bottom:10px;letter-spacing:-0.3px;}
-.rc-desc{font-size:13px;color:var(--text);line-height:1.6;margin-bottom:16px;}
-.rc-link{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--gold);}
-
-/* PRODUCTS */
-.products-section{padding:80px 60px;border-bottom:1px solid var(--border);}
-.products-tension{font-size:17px;color:var(--text);line-height:1.7;max-width:640px;margin-bottom:48px;}
-.products-tension strong{color:var(--white);}
-.products-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;margin-bottom:20px;padding-bottom:12px;border-bottom:1px solid var(--border);}
-.products-label.live{color:var(--green);}
-.products-label.dev{color:var(--mid);}
-.products-live{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);margin-bottom:1px;}
-.products-dev{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--border);margin-bottom:48px;}
-.product{background:var(--dark);padding:28px;transition:background 0.2s;}
-.product:hover{background:var(--panel);}
-.product-sector{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--dim);margin-bottom:8px;}
-.product-name{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;color:var(--white);margin-bottom:8px;}
-.product-desc{font-size:12px;color:var(--text);line-height:1.5;}
-.product-status{display:inline-flex;align-items:center;gap:6px;margin-top:12px;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;}
-.product-status.live{color:var(--green);}
-.product-status.dev{color:var(--muted);}
-.product-status .dot{width:5px;height:5px;border-radius:50%;}
-.product-status.live .dot{background:var(--green);}
-.product-status.dev .dot{background:var(--muted);}
+.record-inner{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
+.record-left{}
+.record-eyebrow{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--mid);margin-bottom:20px;}
+.record-headline{font-family:'Syne',sans-serif;font-size:clamp(28px,3.5vw,52px);font-weight:800;color:var(--white);letter-spacing:-1.5px;line-height:1.0;margin-bottom:24px;}
+.record-headline span{color:var(--gold);}
+.record-body{font-size:16px;color:var(--text);line-height:1.8;margin-bottom:32px;}
+.record-body strong{color:var(--white);}
+.record-link{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);text-decoration:none;border-bottom:1px solid rgba(200,169,110,0.3);padding-bottom:2px;transition:border-color 0.2s;}
+.record-link:hover{border-color:var(--gold);}
+.record-right{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);}
+.record-stat{background:var(--dark);padding:32px;}
+.record-stat-num{font-family:'Syne',sans-serif;font-size:40px;font-weight:800;color:var(--white);letter-spacing:-1px;}
+.record-stat-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--mid);margin-top:8px;}
+.full-record-link{grid-column:1/-1;background:var(--dark);padding:24px 32px;text-decoration:none;display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--border);transition:background 0.2s;}
+.full-record-link:hover{background:var(--panel);}
+.full-record-link span{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);}
 
 /* BUDAPEST */
-.budapest-section{padding:80px 60px;border-bottom:1px solid var(--border);background:var(--dark);}
-.budapest-statement{font-family:'Syne',sans-serif;font-size:clamp(20px,2.5vw,30px);font-weight:700;color:var(--white);line-height:1.3;max-width:760px;margin:16px 0 24px;letter-spacing:-0.5px;}
-.budapest-body{font-size:16px;color:var(--text);line-height:1.8;max-width:720px;margin-bottom:16px;}
+.budapest-section{padding:80px 60px;border-bottom:1px solid var(--border);}
+.budapest-statement{font-family:'Syne',sans-serif;font-size:clamp(22px,3vw,38px);font-weight:700;color:var(--white);line-height:1.2;max-width:800px;margin:16px 0 28px;letter-spacing:-0.5px;}
+.budapest-body{font-size:16px;color:var(--text);line-height:1.8;max-width:680px;margin-bottom:16px;}
 .budapest-body strong{color:var(--white);}
-.budapest-cta{display:inline-block;margin-top:8px;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);text-decoration:none;border-bottom:1px solid rgba(200,169,110,0.3);padding-bottom:2px;}
-.ticker-wrap{overflow:hidden;position:relative;margin-top:40px;border-top:1px solid var(--border);padding-top:32px;}
-.ticker-wrap::before,.ticker-wrap::after{content:'';position:absolute;top:32px;bottom:0;width:80px;z-index:2;}
-.ticker-wrap::before{left:0;background:linear-gradient(to right,var(--dark),transparent);}
-.ticker-wrap::after{right:0;background:linear-gradient(to left,var(--dark),transparent);}
+.budapest-cta{display:inline-block;margin-top:12px;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);text-decoration:none;border-bottom:1px solid rgba(200,169,110,0.3);padding-bottom:2px;}
+.ticker-wrap{overflow:hidden;position:relative;margin-top:48px;border-top:1px solid var(--border);padding-top:32px;}
+.ticker-wrap::before,.ticker-wrap::after{content:'';position:absolute;top:32px;bottom:0;width:100px;z-index:2;}
+.ticker-wrap::before{left:0;background:linear-gradient(to right,var(--black),transparent);}
+.ticker-wrap::after{right:0;background:linear-gradient(to left,var(--black),transparent);}
 .ticker{display:flex;white-space:nowrap;animation:tickerScroll 40s linear infinite;}
 .ticker span{font-family:'Syne',sans-serif;font-size:15px;font-weight:600;color:var(--white);padding:0 32px;border-right:1px solid var(--border);}
 .ticker span em{color:var(--gold);font-style:normal;font-weight:400;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:1px;}
@@ -113,40 +96,34 @@ body{overflow-x:hidden;}
 
 /* CONTACT */
 .contact-section{padding:80px 60px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;}
-.contact-title{font-family:'Syne',sans-serif;font-size:clamp(26px,3vw,42px);font-weight:800;color:var(--white);letter-spacing:-1px;line-height:1.0;margin:12px 0 20px;}
+.contact-eyebrow{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--mid);margin-bottom:16px;}
+.contact-title{font-family:'Syne',sans-serif;font-size:clamp(28px,3.5vw,52px);font-weight:800;color:var(--white);letter-spacing:-1.5px;line-height:1.0;margin-bottom:24px;}
 .contact-title span{color:var(--gold);}
-.contact-sub{font-size:16px;color:var(--text);line-height:1.7;margin-bottom:32px;}
-.contact-details{display:flex;flex-direction:column;gap:6px;margin-bottom:32px;}
-.contact-detail{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:1px;color:var(--dim);}
+.contact-sub{font-size:16px;color:var(--text);line-height:1.7;margin-bottom:16px;}
+.contact-detail{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:1px;color:var(--dim);margin-top:6px;}
 .form{display:flex;flex-direction:column;gap:16px;}
-.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
 .form-field{display:flex;flex-direction:column;gap:8px;}
 .form-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--mid);}
-.form-input,.form-select,.form-textarea{background:var(--dark);border:1px solid var(--border);color:var(--white);font-family:'DM Sans',sans-serif;font-size:14px;padding:12px 16px;outline:none;transition:border-color 0.2s;width:100%;}
+.form-input,.form-select,.form-textarea{background:var(--dark);border:1px solid var(--border);color:var(--white);font-family:'DM Sans',sans-serif;font-size:14px;padding:14px 16px;outline:none;transition:border-color 0.2s;width:100%;}
 .form-input:focus,.form-select:focus,.form-textarea:focus{border-color:var(--gold);}
 .form-select{appearance:none;cursor:pointer;}
-.form-textarea{resize:vertical;min-height:100px;}
-.form-submit{font-family:'DM Mono',monospace;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:var(--black);background:var(--gold);border:none;padding:16px 32px;cursor:pointer;width:100%;text-align:left;transition:background 0.2s;}
+.form-textarea{resize:vertical;min-height:120px;}
+.form-submit{font-family:'DM Mono',monospace;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:var(--black);background:var(--gold);border:none;padding:18px 36px;cursor:pointer;width:100%;text-align:left;transition:background 0.2s;}
 .form-submit:hover{background:var(--gold2);}
 
 @media(max-width:1023px){
-  .trust-grid{grid-template-columns:1fr 1fr;}
-  .record-grid{grid-template-columns:1fr 1fr;}
-  .products-live{grid-template-columns:1fr 1fr;}
-  .products-dev{grid-template-columns:1fr 1fr 1fr;}
+  .trust-statements{grid-template-columns:1fr;}
+  .record-inner{grid-template-columns:1fr;}
+  .record-right{grid-template-columns:1fr 1fr;}
   .contact-section{grid-template-columns:1fr;}
 }
 @media(max-width:768px){
   .hero{padding:120px 24px 60px;min-height:auto;}
-  .trust-section,.record-section,.products-section,.budapest-section{padding:56px 24px;}
-  .trust-grid{grid-template-columns:1fr;}
-  .record-grid{grid-template-columns:1fr;}
-  .products-live{grid-template-columns:1fr 1fr;}
-  .products-dev{grid-template-columns:1fr 1fr;}
-  .contact-section{padding:56px 24px;grid-template-columns:1fr;gap:40px;}
-  .form-row{grid-template-columns:1fr;}
-  .live-strip{padding:0 24px;}
   .hero-eyebrow{gap:16px;}
+  .trust-section,.record-section,.budapest-section{padding:56px 24px;}
+  .contact-section{padding:56px 24px;gap:40px;}
+  .live-strip{padding:0 24px;height:64px;}
+  .live-ticker-item{font-size:13px;padding:0 32px;}
 }
 </style>
 </head>
@@ -164,7 +141,7 @@ body{overflow-x:hidden;}
     Thirty years building
     <em>what AI runs on.</em>
   </h1>
-  <p class="hero-sub reveal">E-Group builds the <strong>deep infrastructure of trust, data and intelligence</strong> that enterprises need to make AI actually work. Not the hype. The foundation.</p>
+  <p class="hero-sub reveal">Not the hype. The foundation. <strong>Trust infrastructure, sovereign data, and applied intelligence</strong> — built at national scale, for three decades.</p>
   <div class="hero-ctas reveal">
     <a href="#contact" class="cta-primary">Start a Conversation →</a>
     <a href="record/index.html" class="cta-secondary">View The Record →</a>
@@ -173,203 +150,93 @@ body{overflow-x:hidden;}
 
 <!-- LIVE STRIP -->
 <div class="live-strip">
-  <div class="live-strip-label"><span class="live-dot"></span>Live</div>
+  <div class="live-label"><span class="live-dot"></span>Live</div>
   <div class="live-ticker-wrap">
     <div class="live-ticker">
       <span class="live-ticker-item"><strong>HeliX General Assembly</strong> hosted in Budapest — March 2026</span>
       <span class="live-ticker-item"><strong>Dr. Péter Antal</strong> awarded Hungary's Knight's Cross — August 2025</span>
       <span class="live-ticker-item"><strong>eIDAS 2.0</strong> — all testbed scenarios passed · 2026 rollout ready</span>
-      <span class="live-ticker-item"><strong>ProofX</strong> — ESA partnership active · Galileo OSNMA integration</span>
+      <span class="live-ticker-item"><strong>ProofX</strong> — ESA partnership active · Galileo OSNMA integration underway</span>
       <span class="live-ticker-item"><strong>IPCEI-CIS</strong> — Antal Kuthy chairs AI Cluster · 7 EU member states</span>
-      <span class="live-ticker-item"><strong>MAVIR</strong> — 25+ year partnership · still running · still chosen</span>
+      <span class="live-ticker-item"><strong>MAVIR</strong> — 25+ year partnership · still running · still the only call they make</span>
+      <span class="live-ticker-item"><strong>Medical AI</strong> — back-to-back international first place · Dr. Anna Kovács leads</span>
       <span class="live-ticker-item"><strong>Kellton MoU</strong> — sovereign AI ecosystem for European enterprise · 2025</span>
-      <span class="live-ticker-item"><strong>Medical AI</strong> — back-to-back international first place · Dr. Anna Kovács</span>
-      <!-- Duplicate for seamless loop -->
+      <!-- duplicate for seamless loop -->
       <span class="live-ticker-item"><strong>HeliX General Assembly</strong> hosted in Budapest — March 2026</span>
       <span class="live-ticker-item"><strong>Dr. Péter Antal</strong> awarded Hungary's Knight's Cross — August 2025</span>
       <span class="live-ticker-item"><strong>eIDAS 2.0</strong> — all testbed scenarios passed · 2026 rollout ready</span>
-      <span class="live-ticker-item"><strong>ProofX</strong> — ESA partnership active · Galileo OSNMA integration</span>
+      <span class="live-ticker-item"><strong>ProofX</strong> — ESA partnership active · Galileo OSNMA integration underway</span>
       <span class="live-ticker-item"><strong>IPCEI-CIS</strong> — Antal Kuthy chairs AI Cluster · 7 EU member states</span>
-      <span class="live-ticker-item"><strong>MAVIR</strong> — 25+ year partnership · still running · still chosen</span>
+      <span class="live-ticker-item"><strong>MAVIR</strong> — 25+ year partnership · still running · still the only call they make</span>
+      <span class="live-ticker-item"><strong>Medical AI</strong> — back-to-back international first place · Dr. Anna Kovács leads</span>
       <span class="live-ticker-item"><strong>Kellton MoU</strong> — sovereign AI ecosystem for European enterprise · 2025</span>
-      <span class="live-ticker-item"><strong>Medical AI</strong> — back-to-back international first place · Dr. Anna Kovács</span>
     </div>
   </div>
 </div>
 
-<!-- TRUST -->
+<!-- THREE TRUST STATEMENTS -->
 <section class="trust-section">
-  <div class="section-eyebrow reveal">Trusted by · Recognised by · Working with</div>
-  <div class="trust-grid">
-    <a href="record/mavir.html" class="trust-card reveal">
-      <div class="trust-card-type">Client · 25+ Years</div>
-      <div class="trust-card-name">MAVIR</div>
-      <div class="trust-card-desc">Hungary's national electricity transmission operator. Mission-critical infrastructure. Still running today.</div>
+  <div class="trust-eyebrow reveal">Who trusts us · Who recognises us · Who works with us</div>
+  <div class="trust-statements">
+    <a href="record/mavir.html" class="trust-statement reveal">
+      <div class="trust-statement-name">MAVIR — National Electricity Grid</div>
+      <div class="trust-statement-claim">25 years. Still the only call they make.</div>
+      <div class="trust-statement-fact">Hungary's electricity transmission operator has trusted E-Group with mission-critical infrastructure since 1999. Not a pilot. Not a proof of concept. A quarter century of unbroken delivery on infrastructure that cannot fail.</div>
+      <span class="trust-statement-link">See the record →</span>
     </a>
-    <a href="record/proofx.html" class="trust-card reveal reveal-delay-1">
-      <div class="trust-card-type">Technology Partner</div>
-      <div class="trust-card-name">European Space Agency</div>
-      <div class="trust-card-desc">Active partnership on ProofX — Galileo OSNMA cryptographic verification. Court-admissible evidence chains.</div>
+    <a href="record/kau.html" class="trust-statement reveal reveal-delay-1">
+      <div class="trust-statement-name">Hungarian Government — KAÜ</div>
+      <div class="trust-statement-claim">Millions of citizens. Every day. No failures.</div>
+      <div class="trust-statement-fact">E-Group designed and built Hungary's national digital identity infrastructure — personally led by CTO András Nagy. The system that authenticates every Hungarian citizen across every government service. Running in production. No failures.</div>
+      <span class="trust-statement-link">See the record →</span>
     </a>
-    <a href="record/kau.html" class="trust-card reveal reveal-delay-2">
-      <div class="trust-card-type">Client</div>
-      <div class="trust-card-name">Hungarian Government</div>
-      <div class="trust-card-desc">KAÜ national digital identity infrastructure. Authenticates millions of Hungarian citizens daily.</div>
-    </a>
-    <a href="record/index.html" class="trust-card reveal reveal-delay-3">
-      <div class="trust-card-type">Partnership · MoU 2025</div>
-      <div class="trust-card-name">Kellton</div>
-      <div class="trust-card-desc">Sovereign AI ecosystem for European enterprise. Built independent of US hyperscalers.</div>
-    </a>
-    <a href="record/ipcei-cis.html" class="trust-card reveal">
-      <div class="trust-card-type">EU Programme · Active</div>
-      <div class="trust-card-name">IPCEI-CIS</div>
-      <div class="trust-card-desc">Co-leads Workstream 3 and the AI Cluster. 7 EU member states. €1.2bn programme. EC approved.</div>
-    </a>
-    <a href="record/helix.html" class="trust-card reveal reveal-delay-1">
-      <div class="trust-card-type">EU Programme · Active</div>
-      <div class="trust-card-name">HeliX — FedX</div>
-      <div class="trust-card-desc">8 biobank clients. 50+ healthcare providers. 12,000+ individuals' data unified. EHDEN certified.</div>
-    </a>
-    <a href="record/index.html" class="trust-card reveal reveal-delay-2">
-      <div class="trust-card-type">EU Programme · 2024</div>
-      <div class="trust-card-name">EU DOME</div>
-      <div class="trust-card-desc">Hungary's representative for the EU federated cloud initiative. Sovereign cloud for European enterprise.</div>
-    </a>
-    <a href="record/eidas.html" class="trust-card reveal reveal-delay-3">
-      <div class="trust-card-type">EU Programme · Active</div>
-      <div class="trust-card-name">EWC / eIDAS 2.0</div>
-      <div class="trust-card-desc">European Digital Identity Wallet Consortium. All eIDAS 2 testbed scenarios passed. 2026 rollout ready.</div>
+    <a href="record/proofx.html" class="trust-statement reveal reveal-delay-2">
+      <div class="trust-statement-name">European Space Agency — ProofX</div>
+      <div class="trust-statement-claim">The satellite that proves your photo is real.</div>
+      <div class="trust-statement-fact">Active partnership with ESA on ProofX — combining Galileo OSNMA cryptographic satellite authentication with C2PA standards. The result: a court-admissible evidence chain that proves an image was taken where and when it claims. AI-generated imagery cannot fake it.</div>
+      <span class="trust-statement-link">See the record →</span>
     </a>
   </div>
 </section>
 
-<!-- RECORD HIGHLIGHTS -->
+<!-- ONE RECORD HIGHLIGHT -->
 <section class="record-section">
-  <div class="section-header reveal">
-    <div>
-      <div class="section-eyebrow">The Record</div>
-      <h2 class="section-title">Not a pitch.<br><span>A thirty-year history.</span></h2>
+  <div class="record-inner">
+    <div class="record-left reveal">
+      <div class="record-eyebrow">The Record</div>
+      <h2 class="record-headline">Back-to-back.<br><span>International first place.</span></h2>
+      <p class="record-body">E-Group's HealthTech AI research team took first place at two consecutive international medical AI research events. <strong>Dr. Anna Kovács</strong> leads a team that the global academic community is watching — and whose research ships into production, not just into journals.</p>
+      <p class="record-body">This is what thirty years of domain knowledge looks like when you point it at a hard problem.</p>
+      <a href="record/medical-ai.html" class="record-link">Read the full record →</a>
     </div>
-    <a href="record/index.html" class="section-link">Full record →</a>
-  </div>
-  <div class="record-grid">
-    <a href="record/mavir.html" class="record-card reveal">
-      <div class="rc-year">1999 — Active · 25+ Years</div>
-      <div class="rc-title">MAVIR — National Electricity Grid</div>
-      <div class="rc-desc">Hungary's electricity transmission operator. Mission-critical settlement systems. Still the partner of choice after twenty-five years.</div>
-      <span class="rc-link">View record →</span>
-    </a>
-    <a href="record/kau.html" class="record-card reveal reveal-delay-1">
-      <div class="rc-year">2010s — Live</div>
-      <div class="rc-title">KAÜ — National Digital Identity</div>
-      <div class="rc-desc">Hungary's national digital authorisation service. Designed and built by E-Group. Authenticates millions of citizens across all government services.</div>
-      <span class="rc-link">View record →</span>
-    </a>
-    <a href="record/helix.html" class="record-card reveal reveal-delay-2">
-      <div class="rc-year">Active · 8 Biobanks · 50+ Partners</div>
-      <div class="rc-title">HeliX — Federated Health Data</div>
-      <div class="rc-desc">FedX platform operationally validated across 8 biobanks and 50+ partners. Data stays local. AI travels. 12,000+ individuals unified.</div>
-      <span class="rc-link">View record →</span>
-    </a>
-    <a href="record/proofx.html" class="record-card reveal">
-      <div class="rc-year">In Development · ESA Partnership</div>
-      <div class="rc-title">ProofX — Can You Tell Real from AI?</div>
-      <div class="rc-desc">Galileo OSNMA satellite authentication + C2PA standards = a court-admissible evidence chain proving an image is real. Built with ESA.</div>
-      <span class="rc-link">View record →</span>
-    </a>
-    <a href="record/medical-ai.html" class="record-card reveal reveal-delay-1">
-      <div class="rc-year">2024 · Back-to-Back First Place</div>
-      <div class="rc-title">Medical AI — International Research Wins</div>
-      <div class="rc-desc">Back-to-back first place at international medical AI research events. Dr. Anna Kovács leads a team the global academic community is watching.</div>
-      <span class="rc-link">View record →</span>
-    </a>
-    <a href="record/peter-antal.html" class="record-card reveal reveal-delay-2">
-      <div class="rc-year">2025 · National Honour</div>
-      <div class="rc-title">Dr. Péter Antal — Knight's Cross</div>
-      <div class="rc-desc">E-Group's lead AI researcher awarded Hungary's Knight's Cross of the Order of Merit — the civilian division's highest recognition.</div>
-      <span class="rc-link">View record →</span>
-    </a>
-  </div>
-</section>
-
-<!-- PRODUCTS -->
-<section class="products-section">
-  <div class="section-header reveal">
-    <div>
-      <div class="section-eyebrow">The Products</div>
-      <h2 class="section-title">Thirty years of IP.<br><span>Now deployable.</span></h2>
-    </div>
-    <a href="intelligence.html" class="section-link">The Work →</a>
-  </div>
-  <p class="products-tension reveal">Four live in production. Five in active development. All of it built on the same foundations that have been running national infrastructure for three decades. <strong>Not concepts. Not roadmaps. Running systems — and what comes next.</strong></p>
-
-  <div class="products-label live reveal">● Live in Production</div>
-  <div class="products-live">
-    <div class="product reveal">
-      <div class="product-sector">HealthTech</div>
-      <div class="product-name">FedX</div>
-      <div class="product-desc">Federated learning. 8 biobanks. 50+ providers. Data stays local. AI travels. EHDEN certified.</div>
-      <span class="product-status live"><span class="dot"></span>Live</span>
-    </div>
-    <div class="product reveal reveal-delay-1">
-      <div class="product-sector">GovTech</div>
-      <div class="product-name">KAÜ</div>
-      <div class="product-desc">Hungary's national digital identity infrastructure. Millions authenticated daily.</div>
-      <span class="product-status live"><span class="dot"></span>Live</span>
-    </div>
-    <div class="product reveal reveal-delay-2">
-      <div class="product-sector">FinTech</div>
-      <div class="product-name">CORPEX</div>
-      <div class="product-desc">Corporate banking infrastructure. Proven across Central European financial institutions for over twenty years.</div>
-      <span class="product-status live"><span class="dot"></span>Live</span>
-    </div>
-    <div class="product reveal reveal-delay-3">
-      <div class="product-sector">EnergyTech</div>
-      <div class="product-name">Electric Utility</div>
-      <div class="product-desc">Settlement systems for MAVIR — Hungary's national electricity operator. 25+ years. Still running.</div>
-      <span class="product-status live"><span class="dot"></span>Live</span>
-    </div>
-  </div>
-
-  <div class="products-label dev reveal" style="margin-top:32px;">○ In Active Development</div>
-  <div class="products-dev">
-    <div class="product reveal">
-      <div class="product-sector">SpaceTech · ESA</div>
-      <div class="product-name">ProofX</div>
-      <div class="product-desc">Cryptographic image verification. Galileo OSNMA. Court-admissible evidence chains.</div>
-      <span class="product-status dev"><span class="dot"></span>In Development</span>
-    </div>
-    <div class="product reveal reveal-delay-1">
-      <div class="product-sector">SpaceTech · ESA</div>
-      <div class="product-name">SpadaX</div>
-      <div class="product-desc">Real-time anomaly detection for space and ground infrastructure.</div>
-      <span class="product-status dev"><span class="dot"></span>In Development</span>
-    </div>
-    <div class="product reveal reveal-delay-2">
-      <div class="product-sector">SpaceTech · ESA</div>
-      <div class="product-name">GENESIS</div>
-      <div class="product-desc">Generative satellite imagery simulator. Synthetic training data at scale.</div>
-      <span class="product-status dev"><span class="dot"></span>In Development</span>
-    </div>
-    <div class="product reveal reveal-delay-3">
-      <div class="product-sector">FinTech · GovTech</div>
-      <div class="product-name">COIOS</div>
-      <div class="product-desc">Sovereign AI orchestration. Local LLMs, federated learning, agentic workflows.</div>
-      <span class="product-status dev"><span class="dot"></span>In Development</span>
-    </div>
-    <div class="product reveal reveal-delay-4">
-      <div class="product-sector">HealthTech</div>
-      <div class="product-name">Neonatal Intelligence</div>
-      <div class="product-desc">AI-powered neonatal tracking and care. Built on our HealthTech foundations.</div>
-      <span class="product-status dev"><span class="dot"></span>In Development</span>
+    <div class="record-right reveal">
+      <div class="record-stat">
+        <div class="record-stat-num">2×</div>
+        <div class="record-stat-label">International first place</div>
+      </div>
+      <div class="record-stat">
+        <div class="record-stat-num">2024</div>
+        <div class="record-stat-label">Back to back wins</div>
+      </div>
+      <div class="record-stat">
+        <div class="record-stat-num">8</div>
+        <div class="record-stat-label">Biobank clients on FedX</div>
+      </div>
+      <div class="record-stat">
+        <div class="record-stat-num">30+</div>
+        <div class="record-stat-label">Years of HealthTech IP</div>
+      </div>
+      <a href="record/index.html" class="full-record-link">
+        <span>View the full record</span>
+        <span>→</span>
+      </a>
     </div>
   </div>
 </section>
 
 <!-- BUDAPEST -->
 <section class="budapest-section">
-  <div class="section-eyebrow reveal">Built in Budapest</div>
+  <div class="trust-eyebrow reveal">Built in Budapest</div>
   <div class="budapest-statement reveal">Hungary is a country of 10 million people that has produced 13 Nobel laureates, invented modern computing, holography, and the mRNA vaccine.</div>
   <p class="budapest-body reveal"><strong>John von Neumann</strong> designed the architecture every computer still runs on. <strong>Katalin Karikó's</strong> mRNA research saved millions of lives. <strong>Dénes Gábor</strong> invented holography. These are not coincidences — Hungary has a culture of rigorous, original thinking. Of building things that last.</p>
   <p class="budapest-body reveal">E-Group was founded here in 1993. Still here. Still building. We consider that a point of pride.</p>
@@ -399,49 +266,25 @@ body{overflow-x:hidden;}
 <!-- CONTACT -->
 <section class="contact-section" id="contact">
   <div>
-    <div class="section-eyebrow reveal">Work With Us</div>
+    <div class="contact-eyebrow reveal">Work With Us</div>
     <h2 class="contact-title reveal">Tell us what<br><span>you're building.</span></h2>
-    <p class="contact-sub reveal">We work with enterprises, consortiums, and government partners who are serious about what AI infrastructure actually means. Not a pitch — a conversation. Tell us what you're trying to solve.</p>
-    <div class="contact-details reveal">
-      <span class="contact-detail">Budapest, Hungary · Est. 1993</span>
-      <span class="contact-detail">90+ staff · 50+ external associates</span>
-      <span class="contact-detail">FinTech · HealthTech · GovTech · SpaceTech · EnergyTech</span>
-    </div>
+    <p class="contact-sub reveal">We work with enterprises, consortiums, and government partners who are serious about what AI infrastructure actually means. Not a pitch — a conversation.</p>
+    <p class="contact-detail reveal">Budapest, Hungary · Est. 1993</p>
+    <p class="contact-detail reveal">90+ staff · 50+ external associates</p>
+    <p class="contact-detail reveal">FinTech · HealthTech · GovTech · SpaceTech · EnergyTech</p>
   </div>
   <div class="form reveal">
-    <div class="form-row">
-      <div class="form-field">
-        <label class="form-label">Your Name</label>
-        <input class="form-input" type="text" placeholder="Name">
-      </div>
-      <div class="form-field">
-        <label class="form-label">Organisation</label>
-        <input class="form-input" type="text" placeholder="Company">
-      </div>
+    <div class="form-field">
+      <label class="form-label">Your Name & Organisation</label>
+      <input class="form-input" type="text" placeholder="Name, Company">
     </div>
     <div class="form-field">
       <label class="form-label">Email</label>
       <input class="form-input" type="email" placeholder="email@organisation.com">
     </div>
     <div class="form-field">
-      <label class="form-label">Area of Interest</label>
-      <select class="form-select">
-        <option value="">Select one</option>
-        <option>Trust &amp; Digital Identity</option>
-        <option>Sovereign Data Infrastructure</option>
-        <option>Applied AI &amp; Intelligence Products</option>
-        <option>FinTech</option>
-        <option>HealthTech</option>
-        <option>GovTech</option>
-        <option>SpaceTech</option>
-        <option>EnergyTech</option>
-        <option>Partnership / Investment</option>
-        <option>Other</option>
-      </select>
-    </div>
-    <div class="form-field">
-      <label class="form-label">What are you building?</label>
-      <textarea class="form-textarea" placeholder="Tell us what you're working on..."></textarea>
+      <label class="form-label">What are you working on?</label>
+      <textarea class="form-textarea" placeholder="Tell us what you're trying to solve..."></textarea>
     </div>
     <button class="form-submit">Send Message →</button>
   </div>
