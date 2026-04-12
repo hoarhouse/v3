@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Delivered — E-Group Record</title>
+<meta name="description" content="Projects, products and systems built and deployed by E-Group ICT Software Zrt. Live in production at national scale since 1993.">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23080808'/%3E%3Ctext x='5' y='25' font-family='Georgia,serif' font-weight='900' font-size='26' fill='%23C8A96E'%3EE%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --black:#080808;--dark:#0A0A0A;--panel:#111;--ink:#0F0F0F;
+  --border:#1A1A1A;--muted:#333;--dim:#555;--mid:#777;
+  --text:#B0B0B0;--light:#D0D0D0;--white:#EFEFEF;
+  --gold:#C8A96E;--gold2:#A07840;--teal:#4ECDC4;--green:#4ADE80;
+}
+html{background:var(--black);color:var(--white);font-family:'DM Sans',sans-serif;}
+body{overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");opacity:0.025;pointer-events:none;z-index:1000;}
+
+/* HERO */
+.page-hero{padding:172px 60px 80px;border-bottom:1px solid var(--border);}
+.page-eyebrow{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--mid);margin-bottom:32px;display:flex;align-items:center;gap:12px;}
+.page-eyebrow::before{content:'';display:inline-block;width:24px;height:1px;background:var(--gold);}
+.page-hero h1{font-family:'Syne',sans-serif;font-size:clamp(36px,5vw,64px);font-weight:800;color:var(--white);letter-spacing:-1px;line-height:1.1;margin-bottom:24px;max-width:800px;}
+.page-hero h1 em{font-style:normal;color:var(--gold);}
+.page-hero p{font-size:18px;color:var(--text);line-height:1.7;max-width:600px;margin-bottom:48px;}
+.hero-stats{display:flex;gap:48px;flex-wrap:wrap;}
+.hero-stat{border-left:2px solid var(--gold);padding-left:20px;}
+.hero-stat-num{font-family:'Syne',sans-serif;font-size:32px;font-weight:800;color:var(--white);}
+.hero-stat-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--mid);margin-top:4px;}
+
+/* SECTION */
+.section{padding:80px 60px;border-bottom:1px solid var(--border);}
+.section.dark{background:var(--dark);}
+.section-eyebrow{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--mid);margin-bottom:16px;}
+.section-title{font-family:'Syne',sans-serif;font-size:clamp(24px,3vw,36px);font-weight:700;color:var(--white);letter-spacing:-0.5px;margin-bottom:48px;}
+.section-title em{font-style:normal;color:var(--gold);}
+
+/* CARDS */
+.card-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);}
+.card-grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:var(--border);}
+.work-card{background:var(--dark);padding:48px;position:relative;text-decoration:none;display:block;transition:background 0.2s,border-left-color 0.2s;border-left:3px solid transparent;}
+.work-card:hover{background:var(--panel);border-left-color:var(--gold);}
+.card-status{display:inline-flex;align-items:center;gap:8px;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;margin-bottom:20px;}
+.dot{width:6px;height:6px;border-radius:50%;}
+.status-live{color:var(--green);}
+.status-live .dot{background:var(--green);animation:pulse 2s ease-in-out infinite;}
+.status-active{color:var(--gold);}
+.status-active .dot{background:var(--gold);animation:pulse 2s ease-in-out infinite;}
+.status-dev{color:var(--mid);}
+.status-dev .dot{background:var(--mid);}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.4;}}
+.card-sector{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--mid);margin-bottom:10px;}
+.card-name{font-family:'Syne',sans-serif;font-size:26px;font-weight:700;color:var(--white);letter-spacing:-0.5px;margin-bottom:14px;line-height:1.2;}
+.card-desc{font-size:15px;color:var(--text);line-height:1.7;margin-bottom:20px;}
+.card-facts{display:flex;flex-direction:column;gap:6px;margin-bottom:24px;}
+.card-fact{font-family:'DM Mono',monospace;font-size:11px;color:var(--gold);letter-spacing:0.5px;}
+.card-client{font-size:13px;color:var(--dim);padding-top:16px;border-top:1px solid var(--border);}
+.card-client strong{color:var(--text);}
+.card-link{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--gold);margin-top:14px;display:block;}
+
+/* DEV CARDS */
+.dev-card{background:var(--dark);padding:40px 36px;transition:background 0.2s,border-left-color 0.2s;border-left:3px solid transparent;}
+.dev-card:hover{background:var(--panel);border-left-color:var(--border);}
+.dev-card-sector{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:10px;}
+.dev-card-name{font-family:'Syne',sans-serif;font-size:22px;font-weight:700;color:var(--text);margin-bottom:12px;}
+.dev-card-desc{font-size:13px;color:var(--dim);line-height:1.6;}
+
+/* CTA */
+.page-cta{padding:80px 60px;display:flex;align-items:center;justify-content:space-between;gap:40px;flex-wrap:wrap;}
+.page-cta h2{font-family:'Syne',sans-serif;font-size:clamp(24px,3vw,36px);font-weight:700;color:var(--white);margin-bottom:12px;}
+.page-cta p{font-size:16px;color:var(--text);max-width:500px;line-height:1.6;}
+.cta-btn{font-family:'DM Mono',monospace;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:var(--black);background:var(--gold);padding:16px 32px;text-decoration:none;white-space:nowrap;transition:background 0.2s;}
+.cta-btn:hover{background:var(--gold2);}
+
+/* MOBILE */
+.mob-main{font-family:'Syne',sans-serif !important;font-weight:800 !important;font-size:clamp(26px,7vw,40px) !important;color:var(--white) !important;letter-spacing:-0.5px !important;padding:9px 0 !important;width:80%;text-align:center;transition:color 0.2s;display:block;text-decoration:none;}
+.mob-main:hover{color:var(--gold) !important;}
+.mob-divider{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--dim);padding:20px 0 6px;width:80%;border-bottom:1px solid var(--border);text-align:center;margin-bottom:4px;}
+.mob-record{font-family:'DM Mono',monospace !important;font-size:11px !important;letter-spacing:1.5px !important;text-transform:uppercase !important;color:var(--mid) !important;padding:7px 0 !important;width:80%;text-align:center;transition:color 0.2s;display:block;text-decoration:none;}
+.mob-record:hover{color:var(--gold) !important;}
+.mob-cta{font-family:'DM Mono',monospace !important;font-size:12px !important;letter-spacing:2px !important;text-transform:uppercase !important;color:var(--black) !important;background:var(--gold) !important;padding:14px 36px !important;margin-top:20px !important;display:block;text-decoration:none;}
+
+@media(max-width:1023px){
+  .card-grid-2,.card-grid-3{grid-template-columns:1fr;}
+  .section{padding:60px 36px;}
+  .page-hero{padding:152px 36px 60px;}
+  .page-cta{padding:60px 36px;flex-direction:column;align-items:flex-start;}
+}
+@media(max-width:767px){
+  .section{padding:48px 20px;}
+  .page-hero{padding:132px 20px 48px;}
+  .work-card{padding:32px 24px;}
+  .hero-stats{gap:28px;}
+  .page-cta{padding:48px 20px;}
+}
+</style>
+</head>
+<body>
+<script src="../nav-site.js"></script>
+<script src="nav-record.js"></script>
+
+<!-- HERO -->
+<div class="page-hero">
+  <div class="page-eyebrow">The Record · Delivered</div>
+  <h1>Built. Deployed.<br><em>Still running.</em></h1>
+  <p>Thirty years of projects, products, and systems at national scale. Not demos. Not prototypes. Infrastructure that governments, banks, and energy operators depend on every day.</p>
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <div class="hero-stat-num">25+</div>
+      <div class="hero-stat-label">Years with MAVIR</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">M+</div>
+      <div class="hero-stat-label">Citizens on KAÜ daily</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">8</div>
+      <div class="hero-stat-label">Biobank clients</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">30+</div>
+      <div class="hero-stat-label">Years in production</div>
+    </div>
+  </div>
+</div>
+
+<!-- LIVE IN PRODUCTION -->
+<div class="section dark">
+  <div class="section-eyebrow">Live in Production</div>
+  <div class="section-title">Running today. <em>Not someday.</em></div>
+  <div class="card-grid-2">
+
+    <a href="mavir.html" class="work-card">
+      <div class="card-status status-live"><span class="dot"></span>Live · 25+ Years</div>
+      <div class="card-sector">EnergyTech · Critical Infrastructure</div>
+      <div class="card-name">MAVIR — National Electricity Grid</div>
+      <div class="card-desc">Hungary's electricity transmission system operator. Mission-critical settlement systems, market modelling, and regulatory change management. E-Group's longest active client relationship — unbroken for over twenty-five years.</div>
+      <div class="card-facts">
+        <div class="card-fact">25+ year production partnership</div>
+        <div class="card-fact">National electricity transmission operator</div>
+        <div class="card-fact">Zero tolerance for failure — zero failures</div>
+      </div>
+      <div class="card-client"><strong>Client:</strong> MAVIR — Hungarian Transmission System Operator</div>
+      <span class="card-link">Full record →</span>
+    </a>
+
+    <a href="kau.html" class="work-card">
+      <div class="card-status status-live"><span class="dot"></span>Live in Production</div>
+      <div class="card-sector">GovTech · Identity</div>
+      <div class="card-name">KAÜ — National Digital Identity</div>
+      <div class="card-desc">Hungary's national digital authorisation service — designed and implemented personally by Co-founder András Nagy. The most significant trust infrastructure project in Hungary's digital history.</div>
+      <div class="card-facts">
+        <div class="card-fact">Millions of citizens authenticated daily</div>
+        <div class="card-fact">All Hungarian government services</div>
+        <div class="card-fact">eIDAS 2.0 forward-compatible</div>
+      </div>
+      <div class="card-client"><strong>Client:</strong> Hungarian Government</div>
+      <span class="card-link">Full record →</span>
+    </a>
+
+    <a href="helix.html" class="work-card">
+      <div class="card-status status-live"><span class="dot"></span>Live in Production</div>
+      <div class="card-sector">HealthTech · Federated AI</div>
+      <div class="card-name">FedX — Federated Learning Platform</div>
+      <div class="card-desc">The AI travels to the data — the data never moves. Sovereign, compliant, and running across Europe's largest health data ecosystem. EHDEN certified, GDPR compliant, OMOP standardised.</div>
+      <div class="card-facts">
+        <div class="card-fact">8 active biobank clients</div>
+        <div class="card-fact">50+ healthcare providers in HeliX</div>
+        <div class="card-fact">12,000+ individuals' data unified</div>
+      </div>
+      <div class="card-client"><strong>Part of:</strong> HeliX Health Data Space</div>
+      <span class="card-link">Full record →</span>
+    </a>
+
+    <a href="corpex.html" class="work-card">
+      <div class="card-status status-live"><span class="dot"></span>Live in Production</div>
+      <div class="card-sector">FinTech · Banking</div>
+      <div class="card-name">CORPEX — Corporate Banking Infrastructure</div>
+      <div class="card-desc">Corporate internet banking platform built on thirty years of financial systems expertise. Live in production for over two decades across Central European financial institutions.</div>
+      <div class="card-facts">
+        <div class="card-fact">20+ years in production</div>
+        <div class="card-fact">Granular authorisation, multi-auth</div>
+        <div class="card-fact">SCA, SSL/TLS, biometrics and PKI</div>
+      </div>
+      <div class="card-client"><strong>Clients:</strong> Financial institutions across Central Europe</div>
+      <span class="card-link">Full record →</span>
+    </a>
+
+    <a href="eidas.html" class="work-card">
+      <div class="card-status status-live"><span class="dot"></span>Live · Testbed Passed</div>
+      <div class="card-sector">GovTech · Identity</div>
+      <div class="card-name">MyD Wallet — eIDAS 2.0</div>
+      <div class="card-desc">Hungary's EUDI Wallet implementation. Passed every eIDAS 2 testbed scenario. Backward compatible with KAÜ. Forward compatible with the EU-wide 2026 rollout. Post-quantum cryptography support.</div>
+      <div class="card-facts">
+        <div class="card-fact">All eIDAS 2 testbed scenarios passed</div>
+        <div class="card-fact">EWC consortium member</div>
+        <div class="card-fact">Post-quantum cryptography</div>
+      </div>
+      <div class="card-client"><strong>Programme:</strong> European Digital Identity Wallet Consortium</div>
+      <span class="card-link">Full record →</span>
+    </a>
+
+    <a href="ipcei-cis.html" class="work-card">
+      <div class="card-status status-active"><span class="dot"></span>Active</div>
+      <div class="card-sector">EU Infrastructure · AI</div>
+      <div class="card-name">IPCEI-CIS — FedEU.ai</div>
+      <div class="card-desc">E-Group co-leads Workstream 3 and the AI Cluster of the EU's most significant cloud and AI infrastructure programme. Seven EU member states. European Commission approved. A leadership role — not a membership.</div>
+      <div class="card-facts">
+        <div class="card-fact">Co-leads Workstream 3 + AI Cluster</div>
+        <div class="card-fact">7 EU member states · EC approved</div>
+        <div class="card-fact">€1.2bn programme</div>
+      </div>
+      <div class="card-client"><strong>Partners:</strong> CloudFerro, Engineering, Orange, IONOS, Infobip, Reply</div>
+      <span class="card-link">Full record →</span>
+    </a>
+
+  </div>
+</div>
+
+<!-- IN DEVELOPMENT -->
+<div class="section">
+  <div class="section-eyebrow">In Development</div>
+  <div class="section-title">What we are building next. <em>On the same foundations.</em></div>
+  <div class="card-grid-3">
+
+    <a href="proofx.html" class="work-card" style="padding:40px 32px;">
+      <div class="card-status status-active"><span class="dot"></span>ESA Partnership</div>
+      <div class="dev-card-sector">SpaceTech</div>
+      <div class="card-name" style="font-size:22px;">ProofX</div>
+      <div class="card-desc" style="font-size:13px;">Cryptographic image verification combining Galileo OSNMA authentication with C2PA standards. Court-admissible evidence chains for insurance, media, and facility management.</div>
+      <span class="card-link">Full record →</span>
+    </a>
+
+    <a href="genesis.html" class="work-card" style="padding:40px 32px;">
+      <div class="card-status status-active"><span class="dot"></span>ESA Partnership</div>
+      <div class="dev-card-sector">SpaceTech</div>
+      <div class="card-name" style="font-size:22px;">GENESIS</div>
+      <div class="card-desc" style="font-size:13px;">Generative Earth Observation Satellite Imagery Simulator. Photorealistic synthetic datasets for AI model training — eliminating the bottleneck of real-world satellite data acquisition.</div>
+      <span class="card-link">Full record →</span>
+    </a>
+
+    <div class="work-card" style="padding:40px 32px;">
+      <div class="card-status status-dev"><span class="dot"></span>In Development</div>
+      <div class="dev-card-sector">FinTech</div>
+      <div class="card-name" style="font-size:22px;">COIOS</div>
+      <div class="card-desc" style="font-size:13px;">Sovereign AI orchestration platform. Local LLMs, federated learning, and agentic workflows. Built for financial institutions that need intelligence across clearing, settlement, and risk.</div>
+    </div>
+
+    <div class="work-card" style="padding:40px 32px;">
+      <div class="card-status status-dev"><span class="dot"></span>In Development</div>
+      <div class="dev-card-sector">SpaceTech · Critical Infrastructure</div>
+      <div class="card-name" style="font-size:22px;">SpadaX</div>
+      <div class="card-desc" style="font-size:13px;">Real-time sensor analytics, anomaly detection, and predictive maintenance for space and ground infrastructure. Built for environments where failure is not an option.</div>
+    </div>
+
+    <div class="work-card" style="padding:40px 32px;">
+      <div class="card-status status-dev"><span class="dot"></span>In Development</div>
+      <div class="dev-card-sector">HealthTech</div>
+      <div class="card-name" style="font-size:22px;">Neonatal Intelligence</div>
+      <div class="card-desc" style="font-size:13px;">AI-powered neonatal tracking and care intelligence. Built on the same federated foundations as FedX — bringing internationally award-winning medical AI to the most critical hours of a new life.</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- PRESS -->
+<div class="section dark" style="border-bottom:none;">
+  <div class="section-eyebrow">Media Resources</div>
+  <div class="section-title">For journalists and <em>procurement officers.</em></div>
+  <div class="card-grid-2">
+    <a href="press.html" class="work-card">
+      <div class="card-status status-active"><span class="dot"></span>Available Now</div>
+      <div class="card-name">Press Kit</div>
+      <div class="card-desc">Company facts, founding story, key figures, and verified information for journalists, researchers, and procurement officers. Citable, accurate, and up to date.</div>
+      <span class="card-link">Open press kit →</span>
+    </a>
+    <a href="index.html" class="work-card">
+      <div class="card-status status-active"><span class="dot"></span>Full Record</div>
+      <div class="card-name">Back to The Record</div>
+      <div class="card-desc">Return to the full E-Group Record — People, Science, Recognition, and verified facts across thirty years of work.</div>
+      <span class="card-link">The Record →</span>
+    </a>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="page-cta">
+  <div>
+    <h2>Working on a hard problem<br>in a regulated industry?</h2>
+    <p>We are not looking for customers. We are looking for partners who understand their domain deeply enough to help us build something genuinely useful.</p>
+  </div>
+  <a href="../index.html#contact" class="cta-btn">Start the conversation →</a>
+</div>
+
+<script>
+const hamburger=document.getElementById('egroup-hamburger'),mobileMenu=document.getElementById('egroup-mobile-menu');
+if(hamburger&&mobileMenu){
+  hamburger.addEventListener('click',()=>{hamburger.classList.toggle('open');mobileMenu.classList.toggle('open');document.body.style.overflow=mobileMenu.classList.contains('open')?'hidden':'';});
+  mobileMenu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{hamburger.classList.remove('open');mobileMenu.classList.remove('open');document.body.style.overflow='';}));
+}
+</script>
+</body>
+</html>
