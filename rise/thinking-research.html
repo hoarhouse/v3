@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Research — E-Group Thinking</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --black:#080808;--dark:#0A0A0A;--panel:#111;
+  --border:#1A1A1A;--muted:#333;--dim:#555;--mid:#777;
+  --text:#B0B0B0;--light:#D0D0D0;--white:#EFEFEF;
+  --gold:#C8A96E;--gold2:#A07840;--teal:#4ECDC4;--green:#4ADE80;
+  --purple:#818CF8;
+}
+html{background:var(--black);color:var(--white);font-family:'DM Sans',sans-serif;}
+body{overflow-x:hidden;}
+
+/* BREADCRUMB */
+.breadcrumb{padding:100px 60px 0;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);}
+.breadcrumb a{color:var(--dim);text-decoration:none;transition:color 0.2s;}
+.breadcrumb a:hover{color:var(--gold);}
+.breadcrumb span{color:var(--mid);margin:0 8px;}
+
+/* DEPT HERO */
+.dept-hero{padding:40px 60px 72px;border-bottom:1px solid var(--border);display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:end;}
+.dept-hero-left{}
+.dept-tag{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:20px;}
+.dept-headline{font-family:'Syne',sans-serif;font-size:clamp(32px,4vw,60px);font-weight:800;color:var(--white);letter-spacing:-2px;line-height:0.95;margin-bottom:24px;}
+.dept-headline span{color:var(--gold);}
+.dept-sub{font-size:16px;color:var(--text);line-height:1.8;max-width:520px;}
+.dept-hero-right{}
+.dept-lead{border-left:3px solid var(--gold);padding-left:32px;}
+.dept-lead-initials{width:56px;height:56px;background:rgba(200,169,110,0.1);display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:800;font-size:18px;color:var(--gold);margin-bottom:20px;}
+.dept-lead-name{font-family:'Syne',sans-serif;font-size:22px;font-weight:700;color:var(--white);margin-bottom:6px;letter-spacing:-0.3px;}
+.dept-lead-title{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:16px;}
+.dept-lead-bio{font-size:14px;color:var(--text);line-height:1.7;margin-bottom:20px;}
+.dept-lead-note{font-family:'DM Mono',monospace;font-size:10px;color:var(--dim);letter-spacing:0.5px;padding:12px 16px;border:1px solid var(--border);border-left:3px solid var(--muted);}
+
+/* ALSO CONTRIBUTING */
+.contributing{padding:32px 60px;border-bottom:1px solid var(--border);background:var(--dark);display:flex;align-items:center;gap:24px;flex-wrap:wrap;}
+.contributing-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--mid);white-space:nowrap;}
+.contributor{display:flex;align-items:center;gap:10px;}
+.contributor-initials{width:32px;height:32px;background:var(--muted);display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:700;font-size:11px;color:var(--white);}
+.contributor-name{font-family:'DM Mono',monospace;font-size:10px;color:var(--text);}
+.contributor-role{font-family:'DM Mono',monospace;font-size:9px;color:var(--dim);}
+
+/* FEED */
+.dept-feed{padding:0 60px;}
+.feed-section-title{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--mid);padding:32px 0 24px;border-bottom:1px solid var(--border);}
+
+/* FEATURED ARTICLE */
+.feed-featured{padding:56px 0;border-bottom:1px solid var(--border);}
+.feed-featured-tag{display:flex;align-items:center;gap:12px;margin-bottom:20px;}
+.feed-tag{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;padding:4px 10px;border:1px solid;}
+.feed-tag.signal{color:var(--green);border-color:rgba(74,222,128,0.3);}
+.feed-tag.deep-read{color:var(--teal);border-color:rgba(78,205,196,0.3);}
+.feed-tag.in-the-room{color:var(--purple);border-color:rgba(129,140,248,0.3);}
+.feed-tag.sector{color:var(--mid);border-color:var(--border);}
+.feed-featured-headline{font-family:'Syne',sans-serif;font-size:clamp(24px,3vw,40px);font-weight:800;color:var(--white);letter-spacing:-1px;line-height:1.1;margin-bottom:16px;}
+.feed-featured-desc{font-size:16px;color:var(--text);line-height:1.8;max-width:680px;margin-bottom:28px;}
+.feed-featured-meta{display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
+.feed-meta-author{font-family:'DM Mono',monospace;font-size:11px;color:var(--white);}
+.feed-meta-date{font-family:'DM Mono',monospace;font-size:10px;color:var(--dim);}
+.feed-meta-divider{color:var(--muted);}
+.feed-read-link{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);text-decoration:none;border-bottom:1px solid rgba(200,169,110,0.3);padding-bottom:2px;transition:border-color 0.2s;}
+.feed-read-link:hover{border-color:var(--gold);}
+
+/* ARTICLE GRID */
+.article-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--border);border-top:1px solid var(--border);}
+.article-card{background:var(--dark);padding:40px;text-decoration:none;display:block;border-top:3px solid transparent;transition:background 0.2s,border-top-color 0.2s;}
+.article-card:hover{background:var(--panel);border-top-color:var(--gold);}
+.article-card.placeholder{opacity:0.4;cursor:default;}
+.article-card-tags{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;}
+.article-card-headline{font-family:'Syne',sans-serif;font-size:20px;font-weight:700;color:var(--white);letter-spacing:-0.3px;line-height:1.2;margin-bottom:12px;}
+.article-card-desc{font-size:13px;color:var(--text);line-height:1.6;margin-bottom:20px;}
+.article-card-meta{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.article-card-author{font-family:'DM Mono',monospace;font-size:10px;color:var(--white);}
+.article-card-date{font-family:'DM Mono',monospace;font-size:10px;color:var(--dim);}
+.article-card-link{font-family:'DM Mono',monospace;font-size:10px;color:var(--gold);}
+
+/* COMING UP */
+.coming-section{padding:72px 60px;border-top:1px solid var(--border);background:var(--dark);}
+.coming-eyebrow{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--mid);margin-bottom:16px;}
+.coming-headline{font-family:'Syne',sans-serif;font-size:clamp(22px,2.5vw,36px);font-weight:700;color:var(--white);letter-spacing:-0.5px;margin-bottom:32px;}
+.coming-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);}
+.coming-card{background:var(--dark);padding:28px;opacity:0.5;}
+.coming-card-type{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--mid);margin-bottom:10px;}
+.coming-card-title{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;color:var(--white);line-height:1.3;margin-bottom:8px;}
+.coming-card-author{font-family:'DM Mono',monospace;font-size:10px;color:var(--dim);}
+
+/* SUBSCRIBE */
+.subscribe-bar{padding:48px 60px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:40px;flex-wrap:wrap;}
+.subscribe-text h3{font-family:'Syne',sans-serif;font-size:22px;font-weight:700;color:var(--white);margin-bottom:8px;}
+.subscribe-text p{font-size:14px;color:var(--text);}
+.subscribe-form{display:flex;gap:0;}
+.subscribe-input{background:var(--dark);border:1px solid var(--border);border-right:none;color:var(--white);font-family:'DM Sans',sans-serif;font-size:14px;padding:14px 20px;outline:none;transition:border-color 0.2s;width:280px;}
+.subscribe-input:focus{border-color:var(--gold);}
+.subscribe-btn{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--black);background:var(--gold);border:none;padding:14px 24px;cursor:pointer;white-space:nowrap;transition:background 0.2s;}
+.subscribe-btn:hover{background:var(--gold2);}
+
+/* BACK LINK */
+.back-bar{padding:32px 60px;border-top:1px solid var(--border);}
+.back-link{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--mid);text-decoration:none;transition:color 0.2s;}
+.back-link:hover{color:var(--gold);}
+
+/* RESPONSIVE */
+@media(max-width:1023px){
+  .dept-hero{grid-template-columns:1fr;gap:48px;}
+  .article-grid{grid-template-columns:1fr;}
+  .coming-grid{grid-template-columns:1fr 1fr;}
+}
+@media(max-width:768px){
+  .breadcrumb{padding:80px 24px 0;}
+  .dept-hero{padding:32px 24px 56px;}
+  .contributing{padding:24px;}
+  .dept-feed{padding:0 24px;}
+  .coming-section{padding:56px 24px;}
+  .subscribe-bar{padding:48px 24px;flex-direction:column;align-items:flex-start;}
+  .subscribe-input{width:100%;}
+  .back-bar{padding:24px;}
+  .coming-grid{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body data-page="thinking">
+<script src="../nav-site.js"></script>
+
+<div class="breadcrumb">
+  <a href="../thinking.html">Thinking</a>
+  <span>/</span>
+  Research Department
+</div>
+
+<!-- DEPT HERO -->
+<section class="dept-hero">
+  <div class="dept-hero-left">
+    <div class="dept-tag">Department Blog · AI Research</div>
+    <h1 class="dept-headline">Research.<br><span>Where rigour meets production.</span></h1>
+    <p class="dept-sub">The E-Group Research department publishes thinking on AI methodology, medical intelligence, cryptography, and the gap between academic research and systems that actually ship. We write when we have something worth saying.</p>
+  </div>
+  <div class="dept-hero-right">
+    <div class="dept-lead">
+      <div class="dept-lead-initials">MM</div>
+      <div class="dept-lead-name">Mark Marosi</div>
+      <div class="dept-lead-title">[Title — to be confirmed] · Head of Research</div>
+      <p class="dept-lead-bio">Mark leads E-Group's Research department. [Bio to be added — please provide a short description of Mark's background, focus areas, and what the Research department covers under his leadership.]</p>
+      <div class="dept-lead-note">Profile and title to be confirmed. Content will be updated.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ALSO CONTRIBUTING -->
+<div class="contributing">
+  <span class="contributing-label">Also publishing from this department</span>
+  <div class="contributor">
+    <div class="contributor-initials">PA</div>
+    <div>
+      <div class="contributor-name">Dr. Péter Antal</div>
+      <div class="contributor-role">[Role to be confirmed] · AI Research</div>
+    </div>
+  </div>
+  <div class="contributor">
+    <div class="contributor-initials">AB</div>
+    <div>
+      <div class="contributor-name">Ágota Benedek</div>
+      <div class="contributor-role">Research Engineer</div>
+    </div>
+  </div>
+  <div class="contributor">
+    <div class="contributor-initials">TM</div>
+    <div>
+      <div class="contributor-name">Tamás Mészáros PhD</div>
+      <div class="contributor-role">Senior Researcher · BME Associate Professor</div>
+    </div>
+  </div>
+</div>
+
+<!-- FEED -->
+<div class="dept-feed">
+  <div class="feed-section-title">Published</div>
+
+  <!-- FEATURED — GRaDPaLM double win -->
+  <div class="feed-featured">
+    <div class="feed-featured-tag">
+      <span class="feed-tag signal">Signal</span>
+      <span class="feed-tag sector">HealthTech · AI Research</span>
+    </div>
+    <h2 class="feed-featured-headline">Two wins. One week. What GRaDPaLM actually is.</h2>
+    <p class="feed-featured-desc">Back-to-back first place at Neumann Colloquium and BME TDK 2025. Ágota Benedek and the team explain the work — graph retrieval and diagnostic pathway augmented language models that reduce hallucination and make AI-generated medical recommendations explainable, traceable, and grounded in verified clinical data.</p>
+    <div class="feed-featured-meta">
+      <span class="feed-meta-author">Ágota Benedek · Research Engineer</span>
+      <span class="feed-meta-divider">·</span>
+      <span class="feed-meta-date">November 2025</span>
+      <span class="feed-meta-divider">·</span>
+      <a href="https://www.egroup.hu/a-winning-streak-in-ai-innovation-e-group-team-member-secures-double-victory-at-scientific-events/" target="_blank" class="feed-read-link">Read the full article →</a>
+    </div>
+  </div>
+
+  <!-- ARTICLE GRID -->
+  <div class="article-grid">
+
+    <a href="https://www.egroup.hu/dr-peter-antal-lead-researcher-at-e-group-awarded-the-knights-cross-of-the-order-of-merit-of-hungary/" target="_blank" class="article-card">
+      <div class="article-card-tags">
+        <span class="feed-tag signal">Signal</span>
+        <span class="feed-tag sector">AI Research</span>
+      </div>
+      <div class="article-card-headline">Dr. Péter Antal awarded Hungary's Knight's Cross.</div>
+      <div class="article-card-desc">On August 19, 2025, Dr. Péter Antal was awarded the Knight's Cross of the Order of Merit of Hungary — the civilian division's highest recognition. A personal honour that reflects the quality of E-Group's research programme.</div>
+      <div class="article-card-meta">
+        <span class="article-card-author">E-Group</span>
+        <span class="feed-meta-divider">·</span>
+        <span class="article-card-date">August 2025</span>
+      </div>
+    </a>
+
+    <!-- Placeholder — honest -->
+    <div class="article-card placeholder">
+      <div class="article-card-tags">
+        <span class="feed-tag deep-read">Deep Read</span>
+        <span class="feed-tag sector">AI Research</span>
+      </div>
+      <div class="article-card-headline">Post-quantum cryptography is not a 2030 problem.</div>
+      <div class="article-card-desc">Most enterprises are treating post-quantum security as a future concern. Our team has been working on this since 2019. First piece from the Research department coming.</div>
+      <div class="article-card-meta">
+        <span class="article-card-date">Coming soon</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- COMING UP -->
+<section class="coming-section">
+  <div class="coming-eyebrow">In the pipeline</div>
+  <h2 class="coming-headline">What the Research team is working on next.</h2>
+  <div class="coming-grid">
+    <div class="coming-card">
+      <div class="coming-card-type">Deep Read</div>
+      <div class="coming-card-title">What GRaDPaLM taught us about the limits of LLMs in clinical settings.</div>
+      <div class="coming-card-author">Tamás Mészáros PhD · Coming</div>
+    </div>
+    <div class="coming-card">
+      <div class="coming-card-type">Signal</div>
+      <div class="coming-card-title">Why we started post-quantum research in 2019 — and what we know now.</div>
+      <div class="coming-card-author">Research Department · Coming</div>
+    </div>
+    <div class="coming-card">
+      <div class="coming-card-type">In The Room</div>
+      <div class="coming-card-title">The INTERUNI conference — what the presentation revealed about where the field is going.</div>
+      <div class="coming-card-author">Ágota Benedek · Coming</div>
+    </div>
+  </div>
+</section>
+
+<!-- SUBSCRIBE -->
+<div class="subscribe-bar">
+  <div class="subscribe-text">
+    <h3>Follow the Research department.</h3>
+    <p>Get notified when the Research team publishes. No cadence. No digest. Just what we write.</p>
+  </div>
+  <div class="subscribe-form">
+    <input class="subscribe-input" type="email" placeholder="your@email.com">
+    <button class="subscribe-btn">Subscribe →</button>
+  </div>
+</div>
+
+<div class="back-bar">
+  <a href="../thinking.html" class="back-link">← Back to Thinking</a>
+</div>
+
+<footer>
+  <div>E-Group Intelligence Infrastructure · Est. 1993</div>
+  <div>Budapest, Hungary · © 2026 E-Group ICT Software Zrt.</div>
+</footer>
+</body>
+</html>
