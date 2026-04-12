@@ -17,30 +17,49 @@
 }
 html{background:var(--black);color:var(--white);font-family:'DM Sans',sans-serif;}
 body{overflow-x:hidden;}
-.reveal{opacity:0;transform:translateY(20px);transition:opacity 0.7s ease,transform 0.7s ease;}
-.reveal.visible{opacity:1;transform:none;}
-.reveal-delay-1{transition-delay:0.15s;}
-.reveal-delay-2{transition-delay:0.3s;}
-.reveal-delay-3{transition-delay:0.45s;}
 
 /* HERO */
-.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:140px 60px 80px;border-bottom:1px solid var(--border);position:relative;}
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:140px 60px 80px;border-bottom:1px solid var(--border);position:relative;overflow:hidden;}
 .hero-eyebrow{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--dim);margin-bottom:48px;display:flex;gap:32px;flex-wrap:wrap;}
 .hero-eyebrow span{display:flex;align-items:center;gap:10px;}
 .hero-eyebrow span::before{content:'';display:inline-block;width:20px;height:1px;background:var(--muted);}
-.hero-headline{font-family:'Syne',sans-serif;font-size:clamp(44px,5.5vw,80px);font-weight:800;color:var(--white);letter-spacing:-2.5px;line-height:0.95;margin-bottom:40px;max-width:860px;}
+.hero-headline{font-family:'Syne',sans-serif;font-size:clamp(36px,4vw,64px);font-weight:800;color:var(--white);letter-spacing:-2px;line-height:0.95;margin-bottom:40px;max-width:700px;position:relative;z-index:1;}
 .hero-headline em{color:var(--gold);font-style:normal;display:block;}
-.hero-sub{font-size:18px;color:var(--text);line-height:1.7;max-width:500px;margin-bottom:56px;}
+.hero-sub{font-size:17px;color:var(--text);line-height:1.7;max-width:480px;margin-bottom:56px;position:relative;z-index:1;}
 .hero-sub strong{color:var(--white);}
-.hero-ctas{display:flex;align-items:center;gap:28px;flex-wrap:wrap;}
+.hero-ctas{display:flex;align-items:center;gap:28px;flex-wrap:wrap;position:relative;z-index:1;}
 .cta-primary{font-family:'DM Mono',monospace;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:var(--black);background:var(--gold);padding:18px 36px;text-decoration:none;transition:background 0.2s;}
 .cta-primary:hover{background:var(--gold2);}
 .cta-secondary{font-family:'DM Mono',monospace;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:var(--mid);text-decoration:none;border-bottom:1px solid var(--muted);padding-bottom:2px;transition:color 0.2s,border-color 0.2s;}
 .cta-secondary:hover{color:var(--white);border-color:var(--white);}
 
-/* THREE TRUST STATEMENTS */
+/* HERO — ghost year */
+.hero-bg-year{position:absolute;right:-20px;top:50%;transform:translateY(-50%);font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(160px,18vw,260px);color:rgba(200,169,110,0.04);letter-spacing:-8px;line-height:1;pointer-events:none;user-select:none;z-index:0;}
+
+/* HERO — right stats (desktop) */
+.hero-right{position:absolute;right:60px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:28px;z-index:1;}
+.hero-right-stat{text-align:right;}
+.hero-right-stat-num{font-family:'Syne',sans-serif;font-size:clamp(28px,3vw,48px);font-weight:800;color:var(--white);letter-spacing:-1px;line-height:1;}
+.hero-right-stat-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-top:4px;}
+
+/* HERO — mobile stats grid (shown below CTAs on mobile) */
+.hero-stats-mobile{display:none;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);margin-top:40px;}
+.hero-stat-mobile{background:var(--dark);padding:20px 24px;}
+.hero-stat-mobile-num{font-family:'Syne',sans-serif;font-size:32px;font-weight:800;color:var(--white);letter-spacing:-1px;line-height:1;}
+.hero-stat-mobile-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-top:4px;}
+
+/* NEWS CARDS */
+.news-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);}
+.news-card{background:var(--dark);padding:36px 32px;text-decoration:none;display:block;border-top:3px solid transparent;transition:background 0.2s,border-top-color 0.2s;}
+.news-card:hover{background:var(--panel);border-top-color:var(--gold);}
+.news-card-date{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-bottom:16px;}
+.news-card-title{font-family:'Syne',sans-serif;font-size:18px;font-weight:700;color:var(--white);line-height:1.3;margin-bottom:12px;letter-spacing:-0.3px;}
+.news-card-desc{font-size:13px;color:var(--text);line-height:1.6;margin-bottom:20px;}
+.news-card-link{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);}
+
+/* TRUST STATEMENTS */
 .trust-section{padding:80px 60px;border-bottom:1px solid var(--border);}
-.trust-eyebrow{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--mid);margin-bottom:48px;}
+.section-eyebrow{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--mid);margin-bottom:48px;}
 .trust-statements{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);}
 .trust-statement{background:var(--dark);padding:48px 40px;text-decoration:none;display:block;border-left:3px solid transparent;transition:background 0.2s,border-left-color 0.2s;}
 .trust-statement:hover{background:var(--panel);border-left-color:var(--gold);}
@@ -49,16 +68,15 @@ body{overflow-x:hidden;}
 .trust-statement-fact{font-size:14px;color:var(--text);line-height:1.6;}
 .trust-statement-link{display:inline-block;margin-top:24px;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);}
 
-/* ONE RECORD HIGHLIGHT */
+/* RECORD HIGHLIGHT */
 .record-section{padding:80px 60px;border-bottom:1px solid var(--border);background:var(--dark);}
 .record-inner{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
-.record-left{}
 .record-eyebrow{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--mid);margin-bottom:20px;}
 .record-headline{font-family:'Syne',sans-serif;font-size:clamp(28px,3.5vw,52px);font-weight:800;color:var(--white);letter-spacing:-1.5px;line-height:1.0;margin-bottom:24px;}
 .record-headline span{color:var(--gold);}
 .record-body{font-size:16px;color:var(--text);line-height:1.8;margin-bottom:32px;}
 .record-body strong{color:var(--white);}
-.record-link{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);text-decoration:none;border-bottom:1px solid rgba(200,169,110,0.3);padding-bottom:2px;transition:border-color 0.2s;}
+.record-link{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);text-decoration:none;border-bottom:1px solid rgba(200,169,110,0.3);padding-bottom:2px;}
 .record-link:hover{border-color:var(--gold);}
 .record-right{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);}
 .record-stat{background:var(--dark);padding:32px;}
@@ -67,6 +85,15 @@ body{overflow-x:hidden;}
 .full-record-link{grid-column:1/-1;background:var(--dark);padding:24px 32px;text-decoration:none;display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--border);transition:background 0.2s;}
 .full-record-link:hover{background:var(--panel);}
 .full-record-link span{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);}
+
+/* GO DEEPER */
+.go-deeper{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);}
+.go-deeper-card{background:var(--dark);padding:48px;text-decoration:none;display:block;transition:background 0.2s;}
+.go-deeper-card:hover{background:var(--panel);}
+.go-deeper-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--mid);margin-bottom:16px;}
+.go-deeper-title{font-family:'Syne',sans-serif;font-size:clamp(22px,2.5vw,32px);font-weight:700;color:var(--white);letter-spacing:-0.5px;margin-bottom:12px;}
+.go-deeper-desc{font-size:14px;color:var(--text);line-height:1.6;margin-bottom:24px;}
+.go-deeper-cta{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);}
 
 /* BUDAPEST */
 .budapest-section{padding:80px 60px;border-bottom:1px solid var(--border);}
@@ -78,7 +105,7 @@ body{overflow-x:hidden;}
 .ticker-wrap::before,.ticker-wrap::after{content:'';position:absolute;top:32px;bottom:0;width:100px;z-index:2;}
 .ticker-wrap::before{left:0;background:linear-gradient(to right,var(--black),transparent);}
 .ticker-wrap::after{right:0;background:linear-gradient(to left,var(--black),transparent);}
-.ticker{display:flex;white-space:nowrap;animation:tickerScroll 10s linear infinite;}
+.ticker{display:flex;white-space:nowrap;animation:tickerScroll 12s linear infinite;}
 .ticker span{font-family:'Syne',sans-serif;font-size:15px;font-weight:600;color:var(--white);padding:0 32px;border-right:1px solid var(--border);}
 .ticker span em{color:var(--gold);font-style:normal;font-weight:400;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:1px;}
 @keyframes tickerScroll{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
@@ -93,47 +120,32 @@ body{overflow-x:hidden;}
 .form{display:flex;flex-direction:column;gap:16px;}
 .form-field{display:flex;flex-direction:column;gap:8px;}
 .form-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--mid);}
-.form-input,.form-select,.form-textarea{background:var(--dark);border:1px solid var(--border);color:var(--white);font-family:'DM Sans',sans-serif;font-size:14px;padding:14px 16px;outline:none;transition:border-color 0.2s;width:100%;}
-.form-input:focus,.form-select:focus,.form-textarea:focus{border-color:var(--gold);}
-.form-select{appearance:none;cursor:pointer;}
+.form-input,.form-textarea{background:var(--dark);border:1px solid var(--border);color:var(--white);font-family:'DM Sans',sans-serif;font-size:14px;padding:14px 16px;outline:none;transition:border-color 0.2s;width:100%;}
+.form-input:focus,.form-textarea:focus{border-color:var(--gold);}
 .form-textarea{resize:vertical;min-height:120px;}
 .form-submit{font-family:'DM Mono',monospace;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:var(--black);background:var(--gold);border:none;padding:18px 36px;cursor:pointer;width:100%;text-align:left;transition:background 0.2s;}
 .form-submit:hover{background:var(--gold2);}
 
+/* RESPONSIVE */
 @media(max-width:1023px){
   .trust-statements{grid-template-columns:1fr;}
   .record-inner{grid-template-columns:1fr;}
   .record-right{grid-template-columns:1fr 1fr;}
+  .news-cards{grid-template-columns:1fr 1fr;}
   .contact-section{grid-template-columns:1fr;}
 }
 @media(max-width:768px){
-  .hero{padding:120px 24px 60px;min-height:auto;}
+  .hero{padding:100px 24px 48px;min-height:auto;}
   .hero-eyebrow{gap:16px;}
+  .hero-right{display:none;}
+  .hero-bg-year{display:none;}
+  .hero-stats-mobile{display:grid;}
+  .news-cards{grid-template-columns:1fr;}
   .trust-section,.record-section,.budapest-section{padding:56px 24px;}
+  .trust-statements{grid-template-columns:1fr;}
+  .go-deeper{grid-template-columns:1fr;}
   .contact-section{padding:56px 24px;gap:40px;}
-  .live-strip{padding:0 24px;height:64px;}
-  .live-ticker-item{font-size:13px;padding:0 32px;}
 }
-
-/* GO DEEPER */
-.go-deeper{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border-top:1px solid var(--border);}
-.go-deeper-card{background:var(--dark);padding:48px;text-decoration:none;display:block;transition:background 0.2s;}
-.go-deeper-card:hover{background:var(--panel);}
-.go-deeper-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--mid);margin-bottom:16px;}
-.go-deeper-title{font-family:'Syne',sans-serif;font-size:clamp(22px,2.5vw,32px);font-weight:700;color:var(--white);letter-spacing:-0.5px;margin-bottom:12px;}
-.go-deeper-desc{font-size:14px;color:var(--text);line-height:1.6;margin-bottom:24px;}
-.go-deeper-cta{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);}
-@media(max-width:768px){.go-deeper{grid-template-columns:1fr;}}
-/* NEWS CARDS */
-.news-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);}
-.news-card{background:var(--dark);padding:36px 32px;text-decoration:none;display:block;border-top:3px solid transparent;transition:background 0.2s,border-top-color 0.2s;}
-.news-card:hover{background:var(--panel);border-top-color:var(--gold);}
-.news-card-date{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-bottom:16px;}
-.news-card-title{font-family:'Syne',sans-serif;font-size:18px;font-weight:700;color:var(--white);line-height:1.3;margin-bottom:12px;letter-spacing:-0.3px;}
-.news-card-desc{font-size:13px;color:var(--text);line-height:1.6;margin-bottom:20px;}
-.news-card-link{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);}
-@media(max-width:1023px){.news-cards{grid-template-columns:1fr 1fr;}}
-@media(max-width:768px){.news-cards{grid-template-columns:1fr;}}
 </style>
 </head>
 <body data-page="home">
@@ -141,19 +153,59 @@ body{overflow-x:hidden;}
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-eyebrow reveal">
+  <div class="hero-eyebrow">
     <span>Est. 1993</span>
     <span>Budapest, Hungary</span>
     <span>Intelligence Infrastructure</span>
   </div>
-  <h1 class="hero-headline reveal">
+  <h1 class="hero-headline">
     Thirty years building
     <em>what AI runs on.</em>
   </h1>
-  <p class="hero-sub reveal">Not the hype. The foundation. <strong>Trust infrastructure, sovereign data, and applied intelligence</strong> — built at national scale, for three decades.</p>
-  <div class="hero-ctas reveal">
+  <p class="hero-sub">Not the hype. The foundation. <strong>Trust infrastructure, sovereign data, and applied intelligence</strong> — built at national scale, for three decades.</p>
+  <div class="hero-ctas">
     <a href="#contact" class="cta-primary">Start a Conversation →</a>
     <a href="record/index.html" class="cta-secondary">View The Record →</a>
+  </div>
+  <!-- Mobile stats — shown below CTAs on small screens -->
+  <div class="hero-stats-mobile">
+    <div class="hero-stat-mobile">
+      <div class="hero-stat-mobile-num">25+</div>
+      <div class="hero-stat-mobile-label">Years with MAVIR</div>
+    </div>
+    <div class="hero-stat-mobile">
+      <div class="hero-stat-mobile-num">M+</div>
+      <div class="hero-stat-mobile-label">Citizens on KAÜ daily</div>
+    </div>
+    <div class="hero-stat-mobile">
+      <div class="hero-stat-mobile-num">2×</div>
+      <div class="hero-stat-mobile-label">International AI first place</div>
+    </div>
+    <div class="hero-stat-mobile">
+      <div class="hero-stat-mobile-num">7</div>
+      <div class="hero-stat-mobile-label">EU member states · IPCEI</div>
+    </div>
+  </div>
+  <!-- Desktop ghost year -->
+  <div class="hero-bg-year">1993</div>
+  <!-- Desktop right stats -->
+  <div class="hero-right">
+    <div class="hero-right-stat">
+      <div class="hero-right-stat-num">25+</div>
+      <div class="hero-right-stat-label">Years with MAVIR</div>
+    </div>
+    <div class="hero-right-stat">
+      <div class="hero-right-stat-num">M+</div>
+      <div class="hero-right-stat-label">Citizens on KAÜ daily</div>
+    </div>
+    <div class="hero-right-stat">
+      <div class="hero-right-stat-num">2×</div>
+      <div class="hero-right-stat-label">International AI first place</div>
+    </div>
+    <div class="hero-right-stat">
+      <div class="hero-right-stat-num">7</div>
+      <div class="hero-right-stat-label">EU member states · IPCEI</div>
+    </div>
   </div>
 </section>
 
@@ -185,42 +237,42 @@ body{overflow-x:hidden;}
   </a>
 </div>
 
-<!-- THREE TRUST STATEMENTS -->
+<!-- TRUST STATEMENTS -->
 <section class="trust-section">
-  <div class="trust-eyebrow reveal">Who trusts us · Who recognises us · Who works with us</div>
+  <div class="section-eyebrow">Who trusts us · Who recognises us · Who works with us</div>
   <div class="trust-statements">
-    <a href="record/mavir.html" class="trust-statement reveal">
+    <a href="record/mavir.html" class="trust-statement">
       <div class="trust-statement-name">MAVIR — National Electricity Grid</div>
       <div class="trust-statement-claim">25 years. Still the only call they make.</div>
-      <div class="trust-statement-fact">Hungary's electricity transmission operator has trusted E-Group with mission-critical infrastructure since 1999. Not a pilot. Not a proof of concept. A quarter century of unbroken delivery on infrastructure that cannot fail.</div>
+      <div class="trust-statement-fact">Hungary's electricity transmission operator has trusted E-Group with mission-critical infrastructure since 1999. A quarter century of unbroken delivery on infrastructure that cannot fail.</div>
       <span class="trust-statement-link">See the record →</span>
     </a>
-    <a href="record/kau.html" class="trust-statement reveal reveal-delay-1">
+    <a href="record/kau.html" class="trust-statement">
       <div class="trust-statement-name">Hungarian Government — KAÜ</div>
       <div class="trust-statement-claim">Millions of citizens. Every day. No failures.</div>
-      <div class="trust-statement-fact">E-Group designed and built Hungary's national digital identity infrastructure — personally led by CTO András Nagy. The system that authenticates every Hungarian citizen across every government service. Running in production. No failures.</div>
+      <div class="trust-statement-fact">E-Group designed and built Hungary's national digital identity infrastructure. The system that authenticates every Hungarian citizen across every government service. Running in production. No failures.</div>
       <span class="trust-statement-link">See the record →</span>
     </a>
-    <a href="record/proofx.html" class="trust-statement reveal reveal-delay-2">
+    <a href="record/proofx.html" class="trust-statement">
       <div class="trust-statement-name">European Space Agency — ProofX</div>
       <div class="trust-statement-claim">The satellite that proves your photo is real.</div>
-      <div class="trust-statement-fact">Active partnership with ESA on ProofX — combining Galileo OSNMA cryptographic satellite authentication with C2PA standards. The result: a court-admissible evidence chain that proves an image was taken where and when it claims. AI-generated imagery cannot fake it.</div>
+      <div class="trust-statement-fact">Active partnership with ESA on ProofX — Galileo OSNMA cryptographic satellite authentication combined with C2PA standards. A court-admissible evidence chain that AI-generated imagery cannot fake.</div>
       <span class="trust-statement-link">See the record →</span>
     </a>
   </div>
 </section>
 
-<!-- ONE RECORD HIGHLIGHT -->
+<!-- RECORD HIGHLIGHT -->
 <section class="record-section">
   <div class="record-inner">
-    <div class="record-left reveal">
+    <div class="record-left">
       <div class="record-eyebrow">The Record</div>
       <h2 class="record-headline">Back-to-back.<br><span>International first place.</span></h2>
-      <p class="record-body">E-Group's HealthTech AI research team took first place at two consecutive international medical AI research events. <strong>Dr. Anna Kovács</strong> leads a team that the global academic community is watching — and whose research ships into production, not just into journals.</p>
+      <p class="record-body">E-Group's HealthTech AI research team took first place at two consecutive international medical AI research events. <strong>Dr. Anna Kovács</strong> leads a team the global academic community is watching — research that ships into production, not just into journals.</p>
       <p class="record-body">This is what thirty years of domain knowledge looks like when you point it at a hard problem.</p>
       <a href="record/medical-ai.html" class="record-link">Read the full record →</a>
     </div>
-    <div class="record-right reveal">
+    <div class="record-right">
       <div class="record-stat">
         <div class="record-stat-num">2×</div>
         <div class="record-stat-label">International first place</div>
@@ -245,31 +297,30 @@ body{overflow-x:hidden;}
   </div>
 </section>
 
-
 <!-- GO DEEPER -->
 <div class="go-deeper">
-  <a href="intelligence.html" class="go-deeper-card reveal">
+  <a href="intelligence.html" class="go-deeper-card">
     <div class="go-deeper-label">The Work</div>
     <div class="go-deeper-title">Four products.<br>Live in production.</div>
     <div class="go-deeper-desc">FedX, KAÜ, CORPEX, Electric Utility — four systems running at national scale. Real clients. Real numbers. No roadmap promises.</div>
     <span class="go-deeper-cta">See The Work →</span>
   </a>
-  <a href="rise.html" class="go-deeper-card reveal reveal-delay-1">
+  <a href="rise.html" class="go-deeper-card">
     <div class="go-deeper-label">What's Next</div>
     <div class="go-deeper-title">Five products.<br>In active development.</div>
-    <div class="go-deeper-desc">ProofX, SpadaX, GENESIS, COIOS, Neonatal Intelligence — five products in development across SpaceTech, FinTech and HealthTech. Built in the open. Partners welcome.</div>
+    <div class="go-deeper-desc">ProofX, SpadaX, GENESIS, COIOS, Neonatal Intelligence — five products across SpaceTech, FinTech and HealthTech. Built in the open. Partners welcome.</div>
     <span class="go-deeper-cta">See What's Next →</span>
   </a>
 </div>
 
 <!-- BUDAPEST -->
 <section class="budapest-section">
-  <div class="trust-eyebrow reveal">Built in Budapest</div>
-  <div class="budapest-statement reveal">Hungary is a country of 10 million people that has produced 13 Nobel laureates, invented modern computing, holography, and the mRNA vaccine.</div>
-  <p class="budapest-body reveal"><strong>John von Neumann</strong> designed the architecture every computer still runs on. <strong>Katalin Karikó's</strong> mRNA research saved millions of lives. <strong>Dénes Gábor</strong> invented holography. These are not coincidences — Hungary has a culture of rigorous, original thinking. Of building things that last.</p>
-  <p class="budapest-body reveal">E-Group was founded here in 1993. Still here. Still building. We consider that a point of pride.</p>
-  <a href="about.html" class="budapest-cta reveal">Our story →</a>
-  <div class="ticker-wrap reveal">
+  <div class="section-eyebrow">Built in Budapest</div>
+  <div class="budapest-statement">Hungary is a country of 10 million people that has produced 13 Nobel laureates, invented modern computing, holography, and the mRNA vaccine.</div>
+  <p class="budapest-body"><strong>John von Neumann</strong> designed the architecture every computer still runs on. <strong>Katalin Karikó's</strong> mRNA research saved millions of lives. <strong>Dénes Gábor</strong> invented holography. These are not coincidences — Hungary has a culture of rigorous, original thinking. Of building things that last.</p>
+  <p class="budapest-body">E-Group was founded here in 1993. Still here. Still building. We consider that a point of pride.</p>
+  <a href="about.html" class="budapest-cta">Our story →</a>
+  <div class="ticker-wrap">
     <div class="ticker">
       <span>John von Neumann <em>· Computing</em></span>
       <span>Katalin Karikó <em>· mRNA Vaccines</em></span>
@@ -294,16 +345,16 @@ body{overflow-x:hidden;}
 <!-- CONTACT -->
 <section class="contact-section" id="contact">
   <div>
-    <div class="contact-eyebrow reveal">Work With Us</div>
-    <h2 class="contact-title reveal">Tell us what<br><span>you're building.</span></h2>
-    <p class="contact-sub reveal">We work with enterprises, consortiums, and government partners who are serious about what AI infrastructure actually means. Not a pitch — a conversation.</p>
-    <p class="contact-detail reveal">Budapest, Hungary · Est. 1993</p>
-    <p class="contact-detail reveal">90+ staff · 50+ external associates</p>
-    <p class="contact-detail reveal">FinTech · HealthTech · GovTech · SpaceTech · EnergyTech</p>
+    <div class="contact-eyebrow">Work With Us</div>
+    <h2 class="contact-title">Tell us what<br><span>you're building.</span></h2>
+    <p class="contact-sub">We work with enterprises, consortiums, and government partners who are serious about what AI infrastructure actually means. Not a pitch — a conversation.</p>
+    <p class="contact-detail">Budapest, Hungary · Est. 1993</p>
+    <p class="contact-detail">90+ staff · 50+ external associates</p>
+    <p class="contact-detail">FinTech · HealthTech · GovTech · SpaceTech · EnergyTech</p>
   </div>
-  <div class="form reveal">
+  <div class="form">
     <div class="form-field">
-      <label class="form-label">Your Name & Organisation</label>
+      <label class="form-label">Your Name &amp; Organisation</label>
       <input class="form-input" type="text" placeholder="Name, Company">
     </div>
     <div class="form-field">
@@ -323,11 +374,6 @@ body{overflow-x:hidden;}
   <div>Budapest, Hungary · © 2026 E-Group ICT Software Zrt.</div>
 </footer>
 
-<script>
-const obs = new IntersectionObserver(entries => entries.forEach(e => {
-  if(e.isIntersecting) e.target.classList.add('visible');
-}),{threshold:0.08});
-document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
-</script>
+<script></script>
 </body>
 </html>
