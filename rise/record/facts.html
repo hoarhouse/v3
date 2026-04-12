@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Facts — E-Group Record</title>
+<meta name="description" content="Verified facts about E-Group ICT Software Zrt. Legal name, registration, addresses, headcount, founding history. For journalists, researchers and procurement officers.">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23080808'/%3E%3Ctext x='5' y='25' font-family='Georgia,serif' font-weight='900' font-size='26' fill='%23C8A96E'%3EE%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --black:#080808;--dark:#0A0A0A;--panel:#111;--ink:#0F0F0F;
+  --border:#1A1A1A;--muted:#333;--dim:#555;--mid:#777;
+  --text:#B0B0B0;--light:#D0D0D0;--white:#EFEFEF;
+  --gold:#C8A96E;--gold2:#A07840;--teal:#4ECDC4;--green:#4ADE80;
+}
+html{background:var(--black);color:var(--white);font-family:'DM Sans',sans-serif;}
+body{overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");opacity:0.025;pointer-events:none;z-index:1000;}
+
+.page-hero{padding:172px 60px 80px;border-bottom:1px solid var(--border);}
+.page-eyebrow{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--mid);margin-bottom:32px;display:flex;align-items:center;gap:12px;}
+.page-eyebrow::before{content:'';display:inline-block;width:24px;height:1px;background:var(--gold);}
+.page-hero h1{font-family:'Syne',sans-serif;font-size:clamp(36px,5vw,64px);font-weight:800;color:var(--white);letter-spacing:-1px;line-height:1.1;margin-bottom:24px;max-width:800px;}
+.page-hero h1 em{font-style:normal;color:var(--gold);}
+.page-hero p{font-size:18px;color:var(--text);line-height:1.7;max-width:600px;}
+
+.section{padding:80px 60px;border-bottom:1px solid var(--border);}
+.section.dark{background:var(--dark);}
+.section-eyebrow{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:16px;display:flex;align-items:center;gap:12px;}
+.section-eyebrow::before{content:'';display:inline-block;width:24px;height:1px;background:var(--gold);}
+.section-title{font-family:'Syne',sans-serif;font-size:clamp(24px,3vw,36px);font-weight:700;color:var(--white);letter-spacing:-0.5px;margin-bottom:48px;}
+.section-title em{font-style:normal;color:var(--gold);}
+
+/* STAT GRID */
+.stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);margin-bottom:1px;}
+.stat-card{background:var(--dark);padding:40px 32px;}
+.stat-num{font-family:'Syne',sans-serif;font-size:clamp(28px,3vw,42px);font-weight:800;color:var(--white);line-height:1;margin-bottom:8px;}
+.stat-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--mid);margin-bottom:6px;}
+.stat-note{font-size:12px;color:var(--dim);line-height:1.5;}
+
+/* FACT TABLE */
+.fact-table{width:100%;border-collapse:collapse;}
+.fact-table tr{border-bottom:1px solid var(--border);}
+.fact-table tr:last-child{border-bottom:none;}
+.fact-table td{padding:20px 0;vertical-align:top;}
+.fact-table td:first-child{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--mid);width:220px;padding-right:32px;padding-top:22px;}
+.fact-table td:last-child{font-size:15px;color:var(--text);line-height:1.6;}
+.fact-table td:last-child strong{color:var(--white);font-weight:500;}
+.fact-table td:last-child a{color:var(--gold);text-decoration:none;border-bottom:1px solid rgba(200,169,110,0.3);}
+.fact-table td:last-child a:hover{border-color:var(--gold);}
+
+/* OFFICE CARDS */
+.office-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);}
+.office-card{background:var(--dark);padding:36px 28px;}
+.office-city{font-family:'Syne',sans-serif;font-size:20px;font-weight:700;color:var(--white);margin-bottom:6px;}
+.office-type{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);opacity:0.7;margin-bottom:12px;}
+.office-addr{font-size:13px;color:var(--dim);line-height:1.7;}
+
+/* SECTOR GRID */
+.sector-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--border);}
+.sector-card{background:var(--dark);padding:28px 24px;text-align:center;}
+.sector-name{font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:var(--white);margin-bottom:6px;}
+.sector-note{font-size:12px;color:var(--dim);line-height:1.5;}
+
+/* CTA */
+.page-cta{padding:80px 60px;display:flex;align-items:center;justify-content:space-between;gap:40px;flex-wrap:wrap;}
+.page-cta h2{font-family:'Syne',sans-serif;font-size:clamp(24px,3vw,36px);font-weight:700;color:var(--white);margin-bottom:12px;}
+.page-cta p{font-size:16px;color:var(--text);max-width:500px;line-height:1.6;}
+.cta-btn{font-family:'DM Mono',monospace;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:var(--black);background:var(--gold);padding:16px 32px;text-decoration:none;white-space:nowrap;transition:background 0.2s;}
+.cta-btn:hover{background:var(--gold2);}
+
+@media(max-width:1023px){
+  .stat-grid{grid-template-columns:1fr 1fr;}
+  .office-grid{grid-template-columns:1fr 1fr;}
+  .sector-grid{grid-template-columns:1fr 1fr 1fr;}
+  .section{padding:60px 36px;}
+  .page-hero{padding:152px 36px 60px;}
+  .page-cta{padding:60px 36px;flex-direction:column;align-items:flex-start;}
+  .fact-table td:first-child{width:160px;}
+}
+@media(max-width:767px){
+  .stat-grid{grid-template-columns:1fr 1fr;}
+  .office-grid{grid-template-columns:1fr 1fr;}
+  .sector-grid{grid-template-columns:1fr 1fr;}
+  .section{padding:48px 20px;}
+  .page-hero{padding:132px 20px 48px;}
+  .page-cta{padding:48px 20px;}
+  .fact-table td:first-child{display:block;width:100%;padding-bottom:4px;padding-top:20px;}
+  .fact-table td:last-child{display:block;padding-top:0;padding-bottom:20px;}
+}
+</style>
+</head>
+<body>
+<script src="../nav-site.js"></script>
+<script src="nav-record.js"></script>
+
+<div class="page-hero">
+  <div class="page-eyebrow">The Record · The Facts</div>
+  <h1>Verified. Citable.<br><em>On the record.</em></h1>
+  <p>For journalists, procurement officers, researchers, and anyone who needs accurate, verifiable information about E-Group. Everything here is factual and sourced.</p>
+</div>
+
+<!-- KEY NUMBERS -->
+<div class="section dark">
+  <div class="section-eyebrow">Key Numbers</div>
+  <div class="section-title">The numbers that <em>matter.</em></div>
+  <div class="stat-grid">
+    <div class="stat-card">
+      <div class="stat-label">Founded</div>
+      <div class="stat-num">1993</div>
+      <div class="stat-note">Budapest, Hungary. 100% Hungarian-owned and operated.</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Professionals</div>
+      <div class="stat-num">90+</div>
+      <div class="stat-note">Plus 50+ external associates across four offices.</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Offices</div>
+      <div class="stat-num">4</div>
+      <div class="stat-note">Budapest HQ · Pécs · Miskolc · Hong Kong</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Sectors</div>
+      <div class="stat-num">5</div>
+      <div class="stat-note">FinTech · HealthTech · GovTech · SpaceTech · EnergyTech</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">MAVIR Partnership</div>
+      <div class="stat-num">25+</div>
+      <div class="stat-note">Years as trusted partner for Hungary's electricity grid.</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">FedX Biobanks</div>
+      <div class="stat-num">8</div>
+      <div class="stat-note">Active biobank clients on FedX federated learning platform.</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">HeliX Providers</div>
+      <div class="stat-num">50+</div>
+      <div class="stat-note">Healthcare providers in the HeliX health data space.</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">EU Programme</div>
+      <div class="stat-num">€1.2bn</div>
+      <div class="stat-note">IPCEI-CIS total programme value. E-Group co-leads.</div>
+    </div>
+  </div>
+</div>
+
+<!-- LEGAL & REGISTRATION -->
+<div class="section">
+  <div class="section-eyebrow">Legal &amp; Registration</div>
+  <div class="section-title">The information procurement <em>officers need.</em></div>
+  <table class="fact-table">
+    <tr>
+      <td>Legal name</td>
+      <td><strong>E-GROUP ICT SOFTWARE Informatikai Zártkörűen Működő Részvénytársaság</strong></td>
+    </tr>
+    <tr>
+      <td>Trading name</td>
+      <td><strong>E-Group ICT Software Zrt.</strong></td>
+    </tr>
+    <tr>
+      <td>Company type</td>
+      <td>Zártkörűen Működő Részvénytársaság (Zrt.) — Hungarian closed joint-stock company</td>
+    </tr>
+    <tr>
+      <td>Registration number</td>
+      <td><strong>01 10 045390 HUN</strong></td>
+    </tr>
+    <tr>
+      <td>Tax ID</td>
+      <td><strong>13665908-2-41</strong></td>
+    </tr>
+    <tr>
+      <td>EU VAT number</td>
+      <td><strong>HU13665908</strong></td>
+    </tr>
+    <tr>
+      <td>Founded</td>
+      <td>1993 · Budapest, Hungary</td>
+    </tr>
+    <tr>
+      <td>Founders</td>
+      <td>Antal Kuthy (CEO) · András Nagy (CTO)</td>
+    </tr>
+    <tr>
+      <td>Registered address</td>
+      <td>Alsó Törökvész út 2, H-1022 Budapest, Hungary</td>
+    </tr>
+    <tr>
+      <td>Website</td>
+      <td><a href="https://www.egroup.hu" target="_blank" rel="noopener">www.egroup.hu</a></td>
+    </tr>
+    <tr>
+      <td>LinkedIn</td>
+      <td><a href="https://www.linkedin.com/company/e-group-ict-group" target="_blank" rel="noopener">linkedin.com/company/e-group-ict-group</a></td>
+    </tr>
+  </table>
+</div>
+
+<!-- OFFICES -->
+<div class="section dark">
+  <div class="section-eyebrow">Offices</div>
+  <div class="section-title">Where E-Group <em>operates.</em></div>
+  <div class="office-grid">
+    <div class="office-card">
+      <div class="office-city">Budapest</div>
+      <div class="office-type">Headquarters</div>
+      <div class="office-addr">Alsó Törökvész út 2<br>H-1022 Budapest<br>Hungary</div>
+    </div>
+    <div class="office-card">
+      <div class="office-city">Pécs</div>
+      <div class="office-type">R&amp;D Office</div>
+      <div class="office-addr">Hungary</div>
+    </div>
+    <div class="office-card">
+      <div class="office-city">Miskolc</div>
+      <div class="office-type">R&amp;D Office</div>
+      <div class="office-addr">Hungary</div>
+    </div>
+    <div class="office-card">
+      <div class="office-city">Hong Kong</div>
+      <div class="office-type">Asia Office</div>
+      <div class="office-addr">E-Group Asia<br>Hong Kong SAR</div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTORS -->
+<div class="section">
+  <div class="section-eyebrow">Sectors</div>
+  <div class="section-title">Five domains. <em>Thirty years deep.</em></div>
+  <div class="sector-grid">
+    <div class="sector-card">
+      <div class="sector-name">FinTech</div>
+      <div class="sector-note">CORPEX · COIOS · Banking infrastructure</div>
+    </div>
+    <div class="sector-card">
+      <div class="sector-name">HealthTech</div>
+      <div class="sector-note">FedX · HeliX · Neonatal Intelligence · GRaDPaLM</div>
+    </div>
+    <div class="sector-card">
+      <div class="sector-name">GovTech</div>
+      <div class="sector-note">KAÜ · MyD Wallet · eIDAS 2.0</div>
+    </div>
+    <div class="sector-card">
+      <div class="sector-name">SpaceTech</div>
+      <div class="sector-note">ProofX · GENESIS · SpadaX · ESA Partnership</div>
+    </div>
+    <div class="sector-card">
+      <div class="sector-name">EnergyTech</div>
+      <div class="sector-note">MAVIR · Grid intelligence · Settlement systems</div>
+    </div>
+  </div>
+</div>
+
+<!-- EU PROGRAMMES -->
+<div class="section dark" style="border-bottom:none;">
+  <div class="section-eyebrow">EU Programmes &amp; Memberships</div>
+  <div class="section-title">Where E-Group sits <em>in the European landscape.</em></div>
+  <table class="fact-table">
+    <tr>
+      <td>IPCEI-CIS</td>
+      <td><strong>Important Project of Common European Interest — Cloud Infrastructure and Services.</strong> E-Group co-leads Workstream 3 and the AI Cluster. Antal Kuthy sits on the EU Industry Steering Board. Active since December 2023.</td>
+    </tr>
+    <tr>
+      <td>HeliX</td>
+      <td><strong>EU Health Data Space.</strong> E-Group's FedX platform validated across 8 biobanks and 50+ providers. One of Europe's largest sovereign health data ecosystems.</td>
+    </tr>
+    <tr>
+      <td>EWC / eIDAS 2.0</td>
+      <td><strong>European Digital Identity Wallet Consortium.</strong> Active member. MyD Wallet has passed all eIDAS 2.0 testbed scenarios. Positioned for EU-wide 2026 rollout.</td>
+    </tr>
+    <tr>
+      <td>EU DOME</td>
+      <td><strong>EU DOME consortium member.</strong> Details to be confirmed.</td>
+    </tr>
+    <tr>
+      <td>ESA</td>
+      <td><strong>European Space Agency partnership.</strong> Active collaboration on ProofX (Galileo OSNMA) and GENESIS (synthetic satellite imagery).</td>
+    </tr>
+    <tr>
+      <td>Kellton MoU</td>
+      <td><strong>Memorandum of Understanding — Kellton, 2025.</strong> Strategic partnership. Details to be confirmed.</td>
+    </tr>
+  </table>
+</div>
+
+<div class="page-cta">
+  <div>
+    <h2>Need something specific<br>for procurement or press?</h2>
+    <p>All information on this page is verified. If you need additional documentation, certificates, or direct contact with E-Group's team — get in touch.</p>
+  </div>
+  <a href="../index.html#contact" class="cta-btn">Get in touch →</a>
+</div>
+
+<script>
+const hamburger=document.getElementById('egroup-hamburger'),mobileMenu=document.getElementById('egroup-mobile-menu');
+if(hamburger&&mobileMenu){
+  hamburger.addEventListener('click',()=>{hamburger.classList.toggle('open');mobileMenu.classList.toggle('open');document.body.style.overflow=mobileMenu.classList.contains('open')?'hidden':'';});
+  mobileMenu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{hamburger.classList.remove('open');mobileMenu.classList.remove('open');document.body.style.overflow='';}));
+}
+</script>
+</body>
+</html>
