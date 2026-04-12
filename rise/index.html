@@ -6,931 +6,457 @@
 <title>E-Group — Intelligence Infrastructure</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-:root {
-  --black: #080808;
-  --ink: #0F0F0F;
-  --dark: #161616;
-  --panel: #1C1C1C;
-  --border: #252525;
-  --muted: #333;
-  --dim: #555;
-  --mid: #777;
-  --text: #B0B0B0;
-  --light: #D0D0D0;
-  --white: #EFEFEF;
-  --pure: #FFFFFF;
-  --gold: #C8A96E;
-  --gold2: #E8C98E;
-  --teal: #4ECDC4;
-  --red: #E85D4A;
-  --accent: #D4FF00;
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --black:#080808;--dark:#0A0A0A;--panel:#111;
+  --border:#1A1A1A;--muted:#333;--dim:#555;--mid:#777;
+  --text:#B0B0B0;--light:#D0D0D0;--white:#EFEFEF;
+  --gold:#C8A96E;--gold2:#A07840;--teal:#4ECDC4;--green:#4ADE80;
 }
-*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
-html { scroll-behavior: smooth; }
-body {
-  background: var(--black);
-  color: var(--text);
-  font-family: 'DM Sans', sans-serif;
-  font-size: 16px;
-  line-height: 1.6;
-  overflow-x: hidden;
-  cursor: none;
+html{background:var(--black);color:var(--white);font-family:'DM Sans',sans-serif;}
+body{overflow-x:hidden;}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity 0.6s ease,transform 0.6s ease;}
+.reveal.visible{opacity:1;transform:none;}
+.reveal-delay-1{transition-delay:0.1s;}
+.reveal-delay-2{transition-delay:0.2s;}
+.reveal-delay-3{transition-delay:0.3s;}
+.reveal-delay-4{transition-delay:0.4s;}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:140px 60px 80px;border-bottom:1px solid var(--border);position:relative;}
+.hero-eyebrow{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--dim);margin-bottom:40px;display:flex;gap:32px;flex-wrap:wrap;}
+.hero-eyebrow span{display:flex;align-items:center;gap:10px;}
+.hero-eyebrow span::before{content:'';display:inline-block;width:20px;height:1px;background:var(--muted);}
+.hero-headline{font-family:'Syne',sans-serif;font-size:clamp(40px,5vw,68px);font-weight:800;color:var(--white);letter-spacing:-2px;line-height:0.95;margin-bottom:32px;max-width:800px;}
+.hero-headline em{color:var(--gold);font-style:normal;display:block;}
+.hero-sub{font-size:17px;color:var(--text);line-height:1.7;max-width:520px;margin-bottom:48px;}
+.hero-sub strong{color:var(--white);}
+.hero-ctas{display:flex;align-items:center;gap:24px;flex-wrap:wrap;}
+.cta-primary{font-family:'DM Mono',monospace;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:var(--black);background:var(--gold);padding:16px 32px;text-decoration:none;transition:background 0.2s;}
+.cta-primary:hover{background:var(--gold2);}
+.cta-secondary{font-family:'DM Mono',monospace;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:var(--mid);text-decoration:none;transition:color 0.2s;}
+.cta-secondary:hover{color:var(--white);}
+
+/* LIVE STRIP */
+.live-strip{background:var(--dark);border-bottom:1px solid var(--border);padding:0 60px;display:flex;align-items:center;gap:0;overflow:hidden;height:48px;}
+.live-strip-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--green);white-space:nowrap;padding-right:24px;border-right:1px solid var(--border);margin-right:24px;display:flex;align-items:center;gap:8px;flex-shrink:0;}
+.live-dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.3;}}
+.live-ticker-wrap{overflow:hidden;flex:1;}
+.live-ticker{display:flex;white-space:nowrap;animation:liveScroll 30s linear infinite;}
+.live-ticker-item{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1px;color:var(--mid);padding:0 40px;border-right:1px solid var(--border);}
+.live-ticker-item strong{color:var(--light);}
+@keyframes liveScroll{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+
+/* TRUST */
+.trust-section{padding:64px 60px;border-bottom:1px solid var(--border);}
+.section-eyebrow{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--mid);margin-bottom:32px;}
+.trust-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);}
+.trust-card{background:var(--dark);padding:28px 32px;text-decoration:none;display:block;transition:background 0.2s;border-left:3px solid transparent;transition:background 0.2s,border-left-color 0.2s;}
+.trust-card:hover{background:var(--panel);border-left-color:var(--gold);}
+.trust-card-type{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-bottom:10px;}
+.trust-card-name{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;color:var(--white);margin-bottom:8px;letter-spacing:-0.3px;}
+.trust-card-desc{font-size:12px;color:var(--mid);line-height:1.5;}
+
+/* RECORD */
+.record-section{padding:80px 60px;border-bottom:1px solid var(--border);background:var(--dark);}
+.section-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:48px;flex-wrap:wrap;gap:20px;}
+.section-title{font-family:'Syne',sans-serif;font-size:clamp(24px,3vw,40px);font-weight:700;color:var(--white);letter-spacing:-0.5px;line-height:1.1;margin-top:8px;}
+.section-title span{color:var(--gold);}
+.section-link{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);text-decoration:none;border-bottom:1px solid rgba(200,169,110,0.3);padding-bottom:2px;white-space:nowrap;transition:border-color 0.2s;}
+.section-link:hover{border-color:var(--gold);}
+.record-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);}
+.record-card{background:var(--dark);padding:36px;text-decoration:none;display:block;border-left:3px solid transparent;transition:background 0.2s,border-left-color 0.2s;}
+.record-card:hover{background:var(--panel);border-left-color:var(--gold);}
+.rc-year{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-bottom:12px;}
+.rc-title{font-family:'Syne',sans-serif;font-size:17px;font-weight:700;color:var(--white);margin-bottom:10px;letter-spacing:-0.3px;}
+.rc-desc{font-size:13px;color:var(--text);line-height:1.6;margin-bottom:16px;}
+.rc-link{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--gold);}
+
+/* PRODUCTS */
+.products-section{padding:80px 60px;border-bottom:1px solid var(--border);}
+.products-tension{font-size:17px;color:var(--text);line-height:1.7;max-width:640px;margin-bottom:48px;}
+.products-tension strong{color:var(--white);}
+.products-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;margin-bottom:20px;padding-bottom:12px;border-bottom:1px solid var(--border);}
+.products-label.live{color:var(--green);}
+.products-label.dev{color:var(--mid);}
+.products-live{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);margin-bottom:1px;}
+.products-dev{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--border);margin-bottom:48px;}
+.product{background:var(--dark);padding:28px;transition:background 0.2s;}
+.product:hover{background:var(--panel);}
+.product-sector{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--dim);margin-bottom:8px;}
+.product-name{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;color:var(--white);margin-bottom:8px;}
+.product-desc{font-size:12px;color:var(--text);line-height:1.5;}
+.product-status{display:inline-flex;align-items:center;gap:6px;margin-top:12px;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;}
+.product-status.live{color:var(--green);}
+.product-status.dev{color:var(--muted);}
+.product-status .dot{width:5px;height:5px;border-radius:50%;}
+.product-status.live .dot{background:var(--green);}
+.product-status.dev .dot{background:var(--muted);}
+
+/* BUDAPEST */
+.budapest-section{padding:80px 60px;border-bottom:1px solid var(--border);background:var(--dark);}
+.budapest-statement{font-family:'Syne',sans-serif;font-size:clamp(20px,2.5vw,30px);font-weight:700;color:var(--white);line-height:1.3;max-width:760px;margin:16px 0 24px;letter-spacing:-0.5px;}
+.budapest-body{font-size:16px;color:var(--text);line-height:1.8;max-width:720px;margin-bottom:16px;}
+.budapest-body strong{color:var(--white);}
+.budapest-cta{display:inline-block;margin-top:8px;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);text-decoration:none;border-bottom:1px solid rgba(200,169,110,0.3);padding-bottom:2px;}
+.ticker-wrap{overflow:hidden;position:relative;margin-top:40px;border-top:1px solid var(--border);padding-top:32px;}
+.ticker-wrap::before,.ticker-wrap::after{content:'';position:absolute;top:32px;bottom:0;width:80px;z-index:2;}
+.ticker-wrap::before{left:0;background:linear-gradient(to right,var(--dark),transparent);}
+.ticker-wrap::after{right:0;background:linear-gradient(to left,var(--dark),transparent);}
+.ticker{display:flex;white-space:nowrap;animation:tickerScroll 40s linear infinite;}
+.ticker span{font-family:'Syne',sans-serif;font-size:15px;font-weight:600;color:var(--white);padding:0 32px;border-right:1px solid var(--border);}
+.ticker span em{color:var(--gold);font-style:normal;font-weight:400;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:1px;}
+@keyframes tickerScroll{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+
+/* CONTACT */
+.contact-section{padding:80px 60px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;}
+.contact-title{font-family:'Syne',sans-serif;font-size:clamp(26px,3vw,42px);font-weight:800;color:var(--white);letter-spacing:-1px;line-height:1.0;margin:12px 0 20px;}
+.contact-title span{color:var(--gold);}
+.contact-sub{font-size:16px;color:var(--text);line-height:1.7;margin-bottom:32px;}
+.contact-details{display:flex;flex-direction:column;gap:6px;margin-bottom:32px;}
+.contact-detail{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:1px;color:var(--dim);}
+.form{display:flex;flex-direction:column;gap:16px;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.form-field{display:flex;flex-direction:column;gap:8px;}
+.form-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--mid);}
+.form-input,.form-select,.form-textarea{background:var(--dark);border:1px solid var(--border);color:var(--white);font-family:'DM Sans',sans-serif;font-size:14px;padding:12px 16px;outline:none;transition:border-color 0.2s;width:100%;}
+.form-input:focus,.form-select:focus,.form-textarea:focus{border-color:var(--gold);}
+.form-select{appearance:none;cursor:pointer;}
+.form-textarea{resize:vertical;min-height:100px;}
+.form-submit{font-family:'DM Mono',monospace;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:var(--black);background:var(--gold);border:none;padding:16px 32px;cursor:pointer;width:100%;text-align:left;transition:background 0.2s;}
+.form-submit:hover{background:var(--gold2);}
+
+@media(max-width:1023px){
+  .trust-grid{grid-template-columns:1fr 1fr;}
+  .record-grid{grid-template-columns:1fr 1fr;}
+  .products-live{grid-template-columns:1fr 1fr;}
+  .products-dev{grid-template-columns:1fr 1fr 1fr;}
+  .contact-section{grid-template-columns:1fr;}
 }
-
-/* ── CUSTOM CURSOR ── */
-.cursor { position:fixed; width:8px; height:8px; background:var(--gold); border-radius:50%; pointer-events:none; z-index:9999; transform:translate(-50%,-50%); transition:transform 0.1s,background 0.2s; mix-blend-mode:difference; }
-.cursor-ring { position:fixed; width:32px; height:32px; border:1px solid rgba(200,169,110,0.4); border-radius:50%; pointer-events:none; z-index:9998; transform:translate(-50%,-50%); transition:all 0.15s ease; }
-body:has(a:hover) .cursor-ring, body:has(button:hover) .cursor-ring { width:48px; height:48px; border-color:var(--gold); }
-
-/* ── GRAIN OVERLAY ── */
-body::before { content:''; position:fixed; inset:0; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E"); opacity:0.025; pointer-events:none; z-index:1000; }
-
-/* ── NAV ── */
-nav { position:fixed; top:0; left:0; right:0; z-index:100; padding:28px 60px; display:flex; align-items:center; justify-content:space-between; background:linear-gradient(to bottom,rgba(8,8,8,0.97),rgba(8,8,8,0.6) 70%,transparent); backdrop-filter:blur(8px); }
-.nav-logo { display:flex; align-items:center; gap:14px; text-decoration:none; }
-.logo-e { font-family:'Syne',sans-serif; font-weight:800; font-size:26px; color:var(--gold); line-height:1; letter-spacing:-1px; }
-.nav-logo-text { font-family:'Syne',sans-serif; font-weight:600; font-size:15px; color:var(--white); letter-spacing:3px; text-transform:uppercase; }
-.nav-links { display:flex; align-items:center; gap:40px; list-style:none; }
-.nav-links a { font-family:'DM Mono',monospace; font-size:12px; color:var(--mid); text-decoration:none; letter-spacing:1.5px; text-transform:uppercase; transition:color 0.2s; position:relative; }
-.nav-links a::after { content:''; position:absolute; bottom:-3px; left:0; right:0; height:1px; background:var(--gold); transform:scaleX(0); transition:transform 0.2s; }
-.nav-links a:hover, .nav-links a.active { color:var(--white); }
-.nav-links a.active::after, .nav-links a:hover::after { transform:scaleX(1); }
-.nav-cta { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--gold); border:1px solid rgba(200,169,110,0.35); padding:10px 22px; text-decoration:none; transition:all 0.2s; position:relative; overflow:hidden; }
-.nav-cta::before { content:''; position:absolute; inset:0; background:var(--gold); transform:translateX(-100%); transition:transform 0.25s ease; z-index:-1; }
-.nav-cta:hover { color:var(--black); }
-.nav-cta:hover::before { transform:translateX(0); }
-/* ── DROPDOWN ── */
-.nav-dropdown { position:relative; }
-.nav-drop-menu { display:none; position:absolute; top:calc(100% + 16px); right:0; min-width:240px; background:#0F0F0F; border:1px solid #252525; border-top:2px solid var(--gold); z-index:500; }
-.nav-dropdown:hover .nav-drop-menu { display:block; }
-.nav-drop-label { display:block; padding:8px 18px 4px; font-family:'DM Mono',monospace; font-size:8px; letter-spacing:2.5px; text-transform:uppercase; color:#444; border-bottom:1px solid #1a1a1a; }
-.nav-drop-item { display:block; padding:10px 18px; font-family:'DM Mono',monospace; font-size:10px; letter-spacing:1.5px; text-transform:uppercase; color:#666; text-decoration:none; border-bottom:1px solid #1a1a1a; white-space:nowrap; transition:color 0.15s, padding-left 0.15s; }
-.nav-drop-item:last-child { border-bottom:none; }
-.nav-drop-item:hover { color:var(--gold); padding-left:24px; }
-.nav-drop-item::after { display:none !important; }
-/* ── HAMBURGER ── */
-.nav-hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; padding:4px; background:none; border:none; z-index:200; }
-.nav-hamburger span { display:block; width:22px; height:1.5px; background:var(--gold); transition:all 0.3s ease; transform-origin:center; }
-.nav-hamburger.open span:nth-child(1) { transform:translateY(6.5px) rotate(45deg); }
-.nav-hamburger.open span:nth-child(2) { opacity:0; transform:scaleX(0); }
-.nav-hamburger.open span:nth-child(3) { transform:translateY(-6.5px) rotate(-45deg); }
-/* ── MOBILE MENU ── */
-.nav-mobile-menu { display:none; position:fixed; inset:0; background:rgba(8,8,8,0.98); z-index:150; flex-direction:column; align-items:center; justify-content:flex-start; overflow-y:auto; padding:80px 0 40px; backdrop-filter:blur(20px); }
-.nav-mobile-menu.open { display:flex; }
-.nav-mobile-menu a { text-decoration:none; border-bottom:none; }
-.nav-mobile-menu a::after { display:none; }
-.mob-main { font-family:'Syne',sans-serif !important; font-weight:800 !important; font-size:clamp(26px,7vw,40px) !important; color:var(--white) !important; letter-spacing:-0.5px !important; padding:9px 0 !important; width:80%; text-align:center; transition:color 0.2s; display:block; }
-.mob-main:hover { color:var(--gold) !important; }
-.mob-divider { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:3px; text-transform:uppercase; color:var(--dim); padding:20px 0 6px; width:80%; border-bottom:1px solid var(--border); text-align:center; margin-bottom:4px; }
-.mob-record { font-family:'DM Mono',monospace !important; font-size:11px !important; letter-spacing:1.5px !important; text-transform:uppercase !important; color:var(--mid) !important; padding:7px 0 !important; width:80%; text-align:center; transition:color 0.2s; display:block; }
-.mob-record:hover, .mob-record.active { color:var(--gold) !important; }
-.mob-cta { font-family:'DM Mono',monospace !important; font-size:12px !important; letter-spacing:2px !important; text-transform:uppercase !important; color:var(--black) !important; background:var(--gold) !important; padding:14px 36px !important; margin-top:20px !important; display:block; }
-.nav-has-dropdown { position: relative; }
-.nav-has-dropdown .nav-dropdown { display: none; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); background: #0A0A0A; border: 1px solid #1E1E1E; border-radius: 6px; min-width: 220px; padding: 6px 0; z-index: 500; box-shadow: 0 8px 32px rgba(0,0,0,0.5); list-style: none; }
-.nav-has-dropdown { padding-bottom: 12px; }
-.nav-has-dropdown .nav-dropdown li a { display: block; padding: 9px 18px; font-size: 12px; color: #888; text-decoration: none; white-space: nowrap; letter-spacing: 0.04em; transition: color 0.15s, background 0.15s; }
-.nav-has-dropdown .nav-dropdown li a:hover { color: #EEE; background: #141414; }
-.nav-has-dropdown .nav-dropdown li:first-child a { color: #C8A96E; }
-.nav-has-dropdown .nav-dropdown li:first-child { border-bottom: 1px solid #1E1E1E; margin-bottom: 4px; }
-@media (max-width:1023px) { nav { padding:20px 36px; } .nav-links { gap:24px; } }
-@media (max-width:767px) { .nav-links, .nav-cta { display:none; } .nav-hamburger { display:flex; } nav { padding:16px 20px; } }
-
-/* ── HERO ── */
-.hero { min-height:100vh; display:flex; flex-direction:column; justify-content:center; padding:120px 60px 80px; position:relative; overflow:hidden; }
-.hero-grid { position:absolute; inset:0; background-image:linear-gradient(rgba(200,169,110,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(200,169,110,0.04) 1px,transparent 1px); background-size:80px 80px; mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 30%,transparent 100%); }
-.hero-glow { position:absolute; top:-20%; left:50%; transform:translateX(-50%); width:900px; height:600px; background:radial-gradient(ellipse,rgba(200,169,110,0.06) 0%,transparent 65%); pointer-events:none; }
-.hero-glow-2 { position:absolute; bottom:0; right:-10%; width:600px; height:600px; background:radial-gradient(ellipse,rgba(78,205,196,0.04) 0%,transparent 65%); pointer-events:none; }
-.hero-data { position:absolute; top:140px; right:60px; display:flex; flex-direction:column; gap:8px; opacity:0; animation:fadeInRight 1.2s ease 1.4s forwards; }
-.data-line { font-family:'DM Mono',monospace; font-size:11px; color:var(--mid); letter-spacing:1px; display:flex; align-items:center; gap:10px; }
-.data-line::before { content:''; display:inline-block; width:20px; height:1px; background:var(--gold); opacity:0.4; }
-.data-line .val { color:var(--gold); opacity:0.7; }
-.hero-content { position:relative; z-index:2; max-width:900px; }
-.hero-eyebrow { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:3px; text-transform:uppercase; color:var(--gold); margin-bottom:28px; opacity:0; animation:fadeInUp 0.8s ease 0.3s forwards; display:flex; align-items:center; gap:14px; }
-.hero-eyebrow::before { content:''; display:inline-block; width:32px; height:1px; background:var(--gold); }
-.hero-headline { font-family:'Syne',sans-serif; font-weight:800; font-size:clamp(52px,7vw,96px); line-height:0.95; letter-spacing:-3px; color:var(--white); margin-bottom:32px; opacity:0; animation:fadeInUp 0.8s ease 0.5s forwards; }
-.hero-headline .gold { color:var(--gold); -webkit-text-stroke:0; }
-.hero-sub { font-size:18px; font-weight:300; color:var(--mid); max-width:560px; line-height:1.7; margin-bottom:48px; opacity:0; animation:fadeInUp 0.8s ease 0.7s forwards; }
-.hero-sub strong { color:var(--light); font-weight:400; }
-.hero-actions { display:flex; align-items:center; gap:28px; opacity:0; animation:fadeInUp 0.8s ease 0.9s forwards; }
-.btn-primary { font-family:'DM Mono',monospace; font-size:12px; letter-spacing:2px; text-transform:uppercase; color:var(--black); background:var(--gold); padding:16px 36px; text-decoration:none; transition:all 0.2s; position:relative; overflow:hidden; display:inline-flex; align-items:center; gap:10px; }
-.btn-primary:hover { background:var(--gold2); }
-.btn-primary .arr { transition:transform 0.2s; }
-.btn-primary:hover .arr { transform:translateX(4px); }
-.btn-secondary { font-family:'DM Mono',monospace; font-size:12px; letter-spacing:2px; text-transform:uppercase; color:var(--mid); text-decoration:none; transition:color 0.2s; display:flex; align-items:center; gap:8px; }
-.btn-secondary:hover { color:var(--white); }
-.scroll-indicator { position:absolute; bottom:40px; right:60px; display:flex; flex-direction:column; align-items:center; gap:8px; opacity:0; animation:fadeIn 1s ease 1.8s forwards; }
-.scroll-line { width:1px; height:60px; background:linear-gradient(to bottom,transparent,var(--gold)); animation:scrollPulse 2s ease-in-out infinite; }
-.scroll-text { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:2px; text-transform:uppercase; color:var(--dim); writing-mode:vertical-rl; }
-
-/* ── TICKER ── */
-.ticker-wrap { border-top:1px solid var(--border); border-bottom:1px solid var(--border); background:var(--ink); padding:14px 0; overflow:hidden; position:relative; }
-.ticker-wrap::before,.ticker-wrap::after { content:''; position:absolute; top:0; bottom:0; width:80px; z-index:2; }
-.ticker-wrap::before { left:0; background:linear-gradient(to right,var(--ink),transparent); }
-.ticker-wrap::after { right:0; background:linear-gradient(to left,var(--ink),transparent); }
-.ticker { display:flex; animation:ticker 40s linear infinite; white-space:nowrap; }
-.ticker-item { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--dim); padding:0 40px; display:flex; align-items:center; gap:40px; flex-shrink:0; }
-.ticker-item span { color:var(--gold); opacity:0.5; }
-
-/* ── STATS ── */
-.stats { display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--border); border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
-.stat { background:var(--ink); padding:50px 40px; position:relative; overflow:hidden; transition:background 0.3s; }
-.stat::before { content:''; position:absolute; bottom:0; left:0; width:100%; height:2px; background:var(--gold); transform:scaleX(0); transform-origin:left; transition:transform 0.4s ease; }
-.stat:hover { background:var(--dark); }
-.stat:hover::before { transform:scaleX(1); }
-.stat-num { font-family:'Syne',sans-serif; font-weight:800; font-size:56px; color:var(--white); letter-spacing:-2px; line-height:1; margin-bottom:8px; }
-.stat-num .unit { font-size:28px; color:var(--gold); }
-.stat-label { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--dim); line-height:1.5; }
-
-/* ── SECTION TEMPLATE ── */
-section { padding:120px 60px; }
-.section-eyebrow { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:3px; text-transform:uppercase; color:var(--gold); margin-bottom:20px; display:flex; align-items:center; gap:14px; }
-.section-eyebrow::before { content:''; display:inline-block; width:24px; height:1px; background:var(--gold); }
-.section-title { font-family:'Syne',sans-serif; font-weight:800; font-size:clamp(36px,4vw,56px); color:var(--white); letter-spacing:-1.5px; line-height:1.05; margin-bottom:24px; }
-.section-body { font-size:17px; font-weight:300; color:var(--mid); line-height:1.8; max-width:580px; }
-
-/* ── ACT 1: THESIS ── */
-.thesis { padding:120px 60px; background:var(--ink); border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
-.thesis-statement { font-family:'Syne',sans-serif; font-weight:800; font-size:clamp(28px,3.5vw,48px); color:var(--white); letter-spacing:-1.5px; line-height:1.1; max-width:820px; margin-bottom:20px; }
-.thesis-statement em { font-style:normal; color:var(--gold); }
-.thesis-sub { font-size:17px; font-weight:300; color:var(--mid); max-width:600px; line-height:1.8; margin-bottom:72px; }
-.thesis-cards { display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--border); }
-.thesis-card { background:var(--dark); padding:56px 48px; position:relative; overflow:hidden; text-decoration:none; display:block; transition:background 0.3s; }
-.thesis-card::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; transition:opacity 0.3s; opacity:0; }
-.thesis-card.card-rise::before { background:linear-gradient(to right,var(--gold),var(--gold2)); }
-.thesis-card.card-intel::before { background:linear-gradient(to right,var(--teal),rgba(78,205,196,0.3)); }
-.thesis-card:hover { background:var(--panel); }
-.thesis-card:hover::before { opacity:1; }
-.card-status { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2px; text-transform:uppercase; padding:5px 12px; border:1px solid; display:inline-flex; align-items:center; gap:6px; margin-bottom:32px; }
-.card-status.status-pilot { color:var(--gold); border-color:rgba(200,169,110,0.3); }
-.card-status.status-new { color:var(--teal); border-color:rgba(78,205,196,0.3); }
-.card-status .dot { width:5px; height:5px; border-radius:50%; background:currentColor; animation:pulse 2s ease-in-out infinite; }
-.card-title { font-family:'Syne',sans-serif; font-weight:800; font-size:clamp(28px,2.5vw,40px); color:var(--white); letter-spacing:-1px; line-height:1; margin-bottom:16px; }
-.card-desc { font-size:15px; color:var(--mid); line-height:1.7; max-width:380px; margin-bottom:36px; }
-.card-link { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:2px; text-transform:uppercase; display:inline-flex; align-items:center; gap:8px; transition:gap 0.2s; }
-.thesis-card.card-rise .card-link { color:var(--gold); }
-.thesis-card.card-intel .card-link { color:var(--teal); }
-.thesis-card:hover .card-link { gap:14px; }
-
-/* ── ACT 2: PROOF ── */
-.proof { padding:120px 60px; background:var(--black); }
-.proof-inner { display:grid; grid-template-columns:1fr 1fr; gap:100px; align-items:start; }
-.proof-left { }
-.proof-right { }
-.proof-timeline { display:flex; flex-direction:column; gap:0; margin-top:48px; }
-.proof-item { display:grid; grid-template-columns:80px 1fr; gap:24px; padding:28px 0; border-bottom:1px solid var(--border); position:relative; transition:background 0.2s; }
-.proof-item:first-child { border-top:1px solid var(--border); }
-.proof-year { font-family:'DM Mono',monospace; font-size:12px; color:var(--gold); opacity:1; letter-spacing:1px; padding-top:2px; font-weight:600; }
-.proof-content { }
-.proof-headline { font-family:'Syne',sans-serif; font-weight:700; font-size:17px; color:var(--white); letter-spacing:-0.3px; margin-bottom:8px; }
-.proof-detail { font-size:13px; color:var(--text); line-height:1.6; }
-.proof-visual { background:var(--panel); border:1px solid var(--border); padding:48px; position:relative; }
-.proof-visual::before { content:''; position:absolute; top:-1px; left:40px; right:40px; height:2px; background:linear-gradient(to right,transparent,var(--gold),transparent); }
-.proof-quote { font-family:'Syne',sans-serif; font-size:22px; font-weight:600; color:var(--white); line-height:1.4; margin-bottom:24px; letter-spacing:-0.5px; }
-.proof-quote em { color:var(--gold); font-style:normal; }
-.proof-attr { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--dim); }
-.about-tags { display:flex; flex-wrap:wrap; gap:8px; margin-top:36px; }
-.tag { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:1.5px; text-transform:uppercase; color:var(--dim); border:1px solid var(--border); padding:6px 14px; transition:all 0.2s; }
-.tag:hover { color:var(--gold); border-color:rgba(200,169,110,0.35); }
-
-/* ── ACT 3: PULSE ── */
-.pulse-section { background:var(--ink); border-top:1px solid var(--border); border-bottom:1px solid var(--border); padding:100px 60px; }
-.pulse-header { display:flex; align-items:flex-end; justify-content:space-between; margin-bottom:56px; }
-.pulse-header-left { }
-.pulse-eyebrow { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:3px; text-transform:uppercase; color:var(--gold); margin-bottom:16px; display:flex; align-items:center; gap:10px; }
-.pulse-dot { width:6px; height:6px; border-radius:50%; background:var(--gold); animation:pulse 1.5s ease-in-out infinite; }
-.pulse-title { font-family:'Syne',sans-serif; font-weight:800; font-size:clamp(28px,3vw,42px); color:var(--white); letter-spacing:-1px; line-height:1.05; }
-.pulse-link { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--gold); text-decoration:none; display:flex; align-items:center; gap:8px; opacity:0.7; transition:opacity 0.2s; border-bottom:1px solid rgba(200,169,110,0.2); padding-bottom:2px; }
-.pulse-link:hover { opacity:1; }
-.pulse-feed { display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:1px; background:var(--border); }
-.pulse-card { background:var(--dark); padding:36px 32px; position:relative; overflow:hidden; text-decoration:none; display:block; transition:background 0.3s; }
-.pulse-card:hover { background:var(--panel); }
-.pulse-card.card-large { grid-row:span 2; padding:48px 40px; }
-.content-type { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:2.5px; text-transform:uppercase; padding:4px 10px; margin-bottom:20px; display:inline-block; }
-.type-deep { color:#9B8FFF; background:rgba(155,143,255,0.08); border:1px solid rgba(155,143,255,0.15); }
-.type-signal { color:var(--gold); background:rgba(200,169,110,0.08); border:1px solid rgba(200,169,110,0.15); }
-.type-room { color:var(--teal); background:rgba(78,205,196,0.08); border:1px solid rgba(78,205,196,0.15); }
-.pulse-card-title { font-family:'Syne',sans-serif; font-weight:700; color:var(--white); letter-spacing:-0.3px; line-height:1.2; margin-bottom:10px; }
-.card-large .pulse-card-title { font-size:22px; margin-bottom:14px; }
-.pulse-card:not(.card-large) .pulse-card-title { font-size:16px; }
-.pulse-card-excerpt { font-size:13px; color:var(--dim); line-height:1.6; }
-.card-large .pulse-card-excerpt { font-size:15px; color:var(--mid); }
-.pulse-card-meta { display:flex; align-items:center; justify-content:space-between; margin-top:24px; }
-.card-large .pulse-card-meta { margin-top:32px; }
-.pulse-meta-author { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:1px; color:var(--dim); }
-.pulse-meta-date { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:1px; color:var(--gold); opacity:0.6; }
-.sector-tag { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:1.5px; text-transform:uppercase; color:var(--dim); margin-top:8px; }
-.pulse-subscribe { margin-top:48px; display:flex; align-items:center; gap:0; max-width:440px; }
-.pulse-subscribe input { flex:1; background:var(--dark); border:1px solid var(--border); border-right:none; color:var(--white); padding:13px 18px; font-family:'DM Sans',sans-serif; font-size:14px; outline:none; transition:border-color 0.2s; }
-.pulse-subscribe input:focus { border-color:rgba(200,169,110,0.3); }
-.pulse-subscribe button { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--black); background:var(--gold); border:none; padding:13px 24px; cursor:pointer; white-space:nowrap; transition:background 0.2s; }
-.pulse-subscribe button:hover { background:var(--gold2); }
-.pulse-subscribe-label { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--dim); margin-bottom:12px; }
-
-/* ── ABOUT ── */
-.about { display:grid; grid-template-columns:1fr 1fr; gap:120px; align-items:center; }
-.about-visual { background:var(--panel); border:1px solid var(--border); padding:48px; position:relative; }
-.about-visual::before { content:''; position:absolute; top:-1px; left:40px; right:40px; height:2px; background:linear-gradient(to right,transparent,var(--gold),transparent); }
-.about-quote { font-family:'Syne',sans-serif; font-size:22px; font-weight:600; color:var(--white); line-height:1.4; margin-bottom:24px; letter-spacing:-0.5px; }
-.about-quote em { color:var(--gold); font-style:normal; }
-.about-attr { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--dim); }
-
-/* ── WHAT WE BUILD ── */
-.build-section { background:var(--ink); border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
-.build-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--border); margin-top:60px; }
-.build-card { background:var(--dark); padding:48px 40px; position:relative; overflow:hidden; transition:background 0.3s; }
-.build-card::after { content:''; position:absolute; top:0; left:0; width:100%; height:100%; background:radial-gradient(circle at 0% 100%,rgba(200,169,110,0.05),transparent 60%); opacity:0; transition:opacity 0.4s; }
-.build-card:hover { background:var(--panel); }
-.build-card:hover::after { opacity:1; }
-.build-num { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:2px; color:var(--gold); opacity:0.6; margin-bottom:24px; }
-.build-icon { font-size:28px; margin-bottom:20px; }
-.build-title { font-family:'Syne',sans-serif; font-weight:700; font-size:22px; color:var(--white); letter-spacing:-0.5px; margin-bottom:14px; line-height:1.2; }
-.build-desc { font-size:14px; color:var(--dim); line-height:1.7; }
-
-/* ── SECTORS ── */
-.sectors-grid { display:grid; grid-template-columns:repeat(5,1fr); gap:1px; background:var(--border); margin-top:60px; }
-.sector { background:var(--ink); padding:40px 28px; text-align:center; transition:background 0.3s; cursor:default; position:relative; overflow:hidden; }
-.sector::before { content:''; position:absolute; bottom:0; left:0; right:0; height:2px; background:var(--gold); transform:scaleX(0); transition:transform 0.3s; }
-.sector:hover { background:var(--dark); }
-.sector:hover::before { transform:scaleX(1); }
-.sector-icon { font-size:32px; margin-bottom:16px; display:block; transition:transform 0.3s; }
-.sector:hover .sector-icon { transform:scale(1.1) translateY(-2px); }
-.sector-name { font-family:'Syne',sans-serif; font-weight:700; font-size:13px; color:var(--light); letter-spacing:0.5px; }
-
-/* ── MISSION ── */
-.mission { background:var(--black); text-align:center; padding:140px 60px; position:relative; overflow:hidden; }
-.mission::before { content:''; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:800px; height:400px; background:radial-gradient(ellipse,rgba(200,169,110,0.05) 0%,transparent 65%); }
-.mission-text { font-family:'Syne',sans-serif; font-weight:800; font-size:clamp(32px,4vw,52px); color:var(--white); letter-spacing:-1.5px; line-height:1.15; max-width:820px; margin:0 auto 24px; position:relative; }
-.mission-text em { font-style:normal; color:var(--gold); }
-.mission-sub { font-size:16px; font-weight:300; color:var(--dim); max-width:500px; margin:0 auto; }
-
-/* ── CONTACT ── */
-.contact { background:var(--ink); border-top:1px solid var(--border); }
-.contact-inner { display:grid; grid-template-columns:1fr 1fr; gap:100px; align-items:start; }
-.contact-info { padding-top:8px; }
-.contact-detail { display:flex; flex-direction:column; gap:4px; padding:20px 0; border-bottom:1px solid var(--border); }
-.contact-detail:first-child { border-top:1px solid var(--border); }
-.contact-detail-label { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--dim); }
-.contact-detail-value { font-size:15px; color:var(--light); }
-.contact-form { display:flex; flex-direction:column; gap:16px; }
-.form-group { display:flex; flex-direction:column; gap:6px; }
-.form-label { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--dim); }
-.form-input,.form-select,.form-textarea { background:var(--dark); border:1px solid var(--border); color:var(--white); padding:14px 16px; font-family:'DM Sans',sans-serif; font-size:14px; outline:none; transition:border-color 0.2s; width:100%; appearance:none; }
-.form-input:focus,.form-select:focus,.form-textarea:focus { border-color:rgba(200,169,110,0.4); }
-.form-textarea { resize:vertical; min-height:100px; }
-.form-select { background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23555' stroke-width='1.5' fill='none'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right 16px center; cursor:pointer; }
-.form-select option { background:var(--dark); }
-.form-submit { font-family:'DM Mono',monospace; font-size:12px; letter-spacing:2px; text-transform:uppercase; color:var(--black); background:var(--gold); border:none; padding:16px 36px; cursor:pointer; transition:background 0.2s; align-self:flex-start; }
-.form-submit:hover { background:var(--gold2); }
-
-/* ── FOOTER ── */
-footer { background:var(--black); border-top:1px solid var(--border); padding:48px 60px; display:flex; justify-content:space-between; align-items:center; }
-.footer-left { display:flex; flex-direction:column; gap:6px; }
-.footer-logo { font-family:'Syne',sans-serif; font-weight:800; font-size:16px; color:var(--white); letter-spacing:3px; text-transform:uppercase; }
-.footer-logo span { color:var(--gold); }
-.footer-tagline { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--dim); }
-.footer-statement { font-family:'Syne',sans-serif; font-size:14px; color:var(--mid); max-width:420px; text-align:center; line-height:1.6; }
-.footer-statement em { color:var(--gold); font-style:normal; }
-.footer-right { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:1.5px; color:var(--dim); text-align:right; line-height:1.8; }
-
-/* ── ANIMATIONS ── */
-@keyframes fadeInUp { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:translateY(0); } }
-@keyframes fadeInRight { from { opacity:0; transform:translateX(24px); } to { opacity:1; transform:translateX(0); } }
-@keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
-@keyframes ticker { from { transform:translateX(0); } to { transform:translateX(-50%); } }
-@keyframes scrollPulse { 0%,100% { opacity:0.3; transform:scaleY(1); } 50% { opacity:0.8; transform:scaleY(1.1); } }
-@keyframes pulse { 0%,100% { opacity:0.4; transform:scale(1); } 50% { opacity:1; transform:scale(1.3); } }
-.reveal { opacity:0; transform:translateY(30px); transition:opacity 0.7s ease,transform 0.7s ease; }
-.reveal.visible { opacity:1; transform:translateY(0); }
-.reveal-delay-1 { transition-delay:0.1s; }
-.reveal-delay-2 { transition-delay:0.2s; }
-.reveal-delay-3 { transition-delay:0.3s; }
-.reveal-delay-4 { transition-delay:0.4s; }
-.reveal-delay-5 { transition-delay:0.5s; }
-
-/* ── MOBILE ── */
-@media (max-width:768px) {
-  .cursor,.cursor-ring { display:none; }
-  body { cursor:auto; }
-  nav { padding:20px 24px; flex-wrap:wrap; gap:16px; }
-  .nav-links { display:none; }
-  .nav-cta { font-size:10px; padding:8px 16px; }
-  .hero { padding:0 24px 60px; min-height:auto; padding-top:120px; }
-  .hero-data { display:none; }
-  .hero-headline { letter-spacing:-1.5px; }
-  .hero-sub { font-size:16px; }
-  .hero-actions { flex-direction:column; align-items:flex-start; gap:16px; }
-  .scroll-indicator { display:none; }
-  .stats { grid-template-columns:1fr 1fr; }
-  .stat { padding:32px 24px; }
-  .stat-num { font-size:40px; }
-  section { padding:72px 24px; }
-  .thesis { padding:72px 24px; }
-  .thesis-cards { grid-template-columns:1fr; }
-  .proof { padding:72px 24px; }
-  .proof-inner { grid-template-columns:1fr; gap:48px; }
-  .pulse-section { padding:72px 24px; }
-  .pulse-header { flex-direction:column; align-items:flex-start; gap:20px; }
-  .pulse-feed { grid-template-columns:1fr; }
-  .pulse-card.card-large { grid-row:span 1; }
-  .about { grid-template-columns:1fr; gap:48px; }
-  .build-grid { grid-template-columns:1fr; }
-  .build-card { padding:36px 28px; }
-  .sectors-grid { grid-template-columns:1fr 1fr; }
-  .sector:last-child { grid-column:span 2; }
-  .mission { padding:80px 24px; }
-  .contact-inner { grid-template-columns:1fr; gap:48px; }
-  footer { flex-direction:column; gap:20px; text-align:center; padding:40px 24px; }
-  .footer-right { text-align:center; }
-  .footer-statement { text-align:center; }
-  .ticker-item { padding:0 24px; gap:24px; }
+@media(max-width:768px){
+  .hero{padding:120px 24px 60px;min-height:auto;}
+  .trust-section,.record-section,.products-section,.budapest-section{padding:56px 24px;}
+  .trust-grid{grid-template-columns:1fr;}
+  .record-grid{grid-template-columns:1fr;}
+  .products-live{grid-template-columns:1fr 1fr;}
+  .products-dev{grid-template-columns:1fr 1fr;}
+  .contact-section{padding:56px 24px;grid-template-columns:1fr;gap:40px;}
+  .form-row{grid-template-columns:1fr;}
+  .live-strip{padding:0 24px;}
+  .hero-eyebrow{gap:16px;}
 }
-@media (max-width:480px) {
-  .stats { grid-template-columns:1fr; }
-  nav { padding:16px 20px; }
-  section { padding:60px 20px; }
-  .thesis,.proof,.pulse-section { padding:60px 20px; }
-  .hero { padding:0 20px 60px; }
-  .about-visual { padding:28px 24px; }
-  .pulse-subscribe { flex-direction:column; }
-  .pulse-subscribe input { border-right:1px solid var(--border); border-bottom:none; }
-}
-.card-fedx::before { background:linear-gradient(to right,#4ECDC4,rgba(78,205,196,0.3)); }
-.card-kau::before { background:linear-gradient(to right,var(--gold),var(--gold2)); }
-.card-corpex::before { background:linear-gradient(to right,#818CF8,rgba(129,140,248,0.3)); }
-.card-proofx::before { background:linear-gradient(to right,#E24B4A,rgba(226,75,74,0.3)); }
-.card-status.status-live { color:#4ADE80; border-color:rgba(74,222,128,0.3); }
-.card-status.status-coming { color:#888; border-color:rgba(136,136,136,0.3); }
-.coming-section { padding:100px 60px; background:var(--dark); }
-.coming-cards { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--border); margin-top:60px; }
-.coming-card { background:var(--dark); padding:48px 40px; border-top:2px solid var(--border); transition:border-color 0.3s; }
-.coming-card:hover { border-top-color:var(--gold); background:var(--panel); }
-.coming-tag { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--mid); margin-bottom:20px; }
-.coming-name { font-family:'Syne',sans-serif; font-size:22px; font-weight:700; color:var(--white); margin-bottom:16px; letter-spacing:-0.3px; }
-.coming-desc { font-size:14px; color:var(--dim); line-height:1.7; }
-@media (max-width:768px) { .coming-cards { grid-template-columns:1fr; } .coming-section { padding:72px 24px; } }
-.credentials-section { background:#050505; border-top:1px solid var(--border); }
-.credentials-block { padding:40px 60px; border-bottom:none; }
-.credentials-programmes { background:#080808; border-top:1px solid var(--border); }
-.credentials-eyebrow { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:3px; text-transform:uppercase; color:var(--mid); margin-bottom:24px; }
-.credentials-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:0; border-top:1px solid var(--border); border-left:1px solid var(--border); }
-.credential-card { padding:36px 32px; border-right:1px solid var(--border); border-bottom:1px solid var(--border); border-left:2px solid transparent; transition:background 0.2s,border-left-color 0.2s; }
-.credential-card:hover { background:var(--panel); border-left-color:var(--gold); }
-.credential-name { font-family:'Syne',sans-serif; font-size:18px; font-weight:700; color:var(--white); letter-spacing:-0.3px; margin-bottom:12px; }
-.credential-role { font-size:13px; color:var(--text); line-height:1.6; margin-bottom:10px; }
-.credential-stat { font-family:'DM Mono',monospace; font-size:10px; color:var(--gold); letter-spacing:0.5px; opacity:0.8; }
-@media (max-width:1023px) { .credentials-grid { grid-template-columns:repeat(2,1fr); } }
-@media (max-width:768px) { .credentials-block { padding:40px 24px; } .credentials-grid { grid-template-columns:1fr; } .credential-card { padding:28px 0; border-right:none; } }
-
-.fived-section { padding:80px 60px; border-top:1px solid var(--border); border-bottom:1px solid var(--border); background:var(--dark); }
-.fived-inner { display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:start; }
-.fived-eyebrow { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:3px; text-transform:uppercase; color:var(--mid); margin-bottom:20px; }
-.fived-title { font-family:'Syne',sans-serif; font-size:clamp(24px,3vw,40px); font-weight:700; color:var(--white); letter-spacing:-0.5px; margin-bottom:24px; line-height:1.1; }
-.fived-desc { font-size:15px; color:var(--text); line-height:1.7; margin-bottom:16px; }
-.fived-product { padding:40px; border:1px solid var(--border); border-left:3px solid var(--gold); background:var(--panel); }
-.fived-product-tag { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--gold); margin-bottom:16px; }
-.fived-product-name { font-family:'Syne',sans-serif; font-size:36px; font-weight:800; color:var(--white); letter-spacing:-1px; margin-bottom:16px; }
-.fived-product-desc { font-size:14px; color:var(--text); line-height:1.7; margin-bottom:20px; }
-.fived-product-stats { font-family:'DM Mono',monospace; font-size:10px; color:var(--dim); letter-spacing:1px; display:flex; gap:8px; flex-wrap:wrap; }
-@media(max-width:768px) { .fived-section { padding:60px 24px; } .fived-inner { grid-template-columns:1fr; gap:40px; } }
 </style>
 </head>
 <body data-page="home">
 <script src="nav-site.js"></script>
 
-<!-- Custom Cursor -->
-<div class="cursor" id="cursor"></div>
-<div class="cursor-ring" id="cursorRing"></div>
-
-<!-- NAV -->
-
-<div class="nav-mobile-menu" id="mobileMenu">
-  <a href="index.html" class="mob-main">Home</a>
-  <a href="intelligence.html" class="mob-main">The Work</a>
-  <a href="rise.html" class="mob-main">What's Next</a>
-  <a href="thinking.html" class="mob-main">Thinking</a>
-  <a href="about.html" class="mob-main">About</a>
-  <div class="mob-divider">The Record</div>
-  <a href="record/index.html" class="mob-record">Record Home</a>
-  <a href="record/ipcei-cis.html" class="mob-record">IPCEI-CIS — FedEU.ai</a>
-  <a href="record/kau.html" class="mob-record">KAÜ — National Identity</a>
-  <a href="record/helix.html" class="mob-record">HeliX + FedX</a>
-  <a href="record/eidas.html" class="mob-record">eIDAS 2.0 — MyD Wallet</a>
-  <a href="record/medical-ai.html" class="mob-record">Medical AI — GRaDPaLM</a>
-  <a href="record/peter-antal.html" class="mob-record">Dr. Péter Antal</a>
-  <a href="record/press.html" class="mob-record">Press Kit</a>
-  <a href="#contact" class="mob-cta">Work With Us</a>
-</div>
-
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-grid"></div>
-  <div class="hero-glow"></div>
-  <div class="hero-glow-2"></div>
-  <div class="hero-data">
-    <div class="data-line">Est. <span class="val">1993</span></div>
-    <div class="data-line">Budapest, <span class="val">HU</span></div>
-    <div class="data-line">Staff <span class="val">90+</span></div>
-    <div class="data-line">EU Projects <span class="val">Active</span></div>
-    <div class="data-line">AI Infra <span class="val">Sovereign</span></div>
+  <div class="hero-eyebrow reveal">
+    <span>Est. 1993</span>
+    <span>Budapest, Hungary</span>
+    <span>Intelligence Infrastructure</span>
   </div>
-  <div class="hero-content">
-    <div class="hero-eyebrow">Intelligence Infrastructure</div>
-    <h1 class="hero-headline">
-      Thirty years<br>
-      building what<br>
-      <span class="gold">AI runs on.</span>
-    </h1>
-    <p class="hero-sub">
-      E-Group builds the <strong>deep infrastructure of trust, data and intelligence</strong> that enterprises need to make AI actually work. Not the hype. The foundation.
-    </p>
-    <div class="hero-actions">
-      <a href="#contact" class="btn-primary">Start a Conversation <span class="arr">→</span></a>
-      <a href="#about" class="btn-secondary">Our Story</a>
-    </div>
-  </div>
-  <div class="scroll-indicator">
-    <div class="scroll-line"></div>
-    <span class="scroll-text">Scroll</span>
+  <h1 class="hero-headline reveal">
+    Thirty years building
+    <em>what AI runs on.</em>
+  </h1>
+  <p class="hero-sub reveal">E-Group builds the <strong>deep infrastructure of trust, data and intelligence</strong> that enterprises need to make AI actually work. Not the hype. The foundation.</p>
+  <div class="hero-ctas reveal">
+    <a href="#contact" class="cta-primary">Start a Conversation →</a>
+    <a href="record/index.html" class="cta-secondary">View The Record →</a>
   </div>
 </section>
 
-<!-- SOCIAL PROOF -->
-<section class="credentials-section">
-
-  <div class="credentials-block credentials-clients">
-    <div class="credentials-eyebrow">Trusted by</div>
-    <div class="credentials-grid">
-
-      <div class="credential-card">
-        <div class="credential-name">MAVIR</div>
-        <div class="credential-role">Hungary's national electricity transmission operator</div>
-        <div class="credential-stat">25+ year production partnership</div>
-      </div>
-
-      <div class="credential-card">
-        <div class="credential-name">European Space Agency</div>
-        <div class="credential-role">Active technology partner — ProofX cryptographic verification</div>
-        <div class="credential-stat">Galileo OSNMA · Court-admissible evidence chains</div>
-      </div>
-
-      <div class="credential-card">
-        <div class="credential-name">Hungarian Government</div>
-        <div class="credential-role">National digital identity infrastructure — KAÜ</div>
-        <div class="credential-stat">Millions of citizens authenticated daily</div>
-      </div>
-
-      <div class="credential-card">
-        <div class="credential-name">Kellton</div>
-        <div class="credential-role">Sovereign AI ecosystem partnership</div>
-        <div class="credential-stat">Building European AI independence · MoU 2025</div>
-      </div>
-
-    </div>
-  </div>
-
-  <div class="credentials-block credentials-programmes">
-    <div class="credentials-eyebrow">EU Recognition</div>
-    <div class="credentials-grid">
-
-      <div class="credential-card">
-        <div class="credential-name">IPCEI-CIS</div>
-        <div class="credential-role">Co-leads Workstream 3 and the AI Cluster</div>
-        <div class="credential-stat">7 EU member states · €1.2bn programme · EC approved</div>
-      </div>
-
-      <div class="credential-card">
-        <div class="credential-name">HeliX</div>
-        <div class="credential-role">Federated health data space — FedX platform</div>
-        <div class="credential-stat">8 biobank clients · 50+ partners · EHDEN certified</div>
-      </div>
-
-      <div class="credential-card">
-        <div class="credential-name">EU DOME</div>
-        <div class="credential-role">Hungary's representative for the EU federated cloud</div>
-        <div class="credential-stat">Sovereign cloud infrastructure for European enterprise</div>
-      </div>
-
-      <div class="credential-card">
-        <div class="credential-name">EWC / eIDAS 2.0</div>
-        <div class="credential-role">European Digital Identity Wallet Consortium member</div>
-        <div class="credential-stat">Passed all eIDAS 2 testbed scenarios · 2026 rollout ready</div>
-      </div>
-
-    </div>
-  </div>
-
-</section>
-
-<!-- TICKER -->
-<div class="ticker-wrap">
-  <div class="ticker">
-    <div class="ticker-item">Digital Trust <span>—</span> Sovereign AI <span>—</span> Data Infrastructure <span>—</span> Identity Systems <span>—</span> FinTech <span>—</span> HealthTech <span>—</span> GovTech <span>—</span> SpaceTech <span>—</span> Post-Quantum Security <span>—</span> EnergyTech <span>—</span> Smart Data <span>—</span> Applied AI <span>—</span></div>
-    <div class="ticker-item">Digital Trust <span>—</span> Sovereign AI <span>—</span> Data Infrastructure <span>—</span> Identity Systems <span>—</span> FinTech <span>—</span> HealthTech <span>—</span> GovTech <span>—</span> SpaceTech <span>—</span> Post-Quantum Security <span>—</span> EnergyTech <span>—</span> Smart Data <span>—</span> Applied AI <span>—</span></div>
-  </div>
-</div>
-
-<!-- STATS -->
-<div class="stats">
-  <div class="stat reveal">
-    <div class="stat-num">30<span class="unit">+</span></div>
-    <div class="stat-label">Years building<br>deep tech IP</div>
-  </div>
-  <div class="stat reveal reveal-delay-1">
-    <div class="stat-num">90<span class="unit">+</span></div>
-    <div class="stat-label">Engineers,<br>scientists &amp; builders</div>
-  </div>
-  <div class="stat reveal reveal-delay-2">
-    <div class="stat-num">5</div>
-    <div class="stat-label">Critical sectors<br>served globally</div>
-  </div>
-  <div class="stat reveal reveal-delay-3">
-    <div class="stat-num">EU</div>
-    <div class="stat-label">Sovereign infrastructure<br>partner</div>
-  </div>
-</div>
-
-
-<!-- ═══════════════════════════════════════════
-     ACT 2 — THE PROOF
-     30 years. Not a claim. A record.
-════════════════════════════════════════════ -->
-<div class="proof">
-  <div class="proof-inner">
-    <div class="proof-left">
-      <div class="section-eyebrow reveal">The Record</div>
-      <h2 class="section-title reveal">Not a claim.<br>A thirty-year<br>track record.</h2>
-      <p class="section-body reveal">
-        We do not talk about building trust infrastructure — we have been doing it, at national scale, for three decades. These are not press releases. They are the evidence.
-      </p>
-      <div class="proof-timeline">
-        <div class="proof-item reveal">
-          <div class="proof-year">2025</div>
-          <div class="proof-content">
-            <div class="proof-headline">Sovereign AI Ecosystem</div>
-            <div class="proof-detail">Kellton partnership MoU — building the sovereign AI stack for European enterprise.</div>
-          </div>
-        </div>
-        <div class="proof-item reveal reveal-delay-1">
-          <div class="proof-year">2024</div>
-          <div class="proof-content">
-            <div class="proof-headline">EU DOME Cloud Infrastructure</div>
-            <div class="proof-detail">Selected as Hungary's representative for the EU federated cloud initiative.</div>
-          </div>
-        </div>
-        <div class="proof-item reveal reveal-delay-2">
-          <div class="proof-year">2024</div>
-          <div class="proof-content">
-            <div class="proof-headline">Medical AI — Double First Place</div>
-            <div class="proof-detail">Back-to-back victories at international AI research events. Our HealthTech team leads Europe.</div>
-          </div>
-        </div>
-        <div class="proof-item reveal reveal-delay-3">
-          <div class="proof-year">2024</div>
-          <div class="proof-content">
-            <div class="proof-headline">European Space Agency (ESA) Partnership</div>
-            <div class="proof-detail">ProofX cryptographic photo verification system combining Galileo OSNMA authentication with court-admissible evidence chains.</div>
-          </div>
-        </div>
-        <div class="proof-item reveal reveal-delay-4">
-          <div class="proof-year">2023</div>
-          <div class="proof-content">
-            <div class="proof-headline">KAÜ National Digital Identity — Hungarian Government</div>
-            <div class="proof-detail">Hungary's national digital identity infrastructure — designed, built, and operated by E-Group for the Hungarian Government.</div>
-          </div>
-        </div>
-        <div class="proof-item reveal reveal-delay-5">
-          <div class="proof-year">1999–</div>
-          <div class="proof-content">
-            <div class="proof-headline">MAVIR — Mission-Critical Energy Infrastructure</div>
-            <div class="proof-detail">Hungary's national electricity transmission operator. 25+ year production partnership managing critical grid infrastructure at national scale.</div>
-          </div>
-        </div>
-        <div class="proof-item reveal reveal-delay-6">
-          <div class="proof-year">1993</div>
-          <div class="proof-content">
-            <div class="proof-headline">Founded in Budapest</div>
-            <div class="proof-detail">Started building financial trust infrastructure before anyone called it fintech.</div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="proof-right reveal reveal-delay-2" id="about">
-      <div class="about-visual">
-        <div class="about-quote">
-          "We have been building the infrastructure others will need for decades.
-          <em>The world has finally caught up.</em>"
-        </div>
-        <div class="about-attr">Antal Kuthy — Founder &amp; CEO, E-Group</div>
-        <div class="about-tags" style="margin-top:32px; padding-top:32px; border-top:1px solid var(--border);">
-          <span class="tag">Digital Identity</span>
-          <span class="tag">Data Sovereignty</span>
-          <span class="tag">Applied AI</span>
-          <span class="tag">Post-Quantum</span>
-          <span class="tag">Smart Data</span>
-          <span class="tag">Trust Platforms</span>
-          <span class="tag">Banking Tech</span>
-          <span class="tag">Health AI</span>
-        </div>
-      </div>
+<!-- LIVE STRIP -->
+<div class="live-strip">
+  <div class="live-strip-label"><span class="live-dot"></span>Live</div>
+  <div class="live-ticker-wrap">
+    <div class="live-ticker">
+      <span class="live-ticker-item"><strong>HeliX General Assembly</strong> hosted in Budapest — March 2026</span>
+      <span class="live-ticker-item"><strong>Dr. Péter Antal</strong> awarded Hungary's Knight's Cross — August 2025</span>
+      <span class="live-ticker-item"><strong>eIDAS 2.0</strong> — all testbed scenarios passed · 2026 rollout ready</span>
+      <span class="live-ticker-item"><strong>ProofX</strong> — ESA partnership active · Galileo OSNMA integration</span>
+      <span class="live-ticker-item"><strong>IPCEI-CIS</strong> — Antal Kuthy chairs AI Cluster · 7 EU member states</span>
+      <span class="live-ticker-item"><strong>MAVIR</strong> — 25+ year partnership · still running · still chosen</span>
+      <span class="live-ticker-item"><strong>Kellton MoU</strong> — sovereign AI ecosystem for European enterprise · 2025</span>
+      <span class="live-ticker-item"><strong>Medical AI</strong> — back-to-back international first place · Dr. Anna Kovács</span>
+      <!-- Duplicate for seamless loop -->
+      <span class="live-ticker-item"><strong>HeliX General Assembly</strong> hosted in Budapest — March 2026</span>
+      <span class="live-ticker-item"><strong>Dr. Péter Antal</strong> awarded Hungary's Knight's Cross — August 2025</span>
+      <span class="live-ticker-item"><strong>eIDAS 2.0</strong> — all testbed scenarios passed · 2026 rollout ready</span>
+      <span class="live-ticker-item"><strong>ProofX</strong> — ESA partnership active · Galileo OSNMA integration</span>
+      <span class="live-ticker-item"><strong>IPCEI-CIS</strong> — Antal Kuthy chairs AI Cluster · 7 EU member states</span>
+      <span class="live-ticker-item"><strong>MAVIR</strong> — 25+ year partnership · still running · still chosen</span>
+      <span class="live-ticker-item"><strong>Kellton MoU</strong> — sovereign AI ecosystem for European enterprise · 2025</span>
+      <span class="live-ticker-item"><strong>Medical AI</strong> — back-to-back international first place · Dr. Anna Kovács</span>
     </div>
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════════
-     ACT 3 — THE PULSE
-     The living company. Always thinking.
-════════════════════════════════════════════ -->
-<div class="pulse-section" data-rise-slot="homepage-pulse">
-  <div class="pulse-header">
-    <div class="pulse-header-left">
-      <div class="pulse-eyebrow">
-        <span class="pulse-dot"></span>
-        The Thinking — Updated Continuously
-      </div>
-      <h2 class="pulse-title reveal">What we are<br>thinking about <em style="color:var(--gold);font-style:normal;">right now.</em></h2>
-    </div>
-    <a href="thinking.html" class="pulse-link reveal">All Thinking →</a>
-  </div>
-
-  <div class="pulse-feed reveal">
-
-    <!-- Large card: Deep Read -->
-    <a href="thinking.html#why-sector-intelligence" class="pulse-card card-large">
-      <div class="content-type type-deep">Deep Read</div>
-      <div class="pulse-card-title">Why generic AI is the wrong bet for regulated industries</div>
-      <p class="pulse-card-excerpt">
-        Every major AI vendor is selling horizontal platforms. That is the wrong frame for a hospital, a bank, or a government agency. The intelligence that matters in regulated industries is built from thirty years of domain knowledge — not six months of fine-tuning. We explain why we believe sector-specific is not a niche strategy. It is the only defensible one.
-      </p>
-      <div class="sector-tag">FinTech · HealthTech · GovTech</div>
-      <div class="pulse-card-meta">
-        <span class="pulse-meta-author">Antal Kuthy</span>
-        <span class="pulse-meta-date">2 days ago</span>
-      </div>
+<!-- TRUST -->
+<section class="trust-section">
+  <div class="section-eyebrow reveal">Trusted by · Recognised by · Working with</div>
+  <div class="trust-grid">
+    <a href="record/mavir.html" class="trust-card reveal">
+      <div class="trust-card-type">Client · 25+ Years</div>
+      <div class="trust-card-name">MAVIR</div>
+      <div class="trust-card-desc">Hungary's national electricity transmission operator. Mission-critical infrastructure. Still running today.</div>
     </a>
-
-    <!-- Signal -->
-    <a href="thinking.html#nordic-signal" class="pulse-card">
-      <div class="content-type type-signal">Signal</div>
-      <div class="pulse-card-title">Nordic banks are asking the wrong question about AI</div>
-      <p class="pulse-card-excerpt">Three conversations this week with Nordic FinTech teams. Every one asked "which LLM should we use?" — before defining what intelligence they actually need.</p>
-      <div class="pulse-card-meta">
-        <span class="pulse-meta-author">Gábor M.</span>
-        <span class="pulse-meta-date">3 days ago</span>
-      </div>
+    <a href="record/proofx.html" class="trust-card reveal reveal-delay-1">
+      <div class="trust-card-type">Technology Partner</div>
+      <div class="trust-card-name">European Space Agency</div>
+      <div class="trust-card-desc">Active partnership on ProofX — Galileo OSNMA cryptographic verification. Court-admissible evidence chains.</div>
     </a>
-
-    <!-- In The Room -->
-    <a href="thinking.html#packaging-debate" class="pulse-card">
-      <div class="content-type type-room">In The Room</div>
-      <div class="pulse-card-title">We argued for two hours about whether to go vertical or horizontal. Here is where we landed.</div>
-      <p class="pulse-card-excerpt">The Intelligence Products team had a real fight on Tuesday. Vertical products (sector-specific) vs horizontal platform. This is what we decided and why.</p>
-      <div class="pulse-card-meta">
-        <span class="pulse-meta-author">Chris H.</span>
-        <span class="pulse-meta-date">5 days ago</span>
-      </div>
+    <a href="record/kau.html" class="trust-card reveal reveal-delay-2">
+      <div class="trust-card-type">Client</div>
+      <div class="trust-card-name">Hungarian Government</div>
+      <div class="trust-card-desc">KAÜ national digital identity infrastructure. Authenticates millions of Hungarian citizens daily.</div>
     </a>
-
-    <!-- Signal 2 -->
-    <a href="thinking.html#medical-ai" class="pulse-card">
-      <div class="content-type type-signal">Signal</div>
-      <div class="pulse-card-title">Our HealthTech team just took first place again</div>
-      <p class="pulse-card-excerpt">Back-to-back wins at international medical AI events. Dr. Anna Kovács leads research that is getting attention we did not expect this quickly.</p>
-      <div class="pulse-card-meta">
-        <span class="pulse-meta-author">Dr. Anna K.</span>
-        <span class="pulse-meta-date">1 week ago</span>
-      </div>
+    <a href="record/index.html" class="trust-card reveal reveal-delay-3">
+      <div class="trust-card-type">Partnership · MoU 2025</div>
+      <div class="trust-card-name">Kellton</div>
+      <div class="trust-card-desc">Sovereign AI ecosystem for European enterprise. Built independent of US hyperscalers.</div>
     </a>
-
-  </div>
-
-  <div style="margin-top:48px;">
-    <div class="pulse-subscribe-label">Get the Thinking feed in your inbox</div>
-    <div class="pulse-subscribe">
-      <input type="email" placeholder="your@email.com">
-      <button>Get the Thinking feed →</button>
-    </div>
-  </div>
-</div>
-
-<!-- WHAT WE BUILD -->
-<section id="build" class="build-section">
-  <div class="section-eyebrow reveal">What We Have Built — And What's Coming</div>
-  <h2 class="section-title reveal">Thirty years of trust infrastructure.<br>Now deployable for your industry.</h2>
-  <p class="section-sub reveal">Not concepts. Not roadmaps. Production systems running at national scale — and a pipeline of intelligence products built on the same foundations.</p>
-
-  <div class="thesis-cards">
-
-    <a href="record/helix.html" class="thesis-card card-fedx">
-      <div class="card-status status-live">
-        <span class="dot"></span>Live in Production
-      </div>
-      <div class="card-title">FedX</div>
-      <p class="card-desc">Federated learning platform operationally validated across 8 biobank clients and 50+ healthcare providers. Data stays local. AI travels. EHDEN certified. GDPR compliant.</p>
-      <span class="card-link">See the record →</span>
+    <a href="record/ipcei-cis.html" class="trust-card reveal">
+      <div class="trust-card-type">EU Programme · Active</div>
+      <div class="trust-card-name">IPCEI-CIS</div>
+      <div class="trust-card-desc">Co-leads Workstream 3 and the AI Cluster. 7 EU member states. €1.2bn programme. EC approved.</div>
     </a>
-
-    <a href="record/kau.html" class="thesis-card card-kau">
-      <div class="card-status status-live">
-        <span class="dot"></span>Live in Production
-      </div>
-      <div class="card-title">KAÜ — National<br>Digital Identity</div>
-      <p class="card-desc">Hungary's national digital identity infrastructure — designed, built, and operated by E-Group for the Hungarian Government. Authenticates millions of citizens across all government services.</p>
-      <span class="card-link">See the record →</span>
+    <a href="record/helix.html" class="trust-card reveal reveal-delay-1">
+      <div class="trust-card-type">EU Programme · Active</div>
+      <div class="trust-card-name">HeliX — FedX</div>
+      <div class="trust-card-desc">8 biobank clients. 50+ healthcare providers. 12,000+ individuals' data unified. EHDEN certified.</div>
     </a>
-
-    <a href="intelligence.html" class="thesis-card card-corpex">
-      <div class="card-status status-live">
-        <span class="dot"></span>Live in Production
-      </div>
-      <div class="card-title">CORPEX</div>
-      <p class="card-desc">Live correspondent banking infrastructure. Built on thirty years of financial trust infrastructure — clearing, settlement, and payment systems proven at national scale.</p>
-      <span class="card-link">Learn more →</span>
+    <a href="record/index.html" class="trust-card reveal reveal-delay-2">
+      <div class="trust-card-type">EU Programme · 2024</div>
+      <div class="trust-card-name">EU DOME</div>
+      <div class="trust-card-desc">Hungary's representative for the EU federated cloud initiative. Sovereign cloud for European enterprise.</div>
     </a>
-
+    <a href="record/eidas.html" class="trust-card reveal reveal-delay-3">
+      <div class="trust-card-type">EU Programme · Active</div>
+      <div class="trust-card-name">EWC / eIDAS 2.0</div>
+      <div class="trust-card-desc">European Digital Identity Wallet Consortium. All eIDAS 2 testbed scenarios passed. 2026 rollout ready.</div>
+    </a>
   </div>
 </section>
 
-<!-- WHAT'S COMING -->
-<section class="coming-section">
-  <div class="section-eyebrow reveal">What's Coming</div>
-  <h2 class="section-title reveal">The next wave.<br>Built on the same foundations.</h2>
-  <p class="section-sub reveal">Three projects in development. Each one built on thirty years of E-Group infrastructure. Watch this space.</p>
-
-  <div class="coming-cards">
-
-    <div class="coming-card reveal">
-      <div class="coming-tag">In Development</div>
-      <div class="coming-name">ProofX</div>
-      <p class="coming-desc">Can you tell a real satellite image from an AI-generated fake? ProofX uses Galileo OSNMA cryptographic authentication and C2PA standards to answer that question with court-admissible certainty. Built for insurance, media authentication, and defence-adjacent applications.</p>
+<!-- RECORD HIGHLIGHTS -->
+<section class="record-section">
+  <div class="section-header reveal">
+    <div>
+      <div class="section-eyebrow">The Record</div>
+      <h2 class="section-title">Not a pitch.<br><span>A thirty-year history.</span></h2>
     </div>
-
-    <div class="coming-card reveal">
-      <div class="coming-tag">In Development</div>
-      <div class="coming-name">Neonatal Intelligence</div>
-      <p class="coming-desc">AI-powered neonatal tracking and care intelligence. Built on E-Group's HealthTech and federated data foundations — bringing the same rigour that won international medical AI awards to the most critical hours of a new life.</p>
-    </div>
-
-    <div class="coming-card reveal">
-      <div class="coming-tag">Coming Soon</div>
-      <div class="coming-name">Project TBA</div>
-      <p class="coming-desc">A third intelligence product in early development. Details to follow. If you are working on a hard problem in a regulated industry and want to talk — we are listening.</p>
-    </div>
-
+    <a href="record/index.html" class="section-link">Full record →</a>
+  </div>
+  <div class="record-grid">
+    <a href="record/mavir.html" class="record-card reveal">
+      <div class="rc-year">1999 — Active · 25+ Years</div>
+      <div class="rc-title">MAVIR — National Electricity Grid</div>
+      <div class="rc-desc">Hungary's electricity transmission operator. Mission-critical settlement systems. Still the partner of choice after twenty-five years.</div>
+      <span class="rc-link">View record →</span>
+    </a>
+    <a href="record/kau.html" class="record-card reveal reveal-delay-1">
+      <div class="rc-year">2010s — Live</div>
+      <div class="rc-title">KAÜ — National Digital Identity</div>
+      <div class="rc-desc">Hungary's national digital authorisation service. Designed and built by E-Group. Authenticates millions of citizens across all government services.</div>
+      <span class="rc-link">View record →</span>
+    </a>
+    <a href="record/helix.html" class="record-card reveal reveal-delay-2">
+      <div class="rc-year">Active · 8 Biobanks · 50+ Partners</div>
+      <div class="rc-title">HeliX — Federated Health Data</div>
+      <div class="rc-desc">FedX platform operationally validated across 8 biobanks and 50+ partners. Data stays local. AI travels. 12,000+ individuals unified.</div>
+      <span class="rc-link">View record →</span>
+    </a>
+    <a href="record/proofx.html" class="record-card reveal">
+      <div class="rc-year">In Development · ESA Partnership</div>
+      <div class="rc-title">ProofX — Can You Tell Real from AI?</div>
+      <div class="rc-desc">Galileo OSNMA satellite authentication + C2PA standards = a court-admissible evidence chain proving an image is real. Built with ESA.</div>
+      <span class="rc-link">View record →</span>
+    </a>
+    <a href="record/medical-ai.html" class="record-card reveal reveal-delay-1">
+      <div class="rc-year">2024 · Back-to-Back First Place</div>
+      <div class="rc-title">Medical AI — International Research Wins</div>
+      <div class="rc-desc">Back-to-back first place at international medical AI research events. Dr. Anna Kovács leads a team the global academic community is watching.</div>
+      <span class="rc-link">View record →</span>
+    </a>
+    <a href="record/peter-antal.html" class="record-card reveal reveal-delay-2">
+      <div class="rc-year">2025 · National Honour</div>
+      <div class="rc-title">Dr. Péter Antal — Knight's Cross</div>
+      <div class="rc-desc">E-Group's lead AI researcher awarded Hungary's Knight's Cross of the Order of Merit — the civilian division's highest recognition.</div>
+      <span class="rc-link">View record →</span>
+    </a>
   </div>
 </section>
 
-<!-- SECTORS -->
-<section id="sectors">
-  <div class="section-eyebrow reveal">Sectors</div>
-  <h2 class="section-title reveal">Where our work<br>has the most impact.</h2>
-  <p class="section-body reveal">We operate across five sectors where the combination of AI, data sovereignty and digital trust creates the most significant opportunity — and the highest barrier to entry for less experienced competitors.</p>
-  <div class="sectors-grid">
-    <div class="sector reveal"><span class="sector-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="display:inline-block;vertical-align:middle;flex-shrink:0;"><rect x="3" y="13" width="22" height="12" stroke="currentColor" stroke-width="1.5" fill="none"/><path d="M1 13L14 4L27 13" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" fill="none"/><line x1="7" y1="13" x2="7" y2="25" stroke="currentColor" stroke-width="1.5"/><line x1="11" y1="13" x2="11" y2="25" stroke="currentColor" stroke-width="1.5"/><line x1="17" y1="13" x2="17" y2="25" stroke="currentColor" stroke-width="1.5"/><line x1="21" y1="13" x2="21" y2="25" stroke="currentColor" stroke-width="1.5"/><line x1="3" y1="25" x2="25" y2="25" stroke="currentColor" stroke-width="1.5"/></svg></span><div class="sector-name">FinTech</div></div>
-    <div class="sector reveal reveal-delay-1"><span class="sector-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="display:inline-block;vertical-align:middle;flex-shrink:0;"><circle cx="14" cy="14" r="11" stroke="currentColor" stroke-width="1.5" fill="none"/><line x1="14" y1="8" x2="14" y2="20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="8" y1="14" x2="20" y2="14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span><div class="sector-name">HealthTech</div></div>
-    <div class="sector reveal reveal-delay-2"><span class="sector-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="display:inline-block;vertical-align:middle;flex-shrink:0;"><rect x="3" y="12" width="22" height="13" stroke="currentColor" stroke-width="1.5" fill="none"/><path d="M1 12L14 3L27 12" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" fill="none"/><rect x="11" y="17" width="6" height="8" stroke="currentColor" stroke-width="1.5" fill="none"/><line x1="3" y1="25" x2="25" y2="25" stroke="currentColor" stroke-width="2"/></svg></span><div class="sector-name">GovTech</div></div>
-    <div class="sector reveal reveal-delay-3"><span class="sector-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="display:inline-block;vertical-align:middle;flex-shrink:0;"><path d="M14 3C14 3 20 8 20 16L14 25L8 16C8 8 14 3 14 3Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" fill="none"/><circle cx="14" cy="14" r="2.5" stroke="currentColor" stroke-width="1.5" fill="none"/><path d="M8 16L4 18L6 22L8 20" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" fill="none"/><path d="M20 16L24 18L22 22L20 20" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" fill="none"/></svg></span><div class="sector-name">SpaceTech</div></div>
-    <div class="sector reveal reveal-delay-4"><span class="sector-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="display:inline-block;vertical-align:middle;flex-shrink:0;"><path d="M16 3L6 16H14L12 25L22 12H14L16 3Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" fill="none"/></svg></span><div class="sector-name">EnergyTech</div></div>
+<!-- PRODUCTS -->
+<section class="products-section">
+  <div class="section-header reveal">
+    <div>
+      <div class="section-eyebrow">The Products</div>
+      <h2 class="section-title">Thirty years of IP.<br><span>Now deployable.</span></h2>
+    </div>
+    <a href="intelligence.html" class="section-link">The Work →</a>
+  </div>
+  <p class="products-tension reveal">Four live in production. Five in active development. All of it built on the same foundations that have been running national infrastructure for three decades. <strong>Not concepts. Not roadmaps. Running systems — and what comes next.</strong></p>
+
+  <div class="products-label live reveal">● Live in Production</div>
+  <div class="products-live">
+    <div class="product reveal">
+      <div class="product-sector">HealthTech</div>
+      <div class="product-name">FedX</div>
+      <div class="product-desc">Federated learning. 8 biobanks. 50+ providers. Data stays local. AI travels. EHDEN certified.</div>
+      <span class="product-status live"><span class="dot"></span>Live</span>
+    </div>
+    <div class="product reveal reveal-delay-1">
+      <div class="product-sector">GovTech</div>
+      <div class="product-name">KAÜ</div>
+      <div class="product-desc">Hungary's national digital identity infrastructure. Millions authenticated daily.</div>
+      <span class="product-status live"><span class="dot"></span>Live</span>
+    </div>
+    <div class="product reveal reveal-delay-2">
+      <div class="product-sector">FinTech</div>
+      <div class="product-name">CORPEX</div>
+      <div class="product-desc">Corporate banking infrastructure. Proven across Central European financial institutions for over twenty years.</div>
+      <span class="product-status live"><span class="dot"></span>Live</span>
+    </div>
+    <div class="product reveal reveal-delay-3">
+      <div class="product-sector">EnergyTech</div>
+      <div class="product-name">Electric Utility</div>
+      <div class="product-desc">Settlement systems for MAVIR — Hungary's national electricity operator. 25+ years. Still running.</div>
+      <span class="product-status live"><span class="dot"></span>Live</span>
+    </div>
+  </div>
+
+  <div class="products-label dev reveal" style="margin-top:32px;">○ In Active Development</div>
+  <div class="products-dev">
+    <div class="product reveal">
+      <div class="product-sector">SpaceTech · ESA</div>
+      <div class="product-name">ProofX</div>
+      <div class="product-desc">Cryptographic image verification. Galileo OSNMA. Court-admissible evidence chains.</div>
+      <span class="product-status dev"><span class="dot"></span>In Development</span>
+    </div>
+    <div class="product reveal reveal-delay-1">
+      <div class="product-sector">SpaceTech · ESA</div>
+      <div class="product-name">SpadaX</div>
+      <div class="product-desc">Real-time anomaly detection for space and ground infrastructure.</div>
+      <span class="product-status dev"><span class="dot"></span>In Development</span>
+    </div>
+    <div class="product reveal reveal-delay-2">
+      <div class="product-sector">SpaceTech · ESA</div>
+      <div class="product-name">GENESIS</div>
+      <div class="product-desc">Generative satellite imagery simulator. Synthetic training data at scale.</div>
+      <span class="product-status dev"><span class="dot"></span>In Development</span>
+    </div>
+    <div class="product reveal reveal-delay-3">
+      <div class="product-sector">FinTech · GovTech</div>
+      <div class="product-name">COIOS</div>
+      <div class="product-desc">Sovereign AI orchestration. Local LLMs, federated learning, agentic workflows.</div>
+      <span class="product-status dev"><span class="dot"></span>In Development</span>
+    </div>
+    <div class="product reveal reveal-delay-4">
+      <div class="product-sector">HealthTech</div>
+      <div class="product-name">Neonatal Intelligence</div>
+      <div class="product-desc">AI-powered neonatal tracking and care. Built on our HealthTech foundations.</div>
+      <span class="product-status dev"><span class="dot"></span>In Development</span>
+    </div>
   </div>
 </section>
 
-<!-- MISSION -->
-<div class="mission">
-  <div class="mission-text reveal">
-    AI without <em>trustworthy infrastructure</em> is just<br>expensive noise. We build the infrastructure.
-  </div>
-  <p class="mission-sub reveal reveal-delay-2">Three decades of IP. A world-class team. A clear direction. We are ready to build with the enterprises that are serious about what comes next.</p>
-</div>
-
-
-<!-- 5D -->
-<section class="fived-section reveal">
-  <div class="fived-inner">
-    <div class="fived-left">
-      <div class="fived-eyebrow">Also Inside E-Group</div>
-      <h2 class="fived-title">We also move fast<br>when we want to.</h2>
-      <p class="fived-desc">5D is a small internal team with one mandate: take a validated idea from zero to working product in under 90 days. No committees. No lengthy approval chains. Five stages — Discover, Design, Develop, Deploy, Distribute — and a clock.</p>
-      <p class="fived-desc">It exists to prove that thirty years of enterprise experience and startup-speed execution are not mutually exclusive. So far, the evidence supports that theory.</p>
-    </div>
-    <div class="fived-right">
-      <div class="fived-product">
-        <div class="fived-product-tag">First Product · 12 weeks from idea to V1</div>
-        <div class="fived-product-name">Kept</div>
-        <div class="fived-product-desc">An AI conversation manager that gives you sovereignty over your own AI history. Syncs across ChatGPT, Claude, Gemini, Grok and Kimi. Local-first. Open source. No cloud dependency. No account required. Free forever.</div>
-        <div class="fived-product-stats">
-          <span>Windows · macOS · Linux</span>
-          <span>·</span>
-          <span>More products in development</span>
-        </div>
-      </div>
+<!-- BUDAPEST -->
+<section class="budapest-section">
+  <div class="section-eyebrow reveal">Built in Budapest</div>
+  <div class="budapest-statement reveal">Hungary is a country of 10 million people that has produced 13 Nobel laureates, invented modern computing, holography, and the mRNA vaccine.</div>
+  <p class="budapest-body reveal"><strong>John von Neumann</strong> designed the architecture every computer still runs on. <strong>Katalin Karikó's</strong> mRNA research saved millions of lives. <strong>Dénes Gábor</strong> invented holography. These are not coincidences — Hungary has a culture of rigorous, original thinking. Of building things that last.</p>
+  <p class="budapest-body reveal">E-Group was founded here in 1993. Still here. Still building. We consider that a point of pride.</p>
+  <a href="about.html" class="budapest-cta reveal">Our story →</a>
+  <div class="ticker-wrap reveal">
+    <div class="ticker">
+      <span>John von Neumann <em>· Computing</em></span>
+      <span>Katalin Karikó <em>· mRNA Vaccines</em></span>
+      <span>Dénes Gábor <em>· Holography</em></span>
+      <span>Albert Szent-Györgyi <em>· Vitamin C</em></span>
+      <span>Jenő Wigner <em>· Quantum Physics</em></span>
+      <span>Charles Simonyi <em>· Microsoft Office</em></span>
+      <span>László Lovász <em>· Computer Science</em></span>
+      <span>Pál Erdős <em>· Mathematics</em></span>
+      <span>János Bolyai <em>· Non-Euclidean Geometry</em></span>
+      <span>Ferenc Krausz <em>· Attosecond Physics</em></span>
+      <span>Andrew Grove <em>· Intel · Microprocessors</em></span>
+      <span>Rózsa Péter <em>· Recursive Functions</em></span>
+      <span>John von Neumann <em>· Computing</em></span>
+      <span>Katalin Karikó <em>· mRNA Vaccines</em></span>
+      <span>Dénes Gábor <em>· Holography</em></span>
+      <span>Albert Szent-Györgyi <em>· Vitamin C</em></span>
     </div>
   </div>
 </section>
 
 <!-- CONTACT -->
-<section id="contact" class="contact">
-  <div class="contact-inner">
-    <div class="contact-left">
-      <div class="section-eyebrow reveal">Work With Us</div>
-      <h2 class="section-title reveal">Tell us what<br>you're working on.</h2>
-      <p class="section-body reveal">We work with enterprises, consortiums, and government partners who are serious about what AI infrastructure actually means. Not a pitch — a conversation. Tell us what you're trying to solve.</p>
-      <div class="contact-info" style="margin-top:48px;">
-        <div class="contact-detail reveal"><span class="contact-detail-label">Headquarters</span><span class="contact-detail-value">Budapest, Hungary</span></div>
-        <div class="contact-detail reveal reveal-delay-1"><span class="contact-detail-label">Operating Since</span><span class="contact-detail-value">1993 — 30+ years</span></div>
-        <div class="contact-detail reveal reveal-delay-2"><span class="contact-detail-label">Focus</span><span class="contact-detail-value">Enterprise AI Infrastructure</span></div>
-        <div class="contact-detail reveal reveal-delay-3"><span class="contact-detail-label">LinkedIn</span><span class="contact-detail-value">E-Group ICT Group</span></div>
+<section class="contact-section" id="contact">
+  <div>
+    <div class="section-eyebrow reveal">Work With Us</div>
+    <h2 class="contact-title reveal">Tell us what<br><span>you're building.</span></h2>
+    <p class="contact-sub reveal">We work with enterprises, consortiums, and government partners who are serious about what AI infrastructure actually means. Not a pitch — a conversation. Tell us what you're trying to solve.</p>
+    <div class="contact-details reveal">
+      <span class="contact-detail">Budapest, Hungary · Est. 1993</span>
+      <span class="contact-detail">90+ staff · 50+ external associates</span>
+      <span class="contact-detail">FinTech · HealthTech · GovTech · SpaceTech · EnergyTech</span>
+    </div>
+  </div>
+  <div class="form reveal">
+    <div class="form-row">
+      <div class="form-field">
+        <label class="form-label">Your Name</label>
+        <input class="form-input" type="text" placeholder="Name">
+      </div>
+      <div class="form-field">
+        <label class="form-label">Organisation</label>
+        <input class="form-input" type="text" placeholder="Company">
       </div>
     </div>
-    <div class="contact-right reveal reveal-delay-2">
-      <div class="contact-form">
-        <div class="form-group"><label class="form-label">Your Name</label><input type="text" class="form-input" placeholder="Name"></div>
-        <div class="form-group"><label class="form-label">Organisation</label><input type="text" class="form-input" placeholder="Company or institution"></div>
-        <div class="form-group"><label class="form-label">Email</label><input type="email" class="form-input" placeholder="your@email.com"></div>
-        <div class="form-group">
-          <label class="form-label">Area of Interest</label>
-          <select class="form-select">
-            <option value="" disabled selected>Select one</option>
-            <option>Trust &amp; Digital Identity</option>
-            <option>Smart Data &amp; Applied AI</option>
-            <option>Transactional Infrastructure</option>
-            <option>Intelligence Products</option>
-            <option>Rise Platform</option>
-            <option>FinTech</option>
-            <option>HealthTech</option>
-            <option>GovTech</option>
-            <option>Partnership / Investment</option>
-            <option>Other</option>
-          </select>
-        </div>
-        <div class="form-group"><label class="form-label">What Are You Building?</label><textarea class="form-textarea" placeholder="Tell us briefly what you're working on and what you need..."></textarea></div>
-        <button class="form-submit">Send Message →</button>
-      </div>
+    <div class="form-field">
+      <label class="form-label">Email</label>
+      <input class="form-input" type="email" placeholder="email@organisation.com">
     </div>
+    <div class="form-field">
+      <label class="form-label">Area of Interest</label>
+      <select class="form-select">
+        <option value="">Select one</option>
+        <option>Trust &amp; Digital Identity</option>
+        <option>Sovereign Data Infrastructure</option>
+        <option>Applied AI &amp; Intelligence Products</option>
+        <option>FinTech</option>
+        <option>HealthTech</option>
+        <option>GovTech</option>
+        <option>SpaceTech</option>
+        <option>EnergyTech</option>
+        <option>Partnership / Investment</option>
+        <option>Other</option>
+      </select>
+    </div>
+    <div class="form-field">
+      <label class="form-label">What are you building?</label>
+      <textarea class="form-textarea" placeholder="Tell us what you're working on..."></textarea>
+    </div>
+    <button class="form-submit">Send Message →</button>
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer>
-  <div class="footer-left">
-    <div class="footer-logo"><span>E</span>-Group</div>
-    <div class="footer-tagline">Intelligence Infrastructure · Est. 1993</div>
-  </div>
-  <div class="footer-statement">
-    We are building the <em>intelligence layer</em> for the next thirty years.<br>
-    Come help us think about it.
-  </div>
-  <div class="footer-right">
-    Budapest, Hungary<br>
-    © 2026 E-Group ICT Software Zrt.<br>
-    All rights reserved.<br>
-    <a href="mkt/briefing.html" style="color:var(--dim);text-decoration:none;font-size:9px;letter-spacing:2px;text-transform:uppercase;opacity:0.5;margin-top:6px;display:inline-block;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.5'">Vigil ↗</a>
-  </div>
+  <div>E-Group Intelligence Infrastructure · Est. 1993</div>
+  <div>Budapest, Hungary · © 2026 E-Group ICT Software Zrt.</div>
 </footer>
 
 <script>
-// Custom cursor
-const cursor = document.getElementById('cursor');
-const ring = document.getElementById('cursorRing');
-let mouseX = 0, mouseY = 0, ringX = 0, ringY = 0;
-document.addEventListener('mousemove', e => {
-  mouseX = e.clientX; mouseY = e.clientY;
-  cursor.style.left = mouseX + 'px';
-  cursor.style.top = mouseY + 'px';
-});
-function animateRing() {
-  ringX += (mouseX - ringX) * 0.12;
-  ringY += (mouseY - ringY) * 0.12;
-  ring.style.left = ringX + 'px';
-  ring.style.top = ringY + 'px';
-  requestAnimationFrame(animateRing);
-}
-animateRing();
-
-// Scroll reveal
-const reveals = document.querySelectorAll('.reveal');
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-}, { threshold: 0.1 });
-reveals.forEach(el => observer.observe(el));
-
-// Hamburger menu
-const hamburger = document.getElementById('hamburger');
-const mobileMenu = document.getElementById('mobileMenu');
-if (hamburger && mobileMenu) {
-  hamburger.addEventListener('click', () => {
-    hamburger.classList.toggle('open');
-    mobileMenu.classList.toggle('open');
-    document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
-  });
-  mobileMenu.querySelectorAll('a').forEach(a => {
-    a.addEventListener('click', () => {
-      hamburger.classList.remove('open');
-      mobileMenu.classList.remove('open');
-      document.body.style.overflow = '';
-    });
-  });
-}
+const obs = new IntersectionObserver(entries => entries.forEach(e => {
+  if(e.isIntersecting) e.target.classList.add('visible');
+}),{threshold:0.08});
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 </script>
 </body>
 </html>
