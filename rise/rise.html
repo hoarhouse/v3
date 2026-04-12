@@ -42,7 +42,7 @@ body{overflow-x:hidden;}
 .section-sub{font-size:16px;color:var(--text);max-width:600px;line-height:1.7;margin-bottom:56px;}
 
 /* DEV CARDS */
-.dev-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:var(--border);}
+.dev-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);}
 .dev-card{background:var(--dark);padding:48px;border-left:3px solid transparent;transition:background 0.2s,border-left-color 0.2s;text-decoration:none;display:block;}
 .dev-card:hover{background:var(--panel);border-left-color:var(--gold);}
 .dev-card-status{display:inline-flex;align-items:center;gap:8px;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;margin-bottom:20px;}
@@ -82,10 +82,11 @@ footer{padding:40px 60px;border-top:1px solid var(--border);display:flex;align-i
 .footer-legal{font-size:12px;color:var(--muted);}
 
 /* RESPONSIVE */
+.speed-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);}
 @media(max-width:768px){
   .hero{padding:120px 24px 60px;}
   .section{padding:60px 24px;}
-  .dev-grid,.vision-grid{grid-template-columns:1fr;}
+  .dev-grid,.vision-grid,.speed-grid{grid-template-columns:1fr;}
   .dev-card,.vision-card{padding:36px 24px;}
   .cta-section{padding:60px 24px;flex-direction:column;align-items:flex-start;}
   footer{padding:32px 24px;flex-direction:column;}
@@ -99,7 +100,7 @@ footer{padding:40px 60px;border-top:1px solid var(--border);display:flex;align-i
 <section class="hero">
   <div class="hero-eyebrow reveal">What's Next</div>
   <h1 class="hero-headline reveal">We don't announce things<br>until they are <span>worth announcing.</span></h1>
-  <p class="hero-sub reveal">Five products in active development. One long-term platform vision. All of them built on the same foundations that have been running national infrastructure for thirty years.</p>
+  <p class="hero-sub reveal">Four products in active development. One long-term platform vision. All of them built on the same foundations that have been running national infrastructure for thirty years.</p>
   <div class="hero-note reveal">
     <span>Honest status:</span> Everything on this page is in development. None of it is vaporware — each product has a named partner, a defined use case, and engineers working on it today. We say "in development" because that is what it is. Not "coming soon." Not "launching Q3." In development.
   </div>
@@ -108,7 +109,7 @@ footer{padding:40px 60px;border-top:1px solid var(--border);display:flex;align-i
 <!-- IN DEVELOPMENT -->
 <section class="section section-dark">
   <div class="section-eyebrow reveal">In Active Development</div>
-  <h2 class="section-title reveal">Five products. <span>Real foundations.</span></h2>
+  <h2 class="section-title reveal">Four products. <span>Real foundations.</span></h2>
   <p class="section-sub reveal">Each one built on E-Group's existing infrastructure — not greenfield experiments, but extensions of proven systems into new domains.</p>
 
   <div class="dev-grid">
@@ -130,14 +131,6 @@ footer{padding:40px 60px;border-top:1px solid var(--border);display:flex;align-i
     </div>
 
     <div class="dev-card reveal">
-      <div class="dev-card-status status-esa"><span class="dot"></span>ESA Partnership Active</div>
-      <div class="dev-card-sector">SpaceTech · Critical Infrastructure</div>
-      <div class="dev-card-name">SpadaX</div>
-      <div class="dev-card-desc">Real-time sensor analytics, anomaly detection, and predictive maintenance for space and ground infrastructure. Uses a simulate-then-detect methodology — injecting anomalies into real Galileo GNSS data to train and validate AI models against ground truth. Includes autonomous medical diagnostics for space crew health monitoring.</div>
-      <div class="dev-card-why">Why it matters — Proactive anomaly detection on live satellite ground station data. A mission-ready validation framework built for environments where failure is not an option.</div>
-    </div>
-
-        <div class="dev-card reveal">
       <div class="dev-card-status status-dev"><span class="dot"></span>In Development</div>
       <div class="dev-card-sector">FinTech · AI Infrastructure</div>
       <div class="dev-card-name">COIOS</div>
@@ -167,14 +160,14 @@ footer{padding:40px 60px;border-top:1px solid var(--border);display:flex;align-i
       <div class="vision-tag">Outward Intelligence</div>
       <div class="vision-name gold">Rise</div>
       <div class="vision-desc">Rise reads the world so organisations can act on it. Content intelligence, market signals, sector monitoring — all filtered through the specific lens of what matters to your organisation. Not a news feed. Not a dashboard. An intelligence layer that understands context.</div>
-      <div class="vision-status">In development · <a href="../journal/index.html" style="color:var(--gold);text-decoration:none;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1px;">Follow the build →</a></div>
+      <div class="vision-status">In development · No launch date set</div>
     </div>
 
     <div class="vision-card essence-card reveal reveal-delay-1">
       <div class="vision-tag">Inward Intelligence</div>
       <div class="vision-name teal">Essence</div>
       <div class="vision-desc">Essence reads your organisation so leadership can see what is actually happening inside it. Three visibility tiers — all-staff global view, role-specific intelligence, and full leadership insight. The gap between what leadership thinks is happening and what is actually happening is where organisations fail. Essence closes that gap.</div>
-      <div class="vision-status">In development · <a href="../journal/index.html" style="color:var(--gold);text-decoration:none;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1px;">Follow the build →</a></div>
+      <div class="vision-status">In development · No launch date set</div>
     </div>
   </div>
 </section>
@@ -182,11 +175,11 @@ footer{padding:40px 60px;border-top:1px solid var(--border);display:flex;align-i
 
 <!-- 5D -->
 <section class="section" style="background:var(--dark);">
-  <div class="section-eyebrow reveal">Built in Budapest · Moving Fast</div>
+  <div class="section-eyebrow reveal">Also Inside E-Group</div>
   <h2 class="section-title reveal">Enterprise thinking.<br><span>Startup speed.</span></h2>
   <p class="section-sub reveal">Most companies choose one or the other. E-Group runs both simultaneously.</p>
 
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);">
+  <div class="speed-grid">
 
     <div style="background:var(--dark);padding:48px;border-left:3px solid var(--gold);">
       <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--mid);margin-bottom:20px;">The Team</div>
