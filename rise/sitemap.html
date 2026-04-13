@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sitemap — E-Group</title>
+<meta name="description" content="Complete sitemap for the E-Group ICT Software Zrt. website. All pages, sections, and records.">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23080808'/%3E%3Ctext x='5' y='25' font-family='Georgia,serif' font-weight='900' font-size='26' fill='%23C8A96E'%3EE%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --black:#080808;--dark:#0A0A0A;--panel:#111;
+  --border:#1A1A1A;--muted:#333;--dim:#555;--mid:#777;
+  --text:#B0B0B0;--white:#EFEFEF;--gold:#C8A96E;--gold2:#A07840;
+}
+html{background:var(--black);color:var(--white);font-family:'DM Sans',sans-serif;}
+body{overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");opacity:0.025;pointer-events:none;z-index:1000;}
+
+.page-hero{padding:172px 60px 60px;border-bottom:1px solid var(--border);}
+.page-eyebrow{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--mid);margin-bottom:24px;display:flex;align-items:center;gap:12px;}
+.page-eyebrow::before{content:'';display:inline-block;width:24px;height:1px;background:var(--gold);}
+.page-hero h1{font-family:'Syne',sans-serif;font-size:clamp(32px,4vw,52px);font-weight:800;color:var(--white);letter-spacing:-1px;line-height:1;margin-bottom:16px;}
+.page-hero p{font-size:15px;color:var(--mid);max-width:520px;line-height:1.7;}
+
+.sitemap-wrap{padding:80px 60px;display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);}
+.sm-section{background:var(--dark);padding:48px 36px;}
+.sm-section-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:24px;display:flex;align-items:center;gap:10px;}
+.sm-section-label::before{content:'';display:inline-block;width:16px;height:1px;background:var(--gold);}
+.sm-links{display:flex;flex-direction:column;gap:0;}
+.sm-link{display:flex;align-items:baseline;gap:12px;padding:10px 0;border-bottom:1px solid var(--border);text-decoration:none;transition:background 0.15s;group:true;}
+.sm-link:last-child{border-bottom:none;}
+.sm-link:hover .sm-link-name{color:var(--white);}
+.sm-link-name{font-size:14px;color:var(--text);transition:color 0.2s;flex:1;}
+.sm-link-name.primary{font-family:'Syne',sans-serif;font-weight:700;font-size:15px;color:var(--white);}
+.sm-link-meta{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);white-space:nowrap;}
+.sm-link-meta.live{color:#4ADE80;}
+.sm-link-meta.dev{color:var(--gold);}
+.sm-link-meta.coming{color:var(--muted);}
+.sm-indent{padding-left:16px;border-left:1px solid var(--border);margin-top:4px;margin-bottom:4px;}
+
+.xml-note{margin:0 60px 80px;padding:28px 32px;background:var(--dark);border:1px solid var(--border);border-left:3px solid var(--gold);max-width:680px;}
+.xml-note p{font-size:14px;color:var(--dim);line-height:1.8;}
+.xml-note a{color:var(--gold);text-decoration:none;border-bottom:1px solid rgba(200,169,110,0.3);}
+.xml-note a:hover{border-color:var(--gold);}
+.xml-note strong{color:var(--text);}
+
+@media(max-width:1023px){
+  .sitemap-wrap{grid-template-columns:1fr 1fr;padding:60px 36px;}
+  .page-hero{padding:152px 36px 60px;}
+  .xml-note{margin:0 36px 60px;}
+}
+@media(max-width:767px){
+  .sitemap-wrap{grid-template-columns:1fr;padding:48px 20px;}
+  .page-hero{padding:130px 20px 48px;}
+  .xml-note{margin:0 20px 48px;}
+}
+</style>
+</head>
+<body>
+<script src="nav-site.js"></script>
+
+<div class="page-hero">
+  <div class="page-eyebrow">Site Map</div>
+  <h1>Every page.<br>One place.</h1>
+  <p>The complete structure of the E-Group site — main pages, record sections, thinking archive, and all individual records.</p>
+</div>
+
+<div class="sitemap-wrap">
+
+  <!-- MAIN PAGES -->
+  <div class="sm-section">
+    <div class="sm-section-label">Main Pages</div>
+    <div class="sm-links">
+      <a href="index.html" class="sm-link">
+        <span class="sm-link-name primary">Home</span>
+        <span class="sm-link-meta live">Live</span>
+      </a>
+      <a href="intelligence.html" class="sm-link">
+        <span class="sm-link-name primary">The Work</span>
+        <span class="sm-link-meta live">Live</span>
+      </a>
+      <a href="rise.html" class="sm-link">
+        <span class="sm-link-name primary">What's Next</span>
+        <span class="sm-link-meta live">Live</span>
+      </a>
+      <a href="thinking.html" class="sm-link">
+        <span class="sm-link-name primary">Thinking</span>
+        <span class="sm-link-meta live">Live</span>
+      </a>
+      <a href="archive.html" class="sm-link sm-indent">
+        <span class="sm-link-name">Archive</span>
+        <span class="sm-link-meta live">Live</span>
+      </a>
+      <a href="thinking-research.html" class="sm-link sm-indent">
+        <span class="sm-link-name">Research Department Blog</span>
+        <span class="sm-link-meta live">Live</span>
+      </a>
+      <a href="about.html" class="sm-link">
+        <span class="sm-link-name primary">About</span>
+        <span class="sm-link-meta live">Live</span>
+      </a>
+      <a href="contact.html" class="sm-link">
+        <span class="sm-link-name primary">Work With Us</span>
+        <span class="sm-link-meta live">Live</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- THE RECORD -->
+  <div class="sm-section">
+    <div class="sm-section-label">The Record</div>
+    <div class="sm-links">
+      <a href="record/index.html" class="sm-link">
+        <span class="sm-link-name primary">Record Hub</span>
+        <span class="sm-link-meta live">Live</span>
+      </a>
+      <a href="record/delivered.html" class="sm-link sm-indent">
+        <span class="sm-link-name">Delivered</span>
+        <span class="sm-link-meta live">Live</span>
+      </a>
+      <a href="record/people.html" class="sm-link sm-indent">
+        <span class="sm-link-name">The People</span>
+        <span class="sm-link-meta live">Live</span>
+      </a>
+      <a href="record/science.html" class="sm-link sm-indent">
+        <span class="sm-link-name">The Science</span>
+        <span class="sm-link-meta live">Live</span>
+      </a>
+      <a href="record/recognition.html" class="sm-link sm-indent">
+        <span class="sm-link-name">Recognition</span>
+        <span class="sm-link-meta live">Live</span>
+      </a>
+      <a href="record/facts.html" class="sm-link sm-indent">
+        <span class="sm-link-name">The Facts</span>
+        <span class="sm-link-meta live">Live</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- PROJECTS & PRODUCTS -->
+  <div class="sm-section">
+    <div class="sm-section-label">Projects &amp; Products</div>
+    <div class="sm-links">
+      <a href="record/mavir.html" class="sm-link">
+        <span class="sm-link-name">MAVIR — National Electricity Grid</span>
+        <span class="sm-link-meta live">Live</span>
+      </a>
+      <a href="record/kau.html" class="sm-link">
+        <span class="sm-link-name">KAÜ — National Digital Identity</span>
+        <span class="sm-link-meta live">Live</span>
+      </a>
+      <a href="record/helix.html" class="sm-link">
+        <span class="sm-link-name">HeliX + FedX</span>
+        <span class="sm-link-meta live">Live</span>
+      </a>
+      <a href="record/eidas.html" class="sm-link">
+        <span class="sm-link-name">MyD Wallet — eIDAS 2.0</span>
+        <span class="sm-link-meta live">Live</span>
+      </a>
+      <a href="record/corpex.html" class="sm-link">
+        <span class="sm-link-name">CORPEX — Corporate Banking</span>
+        <span class="sm-link-meta live">Live</span>
+      </a>
+      <a href="record/ipcei-cis.html" class="sm-link">
+        <span class="sm-link-name">IPCEI-CIS — FedEU.ai</span>
+        <span class="sm-link-meta live">Live</span>
+      </a>
+      <a href="record/coios.html" class="sm-link">
+        <span class="sm-link-name">COIOS — Sovereign Agentic AI</span>
+        <span class="sm-link-meta dev">In Development</span>
+      </a>
+      <a href="record/proofx.html" class="sm-link">
+        <span class="sm-link-name">ProofX</span>
+        <span class="sm-link-meta dev">In Development</span>
+      </a>
+      <a href="record/genesis.html" class="sm-link">
+        <span class="sm-link-name">GENESIS</span>
+        <span class="sm-link-meta dev">In Development</span>
+      </a>
+      <a href="record/medical-ai.html" class="sm-link">
+        <span class="sm-link-name">Medical AI Research</span>
+        <span class="sm-link-meta live">Live</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- PEOPLE -->
+  <div class="sm-section">
+    <div class="sm-section-label">People</div>
+    <div class="sm-links">
+      <a href="record/people.html" class="sm-link">
+        <span class="sm-link-name primary">Full Team Directory</span>
+        <span class="sm-link-meta live">Live</span>
+      </a>
+      <a href="record/peter-antal.html" class="sm-link sm-indent">
+        <span class="sm-link-name">Dr. Péter Antal</span>
+        <span class="sm-link-meta live">Live</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- PRESS & UTILITIES -->
+  <div class="sm-section">
+    <div class="sm-section-label">Press &amp; Utilities</div>
+    <div class="sm-links">
+      <a href="record/press.html" class="sm-link">
+        <span class="sm-link-name primary">Press Kit</span>
+        <span class="sm-link-meta live">Live</span>
+      </a>
+      <a href="sitemap.html" class="sm-link">
+        <span class="sm-link-name">Sitemap (this page)</span>
+        <span class="sm-link-meta live">Live</span>
+      </a>
+      <a href="sitemap.xml" class="sm-link">
+        <span class="sm-link-name">XML Sitemap</span>
+        <span class="sm-link-meta live">Live</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- COMING SOON -->
+  <div class="sm-section">
+    <div class="sm-section-label">Coming Soon</div>
+    <div class="sm-links">
+      <a href="thinking.html" class="sm-link">
+        <span class="sm-link-name">FinTech Department Blog</span>
+        <span class="sm-link-meta coming">Pending</span>
+      </a>
+      <a href="thinking.html" class="sm-link">
+        <span class="sm-link-name">HealthTech Department Blog</span>
+        <span class="sm-link-meta coming">Pending</span>
+      </a>
+      <a href="thinking.html" class="sm-link">
+        <span class="sm-link-name">GovTech Department Blog</span>
+        <span class="sm-link-meta coming">Pending</span>
+      </a>
+      <a href="thinking.html" class="sm-link">
+        <span class="sm-link-name">SpaceTech Department Blog</span>
+        <span class="sm-link-meta coming">Pending</span>
+      </a>
+      <a href="record/delivered.html" class="sm-link">
+        <span class="sm-link-name">SpadaX Record Page</span>
+        <span class="sm-link-meta coming">Pending</span>
+      </a>
+      <a href="record/delivered.html" class="sm-link">
+        <span class="sm-link-name">Neonatal Intelligence Record</span>
+        <span class="sm-link-meta coming">Pending</span>
+      </a>
+    </div>
+  </div>
+
+</div>
+
+<!-- XML NOTE -->
+<div class="xml-note">
+  <p><strong>Machine-readable sitemap:</strong> An <a href="sitemap.xml">XML sitemap</a> is also available for search engine submission. If you manage this site, submit it via <a href="https://search.google.com/search-console" target="_blank" rel="noopener">Google Search Console</a> to accelerate indexing of all pages.</p>
+</div>
+
+<script>
+const hamburger=document.getElementById('egroup-hamburger'),mobileMenu=document.getElementById('egroup-mobile-menu');
+if(hamburger&&mobileMenu){
+  hamburger.addEventListener('click',()=>{hamburger.classList.toggle('open');mobileMenu.classList.toggle('open');document.body.style.overflow=mobileMenu.classList.contains('open')?'hidden':'';});
+  mobileMenu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{hamburger.classList.remove('open');mobileMenu.classList.remove('open');document.body.style.overflow='';}));
+}
+</script>
+</body>
+</html>

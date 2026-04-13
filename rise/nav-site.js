@@ -110,6 +110,7 @@
           '<a href="' + base + 'intelligence.html">The Work</a>' +
           '<a href="' + base + 'rise.html">What\'s Next</a>' +
           '<a href="' + base + 'thinking.html">Thinking</a>' +
+          '<a href="' + base + 'archive.html">Archive</a>' +
           '<a href="' + base + 'about.html">About</a>' +
           '<a href="' + base + 'contact.html">Work With Us</a>' +
         '</div>' +
@@ -138,7 +139,7 @@
     '</div>' +
     '<div class="site-footer-bottom">' +
       '<div class="site-footer-legal">© 2026 E-Group ICT Software Zrt. All rights reserved.</div>' +
-      '<div class="site-footer-legal">Budapest, Hungary · Intelligence Infrastructure</div>' +
+      '<div class="site-footer-legal">Budapest, Hungary · Intelligence Infrastructure · <a href="' + base + 'sitemap.html" style="color:#555;text-decoration:none;">Sitemap</a></div>' +
     '</div>' +
   '</footer>';
 
