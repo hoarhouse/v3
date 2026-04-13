@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Work With Us — E-Group</title>
+<meta name="description" content="Start a conversation with E-Group ICT Software Zrt. We work with enterprises, consortiums, and government partners serious about AI infrastructure.">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23080808'/%3E%3Ctext x='5' y='25' font-family='Georgia,serif' font-weight='900' font-size='26' fill='%23C8A96E'%3EE%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --black:#080808;--dark:#0F0F0F;--panel:#161616;--ink:#0A0A0A;
+  --border:#1E1E1E;--muted:#333;--dim:#555;--mid:#777;
+  --text:#B0B0B0;--light:#D0D0D0;--white:#EFEFEF;
+  --gold:#C8A96E;--gold2:#A07840;
+}
+html{background:var(--black);color:var(--white);font-family:'DM Sans',sans-serif;}
+body{overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");opacity:0.025;pointer-events:none;z-index:1000;}
+
+.page-wrap{min-height:100vh;padding:160px 60px 100px;display:grid;grid-template-columns:1fr 1fr;gap:100px;align-items:start;max-width:1200px;margin:0 auto;}
+
+/* LEFT SIDE */
+.contact-eyebrow{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:24px;display:flex;align-items:center;gap:12px;}
+.contact-eyebrow::before{content:'';display:inline-block;width:24px;height:1px;background:var(--gold);}
+.contact-title{font-family:'Syne',sans-serif;font-size:clamp(32px,4vw,58px);font-weight:800;color:var(--white);letter-spacing:-2px;line-height:1;margin-bottom:28px;}
+.contact-title em{font-style:normal;color:var(--gold);}
+.contact-sub{font-size:16px;color:var(--text);line-height:1.8;margin-bottom:40px;max-width:440px;}
+.contact-details{display:flex;flex-direction:column;gap:0;border-top:1px solid var(--border);}
+.contact-detail-row{display:flex;align-items:baseline;gap:16px;padding:14px 0;border-bottom:1px solid var(--border);}
+.contact-detail-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);min-width:80px;flex-shrink:0;}
+.contact-detail-value{font-size:13px;color:var(--text);line-height:1.5;}
+
+/* RIGHT SIDE — FORM */
+.form-wrap{background:var(--panel);border:1px solid var(--border);padding:48px 44px;}
+.form-wrap-eyebrow{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-bottom:32px;}
+.form{display:flex;flex-direction:column;gap:24px;}
+.form-field{display:flex;flex-direction:column;gap:10px;}
+.form-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--mid);}
+.form-input,.form-textarea{
+  background:#1A1A1A;
+  border:1px solid #383838;
+  border-radius:2px;
+  color:var(--white);
+  font-family:'DM Sans',sans-serif;
+  font-size:15px;
+  padding:16px 18px;
+  outline:none;
+  transition:border-color 0.2s,background 0.2s;
+  width:100%;
+}
+.form-input::placeholder,.form-textarea::placeholder{color:#444;}
+.form-input:hover,.form-textarea:hover{border-color:#555;}
+.form-input:focus,.form-textarea:focus{border-color:var(--gold);background:#1E1A14;}
+.form-textarea{resize:vertical;min-height:140px;line-height:1.6;}
+.form-submit{
+  font-family:'DM Mono',monospace;
+  font-size:12px;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+  color:var(--black);
+  background:var(--gold);
+  border:none;
+  padding:20px 36px;
+  cursor:pointer;
+  width:100%;
+  text-align:left;
+  transition:background 0.2s;
+  margin-top:8px;
+}
+.form-submit:hover{background:var(--gold2);}
+.form-note{font-size:12px;color:var(--dim);line-height:1.6;margin-top:4px;}
+
+/* NOT LOOKING FOR */
+.not-looking{margin-top:48px;padding:28px 32px;border:1px solid var(--border);border-left:3px solid var(--gold);}
+.not-looking p{font-size:14px;color:var(--dim);line-height:1.8;}
+.not-looking strong{color:var(--text);font-weight:500;}
+
+@media(max-width:1023px){
+  .page-wrap{grid-template-columns:1fr;gap:60px;padding:140px 36px 80px;}
+  .form-wrap{padding:36px 32px;}
+}
+@media(max-width:767px){
+  .page-wrap{padding:120px 20px 60px;}
+  .form-wrap{padding:28px 24px;}
+  .contact-title{font-size:clamp(28px,8vw,44px);}
+}
+</style>
+</head>
+<body>
+<script src="nav-site.js"></script>
+
+<div class="page-wrap">
+
+  <div>
+    <div class="contact-eyebrow">Work With Us</div>
+    <h1 class="contact-title">Tell us what<br>you're <em>building.</em></h1>
+    <p class="contact-sub">We work with enterprises, consortiums, and government partners who are serious about what AI infrastructure actually means. Not a pitch — a conversation.</p>
+
+    <div class="contact-details">
+      <div class="contact-detail-row">
+        <span class="contact-detail-label">Location</span>
+        <span class="contact-detail-value">Budapest, Hungary · Est. 1993</span>
+      </div>
+      <div class="contact-detail-row">
+        <span class="contact-detail-label">Team</span>
+        <span class="contact-detail-value">90+ staff · 50+ external associates</span>
+      </div>
+      <div class="contact-detail-row">
+        <span class="contact-detail-label">Sectors</span>
+        <span class="contact-detail-value">FinTech · HealthTech · GovTech · SpaceTech · EnergyTech</span>
+      </div>
+      <div class="contact-detail-row">
+        <span class="contact-detail-label">Website</span>
+        <span class="contact-detail-value"><a href="https://www.egroup.hu" target="_blank" rel="noopener" style="color:var(--gold);text-decoration:none;border-bottom:1px solid rgba(200,169,110,0.3);">egroup.hu</a></span>
+      </div>
+      <div class="contact-detail-row">
+        <span class="contact-detail-label">LinkedIn</span>
+        <span class="contact-detail-value"><a href="https://www.linkedin.com/company/e-group-ict-group" target="_blank" rel="noopener" style="color:var(--gold);text-decoration:none;border-bottom:1px solid rgba(200,169,110,0.3);">e-group-ict-group</a></span>
+      </div>
+    </div>
+
+    <div class="not-looking">
+      <p><strong>We are not looking for customers.</strong> We are looking for partners who understand their domain deeply enough to help us build something genuinely useful. If you have a hard problem in a regulated industry — tell us what it is.</p>
+    </div>
+  </div>
+
+  <div>
+    <div class="form-wrap">
+      <div class="form-wrap-eyebrow">Start a conversation</div>
+      <div class="form">
+        <div class="form-field">
+          <label class="form-label">Your name &amp; organisation</label>
+          <input class="form-input" type="text" placeholder="Name, Company">
+        </div>
+        <div class="form-field">
+          <label class="form-label">Email</label>
+          <input class="form-input" type="email" placeholder="email@organisation.com">
+        </div>
+        <div class="form-field">
+          <label class="form-label">What are you working on?</label>
+          <textarea class="form-textarea" placeholder="Tell us what you're trying to solve. The harder the problem the better."></textarea>
+        </div>
+        <button class="form-submit">Send Message →</button>
+        <p class="form-note">We read every message. If it's a fit we'll respond within 48 hours.</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const hamburger=document.getElementById('egroup-hamburger'),mobileMenu=document.getElementById('egroup-mobile-menu');
+if(hamburger&&mobileMenu){
+  hamburger.addEventListener('click',()=>{hamburger.classList.toggle('open');mobileMenu.classList.toggle('open');document.body.style.overflow=mobileMenu.classList.contains('open')?'hidden':'';});
+  mobileMenu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{hamburger.classList.remove('open');mobileMenu.classList.remove('open');document.body.style.overflow='';}));
+}
+</script>
+</body>
+</html>
