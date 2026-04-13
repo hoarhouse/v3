@@ -59,16 +59,12 @@
       '<div class="nav-rec" style="position:relative;">' +
         '<a href="' + base + 'record/index.html" style="font-family:\'DM Mono\',monospace;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;text-decoration:none;color:#777;cursor:pointer;">Record ▾</a>' +
         '<div class="ndrop">' +
-          '<a href="' + base + 'record/index.html" style="display:block;padding:10px 18px;font-family:\'DM Mono\',monospace;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:#666;text-decoration:none;">Overview</a>' +
-          '<a href="' + base + 'record/mavir.html" style="display:block;padding:10px 18px;font-family:\'DM Mono\',monospace;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:#666;text-decoration:none;">MAVIR — Electricity Grid</a>' +
-          '<a href="' + base + 'record/corpex.html" style="display:block;padding:10px 18px;font-family:\'DM Mono\',monospace;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:#666;text-decoration:none;">CORPEX — Corporate Banking</a>' +
-          '<a href="' + base + 'record/ipcei-cis.html" style="display:block;padding:10px 18px;font-family:\'DM Mono\',monospace;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:#666;text-decoration:none;">IPCEI-CIS — FedEU.ai</a>' +
-          '<a href="' + base + 'record/kau.html" style="display:block;padding:10px 18px;font-family:\'DM Mono\',monospace;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:#666;text-decoration:none;">KAÜ — National Identity</a>' +
-          '<a href="' + base + 'record/helix.html" style="display:block;padding:10px 18px;font-family:\'DM Mono\',monospace;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:#666;text-decoration:none;">HeliX + FedX</a>' +
-          '<a href="' + base + 'record/eidas.html" style="display:block;padding:10px 18px;font-family:\'DM Mono\',monospace;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:#666;text-decoration:none;">eIDAS 2.0 — MyD Wallet</a>' +
-          '<a href="' + base + 'record/medical-ai.html" style="display:block;padding:10px 18px;font-family:\'DM Mono\',monospace;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:#666;text-decoration:none;">Medical AI — GRaDPaLM</a>' +
-          '<a href="' + base + 'record/peter-antal.html" style="display:block;padding:10px 18px;font-family:\'DM Mono\',monospace;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:#666;text-decoration:none;">Dr. Péter Antal</a>' +
-          '<a href="' + base + 'record/press.html" style="display:block;padding:10px 18px;font-family:\'DM Mono\',monospace;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:#666;text-decoration:none;">Press Kit</a>' +
+          '<a href="' + base + 'record/index.html" style="display:block;padding:10px 18px;font-family:\'DM Mono\',monospace;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:#C8A96E;text-decoration:none;">Full Record →</a>' +
+          '<a href="' + base + 'record/delivered.html" style="display:block;padding:10px 18px;font-family:\'DM Mono\',monospace;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:#666;text-decoration:none;">Delivered</a>' +
+          '<a href="' + base + 'record/people.html" style="display:block;padding:10px 18px;font-family:\'DM Mono\',monospace;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:#666;text-decoration:none;">The People</a>' +
+          '<a href="' + base + 'record/science.html" style="display:block;padding:10px 18px;font-family:\'DM Mono\',monospace;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:#666;text-decoration:none;">The Science</a>' +
+          '<a href="' + base + 'record/recognition.html" style="display:block;padding:10px 18px;font-family:\'DM Mono\',monospace;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:#666;text-decoration:none;">Recognition</a>' +
+          '<a href="' + base + 'record/facts.html" style="display:block;padding:10px 18px;font-family:\'DM Mono\',monospace;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:#666;text-decoration:none;">The Facts</a>' +
         '</div>' +
       '</div>' +
     '</div>' +
@@ -84,16 +80,12 @@
     '<a href="' + base + 'thinking.html" class="mob-main">Thinking</a>' +
     '<a href="' + base + 'about.html" class="mob-main">About</a>' +
     '<div class="mob-divider">The Record</div>' +
-    '<a href="' + base + 'record/index.html" class="mob-record">Overview</a>' +
-    '<a href="' + base + 'record/mavir.html" class="mob-record">MAVIR — Electricity Grid</a>' +
-    '<a href="' + base + 'record/corpex.html" class="mob-record">CORPEX — Corporate Banking</a>' +
-    '<a href="' + base + 'record/ipcei-cis.html" class="mob-record">IPCEI-CIS — FedEU.ai</a>' +
-    '<a href="' + base + 'record/kau.html" class="mob-record">KAÜ — National Identity</a>' +
-    '<a href="' + base + 'record/helix.html" class="mob-record">HeliX + FedX</a>' +
-    '<a href="' + base + 'record/eidas.html" class="mob-record">eIDAS 2.0 — MyD Wallet</a>' +
-    '<a href="' + base + 'record/medical-ai.html" class="mob-record">Medical AI — GRaDPaLM</a>' +
-    '<a href="' + base + 'record/peter-antal.html" class="mob-record">Dr. Péter Antal</a>' +
-    '<a href="' + base + 'record/press.html" class="mob-record">Press Kit</a>' +
+    '<a href="' + base + 'record/index.html" class="mob-record">Full Record</a>' +
+    '<a href="' + base + 'record/delivered.html" class="mob-record">Delivered</a>' +
+    '<a href="' + base + 'record/people.html" class="mob-record">The People</a>' +
+    '<a href="' + base + 'record/science.html" class="mob-record">The Science</a>' +
+    '<a href="' + base + 'record/recognition.html" class="mob-record">Recognition</a>' +
+    '<a href="' + base + 'record/facts.html" class="mob-record">The Facts</a>' +
     '<a href="' + base + 'index.html#contact" class="mob-cta">Work With Us</a>' +
   '</div>';
 
