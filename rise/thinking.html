@@ -217,7 +217,7 @@ body{overflow-x:hidden;}
   <!-- FEED GRID -->
   <div class="feed-grid">
 
-    <a href="https://www.egroup.hu/a-winning-streak-in-ai-innovation-e-group-team-member-secures-double-victory-at-scientific-events/" target="_blank" class="feed-card">
+    <a href="https://www.egroup.hu/a-winning-streak-in-ai-innovation-e-group-team-member-secures-double-victory-at-scientific-events/" target="_blank" class="feed-card" data-format="signal" data-domain="healthtech ai-research">
       <div class="feed-card-tags">
         <span class="feed-tag signal">Signal</span>
         <span class="feed-tag sector">HealthTech · AI Research</span>
@@ -231,7 +231,7 @@ body{overflow-x:hidden;}
       </div>
     </a>
 
-    <a href="https://www.egroup.hu/ambiti8n-doers-paradise-ipcei-cis-8ra-workshop-at-e-group-budapest-hq/" target="_blank" class="feed-card">
+    <a href="https://www.egroup.hu/ambiti8n-doers-paradise-ipcei-cis-8ra-workshop-at-e-group-budapest-hq/" target="_blank" class="feed-card" data-format="in-the-room" data-domain="govtech">
       <div class="feed-card-tags">
         <span class="feed-tag in-the-room">In The Room</span>
         <span class="feed-tag sector">GovTech · EU</span>
@@ -245,7 +245,7 @@ body{overflow-x:hidden;}
       </div>
     </a>
 
-    <a href="https://www.egroup.hu/dr-peter-antal-lead-researcher-at-e-group-awarded-the-knights-cross-of-the-order-of-merit-of-hungary/" target="_blank" class="feed-card">
+    <a href="https://www.egroup.hu/dr-peter-antal-lead-researcher-at-e-group-awarded-the-knights-cross-of-the-order-of-merit-of-hungary/" target="_blank" class="feed-card" data-format="signal" data-domain="ai-research">
       <div class="feed-card-tags">
         <span class="feed-tag signal">Signal</span>
         <span class="feed-tag sector">AI Research</span>
@@ -261,7 +261,7 @@ body{overflow-x:hidden;}
       </div>
     </a>
 
-    <div class="feed-card placeholder">
+    <div class="feed-card placeholder" data-format="deep-read" data-domain="fintech">
       <div class="feed-card-tags">
         <span class="feed-tag deep-read">Deep Read</span>
         <span class="feed-tag sector">FinTech</span>
@@ -271,7 +271,7 @@ body{overflow-x:hidden;}
       <div class="feed-card-meta"><span class="feed-card-date">Coming from the FinTech team</span></div>
     </div>
 
-    <div class="feed-card placeholder">
+    <div class="feed-card placeholder" data-format="signal" data-domain="govtech">
       <div class="feed-card-tags">
         <span class="feed-tag signal">Signal</span>
         <span class="feed-tag sector">GovTech</span>
@@ -281,7 +281,7 @@ body{overflow-x:hidden;}
       <div class="feed-card-meta"><span class="feed-card-date">Coming from the GovTech team</span></div>
     </div>
 
-    <div class="feed-card placeholder">
+    <div class="feed-card placeholder" data-format="deep-read" data-domain="ai-research">
       <div class="feed-card-tags">
         <span class="feed-tag deep-read">Deep Read</span>
         <span class="feed-tag sector">AI Research</span>
@@ -291,6 +291,10 @@ body{overflow-x:hidden;}
       <div class="feed-card-meta"><span class="feed-card-date">Coming from the Research team</span></div>
     </div>
 
+  </div>
+  <div id="feed-empty" style="display:none;padding:60px 40px;text-align:center;background:var(--dark);border-top:1px solid var(--border);">
+    <p style="font-family:'DM Mono',monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);">No articles match this filter yet.</p>
+    <p style="font-size:13px;color:var(--muted);margin-top:8px;">More content is on the way from the teams.</p>
   </div>
 </div>
 
@@ -360,12 +364,62 @@ body{overflow-x:hidden;}
 </footer>
 
 <script>
-const filterBtns = document.querySelectorAll('.filter-btn');
-filterBtns.forEach(btn => {
+const hamburger=document.getElementById('egroup-hamburger'),mobileMenu=document.getElementById('egroup-mobile-menu');
+if(hamburger&&mobileMenu){
+  hamburger.addEventListener('click',()=>{hamburger.classList.toggle('open');mobileMenu.classList.toggle('open');document.body.style.overflow=mobileMenu.classList.contains('open')?'hidden':'';});
+  mobileMenu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{hamburger.classList.remove('open');mobileMenu.classList.remove('open');document.body.style.overflow='';}));
+}
+
+// Filter logic
+var activeFormat = 'all';
+var activeDomain = 'all';
+
+function applyFilters() {
+  var cards = document.querySelectorAll('.feed-grid .feed-card');
+  var visibleCount = 0;
+  cards.forEach(function(card) {
+    var fmt = card.getAttribute('data-format') || '';
+    var dom = card.getAttribute('data-domain') || '';
+    var isPlaceholder = card.classList.contains('placeholder');
+    var formatMatch = activeFormat === 'all' || fmt === activeFormat;
+    var domainMatch = activeDomain === 'all' || dom.indexOf(activeDomain) !== -1;
+    var anyFilterActive = activeFormat !== 'all' || activeDomain !== 'all';
+    // Hide placeholders when any filter is active
+    if (isPlaceholder && anyFilterActive) {
+      card.style.display = 'none';
+    } else if (formatMatch && domainMatch) {
+      card.style.display = '';
+      visibleCount++;
+    } else {
+      card.style.display = 'none';
+    }
+  });
+  // Show empty state if nothing visible
+  var emptyState = document.getElementById('feed-empty');
+  if (emptyState) emptyState.style.display = visibleCount === 0 ? 'block' : 'none';
+}
+
+// Format filter buttons (first group)
+var formatGroup = document.querySelectorAll('.filter-group')[0];
+formatGroup.querySelectorAll('.filter-btn').forEach(function(btn) {
   btn.addEventListener('click', function() {
-    const group = this.closest('.filter-group');
-    group.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    formatGroup.querySelectorAll('.filter-btn').forEach(function(b) { b.classList.remove('active'); });
     this.classList.add('active');
+    var txt = this.textContent.trim().toLowerCase().replace(/ /g, '-').replace('.', '');
+    activeFormat = txt === 'all' ? 'all' : txt === 'dept-voice' ? 'dept-voice' : txt;
+    applyFilters();
+  });
+});
+
+// Domain filter buttons (second group)
+var domainGroup = document.querySelectorAll('.filter-group')[1];
+domainGroup.querySelectorAll('.filter-btn').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    domainGroup.querySelectorAll('.filter-btn').forEach(function(b) { b.classList.remove('active'); });
+    this.classList.add('active');
+    var txt = this.textContent.trim().toLowerCase().replace(/ /g, '-');
+    activeDomain = txt === 'all' ? 'all' : txt === 'ai-research' ? 'ai-research' : txt;
+    applyFilters();
   });
 });
 </script>
