@@ -120,8 +120,8 @@ body{overflow-x:hidden;}
 .form{display:flex;flex-direction:column;gap:16px;}
 .form-field{display:flex;flex-direction:column;gap:8px;}
 .form-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--mid);}
-.form-input,.form-textarea{background:var(--dark);border:1px solid var(--border);color:var(--white);font-family:'DM Sans',sans-serif;font-size:14px;padding:14px 16px;outline:none;transition:border-color 0.2s;width:100%;}
-.form-input:focus,.form-textarea:focus{border-color:var(--gold);}
+.form-input,.form-textarea{background:#1A1A1A;border:1px solid #383838;border-radius:2px;color:var(--white);font-family:'DM Sans',sans-serif;font-size:14px;padding:14px 16px;outline:none;transition:border-color 0.2s,background 0.2s;width:100%;}.form-input::placeholder,.form-textarea::placeholder{color:#444;}.form-input:hover,.form-textarea:hover{border-color:#555;}
+.form-input:focus,.form-textarea:focus{border-color:var(--gold);background:#1E1A14;}
 .form-textarea{resize:vertical;min-height:120px;}
 .form-submit{font-family:'DM Mono',monospace;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:var(--black);background:var(--gold);border:none;padding:18px 36px;cursor:pointer;width:100%;text-align:left;transition:background 0.2s;}
 .form-submit:hover{background:var(--gold2);}
@@ -164,7 +164,7 @@ body{overflow-x:hidden;}
   </h1>
   <p class="hero-sub">Not the hype. The foundation. <strong>Trust infrastructure, federated data, and AI that ships</strong> — built at national scale, for three decades.</p>
   <div class="hero-ctas">
-    <a href="#contact" class="cta-primary">Start a Conversation →</a>
+    <a href="contact.html" class="cta-primary">Start a Conversation →</a>
     <a href="record/index.html" class="cta-secondary">View The Record →</a>
   </div>
   <!-- Mobile stats — shown below CTAs on small screens -->
