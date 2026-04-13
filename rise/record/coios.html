@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>COIOS — Sovereign Agentic AI Platform — E-Group Record</title>
+<meta name="description" content="COIOS is Europe's first sovereign agentic AI platform for system integrators. Built by E-Group ICT Software Zrt. — GDPR, EU AI Act, HIPAA compliant. Deploy anywhere. White-label ready.">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23080808'/%3E%3Ctext x='5' y='25' font-family='Georgia,serif' font-weight='900' font-size='26' fill='%23C8A96E'%3EE%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --black:#080808;--dark:#0A0A0A;--panel:#111;--ink:#0F0F0F;
+  --border:#1A1A1A;--muted:#333;--dim:#555;--mid:#777;
+  --text:#B0B0B0;--light:#D0D0D0;--white:#EFEFEF;
+  --gold:#C8A96E;--gold2:#A07840;--teal:#4ECDC4;--green:#4ADE80;
+}
+html{background:var(--black);color:var(--white);font-family:'DM Sans',sans-serif;}
+body{overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");opacity:0.025;pointer-events:none;z-index:1000;}
+
+/* HERO */
+.page-hero{padding:172px 60px 80px;border-bottom:1px solid var(--border);}
+.page-eyebrow{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--mid);margin-bottom:16px;display:flex;align-items:center;gap:12px;}
+.page-eyebrow::before{content:'';display:inline-block;width:24px;height:1px;background:var(--gold);}
+.status-pill{display:inline-flex;align-items:center;gap:8px;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);border:1px solid rgba(200,169,110,0.3);padding:5px 14px;margin-bottom:28px;}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--gold);animation:pulse 2s ease-in-out infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.4;}}
+.page-hero h1{font-family:'Syne',sans-serif;font-size:clamp(40px,6vw,80px);font-weight:800;color:var(--white);letter-spacing:-2px;line-height:1;margin-bottom:8px;}
+.page-hero h1 em{font-style:normal;color:var(--gold);}
+.hero-full-name{font-family:'DM Mono',monospace;font-size:12px;letter-spacing:2px;color:var(--dim);margin-bottom:28px;}
+.page-hero p{font-size:18px;color:var(--text);line-height:1.8;max-width:640px;margin-bottom:40px;}
+.hero-tags{display:flex;gap:8px;flex-wrap:wrap;}
+.hero-tag{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--mid);border:1px solid var(--border);padding:5px 12px;}
+.hero-tag.eu{color:var(--gold);border-color:rgba(200,169,110,0.25);}
+
+/* SECTIONS */
+.section{padding:80px 60px;border-bottom:1px solid var(--border);}
+.section.dark{background:var(--dark);}
+.section-eyebrow{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:16px;display:flex;align-items:center;gap:12px;}
+.section-eyebrow::before{content:'';display:inline-block;width:24px;height:1px;background:var(--gold);}
+.section-title{font-family:'Syne',sans-serif;font-size:clamp(24px,3vw,38px);font-weight:700;color:var(--white);letter-spacing:-0.5px;margin-bottom:48px;}
+.section-title em{font-style:normal;color:var(--gold);}
+
+/* WHAT IS IT */
+.what-box{background:var(--panel);border:1px solid var(--border);border-left:3px solid var(--gold);padding:36px 40px;max-width:880px;margin-bottom:48px;}
+.what-box p{font-size:16px;color:var(--text);line-height:1.8;}
+.what-box p+p{margin-top:16px;}
+
+/* STAT ROW */
+.stat-row{display:flex;gap:0;background:var(--border);margin-bottom:1px;}
+.stat-item{background:var(--dark);padding:32px 36px;flex:1;}
+.stat-num{font-family:'Syne',sans-serif;font-size:clamp(28px,3vw,42px);font-weight:800;color:var(--white);line-height:1;margin-bottom:8px;}
+.stat-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--mid);}
+
+/* PILLARS */
+.pillars-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);}
+.pillar{background:var(--dark);padding:36px 32px;border-top:2px solid transparent;transition:border-top-color 0.2s,background 0.2s;}
+.pillar:hover{background:var(--panel);border-top-color:var(--gold);}
+.pillar-num{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--muted);margin-bottom:14px;}
+.pillar-name{font-family:'Syne',sans-serif;font-size:18px;font-weight:700;color:var(--white);margin-bottom:10px;}
+.pillar-desc{font-size:13px;color:var(--dim);line-height:1.7;}
+
+/* WHO IS IT FOR */
+.audience-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);}
+.audience-card{background:var(--dark);padding:48px 40px;}
+.ac-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:16px;}
+.ac-title{font-family:'Syne',sans-serif;font-size:24px;font-weight:700;color:var(--white);margin-bottom:16px;line-height:1.2;}
+.ac-desc{font-size:14px;color:var(--text);line-height:1.8;margin-bottom:24px;}
+.ac-list{display:flex;flex-direction:column;gap:8px;}
+.ac-item{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:0.5px;color:var(--mid);padding-left:16px;position:relative;}
+.ac-item::before{content:'→';position:absolute;left:0;color:var(--gold);}
+
+/* COMPETITIVE */
+.comp-table{width:100%;border-collapse:collapse;margin-top:8px;}
+.comp-table th{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);padding:14px 20px;text-align:left;border-bottom:1px solid var(--border);background:var(--ink);}
+.comp-table td{padding:14px 20px;font-size:13px;color:var(--text);border-bottom:1px solid var(--border);vertical-align:top;}
+.comp-table tr:last-child td{border-bottom:none;}
+.comp-table tr:hover td{background:var(--panel);}
+.yes{color:var(--green);font-family:'DM Mono',monospace;font-size:11px;}
+.no{color:var(--dim);font-family:'DM Mono',monospace;font-size:11px;}
+.partial{color:var(--gold);font-family:'DM Mono',monospace;font-size:11px;}
+.comp-name{font-family:'Syne',sans-serif;font-weight:700;color:var(--white);font-size:14px;}
+.comp-hq{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);margin-top:3px;}
+
+/* COMPLIANCE */
+.compliance-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);}
+.comp-card{background:var(--dark);padding:32px 28px;}
+.comp-card-name{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;color:var(--white);margin-bottom:6px;}
+.comp-card-status{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--green);margin-bottom:10px;}
+.comp-card-desc{font-size:12px;color:var(--dim);line-height:1.6;}
+
+/* STATUS */
+.status-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);}
+.status-card{background:var(--dark);padding:40px;}
+.sc-phase{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:12px;}
+.sc-title{font-family:'Syne',sans-serif;font-size:20px;font-weight:700;color:var(--white);margin-bottom:12px;}
+.sc-desc{font-size:13px;color:var(--dim);line-height:1.7;}
+.sc-items{display:flex;flex-direction:column;gap:8px;margin-top:16px;}
+.sc-item{font-size:13px;color:var(--text);padding-left:16px;position:relative;}
+.sc-item::before{content:'·';position:absolute;left:0;color:var(--gold);}
+
+/* CTA */
+.page-cta{padding:80px 60px;display:flex;align-items:center;justify-content:space-between;gap:40px;flex-wrap:wrap;}
+.page-cta h2{font-family:'Syne',sans-serif;font-size:clamp(24px,3vw,36px);font-weight:700;color:var(--white);margin-bottom:12px;}
+.page-cta p{font-size:16px;color:var(--text);max-width:500px;line-height:1.6;}
+.cta-btn{font-family:'DM Mono',monospace;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:var(--black);background:var(--gold);padding:16px 32px;text-decoration:none;white-space:nowrap;transition:background 0.2s;}
+.cta-btn:hover{background:var(--gold2);}
+
+@media(max-width:1023px){
+  .pillars-grid{grid-template-columns:1fr 1fr;}
+  .audience-grid{grid-template-columns:1fr;}
+  .compliance-grid{grid-template-columns:1fr 1fr;}
+  .status-grid{grid-template-columns:1fr;}
+  .stat-row{flex-direction:column;}
+  .section{padding:60px 36px;}
+  .page-hero{padding:152px 36px 60px;}
+  .page-cta{padding:60px 36px;flex-direction:column;align-items:flex-start;}
+}
+@media(max-width:767px){
+  .pillars-grid{grid-template-columns:1fr;}
+  .compliance-grid{grid-template-columns:1fr 1fr;}
+  .section{padding:48px 20px;}
+  .page-hero{padding:130px 20px 48px;}
+  .what-box{padding:24px 24px;}
+  .page-cta{padding:48px 20px;}
+}
+</style>
+</head>
+<body>
+<script src="../nav-site.js"></script>
+<script src="nav-record.js"></script>
+
+<!-- HERO -->
+<div class="page-hero">
+  <div class="page-eyebrow">The Record · Delivered · In Development</div>
+  <div class="status-pill"><span class="dot"></span>In Active Development</div>
+  <h1>COIOS</h1>
+  <div class="hero-full-name">Cognitive Open Intelligence Operating Sovereign</div>
+  <p>Europe's first sovereign agentic AI platform built for system integrators. Deploy anywhere. White-label ready. Compliant by design — GDPR, EU AI Act, HIPAA. No data leaves your infrastructure.</p>
+  <div class="hero-tags">
+    <span class="hero-tag eu">EU AI Act Ready</span>
+    <span class="hero-tag eu">GDPR Compliant</span>
+    <span class="hero-tag">Agentic AI</span>
+    <span class="hero-tag">Federated Learning</span>
+    <span class="hero-tag">Deploy Anywhere</span>
+    <span class="hero-tag">White-Label Ready</span>
+    <span class="hero-tag">On-Premise</span>
+    <span class="hero-tag eu">IPCEI-CIS</span>
+  </div>
+</div>
+
+<!-- WHAT IS IT -->
+<div class="section dark">
+  <div class="section-eyebrow">What it is</div>
+  <div class="section-title">A platform, not a product.<br><em>The foundation SIs build on.</em></div>
+  <div class="what-box">
+    <p>COIOS gives system integrators a complete, sovereign agentic AI platform they can license, customise, and white-label for their own enterprise customers. It provides the infrastructure, compliance framework, and agentic AI capabilities — while the assembly of specific solutions remains the integrator's domain.</p>
+    <p>Building this kind of platform from scratch costs system integrators €5–10M+ and takes years. COIOS removes that barrier entirely. An SI can license COIOS, assemble a sovereign AI offering for their customers, and take it to market — passing procurement reviews that hyperscaler-only approaches fail on data residency and EU AI Act compliance grounds.</p>
+    <p>For regulated enterprises that cannot use centralised AI — because their data cannot leave the building, the country, or the jurisdiction — COIOS delivers complete end-to-end agentic AI solutions with full data sovereignty built in.</p>
+  </div>
+
+  <div class="stat-row">
+    <div class="stat-item">
+      <div class="stat-num">€125B</div>
+      <div class="stat-label">Total addressable market</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">42.8%</div>
+      <div class="stat-label">Agentic AI market CAGR</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">0</div>
+      <div class="stat-label">Direct European competitors</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">52/52</div>
+      <div class="stat-label">Feature categories covered</div>
+    </div>
+  </div>
+</div>
+
+<!-- NINE PILLARS -->
+<div class="section">
+  <div class="section-eyebrow">Nine pillars</div>
+  <div class="section-title">What COIOS delivers.<br><em>All nine. Not a selection.</em></div>
+  <div class="pillars-grid">
+
+    <div class="pillar">
+      <div class="pillar-num">01</div>
+      <div class="pillar-name">Data Sovereignty</div>
+      <div class="pillar-desc">Complete organisational control over data assets with zero unauthorised access. Data physically remains within designated jurisdictions. All movements are fully monitored, logged, and traceable.</div>
+    </div>
+
+    <div class="pillar">
+      <div class="pillar-num">02</div>
+      <div class="pillar-name">Privacy-Preserving AI</div>
+      <div class="pillar-desc">Advanced AI capabilities — reasoning, planning, multi-agent coordination — without sharing sensitive data with third parties. Federated learning enables continuous self-improvement while raw data stays decentralised.</div>
+    </div>
+
+    <div class="pillar">
+      <div class="pillar-num">03</div>
+      <div class="pillar-name">Agentic AI</div>
+      <div class="pillar-desc">Intelligent decision-making with multi-step reasoning and autonomous business process support. Agents understand complex queries, create dynamic execution plans, interact with third-party systems via MCP, and complete tasks autonomously — with configurable human oversight.</div>
+    </div>
+
+    <div class="pillar">
+      <div class="pillar-num">04</div>
+      <div class="pillar-name">Cost Reduction</div>
+      <div class="pillar-desc">Significant operational savings versus centralised solutions. Organisations use existing server capacity across their networks rather than investing in expensive GPU centres or monthly cloud licensing fees.</div>
+    </div>
+
+    <div class="pillar">
+      <div class="pillar-num">05</div>
+      <div class="pillar-name">Regulatory Compliance</div>
+      <div class="pillar-desc">Designed from the ground up for GDPR, HIPAA, EU AI Act, and similar regulations. Data localisation, comprehensive audit trails, and compliance-by-design architecture reduce legal exposure and compliance team workload.</div>
+    </div>
+
+    <div class="pillar">
+      <div class="pillar-num">06</div>
+      <div class="pillar-name">Collaborative Intelligence</div>
+      <div class="pillar-desc">Multi-country, multi-continent collaboration on sensitive datasets previously off-limits for centralised AI. Agents share insights and analytics across sites without centralising sensitive data.</div>
+    </div>
+
+    <div class="pillar">
+      <div class="pillar-num">07</div>
+      <div class="pillar-name">Self-Optimisation</div>
+      <div class="pillar-desc">Systems autonomously adapt to local conditions. With federated learning support, the platform continuously learns and improves — providing faster, more accurate decision-making at edge nodes over time.</div>
+    </div>
+
+    <div class="pillar">
+      <div class="pillar-num">08</div>
+      <div class="pillar-name">Scalability</div>
+      <div class="pillar-desc">Distributed architecture enables efficient scaling across networks without proportional infrastructure increases. Edge processing reduces data transmission and network load while supporting growing computational needs.</div>
+    </div>
+
+    <div class="pillar">
+      <div class="pillar-num">09</div>
+      <div class="pillar-name">European Ecosystem</div>
+      <div class="pillar-desc">Built by European engineers with deep EU regulatory knowledge. Supports European digital sovereignty and independence from foreign AI dependencies — aligned with EU strategic autonomy and IPCEI-CIS objectives.</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- WHO IS IT FOR -->
+<div class="section dark">
+  <div class="section-eyebrow">Who it is for</div>
+  <div class="section-title">Two paths. <em>One platform.</em></div>
+  <div class="audience-grid">
+
+    <div class="audience-card">
+      <div class="ac-label">Primary — System Integrators</div>
+      <div class="ac-title">The platform SIs build sovereign AI solutions on.</div>
+      <div class="ac-desc">System integrators license COIOS to build, host, and run agentic AI solutions for their own enterprise customers. COIOS provides the infrastructure and compliance framework — the SI assembles and customises the solution. White-label ready. Revenue sharing model available.</div>
+      <div class="ac-list">
+        <div class="ac-item">Enterprise software vendors and consulting firms</div>
+        <div class="ac-item">Industry-specific SaaS providers</div>
+        <div class="ac-item">Cloud and infrastructure service providers</div>
+        <div class="ac-item">Regional and specialised system integrators</div>
+        <div class="ac-item">Hardware manufacturers — especially TEE hardware</div>
+      </div>
+    </div>
+
+    <div class="audience-card">
+      <div class="ac-label">Secondary — Regulated Enterprises</div>
+      <div class="ac-title">Complete end-to-end sovereign AI for organisations that cannot use the cloud.</div>
+      <div class="ac-desc">For organisations where data cannot leave the building, the country, or the jurisdiction. COIOS delivers complete, industry-specific agentic AI solutions — framework and intelligent applications — with full data sovereignty built in.</div>
+      <div class="ac-list">
+        <div class="ac-item">Healthcare systems and life sciences companies</div>
+        <div class="ac-item">Financial services and banking institutions</div>
+        <div class="ac-item">Government and public sector entities</div>
+        <div class="ac-item">Telecommunications and critical infrastructure</div>
+        <div class="ac-item">Manufacturing and industrial enterprises</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- COMPLIANCE -->
+<div class="section">
+  <div class="section-eyebrow">Compliance by design</div>
+  <div class="section-title">Built for the regulations<br><em>that block everyone else.</em></div>
+  <div class="compliance-grid">
+    <div class="comp-card">
+      <div class="comp-card-name">GDPR</div>
+      <div class="comp-card-status">Built in</div>
+      <div class="comp-card-desc">Data localisation, comprehensive audit trails, access control, and data deletion — all by design, not configuration.</div>
+    </div>
+    <div class="comp-card">
+      <div class="comp-card-name">EU AI Act</div>
+      <div class="comp-card-status">Built in</div>
+      <div class="comp-card-desc">Explainability framework, human-in-the-loop controls, audit logging, and risk classification aligned with Annex III requirements.</div>
+    </div>
+    <div class="comp-card">
+      <div class="comp-card-name">HIPAA</div>
+      <div class="comp-card-status">Built in</div>
+      <div class="comp-card-desc">End-to-end encryption, access control, audit trails, and data handling designed for regulated healthcare environments.</div>
+    </div>
+    <div class="comp-card">
+      <div class="comp-card-name">DORA</div>
+      <div class="comp-card-status">Aligned</div>
+      <div class="comp-card-desc">Digital Operational Resilience Act alignment for financial institutions — incident logging, resilience testing, and third-party risk management.</div>
+    </div>
+  </div>
+</div>
+
+<!-- COMPETITIVE POSITION -->
+<div class="section dark">
+  <div class="section-eyebrow">Competitive position</div>
+  <div class="section-title">No direct European competitor<br><em>for sovereign agentic AI.</em></div>
+  <p style="font-size:15px;color:var(--text);line-height:1.8;max-width:680px;margin-bottom:40px;">A feature comparison across 40 platforms — low-level frameworks, cloud platforms, and sovereign enterprise systems — confirms that COIOS is the only platform covering all 52 capability dimensions including Data Sovereignty, Federated Learning, EU Compliance, White-Label readiness, and full Agentic AI orchestration simultaneously.</p>
+  <table class="comp-table">
+    <thead>
+      <tr>
+        <th>Platform</th>
+        <th>Data Sovereignty</th>
+        <th>Agentic AI</th>
+        <th>Federated Learning</th>
+        <th>EU Compliant</th>
+        <th>White-Label</th>
+        <th>European HQ</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><div class="comp-name">COIOS</div><div class="comp-hq">Budapest, Hungary</div></td>
+        <td><span class="yes">Yes</span></td>
+        <td><span class="yes">Yes</span></td>
+        <td><span class="yes">Yes</span></td>
+        <td><span class="yes">Yes</span></td>
+        <td><span class="yes">Yes</span></td>
+        <td><span class="yes">Yes</span></td>
+      </tr>
+      <tr>
+        <td><div class="comp-name">Microsoft Copilot / Azure</div><div class="comp-hq">USA</div></td>
+        <td><span class="no">No</span></td>
+        <td><span class="partial">Partial</span></td>
+        <td><span class="no">No</span></td>
+        <td><span class="partial">Partial</span></td>
+        <td><span class="no">No</span></td>
+        <td><span class="no">No</span></td>
+      </tr>
+      <tr>
+        <td><div class="comp-name">Google Vertex AI</div><div class="comp-hq">USA</div></td>
+        <td><span class="no">No</span></td>
+        <td><span class="yes">Yes</span></td>
+        <td><span class="no">No</span></td>
+        <td><span class="partial">Partial</span></td>
+        <td><span class="no">No</span></td>
+        <td><span class="no">No</span></td>
+      </tr>
+      <tr>
+        <td><div class="comp-name">AWS Bedrock</div><div class="comp-hq">USA</div></td>
+        <td><span class="no">No</span></td>
+        <td><span class="yes">Yes</span></td>
+        <td><span class="no">No</span></td>
+        <td><span class="partial">Partial</span></td>
+        <td><span class="partial">Partial</span></td>
+        <td><span class="no">No</span></td>
+      </tr>
+      <tr>
+        <td><div class="comp-name">Aleph Alpha (PhariaAI)</div><div class="comp-hq">Germany</div></td>
+        <td><span class="yes">Yes</span></td>
+        <td><span class="partial">Partial</span></td>
+        <td><span class="no">No</span></td>
+        <td><span class="yes">Yes</span></td>
+        <td><span class="no">No</span></td>
+        <td><span class="yes">Yes</span></td>
+      </tr>
+      <tr>
+        <td><div class="comp-name">Mistral AI</div><div class="comp-hq">France</div></td>
+        <td><span class="partial">Partial</span></td>
+        <td><span class="no">No</span></td>
+        <td><span class="no">No</span></td>
+        <td><span class="yes">Yes</span></td>
+        <td><span class="no">No</span></td>
+        <td><span class="yes">Yes</span></td>
+      </tr>
+      <tr>
+        <td><div class="comp-name">Sherpa.ai</div><div class="comp-hq">Spain</div></td>
+        <td><span class="yes">Yes</span></td>
+        <td><span class="partial">Partial</span></td>
+        <td><span class="yes">Yes</span></td>
+        <td><span class="yes">Yes</span></td>
+        <td><span class="partial">Partial</span></td>
+        <td><span class="yes">Yes</span></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- E-GROUP ADVANTAGE -->
+<div class="section">
+  <div class="section-eyebrow">Why E-Group builds this</div>
+  <div class="section-title">Thirty years of trust infrastructure.<br><em>Now pointed at agentic AI.</em></div>
+  <div class="what-box">
+    <p>COIOS is not a greenfield experiment. It is built on thirty years of E-Group's work in cryptography, digital identity, compliance frameworks, and enterprise data infrastructure. The same team that designed KAÜ — Hungary's national digital identity system — and built MAVIR's mission-critical energy settlement infrastructure is building COIOS.</p>
+    <p>E-Group is a core participant in IPCEI-CIS, the EU's most significant cloud and AI infrastructure programme — co-leading Workstream 3 and the AI Cluster across 7 EU member states. COIOS integrates directly with FedX, E-Group's federated learning platform already running across 8 biobank clients and 50+ healthcare providers.</p>
+    <p>This is not an AI startup's first product. It is a company with three decades of regulated-industry delivery building something the European market needs and currently cannot find anywhere else.</p>
+  </div>
+</div>
+
+<!-- DEVELOPMENT STATUS -->
+<div class="section dark">
+  <div class="section-eyebrow">Current status</div>
+  <div class="section-title">In active development.<br><em>Partners welcome now.</em></div>
+  <div class="status-grid">
+
+    <div class="status-card">
+      <div class="sc-phase">MVP Phase</div>
+      <div class="sc-title">Core platform in development</div>
+      <div class="sc-desc">COIOS is progressing through structured MVP phases, building and validating each capability layer before the next. Core agentic AI engine prototyped. Secure data storage in progress. MCP integration planned.</div>
+      <div class="sc-items">
+        <div class="sc-item">Agentic AI engine — prototype working</div>
+        <div class="sc-item">Secure data storage — in progress</div>
+        <div class="sc-item">Model Context Protocol integration — planned</div>
+        <div class="sc-item">Multi-agent communication — in progress</div>
+        <div class="sc-item">Federated learning (FedX) — partnership active</div>
+      </div>
+    </div>
+
+    <div class="status-card">
+      <div class="sc-phase">PoC Programme</div>
+      <div class="sc-title">Proof of concept projects open</div>
+      <div class="sc-desc">E-Group is actively seeking 5–7 PoC partners across healthcare, finance, government, and logistics. PoC projects run 3–6 months with defined success criteria and a structured path to production deployment.</div>
+      <div class="sc-items">
+        <div class="sc-item">Healthcare — clinical decision support, federated diagnostics</div>
+        <div class="sc-item">Finance — fraud detection, regulatory compliance</div>
+        <div class="sc-item">Government — sovereign AI for public services</div>
+        <div class="sc-item">Logistics — distributed supply chain intelligence</div>
+        <div class="sc-item">System integrators — white-label platform pilots</div>
+      </div>
+    </div>
+
+    <div class="status-card">
+      <div class="sc-phase">Target Clients</div>
+      <div class="sc-title">Who we are building with</div>
+      <div class="sc-desc">Named target organisations for PoC and early production programmes include healthcare systems (Abbott, Roche, I-Sens), EU-funded programmes through IPCEI-CIS, and space technology partners through the ESA partnership.</div>
+      <div class="sc-items">
+        <div class="sc-item">Healthcare systems and life sciences</div>
+        <div class="sc-item">ESA and space technology sector</div>
+        <div class="sc-item">Financial institutions — fraud and compliance</div>
+        <div class="sc-item">IPCEI-CIS consortium partners</div>
+      </div>
+    </div>
+
+    <div class="status-card">
+      <div class="sc-phase">Production Roadmap</div>
+      <div class="sc-title">Path to production</div>
+      <div class="sc-desc">COIOS is targeting Production 1.0 in 2027, following structured MVP releases that validate each capability layer with real customers before moving to the next phase.</div>
+      <div class="sc-items">
+        <div class="sc-item">MVP 1 — core foundation, secure storage, agent basics</div>
+        <div class="sc-item">MVP 2 — agentic system + federated learning integration</div>
+        <div class="sc-item">MVP 3 — marketplace, IAM, decentralised network</div>
+        <div class="sc-item">Production 1.0 — full security audit, certified compliance</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="page-cta">
+  <div>
+    <h2>Building in a regulated industry<br>and can't use the cloud?</h2>
+    <p>If you are a system integrator, regulated enterprise, or government body looking for a sovereign agentic AI platform — we want to hear from you. PoC partnerships are open now.</p>
+  </div>
+  <a href="../contact.html" class="cta-btn">Start the conversation →</a>
+</div>
+
+<script>
+const hamburger=document.getElementById('egroup-hamburger'),mobileMenu=document.getElementById('egroup-mobile-menu');
+if(hamburger&&mobileMenu){
+  hamburger.addEventListener('click',()=>{hamburger.classList.toggle('open');mobileMenu.classList.toggle('open');document.body.style.overflow=mobileMenu.classList.contains('open')?'hidden':'';});
+  mobileMenu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{hamburger.classList.remove('open');mobileMenu.classList.remove('open');document.body.style.overflow='';}));
+}
+</script>
+</body>
+</html>
