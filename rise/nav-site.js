@@ -68,7 +68,7 @@
         '</div>' +
       '</div>' +
     '</div>' +
-    '<a href="' + base + 'index.html#contact" class="nav-desktop" style="font-family:\'DM Mono\',monospace;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:#C8A96E;border:1px solid rgba(200,169,110,0.4);padding:10px 20px;text-decoration:none;">Work With Us</a>' +
+    '<a href="' + base + 'contact.html" class="nav-desktop" style="font-family:\'DM Mono\',monospace;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:#C8A96E;border:1px solid rgba(200,169,110,0.4);padding:10px 20px;text-decoration:none;">Work With Us</a>' +
     '<button class="nav-hamburger" id="egroup-hamburger" aria-label="Menu"><span></span><span></span><span></span></button>' +
   '</nav>' +
   '<div style="height:72px;"></div>' +
@@ -86,7 +86,7 @@
     '<a href="' + base + 'record/science.html" class="mob-record">The Science</a>' +
     '<a href="' + base + 'record/recognition.html" class="mob-record">Recognition</a>' +
     '<a href="' + base + 'record/facts.html" class="mob-record">The Facts</a>' +
-    '<a href="' + base + 'index.html#contact" class="mob-cta">Work With Us</a>' +
+    '<a href="' + base + 'contact.html" class="mob-cta">Work With Us</a>' +
   '</div>';
 
   var footerHtml =
@@ -111,7 +111,7 @@
           '<a href="' + base + 'rise.html">What\'s Next</a>' +
           '<a href="' + base + 'thinking.html">Thinking</a>' +
           '<a href="' + base + 'about.html">About</a>' +
-          '<a href="' + base + 'index.html#contact">Work With Us</a>' +
+          '<a href="' + base + 'contact.html">Work With Us</a>' +
         '</div>' +
       '</div>' +
 
@@ -132,7 +132,7 @@
         '<p class="site-footer-contact-line">Budapest, Hungary</p>' +
         '<p class="site-footer-contact-line">E-Group ICT Software Zrt.</p>' +
         '<p class="site-footer-contact-line">Est. 1993 · 90+ staff</p>' +
-        '<a href="' + base + 'index.html#contact" class="site-footer-contact-cta">Working on something? Tell us →</a>' +
+        '<a href="' + base + 'contact.html" class="site-footer-contact-cta">Working on something? Tell us →</a>' +
       '</div>' +
 
     '</div>' +
