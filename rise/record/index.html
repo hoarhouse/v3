@@ -32,11 +32,6 @@
     "postalCode": "H-1022",
     "addressCountry": "HU"
   },
-  "numberOfEmployees": {
-    "@type": "QuantitativeValue",
-    "minValue": 100,
-    "maxValue": 150
-  },
   "founder": [
     {"@type": "Person", "name": "Antal Kuthy", "jobTitle": "Co-founder and CEO"},
     {"@type": "Person", "name": "András Nagy", "jobTitle": "Co-founder and CTO"}
@@ -44,129 +39,76 @@
   "sameAs": [
     "https://www.linkedin.com/company/e-group-ict-group",
     "https://www.youtube.com/channel/UCcPu-nVi9rzGezd8jOzTURA"
-  ],
-  "knowsAbout": ["Digital Identity", "Federated Learning", "Post-Quantum Cryptography", "Trust Infrastructure", "AI Research", "FinTech", "HealthTech", "GovTech"]
+  ]
 }
 </script>
 <style>
-:root {
+:root{
   --black:#080808;--ink:#0F0F0F;--dark:#161616;--panel:#1C1C1C;
   --border:#252525;--muted:#333;--dim:#555;--mid:#777;
   --text:#B0B0B0;--light:#D0D0D0;--white:#EFEFEF;
-  --gold:#C8A96E;--gold2:#E8C98E;--teal:#4ECDC4;
+  --gold:#C8A96E;--gold2:#A07840;--teal:#4ECDC4;
 }
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
 body{background:var(--black);color:var(--text);font-family:'DM Sans',sans-serif;font-size:16px;line-height:1.6;overflow-x:hidden;}
 body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");opacity:0.025;pointer-events:none;z-index:1000;}
 
-/* ── Section anchors ── */
-.section-anchor{display:block;height:112px;margin-top:-112px;visibility:hidden;}
-
-/* ── Page hero ── */
-.page-hero{padding:160px 60px 80px;border-bottom:1px solid var(--border);position:relative;overflow:hidden;}
-.hero-glow{position:absolute;top:-100px;right:-100px;width:700px;height:500px;background:radial-gradient(ellipse,rgba(200,169,110,0.05) 0%,transparent 65%);pointer-events:none;}
+/* HERO */
+.page-hero{padding:172px 60px 80px;border-bottom:1px solid var(--border);}
 .page-eyebrow{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:20px;display:flex;align-items:center;gap:12px;}
 .page-eyebrow::before{content:'';display:inline-block;width:24px;height:1px;background:var(--gold);}
 .page-hero h1{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(36px,5vw,68px);color:var(--white);letter-spacing:-2px;line-height:1;margin-bottom:24px;max-width:800px;}
 .page-hero h1 em{font-style:normal;color:var(--gold);}
-.page-hero p{font-size:17px;font-weight:300;color:var(--mid);max-width:620px;line-height:1.8;}
+.page-hero p{font-size:17px;font-weight:300;color:var(--mid);max-width:580px;line-height:1.8;}
 
-/* ── What box ── */
-.what-this-is{padding:60px 60px 0;}
+/* WHAT BOX */
+.what-box-wrap{padding:48px 60px 0;}
 .what-box{background:var(--dark);border:1px solid var(--border);border-left:3px solid var(--gold);padding:28px 36px;max-width:860px;}
-.what-box p{font-size:15px;color:var(--mid);line-height:1.8;margin-bottom:0;}
+.what-box p{font-size:15px;color:var(--mid);line-height:1.8;}
 .what-box p+p{margin-top:12px;}
 
-/* ── Section headers ── */
-.record-grid-section{padding:80px 60px;}
-.rg-header{margin-bottom:48px;}
-.rg-eyebrow{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:12px;display:flex;align-items:center;gap:12px;}
-.rg-eyebrow::before{content:'';display:inline-block;width:24px;height:1px;background:var(--gold);}
-.rg-header h2{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(24px,2.8vw,38px);color:var(--white);letter-spacing:-1px;}
-.section-divider{height:1px;background:var(--border);margin:0 60px;}
+/* SECTION CARDS */
+.sections-wrap{padding:80px 60px;}
+.sections-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--mid);margin-bottom:40px;display:flex;align-items:center;gap:12px;}
+.sections-label::before{content:'';display:inline-block;width:24px;height:1px;background:var(--mid);}
+.sections-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);}
+.section-card{background:var(--dark);padding:48px 40px;text-decoration:none;display:block;position:relative;transition:background 0.2s,border-left-color 0.2s;border-left:3px solid transparent;}
+.section-card:hover{background:var(--panel);border-left-color:var(--gold);}
+.sc-number{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:20px;}
+.sc-name{font-family:'Syne',sans-serif;font-weight:800;font-size:28px;color:var(--white);letter-spacing:-0.5px;margin-bottom:14px;line-height:1.1;}
+.sc-desc{font-size:14px;color:var(--dim);line-height:1.7;margin-bottom:28px;}
+.sc-arrow{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--gold);}
+.section-card:hover .sc-arrow{text-decoration:underline;}
 
-/* ── Record cards ── */
-.record-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);}
-.record-card{background:var(--dark);padding:36px 32px;text-decoration:none;display:block;transition:background 0.25s;position:relative;overflow:hidden;}
-.record-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform 0.3s;}
-.record-card:hover{background:var(--panel);}
-.record-card:hover::before{transform:scaleX(1);}
-.rc-year{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--gold);opacity:0.6;margin-bottom:14px;}
-.rc-title{font-family:'Syne',sans-serif;font-weight:700;font-size:18px;color:var(--white);letter-spacing:-0.3px;margin-bottom:10px;line-height:1.2;}
-.rc-desc{font-size:13px;color:var(--dim);line-height:1.6;margin-bottom:16px;}
-.rc-tags{display:flex;flex-wrap:wrap;gap:6px;}
-.rc-tag{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--dim);border:1px solid var(--border);padding:3px 8px;}
-.rc-tag.live{color:var(--teal);border-color:rgba(78,205,196,0.25);}
-.rc-tag.eu{color:var(--gold);border-color:rgba(200,169,110,0.25);}
-.rc-arrow{position:absolute;bottom:24px;right:28px;font-family:'DM Mono',monospace;font-size:14px;color:var(--dim);transition:color 0.2s,transform 0.2s;}
-.record-card:hover .rc-arrow{color:var(--gold);transform:translateX(4px);}
-
-/* ── People section ── */
-.people-section{padding:80px 60px;background:var(--ink);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
-.people-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--border);margin-top:48px;}
-.person-item{background:var(--dark);padding:28px 32px;display:grid;grid-template-columns:52px 1fr;gap:20px;align-items:flex-start;}
-.person-item.tbc{opacity:0.45;}
-.pi-initials{width:52px;height:52px;border-radius:50%;background:var(--muted);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:800;font-size:14px;color:var(--gold);letter-spacing:1px;flex-shrink:0;}
-.pi-name{font-family:'Syne',sans-serif;font-weight:700;font-size:16px;color:var(--white);margin-bottom:3px;}
-.pi-role{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);opacity:0.7;margin-bottom:6px;}
-.pi-bio{font-size:13px;color:var(--dim);line-height:1.6;}
-.pi-tbc{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1px;color:var(--muted);text-transform:uppercase;}
-.dept-label{grid-column:1/-1;background:var(--black);padding:16px 32px;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--dim);border-bottom:1px solid var(--border);}
-
-/* ── Recognition section ── */
-.recognition-section{padding:80px 60px;}
-.recognition-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--border);margin-top:48px;}
-.rec-card{background:var(--dark);padding:36px 32px;position:relative;}
-.rec-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--gold);}
-.rec-date{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--gold);opacity:0.6;margin-bottom:14px;}
-.rec-title{font-family:'Syne',sans-serif;font-weight:700;font-size:20px;color:var(--white);letter-spacing:-0.3px;margin-bottom:10px;line-height:1.2;}
-.rec-desc{font-size:13px;color:var(--dim);line-height:1.6;margin-bottom:16px;}
-.rec-people{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1px;color:var(--mid);margin-top:12px;}
-.rec-link{display:inline-block;margin-top:16px;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);text-decoration:none;border-bottom:1px solid rgba(200,169,110,0.3);padding-bottom:2px;}
-.rec-link:hover{border-color:var(--gold);}
-
-/* ── Fast facts ── */
-.fast-facts{padding:60px 60px 80px;border-top:1px solid var(--border);}
-.ff-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);margin-top:40px;}
-.ff-item{background:var(--dark);padding:32px 28px;}
-.ff-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-bottom:8px;}
-.ff-value{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(20px,2.2vw,28px);color:var(--white);letter-spacing:-0.5px;line-height:1.1;margin-bottom:4px;}
-.ff-note{font-size:12px;color:var(--dim);line-height:1.4;}
-
-/* ── Mobile nav overrides ── */
-.nav-mobile-menu a{text-decoration:none;border-bottom:none;}
-.nav-mobile-menu a::after{display:none;}
-.mob-main{font-family:'Syne',sans-serif !important;font-weight:800 !important;font-size:clamp(26px,7vw,40px) !important;color:var(--white) !important;letter-spacing:-0.5px !important;padding:9px 0 !important;width:80%;text-align:center;transition:color 0.2s;display:block;}
-.mob-main:hover{color:var(--gold) !important;}
-.mob-divider{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--dim);padding:20px 0 6px;width:80%;border-bottom:1px solid var(--border);text-align:center;margin-bottom:4px;}
-.mob-record{font-family:'DM Mono',monospace !important;font-size:11px !important;letter-spacing:1.5px !important;text-transform:uppercase !important;color:var(--mid) !important;padding:7px 0 !important;width:80%;text-align:center;transition:color 0.2s;display:block;}
-.mob-record:hover{color:var(--gold) !important;}
-.mob-cta{font-family:'DM Mono',monospace !important;font-size:12px !important;letter-spacing:2px !important;text-transform:uppercase !important;color:var(--black) !important;background:var(--gold) !important;padding:14px 36px !important;margin-top:20px !important;display:block;}
+/* FAST FACTS */
+.facts-wrap{padding:0 60px 80px;border-top:1px solid var(--border);margin-top:80px;}
+.facts-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--mid);margin:60px 0 40px;display:flex;align-items:center;gap:12px;}
+.facts-label::before{content:'';display:inline-block;width:24px;height:1px;background:var(--mid);}
+.facts-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);}
+.fact-item{background:var(--dark);padding:32px 28px;}
+.fact-label-txt{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-bottom:8px;}
+.fact-value{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(18px,2vw,26px);color:var(--white);letter-spacing:-0.5px;line-height:1.1;margin-bottom:4px;}
+.fact-note{font-size:12px;color:var(--dim);line-height:1.4;}
+.fact-note a{color:var(--gold);text-decoration:none;border-bottom:1px solid rgba(200,169,110,0.3);}
+.fact-note a:hover{border-color:var(--gold);}
 
 @media(max-width:1023px){
-  .page-hero{padding:140px 36px 60px;}
-  .what-this-is{padding:48px 36px 0;}
-  .record-grid-section{padding:60px 36px;}
-  .record-grid{grid-template-columns:1fr 1fr;}
-  .people-section{padding:60px 36px;}
-  .people-grid{grid-template-columns:1fr;}
-  .recognition-section{padding:60px 36px;}
-  .recognition-grid{grid-template-columns:1fr;}
-  .fast-facts{padding:48px 36px 60px;}
-  .ff-grid{grid-template-columns:1fr 1fr;}
-  .section-divider{margin:0 36px;}
+  .page-hero{padding:152px 36px 60px;}
+  .what-box-wrap{padding:40px 36px 0;}
+  .sections-wrap{padding:60px 36px;}
+  .sections-grid{grid-template-columns:1fr 1fr;}
+  .facts-wrap{padding:0 36px 60px;}
+  .facts-grid{grid-template-columns:1fr 1fr;}
 }
 @media(max-width:767px){
-  .page-hero{padding:120px 20px 48px;}
-  .what-this-is{padding:36px 20px 0;}
-  .record-grid-section{padding:48px 20px;}
-  .record-grid{grid-template-columns:1fr;}
-  .people-section{padding:48px 20px;}
-  .recognition-section{padding:48px 20px;}
-  .fast-facts{padding:48px 20px;}
-  .ff-grid{grid-template-columns:1fr 1fr;}
-  .section-divider{margin:0 20px;}
+  .page-hero{padding:130px 20px 48px;}
+  .what-box-wrap{padding:32px 20px 0;}
+  .sections-wrap{padding:48px 20px;}
+  .sections-grid{grid-template-columns:1fr;}
+  .section-card{padding:36px 28px;}
+  .facts-wrap{padding:0 20px 48px;}
+  .facts-grid{grid-template-columns:1fr 1fr;}
 }
 </style>
 </head>
@@ -174,309 +116,111 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 <script src="../nav-site.js"></script>
 <script src="nav-record.js"></script>
 
-
-
 <div class="page-hero">
-  <div class="hero-glow"></div>
   <div class="page-eyebrow">Public Record</div>
   <h1>Everything we have built.<br>Every credential. <em>On the record.</em></h1>
-  <p>The authoritative public knowledge base for E-Group ICT Software Zrt. — founded Budapest, 1993. Projects, people, credentials, research wins, and EU partnerships.</p>
+  <p>The authoritative public knowledge base for E-Group ICT Software Zrt. — founded Budapest, 1993. Thirty years of work, structured for humans, journalists, researchers, and procurement officers.</p>
 </div>
 
-<div class="what-this-is">
+<div class="what-box-wrap">
   <div class="what-box">
     <p>E-Group has thirty years of work that is genuinely hard to find on the internet. National digital identity systems, EU-approved AI projects, federated health data platforms, post-quantum cryptography — real work, at real scale, almost entirely absent from public records.</p>
-    <p>This section exists to fix that. Every page here is a permanent, citable, search-indexed record of a specific project, credential, or achievement.</p>
+    <p>This section exists to fix that. Every page here is a permanent, citable, search-indexed record. Use the five sections below to navigate.</p>
   </div>
 </div>
 
-<!-- ══ THE WORK ══ -->
-<span class="section-anchor" id="the-work"></span>
-<div class="record-grid-section">
-  <div class="rg-header">
-    <div class="rg-eyebrow">The Work</div>
-    <h2>Projects, products, and deployments.<br>Built and running at national scale.</h2>
-  </div>
-  <div class="record-grid">
+<div class="sections-wrap">
+  <div class="sections-label">Five sections</div>
+  <div class="sections-grid">
 
-    <a href="mavir.html" class="record-card">
-      <div class="rc-year">1999 — Active · 25+ Years</div>
-      <div class="rc-title">MAVIR — National Electricity Grid</div>
-      <p class="rc-desc">Hungary's electricity transmission system operator. Mission-critical settlement systems, market modelling, and regulatory change management. E-Group's longest active client relationship — running for over twenty-five years without interruption.</p>
-      <div class="rc-tags"><span class="rc-tag live">Live in Production</span><span class="rc-tag">EnergyTech</span><span class="rc-tag">25+ Years</span></div>
-      <div class="rc-arrow">→</div>
+    <a href="delivered.html" class="section-card">
+      <div class="sc-number">01</div>
+      <div class="sc-name">Delivered</div>
+      <div class="sc-desc">Projects, products, and systems built and deployed. Live in production at national scale. MAVIR, KAÜ, FedX, CORPEX, MyD Wallet, IPCEI-CIS, ProofX, GENESIS.</div>
+      <div class="sc-arrow">Explore →</div>
     </a>
 
-    <a href="kau.html" class="record-card">
-      <div class="rc-year">2010s — Operational</div>
-      <div class="rc-title">KAÜ — National Digital Identity</div>
-      <p class="rc-desc">Hungary's national digital authorisation service — designed and implemented personally by Co-founder András Nagy. Authenticates millions of Hungarian citizens across all government services.</p>
-      <div class="rc-tags"><span class="rc-tag live">Live</span><span class="rc-tag">GovTech</span><span class="rc-tag">Identity</span><span class="rc-tag">Cryptography</span></div>
-      <div class="rc-arrow">→</div>
+    <a href="people.html" class="section-card">
+      <div class="sc-number">02</div>
+      <div class="sc-name">The People</div>
+      <div class="sc-desc">The team behind E-Group. Founders, leadership, researchers, and domain leads. The people who have been building this since 1993.</div>
+      <div class="sc-arrow">Explore →</div>
     </a>
 
-    <a href="helix.html" class="record-card">
-      <div class="rc-year">2025 — Active</div>
-      <div class="rc-title">HeliX Health Data Space + FedX</div>
-      <p class="rc-desc">E-Group's FedX federated learning platform validated across 8 biobanks and 50+ partners in the HeliX Health Data Space — one of Europe's largest sovereign health data ecosystems.</p>
-      <div class="rc-tags"><span class="rc-tag eu">EU Project</span><span class="rc-tag live">Active</span><span class="rc-tag">HealthTech</span><span class="rc-tag">FedX</span></div>
-      <div class="rc-arrow">→</div>
+    <a href="science.html" class="section-card">
+      <div class="sc-number">03</div>
+      <div class="sc-name">The Science</div>
+      <div class="sc-desc">Research output, academic wins, and published work. Medical AI, federated learning, post-quantum cryptography. Science that ships into production.</div>
+      <div class="sc-arrow">Explore →</div>
     </a>
 
-    <a href="eidas.html" class="record-card">
-      <div class="rc-year">2024 — Active</div>
-      <div class="rc-title">eIDAS 2.0 — MyD Wallet</div>
-      <p class="rc-desc">Active member of the European Digital Identity Wallet Consortium. E-Group's MyD Wallet passed all eIDAS 2 testbed scenarios — backward compatible with KAÜ, forward compatible with the EU-wide 2026 rollout.</p>
-      <div class="rc-tags"><span class="rc-tag eu">EWC Member</span><span class="rc-tag live">Testbed Passed</span><span class="rc-tag">Identity</span></div>
-      <div class="rc-arrow">→</div>
+    <a href="recognition.html" class="section-card">
+      <div class="sc-number">04</div>
+      <div class="sc-name">Recognition</div>
+      <div class="sc-desc">Awards, state honours, EU programme approvals, and certifications. External validation of thirty years of work — earned, not purchased.</div>
+      <div class="sc-arrow">Explore →</div>
     </a>
 
-    <a href="corpex.html" class="record-card">
-      <div class="rc-year">2000s — Ongoing · 20+ Years</div>
-      <div class="rc-title">CORPEX — Corporate Banking Infrastructure</div>
-      <p class="rc-desc">Corporate internet banking platform for financial institutions. Live in production for over two decades across Central European financial institutions.</p>
-      <div class="rc-tags"><span class="rc-tag live">Live in Production</span><span class="rc-tag">FinTech</span><span class="rc-tag">20+ Years</span></div>
-      <div class="rc-arrow">→</div>
+    <a href="facts.html" class="section-card">
+      <div class="sc-number">05</div>
+      <div class="sc-name">The Facts</div>
+      <div class="sc-desc">Legal name, registration numbers, addresses, headcount, offices, EU memberships. Verified and citable. For procurement officers and press.</div>
+      <div class="sc-arrow">Explore →</div>
     </a>
 
-    <a href="ipcei-cis.html" class="record-card">
-      <div class="rc-year">Dec 2023 — Active</div>
-      <div class="rc-title">IPCEI-CIS — FedEU.ai Project</div>
-      <p class="rc-desc">European Commission approved. 7 EU member states. €1.2bn programme. E-Group co-leads Workstream 3 and the AI Cluster — building sovereign federated AI infrastructure for Europe.</p>
-      <div class="rc-tags"><span class="rc-tag eu">EU Commission</span><span class="rc-tag live">Active</span><span class="rc-tag">AI</span><span class="rc-tag">Federated</span></div>
-      <div class="rc-arrow">→</div>
-    </a>
-
-    <a href="proofx.html" class="record-card">
-      <div class="rc-year">In Development · ESA Partnership</div>
-      <div class="rc-title">ProofX — Cryptographic Image Verification</div>
-      <p class="rc-desc">Uses Galileo OSNMA satellite authentication and C2PA standards to create a court-admissible evidence chain proving an image is real, unaltered, and taken exactly where and when it claims.</p>
-      <div class="rc-tags"><span class="rc-tag">In Development</span><span class="rc-tag">SpaceTech</span><span class="rc-tag">ESA</span></div>
-      <div class="rc-arrow">→</div>
-    </a>
-
-    <a href="genesis.html" class="record-card">
-      <div class="rc-year">In Development · ESA Partnership</div>
-      <div class="rc-title">GENESIS — Generative Satellite Imagery</div>
-      <p class="rc-desc">A proprietary Generative Earth Observation Satellite Imagery Simulator. Produces photorealistic synthetic datasets for AI model training.</p>
-      <div class="rc-tags"><span class="rc-tag">In Development</span><span class="rc-tag">SpaceTech</span><span class="rc-tag">ESA</span></div>
-      <div class="rc-arrow">→</div>
-    </a>
-
-    <a href="press.html" class="record-card">
-      <div class="rc-year">Media Resources</div>
-      <div class="rc-title">Press Kit</div>
-      <p class="rc-desc">Company facts, leadership profiles, and media resources for journalists, researchers, and procurement officers.</p>
-      <div class="rc-tags"><span class="rc-tag">Media</span><span class="rc-tag">Press</span></div>
-      <div class="rc-arrow">→</div>
+    <a href="../index.html#contact" class="section-card" style="border-left-color:rgba(200,169,110,0.2);">
+      <div class="sc-number" style="color:var(--gold);opacity:0.6;">—</div>
+      <div class="sc-name" style="color:var(--mid);font-size:22px;">Work With Us</div>
+      <div class="sc-desc">If you are researching E-Group for partnership, procurement, or press — we are happy to talk directly.</div>
+      <div class="sc-arrow">Start a conversation →</div>
     </a>
 
   </div>
 </div>
 
-<div class="section-divider"></div>
-
-<!-- ══ THE PEOPLE ══ -->
-<span class="section-anchor" id="the-people"></span>
-<div class="people-section">
-  <div class="rg-header">
-    <div class="rg-eyebrow">The People</div>
-    <h2>The team building things<br>real people depend on.</h2>
-  </div>
-
-  <div class="people-grid">
-
-    <div class="dept-label">Founders</div>
-
-    <div class="person-item">
-      <div class="pi-initials">AK</div>
-      <div>
-        <div class="pi-name">Antal Kuthy</div>
-        <div class="pi-role">Co-founder &amp; CEO</div>
-        <p class="pi-bio">M.Sc. BME. IBM R&D Heidelberg. NTT Tokyo. FCO Chevening Scholar, UCL London. Founded E-Group Asia (Hong Kong) and E-Group Vietnam. Leads strategy, innovation, and business development. Chairs the AI Cluster and sits on the EU Industry Steering Board of IPCEI-CIS.</p>
-      </div>
+<div class="facts-wrap">
+  <div class="facts-label">Fast facts</div>
+  <div class="facts-grid">
+    <div class="fact-item">
+      <div class="fact-label-txt">Founded</div>
+      <div class="fact-value">1993</div>
+      <div class="fact-note">Budapest, Hungary. 100% Hungarian-owned.</div>
     </div>
-
-    <div class="person-item">
-      <div class="pi-initials">AN</div>
-      <div>
-        <div class="pi-name">András Nagy</div>
-        <div class="pi-role">Co-founder &amp; CTO</div>
-        <p class="pi-bio">M.Sc. BME. IBM Watson Heidelberg. CISA certified. Personally designed and implemented KAÜ — Hungary's national digital authorisation service. Leads engineering, product technology, and delivery.</p>
-      </div>
+    <div class="fact-item">
+      <div class="fact-label-txt">People</div>
+      <div class="fact-value">90+</div>
+      <div class="fact-note">Plus 50+ external associates.</div>
     </div>
-
-    <div class="dept-label">Leadership</div>
-
-    <div class="person-item">
-      <div class="pi-initials">LB</div>
-      <div>
-        <div class="pi-name">László Blénessy</div>
-        <div class="pi-role">Deputy Group CEO</div>
-        <p class="pi-bio pi-tbc">Bio coming soon.</p>
-      </div>
+    <div class="fact-item">
+      <div class="fact-label-txt">Offices</div>
+      <div class="fact-value">4</div>
+      <div class="fact-note">Budapest · Pécs · Miskolc · Hong Kong</div>
     </div>
-
-    <div class="person-item">
-      <div class="pi-initials">TF</div>
-      <div>
-        <div class="pi-name">Tibor Farkas</div>
-        <div class="pi-role">COO / CFO</div>
-        <p class="pi-bio pi-tbc">Bio coming soon.</p>
-      </div>
+    <div class="fact-item">
+      <div class="fact-label-txt">Sectors</div>
+      <div class="fact-value">5</div>
+      <div class="fact-note">FinTech · HealthTech · GovTech · SpaceTech · EnergyTech</div>
     </div>
-
-    <div class="dept-label">Research</div>
-
-    <div class="person-item">
-      <div class="pi-initials">MM</div>
-      <div>
-        <div class="pi-name">Mark Marosi</div>
-        <div class="pi-role">Head of Research — Title TBC</div>
-        <p class="pi-bio pi-tbc">Bio coming soon.</p>
-      </div>
+    <div class="fact-item">
+      <div class="fact-label-txt">Legal name</div>
+      <div class="fact-value" style="font-size:13px;letter-spacing:0;">E-GROUP ICT SOFTWARE Zrt.</div>
+      <div class="fact-note">Reg: 01 10 045390 HUN<br>Tax: 13665908-2-41 · EU VAT: HU13665908</div>
     </div>
-
-    <div class="person-item">
-      <div class="pi-initials">PA</div>
-      <div>
-        <div class="pi-name">Dr. Péter Antal</div>
-        <div class="pi-role">Lead Researcher · Knight's Cross 2025</div>
-        <p class="pi-bio">Associate Professor at BME. Head of AI Research Group since 2019. FedEU.ai lead researcher. Awarded Hungary's Knight's Cross of the Order of Merit on August 19, 2025.</p>
-      </div>
+    <div class="fact-item">
+      <div class="fact-label-txt">Address</div>
+      <div class="fact-value" style="font-size:15px;letter-spacing:0;">Alsó Törökvész út 2</div>
+      <div class="fact-note">H-1022 Budapest, Hungary</div>
     </div>
-
-    <div class="person-item">
-      <div class="pi-initials">AB</div>
-      <div>
-        <div class="pi-name">Ágota Benedek</div>
-        <div class="pi-role">Research Engineer</div>
-        <p class="pi-bio">Lead author of GRaDPaLM. Co-winner of Best Scientific Article at Neumann Colloquium, November 2025.</p>
-      </div>
+    <div class="fact-item">
+      <div class="fact-label-txt">EU Programmes</div>
+      <div class="fact-value">3+</div>
+      <div class="fact-note">IPCEI-CIS · HeliX · EWC/eIDAS 2.0</div>
     </div>
-
-    <div class="person-item">
-      <div class="pi-initials">TM</div>
-      <div>
-        <div class="pi-name">Tamás Mészáros PhD</div>
-        <div class="pi-role">Senior Researcher · BME Associate Professor</div>
-        <p class="pi-bio">Co-author of GRaDPaLM. First place at BME TDK, November 2025. BME Associate Professor.</p>
-      </div>
+    <div class="fact-item">
+      <div class="fact-label-txt">Website</div>
+      <div class="fact-value" style="font-size:15px;letter-spacing:0;"><a href="https://www.egroup.hu" target="_blank" rel="noopener">egroup.hu</a></div>
+      <div class="fact-note">Primary company website</div>
     </div>
-
-    <div class="person-item">
-      <div class="pi-initials">AK</div>
-      <div>
-        <div class="pi-name">Dr. Anna Kovács</div>
-        <div class="pi-role">HealthTech AI Research Lead</div>
-        <p class="pi-bio">Back-to-back international first place 2024. HealthTech AI research lead.</p>
-      </div>
-    </div>
-
-    <div class="dept-label">Domain Leads</div>
-
-    <div class="person-item">
-      <div class="pi-initials">GM</div>
-      <div>
-        <div class="pi-name">Gábor Mészáros</div>
-        <div class="pi-role">FinTech Lead</div>
-        <p class="pi-bio pi-tbc">Bio coming soon.</p>
-      </div>
-    </div>
-
-    <div class="person-item">
-      <div class="pi-initials">KV</div>
-      <div>
-        <div class="pi-name">Katalin Varga</div>
-        <div class="pi-role">GovTech Lead</div>
-        <p class="pi-bio pi-tbc">Bio coming soon.</p>
-      </div>
-    </div>
-
-    <div class="dept-label">More team members coming soon</div>
-
-    <div class="person-item tbc">
-      <div class="pi-initials">—</div>
-      <div>
-        <div class="pi-name" style="color:var(--dim)">Name TBC</div>
-        <div class="pi-role">Title TBC</div>
-      </div>
-    </div>
-
-    <div class="person-item tbc">
-      <div class="pi-initials">—</div>
-      <div>
-        <div class="pi-name" style="color:var(--dim)">Name TBC</div>
-        <div class="pi-role">Title TBC</div>
-      </div>
-    </div>
-
-  </div>
-</div>
-
-<div class="section-divider"></div>
-
-<!-- ══ RECOGNITION ══ -->
-<span class="section-anchor" id="recognition"></span>
-<div class="recognition-section">
-  <div class="rg-header">
-    <div class="rg-eyebrow">Recognition</div>
-    <h2>Awards, firsts, and credentials<br>earned the hard way.</h2>
-  </div>
-  <div class="recognition-grid">
-
-    <div class="rec-card">
-      <div class="rec-date">August 2025</div>
-      <div class="rec-title">Knight's Cross of the Order of Merit of Hungary</div>
-      <p class="rec-desc">Hungary's state civilian honour awarded to Dr. Péter Antal on August 19, 2025 — for outstanding contributions to AI research and the advancement of Hungarian technology.</p>
-      <div class="rec-people">Dr. Péter Antal · Lead Researcher</div>
-      <a href="peter-antal.html" class="rec-link">Full record →</a>
-    </div>
-
-    <div class="rec-card">
-      <div class="rec-date">November 2025</div>
-      <div class="rec-title">GRaDPaLM — Double International First Place</div>
-      <p class="rec-desc">Best Scientific Article at Neumann Colloquium and first place at BME TDK — back-to-back in November 2025. A medical AI system for pathology analysis.</p>
-      <div class="rec-people">Ágota Benedek · Csaba Potyók · Tamás Mészáros PhD</div>
-      <a href="medical-ai.html" class="rec-link">Full record →</a>
-    </div>
-
-    <div class="rec-card">
-      <div class="rec-date">December 2023 — Active</div>
-      <div class="rec-title">IPCEI-CIS — European Commission Approval</div>
-      <p class="rec-desc">E-Group selected as a key participant in the €1.2bn Important Project of Common European Interest in Cloud Infrastructure and Services. Co-leads Workstream 3 and the AI Cluster across 7 EU member states.</p>
-      <div class="rec-people">Antal Kuthy · Dr. Péter Antal · E-Group Research Team</div>
-      <a href="ipcei-cis.html" class="rec-link">Full record →</a>
-    </div>
-
-    <div class="rec-card">
-      <div class="rec-date">March 2026</div>
-      <div class="rec-title">HeliX General Assembly</div>
-      <p class="rec-desc">E-Group's FedX platform operationally validated across 8 biobanks and 50+ providers — confirmed as one of Europe's largest sovereign health data ecosystems at the HeliX General Assembly, March 2026.</p>
-      <div class="rec-people">E-Group HealthTech Team · HeliX Consortium</div>
-      <a href="helix.html" class="rec-link">Full record →</a>
-    </div>
-
-  </div>
-</div>
-
-<div class="section-divider"></div>
-
-<!-- ══ FAST FACTS ══ -->
-<div class="fast-facts">
-  <div class="rg-header">
-    <div class="rg-eyebrow">Fast Facts</div>
-    <h2>For journalists, researchers,<br>and procurement officers.</h2>
-  </div>
-  <div class="ff-grid">
-    <div class="ff-item"><div class="ff-label">Founded</div><div class="ff-value">1993</div><div class="ff-note">Budapest, Hungary. 100% Hungarian-owned.</div></div>
-    <div class="ff-item"><div class="ff-label">People</div><div class="ff-value">90+</div><div class="ff-note">Plus 50+ external associates.</div></div>
-    <div class="ff-item"><div class="ff-label">Offices</div><div class="ff-value">4</div><div class="ff-note">Budapest HQ · Pécs · Miskolc · Hong Kong</div></div>
-    <div class="ff-item"><div class="ff-label">Sectors</div><div class="ff-value">5</div><div class="ff-note">FinTech · HealthTech · GovTech · SpaceTech · EnergyTech</div></div>
-    <div class="ff-item"><div class="ff-label">Legal Name</div><div class="ff-value" style="font-size:14px;letter-spacing:0;">E-GROUP ICT SOFTWARE Zrt.</div><div class="ff-note">Reg: 01 10 045390 HUN<br>Tax: 13665908-2-41<br>EU VAT: HU13665908</div></div>
-    <div class="ff-item"><div class="ff-label">Address</div><div class="ff-value" style="font-size:16px;letter-spacing:0;">Alsó Törökvész út 2</div><div class="ff-note">H-1022 Budapest, Hungary</div></div>
-    <div class="ff-item"><div class="ff-label">EU Projects</div><div class="ff-value">3+</div><div class="ff-note">IPCEI-CIS · HeliX · EWC/eIDAS 2.0</div></div>
-    <div class="ff-item"><div class="ff-label">Website</div><div class="ff-value" style="font-size:16px;letter-spacing:0;"><a href="https://www.egroup.hu" target="_blank" style="color:var(--gold);text-decoration:none;">egroup.hu</a></div><div class="ff-note">Primary company website</div></div>
   </div>
 </div>
 
