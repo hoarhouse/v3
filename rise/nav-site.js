@@ -118,11 +118,11 @@
       '<div>' +
         '<div class="site-footer-col-title">The Record</div>' +
         '<div class="site-footer-links">' +
-          '<a href="' + base + 'record/kau.html">KAÜ — National Identity</a>' +
-          '<a href="' + base + 'record/helix.html">HeliX + FedX</a>' +
-          '<a href="' + base + 'record/ipcei-cis.html">IPCEI-CIS</a>' +
-          '<a href="' + base + 'record/eidas.html">eIDAS 2.0</a>' +
-          '<a href="' + base + 'record/medical-ai.html">Medical AI</a>' +
+          '<a href="' + base + 'record/delivered.html">Delivered</a>' +
+          '<a href="' + base + 'record/people.html">The People</a>' +
+          '<a href="' + base + 'record/science.html">The Science</a>' +
+          '<a href="' + base + 'record/recognition.html">Recognition</a>' +
+          '<a href="' + base + 'record/facts.html">The Facts</a>' +
           '<a href="' + base + 'record/index.html">Full Record →</a>' +
         '</div>' +
       '</div>' +
