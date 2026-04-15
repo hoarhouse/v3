@@ -7,7 +7,7 @@
   /* ── Inject Nav ── */
   const NAV_HTML = `
 <nav id="gnla-nav" class="always-solid">
-  <a href="index.html" class="nav-brand"><span class="nav-brand-top">Global Nobel Laureates Assembly</span><span class="nav-brand-sub">On Artificial Intelligence and Nuclear War</span></a>
+  <a href="index.html" class="nav-brand"><span class="nav-brand-top">GNLA</span><span class="nav-brand-sub">Global Nobel Laureates Assembly</span></a>
   <ul class="nav-desktop">
     <li><a href="about.html">About <span class="caret">▾</span></a><div class="nav-dropdown"><a href="about.html">The Assembly</a><a href="rome-declaration.html">The Rome Declaration</a><a href="institutions.html">Institutions &amp; Partners</a></div></li>
     <li><a href="speakers.html">Speakers</a></li>
