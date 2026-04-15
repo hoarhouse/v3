@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>News & Updates — GNLA 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Outfit:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:start}
+.three-col{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem}
+.four-col{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--w08);border:1px solid var(--w08)}
+.content-col{max-width:720px}
+.prose p{font-size:16px;font-weight:300;color:var(--w70);line-height:1.9;margin-bottom:1.5rem}
+.prose h3{font-family:"Cormorant Garamond",serif;font-size:28px;font-weight:300;color:var(--white);margin:3rem 0 1rem;font-style:italic}
+.prose blockquote{border-left:2px solid var(--gold);padding-left:1.5rem;margin:2.5rem 0;font-family:"Cormorant Garamond",serif;font-size:22px;font-style:italic;color:var(--silver);line-height:1.5}
+.info-card{background:var(--navy);border:1px solid var(--w08);padding:2rem;border-radius:1px;position:relative;overflow:hidden;transition:border-color .3s,background .3s}
+.info-card::before{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform .4s ease}
+.info-card:hover::before{transform:scaleX(1)}
+.info-card:hover{border-color:var(--w15);background:var(--navy2)}
+.card-kicker{font-size:9px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);opacity:.7;margin-bottom:.75rem;display:block}
+.card-title{font-size:16px;font-weight:500;color:var(--w90);margin-bottom:.6rem;line-height:1.3}
+.card-body{font-size:13px;font-weight:300;color:var(--w40);line-height:1.65}
+.sp-grid-full{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--w08);border:1px solid var(--w08)}
+.sp-card{background:var(--navy);padding:2rem 1.75rem;transition:background .25s;position:relative;overflow:hidden}
+.sp-card::after{content:"";position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform .35s ease}
+.sp-card:hover{background:var(--slate)}
+.sp-card:hover::after{transform:scaleX(1)}
+.sp-cat-header{grid-column:1/-1;padding:1.5rem 2rem;background:var(--ink);border-bottom:1px solid var(--w08)}
+.sp-cat-label{font-size:10px;font-weight:500;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);opacity:.7}
+.sp-av{width:52px;height:52px;border-radius:50%;border:1px solid var(--w15);background:linear-gradient(135deg,var(--navy2),var(--slate));display:flex;align-items:center;justify-content:center;font-family:"Cormorant Garamond",serif;font-size:16px;font-style:italic;color:var(--mist);margin-bottom:1rem;overflow:hidden}
+.sp-name{font-size:13px;font-weight:500;color:var(--w90);margin-bottom:3px;line-height:1.3}
+.sp-role{font-size:11px;font-weight:300;color:var(--w40);line-height:1.4;margin-bottom:8px}
+.sp-award{font-size:9px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);opacity:.75}
+.sess-grid{display:flex;flex-direction:column;gap:0}
+.sess-row{display:grid;grid-template-columns:120px 1fr auto;gap:2.5rem;padding:2.25rem 0;border-bottom:1px solid var(--w08);align-items:start;transition:background .2s}
+.sess-row:first-child{border-top:1px solid var(--w08)}
+.sess-time{font-size:10px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--steel);padding-top:5px}
+.sess-h{font-family:"Cormorant Garamond",serif;font-size:22px;font-style:italic;font-weight:400;color:var(--w90);margin-bottom:.4rem;line-height:1.2}
+.sess-p{font-size:13px;font-weight:300;color:var(--w40);line-height:1.6}
+.sess-tag{font-size:9px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;padding:5px 13px;border-radius:1px;white-space:nowrap;margin-top:2px}
+.t-closed{color:var(--gold);border:1px solid rgba(200,168,75,.3);background:rgba(200,168,75,.07)}
+.t-open{color:var(--silver);border:1px solid var(--w15);background:var(--w04)}
+.t-press{color:var(--mist);border:1px solid rgba(141,174,200,.25);background:rgba(141,174,200,.06)}
+.day-head{padding:2rem 0 1rem;border-bottom:2px solid var(--gold);margin-bottom:0}
+.day-head-title{font-family:"Cormorant Garamond",serif;font-size:32px;font-weight:300;color:var(--white);font-style:italic}
+.day-head-sub{font-size:11px;font-weight:400;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);opacity:.7;margin-top:.4rem}
+.faq-item{border-bottom:1px solid var(--w08);padding:2rem 0;cursor:pointer}
+.faq-item:first-child{border-top:1px solid var(--w08)}
+.faq-q{display:flex;justify-content:space-between;align-items:center;gap:2rem}
+.faq-q-text{font-size:17px;font-weight:400;color:var(--w90);line-height:1.4}
+.faq-toggle{width:24px;height:24px;border:1px solid var(--w15);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;color:var(--gold);flex-shrink:0;transition:transform .3s,background .2s}
+.faq-item.open .faq-toggle{transform:rotate(45deg);background:var(--gold-t)}
+.faq-a{display:none;padding-top:1.25rem;font-size:14px;font-weight:300;color:var(--w70);line-height:1.8;max-width:680px}
+.faq-item.open .faq-a{display:block}
+.form-group{margin-bottom:1.5rem}
+.form-label{display:block;font-size:10px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);opacity:.75;margin-bottom:.6rem}
+.form-input{width:100%;padding:13px 16px;background:rgba(255,255,255,.05);border:1px solid var(--w15);color:var(--white);font-family:"Outfit",sans-serif;font-size:14px;font-weight:300;outline:none;border-radius:1px;transition:border-color .2s,background .2s}
+.form-input::placeholder{color:var(--w15)}
+.form-input:focus{background:rgba(255,255,255,.08);border-color:var(--gold)}
+.form-select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23c8a84b' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 1rem center}
+.form-textarea{resize:vertical;min-height:120px}
+.form-submit{margin-top:.5rem}
+.inst-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+.inst-card{background:var(--navy);border:1px solid var(--w08);padding:2rem;border-radius:1px;transition:border-color .3s,background .3s}
+.inst-card:hover{border-color:var(--w15);background:var(--navy2)}
+.inst-name{font-size:15px;font-weight:500;color:var(--w90);margin-bottom:.4rem}
+.inst-role{font-size:11px;font-weight:400;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);opacity:.7;margin-bottom:.75rem}
+.inst-desc{font-size:13px;font-weight:300;color:var(--w40);line-height:1.65}
+.timeline{display:flex;flex-direction:column;gap:0;position:relative}
+.timeline::before{content:"";position:absolute;left:16px;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,var(--gold),rgba(200,168,75,.1))}
+.tl-item{display:grid;grid-template-columns:40px 1fr;gap:1.5rem;padding:2rem 0;border-bottom:1px solid var(--w08)}
+.tl-dot{width:32px;height:32px;border-radius:50%;border:1px solid var(--gold);background:var(--ink);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:10px;color:var(--gold);font-weight:500;position:relative;z-index:1;margin-top:2px}
+.tl-content h4{font-size:15px;font-weight:500;color:var(--w90);margin-bottom:.35rem}
+.tl-content p{font-size:13px;font-weight:300;color:var(--w40);line-height:1.65}
+.tl-content .tl-date{font-size:10px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);opacity:.65;margin-bottom:.4rem;display:block}
+.news-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem}
+.news-card{background:var(--navy);border:1px solid var(--w08);border-radius:1px;overflow:hidden;transition:border-color .3s,background .3s;text-decoration:none;display:flex;flex-direction:column}
+.news-card:hover{border-color:var(--w15);background:var(--navy2)}
+.news-thumb{height:180px;background:linear-gradient(135deg,var(--navy2),var(--slate));border-bottom:1px solid var(--w08);display:flex;align-items:center;justify-content:center;font-family:"Cormorant Garamond",serif;font-size:48px;font-style:italic;color:var(--w08)}
+.news-body{padding:1.75rem;flex:1;display:flex;flex-direction:column}
+.news-date{font-size:9px;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);opacity:.65;margin-bottom:.75rem}
+.news-title{font-family:"Cormorant Garamond",serif;font-size:20px;font-weight:400;color:var(--w90);line-height:1.3;margin-bottom:.75rem;flex:1}
+.news-excerpt{font-size:13px;font-weight:300;color:var(--w40);line-height:1.6}
+.download-item{display:flex;justify-content:space-between;align-items:center;padding:1.5rem 2rem;background:var(--navy);border:1px solid var(--w08);border-radius:1px;margin-bottom:.75rem;transition:border-color .3s,background .3s}
+.download-item:hover{border-color:var(--w15);background:var(--navy2)}
+.dl-info{display:flex;flex-direction:column;gap:.3rem}
+.dl-name{font-size:14px;font-weight:500;color:var(--w90)}
+.dl-meta{font-size:11px;font-weight:300;color:var(--w40)}
+.dl-btn{font-size:10px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);border:1px solid rgba(200,168,75,.35);padding:8px 18px;border-radius:1px;text-decoration:none;transition:all .2s;white-space:nowrap}
+.dl-btn:hover{background:var(--gold);color:var(--ink)}
+.reg-section{padding:5rem 0;border-bottom:1px solid var(--w08)}
+.reg-section:last-child{border-bottom:none}
+.reg-section-label{font-size:10px;font-weight:500;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);opacity:.7;margin-bottom:.75rem;display:block}
+.reg-section-title{font-family:"Cormorant Garamond",serif;font-size:36px;font-weight:300;color:var(--white);margin-bottom:1rem;font-style:italic}
+.reg-form-wrap{background:var(--navy);border:1px solid var(--w08);padding:3rem;border-radius:1px;max-width:640px}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start}
+@media(max-width:1024px){.two-col,.contact-grid,.inst-grid{grid-template-columns:1fr;gap:3rem}.sp-grid-full,.four-col{grid-template-columns:repeat(2,1fr)}.three-col,.news-grid{grid-template-columns:1fr}.sess-row{grid-template-columns:1fr;gap:.5rem}}
+@media(max-width:768px){.sp-grid-full,.four-col{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<nav id="gnla-nav" class="always-solid">
+  <a href="index.html" class="nav-brand"><span class="nav-brand-top">GNLA · 2026</span><span class="nav-brand-sub">Global Nobel Laureates Assembly</span></a>
+  <ul class="nav-desktop">
+    <li><a href="about.html">About <span class="caret">▾</span></a><div class="nav-dropdown"><a href="about.html">The Assembly</a><a href="rome-declaration.html">The Rome Declaration</a><a href="institutions.html">Institutions &amp; Partners</a></div></li>
+    <li><a href="speakers.html">Speakers</a></li>
+    <li><a href="programme.html">Programme</a></li>
+    <li><a href="venue.html">Venue</a></li>
+    <li><a href="news.html">Media <span class="caret">▾</span></a><div class="nav-dropdown"><a href="news.html">News &amp; Updates</a><a href="media.html">Press &amp; Media Kit</a></div></li>
+    <li><a href="faq.html">FAQ</a></li>
+  </ul>
+  <a href="register.html" class="nav-cta">Register</a>
+  <button class="nav-hamburger" id="gnla-burger" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+<div class="nav-drawer" id="gnla-drawer">
+  <div class="nav-drawer-inner">
+    <div class="drawer-section"><span class="drawer-section-label">About</span><a href="about.html" class="drawer-link">The Assembly</a><a href="rome-declaration.html" class="drawer-link">The Rome Declaration</a><a href="institutions.html" class="drawer-link">Institutions &amp; Partners</a></div>
+    <div class="drawer-section"><span class="drawer-section-label">Event</span><a href="speakers.html" class="drawer-link">Speakers &amp; Participants</a><a href="programme.html" class="drawer-link">Programme</a><a href="venue.html" class="drawer-link">Venue</a></div>
+    <div class="drawer-section"><span class="drawer-section-label">Media &amp; Info</span><a href="news.html" class="drawer-link">News &amp; Updates</a><a href="media.html" class="drawer-link">Press &amp; Media Kit</a><a href="faq.html" class="drawer-link">FAQ</a><a href="contact.html" class="drawer-link">Contact</a></div>
+    <a href="register.html" class="drawer-cta">Register Interest</a>
+  </div>
+</div>
+<section class="page-hero">
+  <div class="page-hero-grid"></div>
+  <div class="page-hero-inner">
+    <div class="page-breadcrumb"><a href="index.html">Home</a> <span>/</span> <span>News & Updates</span></div>
+    <div class="page-hero-kicker">News & Updates</div>
+    <h1 class="page-hero-title">Latest from<br><em>the Assembly</em></h1>
+    <p class="page-hero-sub">Announcements, speaker confirmations, and updates from the organizing committee as we approach July 2026.</p>
+  </div>
+</section>
+<section class="section-pad section-border-top">
+  <div class="container">
+    <div class="news-grid r">
+      <a href="#" class="news-card"><div class="news-thumb">GNLA</div><div class="news-body"><span class="news-date">14 April 2026</span><div class="news-title">Global Nobel Laureates Assembly Formally Announced</div><p class="news-excerpt">Nine leading global institutions convene to announce the first Global Nobel Laureates Assembly on Artificial Intelligence and Nuclear War, to be held at Borgo Laudato Si', Vatican, July 14–16 2026.</p></div></a>
+      <a href="#" class="news-card"><div class="news-thumb">AI</div><div class="news-body"><span class="news-date">14 April 2026</span><div class="news-title">Prof. Yoshua Bengio and Prof. Geoffrey Hinton Confirmed as Participants</div><p class="news-excerpt">Two of the world's most prominent AI scientists will join the Assembly as leading voices on the risks of artificial intelligence in high-stakes systems.</p></div></a>
+      <a href="#" class="news-card"><div class="news-thumb">★</div><div class="news-body"><span class="news-date">14 April 2026</span><div class="news-title">Nobel Laureates in Economics Join the Assembly</div><p class="news-excerpt">Professors Daron Acemoglu, Joseph Stiglitz, and Angus Deaton will participate in sessions on the economy of war, the economy of peace, and new models of global development.</p></div></a>
+    </div>
+    <div class="r" style="margin-top:4rem;padding:3rem;border:1px solid var(--w08);background:var(--navy);border-radius:1px;text-align:center">
+      <div style="font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:300;font-style:italic;color:var(--white);margin-bottom:1rem">Stay informed</div>
+      <p style="font-size:14px;font-weight:300;color:var(--w40);max-width:480px;margin:0 auto 2rem;line-height:1.7">Subscribe to receive all Assembly updates directly to your inbox — speaker announcements, programme changes, and access to the Rome Declaration.</p>
+      <div style="display:flex;max-width:380px;margin:0 auto">
+        <input class="form-input" type="email" placeholder="Your email address" style="border-radius:1px 0 0 1px;border-right:none">
+        <button class="btn-primary" type="button" style="white-space:nowrap;border-radius:0 1px 1px 0;padding:13px 24px">Subscribe</button>
+      </div>
+    </div>
+  </div>
+</section>
+<footer id="gnla-footer">
+  <div class="footer-top">
+    <div class="footer-brand-col"><div class="footer-brand-name">Global Nobel Laureates Assembly on Artificial Intelligence and Nuclear War</div><div class="footer-brand-meta">Borgo Laudato Si' · Castel Gandolfo, Vatican<br>14–16 July 2026<br>Organized by Domus Communis Foundation</div></div>
+    <div><span class="footer-col-title">About</span><ul class="footer-col-links"><li><a href="about.html">The Assembly</a></li><li><a href="rome-declaration.html">The Rome Declaration</a></li><li><a href="institutions.html">Institutions &amp; Partners</a></li></ul></div>
+    <div><span class="footer-col-title">Event</span><ul class="footer-col-links"><li><a href="speakers.html">Speakers &amp; Participants</a></li><li><a href="programme.html">Programme</a></li><li><a href="venue.html">Venue</a></li></ul></div>
+    <div><span class="footer-col-title">Engage</span><ul class="footer-col-links"><li><a href="register.html">Register Interest</a></li><li><a href="news.html">News &amp; Updates</a></li><li><a href="media.html">Press &amp; Media</a></li><li><a href="faq.html">FAQ</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><span class="footer-copy">© 2026 Domus Communis Foundation · All rights reserved · Confidential</span><ul class="footer-legal"><li><a href="#">Privacy Policy</a></li><li><a href="#">Terms of Use</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+</footer>
+<script src="shared.js"></script>
+</body></html>

@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Global Nobel Laureates Assembly — AI & Nuclear War · Vatican, July 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Outfit:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+.hero{position:relative;min-height:100vh;display:flex;flex-direction:column;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 65% 40%,rgba(21,37,64,.7) 0%,transparent 70%),linear-gradient(168deg,#080e18 0%,#0d1b2e 40%,#101e33 70%,#080e18 100%)}
+.hero-vignette{position:absolute;inset:0;background:radial-gradient(ellipse 100% 50% at 50% 100%,rgba(8,14,24,1) 0%,transparent 60%),radial-gradient(ellipse 40% 80% at 0% 50%,rgba(8,14,24,.85) 0%,transparent 60%)}
+.hero-gridlines{position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(to right,var(--w04) 1px,transparent 1px),linear-gradient(to bottom,var(--w04) 1px,transparent 1px);background-size:120px 120px;-webkit-mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 30%,transparent 80%);mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 30%,transparent 80%)}
+.hero-horizon{position:absolute;top:50%;left:0;right:0;height:1px;background:linear-gradient(to right,transparent,var(--gold) 30%,var(--gold) 70%,transparent);opacity:.1}
+.hero-datebadge{position:absolute;top:5.5rem;right:3rem;z-index:2;text-align:right;opacity:0;animation:fadeIn 1s 1.1s ease forwards}
+.datebadge-big{font-family:'Cormorant Garamond',serif;font-size:88px;font-weight:300;color:var(--w08);line-height:1;letter-spacing:-.02em}
+.datebadge-rest{font-size:11px;font-weight:300;letter-spacing:.1em;color:var(--w15);text-transform:uppercase}
+.hero-content{position:relative;z-index:2;flex:1;display:flex;flex-direction:column;justify-content:flex-end;padding:0 4rem 5rem}
+.hero-overline{display:flex;align-items:center;gap:12px;margin-bottom:2.5rem;opacity:0;animation:up .9s .3s ease forwards}
+.hero-overline::before{content:'';display:block;width:24px;height:1px;background:var(--gold);flex-shrink:0}
+.hero-overline-text{font-size:10px;font-weight:500;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);opacity:.85}
+.hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(62px,9.5vw,128px);font-weight:300;line-height:.95;letter-spacing:-.01em;color:var(--white);margin-bottom:1.25rem;opacity:0;animation:up 1s .5s ease forwards}
+.hero-title .l2{display:block;padding-left:.12em;color:var(--snow)}
+.hero-title .l3{display:block;font-style:italic;color:var(--silver);font-size:.57em;padding-left:.22em;margin-top:.2em;letter-spacing:.01em}
+.hero-meta{display:flex;align-items:center;gap:0;margin-bottom:3.5rem;border-left:2px solid var(--gold);padding-left:1.25rem;opacity:0;animation:up .9s .75s ease forwards}
+.hm-item{display:flex;flex-direction:column;gap:4px;padding-right:2rem;border-right:1px solid var(--w15);margin-right:2rem}
+.hm-item:last-child{border-right:none;margin-right:0;padding-right:0}
+.hm-label{font-size:9px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:var(--w40)}
+.hm-val{font-size:14px;font-weight:300;color:var(--silver);letter-spacing:.02em}
+.hero-btns{display:flex;gap:1rem;align-items:center;opacity:0;animation:up .9s .95s ease forwards}
+.hero-scroll-cue{position:absolute;bottom:3rem;right:3rem;z-index:2;display:flex;flex-direction:column;align-items:center;gap:8px;opacity:0;animation:up 1s 1.3s ease forwards}
+.scroll-label{writing-mode:vertical-lr;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--w40)}
+.scroll-bar{width:1px;height:60px;background:linear-gradient(to bottom,var(--gold),transparent);animation:pulse 2.5s ease-in-out infinite}
+.stats-band{position:relative;z-index:2;background:rgba(21,37,64,.82);backdrop-filter:blur(12px);border-top:1px solid var(--w08);display:grid;grid-template-columns:repeat(4,1fr);opacity:0;animation:up 1s .9s ease forwards}
+.stat-cell{padding:1.75rem 2rem;border-right:1px solid var(--w08);text-align:center;transition:background .25s;cursor:default;position:relative;overflow:hidden}
+.stat-cell::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--gold);transform:scaleX(0);transform-origin:center;transition:transform .35s ease}
+.stat-cell:hover{background:rgba(46,82,128,.35)}
+.stat-cell:hover::after{transform:scaleX(1)}
+.stat-cell:last-child{border-right:none}
+.stat-n{font-family:'Cormorant Garamond',serif;font-size:42px;font-weight:300;color:var(--white);line-height:1;margin-bottom:4px}
+.stat-l{font-size:10px;font-weight:400;letter-spacing:.12em;text-transform:uppercase;color:var(--w40)}
+.stat-d{font-size:12px;font-weight:300;color:var(--w15);margin-top:4px}
+.why-band{background:var(--navy);padding:7rem 0;border-bottom:1px solid var(--w08)}
+.why-inner{max-width:1300px;margin:0 auto;padding:0 4rem;display:grid;grid-template-columns:1fr 1fr 1fr;gap:3rem}
+.why-card{padding:2.5rem;border:1px solid var(--w08);border-radius:1px;position:relative;overflow:hidden;transition:border-color .3s,background .3s;cursor:default}
+.why-card:hover{border-color:var(--w15);background:var(--w04)}
+.why-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform .4s ease}
+.why-card:hover::before{transform:scaleX(1)}
+.why-n{font-family:'Cormorant Garamond',serif;font-size:56px;font-weight:300;color:var(--w08);line-height:1;margin-bottom:1rem}
+.why-h{font-size:14px;font-weight:500;color:var(--w90);margin-bottom:.6rem;letter-spacing:.02em}
+.why-p{font-size:13px;font-weight:300;color:var(--w40);line-height:1.7}
+.decl-band{padding:9rem 0;background:var(--ink);border-bottom:1px solid var(--w08);position:relative;overflow:hidden}
+.decl-bg{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:'Cormorant Garamond',serif;font-size:500px;font-weight:300;color:rgba(255,255,255,.018);line-height:1;pointer-events:none;user-select:none;white-space:nowrap}
+.decl-inner{position:relative;z-index:2;max-width:900px;margin:0 auto;padding:0 4rem;text-align:center}
+.decl-line{width:1px;height:80px;background:linear-gradient(to bottom,transparent,var(--gold),transparent);margin:0 auto 3rem}
+.decl-quote{font-family:'Cormorant Garamond',serif;font-size:clamp(24px,3.8vw,46px);font-weight:300;font-style:italic;color:var(--white);line-height:1.5;margin-bottom:3rem;letter-spacing:.01em}
+.decl-quote strong{font-style:normal;font-weight:400;color:var(--gold2)}
+.decl-attr{display:flex;align-items:center;justify-content:center;gap:1.5rem}
+.decl-rule{width:48px;height:1px;background:var(--gold);opacity:.5}
+.decl-src{font-size:10px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);opacity:.65}
+.triptych{background:var(--navy);border-bottom:1px solid var(--w08);padding:8rem 0}
+.triptych-inner{max-width:1300px;margin:0 auto;padding:0 4rem}
+.triptych-label{font-size:9px;font-weight:500;letter-spacing:.25em;text-transform:uppercase;color:var(--w15);text-align:center;margin-bottom:4rem;display:block}
+.triptych-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:var(--w08);border:1px solid var(--w08)}
+.trip-panel{background:var(--navy);padding:3rem 2.5rem;position:relative;overflow:hidden;transition:background .3s;display:flex;flex-direction:column;text-decoration:none}
+.trip-panel:hover{background:var(--slate)}
+.trip-panel::after{content:'→';position:absolute;bottom:2rem;right:2rem;font-size:18px;color:var(--gold);opacity:0;transform:translateX(-8px);transition:opacity .3s,transform .3s}
+.trip-panel:hover::after{opacity:.7;transform:translateX(0)}
+.trip-eyebrow{font-size:9px;font-weight:500;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);opacity:.7;margin-bottom:1.25rem}
+.trip-title{font-family:'Cormorant Garamond',serif;font-size:clamp(26px,2.5vw,38px);font-weight:300;line-height:1.15;color:var(--white);margin-bottom:1rem;flex:1}
+.trip-title em{font-style:italic;color:var(--silver)}
+.trip-desc{font-size:13px;font-weight:300;color:var(--w40);line-height:1.65;margin-bottom:2rem}
+.trip-link{font-size:10px;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);opacity:.7}
+.sp-peek{display:flex;gap:.6rem;margin:.5rem 0}
+.sp-mini{display:flex;align-items:center;gap:.6rem;background:var(--w04);border:1px solid var(--w08);padding:.5rem .75rem;border-radius:1px;min-width:0;flex:1}
+.sp-mini-av{width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--navy2),var(--slate));border:1px solid var(--w15);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:11px;font-style:italic;color:var(--mist);flex-shrink:0}
+.sp-mini-name{font-size:11px;font-weight:400;color:var(--w70);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.reg-band{padding:11rem 0;background:var(--ink);text-align:center;position:relative;overflow:hidden;border-top:1px solid var(--w08)}
+.reg-band::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:800px;height:500px;background:radial-gradient(ellipse,rgba(21,37,64,.55) 0%,transparent 65%);pointer-events:none}
+.reg-band::after{content:'';position:absolute;inset:0;background-image:linear-gradient(to right,var(--w04) 1px,transparent 1px),linear-gradient(to bottom,var(--w04) 1px,transparent 1px);background-size:80px 80px;pointer-events:none}
+.reg-inner-wrap{position:relative;z-index:2}
+.reg-title{font-family:'Cormorant Garamond',serif;font-size:clamp(48px,6vw,82px);font-weight:300;font-style:italic;color:var(--white);line-height:1.08;margin-bottom:1.5rem}
+.reg-sub{font-size:16px;font-weight:300;color:var(--w70);line-height:1.85;max-width:520px;margin:0 auto 3.5rem}
+.reg-paths{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-bottom:3rem}
+.reg-path{display:flex;flex-direction:column;align-items:center;gap:.75rem;padding:2rem 2.25rem;border:1px solid var(--w08);border-radius:2px;min-width:190px;text-decoration:none;background:var(--w04);transition:border-color .25s,background .25s,transform .2s;cursor:pointer}
+.reg-path:hover{border-color:var(--gold);background:var(--gold-t);transform:translateY(-3px)}
+.reg-path-icon{font-size:20px;opacity:.6}
+.reg-path-title{font-size:12px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--white)}
+.reg-path-desc{font-size:12px;font-weight:300;color:var(--w40);text-align:center}
+.reg-email{display:flex;max-width:420px;margin:0 auto 1.25rem}
+.reg-email input{flex:1;padding:14px 18px;background:rgba(255,255,255,.05);border:1px solid var(--w15);border-right:none;color:var(--white);font-family:'Outfit',sans-serif;font-size:13px;font-weight:300;outline:none;border-radius:1px 0 0 1px;transition:border-color .2s,background .2s}
+.reg-email input::placeholder{color:var(--w15)}
+.reg-email input:focus{background:rgba(255,255,255,.08);border-color:var(--gold)}
+.reg-email button{padding:14px 26px;background:var(--gold);color:var(--ink);font-family:'Outfit',sans-serif;font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;border:none;cursor:pointer;border-radius:0 1px 1px 0;transition:background .2s;white-space:nowrap}
+.reg-email button:hover{background:var(--gold2)}
+.reg-note{font-size:11px;color:var(--w15)}
+.reg-note a{color:var(--mist);text-decoration:none}
+.reg-note a:hover{color:var(--silver)}
+@keyframes up{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes pulse{0%,100%{opacity:.3}50%{opacity:.9}}
+@media(max-width:1024px){.why-inner,.triptych-grid{grid-template-columns:1fr}.stats-band{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:768px){.hero-content{padding:0 1.5rem 4rem}.hero-title{font-size:clamp(48px,12vw,72px)}.hero-datebadge{display:none}.hero-meta{flex-direction:column;align-items:flex-start;gap:1rem}.hm-item{border-right:none;padding-right:0;margin-right:0}.stats-band{grid-template-columns:1fr 1fr}.why-inner{padding:0 1.5rem}.triptych-inner,.decl-inner{padding:0 1.5rem}.reg-paths{flex-direction:column;align-items:center}.sp-peek{flex-direction:column}}
+</style>
+</head>
+<body>
+<nav id="gnla-nav">
+  <a href="index.html" class="nav-brand">
+    <span class="nav-brand-top">GNLA · 2026</span>
+    <span class="nav-brand-sub">Global Nobel Laureates Assembly</span>
+  </a>
+  <ul class="nav-desktop">
+    <li>
+      <a href="about.html">About <span class="caret">▾</span></a>
+      <div class="nav-dropdown">
+        <a href="about.html">The Assembly</a>
+        <a href="rome-declaration.html">The Rome Declaration</a>
+        <a href="institutions.html">Institutions & Partners</a>
+      </div>
+    </li>
+    <li><a href="speakers.html">Speakers</a></li>
+    <li><a href="programme.html">Programme</a></li>
+    <li><a href="venue.html">Venue</a></li>
+    <li>
+      <a href="news.html">Media <span class="caret">▾</span></a>
+      <div class="nav-dropdown">
+        <a href="news.html">News & Updates</a>
+        <a href="media.html">Press & Media Kit</a>
+      </div>
+    </li>
+    <li><a href="faq.html">FAQ</a></li>
+  </ul>
+  <a href="register.html" class="nav-cta">Register</a>
+  <button class="nav-hamburger" id="gnla-burger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="nav-drawer" id="gnla-drawer">
+  <div class="nav-drawer-inner">
+    <div class="drawer-section">
+      <span class="drawer-section-label">About</span>
+      <a href="about.html" class="drawer-link">The Assembly</a>
+      <a href="rome-declaration.html" class="drawer-link">The Rome Declaration</a>
+      <a href="institutions.html" class="drawer-link">Institutions & Partners</a>
+    </div>
+    <div class="drawer-section">
+      <span class="drawer-section-label">Event</span>
+      <a href="speakers.html" class="drawer-link">Speakers & Participants</a>
+      <a href="programme.html" class="drawer-link">Programme</a>
+      <a href="venue.html" class="drawer-link">Venue</a>
+    </div>
+    <div class="drawer-section">
+      <span class="drawer-section-label">Media & Info</span>
+      <a href="news.html" class="drawer-link">News & Updates</a>
+      <a href="media.html" class="drawer-link">Press & Media Kit</a>
+      <a href="faq.html" class="drawer-link">FAQ</a>
+      <a href="contact.html" class="drawer-link">Contact</a>
+    </div>
+    <a href="register.html" class="drawer-cta">Register Interest</a>
+  </div>
+</div>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-vignette"></div>
+  <div class="hero-gridlines"></div>
+  <div class="hero-horizon"></div>
+  <div class="hero-datebadge">
+    <div class="datebadge-big">14</div>
+    <div class="datebadge-rest">— 16 July 2026<br>Vatican City</div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-overline"><span class="hero-overline-text">Global Nobel Laureates Assembly &nbsp;·&nbsp; Vatican 2026</span></div>
+    <h1 class="hero-title">
+      Toward an<br>
+      <span class="l2">Unarmed Peace</span>
+      <span class="l3">in the Age of Artificial Intelligence &amp; Nuclear War</span>
+    </h1>
+    <div class="hero-meta">
+      <div class="hm-item"><span class="hm-label">Date</span><span class="hm-val">14 – 16 July 2026</span></div>
+      <div class="hm-item"><span class="hm-label">Venue</span><span class="hm-val">Borgo Laudato Si', Vatican</span></div>
+      <div class="hm-item"><span class="hm-label">Outcome</span><span class="hm-val">The Rome Declaration</span></div>
+    </div>
+    <div class="hero-btns">
+      <a href="register.html" class="btn-primary">Register Interest</a>
+      <a href="about.html" class="btn-outline">Learn More</a>
+    </div>
+  </div>
+  <div class="stats-band">
+    <div class="stat-cell"><div class="stat-n">14<span style="font-size:.45em;color:var(--gold)">+</span></div><div class="stat-l">Nobel Laureates</div><div class="stat-d">Peace · Economics · Chemistry</div></div>
+    <div class="stat-cell"><div class="stat-n">9</div><div class="stat-l">Global Institutions</div><div class="stat-d">From Chicago to Harvard to Pugwash</div></div>
+    <div class="stat-cell"><div class="stat-n">3</div><div class="stat-l">Days of Deliberation</div><div class="stat-d">14–16 July 2026, Vatican</div></div>
+    <div class="stat-cell"><div class="stat-n">1</div><div class="stat-l">Rome Declaration</div><div class="stat-d">A new framework for human security</div></div>
+  </div>
+  <div class="hero-scroll-cue"><div class="scroll-bar"></div><span class="scroll-label">Scroll</span></div>
+</section>
+
+<section class="why-band">
+  <div class="why-inner">
+    <div class="why-card r"><div class="why-n">01</div><h3 class="why-h">Compressed Decision Timelines</h3><p class="why-p">AI-driven systems shrink the time available for human judgment in nuclear scenarios — turning minutes into seconds, elevating the risk of irreversible miscalculation.</p></div>
+    <div class="why-card r2"><div class="why-n">02</div><h3 class="why-h">Eroding Arms Control</h3><p class="why-p">The collapse of multilateral agreements and re-emergence of deterrence doctrines leave critical gaps in the architecture that has kept nuclear peace since 1945.</p></div>
+    <div class="why-card r3"><div class="why-n">03</div><h3 class="why-h">A Governance Vacuum</h3><p class="why-p">Autonomous weapons and AI integration have advanced without corresponding international norms — a vacuum that grows more dangerous with every passing month.</p></div>
+  </div>
+</section>
+
+<section class="decl-band">
+  <div class="decl-bg">&ldquo;</div>
+  <div class="decl-inner">
+    <div class="decl-line r"></div>
+    <p class="decl-quote r2">Security is no longer grounded in <strong>deterrence and fear</strong>, but in cooperation, responsibility, and the <strong>dignity of the human person.</strong></p>
+    <div class="decl-attr r3"><div class="decl-rule"></div><span class="decl-src">Toward the Rome Declaration · July 2026</span><div class="decl-rule"></div></div>
+    <div style="margin-top:3rem" class="r3"><a href="rome-declaration.html" class="btn-gold-outline">About the Rome Declaration</a></div>
+  </div>
+</section>
+
+<section class="triptych">
+  <div class="triptych-inner">
+    <span class="triptych-label r">Explore the Assembly</span>
+    <div class="triptych-grid r">
+      <a href="speakers.html" class="trip-panel">
+        <span class="trip-eyebrow">Participants</span>
+        <h2 class="trip-title">Voices that carry <em>the weight of the world</em></h2>
+        <div class="sp-peek"><div class="sp-mini"><div class="sp-mini-av">YB</div><span class="sp-mini-name">Prof. Yoshua Bengio</span></div><div class="sp-mini"><div class="sp-mini-av">GH</div><span class="sp-mini-name">Prof. Geoffrey Hinton</span></div></div>
+        <div class="sp-peek" style="margin-bottom:1rem"><div class="sp-mini"><div class="sp-mini-av">JS</div><span class="sp-mini-name">Prof. Joseph Stiglitz</span></div><div class="sp-mini"><div class="sp-mini-av">NM</div><span class="sp-mini-name">Ms. Nadia Murad</span></div></div>
+        <p class="trip-desc">14+ Nobel Laureates, leading AI scientists, global economists, and faith leaders.</p>
+        <span class="trip-link">View all speakers</span>
+      </a>
+      <a href="programme.html" class="trip-panel">
+        <span class="trip-eyebrow">Programme</span>
+        <h2 class="trip-title">Three days of <em>deliberation and commitment</em></h2>
+        <div style="margin:1.25rem 0;display:flex;flex-direction:column;gap:.6rem">
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:.75rem 1rem;background:var(--w04);border:1px solid var(--w08);border-radius:1px"><span style="font-size:12px;font-weight:300;color:var(--w70)">14 Jul · Day One</span><span style="font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);opacity:.7">Understanding the Risk</span></div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:.75rem 1rem;background:var(--w04);border:1px solid var(--w08);border-radius:1px"><span style="font-size:12px;font-weight:300;color:var(--w70)">15 Jul · Day Two</span><span style="font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);opacity:.7">Governance & Frameworks</span></div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:.75rem 1rem;background:var(--w04);border:1px solid var(--w08);border-radius:1px"><span style="font-size:12px;font-weight:300;color:var(--w70)">16 Jul · Day Three</span><span style="font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);opacity:.7">The Rome Declaration</span></div>
+        </div>
+        <p class="trip-desc">8 sessions across 3 days — closed deliberation, open panels, global press conference.</p>
+        <span class="trip-link">See full programme</span>
+      </a>
+      <a href="venue.html" class="trip-panel">
+        <span class="trip-eyebrow">The Setting</span>
+        <h2 class="trip-title">Borgo Laudato Si' <em>Castel Gandolfo</em></h2>
+        <div style="margin:1.25rem 0;padding:1.5rem;border:1px solid var(--w08);background:var(--w04);border-radius:1px"><div style="font-size:13px;font-weight:300;color:var(--w40);line-height:1.7;font-style:italic">The traditional summer residence of the Popes — now an international ecological center within Vatican territory.</div></div>
+        <p class="trip-desc">A setting that carries both spiritual authority and a profound vision for humanity's shared future.</p>
+        <span class="trip-link">Explore the venue</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="reg-band">
+  <div class="reg-inner-wrap container">
+    <span class="eyebrow r" style="display:block;margin-bottom:1rem">Attend · Follow · Engage</span>
+    <h2 class="reg-title r">Be part of<br>this moment</h2>
+    <p class="reg-sub r">Whether you join us at the Vatican, follow online, or carry the Rome Declaration forward in your work — this Assembly belongs to everyone who believes humanity can choose a different future.</p>
+    <div class="reg-paths r">
+      <a href="register.html#attend" class="reg-path"><span class="reg-path-icon">✦</span><span class="reg-path-title">Request Attendance</span><span class="reg-path-desc">Apply to join in person at Castel Gandolfo</span></a>
+      <a href="register.html#press" class="reg-path"><span class="reg-path-icon">◉</span><span class="reg-path-title">Press Accreditation</span><span class="reg-path-desc">Media registration and press kit access</span></a>
+      <a href="register.html#online" class="reg-path"><span class="reg-path-icon">◈</span><span class="reg-path-title">Follow Online</span><span class="reg-path-desc">Live stream access and Declaration updates</span></a>
+    </div>
+    <div class="reg-email r2"><input type="email" placeholder="Your email address"><button type="button">Subscribe</button></div>
+    <p class="reg-note r2">For direct inquiries: <a href="contact.html">Domus Communis Foundation Secretariat</a></p>
+  </div>
+</section>
+
+<footer id="gnla-footer">
+  <div class="footer-top">
+    <div class="footer-brand-col">
+      <div class="footer-brand-name">Global Nobel Laureates Assembly on Artificial Intelligence and Nuclear War</div>
+      <div class="footer-brand-meta">Borgo Laudato Si' · Castel Gandolfo, Vatican<br>14–16 July 2026<br>Organized by Domus Communis Foundation</div>
+    </div>
+    <div><span class="footer-col-title">About</span><ul class="footer-col-links"><li><a href="about.html">The Assembly</a></li><li><a href="rome-declaration.html">The Rome Declaration</a></li><li><a href="institutions.html">Institutions & Partners</a></li></ul></div>
+    <div><span class="footer-col-title">Event</span><ul class="footer-col-links"><li><a href="speakers.html">Speakers & Participants</a></li><li><a href="programme.html">Programme</a></li><li><a href="venue.html">Venue</a></li></ul></div>
+    <div><span class="footer-col-title">Engage</span><ul class="footer-col-links"><li><a href="register.html">Register Interest</a></li><li><a href="news.html">News & Updates</a></li><li><a href="media.html">Press & Media</a></li><li><a href="faq.html">FAQ</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2026 Domus Communis Foundation · All rights reserved · Confidential</span>
+    <ul class="footer-legal"><li><a href="#">Privacy Policy</a></li><li><a href="#">Terms of Use</a></li><li><a href="contact.html">Contact</a></li></ul>
+  </div>
+</footer>
+<script src="shared.js"></script>
+</body>
+</html>
