@@ -74,16 +74,34 @@
   max-width:580px;margin-bottom:2.5rem;
 }
 .hero-meta{
-  display:flex;align-items:center;gap:2.5rem;flex-wrap:wrap;
+  display:flex;align-items:stretch;gap:0;flex-wrap:wrap;
   margin-bottom:3rem;
-  padding-bottom:2.5rem;
-  border-bottom:1px solid var(--w15);
-  max-width:680px;
+  max-width:860px;
+  border:1px solid rgba(212,175,55,.25);
+  border-radius:1px;
+  overflow:hidden;
 }
-.hero-meta-item{display:flex;flex-direction:column;gap:.25rem}
-.hero-meta-label{font-size:9px;font-weight:500;letter-spacing:.25em;text-transform:uppercase;color:var(--w15)}
-.hero-meta-value{font-size:14px;font-weight:400;color:var(--w90)}
-.hero-meta-sep{width:1px;height:36px;background:var(--w15);flex-shrink:0}
+.hero-meta-item{
+  display:flex;flex-direction:column;gap:.5rem;
+  padding:2rem 2.5rem;
+  flex:1;
+  border-right:1px solid rgba(212,175,55,.2);
+  position:relative;
+}
+.hero-meta-item::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:var(--gold);
+}
+.hero-meta-item:last-child{border-right:none}
+.hero-meta-label{
+  font-size:9px;font-weight:500;letter-spacing:.25em;text-transform:uppercase;
+  color:var(--gold);opacity:.9;
+}
+.hero-meta-value{
+  font-family:'Cormorant Garamond',serif;
+  font-size:22px;font-weight:300;color:var(--white);line-height:1.2;
+}
+.hero-meta-sep{display:none}
 .hero-btns{display:flex;align-items:center;gap:1.25rem;flex-wrap:wrap}
 
 /* ── STATS STRIP ── */
@@ -184,8 +202,9 @@
   .home-hero-inner{padding:0 1.5rem}
   .stats-inner{padding:0 1.5rem;grid-template-columns:1fr 1fr}
   .sp-grid-full{grid-template-columns:1fr}
-  .hero-meta{gap:1.5rem}
-  .hero-meta-sep{display:none}
+  .hero-meta{flex-direction:column}
+  .hero-meta-item{border-right:none;border-bottom:1px solid rgba(212,175,55,.2)}
+  .hero-meta-item:last-child{border-bottom:none}
   .cta-email-row{flex-direction:column}
   .cta-email-row input{border-right:1px solid var(--w15);border-bottom:none;border-radius:1px 1px 0 0}
   .cta-email-row button{border-radius:0 0 1px 1px}
@@ -193,6 +212,29 @@
 </style>
 </head>
 <body>
+
+<!-- NAV -->
+<nav id="gnla-nav">
+  <a href="index.html" class="nav-brand"><span class="nav-brand-top">Global Nobel Laureates Assembly</span><span class="nav-brand-sub">On Artificial Intelligence and Nuclear War</span></a>
+  <ul class="nav-desktop">
+    <li><a href="about.html">About <span class="caret">▾</span></a><div class="nav-dropdown"><a href="about.html">The Assembly</a><a href="rome-declaration.html">The Rome Declaration</a><a href="institutions.html">Institutions &amp; Partners</a></div></li>
+    <li><a href="speakers.html">Speakers</a></li>
+    <li><a href="programme.html">Programme</a></li>
+    <li><a href="venue.html">Venue</a></li>
+    <li><a href="news.html">Media <span class="caret">▾</span></a><div class="nav-dropdown"><a href="news.html">News &amp; Updates</a><a href="media.html">Press &amp; Media Kit</a></div></li>
+    <li><a href="faq.html">FAQ</a></li>
+  </ul>
+  <a href="register.html" class="nav-cta">Accept Invitation</a>
+  <button class="nav-hamburger" id="gnla-burger" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+<div class="nav-drawer" id="gnla-drawer">
+  <div class="nav-drawer-inner">
+    <div class="drawer-section"><span class="drawer-section-label">About</span><a href="about.html" class="drawer-link">The Assembly</a><a href="rome-declaration.html" class="drawer-link">The Rome Declaration</a><a href="institutions.html" class="drawer-link">Institutions &amp; Partners</a></div>
+    <div class="drawer-section"><span class="drawer-section-label">Event</span><a href="speakers.html" class="drawer-link">Speakers &amp; Participants</a><a href="programme.html" class="drawer-link">Programme</a><a href="venue.html" class="drawer-link">Venue</a></div>
+    <div class="drawer-section"><span class="drawer-section-label">Media &amp; Info</span><a href="news.html" class="drawer-link">News &amp; Updates</a><a href="media.html" class="drawer-link">Press &amp; Media Kit</a><a href="faq.html" class="drawer-link">FAQ</a><a href="contact.html" class="drawer-link">Contact</a></div>
+    <a href="register.html" class="drawer-cta">Accept Invitation</a>
+  </div>
+</div>
 
 <!-- HERO -->
 <section class="home-hero">
@@ -203,11 +245,20 @@
     <h1 class="home-hero-title r">Toward an Unarmed<br>and Disarming Peace<br><em>in the Age of AI</em></h1>
     <p class="home-hero-sub r">A historic convening of Nobel Laureates, AI pioneers, and global leaders — committed to ensuring technology serves humanity, not threatens it.</p>
     <div class="hero-meta r">
-      <div class="hero-meta-item"><span class="hero-meta-label">Dates</span><span class="hero-meta-value">14–16 July 2026</span></div>
+      <div class="hero-meta-item">
+        <span class="hero-meta-label">Dates</span>
+        <span class="hero-meta-value">14–16 July 2026</span>
+      </div>
       <div class="hero-meta-sep"></div>
-      <div class="hero-meta-item"><span class="hero-meta-label">Venue</span><span class="hero-meta-value">Borgo Laudato Si', Castel Gandolfo</span></div>
+      <div class="hero-meta-item">
+        <span class="hero-meta-label">Venue</span>
+        <span class="hero-meta-value">Borgo Laudato Si', Castel Gandolfo</span>
+      </div>
       <div class="hero-meta-sep"></div>
-      <div class="hero-meta-item"><span class="hero-meta-label">Organised by</span><span class="hero-meta-value">Domus Communis Foundation</span></div>
+      <div class="hero-meta-item">
+        <span class="hero-meta-label">Organised by</span>
+        <span class="hero-meta-value">Domus Communis Foundation</span>
+      </div>
     </div>
     <div class="hero-btns r">
       <a href="register.html" class="btn-primary">Accept Invitation</a>
@@ -347,7 +398,16 @@
   </div>
 </section>
 
-
+<!-- FOOTER -->
+<footer id="gnla-footer">
+  <div class="footer-top">
+    <div class="footer-brand-col"><div class="footer-brand-name">Global Nobel Laureates Assembly on Artificial Intelligence and Nuclear War</div><div class="footer-brand-meta">Borgo Laudato Si' · Castel Gandolfo, Vatican<br>14–16 July 2026<br>Organized by Domus Communis Foundation</div></div>
+    <div><span class="footer-col-title">About</span><ul class="footer-col-links"><li><a href="about.html">The Assembly</a></li><li><a href="rome-declaration.html">The Rome Declaration</a></li><li><a href="institutions.html">Institutions &amp; Partners</a></li></ul></div>
+    <div><span class="footer-col-title">Event</span><ul class="footer-col-links"><li><a href="speakers.html">Speakers &amp; Participants</a></li><li><a href="programme.html">Programme</a></li><li><a href="venue.html">Venue</a></li></ul></div>
+    <div><span class="footer-col-title">Engage</span><ul class="footer-col-links"><li><a href="register.html">Accept Invitation</a></li><li><a href="news.html">News &amp; Updates</a></li><li><a href="media.html">Press &amp; Media</a></li><li><a href="faq.html">FAQ</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><span class="footer-copy">© 2026 Domus Communis Foundation · All rights reserved · Confidential</span><ul class="footer-legal"><li><a href="#">Privacy Policy</a></li><li><a href="#">Terms of Use</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+</footer>
 
 <script src="shared.js"></script>
 </body>
