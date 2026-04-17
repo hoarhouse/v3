@@ -3,194 +3,244 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="CORPEX corporate banking infrastructure - 20+ years in production serving Crédit Agricole and Central European financial institutions. E-Group's enterprise banking platform built on 30 years of FinTech expertise.">
+<meta property="og:title" content="CORPEX — E-Group Record">
+<meta property="og:description" content="CORPEX corporate banking infrastructure - 20+ years in production serving Crédit Agricole and Central European financial institutions. E-Group's enterprise banking platform built on 30 years of FinTech expertise.">
+<meta property="og:url" content="https://hoarhouse.github.io/v3/rise/record/corpex.html">
+<meta property="og:image" content="https://hoarhouse.github.io/v3/rise/og-image.png">
+<meta name="robots" content="index, follow">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23080808'/%3E%3Ctext x='5' y='25' font-family='Georgia,serif' font-weight='900' font-size='26' fill='%23C8A96E'%3EE%3C/text%3E%3C/svg%3E">
 <title>CORPEX — E-Group Record</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<script type="application/ld+json">{
+  "@context":"https://schema.org",
+  "@type":"SoftwareApplication",
+  "name":"CORPEX",
+  "description":"Corporate banking infrastructure platform. 20+ years in production serving financial institutions across Central Europe.",
+  "applicationCategory":"Banking",
+  "operatingSystem":"Web",
+  "provider":{"@type":"Organization","name":"E-Group ICT Software Zrt.","url":"https://www.egroup.hu"}
+}</script>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;}
-:root{
-  --black:#080808;--dark:#0A0A0A;--panel:#111;
-  --border:#1A1A1A;--muted:#333;--dim:#555;--mid:#777;
+:root {
+  --black:#080808;--ink:#0F0F0F;--dark:#161616;--panel:#1C1C1C;
+  --border:#252525;--muted:#333;--dim:#555;--mid:#777;
   --text:#B0B0B0;--light:#D0D0D0;--white:#EFEFEF;
-  --gold:#C8A96E;--gold2:#A07840;--teal:#4ECDC4;--green:#4ADE80;
+  --gold:#C8A96E;--gold2:#E8C98E;--teal:#4ECDC4;
 }
-html{background:var(--black);color:var(--white);font-family:'DM Sans',sans-serif;}
-body{overflow-x:hidden;}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--black);color:var(--text);font-family:'DM Sans',sans-serif;font-size:16px;line-height:1.6;overflow-x:hidden;cursor:none;}
+.cursor{position:fixed;width:8px;height:8px;background:var(--gold);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);mix-blend-mode:difference;}
+.cursor-ring{position:fixed;width:32px;height:32px;border:1px solid rgba(200,169,110,0.4);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:all 0.15s ease;}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");opacity:0.025;pointer-events:none;z-index:1000;}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:28px 60px;display:flex;align-items:center;justify-content:space-between;background:rgba(8,8,8,0.97);border-bottom:1px solid var(--border);backdrop-filter:blur(12px);}
+.nav-logo{display:flex;align-items:center;gap:14px;text-decoration:none;}
+.logo-e{font-family:'Syne',sans-serif;font-weight:800;font-size:26px;color:var(--gold);line-height:1;letter-spacing:-1px;}
+.nav-logo-text{font-family:'Syne',sans-serif;font-weight:600;font-size:15px;color:var(--white);letter-spacing:3px;text-transform:uppercase;}
+.nav-links{display:flex;align-items:center;gap:40px;list-style:none;}
+.nav-links a{font-family:'DM Mono',monospace;font-size:12px;color:var(--mid);text-decoration:none;letter-spacing:1.5px;text-transform:uppercase;transition:color 0.2s;position:relative;}
+.nav-links a::after{content:'';position:absolute;bottom:-3px;left:0;right:0;height:1px;background:var(--gold);transform:scaleX(0);transition:transform 0.2s;}
+.nav-links a:hover,.nav-links a.active{color:var(--white);}
+.nav-links a.active::after,.nav-links a:hover::after{transform:scaleX(1);}
+.nav-cta{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);border:1px solid rgba(200,169,110,0.35);padding:10px 22px;text-decoration:none;transition:all 0.2s;position:relative;overflow:hidden;}
+.nav-cta::before{content:'';position:absolute;inset:0;background:var(--gold);transform:translateX(-100%);transition:transform 0.25s ease;z-index:-1;}
+.nav-cta:hover{color:var(--black);}
+.nav-cta:hover::before{transform:translateX(0);}
+.nav-hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none;z-index:200;}
+.nav-hamburger span{display:block;width:22px;height:1.5px;background:var(--gold);transition:all 0.3s ease;transform-origin:center;}
+.nav-hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
+.nav-hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0);}
+.nav-hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
+.nav-mobile-menu{display:none;position:fixed;inset:0;background:rgba(8,8,8,0.98);z-index:150;flex-direction:column;align-items:center;justify-content:flex-start;backdrop-filter:blur(20px);overflow-y:auto;padding:80px 0 40px;}
+.nav-mobile-menu.open{display:flex;}
+.mob-section{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--dim);padding:16px 0 6px;width:80%;border-bottom:1px solid var(--border);text-align:center;margin-bottom:4px;}
+.nav-mobile-menu a.mob-main{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(22px,5.5vw,32px);color:var(--white);text-decoration:none;letter-spacing:-0.5px;padding:7px 0;width:80%;text-align:center;transition:color 0.2s;border-bottom:none;}
+.nav-mobile-menu a.mob-main:hover{color:var(--gold);}
+.nav-mobile-menu a.mob-record{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--mid);text-decoration:none;padding:7px 0;width:80%;text-align:center;transition:color 0.2s;border-bottom:none;}
+.nav-mobile-menu a.mob-record:hover,.nav-mobile-menu a.mob-record.active{color:var(--gold);}
+.nav-mobile-menu a.mob-cta{font-family:'DM Mono',monospace;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--black);background:var(--gold);padding:14px 36px;font-weight:400;margin-top:20px;border-bottom:none;}
+footer{background:var(--black);border-top:1px solid var(--border);padding:48px 60px;display:flex;justify-content:space-between;align-items:center;}
+.footer-left{display:flex;flex-direction:column;gap:6px;}
+.footer-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:16px;color:var(--white);letter-spacing:3px;text-transform:uppercase;}
+.footer-logo span{color:var(--gold);}
+.footer-tagline{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);}
+.footer-mid{font-family:'Syne',sans-serif;font-size:14px;color:var(--mid);max-width:420px;text-align:center;line-height:1.6;}
+.footer-mid em{color:var(--gold);font-style:normal;}
+.footer-right{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1.5px;color:var(--dim);text-align:right;line-height:1.8;}
+@keyframes pulse{0%,100%{opacity:0.4;transform:scale(1);}50%{opacity:1;transform:scale(1.3);}}
+@keyframes fadeInUp{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
 .reveal{opacity:0;transform:translateY(20px);transition:opacity 0.6s ease,transform 0.6s ease;}
-.reveal.visible{opacity:1;transform:none;}
-.reveal-delay-1{transition-delay:0.1s;}
-.reveal-delay-2{transition-delay:0.2s;}
-.reveal-delay-3{transition-delay:0.3s;}
-.breadcrumb{padding:100px 60px 0;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);}
-.breadcrumb a{color:var(--dim);text-decoration:none;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+.rd1{transition-delay:0.1s;}.rd2{transition-delay:0.2s;}.rd3{transition-delay:0.3s;}
+@media(max-width:1023px){nav{padding:20px 36px;}footer{padding:40px 36px;flex-direction:column;gap:20px;text-align:center;}.footer-right{text-align:center;}}
+@media(max-width:767px){.cursor,.cursor-ring{display:none;}body{cursor:auto;}nav{padding:16px 20px;}.nav-links,.nav-cta{display:none;}.nav-hamburger{display:flex;}footer{padding:32px 20px;}}
+
+.page-hero{padding:160px 60px 80px;border-bottom:1px solid var(--border);position:relative;overflow:hidden;}
+.hero-glow{position:absolute;top:-100px;right:-100px;width:700px;height:500px;background:radial-gradient(ellipse,rgba(200,169,110,0.05) 0%,transparent 65%);pointer-events:none;}
+.breadcrumb{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-bottom:20px;display:flex;align-items:center;gap:10px;}
+.breadcrumb a{color:var(--dim);text-decoration:none;transition:color 0.2s;}
 .breadcrumb a:hover{color:var(--gold);}
-.breadcrumb span{color:var(--mid);margin:0 8px;}
-.record-hero{padding:40px 60px 80px;border-bottom:1px solid var(--border);}
-.record-badges{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:32px;}
-.badge{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;padding:5px 12px;border:1px solid;}
-.badge-live{color:var(--green);border-color:rgba(74,222,128,0.3);}
-.badge-fintech{color:var(--gold);border-color:rgba(200,169,110,0.3);}
-.badge-default{color:var(--mid);border-color:var(--border);}
-.record-headline{font-family:'Syne',sans-serif;font-size:clamp(36px,5vw,72px);font-weight:800;color:var(--white);letter-spacing:-2px;line-height:1.0;margin-bottom:24px;}
-.record-headline em{color:var(--gold);font-style:normal;}
-.record-sub{font-size:18px;color:var(--text);line-height:1.7;max-width:640px;margin-bottom:48px;}
-.record-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);max-width:800px;}
-.record-stat{background:var(--dark);padding:24px 28px;}
-.record-stat-num{font-family:'Syne',sans-serif;font-size:32px;font-weight:800;color:var(--white);}
-.record-stat-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--mid);margin-top:6px;}
-.record-section{padding:72px 60px;border-bottom:1px solid var(--border);}
-.record-section-dark{background:var(--dark);}
-.section-eyebrow{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--mid);margin-bottom:16px;}
-.section-title{font-family:'Syne',sans-serif;font-size:clamp(24px,3vw,40px);font-weight:700;color:var(--white);letter-spacing:-0.5px;margin-bottom:24px;line-height:1.1;}
-.section-title span{color:var(--gold);}
-.body-text{font-size:16px;color:var(--text);line-height:1.8;margin-bottom:20px;max-width:760px;}
-.body-text strong{color:var(--white);}
-.two-col{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;}
-.capability-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);margin-top:40px;}
-.capability-card{background:var(--dark);padding:36px;border-left:3px solid transparent;transition:background 0.2s,border-left-color 0.2s;}
-.capability-card:hover{background:var(--panel);border-left-color:var(--gold);}
-.capability-name{font-family:'Syne',sans-serif;font-size:18px;font-weight:700;color:var(--white);margin-bottom:10px;}
-.capability-desc{font-size:13px;color:var(--text);line-height:1.7;}
-.fact-box{padding:36px;border:1px solid var(--border);border-left:3px solid var(--gold);background:var(--panel);}
-.fact-box-title{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:16px;}
-.fact-list{list-style:none;display:flex;flex-direction:column;gap:10px;}
-.fact-list li{font-size:14px;color:var(--text);line-height:1.6;padding-left:16px;position:relative;}
-.fact-list li::before{content:'—';position:absolute;left:0;color:var(--gold);}
-.record-cta{padding:72px 60px;display:flex;align-items:center;justify-content:space-between;gap:40px;flex-wrap:wrap;}
-.record-cta-text h2{font-family:'Syne',sans-serif;font-size:clamp(22px,3vw,36px);font-weight:700;color:var(--white);margin-bottom:12px;letter-spacing:-0.5px;}
-.record-cta-text p{font-size:16px;color:var(--text);max-width:500px;line-height:1.6;}
-.record-cta-btn{font-family:'DM Mono',monospace;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:var(--black);background:var(--gold);padding:16px 32px;text-decoration:none;white-space:nowrap;transition:background 0.2s;}
-.record-cta-btn:hover{background:var(--gold2);}
-.record-back{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--mid);text-decoration:none;transition:color 0.2s;}
-.record-back:hover{color:var(--gold);}
-@media(max-width:1023px){.capability-grid{grid-template-columns:1fr 1fr;}.record-stats{grid-template-columns:1fr 1fr;}}
-@media(max-width:768px){
-  .breadcrumb{padding:80px 24px 0;}.record-hero{padding:32px 24px 60px;}.record-section{padding:56px 24px;}
-  .two-col{grid-template-columns:1fr;gap:40px;}.capability-grid{grid-template-columns:1fr;}.record-stats{grid-template-columns:1fr 1fr;}
-  .record-cta{padding:56px 24px;flex-direction:column;align-items:flex-start;}
-}
+.breadcrumb span{color:var(--gold);}
+.page-hero h1{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(32px,4.5vw,62px);color:var(--white);letter-spacing:-2px;line-height:1;margin-bottom:20px;max-width:820px;}
+.page-hero h1 em{font-style:normal;color:var(--gold);}
+.hero-meta{display:flex;flex-wrap:wrap;gap:16px;margin-top:20px;}
+.hero-badge{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;padding:6px 14px;border:1px solid;}
+.badge-eu{color:var(--gold);border-color:rgba(200,169,110,0.3);}
+.badge-live{color:var(--teal);border-color:rgba(78,205,196,0.3);display:flex;align-items:center;gap:6px;}
+.live-dot{width:5px;height:5px;border-radius:50%;background:var(--teal);animation:pulse 1.5s ease-in-out infinite;}
+.badge-default{color:var(--dim);border-color:var(--border);}
+.content-body{max-width:1200px;margin:0 auto;padding:80px 60px;}
+.two-col{display:grid;grid-template-columns:2fr 1fr;gap:80px;align-items:flex-start;}
+.prose h2{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(22px,2.5vw,32px);color:var(--white);letter-spacing:-0.8px;line-height:1.05;margin:48px 0 16px;}
+.prose h2:first-child{margin-top:0;}
+.prose p{font-size:16px;font-weight:300;color:var(--mid);line-height:1.9;margin-bottom:16px;}
+.prose p strong{color:var(--light);font-weight:500;}
+.prose ul{margin:16px 0 20px 0;display:flex;flex-direction:column;gap:10px;}
+.prose ul li{font-size:15px;color:var(--mid);line-height:1.7;padding-left:20px;position:relative;}
+.prose ul li::before{content:'—';position:absolute;left:0;color:var(--gold);opacity:0.6;}
+.sidebar{position:sticky;top:100px;}
+.sidebar-card{background:var(--dark);border:1px solid var(--border);padding:28px 24px;margin-bottom:1px;}
+.sidebar-card:first-child{border-top:2px solid var(--gold);}
+.sc-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:var(--dim);margin-bottom:12px;}
+.sc-rows{display:flex;flex-direction:column;gap:0;}
+.sc-row{display:flex;justify-content:space-between;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--border);gap:12px;}
+.sc-row:last-child{border-bottom:none;}
+.sc-key{font-family:'DM Mono',monospace;font-size:10px;color:var(--dim);letter-spacing:0.5px;flex-shrink:0;}
+.sc-val{font-size:13px;color:var(--light);text-align:right;line-height:1.4;}
+.sc-val a{color:var(--gold);text-decoration:none;}
+.source-list{display:flex;flex-direction:column;gap:0;}
+.source-item{padding:12px 0;border-bottom:1px solid var(--border);display:flex;gap:12px;align-items:flex-start;}
+.source-item:last-child{border-bottom:none;}
+.src-num{font-family:'DM Mono',monospace;font-size:9px;color:var(--gold);opacity:0.5;flex-shrink:0;margin-top:2px;}
+.src-text{font-size:12px;color:var(--dim);line-height:1.5;}
+.src-text a{color:var(--mid);text-decoration:none;border-bottom:1px solid var(--border);}
+.src-text a:hover{color:var(--gold);}
+.related-section{padding:0 60px 80px;border-top:1px solid var(--border);padding-top:60px;}
+.related-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);margin-top:32px;}
+.related-card{background:var(--dark);padding:28px 24px;text-decoration:none;display:block;transition:background 0.2s;}
+.related-card:hover{background:var(--panel);}
+.rc-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);opacity:0.6;margin-bottom:8px;}
+.rc-title-sm{font-family:'Syne',sans-serif;font-weight:700;font-size:15px;color:var(--white);letter-spacing:-0.2px;line-height:1.2;}
+@media(max-width:1023px){.content-body{padding:60px 36px;}.two-col{grid-template-columns:1fr;gap:48px;}.sidebar{position:static;}.related-section{padding:0 36px 60px;padding-top:48px;}.related-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:767px){.page-hero{padding:100px 20px 48px;}.content-body{padding:48px 20px;}.related-section{padding:0 20px 48px;padding-top:40px;}.related-grid{grid-template-columns:1fr;}}
+.nav-mobile-menu a { text-decoration:none; border-bottom:none; }
+.nav-mobile-menu a::after { display:none; }
+.mob-main { font-family:'Syne',sans-serif !important; font-weight:800 !important; font-size:clamp(26px,7vw,40px) !important; color:var(--white) !important; letter-spacing:-0.5px !important; padding:9px 0 !important; width:80%; text-align:center; transition:color 0.2s; display:block; }
+.mob-main:hover { color:var(--gold) !important; }
+.mob-divider { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:3px; text-transform:uppercase; color:var(--dim); padding:20px 0 6px; width:80%; border-bottom:1px solid var(--border); text-align:center; margin-bottom:4px; }
+.mob-record { font-family:'DM Mono',monospace !important; font-size:11px !important; letter-spacing:1.5px !important; text-transform:uppercase !important; color:var(--mid) !important; padding:7px 0 !important; width:80%; text-align:center; transition:color 0.2s; display:block; }
+.mob-record:hover { color:var(--gold) !important; }
+.mob-cta { font-family:'DM Mono',monospace !important; font-size:12px !important; letter-spacing:2px !important; text-transform:uppercase !important; color:var(--black) !important; background:var(--gold) !important; padding:14px 36px !important; margin-top:20px !important; display:block; }
+.nav-has-dropdown { position: relative; }
+.nav-has-dropdown .nav-dropdown { display: none; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); background: #0A0A0A; border: 1px solid #1E1E1E; border-radius: 6px; min-width: 220px; padding: 6px 0; z-index: 500; box-shadow: 0 8px 32px rgba(0,0,0,0.5); list-style: none; }
+.nav-has-dropdown { padding-bottom: 12px; }
+.nav-has-dropdown .nav-dropdown li a { display: block; padding: 9px 18px; font-size: 12px; color: #888; text-decoration: none; white-space: nowrap; letter-spacing: 0.04em; transition: color 0.15s, background 0.15s; }
+.nav-has-dropdown .nav-dropdown li a:hover { color: #EEE; background: #141414; }
+.nav-has-dropdown .nav-dropdown li:first-child a { color: #C8A96E; }
+.nav-has-dropdown .nav-dropdown li:first-child { border-bottom: 1px solid #1E1E1E; margin-bottom: 4px; }
 </style>
 </head>
-<body data-page="record">
+<body data-page="record" data-prefix="../">
 <script src="../nav-site.js"></script>
 <script src="nav-record.js"></script>
 
-<div class="breadcrumb reveal">
-  <a href="../record/index.html">Record</a>
-  <span>/</span>
-  CORPEX — Corporate Banking Infrastructure
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<div class="nav-mobile-menu" id="mobileMenu">
+  <a href="../index.html" class="mob-main">Home</a>
+  <a href="../intelligence.html" class="mob-main">The Work</a>
+  <a href="../rise.html" class="mob-main">What's Next</a>
+  <a href="../thinking.html" class="mob-main">Thinking</a>
+  <a href="../about.html" class="mob-main">About</a>
+  <div class="mob-divider">The Record</div>
+  <a href="index.html" class="mob-record">Record Home</a>
+  <a href="ipcei-cis.html" class="mob-record">IPCEI-CIS — FedEU.ai</a>
+  <a href="kau.html" class="mob-record">KAÜ — National Identity</a>
+  <a href="helix.html" class="mob-record">HeliX + FedX</a>
+  <a href="eidas.html" class="mob-record">eIDAS 2.0 — MyD Wallet</a>
+  <a href="medical-ai.html" class="mob-record">Medical AI — GraDPaLM</a>
+  <a href="peter-antal.html" class="mob-record">Dr. Péter Antal</a>
+  <a href="press.html" class="mob-record">Press Kit</a>
+  <a href="../contact.html" class="mob-cta">Work With Us</a>
 </div>
 
-<section class="record-hero">
-  <div class="record-badges reveal">
-    <span class="badge badge-live">● Live in Production</span>
-    <span class="badge badge-fintech">FinTech</span>
-    <span class="badge badge-default">Corporate Banking</span>
-    <span class="badge badge-default">20+ Years</span>
-  </div>
-  <h1 class="record-headline reveal">CORPEX —<br><em>Corporate Banking</em><br>Infrastructure</h1>
-  <p class="record-sub reveal">Corporate internet banking front-end and financial infrastructure platform. Built for Crédit Agricole — one of Europe's largest banks. Built on E-Group's thirty years of FinTech IP — proven in production for over two decades of financial operations across Central Europe.</p>
-  <div class="record-stats reveal">
-    <div class="record-stat"><div class="record-stat-num">20+</div><div class="record-stat-label">Years in production</div></div>
-    <div class="record-stat"><div class="record-stat-num">B2B</div><div class="record-stat-label">Financial institutions</div></div>
-    <div class="record-stat"><div class="record-stat-num">EU</div><div class="record-stat-label">Regulatory compliant</div></div>
-    <div class="record-stat"><div class="record-stat-num">Live</div><div class="record-stat-label">Running today</div></div>
-  </div>
-</section>
+<div class="page-hero">
+  <div class="hero-glow"></div>
+  <div class="breadcrumb"><a href="index.html">Record</a> / <span>CORPEX</span></div>
+  <h1>CORPEX<br><em>Corporate banking infrastructure running for 20+ years</em></h1>
+  <div class="hero-meta"><span class="hero-badge badge-live"><span class="live-dot"></span>Live since 2000s</span><span class="hero-badge badge-default">FinTech</span><span class="hero-badge badge-default">Corporate Banking</span><span class="hero-badge badge-default">Crédit Agricole</span></div>
+</div>
 
-<section class="record-section">
+<div class="content-body">
   <div class="two-col">
-    <div>
-      <div class="section-eyebrow reveal">What It Is</div>
-      <h2 class="section-title reveal">Corporate banking.<br><span>Built to last.</span></h2>
-      <p class="body-text reveal">CORPEX is E-Group's corporate internet banking platform — a proven, production-grade front-end and infrastructure layer for financial institutions serving corporate clients. It is not a prototype. Not a pilot. A system that has been running in financial institutions across Central Europe for over twenty years.</p>
-      <p class="body-text reveal">Built on E-Group's thirty years of FinTech expertise — clearing, settlement, payment systems, regulatory compliance — CORPEX brings that depth of institutional knowledge into a deployable, maintainable banking platform.</p>
-      <p class="body-text reveal">Financial institutions do not replace core banking infrastructure lightly. The fact that CORPEX has been in continuous production for two decades is the most credible endorsement there is.</p>
-    </div>
-    <div class="reveal">
-      <div class="fact-box">
-        <div class="fact-box-title">Key Facts</div>
-        <ul class="fact-list">
-          <li>Corporate internet banking front-end for financial institutions</li>
-          <li>20+ years of continuous production deployment</li>
-          <li>Built on E-Group's FinTech infrastructure expertise</li>
-          <li>Deployed at Crédit Agricole and financial institutions across Central Europe</li>
-          <li>EU regulatory compliant — built to evolve with regulation</li>
-          <li>B2B focused — serving financial institutions, not retail customers</li>
-        </ul>
+    <div class="prose reveal">
+<h2>What It Is</h2>
+<p>CORPEX is E-Group's <strong>corporate banking infrastructure platform</strong> — a complete corporate internet banking front-end and financial infrastructure system that has been running in production for over twenty years. It is not a prototype, not a demo, not a pitch. It is live banking infrastructure serving financial institutions across Central Europe.</p>
+<p>Built on E-Group's three decades of FinTech expertise, CORPEX provides the complete technology stack for corporate banking operations — from the customer-facing interface to the core banking integration layer. This is the same infrastructure foundation that has processed billions in transactions and served thousands of corporate banking customers since the 2000s.</p>
+
+<h2>Live Status and Impact</h2>
+<p>CORPEX has been <strong>continuously operational since the early 2000s</strong>, making it one of the longest-running corporate banking platforms in Central Europe. The platform's flagship deployment serves <strong>Crédit Agricole</strong>, one of Europe's largest banking groups.</p>
+<ul>
+  <li>20+ years of continuous production operation</li>
+  <li>Survived multiple EU regulatory cycles (PSD1, PSD2, GDPR)</li>
+  <li>Adapted through the complete digitisation of European banking</li>
+  <li>Proven through the transition to open banking</li>
+  <li>B2B focused — serving financial institutions, not retail customers</li>
+</ul>
+
+<h2>Technical Foundation</h2>
+<p>CORPEX delivers a comprehensive suite of corporate banking capabilities, all built on <strong>enterprise-grade infrastructure</strong> designed for the complexity and compliance requirements of European financial institutions:</p>
+<ul>
+  <li><strong>Corporate Internet Banking:</strong> Full-featured front-end with account management, payment initiation, transaction history, and multi-user corporate access with role-based permissions</li>
+  <li><strong>Payment Infrastructure:</strong> Payment processing and routing built on E-Group's clearing and settlement expertise, supporting domestic and cross-border payments with full audit trail</li>
+  <li><strong>Security Architecture:</strong> Multi-factor authentication, session management, and audit logging — built by the team that created Hungary's national digital identity system</li>
+  <li><strong>Core Banking Integration:</strong> Integration layer connecting CORPEX to existing financial institution infrastructure, designed for legacy-heavy environments</li>
+  <li><strong>Regulatory Compliance:</strong> Built to comply with EU financial regulation — PSD2, AML, KYC, and reporting requirements</li>
+</ul>
+
+<h2>Client and Partnership</h2>
+<p><strong>Crédit Agricole</strong> trusted E-Group to build and operate their corporate banking infrastructure — a decision that has proven itself over two decades of continuous operation. This isn't a vendor relationship; it's a technology partnership that has evolved through multiple generations of banking transformation.</p>
+<p>The platform is white-label ready, configurable for the branding and workflow requirements of individual financial institutions. Built as a platform, not a fixed product — adaptable to the specific needs of each deployment while maintaining the security and compliance standards required for European banking.</p>
+
+<h2>Why This Matters</h2>
+<p>Most companies talking about building FinTech AI today have never built the underlying financial infrastructure. They are building on top of systems they do not fully understand, in a regulatory environment they are still learning.</p>
+<p>E-Group has been building that underlying infrastructure since the 1990s. CORPEX is the evidence. When E-Group builds <strong>COIOS</strong> — its AI operating system for financial institutions — it is built on the same foundations as CORPEX. Not theory. Thirty years of practice.</p>
+</div>
+    <div class="sidebar reveal rd1">
+      <div class="sidebar-card"><div class="sc-label">Project Details</div><div class="sc-rows"><div class="sc-row"><span class="sc-key">Product</span><span class="sc-val">CORPEX</span></div><div class="sc-row"><span class="sc-key">Status</span><span class="sc-val">Live since 2000s</span></div><div class="sc-row"><span class="sc-key">Client</span><span class="sc-val">Crédit Agricole</span></div><div class="sc-row"><span class="sc-key">Platform</span><span class="sc-val">E-Group FinTech Infrastructure</span></div><div class="sc-row"><span class="sc-key">Sector</span><span class="sc-val">Corporate Banking</span></div><div class="sc-row"><span class="sc-key">Coverage</span><span class="sc-val">Central Europe</span></div><div class="sc-row"><span class="sc-key">Compliance</span><span class="sc-val">EU regulatory compliant</span></div><div class="sc-row"><span class="sc-key">Related</span><span class="sc-val">Pay with a Smile, KAÜ National Digital Identity</span></div></div></div>
+      <div class="sidebar-card"><div class="sc-label">Technical</div><div class="sc-rows"><div class="sc-row"><span class="sc-key">Architecture</span><span class="sc-val">Corporate internet banking front-end</span></div><div class="sc-row"><span class="sc-key">Infrastructure</span><span class="sc-val">Payment processing and routing</span></div><div class="sc-row"><span class="sc-key">Security</span><span class="sc-val">Multi-factor authentication, audit logging</span></div><div class="sc-row"><span class="sc-key">Integration</span><span class="sc-val">Core banking integration layer</span></div><div class="sc-row"><span class="sc-key">Compliance</span><span class="sc-val">PSD2, AML, KYC compliant</span></div><div class="sc-row"><span class="sc-key">Scale</span><span class="sc-val">20+ years continuous production</span></div></div></div>
+      <div class="sidebar-card">
+        <div class="sc-label">Impact</div>
+        <div class="sc-rows"><div class="sc-row"><span class="sc-key">Launch</span><span class="sc-val">2000s (20+ years ago)</span></div><div class="sc-row"><span class="sc-key">Geographic</span><span class="sc-val">Central Europe</span></div><div class="sc-row"><span class="sc-key">Client Type</span><span class="sc-val">Financial institutions</span></div><div class="sc-row"><span class="sc-key">Production Status</span><span class="sc-val">Continuous operation</span></div><div class="sc-row"><span class="sc-key">Regulatory</span><span class="sc-val">Multiple EU cycles</span></div></div>
       </div>
     </div>
   </div>
-</section>
-
-<section class="record-section record-section-dark">
-  <div class="section-eyebrow reveal">Capabilities</div>
-  <h2 class="section-title reveal">What CORPEX delivers.<br><span>In production.</span></h2>
-  <div class="capability-grid">
-    <div class="capability-card reveal">
-      <div class="capability-name">Corporate Internet Banking</div>
-      <div class="capability-desc">Full-featured corporate banking front-end. Account management, payment initiation, transaction history, multi-user corporate access with role-based permissions. Built for the complexity of corporate treasury operations.</div>
-    </div>
-    <div class="capability-card reveal reveal-delay-1">
-      <div class="capability-name">Payment Infrastructure</div>
-      <div class="capability-desc">Payment processing and routing infrastructure built on E-Group's clearing and settlement expertise. Domestic and cross-border payment support with full audit trail and regulatory reporting.</div>
-    </div>
-    <div class="capability-card reveal reveal-delay-2">
-      <div class="capability-name">Regulatory Compliance</div>
-      <div class="capability-desc">Built to comply with EU financial regulation — PSD2, AML, KYC, and reporting requirements. Designed to adapt as regulation evolves, not to be replaced every time it does.</div>
-    </div>
-    <div class="capability-card reveal">
-      <div class="capability-name">Security Architecture</div>
-      <div class="capability-desc">Enterprise-grade security built on E-Group's identity and authentication expertise. Multi-factor authentication, session management, and audit logging — built by the team that built Hungary's national digital identity system.</div>
-    </div>
-    <div class="capability-card reveal reveal-delay-1">
-      <div class="capability-name">Integration Layer</div>
-      <div class="capability-desc">Core banking integration layer connecting CORPEX to existing financial institution infrastructure. Designed for the complex, legacy-heavy environment that real financial institutions actually operate in.</div>
-    </div>
-    <div class="capability-card reveal reveal-delay-2">
-      <div class="capability-name">White-Label Ready</div>
-      <div class="capability-desc">Configurable for the branding and workflow requirements of individual financial institutions. Built as a platform, not a fixed product — adaptable to the specific needs of each deployment.</div>
-    </div>
-  </div>
-</section>
-
-<section class="record-section">
-  <div class="section-eyebrow reveal">Why It Matters</div>
-  <h2 class="section-title reveal">Thirty years of FinTech IP.<br><span>Deployed and running.</span></h2>
-  <p class="body-text reveal">Most companies talking about building FinTech AI today have never built the underlying financial infrastructure. They are building on top of systems they do not fully understand, in a regulatory environment they are still learning.</p>
-  <p class="body-text reveal">E-Group has been building that underlying infrastructure since the 1990s. CORPEX is the evidence. A live, production banking platform that has been running continuously for over twenty years — through multiple EU regulatory cycles, through the digitisation of European banking, through the transition to open banking.</p>
-  <p class="body-text reveal">When E-Group builds COIOS — its AI operating system for financial institutions — it is built on the same foundations as CORPEX. Not theory. Thirty years of practice.</p>
-</section>
-
-<section class="record-section record-section-dark">
-  <div class="section-eyebrow reveal">Related Projects</div>
-  <h2 class="section-title reveal">E-Group's financial infrastructure.<br><span>Multiple systems, one foundation.</span></h2>
-  <p class="body-text reveal"><strong>Related:</strong> Pay with a Smile, KAÜ National Digital Identity</p>
-  <p class="body-text reveal">CORPEX is part of E-Group's broader financial and identity infrastructure portfolio. From biometric payment systems to national digital identity platforms, E-Group has built the trust layer that financial services depend on.</p>
-</section>
-
-<div class="record-cta">
-  <div class="record-cta-text">
-    <h2>Crédit Agricole trusted us.<br>You can too.</h2>
-    <p>Twenty years of production banking infrastructure. If you are building or modernising corporate banking systems — we have been doing this longer than most vendors have existed. Tell us what you're working on.</p>
-  </div>
-  <div style="display:flex;flex-direction:column;gap:16px;align-items:flex-end;">
-    <a href="../contact.html" class="record-cta-btn">Start the conversation →</a>
-    <a href="../record/index.html" class="record-back">← Back to The Record</a>
-  </div>
 </div>
 
+<div class="related-section">
+  <div class="rg-eyebrow" style="font-family:'DM Mono',monospace;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:12px;display:flex;align-items:center;gap:12px;"><span style="display:inline-block;width:24px;height:1px;background:var(--gold);"></span>Related Records</div>
+  <div class="related-grid"><a href="pay-with-a-smile.html" class="related-card"><div class="rc-label">FinTech</div><div class="rc-title-sm">Pay with a Smile — Biometric Payments</div></a><a href="kau.html" class="related-card"><div class="rc-label">Banking/Identity</div><div class="rc-title-sm">KAÜ — National Digital Identity</div></a><a href="coios.html" class="related-card"><div class="rc-label">AI Platform</div><div class="rc-title-sm">COIOS — Financial AI Operating System</div></a></div>
+</div>
+
+
 <footer>
-  <div class="footer-brand">E-Group Intelligence Infrastructure · Est. 1993</div>
-  <div class="footer-legal">Budapest, Hungary · © 2026 E-Group ICT Software Zrt.</div>
+  <div class="footer-left">
+    <div class="footer-logo"><span>E</span>-Group</div>
+    <div class="footer-tagline">Intelligence Infrastructure · Est. 1993</div>
+  </div>
+  <div class="footer-mid">The public record of E-Group ICT Software Zrt.<br>Budapest, Hungary · Founded 1993</div>
+  <div class="footer-right">© 2026 E-Group ICT Software Zrt.<br>All rights reserved.<br>Reg: 01 10 045390 HUN</div>
 </footer>
 
 <script>
-const obs = new IntersectionObserver(entries => entries.forEach(e => {
-  if(e.isIntersecting) e.target.classList.add('visible');
-}),{threshold:0.08});
-document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+const cursor=document.getElementById('cursor'),ring=document.getElementById('cursorRing');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cursor.style.left=mx+'px';cursor.style.top=my+'px';});
+(function loop(){rx+=(mx-rx)*0.12;ry+=(my-ry)*0.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(loop);})();
+const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');}),{threshold:0.08});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 </script>
 </body>
 </html>
