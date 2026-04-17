@@ -1,7 +1,7 @@
 (function() {
   var path = window.location.pathname;
-  var inRecord = path.includes('/record/');
-  var base = inRecord ? '../' : '';
+  var inSubfolder = path.includes('/record/') || path.includes('/people/');
+  var base = inSubfolder ? '../' : '';
   var current = path.split('/').pop() || 'index.html';
   function active(page) { return current === page ? 'color:#C8A96E;' : ''; }
 
