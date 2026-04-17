@@ -167,12 +167,16 @@
         btn.classList.toggle('open');
         menu.classList.toggle('open');
         document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : '';
+        var subnav = document.getElementById('record-subnav');
+        if (subnav) subnav.style.display = menu.classList.contains('open') ? 'none' : '';
       });
       menu.querySelectorAll('a').forEach(function(a) {
         a.addEventListener('click', function() {
           btn.classList.remove('open');
           menu.classList.remove('open');
           document.body.style.overflow = '';
+          var subnav = document.getElementById('record-subnav');
+          if (subnav) subnav.style.display = '';
         });
       });
     }
