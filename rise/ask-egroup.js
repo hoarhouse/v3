@@ -78,7 +78,7 @@ INSTRUCTIONS:
   // ── STYLES ───────────────────────────────────────────────────────────────
   var css = `
     #eg-chat-btn {
-      position:fixed;bottom:28px;right:28px;z-index:9998;
+      position:fixed;bottom:28px;right:28px;z-index:998;
       display:flex;align-items:center;gap:10px;
       background:#C8A96E;color:#080808;
       font-family:'DM Mono',monospace;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;
@@ -91,7 +91,7 @@ INSTRUCTIONS:
     @keyframes eg-pulse{0%,100%{opacity:1;}50%{opacity:0.4;}}
 
     #eg-chat-panel {
-      position:fixed;bottom:90px;right:28px;z-index:9999;
+      position:fixed;bottom:90px;right:28px;z-index:999;
       width:380px;max-height:560px;
       background:#0A0A0A;border:1px solid #1A1A1A;
       display:flex;flex-direction:column;
