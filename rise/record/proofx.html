@@ -3,241 +3,236 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="ProofX cryptographic image verification system - ESA partnership using Galileo OSNMA and C2PA standards for court-admissible evidence in insurance, media, and facility management.">
+<meta property="og:title" content="ProofX — E-Group Record">
+<meta property="og:description" content="ProofX cryptographic image verification system - ESA partnership using Galileo OSNMA and C2PA standards for court-admissible evidence in insurance, media, and facility management.">
+<meta property="og:url" content="https://hoarhouse.github.io/v3/rise/record/proofx.html">
+<meta property="og:image" content="https://hoarhouse.github.io/v3/rise/og-image.png">
+<meta name="robots" content="index, follow">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23080808'/%3E%3Ctext x='5' y='25' font-family='Georgia,serif' font-weight='900' font-size='26' fill='%23C8A96E'%3EE%3C/text%3E%3C/svg%3E">
 <title>ProofX — E-Group Record</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<script type="application/ld+json">{
+  "@context":"https://schema.org",
+  "@type":"SoftwareApplication",
+  "name":"ProofX",
+  "description":"Cryptographic image verification system using Galileo OSNMA and C2PA standards. ESA partnership for court-admissible evidence chains.",
+  "applicationCategory":"SpaceTech",
+  "operatingSystem":"Cryptographic verification",
+  "provider":{"@type":"Organization","name":"E-Group ICT Software Zrt.","url":"https://www.egroup.hu"}
+}</script>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;}
-:root{
-  --black:#080808;--dark:#0A0A0A;--panel:#111;
-  --border:#1A1A1A;--muted:#333;--dim:#555;--mid:#777;
+:root {
+  --black:#080808;--ink:#0F0F0F;--dark:#161616;--panel:#1C1C1C;
+  --border:#252525;--muted:#333;--dim:#555;--mid:#777;
   --text:#B0B0B0;--light:#D0D0D0;--white:#EFEFEF;
-  --gold:#C8A96E;--gold2:#A07840;--teal:#4ECDC4;--green:#4ADE80;
+  --gold:#C8A96E;--gold2:#E8C98E;--teal:#4ECDC4;
 }
-html{background:var(--black);color:var(--white);font-family:'DM Sans',sans-serif;}
-body{overflow-x:hidden;}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--black);color:var(--text);font-family:'DM Sans',sans-serif;font-size:16px;line-height:1.6;overflow-x:hidden;cursor:none;}
+.cursor{position:fixed;width:8px;height:8px;background:var(--gold);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);mix-blend-mode:difference;}
+.cursor-ring{position:fixed;width:32px;height:32px;border:1px solid rgba(200,169,110,0.4);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:all 0.15s ease;}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");opacity:0.025;pointer-events:none;z-index:1000;}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:28px 60px;display:flex;align-items:center;justify-content:space-between;background:rgba(8,8,8,0.97);border-bottom:1px solid var(--border);backdrop-filter:blur(12px);}
+.nav-logo{display:flex;align-items:center;gap:14px;text-decoration:none;}
+.logo-e{font-family:'Syne',sans-serif;font-weight:800;font-size:26px;color:var(--gold);line-height:1;letter-spacing:-1px;}
+.nav-logo-text{font-family:'Syne',sans-serif;font-weight:600;font-size:15px;color:var(--white);letter-spacing:3px;text-transform:uppercase;}
+.nav-links{display:flex;align-items:center;gap:40px;list-style:none;}
+.nav-links a{font-family:'DM Mono',monospace;font-size:12px;color:var(--mid);text-decoration:none;letter-spacing:1.5px;text-transform:uppercase;transition:color 0.2s;position:relative;}
+.nav-links a::after{content:'';position:absolute;bottom:-3px;left:0;right:0;height:1px;background:var(--gold);transform:scaleX(0);transition:transform 0.2s;}
+.nav-links a:hover,.nav-links a.active{color:var(--white);}
+.nav-links a.active::after,.nav-links a:hover::after{transform:scaleX(1);}
+.nav-cta{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);border:1px solid rgba(200,169,110,0.35);padding:10px 22px;text-decoration:none;transition:all 0.2s;position:relative;overflow:hidden;}
+.nav-cta::before{content:'';position:absolute;inset:0;background:var(--gold);transform:translateX(-100%);transition:transform 0.25s ease;z-index:-1;}
+.nav-cta:hover{color:var(--black);}
+.nav-cta:hover::before{transform:translateX(0);}
+.nav-hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none;z-index:200;}
+.nav-hamburger span{display:block;width:22px;height:1.5px;background:var(--gold);transition:all 0.3s ease;transform-origin:center;}
+.nav-hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
+.nav-hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0);}
+.nav-hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
+.nav-mobile-menu{display:none;position:fixed;inset:0;background:rgba(8,8,8,0.98);z-index:150;flex-direction:column;align-items:center;justify-content:flex-start;backdrop-filter:blur(20px);overflow-y:auto;padding:80px 0 40px;}
+.nav-mobile-menu.open{display:flex;}
+.mob-section{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--dim);padding:16px 0 6px;width:80%;border-bottom:1px solid var(--border);text-align:center;margin-bottom:4px;}
+.nav-mobile-menu a.mob-main{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(22px,5.5vw,32px);color:var(--white);text-decoration:none;letter-spacing:-0.5px;padding:7px 0;width:80%;text-align:center;transition:color 0.2s;border-bottom:none;}
+.nav-mobile-menu a.mob-main:hover{color:var(--gold);}
+.nav-mobile-menu a.mob-record{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--mid);text-decoration:none;padding:7px 0;width:80%;text-align:center;transition:color 0.2s;border-bottom:none;}
+.nav-mobile-menu a.mob-record:hover,.nav-mobile-menu a.mob-record.active{color:var(--gold);}
+.nav-mobile-menu a.mob-cta{font-family:'DM Mono',monospace;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--black);background:var(--gold);padding:14px 36px;font-weight:400;margin-top:20px;border-bottom:none;}
+footer{background:var(--black);border-top:1px solid var(--border);padding:48px 60px;display:flex;justify-content:space-between;align-items:center;}
+.footer-left{display:flex;flex-direction:column;gap:6px;}
+.footer-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:16px;color:var(--white);letter-spacing:3px;text-transform:uppercase;}
+.footer-logo span{color:var(--gold);}
+.footer-tagline{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);}
+.footer-mid{font-family:'Syne',sans-serif;font-size:14px;color:var(--mid);max-width:420px;text-align:center;line-height:1.6;}
+.footer-mid em{color:var(--gold);font-style:normal;}
+.footer-right{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1.5px;color:var(--dim);text-align:right;line-height:1.8;}
+@keyframes pulse{0%,100%{opacity:0.4;transform:scale(1);}50%{opacity:1;transform:scale(1.3);}}
+@keyframes fadeInUp{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
 .reveal{opacity:0;transform:translateY(20px);transition:opacity 0.6s ease,transform 0.6s ease;}
-.reveal.visible{opacity:1;transform:none;}
-.reveal-delay-1{transition-delay:0.1s;}
-.reveal-delay-2{transition-delay:0.2s;}
-.reveal-delay-3{transition-delay:0.3s;}
-.breadcrumb{padding:100px 60px 0;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);}
-.breadcrumb a{color:var(--dim);text-decoration:none;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+.rd1{transition-delay:0.1s;}.rd2{transition-delay:0.2s;}.rd3{transition-delay:0.3s;}
+@media(max-width:1023px){nav{padding:20px 36px;}footer{padding:40px 36px;flex-direction:column;gap:20px;text-align:center;}.footer-right{text-align:center;}}
+@media(max-width:767px){.cursor,.cursor-ring{display:none;}body{cursor:auto;}nav{padding:16px 20px;}.nav-links,.nav-cta{display:none;}.nav-hamburger{display:flex;}footer{padding:32px 20px;}}
+
+.page-hero{padding:160px 60px 80px;border-bottom:1px solid var(--border);position:relative;overflow:hidden;}
+.hero-glow{position:absolute;top:-100px;right:-100px;width:700px;height:500px;background:radial-gradient(ellipse,rgba(200,169,110,0.05) 0%,transparent 65%);pointer-events:none;}
+.breadcrumb{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-bottom:20px;display:flex;align-items:center;gap:10px;}
+.breadcrumb a{color:var(--dim);text-decoration:none;transition:color 0.2s;}
 .breadcrumb a:hover{color:var(--gold);}
-.breadcrumb span{color:var(--mid);margin:0 8px;}
-.record-hero{padding:40px 60px 80px;border-bottom:1px solid var(--border);}
-.record-badges{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:32px;}
-.badge{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;padding:5px 12px;border:1px solid;}
-.badge-dev{color:var(--teal);border-color:rgba(78,205,196,0.3);}
-.badge-esa{color:var(--gold);border-color:rgba(200,169,110,0.3);}
-.badge-default{color:var(--mid);border-color:var(--border);}
-.record-headline{font-family:'Syne',sans-serif;font-size:clamp(36px,5vw,72px);font-weight:800;color:var(--white);letter-spacing:-2px;line-height:1.0;margin-bottom:24px;}
-.record-headline em{color:var(--teal);font-style:normal;}
-.record-sub{font-size:18px;color:var(--text);line-height:1.7;max-width:640px;margin-bottom:48px;}
-.record-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);max-width:800px;}
-.record-stat{background:var(--dark);padding:24px 28px;}
-.record-stat-num{font-family:'Syne',sans-serif;font-size:32px;font-weight:800;color:var(--white);}
-.record-stat-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--mid);margin-top:6px;}
-.record-section{padding:72px 60px;border-bottom:1px solid var(--border);}
-.record-section-dark{background:var(--dark);}
-.section-eyebrow{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--mid);margin-bottom:16px;}
-.section-title{font-family:'Syne',sans-serif;font-size:clamp(24px,3vw,40px);font-weight:700;color:var(--white);letter-spacing:-0.5px;margin-bottom:24px;line-height:1.1;}
-.section-title span{color:var(--teal);}
-.body-text{font-size:16px;color:var(--text);line-height:1.8;margin-bottom:20px;max-width:760px;}
-.body-text strong{color:var(--white);}
-.two-col{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;}
-.capability-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);margin-top:40px;}
-.capability-card{background:var(--dark);padding:36px;border-left:3px solid transparent;transition:background 0.2s,border-left-color 0.2s;}
-.capability-card:hover{background:var(--panel);border-left-color:var(--teal);}
-.capability-name{font-family:'Syne',sans-serif;font-size:18px;font-weight:700;color:var(--white);margin-bottom:10px;}
-.capability-desc{font-size:13px;color:var(--text);line-height:1.7;}
-.fact-box{padding:36px;border:1px solid var(--border);border-left:3px solid var(--teal);background:var(--panel);}
-.fact-box-title{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--teal);margin-bottom:16px;}
-.fact-list{list-style:none;display:flex;flex-direction:column;gap:10px;}
-.fact-list li{font-size:14px;color:var(--text);line-height:1.6;padding-left:16px;position:relative;}
-.fact-list li::before{content:'—';position:absolute;left:0;color:var(--teal);}
-.use-case-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);margin-top:40px;}
-.use-case{background:var(--dark);padding:36px;transition:background 0.2s;}
-.use-case:hover{background:var(--panel);}
-.use-case-name{font-family:'Syne',sans-serif;font-size:18px;font-weight:700;color:var(--white);margin-bottom:10px;}
-.use-case-desc{font-size:13px;color:var(--text);line-height:1.7;}
-.record-cta{padding:72px 60px;display:flex;align-items:center;justify-content:space-between;gap:40px;flex-wrap:wrap;}
-.record-cta-text h2{font-family:'Syne',sans-serif;font-size:clamp(22px,3vw,36px);font-weight:700;color:var(--white);margin-bottom:12px;letter-spacing:-0.5px;}
-.record-cta-text p{font-size:16px;color:var(--text);max-width:500px;line-height:1.6;}
-.record-cta-btn{font-family:'DM Mono',monospace;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:var(--black);background:var(--gold);padding:16px 32px;text-decoration:none;white-space:nowrap;transition:background 0.2s;}
-.record-cta-btn:hover{background:var(--gold2);}
-.record-back{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--mid);text-decoration:none;transition:color 0.2s;}
-.record-back:hover{color:var(--gold);}
-@media(max-width:1023px){.capability-grid{grid-template-columns:1fr 1fr;}.record-stats{grid-template-columns:1fr 1fr;}.use-case-grid{grid-template-columns:1fr;}}
-@media(max-width:768px){
-  .breadcrumb{padding:80px 24px 0;}.record-hero{padding:32px 24px 60px;}.record-section{padding:56px 24px;}
-  .two-col{grid-template-columns:1fr;gap:40px;}.capability-grid{grid-template-columns:1fr;}.record-stats{grid-template-columns:1fr 1fr;}
-  .record-cta{padding:56px 24px;flex-direction:column;align-items:flex-start;}
-}
+.breadcrumb span{color:var(--gold);}
+.page-hero h1{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(32px,4.5vw,62px);color:var(--white);letter-spacing:-2px;line-height:1;margin-bottom:20px;max-width:820px;}
+.page-hero h1 em{font-style:normal;color:var(--gold);}
+.hero-meta{display:flex;flex-wrap:wrap;gap:16px;margin-top:20px;}
+.hero-badge{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;padding:6px 14px;border:1px solid;}
+.badge-eu{color:var(--gold);border-color:rgba(200,169,110,0.3);}
+.badge-live{color:var(--teal);border-color:rgba(78,205,196,0.3);display:flex;align-items:center;gap:6px;}
+.live-dot{width:5px;height:5px;border-radius:50%;background:var(--teal);animation:pulse 1.5s ease-in-out infinite;}
+.badge-default{color:var(--dim);border-color:var(--border);}
+.content-body{max-width:1200px;margin:0 auto;padding:80px 60px;}
+.two-col{display:grid;grid-template-columns:2fr 1fr;gap:80px;align-items:flex-start;}
+.prose h2{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(22px,2.5vw,32px);color:var(--white);letter-spacing:-0.8px;line-height:1.05;margin:48px 0 16px;}
+.prose h2:first-child{margin-top:0;}
+.prose p{font-size:16px;font-weight:300;color:var(--mid);line-height:1.9;margin-bottom:16px;}
+.prose p strong{color:var(--light);font-weight:500;}
+.prose ul{margin:16px 0 20px 0;display:flex;flex-direction:column;gap:10px;}
+.prose ul li{font-size:15px;color:var(--mid);line-height:1.7;padding-left:20px;position:relative;}
+.prose ul li::before{content:'—';position:absolute;left:0;color:var(--gold);opacity:0.6;}
+.sidebar{position:sticky;top:100px;}
+.sidebar-card{background:var(--dark);border:1px solid var(--border);padding:28px 24px;margin-bottom:1px;}
+.sidebar-card:first-child{border-top:2px solid var(--gold);}
+.sc-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:var(--dim);margin-bottom:12px;}
+.sc-rows{display:flex;flex-direction:column;gap:0;}
+.sc-row{display:flex;justify-content:space-between;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--border);gap:12px;}
+.sc-row:last-child{border-bottom:none;}
+.sc-key{font-family:'DM Mono',monospace;font-size:10px;color:var(--dim);letter-spacing:0.5px;flex-shrink:0;}
+.sc-val{font-size:13px;color:var(--light);text-align:right;line-height:1.4;}
+.sc-val a{color:var(--gold);text-decoration:none;}
+.source-list{display:flex;flex-direction:column;gap:0;}
+.source-item{padding:12px 0;border-bottom:1px solid var(--border);display:flex;gap:12px;align-items:flex-start;}
+.source-item:last-child{border-bottom:none;}
+.src-num{font-family:'DM Mono',monospace;font-size:9px;color:var(--gold);opacity:0.5;flex-shrink:0;margin-top:2px;}
+.src-text{font-size:12px;color:var(--dim);line-height:1.5;}
+.src-text a{color:var(--mid);text-decoration:none;border-bottom:1px solid var(--border);}
+.src-text a:hover{color:var(--gold);}
+.related-section{padding:0 60px 80px;border-top:1px solid var(--border);padding-top:60px;}
+.related-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);margin-top:32px;}
+.related-card{background:var(--dark);padding:28px 24px;text-decoration:none;display:block;transition:background 0.2s;}
+.related-card:hover{background:var(--panel);}
+.rc-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);opacity:0.6;margin-bottom:8px;}
+.rc-title-sm{font-family:'Syne',sans-serif;font-weight:700;font-size:15px;color:var(--white);letter-spacing:-0.2px;line-height:1.2;}
+@media(max-width:1023px){.content-body{padding:60px 36px;}.two-col{grid-template-columns:1fr;gap:48px;}.sidebar{position:static;}.related-section{padding:0 36px 60px;padding-top:48px;}.related-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:767px){.page-hero{padding:100px 20px 48px;}.content-body{padding:48px 20px;}.related-section{padding:0 20px 48px;padding-top:40px;}.related-grid{grid-template-columns:1fr;}}
+.nav-mobile-menu a { text-decoration:none; border-bottom:none; }
+.nav-mobile-menu a::after { display:none; }
+.mob-main { font-family:'Syne',sans-serif !important; font-weight:800 !important; font-size:clamp(26px,7vw,40px) !important; color:var(--white) !important; letter-spacing:-0.5px !important; padding:9px 0 !important; width:80%; text-align:center; transition:color 0.2s; display:block; }
+.mob-main:hover { color:var(--gold) !important; }
+.mob-divider { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:3px; text-transform:uppercase; color:var(--dim); padding:20px 0 6px; width:80%; border-bottom:1px solid var(--border); text-align:center; margin-bottom:4px; }
+.mob-record { font-family:'DM Mono',monospace !important; font-size:11px !important; letter-spacing:1.5px !important; text-transform:uppercase !important; color:var(--mid) !important; padding:7px 0 !important; width:80%; text-align:center; transition:color 0.2s; display:block; }
+.mob-record:hover { color:var(--gold) !important; }
+.mob-cta { font-family:'DM Mono',monospace !important; font-size:12px !important; letter-spacing:2px !important; text-transform:uppercase !important; color:var(--black) !important; background:var(--gold) !important; padding:14px 36px !important; margin-top:20px !important; display:block; }
+.nav-has-dropdown { position: relative; }
+.nav-has-dropdown .nav-dropdown { display: none; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); background: #0A0A0A; border: 1px solid #1E1E1E; border-radius: 6px; min-width: 220px; padding: 6px 0; z-index: 500; box-shadow: 0 8px 32px rgba(0,0,0,0.5); list-style: none; }
+.nav-has-dropdown { padding-bottom: 12px; }
+.nav-has-dropdown .nav-dropdown li a { display: block; padding: 9px 18px; font-size: 12px; color: #888; text-decoration: none; white-space: nowrap; letter-spacing: 0.04em; transition: color 0.15s, background 0.15s; }
+.nav-has-dropdown .nav-dropdown li a:hover { color: #EEE; background: #141414; }
+.nav-has-dropdown .nav-dropdown li:first-child a { color: #C8A96E; }
+.nav-has-dropdown .nav-dropdown li:first-child { border-bottom: 1px solid #1E1E1E; margin-bottom: 4px; }
 </style>
 </head>
-<body data-page="record">
+<body data-page="record" data-prefix="../">
 <script src="../nav-site.js"></script>
 <script src="nav-record.js"></script>
 
-<div class="breadcrumb reveal">
-  <a href="../record/index.html">Record</a>
-  <span>/</span>
-  ProofX — Cryptographic Image Verification
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<div class="nav-mobile-menu" id="mobileMenu">
+  <a href="../index.html" class="mob-main">Home</a>
+  <a href="../intelligence.html" class="mob-main">The Work</a>
+  <a href="../rise.html" class="mob-main">What's Next</a>
+  <a href="../thinking.html" class="mob-main">Thinking</a>
+  <a href="../about.html" class="mob-main">About</a>
+  <div class="mob-divider">The Record</div>
+  <a href="index.html" class="mob-record">Record Home</a>
+  <a href="ipcei-cis.html" class="mob-record">IPCEI-CIS — FedEU.ai</a>
+  <a href="kau.html" class="mob-record">KAÜ — National Identity</a>
+  <a href="helix.html" class="mob-record">HeliX + FedX</a>
+  <a href="eidas.html" class="mob-record">eIDAS 2.0 — MyD Wallet</a>
+  <a href="medical-ai.html" class="mob-record">Medical AI — GraDPaLM</a>
+  <a href="peter-antal.html" class="mob-record">Dr. Péter Antal</a>
+  <a href="press.html" class="mob-record">Press Kit</a>
+  <a href="../contact.html" class="mob-cta">Work With Us</a>
 </div>
 
-<section class="record-hero">
-  <div class="record-badges reveal">
-    <span class="badge badge-dev">● In Development</span>
-    <span class="badge badge-esa">ESA Partnership</span>
-    <span class="badge badge-default">SpaceTech</span>
-    <span class="badge badge-default">Galileo OSNMA</span>
-  </div>
-  <h1 class="record-headline reveal">ProofX —<br><em>Can you tell real</em><br>from AI?</h1>
-  <p class="record-sub reveal">Cryptographic image and video verification built on Galileo satellite authentication, C2PA tamper-proof standards, and eIDAS digital identity. The result: a court-admissible evidence chain that answers the question that matters — was this taken where and when it claims to be?</p>
-  <div class="record-stats reveal">
-    <div class="record-stat"><div class="record-stat-num">ESA</div><div class="record-stat-label">Active partnership</div></div>
-    <div class="record-stat"><div class="record-stat-num">EU</div><div class="record-stat-label">AI Act compliant</div></div>
-    <div class="record-stat"><div class="record-stat-num">C2PA</div><div class="record-stat-label">Tamper-proof standard</div></div>
-    <div class="record-stat"><div class="record-stat-num">Court</div><div class="record-stat-label">Admissible evidence</div></div>
-  </div>
-</section>
+<div class="page-hero">
+  <div class="hero-glow"></div>
+  <div class="breadcrumb"><a href="index.html">Record</a> / <span>ProofX</span></div>
+  <h1>ProofX<br><em>Cryptographic image verification system</em></h1>
+  <div class="hero-meta"><span class="hero-badge badge-eu">ESA Partnership</span><span class="hero-badge badge-default">SpaceTech</span><span class="hero-badge badge-default">Galileo OSNMA</span><span class="hero-badge badge-default">C2PA Standards</span></div>
+</div>
 
-<!-- THE PROBLEM -->
-<section class="record-section">
+<div class="content-body">
   <div class="two-col">
-    <div>
-      <div class="section-eyebrow reveal">The Problem</div>
-      <h2 class="section-title reveal">AI-generated imagery is now<br><span>indistinguishable to the human eye.</span></h2>
-      <p class="body-text reveal">In 2024, the gap between a real photograph and an AI-generated image closed. Not partially. Completely. A skilled professional cannot reliably tell them apart. Neither can a judge. Neither can an insurance assessor. Neither can a journalist.</p>
-      <p class="body-text reveal">This creates a fundamental trust problem across every industry that depends on photographic evidence. Insurance claims. Legal proceedings. Media verification. Facility inspections. Drone-based asset management. The entire evidentiary value of photography — built over 180 years — is now in question.</p>
-      <p class="body-text reveal"><strong>ProofX is E-Group's answer to that question.</strong> Not a filter. Not a detection algorithm. A cryptographic proof — built at the moment of capture — that establishes an unbreakable chain of evidence between a photograph and the physical reality it records.</p>
-    </div>
-    <div class="reveal">
-      <div class="fact-box">
-        <div class="fact-box-title">The Technical Foundation</div>
-        <ul class="fact-list">
-          <li><strong>Galileo OSNMA</strong> — ESA's Open Service Navigation Message Authentication. Cryptographic satellite timestamps embedded at the exact moment of capture.</li>
-          <li><strong>C2PA Standard</strong> — Coalition for Content Provenance and Authenticity. End-to-end tamper-proof metadata chain from capture to publication.</li>
-          <li><strong>eIDAS Identity</strong> — EU-compliant digital identity of the image creator. AML-grade KYC authentication.</li>
-          <li><strong>EU AI Act</strong> — Compliant real-or-AI transparency layer. Every image carries a verifiable provenance declaration.</li>
-        </ul>
+    <div class="prose reveal">
+<h2>What It Is</h2>
+<p>ProofX is E-Group's <strong>cryptographic image verification system</strong> that creates tamper-proof evidence chains for digital imagery. Built in partnership with the European Space Agency, ProofX combines Galileo satellite authentication with C2PA content provenance standards to establish unbreakable proof of when, where, and by whom an image was captured.</p>
+<p>The system addresses a fundamental challenge in the AI era: distinguishing between authentic photographs and AI-generated imagery. ProofX doesn't analyze images after capture — it creates cryptographic proof at the moment of capture that travels with the image permanently and cannot be forged.</p>
+
+<h2>ESA Partnership</h2>
+<p>ProofX is being developed through an <strong>active partnership with the European Space Agency</strong>, leveraging ESA's Galileo satellite constellation and OSNMA (Open Service Navigation Message Authentication) protocol. This partnership provides access to space-based cryptographic timestamps that form the foundation of ProofX's evidence chains.</p>
+<p>The collaboration represents E-Group's position in the European space technology ecosystem, working directly with ESA on commercial applications of satellite authentication rather than simply licensing existing technologies. ProofX is among the first commercial products to implement Galileo OSNMA for image verification.</p>
+
+<h2>Technical Innovation</h2>
+<p>ProofX employs a multi-layered approach to <strong>cryptographic image verification</strong>, combining space-based authentication with industry-standard content provenance protocols. The system creates an immutable record that binds each image to verified location, time, and creator identity.</p>
+<ul>
+  <li>Galileo OSNMA authentication provides satellite-verified timestamps at capture</li>
+  <li>C2PA (Coalition for Content Provenance and Authenticity) standards ensure tamper-proof metadata chains</li>
+  <li>eIDAS digital identity integration establishes verified creator identity</li>
+  <li>Court-admissible evidence format designed for legal proceedings</li>
+  <li>EU AI Act compliance for synthetic media transparency requirements</li>
+  <li>Real-time verification without dependence on external databases</li>
+</ul>
+
+<h2>Applications</h2>
+<p>ProofX targets sectors where <strong>photographic authenticity has legal, financial, or operational consequences</strong>. The system provides court-admissible evidence chains for industries that depend on verified imagery, eliminating disputes about image manipulation or synthetic content.</p>
+<p>Primary applications include insurance claim documentation, media and journalism verification, facility management and compliance photography, and defense-adjacent reconnaissance where image authenticity is operationally critical. Each use case benefits from ProofX's ability to provide definitive proof of image origin and integrity.</p>
+<p>The system is optimized for integration with professional imaging workflows, supporting both handheld devices and specialized equipment like the Airlot S1 drone for aerial intelligence applications requiring cryptographic verification.</p>
+</div>
+    <div class="sidebar reveal rd1">
+      <div class="sidebar-card"><div class="sc-label">Project Details</div><div class="sc-rows"><div class="sc-row"><span class="sc-key">Product</span><span class="sc-val">ProofX</span></div><div class="sc-row"><span class="sc-key">Status</span><span class="sc-val">ESA Partnership</span></div><div class="sc-row"><span class="sc-key">Sector</span><span class="sc-val">SpaceTech</span></div><div class="sc-row"><span class="sc-key">Technology</span><span class="sc-val">Cryptographic verification</span></div><div class="sc-row"><span class="sc-key">Standards</span><span class="sc-val">Galileo OSNMA + C2PA</span></div><div class="sc-row"><span class="sc-key">Applications</span><span class="sc-val">Legal evidence chains</span></div><div class="sc-row"><span class="sc-key">Related</span><span class="sc-val">GENESIS, SpadaX, COIOS</span></div></div></div>
+      <div class="sidebar-card"><div class="sc-label">Technical</div><div class="sc-rows"><div class="sc-row"><span class="sc-key">Verification</span><span class="sc-val">Cryptographic image verification</span></div><div class="sc-row"><span class="sc-key">Standards</span><span class="sc-val">Galileo OSNMA authentication</span></div><div class="sc-row"><span class="sc-key">Protocol</span><span class="sc-val">C2PA standards integration</span></div><div class="sc-row"><span class="sc-key">Output</span><span class="sc-val">Court-admissible evidence</span></div><div class="sc-row"><span class="sc-key">Security</span><span class="sc-val">Tamper-proof evidence chains</span></div><div class="sc-row"><span class="sc-key">Innovation</span><span class="sc-val">Space-based authentication</span></div></div></div>
+      <div class="sidebar-card">
+        <div class="sc-label">Partnership</div>
+        <div class="sc-rows"><div class="sc-row"><span class="sc-key">Partner</span><span class="sc-val">European Space Agency (ESA)</span></div><div class="sc-row"><span class="sc-key">Program</span><span class="sc-val">ESA Technology Partnership</span></div><div class="sc-row"><span class="sc-key">Technology</span><span class="sc-val">Galileo satellite authentication</span></div><div class="sc-row"><span class="sc-key">Market</span><span class="sc-val">Insurance, media, facility management</span></div><div class="sc-row"><span class="sc-key">Legal</span><span class="sc-val">Court-admissible evidence standard</span></div></div>
       </div>
     </div>
   </div>
-</section>
-
-<!-- HOW IT WORKS -->
-<section class="record-section record-section-dark">
-  <div class="section-eyebrow reveal">How It Works</div>
-  <h2 class="section-title reveal">A cryptographic chain.<br><span>Built at the moment of capture.</span></h2>
-  <p class="body-text reveal">ProofX does not analyse images after the fact. It creates a cryptographic proof at the exact second of capture — binding the image to a satellite-verified location, a satellite-verified time, and a verified identity. That proof travels with the image, permanently, and cannot be forged.</p>
-
-  <div class="capability-grid">
-    <div class="capability-card reveal">
-      <div class="capability-name">Galileo OSNMA Authentication</div>
-      <div class="capability-desc">At the moment of capture, ProofX records a cryptographic timestamp from the Galileo satellite constellation using ESA's OSNMA authentication protocol. This binds the image to a specific location and time that cannot be retrospectively altered.</div>
-    </div>
-    <div class="capability-card reveal reveal-delay-1">
-      <div class="capability-name">C2PA Metadata Chain</div>
-      <div class="capability-desc">The image is wrapped in a C2PA-compliant metadata structure that records every modification, every export, every share. Any tampering with the image breaks the chain — and that break is immediately detectable by any C2PA-aware system.</div>
-    </div>
-    <div class="capability-card reveal reveal-delay-2">
-      <div class="capability-name">eIDAS Creator Identity</div>
-      <div class="capability-desc">The identity of the person or system that captured the image is bound to the proof using eIDAS-compliant digital identity. Court-admissible. AML-grade KYC. The image knows who took it and can prove it.</div>
-    </div>
-    <div class="capability-card reveal">
-      <div class="capability-name">Court-Admissible Output</div>
-      <div class="capability-desc">The resulting evidence chain is designed to meet the evidential standards of European courts and insurance regulations. Not a best-effort approximation — a formal proof structure with defined legal standing.</div>
-    </div>
-    <div class="capability-card reveal reveal-delay-1">
-      <div class="capability-name">Airlot S1 Drone Integration</div>
-      <div class="capability-desc">ProofX is optimised for the Airlot S1 drone — enabling tamper-proof aerial intelligence. Every frame captured by the drone carries a full cryptographic proof of its origin, time, and location.</div>
-    </div>
-    <div class="capability-card reveal reveal-delay-2">
-      <div class="capability-name">EU AI Act Compliance</div>
-      <div class="capability-desc">ProofX generates a real-or-AI transparency declaration for every image — compliant with EU AI Act requirements for synthetic media disclosure. Every image either carries proof of real-world capture or is declared synthetic.</div>
-    </div>
-  </div>
-</section>
-
-<!-- USE CASES -->
-<section class="record-section">
-  <div class="section-eyebrow reveal">Who Needs This</div>
-  <h2 class="section-title reveal">Every industry that depends<br><span>on photographic evidence.</span></h2>
-  <p class="body-text reveal">ProofX was designed for sectors where the authenticity of an image has legal, financial, or operational consequences. Where "we think this is real" is not good enough.</p>
-
-  <div class="use-case-grid">
-    <div class="use-case reveal">
-      <div class="use-case-name">Insurance</div>
-      <div class="use-case-desc">Claim submission with cryptographic proof of the damage photograph. No more disputed claims based on allegedly manipulated imagery. The photograph either carries a valid proof chain or it doesn't. Clear, unambiguous, court-ready.</div>
-    </div>
-    <div class="use-case reveal reveal-delay-1">
-      <div class="use-case-name">Media & Journalism</div>
-      <div class="use-case-desc">News organisations and content platforms can verify the provenance of every image in their supply chain. Real photographs carry proof. AI-generated content carries a disclosure. The distinction is automatic and verifiable.</div>
-    </div>
-    <div class="use-case reveal">
-      <div class="use-case-name">Facility Management</div>
-      <div class="use-case-desc">Site inspections, compliance photography, asset condition records — all with cryptographic proof of when and where they were taken. No more disputes about whether the photograph represents the actual site condition at the claimed time.</div>
-    </div>
-    <div class="use-case reveal reveal-delay-1">
-      <div class="use-case-name">Defence-Adjacent</div>
-      <div class="use-case-desc">Reconnaissance and intelligence applications where the authenticity of aerial imagery is operationally critical. ProofX provides the cryptographic assurance that the image reflects physical reality at a specific time and location.</div>
-    </div>
-  </div>
-</section>
-
-<!-- THE ESA CONNECTION -->
-<section class="record-section record-section-dark">
-  <div class="two-col">
-    <div>
-      <div class="section-eyebrow reveal">The ESA Partnership</div>
-      <h2 class="section-title reveal">Built with the people<br><span>who own the satellites.</span></h2>
-      <p class="body-text reveal">ProofX is being developed in active partnership with the European Space Agency. ESA's Galileo constellation provides the OSNMA authentication layer — the cryptographic heartbeat that makes the entire proof chain possible.</p>
-      <p class="body-text reveal">This is not a licensing arrangement. E-Group is working directly with ESA on the technical implementation of Galileo OSNMA for commercial authentication applications. ProofX is one of the first commercial products to build on this capability.</p>
-      <p class="body-text reveal">The partnership reflects E-Group's broader position in the European space technology ecosystem — as a technology builder, not a reseller of someone else's platform.</p>
-      <p class="body-text reveal">Supported by Thales Alenia Space — providing specialist knowledge and access in critical space infrastructures.</p>
-    </div>
-    <div class="reveal">
-      <div class="fact-box">
-        <div class="fact-box-title">Status</div>
-        <ul class="fact-list">
-          <li>In active development — ESA partnership established</li>
-          <li>Name not final — ProofX is the working name</li>
-          <li>Part of E-Group's SpaceTech portfolio</li>
-          <li>Optimised for Airlot S1 drone hardware</li>
-          <li>Target sectors: insurance, media, facility management, defence-adjacent</li>
-          <li>EU AI Act compliance built in from day one</li>
-          <li>Court-admissible evidence chain as primary deliverable</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CTA -->
-<div class="record-cta">
-  <div class="record-cta-text">
-    <h2>Working in insurance, media,<br>or facility management?</h2>
-    <p>If photographic authenticity matters in your sector — legally, operationally, or financially — ProofX may be exactly what you need. We are building this product in conversation with domain experts. Tell us what you're working on.</p>
-  </div>
-  <div style="display:flex;flex-direction:column;gap:16px;align-items:flex-end;">
-    <a href="../contact.html" class="record-cta-btn">Start the conversation →</a>
-    <a href="../record/index.html" class="record-back">← Back to The Record</a>
-  </div>
 </div>
+
+<div class="related-section">
+  <div class="rg-eyebrow" style="font-family:'DM Mono',monospace;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:12px;display:flex;align-items:center;gap:12px;"><span style="display:inline-block;width:24px;height:1px;background:var(--gold);"></span>Related Records</div>
+  <div class="related-grid"><a href="genesis.html" class="related-card"><div class="rc-label">SpaceTech</div><div class="rc-title-sm">GENESIS — Satellite Imagery Simulator</div></a><a href="spadax.html" class="related-card"><div class="rc-label">SpaceTech</div><div class="rc-title-sm">SpadaX — Space Infrastructure Monitoring</div></a><a href="coios.html" class="related-card"><div class="rc-label">AI Platform</div><div class="rc-title-sm">COIOS — Sovereign Agentic AI</div></a></div>
+</div>
+
 
 <footer>
-  <div class="footer-brand">E-Group Intelligence Infrastructure · Est. 1993</div>
-  <div class="footer-legal">Budapest, Hungary · © 2026 E-Group ICT Software Zrt.</div>
+  <div class="footer-left">
+    <div class="footer-logo"><span>E</span>-Group</div>
+    <div class="footer-tagline">Intelligence Infrastructure · Est. 1993</div>
+  </div>
+  <div class="footer-mid">The public record of E-Group ICT Software Zrt.<br>Budapest, Hungary · Founded 1993</div>
+  <div class="footer-right">© 2026 E-Group ICT Software Zrt.<br>All rights reserved.<br>Reg: 01 10 045390 HUN</div>
 </footer>
 
 <script>
-const obs = new IntersectionObserver(entries => entries.forEach(e => {
-  if(e.isIntersecting) e.target.classList.add('visible');
-}),{threshold:0.08});
-document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+const cursor=document.getElementById('cursor'),ring=document.getElementById('cursorRing');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cursor.style.left=mx+'px';cursor.style.top=my+'px';});
+(function loop(){rx+=(mx-rx)*0.12;ry+=(my-ry)*0.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(loop);})();
+const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');}),{threshold:0.08});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 </script>
 </body>
 </html>
