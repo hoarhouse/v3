@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mark Marosi — E-Group</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --black:#080808;--dark:#0A0A0A;--panel:#111;
+  --border:#1A1A1A;--muted:#333;--dim:#555;--mid:#777;
+  --text:#B0B0B0;--light:#D0D0D0;--white:#EFEFEF;
+  --gold:#C8A96E;--gold2:#A07840;--teal:#4ECDC4;--green:#4ADE80;
+}
+html{background:var(--black);color:var(--white);font-family:'DM Sans',sans-serif;}
+body{overflow-x:hidden;}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity 0.6s ease,transform 0.6s ease;}
+.reveal.visible{opacity:1;transform:none;}
+
+/* Profile Hero */
+.profile-hero{padding:160px 60px 80px;border-bottom:1px solid var(--border);display:grid;grid-template-columns:1.5fr 1fr;gap:80px;align-items:start;}
+.profile-eyebrow{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:20px;}
+.profile-name{font-family:'Syne',sans-serif;font-size:clamp(36px,5vw,64px);font-weight:800;color:var(--white);letter-spacing:-1px;line-height:1;margin-bottom:12px;}
+.profile-title{font-family:'DM Mono',monospace;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--mid);margin-bottom:32px;}
+.profile-bio{font-size:15px;color:#999;line-height:1.7;max-width:520px;}
+.profile-photo{width:280px;height:280px;background:#1A1A1A;border:1px solid #2A2A2A;display:flex;align-items:center;justify-content:center;}
+.profile-initials{font-family:'Syne',sans-serif;font-size:64px;font-weight:800;color:var(--muted);}
+
+/* At E-Group Section */
+.at-section{padding:80px 60px;border-bottom:1px solid var(--border);}
+.section-eyebrow{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:32px;}
+.stats-row{display:flex;gap:48px;flex-wrap:wrap;}
+.stat-block{border-left:2px solid var(--gold);padding-left:20px;}
+.stat-value{font-family:'Syne',sans-serif;font-size:24px;font-weight:700;color:var(--white);}
+.stat-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--mid);margin-top:4px;}
+
+/* Published Section */
+.published-section{padding:80px 60px;border-bottom:1px solid var(--border);background:var(--dark);}
+.section-title{font-family:'Syne',sans-serif;font-size:36px;font-weight:700;color:var(--white);letter-spacing:-0.5px;margin-bottom:40px;}
+.article-card{background:var(--panel);border:1px solid var(--border);padding:32px;opacity:0.5;}
+.article-tag{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--mid);margin-bottom:12px;}
+.article-title{font-family:'Syne',sans-serif;font-size:20px;font-weight:700;color:var(--text);margin-bottom:8px;}
+.article-subtitle{font-size:14px;color:var(--dim);line-height:1.6;}
+
+/* Links Section */
+.links-section{padding:80px 60px;border-bottom:1px solid var(--border);}
+.links-intro{font-size:15px;color:var(--text);line-height:1.7;margin-bottom:32px;max-width:600px;}
+.links-grid{display:flex;flex-direction:column;gap:12px;max-width:600px;}
+.link-block{border:1px solid #2A2A2A;padding:20px 24px;display:flex;justify-content:space-between;align-items:center;background:var(--dark);}
+.link-title{font-family:'Syne',sans-serif;font-size:16px;font-weight:600;color:var(--text);}
+.link-status{font-family:'DM Mono',monospace;font-size:11px;color:var(--dim);}
+
+/* Contact Section */
+.contact-section{padding:80px 60px;display:flex;flex-direction:column;gap:24px;align-items:flex-start;}
+.contact-text{font-size:16px;color:var(--text);line-height:1.6;}
+.cta-btn{font-family:'DM Mono',monospace;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:var(--black);background:var(--gold);padding:16px 32px;text-decoration:none;white-space:nowrap;transition:background 0.2s;}
+.cta-btn:hover{background:var(--gold2);}
+
+/* Footer */
+footer{padding:40px 60px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;}
+.footer-brand{font-family:'Syne',sans-serif;font-size:13px;color:var(--dim);}
+.footer-legal{font-size:12px;color:var(--muted);}
+
+@media(max-width:768px){
+  .profile-hero{padding:120px 24px 48px;grid-template-columns:1fr;gap:40px;}
+  .profile-photo{width:200px;height:200px;margin:0 auto;}
+  .at-section,.published-section,.links-section,.contact-section{padding:48px 24px;}
+  .stats-row{gap:32px;}
+  footer{padding:32px 24px;flex-direction:column;gap:12px;}
+}
+</style>
+</head>
+<body data-page="people">
+<script src="../nav-site.js"></script>
+
+<!-- PROFILE HERO -->
+<section class="profile-hero">
+  <div>
+    <div class="profile-eyebrow reveal">RESEARCH · E-GROUP</div>
+    <h1 class="profile-name reveal">Mark Marosi</h1>
+    <div class="profile-title reveal">Head of Research</div>
+    <p class="profile-bio reveal">Mark leads E-Group's Research department. Bio and background to be confirmed — this page will be updated when details are provided.</p>
+  </div>
+  <div class="reveal">
+    <div class="profile-photo">
+      <div class="profile-initials">MM</div>
+    </div>
+  </div>
+</section>
+
+<!-- AT E-GROUP -->
+<section class="at-section">
+  <div class="section-eyebrow reveal">AT E-GROUP</div>
+  <div class="stats-row reveal">
+    <div class="stat-block">
+      <div class="stat-value">Research</div>
+      <div class="stat-label">Department</div>
+    </div>
+    <div class="stat-block">
+      <div class="stat-value">Budapest</div>
+      <div class="stat-label">Based</div>
+    </div>
+    <div class="stat-block">
+      <div class="stat-value">2020s</div>
+      <div class="stat-label">Joined</div>
+    </div>
+  </div>
+</section>
+
+<!-- PUBLISHED -->
+<section class="published-section">
+  <div class="section-eyebrow reveal">PUBLISHED ON THIS SITE</div>
+  <h2 class="section-title reveal">What Mark has written.</h2>
+  
+  <div class="article-card reveal">
+    <div class="article-tag">AI Research</div>
+    <div class="article-title">First article coming.</div>
+    <div class="article-subtitle">Mark's published thinking will appear here when posted.</div>
+  </div>
+</section>
+
+<!-- LINKS -->
+<section class="links-section">
+  <div class="section-eyebrow reveal">FIND MARK</div>
+  <h2 class="section-title reveal">Beyond E-Group.</h2>
+  <p class="links-intro reveal">Links to Mark's personal site, socials, and other work will appear here.</p>
+  
+  <div class="links-grid reveal">
+    <div class="link-block">
+      <div class="link-title">Personal Website</div>
+      <div class="link-status">URL to be added</div>
+    </div>
+    <div class="link-block">
+      <div class="link-title">LinkedIn</div>
+      <div class="link-status">Profile to be added</div>
+    </div>
+    <div class="link-block">
+      <div class="link-title">Other</div>
+      <div class="link-status">To be confirmed</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-section">
+  <div class="section-eyebrow reveal">WORK WITH MARK</div>
+  <p class="contact-text reveal">Interested in collaborating or have a research question?</p>
+  <a href="../contact.html" class="cta-btn reveal">Start the conversation →</a>
+</section>
+
+<footer>
+  <div class="footer-brand">E-Group Intelligence Infrastructure · Est. 1993</div>
+  <div class="footer-legal">Budapest, Hungary · © 2026 E-Group ICT Software Zrt.</div>
+</footer>
+
+<script>
+const obs = new IntersectionObserver(entries => entries.forEach(e => {
+  if(e.isIntersecting) e.target.classList.add('visible');
+}), {threshold:0.08});
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+
+</body>
+</html>
