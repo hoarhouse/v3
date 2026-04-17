@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Research — E-Group</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --black:#080808;--dark:#0A0A0A;--panel:#111;
+  --border:#1A1A1A;--muted:#333;--dim:#555;--mid:#777;
+  --text:#B0B0B0;--light:#D0D0D0;--white:#EFEFEF;
+  --gold:#C8A96E;--gold2:#A07840;--teal:#4ECDC4;--green:#4ADE80;
+}
+html{background:var(--black);color:var(--white);font-family:'DM Sans',sans-serif;}
+body{overflow-x:hidden;}
+.hero{padding:160px 60px 80px;border-bottom:1px solid var(--border);}
+.hero-eyebrow{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--mid);margin-bottom:32px;}
+.hero-headline{font-family:'Syne',sans-serif;font-size:clamp(36px,5vw,72px);font-weight:800;color:var(--white);letter-spacing:-1.5px;line-height:1.05;margin-bottom:24px;max-width:900px;}
+.hero-headline span{color:var(--gold);}
+.hero-sub{font-size:18px;color:var(--text);line-height:1.7;max-width:600px;}
+
+/* Stats Bar */
+.stats-bar{display:flex;gap:48px;flex-wrap:wrap;margin-top:48px;}
+.stat-item{border-left:2px solid var(--gold);padding-left:20px;}
+.stat-num{font-family:'Syne',sans-serif;font-size:32px;font-weight:800;color:var(--white);}
+.stat-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--mid);margin-top:4px;}
+
+/* Research Areas Section */
+.research-section{padding:80px 60px;border-bottom:1px solid var(--border);}
+.section-eyebrow{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:16px;}
+.section-title{font-family:'Syne',sans-serif;font-size:clamp(24px,3vw,40px);font-weight:700;color:var(--white);letter-spacing:-0.5px;margin-bottom:48px;}
+.research-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);}
+.research-card{background:var(--dark);padding:40px;border-left:3px solid transparent;transition:background 0.2s,border-left-color 0.2s;}
+.research-card:hover{background:var(--panel);border-left-color:var(--gold);}
+.research-name{font-family:'Syne',sans-serif;font-size:24px;font-weight:700;color:var(--white);margin-bottom:12px;letter-spacing:-0.3px;}
+.research-desc{font-size:14px;color:var(--text);line-height:1.7;margin-bottom:16px;}
+.research-status{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--green);}
+
+/* People Section */
+.people-section{padding:80px 60px;border-bottom:1px solid var(--border);background:var(--dark);}
+.people-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);margin-top:48px;}
+.person-card{background:var(--dark);padding:36px;border-left:3px solid transparent;transition:background 0.2s,border-left-color 0.2s;}
+.person-card:hover{background:var(--panel);border-left-color:var(--gold);}
+.person-initials{width:48px;height:48px;background:rgba(200,169,110,0.15);color:var(--gold);display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:800;font-size:16px;margin-bottom:20px;}
+.person-name{font-family:'Syne',sans-serif;font-size:18px;font-weight:700;color:var(--white);margin-bottom:6px;letter-spacing:-0.3px;}
+.person-title{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:12px;}
+.person-desc{font-size:13px;color:var(--text);line-height:1.6;}
+
+/* Timeline Section */
+.timeline-section{padding:80px 60px;border-bottom:1px solid var(--border);}
+.timeline{margin-top:48px;position:relative;}
+.timeline::before{content:'';position:absolute;left:0;top:0;bottom:0;width:1px;background:var(--border);}
+.timeline-item{padding:0 0 48px 40px;position:relative;}
+.timeline-item::before{content:'';position:absolute;left:-4px;top:6px;width:9px;height:9px;border-radius:50%;background:var(--border);border:1px solid var(--mid);}
+.timeline-item.landmark::before{background:var(--gold);border-color:var(--gold);}
+.timeline-year{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:2px;color:var(--mid);margin-bottom:8px;}
+.timeline-title{font-family:'Syne',sans-serif;font-size:20px;font-weight:700;color:var(--white);margin-bottom:8px;letter-spacing:-0.3px;}
+.timeline-desc{font-size:14px;color:var(--text);line-height:1.7;max-width:640px;}
+
+/* Published Work Section */
+.published-section{padding:80px 60px;border-bottom:1px solid var(--border);background:var(--dark);}
+.published-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);margin-top:48px;}
+.published-card{background:var(--dark);padding:36px;transition:background 0.2s;position:relative;}
+.published-card:hover{background:var(--panel);}
+.published-card.placeholder{opacity:0.5;}
+.published-name{font-family:'Syne',sans-serif;font-size:18px;font-weight:700;color:var(--white);margin-bottom:10px;letter-spacing:-0.3px;}
+.published-desc{font-size:13px;color:var(--text);line-height:1.6;margin-bottom:12px;}
+.published-authors{font-family:'DM Mono',monospace;font-size:10px;color:var(--mid);letter-spacing:0.5px;margin-bottom:12px;}
+.published-tag{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:16px;}
+.published-link{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1px;color:var(--gold);text-decoration:none;}
+.published-link:hover{text-decoration:underline;}
+
+/* CTA Section */
+.cta-section{padding:80px 60px;display:flex;align-items:center;justify-content:space-between;gap:40px;flex-wrap:wrap;}
+.cta-text h2{font-family:'Syne',sans-serif;font-size:clamp(24px,3vw,40px);font-weight:700;color:var(--white);margin-bottom:12px;letter-spacing:-0.5px;}
+.cta-text p{font-size:16px;color:var(--text);max-width:500px;line-height:1.6;}
+.cta-btn{font-family:'DM Mono',monospace;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:var(--black);background:var(--gold);padding:16px 32px;text-decoration:none;white-space:nowrap;transition:background 0.2s;}
+.cta-btn:hover{background:var(--gold2);}
+
+/* Footer */
+footer{padding:40px 60px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;}
+.footer-brand{font-family:'Syne',sans-serif;font-size:13px;color:var(--dim);}
+.footer-legal{font-size:12px;color:var(--muted);}
+
+@media(max-width:1023px){
+  .people-grid{grid-template-columns:1fr 1fr;}
+  .published-grid{grid-template-columns:1fr 1fr;}
+}
+@media(max-width:768px){
+  .hero{padding:120px 24px 60px;}
+  .stats-bar{gap:32px;}
+  .research-section,.people-section,.timeline-section,.published-section{padding:60px 24px;}
+  .research-grid{grid-template-columns:1fr;}
+  .people-grid{grid-template-columns:1fr;}
+  .published-grid{grid-template-columns:1fr;}
+  .cta-section{padding:60px 24px;flex-direction:column;align-items:flex-start;}
+  footer{padding:32px 24px;flex-direction:column;gap:12px;}
+}
+</style>
+</head>
+<body data-page="research">
+<script src="nav-site.js"></script>
+
+<main>
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-eyebrow">EST. 1993 · BUDAPEST · HUNGARY</div>
+  <h1 class="hero-headline">Thirty years<br><span>building.</span></h1>
+  <p class="hero-sub">A decade of published, peer-reviewed research. Winning international competitions. Running in production.</p>
+  
+  <div class="stats-bar">
+    <div class="stat-item">
+      <div class="stat-num">2×</div>
+      <div class="stat-label">International first place</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">2025</div>
+      <div class="stat-label">Knight's Cross awarded</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">6</div>
+      <div class="stat-label">Years post-quantum research</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">1</div>
+      <div class="stat-label">Active BME academic partnership</div>
+    </div>
+  </div>
+</section>
+
+<!-- RESEARCH AREAS -->
+<section class="research-section">
+  <div class="section-eyebrow">ACTIVE RESEARCH</div>
+  <h2 class="section-title">Four domains. Serious work.</h2>
+  
+  <div class="research-grid">
+    <div class="research-card">
+      <div class="research-name">Medical AI & Diagnostic Intelligence</div>
+      <div class="research-desc">Graph-based AI for clinical decision support. Reduces hallucination. Makes recommendations traceable.</div>
+      <div class="research-status">Status: Active</div>
+    </div>
+    
+    <div class="research-card">
+      <div class="research-name">Post-Quantum Cryptography</div>
+      <div class="research-desc">Building cryptographic systems that will outlast current encryption standards. Started 2019.</div>
+      <div class="research-status">Status: Active</div>
+    </div>
+    
+    <div class="research-card">
+      <div class="research-name">Federated Learning</div>
+      <div class="research-desc">AI that travels to the data. The foundation of HeliX and FedX. Running in production.</div>
+      <div class="research-status">Status: Active</div>
+    </div>
+    
+    <div class="research-card">
+      <div class="research-name">Graph-based Language Models</div>
+      <div class="research-desc">GRaDPaLM. Back-to-back international first place. Published and peer-reviewed.</div>
+      <div class="research-status">Status: Active</div>
+    </div>
+  </div>
+</section>
+
+<!-- THE PEOPLE -->
+<section class="people-section">
+  <div class="section-eyebrow">THE RESEARCHERS</div>
+  <h2 class="section-title">The people doing the work.</h2>
+  
+  <div class="people-grid">
+    <div class="person-card">
+      <div class="person-initials">PA</div>
+      <div class="person-name">Dr. Péter Antal</div>
+      <div class="person-title">Lead AI Researcher</div>
+      <div class="person-desc">Knight's Cross of the Order of Merit · Hungary · 2025</div>
+    </div>
+    
+    <div class="person-card">
+      <div class="person-initials">AK</div>
+      <div class="person-name">Dr. Anna Kovács</div>
+      <div class="person-title">AI Research Lead · HealthTech</div>
+      <div class="person-desc">Back-to-back international medical AI first place · 2024</div>
+    </div>
+    
+    <div class="person-card">
+      <div class="person-initials">MM</div>
+      <div class="person-name">Mark Marosi</div>
+      <div class="person-title">Head of Research</div>
+      <div class="person-desc">Leading E-Group's research department and published output.</div>
+    </div>
+    
+    <div class="person-card">
+      <div class="person-initials">AB</div>
+      <div class="person-name">Ágota Benedek</div>
+      <div class="person-title">Research Engineer</div>
+      <div class="person-desc">GRaDPaLM co-author. Neumann Colloquium and BME TDK 2025 first place.</div>
+    </div>
+    
+    <div class="person-card">
+      <div class="person-initials">TM</div>
+      <div class="person-name">Tamás Mészáros PhD</div>
+      <div class="person-title">Senior Researcher · BME Associate Professor</div>
+      <div class="person-desc">Active academic bridge between BME and E-Group's research programme.</div>
+    </div>
+  </div>
+</section>
+
+<!-- RECOGNITION TIMELINE -->
+<section class="timeline-section">
+  <div class="section-eyebrow">RECOGNITION</div>
+  <h2 class="section-title">What the work has earned.</h2>
+  
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-year">2019</div>
+      <div class="timeline-title">Post-Quantum Research Begins</div>
+      <div class="timeline-desc">E-Group begins active research into post-quantum cryptographic systems — six years before most enterprises treat this as urgent.</div>
+    </div>
+    
+    <div class="timeline-item">
+      <div class="timeline-year">2022</div>
+      <div class="timeline-title">AI Research Programme Established</div>
+      <div class="timeline-desc">Formal AI research group established under Dr. Péter Antal. Academic rigour combined with enterprise application.</div>
+    </div>
+    
+    <div class="timeline-item landmark">
+      <div class="timeline-year">2024</div>
+      <div class="timeline-title">Medical AI — Back-to-Back International First Place</div>
+      <div class="timeline-desc">E-Group's HealthTech AI team takes first place at two consecutive international medical AI research events.</div>
+    </div>
+    
+    <div class="timeline-item landmark">
+      <div class="timeline-year">2025</div>
+      <div class="timeline-title">GRaDPaLM — Neumann Colloquium & BME TDK First Place</div>
+      <div class="timeline-desc">Back-to-back first place for graph retrieval and diagnostic pathway augmented language models.</div>
+    </div>
+    
+    <div class="timeline-item landmark">
+      <div class="timeline-year">2025</div>
+      <div class="timeline-title">Knight's Cross of the Order of Merit</div>
+      <div class="timeline-desc">Dr. Péter Antal awarded Hungary's highest civilian recognition. A personal honour that reflects the quality of the research programme.</div>
+    </div>
+    
+    <div class="timeline-item">
+      <div class="timeline-year">2025</div>
+      <div class="timeline-title">BME Academic Partnership</div>
+      <div class="timeline-desc">Active partnership with Budapest Technical University Department of AI and Systems Design. Joint research presented at ICSB 2025.</div>
+    </div>
+  </div>
+</section>
+
+<!-- PUBLISHED WORK -->
+<section class="published-section">
+  <div class="section-eyebrow">PUBLISHED</div>
+  <h2 class="section-title">What we've put our name on.</h2>
+  
+  <div class="published-grid">
+    <div class="published-card">
+      <div class="published-name">GRaDPaLM</div>
+      <div class="published-desc">Graph retrieval and diagnostic pathway augmented language models.</div>
+      <div class="published-authors">Ágota Benedek · Tamás Mészáros PhD · November 2025</div>
+      <div class="published-tag">HealthTech · AI Research</div>
+      <a href="https://egroup.hu/a-winning-streak-in-ai-innovation-e-group-team-member-secures-double-victory-at-scientific-events/" class="published-link" target="_blank" rel="noopener">Read the full article →</a>
+    </div>
+    
+    <div class="published-card placeholder">
+      <div class="published-name">Post-Quantum Cryptography — first publication</div>
+      <div class="published-desc">Research Department · Coming</div>
+    </div>
+    
+    <div class="published-card placeholder">
+      <div class="published-name">Federated Learning in Clinical Settings</div>
+      <div class="published-desc">Research Department · Coming</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-section">
+  <div class="cta-text">
+    <h2>Working on a hard problem?</h2>
+    <p>Our research team takes on problems that matter. If you're working in medical AI, cryptography, or federated systems — talk to us.</p>
+  </div>
+  <a href="contact.html" class="cta-btn">Start the conversation →</a>
+</div>
+</main>
+
+<footer>
+  <div class="footer-brand">E-Group Intelligence Infrastructure · Est. 1993</div>
+  <div class="footer-legal">Budapest, Hungary · © 2026 E-Group ICT Software Zrt.</div>
+</footer>
+
+</body>
+</html>
