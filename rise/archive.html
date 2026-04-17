@@ -278,12 +278,6 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 </div>
 
 <script>
-const hamburger=document.getElementById('egroup-hamburger'),mobileMenu=document.getElementById('egroup-mobile-menu');
-if(hamburger&&mobileMenu){
-  hamburger.addEventListener('click',()=>{hamburger.classList.toggle('open');mobileMenu.classList.toggle('open');document.body.style.overflow=mobileMenu.classList.contains('open')?'hidden':'';});
-  mobileMenu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{hamburger.classList.remove('open');mobileMenu.classList.remove('open');document.body.style.overflow='';}));
-}
-
 // Filter logic
 let activeFormat = 'all';
 let activeStatus = 'all';
