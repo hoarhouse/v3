@@ -55,6 +55,7 @@
       '<a href="' + base + 'intelligence.html" style="font-family:\'DM Mono\',monospace;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;text-decoration:none;color:#777;' + active('intelligence.html') + '">The Work</a>' +
       '<a href="' + base + 'rise.html" style="font-family:\'DM Mono\',monospace;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;text-decoration:none;color:#777;' + active('rise.html') + '">What\'s Next</a>' +
       '<a href="' + base + 'thinking.html" style="font-family:\'DM Mono\',monospace;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;text-decoration:none;color:#777;' + active('thinking.html') + '">Thinking</a>' +
+      '<a href="' + base + 'research.html" style="font-family:\'DM Mono\',monospace;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;text-decoration:none;color:#777;' + active('research.html') + '">The Research</a>' +
       '<a href="' + base + 'about.html" style="font-family:\'DM Mono\',monospace;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;text-decoration:none;color:#777;' + active('about.html') + '">About</a>' +
       '<div class="nav-rec" style="position:relative;">' +
         '<a href="' + base + 'record/index.html" style="font-family:\'DM Mono\',monospace;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;text-decoration:none;color:#777;cursor:pointer;">Record ▾</a>' +
@@ -78,6 +79,7 @@
     '<a href="' + base + 'intelligence.html" class="mob-main">The Work</a>' +
     '<a href="' + base + 'rise.html" class="mob-main">What\'s Next</a>' +
     '<a href="' + base + 'thinking.html" class="mob-main">Thinking</a>' +
+    '<a href="' + base + 'research.html" class="mob-main">The Research</a>' +
     '<a href="' + base + 'about.html" class="mob-main">About</a>' +
     '<div class="mob-divider">The Record</div>' +
     '<a href="' + base + 'record/index.html" class="mob-record">Full Record</a>' +
@@ -110,6 +112,7 @@
           '<a href="' + base + 'intelligence.html">The Work</a>' +
           '<a href="' + base + 'rise.html">What\'s Next</a>' +
           '<a href="' + base + 'thinking.html">Thinking</a>' +
+          '<a href="' + base + 'research.html">The Research</a>' +
           '<a href="' + base + 'about.html">About</a>' +
           '<a href="' + base + 'contact.html">Work With Us</a>' +
         '</div>' +
