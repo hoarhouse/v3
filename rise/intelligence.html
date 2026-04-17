@@ -26,31 +26,6 @@ body{cursor:none;overflow-x:hidden;}
 .reveal-delay-2{transition-delay:0.2s;}
 .reveal-delay-3{transition-delay:0.3s;}
 
-/* NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:24px 48px;background:rgba(8,8,8,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);}
-.nav-logo{display:flex;align-items:center;gap:12px;text-decoration:none;}
-.logo-e{width:28px;height:28px;background:var(--gold);color:var(--black);display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:800;font-size:14px;}
-.nav-logo-text{font-family:'Syne',sans-serif;font-weight:700;font-size:14px;color:var(--white);letter-spacing:1px;}
-.nav-links{display:flex;align-items:center;gap:8px;list-style:none;}
-.nav-links a{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--mid);text-decoration:none;padding:6px 12px;transition:color 0.2s;}
-.nav-links a:hover,.nav-links a.active{color:var(--white);}
-.nav-has-dropdown{position:relative;}
-.nav-dropdown{display:none;position:absolute;top:100%;left:0;background:var(--dark);border:1px solid var(--border);min-width:220px;padding:8px 0;}
-.nav-has-dropdown:hover .nav-dropdown{display:block;}
-.nav-dropdown li{list-style:none;}
-.nav-dropdown a{display:block;padding:8px 16px;font-size:11px;color:var(--dim);letter-spacing:1px;}
-.nav-dropdown a:hover{color:var(--white);background:var(--panel);}
-.nav-cta{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--white);text-decoration:none;padding:10px 20px;border:1px solid var(--white);transition:all 0.2s;}
-.nav-cta:hover{background:var(--white);color:var(--black);}
-.nav-hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px;}
-.nav-hamburger span{display:block;width:22px;height:1px;background:var(--white);transition:all 0.3s;}
-.nav-mobile-menu{display:none;position:fixed;inset:0;background:var(--black);z-index:99;flex-direction:column;padding:100px 32px 40px;gap:0;}
-.nav-mobile-menu.open{display:flex;}
-.mob-main{font-family:'Syne',sans-serif;font-size:28px;font-weight:700;color:var(--white);text-decoration:none;padding:16px 0;border-bottom:1px solid var(--border);}
-.mob-divider{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--muted);padding:20px 0 8px;text-transform:uppercase;}
-.mob-record{font-family:'DM Sans',sans-serif;font-size:15px;color:var(--dim);text-decoration:none;padding:10px 0;border-bottom:1px solid var(--border);}
-.mob-cta{margin-top:32px;font-family:'DM Mono',monospace;font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--white);text-decoration:none;padding:14px 24px;border:1px solid var(--white);text-align:center;}
-
 /* HERO */
 .work-hero{padding:160px 60px 80px;border-bottom:1px solid var(--border);}
 .work-hero-eyebrow{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--mid);margin-bottom:32px;}
@@ -115,8 +90,6 @@ footer{padding:60px 60px 40px;background:var(--dark);}
 .footer-legal{font-family:'DM Mono',monospace;font-size:10px;color:var(--mid);letter-spacing:1px;}
 
 @media (max-width: 768px) {
-  .nav-links, .nav-cta { display: none; }
-  .nav-hamburger { display: flex; }
   .live-grid, .active-grid { grid-template-columns: 1fr; }
   .dev-grid { grid-template-columns: 1fr 1fr; }
   .work-hero { padding: 120px 32px 60px; }
@@ -132,63 +105,11 @@ footer{padding:60px 60px 40px;background:var(--dark);}
 }
 </style>
 </head>
-<body>
+<body data-page="intelligence">
+<script src="nav-site.js"></script>
 
 <div class="cursor" id="cursor"></div>
 <div class="cursor-ring" id="cursorRing"></div>
-
-<nav>
-  <a href="index.html" class="nav-logo">
-    <div class="logo-e">E</div>
-    <span class="nav-logo-text">E-GROUP</span>
-  </a>
-  <ul class="nav-links">
-    <li class="nav-has-dropdown">
-      <a href="#" class="active">The Work</a>
-      <ul class="nav-dropdown">
-        <li><a href="intelligence.html">Intelligence</a></li>
-        <li><a href="rise.html">What's Next</a></li>
-      </ul>
-    </li>
-    <li class="nav-has-dropdown">
-      <a href="record/">The Record</a>
-      <ul class="nav-dropdown">
-        <li><a href="record/">Full Record</a></li>
-        <li><a href="record/delivered.html">Delivered</a></li>
-        <li><a href="record/people.html">The People</a></li>
-        <li><a href="record/science.html">The Science</a></li>
-        <li><a href="record/recognition.html">Recognition</a></li>
-        <li><a href="record/facts.html">The Facts</a></li>
-      </ul>
-    </li>
-    <li><a href="thinking.html">Thinking</a></li>
-    <li><a href="about.html">About</a></li>
-  </ul>
-  <a href="mailto:connect@egroup.hu" class="nav-cta">Work With Us</a>
-  <button class="nav-hamburger" onclick="document.getElementById('mobileMenu').classList.toggle('open');">
-    <span></span>
-    <span></span>
-    <span></span>
-  </button>
-</nav>
-
-<div class="nav-mobile-menu" id="mobileMenu">
-  <a href="intelligence.html" class="mob-main">The Work</a>
-  <div class="mob-divider">Projects</div>
-  <a href="intelligence.html" class="mob-record">Intelligence</a>
-  <a href="rise.html" class="mob-record">What's Next</a>
-  <div class="mob-divider">Record</div>
-  <a href="record/" class="mob-record">Full Record</a>
-  <a href="record/delivered.html" class="mob-record">Delivered</a>
-  <a href="record/people.html" class="mob-record">The People</a>
-  <a href="record/science.html" class="mob-record">The Science</a>
-  <a href="record/recognition.html" class="mob-record">Recognition</a>
-  <a href="record/facts.html" class="mob-record">The Facts</a>
-  <div class="mob-divider">Company</div>
-  <a href="thinking.html" class="mob-record">Thinking</a>
-  <a href="about.html" class="mob-record">About</a>
-  <a href="mailto:connect@egroup.hu" class="mob-cta">Work With Us</a>
-</div>
 
 <!-- HERO -->
 <section class="work-hero">
