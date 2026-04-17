@@ -178,6 +178,6 @@
 
   // Inject Ask E-Group chat widget
   var chatScript = document.createElement('script');
-  chatScript.src = (path.includes('/record/') ? '../' : '') + 'ask-egroup.js';
+  chatScript.src = (inSubfolder ? '../' : '') + 'ask-egroup.js';
   document.body.appendChild(chatScript);
 })();
