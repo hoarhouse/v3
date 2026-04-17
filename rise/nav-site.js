@@ -158,23 +158,25 @@
     }
   });
 
-  // Hamburger toggle
-  var btn = document.getElementById('egroup-hamburger');
-  var menu = document.getElementById('egroup-mobile-menu');
-  if (btn && menu) {
-    btn.addEventListener('click', function() {
-      btn.classList.toggle('open');
-      menu.classList.toggle('open');
-      document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : '';
-    });
-    menu.querySelectorAll('a').forEach(function(a) {
-      a.addEventListener('click', function() {
-        btn.classList.remove('open');
-        menu.classList.remove('open');
-        document.body.style.overflow = '';
+  // Hamburger toggle — wrapped in setTimeout to ensure DOM is ready
+  setTimeout(function() {
+    var btn = document.getElementById('egroup-hamburger');
+    var menu = document.getElementById('egroup-mobile-menu');
+    if (btn && menu) {
+      btn.addEventListener('click', function() {
+        btn.classList.toggle('open');
+        menu.classList.toggle('open');
+        document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : '';
       });
-    });
-  }
+      menu.querySelectorAll('a').forEach(function(a) {
+        a.addEventListener('click', function() {
+          btn.classList.remove('open');
+          menu.classList.remove('open');
+          document.body.style.overflow = '';
+        });
+      });
+    }
+  }, 0);
 
   // Inject Ask E-Group chat widget
   var chatScript = document.createElement('script');

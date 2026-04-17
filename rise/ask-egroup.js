@@ -147,6 +147,10 @@ INSTRUCTIONS:
 
     .eg-error{font-family:'DM Mono',monospace;font-size:10px;color:#BF7C7C;padding:8px 14px;background:#1A0A0A;border:1px solid #3A1A1A;margin-top:4px;}
 
+    @media(max-width:768px){
+      #eg-chat-btn{bottom:16px;right:16px;}
+      #eg-chat-panel{bottom:78px;}
+    }
     @media(max-width:480px){
       #eg-chat-panel{width:calc(100vw - 32px);right:16px;bottom:80px;}
       #eg-chat-btn{right:16px;bottom:16px;}
