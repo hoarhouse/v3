@@ -37,6 +37,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:#000}
 .h-top-right{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.1em;color:#cc2200;display:flex;align-items:center;gap:.5rem}
 .live-dot{width:5px;height:5px;border-radius:50%;background:#cc2200;animation:pulse 2s ease-in-out infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
 .h-mid{flex:1;display:grid;grid-template-columns:1fr auto;align-items:center;padding:2.5rem 2.5rem;gap:4rem}
 .tagline{font-family:'Outfit',sans-serif;font-size:11px;font-weight:300;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:1.5rem}
 .title{font-family:'JetBrains Mono',monospace;font-size:clamp(60px,9vw,120px);font-weight:700;color:#ffffff;line-height:.9;letter-spacing:-.01em}
@@ -128,8 +129,8 @@ html,body{width:100%;height:100%;overflow:hidden;background:#000}
       <div style="flex:1;display:flex;min-height:0">
         <div style="flex:0 0 65%;display:flex;flex-direction:column;justify-content:center;padding:1.5rem 2.5rem;border-right:1px solid rgba(255,102,0,0.15);min-width:0;overflow:hidden">
           <div style="display:flex;flex-direction:column">
-            <span style="font-family:'Bebas Neue',sans-serif;font-size:clamp(100px,15.5vw,185px);line-height:.85;letter-spacing:.27em;display:block;color:#ffffff">ZERO</span>
-            <span style="font-family:'Bebas Neue',sans-serif;font-size:clamp(100px,15.5vw,185px);line-height:.85;letter-spacing:.01em;display:block;color:#ff6600">HOUR</span>
+            <span style="font-family:'Bebas Neue',sans-serif;font-size:clamp(144px,22.3vw,266px);line-height:.85;letter-spacing:.27em;display:block;color:#ffffff">ZERO</span>
+            <span style="font-family:'Bebas Neue',sans-serif;font-size:clamp(144px,22.3vw,266px);line-height:.85;letter-spacing:.01em;display:block;color:#ff6600">HOUR</span>
             <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,0.25);margin-top:.9rem;white-space:nowrap">Nobel minds. Nuclear stakes.</div>
           </div>
         </div>
@@ -315,6 +316,40 @@ html,body{width:100%;height:100%;overflow:hidden;background:#000}
     </div>
   </div>
 
+  <!-- ══ SLIDE 10 — If Not Now ══ -->
+  <div class="slide" data-label="Concept 10 · If Not Now">
+    <div style="width:100%;height:100vh;background:#080e18;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:3rem 2rem;position:relative;overflow:hidden">
+      <div style="position:absolute;top:0;left:0;right:0;height:3px;background:#d4af37"></div>
+      <div style="position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(ellipse at center,rgba(200,168,75,0.06) 0%,transparent 70%);pointer-events:none"></div>
+      <div style="position:absolute;top:16px;left:2rem;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,0.2)">Global Nobel Laureates Assembly</div>
+      <div style="position:absolute;top:16px;right:2rem;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:#d4af37;display:flex;align-items:center;gap:.5rem"><div style="width:5px;height:5px;border-radius:50%;background:#d4af37;animation:pulse 2s infinite"></div>Vatican · July 2026</div>
+      <div style="width:100%;max-width:700px;margin-bottom:2rem">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(200,168,75,0.5);letter-spacing:.1em;margin-bottom:.5rem">// prompt</div>
+        <div style="display:flex;align-items:center;background:rgba(255,255,255,0.03);border:1px solid rgba(200,168,75,0.3);padding:1.25rem 1.5rem;cursor:pointer" onclick="triggerResponse()">
+          <span style="font-family:'JetBrains Mono',monospace;font-size:14px;color:#d4af37;margin-right:1rem">›</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:clamp(20px,3.5vw,32px);font-weight:300;color:#ffffff;letter-spacing:.02em">If not now...</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:rgba(255,255,255,0.2);border:1px solid rgba(255,255,255,0.1);padding:3px 8px;border-radius:3px;margin-left:auto" id="s10-hint">↵ enter</span>
+        </div>
+      </div>
+      <div style="width:100%;max-width:700px;opacity:0;transform:translateY(8px);transition:opacity .6s ease,transform .6s ease" id="s10-response">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(255,255,255,0.2);letter-spacing:.1em;margin-bottom:.5rem">// response</div>
+        <div style="display:flex;align-items:center;gap:1.5rem;padding:1.25rem 1.5rem;border-left:2px solid #d4af37">
+          <div style="width:28px;height:28px;border-radius:50%;background:rgba(200,168,75,0.15);border:1px solid rgba(200,168,75,0.3);display:flex;align-items:center;justify-content:center;flex-shrink:0"><div style="width:8px;height:8px;border-radius:50%;background:#d4af37"></div></div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:clamp(40px,7vw,80px);font-style:italic;font-weight:300;color:#d4af37;line-height:1" id="s10-answer"></div>
+        </div>
+      </div>
+      <div style="display:flex;gap:3rem;margin-top:3rem;opacity:0;transition:opacity .5s ease" id="s10-meta">
+        <div style="text-align:center"><div style="font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,0.2);margin-bottom:.3rem">Date</div><div style="font-family:'Outfit',sans-serif;font-size:12px;font-weight:300;color:rgba(255,255,255,0.45)">14–16 July 2026</div></div>
+        <div style="text-align:center"><div style="font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,0.2);margin-bottom:.3rem">Venue</div><div style="font-family:'Outfit',sans-serif;font-size:12px;font-weight:300;color:rgba(255,255,255,0.45)">Borgo Laudato Si', Castel Gandolfo</div></div>
+        <div style="text-align:center"><div style="font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,0.2);margin-bottom:.3rem">By</div><div style="font-family:'Outfit',sans-serif;font-size:12px;font-weight:300;color:rgba(255,255,255,0.45)">Domus Communis Foundation</div></div>
+      </div>
+      <div style="display:flex;gap:1rem;margin-top:2rem;opacity:0;transition:opacity .5s ease" id="s10-btns">
+        <button style="font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#080e18;background:#d4af37;padding:13px 32px;border:none;cursor:pointer">Accept Invitation</button>
+        <button style="font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:400;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,0.4);border:1px solid rgba(255,255,255,0.15);padding:13px 32px;background:none;cursor:pointer">Learn More</button>
+      </div>
+    </div>
+  </div>
+
 </div>
 
 <!-- NAV -->
@@ -335,6 +370,9 @@ function update() {
   slides.forEach((s, i) => s.classList.toggle('active', i === current));
   counter.textContent = (current + 1) + ' / ' + slides.length;
   label.textContent = slides[current].dataset.label || '';
+  if (slides[current].dataset.label && slides[current].dataset.label.includes('If Not Now')) {
+    setTimeout(() => { if (!s10responded) triggerResponse(); }, 2500);
+  }
 }
 
 function changeSlide(dir) {
@@ -345,7 +383,34 @@ function changeSlide(dir) {
 document.addEventListener('keydown', e => {
   if (e.key === 'ArrowRight' || e.key === 'ArrowDown') changeSlide(1);
   if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') changeSlide(-1);
+  if (e.key === 'Enter') triggerResponse();
 });
+
+// Slide 10 — If Not Now
+let s10responded = false;
+function triggerResponse() {
+  if (s10responded) return;
+  const resp = document.getElementById('s10-response');
+  if (!resp) return;
+  s10responded = true;
+  const hint = document.getElementById('s10-hint');
+  if (hint) hint.style.opacity = '0';
+  setTimeout(() => {
+    resp.style.opacity = '1'; resp.style.transform = 'translateY(0)';
+    const el = document.getElementById('s10-answer');
+    let text = 'When?', i = 0;
+    el.innerHTML = '<span style="display:inline-block;width:2px;height:.8em;background:#d4af37;margin-left:2px;vertical-align:middle;animation:blink 1s step-end infinite"></span>';
+    const iv = setInterval(() => {
+      if (i < text.length) { el.innerHTML = text.substring(0,i+1) + '<span style="display:inline-block;width:2px;height:.8em;background:#d4af37;margin-left:2px;vertical-align:middle;animation:blink 1s step-end infinite"></span>'; i++; }
+      else { el.innerHTML = text; clearInterval(iv);
+        setTimeout(() => {
+          document.getElementById('s10-meta').style.opacity = '1';
+          document.getElementById('s10-btns').style.opacity = '1';
+        }, 400);
+      }
+    }, 100);
+  }, 300);
+}
 
 update();
 </script>
