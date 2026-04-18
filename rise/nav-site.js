@@ -114,6 +114,8 @@
           '<a href="' + base + 'thinking.html">Thinking</a>' +
           '<a href="' + base + 'research.html">The Research</a>' +
           '<a href="' + base + 'about.html">About</a>' +
+          '<a href="' + base + 'record/proofx.html" style="color:#C8A96E;">ProofX — ESA</a>' +
+          '<a href="' + base + 'record/genesis.html" style="color:#C8A96E;">GENESIS — ESA</a>' +
           '<a href="' + base + 'contact.html">Work With Us</a>' +
         '</div>' +
       '</div>' +
@@ -134,7 +136,7 @@
         '<div class="site-footer-col-title">Contact</div>' +
         '<p class="site-footer-contact-line">Budapest, Hungary</p>' +
         '<p class="site-footer-contact-line">E-Group ICT Software Zrt.</p>' +
-        '<p class="site-footer-contact-line">Est. 1993 · 90+ staff</p>' +
+        '<p class="site-footer-contact-line">Est. 1993 · 110+ staff</p>' +
         '<a href="' + base + 'contact.html" class="site-footer-contact-cta">Working on something? Tell us →</a>' +
       '</div>' +
 
