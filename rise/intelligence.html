@@ -103,6 +103,17 @@ footer{padding:60px 60px 40px;background:var(--dark);}
 @media (max-width: 480px) {
   .dev-grid { grid-template-columns: 1fr; }
 }
+/* SECTOR FILTERS */
+.filter-bar{display:flex;gap:8px;flex-wrap:wrap;margin-top:24px;}
+.filter-btn{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--dim);background:transparent;border:1px solid var(--border);padding:8px 16px;cursor:pointer;transition:all 0.2s;}
+.filter-btn:hover{color:var(--text);border-color:var(--muted);}
+.filter-btn.active{color:var(--gold);border-color:var(--gold);background:rgba(200,169,110,0.08);}
+.work-card-anchor.sector-hidden{display:none !important;}
+
+@media (max-width: 768px) {
+  .filter-bar{gap:6px;}
+  .filter-btn{padding:6px 12px;font-size:9px;}
+}
 </style>
 </head>
 <body data-page="intelligence">
@@ -137,10 +148,18 @@ footer{padding:60px 60px 40px;background:var(--dark);}
   <div class="work-section-header">
     <div class="work-section-eyebrow reveal">Live Systems</div>
     <h2 class="work-section-title reveal">What we have built.<br><span>What organisations depend on.</span></h2>
+    <div class="filter-bar reveal">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="fintech">FinTech</button>
+      <button class="filter-btn" data-filter="healthtech">HealthTech</button>
+      <button class="filter-btn" data-filter="govtech">GovTech</button>
+      <button class="filter-btn" data-filter="energytech">EnergyTech</button>
+      <button class="filter-btn" data-filter="eu">EU Programmes</button>
+    </div>
   </div>
   <div class="live-grid">
 
-    <a href="record/helix.html" class="work-card-anchor" style="text-decoration:none;color:inherit;display:block;">
+    <a href="record/helix.html" class="work-card-anchor" data-sector="healthtech" style="text-decoration:none;color:inherit;display:block;">
       <div class="work-card reveal">
         <div class="work-card-status status-live"><span class="dot"></span>Live in Production</div>
         <div class="work-card-sector">HealthTech · Federated Data</div>
@@ -156,7 +175,7 @@ footer{padding:60px 60px 40px;background:var(--dark);}
       </div>
     </a>
 
-    <a href="record/remote-eye.html" class="work-card-anchor" style="text-decoration:none;color:inherit;display:block;">
+    <a href="record/remote-eye.html" class="work-card-anchor" data-sector="healthtech" style="text-decoration:none;color:inherit;display:block;">
       <div class="work-card reveal">
         <div class="work-card-status status-live"><span class="dot"></span>Live in Production</div>
         <div class="work-card-sector">HealthTech · Accessibility</div>
@@ -172,7 +191,7 @@ footer{padding:60px 60px 40px;background:var(--dark);}
       </div>
     </a>
 
-    <a href="record/rpm.html" class="work-card-anchor" style="text-decoration:none;color:inherit;display:block;">
+    <a href="record/rpm.html" class="work-card-anchor" data-sector="healthtech" style="text-decoration:none;color:inherit;display:block;">
       <div class="work-card reveal">
         <div class="work-card-status status-live"><span class="dot"></span>Live Product</div>
         <div class="work-card-sector">HealthTech · Telemonitoring</div>
@@ -188,7 +207,7 @@ footer{padding:60px 60px 40px;background:var(--dark);}
       </div>
     </a>
 
-    <a href="record/kau.html" class="work-card-anchor" style="text-decoration:none;color:inherit;display:block;">
+    <a href="record/kau.html" class="work-card-anchor" data-sector="govtech" style="text-decoration:none;color:inherit;display:block;">
       <div class="work-card reveal reveal-delay-1">
         <div class="work-card-status status-live"><span class="dot"></span>Live in Production</div>
         <div class="work-card-sector">GovTech · National Identity</div>
@@ -204,7 +223,7 @@ footer{padding:60px 60px 40px;background:var(--dark);}
       </div>
     </a>
 
-    <a href="record/corpex.html" class="work-card-anchor" style="text-decoration:none;color:inherit;display:block;">
+    <a href="record/corpex.html" class="work-card-anchor" data-sector="fintech" style="text-decoration:none;color:inherit;display:block;">
       <div class="work-card reveal reveal-delay-2">
         <div class="work-card-status status-live"><span class="dot"></span>Live in Production</div>
         <div class="work-card-sector">FinTech · Corporate Banking</div>
@@ -220,7 +239,7 @@ footer{padding:60px 60px 40px;background:var(--dark);}
       </div>
     </a>
 
-    <a href="record/pay-with-a-smile.html" class="work-card-anchor" style="text-decoration:none;color:inherit;display:block;">
+    <a href="record/pay-with-a-smile.html" class="work-card-anchor" data-sector="fintech" style="text-decoration:none;color:inherit;display:block;">
       <div class="work-card reveal">
         <div class="work-card-status status-live"><span class="dot"></span>Live in Production</div>
         <div class="work-card-sector">FinTech · Biometric Payments</div>
@@ -236,7 +255,7 @@ footer{padding:60px 60px 40px;background:var(--dark);}
       </div>
     </a>
 
-    <a href="record/otp-bank.html" class="work-card-anchor" style="text-decoration:none;color:inherit;display:block;">
+    <a href="record/otp-bank.html" class="work-card-anchor" data-sector="fintech" style="text-decoration:none;color:inherit;display:block;">
       <div class="work-card reveal">
         <div class="work-card-status status-live"><span class="dot"></span>Live in Production</div>
         <div class="work-card-sector">FinTech · Banking Infrastructure</div>
@@ -252,7 +271,7 @@ footer{padding:60px 60px 40px;background:var(--dark);}
       </div>
     </a>
 
-    <a href="record/starbucks.html" class="work-card-anchor" style="text-decoration:none;color:inherit;display:block;">
+    <a href="record/starbucks.html" class="work-card-anchor" data-sector="fintech" style="text-decoration:none;color:inherit;display:block;">
       <div class="work-card reveal">
         <div class="work-card-status status-live"><span class="dot"></span>Live in Production</div>
         <div class="work-card-sector">FinTech · Retail Payment Technology</div>
@@ -268,7 +287,7 @@ footer{padding:60px 60px 40px;background:var(--dark);}
       </div>
     </a>
 
-    <a href="record/diakhitel.html" class="work-card-anchor" style="text-decoration:none;color:inherit;display:block;">
+    <a href="record/diakhitel.html" class="work-card-anchor" data-sector="fintech" style="text-decoration:none;color:inherit;display:block;">
       <div class="work-card reveal">
         <div class="work-card-status status-live"><span class="dot"></span>Live in Production</div>
         <div class="work-card-sector">FinTech · Government Financial Services</div>
@@ -284,7 +303,7 @@ footer{padding:60px 60px 40px;background:var(--dark);}
       </div>
     </a>
 
-    <a href="record/mnb.html" class="work-card-anchor" style="text-decoration:none;color:inherit;display:block;">
+    <a href="record/mnb.html" class="work-card-anchor" data-sector="fintech" style="text-decoration:none;color:inherit;display:block;">
       <div class="work-card reveal">
         <div class="work-card-status status-live"><span class="dot"></span>Live in Production</div>
         <div class="work-card-sector">FinTech · Government Banking</div>
@@ -300,7 +319,7 @@ footer{padding:60px 60px 40px;background:var(--dark);}
       </div>
     </a>
 
-    <a href="record/evoting.html" class="work-card-anchor" style="text-decoration:none;color:inherit;display:block;">
+    <a href="record/evoting.html" class="work-card-anchor" data-sector="govtech" style="text-decoration:none;color:inherit;display:block;">
       <div class="work-card reveal">
         <div class="work-card-status status-live"><span class="dot"></span>Live in Production</div>
         <div class="work-card-sector">GovTech · Democratic Infrastructure</div>
@@ -316,7 +335,7 @@ footer{padding:60px 60px 40px;background:var(--dark);}
       </div>
     </a>
 
-    <a href="record/credit-agricole.html" class="work-card-anchor" style="text-decoration:none;color:inherit;display:block;">
+    <a href="record/credit-agricole.html" class="work-card-anchor" data-sector="fintech" style="text-decoration:none;color:inherit;display:block;">
       <div class="work-card reveal">
         <div class="work-card-status status-live"><span class="dot"></span>Live in Production</div>
         <div class="work-card-sector">FinTech · European Banking</div>
@@ -332,7 +351,7 @@ footer{padding:60px 60px 40px;background:var(--dark);}
       </div>
     </a>
 
-    <a href="record/union-pay.html" class="work-card-anchor" style="text-decoration:none;color:inherit;display:block;">
+    <a href="record/union-pay.html" class="work-card-anchor" data-sector="fintech" style="text-decoration:none;color:inherit;display:block;">
       <div class="work-card reveal">
         <div class="work-card-status status-live"><span class="dot"></span>Live in Production</div>
         <div class="work-card-sector">FinTech · Global Payment Networks</div>
@@ -348,7 +367,7 @@ footer{padding:60px 60px 40px;background:var(--dark);}
       </div>
     </a>
 
-    <a href="record/innohealth.html" class="work-card-anchor" style="text-decoration:none;color:inherit;display:block;">
+    <a href="record/innohealth.html" class="work-card-anchor" data-sector="healthtech" style="text-decoration:none;color:inherit;display:block;">
       <div class="work-card reveal">
         <div class="work-card-status status-live"><span class="dot"></span>Live in Production</div>
         <div class="work-card-sector">HealthTech · Data Engineering</div>
@@ -364,7 +383,7 @@ footer{padding:60px 60px 40px;background:var(--dark);}
       </div>
     </a>
 
-    <a href="record/neak.html" class="work-card-anchor" style="text-decoration:none;color:inherit;display:block;">
+    <a href="record/neak.html" class="work-card-anchor" data-sector="healthtech" style="text-decoration:none;color:inherit;display:block;">
       <div class="work-card reveal">
         <div class="work-card-status status-live"><span class="dot"></span>Live in Production</div>
         <div class="work-card-sector">HealthTech · Data Analytics</div>
@@ -380,7 +399,7 @@ footer{padding:60px 60px 40px;background:var(--dark);}
       </div>
     </a>
 
-    <a href="record/sinosz.html" class="work-card-anchor" style="text-decoration:none;color:inherit;display:block;">
+    <a href="record/sinosz.html" class="work-card-anchor" data-sector="healthtech" style="text-decoration:none;color:inherit;display:block;">
       <div class="work-card reveal">
         <div class="work-card-status status-live"><span class="dot"></span>Live in Production</div>
         <div class="work-card-sector">HealthTech · Industry Systems</div>
@@ -396,7 +415,7 @@ footer{padding:60px 60px 40px;background:var(--dark);}
       </div>
     </a>
 
-    <a href="record/dialogue-manager.html" class="work-card-anchor" style="text-decoration:none;color:inherit;display:block;">
+    <a href="record/dialogue-manager.html" class="work-card-anchor" data-sector="govtech" style="text-decoration:none;color:inherit;display:block;">
       <div class="work-card reveal">
         <div class="work-card-status status-live"><span class="dot"></span>Live in Production</div>
         <div class="work-card-sector">AI · Customer Service</div>
@@ -412,7 +431,7 @@ footer{padding:60px 60px 40px;background:var(--dark);}
       </div>
     </a>
 
-    <a href="record/idxaas.html" class="work-card-anchor" style="text-decoration:none;color:inherit;display:block;">
+    <a href="record/idxaas.html" class="work-card-anchor" data-sector="govtech" style="text-decoration:none;color:inherit;display:block;">
       <div class="work-card reveal">
         <div class="work-card-status status-live"><span class="dot"></span>Live in Production</div>
         <div class="work-card-sector">GovTech · Identity</div>
@@ -428,7 +447,7 @@ footer{padding:60px 60px 40px;background:var(--dark);}
       </div>
     </a>
 
-    <a href="record/redatame.html" class="work-card-anchor" style="text-decoration:none;color:inherit;display:block;">
+    <a href="record/redatame.html" class="work-card-anchor" data-sector="fintech" style="text-decoration:none;color:inherit;display:block;">
       <div class="work-card reveal">
         <div class="work-card-status status-live"><span class="dot"></span>Live in Production</div>
         <div class="work-card-sector">FinTech · Data Governance</div>
@@ -444,7 +463,7 @@ footer{padding:60px 60px 40px;background:var(--dark);}
       </div>
     </a>
 
-    <a href="record/mvgyosz.html" class="work-card-anchor" style="text-decoration:none;color:inherit;display:block;">
+    <a href="record/mvgyosz.html" class="work-card-anchor" data-sector="govtech" style="text-decoration:none;color:inherit;display:block;">
       <div class="work-card reveal">
         <div class="work-card-status status-live"><span class="dot"></span>Live in Production</div>
         <div class="work-card-sector">GovTech · Accessibility Services</div>
@@ -460,7 +479,7 @@ footer{padding:60px 60px 40px;background:var(--dark);}
       </div>
     </a>
 
-    <a href="record/belugyminiszterium.html" class="work-card-anchor" style="text-decoration:none;color:inherit;display:block;">
+    <a href="record/belugyminiszterium.html" class="work-card-anchor" data-sector="govtech" style="text-decoration:none;color:inherit;display:block;">
       <div class="work-card reveal">
         <div class="work-card-status status-live"><span class="dot"></span>Live in Production</div>
         <div class="work-card-sector">GovTech · Digital Government</div>
@@ -476,7 +495,7 @@ footer{padding:60px 60px 40px;background:var(--dark);}
       </div>
     </a>
 
-    <a href="record/eidas.html" class="work-card-anchor" style="text-decoration:none;color:inherit;display:block;">
+    <a href="record/eidas.html" class="work-card-anchor" data-sector="govtech" style="text-decoration:none;color:inherit;display:block;">
       <div class="work-card reveal reveal-delay-3">
         <div class="work-card-status status-live"><span class="dot"></span>Live · Testbed Passed</div>
         <div class="work-card-sector">GovTech · Identity</div>
@@ -503,7 +522,7 @@ footer{padding:60px 60px 40px;background:var(--dark);}
   </div>
   <div class="active-grid">
 
-    <a href="record/ipcei-cis.html" class="work-card-anchor" style="text-decoration:none;color:inherit;display:block;">
+    <a href="record/ipcei-cis.html" class="work-card-anchor" data-sector="eu" style="text-decoration:none;color:inherit;display:block;">
       <div class="work-card reveal">
         <div class="work-card-status status-active"><span class="dot"></span>Active</div>
         <div class="work-card-sector">EU Infrastructure · AI</div>
@@ -519,7 +538,7 @@ footer{padding:60px 60px 40px;background:var(--dark);}
       </div>
     </a>
 
-    <a href="record/dome.html" class="work-card-anchor" style="text-decoration:none;color:inherit;display:block;">
+    <a href="record/dome.html" class="work-card-anchor" data-sector="eu" style="text-decoration:none;color:inherit;display:block;">
       <div class="work-card reveal">
         <div class="work-card-status status-active"><span class="dot"></span>Active</div>
         <div class="work-card-sector">EU Infrastructure · Cloud</div>
@@ -535,7 +554,7 @@ footer{padding:60px 60px 40px;background:var(--dark);}
       </div>
     </a>
 
-    <a href="record/animal-health.html" class="work-card-anchor" style="text-decoration:none;color:inherit;display:block;">
+    <a href="record/animal-health.html" class="work-card-anchor" data-sector="healthtech" style="text-decoration:none;color:inherit;display:block;">
       <div class="work-card reveal">
         <div class="work-card-status status-active"><span class="dot"></span>Active</div>
         <div class="work-card-sector">HealthTech · R&D</div>
@@ -551,7 +570,7 @@ footer{padding:60px 60px 40px;background:var(--dark);}
       </div>
     </a>
 
-    <a href="record/mavir.html" class="work-card-anchor" style="text-decoration:none;color:inherit;display:block;">
+    <a href="record/mavir.html" class="work-card-anchor" data-sector="energytech" style="text-decoration:none;color:inherit;display:block;">
       <div class="work-card reveal reveal-delay-1">
         <div class="work-card-status status-active"><span class="dot"></span>Active — 25+ Years</div>
         <div class="work-card-sector">EnergyTech · Energy Markets</div>
@@ -567,7 +586,7 @@ footer{padding:60px 60px 40px;background:var(--dark);}
       </div>
     </a>
 
-    <a href="record/total-energies.html" class="work-card-anchor" style="text-decoration:none;color:inherit;display:block;">
+    <a href="record/total-energies.html" class="work-card-anchor" data-sector="energytech" style="text-decoration:none;color:inherit;display:block;">
       <div class="work-card reveal">
         <div class="work-card-status status-live"><span class="dot"></span>Live in Production</div>
         <div class="work-card-sector">EnergyTech · Energy Management</div>
@@ -583,7 +602,7 @@ footer{padding:60px 60px 40px;background:var(--dark);}
       </div>
     </a>
 
-    <a href="record/mol-group.html" class="work-card-anchor" style="text-decoration:none;color:inherit;display:block;">
+    <a href="record/mol-group.html" class="work-card-anchor" data-sector="energytech" style="text-decoration:none;color:inherit;display:block;">
       <div class="work-card reveal">
         <div class="work-card-status status-live"><span class="dot"></span>Live in Production</div>
         <div class="work-card-sector">EnergyTech · Oil & Gas Digital Infrastructure</div>
@@ -637,6 +656,22 @@ document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cursor.style
 const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');}),{threshold:0.08});
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 const mobileMenu=document.getElementById('mobileMenu');
+
+// Sector filter logic
+document.querySelectorAll('.filter-btn').forEach(function(btn){
+  btn.addEventListener('click',function(){
+    var filter=this.getAttribute('data-filter');
+    document.querySelectorAll('.filter-btn').forEach(function(b){b.classList.remove('active');});
+    this.classList.add('active');
+    document.querySelectorAll('.work-card-anchor[data-sector]').forEach(function(card){
+      if(filter==='all'||card.getAttribute('data-sector')===filter){
+        card.classList.remove('sector-hidden');
+      } else {
+        card.classList.add('sector-hidden');
+      }
+    });
+  });
+});
 </script>
 </body>
 </html>
