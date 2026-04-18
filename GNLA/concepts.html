@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>prompt>714 — Concept Deck</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;700&family=Bebas+Neue&family=Outfit:wght@200;300;400;500&family=Cormorant+Garamond:ital,wght@1,300;1,600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:100%;height:100%;overflow:hidden;background:#000}
+
+/* ── SLIDESHOW SHELL ── */
+.deck{width:100%;height:100vh;position:relative}
+.slide{position:absolute;inset:0;opacity:0;pointer-events:none;transition:opacity .6s ease}
+.slide.active{opacity:1;pointer-events:all}
+
+/* ── NAV ── */
+.deck-nav{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);z-index:999;display:flex;align-items:center;gap:1.5rem}
+.deck-nav button{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,0.4);background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);padding:10px 20px;cursor:pointer;transition:all .2s}
+.deck-nav button:hover{color:#fff;border-color:rgba(255,255,255,0.3)}
+.deck-nav button.prev-btn{color:#cc2200;border-color:rgba(204,34,0,0.3)}
+.deck-nav button.prev-btn:hover{background:rgba(204,34,0,0.1)}
+.deck-nav button.next-btn{color:#cc2200;border-color:rgba(204,34,0,0.3)}
+.deck-nav button.next-btn:hover{background:rgba(204,34,0,0.1)}
+.slide-counter{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.2em;color:rgba(255,255,255,0.2)}
+
+/* ── SLIDE LABEL ── */
+.slide-label{position:fixed;top:1rem;right:1.5rem;z-index:999;font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,0.15)}
+
+/* ════════════════════════
+   SHARED HERO STYLES
+════════════════════════ */
+.hero{width:100%;height:100vh;background:#0a0a0a;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden}
+.red-bar{height:3px;background:#cc2200;width:100%;flex-shrink:0}
+.h-top{display:flex;justify-content:space-between;align-items:center;padding:1.25rem 2.5rem;border-bottom:1px solid rgba(255,255,255,0.06)}
+.h-top-left{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.15em;color:rgba(255,255,255,0.25);text-transform:uppercase}
+.h-top-right{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.1em;color:#cc2200;display:flex;align-items:center;gap:.5rem}
+.live-dot{width:5px;height:5px;border-radius:50%;background:#cc2200;animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.h-mid{flex:1;display:grid;grid-template-columns:1fr auto;align-items:center;padding:2.5rem 2.5rem;gap:4rem}
+.tagline{font-family:'Outfit',sans-serif;font-size:11px;font-weight:300;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:1.5rem}
+.title{font-family:'JetBrains Mono',monospace;font-size:clamp(60px,9vw,120px);font-weight:700;color:#ffffff;line-height:.9;letter-spacing:-.01em}
+.title span{color:#cc2200}
+.cursor{display:inline-block;width:3px;height:.8em;background:#cc2200;margin-left:3px;vertical-align:middle;animation:blink 1s step-end infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+.subtitle{font-family:'Outfit',sans-serif;font-size:17px;font-weight:300;font-style:italic;margin-top:1.75rem;letter-spacing:.02em}
+.sub-white{color:rgba(255,255,255,0.5)}
+.sub-red{color:#cc2200}
+.h-right{display:flex;flex-direction:column;gap:1.5rem;border-left:1px solid rgba(255,255,255,0.08);padding-left:3rem;min-width:220px}
+.meta-block .meta-key{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.2em;text-transform:uppercase;color:#cc2200;margin-bottom:.35rem}
+.meta-block .meta-val{font-family:'Outfit',sans-serif;font-size:14px;font-weight:300;color:rgba(255,255,255,0.6);line-height:1.4}
+.h-bottom{border-top:1px solid rgba(255,255,255,0.06);display:flex;justify-content:space-between;align-items:center;padding:1.5rem 2.5rem}
+.org{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.1em;color:rgba(255,255,255,0.15);text-transform:uppercase}
+.btn-row{display:flex;gap:.75rem}
+.btn1{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#0a0a0a;background:#cc2200;padding:12px 28px;border:none;cursor:pointer}
+.btn2{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:400;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,0.3);border:1px solid rgba(255,255,255,0.12);padding:12px 28px;background:none;cursor:pointer}
+</style>
+</head>
+<body>
+
+<div class="deck" id="deck">
+
+  <!-- ══ SLIDE 1 — Nobel minds. Nuclear stakes. ══ -->
+  <div class="slide active" data-label="Concept 1 · Nobel minds. Nuclear stakes.">
+    <div class="hero">
+      <div class="red-bar"></div>
+      <div class="h-top">
+        <div class="h-top-left">Global Nobel Laureates Assembly</div>
+        <div class="h-top-right"><div class="live-dot"></div>Vatican · July 2026</div>
+      </div>
+      <div class="h-mid">
+        <div>
+          <div class="tagline">The question that cannot wait.</div>
+          <div class="title">prompt><br><span>714</span><span class="cursor"></span></div>
+          <div class="subtitle sub-white">Nobel minds. Nuclear stakes.</div>
+        </div>
+        <div class="h-right">
+          <div class="meta-block"><div class="meta-key">Date</div><div class="meta-val">14–16 July 2026</div></div>
+          <div class="meta-block"><div class="meta-key">Venue</div><div class="meta-val">Borgo Laudato Si'<br>Castel Gandolfo</div></div>
+          <div class="meta-block"><div class="meta-key">Location</div><div class="meta-val">Vatican Territory, Rome</div></div>
+        </div>
+      </div>
+      <div class="h-bottom">
+        <div class="org">Organized by Domus Communis Foundation</div>
+        <div class="btn-row"><button class="btn1">Accept Invitation</button><button class="btn2">Learn More</button></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ SLIDE 2 — White/Orange ══ -->
+  <div class="slide" data-label="Concept 2 · Before the machines decide.">
+    <div style="width:100%;height:100vh;background:#ffffff;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden">
+      <div style="height:4px;background:#ff5500;width:100%;flex-shrink:0"></div>
+      <div style="display:flex;justify-content:space-between;align-items:center;padding:1.25rem 2.5rem;border-bottom:1px solid rgba(0,0,0,0.08)">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.15em;color:rgba(0,0,0,0.3);text-transform:uppercase">Global Nobel Laureates Assembly</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.1em;color:#ff5500;display:flex;align-items:center;gap:.5rem"><div style="width:5px;height:5px;border-radius:50%;background:#ff5500;animation:pulse 2s ease-in-out infinite"></div>Vatican · July 2026</div>
+      </div>
+      <div style="flex:1;display:grid;grid-template-columns:1fr auto;align-items:center;padding:2.5rem 2.5rem;gap:4rem">
+        <div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:300;letter-spacing:.2em;text-transform:uppercase;color:rgba(0,0,0,0.3);margin-bottom:1.5rem">The question that cannot wait.</div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:clamp(60px,11vw,150px);font-weight:700;color:#0a0a0a;line-height:.9;letter-spacing:-.01em">prompt><br><span style="color:#ff5500">714</span><span style="display:inline-block;width:3px;height:.8em;background:#ff5500;margin-left:3px;vertical-align:middle;animation:blink 1s step-end infinite"></span></div>
+          <div style="font-family:'Outfit',sans-serif;font-size:18px;font-weight:300;font-style:italic;margin-top:1.75rem;color:rgba(0,0,0,0.5)">Before the machines decide.</div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:1.5rem;border-left:2px solid rgba(0,0,0,0.08);padding-left:3rem;min-width:220px">
+          <div><div style="font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.2em;text-transform:uppercase;color:#ff5500;margin-bottom:.35rem">Date</div><div style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:300;color:rgba(0,0,0,0.6);line-height:1.4">14–16 July 2026</div></div>
+          <div><div style="font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.2em;text-transform:uppercase;color:#ff5500;margin-bottom:.35rem">Venue</div><div style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:300;color:rgba(0,0,0,0.6);line-height:1.4">Borgo Laudato Si'<br>Castel Gandolfo</div></div>
+          <div><div style="font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.2em;text-transform:uppercase;color:#ff5500;margin-bottom:.35rem">Location</div><div style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:300;color:rgba(0,0,0,0.6);line-height:1.4">Vatican Territory, Rome</div></div>
+        </div>
+      </div>
+      <div style="border-top:1px solid rgba(0,0,0,0.08);display:flex;justify-content:space-between;align-items:center;padding:1.5rem 2.5rem">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.1em;color:rgba(0,0,0,0.25);text-transform:uppercase">Organized by Domus Communis Foundation</div>
+        <div style="display:flex;gap:.75rem">
+          <button style="font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#ffffff;background:#ff5500;padding:12px 28px;border:none;cursor:pointer">Accept Invitation</button>
+          <button style="font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:400;letter-spacing:.12em;text-transform:uppercase;color:rgba(0,0,0,0.4);border:1px solid rgba(0,0,0,0.15);padding:12px 28px;background:none;cursor:pointer">Learn More</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ SLIDE 3 — Royal Blue/Yellow Centred ══ -->
+  <div class="slide" data-label="Concept 3 · Zero Hour">
+    <div style="width:100%;height:100vh;background:#0033cc;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden">
+      <div style="height:4px;background:#ffe600;width:100%;flex-shrink:0"></div>
+      <div style="display:flex;justify-content:space-between;align-items:center;padding:1.25rem 2.5rem;border-bottom:1px solid rgba(255,255,255,0.1)">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.15em;color:rgba(255,255,255,0.4);text-transform:uppercase">Global Nobel Laureates Assembly</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.1em;color:#ffe600;display:flex;align-items:center;gap:.5rem"><div style="width:5px;height:5px;border-radius:50%;background:#ffe600;animation:pulse 2s ease-in-out infinite"></div>Vatican · July 2026</div>
+      </div>
+      <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:2rem">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:300;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:1.5rem">The question that cannot wait.</div>
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:clamp(90px,16vw,200px);color:#ffffff;line-height:.85;letter-spacing:.02em">ZERO<br><span style="color:#ffe600">HOUR</span></div>
+        <div style="display:flex;gap:3rem;margin-top:3rem;padding-top:2rem;border-top:1px solid rgba(255,255,255,0.15)">
+          <div style="text-align:center"><div style="font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.2em;text-transform:uppercase;color:#ffe600;margin-bottom:.4rem">Date</div><div style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:300;color:rgba(255,255,255,0.7)">14–16 July 2026</div></div>
+          <div style="text-align:center"><div style="font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.2em;text-transform:uppercase;color:#ffe600;margin-bottom:.4rem">Venue</div><div style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:300;color:rgba(255,255,255,0.7)">Borgo Laudato Si', Castel Gandolfo</div></div>
+          <div style="text-align:center"><div style="font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.2em;text-transform:uppercase;color:#ffe600;margin-bottom:.4rem">Location</div><div style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:300;color:rgba(255,255,255,0.7)">Vatican Territory, Rome</div></div>
+        </div>
+      </div>
+      <div style="border-top:1px solid rgba(255,255,255,0.1);display:flex;justify-content:space-between;align-items:center;padding:1.5rem 2.5rem">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.1em;color:rgba(255,255,255,0.25);text-transform:uppercase">Organized by Domus Communis Foundation</div>
+        <div style="display:flex;gap:.75rem">
+          <button style="font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#0033cc;background:#ffe600;padding:12px 28px;border:none;cursor:pointer">Accept Invitation</button>
+          <button style="font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:400;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,0.4);border:1px solid rgba(255,255,255,0.2);padding:12px 28px;background:none;cursor:pointer">Learn More</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- NAV -->
+<div class="slide-label" id="slideLabel"></div>
+<div class="deck-nav">
+  <button class="prev-btn" onclick="changeSlide(-1)">← Prev</button>
+  <span class="slide-counter" id="counter">1 / 2</span>
+  <button class="next-btn" onclick="changeSlide(1)">Next →</button>
+</div>
+
+<script>
+let current = 0;
+const slides = document.querySelectorAll('.slide');
+const counter = document.getElementById('counter');
+const label = document.getElementById('slideLabel');
+
+function update() {
+  slides.forEach((s, i) => s.classList.toggle('active', i === current));
+  counter.textContent = (current + 1) + ' / ' + slides.length;
+  label.textContent = slides[current].dataset.label || '';
+}
+
+function changeSlide(dir) {
+  current = (current + dir + slides.length) % slides.length;
+  update();
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown') changeSlide(1);
+  if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') changeSlide(-1);
+});
+
+update();
+</script>
+</body>
+</html>
