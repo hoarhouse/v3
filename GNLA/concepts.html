@@ -38,6 +38,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:#000}
 .live-dot{width:5px;height:5px;border-radius:50%;background:#cc2200;animation:pulse 2s ease-in-out infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+@keyframes glow{0%,100%{box-shadow:0 0 8px rgba(212,175,55,0.6),0 0 20px rgba(212,175,55,0.3)}50%{box-shadow:0 0 16px rgba(212,175,55,1),0 0 40px rgba(212,175,55,0.6)}}
 .h-mid{flex:1;display:grid;grid-template-columns:1fr auto;align-items:center;padding:2.5rem 2.5rem;gap:4rem}
 .tagline{font-family:'Outfit',sans-serif;font-size:11px;font-weight:300;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:1.5rem}
 .title{font-family:'JetBrains Mono',monospace;font-size:clamp(60px,9vw,120px);font-weight:700;color:#ffffff;line-height:.9;letter-spacing:-.01em}
@@ -328,7 +329,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:#000}
         <div style="display:flex;align-items:center;background:rgba(255,255,255,0.03);border:1px solid rgba(200,168,75,0.3);padding:1.25rem 1.5rem;cursor:pointer" onclick="triggerResponse()">
           <span style="font-family:'JetBrains Mono',monospace;font-size:14px;color:#d4af37;margin-right:1rem">›</span>
           <span style="font-family:'JetBrains Mono',monospace;font-size:clamp(20px,3.5vw,32px);font-weight:300;color:#ffffff;letter-spacing:.02em">If not now...</span>
-          <span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:rgba(255,255,255,0.2);border:1px solid rgba(255,255,255,0.1);padding:3px 8px;border-radius:3px;margin-left:auto" id="s10-hint">↵ enter</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#080e18;background:#d4af37;padding:10px 22px;margin-left:auto;cursor:pointer;animation:glow 1.5s ease-in-out infinite;flex-shrink:0" id="s10-hint" onclick="triggerResponse()">↵ Enter</span>
         </div>
       </div>
       <div style="width:100%;max-width:700px;opacity:0;transform:translateY(8px);transition:opacity .6s ease,transform .6s ease" id="s10-response">
@@ -370,9 +371,6 @@ function update() {
   slides.forEach((s, i) => s.classList.toggle('active', i === current));
   counter.textContent = (current + 1) + ' / ' + slides.length;
   label.textContent = slides[current].dataset.label || '';
-  if (slides[current].dataset.label && slides[current].dataset.label.includes('If Not Now')) {
-    setTimeout(() => { if (!s10responded) triggerResponse(); }, 2500);
-  }
 }
 
 function changeSlide(dir) {
