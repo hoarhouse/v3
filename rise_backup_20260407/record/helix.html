@@ -33,32 +33,6 @@ body{background:var(--black);color:var(--text);font-family:'DM Sans',sans-serif;
 .cursor{position:fixed;width:8px;height:8px;background:var(--gold);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);mix-blend-mode:difference;}
 .cursor-ring{position:fixed;width:32px;height:32px;border:1px solid rgba(200,169,110,0.4);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:all 0.15s ease;}
 body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");opacity:0.025;pointer-events:none;z-index:1000;}
-nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:28px 60px;display:flex;align-items:center;justify-content:space-between;background:rgba(8,8,8,0.97);border-bottom:1px solid var(--border);backdrop-filter:blur(12px);}
-.nav-logo{display:flex;align-items:center;gap:14px;text-decoration:none;}
-.logo-e{font-family:'Syne',sans-serif;font-weight:800;font-size:26px;color:var(--gold);line-height:1;letter-spacing:-1px;}
-.nav-logo-text{font-family:'Syne',sans-serif;font-weight:600;font-size:15px;color:var(--white);letter-spacing:3px;text-transform:uppercase;}
-.nav-links{display:flex;align-items:center;gap:40px;list-style:none;}
-.nav-links a{font-family:'DM Mono',monospace;font-size:12px;color:var(--mid);text-decoration:none;letter-spacing:1.5px;text-transform:uppercase;transition:color 0.2s;position:relative;}
-.nav-links a::after{content:'';position:absolute;bottom:-3px;left:0;right:0;height:1px;background:var(--gold);transform:scaleX(0);transition:transform 0.2s;}
-.nav-links a:hover,.nav-links a.active{color:var(--white);}
-.nav-links a.active::after,.nav-links a:hover::after{transform:scaleX(1);}
-.nav-cta{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);border:1px solid rgba(200,169,110,0.35);padding:10px 22px;text-decoration:none;transition:all 0.2s;position:relative;overflow:hidden;}
-.nav-cta::before{content:'';position:absolute;inset:0;background:var(--gold);transform:translateX(-100%);transition:transform 0.25s ease;z-index:-1;}
-.nav-cta:hover{color:var(--black);}
-.nav-cta:hover::before{transform:translateX(0);}
-.nav-hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none;z-index:200;}
-.nav-hamburger span{display:block;width:22px;height:1.5px;background:var(--gold);transition:all 0.3s ease;transform-origin:center;}
-.nav-hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
-.nav-hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0);}
-.nav-hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
-.nav-mobile-menu{display:none;position:fixed;inset:0;background:rgba(8,8,8,0.98);z-index:150;flex-direction:column;align-items:center;justify-content:flex-start;backdrop-filter:blur(20px);overflow-y:auto;padding:80px 0 40px;}
-.nav-mobile-menu.open{display:flex;}
-.mob-section{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--dim);padding:16px 0 6px;width:80%;border-bottom:1px solid var(--border);text-align:center;margin-bottom:4px;}
-.nav-mobile-menu a.mob-main{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(22px,5.5vw,32px);color:var(--white);text-decoration:none;letter-spacing:-0.5px;padding:7px 0;width:80%;text-align:center;transition:color 0.2s;border-bottom:none;}
-.nav-mobile-menu a.mob-main:hover{color:var(--gold);}
-.nav-mobile-menu a.mob-record{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--mid);text-decoration:none;padding:7px 0;width:80%;text-align:center;transition:color 0.2s;border-bottom:none;}
-.nav-mobile-menu a.mob-record:hover,.nav-mobile-menu a.mob-record.active{color:var(--gold);}
-.nav-mobile-menu a.mob-cta{font-family:'DM Mono',monospace;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--black);background:var(--gold);padding:14px 36px;font-weight:400;margin-top:20px;border-bottom:none;}
 footer{background:var(--black);border-top:1px solid var(--border);padding:48px 60px;display:flex;justify-content:space-between;align-items:center;}
 .footer-left{display:flex;flex-direction:column;gap:6px;}
 .footer-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:16px;color:var(--white);letter-spacing:3px;text-transform:uppercase;}
@@ -72,8 +46,6 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:48px 6
 .reveal{opacity:0;transform:translateY(20px);transition:opacity 0.6s ease,transform 0.6s ease;}
 .reveal.visible{opacity:1;transform:translateY(0);}
 .rd1{transition-delay:0.1s;}.rd2{transition-delay:0.2s;}.rd3{transition-delay:0.3s;}
-@media(max-width:1023px){nav{padding:20px 36px;}footer{padding:40px 36px;flex-direction:column;gap:20px;text-align:center;}.footer-right{text-align:center;}}
-@media(max-width:767px){.cursor,.cursor-ring{display:none;}body{cursor:auto;}nav{padding:16px 20px;}.nav-links,.nav-cta{display:none;}.nav-hamburger{display:flex;}footer{padding:32px 20px;}}
 
 .page-hero{padding:160px 60px 80px;border-bottom:1px solid var(--border);position:relative;overflow:hidden;}
 .hero-glow{position:absolute;top:-100px;right:-100px;width:700px;height:500px;background:radial-gradient(ellipse,rgba(200,169,110,0.05) 0%,transparent 65%);pointer-events:none;}
@@ -125,40 +97,12 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:48px 6
 @media(max-width:767px){.page-hero{padding:100px 20px 48px;}.content-body{padding:48px 20px;}.related-section{padding:0 20px 48px;padding-top:40px;}.related-grid{grid-template-columns:1fr;}}
 </style>
 </head>
-<body>
+<body data-page="record" data-prefix="../">
+<script src="../nav-site.js"></script>
+<script src="nav-record.js"></script>
 
 <div class="cursor" id="cursor"></div>
 <div class="cursor-ring" id="cursorRing"></div>
-<nav>
-  <a href="../index.html" class="nav-logo"><div class="logo-e">E</div><span class="nav-logo-text">E-Group</span></a>
-  <ul class="nav-links">
-    <li><a href="../intelligence.html">Intelligence</a></li>
-    <li><a href="../rise.html">Rise</a></li>
-    <li><a href="../thinking.html">Thinking</a></li>
-    <li><a href="../about.html">About</a></li>
-    <li><a href="index.html" class="active">Record</a></li>
-  </ul>
-  <a href="../index.html#contact" class="nav-cta">Work With Us</a>
-  <button class="nav-hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
-</nav>
-<div class="nav-mobile-menu" id="mobileMenu">
-  <div class="mob-section">Main Site</div>
-  <a href="../index.html" class="mob-main">Home</a>
-  <a href="../intelligence.html" class="mob-main">Intelligence</a>
-  <a href="../rise.html" class="mob-main">Rise</a>
-  <a href="../thinking.html" class="mob-main">Thinking</a>
-  <a href="../about.html" class="mob-main">About</a>
-  <div class="mob-section">The Record</div>
-  <a href="index.html" class="mob-record">Record Home</a>
-  <a href="ipcei-cis.html" class="mob-record">IPCEI-CIS — FedEU.ai</a>
-  <a href="kau.html" class="mob-record">KAÜ — National Identity</a>
-  <a href="helix.html" class="mob-recordactive">HeliX + FedX</a>
-  <a href="eidas.html" class="mob-record">eIDAS 2.0 — MyD Wallet</a>
-  <a href="medical-ai.html" class="mob-record">Medical AI — GRaDPaLM</a>
-  <a href="peter-antal.html" class="mob-record">Dr. Péter Antal</a>
-  <a href="press.html" class="mob-record">Press Kit</a>
-  <a href="../index.html#contact" class="mob-cta">Work With Us</a>
-</div>
 
 <div class="page-hero">
   <div class="hero-glow"></div>
@@ -185,13 +129,21 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:48px 6
 
 <h2>Research Output</h2>
 <p>E-Group and BME jointly presented a research poster at ICSB 2025: "Cross-Biobank Analysis by Transformers." This work introduced MQTT — a novel transformer architecture creating unified representations from diverse patient data (genetic, laboratory, prescription) using federated learning across different biobanks.</p>
+
+<h2>FedX SF® — The Tech Edge</h2>
+<p>FedX SF® is E-Group's proprietary federated learning technology with two performance claims that set it apart from standard federated approaches:</p>
+<ul>
+  <li><strong>0% loss on accuracy</strong> — federated training matches central training performance, even on non-IID (non-independently and identically distributed) real-world data. This eliminates the technology adaptation barrier that has held back enterprise federated learning adoption</li>
+  <li><strong>90% energy savings</strong> — compared to central training approaches, delivering low-cost operations and competitive pricing</li>
+</ul>
+<p>FedX is designed with <strong>AI Act Regulatory Sandbox</strong> compliance in mind — providing a privacy-first, controlled, federated AI sandbox for conformant AI training, testing, and validation. This positions E-Group's federated technology for the EU regulatory environment that takes full effect in 2026.</p>
 <p>This joint presentation, led by Dr. Péter Antal, exemplifies E-Group's approach: academic rigour combined with production-ready infrastructure.</p>
 
 <h2>General Assembly in Budapest</h2>
 <p>The HeliX consortium held its second in-person General Assembly (HGA) on <strong>10–11 March 2026 in Budapest, Hungary</strong> — hosted at E-Group's facilities. As the primary decision-making body of the consortium, all partner organisations were represented. The HGA convenes every six months per the project's grant agreement.</p>
 </div>
     <div class="sidebar reveal rd1">
-      <div class="sidebar-card"><div class="sc-label">Project Details</div><div class="sc-rows"><div class="sc-row"><span class="sc-key">Platform</span><span class="sc-val">FedX (by E-Group)</span></div><div class="sc-row"><span class="sc-key">Consortium</span><span class="sc-val">HeliX Health Data Space</span></div><div class="sc-row"><span class="sc-key">Partners</span><span class="sc-val">50+ organisations</span></div><div class="sc-row"><span class="sc-key">Biobanks</span><span class="sc-val">8 validated</span></div><div class="sc-row"><span class="sc-key">Status</span><span class="sc-val">Operationally validated</span></div><div class="sc-row"><span class="sc-key">Recent Event</span><span class="sc-val">HGA — Budapest, March 2026</span></div><div class="sc-row"><span class="sc-key">Joint Research</span><span class="sc-val">BME + E-Group (ICSB 2025)</span></div></div></div><div class="sidebar-card"><div class="sc-label">Technical</div><div class="sc-rows"><div class="sc-row"><span class="sc-key">Approach</span><span class="sc-val">Federated Learning</span></div><div class="sc-row"><span class="sc-key">Data Model</span><span class="sc-val">Cross-biobank, no data transfer</span></div><div class="sc-row"><span class="sc-key">Research Paper</span><span class="sc-val">MQTT transformer architecture</span></div><div class="sc-row"><span class="sc-key">Conference</span><span class="sc-val">ICSB 2025</span></div><div class="sc-row"><span class="sc-key">Related</span><span class="sc-val">IPCEI-CIS FedEU.ai</span></div></div></div>
+      <div class="sidebar-card"><div class="sc-label">Project Details</div><div class="sc-rows"><div class="sc-row"><span class="sc-key">Platform</span><span class="sc-val">FedX (by E-Group)</span></div><div class="sc-row"><span class="sc-key">Consortium</span><span class="sc-val">HeliX Health Data Space</span></div><div class="sc-row"><span class="sc-key">Partners</span><span class="sc-val">50+ organisations</span></div><div class="sc-row"><span class="sc-key">Biobanks</span><span class="sc-val">8 validated</span></div><div class="sc-row"><span class="sc-key">Status</span><span class="sc-val">Operationally validated</span></div><div class="sc-row"><span class="sc-key">Recent Event</span><span class="sc-val">HGA — Budapest, March 2026</span></div><div class="sc-row"><span class="sc-key">Joint Research</span><span class="sc-val">BME + E-Group (ICSB 2025)</span></div></div></div><div class="sidebar-card"><div class="sc-label">Technical</div><div class="sc-rows"><div class="sc-row"><span class="sc-key">Approach</span><span class="sc-val">Federated Learning</span></div><div class="sc-row"><span class="sc-key">Proprietary</span><span class="sc-val">FedX SF®</span></div><div class="sc-row"><span class="sc-key">Accuracy</span><span class="sc-val">0% loss vs central training</span></div><div class="sc-row"><span class="sc-key">Energy</span><span class="sc-val">90% savings vs central</span></div><div class="sc-row"><span class="sc-key">Data Model</span><span class="sc-val">Non-IID compatible</span></div><div class="sc-row"><span class="sc-key">Compliance</span><span class="sc-val">AI Act Regulatory Sandbox</span></div><div class="sc-row"><span class="sc-key">Research Paper</span><span class="sc-val">MQTT transformer architecture</span></div><div class="sc-row"><span class="sc-key">Conference</span><span class="sc-val">ICSB 2025</span></div><div class="sc-row"><span class="sc-key">Related</span><span class="sc-val">IPCEI-CIS FedEU.ai, Remote Eye, InnoHealth DataLake, Animal Health Innovation Platform</span></div></div></div>
       <div class="sidebar-card">
         <div class="sc-label">Sources</div>
         <div class="source-list"><div class="source-item"><div class="src-num">1</div><div class="src-text"><a href="https://www.egroup.hu/e-group-at-icsb-2025-pioneering-sovereign-ai-in-systems-biology/" target="_blank">E-Group at ICSB 2025: Pioneering Sovereign AI in Systems Biology</a></div></div><div class="source-item"><div class="src-num">2</div><div class="src-text">E-Group homepage (egroup.hu) — HeliX HGA announcement, March 2026</div></div><div class="source-item"><div class="src-num">3</div><div class="src-text">ICSB 2025 — Cross-Biobank Analysis by Transformers (E-Group + BME joint poster)</div></div></div>
@@ -204,7 +156,6 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:48px 6
   <div class="rg-eyebrow" style="font-family:'DM Mono',monospace;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:12px;display:flex;align-items:center;gap:12px;"><span style="display:inline-block;width:24px;height:1px;background:var(--gold);"></span>Related Records</div>
   <div class="related-grid"><a href="ipcei-cis.html" class="related-card"><div class="rc-label">EU Project</div><div class="rc-title-sm">IPCEI-CIS — FedEU.ai</div></a><a href="medical-ai.html" class="related-card"><div class="rc-label">Research</div><div class="rc-title-sm">Medical AI — Double First Place</div></a><a href="peter-antal.html" class="related-card"><div class="rc-label">AI Research</div><div class="rc-title-sm">Dr. Péter Antal — Knight's Cross</div></a></div>
 </div>
-
 
 <footer>
   <div class="footer-left">
@@ -222,9 +173,6 @@ document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cursor.style
 (function loop(){rx+=(mx-rx)*0.12;ry+=(my-ry)*0.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(loop);})();
 const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');}),{threshold:0.08});
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
-const hamburger=document.getElementById('hamburger'),mobileMenu=document.getElementById('mobileMenu');
-hamburger.addEventListener('click',()=>{hamburger.classList.toggle('open');mobileMenu.classList.toggle('open');document.body.style.overflow=mobileMenu.classList.contains('open')?'hidden':'';});
-mobileMenu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{hamburger.classList.remove('open');mobileMenu.classList.remove('open');document.body.style.overflow='';}));
 </script>
 </body>
 </html>
