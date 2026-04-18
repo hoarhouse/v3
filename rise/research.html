@@ -100,80 +100,182 @@ footer{padding:40px 60px;border-top:1px solid var(--border);display:flex;align-i
   .cta-section{padding:60px 24px;flex-direction:column;align-items:flex-start;}
   footer{padding:32px 24px;flex-direction:column;gap:12px;}
 }
+
+/* Pillar Headers */
+.pillar-header{padding:40px 0 24px;border-top:1px solid var(--border);margin-top:40px;}
+.pillar-header:first-of-type{margin-top:0;border-top:none;padding-top:0;}
+.pillar-num{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:2px;color:var(--gold);margin-bottom:8px;}
+.pillar-name{font-family:'Syne',sans-serif;font-size:20px;font-weight:700;color:var(--white);letter-spacing:-0.3px;margin-bottom:6px;}
+.pillar-scope{font-size:13px;color:var(--dim);line-height:1.6;}
+.research-credit{font-family:'DM Mono',monospace;font-size:10px;color:var(--dim);letter-spacing:0.5px;margin-top:8px;}
 </style>
 </head>
 <body data-page="research">
 <script src="nav-site.js"></script>
 
 <main>
+
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-eyebrow">EST. 1993 · BUDAPEST · HUNGARY</div>
+  <div class="hero-eyebrow">RESEARCH PORTFOLIO · 2025</div>
   <h1 style="font-family:Syne,sans-serif;font-size:clamp(48px,7vw,96px);font-weight:800;line-height:1;color:#EFEFEF;margin:0 0 32px;">Research<br><span style="color:#C8A96E;">that ships.</span></h1>
   <p class="hero-sub">Published. Peer-reviewed. Winning international competitions. And then put to work in systems that run national infrastructure.</p>
   
   <div class="stats-bar">
     <div class="stat-item">
-      <div class="stat-num">2×</div>
-      <div class="stat-label">International first place</div>
+      <div class="stat-num">25</div>
+      <div class="stat-label">Projects in 2025</div>
     </div>
     <div class="stat-item">
-      <div class="stat-num">2025</div>
-      <div class="stat-label">Knight's Cross awarded</div>
+      <div class="stat-num">13</div>
+      <div class="stat-label">Researchers</div>
     </div>
     <div class="stat-item">
-      <div class="stat-num">6</div>
-      <div class="stat-label">Years post-quantum research</div>
+      <div class="stat-num">11</div>
+      <div class="stat-label">Publications</div>
     </div>
     <div class="stat-item">
-      <div class="stat-num">1</div>
-      <div class="stat-label">Active BME academic partnership</div>
+      <div class="stat-num">5</div>
+      <div class="stat-label">Awards</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">2</div>
+      <div class="stat-label">Patents filed</div>
     </div>
   </div>
 </section>
 
-<!-- RESEARCH AREAS -->
+<!-- FOUR RESEARCH PILLARS -->
 <section class="research-section">
-  <div class="section-eyebrow">ACTIVE RESEARCH</div>
-  <h2 class="section-title">Four domains. Serious work.</h2>
-  
+  <div class="section-eyebrow">RESEARCH PILLARS</div>
+  <h2 class="section-title">Four pillars. Twenty-five projects.</h2>
+
+  <!-- PILLAR 01 -->
+  <div class="pillar-header">
+    <div class="pillar-num">01</div>
+    <div class="pillar-name">Agent Platforms</div>
+    <div class="pillar-scope">Multi-agent frameworks, test harnesses, and safety research.</div>
+  </div>
   <div class="research-grid">
     <div class="research-card">
-      <div class="research-name">Medical AI & Diagnostic Intelligence</div>
-      <div class="research-desc">Graph-based AI for clinical decision support. Reduces hallucination. Makes recommendations traceable.</div>
-      <div class="research-status">Status: Active</div>
+      <div class="research-name">COIOS.AI</div>
+      <div class="research-desc">Full-stack automatable multi-agent framework. CLI, multiuser auth, persistent chat, agent memory, P2P messaging, and the Checks end-to-end test framework. Reached internal deployment and handed over to dedicated COIOS product team.</div>
+      <div class="research-status">Flagship Product · 5 Researchers</div>
     </div>
-    
+    <div class="research-card">
+      <div class="research-name">SCRUMBENCH · LLM Graph Engine</div>
+      <div class="research-desc">Agentic test framework for evaluating multi-agent systems. Safe code execution research. Malicious agent detection and defence.</div>
+      <div class="research-status">Active</div>
+    </div>
+  </div>
+
+  <!-- PILLAR 02 -->
+  <div class="pillar-header">
+    <div class="pillar-num">02</div>
+    <div class="pillar-name">Federated &amp; Interpretable AI</div>
+    <div class="pillar-scope">Privacy-preserving learning and white-box modelling.</div>
+  </div>
+  <div class="research-grid">
+    <div class="research-card">
+      <div class="research-name">FedX — Federated Learning</div>
+      <div class="research-desc">FedX SF® proprietary technology: 0% accuracy loss vs central training, 90% energy savings, non-IID data compatible. AI Act Regulatory Sandbox ready. Proved four-language federated training with custom tokeniser fix. NVFlare + Streaming DiLoCo direction set.</div>
+      <div class="research-status">Active · In Production · 4-Person Team</div>
+    </div>
+    <div class="research-card">
+      <div class="research-name">Bayesian Network Engine · Fed-NIC-BN</div>
+      <div class="research-desc">Federated schema matching and agentic ETL. Interpretable AI models that explain their reasoning — moving beyond black-box approaches.</div>
+      <div class="research-status">Active</div>
+    </div>
+  </div>
+
+  <!-- PILLAR 03 -->
+  <div class="pillar-header">
+    <div class="pillar-num">03</div>
+    <div class="pillar-name">Biomedical &amp; Knowledge Graphs</div>
+    <div class="pillar-scope">LLMs grounded in medical knowledge.</div>
+  </div>
+  <div class="research-grid">
+    <div class="research-card">
+      <div class="research-name">GRaDPaLM</div>
+      <div class="research-desc">Graph retrieval and diagnostic pathway augmented language models. Knowledge-graph-native LLM methodology for medical diagnostics. Back-to-back first place: BME VIK TDK 2025 + Neumann Kolloquium Best Paper.</div>
+      <div class="research-credit">Ágota Benedek</div>
+      <div class="research-status">Award Winner · Published</div>
+    </div>
+    <div class="research-card">
+      <div class="research-name">BaioX</div>
+      <div class="research-desc">Biomedical knowledge graph research. Part of the broader programme connecting LLMs with structured medical knowledge for traceable clinical decision support.</div>
+      <div class="research-status">Active</div>
+    </div>
     <div class="research-card">
       <div class="research-name">CellMo.AI — Predictive Cellular Biology</div>
       <div class="research-desc">Transformer-based deep learning for whole-cell modelling. 29 integrated databases, 47K vertices, 2.25M edges. Drug repositioning capability — translating the language of biology to medicine.</div>
-      <div class="research-status">Status: To be confirmed with Antal *</div>
+      <div class="research-status">Active</div>
     </div>
-    
     <div class="research-card">
-      <div class="research-name">Post-Quantum Cryptography</div>
-      <div class="research-desc">Building cryptographic systems that will outlast current encryption standards. Started 2015. Post-quantum security algorithm already deployed in production — live in the SDX digital signature module of the Digital Identity Platform.</div>
-      <div class="research-status">Status: Active</div>
+      <div class="research-name">Endometriosis Research</div>
+      <div class="research-desc">Clinical research applying graph-based AI methods to endometriosis diagnostics. 3rd place BME TDK 2025. 2nd place Semmelweis University TDK.</div>
+      <div class="research-credit">Kováts Boglárka Dorottya · Sebők</div>
+      <div class="research-status">Award Winner</div>
     </div>
-    
+  </div>
+
+  <!-- PILLAR 04 -->
+  <div class="pillar-header">
+    <div class="pillar-num">04</div>
+    <div class="pillar-name">Specialised LLM &amp; Robotics</div>
+    <div class="pillar-scope">Frontier research applied to domain problems.</div>
+  </div>
+  <div class="research-grid">
     <div class="research-card">
-      <div class="research-name">Federated Learning</div>
-      <div class="research-desc">AI that travels to the data. FedX SF® proprietary technology: 0% accuracy loss vs central training, 90% energy savings, non-IID data compatible. AI Act Regulatory Sandbox ready. Running in production across HeliX.</div>
-      <div class="research-status">Status: Active · In Production</div>
+      <div class="research-name">Quadruped Robot — Deep RL</div>
+      <div class="research-desc">Unitree Go2 quadruped trained end-to-end with deep reinforcement learning in NVIDIA Isaac Lab. Distance-function study yielded >2× precision improvement. 3rd place BME VIK TDK 2025, Systems Modelling section.</div>
+      <div class="research-credit">Farkas Bence · Váradi Péter</div>
+      <div class="research-status">Award Winner · Published</div>
     </div>
-    
     <div class="research-card">
-      <div class="research-name">Graph-based Language Models</div>
-      <div class="research-desc">GRaDPaLM. Back-to-back international first place. Published and peer-reviewed.</div>
-      <div class="research-status">Status: Active</div>
+      <div class="research-name">Compute-Accuracy Pareto for LLMs</div>
+      <div class="research-desc">Empirical frontier for open-source reasoning LLMs — 12 SOTA models × 5 benchmarks. Principled model-selection framework for COIOS. Fulfils IPCEI research-contribution quotas.</div>
+      <div class="research-credit">Prucák Ákos · Csutora Márton</div>
+      <div class="research-status">arXiv Published</div>
     </div>
-    
+    <div class="research-card">
+      <div class="research-name">Molecular Language Models</div>
+      <div class="research-desc">Circuits, features, and heuristics in molecular transformers. ICLR 2026 submission. Pushing the boundaries of how language models understand molecular structure.</div>
+      <div class="research-status">ICLR 2026 Submission</div>
+    </div>
+    <div class="research-card">
+      <div class="research-name">ESA Earth Imaging · Biobank Transformer</div>
+      <div class="research-desc">Earth observation imaging research with ESA. Biobank transformer interpretability. Diffusion language models. Frontier applications of specialised AI.</div>
+      <div class="research-status">Active</div>
+    </div>
+  </div>
+
+  <!-- POST-QUANTUM (existing, important standalone) -->
+  <div class="pillar-header">
+    <div class="pillar-num">—</div>
+    <div class="pillar-name">Post-Quantum Cryptography</div>
+    <div class="pillar-scope">Cross-cutting security research. Started 2015.</div>
+  </div>
+  <div class="research-grid">
+    <div class="research-card">
+      <div class="research-name">Post-Quantum Cryptographic Systems</div>
+      <div class="research-desc">Building cryptographic systems that will outlast current encryption standards. Post-quantum security algorithm already deployed in production — live in the SDX digital signature module of the Digital Identity Platform. Over a decade of active research.</div>
+      <div class="research-status">Active · In Production</div>
+    </div>
+  </div>
+</section>
+
+<!-- FUNDED R&D -->
+<section class="research-section">
+  <div class="section-eyebrow">FUNDED R&amp;D</div>
+  <h2 class="section-title">Grant-funded research programmes.</h2>
+
+  <div class="research-grid">
     <div class="research-card">
       <div class="research-name">FedXGen — Federated Biobank AI</div>
       <div class="research-desc">Federated AI for sovereign biobank data networks. Unified analysis of distributed genomic and phenotypic data without exposing personal data outside managing institutions. Consortium with Semmelweis University and BME.</div>
       <div class="research-status">Funded: 641.9M HUF · NRDI · Completion 2027</div>
     </div>
-    
     <div class="research-card">
       <div class="research-name">ELTE Software &amp; Data-Intensive Services</div>
       <div class="research-desc">Competence Center under ELTE Faculty of Informatics. IT solutions across Finance, Healthcare, and Industry 4.0. Integrating education, research, and knowledge utilisation.</div>
@@ -184,43 +286,99 @@ footer{padding:40px 60px;border-top:1px solid var(--border);display:flex;align-i
 
 <!-- THE PEOPLE -->
 <section class="people-section">
-  <div class="section-eyebrow">THE RESEARCHERS</div>
+  <div class="section-eyebrow">THE RESEARCH DEPARTMENT</div>
   <h2 class="section-title">The people doing the work.</h2>
-  
+
   <div class="people-grid">
+    <div class="person-card">
+      <div class="person-initials">MM</div>
+      <div class="person-name">Mark Marosi</div>
+      <div class="person-title">Head of Research</div>
+      <div class="person-desc">Leading E-Group’s research department, 25 active projects, and the team’s published output.</div>
+    </div>
     <div class="person-card">
       <div class="person-initials">PA</div>
       <div class="person-name">Dr. Péter Antal</div>
       <div class="person-title">Lead AI Researcher</div>
-      <div class="person-desc">Knight's Cross of the Order of Merit · Hungary · 2025</div>
+      <div class="person-desc">Knight’s Cross of the Order of Merit · Hungary · 2025</div>
     </div>
-    
     <div class="person-card">
       <div class="person-initials">AK</div>
       <div class="person-name">Dr. Anna Kovács</div>
       <div class="person-title">AI Research Lead · HealthTech</div>
       <div class="person-desc">Back-to-back international medical AI first place · 2024</div>
     </div>
-    
     <div class="person-card">
-      <div class="person-initials">MM</div>
-      <div class="person-name"><a href="people/mark-marosi.html" style="color:inherit;text-decoration:none;">Mark Marosi</a></div>
-      <div class="person-title">Head of Research</div>
-      <div class="person-desc">Leading E-Group's research department and published output.</div>
+      <div class="person-initials">TM</div>
+      <div class="person-name">Tamás Mészáros PhD</div>
+      <div class="person-title">Senior Researcher · BME Assoc. Professor</div>
+      <div class="person-desc">Academic bridge between BME and E-Group’s research programme.</div>
     </div>
-    
     <div class="person-card">
       <div class="person-initials">AB</div>
       <div class="person-name">Ágota Benedek</div>
       <div class="person-title">Research Engineer</div>
-      <div class="person-desc">GRaDPaLM co-author. Neumann Colloquium and BME TDK 2025 first place.</div>
+      <div class="person-desc">GRaDPaLM. 1st place BME VIK TDK + Neumann Kolloquium Best Paper.</div>
     </div>
-    
     <div class="person-card">
-      <div class="person-initials">TM</div>
-      <div class="person-name">Tamás Mészáros PhD</div>
-      <div class="person-title">Senior Researcher · BME Associate Professor</div>
-      <div class="person-desc">Active academic bridge between BME and E-Group's research programme.</div>
+      <div class="person-initials">CM</div>
+      <div class="person-name">Csutora Márton</div>
+      <div class="person-title">Researcher</div>
+      <div class="person-desc">Compute-Accuracy Pareto for LLMs. arXiv published.</div>
+    </div>
+    <div class="person-card">
+      <div class="person-initials">FB</div>
+      <div class="person-name">Farkas Bence</div>
+      <div class="person-title">Researcher · Robotics</div>
+      <div class="person-desc">Quadruped robot deep RL. 3rd place BME VIK TDK 2025.</div>
+    </div>
+    <div class="person-card">
+      <div class="person-initials">VP</div>
+      <div class="person-name">Váradi Péter Tamás</div>
+      <div class="person-title">Researcher · Robotics</div>
+      <div class="person-desc">Quadruped robot deep RL. 3rd place BME VIK TDK 2025.</div>
+    </div>
+    <div class="person-card">
+      <div class="person-initials">PA</div>
+      <div class="person-name">Prucs Ákos András</div>
+      <div class="person-title">Researcher</div>
+      <div class="person-desc">Compute-Accuracy Pareto. arXiv published.</div>
+    </div>
+    <div class="person-card">
+      <div class="person-initials">AM</div>
+      <div class="person-name">Antal Mátyás</div>
+      <div class="person-title">Researcher</div>
+      <div class="person-desc">Research department.</div>
+    </div>
+    <div class="person-card">
+      <div class="person-initials">KJ</div>
+      <div class="person-name">Kisida Júlia</div>
+      <div class="person-title">Researcher</div>
+      <div class="person-desc">Research department.</div>
+    </div>
+    <div class="person-card">
+      <div class="person-initials">KB</div>
+      <div class="person-name">Kováts Boglárka Dorottya</div>
+      <div class="person-title">Researcher</div>
+      <div class="person-desc">Endometriosis research. 3rd BME TDK · 2nd Semmelweis TDK.</div>
+    </div>
+    <div class="person-card">
+      <div class="person-initials">MA</div>
+      <div class="person-name">Millinghoffér András</div>
+      <div class="person-title">Researcher</div>
+      <div class="person-desc">Research department.</div>
+    </div>
+    <div class="person-card">
+      <div class="person-initials">NM</div>
+      <div class="person-name">Németh Márton</div>
+      <div class="person-title">Researcher</div>
+      <div class="person-desc">Research department.</div>
+    </div>
+    <div class="person-card">
+      <div class="person-initials">VK</div>
+      <div class="person-name">Váradi Kristóf</div>
+      <div class="person-title">Researcher</div>
+      <div class="person-desc">Research department.</div>
     </div>
   </div>
 </section>
@@ -231,78 +389,119 @@ footer{padding:40px 60px;border-top:1px solid var(--border);display:flex;align-i
   <h2 class="section-title">What the work has earned.</h2>
   
   <div class="timeline">
-    <div class="timeline-item">
-      <div class="timeline-year">2015</div>
-      <div class="timeline-title">Post-Quantum Research Begins</div>
-      <div class="timeline-desc">E-Group begins active research into post-quantum cryptographic systems — over a decade before most enterprises treat this as urgent.</div>
-    </div>
-    
-    <div class="timeline-item">
-      <div class="timeline-year">2022</div>
-      <div class="timeline-title">AI Research Programme Established</div>
-      <div class="timeline-desc">Formal AI research group established under Dr. Péter Antal. Academic rigour combined with enterprise application.</div>
-    </div>
-    
-    <div class="timeline-item landmark">
-      <div class="timeline-year">2024</div>
-      <div class="timeline-title">Medical AI — Back-to-Back International First Place</div>
-      <div class="timeline-desc">E-Group's HealthTech AI team takes first place at two consecutive international medical AI research events.</div>
-    </div>
-    
     <div class="timeline-item landmark">
       <div class="timeline-year">2025</div>
-      <div class="timeline-title">GRaDPaLM — Neumann Colloquium & BME TDK First Place</div>
-      <div class="timeline-desc">Back-to-back first place for graph retrieval and diagnostic pathway augmented language models.</div>
+      <div class="timeline-title">Knight’s Cross of the Order of Merit</div>
+      <div class="timeline-desc">Dr. Péter Antal awarded Hungary’s highest civilian recognition. A personal honour that reflects the quality of the research programme.</div>
     </div>
-    
     <div class="timeline-item landmark">
       <div class="timeline-year">2025</div>
-      <div class="timeline-title">Knight's Cross of the Order of Merit</div>
-      <div class="timeline-desc">Dr. Péter Antal awarded Hungary's highest civilian recognition. A personal honour that reflects the quality of the research programme.</div>
+      <div class="timeline-title">GRaDPaLM — BME VIK TDK 1st Place + Neumann Best Paper</div>
+      <div class="timeline-desc">Back-to-back first place for graph retrieval and diagnostic pathway augmented language models. Ágota Benedek.</div>
     </div>
-    
+    <div class="timeline-item landmark">
+      <div class="timeline-year">2025</div>
+      <div class="timeline-title">Quadruped Robot — BME VIK TDK 3rd Place</div>
+      <div class="timeline-desc">Deep reinforcement learning robotics. Systems Modelling section. Farkas Bence + Váradi Péter.</div>
+    </div>
+    <div class="timeline-item landmark">
+      <div class="timeline-year">2025</div>
+      <div class="timeline-title">Endometriosis — BME TDK 3rd + Semmelweis TDK 2nd</div>
+      <div class="timeline-desc">Graph-based AI applied to clinical diagnostics. Kováts Boglárka Dorottya + Sebők.</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">2025</div>
+      <div class="timeline-title">2 IPCEI AI Patent Filings</div>
+      <div class="timeline-desc">Two patent applications filed as part of the IPCEI-CIS AI programme.</div>
+    </div>
     <div class="timeline-item">
       <div class="timeline-year">2025</div>
       <div class="timeline-title">BME Academic Partnership</div>
       <div class="timeline-desc">Active partnership with Budapest Technical University Department of AI and Systems Design. Joint research presented at ICSB 2025.</div>
     </div>
-    
+    <div class="timeline-item landmark">
+      <div class="timeline-year">2024</div>
+      <div class="timeline-title">Medical AI — Back-to-Back International First Place</div>
+      <div class="timeline-desc">E-Group’s HealthTech AI team takes first place at two consecutive international medical AI research events.</div>
+    </div>
     <div class="timeline-item landmark">
       <div class="timeline-year">2024</div>
       <div class="timeline-title">FedXGen — NRDI Funded Biobank AI Research</div>
       <div class="timeline-desc">641.9M HUF grant awarded for federated AI technology development. Consortium with Semmelweis University and BME. Project ID: 2024-1.1.1-KKV_FÓKUSZ-2024-00061.</div>
     </div>
-    
+    <div class="timeline-item">
+      <div class="timeline-year">2022</div>
+      <div class="timeline-title">AI Research Programme Established</div>
+      <div class="timeline-desc">Formal AI research group established under Dr. Péter Antal. Academic rigour combined with enterprise application.</div>
+    </div>
     <div class="timeline-item">
       <div class="timeline-year">2019</div>
       <div class="timeline-title">ELTE Competence Center — Software &amp; Data-Intensive Services</div>
       <div class="timeline-desc">180.7M HUF NRDI grant. Consortium under ELTE Faculty of Informatics. Three focus areas: Finance, Healthcare, Industry 4.0. Project ID: 2019-1.3.1-KK-2019-00011.</div>
     </div>
+    <div class="timeline-item">
+      <div class="timeline-year">2015</div>
+      <div class="timeline-title">Post-Quantum Research Begins</div>
+      <div class="timeline-desc">E-Group begins active research into post-quantum cryptographic systems — over a decade before most enterprises treat this as urgent.</div>
+    </div>
   </div>
 </section>
 
-<!-- PUBLISHED WORK -->
+<!-- PUBLICATIONS -->
 <section class="published-section">
-  <div class="section-eyebrow">PUBLISHED</div>
-  <h2 class="section-title">What we've put our name on.</h2>
+  <div class="section-eyebrow">PUBLICATIONS</div>
+  <h2 class="section-title">What we’ve put our name on.</h2>
   
   <div class="published-grid">
     <div class="published-card">
+      <div class="published-name">Compute-Accuracy Pareto Frontiers for Open-Source Reasoning LLMs</div>
+      <div class="published-desc">Empirical frontier: 12 SOTA models × 5 benchmarks.</div>
+      <div class="published-authors">Prucsák Ákos · Csutora Márton · 2025</div>
+      <div class="published-tag">arXiv · E-Group affiliation</div>
+    </div>
+    <div class="published-card">
+      <div class="published-name">Circuits, Features, and Heuristics in Molecular Transformers</div>
+      <div class="published-desc">Understanding how language models process molecular structure.</div>
+      <div class="published-authors">Research Department · 2025</div>
+      <div class="published-tag">arXiv · E-Group affiliation</div>
+    </div>
+    <div class="published-card">
       <div class="published-name">GRaDPaLM</div>
       <div class="published-desc">Graph retrieval and diagnostic pathway augmented language models.</div>
-      <div class="published-authors">Ágota Benedek · Tamás Mészáros PhD · November 2025</div>
-      <div class="published-tag">HealthTech · AI Research</div>
+      <div class="published-authors">Ágota Benedek · Tamás Mészáros PhD · Nov 2025</div>
+      <div class="published-tag">HealthTech · Award Winner</div>
       <a href="https://egroup.hu/a-winning-streak-in-ai-innovation-e-group-team-member-secures-double-victory-at-scientific-events/" class="published-link" target="_blank" rel="noopener">Read the full article →</a>
     </div>
-    
-    <div class="published-card placeholder">
-      <div class="published-name">Post-Quantum Cryptography — first publication</div>
-      <div class="published-desc">Research Department · Coming</div>
+    <div class="published-card">
+      <div class="published-name">Molecular Language Models</div>
+      <div class="published-desc">Frontier research on LLMs applied to molecular structure.</div>
+      <div class="published-authors">Research Department · 2025</div>
+      <div class="published-tag">ICLR 2026 Submission</div>
     </div>
-    
     <div class="published-card placeholder">
-      <div class="published-name">Federated Learning in Clinical Settings</div>
-      <div class="published-desc">Research Department · Coming</div>
+      <div class="published-name">In Progress</div>
+      <div class="published-desc">Biobank Transformer Interpretability · Diffusion LMs · Fed-NIC-BN · Schema Matching · Malicious Agents · Agentic ETL</div>
+      <div class="published-authors">Research Department · 2025–2026</div>
+      <div class="published-tag">6 papers in progress</div>
+    </div>
+  </div>
+</section>
+
+<!-- IP & GRANTS -->
+<section class="research-section" style="background:var(--dark);">
+  <div class="section-eyebrow">IP &amp; GRANTS</div>
+  <h2 class="section-title">Protecting the work. Funding the next.</h2>
+  
+  <div class="research-grid">
+    <div class="research-card">
+      <div class="research-name">2 IPCEI AI Patent Filings</div>
+      <div class="research-desc">Two patent applications filed as part of E-Group’s contribution to the IPCEI-CIS AI programme. Protecting novel federated AI and agent platform innovations.</div>
+      <div class="research-status">Filed · 2025</div>
+    </div>
+    <div class="research-card">
+      <div class="research-name">6+ Grant Proposals</div>
+      <div class="research-desc">Active grant contributions across OvaAI, IPCEI AI, ESA Earth Observatory, IPCEI CIS, and Natural Product programmes.</div>
+      <div class="research-status">Active</div>
     </div>
   </div>
 </section>
@@ -311,7 +510,7 @@ footer{padding:40px 60px;border-top:1px solid var(--border);display:flex;align-i
 <div class="cta-section">
   <div class="cta-text">
     <h2>Working on a hard problem?</h2>
-    <p>Our research team takes on problems that matter. If you're working in medical AI, cryptography, or federated systems — talk to us.</p>
+    <p>Our research team takes on problems that matter. If you’re working in medical AI, cryptography, federated systems, or agentic AI — talk to us.</p>
   </div>
   <a href="contact.html" class="cta-btn">Start the conversation →</a>
 </div>
