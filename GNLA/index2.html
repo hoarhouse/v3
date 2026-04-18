@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Global Nobel Laureates Assembly — AI &amp; Nuclear War · July 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Outfit:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:start}
+.three-col{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem}
+.content-col{max-width:720px}
+.info-card{background:var(--navy);border:1px solid var(--w08);padding:2rem;border-radius:1px;position:relative;overflow:hidden;transition:border-color .3s,background .3s}
+.info-card::before{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform .4s ease}
+.info-card:hover::before{transform:scaleX(1)}
+.info-card:hover{border-color:var(--w15);background:var(--navy2)}
+.card-kicker{font-size:9px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);opacity:.7;margin-bottom:.75rem;display:block}
+.card-title{font-size:16px;font-weight:500;color:var(--w90);margin-bottom:.6rem;line-height:1.3}
+.card-body{font-size:13px;font-weight:300;color:var(--w40);line-height:1.65}
+.sp-grid-full{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--w08);border:1px solid var(--w08)}
+.sp-card{background:var(--navy);padding:2rem 1.75rem;transition:background .25s;position:relative;overflow:hidden}
+.sp-card::after{content:"";position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform .35s ease}
+.sp-card:hover{background:var(--slate)}
+.sp-card:hover::after{transform:scaleX(1)}
+.sp-av{width:52px;height:52px;border-radius:50%;border:1px solid var(--w15);background:linear-gradient(135deg,var(--navy2),var(--slate));display:flex;align-items:center;justify-content:center;font-family:"Cormorant Garamond",serif;font-size:16px;font-style:italic;color:var(--mist);margin-bottom:1rem;overflow:hidden}
+.sp-name{font-size:13px;font-weight:500;color:var(--w90);margin-bottom:3px;line-height:1.3}
+.sp-role{font-size:11px;font-weight:300;color:var(--w40);line-height:1.4;margin-bottom:8px}
+.sp-award{font-size:9px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);opacity:.75}
+.day-num{font-family:"Cormorant Garamond",serif;font-size:80px;font-weight:300;color:var(--w08);line-height:1;flex-shrink:0}
+.day-date{font-size:11px;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);opacity:.75}
+.day-theme{font-family:"Cormorant Garamond",serif;font-size:28px;font-weight:300;font-style:italic;color:var(--white);margin-top:.3rem}
+
+/* ── HERO ── */
+.home-hero{
+  position:relative;min-height:100vh;
+  display:flex;align-items:flex-end;
+  padding-top:100px;padding-bottom:7rem;overflow:hidden;
+}
+.home-hero-bg{
+  position:absolute;inset:0;z-index:0;
+  background-image:url('images/hero.jpg');
+  background-size:cover;background-position:center top;
+}
+.home-hero-overlay{
+  position:absolute;inset:0;z-index:1;
+  background:linear-gradient(
+    to bottom,
+    rgba(8,14,24,.35) 0%,
+    rgba(8,14,24,.55) 40%,
+    rgba(8,14,24,.85) 75%,
+    rgba(8,14,24,1) 100%
+  );
+}
+.home-hero-inner{
+  position:relative;z-index:2;
+  max-width:1300px;margin:0 auto;padding:0 4rem;width:100%;
+}
+.hero-kicker{
+  font-size:26px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--gold);opacity:1;margin-bottom:2rem;
+  display:flex;flex-direction:column;gap:4px;
+  text-shadow:0 2px 12px rgba(0,0,0,.8), 0 1px 4px rgba(0,0,0,.9);
+}
+.hero-kicker::before{content:'';display:block;width:24px;height:1px;background:var(--gold);margin-bottom:.75rem}
+.home-hero-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(52px,7vw,96px);
+  font-weight:300;line-height:1.0;
+  color:var(--white);margin-bottom:1.5rem;
+  max-width:900px;
+}
+.home-hero-title em{font-style:italic;color:var(--silver)}
+.home-hero-sub{
+  font-size:17px;font-weight:300;
+  color:var(--w70);line-height:1.85;
+  max-width:580px;margin-bottom:2.5rem;
+}
+.hero-meta{
+  display:flex;align-items:stretch;gap:0;flex-wrap:wrap;
+  margin-bottom:3rem;
+  max-width:860px;
+  border:1px solid rgba(212,175,55,.25);
+  border-radius:1px;
+  overflow:hidden;
+}
+.hero-meta-item{
+  display:flex;flex-direction:column;gap:.5rem;
+  padding:2rem 2.5rem;
+  flex:1;
+  border-right:1px solid rgba(212,175,55,.2);
+  position:relative;
+}
+.hero-meta-item::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:var(--gold);
+}
+.hero-meta-item:last-child{border-right:none}
+.hero-meta-label{
+  font-size:9px;font-weight:500;letter-spacing:.25em;text-transform:uppercase;
+  color:var(--gold);opacity:.9;
+}
+.hero-meta-value{
+  font-family:'Cormorant Garamond',serif;
+  font-size:22px;font-weight:300;color:var(--white);line-height:1.2;
+}
+.hero-meta-sep{display:none}
+.hero-btns{display:flex;align-items:center;gap:1.25rem;flex-wrap:wrap}
+
+/* ── STATS STRIP ── */
+.stats-strip{
+  background:var(--navy);
+  border-top:1px solid var(--w08);
+  border-bottom:1px solid var(--w08);
+  padding:3rem 0;
+}
+.stats-inner{
+  max-width:1300px;margin:0 auto;padding:0 4rem;
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:0;
+}
+.stat-item{
+  padding:0 2.5rem;
+  border-right:1px solid var(--w08);
+}
+.stat-item:first-child{padding-left:0}
+.stat-item:last-child{border-right:none}
+.stat-num{
+  font-family:'Cormorant Garamond',serif;
+  font-size:52px;font-weight:300;color:var(--white);line-height:1;
+  margin-bottom:.4rem;
+}
+.stat-label{font-size:11px;font-weight:300;color:var(--w40);line-height:1.5}
+
+/* ── PROGRAMME DAYS ── */
+.day-card{
+  padding:2.5rem;background:var(--navy);
+  border:1px solid var(--w08);border-radius:1px;
+  transition:border-color .3s,background .3s;
+  text-decoration:none;display:block;
+}
+.day-card:hover{border-color:var(--w15);background:var(--navy2)}
+.day-card-head{display:flex;align-items:baseline;gap:1.5rem;margin-bottom:1.25rem;padding-bottom:1.25rem;border-bottom:1px solid var(--w08)}
+
+/* ── VENUE ── */
+.venue-block{
+  background:var(--navy);border:1px solid var(--w08);border-radius:1px;
+  overflow:hidden;
+}
+.venue-img{
+  height:260px;
+  background:linear-gradient(135deg,var(--navy2),var(--slate));
+  border-bottom:1px solid var(--w08);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Cormorant Garamond',serif;font-size:64px;font-style:italic;color:var(--w08);
+}
+.venue-body{padding:2rem}
+.venue-name{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:300;color:var(--white);margin-bottom:.5rem}
+.venue-loc{font-size:12px;font-weight:300;color:var(--gold);opacity:.8;letter-spacing:.08em;margin-bottom:1rem}
+.venue-desc{font-size:13px;font-weight:300;color:var(--w40);line-height:1.65}
+
+/* ── CTA BAND ── */
+.cta-band{
+  background:linear-gradient(135deg,var(--navy) 0%,var(--navy2) 100%);
+  border-top:1px solid var(--w08);border-bottom:1px solid var(--w08);
+  padding:6rem 0;text-align:center;
+}
+.cta-band-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(36px,4vw,60px);font-weight:300;
+  color:var(--white);margin-bottom:1rem;
+}
+.cta-band-title em{font-style:italic;color:var(--silver)}
+.cta-band-sub{font-size:15px;font-weight:300;color:var(--w70);max-width:520px;margin:0 auto 2.5rem;line-height:1.8}
+.cta-email-row{display:flex;align-items:stretch;gap:0;max-width:480px;margin:0 auto}
+.cta-email-row input{
+  flex:1;padding:14px 18px;
+  background:rgba(255,255,255,.05);border:1px solid var(--w15);
+  border-right:none;
+  color:var(--white);font-family:'Outfit',sans-serif;font-size:14px;font-weight:300;
+  outline:none;border-radius:1px 0 0 1px;
+  transition:border-color .2s,background .2s;
+}
+.cta-email-row input::placeholder{color:var(--w15)}
+.cta-email-row input:focus{background:rgba(255,255,255,.08);border-color:var(--gold)}
+.cta-email-row button{
+  font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink);background:var(--gold);
+  padding:14px 28px;border:none;cursor:pointer;
+  border-radius:0 1px 1px 0;
+  transition:background .2s;font-family:'Outfit',sans-serif;
+  white-space:nowrap;
+}
+.cta-email-row button:hover{background:var(--gold2)}
+.cta-note{font-size:11px;font-weight:300;color:var(--w15);margin-top:1rem}
+
+@media(max-width:1024px){
+  .two-col{grid-template-columns:1fr;gap:3rem}
+  .stats-inner{grid-template-columns:repeat(2,1fr);gap:2rem}
+  .stat-item{border-right:none;padding:0}
+  .three-col{grid-template-columns:1fr}
+  .sp-grid-full{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:768px){
+  .home-hero-inner{padding:0 1.5rem}
+  .stats-inner{padding:0 1.5rem;grid-template-columns:1fr 1fr}
+  .sp-grid-full{grid-template-columns:1fr}
+  .hero-meta{flex-direction:column}
+  .hero-meta-item{border-right:none;border-bottom:1px solid rgba(212,175,55,.2)}
+  .hero-meta-item:last-child{border-bottom:none}
+  .cta-email-row{flex-direction:column}
+  .cta-email-row input{border-right:1px solid var(--w15);border-bottom:none;border-radius:1px 1px 0 0}
+  .cta-email-row button{border-radius:0 0 1px 1px}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<!-- HERO -->
+<section class="home-hero">
+  <div class="home-hero-bg"></div>
+  <div class="home-hero-overlay"></div>
+  <div class="home-hero-inner">
+    <div class="hero-kicker r">Global Nobel Laureates Assembly<br>On Artificial Intelligence and Nuclear War</div>
+    <h1 class="home-hero-title r">Toward an Unarmed<br>and Disarming Peace<br><em>in the Age of AI</em></h1>
+    <p class="home-hero-sub r">A historic convening of Nobel Laureates, AI pioneers, and global leaders — committed to ensuring technology serves humanity, not threatens it.</p>
+    <div class="hero-meta r">
+      <div class="hero-meta-item">
+        <span class="hero-meta-label">Dates</span>
+        <span class="hero-meta-value">14–16 July 2026</span>
+      </div>
+      <div class="hero-meta-sep"></div>
+      <div class="hero-meta-item">
+        <span class="hero-meta-label">Venue</span>
+        <span class="hero-meta-value">Borgo Laudato Si', Castel Gandolfo</span>
+      </div>
+      <div class="hero-meta-sep"></div>
+      <div class="hero-meta-item">
+        <span class="hero-meta-label">Organised by</span>
+        <span class="hero-meta-value">Domus Communis Foundation</span>
+      </div>
+    </div>
+    <div class="hero-btns r">
+      <a href="register.html" class="btn-primary">Accept Invitation</a>
+      <a href="about.html" class="btn-outline">Learn More</a>
+    </div>
+  </div>
+</section>
+
+<!-- STATS STRIP -->
+<div class="stats-strip">
+  <div class="stats-inner">
+    <div class="stat-item r"><div class="stat-num">25+</div><div class="stat-label">Nobel Laureates &amp; Nobel Community Members</div></div>
+    <div class="stat-item r2"><div class="stat-num">3</div><div class="stat-label">Days of Deliberation &amp; High-Level Sessions</div></div>
+    <div class="stat-item r3"><div class="stat-num">40+</div><div class="stat-label">Scientists, AI Pioneers &amp; Global Leaders</div></div>
+    <div class="stat-item r"><div class="stat-num">1</div><div class="stat-label">Historic Declaration — The Rome Declaration</div></div>
+  </div>
+</div>
+
+<!-- WHY THIS MATTERS -->
+<section class="section-pad section-border-top">
+  <div class="container">
+    <div class="two-col">
+      <div class="r">
+        <span class="eyebrow">Why This Assembly</span>
+        <h2 class="section-title">A convergence of risks<br><em>unprecedented in scale</em></h2>
+        <p class="body-text" style="margin-bottom:1.5rem">The integration of artificial intelligence into military infrastructure — including command, control, and decision-support systems — introduces dynamics of speed, opacity, and automation that may fundamentally alter how existential decisions are made.</p>
+        <p class="body-text" style="margin-bottom:2rem">At the same time, the global geopolitical landscape is entering a renewed phase of fragmentation, marked by the re-emergence of nuclear deterrence doctrines and a gradual erosion of arms control frameworks.</p>
+        <a href="about.html" class="btn-gold-outline">Read the Full Brief</a>
+      </div>
+      <div class="r2" style="display:flex;flex-direction:column;gap:.75rem">
+        <div class="info-card"><span class="card-kicker">The Risk</span><div class="card-title">AI &amp; Nuclear Convergence</div><div class="card-body">Automated systems operating at machine speed may compress the time available for human judgment in high-stakes strategic decisions.</div></div>
+        <div class="info-card"><span class="card-kicker">The Stakes</span><div class="card-title">Civilizational Consequence</div><div class="card-body">Decisions of existential consequence may become increasingly mediated or influenced by algorithmic systems — without adequate governance frameworks.</div></div>
+        <div class="info-card"><span class="card-kicker">The Response</span><div class="card-title">An Unarmed &amp; Disarming Peace</div><div class="card-body">This Assembly challenges the assumption that security must be grounded in deterrence — and charts a different path toward structural, lasting peace.</div></div>
+        <div class="info-card"><span class="card-kicker">The Output</span><div class="card-title">The Rome Declaration</div><div class="card-body">A founding text for a renewed global security framework, to be signed and announced publicly on 16 July 2026.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SPEAKERS TEASER -->
+<section class="section-pad section-border-top" style="background:var(--navy)">
+  <div class="container">
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:3rem;flex-wrap:wrap;gap:1.5rem">
+      <div class="r">
+        <span class="eyebrow">Participants</span>
+        <h2 class="section-title">Voices that carry<br><em>the weight of the world</em></h2>
+      </div>
+      <a href="speakers.html" class="btn-gold-outline r">View All Speakers</a>
+    </div>
+    <div class="sp-grid-full r">
+      <div class="sp-card"><div class="sp-av">KS</div><div class="sp-name">Mr. Kailash Satyarthi</div><div class="sp-role">Nobel Peace Prize Laureate · 2014</div><div class="sp-award">★ Nobel Laureate</div></div>
+      <div class="sp-card"><div class="sp-av">TK</div><div class="sp-name">Mrs. Tawakkol Karman</div><div class="sp-role">Nobel Peace Prize Laureate · 2011</div><div class="sp-award">★ Nobel Laureate</div></div>
+      <div class="sp-card"><div class="sp-av">GH</div><div class="sp-name">Prof. Geoffrey Hinton</div><div class="sp-role">AI Pioneer · University of Toronto</div><div class="sp-award">AI Scientist</div></div>
+      <div class="sp-card"><div class="sp-av">YB</div><div class="sp-name">Prof. Yoshua Bengio</div><div class="sp-role">AI Pioneer · Université de Montréal</div><div class="sp-award">AI Scientist</div></div>
+      <div class="sp-card"><div class="sp-av">DA</div><div class="sp-name">Prof. Daron Acemoglu</div><div class="sp-role">Nobel Prize in Economics · 2024</div><div class="sp-award">★ Nobel Laureate</div></div>
+      <div class="sp-card"><div class="sp-av">JS</div><div class="sp-name">Prof. Joseph Stiglitz</div><div class="sp-role">Nobel Prize in Economics · 2001</div><div class="sp-award">★ Nobel Laureate</div></div>
+      <div class="sp-card"><div class="sp-av">SR</div><div class="sp-name">Prof. Stuart Russell</div><div class="sp-role">AI Safety · UC Berkeley</div><div class="sp-award">AI Safety</div></div>
+      <div class="sp-card"><div class="sp-av">MY</div><div class="sp-name">Prof. Muhammad Yunus</div><div class="sp-role">Nobel Peace Prize Laureate · 2006</div><div class="sp-award">★ Nobel Laureate</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROGRAMME TEASER -->
+<section class="section-pad section-border-top">
+  <div class="container">
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:3rem;flex-wrap:wrap;gap:1.5rem">
+      <div class="r">
+        <span class="eyebrow">Programme</span>
+        <h2 class="section-title">Three days of<br><em>deliberation &amp; action</em></h2>
+      </div>
+      <a href="programme.html" class="btn-gold-outline r">Full Programme</a>
+    </div>
+    <div class="three-col r">
+      <a href="programme.html" class="day-card">
+        <div class="day-card-head">
+          <div class="day-num">1</div>
+          <div><div class="day-date">14 July 2026</div><div class="day-theme">Understanding the Systemic Shift</div></div>
+        </div>
+        <p style="font-size:13px;font-weight:300;color:var(--w40);line-height:1.65">AI–nuclear convergence, strategic risk, humanitarian consequences, and the economy of war vs. peace.</p>
+      </a>
+      <a href="programme.html" class="day-card">
+        <div class="day-card-head">
+          <div class="day-num">2</div>
+          <div><div class="day-date">15 July 2026</div><div class="day-theme">Governance, Opportunity &amp; New Frameworks</div></div>
+        </div>
+        <p style="font-size:13px;font-weight:300;color:var(--w40);line-height:1.65">Governing AI in high-risk systems, new digital protocols, models of development, and building global platforms for action.</p>
+      </a>
+      <a href="programme.html" class="day-card">
+        <div class="day-card-head">
+          <div class="day-num">3</div>
+          <div><div class="day-date">16 July 2026</div><div class="day-theme">Toward the Rome Declaration</div></div>
+        </div>
+        <p style="font-size:13px;font-weight:300;color:var(--w40);line-height:1.65">Closing deliberations, signing and presentation of the Rome Declaration, and a global press conference.</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- VENUE TEASER -->
+<section class="section-pad section-border-top" style="background:var(--navy)">
+  <div class="container">
+    <div class="two-col">
+      <div class="r">
+        <span class="eyebrow">Venue</span>
+        <h2 class="section-title">Borgo Laudato Si'<br><em>Castel Gandolfo</em></h2>
+        <p class="body-text" style="margin-bottom:1.5rem">Set within the Papal Gardens overlooking Lake Albano, Borgo Laudato Si' is a setting of rare spiritual and institutional authority — a place commensurate with the weight of this moment.</p>
+        <p class="body-text" style="margin-bottom:2rem">Located just 25 kilometres from Rome, the venue provides both the serenity required for genuine deliberation and the proximity to global media and institutional infrastructure.</p>
+        <a href="venue.html" class="btn-gold-outline">Explore the Venue</a>
+      </div>
+      <div class="r2">
+        <div class="venue-block">
+          <div class="venue-img" style="background-image:url('images/hero.jpg');background-size:cover;background-position:center;"></div>
+          <div class="venue-body">
+            <div class="venue-name">Borgo Laudato Si'</div>
+            <div class="venue-loc">Castel Gandolfo · Vatican · Rome, Italy</div>
+            <div class="venue-desc">A historic retreat within the Papal Estate, offering a unique convergence of spiritual heritage and world-class conferencing facilities. July 14–16, 2026.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ACCEPT INVITATION CTA -->
+<section class="cta-band">
+  <div class="container">
+    <div class="r">
+      <span class="eyebrow" style="justify-content:center;display:flex">Accept Your Invitation</span>
+      <h2 class="cta-band-title">Be part of this<br><em>historic moment</em></h2>
+      <p class="cta-band-sub">Whether you join us in person, follow proceedings online, or carry the Rome Declaration forward in your own work — this Assembly belongs to all who believe humanity can choose a different future.</p>
+      <div class="cta-email-row">
+        <input type="email" placeholder="Your email address">
+        <button type="button">Follow Updates</button>
+      </div>
+      <p class="cta-note">For accreditation and attendance inquiries, <a href="register.html" style="color:var(--gold);text-decoration:none">accept your invitation here</a> or contact the Domus Communis Foundation Secretariat.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+
+
+<script src="shared.js"></script>
+</body>
+</html>
