@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="InnoHealth DataLake — Large-scale health data lake built on Microsoft SQL Server. Featured as flagship customer case study at Microsoft's SQL Server 2019 Uncovered Virtual Event. Built by E-Group.">
+<meta name="description" content="Large-scale health data lake built with the University of Pécs (PTE). OMOP CDM, oncology AI data mining, federated extension (FDLX). Microsoft SQL Server 2019 flagship customer case study. Built by E-Group.">
 <meta property="og:title" content="InnoHealth DataLake — E-Group Record">
-<meta property="og:description" content="Enterprise health data aggregation at scale. Microsoft SQL Server flagship customer case study. Built by E-Group.">
+<meta property="og:description" content="Large-scale health data lake built with the University of Pécs (PTE). OMOP CDM, oncology AI data mining, federated extension (FDLX). Microsoft flagship case study. Built by E-Group.">
 <meta property="og:url" content="https://hoarhouse.github.io/v3/rise/record/innohealth.html">
 <meta name="robots" content="index, follow">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23080808'/%3E%3Ctext x='5' y='25' font-family='Georgia,serif' font-weight='900' font-size='26' fill='%23C8A96E'%3EE%3C/text%3E%3C/svg%3E">
@@ -50,16 +50,18 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:48px 6
   <div class="two-col">
     <div class="prose reveal">
 <h2>What It Is</h2>
-<p>A <strong>large-scale health data lake</strong> built on Microsoft SQL Server. The InnoHealth DataLake aggregates, structures, and makes health data queryable at enterprise scale. It was featured as a <strong>flagship customer case study at Microsoft's SQL Server 2019 Uncovered Virtual Event</strong> — selected by Microsoft to demonstrate what their platform could do at scale.</p>
+<p>A <strong>large-scale health data lake</strong> built on Microsoft SQL Server — developed in partnership with the <strong>University of Pécs (PTE)</strong>. The cooperation started in 2017. The formal InnoHealth DataLake project launched in 2018 and has operated continuously since, with active sub-projects in oncology data mining and multimodal patient monitoring.</p>
+<p>The platform was featured as a <strong>flagship customer case study at Microsoft's SQL Server 2019 Uncovered Virtual Event</strong> — selected by Microsoft to demonstrate what their platform could do at scale.</p>
 
 <h2>What It Does</h2>
 <p>The DataLake implements cognitive modelling and data processing methods for evaluating health data. The system includes:</p>
 <ul>
-  <li>Multiple database technologies and data warehouse targets</li>
-  <li>Big Data cluster integration</li>
-  <li>Real-time processing tools</li>
-  <li>Uniform standard and accreditation system for health IT</li>
+  <li>Oncology indicator extraction from free-text medical records</li>
+  <li>Integration of laboratory test results, wearable device data (blood pressure, glucose, smart insoles, mattresses) and ECG monitors</li>
+  <li>Text classification using simple, complex, and advanced NLP models</li>
+  <li>Real-time reporting and BI visualisation via Power BI</li>
   <li>Framework for data collection, representation, storage, recovery, management, and security</li>
+  <li>Unified standard and accreditation system for health IT</li>
 </ul>
 
 <h2>DLX Architecture — Smart DataLake Platform</h2>
@@ -71,6 +73,7 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:48px 6
   <li><strong>Unified Management Layer</strong> — system traceability, accessibility, and common operation services</li>
 </ul>
 <p>The technology stack: <strong>SQL Server, MinIO, SPARK, and Kubernetes (K8S)</strong>. Deployable in cloud or hybrid infrastructure with full data control, data privacy, elastic scalability, and a diverse set of analytic engines.</p>
+<p>The platform adopts the <strong>OMOP Common Data Model</strong> — the international standard for harmonising observational health data — and was built from day one with <strong>GDPR-compliant privacy impact assessments</strong> governing every data flow.</p>
 
 <h2>Principal Architect</h2>
 <p><strong>Alexandra Babaics</strong> — E-Group's Principal Architect for the InnoHealth DataLake. She presented the project at the Microsoft SQL Server 2019 Uncovered Virtual Event, demonstrating E-Group's capability in large-scale health data architecture.</p>
@@ -78,12 +81,13 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:48px 6
 <h2>EU Funding</h2>
 <p>The project was developed with EU funding through the Széchenyi 2020 programme, as part of a broader initiative to develop cognitive modelling and data processing methods for health data evaluation. The work established frameworks for data collection, representation, storage, and security that inform E-Group's broader health data work including FedX and HeliX.</p>
 
-<h2>Connection to FedX and HeliX</h2>
-<p>The InnoHealth DataLake is architecturally related to E-Group's later federated health data work. The data modelling, health IT standards, and large-scale data architecture expertise developed through InnoHealth directly informed the design of the FedX federated learning platform and the HeliX health data space — now one of Europe's largest sovereign health data ecosystems.</p>
+<h2>From InnoHealth to FedX and HeliX</h2>
+<p>The InnoHealth DataLake is the direct architectural ancestor of E-Group's later federated health data work. Its federated extension — <strong>FDLX (Federated Data Lab)</strong> — extends the DLX concept across multiple institutions: analytics travel to the data, not the other way round. No central data storage, encrypted gradient sharing only, complete GDPR compliance.</p>
+<p>The data modelling, health IT standards, and large-scale data architecture expertise developed through InnoHealth directly informed the design of the FedX federated learning platform and the HeliX health data space — now one of Europe's largest sovereign health data ecosystems. And while the platform was built for healthcare, the same architecture now underpins data-driven decision support in government, financial, and energy sectors.</p>
 </div>
     <div class="sidebar reveal rd1">
-      <div class="sidebar-card"><div class="sc-label">Project Details</div><div class="sc-rows"><div class="sc-row"><span class="sc-key">Product</span><span class="sc-val">InnoHealth DataLake</span></div><div class="sc-row"><span class="sc-key">Platform</span><span class="sc-val">Smart DataLake (DLX)</span></div><div class="sc-row"><span class="sc-key">Status</span><span class="sc-val">Live in Production</span></div><div class="sc-row"><span class="sc-key">Sector</span><span class="sc-val">HealthTech · Data Engineering</span></div><div class="sc-row"><span class="sc-key">Stack</span><span class="sc-val">SQL Server · MinIO · SPARK · K8S</span></div><div class="sc-row"><span class="sc-key">Architect</span><span class="sc-val">Alexandra Babaics</span></div><div class="sc-row"><span class="sc-key">Recognition</span><span class="sc-val">Microsoft flagship case study</span></div><div class="sc-row"><span class="sc-key">Deploy</span><span class="sc-val">Cloud or hybrid</span></div><div class="sc-row"><span class="sc-key">Funding</span><span class="sc-val">EU — Széchenyi 2020</span></div></div></div>
-      <div class="sidebar-card"><div class="sc-label">Sources</div><div class="source-list"><div class="source-item"><div class="src-num">1</div><div class="src-text"><a href="https://www.egroup.hu/company/references/" target="_blank" rel="noopener">E-Group — References (InnoHealth DataLake)</a></div></div></div></div>
+      <div class="sidebar-card"><div class="sc-label">Project Details</div><div class="sc-rows"><div class="sc-row"><span class="sc-key">Product</span><span class="sc-val">InnoHealth DataLake</span></div><div class="sc-row"><span class="sc-key">Partner</span><span class="sc-val">University of Pécs (PTE)</span></div><div class="sc-row"><span class="sc-key">Platform</span><span class="sc-val">Smart DataLake (DLX)</span></div><div class="sc-row"><span class="sc-key">Status</span><span class="sc-val">Live in Production</span></div><div class="sc-row"><span class="sc-key">Sector</span><span class="sc-val">HealthTech · Data Engineering</span></div><div class="sc-row"><span class="sc-key">Stack</span><span class="sc-val">SQL Server · MinIO · SPARK · K8S</span></div><div class="sc-row"><span class="sc-key">Architect</span><span class="sc-val">Alexandra Babaics</span></div><div class="sc-row"><span class="sc-key">Recognition</span><span class="sc-val">Microsoft flagship case study</span></div><div class="sc-row"><span class="sc-key">Deploy</span><span class="sc-val">Cloud or hybrid</span></div><div class="sc-row"><span class="sc-key">Funding</span><span class="sc-val">EU — Széchenyi 2020</span></div></div></div>
+      <div class="sidebar-card"><div class="sc-label">Sources</div><div class="source-list"><div class="source-item"><div class="src-num">1</div><div class="src-text"><a href="https://www.egroup.hu/company/references/" target="_blank" rel="noopener">E-Group — References (InnoHealth DataLake)</a></div></div><div class="source-item"><div class="src-num">2</div><div class="src-text"><a href="https://innohealth.eu/en/datalake/" target="_blank" rel="noopener">InnoHealth DataLake — Official project site</a></div></div></div></div>
     </div>
   </div>
 </div>
