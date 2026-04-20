@@ -1,7 +1,7 @@
 (function() {
   var path = window.location.pathname;
   var page = path.split('/').pop() || 'index.html';
-  var deliveredPages = ['index.html','mavir.html','kau.html','helix.html','eidas.html','corpex.html','ipcei-cis.html','proofx.html','genesis.html','coios.html','press.html','delivered.html'];
+  var deliveredPages = ['index.html','mavir.html','kau.html','helix.html','eidas.html','corpex.html','ipcei-cis.html','proofx.html','genesis.html','coios.html','repox.html','press.html','delivered.html'];
   var peoplePages = ['people.html','peter-antal.html'];
   var sciencePages = ['science.html','medical-ai.html'];
   var recognitionPages = ['recognition.html'];
