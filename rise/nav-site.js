@@ -61,7 +61,7 @@
         '<a href="' + base + 'record/index.html" style="font-family:\'DM Mono\',monospace;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;text-decoration:none;color:#777;cursor:pointer;">Record ▾</a>' +
         '<div class="ndrop">' +
           '<a href="' + base + 'record/index.html" style="display:block;padding:10px 18px;font-family:\'DM Mono\',monospace;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:#C8A96E;text-decoration:none;">Full Record →</a>' +
-          '<a href="' + base + 'record/delivered.html" style="display:block;padding:10px 18px;font-family:\'DM Mono\',monospace;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:#C8A96E;text-decoration:none;">Delivered · 33 Projects</a>' +
+          '<a href="' + base + 'record/delivered.html" style="display:block;padding:10px 18px;font-family:\'DM Mono\',monospace;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:#C8A96E;text-decoration:none;">Delivered · 28 Projects</a>' +
           '<a href="' + base + 'record/people.html" style="display:block;padding:10px 18px;font-family:\'DM Mono\',monospace;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:#666;text-decoration:none;">The People</a>' +
           '<a href="' + base + 'record/science.html" style="display:block;padding:10px 18px;font-family:\'DM Mono\',monospace;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:#666;text-decoration:none;">The Science</a>' +
           '<a href="' + base + 'record/recognition.html" style="display:block;padding:10px 18px;font-family:\'DM Mono\',monospace;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:#666;text-decoration:none;">Recognition</a>' +
